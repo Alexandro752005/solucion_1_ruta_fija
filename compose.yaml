@@ -1,0 +1,89 @@
+name: ${COMPOSE_PROJECT_NAME:-ruta-fija-local}
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: "on-failure:3"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-ruta_fija}
+      POSTGRES_USER: ${POSTGRES_USER:-ruta_fija_app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set in .env}
+      TZ: UTC
+      PGTZ: UTC
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+    networks:
+      - ruta_fija
+    stop_grace_period: 30s
+
+  backend:
+    profiles: ["app"]
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: "on-failure:3"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev,docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-ruta_fija}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-ruta_fija_app}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set in .env}
+      JWT_SECRET_BASE64: ${JWT_SECRET_BASE64:?JWT_SECRET_BASE64 must be set in .env}
+      APP_SEED_ENABLED: "true"
+      DEMO_USER_PASSWORD: ${DEMO_USER_PASSWORD:?DEMO_USER_PASSWORD must be set in .env}
+      APP_CORS_ALLOWED_ORIGINS: ${APP_CORS_ALLOWED_ORIGINS:-http://localhost:4200}
+      TZ: UTC
+    ports:
+      - "127.0.0.1:${BACKEND_PORT:-8080}:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://localhost:8080/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 210s
+    networks:
+      - ruta_fija
+    stop_grace_period: 30s
+
+  frontend:
+    profiles: ["app"]
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: "on-failure:3"
+    ports:
+      - "127.0.0.1:${FRONTEND_PORT:-4200}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://localhost/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 10s
+    networks:
+      - ruta_fija
+    stop_grace_period: 15s
+
+volumes:
+  postgres_data:
+    labels:
+      com.rutafija.component: database
+      com.rutafija.environment: local
+
+networks:
+  ruta_fija:
+    driver: bridge
+    labels:
+      com.rutafija.environment: local

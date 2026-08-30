@@ -1,0 +1,23 @@
+app:
+  seed:
+    enabled: false
+  security:
+    refresh-cookie:
+      secure: ${REFRESH_COOKIE_SECURE:true}
+    cors:
+      allowed-origins: ${APP_CORS_ALLOWED_ORIGINS}
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+logging:
+  structured:
+    format:
+      console: logstash
+  level:
+    root: INFO
+    pe.rutafija: INFO
+    org.springframework.security: WARN

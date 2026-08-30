@@ -1,0 +1,9 @@
+app:
+  seed:
+    enabled: ${APP_SEED_ENABLED:true}
+    demo-password: ${DEMO_USER_PASSWORD:}
+
+logging:
+  level:
+    pe.rutafija: INFO
+    org.springframework.security: INFO

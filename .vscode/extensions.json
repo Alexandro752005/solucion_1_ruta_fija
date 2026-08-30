@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "ms-azuretools.vscode-containers",
+    "angular.ng-template",
+    "vmware.vscode-boot-dev-pack"
+  ]
+}

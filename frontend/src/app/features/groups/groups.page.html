@@ -1,0 +1,159 @@
+<section class="management-page" aria-labelledby="groups-title">
+  <header class="management-heading">
+    <div>
+      <p class="management-eyebrow">Fase 2 · Administración</p>
+      <h1 id="groups-title">Grupos de transporte</h1>
+      <p>Organiza la operación por grupos y asigna coordinadores autorizados.</p>
+    </div>
+    <span class="management-badge">{{ totalItems() }} registrados</span>
+  </header>
+
+  @if (error(); as currentError) {
+    <div class="management-alert error" role="alert">
+      <strong>{{ currentError.message }}</strong>
+      @if (currentError.correlationId) {
+        <span>Referencia: {{ currentError.correlationId }}</span>
+      }
+    </div>
+  }
+
+  @if (notice(); as currentNotice) {
+    <div class="management-alert success" role="status">{{ currentNotice }}</div>
+  }
+
+  <div class="management-layout" [class.single-column]="!canManage()">
+    @if (canManage()) {
+      <section class="management-panel" aria-labelledby="group-form-title">
+        <header>
+          <div>
+            <h2 id="group-form-title">{{ editing() ? 'Editar grupo' : 'Nuevo grupo' }}</h2>
+            <p>Un grupo inactivo no admite nuevos conductores ni coordinadores.</p>
+          </div>
+        </header>
+
+        <form class="management-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+          <div class="field">
+            <label for="group-name">Nombre</label>
+            <input id="group-name" type="text" formControlName="name" maxlength="120" [attr.aria-invalid]="form.controls.name.invalid && form.controls.name.touched" />
+            @if (form.controls.name.invalid && form.controls.name.touched) {
+              <p class="management-field-error">Ingresa el nombre del grupo.</p>
+            }
+          </div>
+
+          <div class="field">
+            <label for="group-description">Descripción</label>
+            <textarea id="group-description" formControlName="description" maxlength="300"></textarea>
+          </div>
+
+          @if (editing()) {
+            <div class="field">
+              <label for="group-active">Estado</label>
+              <select id="group-active" formControlName="active">
+                <option [ngValue]="true">Activo</option>
+                <option [ngValue]="false">Inactivo</option>
+              </select>
+            </div>
+          }
+
+          <div class="management-actions">
+            @if (editing()) {
+              <button class="management-button" type="button" (click)="cancelEdit()">Cancelar</button>
+            }
+            <button class="management-button primary" type="submit" [disabled]="saving()">
+              {{ saving() ? 'Guardando…' : editing() ? 'Guardar cambios' : 'Crear grupo' }}
+            </button>
+          </div>
+        </form>
+
+        @if (selectedGroup(); as group) {
+          <section class="management-detail" aria-labelledby="coordinators-title">
+            <div class="panel-heading">
+              <div>
+                <h3 id="coordinators-title">Coordinadores de {{ group.name }}</h3>
+                <p>Solo se pueden asignar usuarios activos con rol coordinador.</p>
+              </div>
+            </div>
+
+            <div class="management-filter">
+              <select [formControl]="coordinatorControl" aria-label="Coordinador para asignar">
+                <option value="">Selecciona un coordinador</option>
+                @for (coordinator of assignableCoordinators(); track coordinator.id) {
+                  <option [value]="coordinator.id">{{ coordinator.fullName }}</option>
+                }
+              </select>
+              <button class="management-button compact" type="button" (click)="assignCoordinator()" [disabled]="assigning() || assignableCoordinators().length === 0">
+                {{ assigning() ? 'Asignando…' : 'Asignar' }}
+              </button>
+            </div>
+
+            @if (group.coordinators.length === 0) {
+              <p class="management-muted">Este grupo todavía no tiene coordinadores asignados.</p>
+            } @else {
+              <ul class="management-detail-list">
+                @for (coordinator of group.coordinators; track coordinator.userId) {
+                  <li>
+                    <span><strong>{{ coordinator.fullName }}</strong><small>{{ coordinator.email }}</small></span>
+                    <button class="management-button compact danger" type="button" (click)="removeCoordinator(coordinator.userId, coordinator.fullName)">Retirar</button>
+                  </li>
+                }
+              </ul>
+            }
+          </section>
+        }
+      </section>
+    }
+
+    <section class="management-panel" aria-labelledby="groups-list-title">
+      <header>
+        <div>
+          <h2 id="groups-list-title">Grupos visibles</h2>
+          <p>La lista respeta la organización activa y los grupos asignados al coordinador.</p>
+        </div>
+      </header>
+
+      <div class="management-filter">
+        <input #searchInput type="search" [value]="search()" placeholder="Buscar por nombre" aria-label="Buscar grupos" (keyup.enter)="applySearch(searchInput.value)" />
+        <button class="management-button" type="button" (click)="applySearch(searchInput.value)">Buscar</button>
+      </div>
+
+      @if (loading()) {
+        <p class="management-empty" role="status">Cargando grupos…</p>
+      } @else if (groups().length === 0) {
+        <p class="management-empty">No hay grupos para los filtros actuales.</p>
+      } @else {
+        <div class="management-table-wrap">
+          <table class="management-table">
+            <thead>
+              <tr><th>Grupo</th><th>Coordinadores</th><th>Estado</th><th>Acciones</th></tr>
+            </thead>
+            <tbody>
+              @for (group of groups(); track group.id) {
+                <tr>
+                  <td><strong>{{ group.name }}</strong><small>{{ group.description || 'Sin descripción' }}</small></td>
+                  <td>{{ group.coordinators.length ? group.coordinators.length + ' asignado(s)' : 'Sin asignar' }}</td>
+                  <td><span class="management-status" [class.success]="group.active" [class.muted]="!group.active">{{ group.active ? 'Activo' : 'Inactivo' }}</span></td>
+                  <td>
+                    @if (canManage()) {
+                      <div class="management-inline-actions">
+                        <button class="management-button compact" type="button" (click)="startEdit(group)">Editar</button>
+                        <button class="management-button compact" type="button" (click)="manageCoordinators(group)">Coordinadores</button>
+                      </div>
+                    } @else {
+                      <span class="management-muted">Solo lectura</span>
+                    }
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+
+      <div class="management-pagination">
+        <button class="management-button compact" type="button" (click)="previousPage()" [disabled]="page() === 0">Anterior</button>
+        <span>Página {{ page() + 1 }} de {{ totalPages() || 1 }}</span>
+        <button class="management-button compact" type="button" (click)="nextPage()" [disabled]="page() + 1 >= totalPages()">Siguiente</button>
+      </div>
+    </section>
+  </div>
+</section>

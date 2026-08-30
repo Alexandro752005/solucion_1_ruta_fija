@@ -1,0 +1,146 @@
+<section class="management-page" aria-labelledby="assignments-title">
+  <header class="management-heading">
+    <div>
+      <p class="management-eyebrow">Fase 4 · Operación web</p>
+      <h1 id="assignments-title">Asignaciones</h1>
+      <p>El coordinador programa directamente en <strong>SCHEDULED</strong>; no se simula aceptación de conductor.</p>
+    </div>
+    <span class="management-badge">{{ totalItems() }} registradas</span>
+  </header>
+
+  @if (error(); as currentError) {
+    <div class="management-alert error" role="alert">
+      <strong>{{ currentError.message }}</strong>
+      @if (currentError.correlationId) { <span>Referencia: {{ currentError.correlationId }}</span> }
+    </div>
+  }
+
+  @if (notice(); as currentNotice) {
+    <div class="management-alert success" role="status">{{ currentNotice }}</div>
+  }
+
+  <div class="management-layout">
+    <section class="management-panel" aria-labelledby="assignment-form-title">
+      <header>
+        <div>
+          <h2 id="assignment-form-title">{{ editing() ? 'Editar asignación' : 'Nueva asignación' }}</h2>
+          <p>El vehículo se valida contra el conductor y la disponibilidad futura se calcula por intervalo.</p>
+        </div>
+      </header>
+
+      <form class="management-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="field">
+          <label for="assignment-driver">Conductor</label>
+          <select id="assignment-driver" formControlName="driverId">
+            <option value="">Selecciona un conductor disponible para programar</option>
+            @for (driver of drivers(); track driver.id) {
+              <option [value]="driver.id">{{ driver.fullName }} · {{ driver.groupName }} · {{ driver.availabilityStatus }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="assignment-vehicle">Vehículo vinculado</label>
+          <select id="assignment-vehicle" formControlName="vehicleId">
+            <option value="">Selecciona un vehículo</option>
+            @for (vehicle of vehicles(); track vehicle.id) {
+              <option [value]="vehicle.id">{{ vehicle.plate }} · {{ vehicle.status }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="assignment-origin">Origen</label>
+            <input id="assignment-origin" type="text" maxlength="250" formControlName="originText" />
+          </div>
+          <div class="field">
+            <label for="assignment-destination">Destino</label>
+            <input id="assignment-destination" type="text" maxlength="250" formControlName="destinationText" />
+          </div>
+          <div class="field">
+            <label for="assignment-start">Inicio programado</label>
+            <input id="assignment-start" type="datetime-local" formControlName="scheduledAt" />
+          </div>
+          <div class="field">
+            <label for="assignment-end">Fin programado</label>
+            <input id="assignment-end" type="datetime-local" formControlName="scheduledEndAt" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="assignment-notes">Notas (opcional)</label>
+          <textarea id="assignment-notes" maxlength="500" formControlName="notes"></textarea>
+        </div>
+
+        <div class="management-actions">
+          @if (editing()) { <button class="management-button" type="button" (click)="cancelEdit()">Cancelar edición</button> }
+          <button class="management-button primary" type="submit" [disabled]="saving()">
+            {{ saving() ? 'Guardando…' : editing() ? 'Guardar cambios' : 'Programar SCHEDULED' }}
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section class="management-panel" aria-labelledby="assignments-list-title">
+      <header>
+        <div>
+          <h2 id="assignments-list-title">Plan operativo</h2>
+          <p>Reservar afecta solo al conductor actual; el vehículo pasa a EN_SERVICIO únicamente al iniciar.</p>
+        </div>
+      </header>
+
+      <div class="management-filter">
+        <select #statusFilter [value]="selectedStatus()" aria-label="Filtrar asignaciones" (change)="applyStatus(statusFilter.value)">
+          <option value="">Todos los estados</option>
+          @for (status of statuses; track status) { <option [value]="status">{{ statusLabel(status) }}</option> }
+        </select>
+        <button class="management-button" type="button" (click)="load(0)">Actualizar</button>
+      </div>
+
+      @if (loading()) {
+        <p class="management-empty" role="status">Cargando asignaciones…</p>
+      } @else if (assignments().length === 0) {
+        <p class="management-empty">No existen asignaciones para el filtro actual.</p>
+      } @else {
+        <div class="management-table-wrap">
+          <table class="management-table">
+            <thead><tr><th>Programación</th><th>Recursos</th><th>Estado</th><th>Acciones de coordinación</th></tr></thead>
+            <tbody>
+              @for (assignment of assignments(); track assignment.id) {
+                <tr>
+                  <td>
+                    <strong>{{ assignment.originText }} → {{ assignment.destinationText }}</strong>
+                    <small>{{ dateLabel(assignment.scheduledAt) }} — {{ dateLabel(assignment.scheduledEndAt) }}</small>
+                  </td>
+                  <td><strong>{{ assignment.driverName }}</strong><small>{{ assignment.vehiclePlate }} · {{ assignment.groupName }}</small></td>
+                  <td>
+                    <span class="management-status" [class.success]="assignment.status === 'COMPLETED'" [class.warning]="assignment.status === 'SCHEDULED' || assignment.status === 'EN_SERVICIO'" [class.muted]="assignment.status === 'CANCELLED'">
+                      {{ statusLabel(assignment.status) }}
+                    </span>
+                    @if (assignment.reservedAt && assignment.status === 'SCHEDULED') { <small>Conductor reservado</small> }
+                  </td>
+                  <td>
+                    <div class="management-inline-actions">
+                      @if (canEdit(assignment)) { <button class="management-button compact" type="button" (click)="startEdit(assignment)">Editar</button> }
+                      @if (canReserve(assignment)) { <button class="management-button compact" type="button" [disabled]="actionId() === assignment.id" (click)="reserve(assignment)">Reservar</button> }
+                      @if (canStart(assignment)) { <button class="management-button compact primary" type="button" [disabled]="actionId() === assignment.id" (click)="start(assignment)">Iniciar</button> }
+                      @if (canComplete(assignment)) { <button class="management-button compact primary" type="button" [disabled]="actionId() === assignment.id" (click)="complete(assignment)">Completar</button> }
+                      @if (canCancel(assignment)) { <button class="management-button compact danger" type="button" [disabled]="actionId() === assignment.id" (click)="cancel(assignment)">Cancelar</button> }
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+
+      <div class="management-pagination">
+        <button class="management-button compact" type="button" (click)="previousPage()" [disabled]="page() === 0">Anterior</button>
+        <span>Página {{ page() + 1 }} de {{ totalPages() || 1 }}</span>
+        <button class="management-button compact" type="button" (click)="nextPage()" [disabled]="page() + 1 >= totalPages()">Siguiente</button>
+      </div>
+    </section>
+  </div>
+</section>

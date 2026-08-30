@@ -1,0 +1,113 @@
+<div class="page-heading">
+  <div>
+    <p class="eyebrow">Fase 4 · Cierre profesional</p>
+    <h1>Hola, {{ session.user()?.fullName }}</h1>
+    <p>
+      La operación web usa asignaciones, incidencias y comunicados persistidos. Los reportes,
+      exportaciones y auditoría se calculan desde esos mismos registros.
+    </p>
+  </div>
+  <span class="status-chip"><i aria-hidden="true"></i> Sesión activa</span>
+</div>
+
+<section class="summary-grid" aria-label="Estado del CRM administrativo">
+  <article>
+    <span class="card-label">Identidad verificada</span>
+    <strong>{{ session.user()?.email || 'Usuario autenticado' }}</strong>
+      <p>Información obtenida mediante <code>/auth/me</code>.</p>
+  </article>
+  <article>
+    <span class="card-label">Rol efectivo</span>
+    <strong>{{ session.user()?.role }}</strong>
+      <p>La navegación y cada acción se validan nuevamente en el backend.</p>
+  </article>
+  <article>
+    <span class="card-label">Aislamiento</span>
+    <strong>{{ organizationContext() }}</strong>
+      <p>La organización se resuelve en el backend, no desde el navegador.</p>
+  </article>
+</section>
+
+@if (canViewReports()) {
+  <section class="readiness-card" aria-labelledby="operational-summary-title">
+    <div class="section-heading">
+      <div><p class="eyebrow">Datos persistidos</p><h2 id="operational-summary-title">Resumen operativo actual</h2></div>
+      <a routerLink="/reports">Ver reportes</a>
+    </div>
+    @if (loadingAvailability()) { <p class="management-empty" role="status">Calculando indicadores reales…</p> }
+    @else if (availability(); as report) {
+      <div class="summary-grid operational-summary">
+        <article><span class="card-label">Conductores disponibles</span><strong>{{ countByStatus(report.drivers, 'DISPONIBLE') }}</strong><p>Estado físico actual.</p></article>
+        <article><span class="card-label">Vehículos disponibles</span><strong>{{ countByStatus(report.vehicles, 'DISPONIBLE') }}</strong><p>Las reservas futuras no los marcan como reservados.</p></article>
+        <article><span class="card-label">Asignaciones futuras</span><strong>{{ report.futureScheduledAssignments }}</strong><p>Programadas desde el CRM.</p></article>
+        <article><span class="card-label">Servicios en curso</span><strong>{{ report.assignmentsInService }}</strong><p>Estado EN_SERVICIO persistido.</p></article>
+        <article><span class="card-label">Incidencias abiertas</span><strong>{{ report.openIncidents }}</strong><p>Abiertas o en seguimiento.</p></article>
+        <article><span class="card-label">Actualización</span><strong>En tiempo real</strong><p>El canal autorizado refresca esta instantánea.</p></article>
+      </div>
+    }
+    @else if (availabilityError()) { <p class="management-empty">No fue posible calcular el resumen operativo. Use Reportes reales para reintentar.</p> }
+  </section>
+}
+
+<section class="readiness-card" aria-labelledby="readiness-title">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Estado verificable</p>
+      <h2 id="readiness-title">Capacidades habilitadas</h2>
+    </div>
+    <span>Fase 4 · 75–100 %</span>
+  </div>
+
+  <ul>
+    <li>
+      <span class="check" aria-hidden="true">✓</span>
+      <div>
+        <strong>Inicio y recuperación de sesión</strong>
+        <p>Access token temporal en memoria y renovación coordinada por cookie.</p>
+      </div>
+    </li>
+    <li>
+      <span class="check" aria-hidden="true">✓</span>
+      <div>
+        <strong>Asignaciones con transiciones controladas</strong>
+        <p>La coordinación opera SCHEDULED, reserva, inicia y completa sin simular aceptación móvil.</p>
+      </div>
+    </li>
+    <li>
+      <span class="check" aria-hidden="true">✓</span>
+      <div>
+        <strong>Reportes y trazabilidad verificables</strong>
+        <p>Disponibilidad, asignaciones e incidencias se consultan desde PostgreSQL y se exportan en PDF, Excel o CSV protegido.</p>
+      </div>
+    </li>
+  </ul>
+
+  <div class="scope-note">
+    <strong>Alcance actual</strong>
+    <p>
+      Esta fase no incluye aplicación móvil, GPS ni una falsa aceptación del conductor. La
+      disponibilidad futura se calcula por asignaciones programadas.
+    </p>
+  </div>
+
+  <div class="management-shortcuts" aria-label="Accesos de administración">
+    @if (canManageResources()) {
+      <a routerLink="/users">Administrar usuarios</a>
+    }
+    @if (canBrowseResources()) {
+      <a routerLink="/groups">Ver grupos</a>
+      <a routerLink="/drivers">Ver conductores</a>
+      <a routerLink="/vehicles">Ver vehículos</a>
+      <a routerLink="/assignments">Gestionar asignaciones</a>
+      <a routerLink="/incidents">Registrar incidencias</a>
+      <a routerLink="/announcements">Ver comunicados</a>
+    }
+    @if (canViewReports()) {
+      <a routerLink="/reports">Abrir reportes reales</a>
+      <a routerLink="/audit">Consultar auditoría</a>
+    }
+    @if (isSuperAdmin()) {
+      <a routerLink="/organizations">Administrar organizaciones</a>
+    }
+  </div>
+</section>

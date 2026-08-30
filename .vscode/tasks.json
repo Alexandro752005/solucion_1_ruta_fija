@@ -1,0 +1,37 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Ruta Fija: iniciar PostgreSQL",
+      "type": "process",
+      "command": "docker",
+      "args": ["compose", "up", "-d", "postgres"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Ruta Fija: construir e iniciar CRM",
+      "type": "process",
+      "command": "docker",
+      "args": ["compose", "--profile", "app", "up", "-d", "--build"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Ruta Fija: estado de contenedores",
+      "type": "process",
+      "command": "docker",
+      "args": ["compose", "--profile", "app", "ps"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Ruta Fija: detener CRM conservando datos",
+      "type": "process",
+      "command": "docker",
+      "args": ["compose", "--profile", "app", "down"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    }
+  ]
+}

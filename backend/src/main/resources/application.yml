@@ -1,0 +1,91 @@
+spring:
+  application:
+    name: ruta-fija-backend
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    hikari:
+      maximum-pool-size: ${DB_POOL_MAX_SIZE:10}
+      minimum-idle: ${DB_POOL_MIN_IDLE:2}
+      connection-timeout: 30000
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    validate-migration-naming: true
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  jackson:
+    default-property-inclusion: non_null
+    time-zone: UTC
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
+
+server:
+  port: ${SERVER_PORT:8080}
+  shutdown: graceful
+  forward-headers-strategy: framework
+  error:
+    include-message: never
+    include-stacktrace: never
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: never
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: Ruta Fija Backend
+    version: '@project.version@'
+    phase: 4
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+
+app:
+  operations:
+    stream-ticket-ttl: ${OPERATION_STREAM_TICKET_TTL:PT2M}
+  security:
+    jwt:
+      issuer: ${JWT_ISSUER:ruta-fija-api}
+      secret-base64: ${JWT_SECRET_BASE64}
+      access-ttl: ${JWT_ACCESS_TTL:PT15M}
+      refresh-ttl: ${JWT_REFRESH_TTL:P7D}
+    refresh-cookie:
+      name: ${REFRESH_COOKIE_NAME:rf_refresh}
+      path: /api/v1/auth
+      same-site: Strict
+      secure: ${REFRESH_COOKIE_SECURE:false}
+    cors:
+      allowed-origins: ${APP_CORS_ALLOWED_ORIGINS:http://localhost:4200}
+    login-rate-limit:
+      enabled: ${LOGIN_RATE_LIMIT_ENABLED:true}
+      account-max-attempts: ${LOGIN_RATE_LIMIT_ACCOUNT_ATTEMPTS:5}
+      account-window: ${LOGIN_RATE_LIMIT_ACCOUNT_WINDOW:PT5M}
+      global-max-attempts: ${LOGIN_RATE_LIMIT_GLOBAL_ATTEMPTS:300}
+      global-window: ${LOGIN_RATE_LIMIT_GLOBAL_WINDOW:PT1M}
+      max-tracked-accounts: ${LOGIN_RATE_LIMIT_MAX_ACCOUNTS:10000}
+
+logging:
+  pattern:
+    level: "%5p [correlationId:%X{correlationId:-}]"

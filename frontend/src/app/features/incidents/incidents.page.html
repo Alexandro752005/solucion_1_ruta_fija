@@ -1,0 +1,75 @@
+<section class="management-page" aria-labelledby="incidents-title">
+  <header class="management-heading">
+    <div>
+      <p class="management-eyebrow">Fase 4 · Operación web</p>
+      <h1 id="incidents-title">Incidencias</h1>
+      <p>El personal de coordinación registra hechos reales desde el CRM; no se simulan eventos móviles.</p>
+    </div>
+    <span class="management-badge">{{ totalItems() }} registradas</span>
+  </header>
+
+  @if (error(); as currentError) {
+    <div class="management-alert error" role="alert"><strong>{{ currentError.message }}</strong>@if (currentError.correlationId) { <span>Referencia: {{ currentError.correlationId }}</span> }</div>
+  }
+  @if (notice(); as currentNotice) { <div class="management-alert success" role="status">{{ currentNotice }}</div> }
+
+  <div class="management-layout">
+    <section class="management-panel" aria-labelledby="incident-form-title">
+      <header><div><h2 id="incident-form-title">Registrar incidencia</h2><p>La incidencia queda trazada con el usuario que la registró y la hora real del servidor.</p></div></header>
+      <form class="management-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="field">
+          <label for="incident-driver">Conductor</label>
+          <select id="incident-driver" formControlName="driverId"><option value="">Selecciona un conductor</option>@for (driver of drivers(); track driver.id) { <option [value]="driver.id">{{ driver.fullName }} · {{ driver.groupName }}</option> }</select>
+        </div>
+        <div class="field">
+          <label for="incident-assignment">Asignación relacionada (opcional)</label>
+          <select id="incident-assignment" [value]="form.controls.assignmentId.value" (change)="selectAssignment(assignmentSelect.value)" #assignmentSelect><option value="">Sin asignación relacionada</option>@for (assignment of assignments(); track assignment.id) { <option [value]="assignment.id">{{ assignment.driverName }} · {{ assignment.vehiclePlate }} · {{ assignment.originText }} → {{ assignment.destinationText }}</option> }</select>
+        </div>
+        <div class="field">
+          <label for="incident-category">Categoría</label>
+          <select id="incident-category" formControlName="category">@for (category of categories; track category) { <option [value]="category">{{ categoryLabel(category) }}</option> }</select>
+        </div>
+        <div class="field">
+          <label for="incident-description">Descripción</label>
+          <textarea id="incident-description" maxlength="1000" formControlName="description"></textarea>
+        </div>
+        <div class="management-actions"><button class="management-button primary" type="submit" [disabled]="saving()">{{ saving() ? 'Registrando…' : 'Registrar incidencia' }}</button></div>
+      </form>
+
+      @if (selectedForFollowUp(); as incident) {
+        <div class="management-detail">
+          <h3>Seguimiento: {{ incident.driverName }}</h3>
+          <form class="management-form" [formGroup]="followUpForm" (ngSubmit)="submitFollowUp()" novalidate>
+            <div class="field"><label for="follow-up-note">Nota de seguimiento</label><textarea id="follow-up-note" maxlength="1000" formControlName="note"></textarea></div>
+            <label><input type="checkbox" formControlName="resolve" /> Resolver incidencia</label>
+            <div class="management-actions"><button class="management-button" type="button" (click)="cancelFollowUp()">Cancelar</button><button class="management-button primary" type="submit" [disabled]="followUpSaving()">{{ followUpSaving() ? 'Guardando…' : 'Guardar seguimiento' }}</button></div>
+          </form>
+        </div>
+      }
+    </section>
+
+    <section class="management-panel" aria-labelledby="incidents-list-title">
+      <header><div><h2 id="incidents-list-title">Registro operativo</h2><p>Los seguimientos usan control de versión para evitar sobrescribir el trabajo de otra persona.</p></div></header>
+      <div class="management-filter">
+        <select #statusFilter [value]="selectedStatus()" aria-label="Filtrar por estado"><option value="">Todos los estados</option>@for (status of statuses; track status) { <option [value]="status">{{ statusLabel(status) }}</option> }</select>
+        <select #categoryFilter [value]="selectedCategory()" aria-label="Filtrar por categoría"><option value="">Todas las categorías</option>@for (category of categories; track category) { <option [value]="category">{{ categoryLabel(category) }}</option> }</select>
+        <button class="management-button" type="button" (click)="applyFilters(statusFilter.value, categoryFilter.value)">Filtrar</button>
+      </div>
+      @if (loading()) { <p class="management-empty" role="status">Cargando incidencias…</p> }
+      @else if (incidents().length === 0) { <p class="management-empty">No existen incidencias para el filtro actual.</p> }
+      @else {
+        <div class="management-table-wrap"><table class="management-table"><thead><tr><th>Incidencia</th><th>Conductor</th><th>Estado</th><th>Seguimiento</th></tr></thead><tbody>
+          @for (incident of incidents(); track incident.id) {
+            <tr>
+              <td><strong>{{ categoryLabel(incident.category) }}</strong><small>{{ incident.description }}</small><small>{{ dateLabel(incident.reportedAt) }} · {{ incident.reportedByName }}</small></td>
+              <td><strong>{{ incident.driverName }}</strong><small>{{ incident.assignmentId ? 'Con asignación relacionada' : 'Sin asignación relacionada' }}</small></td>
+              <td><span class="management-status" [class.success]="incident.status === 'RESOLVED'" [class.warning]="incident.status !== 'RESOLVED'">{{ statusLabel(incident.status) }}</span></td>
+              <td><small>{{ incident.followUpNote || 'Sin seguimiento aún' }}</small>@if (incident.status !== 'RESOLVED') { <button class="management-button compact" type="button" (click)="beginFollowUp(incident)">Seguimiento</button> }</td>
+            </tr>
+          }
+        </tbody></table></div>
+      }
+      <div class="management-pagination"><button class="management-button compact" type="button" (click)="previousPage()" [disabled]="page() === 0">Anterior</button><span>Página {{ page() + 1 }} de {{ totalPages() || 1 }}</span><button class="management-button compact" type="button" (click)="nextPage()" [disabled]="page() + 1 >= totalPages()">Siguiente</button></div>
+    </section>
+  </div>
+</section>

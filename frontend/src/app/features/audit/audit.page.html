@@ -1,0 +1,49 @@
+<section class="management-page" aria-labelledby="audit-title">
+  <header class="management-heading">
+    <div>
+      <p class="management-eyebrow">Fase 4 · Trazabilidad inmutable</p>
+      <h1 id="audit-title">Auditoría de eventos</h1>
+      <p>Consulta de solo lectura limitada a la organización activa. No existen acciones para crear, editar ni eliminar eventos.</p>
+    </div>
+    <span class="management-badge">{{ totalItems() }} eventos</span>
+  </header>
+
+  @if (error(); as currentError) {
+    <div class="management-alert error" role="alert"><strong>{{ currentError.message }}</strong>@if (currentError.correlationId) { <span>Referencia: {{ currentError.correlationId }}</span> }</div>
+  }
+
+  <section class="management-panel" aria-labelledby="audit-filter-title">
+    <header><div><h2 id="audit-filter-title">Criterios de consulta</h2><p>Filtra por acción, entidad o periodo. Los resultados se paginan y se ordenan por fecha descendente.</p></div></header>
+    <form class="management-form" [formGroup]="form" (ngSubmit)="applyFilters()" novalidate>
+      <div class="form-grid">
+        <div class="field"><label for="audit-action">Acción</label><input id="audit-action" type="text" maxlength="80" formControlName="action" placeholder="Ej.: ASSIGNMENT_STARTED" /></div>
+        <div class="field"><label for="audit-entity">Entidad</label><input id="audit-entity" type="text" maxlength="60" formControlName="entityType" placeholder="Ej.: ASSIGNMENT" /></div>
+        <div class="field"><label for="audit-from">Desde</label><input id="audit-from" type="date" formControlName="from" /></div>
+        <div class="field"><label for="audit-to">Hasta</label><input id="audit-to" type="date" formControlName="to" /></div>
+      </div>
+      <div class="management-actions"><button class="management-button" type="button" (click)="clearFilters()">Limpiar</button><button class="management-button primary" type="submit" [disabled]="loading()">{{ loading() ? 'Consultando…' : 'Consultar auditoría' }}</button></div>
+    </form>
+  </section>
+
+  <section class="management-panel" aria-labelledby="audit-list-title">
+    <header><div><h2 id="audit-list-title">Eventos registrados</h2><p>La correlación permite relacionar un evento con los registros técnicos, sin exponer secretos ni coordenadas.</p></div></header>
+    @if (loading()) { <p class="management-empty" role="status">Cargando auditoría…</p> }
+    @else if (events().length === 0) { <p class="management-empty">No hay eventos para los criterios seleccionados.</p> }
+    @else {
+      <div class="management-table-wrap"><table class="management-table"><thead><tr><th>Acción</th><th>Responsable</th><th>Entidad</th><th>Fecha</th><th></th></tr></thead><tbody>
+        @for (event of events(); track event.id) {
+          <tr><td><strong>{{ event.action }}</strong><small>{{ event.correlationId || 'Sin correlación disponible' }}</small></td><td>{{ event.userFullName || 'Sistema' }}</td><td><strong>{{ event.entityType || 'No aplica' }}</strong><small>{{ event.entityId || 'Sin entidad asociada' }}</small></td><td>{{ dateLabel(event.occurredAt) }}</td><td><button class="management-button compact" type="button" (click)="select(event)" [disabled]="loadingDetail()">Ver detalle</button></td></tr>
+        }
+      </tbody></table></div>
+    }
+    <div class="management-pagination"><button class="management-button compact" type="button" (click)="previousPage()" [disabled]="page() === 0">Anterior</button><span>Página {{ page() + 1 }} de {{ totalPages() || 1 }}</span><button class="management-button compact" type="button" (click)="nextPage()" [disabled]="page() + 1 >= totalPages()">Siguiente</button></div>
+  </section>
+
+  @if (selected(); as event) {
+    <section class="management-panel" aria-labelledby="audit-detail-title">
+      <header><div><h2 id="audit-detail-title">Detalle inmutable</h2><p>{{ event.action }} · {{ dateLabel(event.occurredAt) }}</p></div></header>
+      <dl class="management-detail-list"><div><dt>Identificador</dt><dd>{{ event.id }}</dd></div><div><dt>Responsable</dt><dd>{{ event.userFullName || 'Sistema' }}</dd></div><div><dt>Entidad</dt><dd>{{ event.entityType || 'No aplica' }} · {{ event.entityId || 'Sin entidad asociada' }}</dd></div><div><dt>Correlation ID</dt><dd>{{ event.correlationId || 'No disponible' }}</dd></div></dl>
+      <h3>Metadatos seguros</h3><pre class="management-code">{{ metadataLabel(event) }}</pre>
+    </section>
+  }
+</section>

@@ -1,0 +1,41 @@
+<section class="management-page" aria-labelledby="announcements-title">
+  <header class="management-heading">
+    <div>
+      <p class="management-eyebrow">Fase 4 · Comunicación web</p>
+      <h1 id="announcements-title">Comunicados</h1>
+      <p>Publica información para toda la organización o para un grupo visible, sin afirmar lecturas inexistentes.</p>
+    </div>
+    <span class="management-badge">{{ totalItems() }} publicados</span>
+  </header>
+
+  @if (error(); as currentError) { <div class="management-alert error" role="alert"><strong>{{ currentError.message }}</strong>@if (currentError.correlationId) { <span>Referencia: {{ currentError.correlationId }}</span> }</div> }
+  @if (notice(); as currentNotice) { <div class="management-alert success" role="status">{{ currentNotice }}</div> }
+
+  <div class="management-layout">
+    <section class="management-panel" aria-labelledby="announcement-form-title">
+      <header><div><h2 id="announcement-form-title">Nuevo comunicado</h2><p>El acuse de lectura se mantiene deshabilitado hasta que exista un cliente para conductores.</p></div></header>
+      <form class="management-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="field"><label for="announcement-title">Título</label><input id="announcement-title" type="text" maxlength="160" formControlName="title" /></div>
+        <div class="field"><label for="announcement-body">Contenido</label><textarea id="announcement-body" maxlength="5000" formControlName="body"></textarea></div>
+        <div class="field"><label for="announcement-audience">Destinatarios</label><select id="announcement-audience" [value]="form.controls.audienceType.value" (change)="changeFormAudience(audienceSelect.value)" #audienceSelect>@for (audience of audiences; track audience) { <option [value]="audience" [disabled]="audience === 'ORGANIZATION' && !canPublishOrganization()">{{ audienceLabel(audience) }}</option> }</select></div>
+        @if (form.controls.audienceType.value === 'GROUP') {
+          <div class="field"><label for="announcement-group">Grupo</label><select id="announcement-group" formControlName="audienceId"><option value="">Selecciona un grupo</option>@for (group of groups(); track group.id) { <option [value]="group.id">{{ group.name }}</option> }</select></div>
+        }
+        <div class="management-actions"><button class="management-button primary" type="submit" [disabled]="saving()">{{ saving() ? 'Publicando…' : 'Publicar comunicado' }}</button></div>
+      </form>
+    </section>
+
+    <section class="management-panel" aria-labelledby="announcements-list-title">
+      <header><div><h2 id="announcements-list-title">Comunicados visibles</h2><p>La visibilidad respeta la organización y, para coordinadores, sus grupos asignados.</p></div></header>
+      <div class="management-filter"><select #audienceFilter [value]="selectedAudience()" aria-label="Filtrar comunicados"><option value="">Todas las audiencias</option>@for (audience of audiences; track audience) { <option [value]="audience">{{ audienceLabel(audience) }}</option> }</select><button class="management-button" type="button" (click)="applyAudience(audienceFilter.value)">Filtrar</button></div>
+      @if (loading()) { <p class="management-empty" role="status">Cargando comunicados…</p> }
+      @else if (announcements().length === 0) { <p class="management-empty">No existen comunicados visibles.</p> }
+      @else {
+        <div class="management-table-wrap"><table class="management-table"><thead><tr><th>Comunicado</th><th>Audiencia</th><th>Autor</th></tr></thead><tbody>
+          @for (announcement of announcements(); track announcement.id) { <tr><td><strong>{{ announcement.title }}</strong><small>{{ announcement.body }}</small></td><td><span class="management-status">{{ audienceLabel(announcement.audienceType) }}</span><small>Sin acuse de lectura en fase web</small></td><td><strong>{{ announcement.createdByName }}</strong><small>{{ dateLabel(announcement.createdAt) }}</small></td></tr> }
+        </tbody></table></div>
+      }
+      <div class="management-pagination"><button class="management-button compact" type="button" (click)="previousPage()" [disabled]="page() === 0">Anterior</button><span>Página {{ page() + 1 }} de {{ totalPages() || 1 }}</span><button class="management-button compact" type="button" (click)="nextPage()" [disabled]="page() + 1 >= totalPages()">Siguiente</button></div>
+    </section>
+  </div>
+</section>

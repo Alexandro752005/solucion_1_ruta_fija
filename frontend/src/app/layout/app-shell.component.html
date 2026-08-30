@@ -1,0 +1,113 @@
+<a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+<div class="app-frame">
+  <aside class="sidebar">
+    <a class="brand" routerLink="/dashboard" aria-label="Ruta Fija, inicio">
+      <span class="brand-symbol" aria-hidden="true">RF</span>
+      <span class="brand-copy">
+        <strong>{{ runtimeConfig.config().appName }}</strong>
+        <small>CRM administrativo</small>
+      </span>
+    </a>
+
+    <nav aria-label="Navegación principal">
+      <p class="nav-label">Fase 4 · Cierre y reportes</p>
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        ariaCurrentWhenActive="page"
+      >
+        <span class="nav-icon" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </span>
+        Resumen
+      </a>
+      @if (canManageResources()) {
+        <a routerLink="/users" routerLinkActive="active" ariaCurrentWhenActive="page">
+          <span class="nav-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          Usuarios
+        </a>
+      }
+      @if (canBrowseResources()) {
+        <a routerLink="/groups" routerLinkActive="active" ariaCurrentWhenActive="page">
+          <span class="nav-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          Grupos
+        </a>
+        <a routerLink="/drivers" routerLinkActive="active" ariaCurrentWhenActive="page">
+          <span class="nav-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          Conductores
+        </a>
+        <a routerLink="/vehicles" routerLinkActive="active" ariaCurrentWhenActive="page">
+          <span class="nav-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          Vehículos
+        </a>
+        <a routerLink="/assignments" routerLinkActive="active" ariaCurrentWhenActive="page">
+          <span class="nav-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          Asignaciones
+        </a>
+        <a routerLink="/incidents" routerLinkActive="active" ariaCurrentWhenActive="page">
+          <span class="nav-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          Incidencias
+        </a>
+        <a routerLink="/announcements" routerLinkActive="active" ariaCurrentWhenActive="page">
+          <span class="nav-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          Comunicados
+        </a>
+      }
+      @if (canViewReports()) {
+        <a routerLink="/reports" routerLinkActive="active" ariaCurrentWhenActive="page">
+          <span class="nav-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          Reportes reales
+        </a>
+        <a routerLink="/audit" routerLinkActive="active" ariaCurrentWhenActive="page">
+          <span class="nav-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          Auditoría
+        </a>
+      }
+      @if (isSuperAdmin()) {
+        <a routerLink="/organizations" routerLinkActive="active" ariaCurrentWhenActive="page">
+          <span class="nav-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          Organizaciones
+        </a>
+      }
+    </nav>
+
+    <div class="phase-card">
+      <span class="phase-dot" aria-hidden="true"></span>
+      <div>
+        <strong>Cierre operativo</strong>
+        <span>Fase 4 · 75–100 % del MVP</span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="workspace">
+    <header class="topbar">
+      <div>
+        <p class="context-label">Organización activa</p>
+        <p class="context-name">{{ organizationLabel() }}</p>
+      </div>
+
+      <div class="user-area">
+        <span class="avatar" aria-hidden="true">{{ initials() }}</span>
+        <div class="user-copy">
+          <strong>{{ session.user()?.fullName }}</strong>
+          <span>{{ roleLabel(session.user()?.role) }}</span>
+        </div>
+        <button
+          type="button"
+          (click)="logout()"
+          [disabled]="loggingOut()"
+          [attr.aria-busy]="loggingOut()"
+        >
+          {{ loggingOut() ? 'Cerrando…' : 'Cerrar sesión' }}
+        </button>
+      </div>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <router-outlet />
+    </main>
+  </div>
+</div>

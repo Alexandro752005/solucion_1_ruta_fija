@@ -1,0 +1,10 @@
+app:
+  seed:
+    enabled: false
+  security:
+    refresh-cookie:
+      secure: false
+
+springdoc:
+  swagger-ui:
+    enabled: false
