@@ -1,41 +1,48 @@
-<section class="management-page" aria-labelledby="announcements-title">
-  <header class="management-heading">
-    <div>
-      <p class="management-eyebrow">Fase 4 · Comunicación web</p>
-      <h1 id="announcements-title">Comunicados</h1>
-      <p>Publica información para toda la organización o para un grupo visible, sin afirmar lecturas inexistentes.</p>
-    </div>
-    <span class="management-badge">{{ totalItems() }} publicados</span>
-  </header>
+<section class="management-page">
+  <rf-page-header
+    title="Comunicados"
+    description="Publica informaci&oacute;n para la organizaci&oacute;n o para los grupos autorizados."
+    [context]="organizationName()"
+  >
+    <button page-actions class="management-button primary" type="button" (click)="startCreate()">Nuevo comunicado</button>
+  </rf-page-header>
 
   @if (error(); as currentError) { <div class="management-alert error" role="alert"><strong>{{ currentError.message }}</strong>@if (currentError.correlationId) { <span>Referencia: {{ currentError.correlationId }}</span> }</div> }
   @if (notice(); as currentNotice) { <div class="management-alert success" role="status">{{ currentNotice }}</div> }
 
-  <div class="management-layout">
-    <section class="management-panel" aria-labelledby="announcement-form-title">
-      <header><div><h2 id="announcement-form-title">Nuevo comunicado</h2><p>El acuse de lectura se mantiene deshabilitado hasta que exista un cliente para conductores.</p></div></header>
-      <form class="management-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
-        <div class="field"><label for="announcement-title">Título</label><input id="announcement-title" type="text" maxlength="160" formControlName="title" /></div>
-        <div class="field"><label for="announcement-body">Contenido</label><textarea id="announcement-body" maxlength="5000" formControlName="body"></textarea></div>
-        <div class="field"><label for="announcement-audience">Destinatarios</label><select id="announcement-audience" [value]="form.controls.audienceType.value" (change)="changeFormAudience(audienceSelect.value)" #audienceSelect>@for (audience of audiences; track audience) { <option [value]="audience" [disabled]="audience === 'ORGANIZATION' && !canPublishOrganization()">{{ audienceLabel(audience) }}</option> }</select></div>
-        @if (form.controls.audienceType.value === 'GROUP') {
-          <div class="field"><label for="announcement-group">Grupo</label><select id="announcement-group" formControlName="audienceId"><option value="">Selecciona un grupo</option>@for (group of groups(); track group.id) { <option [value]="group.id">{{ group.name }}</option> }</select></div>
-        }
-        <div class="management-actions"><button class="management-button primary" type="submit" [disabled]="saving()">{{ saving() ? 'Publicando…' : 'Publicar comunicado' }}</button></div>
-      </form>
-    </section>
+  <section class="management-panel" aria-labelledby="announcements-list-title">
+    <header><div><h2 id="announcements-list-title">Comunicados visibles</h2><p>{{ totalItems() }} publicaciones disponibles para tu perfil.</p></div></header>
+    <div class="management-filter"><select #audienceFilter [value]="selectedAudience()" aria-label="Filtrar comunicados"><option value="">Todas las audiencias</option>@for (audience of audiences; track audience) { <option [value]="audience">{{ audienceLabel(audience) }}</option> }</select><button class="management-button" type="button" (click)="applyAudience(audienceFilter.value)">Aplicar</button><button class="management-button" type="button" (click)="audienceFilter.value = ''; clearAudience()">Limpiar</button></div>
 
-    <section class="management-panel" aria-labelledby="announcements-list-title">
-      <header><div><h2 id="announcements-list-title">Comunicados visibles</h2><p>La visibilidad respeta la organización y, para coordinadores, sus grupos asignados.</p></div></header>
-      <div class="management-filter"><select #audienceFilter [value]="selectedAudience()" aria-label="Filtrar comunicados"><option value="">Todas las audiencias</option>@for (audience of audiences; track audience) { <option [value]="audience">{{ audienceLabel(audience) }}</option> }</select><button class="management-button" type="button" (click)="applyAudience(audienceFilter.value)">Filtrar</button></div>
-      @if (loading()) { <p class="management-empty" role="status">Cargando comunicados…</p> }
-      @else if (announcements().length === 0) { <p class="management-empty">No existen comunicados visibles.</p> }
-      @else {
-        <div class="management-table-wrap"><table class="management-table"><thead><tr><th>Comunicado</th><th>Audiencia</th><th>Autor</th></tr></thead><tbody>
-          @for (announcement of announcements(); track announcement.id) { <tr><td><strong>{{ announcement.title }}</strong><small>{{ announcement.body }}</small></td><td><span class="management-status">{{ audienceLabel(announcement.audienceType) }}</span><small>Sin acuse de lectura en fase web</small></td><td><strong>{{ announcement.createdByName }}</strong><small>{{ dateLabel(announcement.createdAt) }}</small></td></tr> }
-        </tbody></table></div>
-      }
-      <div class="management-pagination"><button class="management-button compact" type="button" (click)="previousPage()" [disabled]="page() === 0">Anterior</button><span>Página {{ page() + 1 }} de {{ totalPages() || 1 }}</span><button class="management-button compact" type="button" (click)="nextPage()" [disabled]="page() + 1 >= totalPages()">Siguiente</button></div>
-    </section>
-  </div>
+    @if (loading()) { <p class="management-empty" role="status">Cargando comunicados&hellip;</p> }
+    @else if (announcements().length === 0) { <p class="management-empty">No existen comunicados visibles.</p> }
+    @else {
+      <div class="management-table-wrap"><table class="management-table">
+        <thead><tr><th>Fecha</th><th>T&iacute;tulo</th><th>Destinatario</th><th>Autor</th><th>Acciones</th></tr></thead>
+        <tbody>@for (announcement of announcements(); track announcement.id) {
+          <tr><td>{{ dateLabel(announcement.createdAt) }}</td><td><strong>{{ announcement.title }}</strong></td><td>{{ audienceTargetLabel(announcement) }}</td><td>{{ announcement.createdByName }}</td><td><button class="management-button compact" type="button" (click)="viewDetails(announcement)">Ver detalle</button></td></tr>
+        }</tbody>
+      </table></div>
+    }
+    <rf-pagination [page]="page()" [totalPages]="totalPages()" [totalItems]="totalItems()" (previous)="previousPage()" (next)="nextPage()" />
+  </section>
 </section>
+
+<rf-modal [open]="formOpen()" title="Nuevo comunicado" size="large" (closed)="closeForm()">
+  <form class="management-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="field"><label for="announcement-title">T&iacute;tulo</label><input id="announcement-title" type="text" maxlength="160" formControlName="title" [attr.aria-invalid]="form.controls.title.invalid && form.controls.title.touched" />@if (form.controls.title.invalid && form.controls.title.touched) { <p class="management-field-error">Ingresa el t&iacute;tulo.</p> }</div>
+    <div class="field"><label for="announcement-body">Contenido</label><textarea id="announcement-body" maxlength="5000" formControlName="body" [attr.aria-invalid]="form.controls.body.invalid && form.controls.body.touched"></textarea>@if (form.controls.body.invalid && form.controls.body.touched) { <p class="management-field-error">Ingresa el contenido.</p> }</div>
+    <div class="field"><label for="announcement-audience">Destinatarios</label><select id="announcement-audience" [value]="form.controls.audienceType.value" (change)="changeFormAudience(audienceSelect.value)" #audienceSelect>@for (audience of audiences; track audience) { <option [value]="audience" [disabled]="audience === 'ORGANIZATION' && !canPublishOrganization()">{{ audienceLabel(audience) }}</option> }</select></div>
+    @if (form.controls.audienceType.value === 'GROUP') { <div class="field"><label for="announcement-group">Grupo</label><select id="announcement-group" formControlName="audienceId"><option value="">Selecciona un grupo</option>@for (group of groups(); track group.id) { <option [value]="group.id">{{ group.name }}</option> }</select></div> }
+    <p class="management-muted">El comunicado se publicar&aacute; inmediatamente. La programaci&oacute;n futura y el chat no forman parte de este m&oacute;dulo.</p>
+    <div class="management-actions"><button class="management-button" type="button" (click)="closeForm()" [disabled]="saving()">Cancelar</button><button class="management-button primary" type="submit" [disabled]="saving()">{{ saving() ? 'Publicando&hellip;' : 'Publicar comunicado' }}</button></div>
+  </form>
+</rf-modal>
+
+<rf-modal [open]="detailOpen()" title="Detalle del comunicado" (closed)="closeDetails()">
+  @if (selectedAnnouncement(); as announcement) {
+    <dl class="rf-detail-grid"><div><dt>Fecha</dt><dd>{{ dateLabel(announcement.createdAt) }}</dd></div><div><dt>Autor</dt><dd>{{ announcement.createdByName }}</dd></div><div><dt>Destinatario</dt><dd>{{ audienceTargetLabel(announcement) }}</dd></div><div><dt>T&iacute;tulo</dt><dd>{{ announcement.title }}</dd></div></dl>
+    <section class="management-detail"><h3>Contenido</h3><p class="announcement-body">{{ announcement.body }}</p></section>
+  }
+  <div modal-actions><button class="management-button" type="button" (click)="closeDetails()">Cerrar</button></div>
+</rf-modal>

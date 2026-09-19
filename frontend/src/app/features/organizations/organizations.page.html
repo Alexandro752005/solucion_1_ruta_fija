@@ -1,118 +1,38 @@
-<section class="management-page" aria-labelledby="organizations-title">
-  <header class="management-heading">
-    <div>
-      <p class="management-eyebrow">Fase 2 · Plataforma</p>
-      <h1 id="organizations-title">Organizaciones</h1>
-      <p>Administra los datos base y estado de las organizaciones de la plataforma.</p>
-    </div>
-    <span class="management-badge">{{ totalItems() }} registradas</span>
-  </header>
+<section class="management-page">
+  <rf-page-header
+    title="Organizaciones"
+    description="Administra las entidades habilitadas en la plataforma."
+    eyebrow="Administraci&oacute;n global"
+  >
+    <button page-actions class="management-button primary" type="button" (click)="startCreate()">Nueva organizaci&oacute;n</button>
+  </rf-page-header>
 
-  @if (error(); as currentError) {
-    <div class="management-alert error" role="alert">
-      <strong>{{ currentError.message }}</strong>
-      @if (currentError.correlationId) {
-        <span>Referencia: {{ currentError.correlationId }}</span>
-      }
-    </div>
-  }
+  @if (error(); as currentError) { <div class="management-alert error" role="alert"><strong>{{ currentError.message }}</strong>@if (currentError.correlationId) { <span>Referencia: {{ currentError.correlationId }}</span> }</div> }
+  @if (notice(); as currentNotice) { <div class="management-alert success" role="status">{{ currentNotice }}</div> }
 
-  @if (notice(); as currentNotice) {
-    <div class="management-alert success" role="status">{{ currentNotice }}</div>
-  }
-
-  <div class="management-layout">
-    <section class="management-panel" aria-labelledby="organization-form-title">
-      <header>
-        <div>
-          <h2 id="organization-form-title">{{ editing() ? 'Editar organización' : 'Nueva organización' }}</h2>
-          <p>El cambio de estado se conserva en la auditoría de plataforma.</p>
-        </div>
-      </header>
-
-      <form class="management-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
-        <div class="field">
-          <label for="organization-legal-name">Razón social</label>
-          <input id="organization-legal-name" type="text" formControlName="legalName" maxlength="150" [attr.aria-invalid]="form.controls.legalName.invalid && form.controls.legalName.touched" />
-          @if (form.controls.legalName.invalid && form.controls.legalName.touched) {
-            <p class="management-field-error">Ingresa la razón social.</p>
-          }
-        </div>
-
-        <div class="field">
-          <label for="organization-trade-name">Nombre comercial</label>
-          <input id="organization-trade-name" type="text" formControlName="tradeName" maxlength="120" />
-        </div>
-
-        <div class="field">
-          <label for="organization-timezone">Zona horaria</label>
-          <input id="organization-timezone" type="text" formControlName="timezone" maxlength="50" placeholder="America/Lima" />
-        </div>
-
-        @if (editing()) {
-          <div class="field">
-            <label for="organization-status">Estado</label>
-            <select id="organization-status" formControlName="status">
-              @for (status of statuses; track status) {
-                <option [value]="status">{{ statusLabel(status) }}</option>
-              }
-            </select>
-          </div>
-        }
-
-        <div class="management-actions">
-          @if (editing()) {
-            <button class="management-button" type="button" (click)="cancelEdit()">Cancelar</button>
-          }
-          <button class="management-button primary" type="submit" [disabled]="saving()">
-            {{ saving() ? 'Guardando…' : editing() ? 'Guardar cambios' : 'Crear organización' }}
-          </button>
-        </div>
-      </form>
-    </section>
-
-    <section class="management-panel" aria-labelledby="organizations-list-title">
-      <header>
-        <div>
-          <h2 id="organizations-list-title">Directorio de organizaciones</h2>
-          <p>Acceso reservado al superadministrador de la plataforma.</p>
-        </div>
-      </header>
-
-      <div class="management-filter">
-        <input #searchInput type="search" [value]="search()" placeholder="Buscar por razón social" aria-label="Buscar organizaciones" (keyup.enter)="applySearch(searchInput.value)" />
-        <button class="management-button" type="button" (click)="applySearch(searchInput.value)">Buscar</button>
-      </div>
-
-      @if (loading()) {
-        <p class="management-empty" role="status">Cargando organizaciones…</p>
-      } @else if (organizations().length === 0) {
-        <p class="management-empty">No hay organizaciones para los filtros actuales.</p>
-      } @else {
-        <div class="management-table-wrap">
-          <table class="management-table">
-            <thead>
-              <tr><th>Organización</th><th>Zona horaria</th><th>Estado</th><th>Acción</th></tr>
-            </thead>
-            <tbody>
-              @for (organization of organizations(); track organization.id) {
-                <tr>
-                  <td><strong>{{ organization.legalName }}</strong><small>{{ organization.tradeName || 'Sin nombre comercial' }}</small></td>
-                  <td>{{ organization.timezone }}</td>
-                  <td><span class="management-status" [class.success]="organization.status === 'ACTIVE'" [class.warning]="organization.status === 'SUSPENDED'" [class.muted]="organization.status === 'INACTIVE'">{{ statusLabel(organization.status) }}</span></td>
-                  <td><button class="management-button compact" type="button" (click)="startEdit(organization)">Editar</button></td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
-      }
-
-      <div class="management-pagination">
-        <button class="management-button compact" type="button" (click)="previousPage()" [disabled]="page() === 0">Anterior</button>
-        <span>Página {{ page() + 1 }} de {{ totalPages() || 1 }}</span>
-        <button class="management-button compact" type="button" (click)="nextPage()" [disabled]="page() + 1 >= totalPages()">Siguiente</button>
-      </div>
-    </section>
-  </div>
+  <section class="management-panel" aria-labelledby="organizations-list-title">
+    <header><div><h2 id="organizations-list-title">Directorio de organizaciones</h2><p>{{ totalItems() }} organizaciones registradas.</p></div></header>
+    <div class="management-filter"><input #searchInput type="search" [value]="search()" placeholder="Buscar por raz&oacute;n social" aria-label="Buscar organizaciones" (keyup.enter)="applySearch(searchInput.value)" /><button class="management-button" type="button" (click)="applySearch(searchInput.value)">Buscar</button><button class="management-button" type="button" (click)="searchInput.value = ''; clearSearch()">Limpiar</button></div>
+    @if (loading()) { <p class="management-empty" role="status">Cargando organizaciones&hellip;</p> }
+    @else if (organizations().length === 0) { <p class="management-empty">No hay organizaciones para los filtros actuales.</p> }
+    @else {
+      <div class="management-table-wrap"><table class="management-table">
+        <thead><tr><th>Raz&oacute;n social</th><th>Nombre comercial</th><th>Zona horaria</th><th>Estado</th><th>Acciones</th></tr></thead>
+        <tbody>@for (organization of organizations(); track organization.id) {
+          <tr><td><strong>{{ organization.legalName }}</strong></td><td>{{ organization.tradeName || 'No registrado' }}</td><td>{{ organization.timezone }}</td><td><span class="management-status" [class.success]="organization.status === 'ACTIVE'" [class.warning]="organization.status === 'SUSPENDED'" [class.muted]="organization.status === 'INACTIVE'">{{ statusLabel(organization.status) }}</span></td><td><button class="management-button compact" type="button" (click)="startEdit(organization)">Editar</button></td></tr>
+        }</tbody>
+      </table></div>
+    }
+    <rf-pagination [page]="page()" [totalPages]="totalPages()" [totalItems]="totalItems()" (previous)="previousPage()" (next)="nextPage()" />
+  </section>
 </section>
+
+<rf-modal [open]="formOpen()" [title]="editing() ? 'Editar organizaci&oacute;n' : 'Nueva organizaci&oacute;n'" (closed)="closeForm()">
+  <form class="management-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="field"><label for="organization-legal-name">Raz&oacute;n social</label><input id="organization-legal-name" type="text" formControlName="legalName" maxlength="150" [attr.aria-invalid]="form.controls.legalName.invalid && form.controls.legalName.touched" />@if (form.controls.legalName.invalid && form.controls.legalName.touched) { <p class="management-field-error">Ingresa la raz&oacute;n social.</p> }</div>
+    <div class="field"><label for="organization-trade-name">Nombre comercial</label><input id="organization-trade-name" type="text" formControlName="tradeName" maxlength="120" /></div>
+    <div class="field"><label for="organization-timezone">Zona horaria</label><input id="organization-timezone" type="text" formControlName="timezone" maxlength="50" placeholder="America/Lima" /></div>
+    @if (editing()) { <div class="field"><label for="organization-status">Estado</label><select id="organization-status" formControlName="status">@for (status of statuses; track status) { <option [value]="status">{{ statusLabel(status) }}</option> }</select></div> }
+    <div class="management-actions"><button class="management-button" type="button" (click)="closeForm()" [disabled]="saving()">Cancelar</button><button class="management-button primary" type="submit" [disabled]="saving()">{{ saving() ? 'Guardando&hellip;' : editing() ? 'Guardar cambios' : 'Crear organizaci&oacute;n' }}</button></div>
+  </form>
+</rf-modal>

@@ -1,26 +1,44 @@
 :root {
   color-scheme: light;
-  --primary-050: #f0f8f7;
-  --primary-100: #dcefed;
-  --primary-500: #238f84;
-  --primary-600: #147c74;
-  --primary-700: #123c69;
-  --primary-800: #0f345c;
-  --primary-900: #0b2747;
-  --ink-900: #142536;
-  --ink-800: #26394a;
-  --ink-700: #3b4c5d;
-  --ink-500: #617181;
-  --ink-400: #7d8b98;
-  --line-300: #cbd5dd;
-  --line-200: #dfe6eb;
-  --line-100: #edf1f4;
-  --surface: #fff;
-  --surface-muted: #f5f7f9;
-  --danger-600: #b63a3a;
-  font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  --rf-yellow: #ffc400;
+  --rf-yellow-hover: #e6b000;
+  --rf-black: #111;
+  --rf-black-secondary: #252525;
+  --rf-text: #111;
+  --rf-text-secondary: #4a4a4a;
+  --rf-background: #fff;
+  --rf-background-soft: #fafafa;
+  --rf-border: #bdbdbd;
+  --rf-border-soft: #d8d8d8;
+  --rf-success: #159447;
+  --rf-warning: #d89b00;
+  --rf-error: #d93025;
+  --rf-info: #1668c7;
+  --rf-inactive: #7a7a7a;
+  --rf-radius: 2px;
+  --rf-control-height: 44px;
+
+  /* Alias temporales para estilos de módulos que se migran secuencialmente. */
+  --primary-050: #fff9df;
+  --primary-100: #fff2b7;
+  --primary-500: var(--rf-yellow);
+  --primary-600: var(--rf-yellow-hover);
+  --primary-700: var(--rf-black-secondary);
+  --primary-800: var(--rf-black);
+  --primary-900: var(--rf-black);
+  --ink-900: var(--rf-text);
+  --ink-800: var(--rf-text);
+  --ink-700: #303030;
+  --ink-500: var(--rf-text-secondary);
+  --ink-400: #666;
+  --line-300: var(--rf-border);
+  --line-200: var(--rf-border-soft);
+  --line-100: #ececec;
+  --surface: var(--rf-background);
+  --surface-muted: var(--rf-background-soft);
+  --danger-600: var(--rf-error);
+
+  font-family: Arial, Inter, Roboto, "Segoe UI", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
@@ -34,15 +52,21 @@
 html {
   min-width: 320px;
   min-height: 100%;
-  background: var(--surface-muted);
+  background: var(--rf-background-soft);
 }
 
 body {
   min-width: 320px;
   min-height: 100%;
   margin: 0;
-  color: var(--ink-800);
-  background: var(--surface-muted);
+  color: var(--rf-text);
+  background: var(--rf-background-soft);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+body.rf-modal-open {
+  overflow: hidden;
 }
 
 .app-boot-message {
@@ -50,7 +74,7 @@ body {
   min-height: 100dvh;
   margin: 0;
   place-items: center;
-  color: var(--ink-500);
+  color: var(--rf-text-secondary);
   font-weight: 650;
 }
 
@@ -71,7 +95,7 @@ button {
 }
 
 :focus-visible {
-  outline: 3px solid rgb(35 143 132 / 34%);
+  outline: 3px solid var(--rf-info);
   outline-offset: 2px;
 }
 
@@ -88,7 +112,7 @@ button {
 
 .management-page {
   display: grid;
-  max-width: 88rem;
+  width: min(100%, 92rem);
   margin: 0 auto;
   gap: 1.25rem;
 }
@@ -97,6 +121,8 @@ button {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--rf-border);
   gap: 1.5rem;
 }
 
@@ -105,66 +131,85 @@ button {
 .management-panel h2,
 .management-panel h3 {
   margin: 0;
-  color: var(--ink-900);
-  letter-spacing: -0.025em;
+  color: var(--rf-text);
+  letter-spacing: -0.02em;
 }
 
 .management-heading h1 {
-  margin-top: 0.32rem;
-  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  margin-top: 0.2rem;
+  font-size: clamp(1.9rem, 4vw, 2.25rem);
 }
 
 .management-heading p:last-child {
-  max-width: 48rem;
+  max-width: 52rem;
   margin: 0.55rem 0 0;
-  color: var(--ink-500);
-  line-height: 1.55;
+  color: var(--rf-text-secondary);
+  line-height: 1.5;
 }
 
 .management-eyebrow {
   margin: 0;
-  color: var(--primary-600);
-  font-size: 0.72rem;
-  font-weight: 760;
-  letter-spacing: 0.1em;
+  color: var(--rf-text-secondary);
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.management-badge,
+.management-badge {
+  display: inline-flex;
+  width: max-content;
+  min-height: 2rem;
+  align-items: center;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--rf-border);
+  border-radius: var(--rf-radius);
+  color: var(--rf-text);
+  background: var(--rf-background-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
 .management-status {
   display: inline-flex;
   width: max-content;
   align-items: center;
-  padding: 0.35rem 0.58rem;
-  border-radius: 999px;
-  font-size: 0.72rem;
-  font-weight: 720;
-  line-height: 1.1;
+  color: var(--rf-text);
+  background: transparent;
+  font-size: 0.82rem;
+  font-weight: 650;
+  gap: 0.42rem;
 }
 
-.management-badge {
-  color: var(--primary-800);
-  background: var(--primary-100);
+.management-status::before {
+  width: 0.58rem;
+  height: 0.58rem;
+  flex: 0 0 auto;
+  border: 1px solid rgb(0 0 0 / 18%);
+  border-radius: 50%;
+  background: var(--rf-info);
+  content: "";
 }
 
-.management-status.success {
-  color: #136650;
-  background: #e2f6ef;
+.management-status.success::before {
+  background: var(--rf-success);
 }
 
-.management-status.warning {
-  color: #7c5212;
-  background: #fff2d9;
+.management-status.warning::before {
+  background: var(--rf-warning);
 }
 
-.management-status.muted {
-  color: var(--ink-600, #566775);
-  background: #e9eef2;
+.management-status.muted::before {
+  background: var(--rf-inactive);
+}
+
+.management-status.danger::before {
+  background: var(--rf-error);
 }
 
 .management-layout {
   display: grid;
-  grid-template-columns: minmax(17rem, 24rem) minmax(0, 1fr);
+  grid-template-columns: minmax(19rem, 25rem) minmax(0, 1fr);
   align-items: start;
   gap: 1.25rem;
 }
@@ -176,10 +221,9 @@ button {
 .management-panel {
   min-width: 0;
   padding: 1.25rem;
-  border: 1px solid var(--line-200);
-  border-radius: 0.9rem;
-  background: var(--surface);
-  box-shadow: 0 0.15rem 0.8rem rgb(19 52 80 / 4%);
+  border: 1px solid var(--rf-border-soft);
+  border-radius: var(--rf-radius);
+  background: var(--rf-background);
 }
 
 .management-panel > header,
@@ -192,35 +236,35 @@ button {
 }
 
 .management-panel h2 {
-  font-size: 1.08rem;
+  font-size: 1.2rem;
 }
 
 .management-panel h3 {
-  font-size: 0.93rem;
+  font-size: 1rem;
 }
 
 .management-panel header p,
 .management-panel .panel-heading p {
-  margin: 0.28rem 0 0;
-  color: var(--ink-400);
-  font-size: 0.79rem;
+  margin: 0.3rem 0 0;
+  color: var(--rf-text-secondary);
+  font-size: 0.88rem;
   line-height: 1.45;
 }
 
 .management-form {
   display: grid;
-  gap: 0.9rem;
+  gap: 1rem;
 }
 
 .management-form .form-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.8rem;
+  gap: 0.9rem;
 }
 
 .management-form .field {
   display: grid;
-  gap: 0.36rem;
+  gap: 0.38rem;
 }
 
 .management-form .field.wide {
@@ -228,9 +272,9 @@ button {
 }
 
 .management-form label {
-  color: var(--ink-700);
-  font-size: 0.76rem;
-  font-weight: 720;
+  color: var(--rf-text);
+  font-size: 0.88rem;
+  font-weight: 700;
 }
 
 .management-form input,
@@ -239,17 +283,17 @@ button {
 .management-filter input,
 .management-filter select {
   width: 100%;
-  min-height: 2.45rem;
-  padding: 0.5rem 0.62rem;
-  border: 1px solid var(--line-300);
-  border-radius: 0.5rem;
-  color: var(--ink-800);
-  background: #fff;
-  font-size: 0.84rem;
+  min-height: var(--rf-control-height);
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--rf-border);
+  border-radius: var(--rf-radius);
+  color: var(--rf-text);
+  background: var(--rf-background);
+  font-size: 0.94rem;
 }
 
 .management-form textarea {
-  min-height: 4.9rem;
+  min-height: 6rem;
   resize: vertical;
 }
 
@@ -258,26 +302,28 @@ button {
 .management-form textarea:focus,
 .management-filter input:focus,
 .management-filter select:focus {
-  border-color: var(--primary-500);
-  outline: none;
-  box-shadow: 0 0 0 3px rgb(35 143 132 / 12%);
+  border-color: var(--rf-black-secondary);
+  outline: 3px solid rgb(22 104 199 / 22%);
+  outline-offset: 1px;
 }
 
 .management-form input[aria-invalid='true'],
-.management-form select[aria-invalid='true'] {
-  border-color: var(--danger-600);
+.management-form select[aria-invalid='true'],
+.management-form textarea[aria-invalid='true'] {
+  border-color: var(--rf-error);
 }
 
 .management-field-error {
   margin: 0;
-  color: var(--danger-600);
-  font-size: 0.72rem;
+  color: var(--rf-error);
+  font-size: 0.8rem;
 }
 
 .management-actions,
 .management-inline-actions,
 .management-filter,
-.management-pagination {
+.management-pagination,
+.rf-toolbar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -286,45 +332,53 @@ button {
 
 .management-actions {
   justify-content: flex-end;
-  padding-top: 0.2rem;
+  padding-top: 0.25rem;
 }
 
 .management-button {
-  min-height: 2.4rem;
-  padding: 0.48rem 0.76rem;
-  border: 1px solid var(--line-300);
-  border-radius: 0.5rem;
-  color: var(--ink-700);
-  background: #fff;
-  font-size: 0.76rem;
-  font-weight: 720;
+  min-height: var(--rf-control-height);
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--rf-border);
+  border-radius: var(--rf-radius);
+  color: var(--rf-text);
+  background: var(--rf-background);
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 .management-button:hover:not(:disabled) {
-  border-color: var(--primary-500);
-  color: var(--primary-800);
+  border-color: var(--rf-black-secondary);
+  background: var(--rf-background-soft);
 }
 
 .management-button.primary {
-  border-color: var(--primary-600);
-  color: #fff;
-  background: var(--primary-600);
+  border-color: var(--rf-black-secondary);
+  color: var(--rf-black);
+  background: var(--rf-yellow);
 }
 
 .management-button.primary:hover:not(:disabled) {
-  border-color: var(--primary-800);
-  color: #fff;
-  background: var(--primary-800);
+  border-color: var(--rf-black);
+  color: var(--rf-black);
+  background: var(--rf-yellow-hover);
 }
 
 .management-button.danger {
-  color: var(--danger-600);
+  border-color: #d9a5a1;
+  color: var(--rf-error);
+  background: var(--rf-background);
+}
+
+.management-button.danger:hover:not(:disabled) {
+  border-color: var(--rf-error);
+  color: #a51f18;
+  background: #fff7f6;
 }
 
 .management-button.compact {
-  min-height: 2rem;
-  padding: 0.3rem 0.5rem;
-  font-size: 0.7rem;
+  min-height: 2.25rem;
+  padding: 0.35rem 0.58rem;
+  font-size: 0.8rem;
 }
 
 .management-button:disabled {
@@ -333,12 +387,15 @@ button {
 }
 
 .management-filter {
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 1rem;
+  padding: 0.9rem;
+  border: 1px solid var(--rf-border-soft);
+  background: var(--rf-background-soft);
 }
 
 .management-filter > * {
-  flex: 1 1 10rem;
+  flex: 1 1 12rem;
 }
 
 .management-filter .management-button {
@@ -347,32 +404,37 @@ button {
 
 .management-table-wrap {
   overflow-x: auto;
-  border: 1px solid var(--line-100);
-  border-radius: 0.65rem;
+  border: 1px solid var(--rf-border-soft);
+  border-radius: var(--rf-radius);
 }
 
 .management-table {
   width: 100%;
-  min-width: 38rem;
+  min-width: 42rem;
   border-collapse: collapse;
-  font-size: 0.78rem;
+  font-size: 0.9rem;
 }
 
 .management-table th,
 .management-table td {
-  padding: 0.75rem 0.8rem;
-  border-bottom: 1px solid var(--line-100);
+  height: 3.25rem;
+  padding: 0.72rem 0.8rem;
+  border-bottom: 1px solid var(--rf-border-soft);
   text-align: left;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 .management-table th {
-  color: var(--ink-400);
-  background: #fbfcfd;
-  font-size: 0.68rem;
-  font-weight: 760;
-  letter-spacing: 0.06em;
+  color: var(--rf-text);
+  background: var(--rf-background-soft);
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.035em;
   text-transform: uppercase;
+}
+
+.management-table tbody tr:hover {
+  background: #fffdf2;
 }
 
 .management-table tr:last-child td {
@@ -381,59 +443,75 @@ button {
 
 .management-table td strong {
   display: block;
-  color: var(--ink-800);
-  font-weight: 730;
+  color: var(--rf-text);
+  font-weight: 700;
 }
 
 .management-table td small {
   display: block;
   margin-top: 0.16rem;
-  color: var(--ink-400);
+  color: var(--rf-text-secondary);
   line-height: 1.35;
 }
 
-.management-empty {
+.management-table td:last-child,
+.management-table th:last-child {
+  text-align: right;
+}
+
+.management-empty,
+.rf-data-state {
+  margin: 0;
   padding: 2.2rem 1rem;
-  color: var(--ink-400);
+  color: var(--rf-text-secondary);
   text-align: center;
 }
 
 .management-alert {
   display: grid;
   padding: 0.8rem 0.9rem;
-  border-radius: 0.58rem;
-  font-size: 0.8rem;
+  border: 1px solid var(--rf-border);
+  border-left-width: 4px;
+  border-radius: var(--rf-radius);
+  background: var(--rf-background);
+  font-size: 0.9rem;
   gap: 0.18rem;
 }
 
 .management-alert.error {
-  border: 1px solid #f0c7c7;
-  color: #8f2b2b;
-  background: #fff5f5;
+  border-left-color: var(--rf-error);
+  color: #8e241d;
+  background: #fff7f6;
 }
 
 .management-alert.success {
-  border: 1px solid #bfe7d8;
-  color: #14634e;
-  background: #f1faf7;
+  border-left-color: var(--rf-success);
+  color: #105c35;
+  background: #f6fff9;
+}
+
+.management-alert.warning {
+  border-left-color: var(--rf-warning);
+  color: #6f4b00;
+  background: #fffaf0;
 }
 
 .management-alert span {
   color: inherit;
-  font-size: 0.72rem;
+  font-size: 0.8rem;
 }
 
 .management-pagination {
   justify-content: flex-end;
-  margin-top: 0.9rem;
-  color: var(--ink-500);
-  font-size: 0.75rem;
+  margin-top: 1rem;
+  color: var(--rf-text-secondary);
+  font-size: 0.82rem;
 }
 
 .management-detail {
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--line-200);
+  border-top: 1px solid var(--rf-border-soft);
 }
 
 .management-detail-list {
@@ -441,24 +519,165 @@ button {
   margin: 0.8rem 0 0;
   padding: 0;
   list-style: none;
-  gap: 0.55rem;
+  gap: 0;
 }
 
 .management-detail-list li {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.65rem;
-  border: 1px solid var(--line-100);
-  border-radius: 0.52rem;
+  min-height: 3rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--rf-border-soft);
+  border-radius: 0;
   gap: 0.75rem;
+}
+
+.filter-date {
+  display: grid;
+  min-width: 9rem;
+  color: var(--rf-text-secondary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  gap: 0.25rem;
+}
+
+.filter-date input {
+  min-height: var(--rf-control-height);
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--rf-border);
+  border-radius: var(--rf-radius);
+  color: var(--rf-text);
+  background: var(--rf-background);
+}
+
+.checkbox-field {
+  display: inline-flex;
+  align-items: center;
+  color: var(--rf-text);
+  font-weight: 650;
+  gap: 0.55rem;
+}
+
+.checkbox-field input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--rf-yellow-hover);
+}
+
+.announcement-body {
+  margin: 0.75rem 0 0;
+  color: var(--rf-text);
+  line-height: 1.65;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.management-code {
+  max-height: 18rem;
+  overflow: auto;
+  margin: 0.75rem 0 0;
+  padding: 0.85rem;
+  border: 1px solid var(--rf-border-soft);
+  border-radius: var(--rf-radius);
+  color: var(--rf-text);
+  background: var(--rf-background-soft);
+  font: 0.8rem/1.5 ui-monospace, SFMono-Regular, Consolas, monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.report-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--rf-border-soft);
+}
+
+.report-summary > div {
+  min-height: 6rem;
+  padding: 0.9rem;
+  border-right: 1px solid var(--rf-border-soft);
+  border-top: 4px solid var(--rf-yellow);
+}
+
+.report-summary > div:last-child {
+  border-right: 0;
+}
+
+.report-summary span,
+.report-summary strong {
+  display: block;
+}
+
+.report-summary span {
+  color: var(--rf-text-secondary);
+  font-size: 0.82rem;
+}
+
+.report-summary strong {
+  margin-top: 0.35rem;
+  font-size: 1.6rem;
+}
+
+.report-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.report-columns h3 {
+  margin: 0 0 0.55rem;
+}
+
+.report-count-table {
+  min-width: 18rem;
+}
+
+.report-totals {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+}
+
+.report-totals span {
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--rf-border-soft);
+  border-left: 4px solid var(--rf-yellow);
+  background: var(--rf-background-soft);
+  font-size: 0.85rem;
 }
 
 .management-muted {
   margin: 0;
-  color: var(--ink-400);
-  font-size: 0.78rem;
+  color: var(--rf-text-secondary);
+  font-size: 0.85rem;
   line-height: 1.45;
+}
+
+.rf-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  gap: 0;
+}
+
+.rf-detail-grid > div {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--rf-border-soft);
+}
+
+.rf-detail-grid dt {
+  color: var(--rf-text-secondary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.rf-detail-grid dd {
+  margin: 0.25rem 0 0;
+  color: var(--rf-text);
 }
 
 @media (max-width: 1000px) {
@@ -472,7 +691,8 @@ button {
     display: grid;
   }
 
-  .management-form .form-grid {
+  .management-form .form-grid,
+  .rf-detail-grid {
     grid-template-columns: 1fr;
   }
 
@@ -484,7 +704,23 @@ button {
     justify-content: stretch;
   }
 
-  .management-actions .management-button {
+  .management-actions .management-button,
+  .management-heading > .management-button {
     flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .management-filter .management-button {
+    flex: 1 1 100%;
+  }
+
+  .report-summary,
+  .report-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .report-summary > div {
+    border-right: 0;
+    border-bottom: 1px solid var(--rf-border-soft);
   }
 }

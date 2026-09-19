@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
 
 import { ApiErrorService } from '../../core/api/api-error.service';
 import { UiError } from '../../core/api/api-error.model';
+import { AuthSessionService } from '../../core/auth/auth-session.service';
 import { ManagementApiService } from '../../core/management/management-api.service';
 import { Driver } from '../../core/management/management.models';
 import { OperationRealtimeService } from '../../core/operations/operation-realtime.service';
@@ -17,10 +18,13 @@ import {
   IncidentStatus,
 } from '../../core/operations/operations.models';
 import { OperationsApiService } from '../../core/operations/operations-api.service';
+import { ModalComponent } from '../../shared/ui/modal.component';
+import { PageHeaderComponent } from '../../shared/ui/page-header.component';
+import { PaginationComponent } from '../../shared/ui/pagination.component';
 
 @Component({
   selector: 'rf-incidents-page',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, PageHeaderComponent, ModalComponent, PaginationComponent],
   templateUrl: './incidents.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -28,6 +32,7 @@ export class IncidentsPage {
   private readonly api = inject(OperationsApiService);
   private readonly managementApi = inject(ManagementApiService);
   private readonly apiErrors = inject(ApiErrorService);
+  private readonly session = inject(AuthSessionService);
   private readonly realtime = inject(OperationRealtimeService);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -44,9 +49,18 @@ export class IncidentsPage {
   readonly totalItems = signal(0);
   readonly selectedStatus = signal<IncidentStatus | ''>('');
   readonly selectedCategory = signal<IncidentCategory | ''>('');
+  readonly selectedDriverId = signal('');
+  readonly fromFilter = signal('');
+  readonly toFilter = signal('');
+  readonly formOpen = signal(false);
+  readonly selectedIncident = signal<Incident | null>(null);
+  readonly detailOpen = signal(false);
   readonly selectedForFollowUp = signal<Incident | null>(null);
   readonly error = signal<UiError | null>(null);
   readonly notice = signal<string | null>(null);
+  readonly organizationName = computed(
+    () => this.session.user()?.organizationName?.trim() || 'Organizaci\u00f3n asignada',
+  );
 
   readonly form = new FormGroup({
     driverId: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
@@ -83,6 +97,9 @@ export class IncidentsPage {
         sort: 'reportedAt,desc',
         status: this.selectedStatus() || undefined,
         category: this.selectedCategory() || undefined,
+        driverId: this.selectedDriverId() || undefined,
+        from: this.filterInstant(this.fromFilter(), false),
+        to: this.filterInstant(this.toFilter(), true),
       })
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
@@ -97,10 +114,50 @@ export class IncidentsPage {
       });
   }
 
-  applyFilters(status: string, category: string): void {
+  applyFilters(status: string, category: string, driverId: string, from: string, to: string): void {
     this.selectedStatus.set(this.isIncidentStatus(status) ? status : '');
     this.selectedCategory.set(this.isIncidentCategory(category) ? category : '');
+    this.selectedDriverId.set(driverId);
+    this.fromFilter.set(from);
+    this.toFilter.set(to);
     this.load(0);
+  }
+
+  clearFilters(): void {
+    this.selectedStatus.set('');
+    this.selectedCategory.set('');
+    this.selectedDriverId.set('');
+    this.fromFilter.set('');
+    this.toFilter.set('');
+    this.load(0);
+  }
+
+  startCreate(): void {
+    this.error.set(null);
+    this.notice.set(null);
+    this.form.reset({ driverId: '', assignmentId: '', category: 'AVERIA', description: '' });
+    this.formOpen.set(true);
+  }
+
+  closeForm(): void {
+    if (!this.saving()) {
+      this.formOpen.set(false);
+    }
+  }
+
+  viewDetails(incident: Incident): void {
+    this.selectedIncident.set(incident);
+    this.selectedForFollowUp.set(null);
+    this.detailOpen.set(true);
+  }
+
+  closeDetails(): void {
+    if (!this.followUpSaving()) {
+      this.detailOpen.set(false);
+      this.selectedIncident.set(null);
+      this.selectedForFollowUp.set(null);
+      this.followUpForm.reset({ note: '', resolve: false });
+    }
   }
 
   submit(): void {
@@ -122,8 +179,9 @@ export class IncidentsPage {
       .pipe(finalize(() => this.saving.set(false)))
       .subscribe({
         next: () => {
-          this.notice.set('Incidencia registrada desde el CRM web.');
+          this.notice.set('Incidencia registrada correctamente.');
           this.form.reset({ driverId: '', assignmentId: '', category: 'AVERIA', description: '' });
+          this.formOpen.set(false);
           this.load(0);
         },
         error: (error: unknown) =>
@@ -174,6 +232,8 @@ export class IncidentsPage {
         next: () => {
           this.notice.set(value.resolve ? 'Incidencia resuelta.' : 'Seguimiento registrado.');
           this.cancelFollowUp();
+          this.detailOpen.set(false);
+          this.selectedIncident.set(null);
           this.load();
         },
         error: (error: unknown) =>
@@ -222,6 +282,14 @@ export class IncidentsPage {
         // La asignación es opcional para registrar una incidencia.
       },
     });
+  }
+
+  private filterInstant(value: string, endOfDay: boolean): string | undefined {
+    if (!value) {
+      return undefined;
+    }
+    const timestamp = Date.parse(`${value}T${endOfDay ? '23:59:59.999' : '00:00:00.000'}`);
+    return Number.isNaN(timestamp) ? undefined : new Date(timestamp).toISOString();
   }
 
   private isIncidentStatus(value: string): value is IncidentStatus {

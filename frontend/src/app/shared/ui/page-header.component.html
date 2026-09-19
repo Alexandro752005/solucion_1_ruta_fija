@@ -1,0 +1,19 @@
+<header class="rf-page-header">
+  <div class="rf-page-header__copy">
+    @if (eyebrow) {
+      <p class="rf-page-header__eyebrow">{{ eyebrow }}</p>
+    }
+    <h1>{{ title }}</h1>
+    @if (description) {
+      <p class="rf-page-header__description">{{ description }}</p>
+    }
+    @if (context) {
+      <p class="rf-page-header__context">
+        Organizaci&oacute;n activa: <strong>{{ context }}</strong>
+      </p>
+    }
+  </div>
+  <div class="rf-page-header__actions">
+    <ng-content select="[page-actions]" />
+  </div>
+</header>

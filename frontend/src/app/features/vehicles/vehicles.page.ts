@@ -12,10 +12,19 @@ import {
   VehiclePayload,
   VehicleStatus,
 } from '../../core/management/management.models';
+import { ConfirmDialogComponent } from '../../shared/ui/confirm-dialog.component';
+import { ModalComponent } from '../../shared/ui/modal.component';
+import { PageHeaderComponent } from '../../shared/ui/page-header.component';
+import { PaginationComponent } from '../../shared/ui/pagination.component';
+
+interface PendingVehicleStatus {
+  readonly vehicle: Vehicle;
+  readonly status: VehicleStatus;
+}
 
 @Component({
   selector: 'rf-vehicles-page',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, PageHeaderComponent, ModalComponent, ConfirmDialogComponent, PaginationComponent],
   templateUrl: './vehicles.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -26,6 +35,9 @@ export class VehiclesPage {
 
   readonly canManage = computed(() =>
     this.session.hasAnyRole(['ADMINISTRADOR']),
+  );
+  readonly organizationName = computed(
+    () => this.session.user()?.organizationName?.trim() || 'Organizaci\u00f3n asignada',
   );
   readonly statuses = VEHICLE_STATUSES;
   readonly administrativeStatuses: readonly VehicleStatus[] = [
@@ -43,6 +55,10 @@ export class VehiclesPage {
   readonly search = signal('');
   readonly selectedStatus = signal<VehicleStatus | ''>('');
   readonly editing = signal<Vehicle | null>(null);
+  readonly formOpen = signal(false);
+  readonly selectedVehicle = signal<Vehicle | null>(null);
+  readonly detailOpen = signal(false);
+  readonly pendingStatus = signal<PendingVehicleStatus | null>(null);
   readonly error = signal<UiError | null>(null);
   readonly notice = signal<string | null>(null);
 
@@ -102,6 +118,32 @@ export class VehiclesPage {
     this.load(0);
   }
 
+  clearFilters(): void {
+    this.search.set('');
+    this.selectedStatus.set('');
+    this.load(0);
+  }
+
+  startCreate(): void {
+    this.notice.set(null);
+    this.error.set(null);
+    this.resetForm(false);
+    this.formOpen.set(true);
+  }
+
+  viewDetails(vehicle: Vehicle): void {
+    this.selectedVehicle.set(vehicle);
+    this.detailOpen.set(true);
+  }
+
+  closeDetails(): void {
+    if (this.savingStatusId() === null) {
+      this.detailOpen.set(false);
+      this.selectedVehicle.set(null);
+      this.pendingStatus.set(null);
+    }
+  }
+
   submit(): void {
     this.notice.set(null);
     this.error.set(null);
@@ -139,32 +181,56 @@ export class VehiclesPage {
       year: vehicle.year ?? null,
       color: vehicle.color ?? '',
     });
+    this.detailOpen.set(false);
+    this.selectedVehicle.set(null);
+    this.formOpen.set(true);
   }
 
   cancelEdit(): void {
     this.resetForm();
   }
 
+  closeForm(): void {
+    if (!this.saving()) {
+      this.resetForm();
+    }
+  }
+
   changeStatus(vehicle: Vehicle, status: string): void {
     if (!this.isAdministrativeStatus(status) || status === vehicle.status) {
       return;
     }
-    if (!globalThis.confirm(`¿Cambiar el estado de ${vehicle.plate} a ${this.statusLabel(status)}?`)) {
+    this.pendingStatus.set({ vehicle, status });
+  }
+
+  cancelStatusChange(): void {
+    if (this.savingStatusId() === null) {
+      this.pendingStatus.set(null);
+    }
+  }
+
+  confirmStatusChange(): void {
+    const pending = this.pendingStatus();
+    if (pending === null || this.savingStatusId() !== null) {
       return;
     }
-
     this.error.set(null);
-    this.savingStatusId.set(vehicle.id);
+    this.savingStatusId.set(pending.vehicle.id);
     this.api
-      .setVehicleStatus(vehicle.id, status)
+      .setVehicleStatus(pending.vehicle.id, pending.status)
       .pipe(finalize(() => this.savingStatusId.set(null)))
       .subscribe({
         next: () => {
           this.notice.set('Estado del vehículo actualizado correctamente.');
+          this.pendingStatus.set(null);
+          this.detailOpen.set(false);
+          this.selectedVehicle.set(null);
           this.load();
         },
-        error: (error: unknown) =>
-          this.error.set(this.apiErrors.toUiError(error, 'No se pudo actualizar el estado del vehículo.')),
+        error: (error: unknown) => {
+          this.pendingStatus.set(null);
+          this.error.set(this.apiErrors.toUiError(error, 'No se pudo actualizar el estado del vehículo.'));
+        },
       });
   }
 
@@ -208,8 +274,11 @@ export class VehiclesPage {
     return this.administrativeStatuses.includes(value as VehicleStatus);
   }
 
-  private resetForm(): void {
+  private resetForm(close = true): void {
     this.editing.set(null);
     this.form.reset({ plate: '', brand: '', model: '', year: null, color: '' });
+    if (close) {
+      this.formOpen.set(false);
+    }
   }
 }

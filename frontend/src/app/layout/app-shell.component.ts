@@ -3,8 +3,14 @@ import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/rou
 import { finalize } from 'rxjs';
 
 import { AuthSessionService } from '../core/auth/auth-session.service';
-import { UserRole } from '../core/auth/auth.models';
+import { CRM_ROLES, UserRole } from '../core/auth/auth.models';
 import { RuntimeConfigService } from '../core/config/runtime-config.service';
+
+interface NavigationItem {
+  readonly label: string;
+  readonly route: string;
+  readonly roles: readonly UserRole[];
+}
 
 @Component({
   selector: 'rf-app-shell',
@@ -20,18 +26,27 @@ export class AppShellComponent {
   readonly runtimeConfig = inject(RuntimeConfigService);
   readonly loggingOut = signal(false);
   readonly logoutError = signal(false);
-  readonly canManageResources = computed(() =>
-    this.session.hasAnyRole(['ADMINISTRADOR']),
-  );
-  readonly canBrowseResources = computed(() =>
-    this.session.hasAnyRole(['ADMINISTRADOR', 'COORDINADOR']),
-  );
-  readonly canViewReports = computed(() =>
-    this.session.hasAnyRole(['ADMINISTRADOR']),
-  );
-  readonly isSuperAdmin = computed(() =>
-    this.session.hasAnyRole(['SUPER_ADMIN']),
-  );
+  readonly mobileNavigationOpen = signal(false);
+  readonly navigation: readonly NavigationItem[] = [
+    { label: 'Resumen', route: '/dashboard', roles: CRM_ROLES },
+    { label: 'Usuarios', route: '/users', roles: ['ADMINISTRADOR'] },
+    { label: 'Organización', route: '/organization', roles: ['ADMINISTRADOR'] },
+    { label: 'Grupos', route: '/groups', roles: ['ADMINISTRADOR', 'COORDINADOR'] },
+    { label: 'Conductores', route: '/drivers', roles: ['ADMINISTRADOR', 'COORDINADOR'] },
+    { label: 'Vehículos', route: '/vehicles', roles: ['ADMINISTRADOR', 'COORDINADOR'] },
+    { label: 'Asignaciones', route: '/assignments', roles: ['ADMINISTRADOR', 'COORDINADOR'] },
+    { label: 'Incidencias', route: '/incidents', roles: ['ADMINISTRADOR', 'COORDINADOR'] },
+    { label: 'Comunicados', route: '/announcements', roles: ['ADMINISTRADOR', 'COORDINADOR'] },
+    { label: 'Reportes', route: '/reports', roles: ['ADMINISTRADOR'] },
+    { label: 'Auditoría', route: '/audit', roles: ['ADMINISTRADOR'] },
+    { label: 'Organizaciones', route: '/organizations', roles: ['SUPER_ADMIN'] },
+  ];
+  readonly visibleNavigation = computed(() => {
+    const role = this.session.user()?.role;
+    return role === undefined
+      ? []
+      : this.navigation.filter((item) => item.roles.includes(role));
+  });
   readonly initials = computed(() => {
     const parts = this.session.user()?.fullName.trim().split(/\s+/) ?? [];
     return parts
@@ -69,6 +84,14 @@ export class AppShellComponent {
           });
         },
       });
+  }
+
+  toggleMobileNavigation(): void {
+    this.mobileNavigationOpen.update((open) => !open);
+  }
+
+  closeMobileNavigation(): void {
+    this.mobileNavigationOpen.set(false);
   }
 
   roleLabel(role: UserRole | undefined): string {

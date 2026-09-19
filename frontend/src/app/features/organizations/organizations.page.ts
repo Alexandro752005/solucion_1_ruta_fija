@@ -11,10 +11,13 @@ import {
   OrganizationPayload,
   OrganizationStatus,
 } from '../../core/management/management.models';
+import { ModalComponent } from '../../shared/ui/modal.component';
+import { PageHeaderComponent } from '../../shared/ui/page-header.component';
+import { PaginationComponent } from '../../shared/ui/pagination.component';
 
 @Component({
   selector: 'rf-organizations-page',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, PageHeaderComponent, ModalComponent, PaginationComponent],
   templateUrl: './organizations.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -31,6 +34,7 @@ export class OrganizationsPage {
   readonly totalItems = signal(0);
   readonly search = signal('');
   readonly editing = signal<Organization | null>(null);
+  readonly formOpen = signal(false);
   readonly error = signal<UiError | null>(null);
   readonly notice = signal<string | null>(null);
 
@@ -85,6 +89,18 @@ export class OrganizationsPage {
     this.load(0);
   }
 
+  clearSearch(): void {
+    this.search.set('');
+    this.load(0);
+  }
+
+  startCreate(): void {
+    this.notice.set(null);
+    this.error.set(null);
+    this.resetForm(false);
+    this.formOpen.set(true);
+  }
+
   submit(): void {
     this.notice.set(null);
     this.error.set(null);
@@ -130,10 +146,17 @@ export class OrganizationsPage {
       timezone: organization.timezone,
       status: organization.status,
     });
+    this.formOpen.set(true);
   }
 
   cancelEdit(): void {
     this.resetForm();
+  }
+
+  closeForm(): void {
+    if (!this.saving()) {
+      this.resetForm();
+    }
   }
 
   statusLabel(status: OrganizationStatus): string {
@@ -156,7 +179,7 @@ export class OrganizationsPage {
     }
   }
 
-  private resetForm(): void {
+  private resetForm(close = true): void {
     this.editing.set(null);
     this.form.reset({
       legalName: '',
@@ -164,5 +187,8 @@ export class OrganizationsPage {
       timezone: 'America/Lima',
       status: 'ACTIVE',
     });
+    if (close) {
+      this.formOpen.set(false);
+    }
   }
 }

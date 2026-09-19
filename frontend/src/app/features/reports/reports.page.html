@@ -1,0 +1,53 @@
+<section class="management-page">
+  <rf-page-header
+    title="Reportes"
+    description="Consulta la disponibilidad y los resultados operativos del periodo seleccionado."
+    [context]="organizationName()"
+  />
+
+  @if (error(); as currentError) { <div class="management-alert error" role="alert"><strong>{{ currentError.message }}</strong>@if (currentError.correlationId) { <span>Referencia: {{ currentError.correlationId }}</span> }</div> }
+  @if (notice(); as currentNotice) { <div class="management-alert success" role="status">{{ currentNotice }}</div> }
+  @if (exporting()) { <p class="management-alert warning" role="status">Generando exportaci&oacute;n&hellip;</p> }
+
+  <section class="management-panel" aria-labelledby="report-range-title">
+    <header><div><h2 id="report-range-title">Periodo de consulta</h2><p>Selecciona un rango de hasta 90 d&iacute;as.</p></div></header>
+    <form class="management-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <div class="form-grid"><div class="field"><label for="report-from">Desde</label><input id="report-from" type="date" formControlName="from" /></div><div class="field"><label for="report-to">Hasta</label><input id="report-to" type="date" formControlName="to" /></div></div>
+      <div class="management-actions"><button class="management-button primary" type="submit" [disabled]="loadingRange()">{{ loadingRange() ? 'Consultando&hellip;' : 'Consultar' }}</button></div>
+    </form>
+  </section>
+
+  <section class="management-panel" aria-labelledby="availability-title">
+    <header><div><h2 id="availability-title">Disponibilidad actual</h2><p>Estado actual de conductores, veh&iacute;culos y operaci&oacute;n.</p></div><div class="management-inline-actions"><button class="management-button compact" type="button" (click)="exportAvailability('pdf')" [disabled]="exporting() !== null">Exportar PDF</button><button class="management-button compact" type="button" (click)="exportAvailability('xlsx')" [disabled]="exporting() !== null">Exportar Excel</button></div></header>
+    @if (loadingAvailability()) { <p class="management-empty" role="status">Calculando disponibilidad&hellip;</p> }
+    @else if (availability(); as report) {
+      <div class="report-summary"><div><span>Asignaciones futuras</span><strong>{{ report.futureScheduledAssignments }}</strong></div><div><span>Servicios en curso</span><strong>{{ report.assignmentsInService }}</strong></div><div><span>Incidencias abiertas</span><strong>{{ report.openIncidents }}</strong></div></div>
+      <div class="report-columns">
+        <div><h3>Conductores</h3><div class="management-table-wrap"><table class="management-table report-count-table"><thead><tr><th>Estado</th><th>Total</th></tr></thead><tbody>@for (count of report.drivers; track count.status) { <tr><td>{{ label(count.status) }}</td><td><strong>{{ count.total }}</strong></td></tr> }</tbody></table></div></div>
+        <div><h3>Veh&iacute;culos</h3><div class="management-table-wrap"><table class="management-table report-count-table"><thead><tr><th>Estado</th><th>Total</th></tr></thead><tbody>@for (count of report.vehicles; track count.status) { <tr><td>{{ label(count.status) }}</td><td><strong>{{ count.total }}</strong></td></tr> }</tbody></table></div></div>
+      </div>
+      <p class="management-muted">Actualizado: {{ dateLabel(report.generatedAt) }}</p>
+    }
+  </section>
+
+  @if (loadingRange()) { <p class="management-empty" role="status">Consultando resultados&hellip;</p> }
+  @else {
+    @if (assignmentReport(); as report) {
+      <section class="management-panel" aria-labelledby="assignment-report-title">
+        <header><div><h2 id="assignment-report-title">Asignaciones por estado</h2><p>{{ report.from }} a {{ report.to }} &middot; {{ report.items.length }} registros</p></div><div class="management-inline-actions"><button class="management-button compact" type="button" (click)="exportAssignments('pdf')" [disabled]="exporting() !== null">PDF</button><button class="management-button compact" type="button" (click)="exportAssignments('xlsx')" [disabled]="exporting() !== null">Excel</button><button class="management-button compact" type="button" (click)="downloadAssignmentsCsv()" [disabled]="exporting() !== null">CSV</button></div></header>
+        <div class="report-totals">@for (count of report.totalsByStatus; track count.status) { <span><strong>{{ count.total }}</strong> {{ label(count.status) }}</span> }</div>
+        @if (report.items.length === 0) { <p class="management-empty">No hay asignaciones en este periodo.</p> }
+        @else { <div class="management-table-wrap"><table class="management-table"><thead><tr><th>Ruta</th><th>Conductor</th><th>Veh&iacute;culo</th><th>Inicio</th><th>Estado</th></tr></thead><tbody>@for (item of report.items; track item.id) { <tr><td><strong>{{ item.originText }} &rarr; {{ item.destinationText }}</strong></td><td>{{ item.driverName }}</td><td>{{ item.vehiclePlate }}</td><td>{{ dateLabel(item.scheduledAt) }}</td><td><span class="management-status">{{ label(item.status) }}</span></td></tr> }</tbody></table></div> }
+      </section>
+    }
+
+    @if (incidentReport(); as report) {
+      <section class="management-panel" aria-labelledby="incident-report-title">
+        <header><div><h2 id="incident-report-title">Incidencias por estado y categor&iacute;a</h2><p>{{ report.from }} a {{ report.to }} &middot; {{ report.items.length }} registros</p></div><div class="management-inline-actions"><button class="management-button compact" type="button" (click)="exportIncidents('pdf')" [disabled]="exporting() !== null">PDF</button><button class="management-button compact" type="button" (click)="exportIncidents('xlsx')" [disabled]="exporting() !== null">Excel</button><button class="management-button compact" type="button" (click)="downloadIncidentsCsv()" [disabled]="exporting() !== null">CSV</button></div></header>
+        <div class="report-totals">@for (count of report.totalsByStatus; track count.status) { <span><strong>{{ count.total }}</strong> {{ label(count.status) }}</span> }@for (count of report.totalsByCategory; track count.status) { <span><strong>{{ count.total }}</strong> {{ label(count.status) }}</span> }</div>
+        @if (report.items.length === 0) { <p class="management-empty">No hay incidencias en este periodo.</p> }
+        @else { <div class="management-table-wrap"><table class="management-table"><thead><tr><th>Categor&iacute;a</th><th>Descripci&oacute;n</th><th>Conductor</th><th>Fecha</th><th>Estado</th></tr></thead><tbody>@for (item of report.items; track item.id) { <tr><td><strong>{{ label(item.category) }}</strong></td><td>{{ item.description }}</td><td>{{ item.driverName }}</td><td>{{ dateLabel(item.reportedAt) }}</td><td><span class="management-status">{{ label(item.status) }}</span></td></tr> }</tbody></table></div> }
+      </section>
+    }
+  }
+</section>

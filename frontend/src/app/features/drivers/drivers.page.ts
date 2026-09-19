@@ -20,10 +20,19 @@ import {
   TransportGroup,
   Vehicle,
 } from '../../core/management/management.models';
+import { ConfirmDialogComponent } from '../../shared/ui/confirm-dialog.component';
+import { ModalComponent } from '../../shared/ui/modal.component';
+import { PageHeaderComponent } from '../../shared/ui/page-header.component';
+import { PaginationComponent } from '../../shared/ui/pagination.component';
+
+type PendingDriverAction =
+  | { readonly kind: 'active'; readonly driver: Driver }
+  | { readonly kind: 'availability'; readonly driver: Driver; readonly status: AdministrativeDriverStatus }
+  | { readonly kind: 'unlink'; readonly vehicleId: string; readonly plate: string };
 
 @Component({
   selector: 'rf-drivers-page',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, PageHeaderComponent, ModalComponent, ConfirmDialogComponent, PaginationComponent],
   templateUrl: './drivers.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -35,6 +44,9 @@ export class DriversPage {
 
   readonly canManage = computed(() =>
     this.session.hasAnyRole(['ADMINISTRADOR']),
+  );
+  readonly organizationName = computed(
+    () => this.session.user()?.organizationName?.trim() || 'Organizaci\u00f3n asignada',
   );
   readonly statuses = DRIVER_STATUSES;
   readonly administrativeStatuses: readonly AdministrativeDriverStatus[] = [
@@ -50,6 +62,7 @@ export class DriversPage {
   readonly saving = signal(false);
   readonly detailLoading = signal(false);
   readonly linking = signal(false);
+  readonly actionInProgress = signal(false);
   readonly changingAvailabilityId = signal<string | null>(null);
   readonly page = signal(0);
   readonly totalPages = signal(0);
@@ -58,7 +71,10 @@ export class DriversPage {
   readonly selectedGroupId = signal('');
   readonly selectedStatus = signal<DriverStatus | ''>('');
   readonly editing = signal<Driver | null>(null);
+  readonly formOpen = signal(false);
   readonly selectedDriver = signal<DriverDetail | null>(null);
+  readonly detailOpen = signal(false);
+  readonly pendingAction = signal<PendingDriverAction | null>(null);
   readonly error = signal<UiError | null>(null);
   readonly notice = signal<string | null>(null);
 
@@ -135,6 +151,20 @@ export class DriversPage {
     this.load(0);
   }
 
+  clearFilters(): void {
+    this.search.set('');
+    this.selectedGroupId.set('');
+    this.selectedStatus.set('');
+    this.load(0);
+  }
+
+  startCreate(): void {
+    this.notice.set(null);
+    this.error.set(null);
+    this.resetForm(false);
+    this.formOpen.set(true);
+  }
+
   submit(): void {
     this.notice.set(null);
     this.error.set(null);
@@ -174,14 +204,23 @@ export class DriversPage {
       documentNumber: driver.documentNumber,
       licenseNumber: driver.licenseNumber ?? '',
     });
-    this.viewDetails(driver);
+    this.detailOpen.set(false);
+    this.selectedDriver.set(null);
+    this.formOpen.set(true);
   }
 
   cancelEdit(): void {
     this.resetForm();
   }
 
+  closeForm(): void {
+    if (!this.saving()) {
+      this.resetForm();
+    }
+  }
+
   viewDetails(driver: Driver): void {
+    this.detailOpen.set(true);
     this.detailLoading.set(true);
     this.error.set(null);
     this.api
@@ -197,24 +236,16 @@ export class DriversPage {
       });
   }
 
-  toggleActive(driver: Driver): void {
-    const action = driver.active ? 'desactivar' : 'activar';
-    if (!globalThis.confirm(`¿Deseas ${action} a ${driver.fullName}?`)) {
-      return;
+  closeDetails(): void {
+    if (!this.detailLoading() && !this.linking() && !this.actionInProgress()) {
+      this.detailOpen.set(false);
+      this.selectedDriver.set(null);
+      this.pendingAction.set(null);
     }
+  }
 
-    this.error.set(null);
-    this.api.setDriverActive(driver.id, !driver.active).subscribe({
-      next: () => {
-        this.notice.set(`Conductor ${driver.active ? 'desactivado' : 'activado'} correctamente.`);
-        this.load();
-        if (this.selectedDriver()?.driver.id === driver.id) {
-          this.viewDetails(driver);
-        }
-      },
-      error: (error: unknown) =>
-        this.error.set(this.apiErrors.toUiError(error, 'No se pudo actualizar el estado del conductor.')),
-    });
+  toggleActive(driver: Driver): void {
+    this.pendingAction.set({ kind: 'active', driver });
   }
 
   changeAvailability(driver: Driver, status: string): void {
@@ -224,22 +255,7 @@ export class DriversPage {
     if (status === driver.availabilityStatus) {
       return;
     }
-    if (!globalThis.confirm(`¿Cambiar la disponibilidad de ${driver.fullName} a ${this.statusLabel(status)}?`)) {
-      return;
-    }
-    this.error.set(null);
-    this.changingAvailabilityId.set(driver.id);
-    this.operationsApi
-      .changeDriverAvailability(driver.id, status)
-      .pipe(finalize(() => this.changingAvailabilityId.set(null)))
-      .subscribe({
-        next: () => {
-          this.notice.set('Disponibilidad del conductor actualizada.');
-          this.load();
-        },
-        error: (error: unknown) =>
-          this.error.set(this.apiErrors.toUiError(error, 'No se pudo cambiar la disponibilidad.')),
-      });
+    this.pendingAction.set({ kind: 'availability', driver, status });
   }
 
   canChangeAvailability(driver: Driver): boolean {
@@ -272,23 +288,9 @@ export class DriversPage {
   }
 
   unlinkVehicle(vehicleId: string, plate: string): void {
-    const detail = this.selectedDriver();
-    if (detail === null || !globalThis.confirm(`¿Desvincular el vehículo ${plate}?`)) {
-      return;
+    if (this.selectedDriver() !== null) {
+      this.pendingAction.set({ kind: 'unlink', vehicleId, plate });
     }
-
-    this.error.set(null);
-    this.api.unlinkVehicle(detail.driver.id, vehicleId).subscribe({
-      next: () => {
-        this.selectedDriver.set({
-          ...detail,
-          vehicles: detail.vehicles.filter((vehicle) => vehicle.vehicleId !== vehicleId),
-        });
-        this.notice.set('Vehículo desvinculado correctamente.');
-      },
-      error: (error: unknown) =>
-        this.error.set(this.apiErrors.toUiError(error, 'No se pudo desvincular el vehículo.')),
-    });
   }
 
   markPrimary(vehicleId: string): void {
@@ -306,6 +308,125 @@ export class DriversPage {
       error: (error: unknown) =>
         this.error.set(this.apiErrors.toUiError(error, 'No se pudo definir el vehículo principal.')),
     });
+  }
+
+  pendingActionTitle(): string {
+    const action = this.pendingAction();
+    if (action?.kind === 'active') {
+      return action.driver.active ? 'Desactivar conductor' : 'Activar conductor';
+    }
+    if (action?.kind === 'availability') {
+      return 'Cambiar disponibilidad';
+    }
+    return 'Desvincular vehículo';
+  }
+
+  pendingActionMessage(): string {
+    const action = this.pendingAction();
+    if (action?.kind === 'active') {
+      return `${action.driver.active ? 'Se desactivará' : 'Se activará'} a ${action.driver.fullName}. ¿Deseas continuar?`;
+    }
+    if (action?.kind === 'availability') {
+      return `La disponibilidad de ${action.driver.fullName} cambiará a ${this.statusLabel(action.status)}. ¿Deseas continuar?`;
+    }
+    if (action?.kind === 'unlink') {
+      return `Se desvinculará el vehículo ${action.plate}. ¿Deseas continuar?`;
+    }
+    return '';
+  }
+
+  pendingActionLabel(): string {
+    if (this.actionInProgress()) {
+      return 'Procesando…';
+    }
+    const action = this.pendingAction();
+    if (action?.kind === 'active') {
+      return action.driver.active ? 'Desactivar' : 'Activar';
+    }
+    return action?.kind === 'availability' ? 'Cambiar' : 'Desvincular';
+  }
+
+  pendingActionDanger(): boolean {
+    const action = this.pendingAction();
+    return action?.kind === 'unlink' || (action?.kind === 'active' && action.driver.active);
+  }
+
+  cancelPendingAction(): void {
+    if (!this.actionInProgress()) {
+      this.pendingAction.set(null);
+    }
+  }
+
+  confirmPendingAction(): void {
+    const action = this.pendingAction();
+    if (action === null || this.actionInProgress()) {
+      return;
+    }
+    this.actionInProgress.set(true);
+    this.error.set(null);
+
+    if (action.kind === 'active') {
+      this.api.setDriverActive(action.driver.id, !action.driver.active)
+        .pipe(finalize(() => this.actionInProgress.set(false)))
+        .subscribe({
+          next: () => {
+            this.notice.set(`Conductor ${action.driver.active ? 'desactivado' : 'activado'} correctamente.`);
+            this.pendingAction.set(null);
+            this.load();
+            this.detailOpen.set(false);
+            this.selectedDriver.set(null);
+          },
+          error: (error: unknown) => {
+            this.pendingAction.set(null);
+            this.error.set(this.apiErrors.toUiError(error, 'No se pudo actualizar el estado del conductor.'));
+          },
+        });
+      return;
+    }
+
+    if (action.kind === 'availability') {
+      this.changingAvailabilityId.set(action.driver.id);
+      this.operationsApi.changeDriverAvailability(action.driver.id, action.status)
+        .pipe(finalize(() => {
+          this.actionInProgress.set(false);
+          this.changingAvailabilityId.set(null);
+        }))
+        .subscribe({
+          next: () => {
+            this.notice.set('Disponibilidad del conductor actualizada.');
+            this.pendingAction.set(null);
+            this.load();
+          },
+          error: (error: unknown) => {
+            this.pendingAction.set(null);
+            this.error.set(this.apiErrors.toUiError(error, 'No se pudo cambiar la disponibilidad.'));
+          },
+        });
+      return;
+    }
+
+    const detail = this.selectedDriver();
+    if (detail === null) {
+      this.actionInProgress.set(false);
+      this.pendingAction.set(null);
+      return;
+    }
+    this.api.unlinkVehicle(detail.driver.id, action.vehicleId)
+      .pipe(finalize(() => this.actionInProgress.set(false)))
+      .subscribe({
+        next: () => {
+          this.selectedDriver.set({
+            ...detail,
+            vehicles: detail.vehicles.filter((vehicle) => vehicle.vehicleId !== action.vehicleId),
+          });
+          this.pendingAction.set(null);
+          this.notice.set('Vehículo desvinculado correctamente.');
+        },
+        error: (error: unknown) => {
+          this.pendingAction.set(null);
+          this.error.set(this.apiErrors.toUiError(error, 'No se pudo desvincular el vehículo.'));
+        },
+      });
   }
 
   availableDriverUsers(): readonly ManagedUser[] {
@@ -333,6 +454,15 @@ export class DriversPage {
       DESCANSO: 'Descanso',
       NO_DISPONIBLE: 'No disponible',
     } as Record<DriverStatus, string>)[status];
+  }
+
+  vehicleStatusLabel(status: string): string {
+    return ({
+      DISPONIBLE: 'Disponible',
+      EN_SERVICIO: 'En servicio',
+      MANTENIMIENTO: 'Mantenimiento',
+      INACTIVO: 'Inactivo',
+    } as Record<string, string>)[status] ?? 'Estado no disponible';
   }
 
   previousPage(): void {
@@ -404,7 +534,7 @@ export class DriversPage {
     return (this.administrativeStatuses as readonly string[]).includes(value);
   }
 
-  private resetForm(): void {
+  private resetForm(close = true): void {
     this.editing.set(null);
     this.form.reset({
       userId: '',
@@ -415,5 +545,8 @@ export class DriversPage {
       documentNumber: '',
       licenseNumber: '',
     });
+    if (close) {
+      this.formOpen.set(false);
+    }
   }
 }

@@ -1,0 +1,26 @@
+@if (open) {
+  <div class="rf-modal-backdrop" (mousedown)="backdropClick($event)">
+    <section
+      #dialog
+      class="rf-modal"
+      [class.rf-modal--small]="size === 'small'"
+      [class.rf-modal--large]="size === 'large'"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-labelledby]="titleId"
+      tabindex="-1"
+      (keydown)="trapFocus($event)"
+    >
+      <header class="rf-modal__header">
+        <h2 [id]="titleId">{{ title }}</h2>
+        <button class="rf-modal__close" type="button" [attr.aria-label]="closeLabel" (click)="close()">&times;</button>
+      </header>
+      <div class="rf-modal__body">
+        <ng-content />
+      </div>
+      <footer class="rf-modal__footer">
+        <ng-content select="[modal-actions]" />
+      </footer>
+    </section>
+  </div>
+}

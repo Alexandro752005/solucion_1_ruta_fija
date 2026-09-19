@@ -1,137 +1,84 @@
-<section class="management-page" aria-labelledby="vehicles-title">
-  <header class="management-heading">
-    <div>
-      <p class="management-eyebrow">Fase 2 · Administración</p>
-      <h1 id="vehicles-title">Vehículos</h1>
-      <p>Administra el inventario por organización y sus estados administrativos permitidos.</p>
+<section class="management-page">
+  <rf-page-header
+    title="Veh&iacute;culos"
+    description="Consulta el inventario vehicular y administra sus datos y estados permitidos."
+    [context]="organizationName()"
+  >
+    @if (canManage()) { <button page-actions class="management-button primary" type="button" (click)="startCreate()">Nuevo veh&iacute;culo</button> }
+  </rf-page-header>
+
+  @if (error(); as currentError) { <div class="management-alert error" role="alert"><strong>{{ currentError.message }}</strong>@if (currentError.correlationId) { <span>Referencia: {{ currentError.correlationId }}</span> }</div> }
+  @if (notice(); as currentNotice) { <div class="management-alert success" role="status">{{ currentNotice }}</div> }
+
+  <section class="management-panel" aria-labelledby="vehicles-list-title">
+    <header><div><h2 id="vehicles-list-title">Inventario vehicular</h2><p>{{ totalItems() }} veh&iacute;culos disponibles para tu perfil.</p></div></header>
+    <div class="management-filter">
+      <input #searchInput type="search" [value]="search()" placeholder="Placa, marca o modelo" aria-label="Buscar veh&iacute;culos" (keyup.enter)="applyFilters(searchInput.value, statusFilter.value)" />
+      <select #statusFilter [value]="selectedStatus()" aria-label="Filtrar por estado"><option value="">Todos los estados</option>@for (status of statuses; track status) { <option [value]="status">{{ statusLabel(status) }}</option> }</select>
+      <button class="management-button" type="button" (click)="applyFilters(searchInput.value, statusFilter.value)">Aplicar</button>
+      <button class="management-button" type="button" (click)="searchInput.value = ''; statusFilter.value = ''; clearFilters()">Limpiar</button>
     </div>
-    <span class="management-badge">{{ totalItems() }} registrados</span>
-  </header>
 
-  @if (error(); as currentError) {
-    <div class="management-alert error" role="alert">
-      <strong>{{ currentError.message }}</strong>
-      @if (currentError.correlationId) {
-        <span>Referencia: {{ currentError.correlationId }}</span>
-      }
-    </div>
-  }
-
-  @if (notice(); as currentNotice) {
-    <div class="management-alert success" role="status">{{ currentNotice }}</div>
-  }
-
-  <div class="management-layout" [class.single-column]="!canManage()">
-    @if (canManage()) {
-      <section class="management-panel" aria-labelledby="vehicle-form-title">
-        <header>
-          <div>
-            <h2 id="vehicle-form-title">{{ editing() ? 'Editar vehículo' : 'Nuevo vehículo' }}</h2>
-            <p>El estado «En servicio» solo podrá ser establecido por una asignación futura.</p>
-          </div>
-        </header>
-
-        <form class="management-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
-          <div class="form-grid">
-            <div class="field">
-              <label for="vehicle-plate">Placa</label>
-              <input id="vehicle-plate" type="text" formControlName="plate" maxlength="15" [attr.aria-invalid]="form.controls.plate.invalid && form.controls.plate.touched" />
-              @if (form.controls.plate.invalid && form.controls.plate.touched) {
-                <p class="management-field-error">Ingresa la placa.</p>
-              }
-            </div>
-            <div class="field">
-              <label for="vehicle-year">Año</label>
-              <input id="vehicle-year" type="number" formControlName="year" min="1900" max="2100" />
-            </div>
-            <div class="field">
-              <label for="vehicle-brand">Marca</label>
-              <input id="vehicle-brand" type="text" formControlName="brand" maxlength="60" />
-            </div>
-            <div class="field">
-              <label for="vehicle-model">Modelo</label>
-              <input id="vehicle-model" type="text" formControlName="model" maxlength="60" />
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="vehicle-color">Color</label>
-            <input id="vehicle-color" type="text" formControlName="color" maxlength="40" />
-          </div>
-
-          <div class="management-actions">
-            @if (editing()) {
-              <button class="management-button" type="button" (click)="cancelEdit()">Cancelar</button>
-            }
-            <button class="management-button primary" type="submit" [disabled]="saving()">
-              {{ saving() ? 'Guardando…' : editing() ? 'Guardar cambios' : 'Registrar vehículo' }}
-            </button>
-          </div>
-        </form>
-      </section>
+    @if (loading()) { <p class="management-empty" role="status">Cargando veh&iacute;culos&hellip;</p> }
+    @else if (vehicles().length === 0) { <p class="management-empty">No hay veh&iacute;culos para los filtros actuales.</p> }
+    @else {
+      <div class="management-table-wrap"><table class="management-table">
+        <thead><tr><th>Placa</th><th>Marca / Modelo</th><th>A&ntilde;o</th><th>Color</th><th>Estado</th><th>Acciones</th></tr></thead>
+        <tbody>@for (vehicle of vehicles(); track vehicle.id) {
+          <tr>
+            <td><strong>{{ vehicle.plate }}</strong></td>
+            <td>{{ vehicle.brand || 'Sin marca' }} {{ vehicle.model || '' }}</td>
+            <td>{{ vehicle.year || 'No registrado' }}</td>
+            <td>{{ vehicle.color || 'No registrado' }}</td>
+            <td><span class="management-status" [class.success]="vehicle.status === 'DISPONIBLE'" [class.warning]="vehicle.status === 'MANTENIMIENTO'" [class.muted]="vehicle.status === 'INACTIVO'">{{ statusLabel(vehicle.status) }}</span></td>
+            <td><button class="management-button compact" type="button" (click)="viewDetails(vehicle)">Ver detalle</button></td>
+          </tr>
+        }</tbody>
+      </table></div>
     }
-
-    <section class="management-panel" aria-labelledby="vehicles-list-title">
-      <header>
-        <div>
-          <h2 id="vehicles-list-title">Vehículos visibles</h2>
-          <p>Los coordinadores tienen acceso de consulta; los cambios son exclusivos de administración.</p>
-        </div>
-      </header>
-
-      <div class="management-filter">
-        <input #searchInput type="search" [value]="search()" placeholder="Placa, marca o modelo" aria-label="Buscar vehículos" (keyup.enter)="applyFilters(searchInput.value, statusFilter.value)" />
-        <select #statusFilter [value]="selectedStatus()" aria-label="Filtrar por estado" (change)="applyFilters(searchInput.value, statusFilter.value)">
-          <option value="">Todos los estados</option>
-          @for (status of statuses; track status) {
-            <option [value]="status">{{ statusLabel(status) }}</option>
-          }
-        </select>
-        <button class="management-button" type="button" (click)="applyFilters(searchInput.value, statusFilter.value)">Buscar</button>
-      </div>
-
-      @if (loading()) {
-        <p class="management-empty" role="status">Cargando vehículos…</p>
-      } @else if (vehicles().length === 0) {
-        <p class="management-empty">No hay vehículos para los filtros actuales.</p>
-      } @else {
-        <div class="management-table-wrap">
-          <table class="management-table">
-            <thead>
-              <tr><th>Vehículo</th><th>Características</th><th>Estado</th><th>Acciones</th></tr>
-            </thead>
-            <tbody>
-              @for (vehicle of vehicles(); track vehicle.id) {
-                <tr>
-                  <td><strong>{{ vehicle.plate }}</strong><small>{{ vehicle.brand || 'Sin marca' }} {{ vehicle.model || '' }}</small></td>
-                  <td>{{ vehicle.year || 'Año no registrado' }} · {{ vehicle.color || 'Sin color' }}</td>
-                  <td><span class="management-status" [class.success]="vehicle.status === 'DISPONIBLE'" [class.warning]="vehicle.status === 'MANTENIMIENTO'" [class.muted]="vehicle.status === 'INACTIVO'">{{ statusLabel(vehicle.status) }}</span></td>
-                  <td>
-                    @if (canManage()) {
-                      <div class="management-inline-actions">
-                        <button class="management-button compact" type="button" (click)="startEdit(vehicle)">Editar</button>
-                        <select #newStatus class="management-button compact" [value]="vehicle.status" [disabled]="savingStatusId() === vehicle.id" aria-label="Cambiar estado de {{ vehicle.plate }}" (change)="changeStatus(vehicle, newStatus.value)">
-                          @for (status of statuses; track status) {
-                            <option [value]="status" [disabled]="status === 'EN_SERVICIO'">{{ statusLabel(status) }}{{ status === 'EN_SERVICIO' ? ' (solo asignación)' : '' }}</option>
-                          }
-                        </select>
-                      </div>
-                    } @else {
-                      <span class="management-muted">Solo lectura</span>
-                    }
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
-      }
-
-      <div class="management-pagination">
-        <button class="management-button compact" type="button" (click)="previousPage()" [disabled]="page() === 0">Anterior</button>
-        <span>Página {{ page() + 1 }} de {{ totalPages() || 1 }}</span>
-        <button class="management-button compact" type="button" (click)="nextPage()" [disabled]="page() + 1 >= totalPages()">Siguiente</button>
-      </div>
-    </section>
-  </div>
+    <rf-pagination [page]="page()" [totalPages]="totalPages()" [totalItems]="totalItems()" (previous)="previousPage()" (next)="nextPage()" />
+  </section>
 </section>
+
+<rf-modal [open]="formOpen()" [title]="editing() ? 'Editar veh&iacute;culo' : 'Nuevo veh&iacute;culo'" (closed)="closeForm()">
+  <form class="management-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="form-grid">
+      <div class="field"><label for="vehicle-plate">Placa</label><input id="vehicle-plate" type="text" formControlName="plate" maxlength="15" [attr.aria-invalid]="form.controls.plate.invalid && form.controls.plate.touched" />@if (form.controls.plate.invalid && form.controls.plate.touched) { <p class="management-field-error">Ingresa la placa.</p> }</div>
+      <div class="field"><label for="vehicle-year">A&ntilde;o</label><input id="vehicle-year" type="number" formControlName="year" min="1900" max="2100" />@if (form.controls.year.invalid && form.controls.year.touched) { <p class="management-field-error">Ingresa un a&ntilde;o entre 1900 y 2100.</p> }</div>
+      <div class="field"><label for="vehicle-brand">Marca</label><input id="vehicle-brand" type="text" formControlName="brand" maxlength="60" /></div>
+      <div class="field"><label for="vehicle-model">Modelo</label><input id="vehicle-model" type="text" formControlName="model" maxlength="60" /></div>
+      <div class="field wide"><label for="vehicle-color">Color</label><input id="vehicle-color" type="text" formControlName="color" maxlength="40" /></div>
+    </div>
+    <p class="management-muted">El estado En servicio solo puede establecerse mediante una asignaci&oacute;n.</p>
+    <div class="management-actions"><button class="management-button" type="button" (click)="closeForm()" [disabled]="saving()">Cancelar</button><button class="management-button primary" type="submit" [disabled]="saving()">{{ saving() ? 'Guardando&hellip;' : editing() ? 'Guardar cambios' : 'Registrar veh&iacute;culo' }}</button></div>
+  </form>
+</rf-modal>
+
+<rf-modal [open]="detailOpen()" [title]="selectedVehicle()?.plate || 'Detalle del veh&iacute;culo'" (closed)="closeDetails()">
+  @if (selectedVehicle(); as vehicle) {
+    <dl class="rf-detail-grid">
+      <div><dt>Placa</dt><dd>{{ vehicle.plate }}</dd></div>
+      <div><dt>Estado</dt><dd>{{ statusLabel(vehicle.status) }}</dd></div>
+      <div><dt>Marca</dt><dd>{{ vehicle.brand || 'No registrada' }}</dd></div>
+      <div><dt>Modelo</dt><dd>{{ vehicle.model || 'No registrado' }}</dd></div>
+      <div><dt>A&ntilde;o</dt><dd>{{ vehicle.year || 'No registrado' }}</dd></div>
+      <div><dt>Color</dt><dd>{{ vehicle.color || 'No registrado' }}</dd></div>
+    </dl>
+    @if (canManage()) {
+      <section class="management-detail"><h3>Acciones administrativas</h3><p class="management-muted">Solo se muestran estados que pueden seleccionarse manualmente.</p><div class="rf-toolbar"><button class="management-button" type="button" (click)="startEdit(vehicle)">Editar datos</button><select #newStatus class="management-button" aria-label="Cambiar estado del veh&iacute;culo" (change)="changeStatus(vehicle, newStatus.value)"><option value="">Cambiar estado&hellip;</option>@for (status of administrativeStatuses; track status) { <option [value]="status" [disabled]="status === vehicle.status">{{ statusLabel(status) }}</option> }</select></div></section>
+    }
+  }
+  <div modal-actions><button class="management-button" type="button" (click)="closeDetails()">Cerrar</button></div>
+</rf-modal>
+
+@if (pendingStatus(); as pending) {
+  <rf-confirm-dialog
+    [open]="true"
+    title="Cambiar estado del veh&iacute;culo"
+    [message]="'El estado de ' + pending.vehicle.plate + ' cambiar&aacute; a ' + statusLabel(pending.status) + '. &iquest;Deseas continuar?'"
+    [confirmLabel]="savingStatusId() ? 'Procesando&hellip;' : 'Cambiar estado'"
+    [danger]="pending.status === 'INACTIVO'"
+    (confirmed)="confirmStatusChange()"
+    (cancelled)="cancelStatusChange()"
+  />
+}

@@ -1,9 +1,9 @@
 # Ruta Fija — CRM Web Administrativo y Reportes
 
 Monolito modular para administrar organizaciones, usuarios, grupos, conductores,
-vehículos, operación y reportes. La Fase 4 completa la gestión administrativa,
-la auditoría de consulta y los reportes exportables con Spring Boot, Angular y
-PostgreSQL local.
+vehículos, operación y reportes. La Fase 5 incorpora el sistema visual integral,
+la topbar por rol y flujos de gestión mediante modales accesibles, conservando
+la API Spring Boot, la auditoría y PostgreSQL local sin cambios funcionales.
 
 > Alcance confirmado: este repositorio construye únicamente el **CRM web
 > administrativo + reportes**. No incluye aplicación móvil. Durante esta fase
@@ -157,11 +157,10 @@ La integración continua valida el modelo de Compose, construye las imágenes,
 exige que las integraciones PostgreSQL no sean omitidas, ejecuta `mvnw verify`,
 audita las dependencias npm con umbral alto y compila/prueba el frontend.
 Dependabot revisa semanalmente Maven, npm y las acciones del pipeline. La
-aceptación explícita del propietario autorizó la Fase 4. La auditoría final
-deja constancia de los controles superados y de los límites que requieren una
-futura preparación de producción. La ausencia de un repositorio Git sigue
-siendo un control operativo pendiente, no un bloqueo para el entorno local
-aprobado.
+auditoría final deja constancia de los controles superados y de los límites que
+requieren una futura preparación de producción. El proyecto se distribuye
+mediante su repositorio público y conserva una configuración local sin secretos
+versionados.
 
 Documentación adicional:
 
@@ -179,5 +178,9 @@ Documentación adicional:
 - [Matriz de trazabilidad final](docs/matriz-trazabilidad-final.md)
 - [Auditoría final de la Fase 4](docs/auditoria-final-fase-4.md)
 - [Evidencia de la Fase 4](docs/evidencia-fase-4-2026-08-30.md)
+- [Diseño y límites de la Fase 5](docs/fase-5-diseno.md)
+- [Estado y cierre de la Fase 5](docs/fase-5-estado.md)
+- [Auditoría final de la Fase 5](docs/auditoria-final-fase-5.md)
+- [Evidencia de la Fase 5](docs/evidencia-fase-5-2026-08-30.md)
 - [Cumplimiento Java](REPORTE_CUMPLIMIENTO_JAVA.md)
 - [Uso del Sistema](<docs/Uso del Sistema.md>)

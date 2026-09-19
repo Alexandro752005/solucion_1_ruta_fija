@@ -1,146 +1,94 @@
-<section class="management-page" aria-labelledby="assignments-title">
-  <header class="management-heading">
-    <div>
-      <p class="management-eyebrow">Fase 4 · Operación web</p>
-      <h1 id="assignments-title">Asignaciones</h1>
-      <p>El coordinador programa directamente en <strong>SCHEDULED</strong>; no se simula aceptación de conductor.</p>
+<section class="management-page">
+  <rf-page-header
+    title="Asignaciones"
+    description="Programa servicios y controla sus transiciones operativas."
+    [context]="organizationName()"
+  >
+    <button page-actions class="management-button primary" type="button" (click)="startCreate()">Nueva asignaci&oacute;n</button>
+  </rf-page-header>
+
+  @if (error(); as currentError) { <div class="management-alert error" role="alert"><strong>{{ currentError.message }}</strong>@if (currentError.correlationId) { <span>Referencia: {{ currentError.correlationId }}</span> }</div> }
+  @if (notice(); as currentNotice) { <div class="management-alert success" role="status">{{ currentNotice }}</div> }
+
+  <section class="management-panel" aria-labelledby="assignments-list-title">
+    <header><div><h2 id="assignments-list-title">Plan operativo</h2><p>{{ totalItems() }} asignaciones registradas.</p></div></header>
+    <div class="management-filter">
+      <select #statusFilter [value]="selectedStatus()" aria-label="Filtrar por estado"><option value="">Todos los estados</option>@for (status of statuses; track status) { <option [value]="status">{{ statusLabel(status) }}</option> }</select>
+      <select #driverFilter [value]="selectedDriverId()" aria-label="Filtrar por conductor"><option value="">Todos los conductores</option>@for (driver of drivers(); track driver.id) { <option [value]="driver.id">{{ driver.fullName }}</option> }</select>
+      <select #vehicleFilter [value]="selectedVehicleId()" aria-label="Filtrar por veh&iacute;culo"><option value="">Todos los veh&iacute;culos</option>@for (vehicle of vehicles(); track vehicle.id) { <option [value]="vehicle.id">{{ vehicle.plate }}</option> }</select>
+      <label class="filter-date">Desde<input #fromInput type="date" [value]="fromFilter()" /></label>
+      <label class="filter-date">Hasta<input #toInput type="date" [value]="toFilter()" /></label>
+      <button class="management-button" type="button" (click)="applyFilters(statusFilter.value, driverFilter.value, vehicleFilter.value, fromInput.value, toInput.value)">Aplicar</button>
+      <button class="management-button" type="button" (click)="statusFilter.value = ''; driverFilter.value = ''; vehicleFilter.value = ''; fromInput.value = ''; toInput.value = ''; clearFilters()">Limpiar</button>
     </div>
-    <span class="management-badge">{{ totalItems() }} registradas</span>
-  </header>
 
-  @if (error(); as currentError) {
-    <div class="management-alert error" role="alert">
-      <strong>{{ currentError.message }}</strong>
-      @if (currentError.correlationId) { <span>Referencia: {{ currentError.correlationId }}</span> }
-    </div>
-  }
-
-  @if (notice(); as currentNotice) {
-    <div class="management-alert success" role="status">{{ currentNotice }}</div>
-  }
-
-  <div class="management-layout">
-    <section class="management-panel" aria-labelledby="assignment-form-title">
-      <header>
-        <div>
-          <h2 id="assignment-form-title">{{ editing() ? 'Editar asignación' : 'Nueva asignación' }}</h2>
-          <p>El vehículo se valida contra el conductor y la disponibilidad futura se calcula por intervalo.</p>
-        </div>
-      </header>
-
-      <form class="management-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
-        <div class="field">
-          <label for="assignment-driver">Conductor</label>
-          <select id="assignment-driver" formControlName="driverId">
-            <option value="">Selecciona un conductor disponible para programar</option>
-            @for (driver of drivers(); track driver.id) {
-              <option [value]="driver.id">{{ driver.fullName }} · {{ driver.groupName }} · {{ driver.availabilityStatus }}</option>
-            }
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="assignment-vehicle">Vehículo vinculado</label>
-          <select id="assignment-vehicle" formControlName="vehicleId">
-            <option value="">Selecciona un vehículo</option>
-            @for (vehicle of vehicles(); track vehicle.id) {
-              <option [value]="vehicle.id">{{ vehicle.plate }} · {{ vehicle.status }}</option>
-            }
-          </select>
-        </div>
-
-        <div class="form-grid">
-          <div class="field">
-            <label for="assignment-origin">Origen</label>
-            <input id="assignment-origin" type="text" maxlength="250" formControlName="originText" />
-          </div>
-          <div class="field">
-            <label for="assignment-destination">Destino</label>
-            <input id="assignment-destination" type="text" maxlength="250" formControlName="destinationText" />
-          </div>
-          <div class="field">
-            <label for="assignment-start">Inicio programado</label>
-            <input id="assignment-start" type="datetime-local" formControlName="scheduledAt" />
-          </div>
-          <div class="field">
-            <label for="assignment-end">Fin programado</label>
-            <input id="assignment-end" type="datetime-local" formControlName="scheduledEndAt" />
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="assignment-notes">Notas (opcional)</label>
-          <textarea id="assignment-notes" maxlength="500" formControlName="notes"></textarea>
-        </div>
-
-        <div class="management-actions">
-          @if (editing()) { <button class="management-button" type="button" (click)="cancelEdit()">Cancelar edición</button> }
-          <button class="management-button primary" type="submit" [disabled]="saving()">
-            {{ saving() ? 'Guardando…' : editing() ? 'Guardar cambios' : 'Programar SCHEDULED' }}
-          </button>
-        </div>
-      </form>
-    </section>
-
-    <section class="management-panel" aria-labelledby="assignments-list-title">
-      <header>
-        <div>
-          <h2 id="assignments-list-title">Plan operativo</h2>
-          <p>Reservar afecta solo al conductor actual; el vehículo pasa a EN_SERVICIO únicamente al iniciar.</p>
-        </div>
-      </header>
-
-      <div class="management-filter">
-        <select #statusFilter [value]="selectedStatus()" aria-label="Filtrar asignaciones" (change)="applyStatus(statusFilter.value)">
-          <option value="">Todos los estados</option>
-          @for (status of statuses; track status) { <option [value]="status">{{ statusLabel(status) }}</option> }
-        </select>
-        <button class="management-button" type="button" (click)="load(0)">Actualizar</button>
-      </div>
-
-      @if (loading()) {
-        <p class="management-empty" role="status">Cargando asignaciones…</p>
-      } @else if (assignments().length === 0) {
-        <p class="management-empty">No existen asignaciones para el filtro actual.</p>
-      } @else {
-        <div class="management-table-wrap">
-          <table class="management-table">
-            <thead><tr><th>Programación</th><th>Recursos</th><th>Estado</th><th>Acciones de coordinación</th></tr></thead>
-            <tbody>
-              @for (assignment of assignments(); track assignment.id) {
-                <tr>
-                  <td>
-                    <strong>{{ assignment.originText }} → {{ assignment.destinationText }}</strong>
-                    <small>{{ dateLabel(assignment.scheduledAt) }} — {{ dateLabel(assignment.scheduledEndAt) }}</small>
-                  </td>
-                  <td><strong>{{ assignment.driverName }}</strong><small>{{ assignment.vehiclePlate }} · {{ assignment.groupName }}</small></td>
-                  <td>
-                    <span class="management-status" [class.success]="assignment.status === 'COMPLETED'" [class.warning]="assignment.status === 'SCHEDULED' || assignment.status === 'EN_SERVICIO'" [class.muted]="assignment.status === 'CANCELLED'">
-                      {{ statusLabel(assignment.status) }}
-                    </span>
-                    @if (assignment.reservedAt && assignment.status === 'SCHEDULED') { <small>Conductor reservado</small> }
-                  </td>
-                  <td>
-                    <div class="management-inline-actions">
-                      @if (canEdit(assignment)) { <button class="management-button compact" type="button" (click)="startEdit(assignment)">Editar</button> }
-                      @if (canReserve(assignment)) { <button class="management-button compact" type="button" [disabled]="actionId() === assignment.id" (click)="reserve(assignment)">Reservar</button> }
-                      @if (canStart(assignment)) { <button class="management-button compact primary" type="button" [disabled]="actionId() === assignment.id" (click)="start(assignment)">Iniciar</button> }
-                      @if (canComplete(assignment)) { <button class="management-button compact primary" type="button" [disabled]="actionId() === assignment.id" (click)="complete(assignment)">Completar</button> }
-                      @if (canCancel(assignment)) { <button class="management-button compact danger" type="button" [disabled]="actionId() === assignment.id" (click)="cancel(assignment)">Cancelar</button> }
-                    </div>
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
-      }
-
-      <div class="management-pagination">
-        <button class="management-button compact" type="button" (click)="previousPage()" [disabled]="page() === 0">Anterior</button>
-        <span>Página {{ page() + 1 }} de {{ totalPages() || 1 }}</span>
-        <button class="management-button compact" type="button" (click)="nextPage()" [disabled]="page() + 1 >= totalPages()">Siguiente</button>
-      </div>
-    </section>
-  </div>
+    @if (loading()) { <p class="management-empty" role="status">Cargando asignaciones&hellip;</p> }
+    @else if (assignments().length === 0) { <p class="management-empty">No existen asignaciones para los filtros actuales.</p> }
+    @else {
+      <div class="management-table-wrap"><table class="management-table">
+        <thead><tr><th>Conductor</th><th>Veh&iacute;culo</th><th>Origen</th><th>Destino</th><th>Inicio</th><th>Fin</th><th>Estado</th><th>Acciones</th></tr></thead>
+        <tbody>@for (assignment of assignments(); track assignment.id) {
+          <tr>
+            <td><strong>{{ assignment.driverName }}</strong><small>{{ assignment.groupName }}</small></td>
+            <td>{{ assignment.vehiclePlate }}</td>
+            <td>{{ assignment.originText }}</td>
+            <td>{{ assignment.destinationText }}</td>
+            <td>{{ dateLabel(assignment.scheduledAt) }}</td>
+            <td>{{ dateLabel(assignment.scheduledEndAt) }}</td>
+            <td><span class="management-status" [class.success]="assignment.status === 'COMPLETED'" [class.warning]="assignment.status === 'SCHEDULED' || assignment.status === 'EN_SERVICIO'" [class.muted]="assignment.status === 'CANCELLED'">{{ statusLabel(assignment.status) }}</span>@if (assignment.reservedAt && assignment.status === 'SCHEDULED') { <small>Conductor reservado</small> }</td>
+            <td><button class="management-button compact" type="button" (click)="viewDetails(assignment)">Ver detalle</button></td>
+          </tr>
+        }</tbody>
+      </table></div>
+    }
+    <rf-pagination [page]="page()" [totalPages]="totalPages()" [totalItems]="totalItems()" (previous)="previousPage()" (next)="nextPage()" />
+  </section>
 </section>
+
+<rf-modal [open]="formOpen()" [title]="editing() ? 'Editar asignaci&oacute;n' : 'Nueva asignaci&oacute;n'" size="large" (closed)="closeForm()">
+  <form class="management-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="form-grid">
+      <div class="field"><label for="assignment-driver">Conductor</label><select #driverSelect id="assignment-driver" formControlName="driverId" (change)="driverChanged(driverSelect.value)" [attr.aria-invalid]="form.controls.driverId.invalid && form.controls.driverId.touched"><option value="">Selecciona un conductor</option>@for (driver of drivers(); track driver.id) { <option [value]="driver.id">{{ driver.fullName }} &middot; {{ driver.groupName }} &middot; {{ driverStatusLabel(driver.availabilityStatus) }}</option> }</select>@if (form.controls.driverId.invalid && form.controls.driverId.touched) { <p class="management-field-error">Selecciona un conductor.</p> }</div>
+      <div class="field"><label for="assignment-vehicle">Veh&iacute;culo vinculado</label><select id="assignment-vehicle" formControlName="vehicleId" [disabled]="!form.controls.driverId.value || loadingEligibleVehicles()" [attr.aria-invalid]="form.controls.vehicleId.invalid && form.controls.vehicleId.touched"><option value="">{{ loadingEligibleVehicles() ? 'Cargando veh&iacute;culos&hellip;' : 'Selecciona un veh&iacute;culo' }}</option>@for (vehicle of eligibleVehicles(); track vehicle.id) { <option [value]="vehicle.id">{{ vehicle.plate }} &middot; {{ vehicleStatusLabel(vehicle.status) }}</option> }</select>@if (form.controls.vehicleId.invalid && form.controls.vehicleId.touched) { <p class="management-field-error">Selecciona un veh&iacute;culo vinculado.</p> }</div>
+      <div class="field"><label for="assignment-origin">Origen</label><input id="assignment-origin" type="text" maxlength="250" formControlName="originText" [attr.aria-invalid]="form.controls.originText.invalid && form.controls.originText.touched" /></div>
+      <div class="field"><label for="assignment-destination">Destino</label><input id="assignment-destination" type="text" maxlength="250" formControlName="destinationText" [attr.aria-invalid]="form.controls.destinationText.invalid && form.controls.destinationText.touched" /></div>
+      <div class="field"><label for="assignment-start">Inicio programado</label><input id="assignment-start" type="datetime-local" formControlName="scheduledAt" [attr.aria-invalid]="form.controls.scheduledAt.invalid && form.controls.scheduledAt.touched" /></div>
+      <div class="field"><label for="assignment-end">Fin programado</label><input id="assignment-end" type="datetime-local" formControlName="scheduledEndAt" [attr.aria-invalid]="form.controls.scheduledEndAt.invalid && form.controls.scheduledEndAt.touched" /></div>
+      <div class="field wide"><label for="assignment-notes">Notas (opcional)</label><textarea id="assignment-notes" maxlength="500" formControlName="notes"></textarea></div>
+    </div>
+    <p class="management-muted">La programaci&oacute;n se crea directamente como Programada. La validaci&oacute;n final de agenda y recursos se realiza al guardar.</p>
+    <div class="management-actions"><button class="management-button" type="button" (click)="closeForm()" [disabled]="saving()">Cancelar</button><button class="management-button primary" type="submit" [disabled]="saving()">{{ saving() ? 'Guardando&hellip;' : editing() ? 'Guardar cambios' : 'Programar asignaci&oacute;n' }}</button></div>
+  </form>
+</rf-modal>
+
+<rf-modal [open]="detailOpen()" title="Detalle de asignaci&oacute;n" size="large" (closed)="closeDetails()">
+  @if (selectedAssignment(); as assignment) {
+    <dl class="rf-detail-grid">
+      <div><dt>Conductor</dt><dd>{{ assignment.driverName }}</dd></div><div><dt>Veh&iacute;culo</dt><dd>{{ assignment.vehiclePlate }}</dd></div>
+      <div><dt>Grupo</dt><dd>{{ assignment.groupName }}</dd></div><div><dt>Estado</dt><dd>{{ statusLabel(assignment.status) }}@if (assignment.reservedAt && assignment.status === 'SCHEDULED') { &nbsp;&middot; Conductor reservado }</dd></div>
+      <div><dt>Origen</dt><dd>{{ assignment.originText }}</dd></div><div><dt>Destino</dt><dd>{{ assignment.destinationText }}</dd></div>
+      <div><dt>Inicio programado</dt><dd>{{ dateLabel(assignment.scheduledAt) }}</dd></div><div><dt>Fin programado</dt><dd>{{ dateLabel(assignment.scheduledEndAt) }}</dd></div>
+      <div><dt>Creada por</dt><dd>{{ assignment.createdByName }}</dd></div><div><dt>Notas</dt><dd>{{ assignment.notes || 'Sin notas' }}</dd></div>
+      @if (assignment.cancellationReason) { <div><dt>Motivo de cancelaci&oacute;n</dt><dd>{{ assignment.cancellationReason }}</dd></div> }
+    </dl>
+    <section class="management-detail"><h3>Acciones disponibles</h3><div class="rf-toolbar">
+      @if (canEdit(assignment)) { <button class="management-button" type="button" (click)="startEdit(assignment)">Editar</button> }
+      @if (canReserve(assignment)) { <button class="management-button" type="button" (click)="reserve(assignment)">Reservar conductor</button> }
+      @if (canStart(assignment)) { <button class="management-button primary" type="button" (click)="start(assignment)">Iniciar servicio</button> }
+      @if (canComplete(assignment)) { <button class="management-button primary" type="button" (click)="complete(assignment)">Completar servicio</button> }
+      @if (canCancel(assignment)) { <button class="management-button danger" type="button" (click)="cancel(assignment)">Cancelar asignaci&oacute;n</button> }
+      @if (!canEdit(assignment) && !canReserve(assignment) && !canStart(assignment) && !canComplete(assignment) && !canCancel(assignment)) { <p class="management-muted">Esta asignaci&oacute;n es de solo lectura.</p> }
+    </div></section>
+  }
+  <div modal-actions><button class="management-button" type="button" (click)="closeDetails()">Cerrar</button></div>
+</rf-modal>
+
+<rf-confirm-dialog [open]="pendingAction() !== null" [title]="pendingActionTitle()" [message]="pendingActionMessage()" [confirmLabel]="pendingActionLabel()" (confirmed)="confirmPendingAction()" (cancelled)="cancelPendingAction()" />
+
+<rf-modal [open]="cancellationTarget() !== null" title="Cancelar asignaci&oacute;n" size="small" (closed)="closeCancellation()">
+  <form class="management-form" [formGroup]="cancellationForm" (ngSubmit)="submitCancellation()" novalidate>
+    <p class="management-muted">Indica el motivo. Esta acci&oacute;n quedar&aacute; registrada y liberar&aacute; los recursos cuando corresponda.</p>
+    <div class="field"><label for="cancellation-reason">Motivo de cancelaci&oacute;n</label><textarea id="cancellation-reason" formControlName="reason" maxlength="300" [attr.aria-invalid]="cancellationForm.controls.reason.invalid && cancellationForm.controls.reason.touched"></textarea>@if (cancellationForm.controls.reason.invalid && cancellationForm.controls.reason.touched) { <p class="management-field-error">Ingresa un motivo de hasta 300 caracteres.</p> }</div>
+    <div class="management-actions"><button class="management-button" type="button" (click)="closeCancellation()" [disabled]="actionId() !== null">Volver</button><button class="management-button danger" type="submit" [disabled]="actionId() !== null">{{ actionId() ? 'Cancelando&hellip;' : 'Confirmar cancelaci&oacute;n' }}</button></div>
+  </form>
+</rf-modal>

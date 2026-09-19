@@ -153,6 +153,24 @@ administrativas. Si se modifica `DEMO_USER_PASSWORD` después de que las cuentas
 ya existan, sus contraseñas no se cambian automáticamente: no borre datos para
 resolverlo salvo que la base sea solo de demostración.
 
+### Navegación de la interfaz
+
+La cabecera posee dos franjas: identidad y sesión en la parte superior, y una
+topbar de módulos debajo. La línea amarilla indica el módulo activo. En
+pantallas estrechas, el botón **Menú** abre la misma navegación en la parte
+superior; no existe un menú lateral.
+
+| Rol | Navegación disponible |
+| --- | --- |
+| ADMINISTRADOR | Resumen, Usuarios, Organización, Grupos, Conductores, Vehículos, Asignaciones, Incidencias, Comunicados, Reportes y Auditoría. |
+| COORDINADOR | Resumen, Grupos, Conductores, Vehículos, Asignaciones, Incidencias y Comunicados. |
+| SUPER_ADMIN | Resumen y Organizaciones. |
+
+Las vistas comienzan con filtros y tabla. **Nuevo**, **Editar** o **Ver detalle**
+abren ventanas dentro del sistema. Puede cerrarlas con **Cancelar**, el botón
+de cierre o la tecla `Escape`. Las acciones de riesgo piden confirmación y los
+datos ingresados se conservan si el servidor devuelve un error de validación.
+
 ## 7. Recorrido funcional recomendado
 
 ### 7.1 Administración inicial
@@ -292,6 +310,9 @@ docker compose --profile app logs --tail 200 postgres backend frontend
 | `finalizar_ruta_fija.bat` | Cierre preservando la base local. |
 | `docs/auditoria-final-fase-4.md` | Dictamen y observaciones de cierre. |
 | `docs/evidencia-fase-4-2026-08-30.md` | Pruebas y evidencia ejecutada. |
+| `docs/fase-5-estado.md` | Alcance y resultado del rediseño integral. |
+| `docs/auditoria-final-fase-5.md` | Dictamen técnico y riesgos residuales de Fase 5. |
+| `docs/evidencia-fase-5-2026-08-30.md` | Evidencia de pruebas y ejecución de Fase 5. |
 
 Consulte además el [README principal](../README.md), la
 [matriz de trazabilidad](matriz-trazabilidad-final.md) y el

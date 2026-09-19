@@ -1,113 +1,124 @@
-<div class="page-heading">
-  <div>
-    <p class="eyebrow">Fase 4 · Cierre profesional</p>
-    <h1>Hola, {{ session.user()?.fullName }}</h1>
-    <p>
-      La operación web usa asignaciones, incidencias y comunicados persistidos. Los reportes,
-      exportaciones y auditoría se calculan desde esos mismos registros.
-    </p>
-  </div>
-  <span class="status-chip"><i aria-hidden="true"></i> Sesión activa</span>
-</div>
+<section class="dashboard-page">
+  <rf-page-header
+    title="Resumen"
+    [description]="description()"
+    [context]="organizationContext()"
+    eyebrow="Panel principal"
+  >
+    <rf-status-indicator page-actions label="Sesi&oacute;n activa" tone="success" />
+  </rf-page-header>
 
-<section class="summary-grid" aria-label="Estado del CRM administrativo">
-  <article>
-    <span class="card-label">Identidad verificada</span>
-    <strong>{{ session.user()?.email || 'Usuario autenticado' }}</strong>
-      <p>Información obtenida mediante <code>/auth/me</code>.</p>
-  </article>
-  <article>
-    <span class="card-label">Rol efectivo</span>
-    <strong>{{ session.user()?.role }}</strong>
-      <p>La navegación y cada acción se validan nuevamente en el backend.</p>
-  </article>
-  <article>
-    <span class="card-label">Aislamiento</span>
-    <strong>{{ organizationContext() }}</strong>
-      <p>La organización se resuelve en el backend, no desde el navegador.</p>
-  </article>
-</section>
+  @if (isAdministrator()) {
+    <section class="dashboard-section" aria-labelledby="operational-title">
+      <header class="section-heading">
+        <div>
+          <h2 id="operational-title">Estado operativo</h2>
+          <p>Indicadores calculados con los registros actuales de la organizaci&oacute;n.</p>
+        </div>
+        <a routerLink="/reports">Ver reportes</a>
+      </header>
 
-@if (canViewReports()) {
-  <section class="readiness-card" aria-labelledby="operational-summary-title">
-    <div class="section-heading">
-      <div><p class="eyebrow">Datos persistidos</p><h2 id="operational-summary-title">Resumen operativo actual</h2></div>
-      <a routerLink="/reports">Ver reportes</a>
-    </div>
-    @if (loadingAvailability()) { <p class="management-empty" role="status">Calculando indicadores reales…</p> }
-    @else if (availability(); as report) {
-      <div class="summary-grid operational-summary">
-        <article><span class="card-label">Conductores disponibles</span><strong>{{ countByStatus(report.drivers, 'DISPONIBLE') }}</strong><p>Estado físico actual.</p></article>
-        <article><span class="card-label">Vehículos disponibles</span><strong>{{ countByStatus(report.vehicles, 'DISPONIBLE') }}</strong><p>Las reservas futuras no los marcan como reservados.</p></article>
-        <article><span class="card-label">Asignaciones futuras</span><strong>{{ report.futureScheduledAssignments }}</strong><p>Programadas desde el CRM.</p></article>
-        <article><span class="card-label">Servicios en curso</span><strong>{{ report.assignmentsInService }}</strong><p>Estado EN_SERVICIO persistido.</p></article>
-        <article><span class="card-label">Incidencias abiertas</span><strong>{{ report.openIncidents }}</strong><p>Abiertas o en seguimiento.</p></article>
-        <article><span class="card-label">Actualización</span><strong>En tiempo real</strong><p>El canal autorizado refresca esta instantánea.</p></article>
-      </div>
-    }
-    @else if (availabilityError()) { <p class="management-empty">No fue posible calcular el resumen operativo. Use Reportes reales para reintentar.</p> }
+      @if (loadingAvailability()) {
+        <p class="dashboard-state" role="status">Cargando resumen&hellip;</p>
+      } @else if (availabilityError()) {
+        <div class="metric-grid" aria-label="Indicadores no disponibles">
+          @for (label of ['Conductores disponibles', 'Veh&iacute;culos disponibles', 'Asignaciones futuras', 'Servicios en curso', 'Incidencias abiertas']; track label) {
+            <article class="metric"><span>{{ label }}</span><strong class="unavailable">No disponible</strong></article>
+          }
+        </div>
+      } @else if (availability(); as report) {
+        <div class="metric-grid">
+          <article class="metric"><span>Conductores disponibles</span><strong>{{ countByStatus(report.drivers, 'DISPONIBLE') }}</strong></article>
+          <article class="metric"><span>Veh&iacute;culos disponibles</span><strong>{{ countByStatus(report.vehicles, 'DISPONIBLE') }}</strong></article>
+          <article class="metric"><span>Asignaciones futuras</span><strong>{{ report.futureScheduledAssignments }}</strong></article>
+          <article class="metric"><span>Servicios en curso</span><strong>{{ report.assignmentsInService }}</strong></article>
+          <article class="metric"><span>Incidencias abiertas</span><strong>{{ report.openIncidents }}</strong></article>
+        </div>
+      }
+    </section>
+
+    <section class="dashboard-section" aria-labelledby="activity-title">
+      <header class="section-heading">
+        <div>
+          <h2 id="activity-title">Actividad reciente</h2>
+          <p>&Uacute;ltimos eventos registrados en la organizaci&oacute;n.</p>
+        </div>
+        <a routerLink="/audit">Ver toda la actividad</a>
+      </header>
+
+      @if (loadingActivity()) {
+        <p class="dashboard-state" role="status">Cargando actividad&hellip;</p>
+      } @else if (activityError()) {
+        <p class="dashboard-state error" role="alert">La actividad reciente no est&aacute; disponible en este momento.</p>
+      } @else if (recentActivity().length === 0) {
+        <p class="dashboard-state">A&uacute;n no hay actividad registrada.</p>
+      } @else {
+        <div class="activity-table-wrap">
+          <table class="activity-table">
+            <thead><tr><th>Fecha y hora</th><th>Tipo</th><th>Descripci&oacute;n</th><th>Usuario</th></tr></thead>
+            <tbody>
+              @for (event of recentActivity(); track event.id) {
+                <tr>
+                  <td>{{ dateLabel(event.occurredAt) }}</td>
+                  <td>{{ entityLabel(event.entityType) }}</td>
+                  <td>{{ actionLabel(event.action) }}</td>
+                  <td>{{ event.userFullName || 'Sistema' }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </section>
+  }
+
+  @if (isCoordinator()) {
+    <section class="dashboard-section coordinator-intro" aria-labelledby="coordination-title">
+      <h2 id="coordination-title">Panel de coordinaci&oacute;n</h2>
+      <p>Desde aqu&iacute; puedes consultar recursos, programar servicios, atender incidencias y revisar comunicados. Los datos visibles respetan el alcance autorizado para tu cuenta.</p>
+    </section>
+  }
+
+  @if (isSuperAdmin()) {
+    <section class="dashboard-section" aria-labelledby="platform-title">
+      <header class="section-heading">
+        <div><h2 id="platform-title">Control de plataforma</h2><p>Informaci&oacute;n disponible desde la administraci&oacute;n global.</p></div>
+        <a routerLink="/organizations">Ver organizaciones</a>
+      </header>
+      @if (loadingOrganizations()) {
+        <p class="dashboard-state" role="status">Cargando resumen&hellip;</p>
+      } @else {
+        <div class="metric-grid metric-grid--platform">
+          <article class="metric"><span>Organizaciones registradas</span><strong [class.unavailable]="organizationsError()">{{ organizationsError() ? 'No disponible' : organizationTotal() }}</strong></article>
+        </div>
+      }
+    </section>
+  }
+
+  <section class="dashboard-section" aria-labelledby="shortcuts-title">
+    <header class="section-heading">
+      <div><h2 id="shortcuts-title">Accesos r&aacute;pidos</h2><p>Enlaces disponibles para tu perfil.</p></div>
+    </header>
+    <nav class="shortcut-grid" aria-label="Accesos r&aacute;pidos">
+      @if (isAdministrator()) {
+        <a routerLink="/users"><strong>Usuarios</strong><span>Gestionar cuentas y accesos</span></a>
+        <a routerLink="/organization"><strong>Organizaci&oacute;n</strong><span>Consultar el contexto activo</span></a>
+      }
+      @if (isAdministrator() || isCoordinator()) {
+        <a routerLink="/groups"><strong>Grupos</strong><span>Consultar equipos operativos</span></a>
+        <a routerLink="/drivers"><strong>Conductores</strong><span>Revisar disponibilidad</span></a>
+        <a routerLink="/vehicles"><strong>Veh&iacute;culos</strong><span>Consultar el estado de flota</span></a>
+        <a routerLink="/assignments"><strong>Asignaciones</strong><span>Programar y gestionar servicios</span></a>
+        <a routerLink="/incidents"><strong>Incidencias</strong><span>Registrar y dar seguimiento</span></a>
+        <a routerLink="/announcements"><strong>Comunicados</strong><span>Consultar comunicaciones</span></a>
+      }
+      @if (isAdministrator()) {
+        <a routerLink="/reports"><strong>Reportes</strong><span>Consultar y exportar resultados</span></a>
+        <a routerLink="/audit"><strong>Auditor&iacute;a</strong><span>Revisar la trazabilidad</span></a>
+      }
+      @if (isSuperAdmin()) {
+        <a routerLink="/organizations"><strong>Organizaciones</strong><span>Gestionar entidades de la plataforma</span></a>
+      }
+    </nav>
   </section>
-}
-
-<section class="readiness-card" aria-labelledby="readiness-title">
-  <div class="section-heading">
-    <div>
-      <p class="eyebrow">Estado verificable</p>
-      <h2 id="readiness-title">Capacidades habilitadas</h2>
-    </div>
-    <span>Fase 4 · 75–100 %</span>
-  </div>
-
-  <ul>
-    <li>
-      <span class="check" aria-hidden="true">✓</span>
-      <div>
-        <strong>Inicio y recuperación de sesión</strong>
-        <p>Access token temporal en memoria y renovación coordinada por cookie.</p>
-      </div>
-    </li>
-    <li>
-      <span class="check" aria-hidden="true">✓</span>
-      <div>
-        <strong>Asignaciones con transiciones controladas</strong>
-        <p>La coordinación opera SCHEDULED, reserva, inicia y completa sin simular aceptación móvil.</p>
-      </div>
-    </li>
-    <li>
-      <span class="check" aria-hidden="true">✓</span>
-      <div>
-        <strong>Reportes y trazabilidad verificables</strong>
-        <p>Disponibilidad, asignaciones e incidencias se consultan desde PostgreSQL y se exportan en PDF, Excel o CSV protegido.</p>
-      </div>
-    </li>
-  </ul>
-
-  <div class="scope-note">
-    <strong>Alcance actual</strong>
-    <p>
-      Esta fase no incluye aplicación móvil, GPS ni una falsa aceptación del conductor. La
-      disponibilidad futura se calcula por asignaciones programadas.
-    </p>
-  </div>
-
-  <div class="management-shortcuts" aria-label="Accesos de administración">
-    @if (canManageResources()) {
-      <a routerLink="/users">Administrar usuarios</a>
-    }
-    @if (canBrowseResources()) {
-      <a routerLink="/groups">Ver grupos</a>
-      <a routerLink="/drivers">Ver conductores</a>
-      <a routerLink="/vehicles">Ver vehículos</a>
-      <a routerLink="/assignments">Gestionar asignaciones</a>
-      <a routerLink="/incidents">Registrar incidencias</a>
-      <a routerLink="/announcements">Ver comunicados</a>
-    }
-    @if (canViewReports()) {
-      <a routerLink="/reports">Abrir reportes reales</a>
-      <a routerLink="/audit">Consultar auditoría</a>
-    }
-    @if (isSuperAdmin()) {
-      <a routerLink="/organizations">Administrar organizaciones</a>
-    }
-  </div>
 </section>

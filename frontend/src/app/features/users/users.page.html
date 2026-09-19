@@ -1,135 +1,81 @@
-<section class="management-page" aria-labelledby="users-title">
-  <header class="management-heading">
-    <div>
-      <p class="management-eyebrow">Fase 2 · Administración</p>
-      <h1 id="users-title">Usuarios</h1>
-      <p>Crea y administra las cuentas de tu organización. Las sesiones se revocan al desactivar una cuenta.</p>
-    </div>
-    <span class="management-badge">{{ totalItems() }} registrados</span>
-  </header>
+<section class="management-page">
+  <rf-page-header
+    title="Usuarios"
+    description="Administra las cuentas y permisos operativos de la organizaci&oacute;n."
+    [context]="organizationName()"
+  >
+    <button page-actions class="management-button primary" type="button" (click)="startCreate()">Nuevo usuario</button>
+  </rf-page-header>
 
   @if (error(); as currentError) {
-    <div class="management-alert error" role="alert">
-      <strong>{{ currentError.message }}</strong>
-      @if (currentError.correlationId) {
-        <span>Referencia: {{ currentError.correlationId }}</span>
-      }
+    <div class="management-alert error" role="alert"><strong>{{ currentError.message }}</strong>@if (currentError.correlationId) { <span>Referencia: {{ currentError.correlationId }}</span> }</div>
+  }
+  @if (notice(); as currentNotice) { <div class="management-alert success" role="status">{{ currentNotice }}</div> }
+
+  <section class="management-panel" aria-labelledby="users-list-title">
+    <header><div><h2 id="users-list-title">Cuentas de la organizaci&oacute;n</h2><p>{{ totalItems() }} registros encontrados.</p></div></header>
+
+    <div class="management-filter">
+      <input #searchInput type="search" [value]="search()" placeholder="Buscar por nombre o correo" aria-label="Buscar usuarios" (keyup.enter)="applyFilters(searchInput.value, roleInput.value, activeInput.value)" />
+      <select #roleInput [value]="roleFilter()" aria-label="Filtrar por rol">
+        <option value="">Todos los roles</option>
+        @for (role of roles; track role) { <option [value]="role">{{ roleLabel(role) }}</option> }
+      </select>
+      <select #activeInput [value]="activeFilter() === undefined ? '' : activeFilter()" aria-label="Filtrar por estado">
+        <option value="">Todos los estados</option><option value="true">Activos</option><option value="false">Inactivos</option>
+      </select>
+      <button class="management-button" type="button" (click)="applyFilters(searchInput.value, roleInput.value, activeInput.value)">Aplicar</button>
+      <button class="management-button" type="button" (click)="searchInput.value = ''; roleInput.value = ''; activeInput.value = ''; clearFilters()">Limpiar</button>
     </div>
-  }
 
-  @if (notice(); as currentNotice) {
-    <div class="management-alert success" role="status">{{ currentNotice }}</div>
-  }
-
-  <div class="management-layout">
-    <section class="management-panel" aria-labelledby="user-form-title">
-      <header>
-        <div>
-          <h2 id="user-form-title">{{ editing() ? 'Editar usuario' : 'Nuevo usuario' }}</h2>
-          <p>{{ editing() ? 'La contraseña no se modifica desde esta acción.' : 'La contraseña inicial debe tener al menos 12 caracteres.' }}</p>
-        </div>
-      </header>
-
-      <form class="management-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
-        <div class="field">
-          <label for="user-full-name">Nombre completo</label>
-          <input id="user-full-name" type="text" formControlName="fullName" autocomplete="name" [attr.aria-invalid]="form.controls.fullName.invalid && form.controls.fullName.touched" />
-          @if (form.controls.fullName.invalid && form.controls.fullName.touched) {
-            <p class="management-field-error">Ingresa el nombre completo.</p>
-          }
-        </div>
-
-        <div class="field">
-          <label for="user-email">Correo</label>
-          <input id="user-email" type="email" formControlName="email" autocomplete="email" [attr.aria-invalid]="form.controls.email.invalid && form.controls.email.touched" />
-          @if (form.controls.email.invalid && form.controls.email.touched) {
-            <p class="management-field-error">Ingresa un correo válido.</p>
-          }
-        </div>
-
-        @if (!editing()) {
-          <div class="field">
-            <label for="user-password">Contraseña inicial</label>
-            <input id="user-password" type="password" formControlName="password" autocomplete="new-password" [attr.aria-invalid]="form.controls.password.invalid && form.controls.password.touched" />
-            @if (form.controls.password.invalid && form.controls.password.touched) {
-              <p class="management-field-error">La contraseña debe tener al menos 12 caracteres.</p>
+    @if (loading()) {
+      <p class="management-empty" role="status">Cargando usuarios&hellip;</p>
+    } @else if (users().length === 0) {
+      <p class="management-empty">No hay usuarios para los filtros actuales.</p>
+    } @else {
+      <div class="management-table-wrap">
+        <table class="management-table">
+          <thead><tr><th>Nombre</th><th>Correo</th><th>Rol</th><th>Estado</th><th>Tel&eacute;fono</th><th>Acciones</th></tr></thead>
+          <tbody>
+            @for (user of users(); track user.id) {
+              <tr>
+                <td><strong>{{ user.fullName }}</strong></td>
+                <td>{{ user.email }}</td>
+                <td>{{ roleLabel(user.role) }}</td>
+                <td><span class="management-status" [class.success]="user.active" [class.muted]="!user.active">{{ user.active ? 'Activo' : 'Inactivo' }}</span></td>
+                <td>{{ user.phone || 'No registrado' }}</td>
+                <td><div class="management-inline-actions"><button class="management-button compact" type="button" (click)="startEdit(user)">Editar</button><button class="management-button compact" [class.danger]="user.active" type="button" (click)="requestToggleActive(user)">{{ user.active ? 'Desactivar' : 'Activar' }}</button></div></td>
+              </tr>
             }
-          </div>
-        }
-
-        <div class="form-grid">
-          <div class="field">
-            <label for="user-role">Rol</label>
-            <select id="user-role" formControlName="role">
-              @for (role of roles; track role) {
-                <option [value]="role">{{ roleLabel(role) }}</option>
-              }
-            </select>
-          </div>
-          <div class="field">
-            <label for="user-phone">Teléfono</label>
-            <input id="user-phone" type="tel" formControlName="phone" autocomplete="tel" />
-          </div>
-        </div>
-
-        <div class="management-actions">
-          @if (editing()) {
-            <button class="management-button" type="button" (click)="cancelEdit()">Cancelar</button>
-          }
-          <button class="management-button primary" type="submit" [disabled]="saving()">
-            {{ saving() ? 'Guardando…' : editing() ? 'Guardar cambios' : 'Crear usuario' }}
-          </button>
-        </div>
-      </form>
-    </section>
-
-    <section class="management-panel" aria-labelledby="users-list-title">
-      <header>
-        <div>
-          <h2 id="users-list-title">Cuentas de la organización</h2>
-          <p>Los resultados están paginados y limitados a la organización activa.</p>
-        </div>
-      </header>
-
-      <div class="management-filter">
-        <input #searchInput type="search" [value]="search()" placeholder="Buscar por nombre o correo" aria-label="Buscar usuarios" (keyup.enter)="applySearch(searchInput.value)" />
-        <button class="management-button" type="button" (click)="applySearch(searchInput.value)">Buscar</button>
+          </tbody>
+        </table>
       </div>
-
-      @if (loading()) {
-        <p class="management-empty" role="status">Cargando usuarios…</p>
-      } @else if (users().length === 0) {
-        <p class="management-empty">No hay usuarios para los filtros actuales.</p>
-      } @else {
-        <div class="management-table-wrap">
-          <table class="management-table">
-            <thead>
-              <tr><th>Usuario</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr>
-            </thead>
-            <tbody>
-              @for (user of users(); track user.id) {
-                <tr>
-                  <td><strong>{{ user.fullName }}</strong><small>{{ user.email }} · {{ user.phone || 'Sin teléfono' }}</small></td>
-                  <td>{{ roleLabel(user.role) }}</td>
-                  <td><span class="management-status" [class.success]="user.active" [class.muted]="!user.active">{{ user.active ? 'Activo' : 'Inactivo' }}</span></td>
-                  <td>
-                    <div class="management-inline-actions">
-                      <button class="management-button compact" type="button" (click)="startEdit(user)">Editar</button>
-                      <button class="management-button compact" [class.danger]="user.active" type="button" (click)="toggleActive(user)">{{ user.active ? 'Desactivar' : 'Activar' }}</button>
-                    </div>
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
-      }
-
-      <div class="management-pagination">
-        <button class="management-button compact" type="button" (click)="previousPage()" [disabled]="page() === 0">Anterior</button>
-        <span>Página {{ page() + 1 }} de {{ totalPages() || 1 }}</span>
-        <button class="management-button compact" type="button" (click)="nextPage()" [disabled]="page() + 1 >= totalPages()">Siguiente</button>
-      </div>
-    </section>
-  </div>
+    }
+    <rf-pagination [page]="page()" [totalPages]="totalPages()" [totalItems]="totalItems()" (previous)="previousPage()" (next)="nextPage()" />
+  </section>
 </section>
+
+<rf-modal [open]="formOpen()" [title]="editing() ? 'Editar usuario' : 'Nuevo usuario'" (closed)="closeForm()">
+  <form class="management-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="field"><label for="user-full-name">Nombre completo</label><input id="user-full-name" type="text" formControlName="fullName" autocomplete="name" maxlength="160" [attr.aria-invalid]="form.controls.fullName.invalid && form.controls.fullName.touched" />@if (form.controls.fullName.invalid && form.controls.fullName.touched) { <p class="management-field-error">Ingresa el nombre completo.</p> }</div>
+    <div class="field"><label for="user-email">Correo electr&oacute;nico</label><input id="user-email" type="email" formControlName="email" autocomplete="email" maxlength="180" [attr.aria-invalid]="form.controls.email.invalid && form.controls.email.touched" />@if (form.controls.email.invalid && form.controls.email.touched) { <p class="management-field-error">Ingresa un correo v&aacute;lido.</p> }</div>
+    @if (!editing()) { <div class="field"><label for="user-password">Contrase&ntilde;a inicial</label><input id="user-password" type="password" formControlName="password" autocomplete="new-password" maxlength="128" [attr.aria-invalid]="form.controls.password.invalid && form.controls.password.touched" />@if (form.controls.password.invalid && form.controls.password.touched) { <p class="management-field-error">Debe contener entre 12 y 128 caracteres.</p> }</div> }
+    <div class="form-grid">
+      <div class="field"><label for="user-role">Rol</label><select id="user-role" formControlName="role">@for (role of roles; track role) { <option [value]="role">{{ roleLabel(role) }}</option> }</select></div>
+      <div class="field"><label for="user-phone">Tel&eacute;fono</label><input id="user-phone" type="tel" formControlName="phone" autocomplete="tel" maxlength="30" /></div>
+    </div>
+    <div class="management-actions"><button class="management-button" type="button" (click)="closeForm()" [disabled]="saving()">Cancelar</button><button class="management-button primary" type="submit" [disabled]="saving()">{{ saving() ? 'Guardando&hellip;' : editing() ? 'Guardar cambios' : 'Crear usuario' }}</button></div>
+  </form>
+</rf-modal>
+
+@if (pendingStatusUser(); as user) {
+  <rf-confirm-dialog
+    [open]="true"
+    [title]="user.active ? 'Desactivar usuario' : 'Activar usuario'"
+    [message]="user.active ? 'Se revocar&aacute;n las sesiones activas de ' + user.fullName + '. &iquest;Deseas continuar?' : 'Se habilitar&aacute; nuevamente el acceso de ' + user.fullName + '. &iquest;Deseas continuar?'"
+    [confirmLabel]="changingStatus() ? 'Procesando&hellip;' : user.active ? 'Desactivar' : 'Activar'"
+    [danger]="user.active"
+    (confirmed)="confirmToggleActive()"
+    (cancelled)="cancelToggleActive()"
+  />
+}

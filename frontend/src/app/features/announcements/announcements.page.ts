@@ -15,10 +15,13 @@ import {
   AnnouncementAudience,
 } from '../../core/operations/operations.models';
 import { OperationsApiService } from '../../core/operations/operations-api.service';
+import { ModalComponent } from '../../shared/ui/modal.component';
+import { PageHeaderComponent } from '../../shared/ui/page-header.component';
+import { PaginationComponent } from '../../shared/ui/pagination.component';
 
 @Component({
   selector: 'rf-announcements-page',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, PageHeaderComponent, ModalComponent, PaginationComponent],
   templateUrl: './announcements.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -42,8 +45,14 @@ export class AnnouncementsPage {
   readonly totalPages = signal(0);
   readonly totalItems = signal(0);
   readonly selectedAudience = signal<AnnouncementAudience | ''>('');
+  readonly formOpen = signal(false);
+  readonly selectedAnnouncement = signal<Announcement | null>(null);
+  readonly detailOpen = signal(false);
   readonly error = signal<UiError | null>(null);
   readonly notice = signal<string | null>(null);
+  readonly organizationName = computed(
+    () => this.session.user()?.organizationName?.trim() || 'Organizaci\u00f3n asignada',
+  );
 
   readonly form = new FormGroup({
     title: new FormControl('', {
@@ -100,6 +109,39 @@ export class AnnouncementsPage {
     this.load(0);
   }
 
+  clearAudience(): void {
+    this.selectedAudience.set('');
+    this.load(0);
+  }
+
+  startCreate(): void {
+    this.error.set(null);
+    this.notice.set(null);
+    this.form.reset({
+      title: '',
+      body: '',
+      audienceType: this.canPublishOrganization() ? 'ORGANIZATION' : 'GROUP',
+      audienceId: '',
+    });
+    this.formOpen.set(true);
+  }
+
+  closeForm(): void {
+    if (!this.saving()) {
+      this.formOpen.set(false);
+    }
+  }
+
+  viewDetails(announcement: Announcement): void {
+    this.selectedAnnouncement.set(announcement);
+    this.detailOpen.set(true);
+  }
+
+  closeDetails(): void {
+    this.detailOpen.set(false);
+    this.selectedAnnouncement.set(null);
+  }
+
   changeFormAudience(value: string): void {
     if (!this.isAudience(value)) {
       return;
@@ -136,13 +178,14 @@ export class AnnouncementsPage {
       .pipe(finalize(() => this.saving.set(false)))
       .subscribe({
         next: () => {
-          this.notice.set('Comunicado publicado. No requiere acuse porque esta fase no tiene aplicación móvil.');
+          this.notice.set('Comunicado publicado correctamente.');
           this.form.reset({
             title: '',
             body: '',
             audienceType: this.canPublishOrganization() ? 'ORGANIZATION' : 'GROUP',
             audienceId: '',
           });
+          this.formOpen.set(false);
           this.load(0);
         },
         error: (error: unknown) =>
@@ -152,6 +195,13 @@ export class AnnouncementsPage {
 
   audienceLabel(audience: AnnouncementAudience): string {
     return audience === 'ORGANIZATION' ? 'Toda la organización' : 'Grupo específico';
+  }
+
+  audienceTargetLabel(announcement: Announcement): string {
+    if (announcement.audienceType === 'ORGANIZATION') {
+      return 'Toda la organización';
+    }
+    return this.groups().find((group) => group.id === announcement.audienceId)?.name ?? 'Grupo visible';
   }
 
   dateLabel(value: string): string {

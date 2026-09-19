@@ -39,6 +39,16 @@ export const routes: Routes = [
           import('./features/users/users.page').then((module) => module.UsersPage),
       },
       {
+        path: 'organization',
+        title: 'Organización | Ruta Fija',
+        canActivate: [roleGuard],
+        data: { roles: ['ADMINISTRADOR'] },
+        loadComponent: () =>
+          import('./features/organization/organization.page').then(
+            (module) => module.OrganizationPage,
+          ),
+      },
+      {
         path: 'groups',
         title: 'Grupos | Ruta Fija',
         canActivate: [roleGuard],

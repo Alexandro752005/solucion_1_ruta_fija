@@ -8,17 +8,17 @@ import { RouterLink } from '@angular/router';
     <section class="error-page" aria-labelledby="forbidden-title">
       <span aria-hidden="true">403</span>
       <h1 id="forbidden-title">Acceso restringido</h1>
-      <p>Tu rol no tiene autorización para utilizar este módulo del CRM.</p>
-      <a routerLink="/dashboard">Volver al inicio</a>
+      <p>Tu perfil no tiene autorizaci&oacute;n para utilizar este m&oacute;dulo.</p>
+      <a routerLink="/dashboard">Volver al resumen</a>
     </section>
   `,
   styles: `
     :host { display: grid; min-height: 60vh; place-items: center; }
-    .error-page { max-width: 32rem; text-align: center; }
-    span { color: var(--primary-500); font-size: .78rem; font-weight: 800; letter-spacing: .15em; }
-    h1 { margin: .5rem 0; color: var(--ink-900); font-size: clamp(2rem, 6vw, 3.5rem); letter-spacing: -.04em; }
-    p { margin: 0 auto 1.5rem; color: var(--ink-500); line-height: 1.6; }
-    a { display: inline-flex; min-height: 2.7rem; align-items: center; padding: 0 1rem; border-radius: .6rem; color: #fff; background: var(--primary-700); font-weight: 700; text-decoration: none; }
+    .error-page { width: min(100%, 32rem); padding: 2rem; border: 1px solid var(--rf-border); border-top: 5px solid var(--rf-yellow); background: #fff; text-align: center; }
+    span { color: var(--rf-text-secondary); font-size: .78rem; font-weight: 800; letter-spacing: .15em; }
+    h1 { margin: .5rem 0; color: var(--rf-text); font-size: clamp(2rem, 6vw, 3rem); letter-spacing: -.035em; }
+    p { margin: 0 auto 1.5rem; color: var(--rf-text-secondary); line-height: 1.6; }
+    a { display: inline-flex; min-height: var(--rf-control-height); align-items: center; padding: 0 1rem; border: 1px solid var(--rf-black); border-radius: var(--rf-radius); color: var(--rf-black); background: var(--rf-yellow); font-weight: 750; text-decoration: none; }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
