@@ -3,6 +3,7 @@
 .env.*
 !.env.example
 *.local
+backend/.local/
 
 # Java / Maven
 backend/target/

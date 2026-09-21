@@ -2,34 +2,33 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Ruta Fija: iniciar PostgreSQL",
+      "label": "Ruta Fija: crear configuracion nativa local (F1.1A)",
       "type": "process",
-      "command": "docker",
-      "args": ["compose", "up", "-d", "postgres"],
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\Initialize-RutaFijaNativeConfig.ps1"
+      ],
       "options": { "cwd": "${workspaceFolder}" },
       "problemMatcher": []
     },
     {
-      "label": "Ruta Fija: construir e iniciar CRM",
+      "label": "Ruta Fija: validar entorno nativo (F1.1A)",
       "type": "process",
-      "command": "docker",
-      "args": ["compose", "--profile", "app", "up", "-d", "--build"],
+      "command": "cmd.exe",
+      "args": ["/c", "${workspaceFolder}\\iniciar_ruta_fija.bat"],
       "options": { "cwd": "${workspaceFolder}" },
       "problemMatcher": []
     },
     {
-      "label": "Ruta Fija: estado de contenedores",
+      "label": "Ruta Fija: finalizar fase nativa actual",
       "type": "process",
-      "command": "docker",
-      "args": ["compose", "--profile", "app", "ps"],
-      "options": { "cwd": "${workspaceFolder}" },
-      "problemMatcher": []
-    },
-    {
-      "label": "Ruta Fija: detener CRM conservando datos",
-      "type": "process",
-      "command": "docker",
-      "args": ["compose", "--profile", "app", "down"],
+      "command": "cmd.exe",
+      "args": ["/c", "${workspaceFolder}\\finalizar_ruta_fija.bat"],
       "options": { "cwd": "${workspaceFolder}" },
       "problemMatcher": []
     }
