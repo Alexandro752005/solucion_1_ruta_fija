@@ -36,3 +36,5 @@ F1.1A no inicio Spring Boot, Flyway, API ni CRM.
 ## Límite de la subfase
 
 Spring Boot ejecuta Flyway al arrancar. El arranque real se deja para F1.1B, después de que F1.2 cree los roles y la base de pruebas, y F1.3 aplique V1–V5 de manera controlada.
+
+Tras aprobar F1.1A, continúe con [F1.2 - roles y bases aisladas](ejecucion-nativa-f1-2.md).

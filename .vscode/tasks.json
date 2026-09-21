@@ -17,7 +17,22 @@
       "problemMatcher": []
     },
     {
-      "label": "Ruta Fija: validar entorno nativo (F1.1A)",
+      "label": "Ruta Fija: crear roles y base de pruebas (F1.2)",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\Initialize-RutaFijaPostgresqlRoles.ps1"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Ruta Fija: validar roles nativos (F1.2)",
       "type": "process",
       "command": "cmd.exe",
       "args": ["/c", "${workspaceFolder}\\iniciar_ruta_fija.bat"],
