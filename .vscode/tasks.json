@@ -32,7 +32,37 @@
       "problemMatcher": []
     },
     {
-      "label": "Ruta Fija: validar roles nativos (F1.2)",
+      "label": "Ruta Fija: aplicar Flyway controlado (F1.3)",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\Invoke-RutaFijaFlywayF13.ps1"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Ruta Fija: otorgar DML de aplicacion (F1.3)",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\Grant-RutaFijaApplicationPrivilegesF13.ps1"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Ruta Fija: auditar esquema nativo (F1.3)",
       "type": "process",
       "command": "cmd.exe",
       "args": ["/c", "${workspaceFolder}\\iniciar_ruta_fija.bat"],
