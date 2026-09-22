@@ -199,6 +199,19 @@ class AuthFlowIT extends NativePostgresIntegrationTest {
                 .andExpect(jsonPath("$.code").value("AUTH_TOKEN_INVALID"));
     }
 
+    @Test
+    void openApiReflectsTheAdminRoleContractAndRetiresCoordinatorEndpoints() throws Exception {
+        JsonNode document = json(mockMvc.perform(get("/v3/api-docs"))
+                .andExpect(status().isOk())
+                .andReturn());
+
+        assertThat(document.at("/components/schemas/UserUpdateRequest/properties/role/enum").toString())
+                .isEqualTo("[\"SUPER_ADMIN\",\"ADMIN\",\"CONDUCTOR\"]");
+        assertThat(document.at("/paths/~1api~1v1~1groups~1{groupId}~1coordinators").isMissingNode())
+                .isTrue();
+        assertThat(document.path("info").path("description").asText()).contains("ADMIN");
+    }
+
     private MvcResult login() throws Exception {
         return mockMvc.perform(post("/api/v1/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)

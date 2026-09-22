@@ -122,3 +122,4 @@ puede suministrar X-Correlation-ID seguro; de lo contrario se genera uno.
 - [Proxy y WebSocket F1.5](../docs/ejecucion-nativa-f1-5.md)
 - [Consolidación backend ADMIN F2.2](../docs/ejecucion-nativa-f2-2.md)
 - [Auditoría backend F2.2](../docs/auditoria-f2-2-backend-admin.md)
+- [Contrato API ADMIN F2.3](../docs/contrato-api-f2-3-admin.md)

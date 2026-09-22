@@ -12,9 +12,9 @@ import { AppShellComponent } from './app-shell.component';
 describe('AppShellComponent', () => {
   const user = signal<SessionUser | null>({
     id: 'admin-1',
-    fullName: 'Administradora Demo',
+    fullName: 'Admin Demo',
     email: 'admin@example.test',
-    role: 'ADMINISTRADOR',
+    role: 'ADMIN',
     organizationId: 'organization-1',
     organizationName: 'Transportes Demo',
   });
@@ -30,9 +30,9 @@ describe('AppShellComponent', () => {
   beforeEach(async () => {
     user.set({
       id: 'admin-1',
-      fullName: 'Administradora Demo',
+      fullName: 'Admin Demo',
       email: 'admin@example.test',
-      role: 'ADMINISTRADOR',
+      role: 'ADMIN',
       organizationId: 'organization-1',
       organizationName: 'Transportes Demo',
     });
@@ -46,7 +46,7 @@ describe('AppShellComponent', () => {
     }).compileComponents();
   });
 
-  it('muestra la topbar completa del administrador sin sidebar', () => {
+  it('muestra la topbar completa de ADMIN sin sidebar', () => {
     const fixture = TestBed.createComponent(AppShellComponent);
     fixture.detectChanges();
 
@@ -57,7 +57,23 @@ describe('AppShellComponent', () => {
     expect(content).toContain('Organización');
     expect(content).toContain('Reportes');
     expect(content).toContain('Auditoría');
+    expect(content).toContain('Admin');
     expect(content).not.toContain('Organizaciones');
+    const links = Array.from(fixture.nativeElement.querySelectorAll('.primary-navigation a'))
+      .map((element) => (element as HTMLElement).textContent?.trim());
+    expect(links).toEqual([
+      'Resumen',
+      'Usuarios',
+      'Organización',
+      'Grupos',
+      'Conductores',
+      'Vehículos',
+      'Asignaciones',
+      'Incidencias',
+      'Comunicados',
+      'Reportes',
+      'Auditoría',
+    ]);
   });
 
   it('limita la navegación global a Resumen y Organizaciones', () => {

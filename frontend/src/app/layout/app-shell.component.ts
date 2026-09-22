@@ -29,16 +29,16 @@ export class AppShellComponent {
   readonly mobileNavigationOpen = signal(false);
   readonly navigation: readonly NavigationItem[] = [
     { label: 'Resumen', route: '/dashboard', roles: CRM_ROLES },
-    { label: 'Usuarios', route: '/users', roles: ['ADMINISTRADOR'] },
-    { label: 'Organización', route: '/organization', roles: ['ADMINISTRADOR'] },
-    { label: 'Grupos', route: '/groups', roles: ['ADMINISTRADOR', 'COORDINADOR'] },
-    { label: 'Conductores', route: '/drivers', roles: ['ADMINISTRADOR', 'COORDINADOR'] },
-    { label: 'Vehículos', route: '/vehicles', roles: ['ADMINISTRADOR', 'COORDINADOR'] },
-    { label: 'Asignaciones', route: '/assignments', roles: ['ADMINISTRADOR', 'COORDINADOR'] },
-    { label: 'Incidencias', route: '/incidents', roles: ['ADMINISTRADOR', 'COORDINADOR'] },
-    { label: 'Comunicados', route: '/announcements', roles: ['ADMINISTRADOR', 'COORDINADOR'] },
-    { label: 'Reportes', route: '/reports', roles: ['ADMINISTRADOR'] },
-    { label: 'Auditoría', route: '/audit', roles: ['ADMINISTRADOR'] },
+    { label: 'Usuarios', route: '/users', roles: ['ADMIN'] },
+    { label: 'Organización', route: '/organization', roles: ['ADMIN'] },
+    { label: 'Grupos', route: '/groups', roles: ['ADMIN'] },
+    { label: 'Conductores', route: '/drivers', roles: ['ADMIN'] },
+    { label: 'Vehículos', route: '/vehicles', roles: ['ADMIN'] },
+    { label: 'Asignaciones', route: '/assignments', roles: ['ADMIN'] },
+    { label: 'Incidencias', route: '/incidents', roles: ['ADMIN'] },
+    { label: 'Comunicados', route: '/announcements', roles: ['ADMIN'] },
+    { label: 'Reportes', route: '/reports', roles: ['ADMIN'] },
+    { label: 'Auditoría', route: '/audit', roles: ['ADMIN'] },
     { label: 'Organizaciones', route: '/organizations', roles: ['SUPER_ADMIN'] },
   ];
   readonly visibleNavigation = computed(() => {
@@ -98,10 +98,8 @@ export class AppShellComponent {
     switch (role) {
       case 'SUPER_ADMIN':
         return 'Superadministrador';
-      case 'ADMINISTRADOR':
-        return 'Administrador';
-      case 'COORDINADOR':
-        return 'Coordinador';
+      case 'ADMIN':
+        return 'Admin';
       case 'CONDUCTOR':
         return 'Conductor';
       default:

@@ -172,9 +172,9 @@ está protegida por su propio comando:
 .\scripts\Invoke-RutaFijaF22AdminMigration.ps1
 ~~~
 
-V6 deja como roles de aplicación `SUPER_ADMIN`, `ADMIN` y `CONDUCTOR`. El
-backend queda listo en F2.2; la interfaz Angular se adapta en F2.3, por lo que
-no se debe usar el CRM visual como prueba de ADMIN antes de esa fase.
+V6 deja como roles de aplicación `SUPER_ADMIN`, `ADMIN` y `CONDUCTOR`. F2.3
+alinea el CRM Angular al mismo contrato: ADMIN recibe toda la navegación de su
+tenant y no existe administración de coordinadores de grupo en la interfaz.
 
 ## Automatización y documentación
 
@@ -204,6 +204,10 @@ Documentos principales:
 - [Auditoría backend F2.2](docs/auditoria-f2-2-backend-admin.md)
 - [Evidencia F2.2](docs/evidencia-f2-2-consolidacion-admin-2026-09-22.md)
 - [ADR-003 de historia de grupos](docs/decisiones/ADR-003-group-coordinator-historia-sin-autorizacion.md)
+- [Ejecución nativa F2.3](docs/ejecucion-nativa-f2-3.md)
+- [Contrato API F2.3](docs/contrato-api-f2-3-admin.md)
+- [Auditoría CRM F2.3](docs/auditoria-f2-3-frontend-admin.md)
+- [Evidencia de cierre F2.3](docs/evidencia-f2-3-crm-admin-2026-09-22.md)
 - [Plan de migración nativa](docs/plan-f1-postgresql-nativo-sin-docker.md)
 
 Los archivos de Compose y Dockerfile permanecen como compatibilidad histórica

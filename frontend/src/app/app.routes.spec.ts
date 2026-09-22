@@ -13,15 +13,15 @@ function childRoute(path: string): Route {
 }
 
 describe('rutas del CRM por rol', () => {
-  it('reserva Organización, Reportes y Auditoría al administrador', () => {
-    expect(childRoute('organization').data?.['roles']).toEqual(['ADMINISTRADOR']);
-    expect(childRoute('reports').data?.['roles']).toEqual(['ADMINISTRADOR']);
-    expect(childRoute('audit').data?.['roles']).toEqual(['ADMINISTRADOR']);
+  it('reserva Organización, Reportes y Auditoría al rol ADMIN', () => {
+    expect(childRoute('organization').data?.['roles']).toEqual(['ADMIN']);
+    expect(childRoute('reports').data?.['roles']).toEqual(['ADMIN']);
+    expect(childRoute('audit').data?.['roles']).toEqual(['ADMIN']);
   });
 
-  it('mantiene operación para administrador y coordinador', () => {
+  it('mantiene toda la operación del tenant para ADMIN', () => {
     for (const path of ['groups', 'drivers', 'vehicles', 'assignments', 'incidents', 'announcements']) {
-      expect(childRoute(path).data?.['roles']).toEqual(['ADMINISTRADOR', 'COORDINADOR']);
+      expect(childRoute(path).data?.['roles']).toEqual(['ADMIN']);
     }
   });
 

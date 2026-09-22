@@ -66,19 +66,6 @@ export class ManagementApiService {
     return this.http.patch<TransportGroup>(this.url(`/groups/${id}`), payload);
   }
 
-  assignCoordinator(groupId: string, userId: string): Observable<TransportGroup> {
-    return this.http.post<TransportGroup>(
-      this.url(`/groups/${groupId}/coordinators`),
-      { userId },
-    );
-  }
-
-  removeCoordinator(groupId: string, userId: string): Observable<void> {
-    return this.http.delete<void>(
-      this.url(`/groups/${groupId}/coordinators/${userId}`),
-    );
-  }
-
   listDrivers(
     query: PageQuery & {
       readonly groupId?: string;

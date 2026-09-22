@@ -28,8 +28,7 @@ export class DashboardPage {
   private readonly realtime = inject(OperationRealtimeService);
   private readonly destroyRef = inject(DestroyRef);
 
-  readonly isAdministrator = computed(() => this.session.hasAnyRole(['ADMINISTRADOR']));
-  readonly isCoordinator = computed(() => this.session.hasAnyRole(['COORDINADOR']));
+  readonly isAdmin = computed(() => this.session.hasAnyRole(['ADMIN']));
   readonly isSuperAdmin = computed(() => this.session.hasAnyRole(['SUPER_ADMIN']));
   readonly organizationContext = computed(() => {
     if (this.isSuperAdmin()) {
@@ -39,11 +38,8 @@ export class DashboardPage {
     return this.session.user()?.organizationName?.trim() || 'Organizaci\u00f3n asignada';
   });
   readonly description = computed(() => {
-    if (this.isAdministrator()) {
+    if (this.isAdmin()) {
       return 'Revisa el estado operativo actual de la organizaci\u00f3n.';
-    }
-    if (this.isCoordinator()) {
-      return 'Accede a los recursos y actividades que coordinas en la organizaci\u00f3n.';
     }
     return 'Consulta el estado general disponible para la administraci\u00f3n de la plataforma.';
   });
@@ -59,7 +55,7 @@ export class DashboardPage {
   readonly organizationsError = signal(false);
 
   constructor() {
-    if (this.isAdministrator()) {
+    if (this.isAdmin()) {
       this.loadAvailability();
       this.loadRecentActivity();
       this.realtime.connect();

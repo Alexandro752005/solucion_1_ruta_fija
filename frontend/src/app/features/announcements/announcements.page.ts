@@ -35,7 +35,7 @@ export class AnnouncementsPage {
 
   readonly audiences = ANNOUNCEMENT_AUDIENCES;
   readonly canPublishOrganization = computed(() =>
-    this.session.hasAnyRole(['ADMINISTRADOR']),
+    this.session.hasAnyRole(['ADMIN']),
   );
   readonly announcements = signal<readonly Announcement[]>([]);
   readonly groups = signal<readonly TransportGroup[]>([]);

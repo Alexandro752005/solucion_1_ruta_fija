@@ -43,7 +43,7 @@ export class DriversPage {
   private readonly session = inject(AuthSessionService);
 
   readonly canManage = computed(() =>
-    this.session.hasAnyRole(['ADMINISTRADOR']),
+    this.session.hasAnyRole(['ADMIN']),
   );
   readonly organizationName = computed(
     () => this.session.user()?.organizationName?.trim() || 'Organizaci\u00f3n asignada',

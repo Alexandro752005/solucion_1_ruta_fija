@@ -23,16 +23,16 @@ describe('roleGuard', () => {
   it('permite un rol incluido en la ruta', () => {
     session.hasAnyRole.mockReturnValue(true);
 
-    const result = runGuard(['ADMINISTRADOR']);
+    const result = runGuard(['ADMIN']);
 
     expect(result).toBe(true);
-    expect(session.hasAnyRole).toHaveBeenCalledWith(['ADMINISTRADOR']);
+    expect(session.hasAnyRole).toHaveBeenCalledWith(['ADMIN']);
   });
 
   it('redirige cuando el rol no está permitido', () => {
     session.hasAnyRole.mockReturnValue(false);
 
-    const result = runGuard(['ADMINISTRADOR']);
+    const result = runGuard(['ADMIN']);
 
     expect(result).toBe(forbiddenTree);
     expect(router.createUrlTree).toHaveBeenCalledWith(['/forbidden']);

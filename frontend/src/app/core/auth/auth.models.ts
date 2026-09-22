@@ -1,7 +1,6 @@
 export const USER_ROLES = [
   'SUPER_ADMIN',
-  'ADMINISTRADOR',
-  'COORDINADOR',
+  'ADMIN',
   'CONDUCTOR',
 ] as const;
 
@@ -9,8 +8,7 @@ export type UserRole = (typeof USER_ROLES)[number];
 
 export const CRM_ROLES: readonly UserRole[] = [
   'SUPER_ADMIN',
-  'ADMINISTRADOR',
-  'COORDINADOR',
+  'ADMIN',
 ];
 
 export interface LoginRequest {

@@ -140,9 +140,9 @@ describe('authInterceptor', () => {
   function currentUser() {
     return {
       id: 'user-1',
-      fullName: 'Administradora Ruta Fija',
+      fullName: 'Admin Ruta Fija',
       email: 'admin@ruta-fija.pe',
-      role: 'ADMINISTRADOR',
+      role: 'ADMIN',
       organizationId: 'organization-1',
       organizationName: 'Transportes Demo',
     } as const;

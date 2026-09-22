@@ -60,4 +60,9 @@ describe('ManagementApiService', () => {
     statusRequest.flush({ id: 'vehicle-1', status: 'MANTENIMIENTO' });
     await expect(changed).resolves.toMatchObject({ status: 'MANTENIMIENTO' });
   });
+
+  it('no conserva operaciones HTTP para vínculos de grupo retirados', () => {
+    expect('assignCoordinator' in service).toBe(false);
+    expect('removeCoordinator' in service).toBe(false);
+  });
 });

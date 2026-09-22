@@ -1,7 +1,7 @@
 <section class="management-page">
   <rf-page-header
     title="Grupos"
-    description="Consulta los grupos de transporte y administra sus coordinadores autorizados."
+    description="Consulta y administra los grupos de transporte de la organización."
     [context]="organizationName()"
   >
     @if (canManage()) { <button page-actions class="management-button primary" type="button" (click)="startCreate()">Nuevo grupo</button> }
@@ -23,14 +23,13 @@
     @else if (groups().length === 0) { <p class="management-empty">No hay grupos para los filtros actuales.</p> }
     @else {
       <div class="management-table-wrap"><table class="management-table">
-        <thead><tr><th>Grupo</th><th>Descripci&oacute;n</th><th>Coordinadores</th><th>Estado</th><th>Acciones</th></tr></thead>
+        <thead><tr><th>Grupo</th><th>Descripci&oacute;n</th><th>Estado</th><th>Acciones</th></tr></thead>
         <tbody>@for (group of groups(); track group.id) {
           <tr>
             <td><strong>{{ group.name }}</strong></td>
             <td>{{ group.description || 'Sin descripci&oacute;n' }}</td>
-            <td>{{ group.coordinators.length ? group.coordinators.length + ' asignado(s)' : 'Sin asignar' }}</td>
             <td><span class="management-status" [class.success]="group.active" [class.muted]="!group.active">{{ group.active ? 'Activo' : 'Inactivo' }}</span></td>
-            <td>@if (canManage()) { <div class="management-inline-actions"><button class="management-button compact" type="button" (click)="startEdit(group)">Editar</button><button class="management-button compact" type="button" (click)="manageCoordinators(group)">Coordinadores</button></div> } @else { <span class="management-muted">Solo lectura</span> }</td>
+            <td>@if (canManage()) { <div class="management-inline-actions"><button class="management-button compact" type="button" (click)="startEdit(group)">Editar</button></div> } @else { <span class="management-muted">Solo lectura</span> }</td>
           </tr>
         }</tbody>
       </table></div>
@@ -48,20 +47,4 @@
   </form>
 </rf-modal>
 
-<rf-modal [open]="coordinatorsOpen()" [title]="'Coordinadores de ' + (selectedGroup()?.name || '')" size="large" (closed)="closeCoordinators()">
-  @if (selectedGroup(); as group) {
-    <div class="management-form">
-      <p class="management-muted">Solo se muestran usuarios activos con rol Coordinador en la organizaci&oacute;n.</p>
-      <div class="management-filter"><select [formControl]="coordinatorControl" aria-label="Coordinador para asignar"><option value="">Selecciona un coordinador</option>@for (coordinator of assignableCoordinators(); track coordinator.id) { <option [value]="coordinator.id">{{ coordinator.fullName }}</option> }</select><button class="management-button primary" type="button" (click)="assignCoordinator()" [disabled]="assigning() || assignableCoordinators().length === 0">{{ assigning() ? 'Asignando&hellip;' : 'Asignar' }}</button></div>
-      @if (group.coordinators.length === 0) { <p class="management-empty">Este grupo a&uacute;n no tiene coordinadores asignados.</p> }
-      @else { <ul class="management-detail-list">@for (coordinator of group.coordinators; track coordinator.userId) { <li><span><strong>{{ coordinator.fullName }}</strong><small>{{ coordinator.email }}</small></span><button class="management-button compact danger" type="button" (click)="requestRemoveCoordinator(coordinator.userId, coordinator.fullName)">Retirar</button></li> }</ul> }
-    </div>
-  }
-  <div modal-actions><button class="management-button" type="button" (click)="closeCoordinators()">Cerrar</button></div>
-</rf-modal>
-
 <rf-confirm-dialog [open]="confirmingDeactivation()" title="Desactivar grupo" message="El grupo dejar&aacute; de admitir nuevas vinculaciones. El sistema impedir&aacute; el cambio si existen dependencias activas. &iquest;Deseas continuar?" confirmLabel="Desactivar" [danger]="true" (confirmed)="confirmDeactivation()" (cancelled)="cancelDeactivation()" />
-
-@if (pendingRemoval(); as removal) {
-  <rf-confirm-dialog [open]="true" title="Retirar coordinador" [message]="'Se retirar&aacute; a ' + removal.fullName + ' de este grupo. &iquest;Deseas continuar?'" [confirmLabel]="removing() ? 'Procesando&hellip;' : 'Retirar'" [danger]="true" (confirmed)="confirmRemoveCoordinator()" (cancelled)="cancelRemoveCoordinator()" />
-}

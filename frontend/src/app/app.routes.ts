@@ -34,7 +34,7 @@ export const routes: Routes = [
         path: 'users',
         title: 'Usuarios | Ruta Fija',
         canActivate: [roleGuard],
-        data: { roles: ['ADMINISTRADOR'] },
+        data: { roles: ['ADMIN'] },
         loadComponent: () =>
           import('./features/users/users.page').then((module) => module.UsersPage),
       },
@@ -42,7 +42,7 @@ export const routes: Routes = [
         path: 'organization',
         title: 'Organización | Ruta Fija',
         canActivate: [roleGuard],
-        data: { roles: ['ADMINISTRADOR'] },
+        data: { roles: ['ADMIN'] },
         loadComponent: () =>
           import('./features/organization/organization.page').then(
             (module) => module.OrganizationPage,
@@ -52,7 +52,7 @@ export const routes: Routes = [
         path: 'groups',
         title: 'Grupos | Ruta Fija',
         canActivate: [roleGuard],
-        data: { roles: ['ADMINISTRADOR', 'COORDINADOR'] },
+        data: { roles: ['ADMIN'] },
         loadComponent: () =>
           import('./features/groups/groups.page').then((module) => module.GroupsPage),
       },
@@ -60,7 +60,7 @@ export const routes: Routes = [
         path: 'drivers',
         title: 'Conductores | Ruta Fija',
         canActivate: [roleGuard],
-        data: { roles: ['ADMINISTRADOR', 'COORDINADOR'] },
+        data: { roles: ['ADMIN'] },
         loadComponent: () =>
           import('./features/drivers/drivers.page').then((module) => module.DriversPage),
       },
@@ -68,7 +68,7 @@ export const routes: Routes = [
         path: 'vehicles',
         title: 'Vehículos | Ruta Fija',
         canActivate: [roleGuard],
-        data: { roles: ['ADMINISTRADOR', 'COORDINADOR'] },
+        data: { roles: ['ADMIN'] },
         loadComponent: () =>
           import('./features/vehicles/vehicles.page').then((module) => module.VehiclesPage),
       },
@@ -76,7 +76,7 @@ export const routes: Routes = [
         path: 'assignments',
         title: 'Asignaciones | Ruta Fija',
         canActivate: [roleGuard],
-        data: { roles: ['ADMINISTRADOR', 'COORDINADOR'] },
+        data: { roles: ['ADMIN'] },
         loadComponent: () =>
           import('./features/assignments/assignments.page').then(
             (module) => module.AssignmentsPage,
@@ -86,7 +86,7 @@ export const routes: Routes = [
         path: 'incidents',
         title: 'Incidencias | Ruta Fija',
         canActivate: [roleGuard],
-        data: { roles: ['ADMINISTRADOR', 'COORDINADOR'] },
+        data: { roles: ['ADMIN'] },
         loadComponent: () =>
           import('./features/incidents/incidents.page').then(
             (module) => module.IncidentsPage,
@@ -96,7 +96,7 @@ export const routes: Routes = [
         path: 'announcements',
         title: 'Comunicados | Ruta Fija',
         canActivate: [roleGuard],
-        data: { roles: ['ADMINISTRADOR', 'COORDINADOR'] },
+        data: { roles: ['ADMIN'] },
         loadComponent: () =>
           import('./features/announcements/announcements.page').then(
             (module) => module.AnnouncementsPage,
@@ -106,7 +106,7 @@ export const routes: Routes = [
         path: 'reports',
         title: 'Reportes | Ruta Fija',
         canActivate: [roleGuard],
-        data: { roles: ['ADMINISTRADOR'] },
+        data: { roles: ['ADMIN'] },
         loadComponent: () =>
           import('./features/reports/reports.page').then(
             (module) => module.ReportsPage,
@@ -116,7 +116,7 @@ export const routes: Routes = [
         path: 'audit',
         title: 'Auditoría | Ruta Fija',
         canActivate: [roleGuard],
-        data: { roles: ['ADMINISTRADOR'] },
+        data: { roles: ['ADMIN'] },
         loadComponent: () =>
           import('./features/audit/audit.page').then(
             (module) => module.AuditPage,

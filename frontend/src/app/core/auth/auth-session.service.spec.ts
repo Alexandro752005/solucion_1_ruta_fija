@@ -57,17 +57,17 @@ describe('AuthSessionService', () => {
       expiresIn: 900,
       user: {
         id: 'user-1',
-        fullName: 'Administradora Ruta Fija',
-        role: 'ADMINISTRADOR',
+        fullName: 'Admin Ruta Fija',
+        role: 'ADMIN',
       },
     });
 
     const meRequest = http.expectOne('/api/v1/auth/me');
     meRequest.flush({
       id: 'user-1',
-      fullName: 'Administradora Ruta Fija',
+      fullName: 'Admin Ruta Fija',
       email: 'admin@ruta-fija.pe',
-      role: 'ADMINISTRADOR',
+      role: 'ADMIN',
       organizationId: 'organization-1',
     });
 
@@ -89,8 +89,8 @@ describe('AuthSessionService', () => {
       expiresIn: 900,
       user: {
         id: 'user-2',
-        fullName: 'Coordinador Operativo',
-        role: 'COORDINADOR',
+        fullName: 'Admin Operativo',
+        role: 'ADMIN',
       },
     });
 
@@ -120,8 +120,8 @@ describe('AuthSessionService', () => {
       expiresIn: 900,
       user: {
         id: 'user-3',
-        fullName: 'Administradora Temporal',
-        role: 'ADMINISTRADOR',
+        fullName: 'Admin Temporal',
+        role: 'ADMIN',
       },
     });
     await new Promise((resolve) => globalThis.setTimeout(resolve, 0));

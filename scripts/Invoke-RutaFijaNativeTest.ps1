@@ -154,7 +154,7 @@ select coalesce(max(version), '') from flyway_schema_history where success = tru
             if (@($migration | Where-Object { $_ -eq '6' }).Count -ne 1) {
                 throw 'F2.2 no confirmó Flyway V1-V6 en ruta_fija_test.'
             }
-            Write-Output 'F2_2_NATIVE_VERIFY=PASS unit=23 integration=13 flyway=V1-V6 docker=0'
+            Write-Output 'F2_2_NATIVE_VERIFY=PASS unit=23 integration=14 flyway=V1-V6 docker=0'
         }
         finally {
             Clear-TestData -Settings $settings

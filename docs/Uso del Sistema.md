@@ -126,12 +126,12 @@ debajo. En pantallas estrechas, el botón Menú abre la misma navegación.
 | Rol vigente | Módulos |
 | --- | --- |
 | SUPER_ADMIN | Resumen y organizaciones |
-| ADMINISTRADOR | Resumen, usuarios, organización, grupos, conductores, vehículos, asignaciones, incidencias, comunicados, reportes y auditoría |
-| COORDINADOR | Resumen, grupos, conductores, vehículos, asignaciones, incidencias y comunicados |
+| ADMIN | Resumen, usuarios, organización, grupos, conductores, vehículos, asignaciones, incidencias, comunicados, reportes y auditoría |
+| CONDUCTOR | Sin acceso al CRM web administrativo; su aplicación móvil se incorpora en una etapa posterior |
 
-Las futuras decisiones de producto pueden consolidar ADMINISTRADOR y
-COORDINADOR en un único rol ADMIN; ese cambio no se activa con esta guía ni
-altera la autorización actual.
+El rol ADMIN concentra la administración y operación completa de su tenant.
+Las asociaciones históricas de coordinación de grupos no otorgan permisos ni
+se administran desde el CRM.
 
 ## 7. Operación funcional
 
@@ -182,8 +182,19 @@ Verificación completa nativa:
 .\verificar_ruta_fija.bat
 ~~~
 
-La salida esperada termina en F1_4_NATIVE_VERIFY=PASS. Las pruebas usan solo
+La salida esperada termina en F2_2_NATIVE_VERIFY=PASS. Las pruebas usan solo
 ruta_fija_test y limpian datos al finalizar.
+
+Validación del CRM unificado en ADMIN:
+
+~~~powershell
+.\scripts\Test-RutaFijaF23AdminUi.ps1
+~~~
+
+El resultado esperado es F2_3_FRONTEND_AUDIT=PASS. Consulte
+[F2.3 - CRM ADMIN](ejecucion-nativa-f2-3.md) y la
+[evidencia de cierre](evidencia-f2-3-crm-admin-2026-09-22.md) para el alcance
+y las comprobaciones completas.
 
 Para revisar REST, login, refresh y WebSocket desde el proxy Angular:
 

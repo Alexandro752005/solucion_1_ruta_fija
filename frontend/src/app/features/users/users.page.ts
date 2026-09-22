@@ -12,7 +12,7 @@ import { ModalComponent } from '../../shared/ui/modal.component';
 import { PageHeaderComponent } from '../../shared/ui/page-header.component';
 import { PaginationComponent } from '../../shared/ui/pagination.component';
 
-type OrganizationUserRole = 'ADMINISTRADOR' | 'COORDINADOR' | 'CONDUCTOR';
+type OrganizationUserRole = 'ADMIN' | 'CONDUCTOR';
 
 @Component({
   selector: 'rf-users-page',
@@ -25,7 +25,7 @@ export class UsersPage {
   private readonly apiErrors = inject(ApiErrorService);
   readonly session = inject(AuthSessionService);
 
-  readonly roles: readonly OrganizationUserRole[] = ['ADMINISTRADOR', 'COORDINADOR', 'CONDUCTOR'];
+  readonly roles: readonly OrganizationUserRole[] = ['ADMIN', 'CONDUCTOR'];
   readonly users = signal<readonly ManagedUser[]>([]);
   readonly loading = signal(true);
   readonly saving = signal(false);
@@ -59,7 +59,7 @@ export class UsersPage {
       validators: [Validators.required, Validators.maxLength(160)],
     }),
     phone: new FormControl('', { nonNullable: true, validators: [Validators.maxLength(30)] }),
-    role: new FormControl<OrganizationUserRole>('COORDINADOR', {
+    role: new FormControl<OrganizationUserRole>('CONDUCTOR', {
       nonNullable: true,
       validators: [Validators.required],
     }),
@@ -215,13 +215,13 @@ export class UsersPage {
   }
 
   roleLabel(role: string): string {
-    return ({ ADMINISTRADOR: 'Administrador', COORDINADOR: 'Coordinador', CONDUCTOR: 'Conductor' } as Record<string, string>)[role] ?? role;
+    return ({ ADMIN: 'Admin', CONDUCTOR: 'Conductor' } as Record<string, string>)[role] ?? role;
   }
 
   private resetForm(close = true): void {
     this.editing.set(null);
     this.form.controls.password.enable();
-    this.form.reset({ email: '', password: '', fullName: '', phone: '', role: 'COORDINADOR' });
+    this.form.reset({ email: '', password: '', fullName: '', phone: '', role: 'CONDUCTOR' });
     if (close) {
       this.formOpen.set(false);
     }

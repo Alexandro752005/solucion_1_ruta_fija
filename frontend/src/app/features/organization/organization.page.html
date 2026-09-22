@@ -9,7 +9,7 @@
     <header><div><h2 id="organization-information-title">Informaci&oacute;n general</h2><p>Datos disponibles para la sesi&oacute;n administrativa actual.</p></div></header>
     <dl class="rf-detail-grid">
       <div><dt>Organizaci&oacute;n</dt><dd>{{ organizationName() }}</dd></div>
-      <div><dt>Administrador</dt><dd>{{ session.user()?.fullName }}</dd></div>
+      <div><dt>Usuario ADMIN</dt><dd>{{ session.user()?.fullName }}</dd></div>
       <div><dt>Correo de la cuenta</dt><dd>{{ session.user()?.email || 'No disponible' }}</dd></div>
       <div><dt>Estado de acceso</dt><dd><span class="management-status success">Activo</span></dd></div>
     </dl>

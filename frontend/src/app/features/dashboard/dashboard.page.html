@@ -8,7 +8,7 @@
     <rf-status-indicator page-actions label="Sesi&oacute;n activa" tone="success" />
   </rf-page-header>
 
-  @if (isAdministrator()) {
+  @if (isAdmin()) {
     <section class="dashboard-section" aria-labelledby="operational-title">
       <header class="section-heading">
         <div>
@@ -72,13 +72,6 @@
     </section>
   }
 
-  @if (isCoordinator()) {
-    <section class="dashboard-section coordinator-intro" aria-labelledby="coordination-title">
-      <h2 id="coordination-title">Panel de coordinaci&oacute;n</h2>
-      <p>Desde aqu&iacute; puedes consultar recursos, programar servicios, atender incidencias y revisar comunicados. Los datos visibles respetan el alcance autorizado para tu cuenta.</p>
-    </section>
-  }
-
   @if (isSuperAdmin()) {
     <section class="dashboard-section" aria-labelledby="platform-title">
       <header class="section-heading">
@@ -100,11 +93,11 @@
       <div><h2 id="shortcuts-title">Accesos r&aacute;pidos</h2><p>Enlaces disponibles para tu perfil.</p></div>
     </header>
     <nav class="shortcut-grid" aria-label="Accesos r&aacute;pidos">
-      @if (isAdministrator()) {
+      @if (isAdmin()) {
         <a routerLink="/users"><strong>Usuarios</strong><span>Gestionar cuentas y accesos</span></a>
         <a routerLink="/organization"><strong>Organizaci&oacute;n</strong><span>Consultar el contexto activo</span></a>
       }
-      @if (isAdministrator() || isCoordinator()) {
+      @if (isAdmin()) {
         <a routerLink="/groups"><strong>Grupos</strong><span>Consultar equipos operativos</span></a>
         <a routerLink="/drivers"><strong>Conductores</strong><span>Revisar disponibilidad</span></a>
         <a routerLink="/vehicles"><strong>Veh&iacute;culos</strong><span>Consultar el estado de flota</span></a>
@@ -112,7 +105,7 @@
         <a routerLink="/incidents"><strong>Incidencias</strong><span>Registrar y dar seguimiento</span></a>
         <a routerLink="/announcements"><strong>Comunicados</strong><span>Consultar comunicaciones</span></a>
       }
-      @if (isAdministrator()) {
+      @if (isAdmin()) {
         <a routerLink="/reports"><strong>Reportes</strong><span>Consultar y exportar resultados</span></a>
         <a routerLink="/audit"><strong>Auditor&iacute;a</strong><span>Revisar la trazabilidad</span></a>
       }

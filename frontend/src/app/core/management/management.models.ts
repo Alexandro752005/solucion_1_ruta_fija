@@ -44,19 +44,11 @@ export interface UserUpdatePayload {
   readonly role: Exclude<UserRole, 'SUPER_ADMIN'>;
 }
 
-export interface GroupCoordinator {
-  readonly userId: string;
-  readonly fullName: string;
-  readonly email: string;
-  readonly assignedAt: string;
-}
-
 export interface TransportGroup {
   readonly id: string;
   readonly name: string;
   readonly description?: string | null;
   readonly active: boolean;
-  readonly coordinators: readonly GroupCoordinator[];
   readonly createdAt: string;
   readonly updatedAt: string;
 }
