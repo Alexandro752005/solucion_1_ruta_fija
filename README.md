@@ -212,6 +212,8 @@ Documentos principales:
 - [Evidencia de cierre F2.3](docs/evidencia-f2-3-crm-admin-2026-09-22.md)
 - [Cierre G2 / F2.4](docs/ejecucion-nativa-f2-4-g2.md)
 - [Evidencia G2 / F2.4](docs/evidencia-g2-consolidacion-admin-2026-09-22.md)
+- [ADR-004: contrato móvil y ubicación vigente](docs/decisiones/ADR-004-contrato-movil-estados-y-ubicacion.md)
+- [Ejecución F3.1A](docs/ejecucion-f3-1a-adr-contrato-movil.md)
 - [Plan de migración nativa](docs/plan-f1-postgresql-nativo-sin-docker.md)
 
 Los archivos de Compose y Dockerfile permanecen como compatibilidad histórica
