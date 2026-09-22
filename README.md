@@ -158,6 +158,13 @@ desarrollo:
 .\scripts\Invoke-RutaFijaF21aBaseline.ps1
 ~~~
 
+F2.1B ensaya V6 contra una recuperación temporal con datos legacy controlados.
+No aplica V6 al CRM todavía; eso se hará de forma atómica en F2.2:
+
+~~~powershell
+.\scripts\Invoke-RutaFijaF21bV6Rehearsal.ps1
+~~~
+
 ## Automatización y documentación
 
 Las tareas Ruta Fija de VS Code cubren aprovisionamiento, arranque, pruebas,
@@ -179,6 +186,9 @@ Documentos principales:
 - [Línea base F2.1A](docs/ejecucion-nativa-f2-1a.md)
 - [Caracterización pre-V6](docs/f2-1a-caracterizacion-pre-v6.md)
 - [Evidencia F2.1A](docs/evidencia-f2-1a-linea-base-pre-v6-2026-09-22.md)
+- [Ensayo aislado F2.1B](docs/ejecucion-nativa-f2-1b.md)
+- [ADR-002 de V6](docs/decisiones/ADR-002-candidata-v6-ensayo-aislado.md)
+- [Evidencia F2.1B](docs/evidencia-f2-1b-ensayo-v6-2026-09-22.md)
 - [Plan de migración nativa](docs/plan-f1-postgresql-nativo-sin-docker.md)
 
 Los archivos de Compose y Dockerfile permanecen como compatibilidad histórica
