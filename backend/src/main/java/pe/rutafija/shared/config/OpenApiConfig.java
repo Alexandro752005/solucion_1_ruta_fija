@@ -20,7 +20,8 @@ public class OpenApiConfig {
                 .info(new Info()
                         .title("Ruta Fija API")
                         .description(
-                                "API privada del CRM web administrativo y reportes. "
+                                "API privada del CRM web administrativo y reportes, con sesión móvil "
+                                        + "de conductor mediante refresh opaco en JSON. "
                                         + "Los roles activos son SUPER_ADMIN, ADMIN y CONDUCTOR; "
                                         + "la operación de tenant del CRM requiere ADMIN."
                         )

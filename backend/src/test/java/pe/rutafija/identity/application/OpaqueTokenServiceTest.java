@@ -29,4 +29,16 @@ class OpaqueTokenServiceTest {
                 .isEqualTo(service.hash("refresh-value"))
                 .isNotEqualTo(service.hash("another-value"));
     }
+
+    @Test
+    void keepsMobileRefreshTokensInASeparateOpaqueNamespace() {
+        String webToken = service.generate();
+        String mobileToken = service.generateMobile();
+
+        assertThat(service.isWebRefreshToken(webToken)).isTrue();
+        assertThat(service.isMobileRefreshToken(webToken)).isFalse();
+        assertThat(service.isMobileRefreshToken(mobileToken)).isTrue();
+        assertThat(service.isWebRefreshToken(mobileToken)).isFalse();
+        assertThat(mobileToken).startsWith("m1.").hasSize(46);
+    }
 }

@@ -1,6 +1,6 @@
 # ADR-004 - Contrato de asignaciones móviles y ubicación vigente
 
-- Estado: V7/V8 implementadas en F3.1B; sesión y endpoints móviles pendientes de F3.2/F3.3.
+- Estado: V7/V8 implementadas en F3.1B y sesión móvil implementada en F3.2; endpoints operativos pendientes de F3.3/F3.4.
 - Fecha: 2026-09-22.
 - Alcance: días 5 y 6 de la Etapa 2.
 
@@ -8,7 +8,8 @@
 
 La puerta G2 está aprobada. La línea base productiva usa PostgreSQL 16 nativo,
 Flyway V1-V8, los roles `SUPER_ADMIN`, `ADMIN` y `CONDUCTOR`, y un monolito
-modular Spring Boot/Angular. No hay una API móvil ni Flutter implementados aún.
+modular Spring Boot/Angular. Existe sesión móvil mínima, pero no hay API móvil
+operativa ni Flutter implementados aún.
 
 En V3-V5, una asignación existe en `SCHEDULED`, `EN_SERVICIO`, `COMPLETED` o
 `CANCELLED`. `reserved_at` representa una reserva real: cambia al conductor de
@@ -180,14 +181,16 @@ La exposición queda limitada desde el diseño:
 ### 6. Fronteras de las siguientes subfases
 
 F3.1B implementó únicamente V7 y V8, ensayadas desde un esquema vacío y una
-base histórica V5 que avanza por V6. F3.2 definirá login, refresh y logout
-móviles con transporte separado de la cookie web y errores uniformes. F3.3
-construirá los endpoints, la transición autenticada, la limpieza por plazo y el
-UPSERT. F3.4 publicará OpenAPI, pruebas de aislamiento/privacidad/idempotencia
-y reportes reales de `PENDING_RESPONSE`, `REJECTED` y `EXPIRED`.
+base histórica V5 que avanza por V6. F3.2 ya implementó login, refresh y logout
+móviles con transporte JSON separado de la cookie web, conductor activo
+vinculado, rotación y errores uniformes; la decisión detallada vive en
+[ADR-005](ADR-005-sesion-movil-separada.md). F3.3 construirá los endpoints, la
+transición autenticada, la limpieza por plazo y el UPSERT. F3.4 publicará el
+contrato operativo completo, pruebas de aislamiento/privacidad/idempotencia y
+reportes reales de `PENDING_RESPONSE`, `REJECTED` y `EXPIRED`.
 
 V9, V10, Firebase/FCM, fotos, GPS en segundo plano, historial de rutas y
-Flutter quedan fuera de F3.1A. PostgreSQL seguirá privado en `127.0.0.1:5432`;
+Flutter quedan fuera de F3.2. PostgreSQL seguirá privado en `127.0.0.1:5432`;
 no se introduce Docker ni se expone la base de datos a la aplicación móvil.
 
 ## Consecuencias

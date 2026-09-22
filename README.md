@@ -2,10 +2,11 @@
 
 Ruta Fija es un monolito modular para administrar organizaciones, usuarios,
 grupos, conductores, vehículos, asignaciones, incidencias, comunicados,
-reportes y auditoría. El alcance vigente es únicamente el CRM web
-administrativo y reportes; no incluye aplicación móvil, GPS, FCM, SMTP ni
-servicios externos. F3.1B prepara en PostgreSQL el contrato físico que usará la
-app móvil futura, sin exponer aún rutas, pantallas ni captura de ubicación.
+reportes y auditoría. El alcance vigente incluye el CRM web administrativo y
+una sesión API nativa mínima para el futuro conductor móvil. No incluye todavía
+Flutter, GPS, FCM, SMTP ni servicios externos. F3.1B prepara el contrato físico
+en PostgreSQL y F3.2 publica únicamente login, refresh y logout móvil; no hay
+todavía comandos operativos, pantallas ni captura de ubicación.
 
 La operación local usa PostgreSQL 16 instalado en Windows, Java 21 y Angular.
 No se necesita Docker para iniciar, probar, detener ni recuperar el sistema.
@@ -18,7 +19,7 @@ No se necesita Docker para iniciar, probar, detener ni recuperar el sistema.
 | API | Java 21, Spring Boot 3.5.16 en http://127.0.0.1:8080 |
 | Persistencia | PostgreSQL 16 local, puerto 5432 |
 | Esquema | Flyway V1–V8 y Hibernate con ddl-auto=validate |
-| Seguridad | JWT, refresh cookie HttpOnly, roles separados de migración, aplicación y pruebas |
+| Seguridad | JWT, refresh en cookie HttpOnly web y JSON móvil, roles separados de migración, aplicación y pruebas |
 | Tiempo real | WebSocket con ticket efímero por medio del proxy Angular |
 
 El backend está dividido en identity, organization, fleet, operation, audit y
@@ -66,12 +67,12 @@ La instancia debe estar limitada a 127.0.0.1 y ::1. No se publique el puerto
    ~~~
 
 5. Ejecute Flyway una sola vez, otorgue el DML específico de la ubicación
-   vigente y audite el esquema.
+   vigente y audite el esquema y la sesión móvil.
 
    ~~~powershell
    .\scripts\Invoke-RutaFijaFlywayF13.ps1
    .\scripts\Grant-RutaFijaF31bApplicationPrivileges.ps1
-   .\scripts\Test-RutaFijaF31bMobileSchema.ps1
+   .\scripts\Test-RutaFijaF32MobileSession.ps1
    ~~~
 
 6. Instale las dependencias del CRM y valide el entorno.
@@ -121,7 +122,7 @@ Ejecute las pruebas de backend contra la base aislada ruta_fija_test:
 .\verificar_ruta_fija.bat
 ~~~
 
-La salida aprobada termina con F3_1B_NATIVE_VERIFY=PASS. Para comprobar el
+La salida aprobada termina con F3_2_NATIVE_VERIFY=PASS. Para comprobar el
 proxy REST y WebSocket desde Angular, con 8080 y 4200 libres:
 
 ~~~powershell
@@ -184,15 +185,18 @@ historia de grupos y operación nativa antes de iniciar la API móvil.
 F3.1B añade V7 y V8 al esquema ya consolidado: `ADMIN_DIRECT` y
 `MOBILE_CONFIRMATION` distinguen las asignaciones directas de las que requerirán
 respuesta auténtica del conductor; `driver_current_location` retiene solo un
-punto vigente por conductor. No hay endpoint móvil, aceptación/rechazo desde el
-CRM, historial GPS ni aplicación Flutter en este punto. Para una base nueva,
-el bootstrap ya aplica V1–V8. Para una base existente en V6, use primero el
-ensayo y después la aplicación protegida documentados en F3.1B.
+punto vigente por conductor. F3.2 añade solo la sesión de un `CONDUCTOR`
+vinculado y activo: `/api/v1/mobile/auth/login`, `refresh` y `logout` usan
+JSON, rotación de refresh y nunca la cookie del navegador. No hay todavía
+aceptación/rechazo, ubicación, historial GPS ni aplicación Flutter. Para una
+base nueva, el bootstrap ya aplica V1–V8. Para una base existente en V6, use
+primero el ensayo y después la aplicación protegida documentados en F3.1B.
 
 ## Automatización y documentación
 
 Las tareas Ruta Fija de VS Code cubren aprovisionamiento, arranque, pruebas,
-proxy WebSocket, auditoría F1.6 y evidencia de recuperación F1.7.
+proxy WebSocket, auditoría F1.6, evidencia de recuperación F1.7 y auditoría de
+sesión móvil F3.2.
 
 La integración continua crea una instancia PostgreSQL 16 efímera del runner
 para las pruebas de integración. No requiere un motor de contenedores instalado
@@ -227,6 +231,9 @@ Documentos principales:
 - [Ejecución F3.1A](docs/ejecucion-f3-1a-adr-contrato-movil.md)
 - [Ejecución F3.1B: V7 y V8](docs/ejecucion-f3-1b-v7-v8.md)
 - [Evidencia F3.1B](docs/evidencia-f3-1b-v7-v8-2026-09-22.md)
+- [ADR-005: sesión móvil separada](docs/decisiones/ADR-005-sesion-movil-separada.md)
+- [Ejecución F3.2](docs/ejecucion-f3-2-sesion-movil.md)
+- [Evidencia F3.2](docs/evidencia-f3-2-sesion-movil-2026-09-22.md)
 - [Plan de migración nativa](docs/plan-f1-postgresql-nativo-sin-docker.md)
 
 Los archivos de Compose y Dockerfile permanecen como compatibilidad histórica

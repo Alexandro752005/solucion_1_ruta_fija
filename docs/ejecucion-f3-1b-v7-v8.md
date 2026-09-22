@@ -46,7 +46,7 @@ antes de invocar Flyway. Después concede a `rf_app` únicamente DML sobre
 de un solo uso: si la base ya está en V8, se detiene para impedir una segunda
 aplicación.
 
-Finalmente valide el contrato actual:
+Finalmente, antes de incorporar F3.2, valide el contrato de F3.1B:
 
 ~~~powershell
 .\scripts\Test-RutaFijaF31bMobileSchema.ps1
@@ -56,6 +56,12 @@ Finalmente valide el contrato actual:
 La auditoría admite que `ruta_fija_test` esté vacía, en V6 previa a las pruebas
 o en V8. Una migración repetible exitosa de privilegios de pruebas no se
 confunde con una versión Flyway faltante.
+
+> Esta auditoría es una evidencia histórica de la frontera pre-sesión: por
+> diseño rechaza cualquier ruta `/mobile/`. Una vez implementada F3.2 no debe
+> usarse como control actual; ejecute
+> `Test-RutaFijaF32MobileSession.ps1`, que valida V1-V8 y permite únicamente
+> `login`, `refresh` y `logout` de sesión.
 
 ## Resultado esperado
 

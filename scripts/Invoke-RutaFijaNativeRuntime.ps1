@@ -18,7 +18,7 @@ if ([string]::IsNullOrWhiteSpace($ConfigPath)) {
 }
 
 $nativeImportScript = Join-Path $PSScriptRoot 'Import-RutaFijaNativeEnvironment.ps1'
-$schemaAuditScript = Join-Path $PSScriptRoot 'Test-RutaFijaF31bMobileSchema.ps1'
+$schemaAuditScript = Join-Path $PSScriptRoot 'Test-RutaFijaF32MobileSession.ps1'
 $backendRoot = Join-Path $repoRoot 'backend'
 $frontendRoot = Join-Path $repoRoot 'frontend'
 $runtimeDirectory = Join-Path $repoRoot '.runtime'
@@ -423,7 +423,7 @@ function Invoke-NativeStart {
 
         & $schemaAuditScript -ConfigPath $ConfigPath
         if ($LASTEXITCODE -ne 0) {
-            throw 'La auditoria de esquema F3.1B no fue aprobada; no se iniciara el sistema.'
+            throw 'La auditoria de sesion movil F3.2 no fue aprobada; no se iniciara el sistema.'
         }
 
         if (-not (Test-Path -LiteralPath (Join-Path $frontendRoot 'node_modules\@angular\cli\bin\ng.js') -PathType Leaf)) {

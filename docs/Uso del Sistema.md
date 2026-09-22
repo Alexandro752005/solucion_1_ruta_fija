@@ -9,9 +9,10 @@ Windows y usa PostgreSQL 16 instalado localmente.
 El CRM permite gestionar organizaciones, usuarios, grupos, conductores,
 vehículos, asignaciones, incidencias, comunicados, reportes y auditoría.
 
-La solución vigente no incluye aplicación móvil, GPS, mapas, aceptación o
-rechazo por conductor, notificaciones push, correo ni almacenamiento externo.
-Las asignaciones administrativas nacen como SCHEDULED.
+La solución vigente incluye una sesión API mínima para la futura aplicación de
+conductor, pero todavía no incluye Flutter, GPS, mapas, aceptación o rechazo
+por conductor, notificaciones push, correo ni almacenamiento externo. Las
+asignaciones administrativas nacen como SCHEDULED.
 
 ## 2. Requisitos
 
@@ -68,12 +69,12 @@ Estos pasos se ejecutan una sola vez sobre una base de desarrollo vacía.
    ~~~
 
 3. Aplique Flyway, otorgue solo el DML de la ubicación vigente y compruebe
-   estructura, auditoría, constraints, UTC y privilegios.
+   estructura, auditoría, constraints, UTC, privilegios y sesión móvil.
 
    ~~~powershell
    .\scripts\Invoke-RutaFijaFlywayF13.ps1
    .\scripts\Grant-RutaFijaF31bApplicationPrivileges.ps1
-   .\scripts\Test-RutaFijaF31bMobileSchema.ps1
+   .\scripts\Test-RutaFijaF32MobileSession.ps1
    ~~~
 
 4. Instale dependencias web.
@@ -128,7 +129,7 @@ debajo. En pantallas estrechas, el botón Menú abre la misma navegación.
 | --- | --- |
 | SUPER_ADMIN | Resumen y organizaciones |
 | ADMIN | Resumen, usuarios, organización, grupos, conductores, vehículos, asignaciones, incidencias, comunicados, reportes y auditoría |
-| CONDUCTOR | Sin acceso al CRM web administrativo; su aplicación móvil se incorpora en una etapa posterior |
+| CONDUCTOR | Sin acceso al CRM web administrativo; dispone solo del contrato de sesión móvil F3.2, sin funciones operativas aún |
 
 El rol ADMIN concentra la administración y operación completa de su tenant.
 Las asociaciones históricas de coordinación de grupos no otorgan permisos ni
@@ -183,8 +184,19 @@ Verificación completa nativa:
 .\verificar_ruta_fija.bat
 ~~~
 
-La salida esperada termina en F3_1B_NATIVE_VERIFY=PASS. Las pruebas usan solo
+La salida esperada termina en F3_2_NATIVE_VERIFY=PASS. Las pruebas usan solo
 ruta_fija_test y limpian datos al finalizar.
+
+Auditoría específica de la sesión móvil:
+
+~~~powershell
+.\scripts\Test-RutaFijaF32MobileSession.ps1
+~~~
+
+Su resultado esperado empieza con `F3_2_SESSION_AUDIT=PASS`. Verifica que el
+refresh web en cookie y el refresh móvil en JSON no puedan intercambiarse, que
+solo un conductor activo y vinculado inicie sesión, que haya rotación segura y
+que no existan aún endpoints móviles de operación.
 
 Validación del CRM unificado en ADMIN:
 

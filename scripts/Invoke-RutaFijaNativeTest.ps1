@@ -152,9 +152,9 @@ switch ($Action) {
 select coalesce(max(version), '') from flyway_schema_history where success = true;
 '@
             if (@($migration | Where-Object { $_ -eq '8' }).Count -ne 1) {
-                throw 'F3.1B no confirmo Flyway V1-V8 en ruta_fija_test.'
+                throw 'F3.2 no confirmo Flyway V1-V8 en ruta_fija_test.'
             }
-            Write-Output 'F3_1B_NATIVE_VERIFY=PASS flyway=V1-V8 docker=0'
+            Write-Output 'F3_2_NATIVE_VERIFY=PASS flyway=V1-V8 mobile_session=PASS docker=0'
         }
         finally {
             Clear-TestData -Settings $settings

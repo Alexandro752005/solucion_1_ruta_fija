@@ -12,6 +12,7 @@ import pe.rutafija.shared.config.SecurityProperties;
 
 import java.time.Clock;
 import java.time.Instant;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -38,6 +39,25 @@ public class JwtService {
     }
 
     public String issueAccessToken(AppUser user) {
+        return encode(baseClaims(user));
+    }
+
+    public String issueMobileAccessToken(AppUser user, UUID driverId) {
+        Objects.requireNonNull(driverId, "driverId is required for a mobile session");
+        return encode(baseClaims(user)
+                .claim("sessionChannel", "MOBILE")
+                .claim("driverId", driverId.toString()));
+    }
+
+    public long accessTokenExpiresInSeconds() {
+        return properties.jwt().accessTtl().toSeconds();
+    }
+
+    public long refreshTokenExpiresInSeconds() {
+        return properties.jwt().refreshTtl().toSeconds();
+    }
+
+    private JwtClaimsSet.Builder baseClaims(AppUser user) {
         Instant issuedAt = Instant.now(clock);
         JwtClaimsSet.Builder claims = JwtClaimsSet.builder()
                 .id(UUID.randomUUID().toString())
@@ -51,12 +71,11 @@ public class JwtService {
         if (user.getOrganizationId() != null) {
             claims.claim("organizationId", user.getOrganizationId().toString());
         }
-
-        JwsHeader header = JwsHeader.with(MacAlgorithm.HS256).type("JWT").build();
-        return encoder.encode(JwtEncoderParameters.from(header, claims.build())).getTokenValue();
+        return claims;
     }
 
-    public long accessTokenExpiresInSeconds() {
-        return properties.jwt().accessTtl().toSeconds();
+    private String encode(JwtClaimsSet.Builder claims) {
+        JwsHeader header = JwsHeader.with(MacAlgorithm.HS256).type("JWT").build();
+        return encoder.encode(JwtEncoderParameters.from(header, claims.build())).getTokenValue();
     }
 }
