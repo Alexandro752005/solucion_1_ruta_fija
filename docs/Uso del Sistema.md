@@ -67,12 +67,13 @@ Estos pasos se ejecutan una sola vez sobre una base de desarrollo vacía.
    .\scripts\Initialize-RutaFijaPostgresqlRoles.ps1
    ~~~
 
-3. Aplique Flyway y compruebe estructura, auditoría, constraints, UTC y
-   privilegios.
+3. Aplique Flyway, otorgue solo el DML de la ubicación vigente y compruebe
+   estructura, auditoría, constraints, UTC y privilegios.
 
    ~~~powershell
    .\scripts\Invoke-RutaFijaFlywayF13.ps1
-   .\scripts\Test-RutaFijaMigratedSchemaF13.ps1
+   .\scripts\Grant-RutaFijaF31bApplicationPrivileges.ps1
+   .\scripts\Test-RutaFijaF31bMobileSchema.ps1
    ~~~
 
 4. Instale dependencias web.
@@ -182,7 +183,7 @@ Verificación completa nativa:
 .\verificar_ruta_fija.bat
 ~~~
 
-La salida esperada termina en F2_2_NATIVE_VERIFY=PASS. Las pruebas usan solo
+La salida esperada termina en F3_1B_NATIVE_VERIFY=PASS. Las pruebas usan solo
 ruta_fija_test y limpian datos al finalizar.
 
 Validación del CRM unificado en ADMIN:

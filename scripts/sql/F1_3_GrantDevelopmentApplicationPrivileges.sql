@@ -16,7 +16,8 @@ GRANT SELECT, INSERT, UPDATE, DELETE
              driver_vehicle_link,
              assignment,
              incident,
-             announcement
+             announcement,
+             driver_current_location
     TO rf_app;
 
 GRANT SELECT, INSERT ON TABLE audit_event TO rf_app;

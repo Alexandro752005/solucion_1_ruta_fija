@@ -1,3 +1,7 @@
 # V6 is checksum-certified by the F2.1B rehearsal. Keep its exact LF bytes on Windows.
 scripts/flyway/f2-1b/V6__unify_administrative_roles_to_admin.sql text eol=lf
 backend/src/main/resources/db/migration/V6__unify_administrative_roles_to_admin.sql text eol=lf
+scripts/flyway/f3-1b/V7__mobile_assignment_workflow.sql text eol=lf
+scripts/flyway/f3-1b/V8__mobile_current_location.sql text eol=lf
+backend/src/main/resources/db/migration/V7__mobile_assignment_workflow.sql text eol=lf
+backend/src/main/resources/db/migration/V8__mobile_current_location.sql text eol=lf

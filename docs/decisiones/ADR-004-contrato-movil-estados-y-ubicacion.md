@@ -1,13 +1,13 @@
 # ADR-004 - Contrato de asignaciones móviles y ubicación vigente
 
-- Estado: aceptada para diseño en F3.1A; implementación pendiente de F3.1B y F3.3.
+- Estado: V7/V8 implementadas en F3.1B; sesión y endpoints móviles pendientes de F3.2/F3.3.
 - Fecha: 2026-09-22.
 - Alcance: días 5 y 6 de la Etapa 2.
 
 ## Contexto
 
 La puerta G2 está aprobada. La línea base productiva usa PostgreSQL 16 nativo,
-Flyway V1-V6, los roles `SUPER_ADMIN`, `ADMIN` y `CONDUCTOR`, y un monolito
+Flyway V1-V8, los roles `SUPER_ADMIN`, `ADMIN` y `CONDUCTOR`, y un monolito
 modular Spring Boot/Angular. No hay una API móvil ni Flutter implementados aún.
 
 En V3-V5, una asignación existe en `SCHEDULED`, `EN_SERVICIO`, `COMPLETED` o
@@ -179,8 +179,8 @@ La exposición queda limitada desde el diseño:
 
 ### 6. Fronteras de las siguientes subfases
 
-F3.1B implementará únicamente V7 y V8, ensayadas desde un esquema vacío y una
-base histórica V5 que avance por V6. F3.2 definirá login, refresh y logout
+F3.1B implementó únicamente V7 y V8, ensayadas desde un esquema vacío y una
+base histórica V5 que avanza por V6. F3.2 definirá login, refresh y logout
 móviles con transporte separado de la cookie web y errores uniformes. F3.3
 construirá los endpoints, la transición autenticada, la limpieza por plazo y el
 UPSERT. F3.4 publicará OpenAPI, pruebas de aislamiento/privacidad/idempotencia
