@@ -1,4 +1,4 @@
-name: Ruta Fija CI — Phase 4
+name: Ruta Fija CI nativa
 
 on:
   push:
@@ -9,32 +9,11 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: phase-4-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
-  compose-validation:
-    name: Validate Compose and images
-    runs-on: ubuntu-latest
+  backend-native-postgresql:
+    name: Backend verify with native PostgreSQL 16
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Provide non-production validation values
-        run: cp .env.example .env
-
-      - name: Validate Compose model
-        run: docker compose --profile app config --quiet
-
-      - name: Build application images
-        run: docker compose --profile app build backend frontend
-
-  backend:
-    name: Backend verify (Java 21)
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -47,12 +26,58 @@ jobs:
           cache: maven
           cache-dependency-path: backend/pom.xml
 
-      - name: Require Docker for PostgreSQL integration tests
-        run: docker info
+      - name: Install and start PostgreSQL 16 natively
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes postgresql-16 postgresql-client-16
+          sudo pg_ctlcluster 16 main start
+          sudo -u postgres psql -X -v ON_ERROR_STOP=1 -d postgres -c "select version();"
+
+      - name: Provision isolated integration database
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $migratorPassword = [Guid]::NewGuid().ToString('N')
+          $appPassword = [Guid]::NewGuid().ToString('N')
+          $testPassword = [Guid]::NewGuid().ToString('N')
+
+          $rolesSql = @"
+          SET password_encryption = 'scram-sha-256';
+          CREATE ROLE rf_migrator LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT NOREPLICATION NOBYPASSRLS PASSWORD '$migratorPassword';
+          CREATE ROLE rf_app LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT NOREPLICATION NOBYPASSRLS PASSWORD '$appPassword';
+          CREATE ROLE rf_test LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT NOREPLICATION NOBYPASSRLS PASSWORD '$testPassword';
+          "@
+          $rolesSql | & sudo -u postgres psql -X -v ON_ERROR_STOP=1 -d postgres
+          if ($LASTEXITCODE -ne 0) { throw 'No se pudieron crear roles efímeros de CI.' }
+
+          & sudo -u postgres createdb -O rf_migrator ruta_fija_test
+          if ($LASTEXITCODE -ne 0) { throw 'No se pudo crear ruta_fija_test efímera.' }
+
+          $databaseSql = @"
+          ALTER DATABASE ruta_fija_test SET TimeZone TO 'UTC';
+          REVOKE ALL ON DATABASE ruta_fija_test FROM PUBLIC;
+          GRANT CONNECT ON DATABASE ruta_fija_test TO rf_migrator, rf_test;
+          ALTER SCHEMA public OWNER TO rf_migrator;
+          REVOKE ALL ON SCHEMA public FROM PUBLIC, rf_app;
+          GRANT USAGE, CREATE ON SCHEMA public TO rf_migrator;
+          GRANT USAGE ON SCHEMA public TO rf_test;
+          "@
+          $databaseSql | & sudo -u postgres psql -X -v ON_ERROR_STOP=1 -d ruta_fija_test
+          if ($LASTEXITCODE -ne 0) { throw 'No se pudo aislar ruta_fija_test en CI.' }
+
+          @(
+            'RF_TEST_DATASOURCE_URL=jdbc:postgresql://127.0.0.1:5432/ruta_fija_test',
+            'RF_TEST_DATASOURCE_USERNAME=rf_test',
+            "RF_TEST_DATASOURCE_PASSWORD=$testPassword",
+            'RF_TEST_MIGRATOR_URL=jdbc:postgresql://127.0.0.1:5432/ruta_fija_test',
+            'RF_TEST_MIGRATOR_USERNAME=rf_migrator',
+            "RF_TEST_MIGRATOR_PASSWORD=$migratorPassword"
+          ) | Add-Content -LiteralPath $env:GITHUB_ENV -Encoding utf8
 
       - name: Verify backend
         working-directory: backend
-        run: bash ./mvnw -B --no-transfer-progress verify
+        run: ./mvnw --batch-mode --no-transfer-progress verify
 
       - name: Reject omitted critical integration tests
         working-directory: backend
@@ -67,7 +92,7 @@ jobs:
 
   frontend:
     name: Frontend verify (Node 24.16)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     defaults:
       run:

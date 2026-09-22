@@ -1,154 +1,118 @@
 # Ruta Fija — backend
 
-Backend del CRM web administrativo y reportes, construido como monolito modular con Java 21 y Spring Boot 3.5.16. La Fase 4 integra `identity`, `organization`, `fleet`, `operation`, `audit` y `shared`, con PostgreSQL 16 como única persistencia.
+API del CRM Web Administrativo y Reportes, construida como monolito modular con
+Java 21 y Spring Boot 3.5.16. Usa PostgreSQL 16 nativo como única
+persistencia. La ejecución diaria no depende de contenedores.
 
-## Requisitos
+## Módulos
 
-- Java 21 si se ejecuta fuera de contenedores.
-- Docker Desktop y Docker Compose para el entorno local recomendado.
-- No es necesario instalar Maven: el wrapper fija Maven 3.9.15.
+~~~text
+pe.rutafija/
+├── identity/      autenticación, usuarios, JWT, refresh y RBAC
+├── organization/  organizaciones y frontera multiempresa
+├── fleet/         grupos, conductores, vehículos y disponibilidad
+├── operation/     asignaciones, incidencias, comunicados y tiempo real
+├── audit/         eventos críticos de solo anexado
+└── shared/        seguridad, errores, configuración y observabilidad
+~~~
 
-## Configuración
+Los controladores exponen el contrato HTTP, los servicios contienen la lógica
+transaccional y los repositorios realizan el acceso a datos. Hibernate solo
+valida el esquema; Flyway es la única vía para modificarlo.
 
-No hay contraseñas ni claves privadas en el repositorio. Estas variables deben suministrarse desde el entorno o desde el archivo `.env` de Docker Compose ubicado en la raíz del proyecto.
+## Configuración local
 
-| Variable | Obligatoria | Descripción |
-|---|---:|---|
-| `SPRING_DATASOURCE_URL` | Sí | JDBC de PostgreSQL, por ejemplo `jdbc:postgresql://postgres:5432/ruta_fija` |
-| `SPRING_DATASOURCE_USERNAME` | Sí | Usuario de PostgreSQL |
-| `SPRING_DATASOURCE_PASSWORD` | Sí | Contraseña de PostgreSQL |
-| `JWT_SECRET_BASE64` | Sí | Al menos 32 bytes aleatorios codificados en Base64 |
-| `APP_CORS_ALLOWED_ORIGINS` | Producción | Orígenes exactos separados por coma; en desarrollo usa `http://localhost:4200` |
-| `DEMO_USER_PASSWORD` | Para seed dev | Contraseña de al menos 12 caracteres, elegida localmente |
-| `APP_SEED_ENABLED` | No | `true` solo en desarrollo; por defecto está activo bajo el perfil `dev` |
-| `REFRESH_COOKIE_SECURE` | No | `false` en HTTP local; `true` por defecto con el perfil `prod` |
-| `LOGIN_RATE_LIMIT_ENABLED` | No | Activa la protección local del login; `true` por defecto |
-| `LOGIN_RATE_LIMIT_ACCOUNT_ATTEMPTS` | No | Intentos costosos permitidos por cuenta y ventana; `5` por defecto |
-| `LOGIN_RATE_LIMIT_GLOBAL_ATTEMPTS` | No | Intentos costosos permitidos por instancia y ventana; `300` por defecto |
+La configuración privada vive exclusivamente en:
 
-Ejemplo para generar una clave JWT en PowerShell, sin guardarla en el historial del repositorio:
+~~~text
+backend/.local/ruta-fija-native.env
+backend/.local/ruta-fija-bootstrap.env
+~~~
 
-```powershell
-$jwtBytes = New-Object byte[] 32
-$jwtRng = [System.Security.Cryptography.RandomNumberGenerator]::Create()
-try { $jwtRng.GetBytes($jwtBytes) } finally { $jwtRng.Dispose() }
-[Convert]::ToBase64String($jwtBytes)
-```
+Ambos archivos están ignorados por Git. El primero contiene las credenciales de
+aplicación, migración y pruebas; el segundo solo se usa para tareas
+administrativas de PostgreSQL. No copie esos archivos entre equipos ni registre
+secretos en incidencias, commits o capturas.
 
-## Ejecución recomendada
+Variables de ejecución:
 
-Desde la raíz del repositorio:
+| Variable | Uso |
+| --- | --- |
+| SPRING_DATASOURCE_URL | JDBC de desarrollo, siempre 127.0.0.1:5432/solucion_ruta_fija_1 |
+| SPRING_DATASOURCE_USERNAME | rf_app, con DML selectivo y sin DDL |
+| SPRING_FLYWAY_URL / USERNAME | Desarrollo con rf_migrator |
+| JWT_SECRET_BASE64 | Secreto local de al menos 32 bytes |
+| APP_SEED_ENABLED | false para el runtime normal |
+| APP_CORS_ALLOWED_ORIGINS | http://localhost:4200 |
+| REFRESH_COOKIE_SECURE | false solo para HTTP local |
 
-```text
-docker compose --profile app up --build
-```
+## Esquema y roles
 
-El contenedor del backend usa los perfiles `dev,docker`, espera a PostgreSQL y ejecuta Flyway automáticamente. Sus puntos de diagnóstico son:
+Flyway V1–V5 crea 12 tablas de negocio, la extensión btree_gist, la auditoría
+append-only y los constraints de solapamiento de asignaciones. La zona horaria
+de base de datos es UTC y la codificación es UTF8.
 
-- Health: `http://localhost:8080/actuator/health`
-- OpenAPI JSON: `http://localhost:8080/v3/api-docs`
-- Swagger UI: `http://localhost:8080/swagger-ui.html`
+| Cuenta | Responsabilidad |
+| --- | --- |
+| rf_migrator | DDL y Flyway controlado |
+| rf_app | Operación de desarrollo con DML selectivo |
+| rf_test | Pruebas aisladas sobre ruta_fija_test |
 
-Para ejecutar el backend directamente en Windows, configure las variables anteriores, inicie PostgreSQL y use:
+Ninguna de estas cuentas es superusuario ni puede crear bases, roles o
+replicar. PostgreSQL debe escuchar únicamente en 127.0.0.1 y ::1.
 
-```powershell
-./mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=dev"
-```
+## Ejecución
 
-## Usuarios de desarrollo
+Desde la raíz del repositorio se usa:
 
-El inicializador `dev` es idempotente y solo crea datos cuando `DEMO_USER_PASSWORD` está configurada. Si falta, el backend inicia normalmente y omite el seed. La contraseña no se registra en logs.
+~~~powershell
+.\iniciar_ruta_fija.bat
+~~~
 
-| Organización | Usuario | Rol |
-|---|---|---|
-| Global | `superadmin@rutafija.local` | `SUPER_ADMIN` |
-| Ruta Norte | `admin.norte@rutafija.local` | `ADMINISTRADOR` |
-| Ruta Norte | `coordinador.norte@rutafija.local` | `COORDINADOR` |
-| Ruta Sur | `admin.sur@rutafija.local` | `ADMINISTRADOR` |
-| Ruta Sur | `coordinador.sur@rutafija.local` | `COORDINADOR` |
+El iniciador empaqueta el JAR, levanta la API en 127.0.0.1:8080 y comprueba:
 
-Estos datos son exclusivamente locales y no se crean con el perfil `prod`.
+- Salud: http://127.0.0.1:8080/actuator/health
+- OpenAPI: http://127.0.0.1:8080/v3/api-docs
+- Swagger local: http://127.0.0.1:8080/swagger-ui.html
 
-## API de sesión
+Para detener procesos administrados:
 
-Base URL: `/api/v1`.
-
-| Método | Endpoint | Autenticación |
-|---|---|---|
-| `POST` | `/auth/login` | Pública |
-| `POST` | `/auth/refresh` | Cookie de refresh válida |
-| `POST` | `/auth/logout` | Cookie de refresh; idempotente y no requiere un access token vigente |
-| `GET` | `/auth/me` | Bearer access token |
-
-El access token JWT dura 15 minutos por defecto. El refresh token es opaco, rotativo y solo se entrega en una cookie `HttpOnly`, `SameSite=Strict`, limitada a `/api/v1/auth`. En PostgreSQL se conserva exclusivamente su hash SHA-256. La reutilización de un token ya rotado revoca toda su familia.
-
-Esta cookie es una decisión de seguridad deliberada respecto del ejemplo inicial del contrato, que mostraba el refresh token dentro del JSON. El frontend no debe almacenarlo en `localStorage`, `sessionStorage` ni memoria JavaScript; debe enviar solicitudes de login, refresh y logout con credenciales habilitadas.
-
-Login, refresh y logout validan el encabezado `Origin` contra la lista CORS
-cuando la petición proviene de un navegador. Las herramientas CLI pueden operar
-sin ese encabezado. El login aplica cuotas acotadas por cuenta anonimizada y por
-instancia antes de ejecutar BCrypt; una respuesta `429` incluye `Retry-After`.
-
-Todas las respuestas de error siguen el contrato normalizado e incluyen `correlationId`. El cliente puede enviar `X-Correlation-ID` con un valor seguro de hasta 64 caracteres; de lo contrario, el backend genera uno.
-
-## Aislamiento y autorización
-
-- El JWT firmado contiene el identificador de usuario, rol y, salvo para `SUPER_ADMIN`, la organización.
-- La organización ordinaria se deriva únicamente de la autenticación; no se acepta desde headers ni DTO del cliente.
-- Las consultas tenant-aware reciben siempre `organization_id` desde `CurrentUserProvider`.
-- Un `SUPER_ADMIN` global no puede adoptar implícitamente una organización. Los futuros endpoints que lo requieran deberán implementar selección explícita y autorizada.
-- Los roles del MVP son `SUPER_ADMIN`, `ADMINISTRADOR`, `COORDINADOR` y `CONDUCTOR`.
-
-## Base de datos y migraciones
-
-Flyway crea el esquema desde una base PostgreSQL 16 vacía. La primera migración contiene:
-
-- `organization`
-- `app_user`
-- `refresh_token`, con familia, rotación y hashes
-- `audit_event`, protegida como tabla append-only mediante trigger
-- restricciones de roles, organización, índices y claves foráneas
-
-Hibernate usa `ddl-auto=validate`: el modelo Java nunca modifica el esquema. Todo cambio posterior debe incorporarse como una nueva migración versionada; una migración ya aplicada no se edita.
+~~~powershell
+.\finalizar_ruta_fija.bat
+~~~
 
 ## Pruebas
 
-Pruebas unitarias, siempre disponibles:
+Las pruebas unitarias:
 
-```powershell
-./mvnw.cmd test
-```
+~~~powershell
+Set-Location backend
+.\mvnw.cmd test
+~~~
 
-Verificación completa, incluida integración sobre PostgreSQL efímero mediante Testcontainers:
+La verificación completa usa exclusivamente ruta_fija_test, con Flyway ejecutado
+por rf_migrator y limpieza protegida antes y después de cada integración:
 
-```powershell
-./mvnw.cmd verify
-```
+~~~powershell
+Set-Location ..
+.\verificar_ruta_fija.bat
+~~~
 
-`test` no selecciona clases `*IT`, por lo que sigue siendo útil sin Docker.
-`verify`, en cambio, exige Docker y falla si PostgreSQL/Testcontainers no puede
-iniciarse; nunca convierte una integración omitida en una puerta verde. Con
-Docker activo valida Flyway, login, cookie HttpOnly, `/me`, rotación, detección
-de reutilización, logout, origen confiable, contrato HTTP y aislamiento entre
-organizaciones.
+La puerta aprobada termina con F1_4_NATIVE_VERIFY=PASS. No se permite que una
+prueba apunte a desarrollo o a una base de recuperación.
 
-Los reportes JaCoCo se generan en `target/site/jacoco/` durante `verify`.
+## Seguridad HTTP
 
-## Perfiles
+El access token JWT tiene vida corta. El refresh token es opaco, rotativo,
+almacenado únicamente como hash en PostgreSQL y enviado en una cookie HttpOnly,
+SameSite=Strict, limitada a la ruta de autenticación. El backend valida Origin
+para solicitudes del navegador y limita intentos costosos de login.
 
-- `dev`: habilita el seed condicionado y logs de aplicación.
-- `test`: deshabilita seed y Swagger UI; las pruebas suministran una base efímera.
-- `prod`: deshabilita seed y OpenAPI público, exige CORS explícito y usa cookie segura.
-- `docker`: ajustes de ejecución dentro del contenedor; normalmente se combina con `dev` o `prod`.
+Todos los errores usan el contrato normalizado con correlationId. Un cliente
+puede suministrar X-Correlation-ID seguro; de lo contrario se genera uno.
 
-## Estructura modular
+## Referencias
 
-```text
-pe.rutafija/
-├── identity/      autenticación, JWT, refresh, usuarios y RBAC
-├── organization/  organización y frontera tenant
-├── audit/         eventos críticos append-only
-└── shared/        seguridad, errores, configuración y observabilidad
-```
-
-Los controladores se limitan al contrato HTTP; la lógica transaccional permanece en servicios de aplicación y el acceso a datos en repositorios de infraestructura.
+- [Manual operativo](<../docs/Uso del Sistema.md>)
+- [Ejecución nativa F1.4](../docs/ejecucion-nativa-f1-4.md)
+- [Proxy y WebSocket F1.5](../docs/ejecucion-nativa-f1-5.md)

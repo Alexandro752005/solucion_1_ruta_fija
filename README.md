@@ -1,186 +1,173 @@
 # Ruta Fija — CRM Web Administrativo y Reportes
 
-Monolito modular para administrar organizaciones, usuarios, grupos, conductores,
-vehículos, operación y reportes. La Fase 5 incorpora el sistema visual integral,
-la topbar por rol y flujos de gestión mediante modales accesibles, conservando
-la API Spring Boot, la auditoría y PostgreSQL local sin cambios funcionales.
+Ruta Fija es un monolito modular para administrar organizaciones, usuarios,
+grupos, conductores, vehículos, asignaciones, incidencias, comunicados,
+reportes y auditoría. El alcance vigente es únicamente el CRM web
+administrativo y reportes; no incluye aplicación móvil, GPS, FCM, SMTP ni
+servicios externos.
 
-> Alcance confirmado: este repositorio construye únicamente el **CRM web
-> administrativo + reportes**. No incluye aplicación móvil. Durante esta fase
-> tampoco integra FCM, SMTP, S3 ni ninguna base de datos externa.
+La operación local usa PostgreSQL 16 instalado en Windows, Java 21 y Angular.
+No se necesita Docker para iniciar, probar, detener ni recuperar el sistema.
 
-## Tecnologías fijadas
+## Arquitectura y tecnologías
 
-| Componente | Versión / decisión |
+| Componente | Decisión |
 | --- | --- |
-| Java | 21 |
-| Maven | 3.9.15 mediante Maven Wrapper |
-| Spring Boot | 3.5.16 |
-| Node.js | 24.16.x |
-| Angular | 22.x, versión exacta en `frontend/package-lock.json` |
-| Base de datos | PostgreSQL 16 en Docker |
-| API | `/api/v1` |
-| Backend | `http://localhost:8080` |
-| CRM web | `http://localhost:4200` |
+| CRM | Angular 22 en http://localhost:4200 |
+| API | Java 21, Spring Boot 3.5.16 en http://127.0.0.1:8080 |
+| Persistencia | PostgreSQL 16 local, puerto 5432 |
+| Esquema | Flyway V1–V5 y Hibernate con ddl-auto=validate |
+| Seguridad | JWT, refresh cookie HttpOnly, roles separados de migración, aplicación y pruebas |
+| Tiempo real | WebSocket con ticket efímero por medio del proxy Angular |
 
-PostgreSQL del contenedor es PostgreSQL real, no un sustituto en memoria. H2 no
-se usa como base principal ni como atajo para integración. Las pruebas de
-persistencia deben ejecutarse contra PostgreSQL efímero con Testcontainers.
+El backend está dividido en identity, organization, fleet, operation, audit y
+shared. PostgreSQL conserva las reglas críticas: aislamiento de roles,
+auditoría append-only, UTC, extensión btree_gist y prevención de solapamientos
+de conductor y vehículo.
 
-## Requisitos locales
+## Requisitos de una estación nueva
 
-- Docker Desktop con el motor iniciado, Docker Compose v2 y WSL 2.1.5 o
-  posterior (`wsl --version`) en Windows.
-- Visual Studio Code y la extensión Docker, recomendados para administrar los
-  mismos contenedores desde el editor.
-- Git.
-- Java y Node solo son necesarios si se ejecutan backend o frontend fuera de
-  contenedores.
+- Windows 10/11, PowerShell y Git.
+- PostgreSQL 16 instalado como servicio local, con psql disponible.
+- Java 21.
+- Node.js 24.16.x y npm.
+- Visual Studio Code, recomendado.
 
-La extensión de VS Code es la interfaz; el motor que crea la base de datos sigue
-siendo Docker Desktop. No es necesario instalar PostgreSQL, pgAdmin ni otra
-aplicación de base de datos.
+La instancia debe estar limitada a 127.0.0.1 y ::1. No se publique el puerto
+5432 hacia la red. La tarea F1.6 permite comprobarlo.
 
-Si Docker Desktop informa `WSL update required`, abra PowerShell como
-Administrador y ejecute:
+## Primera preparación nativa
 
-```powershell
-wsl --update --web-download
-```
+1. Clone el repositorio y entre a su carpeta.
 
-Reinicie Windows si el instalador lo solicita, confirme `wsl --version` y vuelva
-a iniciar Docker Desktop. Docker Desktop requiere WSL 2.1.5 o posterior.
+   ~~~powershell
+   git clone https://github.com/Alexandro752005/solucion_1_ruta_fija.git
+   Set-Location solucion_1_ruta_fija
+   ~~~
 
-Al abrir el proyecto, VS Code recomendará **Container Tools** y ofrece tareas
-`Ruta Fija: ...` en `Terminal > Run Task` para iniciar PostgreSQL, construir la
-solución, consultar su estado y detenerla sin borrar el volumen.
+2. Cree en PostgreSQL una base vacía llamada solucion_ruta_fija_1 y un usuario
+   administrativo local que será su bootstrap. El usuario debe poder crear los
+   tres roles técnicos durante el primer aprovisionamiento. No use ni comparta
+   la contraseña de otra persona.
 
-### Inicio y cierre rápido en Windows
+3. Cree la configuración privada. La contraseña se solicita de manera oculta y
+   el archivo resultante queda ignorado por Git.
 
-Desde el Explorador de archivos o una consola de Windows, ejecute
-`iniciar_ruta_fija.bat` para validar la configuración y levantar PostgreSQL, la
-API y el CRM. Ejecute `finalizar_ruta_fija.bat` para detenerlos; este último no
-usa `--volumes`, por lo que conserva los datos locales de PostgreSQL.
+   ~~~powershell
+   .\scripts\Initialize-RutaFijaNativeConfig.ps1
+   ~~~
 
-## Primera ejecución desde PowerShell
+4. En una base vacía, cree los roles rf_migrator, rf_app y rf_test, junto con
+   la base aislada ruta_fija_test.
 
-1. Cree la configuración local no versionada:
+   ~~~powershell
+   .\scripts\Initialize-RutaFijaPostgresqlRoles.ps1
+   ~~~
 
-   ```powershell
-   Copy-Item .env.example .env
-   ```
+5. Ejecute Flyway una sola vez y audite el esquema.
 
-2. Genere un secreto JWT local de 32 bytes:
+   ~~~powershell
+   .\scripts\Invoke-RutaFijaFlywayF13.ps1
+   .\scripts\Test-RutaFijaMigratedSchemaF13.ps1
+   ~~~
 
-   ```powershell
-   $jwtBytes = New-Object byte[] 32
-   $jwtRng = [System.Security.Cryptography.RandomNumberGenerator]::Create()
-   try { $jwtRng.GetBytes($jwtBytes) } finally { $jwtRng.Dispose() }
-   [Convert]::ToBase64String($jwtBytes)
-   ```
+6. Instale las dependencias del CRM y valide el entorno.
 
-3. Edite `.env`: reemplace `POSTGRES_PASSWORD` por una contraseña local,
-   `JWT_SECRET_BASE64` por el valor recién generado y `DEMO_USER_PASSWORD` por
-   una contraseña exclusiva para los usuarios de demostración. Nunca confirme
-   `.env` en Git.
+   ~~~powershell
+   Set-Location frontend
+   npm.cmd ci
+   Set-Location ..
+   .\verificar_ruta_fija.bat
+   ~~~
 
-4. Inicie solo PostgreSQL:
+Los scripts de los pasos 3 a 5 protegen los destinos: desarrollo,
+ruta_fija_test y recuperación no se pueden intercambiar de forma accidental.
+No ejecute nuevamente el bootstrap inicial contra una base con datos.
 
-   ```powershell
-   docker compose up -d postgres
-   docker compose ps
-   ```
+## Inicio y cierre diario
 
-5. Para construir y levantar toda la solución cuando los módulos estén listos:
+Desde la raíz:
 
-   ```powershell
-   docker compose --profile app up -d --build
-   docker compose --profile app ps
-   ```
+~~~powershell
+.\iniciar_ruta_fija.bat
+~~~
 
-6. Compruebe los puntos de entrada:
+Cuando el inicio sea correcto:
 
-   - CRM: `http://localhost:4200`
-   - API: `http://localhost:8080/api/v1`
-   - Health: `http://localhost:8080/actuator/health`
-   - OpenAPI: `http://localhost:8080/v3/api-docs`
+- CRM: http://localhost:4200
+- API: http://127.0.0.1:8080/api/v1
+- Salud: http://127.0.0.1:8080/actuator/health
+- OpenAPI: http://127.0.0.1:8080/v3/api-docs
 
-Para observar el arranque:
+Para detener únicamente el backend y el CRM, conservando PostgreSQL como
+servicio local:
 
-```powershell
-docker compose --profile app logs -f postgres backend frontend
-```
+~~~powershell
+.\finalizar_ruta_fija.bat
+~~~
 
-Para detener conservando la base local:
+El inicio normal no crea usuarios de demostración. Las semillas se mantienen
+desactivadas para no introducir cuentas o contraseñas conocidas en la base
+local.
 
-```powershell
-docker compose --profile app down
-```
+## Pruebas y tiempo real
 
-La siguiente operación elimina de forma irreversible los datos locales del
-volumen y solo debe emplearse para ensayar una migración desde cero:
+Ejecute las pruebas de backend contra la base aislada ruta_fija_test:
 
-```powershell
-docker compose --profile app down --volumes
-```
+~~~powershell
+.\verificar_ruta_fija.bat
+~~~
 
-## Ejecución y pruebas sin contenerizar la aplicación
+La salida aprobada termina con F1_4_NATIVE_VERIFY=PASS. Para comprobar el
+proxy REST y WebSocket desde Angular, con 8080 y 4200 libres:
 
-Con PostgreSQL iniciado por Compose, se pueden ejecutar los módulos desde las
-terminales integradas de VS Code:
+~~~powershell
+.\scripts\Invoke-RutaFijaRealtimeProxySmoke.ps1 -Action Verify
+~~~
 
-```powershell
-Set-Location backend
-.\mvnw.cmd verify
-```
+El smoke genera datos temporales solamente en ruta_fija_test, verifica login,
+refresh, ticket de un solo uso y stream.ready, y luego limpia la base.
 
-```powershell
-Set-Location frontend
-npm.cmd ci
-npm.cmd run test:ci
-npm.cmd run build
-```
+## Seguridad local y recuperación
 
-Los valores de conexión y seguridad deben suministrarse mediante variables de
-entorno o el perfil local documentado por cada módulo. No se deben codificar
-credenciales en archivos fuente.
+Abra una consola como Administrador una sola vez para aplicar el listener
+loopback de PostgreSQL. El script solo modifica listen_addresses mediante
+ALTER SYSTEM y reinicia el servicio PostgreSQL 16.
 
-## Datos de demostración
+~~~powershell
+.\scripts\Set-RutaFijaPostgresqlLoopbackF16.ps1
+.\scripts\Test-RutaFijaNativeSecurityF16.ps1
+~~~
 
-Los datos semilla de las dos organizaciones existen exclusivamente bajo el
-perfil `dev`. Sirven para demostrar RBAC y aislamiento multiempresa; no deben
-activarse en `test` ni `prod`, ni copiarse a una futura instancia administrada.
+La auditoría confirma listener local, HBA con SCRAM, mínimo privilegio para
+rf_migrator/rf_app/rf_test, archivos secretos ignorados y CI nativa.
 
-## Flujo de calidad
+El respaldo post-migración usa pg_dump y pg_restore nativos, nunca borra una
+base de recuperación existente y conserva el archivo en backups/, ruta
+excluida de Git:
 
-La integración continua valida el modelo de Compose, construye las imágenes,
-exige que las integraciones PostgreSQL no sean omitidas, ejecuta `mvnw verify`,
-audita las dependencias npm con umbral alto y compila/prueba el frontend.
-Dependabot revisa semanalmente Maven, npm y las acciones del pipeline. La
-auditoría final deja constancia de los controles superados y de los límites que
-requieren una futura preparación de producción. El proyecto se distribuye
-mediante su repositorio público y conserva una configuración local sin secretos
-versionados.
+~~~powershell
+.\scripts\Invoke-RutaFijaRecoveryEvidenceF17.ps1
+~~~
 
-Documentación adicional:
+## Automatización y documentación
 
-- [Arquitectura de la Fase 1](docs/arquitectura-fase-1.md)
-- [Decisión de PostgreSQL local](docs/decisiones/ADR-001-postgresql-docker-local.md)
-- [Auditoría documental y riesgos](docs/auditoria-requisitos-fase-1.md)
-- [Estado actual de la Fase 1](docs/fase-1-estado.md)
-- [Evidencia parcial del 2026-08-29](docs/evidencia-fase-1-2026-08-29.md)
-- [Estado y alcance de la Fase 2](docs/fase-2-estado.md)
-- [Evidencia de la Fase 2](docs/evidencia-fase-2-2026-08-29.md)
-- [Diseño y decisiones de la Fase 3](docs/fase-3-diseno.md)
-- [Estado y alcance de la Fase 3](docs/fase-3-estado.md)
-- [Evidencia de la Fase 3](docs/evidencia-fase-3-2026-08-29.md)
-- [Estado de cierre de la Fase 4](docs/fase-4-estado.md)
-- [Matriz de trazabilidad final](docs/matriz-trazabilidad-final.md)
-- [Auditoría final de la Fase 4](docs/auditoria-final-fase-4.md)
-- [Evidencia de la Fase 4](docs/evidencia-fase-4-2026-08-30.md)
-- [Diseño y límites de la Fase 5](docs/fase-5-diseno.md)
-- [Estado y cierre de la Fase 5](docs/fase-5-estado.md)
-- [Auditoría final de la Fase 5](docs/auditoria-final-fase-5.md)
-- [Evidencia de la Fase 5](docs/evidencia-fase-5-2026-08-30.md)
-- [Cumplimiento Java](REPORTE_CUMPLIMIENTO_JAVA.md)
+Las tareas Ruta Fija de VS Code cubren aprovisionamiento, arranque, pruebas,
+proxy WebSocket, auditoría F1.6 y evidencia de recuperación F1.7.
+
+La integración continua crea una instancia PostgreSQL 16 efímera del runner
+para las pruebas de integración. No requiere un motor de contenedores instalado
+en el equipo del desarrollador.
+
+Documentos principales:
+
 - [Uso del Sistema](<docs/Uso del Sistema.md>)
+- [Ejecución nativa F1.4](docs/ejecucion-nativa-f1-4.md)
+- [Ejecución nativa F1.5](docs/ejecucion-nativa-f1-5.md)
+- [Seguridad local F1.6](docs/ejecucion-nativa-f1-6.md)
+- [Recuperación F1.7](docs/ejecucion-nativa-f1-7.md)
+- [Evidencia F1.7](docs/evidencia-f1-7-recuperacion-post-migracion-2026-09-21.md)
+- [Plan de migración nativa](docs/plan-f1-postgresql-nativo-sin-docker.md)
+
+Los archivos de Compose y Dockerfile permanecen como compatibilidad histórica
+y no forman parte del camino operativo aprobado.

@@ -32,6 +32,7 @@ test-results/
 
 # Runtime data
 .runtime/
+backups/
 logs/
 *.log
 uploads/

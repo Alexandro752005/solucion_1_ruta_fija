@@ -1,319 +1,242 @@
 # Uso del Sistema
 
-Guía de instalación, puesta en marcha y operación del **CRM Web Administrativo
-y Reportes — Ruta Fija**. Está escrita para que una persona nueva pueda clonar
-el proyecto y ejecutarlo desde otro equipo sin instalar PostgreSQL, pgAdmin ni
-una aplicación móvil.
+Guía de instalación y operación del CRM Web Administrativo y Reportes de
+Ruta Fija. Está orientada a una persona que abre el proyecto en otro equipo
+Windows y usa PostgreSQL 16 instalado localmente.
 
-## 1. Qué incluye la solución
+## 1. Qué hace Ruta Fija
 
-El sistema es un CRM web para administrar organizaciones, usuarios, grupos,
-conductores, vehículos, asignaciones, incidencias, comunicados, reportes y
-auditoría. Usa:
+El CRM permite gestionar organizaciones, usuarios, grupos, conductores,
+vehículos, asignaciones, incidencias, comunicados, reportes y auditoría.
 
-| Componente | Tecnología |
+La solución vigente no incluye aplicación móvil, GPS, mapas, aceptación o
+rechazo por conductor, notificaciones push, correo ni almacenamiento externo.
+Las asignaciones administrativas nacen como SCHEDULED.
+
+## 2. Requisitos
+
+| Requisito | Finalidad |
 | --- | --- |
-| CRM | Angular 22 servido por Nginx |
-| API | Java 21, Spring Boot 3.5 |
-| Base de datos | PostgreSQL 16 dentro de Docker Desktop |
-| Migraciones | Flyway |
-| Contenedores | Docker Compose |
+| Windows 10/11 y PowerShell | Scripts de operación local |
+| Git | Clonar y actualizar el código |
+| PostgreSQL 16 + psql | Base de datos local en puerto 5432 |
+| Java 21 | API Spring Boot |
+| Node.js 24.16.x + npm | CRM Angular |
+| Visual Studio Code | Recomendado para tareas y edición |
 
-El alcance no incluye aplicación móvil, GPS, mapas, aceptación/rechazo del
-conductor, FCM, SMTP, S3 ni una base de datos externa. Las asignaciones se
-crean de forma administrativa como `SCHEDULED`, sin simular una respuesta de
-conductor.
+Antes de iniciar, confirme que PostgreSQL es un servicio local y que su puerto
+no está publicado hacia otras computadoras. La configuración aprobada escucha
+solo 127.0.0.1 y ::1.
 
-## 2. Requisitos del equipo nuevo
+## 3. Clonar y preparar PostgreSQL
 
-Instale y compruebe lo siguiente antes de clonar el proyecto:
+Clone el proyecto:
 
-| Requisito | Uso |
-| --- | --- |
-| Git | Descargar actualizaciones desde GitHub. |
-| Docker Desktop | Ejecutar PostgreSQL, API y CRM. Debe estar iniciado. |
-| Docker Compose v2 | Incluido normalmente con Docker Desktop. |
-| Windows 10/11 + PowerShell | Recomendado para los scripts `.bat`. |
-| Visual Studio Code + extensión Docker | Recomendado, no obligatorio. |
-
-Java, Maven, Node.js y npm no son necesarios para ejecutar la solución con
-Docker. Solo se requieren para desarrollar o ejecutar las pruebas localmente.
-
-En PowerShell, valide Docker:
-
-```powershell
-docker version
-docker compose version
-```
-
-Si Docker Desktop solicita actualizar WSL, ejecute PowerShell como administrador:
-
-```powershell
-wsl --update --web-download
-```
-
-Reinicie el equipo si Windows lo solicita y abra Docker Desktop antes de
-continuar.
-
-## 3. Clonar el proyecto desde GitHub
-
-Clone el repositorio público desde GitHub:
-
-```powershell
+~~~powershell
 git clone https://github.com/Alexandro752005/solucion_1_ruta_fija.git
 Set-Location solucion_1_ruta_fija
-```
+~~~
 
-No copie el archivo `.env` de otra persona por correo, chat o Git. Cada equipo
-debe crear sus propios secretos locales en el siguiente paso.
+En pgAdmin o psql cree una base vacía llamada solucion_ruta_fija_1. Defina un
+usuario administrativo local como bootstrap; solo se usa para crear y revisar
+los roles técnicos iniciales. No use una clave compartida ni la guarde dentro
+del repositorio.
 
-## 4. Configurar el archivo `.env`
+El proyecto separa estos destinos:
 
-Desde la raíz clonada, cree la configuración local:
-
-```powershell
-Copy-Item .env.example .env
-```
-
-Abra `.env` en VS Code y complete como mínimo estas variables:
-
-| Variable | Qué colocar |
-| --- | --- |
-| `POSTGRES_PASSWORD` | Contraseña local exclusiva para PostgreSQL. |
-| `JWT_SECRET_BASE64` | Secreto aleatorio Base64 de al menos 32 bytes. |
-| `DEMO_USER_PASSWORD` | Contraseña de al menos 12 caracteres para las cuentas de demostración. |
-| `POSTGRES_PORT` | `5432`, salvo que otro servicio ya ocupe ese puerto. |
-| `BACKEND_PORT` | `8080`, salvo conflicto. |
-| `FRONTEND_PORT` | `4200`, salvo conflicto. |
-| `APP_CORS_ALLOWED_ORIGINS` | La URL exacta del CRM; por defecto `http://localhost:4200`. |
-
-Para generar `JWT_SECRET_BASE64`, ejecute una sola vez:
-
-```powershell
-$jwtBytes = New-Object byte[] 32
-$jwtRng = [System.Security.Cryptography.RandomNumberGenerator]::Create()
-try { $jwtRng.GetBytes($jwtBytes) } finally { $jwtRng.Dispose() }
-[Convert]::ToBase64String($jwtBytes)
-```
-
-Copie el resultado en `JWT_SECRET_BASE64=`. No publique, capture ni comparta
-el contenido de `.env`. El archivo está excluido por `.gitignore`.
-
-Si cambia `FRONTEND_PORT`, actualice también
-`APP_CORS_ALLOWED_ORIGINS=http://localhost:<PUERTO_FRONTEND>`.
-
-## 5. Iniciar por primera vez
-
-1. Abra Docker Desktop y espere que su motor esté activo.
-2. Desde el Explorador de Windows o desde una consola en la raíz del proyecto,
-   ejecute:
-
-   ```powershell
-   .\iniciar_ruta_fija.bat
-   ```
-
-3. El script valida Docker, Compose y `.env`; después construye y espera los
-   tres servicios. La primera construcción descarga dependencias y puede tomar
-   varios minutos. Las siguientes son normalmente más rápidas.
-4. Cuando se muestre `Entorno disponible`, abra:
-
-   | Recurso | Dirección |
-   | --- | --- |
-   | CRM | [http://localhost:4200](http://localhost:4200) |
-   | API | [http://localhost:8080/api/v1](http://localhost:8080/api/v1) |
-   | Salud | [http://localhost:8080/actuator/health](http://localhost:8080/actuator/health) |
-   | OpenAPI | [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs) |
-
-La salud correcta devuelve `{"status":"UP"}`. Para comprobar los
-contenedores en cualquier momento:
-
-```powershell
-docker compose --profile app ps
-```
-
-Los tres servicios deben aparecer como `healthy`: `postgres`, `backend` y
-`frontend`.
-
-## 6. Iniciar sesión y roles
-
-En el primer arranque con una base nueva, el perfil local crea cuentas de
-demostración. Todas usan la contraseña que se escribió en
-`DEMO_USER_PASSWORD` **al crear esa base**.
-
-| Usuario | Rol | Uso principal |
+| Destino | Propósito | Regla |
 | --- | --- | --- |
-| `superadmin@rutafija.local` | `SUPER_ADMIN` | Gestión de organizaciones. |
-| `admin.norte@rutafija.local` | `ADMINISTRADOR` | Administración, reportes y auditoría de Ruta Norte. |
-| `coordinador.norte@rutafija.local` | `COORDINADOR` | Operación de los grupos visibles de Ruta Norte. |
-| `admin.sur@rutafija.local` | `ADMINISTRADOR` | Administración, reportes y auditoría de Ruta Sur. |
-| `coordinador.sur@rutafija.local` | `COORDINADOR` | Operación de los grupos visibles de Ruta Sur. |
+| solucion_ruta_fija_1 | Desarrollo y CRM local | Nunca usar para pruebas automáticas |
+| ruta_fija_test | Integraciones | Se limpia automáticamente |
+| ruta_fija_recovery_YYYYMMDD_fNN | Recuperación | No ejecutar la aplicación allí |
 
-Use inicialmente `admin.norte@rutafija.local` para conocer todas las pantallas
-administrativas. Si se modifica `DEMO_USER_PASSWORD` después de que las cuentas
-ya existan, sus contraseñas no se cambian automáticamente: no borre datos para
-resolverlo salvo que la base sea solo de demostración.
+## 4. Aprovisionamiento inicial
 
-### Navegación de la interfaz
+Estos pasos se ejecutan una sola vez sobre una base de desarrollo vacía.
 
-La cabecera posee dos franjas: identidad y sesión en la parte superior, y una
-topbar de módulos debajo. La línea amarilla indica el módulo activo. En
-pantallas estrechas, el botón **Menú** abre la misma navegación en la parte
-superior; no existe un menú lateral.
+1. Cree el archivo privado de configuración. La contraseña se solicita de
+   forma oculta y se genera un JWT aleatorio.
 
-| Rol | Navegación disponible |
+   ~~~powershell
+   .\scripts\Initialize-RutaFijaNativeConfig.ps1
+   ~~~
+
+2. Cree roles técnicos y la base de pruebas aislada.
+
+   ~~~powershell
+   .\scripts\Initialize-RutaFijaPostgresqlRoles.ps1
+   ~~~
+
+3. Aplique Flyway y compruebe estructura, auditoría, constraints, UTC y
+   privilegios.
+
+   ~~~powershell
+   .\scripts\Invoke-RutaFijaFlywayF13.ps1
+   .\scripts\Test-RutaFijaMigratedSchemaF13.ps1
+   ~~~
+
+4. Instale dependencias web.
+
+   ~~~powershell
+   Set-Location frontend
+   npm.cmd ci
+   Set-Location ..
+   ~~~
+
+Los archivos creados en backend/.local contienen secretos locales. Están
+ignorados por Git y no deben adjuntarse a correos, chats o repositorios.
+
+## 5. Iniciar y detener
+
+Ejecute:
+
+~~~powershell
+.\iniciar_ruta_fija.bat
+~~~
+
+Cuando termine correctamente, abra:
+
+| Recurso | Dirección |
 | --- | --- |
-| ADMINISTRADOR | Resumen, Usuarios, Organización, Grupos, Conductores, Vehículos, Asignaciones, Incidencias, Comunicados, Reportes y Auditoría. |
-| COORDINADOR | Resumen, Grupos, Conductores, Vehículos, Asignaciones, Incidencias y Comunicados. |
-| SUPER_ADMIN | Resumen y Organizaciones. |
+| CRM | http://localhost:4200 |
+| API | http://127.0.0.1:8080/api/v1 |
+| Estado de API | http://127.0.0.1:8080/actuator/health |
+| Contrato OpenAPI | http://127.0.0.1:8080/v3/api-docs |
 
-Las vistas comienzan con filtros y tabla. **Nuevo**, **Editar** o **Ver detalle**
-abren ventanas dentro del sistema. Puede cerrarlas con **Cancelar**, el botón
-de cierre o la tecla `Escape`. Las acciones de riesgo piden confirmación y los
-datos ingresados se conservan si el servidor devuelve un error de validación.
+Para detener solamente procesos administrados por Ruta Fija:
 
-## 7. Recorrido funcional recomendado
+~~~powershell
+.\finalizar_ruta_fija.bat
+~~~
 
-### 7.1 Administración inicial
+PostgreSQL se conserva como servicio local y la base de datos no se elimina.
+El inicio normal mantiene las semillas desactivadas, por lo que no se publican
+usuarios ni contraseñas de demostración.
 
-1. Ingrese como administrador.
-2. Revise **Usuarios**, **Grupos**, **Conductores** y **Vehículos**.
-3. Cree o edite recursos dentro de la organización correspondiente.
-4. Asigne coordinadores a los grupos que podrán operar.
+## 6. Acceso y navegación
 
-El aislamiento entre organizaciones se aplica en el servidor: un usuario de
-una organización no puede consultar ni modificar filas de otra, incluso si
-altera la URL del navegador.
+El acceso requiere un usuario existente de la organización. La aplicación no
+crea cuentas de muestra en el arranque nativo. El primer SUPER_ADMIN debe
+provisionarse de forma controlada por el responsable de la base y nunca con
+credenciales conocidas.
 
-### 7.2 Estados operativos
+La cabecera muestra la identidad y sesión arriba, y la navegación de módulos
+debajo. En pantallas estrechas, el botón Menú abre la misma navegación.
 
-Respete estas reglas durante la operación:
-
-| Recurso | Estados y regla |
+| Rol vigente | Módulos |
 | --- | --- |
-| Conductor | `DISPONIBLE → RESERVADO → EN_SERVICIO → DISPONIBLE`; cambios administrativos controlados a `DESCANSO` y `NO_DISPONIBLE`. |
-| Vehículo | `DISPONIBLE`, `EN_SERVICIO`, `MANTENIMIENTO`, `INACTIVO`. Una reserva futura no lo cambia a `RESERVADO`. |
-| Asignación | Nace `SCHEDULED`; se puede reservar, iniciar, completar o cancelar. |
+| SUPER_ADMIN | Resumen y organizaciones |
+| ADMINISTRADOR | Resumen, usuarios, organización, grupos, conductores, vehículos, asignaciones, incidencias, comunicados, reportes y auditoría |
+| COORDINADOR | Resumen, grupos, conductores, vehículos, asignaciones, incidencias y comunicados |
 
-Una reserva es una acción del coordinador, no una aceptación del conductor. El
-sistema bloquea solapamientos de conductor y vehículo tanto en la aplicación
-como en PostgreSQL.
+Las futuras decisiones de producto pueden consolidar ADMINISTRADOR y
+COORDINADOR en un único rol ADMIN; ese cambio no se activa con esta guía ni
+altera la autorización actual.
 
-### 7.3 Operación diaria
+## 7. Operación funcional
 
-1. En **Asignaciones**, cree el servicio con conductor, vehículo, origen,
-   destino y horario.
-2. Reserve cuando corresponda; el conductor pasa a `RESERVADO`.
-3. Inicie el servicio; conductor y vehículo pasan a `EN_SERVICIO`.
-4. Complete o cancele con motivo. El sistema registra auditoría y actualiza
-   los estados permitidos.
-5. En **Incidencias**, registre, haga seguimiento y resuelva eventos reales
-   reportados desde el CRM.
-6. En **Comunicados**, publique avisos a la organización o a un grupo visible.
+### 7.1 Recursos
+
+Use Usuarios, Grupos, Conductores y Vehículos para registrar los recursos de
+la organización. El servidor deriva la organización del usuario autenticado:
+modificar una URL del navegador no permite acceder a otra empresa.
+
+### 7.2 Estados y asignaciones
+
+| Recurso | Regla |
+| --- | --- |
+| Conductor | DISPONIBLE → RESERVADO → EN_SERVICIO → DISPONIBLE, con cambios controlados a DESCANSO y NO_DISPONIBLE |
+| Vehículo | DISPONIBLE, EN_SERVICIO, MANTENIMIENTO o INACTIVO |
+| Asignación | Nace SCHEDULED; se reserva, inicia, completa o cancela desde el CRM |
+
+Una reserva futura no convierte físicamente al vehículo en RESERVADO. La
+indisponibilidad futura se calcula a partir de asignaciones programadas.
+PostgreSQL y la aplicación bloquean solapamientos de conductor y vehículo.
+
+### 7.3 Incidencias y comunicados
+
+Registre incidencias, haga seguimiento y resuélvalas desde el CRM. Los
+comunicados se publican a la organización o a un grupo visible. Las acciones
+críticas generan eventos de auditoría que no pueden editarse ni eliminarse.
 
 ### 7.4 Reportes y auditoría
 
-Solo el rol `ADMINISTRADOR` puede ver **Reportes** y **Auditoría**.
+Reportes obtiene disponibilidad, asignaciones e incidencias desde datos
+persistidos. Puede limitar fechas y descargar resultados cuando el módulo lo
+habilite. Auditoría es de solo lectura: filtra, pagina y muestra detalle de
+eventos sin permitir modificarlos.
 
-- Reportes muestra disponibilidad actual, asignaciones e incidencias desde
-  filas persistidas de PostgreSQL.
-- El rango máximo es 90 días y 10 000 registros por consulta.
-- Las descargas PDF y Excel (`.xlsx`) se generan en el backend; CSV neutraliza
-  fórmulas potencialmente peligrosas.
-- Auditoría es solo de lectura: permite filtrar, paginar y consultar detalles
-  sin crear, editar ni eliminar eventos.
+## 8. Verificación técnica
 
-## 8. Detener, reiniciar y actualizar
+Pruebas unitarias del backend:
 
-Para detener sin perder la base local:
-
-```powershell
-.\finalizar_ruta_fija.bat
-```
-
-El script usa `docker compose down` sin `--volumes`; por ello conserva
-`postgres_data`. Para volver a iniciar, ejecute `iniciar_ruta_fija.bat`.
-
-Al recibir cambios del repositorio:
-
-```powershell
-git pull
-.\iniciar_ruta_fija.bat
-```
-
-Flyway aplica automáticamente migraciones nuevas y versionadas. Antes de
-actualizar una instalación con datos importantes, respalde la información con
-el procedimiento aprobado por su equipo; el proyecto no configura por sí solo
-una política de copias, retención o restauración de producción.
-
-### Restablecer una demostración desde cero
-
-Solo si no necesita los datos locales, ejecute:
-
-```powershell
-docker compose --profile app down --volumes
-.\iniciar_ruta_fija.bat
-```
-
-> Advertencia: `--volumes` elimina de forma irreversible la base local. No lo
-> use para resolver un problema de contraseña en un entorno que tenga datos que
-> deban conservarse.
-
-## 9. Verificación y desarrollo opcional
-
-Con Java 21, Node.js 24 y Docker Desktop disponibles, ejecute las puertas de
-calidad desde las terminales integradas:
-
-```powershell
+~~~powershell
 Set-Location backend
-.\mvnw.cmd clean verify
-```
+.\mvnw.cmd test
+Set-Location ..
+~~~
 
-```powershell
-Set-Location ..\frontend
-npm.cmd ci
-npm.cmd run typecheck
-npm.cmd run test:ci
-npm.cmd run build
-npm.cmd audit --audit-level=high
-```
+Verificación completa nativa:
 
-La validación backend utiliza PostgreSQL 16 efímero mediante Testcontainers;
-por eso Docker debe estar activo incluso para `verify`.
+~~~powershell
+.\verificar_ruta_fija.bat
+~~~
 
-## 10. Solución de problemas
+La salida esperada termina en F1_4_NATIVE_VERIFY=PASS. Las pruebas usan solo
+ruta_fija_test y limpian datos al finalizar.
 
-| Síntoma | Causa probable y acción |
+Para revisar REST, login, refresh y WebSocket desde el proxy Angular:
+
+~~~powershell
+.\scripts\Invoke-RutaFijaRealtimeProxySmoke.ps1 -Action Verify
+~~~
+
+Antes del smoke, cierre el runtime normal para liberar 8080 y 4200.
+
+## 9. Seguridad y backup
+
+Abra PowerShell o Visual Studio Code como Administrador y ejecute una sola vez:
+
+~~~powershell
+.\scripts\Set-RutaFijaPostgresqlLoopbackF16.ps1
+.\scripts\Test-RutaFijaNativeSecurityF16.ps1
+~~~
+
+La primera orden limita PostgreSQL a loopback y reinicia el servicio. La segunda
+revisa SCRAM, HBA, roles sin privilegios administrativos, secretos fuera de Git
+y automatización nativa.
+
+Para generar evidencia de recuperación post-migración:
+
+~~~powershell
+.\scripts\Invoke-RutaFijaRecoveryEvidenceF17.ps1
+~~~
+
+El proceso crea un dump en backups/ y una nueva base de recuperación; no
+sobrescribe una existente. Guarde una copia del dump fuera del equipo si los
+datos son importantes.
+
+## 10. Problemas frecuentes
+
+| Síntoma | Acción |
 | --- | --- |
-| El `.bat` indica que Docker no responde | Abra Docker Desktop, espere su estado activo y ejecute de nuevo el script. |
-| Falta `.env` | Ejecute `Copy-Item .env.example .env`, complete los tres secretos requeridos y vuelva a iniciar. |
-| Puerto ocupado | Cambie `POSTGRES_PORT`, `BACKEND_PORT` o `FRONTEND_PORT` en `.env`; si cambia el frontend, ajuste también CORS. |
-| El primer inicio tarda | Es normal durante descarga/compilación. El iniciador espera hasta 360 s por el backend. Revise logs si excede ese tiempo. |
-| No se puede iniciar sesión | Verifique el usuario y la contraseña que se usó en `DEMO_USER_PASSWORD` al crear la base. Si la base se preservó, cambiar ahora `.env` no cambia la cuenta existente. |
-| El CRM no abre, pero API está sana | Ejecute `docker compose --profile app ps` y revise `frontend`; luego use los logs indicados abajo. |
-| Una asignación es rechazada | Compruebe estados de conductor/vehículo, horarios y solapamientos existentes. |
+| PostgreSQL no responde | Confirme que el servicio PostgreSQL 16 esté iniciado y que 5432 no pertenezca a otro programa |
+| Falta configuración local | Ejecute Initialize-RutaFijaNativeConfig.ps1; no cree archivos manuales con secretos |
+| La prueba falla por destino | Verifique que ruta_fija_test exista y que no se haya cambiado su URL |
+| CRM no abre | Revise .runtime/backend.stderr.log y .runtime/frontend.stderr.log; use finalizar_ruta_fija.bat antes de un nuevo intento |
+| No se puede iniciar sesión | Solicite un usuario existente al responsable de la organización; no habilite semillas solo para adivinar credenciales |
+| F1.6 solicita administrador | Cierre la consola, ábrala como Administrador y ejecute nuevamente el script |
 
-Para revisar los últimos registros sin modificar datos:
-
-```powershell
-docker compose --profile app logs --tail 200 postgres backend frontend
-```
-
-## 11. Estructura y documentación de referencia
+## 11. Rutas de referencia
 
 | Ruta | Contenido |
 | --- | --- |
-| `backend/` | API Spring Boot, migraciones Flyway y pruebas. |
-| `frontend/` | CRM Angular y pruebas de interfaz. |
-| `compose.yaml` | Definición de contenedores locales. |
-| `.env.example` | Plantilla segura de configuración local. |
-| `iniciar_ruta_fija.bat` | Inicio validado para Windows. |
-| `finalizar_ruta_fija.bat` | Cierre preservando la base local. |
-| `docs/auditoria-final-fase-4.md` | Dictamen y observaciones de cierre. |
-| `docs/evidencia-fase-4-2026-08-30.md` | Pruebas y evidencia ejecutada. |
-| `docs/fase-5-estado.md` | Alcance y resultado del rediseño integral. |
-| `docs/auditoria-final-fase-5.md` | Dictamen técnico y riesgos residuales de Fase 5. |
-| `docs/evidencia-fase-5-2026-08-30.md` | Evidencia de pruebas y ejecución de Fase 5. |
+| backend/ | API, módulos, Flyway y pruebas |
+| frontend/ | CRM Angular, proxy y pruebas de interfaz |
+| scripts/ | Operación nativa, seguridad y recuperación |
+| .vscode/tasks.json | Tareas integradas del proyecto |
+| backups/ | Dumps locales ignorados por Git |
+| docs/ | Diseño, evidencia y manuales |
 
-Consulte además el [README principal](../README.md), la
-[matriz de trazabilidad](matriz-trazabilidad-final.md) y el
-[reporte de cumplimiento Java](../REPORTE_CUMPLIMIENTO_JAVA.md).
+Consulte también el [README principal](../README.md), las guías de
+[F1.4](ejecucion-nativa-f1-4.md) y [F1.5](ejecucion-nativa-f1-5.md).
