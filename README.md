@@ -150,6 +150,14 @@ excluida de Git:
 .\scripts\Invoke-RutaFijaRecoveryEvidenceF17.ps1
 ~~~
 
+Antes de la migración de roles V6, ejecute la línea base F2.1A con API y CRM
+detenidos. El control crea un dump pre-V6 y restaura una copia nueva sin tocar
+desarrollo:
+
+~~~powershell
+.\scripts\Invoke-RutaFijaF21aBaseline.ps1
+~~~
+
 ## Automatización y documentación
 
 Las tareas Ruta Fija de VS Code cubren aprovisionamiento, arranque, pruebas,
@@ -168,6 +176,9 @@ Documentos principales:
 - [Evidencia F1.6](docs/evidencia-f1-6-seguridad-local-2026-09-22.md)
 - [Recuperación F1.7](docs/ejecucion-nativa-f1-7.md)
 - [Evidencia F1.7](docs/evidencia-f1-7-recuperacion-post-migracion-2026-09-21.md)
+- [Línea base F2.1A](docs/ejecucion-nativa-f2-1a.md)
+- [Caracterización pre-V6](docs/f2-1a-caracterizacion-pre-v6.md)
+- [Evidencia F2.1A](docs/evidencia-f2-1a-linea-base-pre-v6-2026-09-22.md)
 - [Plan de migración nativa](docs/plan-f1-postgresql-nativo-sin-docker.md)
 
 Los archivos de Compose y Dockerfile permanecen como compatibilidad histórica
