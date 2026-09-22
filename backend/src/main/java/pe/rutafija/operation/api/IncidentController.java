@@ -50,7 +50,7 @@ public class IncidentController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Listar incidencias registradas en el CRM")
     public ResponseEntity<PageResponse<IncidentResponse>> list(
             @RequestParam(required = false) UUID driverId,
@@ -75,7 +75,7 @@ public class IncidentController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Registrar una incidencia manualmente desde el CRM web")
     public ResponseEntity<IncidentResponse> create(@Valid @RequestBody IncidentCreateRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -84,7 +84,7 @@ public class IncidentController {
     }
 
     @GetMapping("/{incidentId}")
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Consultar una incidencia")
     public ResponseEntity<IncidentResponse> get(@PathVariable UUID incidentId) {
         return ResponseEntity.ok()
@@ -93,7 +93,7 @@ public class IncidentController {
     }
 
     @PatchMapping("/{incidentId}/follow-up")
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Registrar seguimiento o resolver una incidencia")
     public ResponseEntity<IncidentResponse> followUp(
             @PathVariable UUID incidentId,

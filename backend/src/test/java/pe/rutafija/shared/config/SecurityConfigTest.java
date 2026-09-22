@@ -30,16 +30,34 @@ class SecurityConfigTest {
                 "admin@rutafija.test",
                 "hash",
                 "Administrador actual",
-                UserRole.ADMINISTRADOR
+                UserRole.ADMIN
+        );
+        when(userRepository.findOneById(user.getId())).thenReturn(Optional.of(user));
+
+        AbstractAuthenticationToken authentication = converter.convert(jwt(user, "ADMIN"));
+
+        assertThat(authentication).isNotNull();
+        assertThat(authentication.getAuthorities())
+                .extracting("authority")
+                .containsExactly("ROLE_ADMIN");
+    }
+
+    @Test
+    void doesNotGrantAnAuthorityWhenTheTokenCarriesARetiredRole() {
+        Organization organization = Organization.active("Operación", "Operación", "America/Lima");
+        AppUser user = AppUser.organizationUser(
+                organization,
+                "admin@rutafija.test",
+                "hash",
+                "Admin actual",
+                UserRole.ADMIN
         );
         when(userRepository.findOneById(user.getId())).thenReturn(Optional.of(user));
 
         AbstractAuthenticationToken authentication = converter.convert(jwt(user, "ADMINISTRADOR"));
 
         assertThat(authentication).isNotNull();
-        assertThat(authentication.getAuthorities())
-                .extracting("authority")
-                .containsExactly("ROLE_ADMINISTRADOR");
+        assertThat(authentication.getAuthorities()).isEmpty();
     }
 
     @Test
@@ -50,11 +68,11 @@ class SecurityConfigTest {
                 "missing@rutafija.test",
                 "hash",
                 "Usuario eliminado",
-                UserRole.ADMINISTRADOR
+                UserRole.ADMIN
         );
         when(userRepository.findOneById(missingUser.getId())).thenReturn(Optional.empty());
 
-        AbstractAuthenticationToken authentication = converter.convert(jwt(missingUser, "ADMINISTRADOR"));
+        AbstractAuthenticationToken authentication = converter.convert(jwt(missingUser, "ADMIN"));
 
         assertThat(authentication).isNotNull();
         assertThat(authentication.getAuthorities()).isEmpty();

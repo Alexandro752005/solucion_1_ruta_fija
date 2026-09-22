@@ -46,7 +46,7 @@ public class AuditQueryService {
             Instant to,
             Pageable pageable
     ) {
-        AppUser actor = requireAdministrator();
+        AppUser actor = requireAdmin();
         validateRange(from, to);
         Page<AuditEvent> events = repository.findAll(
                 AuditEventSpecifications.filter(actor.getOrganizationId(), action, entityType, from, to),
@@ -57,7 +57,7 @@ public class AuditQueryService {
 
     @Transactional(readOnly = true)
     public AuditEventResponse get(UUID auditEventId) {
-        AppUser actor = requireAdministrator();
+        AppUser actor = requireAdmin();
         AuditEvent event = repository.findOne(AuditEventSpecifications.byIdAndOrganization(
                         auditEventId,
                         actor.getOrganizationId()
@@ -66,13 +66,13 @@ public class AuditQueryService {
         return response(event);
     }
 
-    private AppUser requireAdministrator() {
+    private AppUser requireAdmin() {
         AppUser actor = currentUserService.requireTenantActor();
-        if (actor.getRole() != UserRole.ADMINISTRADOR) {
+        if (actor.getRole() != UserRole.ADMIN) {
             throw new ApplicationException(
                     HttpStatus.FORBIDDEN,
                     ErrorCode.FORBIDDEN_ROLE,
-                    "La consulta de auditoría requiere el rol ADMINISTRADOR"
+                    "La consulta de auditoría requiere el rol ADMIN"
             );
         }
         return actor;

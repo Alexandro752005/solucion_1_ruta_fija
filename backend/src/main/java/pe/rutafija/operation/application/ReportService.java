@@ -60,7 +60,7 @@ public class ReportService {
 
     @Transactional(readOnly = true)
     public AvailabilityReportResponse availability() {
-        AppUser actor = requireAdministrator();
+        AppUser actor = requireAdmin();
         return new AvailabilityReportResponse(
                 Instant.now(clock),
                 toResponse(reportRepository.driverAvailability(actor.getOrganizationId())),
@@ -73,7 +73,7 @@ public class ReportService {
 
     @Transactional(readOnly = true)
     public AssignmentReportResponse assignments(LocalDate from, LocalDate to) {
-        AppUser actor = requireAdministrator();
+        AppUser actor = requireAdmin();
         ReportRange range = validateRange(actor, from, to);
         Page<Assignment> page = assignmentRepository.search(
                 actor.getOrganizationId(),
@@ -97,7 +97,7 @@ public class ReportService {
 
     @Transactional(readOnly = true)
     public IncidentReportResponse incidents(LocalDate from, LocalDate to) {
-        AppUser actor = requireAdministrator();
+        AppUser actor = requireAdmin();
         ReportRange range = validateRange(actor, from, to);
         Page<Incident> page = incidentRepository.search(
                 actor.getOrganizationId(),
@@ -122,13 +122,13 @@ public class ReportService {
         );
     }
 
-    private AppUser requireAdministrator() {
+    private AppUser requireAdmin() {
         AppUser actor = currentUserService.requireTenantActor();
-        if (actor.getRole() != UserRole.ADMINISTRADOR) {
+        if (actor.getRole() != UserRole.ADMIN) {
             throw new ApplicationException(
                     HttpStatus.FORBIDDEN,
                     ErrorCode.FORBIDDEN_ROLE,
-                    "Los reportes operativos requieren el rol ADMINISTRADOR"
+                    "Los reportes operativos requieren el rol ADMIN"
             );
         }
         return actor;

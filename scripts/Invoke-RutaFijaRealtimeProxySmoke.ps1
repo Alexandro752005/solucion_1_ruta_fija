@@ -296,7 +296,7 @@ try {
 
     $authorization = @{ Authorization = ('Bearer ' + $login.accessToken); Origin = 'http://localhost:4200' }
     $me = Invoke-RestMethod -Uri 'http://localhost:4200/api/v1/auth/me' -Method Get -Headers $authorization
-    if ($me.role -ne 'ADMINISTRADOR') {
+    if ($me.role -ne 'ADMIN') {
         throw 'F1.5 no confirmó el usuario administrativo de prueba.'
     }
 

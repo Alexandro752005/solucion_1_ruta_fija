@@ -182,9 +182,9 @@ SELECT current_database(),
        (SELECT count(*) FROM pg_tables WHERE schemaname = 'public' AND tablename <> 'flyway_schema_history'),
        (SELECT string_agg(tablename, ',' ORDER BY tablename) FROM pg_tables WHERE schemaname = 'public' AND tablename <> 'flyway_schema_history'),
        (SELECT count(*) FROM flyway_schema_history),
-       (SELECT count(*) = 5
+       (SELECT count(*) = 6
                  AND bool_and(success)
-                 AND array_agg(version::text ORDER BY installed_rank) = ARRAY['1', '2', '3', '4', '5']::text[]
+                 AND array_agg(version::text ORDER BY installed_rank) = ARRAY['1', '2', '3', '4', '5', '6']::text[]
           FROM flyway_schema_history),
        EXISTS (SELECT 1 FROM pg_extension WHERE extname = 'btree_gist'),
        (SELECT string_agg(conname, ',' ORDER BY conname)
@@ -193,6 +193,11 @@ SELECT current_database(),
            AND conname IN ('ex_assignment_driver_schedule_no_overlap', 'ex_assignment_vehicle_schedule_no_overlap')),
        EXISTS (SELECT 1 FROM pg_trigger WHERE tgname = 'trg_audit_event_append_only' AND NOT tgisinternal),
        POSITION('DESCONECTADO' IN (SELECT pg_get_constraintdef(oid) FROM pg_constraint WHERE conname = 'ck_driver_availability_status')) = 0,
+       (SELECT POSITION('ADMINISTRADOR' IN pg_get_constraintdef(oid)) = 0
+               AND POSITION('COORDINADOR' IN pg_get_constraintdef(oid)) = 0
+               AND POSITION('ADMIN' IN pg_get_constraintdef(oid)) > 0
+          FROM pg_constraint
+         WHERE conname = 'ck_app_user_role'),
        pg_get_userbyid((SELECT datdba FROM pg_database WHERE datname = current_database())),
        (SELECT count(*)
           FROM pg_class c
@@ -240,16 +245,20 @@ $developmentCatalog = Get-SuccessLastRow -Operation 'catalogo migrado de desarro
 $expectedBusinessTables = 'announcement,app_user,assignment,audit_event,driver,driver_vehicle_link,group_coordinator,incident,organization,refresh_token,transport_group,vehicle'
 $expectedConstraints = 'ex_assignment_driver_schedule_no_overlap,ex_assignment_vehicle_schedule_no_overlap'
 $developmentExpected = @(
-    $developmentDatabase, 'rf_migrator', 'UTC', 'UTF8', '12', $expectedBusinessTables, '5', 't', 't',
-    $expectedConstraints, 't', 't', 'rf_migrator', '12', 'rf_migrator', 'f', 't', 't', 't', 't', 't', '0'
+    $developmentDatabase, 'rf_migrator', 'UTC', 'UTF8', '12', $expectedBusinessTables, '6', 't', 't',
+    $expectedConstraints, 't', 't', 't', 'rf_migrator', '12', 'rf_migrator', 'f', 't', 't', 't', 't', 't', '0'
 ) -join '|'
 if ($developmentCatalog -ne $developmentExpected) {
     throw 'El catalogo de desarrollo no satisface la evidencia estructural F1.3.'
 }
 
-$testCatalog = Get-SuccessLastRow -Operation 'aislamiento de pruebas tras F1.3' -Result (Invoke-DatabaseOperation -Database $testDatabase -Username 'rf_migrator' -Password $settings['SPRING_FLYWAY_PASSWORD'] -Query "SELECT current_database(), current_user, current_setting('TimeZone'), current_setting('server_encoding'), (SELECT count(*) FROM pg_tables WHERE schemaname NOT IN ('pg_catalog', 'information_schema')), (to_regclass('public.flyway_schema_history') IS NULL);" -SqlFile $null)
-if ($testCatalog -ne "$testDatabase|rf_migrator|UTC|UTF8|0|t") {
-    throw 'F1.3 modifico indebidamente la base de pruebas.'
+$testCatalog = Get-SuccessLastRow -Operation 'aislamiento de pruebas tras F2.2' -Result (Invoke-DatabaseOperation -Database $testDatabase -Username 'rf_migrator' -Password $settings['SPRING_FLYWAY_PASSWORD'] -Query "SELECT current_database(), current_user, current_setting('TimeZone'), current_setting('server_encoding'), (SELECT count(*) FROM pg_tables WHERE schemaname NOT IN ('pg_catalog', 'information_schema')), (to_regclass('public.flyway_schema_history') IS NULL);" -SqlFile $null)
+$allowedTestCatalogs = @(
+    "$testDatabase|rf_migrator|UTC|UTF8|0|t",
+    "$testDatabase|rf_migrator|UTC|UTF8|13|f"
+)
+if ($testCatalog -notin $allowedTestCatalogs) {
+    throw 'La base de pruebas no está aislada en un estado vacío o de esquema migrado permitido.'
 }
 
 $recoveryCatalog = Get-SuccessLastRow -Operation 'preservacion de recuperacion' -Result (Invoke-DatabaseOperation -Database $recoveryDatabase -Username $bootstrapSettings['RUTA_FIJA_BOOTSTRAP_USERNAME'] -Password $bootstrapSettings['RUTA_FIJA_BOOTSTRAP_PASSWORD'] -Query "SELECT current_database(), current_setting('server_encoding'), (SELECT count(*) FROM pg_tables WHERE schemaname NOT IN ('pg_catalog', 'information_schema')), (to_regclass('public.flyway_schema_history') IS NULL);" -SqlFile $null)
@@ -274,7 +283,7 @@ if ($businessDataCount -ne '0') {
     throw 'Las pruebas F1.3 dejaron datos de negocio persistentes.'
 }
 
-Write-Output 'F1_3_SCHEMA_AUDIT=PASS'
-Write-Output 'flyway=V1-V5 btree_gist=activo audit=append-only exclusion_constraints=activas'
+Write-Output 'F2_2_SCHEMA_AUDIT=PASS'
+Write-Output 'flyway=V1-V6 roles=SUPER_ADMIN,ADMIN,CONDUCTOR btree_gist=activo audit=append-only exclusion_constraints=activas'
 Write-Output 'rf_app=DML_selectivo_sin_DDL historia_Flyway=protegida'
-Write-Output 'F1.3 no inicio Spring Boot, API, CRM ni Docker.'
+Write-Output 'F2.2 no inició Spring Boot, API, CRM ni Docker.'

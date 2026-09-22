@@ -43,11 +43,11 @@ public class OperationStreamTicketService {
 
     public OperationStreamTicketResponse issue() {
         AppUser actor = currentUserService.requireTenantActor();
-        if (actor.getRole() != UserRole.ADMINISTRADOR && actor.getRole() != UserRole.COORDINADOR) {
+        if (actor.getRole() != UserRole.ADMIN) {
             throw new ApplicationException(
                     HttpStatus.FORBIDDEN,
                     ErrorCode.FORBIDDEN_ROLE,
-                    "El canal operativo solo está disponible para administradores y coordinadores"
+                    "El canal operativo solo está disponible para ADMIN"
             );
         }
         Instant now = Instant.now(clock);

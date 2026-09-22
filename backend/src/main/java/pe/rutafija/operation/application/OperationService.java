@@ -13,7 +13,6 @@ import pe.rutafija.fleet.domain.Vehicle;
 import pe.rutafija.fleet.domain.VehicleStatus;
 import pe.rutafija.fleet.infrastructure.DriverRepository;
 import pe.rutafija.fleet.infrastructure.DriverVehicleLinkRepository;
-import pe.rutafija.fleet.infrastructure.GroupCoordinatorRepository;
 import pe.rutafija.fleet.infrastructure.VehicleRepository;
 import pe.rutafija.identity.domain.AppUser;
 import pe.rutafija.identity.domain.UserRole;
@@ -49,7 +48,6 @@ public class OperationService {
     private final DriverRepository driverRepository;
     private final VehicleRepository vehicleRepository;
     private final DriverVehicleLinkRepository driverVehicleLinkRepository;
-    private final GroupCoordinatorRepository groupCoordinatorRepository;
     private final CurrentUserService currentUserService;
     private final AuditService auditService;
     private final OperationEventPublisher eventPublisher;
@@ -60,7 +58,6 @@ public class OperationService {
             DriverRepository driverRepository,
             VehicleRepository vehicleRepository,
             DriverVehicleLinkRepository driverVehicleLinkRepository,
-            GroupCoordinatorRepository groupCoordinatorRepository,
             CurrentUserService currentUserService,
             AuditService auditService,
             OperationEventPublisher eventPublisher,
@@ -70,7 +67,6 @@ public class OperationService {
         this.driverRepository = driverRepository;
         this.vehicleRepository = vehicleRepository;
         this.driverVehicleLinkRepository = driverVehicleLinkRepository;
-        this.groupCoordinatorRepository = groupCoordinatorRepository;
         this.currentUserService = currentUserService;
         this.auditService = auditService;
         this.eventPublisher = eventPublisher;
@@ -88,15 +84,11 @@ public class OperationService {
     ) {
         AppUser actor = requireOperationalActor();
         if (driverId != null) {
-            assertDriverVisible(actor, findTenantDriver(driverId, actor.getOrganizationId()));
+            findTenantDriver(driverId, actor.getOrganizationId());
         }
-        Page<Assignment> assignments = actor.getRole() == UserRole.COORDINADOR
-                ? assignmentRepository.searchVisibleToCoordinator(
-                        actor.getOrganizationId(), actor.getId(), driverId, vehicleId, status, from, to, pageable
-                )
-                : assignmentRepository.search(
-                        actor.getOrganizationId(), driverId, vehicleId, status, from, to, pageable
-                );
+        Page<Assignment> assignments = assignmentRepository.search(
+                actor.getOrganizationId(), driverId, vehicleId, status, from, to, pageable
+        );
         return PageResponse.from(assignments, AssignmentResponse::from);
     }
 
@@ -104,7 +96,6 @@ public class OperationService {
     public AssignmentResponse getAssignment(UUID assignmentId) {
         AppUser actor = requireOperationalActor();
         Assignment assignment = findTenantAssignment(assignmentId, actor.getOrganizationId());
-        assertAssignmentVisible(actor, assignment);
         return AssignmentResponse.from(assignment);
     }
 
@@ -117,14 +108,12 @@ public class OperationService {
                     .findByOrganization_IdAndIdempotencyKey(actor.getOrganizationId(), normalizedKey)
                     .orElse(null);
             if (existing != null) {
-                assertAssignmentVisible(actor, existing);
                 return new AssignmentCreationResult(AssignmentResponse.from(existing), false);
             }
         }
 
         Driver driver = findTenantDriver(request.driverId(), actor.getOrganizationId());
         Vehicle vehicle = findTenantVehicle(request.vehicleId(), actor.getOrganizationId());
-        assertDriverVisible(actor, driver);
         validateSchedulingEligibility(driver, vehicle, request.scheduledAt(), request.scheduledEndAt());
         assertNoSchedulingConflict(
                 actor.getOrganizationId(),
@@ -159,11 +148,9 @@ public class OperationService {
     public AssignmentResponse updateAssignment(UUID assignmentId, AssignmentUpdateRequest request) {
         AppUser actor = requireOperationalActor();
         Assignment assignment = findTenantAssignment(assignmentId, actor.getOrganizationId());
-        assertAssignmentVisible(actor, assignment);
         assertVersion(assignment, request.version());
         Driver driver = findTenantDriver(request.driverId(), actor.getOrganizationId());
         Vehicle vehicle = findTenantVehicle(request.vehicleId(), actor.getOrganizationId());
-        assertDriverVisible(actor, driver);
         validateSchedulingEligibility(driver, vehicle, request.scheduledAt(), request.scheduledEndAt());
         assertNoSchedulingConflict(
                 actor.getOrganizationId(),
@@ -197,7 +184,6 @@ public class OperationService {
     public AssignmentResponse reserveAssignment(UUID assignmentId, AssignmentVersionRequest request) {
         AppUser actor = requireOperationalActor();
         Assignment assignment = findTenantAssignment(assignmentId, actor.getOrganizationId());
-        assertAssignmentVisible(actor, assignment);
         assertVersion(assignment, request.version());
         ensureVehicleOperationalForReservation(assignment.getVehicle());
         try {
@@ -217,7 +203,6 @@ public class OperationService {
     public AssignmentResponse startAssignment(UUID assignmentId, AssignmentVersionRequest request) {
         AppUser actor = requireOperationalActor();
         Assignment assignment = findTenantAssignment(assignmentId, actor.getOrganizationId());
-        assertAssignmentVisible(actor, assignment);
         assertVersion(assignment, request.version());
         try {
             assignment.getDriver().beginService();
@@ -238,7 +223,6 @@ public class OperationService {
     public AssignmentResponse completeAssignment(UUID assignmentId, AssignmentVersionRequest request) {
         AppUser actor = requireOperationalActor();
         Assignment assignment = findTenantAssignment(assignmentId, actor.getOrganizationId());
-        assertAssignmentVisible(actor, assignment);
         assertVersion(assignment, request.version());
         try {
             assignment.getDriver().completeService();
@@ -259,7 +243,6 @@ public class OperationService {
     public AssignmentResponse cancelAssignment(UUID assignmentId, AssignmentCancelRequest request) {
         AppUser actor = requireOperationalActor();
         Assignment assignment = findTenantAssignment(assignmentId, actor.getOrganizationId());
-        assertAssignmentVisible(actor, assignment);
         assertVersion(assignment, request.version());
         AssignmentStatus previousStatus = assignment.getStatus();
         try {
@@ -289,7 +272,6 @@ public class OperationService {
     public DriverResponse changeDriverAvailability(UUID driverId, DriverAvailabilityRequest request) {
         AppUser actor = requireOperationalActor();
         Driver driver = findTenantDriver(driverId, actor.getOrganizationId());
-        assertDriverVisible(actor, driver);
         try {
             driver.changeAdministrativeAvailability(request.status());
         } catch (IllegalStateException exception) {
@@ -304,11 +286,11 @@ public class OperationService {
 
     private AppUser requireOperationalActor() {
         AppUser actor = currentUserService.requireTenantActor();
-        if (actor.getRole() != UserRole.ADMINISTRADOR && actor.getRole() != UserRole.COORDINADOR) {
+        if (actor.getRole() != UserRole.ADMIN) {
             throw new ApplicationException(
                     HttpStatus.FORBIDDEN,
                     ErrorCode.FORBIDDEN_ROLE,
-                    "La operación web requiere el rol ADMINISTRADOR o COORDINADOR"
+                    "La operación web requiere el rol ADMIN"
             );
         }
         return actor;
@@ -408,17 +390,6 @@ public class OperationService {
     private Vehicle findTenantVehicle(UUID vehicleId, UUID organizationId) {
         return vehicleRepository.findByIdAndOrganization_Id(vehicleId, organizationId)
                 .orElseThrow(this::notFound);
-    }
-
-    private void assertAssignmentVisible(AppUser actor, Assignment assignment) {
-        assertDriverVisible(actor, assignment.getDriver());
-    }
-
-    private void assertDriverVisible(AppUser actor, Driver driver) {
-        if (actor.getRole() == UserRole.COORDINADOR
-                && !groupCoordinatorRepository.existsByGroup_IdAndUser_Id(driver.getGroup().getId(), actor.getId())) {
-            throw notFound();
-        }
     }
 
     private void assertVersion(Assignment assignment, Long requestVersion) {

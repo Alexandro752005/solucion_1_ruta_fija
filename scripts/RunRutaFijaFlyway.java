@@ -13,7 +13,7 @@ public final class RunRutaFijaFlyway {
     private static final String EXPECTED_URL =
             "jdbc:postgresql://127.0.0.1:5432/solucion_ruta_fija_1";
     private static final String EXPECTED_USER = "rf_migrator";
-    private static final List<String> EXPECTED_VERSIONS = List.of("1", "2", "3", "4", "5");
+    private static final List<String> EXPECTED_VERSIONS = List.of("1", "2", "3", "4", "5", "6");
 
     private RunRutaFijaFlyway() {
     }
@@ -42,12 +42,12 @@ public final class RunRutaFijaFlyway {
         MigrationInfo[] appliedBefore = flyway.info().applied();
         MigrationInfo[] pendingBefore = flyway.info().pending();
         if (appliedBefore.length != 0 || pendingBefore.length != EXPECTED_VERSIONS.size()) {
-            throw new IllegalStateException("F1.3 exige una base de desarrollo vacia con exactamente V1-V5 pendientes.");
+            throw new IllegalStateException("El bootstrap exige una base vacia con exactamente V1-V6 pendientes.");
         }
 
         MigrateResult result = flyway.migrate();
         if (result.migrationsExecuted != EXPECTED_VERSIONS.size()) {
-            throw new IllegalStateException("Flyway no aplico exactamente las cinco migraciones esperadas.");
+            throw new IllegalStateException("Flyway no aplico exactamente las seis migraciones esperadas.");
         }
 
         List<String> appliedVersions = Arrays.stream(flyway.info().applied())
@@ -56,11 +56,11 @@ public final class RunRutaFijaFlyway {
                 .map(Object::toString)
                 .toList();
         if (!EXPECTED_VERSIONS.equals(appliedVersions)) {
-            throw new IllegalStateException("El historial Flyway final no corresponde exactamente a V1-V5.");
+            throw new IllegalStateException("El historial Flyway final no corresponde exactamente a V1-V6.");
         }
 
-        System.out.println("F1_3_FLYWAY=PASS migrations=5");
-        System.out.println("F1.3 no inicio Spring Boot, API, CRM ni Docker.");
+        System.out.println("F2_2_FLYWAY_BOOTSTRAP=PASS migrations=6");
+        System.out.println("El bootstrap no inicio Spring Boot, API, CRM ni Docker.");
     }
 
     private static String requireEnvironment(String name) {

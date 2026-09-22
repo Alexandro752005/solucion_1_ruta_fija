@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pe.rutafija.audit.application.AuditService;
 import pe.rutafija.fleet.domain.Driver;
 import pe.rutafija.fleet.infrastructure.DriverRepository;
-import pe.rutafija.fleet.infrastructure.GroupCoordinatorRepository;
 import pe.rutafija.identity.api.dto.UserCreateRequest;
 import pe.rutafija.identity.api.dto.UserResponse;
 import pe.rutafija.identity.api.dto.UserUpdateRequest;
@@ -38,7 +37,6 @@ public class UserManagementService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final DriverRepository driverRepository;
     private final AssignmentRepository assignmentRepository;
-    private final GroupCoordinatorRepository groupCoordinatorRepository;
     private final PasswordEncoder passwordEncoder;
     private final CurrentUserService currentUserService;
     private final AuditService auditService;
@@ -49,7 +47,6 @@ public class UserManagementService {
             RefreshTokenRepository refreshTokenRepository,
             DriverRepository driverRepository,
             AssignmentRepository assignmentRepository,
-            GroupCoordinatorRepository groupCoordinatorRepository,
             PasswordEncoder passwordEncoder,
             CurrentUserService currentUserService,
             AuditService auditService,
@@ -59,7 +56,6 @@ public class UserManagementService {
         this.refreshTokenRepository = refreshTokenRepository;
         this.driverRepository = driverRepository;
         this.assignmentRepository = assignmentRepository;
-        this.groupCoordinatorRepository = groupCoordinatorRepository;
         this.passwordEncoder = passwordEncoder;
         this.currentUserService = currentUserService;
         this.auditService = auditService;
@@ -198,11 +194,6 @@ public class UserManagementService {
                 && requestedRole != UserRole.CONDUCTOR
                 && driverRepository.existsByUser_Id(target.getId())) {
             throw conflict("No puede cambiar el rol de un usuario vinculado a un conductor");
-        }
-        if (target.getRole() == UserRole.COORDINADOR
-                && requestedRole != UserRole.COORDINADOR
-                && groupCoordinatorRepository.existsByUser_Id(target.getId())) {
-            throw conflict("No puede cambiar el rol de un coordinador asignado a grupos");
         }
     }
 

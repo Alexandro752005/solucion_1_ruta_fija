@@ -35,7 +35,7 @@ public class ReportController {
     }
 
     @GetMapping("/availability")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Resumen de disponibilidad actual basado en datos persistidos")
     public ResponseEntity<AvailabilityReportResponse> availability() {
         return ResponseEntity.ok()
@@ -44,7 +44,7 @@ public class ReportController {
     }
 
     @GetMapping("/assignments")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Reporte real de asignaciones por rango de fechas")
     public ResponseEntity<AssignmentReportResponse> assignments(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
@@ -56,14 +56,14 @@ public class ReportController {
     }
 
     @GetMapping("/availability/export")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Exportar el reporte real de disponibilidad en PDF o XLSX")
     public ResponseEntity<byte[]> exportAvailability(@RequestParam(defaultValue = "pdf") String format) {
         return file(reportExportService.availability(ReportExportFormat.from(format)));
     }
 
     @GetMapping("/assignments/export")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Exportar el reporte real de asignaciones en PDF o XLSX")
     public ResponseEntity<byte[]> exportAssignments(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
@@ -74,7 +74,7 @@ public class ReportController {
     }
 
     @GetMapping("/incidents")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Reporte real de incidencias por rango de fechas")
     public ResponseEntity<IncidentReportResponse> incidents(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
@@ -86,7 +86,7 @@ public class ReportController {
     }
 
     @GetMapping("/incidents/export")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Exportar el reporte real de incidencias en PDF o XLSX")
     public ResponseEntity<byte[]> exportIncidents(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,

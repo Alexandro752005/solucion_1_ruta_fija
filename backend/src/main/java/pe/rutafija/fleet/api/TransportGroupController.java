@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pe.rutafija.fleet.api.dto.DriverResponse;
-import pe.rutafija.fleet.api.dto.GroupCoordinatorRequest;
 import pe.rutafija.fleet.api.dto.TransportGroupCreateRequest;
 import pe.rutafija.fleet.api.dto.TransportGroupResponse;
 import pe.rutafija.fleet.api.dto.TransportGroupUpdateRequest;
@@ -44,8 +42,8 @@ public class TransportGroupController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
-    @Operation(summary = "Listar grupos visibles para la organización y el rol")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Listar grupos de la organización autenticada")
     public ResponseEntity<PageResponse<TransportGroupResponse>> list(
             @RequestParam(required = false) String search,
             @RequestParam(required = false) Boolean active,
@@ -63,7 +61,7 @@ public class TransportGroupController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Crear grupo operativo")
     public ResponseEntity<TransportGroupResponse> create(
             @Valid @RequestBody TransportGroupCreateRequest request
@@ -74,7 +72,7 @@ public class TransportGroupController {
     }
 
     @PatchMapping("/{groupId}")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Editar o desactivar grupo operativo")
     public ResponseEntity<TransportGroupResponse> update(
             @PathVariable UUID groupId,
@@ -85,32 +83,9 @@ public class TransportGroupController {
                 .body(fleetManagementService.updateGroup(groupId, request));
     }
 
-    @PostMapping("/{groupId}/coordinators")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @Operation(summary = "Asignar un coordinador a un grupo")
-    public ResponseEntity<TransportGroupResponse> assignCoordinator(
-            @PathVariable UUID groupId,
-            @Valid @RequestBody GroupCoordinatorRequest request
-    ) {
-        return ResponseEntity.ok()
-                .cacheControl(CacheControl.noStore())
-                .body(fleetManagementService.assignCoordinator(groupId, request));
-    }
-
-    @DeleteMapping("/{groupId}/coordinators/{userId}")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @Operation(summary = "Retirar un coordinador de un grupo")
-    public ResponseEntity<Void> removeCoordinator(
-            @PathVariable UUID groupId,
-            @PathVariable UUID userId
-    ) {
-        fleetManagementService.removeCoordinator(groupId, userId);
-        return ResponseEntity.noContent().cacheControl(CacheControl.noStore()).build();
-    }
-
     @GetMapping("/{groupId}/drivers")
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
-    @Operation(summary = "Listar conductores de un grupo visible")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Listar conductores de un grupo de la organización autenticada")
     public ResponseEntity<PageResponse<DriverResponse>> listDrivers(
             @PathVariable UUID groupId,
             @RequestParam(defaultValue = "0") @Min(0) int page,

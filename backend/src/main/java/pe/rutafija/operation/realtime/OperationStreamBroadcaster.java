@@ -9,7 +9,6 @@ import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
-import pe.rutafija.fleet.infrastructure.GroupCoordinatorRepository;
 import pe.rutafija.identity.domain.AppUser;
 import pe.rutafija.identity.domain.UserRole;
 import pe.rutafija.identity.infrastructure.AppUserRepository;
@@ -22,8 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * Difunde cambios únicamente a usuarios todavía autorizados dentro de la organización.
- * Los administradores ven todo el tenant; los coordinadores solo eventos de sus grupos.
+ * Difunde cambios únicamente a ADMIN activos dentro de la organización.
  */
 @Component
 public class OperationStreamBroadcaster {
@@ -32,17 +30,14 @@ public class OperationStreamBroadcaster {
 
     private final ObjectMapper objectMapper;
     private final AppUserRepository userRepository;
-    private final GroupCoordinatorRepository groupCoordinatorRepository;
     private final Map<UUID, ConcurrentMap<String, StreamSession>> sessionsByOrganization = new ConcurrentHashMap<>();
 
     public OperationStreamBroadcaster(
             ObjectMapper objectMapper,
-            AppUserRepository userRepository,
-            GroupCoordinatorRepository groupCoordinatorRepository
+            AppUserRepository userRepository
     ) {
         this.objectMapper = objectMapper;
         this.userRepository = userRepository;
-        this.groupCoordinatorRepository = groupCoordinatorRepository;
     }
 
     public void register(UUID organizationId, UUID userId, WebSocketSession session) {
@@ -97,17 +92,7 @@ public class OperationStreamBroadcaster {
         if (user == null || !user.isActive() || !user.getOrganization().isActive()) {
             return false;
         }
-        if (user.getRole() == UserRole.ADMINISTRADOR) {
-            return true;
-        }
-        if (user.getRole() != UserRole.COORDINADOR) {
-            return false;
-        }
-        if (event.visibleGroupIds() == null) {
-            return true;
-        }
-        return event.visibleGroupIds().stream()
-                .anyMatch(groupId -> groupCoordinatorRepository.existsByGroup_IdAndUser_Id(groupId, userId));
+        return user.getRole() == UserRole.ADMIN;
     }
 
     private void send(UUID organizationId, WebSocketSession session, TextMessage message) {

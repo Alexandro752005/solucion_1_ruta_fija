@@ -53,7 +53,7 @@ public class AssignmentController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Listar asignaciones operativas")
     public ResponseEntity<PageResponse<AssignmentResponse>> list(
             @RequestParam(required = false) UUID driverId,
@@ -78,7 +78,7 @@ public class AssignmentController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Programar una asignación directamente en estado SCHEDULED")
     public ResponseEntity<AssignmentResponse> create(
             @Valid @RequestBody AssignmentCreateRequest request,
@@ -91,7 +91,7 @@ public class AssignmentController {
     }
 
     @GetMapping("/{assignmentId}")
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Consultar una asignación")
     public ResponseEntity<AssignmentResponse> get(@PathVariable UUID assignmentId) {
         return ResponseEntity.ok()
@@ -100,7 +100,7 @@ public class AssignmentController {
     }
 
     @PatchMapping("/{assignmentId}")
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Editar una asignación SCHEDULED no reservada")
     public ResponseEntity<AssignmentResponse> update(
             @PathVariable UUID assignmentId,
@@ -112,7 +112,7 @@ public class AssignmentController {
     }
 
     @PostMapping("/{assignmentId}/reserve")
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Reservar el conductor para una asignación programada")
     public ResponseEntity<AssignmentResponse> reserve(
             @PathVariable UUID assignmentId,
@@ -124,7 +124,7 @@ public class AssignmentController {
     }
 
     @PostMapping("/{assignmentId}/start")
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Iniciar una asignación reservada")
     public ResponseEntity<AssignmentResponse> start(
             @PathVariable UUID assignmentId,
@@ -136,7 +136,7 @@ public class AssignmentController {
     }
 
     @PostMapping("/{assignmentId}/complete")
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Completar una asignación en servicio")
     public ResponseEntity<AssignmentResponse> complete(
             @PathVariable UUID assignmentId,
@@ -148,7 +148,7 @@ public class AssignmentController {
     }
 
     @PostMapping("/{assignmentId}/cancel")
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Cancelar una asignación")
     public ResponseEntity<AssignmentResponse> cancel(
             @PathVariable UUID assignmentId,

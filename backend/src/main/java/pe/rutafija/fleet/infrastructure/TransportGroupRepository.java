@@ -32,30 +32,6 @@ public interface TransportGroupRepository extends JpaRepository<TransportGroup, 
     );
 
     @EntityGraph(attributePaths = "organization")
-    @Query("""
-            select transportGroup from TransportGroup transportGroup
-             where transportGroup.organization.id = :organizationId
-               and exists (
-                    select 1 from GroupCoordinator membership
-                     where membership.group = transportGroup
-                       and membership.user.id = :coordinatorId
-               )
-               and (:active is null or transportGroup.active = :active)
-               and (
-                    :search = ''
-                    or lower(transportGroup.name) like lower(concat('%', :search, '%'))
-                    or lower(coalesce(transportGroup.description, '')) like lower(concat('%', :search, '%'))
-               )
-            """)
-    Page<TransportGroup> searchVisibleToCoordinator(
-            @Param("organizationId") UUID organizationId,
-            @Param("coordinatorId") UUID coordinatorId,
-            @Param("search") String search,
-            @Param("active") Boolean active,
-            Pageable pageable
-    );
-
-    @EntityGraph(attributePaths = "organization")
     Optional<TransportGroup> findByIdAndOrganization_Id(UUID id, UUID organizationId);
 
     boolean existsByOrganization_IdAndNameIgnoreCase(UUID organizationId, String name);

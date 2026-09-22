@@ -1,10 +1,7 @@
 package pe.rutafija.operation.infrastructure;
 
 import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
-import jakarta.persistence.criteria.Subquery;
 import org.springframework.data.jpa.domain.Specification;
-import pe.rutafija.fleet.domain.GroupCoordinator;
 import pe.rutafija.operation.domain.Incident;
 import pe.rutafija.operation.domain.IncidentCategory;
 import pe.rutafija.operation.domain.IncidentStatus;
@@ -49,16 +46,4 @@ final class IncidentSpecifications {
         };
     }
 
-    static Specification<Incident> visibleToCoordinator(UUID coordinatorId) {
-        return (root, query, criteriaBuilder) -> {
-            Subquery<Integer> membership = query.subquery(Integer.class);
-            Root<GroupCoordinator> coordinator = membership.from(GroupCoordinator.class);
-            membership.select(criteriaBuilder.literal(1));
-            membership.where(
-                    criteriaBuilder.equal(coordinator.get("group"), root.get("driver").get("group")),
-                    criteriaBuilder.equal(coordinator.get("user").get("id"), coordinatorId)
-            );
-            return criteriaBuilder.exists(membership);
-        };
-    }
 }

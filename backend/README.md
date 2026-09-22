@@ -48,9 +48,13 @@ Variables de ejecución:
 
 ## Esquema y roles
 
-Flyway V1–V5 crea 12 tablas de negocio, la extensión btree_gist, la auditoría
+Flyway V1–V6 crea 12 tablas de negocio, la extensión btree_gist, la auditoría
 append-only y los constraints de solapamiento de asignaciones. La zona horaria
 de base de datos es UTC y la codificación es UTF8.
+
+V6 consolida los roles administrativos en `ADMIN`; los únicos roles de
+aplicación son `SUPER_ADMIN`, `ADMIN` y `CONDUCTOR`. `group_coordinator` se
+mantiene solo como historia técnica y no participa en autorización.
 
 | Cuenta | Responsabilidad |
 | --- | --- |
@@ -98,7 +102,7 @@ Set-Location ..
 .\verificar_ruta_fija.bat
 ~~~
 
-La puerta aprobada termina con F1_4_NATIVE_VERIFY=PASS. No se permite que una
+La puerta aprobada termina con F2_2_NATIVE_VERIFY=PASS. No se permite que una
 prueba apunte a desarrollo o a una base de recuperación.
 
 ## Seguridad HTTP
@@ -116,3 +120,5 @@ puede suministrar X-Correlation-ID seguro; de lo contrario se genera uno.
 - [Manual operativo](<../docs/Uso del Sistema.md>)
 - [Ejecución nativa F1.4](../docs/ejecucion-nativa-f1-4.md)
 - [Proxy y WebSocket F1.5](../docs/ejecucion-nativa-f1-5.md)
+- [Consolidación backend ADMIN F2.2](../docs/ejecucion-nativa-f2-2.md)
+- [Auditoría backend F2.2](../docs/auditoria-f2-2-backend-admin.md)

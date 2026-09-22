@@ -48,7 +48,7 @@ public class VehicleController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Listar vehículos con filtros")
     public ResponseEntity<PageResponse<VehicleResponse>> list(
             @RequestParam(required = false) VehicleStatus status,
@@ -69,7 +69,7 @@ public class VehicleController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Registrar vehículo")
     public ResponseEntity<VehicleResponse> create(@Valid @RequestBody VehicleCreateRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -78,7 +78,7 @@ public class VehicleController {
     }
 
     @GetMapping("/{vehicleId}")
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Consultar vehículo")
     public ResponseEntity<VehicleResponse> get(@PathVariable UUID vehicleId) {
         return ResponseEntity.ok()
@@ -87,7 +87,7 @@ public class VehicleController {
     }
 
     @PatchMapping("/{vehicleId}")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Editar vehículo")
     public ResponseEntity<VehicleResponse> update(
             @PathVariable UUID vehicleId,
@@ -99,7 +99,7 @@ public class VehicleController {
     }
 
     @PostMapping("/{vehicleId}/status")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Cambiar estado administrativo válido del vehículo")
     public ResponseEntity<VehicleResponse> changeStatus(
             @PathVariable UUID vehicleId,

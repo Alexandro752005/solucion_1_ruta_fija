@@ -32,22 +32,6 @@ public interface IncidentRepository extends JpaRepository<Incident, UUID>, JpaSp
         return findAll(IncidentSpecifications.filter(organizationId, driverId, status, category, from, to), pageable);
     }
 
-    default Page<Incident> searchVisibleToCoordinator(
-            UUID organizationId,
-            UUID coordinatorId,
-            UUID driverId,
-            IncidentStatus status,
-            IncidentCategory category,
-            Instant from,
-            Instant to,
-            Pageable pageable
-    ) {
-        Specification<Incident> filter = IncidentSpecifications.filter(
-                organizationId, driverId, status, category, from, to
-        ).and(IncidentSpecifications.visibleToCoordinator(coordinatorId));
-        return findAll(filter, pageable);
-    }
-
     @EntityGraph(attributePaths = {"organization", "driver", "driver.group", "assignment", "reportedBy", "followedUpBy"})
     Optional<Incident> findByIdAndOrganization_Id(UUID id, UUID organizationId);
 }

@@ -11,8 +11,6 @@ import pe.rutafija.fleet.api.dto.DriverDetailResponse;
 import pe.rutafija.fleet.api.dto.DriverResponse;
 import pe.rutafija.fleet.api.dto.DriverUpdateRequest;
 import pe.rutafija.fleet.api.dto.DriverVehicleResponse;
-import pe.rutafija.fleet.api.dto.GroupCoordinatorRequest;
-import pe.rutafija.fleet.api.dto.GroupCoordinatorResponse;
 import pe.rutafija.fleet.api.dto.TransportGroupCreateRequest;
 import pe.rutafija.fleet.api.dto.TransportGroupResponse;
 import pe.rutafija.fleet.api.dto.TransportGroupUpdateRequest;
@@ -23,12 +21,10 @@ import pe.rutafija.fleet.api.dto.VehicleUpdateRequest;
 import pe.rutafija.fleet.domain.Driver;
 import pe.rutafija.fleet.domain.DriverAvailabilityStatus;
 import pe.rutafija.fleet.domain.DriverVehicleLink;
-import pe.rutafija.fleet.domain.GroupCoordinator;
 import pe.rutafija.fleet.domain.TransportGroup;
 import pe.rutafija.fleet.domain.Vehicle;
 import pe.rutafija.fleet.infrastructure.DriverRepository;
 import pe.rutafija.fleet.infrastructure.DriverVehicleLinkRepository;
-import pe.rutafija.fleet.infrastructure.GroupCoordinatorRepository;
 import pe.rutafija.fleet.infrastructure.TransportGroupRepository;
 import pe.rutafija.fleet.infrastructure.VehicleRepository;
 import pe.rutafija.identity.domain.AppUser;
@@ -58,7 +54,6 @@ public class FleetManagementService {
     );
 
     private final TransportGroupRepository groupRepository;
-    private final GroupCoordinatorRepository groupCoordinatorRepository;
     private final DriverRepository driverRepository;
     private final VehicleRepository vehicleRepository;
     private final DriverVehicleLinkRepository driverVehicleLinkRepository;
@@ -70,7 +65,6 @@ public class FleetManagementService {
 
     public FleetManagementService(
             TransportGroupRepository groupRepository,
-            GroupCoordinatorRepository groupCoordinatorRepository,
             DriverRepository driverRepository,
             VehicleRepository vehicleRepository,
             DriverVehicleLinkRepository driverVehicleLinkRepository,
@@ -81,7 +75,6 @@ public class FleetManagementService {
             Clock clock
     ) {
         this.groupRepository = groupRepository;
-        this.groupCoordinatorRepository = groupCoordinatorRepository;
         this.driverRepository = driverRepository;
         this.vehicleRepository = vehicleRepository;
         this.driverVehicleLinkRepository = driverVehicleLinkRepository;
@@ -100,15 +93,9 @@ public class FleetManagementService {
     ) {
         AppUser actor = currentUserService.requireTenantActor();
         String normalizedSearch = normalizeSearch(search);
-        Page<TransportGroup> groups = actor.getRole() == UserRole.COORDINADOR
-                ? groupRepository.searchVisibleToCoordinator(
-                        actor.getOrganizationId(),
-                        actor.getId(),
-                        normalizedSearch,
-                        active,
-                        pageable
-                )
-                : groupRepository.search(actor.getOrganizationId(), normalizedSearch, active, pageable);
+        Page<TransportGroup> groups = groupRepository.search(
+                actor.getOrganizationId(), normalizedSearch, active, pageable
+        );
         return PageResponse.from(groups, this::groupResponse);
     }
 
@@ -162,55 +149,6 @@ public class FleetManagementService {
         return groupResponse(group);
     }
 
-    @Transactional
-    public TransportGroupResponse assignCoordinator(UUID groupId, GroupCoordinatorRequest request) {
-        AppUser actor = currentUserService.requireTenantActor();
-        TransportGroup group = findTenantGroup(groupId, actor.getOrganizationId());
-        if (!group.isActive()) {
-            throw conflict("No puede asignar coordinadores a un grupo inactivo");
-        }
-        AppUser coordinator = findTenantUser(request.userId(), actor.getOrganizationId());
-        if (!coordinator.isActive() || coordinator.getRole() != UserRole.COORDINADOR) {
-            throw new ApplicationException(
-                    HttpStatus.BAD_REQUEST,
-                    ErrorCode.DRIVER_NOT_ELIGIBLE,
-                    "El usuario seleccionado no es un coordinador activo"
-            );
-        }
-        if (groupCoordinatorRepository.findByGroup_IdAndUser_Id(groupId, coordinator.getId()).isEmpty()) {
-            groupCoordinatorRepository.save(GroupCoordinator.assign(
-                    group,
-                    coordinator,
-                    actor,
-                    Instant.now(clock)
-            ));
-            auditService.record(
-                    actor,
-                    "GROUP_COORDINATOR_ASSIGNED",
-                    "TRANSPORT_GROUP",
-                    group.getId(),
-                    Map.of("coordinatorId", coordinator.getId().toString())
-            );
-        }
-        return groupResponse(group);
-    }
-
-    @Transactional
-    public void removeCoordinator(UUID groupId, UUID userId) {
-        AppUser actor = currentUserService.requireTenantActor();
-        TransportGroup group = findTenantGroup(groupId, actor.getOrganizationId());
-        GroupCoordinator assignment = groupCoordinatorRepository.findByGroup_IdAndUser_Id(group.getId(), userId)
-                .orElseThrow(this::notFound);
-        groupCoordinatorRepository.delete(assignment);
-        auditService.record(
-                actor,
-                "GROUP_COORDINATOR_REMOVED",
-                "TRANSPORT_GROUP",
-                group.getId(),
-                Map.of("coordinatorId", userId.toString())
-        );
-    }
-
     @Transactional(readOnly = true)
     public PageResponse<DriverResponse> listDrivers(
             UUID groupId,
@@ -221,36 +159,24 @@ public class FleetManagementService {
     ) {
         AppUser actor = currentUserService.requireTenantActor();
         if (groupId != null) {
-            TransportGroup group = findTenantGroup(groupId, actor.getOrganizationId());
-            assertGroupVisibleTo(actor, group);
+            findTenantGroup(groupId, actor.getOrganizationId());
         }
         String normalizedSearch = normalizeSearch(search);
-        Page<Driver> drivers = actor.getRole() == UserRole.COORDINADOR
-                ? driverRepository.searchVisibleToCoordinator(
-                        actor.getOrganizationId(),
-                        actor.getId(),
-                        groupId,
-                        status,
-                        active,
-                        normalizedSearch,
-                        pageable
-                )
-                : driverRepository.search(
-                        actor.getOrganizationId(),
-                        groupId,
-                        status,
-                        active,
-                        normalizedSearch,
-                        pageable
-                );
+        Page<Driver> drivers = driverRepository.search(
+                actor.getOrganizationId(),
+                groupId,
+                status,
+                active,
+                normalizedSearch,
+                pageable
+        );
         return PageResponse.from(drivers, DriverResponse::from);
     }
 
     @Transactional(readOnly = true)
     public PageResponse<DriverResponse> listGroupDrivers(UUID groupId, Pageable pageable) {
         AppUser actor = currentUserService.requireTenantActor();
-        TransportGroup group = findTenantGroup(groupId, actor.getOrganizationId());
-        assertGroupVisibleTo(actor, group);
+        findTenantGroup(groupId, actor.getOrganizationId());
         return listDrivers(groupId, null, null, null, pageable);
     }
 
@@ -258,7 +184,6 @@ public class FleetManagementService {
     public DriverDetailResponse getDriver(UUID driverId) {
         AppUser actor = currentUserService.requireTenantActor();
         Driver driver = findTenantDriver(driverId, actor.getOrganizationId());
-        assertGroupVisibleTo(actor, driver.getGroup());
         return driverDetailResponse(driver);
     }
 
@@ -504,12 +429,7 @@ public class FleetManagementService {
     }
 
     private TransportGroupResponse groupResponse(TransportGroup group) {
-        List<GroupCoordinatorResponse> coordinators = groupCoordinatorRepository.findAllByGroup_Id(group.getId())
-                .stream()
-                .map(GroupCoordinatorResponse::from)
-                .sorted(Comparator.comparing(GroupCoordinatorResponse::fullName, String.CASE_INSENSITIVE_ORDER))
-                .toList();
-        return TransportGroupResponse.from(group, coordinators);
+        return TransportGroupResponse.from(group);
     }
 
     private DriverDetailResponse driverDetailResponse(Driver driver) {
@@ -548,13 +468,6 @@ public class FleetManagementService {
                     ErrorCode.VEHICLE_NOT_ELIGIBLE,
                     "El vehículo no está activo"
             );
-        }
-    }
-
-    private void assertGroupVisibleTo(AppUser actor, TransportGroup group) {
-        if (actor.getRole() == UserRole.COORDINADOR
-                && !groupCoordinatorRepository.existsByGroup_IdAndUser_Id(group.getId(), actor.getId())) {
-            throw notFound();
         }
     }
 

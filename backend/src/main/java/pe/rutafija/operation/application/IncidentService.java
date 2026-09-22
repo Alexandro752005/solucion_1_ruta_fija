@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pe.rutafija.audit.application.AuditService;
 import pe.rutafija.fleet.domain.Driver;
 import pe.rutafija.fleet.infrastructure.DriverRepository;
-import pe.rutafija.fleet.infrastructure.GroupCoordinatorRepository;
 import pe.rutafija.identity.domain.AppUser;
 import pe.rutafija.identity.domain.UserRole;
 import pe.rutafija.operation.api.dto.IncidentCreateRequest;
@@ -37,7 +36,6 @@ public class IncidentService {
     private final IncidentRepository incidentRepository;
     private final AssignmentRepository assignmentRepository;
     private final DriverRepository driverRepository;
-    private final GroupCoordinatorRepository groupCoordinatorRepository;
     private final CurrentUserService currentUserService;
     private final AuditService auditService;
     private final OperationEventPublisher eventPublisher;
@@ -47,7 +45,6 @@ public class IncidentService {
             IncidentRepository incidentRepository,
             AssignmentRepository assignmentRepository,
             DriverRepository driverRepository,
-            GroupCoordinatorRepository groupCoordinatorRepository,
             CurrentUserService currentUserService,
             AuditService auditService,
             OperationEventPublisher eventPublisher,
@@ -56,7 +53,6 @@ public class IncidentService {
         this.incidentRepository = incidentRepository;
         this.assignmentRepository = assignmentRepository;
         this.driverRepository = driverRepository;
-        this.groupCoordinatorRepository = groupCoordinatorRepository;
         this.currentUserService = currentUserService;
         this.auditService = auditService;
         this.eventPublisher = eventPublisher;
@@ -74,13 +70,11 @@ public class IncidentService {
     ) {
         AppUser actor = requireOperationalActor();
         if (driverId != null) {
-            assertDriverVisible(actor, findTenantDriver(driverId, actor.getOrganizationId()));
+            findTenantDriver(driverId, actor.getOrganizationId());
         }
-        Page<Incident> incidents = actor.getRole() == UserRole.COORDINADOR
-                ? incidentRepository.searchVisibleToCoordinator(
-                        actor.getOrganizationId(), actor.getId(), driverId, status, category, from, to, pageable
-                )
-                : incidentRepository.search(actor.getOrganizationId(), driverId, status, category, from, to, pageable);
+        Page<Incident> incidents = incidentRepository.search(
+                actor.getOrganizationId(), driverId, status, category, from, to, pageable
+        );
         return PageResponse.from(incidents, IncidentResponse::from);
     }
 
@@ -88,7 +82,6 @@ public class IncidentService {
     public IncidentResponse getIncident(UUID incidentId) {
         AppUser actor = requireOperationalActor();
         Incident incident = findTenantIncident(incidentId, actor.getOrganizationId());
-        assertDriverVisible(actor, incident.getDriver());
         return IncidentResponse.from(incident);
     }
 
@@ -96,12 +89,10 @@ public class IncidentService {
     public IncidentResponse createIncident(IncidentCreateRequest request) {
         AppUser actor = requireOperationalActor();
         Driver driver = findTenantDriver(request.driverId(), actor.getOrganizationId());
-        assertDriverVisible(actor, driver);
         Assignment assignment = request.assignmentId() == null
                 ? null
                 : findTenantAssignment(request.assignmentId(), actor.getOrganizationId());
         if (assignment != null) {
-            assertDriverVisible(actor, assignment.getDriver());
             if (!assignment.getDriver().getId().equals(driver.getId())) {
                 throw new ApplicationException(
                         HttpStatus.BAD_REQUEST,
@@ -132,7 +123,6 @@ public class IncidentService {
     public IncidentResponse followUpIncident(UUID incidentId, IncidentFollowUpRequest request) {
         AppUser actor = requireOperationalActor();
         Incident incident = findTenantIncident(incidentId, actor.getOrganizationId());
-        assertDriverVisible(actor, incident.getDriver());
         assertVersion(incident, request.version());
         try {
             incident.followUp(request.note(), request.resolve(), actor, Instant.now(clock));
@@ -149,11 +139,11 @@ public class IncidentService {
 
     private AppUser requireOperationalActor() {
         AppUser actor = currentUserService.requireTenantActor();
-        if (actor.getRole() != UserRole.ADMINISTRADOR && actor.getRole() != UserRole.COORDINADOR) {
+        if (actor.getRole() != UserRole.ADMIN) {
             throw new ApplicationException(
                     HttpStatus.FORBIDDEN,
                     ErrorCode.FORBIDDEN_ROLE,
-                    "La operación web requiere el rol ADMINISTRADOR o COORDINADOR"
+                    "La operación web requiere el rol ADMIN"
             );
         }
         return actor;
@@ -172,13 +162,6 @@ public class IncidentService {
     private Driver findTenantDriver(UUID driverId, UUID organizationId) {
         return driverRepository.findByIdAndOrganization_Id(driverId, organizationId)
                 .orElseThrow(this::notFound);
-    }
-
-    private void assertDriverVisible(AppUser actor, Driver driver) {
-        if (actor.getRole() == UserRole.COORDINADOR
-                && !groupCoordinatorRepository.existsByGroup_IdAndUser_Id(driver.getGroup().getId(), actor.getId())) {
-            throw notFound();
-        }
     }
 
     private void assertVersion(Incident incident, Long requestVersion) {

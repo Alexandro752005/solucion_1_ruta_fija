@@ -34,22 +34,6 @@ public interface AssignmentRepository extends JpaRepository<Assignment, UUID>, J
         return findAll(AssignmentSpecifications.filter(organizationId, driverId, vehicleId, status, from, to), pageable);
     }
 
-    default Page<Assignment> searchVisibleToCoordinator(
-            UUID organizationId,
-            UUID coordinatorId,
-            UUID driverId,
-            UUID vehicleId,
-            AssignmentStatus status,
-            Instant from,
-            Instant to,
-            Pageable pageable
-    ) {
-        Specification<Assignment> filter = AssignmentSpecifications.filter(
-                organizationId, driverId, vehicleId, status, from, to
-        ).and(AssignmentSpecifications.visibleToCoordinator(coordinatorId));
-        return findAll(filter, pageable);
-    }
-
     @EntityGraph(attributePaths = {"organization", "driver", "driver.group", "vehicle", "createdBy"})
     Optional<Assignment> findByIdAndOrganization_Id(UUID id, UUID organizationId);
 

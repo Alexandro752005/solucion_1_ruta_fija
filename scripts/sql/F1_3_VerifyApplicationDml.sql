@@ -41,7 +41,7 @@ VALUES (
     'f13.app.probe@example.test',
     'not-a-real-password-hash',
     'F1.3 App Probe',
-    'ADMINISTRADOR',
+    'ADMIN',
     TRUE,
     clock_timestamp(),
     clock_timestamp()

@@ -38,7 +38,7 @@ public class AnnouncementController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Listar comunicados visibles")
     public ResponseEntity<PageResponse<AnnouncementResponse>> list(
             @RequestParam(required = false) AnnouncementAudienceType audienceType,
@@ -55,7 +55,7 @@ public class AnnouncementController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Publicar un comunicado desde el CRM web")
     public ResponseEntity<AnnouncementResponse> create(@Valid @RequestBody AnnouncementCreateRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)

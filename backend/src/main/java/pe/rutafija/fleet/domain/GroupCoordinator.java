@@ -11,7 +11,6 @@ import jakarta.persistence.Table;
 import pe.rutafija.identity.domain.AppUser;
 
 import java.time.Instant;
-import java.util.Objects;
 
 @Entity
 @Table(name = "group_coordinator")
@@ -38,23 +37,6 @@ public class GroupCoordinator {
     private Instant assignedAt;
 
     protected GroupCoordinator() {
-    }
-
-    private GroupCoordinator(TransportGroup group, AppUser user, AppUser assignedBy, Instant assignedAt) {
-        this.id = new GroupCoordinatorId(group.getId(), user.getId());
-        this.group = Objects.requireNonNull(group);
-        this.user = Objects.requireNonNull(user);
-        this.assignedBy = Objects.requireNonNull(assignedBy);
-        this.assignedAt = Objects.requireNonNull(assignedAt);
-    }
-
-    public static GroupCoordinator assign(
-            TransportGroup group,
-            AppUser user,
-            AppUser assignedBy,
-            Instant assignedAt
-    ) {
-        return new GroupCoordinator(group, user, assignedBy, assignedAt);
     }
 
     public TransportGroup getGroup() {

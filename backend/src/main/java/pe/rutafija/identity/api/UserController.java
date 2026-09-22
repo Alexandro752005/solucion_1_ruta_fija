@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Listar usuarios de la organización autenticada")
     public ResponseEntity<PageResponse<UserResponse>> list(
             @RequestParam(required = false) String search,
@@ -69,7 +69,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Consultar usuario de la organización autenticada")
     public ResponseEntity<UserResponse> get(@PathVariable UUID userId) {
         return ResponseEntity.ok()
@@ -78,7 +78,7 @@ public class UserController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Crear usuario de la organización autenticada")
     public ResponseEntity<UserResponse> create(@Valid @RequestBody UserCreateRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -87,7 +87,7 @@ public class UserController {
     }
 
     @PatchMapping("/{userId}")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Editar usuario de la organización autenticada")
     public ResponseEntity<UserResponse> update(
             @PathVariable UUID userId,
@@ -99,7 +99,7 @@ public class UserController {
     }
 
     @PostMapping("/{userId}/activate")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Activar usuario")
     public ResponseEntity<UserResponse> activate(@PathVariable UUID userId) {
         return ResponseEntity.ok()
@@ -108,7 +108,7 @@ public class UserController {
     }
 
     @PostMapping("/{userId}/deactivate")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Desactivar usuario y revocar sus sesiones")
     public ResponseEntity<UserResponse> deactivate(@PathVariable UUID userId) {
         return ResponseEntity.ok()

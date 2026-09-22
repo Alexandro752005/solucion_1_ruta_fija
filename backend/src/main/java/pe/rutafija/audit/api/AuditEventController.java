@@ -36,7 +36,7 @@ public class AuditEventController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Consultar eventos críticos de auditoría de la organización activa")
     public ResponseEntity<PageResponse<AuditEventResponse>> list(
             @RequestParam(required = false) String action,
@@ -59,7 +59,7 @@ public class AuditEventController {
     }
 
     @GetMapping("/{auditEventId}")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Consultar el detalle inmutable de un evento de auditoría")
     public ResponseEntity<AuditEventResponse> get(@PathVariable UUID auditEventId) {
         return ResponseEntity.ok()

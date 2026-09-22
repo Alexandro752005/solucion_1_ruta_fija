@@ -20,7 +20,7 @@ VALUES (
     'f13.migrator.probe@example.test',
     'not-a-real-password-hash',
     'F1.3 Migrator Probe',
-    'ADMINISTRADOR',
+    'ADMIN',
     TRUE,
     clock_timestamp(),
     clock_timestamp()

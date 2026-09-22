@@ -53,7 +53,7 @@ public class DriverController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Listar conductores con filtros")
     public ResponseEntity<PageResponse<DriverResponse>> list(
             @RequestParam(required = false) UUID groupId,
@@ -76,7 +76,7 @@ public class DriverController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Registrar conductor")
     public ResponseEntity<DriverResponse> create(@Valid @RequestBody DriverCreateRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -85,7 +85,7 @@ public class DriverController {
     }
 
     @GetMapping("/{driverId}")
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Consultar conductor y sus vehículos vinculados")
     public ResponseEntity<DriverDetailResponse> get(@PathVariable UUID driverId) {
         return ResponseEntity.ok()
@@ -94,7 +94,7 @@ public class DriverController {
     }
 
     @PatchMapping("/{driverId}")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Editar conductor")
     public ResponseEntity<DriverResponse> update(
             @PathVariable UUID driverId,
@@ -106,7 +106,7 @@ public class DriverController {
     }
 
     @PostMapping("/{driverId}/activate")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Activar conductor")
     public ResponseEntity<DriverResponse> activate(@PathVariable UUID driverId) {
         return ResponseEntity.ok()
@@ -115,7 +115,7 @@ public class DriverController {
     }
 
     @PostMapping("/{driverId}/deactivate")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Desactivar conductor")
     public ResponseEntity<DriverResponse> deactivate(@PathVariable UUID driverId) {
         return ResponseEntity.ok()
@@ -124,7 +124,7 @@ public class DriverController {
     }
 
     @PostMapping("/{driverId}/availability")
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Cambiar disponibilidad administrativa del conductor")
     public ResponseEntity<DriverResponse> changeAvailability(
             @PathVariable UUID driverId,
@@ -136,7 +136,7 @@ public class DriverController {
     }
 
     @PostMapping("/{driverId}/vehicles/{vehicleId}")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Vincular vehículo a conductor")
     public ResponseEntity<DriverDetailResponse> linkVehicle(
             @PathVariable UUID driverId,
@@ -148,7 +148,7 @@ public class DriverController {
     }
 
     @DeleteMapping("/{driverId}/vehicles/{vehicleId}")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Desvincular vehículo de conductor")
     public ResponseEntity<Void> unlinkVehicle(
             @PathVariable UUID driverId,
@@ -159,7 +159,7 @@ public class DriverController {
     }
 
     @PostMapping("/{driverId}/vehicles/{vehicleId}/primary")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Marcar vehículo principal del conductor")
     public ResponseEntity<DriverDetailResponse> markPrimaryVehicle(
             @PathVariable UUID driverId,

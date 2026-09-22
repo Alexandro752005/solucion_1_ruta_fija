@@ -30,10 +30,10 @@ class CurrentUserProviderTest {
     void derivesTenantOnlyFromAuthenticatedJwt() {
         UUID userId = UUID.randomUUID();
         UUID organizationId = UUID.randomUUID();
-        Jwt jwt = jwt(userId, organizationId, "ADMINISTRADOR");
+        Jwt jwt = jwt(userId, organizationId, "ADMIN");
         SecurityContextHolder.getContext().setAuthentication(new JwtAuthenticationToken(
                 jwt,
-                List.of(new SimpleGrantedAuthority("ROLE_ADMINISTRADOR"))
+                List.of(new SimpleGrantedAuthority("ROLE_ADMIN"))
         ));
 
         AuthenticatedUser user = provider.requireCurrentUser();
@@ -53,6 +53,19 @@ class CurrentUserProviderTest {
         assertThatThrownBy(provider::requireTenantId)
                 .isInstanceOfSatisfying(ApplicationException.class, exception ->
                         assertThat(exception.getCode()).isEqualTo(ErrorCode.TENANT_ACCESS_DENIED));
+    }
+
+    @Test
+    void rejectsAnAccessTokenWithARetiredRole() {
+        Jwt jwt = jwt(UUID.randomUUID(), UUID.randomUUID(), "COORDINADOR");
+        SecurityContextHolder.getContext().setAuthentication(new JwtAuthenticationToken(
+                jwt,
+                List.of(new SimpleGrantedAuthority("ROLE_ADMIN"))
+        ));
+
+        assertThatThrownBy(provider::requireCurrentUser)
+                .isInstanceOfSatisfying(ApplicationException.class, exception ->
+                        assertThat(exception.getCode()).isEqualTo(ErrorCode.AUTH_TOKEN_INVALID));
     }
 
     private Jwt jwt(UUID userId, UUID organizationId, String role) {

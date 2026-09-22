@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pe.rutafija.audit.application.AuditService;
 import pe.rutafija.fleet.domain.TransportGroup;
-import pe.rutafija.fleet.infrastructure.GroupCoordinatorRepository;
 import pe.rutafija.fleet.infrastructure.TransportGroupRepository;
 import pe.rutafija.identity.domain.AppUser;
 import pe.rutafija.identity.domain.UserRole;
@@ -30,7 +29,6 @@ public class AnnouncementService {
 
     private final AnnouncementRepository announcementRepository;
     private final TransportGroupRepository groupRepository;
-    private final GroupCoordinatorRepository groupCoordinatorRepository;
     private final CurrentUserService currentUserService;
     private final AuditService auditService;
     private final OperationEventPublisher eventPublisher;
@@ -38,14 +36,12 @@ public class AnnouncementService {
     public AnnouncementService(
             AnnouncementRepository announcementRepository,
             TransportGroupRepository groupRepository,
-            GroupCoordinatorRepository groupCoordinatorRepository,
             CurrentUserService currentUserService,
             AuditService auditService,
             OperationEventPublisher eventPublisher
     ) {
         this.announcementRepository = announcementRepository;
         this.groupRepository = groupRepository;
-        this.groupCoordinatorRepository = groupCoordinatorRepository;
         this.currentUserService = currentUserService;
         this.auditService = auditService;
         this.eventPublisher = eventPublisher;
@@ -57,11 +53,9 @@ public class AnnouncementService {
             Pageable pageable
     ) {
         AppUser actor = requireOperationalActor();
-        Page<Announcement> announcements = actor.getRole() == UserRole.COORDINADOR
-                ? announcementRepository.searchVisibleToCoordinator(
-                        actor.getOrganizationId(), actor.getId(), audienceType, pageable
-                )
-                : announcementRepository.search(actor.getOrganizationId(), audienceType, pageable);
+        Page<Announcement> announcements = announcementRepository.search(
+                actor.getOrganizationId(), audienceType, pageable
+        );
         return PageResponse.from(announcements, AnnouncementResponse::from);
     }
 
@@ -97,11 +91,11 @@ public class AnnouncementService {
 
     private AppUser requireOperationalActor() {
         AppUser actor = currentUserService.requireTenantActor();
-        if (actor.getRole() != UserRole.ADMINISTRADOR && actor.getRole() != UserRole.COORDINADOR) {
+        if (actor.getRole() != UserRole.ADMIN) {
             throw new ApplicationException(
                     HttpStatus.FORBIDDEN,
                     ErrorCode.FORBIDDEN_ROLE,
-                    "La operación web requiere el rol ADMINISTRADOR o COORDINADOR"
+                    "La operación web requiere el rol ADMIN"
             );
         }
         return actor;
@@ -112,13 +106,6 @@ public class AnnouncementService {
             if (requestedAudienceId != null) {
                 throw validation("Un comunicado para la organización no debe incluir audienceId");
             }
-            if (actor.getRole() == UserRole.COORDINADOR) {
-                throw new ApplicationException(
-                        HttpStatus.FORBIDDEN,
-                        ErrorCode.FORBIDDEN_ROLE,
-                        "Un coordinador solo puede publicar comunicados para sus grupos asignados"
-                );
-            }
             return null;
         }
         if (audienceType != AnnouncementAudienceType.GROUP || requestedAudienceId == null) {
@@ -128,10 +115,6 @@ public class AnnouncementService {
                 .orElseThrow(this::notFound);
         if (!group.isActive()) {
             throw validation("No puede publicar un comunicado para un grupo inactivo");
-        }
-        if (actor.getRole() == UserRole.COORDINADOR
-                && !groupCoordinatorRepository.existsByGroup_IdAndUser_Id(group.getId(), actor.getId())) {
-            throw notFound();
         }
         return group.getId();
     }

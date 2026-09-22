@@ -21,7 +21,7 @@ public class OperationStreamController {
     }
 
     @PostMapping("/stream-ticket")
-    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'COORDINADOR')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Emitir un ticket de un solo uso para el canal operativo")
     public ResponseEntity<OperationStreamTicketResponse> issueTicket() {
         return ResponseEntity.ok()

@@ -16,7 +16,7 @@ No se necesita Docker para iniciar, probar, detener ni recuperar el sistema.
 | CRM | Angular 22 en http://localhost:4200 |
 | API | Java 21, Spring Boot 3.5.16 en http://127.0.0.1:8080 |
 | Persistencia | PostgreSQL 16 local, puerto 5432 |
-| Esquema | Flyway V1–V5 y Hibernate con ddl-auto=validate |
+| Esquema | Flyway V1–V6 y Hibernate con ddl-auto=validate |
 | Seguridad | JWT, refresh cookie HttpOnly, roles separados de migración, aplicación y pruebas |
 | Tiempo real | WebSocket con ticket efímero por medio del proxy Angular |
 
@@ -118,7 +118,7 @@ Ejecute las pruebas de backend contra la base aislada ruta_fija_test:
 .\verificar_ruta_fija.bat
 ~~~
 
-La salida aprobada termina con F1_4_NATIVE_VERIFY=PASS. Para comprobar el
+La salida aprobada termina con F2_2_NATIVE_VERIFY=PASS. Para comprobar el
 proxy REST y WebSocket desde Angular, con 8080 y 4200 libres:
 
 ~~~powershell
@@ -165,6 +165,17 @@ No aplica V6 al CRM todavía; eso se hará de forma atómica en F2.2:
 .\scripts\Invoke-RutaFijaF21bV6Rehearsal.ps1
 ~~~
 
+La aplicación real de V6, solo después de F2.1A/F2.1B y con API/CRM detenidos,
+está protegida por su propio comando:
+
+~~~powershell
+.\scripts\Invoke-RutaFijaF22AdminMigration.ps1
+~~~
+
+V6 deja como roles de aplicación `SUPER_ADMIN`, `ADMIN` y `CONDUCTOR`. El
+backend queda listo en F2.2; la interfaz Angular se adapta en F2.3, por lo que
+no se debe usar el CRM visual como prueba de ADMIN antes de esa fase.
+
 ## Automatización y documentación
 
 Las tareas Ruta Fija de VS Code cubren aprovisionamiento, arranque, pruebas,
@@ -189,6 +200,10 @@ Documentos principales:
 - [Ensayo aislado F2.1B](docs/ejecucion-nativa-f2-1b.md)
 - [ADR-002 de V6](docs/decisiones/ADR-002-candidata-v6-ensayo-aislado.md)
 - [Evidencia F2.1B](docs/evidencia-f2-1b-ensayo-v6-2026-09-22.md)
+- [Ejecución nativa F2.2](docs/ejecucion-nativa-f2-2.md)
+- [Auditoría backend F2.2](docs/auditoria-f2-2-backend-admin.md)
+- [Evidencia F2.2](docs/evidencia-f2-2-consolidacion-admin-2026-09-22.md)
+- [ADR-003 de historia de grupos](docs/decisiones/ADR-003-group-coordinator-historia-sin-autorizacion.md)
 - [Plan de migración nativa](docs/plan-f1-postgresql-nativo-sin-docker.md)
 
 Los archivos de Compose y Dockerfile permanecen como compatibilidad histórica

@@ -17,7 +17,7 @@ class RefreshTokenTest {
                 "admin@example.test",
                 "hash",
                 "Admin",
-                UserRole.ADMINISTRADOR
+                UserRole.ADMIN
         );
         Instant now = Instant.parse("2026-08-28T22:00:00Z");
         RefreshToken current = RefreshToken.firstInFamily(user, "a".repeat(64), now.plusSeconds(60));

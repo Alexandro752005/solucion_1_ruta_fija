@@ -127,6 +127,7 @@ public class SecurityConfig {
                         && user.isActive()
                         && Objects.equals(user.getOrganizationId(), organizationId)
                         && Objects.equals(user.getEmail(), jwt.getClaimAsString("email"))
+                        && Objects.equals(user.getRole().name(), jwt.getClaimAsString("role"))
                         && (user.getOrganization() == null || user.getOrganization().isActive())) {
                     authorities = List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
                 }

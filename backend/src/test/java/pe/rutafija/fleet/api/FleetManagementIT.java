@@ -62,9 +62,9 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
 
     private Organization organizationA;
     private Organization organizationB;
-    private AppUser administratorA;
-    private AppUser coordinatorA;
-    private AppUser administratorB;
+    private AppUser adminA;
+    private AppUser secondAdminA;
+    private AppUser adminB;
 
     @BeforeEach
     void prepareUsers() {
@@ -79,46 +79,46 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
                 "Org B",
                 "America/Lima"
         ));
-        administratorA = userRepository.save(organizationUser(
+        adminA = userRepository.save(organizationUser(
                 organizationA,
                 "admin.a." + suffix + "@rutafija.test",
-                UserRole.ADMINISTRADOR
+                UserRole.ADMIN
         ));
-        coordinatorA = userRepository.save(organizationUser(
+        secondAdminA = userRepository.save(organizationUser(
                 organizationA,
-                "coord.a." + suffix + "@rutafija.test",
-                UserRole.COORDINADOR
+                "admin.operations.a." + suffix + "@rutafija.test",
+                UserRole.ADMIN
         ));
-        administratorB = userRepository.save(organizationUser(
+        adminB = userRepository.save(organizationUser(
                 organizationB,
                 "admin.b." + suffix + "@rutafija.test",
-                UserRole.ADMINISTRADOR
+                UserRole.ADMIN
         ));
     }
 
     @Test
-    void administratorCreatesResourcesAndCoordinatorOnlySeesAssignedGroup() throws Exception {
+    void everyAdminSeesAndManagesTheEntireTenantWithoutGroupMembership() throws Exception {
         String groupId = json(mockMvc.perform(post("/api/v1/groups")
-                        .with(authenticatedAs(administratorA))
+                        .with(authenticatedAs(adminA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {"name":"Grupo Operativo Norte","description":"Grupo para integración"}
                                 """))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.active").value(true))
+                .andExpect(jsonPath("$.coordinators").doesNotExist())
                 .andReturn()).path("id").asText();
 
         mockMvc.perform(post("/api/v1/groups/{groupId}/coordinators", groupId)
-                        .with(authenticatedAs(administratorA))
+                        .with(authenticatedAs(adminA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {"userId":"%s"}
-                                """.formatted(coordinatorA.getId())))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.coordinators[0].userId").value(coordinatorA.getId().toString()));
+                                """.formatted(secondAdminA.getId())))
+                .andExpect(status().isNotFound());
 
         String conductorUserId = json(mockMvc.perform(post("/api/v1/users")
-                        .with(authenticatedAs(administratorA))
+                        .with(authenticatedAs(adminA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -134,7 +134,7 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
                 .andReturn()).path("id").asText();
 
         String driverId = json(mockMvc.perform(post("/api/v1/drivers")
-                        .with(authenticatedAs(administratorA))
+                        .with(authenticatedAs(adminA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -152,7 +152,7 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
                 .andReturn()).path("id").asText();
 
         String vehicleId = json(mockMvc.perform(post("/api/v1/vehicles")
-                        .with(authenticatedAs(administratorA))
+                        .with(authenticatedAs(adminA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -168,38 +168,37 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
                 .andReturn()).path("id").asText();
 
         mockMvc.perform(post("/api/v1/drivers/{driverId}/vehicles/{vehicleId}", driverId, vehicleId)
-                        .with(authenticatedAs(administratorA)))
+                        .with(authenticatedAs(adminA)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.vehicles[0].vehicleId").value(vehicleId));
 
         mockMvc.perform(post("/api/v1/drivers/{driverId}/vehicles/{vehicleId}/primary", driverId, vehicleId)
-                        .with(authenticatedAs(administratorA)))
+                        .with(authenticatedAs(adminA)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.vehicles[0].primary").value(true));
 
         mockMvc.perform(get("/api/v1/groups")
-                        .with(authenticatedAs(coordinatorA)))
+                        .with(authenticatedAs(secondAdminA)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.items.length()").value(1))
                 .andExpect(jsonPath("$.items[0].id").value(groupId));
 
         mockMvc.perform(get("/api/v1/drivers")
-                        .with(authenticatedAs(coordinatorA)))
+                        .with(authenticatedAs(secondAdminA)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.items.length()").value(1))
                 .andExpect(jsonPath("$.items[0].id").value(driverId));
 
         mockMvc.perform(post("/api/v1/vehicles")
-                        .with(authenticatedAs(coordinatorA))
+                        .with(authenticatedAs(secondAdminA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {"plate":"NO-ROLE","brand":"Marca","model":"Modelo"}
+                                {"plate":"RF1-ADMIN","brand":"Marca","model":"Modelo"}
                                 """))
-                .andExpect(status().isForbidden())
-                .andExpect(jsonPath("$.code").value("FORBIDDEN_ROLE"));
+                .andExpect(status().isCreated());
 
         mockMvc.perform(get("/api/v1/drivers/{driverId}", driverId)
-                        .with(authenticatedAs(administratorB)))
+                        .with(authenticatedAs(adminB)))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code").value("RESOURCE_NOT_FOUND"));
 
@@ -210,7 +209,7 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
     @Test
     void resourceConflictsAndOperationalVehicleStateAreRejected() throws Exception {
         String groupId = json(mockMvc.perform(post("/api/v1/groups")
-                        .with(authenticatedAs(administratorA))
+                        .with(authenticatedAs(adminA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {"name":"Grupo Duplicados","description":"Control de unicidad"}
@@ -228,20 +227,20 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
                 """.formatted(groupId);
 
         mockMvc.perform(post("/api/v1/drivers")
-                        .with(authenticatedAs(administratorA))
+                        .with(authenticatedAs(adminA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(driverPayload))
                 .andExpect(status().isCreated());
 
         mockMvc.perform(post("/api/v1/drivers")
-                        .with(authenticatedAs(administratorA))
+                        .with(authenticatedAs(adminA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(driverPayload))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.code").value("RESOURCE_CONFLICT"));
 
         String vehicleId = json(mockMvc.perform(post("/api/v1/vehicles")
-                        .with(authenticatedAs(administratorA))
+                        .with(authenticatedAs(adminA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {"plate":"RF2-2026","brand":"Marca","model":"Modelo"}
@@ -250,7 +249,7 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
                 .andReturn()).path("id").asText();
 
         mockMvc.perform(post("/api/v1/vehicles/{vehicleId}/status", vehicleId)
-                        .with(authenticatedAs(administratorA))
+                        .with(authenticatedAs(adminA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {"status":"EN_SERVICIO"}
@@ -259,7 +258,7 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
                 .andExpect(jsonPath("$.code").value("VEHICLE_NOT_ELIGIBLE"));
 
         mockMvc.perform(patch("/api/v1/groups/{groupId}", groupId)
-                        .with(authenticatedAs(administratorA))
+                        .with(authenticatedAs(adminA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {

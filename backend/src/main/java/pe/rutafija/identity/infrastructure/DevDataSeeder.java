@@ -60,12 +60,10 @@ public class DevDataSeeder implements ApplicationRunner {
         String passwordHash = passwordEncoder.encode(properties.demoPassword());
 
         globalUser("superadmin@rutafija.local", "Superadministrador Ruta Fija", passwordHash);
-        organizationUser(north, "admin.norte@rutafija.local", "Administrador Ruta Norte", UserRole.ADMINISTRADOR, passwordHash);
-        organizationUser(north, "coordinador.norte@rutafija.local", "Coordinador Ruta Norte", UserRole.COORDINADOR, passwordHash);
-        organizationUser(south, "admin.sur@rutafija.local", "Administrador Ruta Sur", UserRole.ADMINISTRADOR, passwordHash);
-        organizationUser(south, "coordinador.sur@rutafija.local", "Coordinador Ruta Sur", UserRole.COORDINADOR, passwordHash);
+        organizationUser(north, "admin.norte@rutafija.local", "Admin Ruta Norte", UserRole.ADMIN, passwordHash);
+        organizationUser(south, "admin.sur@rutafija.local", "Admin Ruta Sur", UserRole.ADMIN, passwordHash);
 
-        log.info("Development seed is ready: 2 organizations and 5 demo users");
+        log.info("Development seed is ready: 2 organizations and 3 demo users");
     }
 
     private Organization organization(String legalName, String tradeName) {

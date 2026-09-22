@@ -6,7 +6,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.socket.WebSocketSession;
-import pe.rutafija.fleet.infrastructure.GroupCoordinatorRepository;
 import pe.rutafija.identity.domain.AppUser;
 import pe.rutafija.identity.domain.UserRole;
 import pe.rutafija.identity.infrastructure.AppUserRepository;
@@ -31,62 +30,67 @@ class OperationStreamBroadcasterTest {
     AppUserRepository userRepository;
 
     @Mock
-    GroupCoordinatorRepository groupCoordinatorRepository;
+    WebSocketSession tenantAdminSession;
 
     @Mock
-    WebSocketSession visibleCoordinatorSession;
+    WebSocketSession conductorSession;
 
     @Mock
-    WebSocketSession hiddenCoordinatorSession;
+    WebSocketSession otherTenantAdminSession;
 
     @Test
-    void onlyCoordinatorAssignedToTheEventGroupReceivesTheEvent() throws Exception {
-        UUID organizationId = UUID.randomUUID();
-        UUID visibleGroupId = UUID.randomUUID();
+    void everyActiveAdminInTheTenantReceivesGroupEventsWithoutMembershipLookup() throws Exception {
         Organization organization = Organization.active("Operación Socket", "Socket", "America/Lima");
-        AppUser visibleCoordinator = AppUser.organizationUser(
+        Organization otherOrganization = Organization.active("Operación B", "Socket B", "America/Lima");
+        UUID organizationId = organization.getId();
+        AppUser tenantAdmin = AppUser.organizationUser(
                 organization,
-                "visible@rutafija.test",
+                "admin@rutafija.test",
                 "hash",
-                "Coordinador visible",
-                UserRole.COORDINADOR
+                "Admin del tenant",
+                UserRole.ADMIN
         );
-        AppUser hiddenCoordinator = AppUser.organizationUser(
+        AppUser conductor = AppUser.organizationUser(
                 organization,
-                "hidden@rutafija.test",
+                "conductor@rutafija.test",
                 "hash",
-                "Coordinador sin acceso",
-                UserRole.COORDINADOR
+                "Conductor del tenant",
+                UserRole.CONDUCTOR
+        );
+        AppUser otherTenantAdmin = AppUser.organizationUser(
+                otherOrganization,
+                "admin.b@rutafija.test",
+                "hash",
+                "Admin de otro tenant",
+                UserRole.ADMIN
         );
 
-        when(visibleCoordinatorSession.getId()).thenReturn("visible-session");
-        when(visibleCoordinatorSession.isOpen()).thenReturn(true);
-        when(hiddenCoordinatorSession.getId()).thenReturn("hidden-session");
-        when(userRepository.findByIdAndOrganization_Id(visibleCoordinator.getId(), organizationId))
-                .thenReturn(Optional.of(visibleCoordinator));
-        when(userRepository.findByIdAndOrganization_Id(hiddenCoordinator.getId(), organizationId))
-                .thenReturn(Optional.of(hiddenCoordinator));
-        when(groupCoordinatorRepository.existsByGroup_IdAndUser_Id(visibleGroupId, visibleCoordinator.getId()))
-                .thenReturn(true);
-        when(groupCoordinatorRepository.existsByGroup_IdAndUser_Id(visibleGroupId, hiddenCoordinator.getId()))
-                .thenReturn(false);
+        when(tenantAdminSession.getId()).thenReturn("tenant-admin-session");
+        when(tenantAdminSession.isOpen()).thenReturn(true);
+        when(conductorSession.getId()).thenReturn("conductor-session");
+        when(otherTenantAdminSession.getId()).thenReturn("other-tenant-session");
+        when(userRepository.findByIdAndOrganization_Id(tenantAdmin.getId(), organizationId))
+                .thenReturn(Optional.of(tenantAdmin));
+        when(userRepository.findByIdAndOrganization_Id(conductor.getId(), organizationId))
+                .thenReturn(Optional.of(conductor));
 
         OperationStreamBroadcaster broadcaster = new OperationStreamBroadcaster(
                 new ObjectMapper().findAndRegisterModules(),
-                userRepository,
-                groupCoordinatorRepository
+                userRepository
         );
-        broadcaster.register(organizationId, visibleCoordinator.getId(), visibleCoordinatorSession);
-        broadcaster.register(organizationId, hiddenCoordinator.getId(), hiddenCoordinatorSession);
+        broadcaster.register(organizationId, tenantAdmin.getId(), tenantAdminSession);
+        broadcaster.register(organizationId, conductor.getId(), conductorSession);
+        broadcaster.register(otherOrganization.getId(), otherTenantAdmin.getId(), otherTenantAdminSession);
         broadcaster.broadcast(new OperationChangedEvent(
                 organizationId,
-                Set.of(visibleGroupId),
+                Set.of(UUID.randomUUID()),
                 "assignment.started",
-                Instant.parse("2026-08-29T20:00:00Z"),
+                Instant.parse("2026-09-22T12:00:00Z"),
                 Map.of("assignmentId", UUID.randomUUID().toString())
         ));
 
-        verify(visibleCoordinatorSession).sendMessage(any());
-        verify(hiddenCoordinatorSession, never()).sendMessage(any());
+        verify(tenantAdminSession).sendMessage(any());
+        verify(conductorSession, never()).sendMessage(any());
+        verify(otherTenantAdminSession, never()).sendMessage(any());
     }
 }

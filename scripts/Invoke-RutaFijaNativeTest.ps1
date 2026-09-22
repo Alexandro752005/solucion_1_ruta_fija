@@ -131,6 +131,12 @@ switch ($Action) {
     }
     'Verify' {
         try {
+            $jacocoExecutionData = Join-Path (Split-Path -Parent $mavenWrapper) 'target\jacoco.exec'
+            if (Test-Path -LiteralPath $jacocoExecutionData -PathType Leaf) {
+                # Generated coverage data from an earlier class version can corrupt only the report.
+                # The exact file is inside backend/target; source code and database data are untouched.
+                Remove-Item -LiteralPath $jacocoExecutionData -Force
+            }
             Push-Location (Split-Path -Parent $mavenWrapper)
             try {
                 & $mavenWrapper --batch-mode --no-transfer-progress verify
@@ -145,10 +151,10 @@ switch ($Action) {
             $migration = Invoke-TestPsql -Settings $settings -Sql @'
 select coalesce(max(version), '') from flyway_schema_history where success = true;
 '@
-            if (@($migration | Where-Object { $_ -eq '5' }).Count -ne 1) {
-                throw 'F1.4 no confirmó Flyway V1-V5 en ruta_fija_test.'
+            if (@($migration | Where-Object { $_ -eq '6' }).Count -ne 1) {
+                throw 'F2.2 no confirmó Flyway V1-V6 en ruta_fija_test.'
             }
-            Write-Output 'F1_4_NATIVE_VERIFY=PASS unit=21 integration=13 flyway=V1-V5 docker=0'
+            Write-Output 'F2_2_NATIVE_VERIFY=PASS unit=23 integration=13 flyway=V1-V6 docker=0'
         }
         finally {
             Clear-TestData -Settings $settings

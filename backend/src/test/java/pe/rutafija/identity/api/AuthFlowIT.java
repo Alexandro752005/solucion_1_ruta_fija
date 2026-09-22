@@ -79,7 +79,7 @@ class AuthFlowIT extends NativePostgresIntegrationTest {
                     EMAIL,
                     passwordEncoder.encode(PASSWORD),
                     "Integration Admin",
-                    UserRole.ADMINISTRADOR
+                    UserRole.ADMIN
             ));
         });
     }
@@ -99,7 +99,7 @@ class AuthFlowIT extends NativePostgresIntegrationTest {
                 .andExpect(header().string("X-Correlation-ID", "integration-me"))
                 .andExpect(jsonPath("$.id").value(testUser.getId().toString()))
                 .andExpect(jsonPath("$.organizationId").value(testUser.getOrganizationId().toString()))
-                .andExpect(jsonPath("$.role").value("ADMINISTRADOR"));
+                .andExpect(jsonPath("$.role").value("ADMIN"));
     }
 
     @Test
@@ -148,7 +148,7 @@ class AuthFlowIT extends NativePostgresIntegrationTest {
                                 .subject(testUser.getId().toString())
                                 .claim("organizationId", testUser.getOrganizationId().toString())
                                 .claim("email", EMAIL)
-                                .claim("role", "ADMINISTRADOR"))))
+                                .claim("role", "ADMIN"))))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code").value("RESOURCE_NOT_FOUND"));
     }
@@ -194,7 +194,7 @@ class AuthFlowIT extends NativePostgresIntegrationTest {
                                         .subject(testUser.getId().toString())
                                         .claim("organizationId", UUID.randomUUID().toString())
                                         .claim("email", EMAIL)
-                                        .claim("role", "ADMINISTRADOR"))))
+                                        .claim("role", "ADMIN"))))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.code").value("AUTH_TOKEN_INVALID"));
     }

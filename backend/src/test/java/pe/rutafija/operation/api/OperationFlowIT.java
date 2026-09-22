@@ -85,13 +85,13 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                 "Operación B",
                 "America/Lima"
         ));
-        administratorA = userRepository.save(organizationUser(organizationA, "admin.a." + suffix, UserRole.ADMINISTRADOR));
-        coordinatorA = userRepository.save(organizationUser(organizationA, "coord.a." + suffix, UserRole.COORDINADOR));
-        administratorB = userRepository.save(organizationUser(organizationB, "admin.b." + suffix, UserRole.ADMINISTRADOR));
+        administratorA = userRepository.save(organizationUser(organizationA, "admin.a." + suffix, UserRole.ADMIN));
+        coordinatorA = userRepository.save(organizationUser(organizationA, "admin.operations.a." + suffix, UserRole.ADMIN));
+        administratorB = userRepository.save(organizationUser(organizationB, "admin.b." + suffix, UserRole.ADMIN));
     }
 
     @Test
-    void coordinatorRunsTheWebOperationalFlowAndReportsPersistedFacts() throws Exception {
+    void adminRunsTheWebOperationalFlowAndReportsPersistedFacts() throws Exception {
         String groupId = json(mockMvc.perform(post("/api/v1/groups")
                         .with(authenticatedAs(administratorA))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -100,14 +100,6 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                                 """))
                 .andExpect(status().isCreated())
                 .andReturn()).path("id").asText();
-
-        mockMvc.perform(post("/api/v1/groups/{groupId}/coordinators", groupId)
-                        .with(authenticatedAs(administratorA))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {"userId":"%s"}
-                                """.formatted(coordinatorA.getId())))
-                .andExpect(status().isOk());
 
         String driverId = json(mockMvc.perform(post("/api/v1/drivers")
                         .with(authenticatedAs(administratorA))
@@ -314,7 +306,7 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(auditEventId));
         mockMvc.perform(get("/api/v1/audit-events").with(authenticatedAs(coordinatorA)))
-                .andExpect(status().isForbidden());
+                .andExpect(status().isOk());
         mockMvc.perform(get("/api/v1/audit-events/{auditEventId}", auditEventId)
                         .with(authenticatedAs(administratorB)))
                 .andExpect(status().isNotFound());
@@ -372,12 +364,6 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                                 """))
                 .andExpect(status().isCreated())
                 .andReturn()).path("id").asText();
-        mockMvc.perform(post("/api/v1/groups/{groupId}/coordinators", groupId)
-                        .with(authenticatedAs(administratorA))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{" + "\"userId\":\"" + coordinatorA.getId() + "\"}"))
-                .andExpect(status().isOk());
-
         String driverId = json(mockMvc.perform(post("/api/v1/drivers")
                         .with(authenticatedAs(administratorA))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -446,7 +432,7 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
         AppUser staleCoordinator = userRepository.save(organizationUser(
                 organizationA,
                 "stale." + suffix,
-                UserRole.COORDINADOR
+                UserRole.ADMIN
         ));
         RequestPostProcessor staleCoordinatorToken = authenticatedAs(staleCoordinator);
 
@@ -480,11 +466,6 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                                 """))
                 .andExpect(status().isCreated())
                 .andReturn()).path("id").asText();
-        mockMvc.perform(post("/api/v1/groups/{groupId}/coordinators", groupId)
-                        .with(authenticatedAs(administratorA))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{" + "\"userId\":\"" + coordinatorA.getId() + "\"}"))
-                .andExpect(status().isOk());
         String driverId = json(mockMvc.perform(post("/api/v1/drivers")
                         .with(authenticatedAs(administratorA))
                         .contentType(MediaType.APPLICATION_JSON)
