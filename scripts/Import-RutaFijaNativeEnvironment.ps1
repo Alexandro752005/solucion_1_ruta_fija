@@ -2,7 +2,7 @@
 param(
     [string]$ConfigPath,
     [switch]$PassThru,
-    [ValidateSet('Runtime', 'All')]
+    [ValidateSet('Runtime', 'Test', 'All')]
     [string]$Scope = 'Runtime'
 )
 
@@ -36,7 +36,12 @@ $f12Keys = @(
     'RF_TEST_DATASOURCE_USERNAME',
     'RF_TEST_DATASOURCE_PASSWORD'
 )
-$allowedKeys = @($f11aKeys + $f12Keys)
+$f14Keys = @(
+    'RF_TEST_MIGRATOR_URL',
+    'RF_TEST_MIGRATOR_USERNAME',
+    'RF_TEST_MIGRATOR_PASSWORD'
+)
+$allowedKeys = @($f11aKeys + $f12Keys + $f14Keys)
 $settings = [ordered]@{}
 $lineNumber = 0
 
@@ -77,6 +82,11 @@ if ($presentF12Keys.Count -gt 0 -and $presentF12Keys.Count -ne $f12Keys.Count) {
     throw 'La configuracion F1.2 esta incompleta: las variables de Flyway y ruta_fija_test deben declararse juntas.'
 }
 
+$presentF14Keys = @($f14Keys | Where-Object { $settings.Contains($_) })
+if ($presentF14Keys.Count -gt 0 -and $presentF14Keys.Count -ne $f14Keys.Count) {
+    throw 'La configuracion F1.4 esta incompleta: las variables del migrador de pruebas deben declararse juntas.'
+}
+
 if ($Scope -eq 'Runtime') {
     $runtimeSettings = [ordered]@{}
     foreach ($key in @($f11aKeys + @('SPRING_FLYWAY_URL', 'SPRING_FLYWAY_USERNAME', 'SPRING_FLYWAY_PASSWORD'))) {
@@ -85,6 +95,66 @@ if ($Scope -eq 'Runtime') {
         }
     }
     $settings = $runtimeSettings
+}
+elseif ($Scope -eq 'Test') {
+    foreach ($requiredKey in $f12Keys) {
+        if (-not $settings.Contains($requiredKey)) {
+            throw "F1.4 requiere la variable $requiredKey para ejecutar pruebas nativas."
+        }
+    }
+
+    $testUrl = $settings['RF_TEST_DATASOURCE_URL']
+    if ($testUrl -ne 'jdbc:postgresql://127.0.0.1:5432/ruta_fija_test') {
+        throw 'F1.4 solo autoriza ruta_fija_test en PostgreSQL local 127.0.0.1:5432.'
+    }
+    if ($settings['RF_TEST_DATASOURCE_USERNAME'] -ne 'rf_test') {
+        throw 'F1.4 requiere RF_TEST_DATASOURCE_USERNAME=rf_test.'
+    }
+
+    $testMigratorUrl = if ($settings.Contains('RF_TEST_MIGRATOR_URL')) {
+        $settings['RF_TEST_MIGRATOR_URL']
+    }
+    else {
+        $testUrl
+    }
+    $testMigratorUsername = if ($settings.Contains('RF_TEST_MIGRATOR_USERNAME')) {
+        $settings['RF_TEST_MIGRATOR_USERNAME']
+    }
+    else {
+        $settings['SPRING_FLYWAY_USERNAME']
+    }
+    $testMigratorPassword = if ($settings.Contains('RF_TEST_MIGRATOR_PASSWORD')) {
+        $settings['RF_TEST_MIGRATOR_PASSWORD']
+    }
+    else {
+        $settings['SPRING_FLYWAY_PASSWORD']
+    }
+
+    if ($testMigratorUrl -ne $testUrl -or $testMigratorUsername -ne 'rf_migrator') {
+        throw 'F1.4 exige rf_migrator y la misma ruta_fija_test para Flyway de pruebas.'
+    }
+
+    $testSettings = [ordered]@{
+        SPRING_PROFILES_ACTIVE = 'test'
+        SPRING_DATASOURCE_URL = $testUrl
+        SPRING_DATASOURCE_USERNAME = $settings['RF_TEST_DATASOURCE_USERNAME']
+        SPRING_DATASOURCE_PASSWORD = $settings['RF_TEST_DATASOURCE_PASSWORD']
+        SPRING_FLYWAY_URL = $testMigratorUrl
+        SPRING_FLYWAY_USER = $testMigratorUsername
+        SPRING_FLYWAY_USERNAME = $testMigratorUsername
+        SPRING_FLYWAY_PASSWORD = $testMigratorPassword
+        JWT_SECRET_BASE64 = $settings['JWT_SECRET_BASE64']
+        APP_SEED_ENABLED = 'false'
+        APP_CORS_ALLOWED_ORIGINS = 'http://localhost:4200'
+        REFRESH_COOKIE_SECURE = 'false'
+        RF_TEST_DATASOURCE_URL = $testUrl
+        RF_TEST_DATASOURCE_USERNAME = $settings['RF_TEST_DATASOURCE_USERNAME']
+        RF_TEST_DATASOURCE_PASSWORD = $settings['RF_TEST_DATASOURCE_PASSWORD']
+        RF_TEST_MIGRATOR_URL = $testMigratorUrl
+        RF_TEST_MIGRATOR_USERNAME = $testMigratorUsername
+        RF_TEST_MIGRATOR_PASSWORD = $testMigratorPassword
+    }
+    $settings = $testSettings
 }
 
 if ($PassThru) {

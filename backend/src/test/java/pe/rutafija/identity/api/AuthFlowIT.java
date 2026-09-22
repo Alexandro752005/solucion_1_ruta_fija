@@ -13,18 +13,14 @@ import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 import pe.rutafija.identity.domain.AppUser;
 import pe.rutafija.identity.domain.UserRole;
 import pe.rutafija.identity.infrastructure.AppUserRepository;
 import pe.rutafija.organization.domain.Organization;
 import pe.rutafija.organization.infrastructure.OrganizationRepository;
+import pe.rutafija.support.NativePostgresIntegrationTest;
 
 import java.util.UUID;
 
@@ -45,29 +41,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 })
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-@Testcontainers
-class AuthFlowIT {
+class AuthFlowIT extends NativePostgresIntegrationTest {
 
     private static final String EMAIL = "admin.integration@rutafija.test";
     private static final String PASSWORD = "Integration-Password-2026";
-
-    @Container
-    static final PostgreSQLContainer<?> POSTGRES = new PostgreSQLContainer<>("postgres:16-alpine")
-            .withDatabaseName("ruta_fija_test")
-            .withUsername("ruta_fija_test")
-            .withPassword("test-only-password");
-
-    @DynamicPropertySource
-    static void databaseProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", POSTGRES::getJdbcUrl);
-        registry.add("spring.datasource.username", POSTGRES::getUsername);
-        registry.add("spring.datasource.password", POSTGRES::getPassword);
-        registry.add(
-                "app.security.jwt.secret-base64",
-                () -> "MDEyMzQ1Njc4OWFiY2RlZjAxMjM0NTY3ODlhYmNkZWY="
-        );
-        registry.add("app.security.cors.allowed-origins", () -> "http://localhost:4200");
-    }
 
     @Autowired
     MockMvc mockMvc;

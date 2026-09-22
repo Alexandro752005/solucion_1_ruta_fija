@@ -8,3 +8,14 @@ app:
 springdoc:
   swagger-ui:
     enabled: false
+
+spring:
+  datasource:
+    url: ${RF_TEST_DATASOURCE_URL}
+    username: ${RF_TEST_DATASOURCE_USERNAME}
+    password: ${RF_TEST_DATASOURCE_PASSWORD}
+  flyway:
+    url: ${RF_TEST_MIGRATOR_URL:${RF_TEST_DATASOURCE_URL}}
+    user: ${RF_TEST_MIGRATOR_USERNAME:${SPRING_FLYWAY_USERNAME}}
+    password: ${RF_TEST_MIGRATOR_PASSWORD:${SPRING_FLYWAY_PASSWORD}}
+    locations: classpath:db/migration,classpath:db/test-migration
