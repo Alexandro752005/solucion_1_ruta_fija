@@ -175,6 +175,8 @@ está protegida por su propio comando:
 V6 deja como roles de aplicación `SUPER_ADMIN`, `ADMIN` y `CONDUCTOR`. F2.3
 alinea el CRM Angular al mismo contrato: ADMIN recibe toda la navegación de su
 tenant y no existe administración de coordinadores de grupo en la interfaz.
+F2.4 ejecuta la puerta G2: consolida la evidencia de roles, tenant, sesiones,
+historia de grupos y operación nativa antes de iniciar la API móvil.
 
 ## Automatización y documentación
 
@@ -208,6 +210,8 @@ Documentos principales:
 - [Contrato API F2.3](docs/contrato-api-f2-3-admin.md)
 - [Auditoría CRM F2.3](docs/auditoria-f2-3-frontend-admin.md)
 - [Evidencia de cierre F2.3](docs/evidencia-f2-3-crm-admin-2026-09-22.md)
+- [Cierre G2 / F2.4](docs/ejecucion-nativa-f2-4-g2.md)
+- [Evidencia G2 / F2.4](docs/evidencia-g2-consolidacion-admin-2026-09-22.md)
 - [Plan de migración nativa](docs/plan-f1-postgresql-nativo-sin-docker.md)
 
 Los archivos de Compose y Dockerfile permanecen como compatibilidad histórica

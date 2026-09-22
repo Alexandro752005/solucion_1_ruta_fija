@@ -196,6 +196,17 @@ El resultado esperado es F2_3_FRONTEND_AUDIT=PASS. Consulte
 [evidencia de cierre](evidencia-f2-3-crm-admin-2026-09-22.md) para el alcance
 y las comprobaciones completas.
 
+Para cerrar la consolidacion de roles antes de iniciar la API movil:
+
+~~~powershell
+.\scripts\Test-RutaFijaG2AdminClosure.ps1
+~~~
+
+Mantenga libres 8080 y 4200. La salida esperada empieza con
+G2_ADMIN_CONSOLIDATION=PASS. La guia de controles esta en
+[F2.4 / G2](ejecucion-nativa-f2-4-g2.md) y la
+[evidencia G2](evidencia-g2-consolidacion-admin-2026-09-22.md).
+
 Para revisar REST, login, refresh y WebSocket desde el proxy Angular:
 
 ~~~powershell

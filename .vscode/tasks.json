@@ -238,6 +238,21 @@
       ],
       "options": { "cwd": "${workspaceFolder}" },
       "problemMatcher": []
+    },
+    {
+      "label": "Ruta Fija: cerrar consolidacion ADMIN (F2.4 / G2)",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\Test-RutaFijaG2AdminClosure.ps1"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
     }
   ]
 }
