@@ -64,13 +64,45 @@
     {
       "label": "Ruta Fija: auditar esquema nativo (F1.3)",
       "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\Test-RutaFijaMigratedSchemaF13.ps1"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Ruta Fija: iniciar nativo (F1.1B)",
+      "type": "process",
       "command": "cmd.exe",
       "args": ["/c", "${workspaceFolder}\\iniciar_ruta_fija.bat"],
       "options": { "cwd": "${workspaceFolder}" },
       "problemMatcher": []
     },
     {
-      "label": "Ruta Fija: finalizar fase nativa actual",
+      "label": "Ruta Fija: validar runtime nativo (F1.1B)",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\Invoke-RutaFijaNativeRuntime.ps1",
+        "-Action",
+        "Test"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Ruta Fija: finalizar nativo (F1.1B)",
       "type": "process",
       "command": "cmd.exe",
       "args": ["/c", "${workspaceFolder}\\finalizar_ruta_fija.bat"],

@@ -29,10 +29,10 @@ locales distintas para los tres roles y las guarda solo en
 de preparar esa configuración, volver a ejecutar el mismo comando reanuda de
 forma conservadora; se detiene si observa una creación parcial inesperada.
 
-Después ejecute:
+Para reproducir solamente la auditoría de roles de F1.2, ejecute:
 
 ```powershell
-.\iniciar_ruta_fija.bat
+.\scripts\Test-RutaFijaRoleIsolation.ps1
 ```
 
 La validación comprueba PostgreSQL 16, UTF8, UTC, las conexiones correctas,

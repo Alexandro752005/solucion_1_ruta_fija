@@ -25,7 +25,7 @@ export class ApiErrorService {
 
     if (error.status === 0) {
       return {
-        message: 'No se pudo conectar con el servidor. Verifica que los contenedores estén activos.',
+        message: 'No se pudo conectar con el servidor. Verifica que el backend local esté iniciado.',
         fieldErrors: [],
       };
     }

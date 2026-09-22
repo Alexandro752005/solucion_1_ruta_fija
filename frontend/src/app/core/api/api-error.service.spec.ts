@@ -32,6 +32,8 @@ describe('ApiErrorService', () => {
     const result = service.toUiError(new HttpErrorResponse({ status: 0 }));
 
     expect(result.message).toContain('No se pudo conectar');
+    expect(result.message).toContain('backend local');
+    expect(result.message).not.toContain('contenedores');
     expect(result.fieldErrors).toEqual([]);
   });
 });

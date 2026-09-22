@@ -22,7 +22,7 @@ Después de aprobar F1.2, el orden obligatorio es:
 
     .\scripts\Invoke-RutaFijaFlywayF13.ps1
     .\scripts\Grant-RutaFijaApplicationPrivilegesF13.ps1
-    .\iniciar_ruta_fija.bat
+    .\scripts\Test-RutaFijaMigratedSchemaF13.ps1
 
 El primer script exige desarrollo vacío, V1-V5 pendientes, perfiles locales,
 semillas desactivadas y API/CRM apagados. Permite como máximo una conexión
@@ -52,6 +52,6 @@ incluye F1_3_SCHEMA_AUDIT=PASS.
 
 ## Límite de F1.3
 
-Esta subfase no arranca el backend ni el frontend. El arranque nativo real,
-health checks y gestión de PID pertenecen a F1.1B, después de la aprobación
-verde de F1.3.
+Esta subfase no arrancó el backend ni el frontend. Tras la aprobación verde de
+F1.3, F1.1B incorporó el arranque nativo, health checks y gestión de PID. Vea
+[F1.1B — Arranque nativo controlado](ejecucion-nativa-f1-1b.md).

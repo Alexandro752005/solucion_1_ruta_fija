@@ -16,10 +16,10 @@ El script solicita la clave PostgreSQL mediante entrada oculta, genera un JWT al
 
 ## Preflight nativo
 
-Ejecute:
+Para reproducir solamente la evidencia histórica de F1.1A, ejecute:
 
 ```powershell
-.\iniciar_ruta_fija.bat
+.\scripts\Test-RutaFijaNativePreflight.ps1
 ```
 
 El preflight valida Java 21+, Node 24+, npm, PostgreSQL 16, UTF8, la URL autorizada, el JWT y el aislamiento del archivo local frente a Git. También ejecuta una conexión JDBC de solo lectura; no inicia el contexto Spring.
@@ -31,7 +31,8 @@ NATIVE_PREFLIGHT=PASS
 F1.1A no inicio Spring Boot, Flyway, API ni CRM.
 ```
 
-`finalizar_ruta_fija.bat` es seguro en esta fase porque aún no existen procesos nativos iniciados por el proyecto.
+Desde F1.1B, iniciar_ruta_fija.bat inicia realmente API y CRM; ya no es el
+comando de preflight histórico de esta subfase.
 
 ## Límite de la subfase
 
