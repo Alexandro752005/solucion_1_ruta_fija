@@ -165,6 +165,7 @@ Documentos principales:
 - [Ejecución nativa F1.4](docs/ejecucion-nativa-f1-4.md)
 - [Ejecución nativa F1.5](docs/ejecucion-nativa-f1-5.md)
 - [Seguridad local F1.6](docs/ejecucion-nativa-f1-6.md)
+- [Evidencia F1.6](docs/evidencia-f1-6-seguridad-local-2026-09-22.md)
 - [Recuperación F1.7](docs/ejecucion-nativa-f1-7.md)
 - [Evidencia F1.7](docs/evidencia-f1-7-recuperacion-post-migracion-2026-09-21.md)
 - [Plan de migración nativa](docs/plan-f1-postgresql-nativo-sin-docker.md)

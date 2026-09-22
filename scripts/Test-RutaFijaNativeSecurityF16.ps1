@@ -230,9 +230,9 @@ try {
          ORDER BY rolname;
     "
     $expectedRoles = @(
-        'rf_app|f|f|f|f|f|t',
-        'rf_migrator|f|f|f|f|f|t',
-        'rf_test|f|f|f|f|f|t'
+        'rf_app|false|false|false|false|false|true',
+        'rf_migrator|false|false|false|false|false|true',
+        'rf_test|false|false|false|false|false|true'
     )
     if ((@($roleRows | ForEach-Object { $_.Trim() }) -join ';') -ne ($expectedRoles -join ';')) {
         throw 'Los roles de Ruta Fija no cumplen minimo privilegio F1.6.'
@@ -278,11 +278,13 @@ if ($ciContent -match '(?im)^.*docker compose.*$' -or
 
 $tasksPath = Join-Path $repoRoot '.vscode\tasks.json'
 $tasks = Get-Content -LiteralPath $tasksPath -Raw -Encoding UTF8 | ConvertFrom-Json
+$recoveryTaskLabel = 'Ruta Fija: backup y recuperaci' + [char]0x00F3 +
+    'n post-migraci' + [char]0x00F3 + 'n (F1.7)'
 $requiredTaskLabels = @(
     'Ruta Fija: verificar pruebas nativas (F1.4)',
     'Ruta Fija: smoke proxy REST y WebSocket (F1.5)',
     'Ruta Fija: auditar seguridad local (F1.6)',
-    'Ruta Fija: backup y recuperación post-migración (F1.7)'
+    $recoveryTaskLabel
 )
 $actualTaskLabels = @($tasks.tasks | ForEach-Object { $_.label })
 foreach ($label in $requiredTaskLabels) {
