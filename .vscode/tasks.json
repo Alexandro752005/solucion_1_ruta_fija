@@ -376,6 +376,21 @@
       "problemMatcher": []
     },
     {
+      "label": "Ruta Fija: instalar Android SDK interactivo (F4.1, titular)",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\Initialize-RutaFijaAndroidSdkF41.ps1"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
       "label": "Ruta Fija: analizar Flutter conductor (F4.1)",
       "type": "process",
       "command": "flutter",

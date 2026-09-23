@@ -83,6 +83,10 @@ Assert-Contains -Text $shell -Pattern 'Pendiente de construc' -Description 'fron
 Assert-Contains -Text $shell -Pattern 'no muestran datos simulados' -Description 'ausencia de datos simulados en M1'
 $androidBuild = Get-Utf8Text 'mobile\android\app\build.gradle.kts'
 Assert-Contains -Text $androidBuild -Pattern 'applicationId\s*=\s*"pe\.rutafija\.conductor"' -Description 'identificador Android de Ruta Fija'
+$manifest = Get-Utf8Text 'mobile\android\app\src\main\AndroidManifest.xml'
+if ($manifest -match 'usesCleartextTraffic\s*=\s*"true"') {
+    throw 'F4.1 no permite trafico HTTP global en el manifiesto Android.'
+}
 
 $flutter = Resolve-FlutterCommand -RequestedRoot $FlutterRoot
 $version = @(& $flutter --version 2>&1)
@@ -112,9 +116,14 @@ try {
     else {
         'PENDING_OWNER_LICENSE'
     }
+
+    $doctorText = $doctorOutput -join "`n"
+    if ($doctorText -match 'Android toolchain' -and $doctorText -match 'Android SDK at') {
+        $androidToolchain = 'READY'
+    }
 }
 finally {
     Pop-Location
 }
 
-Write-Output "F4_1_FLUTTER_FOUNDATION=PASS flutter='$versionLine' m1=8/80 android=$androidToolchain docker=0"
+Write-Output "F4_1_FLUTTER_FOUNDATION=PASS flutter='$versionLine' m1=8/80 android=$androidToolchain manifest=PASS docker=0"

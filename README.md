@@ -35,7 +35,7 @@ de conductor y vehículo.
 - PostgreSQL 16 instalado como servicio local, con psql disponible.
 - Java 21.
 - Node.js 24.16.x y npm.
-- Flutter 3.47.5 estable para `mobile/`; Android SDK solo es necesario para APK o dispositivo.
+- Flutter 3.47.5 estable para `mobile/`; para APK o dispositivo el titular ejecuta `scripts\Initialize-RutaFijaAndroidSdkF41.ps1` y acepta personalmente las licencias Android.
 - Visual Studio Code, recomendado.
 
 La instancia debe estar limitada a 127.0.0.1 y ::1. No se publique el puerto

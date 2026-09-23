@@ -46,6 +46,27 @@ No se implementan login real, refresh, secure storage, llamadas HTTP funcionales
 - Flutter 3.47.5 estable quedó instalado fuera del repositorio en `D:\dev\flutter`; su archivo oficial se verificó con SHA-256 antes de extraerse y su carpeta `bin` se añadió al `PATH` del usuario.
 - Se creó `mobile/` como proyecto Android `pe.rutafija.conductor`, sin SDK, secreto ni archivo temporal de Flutter versionado fuera de lo que el proyecto requiere.
 - La auditoría `Test-RutaFijaF41FlutterFoundation.ps1` ejecutó `flutter analyze` sin incidencias y `flutter test` con 4 pruebas aprobadas.
-- `flutter doctor` confirma Flutter, Windows, Chrome, Edge y red; Android SDK sigue pendiente. Por licencias, el propietario debe revisar y aceptar personalmente la instalación Android antes de generar APK o ejecutar en dispositivo.
+- Las herramientas de línea de comandos Android están ubicadas en `D:\Android\Sdk\cmdline-tools\latest\bin`. Por licencias, el propietario debe revisar y aceptar personalmente la instalación Android antes de generar APK o ejecutar en dispositivo.
 
-La base M1 queda técnicamente aprobada con 8/80 puntos. La habilitación Android no se declara aprobada ni se sustituye por un emulador: queda como requisito explícito antes de la evidencia APK de M9.
+## Habilitación Android controlada por el titular
+
+Desde la raíz del repositorio, el titular ejecuta:
+
+~~~powershell
+.\scripts\Initialize-RutaFijaAndroidSdkF41.ps1
+~~~
+
+El instalador solicita un consentimiento explícito, muestra las licencias de
+Android para responderlas manualmente y descarga únicamente `platform-tools`,
+Android API 36 y Build-Tools 36.0.0. No descarga Android Studio ni un emulador.
+Su salida esperada es `F4_1_ANDROID_SETUP=PASS`. Después, en una terminal nueva,
+se ejecuta:
+
+~~~powershell
+.\scripts\Test-RutaFijaF41FlutterFoundation.ps1
+~~~
+
+La base M1 queda técnicamente aprobada con 8/80 puntos. La habilitación Android
+solo quedará aprobada cuando esa auditoría indique `android=READY`; no se
+sustituye por un emulador y queda como requisito explícito antes de la evidencia
+APK de M9.

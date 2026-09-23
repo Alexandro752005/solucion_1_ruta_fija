@@ -219,13 +219,17 @@ totales persistidos en JSON, PDF y XLSX.
 Auditoría de la base Flutter F4.1:
 
 ~~~powershell
+.\scripts\Initialize-RutaFijaAndroidSdkF41.ps1
 .\scripts\Test-RutaFijaF41FlutterFoundation.ps1
 ~~~
 
-El resultado esperado empieza con `F4_1_FLUTTER_FOUNDATION=PASS`. Comprueba la
-arquitectura M1, la configuración `RF_API_BASE_URL`, la ausencia de dependencias
-funcionales adelantadas, el identificador Android y ejecuta `flutter analyze` y
-`flutter test`. Si Android SDK aún no está instalado, informa
+El primer comando es interactivo: el titular revisa y acepta personalmente las
+licencias Android y se instalan únicamente los paquetes mínimos, sin emulador.
+Debe terminar con `F4_1_ANDROID_SETUP=PASS`. El segundo resultado esperado
+empieza con `F4_1_FLUTTER_FOUNDATION=PASS`. Comprueba la arquitectura M1, la
+configuración `RF_API_BASE_URL`, la ausencia de dependencias funcionales
+adelantadas, el identificador Android y ejecuta `flutter analyze` y
+`flutter test`. Si Android SDK aún no está listo, informa
 `android=PENDING_OWNER_LICENSE` sin fingir un APK.
 
 Validación del CRM unificado en ADMIN:

@@ -29,16 +29,28 @@ Para una URL HTTPS temporal de demostración o una red autorizada, defina la
 misma variable con una URL que termine exactamente en `/api/v1`. Nunca incluya
 usuario, contraseña, token, consulta URL ni el puerto 5432.
 
-## Requisitos Android pendientes
+## Preparar Android para APK o dispositivo
 
-Flutter está instalado en `D:\dev\flutter` y se añadió al `PATH` del usuario.
-Antes de generar un APK o ejecutar Android, el propietario debe instalar el
-Android SDK y revisar/aceptar personalmente sus licencias. No se instala un
-emulador como requisito del proyecto: un dispositivo físico o un APK debug
-serán suficientes para las fases posteriores.
+Flutter está instalado en `D:\dev\flutter` y las herramientas de línea de
+comandos Android están en `D:\Android\Sdk`. Falta instalar los paquetes de
+compilación y aceptar las licencias de Android por el titular. Desde la raíz
+del repositorio, ejecute personalmente:
 
-Para un equipo con recursos limitados, use las herramientas oficiales de línea
-de comandos Android en vez de instalar o ejecutar un emulador. Revise sus
-términos en https://developer.android.com/studio y, cuando el SDK esté
-instalado, informe `LISTO ANDROID SDK` para configurar Ruta Fija y volver a
-validar `flutter doctor` sin aceptar licencias en su nombre.
+~~~powershell
+.\scripts\Initialize-RutaFijaAndroidSdkF41.ps1
+~~~
+
+El script pide escribir `ACEPTO`, muestra las licencias oficiales para que las
+responda directamente y descarga solo `platform-tools`, Android API 36 y
+Build-Tools 36.0.0. No instala Android Studio ni un emulador. Al terminar debe
+emitir `F4_1_ANDROID_SETUP=PASS`.
+
+Abra una terminal nueva de VS Code y ejecute la auditoría desde la raíz:
+
+~~~powershell
+.\scripts\Test-RutaFijaF41FlutterFoundation.ps1
+~~~
+
+El resultado debe incluir `android=READY`. Para un equipo con recursos
+limitados se probará después con dispositivo físico o APK debug, nunca es
+obligatorio instalar o ejecutar un emulador.
