@@ -51,6 +51,10 @@ public class Incident {
     @Column(nullable = false, length = 30)
     private IncidentStatus status;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    private IncidentSource source;
+
     @Column(nullable = false, length = 1000)
     private String description;
 
@@ -92,7 +96,8 @@ public class Incident {
             AppUser reportedBy,
             IncidentCategory category,
             String description,
-            Instant reportedAt
+            Instant reportedAt,
+            IncidentSource source
     ) {
         this.id = UUID.randomUUID();
         this.organization = Objects.requireNonNull(organization);
@@ -101,6 +106,7 @@ public class Incident {
         this.reportedBy = Objects.requireNonNull(reportedBy);
         this.category = Objects.requireNonNull(category);
         this.status = IncidentStatus.OPEN;
+        this.source = Objects.requireNonNull(source);
         this.description = requiredText(description, "La descripción de la incidencia es obligatoria");
         this.reportedAt = Objects.requireNonNull(reportedAt);
     }
@@ -114,7 +120,23 @@ public class Incident {
             String description,
             Instant reportedAt
     ) {
-        return new Incident(organization, driver, assignment, reportedBy, category, description, reportedAt);
+        return new Incident(
+                organization, driver, assignment, reportedBy, category, description, reportedAt, IncidentSource.CRM_WEB
+        );
+    }
+
+    public static Incident reportFromMobile(
+            Organization organization,
+            Driver driver,
+            Assignment assignment,
+            AppUser reportedBy,
+            IncidentCategory category,
+            String description,
+            Instant reportedAt
+    ) {
+        return new Incident(
+                organization, driver, assignment, reportedBy, category, description, reportedAt, IncidentSource.MOBILE_APP
+        );
     }
 
     public void followUp(String note, boolean resolve, AppUser actor, Instant occurredAt) {
@@ -162,6 +184,10 @@ public class Incident {
 
     public IncidentStatus getStatus() {
         return status;
+    }
+
+    public IncidentSource getSource() {
+        return source;
     }
 
     public String getDescription() {

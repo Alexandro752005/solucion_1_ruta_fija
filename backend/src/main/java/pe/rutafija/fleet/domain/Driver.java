@@ -205,6 +205,16 @@ public class Driver {
         availabilityStatus = requested;
     }
 
+    /**
+     * Consent is a functional choice of the authenticated driver. A caller that
+     * revokes it must remove the current point separately in the same service
+     * transaction; historical locations are never retained.
+     */
+    public void recordLocationConsent(boolean granted) {
+        requireActive();
+        locationConsent = granted;
+    }
+
     public UUID getId() {
         return id;
     }

@@ -58,10 +58,10 @@ o en V8. Una migración repetible exitosa de privilegios de pruebas no se
 confunde con una versión Flyway faltante.
 
 > Esta auditoría es una evidencia histórica de la frontera pre-sesión: por
-> diseño rechaza cualquier ruta `/mobile/`. Una vez implementada F3.2 no debe
+> diseño rechaza cualquier ruta `/mobile/`. Una vez implementada F3.3 no debe
 > usarse como control actual; ejecute
-> `Test-RutaFijaF32MobileSession.ps1`, que valida V1-V8 y permite únicamente
-> `login`, `refresh` y `logout` de sesión.
+> `Test-RutaFijaF33MobileOperations.ps1`, que valida V1-V10, rutas propias,
+> idempotencia y privacidad de ubicación.
 
 ## Resultado esperado
 
@@ -70,10 +70,12 @@ F3_1B_SCHEMA_AUDIT=PASS flyway=V1-V8 response_modes=ADMIN_DIRECT,MOBILE_CONFIRMA
 F3_1B_NATIVE_VERIFY=PASS flyway=V1-V8 docker=0
 ~~~
 
-Para una instalación nueva y vacía, `Invoke-RutaFijaFlywayF13.ps1` ya contiene
-V1–V8. Después ejecute `Grant-RutaFijaF31bApplicationPrivileges.ps1` y el
-auditor F3.1B; no use el auditor histórico F1.3, que certificaba solamente
-V1–V6.
+Para una instalación nueva y vacía del árbol actual,
+`Invoke-RutaFijaFlywayF13.ps1` aplica V1–V10. Después ejecute
+`Grant-RutaFijaApplicationPrivilegesF13.ps1` y
+`Test-RutaFijaF33MobileOperations.ps1`. El ensayo protegido F3.1B se conserva
+para una base histórica exactamente en V6; no use los auditores históricos
+como control actual.
 
 ## Recuperación y límites
 

@@ -48,6 +48,25 @@ public class Assignment {
     @Column(nullable = false, length = 30)
     private AssignmentStatus status;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "response_mode", nullable = false, length = 30)
+    private AssignmentResponseMode responseMode;
+
+    @Column(name = "response_deadline_at")
+    private Instant responseDeadlineAt;
+
+    @Column(name = "accepted_at")
+    private Instant acceptedAt;
+
+    @Column(name = "rejected_at")
+    private Instant rejectedAt;
+
+    @Column(name = "rejection_reason", length = 300)
+    private String rejectionReason;
+
+    @Column(name = "expired_at")
+    private Instant expiredAt;
+
     @Column(name = "origin_text", nullable = false, length = 250)
     private String originText;
 
@@ -106,14 +125,15 @@ public class Assignment {
             Instant scheduledAt,
             Instant scheduledEndAt,
             String notes,
-            String idempotencyKey
+            String idempotencyKey,
+            AssignmentResponseMode responseMode,
+            Instant responseDeadlineAt
     ) {
         this.id = UUID.randomUUID();
         this.organization = Objects.requireNonNull(organization);
         this.driver = Objects.requireNonNull(driver);
         this.vehicle = Objects.requireNonNull(vehicle);
         this.createdBy = Objects.requireNonNull(createdBy);
-        this.status = AssignmentStatus.SCHEDULED;
         this.originText = requiredText(originText, "El origen es obligatorio");
         this.destinationText = requiredText(destinationText, "El destino es obligatorio");
         validateSchedule(scheduledAt, scheduledEndAt);
@@ -121,6 +141,18 @@ public class Assignment {
         this.scheduledEndAt = scheduledEndAt;
         this.notes = optionalText(notes);
         this.idempotencyKey = optionalText(idempotencyKey);
+        this.responseMode = Objects.requireNonNull(responseMode);
+
+        if (responseMode == AssignmentResponseMode.MOBILE_CONFIRMATION) {
+            if (responseDeadlineAt == null || !responseDeadlineAt.isBefore(scheduledAt)) {
+                throw new IllegalArgumentException("El plazo de respuesta debe ser anterior al inicio programado");
+            }
+            this.status = AssignmentStatus.PENDING_RESPONSE;
+            this.responseDeadlineAt = responseDeadlineAt;
+        } else {
+            this.status = AssignmentStatus.SCHEDULED;
+            this.responseDeadlineAt = null;
+        }
     }
 
     public static Assignment schedule(
@@ -136,16 +168,29 @@ public class Assignment {
             String idempotencyKey
     ) {
         return new Assignment(
-                organization,
-                driver,
-                vehicle,
-                createdBy,
-                originText,
-                destinationText,
-                scheduledAt,
-                scheduledEndAt,
-                notes,
-                idempotencyKey
+                organization, driver, vehicle, createdBy, originText, destinationText,
+                scheduledAt, scheduledEndAt, notes, idempotencyKey,
+                AssignmentResponseMode.ADMIN_DIRECT, null
+        );
+    }
+
+    public static Assignment requestMobileConfirmation(
+            Organization organization,
+            Driver driver,
+            Vehicle vehicle,
+            AppUser createdBy,
+            String originText,
+            String destinationText,
+            Instant scheduledAt,
+            Instant scheduledEndAt,
+            String notes,
+            String idempotencyKey,
+            Instant responseDeadlineAt
+    ) {
+        return new Assignment(
+                organization, driver, vehicle, createdBy, originText, destinationText,
+                scheduledAt, scheduledEndAt, notes, idempotencyKey,
+                AssignmentResponseMode.MOBILE_CONFIRMATION, responseDeadlineAt
         );
     }
 
@@ -158,6 +203,9 @@ public class Assignment {
             Instant scheduledEndAt,
             String notes
     ) {
+        if (responseMode != AssignmentResponseMode.ADMIN_DIRECT) {
+            throw new IllegalStateException("Una solicitud de confirmacion movil no puede reprogramarse desde el CRM");
+        }
         requireScheduledAndNotReserved();
         this.driver = Objects.requireNonNull(driver);
         this.vehicle = Objects.requireNonNull(vehicle);
@@ -170,13 +218,59 @@ public class Assignment {
     }
 
     public void reserve(Instant occurredAt) {
+        if (responseMode != AssignmentResponseMode.ADMIN_DIRECT) {
+            throw new IllegalStateException("Solo una asignacion ADMIN_DIRECT puede reservarse desde el CRM");
+        }
         requireScheduledAndNotReserved();
         reservedAt = Objects.requireNonNull(occurredAt);
     }
 
+    /** Verifies a pending mobile request before the driver reservation is changed. */
+    public void requirePendingMobileResponse(Instant occurredAt) {
+        Instant now = Objects.requireNonNull(occurredAt);
+        if (responseMode != AssignmentResponseMode.MOBILE_CONFIRMATION || status != AssignmentStatus.PENDING_RESPONSE) {
+            throw new IllegalStateException("La asignacion no esta pendiente de respuesta movil");
+        }
+        if (!now.isBefore(responseDeadlineAt)) {
+            throw new IllegalStateException("El plazo de respuesta de la asignacion ya vencio");
+        }
+    }
+
+    public void acceptMobileResponse(Instant occurredAt) {
+        requirePendingMobileResponse(occurredAt);
+        status = AssignmentStatus.SCHEDULED;
+        acceptedAt = occurredAt;
+        reservedAt = occurredAt;
+    }
+
+    public void rejectMobileResponse(String reason, Instant occurredAt) {
+        requirePendingMobileResponse(occurredAt);
+        status = AssignmentStatus.REJECTED;
+        rejectedAt = occurredAt;
+        rejectionReason = optionalText(reason);
+    }
+
+    /** Returns true only when this invocation changes a due request to EXPIRED. */
+    public boolean expireIfDue(Instant occurredAt) {
+        Instant now = Objects.requireNonNull(occurredAt);
+        if (responseMode != AssignmentResponseMode.MOBILE_CONFIRMATION
+                || status != AssignmentStatus.PENDING_RESPONSE
+                || now.isBefore(responseDeadlineAt)) {
+            return false;
+        }
+        status = AssignmentStatus.EXPIRED;
+        expiredAt = now;
+        return true;
+    }
+
+    public boolean isPendingMobileResponse() {
+        return responseMode == AssignmentResponseMode.MOBILE_CONFIRMATION
+                && status == AssignmentStatus.PENDING_RESPONSE;
+    }
+
     public void start(Instant occurredAt) {
         if (status != AssignmentStatus.SCHEDULED || reservedAt == null) {
-            throw new IllegalStateException("La asignación debe estar reservada antes de iniciar el servicio");
+            throw new IllegalStateException("La asignacion debe estar reservada antes de iniciar el servicio");
         }
         status = AssignmentStatus.EN_SERVICIO;
         startedAt = Objects.requireNonNull(occurredAt);
@@ -184,18 +278,20 @@ public class Assignment {
 
     public void complete(Instant occurredAt) {
         if (status != AssignmentStatus.EN_SERVICIO) {
-            throw new IllegalStateException("Solo una asignación EN_SERVICIO puede completarse");
+            throw new IllegalStateException("Solo una asignacion EN_SERVICIO puede completarse");
         }
         status = AssignmentStatus.COMPLETED;
         completedAt = Objects.requireNonNull(occurredAt);
     }
 
     public void cancel(String reason, Instant occurredAt) {
-        if (status != AssignmentStatus.SCHEDULED && status != AssignmentStatus.EN_SERVICIO) {
-            throw new IllegalStateException("Solo una asignación programada o en servicio puede cancelarse");
+        if (status != AssignmentStatus.PENDING_RESPONSE
+                && status != AssignmentStatus.SCHEDULED
+                && status != AssignmentStatus.EN_SERVICIO) {
+            throw new IllegalStateException("Solo una asignacion pendiente, programada o en servicio puede cancelarse");
         }
         status = AssignmentStatus.CANCELLED;
-        cancellationReason = requiredText(reason, "El motivo de cancelación es obligatorio");
+        cancellationReason = requiredText(reason, "El motivo de cancelacion es obligatorio");
         cancelledAt = Objects.requireNonNull(occurredAt);
     }
 
@@ -225,6 +321,30 @@ public class Assignment {
 
     public AssignmentStatus getStatus() {
         return status;
+    }
+
+    public AssignmentResponseMode getResponseMode() {
+        return responseMode;
+    }
+
+    public Instant getResponseDeadlineAt() {
+        return responseDeadlineAt;
+    }
+
+    public Instant getAcceptedAt() {
+        return acceptedAt;
+    }
+
+    public Instant getRejectedAt() {
+        return rejectedAt;
+    }
+
+    public String getRejectionReason() {
+        return rejectionReason;
+    }
+
+    public Instant getExpiredAt() {
+        return expiredAt;
     }
 
     public String getOriginText() {
@@ -285,7 +405,7 @@ public class Assignment {
 
     private void requireScheduledAndNotReserved() {
         if (status != AssignmentStatus.SCHEDULED || reservedAt != null) {
-            throw new IllegalStateException("Solo una asignación programada no reservada puede modificarse");
+            throw new IllegalStateException("Solo una asignacion programada no reservada puede modificarse");
         }
     }
 

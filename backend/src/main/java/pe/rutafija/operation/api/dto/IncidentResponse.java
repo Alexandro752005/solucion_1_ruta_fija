@@ -2,6 +2,7 @@ package pe.rutafija.operation.api.dto;
 
 import pe.rutafija.operation.domain.Incident;
 import pe.rutafija.operation.domain.IncidentCategory;
+import pe.rutafija.operation.domain.IncidentSource;
 import pe.rutafija.operation.domain.IncidentStatus;
 
 import java.time.Instant;
@@ -14,6 +15,7 @@ public record IncidentResponse(
         String driverName,
         UUID assignmentId,
         IncidentCategory category,
+        IncidentSource source,
         IncidentStatus status,
         String description,
         UUID reportedById,
@@ -35,6 +37,7 @@ public record IncidentResponse(
                 incident.getDriver().getFullName(),
                 incident.getAssignment() == null ? null : incident.getAssignment().getId(),
                 incident.getCategory(),
+                incident.getSource(),
                 incident.getStatus(),
                 incident.getDescription(),
                 incident.getReportedBy().getId(),

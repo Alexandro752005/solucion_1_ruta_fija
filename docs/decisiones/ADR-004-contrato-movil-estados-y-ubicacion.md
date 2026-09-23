@@ -1,6 +1,6 @@
 # ADR-004 - Contrato de asignaciones móviles y ubicación vigente
 
-- Estado: V7/V8 implementadas en F3.1B y sesión móvil implementada en F3.2; endpoints operativos pendientes de F3.3/F3.4.
+- Estado: V7/V8 implementadas en F3.1B, sesión móvil implementada en F3.2 y operaciones móviles V9/V10 implementadas en F3.3; contrato exhaustivo y reportes quedan para F3.4.
 - Fecha: 2026-09-22.
 - Alcance: días 5 y 6 de la Etapa 2.
 
@@ -184,14 +184,16 @@ F3.1B implementó únicamente V7 y V8, ensayadas desde un esquema vacío y una
 base histórica V5 que avanza por V6. F3.2 ya implementó login, refresh y logout
 móviles con transporte JSON separado de la cookie web, conductor activo
 vinculado, rotación y errores uniformes; la decisión detallada vive en
-[ADR-005](ADR-005-sesion-movil-separada.md). F3.3 construirá los endpoints, la
-transición autenticada, la limpieza por plazo y el UPSERT. F3.4 publicará el
-contrato operativo completo, pruebas de aislamiento/privacidad/idempotencia y
-reportes reales de `PENDING_RESPONSE`, `REJECTED` y `EXPIRED`.
+[ADR-005](ADR-005-sesion-movil-separada.md). F3.3 implementó los endpoints, la
+transición autenticada, la limpieza por plazo, el UPSERT y los recibos V9/V10.
+F3.4 publicará el contrato operativo completo, pruebas exhaustivas de
+aislamiento/privacidad/idempotencia y reportes reales de `PENDING_RESPONSE`,
+`REJECTED` y `EXPIRED`.
 
-V9, V10, Firebase/FCM, fotos, GPS en segundo plano, historial de rutas y
-Flutter quedan fuera de F3.2. PostgreSQL seguirá privado en `127.0.0.1:5432`;
-no se introduce Docker ni se expone la base de datos a la aplicación móvil.
+V9 y V10 fueron implementadas en F3.3. Firebase/FCM, fotos, GPS en segundo
+plano, historial de rutas y Flutter siguen fuera de F3.3. PostgreSQL permanece
+privado en `127.0.0.1:5432`; no se introduce Docker ni se expone la base de
+datos a la aplicación móvil.
 
 ## Consecuencias
 

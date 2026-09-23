@@ -45,7 +45,7 @@ $previousPgPassword = [Environment]::GetEnvironmentVariable('PGPASSWORD', 'Proce
 try {
     [Environment]::SetEnvironmentVariable('PGPASSWORD', $settings['SPRING_FLYWAY_PASSWORD'], 'Process')
     $schemaState = & $psql -X -w -v ON_ERROR_STOP=1 -h 127.0.0.1 -p 5432 -U rf_migrator -d $developmentDatabase -At -F '|' -c "SELECT (SELECT count(*) FROM pg_tables WHERE schemaname = 'public' AND tablename <> 'flyway_schema_history'), (SELECT count(*) FROM flyway_schema_history WHERE success), (SELECT count(*) FROM flyway_schema_history);"
-    if ($LASTEXITCODE -ne 0 -or $schemaState.Trim() -ne '13|8|8') {
+    if ($LASTEXITCODE -ne 0 -or $schemaState.Trim() -ne '15|10|10') {
         throw 'El esquema no esta en el estado exacto requerido antes de otorgar DML.'
     }
 

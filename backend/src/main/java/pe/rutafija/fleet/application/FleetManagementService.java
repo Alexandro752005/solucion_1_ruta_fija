@@ -32,6 +32,7 @@ import pe.rutafija.identity.domain.UserRole;
 import pe.rutafija.identity.infrastructure.AppUserRepository;
 import pe.rutafija.operation.domain.AssignmentStatus;
 import pe.rutafija.operation.infrastructure.AssignmentRepository;
+import pe.rutafija.operation.infrastructure.DriverCurrentLocationStore;
 import pe.rutafija.shared.api.PageResponse;
 import pe.rutafija.shared.exception.ApplicationException;
 import pe.rutafija.shared.exception.ErrorCode;
@@ -49,6 +50,7 @@ import java.util.UUID;
 public class FleetManagementService {
 
     private static final List<AssignmentStatus> ACTIVE_OPERATION_STATUSES = List.of(
+            AssignmentStatus.PENDING_RESPONSE,
             AssignmentStatus.SCHEDULED,
             AssignmentStatus.EN_SERVICIO
     );
@@ -59,6 +61,7 @@ public class FleetManagementService {
     private final DriverVehicleLinkRepository driverVehicleLinkRepository;
     private final AppUserRepository userRepository;
     private final AssignmentRepository assignmentRepository;
+    private final DriverCurrentLocationStore currentLocationStore;
     private final CurrentUserService currentUserService;
     private final AuditService auditService;
     private final Clock clock;
@@ -70,6 +73,7 @@ public class FleetManagementService {
             DriverVehicleLinkRepository driverVehicleLinkRepository,
             AppUserRepository userRepository,
             AssignmentRepository assignmentRepository,
+            DriverCurrentLocationStore currentLocationStore,
             CurrentUserService currentUserService,
             AuditService auditService,
             Clock clock
@@ -80,6 +84,7 @@ public class FleetManagementService {
         this.driverVehicleLinkRepository = driverVehicleLinkRepository;
         this.userRepository = userRepository;
         this.assignmentRepository = assignmentRepository;
+        this.currentLocationStore = currentLocationStore;
         this.currentUserService = currentUserService;
         this.auditService = auditService;
         this.clock = clock;
@@ -261,6 +266,7 @@ public class FleetManagementService {
             throw conflict("No puede desactivar un conductor con asignaciones programadas o en servicio");
         }
         driver.deactivate();
+        currentLocationStore.deleteByDriverId(driver.getId());
         auditService.record(actor, "DRIVER_DISABLED", "DRIVER", driver.getId(), Map.of());
         return DriverResponse.from(driver);
     }

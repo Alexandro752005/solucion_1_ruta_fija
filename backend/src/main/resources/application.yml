@@ -65,6 +65,10 @@ springdoc:
 app:
   operations:
     stream-ticket-ttl: ${OPERATION_STREAM_TICKET_TTL:PT2M}
+  mobile:
+    location-ttl: ${MOBILE_LOCATION_TTL:PT5M}
+    location-capture-max-age: ${MOBILE_LOCATION_CAPTURE_MAX_AGE:PT5M}
+    pending-expiry-sweep: ${MOBILE_PENDING_EXPIRY_SWEEP:PT1M}
   security:
     jwt:
       issuer: ${JWT_ISSUER:ruta-fija-api}

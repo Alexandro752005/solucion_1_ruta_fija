@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.domain.Specification;
@@ -13,6 +14,7 @@ import pe.rutafija.operation.domain.AssignmentStatus;
 
 import java.time.Instant;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,6 +38,54 @@ public interface AssignmentRepository extends JpaRepository<Assignment, UUID>, J
 
     @EntityGraph(attributePaths = {"organization", "driver", "driver.group", "vehicle", "createdBy"})
     Optional<Assignment> findByIdAndOrganization_Id(UUID id, UUID organizationId);
+
+    @EntityGraph(attributePaths = {"organization", "driver", "driver.group", "driver.user", "vehicle", "createdBy"})
+    @Query("""
+            select assignment from Assignment assignment
+             where assignment.organization.id = :organizationId
+               and assignment.driver.id = :driverId
+               and (:status is null or assignment.status = :status)
+            """)
+    Page<Assignment> findMobileAssignments(
+            @Param("organizationId") UUID organizationId,
+            @Param("driverId") UUID driverId,
+            @Param("status") AssignmentStatus status,
+            Pageable pageable
+    );
+
+    @EntityGraph(attributePaths = {"organization", "driver", "driver.group", "driver.user", "vehicle", "createdBy"})
+    @Query("""
+            select assignment from Assignment assignment
+             where assignment.id = :assignmentId
+               and assignment.organization.id = :organizationId
+               and assignment.driver.id = :driverId
+            """)
+    Optional<Assignment> findMobileAssignment(
+            @Param("assignmentId") UUID assignmentId,
+            @Param("organizationId") UUID organizationId,
+            @Param("driverId") UUID driverId
+    );
+
+    @Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
+    @EntityGraph(attributePaths = {"organization", "driver", "driver.group", "driver.user", "vehicle", "createdBy"})
+    @Query("""
+            select assignment from Assignment assignment
+             where assignment.id = :assignmentId
+               and assignment.organization.id = :organizationId
+               and assignment.driver.id = :driverId
+            """)
+    Optional<Assignment> lockMobileAssignment(
+            @Param("assignmentId") UUID assignmentId,
+            @Param("organizationId") UUID organizationId,
+            @Param("driverId") UUID driverId
+    );
+
+    @Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
+    @EntityGraph(attributePaths = {"organization", "driver", "driver.group", "vehicle", "createdBy"})
+    List<Assignment> findByStatusAndResponseDeadlineAtLessThanEqual(
+            AssignmentStatus status,
+            Instant responseDeadlineAt
+    );
 
     @EntityGraph(attributePaths = {"organization", "driver", "driver.group", "vehicle", "createdBy"})
     Optional<Assignment> findByOrganization_IdAndIdempotencyKey(UUID organizationId, String idempotencyKey);

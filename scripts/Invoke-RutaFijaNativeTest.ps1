@@ -15,6 +15,7 @@ if ([string]::IsNullOrWhiteSpace($ConfigPath)) {
 
 $importScript = Join-Path $PSScriptRoot 'Import-RutaFijaNativeEnvironment.ps1'
 $mavenWrapper = Join-Path $repoRoot 'backend\mvnw.cmd'
+$f33AuditScript = Join-Path $PSScriptRoot 'Test-RutaFijaF33MobileOperations.ps1'
 
 function Get-PsqlPath {
     $command = Get-Command psql.exe -ErrorAction SilentlyContinue
@@ -151,10 +152,11 @@ switch ($Action) {
             $migration = Invoke-TestPsql -Settings $settings -Sql @'
 select coalesce(max(version), '') from flyway_schema_history where success = true;
 '@
-            if (@($migration | Where-Object { $_ -eq '8' }).Count -ne 1) {
-                throw 'F3.2 no confirmo Flyway V1-V8 en ruta_fija_test.'
+            if (@($migration | Where-Object { $_ -eq '10' }).Count -ne 1) {
+                throw 'F3.3 no confirmo Flyway V1-V10 en ruta_fija_test.'
             }
-            Write-Output 'F3_2_NATIVE_VERIFY=PASS flyway=V1-V8 mobile_session=PASS docker=0'
+            & $f33AuditScript -ConfigPath $ConfigPath
+            Write-Output 'F3_3_NATIVE_VERIFY=PASS flyway=V1-V10 mobile_operations=PASS docker=0'
         }
         finally {
             Clear-TestData -Settings $settings

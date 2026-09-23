@@ -23,7 +23,7 @@ import pe.rutafija.shared.security.CurrentUserService;
 import java.util.Map;
 import java.util.UUID;
 
-/** Comunicados web, sin acuse de lectura porque no existe portal móvil. */
+/** Comunicados publicados desde el CRM y visibles para conductores autorizados. */
 @Service
 public class AnnouncementService {
 
@@ -62,14 +62,6 @@ public class AnnouncementService {
     @Transactional
     public AnnouncementResponse createAnnouncement(AnnouncementCreateRequest request) {
         AppUser actor = requireOperationalActor();
-        if (Boolean.TRUE.equals(request.requireReadAck())) {
-            throw new ApplicationException(
-                    HttpStatus.BAD_REQUEST,
-                    ErrorCode.VALIDATION_ERROR,
-                    "El acuse de lectura requiere una aplicación móvil y no está disponible en el CRM web"
-            );
-        }
-
         UUID audienceId = resolveAudience(actor, request.audienceType(), request.audienceId());
         Announcement announcement = announcementRepository.saveAndFlush(Announcement.publish(
                 actor.getOrganization(),
@@ -77,10 +69,12 @@ public class AnnouncementService {
                 request.title(),
                 request.body(),
                 request.audienceType(),
-                audienceId
+                audienceId,
+                Boolean.TRUE.equals(request.requireReadAck())
         ));
         auditService.record(actor, "ANNOUNCEMENT_PUBLISHED", "ANNOUNCEMENT", announcement.getId(), Map.of(
-                "audienceType", announcement.getAudienceType().name()
+                "audienceType", announcement.getAudienceType().name(),
+                "requireReadAck", announcement.isRequireReadAck()
         ));
         eventPublisher.publish(actor.getOrganizationId(), announcement.getAudienceId(), "announcement.published", Map.of(
                 "announcementId", announcement.getId().toString(),
@@ -95,7 +89,7 @@ public class AnnouncementService {
             throw new ApplicationException(
                     HttpStatus.FORBIDDEN,
                     ErrorCode.FORBIDDEN_ROLE,
-                    "La operación web requiere el rol ADMIN"
+                    "La operacion web requiere el rol ADMIN"
             );
         }
         return actor;
@@ -104,7 +98,7 @@ public class AnnouncementService {
     private UUID resolveAudience(AppUser actor, AnnouncementAudienceType audienceType, UUID requestedAudienceId) {
         if (audienceType == AnnouncementAudienceType.ORGANIZATION) {
             if (requestedAudienceId != null) {
-                throw validation("Un comunicado para la organización no debe incluir audienceId");
+                throw validation("Un comunicado para la organizacion no debe incluir audienceId");
             }
             return null;
         }

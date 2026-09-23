@@ -23,8 +23,10 @@ import pe.rutafija.operation.api.dto.AssignmentUpdateRequest;
 import pe.rutafija.operation.api.dto.AssignmentVersionRequest;
 import pe.rutafija.operation.api.dto.DriverAvailabilityRequest;
 import pe.rutafija.operation.domain.Assignment;
+import pe.rutafija.operation.domain.AssignmentResponseMode;
 import pe.rutafija.operation.domain.AssignmentStatus;
 import pe.rutafija.operation.infrastructure.AssignmentRepository;
+import pe.rutafija.operation.infrastructure.DriverCurrentLocationStore;
 import pe.rutafija.shared.api.PageResponse;
 import pe.rutafija.shared.exception.ApplicationException;
 import pe.rutafija.shared.exception.ErrorCode;
@@ -40,11 +42,13 @@ import java.util.UUID;
 public class OperationService {
 
     private static final List<AssignmentStatus> SCHEDULING_STATUSES = List.of(
+            AssignmentStatus.PENDING_RESPONSE,
             AssignmentStatus.SCHEDULED,
             AssignmentStatus.EN_SERVICIO
     );
 
     private final AssignmentRepository assignmentRepository;
+    private final DriverCurrentLocationStore currentLocationStore;
     private final DriverRepository driverRepository;
     private final VehicleRepository vehicleRepository;
     private final DriverVehicleLinkRepository driverVehicleLinkRepository;
@@ -55,6 +59,7 @@ public class OperationService {
 
     public OperationService(
             AssignmentRepository assignmentRepository,
+            DriverCurrentLocationStore currentLocationStore,
             DriverRepository driverRepository,
             VehicleRepository vehicleRepository,
             DriverVehicleLinkRepository driverVehicleLinkRepository,
@@ -64,6 +69,7 @@ public class OperationService {
             Clock clock
     ) {
         this.assignmentRepository = assignmentRepository;
+        this.currentLocationStore = currentLocationStore;
         this.driverRepository = driverRepository;
         this.vehicleRepository = vehicleRepository;
         this.driverVehicleLinkRepository = driverVehicleLinkRepository;
@@ -102,6 +108,9 @@ public class OperationService {
     @Transactional
     public AssignmentCreationResult createAssignment(AssignmentCreateRequest request, String idempotencyKey) {
         AppUser actor = requireOperationalActor();
+        AssignmentResponseMode responseMode = request.responseMode() == null
+                ? AssignmentResponseMode.ADMIN_DIRECT
+                : request.responseMode();
         String normalizedKey = normalizeIdempotencyKey(idempotencyKey);
         if (normalizedKey != null) {
             Assignment existing = assignmentRepository
@@ -115,6 +124,8 @@ public class OperationService {
         Driver driver = findTenantDriver(request.driverId(), actor.getOrganizationId());
         Vehicle vehicle = findTenantVehicle(request.vehicleId(), actor.getOrganizationId());
         validateSchedulingEligibility(driver, vehicle, request.scheduledAt(), request.scheduledEndAt());
+        Instant now = Instant.now(clock);
+        validateResponseMode(driver, responseMode, request.responseDeadlineAt(), request.scheduledAt(), now);
         assertNoSchedulingConflict(
                 actor.getOrganizationId(),
                 driver.getId(),
@@ -124,23 +135,35 @@ public class OperationService {
                 null
         );
 
-        Assignment assignment = assignmentRepository.saveAndFlush(Assignment.schedule(
-                actor.getOrganization(),
-                driver,
-                vehicle,
-                actor,
-                request.originText(),
-                request.destinationText(),
-                request.scheduledAt(),
-                request.scheduledEndAt(),
-                request.notes(),
-                normalizedKey
-        ));
-        auditService.record(actor, "ASSIGNMENT_SCHEDULED", "ASSIGNMENT", assignment.getId(), Map.of(
+        Assignment assignment = responseMode == AssignmentResponseMode.MOBILE_CONFIRMATION
+                ? Assignment.requestMobileConfirmation(
+                        actor.getOrganization(), driver, vehicle, actor,
+                        request.originText(), request.destinationText(), request.scheduledAt(), request.scheduledEndAt(),
+                        request.notes(), normalizedKey, request.responseDeadlineAt()
+                )
+                : Assignment.schedule(
+                        actor.getOrganization(), driver, vehicle, actor,
+                        request.originText(), request.destinationText(), request.scheduledAt(), request.scheduledEndAt(),
+                        request.notes(), normalizedKey
+                );
+        assignment = assignmentRepository.saveAndFlush(assignment);
+        auditService.record(actor,
+                responseMode == AssignmentResponseMode.MOBILE_CONFIRMATION
+                        ? "ASSIGNMENT_MOBILE_CONFIRMATION_REQUESTED"
+                        : "ASSIGNMENT_SCHEDULED",
+                "ASSIGNMENT", assignment.getId(), Map.of(
                 "driverId", driver.getId().toString(),
-                "vehicleId", vehicle.getId().toString()
+                "vehicleId", vehicle.getId().toString(),
+                "responseMode", responseMode.name()
         ));
-        eventPublisher.publish(actor.getOrganizationId(), assignment.getDriver().getGroup().getId(), "assignment.scheduled", assignmentEventData(assignment));
+        eventPublisher.publish(
+                actor.getOrganizationId(),
+                assignment.getDriver().getGroup().getId(),
+                responseMode == AssignmentResponseMode.MOBILE_CONFIRMATION
+                        ? "assignment.pending-response"
+                        : "assignment.scheduled",
+                assignmentEventData(assignment)
+        );
         return new AssignmentCreationResult(AssignmentResponse.from(assignment), true);
     }
 
@@ -245,12 +268,17 @@ public class OperationService {
         Assignment assignment = findTenantAssignment(assignmentId, actor.getOrganizationId());
         assertVersion(assignment, request.version());
         AssignmentStatus previousStatus = assignment.getStatus();
+        boolean driverChanged = false;
+        boolean vehicleChanged = false;
         try {
             if (previousStatus == AssignmentStatus.SCHEDULED && assignment.getReservedAt() != null) {
                 assignment.getDriver().releaseReservation();
+                driverChanged = true;
             } else if (previousStatus == AssignmentStatus.EN_SERVICIO) {
                 assignment.getDriver().completeService();
                 assignment.getVehicle().finishService();
+                driverChanged = true;
+                vehicleChanged = true;
             }
             assignment.cancel(request.reason(), Instant.now(clock));
         } catch (IllegalStateException exception) {
@@ -261,8 +289,10 @@ public class OperationService {
                 "reason", request.reason().strip()
         ));
         eventPublisher.publish(actor.getOrganizationId(), assignment.getDriver().getGroup().getId(), "assignment.cancelled", assignmentEventData(assignment));
-        eventPublisher.publish(actor.getOrganizationId(), assignment.getDriver().getGroup().getId(), "driver.status.changed", driverEventData(assignment.getDriver()));
-        if (previousStatus == AssignmentStatus.EN_SERVICIO) {
+        if (driverChanged) {
+            eventPublisher.publish(actor.getOrganizationId(), assignment.getDriver().getGroup().getId(), "driver.status.changed", driverEventData(assignment.getDriver()));
+        }
+        if (vehicleChanged) {
             eventPublisher.publish(actor.getOrganizationId(), assignment.getDriver().getGroup().getId(), "vehicle.status.changed", vehicleEventData(assignment.getVehicle()));
         }
         return AssignmentResponse.from(assignment);
@@ -276,6 +306,10 @@ public class OperationService {
             driver.changeAdministrativeAvailability(request.status());
         } catch (IllegalStateException exception) {
             throw invalidTransition(exception.getMessage());
+        }
+        if (driver.getAvailabilityStatus() != DriverAvailabilityStatus.DISPONIBLE
+                && driver.getAvailabilityStatus() != DriverAvailabilityStatus.EN_SERVICIO) {
+            currentLocationStore.deleteByDriverId(driver.getId());
         }
         auditService.record(actor, "DRIVER_AVAILABILITY_CHANGED", "DRIVER", driver.getId(), Map.of(
                 "status", driver.getAvailabilityStatus().name()
@@ -328,6 +362,43 @@ public class OperationService {
                     HttpStatus.BAD_REQUEST,
                     ErrorCode.VALIDATION_ERROR,
                     "El fin programado debe ser posterior al inicio programado"
+            );
+        }
+    }
+
+    private void validateResponseMode(
+            Driver driver,
+            AssignmentResponseMode responseMode,
+            Instant responseDeadlineAt,
+            Instant scheduledAt,
+            Instant now
+    ) {
+        if (responseMode == AssignmentResponseMode.ADMIN_DIRECT) {
+            if (responseDeadlineAt != null) {
+                throw new ApplicationException(
+                        HttpStatus.BAD_REQUEST,
+                        ErrorCode.VALIDATION_ERROR,
+                        "ADMIN_DIRECT no admite un plazo de respuesta mÃ³vil"
+                );
+            }
+            return;
+        }
+        if (driver.getUser() == null
+                || !driver.getUser().isActive()
+                || driver.getUser().getRole() != UserRole.CONDUCTOR) {
+            throw new ApplicationException(
+                    HttpStatus.BAD_REQUEST,
+                    ErrorCode.DRIVER_NOT_ELIGIBLE,
+                    "MOBILE_CONFIRMATION requiere un conductor activo con usuario CONDUCTOR vinculado"
+            );
+        }
+        if (responseDeadlineAt == null
+                || !responseDeadlineAt.isAfter(now)
+                || !responseDeadlineAt.isBefore(scheduledAt)) {
+            throw new ApplicationException(
+                    HttpStatus.BAD_REQUEST,
+                    ErrorCode.VALIDATION_ERROR,
+                    "El plazo de respuesta debe ser posterior al reloj del servidor y anterior al inicio programado"
             );
         }
     }

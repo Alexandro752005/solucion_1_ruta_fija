@@ -61,7 +61,8 @@ public class Announcement {
             String title,
             String body,
             AnnouncementAudienceType audienceType,
-            UUID audienceId
+            UUID audienceId,
+            boolean requireReadAck
     ) {
         this.id = UUID.randomUUID();
         this.organization = Objects.requireNonNull(organization);
@@ -73,7 +74,7 @@ public class Announcement {
                 ? null
                 : Objects.requireNonNull(audienceId);
         // No existe cliente móvil ni portal del conductor para confirmar lectura en este alcance.
-        this.requireReadAck = false;
+        this.requireReadAck = requireReadAck;
     }
 
     public static Announcement publish(
@@ -82,9 +83,10 @@ public class Announcement {
             String title,
             String body,
             AnnouncementAudienceType audienceType,
-            UUID audienceId
+            UUID audienceId,
+            boolean requireReadAck
     ) {
-        return new Announcement(organization, createdBy, title, body, audienceType, audienceId);
+        return new Announcement(organization, createdBy, title, body, audienceType, audienceId, requireReadAck);
     }
 
     public UUID getId() {

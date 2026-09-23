@@ -68,13 +68,14 @@ Estos pasos se ejecutan una sola vez sobre una base de desarrollo vacía.
    .\scripts\Initialize-RutaFijaPostgresqlRoles.ps1
    ~~~
 
-3. Aplique Flyway, otorgue solo el DML de la ubicación vigente y compruebe
-   estructura, auditoría, constraints, UTC, privilegios y sesión móvil.
+3. Para una base nueva, aplique el bootstrap actual V1-V10, otorgue el DML
+   mínimo de aplicación y compruebe estructura, auditoría, constraints, UTC,
+   privacidad e idempotencia móvil.
 
    ~~~powershell
    .\scripts\Invoke-RutaFijaFlywayF13.ps1
-   .\scripts\Grant-RutaFijaF31bApplicationPrivileges.ps1
-   .\scripts\Test-RutaFijaF32MobileSession.ps1
+   .\scripts\Grant-RutaFijaApplicationPrivilegesF13.ps1
+   .\scripts\Test-RutaFijaF33MobileOperations.ps1
    ~~~
 
 4. Instale dependencias web.
@@ -129,7 +130,7 @@ debajo. En pantallas estrechas, el botón Menú abre la misma navegación.
 | --- | --- |
 | SUPER_ADMIN | Resumen y organizaciones |
 | ADMIN | Resumen, usuarios, organización, grupos, conductores, vehículos, asignaciones, incidencias, comunicados, reportes y auditoría |
-| CONDUCTOR | Sin acceso al CRM web administrativo; dispone solo del contrato de sesión móvil F3.2, sin funciones operativas aún |
+| CONDUCTOR | Sin acceso al CRM web administrativo; usa únicamente la API móvil propia con sesión `MOBILE` y no puede operar recursos ajenos |
 
 El rol ADMIN concentra la administración y operación completa de su tenant.
 Las asociaciones históricas de coordinación de grupos no otorgan permisos ni
@@ -149,7 +150,8 @@ modificar una URL del navegador no permite acceder a otra empresa.
 | --- | --- |
 | Conductor | DISPONIBLE → RESERVADO → EN_SERVICIO → DISPONIBLE, con cambios controlados a DESCANSO y NO_DISPONIBLE |
 | Vehículo | DISPONIBLE, EN_SERVICIO, MANTENIMIENTO o INACTIVO |
-| Asignación | Nace SCHEDULED; se reserva, inicia, completa o cancela desde el CRM |
+| Asignación ADMIN_DIRECT | Nace SCHEDULED; el CRM puede reservar, iniciar, completar o cancelar según sus reglas |
+| Asignación MOBILE_CONFIRMATION | Nace PENDING_RESPONSE; solo su conductor móvil puede aceptar o rechazar, y el servidor puede expirar |
 
 Una reserva futura no convierte físicamente al vehículo en RESERVADO. La
 indisponibilidad futura se calcula a partir de asignaciones programadas.
@@ -184,19 +186,19 @@ Verificación completa nativa:
 .\verificar_ruta_fija.bat
 ~~~
 
-La salida esperada termina en F3_2_NATIVE_VERIFY=PASS. Las pruebas usan solo
+La salida esperada termina en F3_3_NATIVE_VERIFY=PASS. Las pruebas usan solo
 ruta_fija_test y limpian datos al finalizar.
 
-Auditoría específica de la sesión móvil:
+Auditoría específica de las operaciones móviles:
 
 ~~~powershell
-.\scripts\Test-RutaFijaF32MobileSession.ps1
+.\scripts\Test-RutaFijaF33MobileOperations.ps1
 ~~~
 
-Su resultado esperado empieza con `F3_2_SESSION_AUDIT=PASS`. Verifica que el
-refresh web en cookie y el refresh móvil en JSON no puedan intercambiarse, que
-solo un conductor activo y vinculado inicie sesión, que haya rotación segura y
-que no existan aún endpoints móviles de operación.
+Su resultado esperado empieza con `F3_3_MOBILE_OPERATIONS_AUDIT=PASS`.
+Verifica canal móvil separado, conductor activo y vinculado, rutas propias,
+V1-V10, recibos idempotentes, ubicación vigente sin historial, ausencia de
+coordenadas en auditoría y privilegios DML sin DDL.
 
 Validación del CRM unificado en ADMIN:
 

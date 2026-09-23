@@ -1,5 +1,10 @@
 # F1.3 - primer esquema nativo con Flyway
 
+> Nota histórica: este documento conserva la evidencia del primer hito V1-V5.
+> En el árbol actual, una instalación nueva debe seguir [Uso del
+> Sistema](<Uso del Sistema.md>) y el bootstrap aplica V1-V10. No ejecute el
+> auditor histórico F1.3 como verificación del estado actual.
+
 F1.3 aplica el esquema versionado de Ruta Fija directamente a PostgreSQL 16
 local, sin iniciar Spring Boot, API, CRM ni Docker. La única base alterada es
 solucion_ruta_fija_1.

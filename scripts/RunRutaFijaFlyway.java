@@ -6,14 +6,16 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * F1.3: ejecuta Flyway sin iniciar Spring Boot, HTTP, semillas ni el CRM.
+ * Bootstrap actual: ejecuta Flyway sin iniciar Spring Boot, HTTP, semillas ni el CRM.
  * Las credenciales se leen solo del entorno de proceso preparado por PowerShell.
  */
 public final class RunRutaFijaFlyway {
     private static final String EXPECTED_URL =
             "jdbc:postgresql://127.0.0.1:5432/solucion_ruta_fija_1";
     private static final String EXPECTED_USER = "rf_migrator";
-    private static final List<String> EXPECTED_VERSIONS = List.of("1", "2", "3", "4", "5", "6", "7", "8");
+    private static final List<String> EXPECTED_VERSIONS = List.of(
+            "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
+    );
 
     private RunRutaFijaFlyway() {
     }
@@ -42,12 +44,12 @@ public final class RunRutaFijaFlyway {
         MigrationInfo[] appliedBefore = flyway.info().applied();
         MigrationInfo[] pendingBefore = flyway.info().pending();
         if (appliedBefore.length != 0 || pendingBefore.length != EXPECTED_VERSIONS.size()) {
-            throw new IllegalStateException("El bootstrap exige una base vacia con exactamente V1-V8 pendientes.");
+            throw new IllegalStateException("El bootstrap exige una base vacia con exactamente V1-V10 pendientes.");
         }
 
         MigrateResult result = flyway.migrate();
         if (result.migrationsExecuted != EXPECTED_VERSIONS.size()) {
-            throw new IllegalStateException("Flyway no aplico exactamente las ocho migraciones esperadas.");
+            throw new IllegalStateException("Flyway no aplico exactamente las diez migraciones esperadas.");
         }
 
         List<String> appliedVersions = Arrays.stream(flyway.info().applied())
@@ -56,10 +58,10 @@ public final class RunRutaFijaFlyway {
                 .map(Object::toString)
                 .toList();
         if (!EXPECTED_VERSIONS.equals(appliedVersions)) {
-            throw new IllegalStateException("El historial Flyway final no corresponde exactamente a V1-V8.");
+            throw new IllegalStateException("El historial Flyway final no corresponde exactamente a V1-V10.");
         }
 
-        System.out.println("F3_1B_FLYWAY_BOOTSTRAP=PASS migrations=8");
+        System.out.println("F3_3_FLYWAY_BOOTSTRAP=PASS migrations=10");
         System.out.println("El bootstrap no inicio Spring Boot, API, CRM ni Docker.");
     }
 

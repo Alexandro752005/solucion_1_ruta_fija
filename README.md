@@ -3,10 +3,10 @@
 Ruta Fija es un monolito modular para administrar organizaciones, usuarios,
 grupos, conductores, vehículos, asignaciones, incidencias, comunicados,
 reportes y auditoría. El alcance vigente incluye el CRM web administrativo y
-una sesión API nativa mínima para el futuro conductor móvil. No incluye todavía
-Flutter, GPS, FCM, SMTP ni servicios externos. F3.1B prepara el contrato físico
-en PostgreSQL y F3.2 publica únicamente login, refresh y logout móvil; no hay
-todavía comandos operativos, pantallas ni captura de ubicación.
+una API móvil operativa para el futuro conductor Flutter. No incluye todavía
+Flutter, FCM, SMTP, GPS en segundo plano ni servicios externos. F3.3 publica
+operaciones propias de conductor, ubicación vigente con consentimiento y
+recibos idempotentes; no introduce pantallas móviles ni historial GPS.
 
 La operación local usa PostgreSQL 16 instalado en Windows, Java 21 y Angular.
 No se necesita Docker para iniciar, probar, detener ni recuperar el sistema.
@@ -18,7 +18,7 @@ No se necesita Docker para iniciar, probar, detener ni recuperar el sistema.
 | CRM | Angular 22 en http://localhost:4200 |
 | API | Java 21, Spring Boot 3.5.16 en http://127.0.0.1:8080 |
 | Persistencia | PostgreSQL 16 local, puerto 5432 |
-| Esquema | Flyway V1–V8 y Hibernate con ddl-auto=validate |
+| Esquema | Flyway V1–V10 y Hibernate con ddl-auto=validate |
 | Seguridad | JWT, refresh en cookie HttpOnly web y JSON móvil, roles separados de migración, aplicación y pruebas |
 | Tiempo real | WebSocket con ticket efímero por medio del proxy Angular |
 
@@ -66,14 +66,24 @@ La instancia debe estar limitada a 127.0.0.1 y ::1. No se publique el puerto
    .\scripts\Initialize-RutaFijaPostgresqlRoles.ps1
    ~~~
 
-5. Ejecute Flyway una sola vez, otorgue el DML específico de la ubicación
-   vigente y audite el esquema y la sesión móvil.
+5. Elija una sola ruta según el estado de la base.
 
-   ~~~powershell
-   .\scripts\Invoke-RutaFijaFlywayF13.ps1
-   .\scripts\Grant-RutaFijaF31bApplicationPrivileges.ps1
-   .\scripts\Test-RutaFijaF32MobileSession.ps1
-   ~~~
+   - Para una base nueva y vacía, el bootstrap actual aplica V1-V10 y luego
+     concede el DML mínimo de aplicación:
+
+     ~~~powershell
+     .\scripts\Invoke-RutaFijaFlywayF13.ps1
+     .\scripts\Grant-RutaFijaApplicationPrivilegesF13.ps1
+     .\scripts\Test-RutaFijaF33MobileOperations.ps1
+     ~~~
+
+   - Para una base existente que ya está exactamente en V8, no use el
+     bootstrap. Aplique V9/V10 mediante el migrador protegido de F3.3:
+
+     ~~~powershell
+     .\scripts\Invoke-RutaFijaF33V9V10Migration.ps1
+     .\scripts\Test-RutaFijaF33MobileOperations.ps1
+     ~~~
 
 6. Instale las dependencias del CRM y valide el entorno.
 
@@ -122,7 +132,7 @@ Ejecute las pruebas de backend contra la base aislada ruta_fija_test:
 .\verificar_ruta_fija.bat
 ~~~
 
-La salida aprobada termina con F3_2_NATIVE_VERIFY=PASS. Para comprobar el
+La salida aprobada termina con F3_3_NATIVE_VERIFY=PASS. Para comprobar el
 proxy REST y WebSocket desde Angular, con 8080 y 4200 libres:
 
 ~~~powershell
@@ -183,20 +193,21 @@ F2.4 ejecuta la puerta G2: consolida la evidencia de roles, tenant, sesiones,
 historia de grupos y operación nativa antes de iniciar la API móvil.
 
 F3.1B añade V7 y V8 al esquema ya consolidado: `ADMIN_DIRECT` y
-`MOBILE_CONFIRMATION` distinguen las asignaciones directas de las que requerirán
+`MOBILE_CONFIRMATION` distinguen las asignaciones directas de las que requieren
 respuesta auténtica del conductor; `driver_current_location` retiene solo un
-punto vigente por conductor. F3.2 añade solo la sesión de un `CONDUCTOR`
-vinculado y activo: `/api/v1/mobile/auth/login`, `refresh` y `logout` usan
-JSON, rotación de refresh y nunca la cookie del navegador. No hay todavía
-aceptación/rechazo, ubicación, historial GPS ni aplicación Flutter. Para una
-base nueva, el bootstrap ya aplica V1–V8. Para una base existente en V6, use
-primero el ensayo y después la aplicación protegida documentados en F3.1B.
+punto vigente por conductor. F3.2 añade sesión JSON separada para un
+`CONDUCTOR` vinculado y activo. F3.3 agrega V9/V10 y las rutas propias bajo
+`/api/v1/mobile`: perfil, disponibilidad, asignaciones, respuesta, inicio,
+finalización, incidencias, comunicados, acuses y ubicación vigente. Una acción
+del CRM no puede fingir aceptación o rechazo de un conductor. Para una base
+existente en V8, ejecute primero el comando protegido de F3.3 que crea backup,
+ensayo aislado y solo después aplica V9/V10.
 
 ## Automatización y documentación
 
 Las tareas Ruta Fija de VS Code cubren aprovisionamiento, arranque, pruebas,
-proxy WebSocket, auditoría F1.6, evidencia de recuperación F1.7 y auditoría de
-sesión móvil F3.2.
+proxy WebSocket, auditoría F1.6, evidencia de recuperación F1.7, auditoría de
+sesión móvil histórica F3.2 y auditoría de operaciones móviles F3.3.
 
 La integración continua crea una instancia PostgreSQL 16 efímera del runner
 para las pruebas de integración. No requiere un motor de contenedores instalado
@@ -234,6 +245,9 @@ Documentos principales:
 - [ADR-005: sesión móvil separada](docs/decisiones/ADR-005-sesion-movil-separada.md)
 - [Ejecución F3.2](docs/ejecucion-f3-2-sesion-movil.md)
 - [Evidencia F3.2](docs/evidencia-f3-2-sesion-movil-2026-09-22.md)
+- [ADR-006: operaciones móviles e idempotencia](docs/decisiones/ADR-006-operaciones-moviles-e-idempotencia.md)
+- [Ejecución F3.3](docs/ejecucion-f3-3-operaciones-moviles.md)
+- [Evidencia F3.3](docs/evidencia-f3-3-operaciones-moviles-2026-09-22.md)
 - [Plan de migración nativa](docs/plan-f1-postgresql-nativo-sin-docker.md)
 
 Los archivos de Compose y Dockerfile permanecen como compatibilidad histórica
