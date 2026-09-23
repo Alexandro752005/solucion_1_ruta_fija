@@ -2,6 +2,7 @@ package pe.rutafija.identity.api;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,10 @@ import pe.rutafija.identity.application.MobileIssuedSession;
  */
 @RestController
 @RequestMapping("/api/v1/mobile/auth")
+@Tag(
+        name = "Móvil conductor: sesión",
+        description = "Sesión JSON exclusiva de la futura aplicación móvil; no usa ni modifica la cookie refresh del CRM."
+)
 public class MobileAuthController {
 
     private final AuthService authService;

@@ -1,6 +1,8 @@
 package pe.rutafija.operation.api;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +20,17 @@ import pe.rutafija.operation.api.dto.mobile.MobileDriverProfileResponse;
 import pe.rutafija.operation.api.dto.mobile.MobileLocationConsentRequest;
 import pe.rutafija.operation.api.dto.mobile.MobileLocationUpdateRequest;
 import pe.rutafija.operation.application.MobileDriverService;
+import pe.rutafija.shared.config.OpenApiConfig;
 
 @RestController
 @Validated
 @PreAuthorize("hasRole('CONDUCTOR')")
 @RequestMapping("/api/v1/mobile")
+@Tag(
+        name = "Móvil conductor: perfil y ubicación",
+        description = "La ubicación es propia, vigente y efímera; requiere consentimiento funcional y atestación de permiso."
+)
+@SecurityRequirement(name = OpenApiConfig.BEARER_SCHEME)
 public class MobileDriverController {
 
     private final MobileDriverService mobileDriverService;
@@ -62,7 +70,10 @@ public class MobileDriverController {
     }
 
     @PutMapping("/location/current")
-    @Operation(summary = "Crear o reemplazar exclusivamente la ubicacion vigente propia")
+    @Operation(
+            summary = "Crear o reemplazar exclusivamente la ubicación vigente propia",
+            description = "No crea historial. El servidor calcula la retención y no emite coordenadas en auditoría ni WebSocket."
+    )
     public ResponseEntity<Void> upsertCurrentLocation(@Valid @RequestBody MobileLocationUpdateRequest request) {
         mobileDriverService.upsertCurrentLocation(request);
         return ResponseEntity.noContent().cacheControl(CacheControl.noStore()).build();

@@ -62,8 +62,7 @@ F3_3_RUNTIME_CLEANUP=PASS ports=8080,4200
 
 ## Limites confirmados y siguiente puerta
 
-No se implementaron pantallas Flutter, FCM, GPS de fondo, fotos, historial de
-ubicaciones, OpenAPI exhaustivo ni reportes de estados moviles. Esos elementos
-son de F3.4 o de la fase Flutter posterior. F3.3 queda lista para revision del
-usuario; solo con `VERDE - F3.4` se abre contrato completo, matriz ampliada y
-reportes reales.
+No se implementaron pantallas Flutter, FCM, GPS de fondo, fotos ni historial
+de ubicaciones. OpenAPI exhaustivo, matriz ampliada y reportes de estados
+móviles fueron completados posteriormente en F3.4. Flutter permanece para la
+siguiente fase autorizada.

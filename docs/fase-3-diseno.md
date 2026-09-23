@@ -1,5 +1,9 @@
 # Diseño de la Fase 3 — Operación web y reportes reales
 
+> Archivo histórico del 2026-08-29. La decisión actual está complementada por
+> F2.2 (ADMIN), F3.1–F3.4 y PostgreSQL 16 nativo sin Docker. No use este texto
+> como instrucción para reactivar roles antiguos ni contenedores.
+
 ## Decisiones de alcance
 
 La Fase 3 mantiene el producto como **CRM web administrativo + reportes**. No

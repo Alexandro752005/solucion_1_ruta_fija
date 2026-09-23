@@ -12,6 +12,7 @@ import { OperationRealtimeService } from '../../core/operations/operation-realti
 import {
   ASSIGNMENT_STATUSES,
   Assignment,
+  AssignmentResponseMode,
   AssignmentPayload,
   AssignmentStatus,
 } from '../../core/operations/operations.models';
@@ -292,11 +293,15 @@ export class AssignmentsPage {
   }
 
   canEdit(assignment: Assignment): boolean {
-    return assignment.status === 'SCHEDULED' && assignment.reservedAt === null;
+    return assignment.responseMode === 'ADMIN_DIRECT'
+      && assignment.status === 'SCHEDULED'
+      && assignment.reservedAt === null;
   }
 
   canReserve(assignment: Assignment): boolean {
-    return assignment.status === 'SCHEDULED' && assignment.reservedAt === null;
+    return assignment.responseMode === 'ADMIN_DIRECT'
+      && assignment.status === 'SCHEDULED'
+      && assignment.reservedAt === null;
   }
 
   canStart(assignment: Assignment): boolean {
@@ -308,16 +313,27 @@ export class AssignmentsPage {
   }
 
   canCancel(assignment: Assignment): boolean {
-    return assignment.status === 'SCHEDULED' || assignment.status === 'EN_SERVICIO';
+    return assignment.status === 'PENDING_RESPONSE'
+      || assignment.status === 'SCHEDULED'
+      || assignment.status === 'EN_SERVICIO';
   }
 
   statusLabel(status: AssignmentStatus): string {
     return ({
+      PENDING_RESPONSE: 'Pendiente de respuesta',
       SCHEDULED: 'Programada',
       EN_SERVICIO: 'En servicio',
       COMPLETED: 'Completada',
+      REJECTED: 'Rechazada',
       CANCELLED: 'Cancelada',
+      EXPIRED: 'Vencida',
     } as Record<AssignmentStatus, string>)[status];
+  }
+
+  responseModeLabel(mode: AssignmentResponseMode): string {
+    return mode === 'MOBILE_CONFIRMATION'
+      ? 'Confirmación móvil del conductor'
+      : 'Programación directa del ADMIN';
   }
 
   dateLabel(value: string): string {

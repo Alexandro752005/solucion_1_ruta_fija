@@ -1,6 +1,6 @@
 # ADR-004 - Contrato de asignaciones móviles y ubicación vigente
 
-- Estado: V7/V8 implementadas en F3.1B, sesión móvil implementada en F3.2 y operaciones móviles V9/V10 implementadas en F3.3; contrato exhaustivo y reportes quedan para F3.4.
+- Estado: aceptada; V7/V8, sesión móvil, operaciones V9/V10, contrato exhaustivo y reportes reales completados hasta F3.4.
 - Fecha: 2026-09-22.
 - Alcance: días 5 y 6 de la Etapa 2.
 
@@ -186,19 +186,21 @@ móviles con transporte JSON separado de la cookie web, conductor activo
 vinculado, rotación y errores uniformes; la decisión detallada vive en
 [ADR-005](ADR-005-sesion-movil-separada.md). F3.3 implementó los endpoints, la
 transición autenticada, la limpieza por plazo, el UPSERT y los recibos V9/V10.
-F3.4 publicará el contrato operativo completo, pruebas exhaustivas de
+F3.4 publicó el contrato operativo completo, pruebas exhaustivas de
 aislamiento/privacidad/idempotencia y reportes reales de `PENDING_RESPONSE`,
-`REJECTED` y `EXPIRED`.
+`REJECTED` y `EXPIRED`. La evidencia y el contrato consultable están en
+[F3.4](../ejecucion-f3-4-contrato-reportes.md) y
+[Contrato API F3.4](../contrato-api-f3-4-movil.md).
 
 V9 y V10 fueron implementadas en F3.3. Firebase/FCM, fotos, GPS en segundo
-plano, historial de rutas y Flutter siguen fuera de F3.3. PostgreSQL permanece
+plano, historial de rutas y Flutter siguen fuera de F3.4. PostgreSQL permanece
 privado en `127.0.0.1:5432`; no se introduce Docker ni se expone la base de
 datos a la aplicación móvil.
 
 ## Consecuencias
 
 El CRM mantiene su flujo directo sin inventar decisiones de conductores, y la
-app móvil tendrá un contrato verificable antes de construir sus pantallas. El
-costo es ampliar cuidadosamente restricciones, DTOs, pruebas y reportes en las
-subfases siguientes. Esa complejidad es necesaria para conservar aislamiento
-multi-tenant, trazabilidad real y privacidad de la ubicación.
+app móvil tiene un contrato verificable antes de construir sus pantallas. El
+costo fue ampliar cuidadosamente DTOs, pruebas y reportes sin introducir otra
+migración. Esa complejidad conserva aislamiento multi-tenant, trazabilidad real
+y privacidad de la ubicación.

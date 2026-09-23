@@ -1,5 +1,6 @@
 package pe.rutafija.operation.api.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import pe.rutafija.operation.domain.Assignment;
 import pe.rutafija.operation.domain.AssignmentResponseMode;
 import pe.rutafija.operation.domain.AssignmentStatus;
@@ -7,14 +8,21 @@ import pe.rutafija.operation.domain.AssignmentStatus;
 import java.time.Instant;
 import java.util.UUID;
 
+@Schema(description = "Estado persistido de una asignación, incluido su modo de respuesta y sus marcas de tiempo auténticas.")
 public record AssignmentResponse(
         UUID id,
         AssignmentStatus status,
+        @Schema(description = "Modo inmutable elegido al crear la asignación.")
         AssignmentResponseMode responseMode,
+        @Schema(description = "Plazo UTC de respuesta para MOBILE_CONFIRMATION; ausente en ADMIN_DIRECT.")
         Instant responseDeadlineAt,
+        @Schema(description = "Hora del servidor de la aceptación auténtica del conductor; nunca la escribe el CRM.")
         Instant acceptedAt,
+        @Schema(description = "Hora del servidor del rechazo auténtico del conductor; nunca la escribe el CRM.")
         Instant rejectedAt,
+        @Schema(description = "Motivo opcional del rechazo auténtico del conductor.")
         String rejectionReason,
+        @Schema(description = "Hora del servidor de expiración; nunca proviene del cliente.")
         Instant expiredAt,
         long version,
         UUID driverId,

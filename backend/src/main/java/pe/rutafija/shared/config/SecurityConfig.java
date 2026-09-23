@@ -145,9 +145,11 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource(SecurityProperties properties) {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(properties.cors().allowedOrigins());
-        configuration.setAllowedMethods(List.of("GET", "POST", "PATCH", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Correlation-ID"));
-        configuration.setExposedHeaders(List.of("X-Correlation-ID"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of(
+                "Authorization", "Content-Type", "X-Correlation-ID", "Idempotency-Key"
+        ));
+        configuration.setExposedHeaders(List.of("X-Correlation-ID", "X-Idempotent-Replay"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
 

@@ -3,10 +3,11 @@
 Ruta Fija es un monolito modular para administrar organizaciones, usuarios,
 grupos, conductores, vehículos, asignaciones, incidencias, comunicados,
 reportes y auditoría. El alcance vigente incluye el CRM web administrativo y
-una API móvil operativa para el futuro conductor Flutter. No incluye todavía
-Flutter, FCM, SMTP, GPS en segundo plano ni servicios externos. F3.3 publica
-operaciones propias de conductor, ubicación vigente con consentimiento y
-recibos idempotentes; no introduce pantallas móviles ni historial GPS.
+una API móvil operativa y contratada para el futuro conductor Flutter. No
+incluye todavía Flutter, FCM, SMTP, GPS en segundo plano ni servicios externos.
+F3.4 completa OpenAPI/DTOs, la matriz de aislamiento e idempotencia y los
+reportes reales de estados móviles; no introduce pantallas móviles ni historial
+GPS.
 
 La operación local usa PostgreSQL 16 instalado en Windows, Java 21 y Angular.
 No se necesita Docker para iniciar, probar, detener ni recuperar el sistema.
@@ -74,7 +75,7 @@ La instancia debe estar limitada a 127.0.0.1 y ::1. No se publique el puerto
      ~~~powershell
      .\scripts\Invoke-RutaFijaFlywayF13.ps1
      .\scripts\Grant-RutaFijaApplicationPrivilegesF13.ps1
-     .\scripts\Test-RutaFijaF33MobileOperations.ps1
+     .\scripts\Test-RutaFijaF34ContractReports.ps1
      ~~~
 
    - Para una base existente que ya está exactamente en V8, no use el
@@ -82,7 +83,7 @@ La instancia debe estar limitada a 127.0.0.1 y ::1. No se publique el puerto
 
      ~~~powershell
      .\scripts\Invoke-RutaFijaF33V9V10Migration.ps1
-     .\scripts\Test-RutaFijaF33MobileOperations.ps1
+     .\scripts\Test-RutaFijaF34ContractReports.ps1
      ~~~
 
 6. Instale las dependencias del CRM y valide el entorno.
@@ -132,7 +133,7 @@ Ejecute las pruebas de backend contra la base aislada ruta_fija_test:
 .\verificar_ruta_fija.bat
 ~~~
 
-La salida aprobada termina con F3_3_NATIVE_VERIFY=PASS. Para comprobar el
+La salida aprobada termina con F3_4_NATIVE_VERIFY=PASS. Para comprobar el
 proxy REST y WebSocket desde Angular, con 8080 y 4200 libres:
 
 ~~~powershell
@@ -203,11 +204,17 @@ del CRM no puede fingir aceptación o rechazo de un conductor. Para una base
 existente en V8, ejecute primero el comando protegido de F3.3 que crea backup,
 ensayo aislado y solo después aplica V9/V10.
 
+F3.4 no altera Flyway: publica el contrato OpenAPI/DTO completo, alinea el CRM
+para mostrar estados móviles sin fingir una respuesta del conductor y reporta
+`PENDING_RESPONSE`, `REJECTED` y `EXPIRED` desde filas persistidas. El arranque
+nativo ahora valida F3.4 antes de iniciar backend y CRM.
+
 ## Automatización y documentación
 
 Las tareas Ruta Fija de VS Code cubren aprovisionamiento, arranque, pruebas,
 proxy WebSocket, auditoría F1.6, evidencia de recuperación F1.7, auditoría de
-sesión móvil histórica F3.2 y auditoría de operaciones móviles F3.3.
+sesión móvil histórica F3.2, auditoría de operaciones móviles F3.3 y contrato
+con reportes reales F3.4.
 
 La integración continua crea una instancia PostgreSQL 16 efímera del runner
 para las pruebas de integración. No requiere un motor de contenedores instalado
@@ -248,6 +255,9 @@ Documentos principales:
 - [ADR-006: operaciones móviles e idempotencia](docs/decisiones/ADR-006-operaciones-moviles-e-idempotencia.md)
 - [Ejecución F3.3](docs/ejecucion-f3-3-operaciones-moviles.md)
 - [Evidencia F3.3](docs/evidencia-f3-3-operaciones-moviles-2026-09-22.md)
+- [Contrato API F3.4](docs/contrato-api-f3-4-movil.md)
+- [Ejecución F3.4](docs/ejecucion-f3-4-contrato-reportes.md)
+- [Evidencia F3.4](docs/evidencia-f3-4-contrato-reportes-2026-09-22.md)
 - [Plan de migración nativa](docs/plan-f1-postgresql-nativo-sin-docker.md)
 
 Los archivos de Compose y Dockerfile permanecen como compatibilidad histórica

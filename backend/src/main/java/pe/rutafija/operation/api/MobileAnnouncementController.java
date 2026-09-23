@@ -1,6 +1,8 @@
 package pe.rutafija.operation.api;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.springframework.http.CacheControl;
@@ -18,6 +20,7 @@ import pe.rutafija.operation.api.dto.mobile.MobileAnnouncementResponse;
 import pe.rutafija.operation.application.MobileAnnouncementService;
 import pe.rutafija.shared.api.PageResponse;
 import pe.rutafija.shared.api.PageableFactory;
+import pe.rutafija.shared.config.OpenApiConfig;
 
 import java.util.Set;
 import java.util.UUID;
@@ -26,6 +29,8 @@ import java.util.UUID;
 @Validated
 @PreAuthorize("hasRole('CONDUCTOR')")
 @RequestMapping("/api/v1/mobile/announcements")
+@Tag(name = "Móvil conductor: comunicados", description = "Comunicados visibles para la organización o grupo propio del conductor.")
+@SecurityRequirement(name = OpenApiConfig.BEARER_SCHEME)
 public class MobileAnnouncementController {
 
     private static final Set<String> SORT_PROPERTIES = Set.of("createdAt", "title");

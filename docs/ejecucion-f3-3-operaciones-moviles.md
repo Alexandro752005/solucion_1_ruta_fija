@@ -78,6 +78,7 @@ ejecuta la auditoria F3.3 antes de iniciar Spring Boot y Angular. Las URLs son:
 ## Limite de la fase
 
 F3.3 no crea Flutter, notificaciones push, GPS en segundo plano, fotos,
-historial de ubicaciones ni reportes nuevos. F3.4 debera publicar el contrato
-OpenAPI completo, ampliar la matriz de pruebas de aislamiento y agregar
-reportes reales para `PENDING_RESPONSE`, `REJECTED` y `EXPIRED`.
+historial de ubicaciones ni reportes nuevos. Ese límite fue resuelto en F3.4:
+el contrato OpenAPI completo, la matriz de aislamiento y los reportes reales
+de `PENDING_RESPONSE`, `REJECTED` y `EXPIRED` están documentados en
+[F3.4](ejecucion-f3-4-contrato-reportes.md).

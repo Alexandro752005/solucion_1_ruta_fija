@@ -1,7 +1,7 @@
 <section class="management-page">
   <rf-page-header
     title="Asignaciones"
-    description="Programa servicios y controla sus transiciones operativas."
+    description="Programa servicios y controla transiciones reales, sin simular respuestas del conductor."
     [context]="organizationName()"
   >
     <button page-actions class="management-button primary" type="button" (click)="startCreate()">Nueva asignaci&oacute;n</button>
@@ -35,7 +35,7 @@
             <td>{{ assignment.destinationText }}</td>
             <td>{{ dateLabel(assignment.scheduledAt) }}</td>
             <td>{{ dateLabel(assignment.scheduledEndAt) }}</td>
-            <td><span class="management-status" [class.success]="assignment.status === 'COMPLETED'" [class.warning]="assignment.status === 'SCHEDULED' || assignment.status === 'EN_SERVICIO'" [class.muted]="assignment.status === 'CANCELLED'">{{ statusLabel(assignment.status) }}</span>@if (assignment.reservedAt && assignment.status === 'SCHEDULED') { <small>Conductor reservado</small> }</td>
+            <td><span class="management-status" [class.success]="assignment.status === 'COMPLETED'" [class.warning]="assignment.status === 'PENDING_RESPONSE' || assignment.status === 'SCHEDULED' || assignment.status === 'EN_SERVICIO'" [class.danger]="assignment.status === 'REJECTED' || assignment.status === 'EXPIRED'" [class.muted]="assignment.status === 'CANCELLED'">{{ statusLabel(assignment.status) }}</span><small>{{ responseModeLabel(assignment.responseMode) }}</small>@if (assignment.reservedAt && assignment.status === 'SCHEDULED') { <small>Conductor reservado</small> }</td>
             <td><button class="management-button compact" type="button" (click)="viewDetails(assignment)">Ver detalle</button></td>
           </tr>
         }</tbody>
@@ -56,7 +56,7 @@
       <div class="field"><label for="assignment-end">Fin programado</label><input id="assignment-end" type="datetime-local" formControlName="scheduledEndAt" [attr.aria-invalid]="form.controls.scheduledEndAt.invalid && form.controls.scheduledEndAt.touched" /></div>
       <div class="field wide"><label for="assignment-notes">Notas (opcional)</label><textarea id="assignment-notes" maxlength="500" formControlName="notes"></textarea></div>
     </div>
-    <p class="management-muted">La programaci&oacute;n se crea directamente como Programada. La validaci&oacute;n final de agenda y recursos se realiza al guardar.</p>
+    <p class="management-muted">Esta pantalla crea asignaciones ADMIN_DIRECT como Programadas. Las solicitudes MOBILE_CONFIRMATION se integran por contrato API y solo su conductor autenticado puede aceptarlas o rechazarlas; el CRM no suplanta esa decisión.</p>
     <div class="management-actions"><button class="management-button" type="button" (click)="closeForm()" [disabled]="saving()">Cancelar</button><button class="management-button primary" type="submit" [disabled]="saving()">{{ saving() ? 'Guardando&hellip;' : editing() ? 'Guardar cambios' : 'Programar asignaci&oacute;n' }}</button></div>
   </form>
 </rf-modal>
@@ -66,9 +66,14 @@
     <dl class="rf-detail-grid">
       <div><dt>Conductor</dt><dd>{{ assignment.driverName }}</dd></div><div><dt>Veh&iacute;culo</dt><dd>{{ assignment.vehiclePlate }}</dd></div>
       <div><dt>Grupo</dt><dd>{{ assignment.groupName }}</dd></div><div><dt>Estado</dt><dd>{{ statusLabel(assignment.status) }}@if (assignment.reservedAt && assignment.status === 'SCHEDULED') { &nbsp;&middot; Conductor reservado }</dd></div>
+      <div><dt>Modo de respuesta</dt><dd>{{ responseModeLabel(assignment.responseMode) }}</dd></div><div><dt>Plazo de respuesta</dt><dd>{{ assignment.responseDeadlineAt ? dateLabel(assignment.responseDeadlineAt) : 'No aplica' }}</dd></div>
       <div><dt>Origen</dt><dd>{{ assignment.originText }}</dd></div><div><dt>Destino</dt><dd>{{ assignment.destinationText }}</dd></div>
       <div><dt>Inicio programado</dt><dd>{{ dateLabel(assignment.scheduledAt) }}</dd></div><div><dt>Fin programado</dt><dd>{{ dateLabel(assignment.scheduledEndAt) }}</dd></div>
       <div><dt>Creada por</dt><dd>{{ assignment.createdByName }}</dd></div><div><dt>Notas</dt><dd>{{ assignment.notes || 'Sin notas' }}</dd></div>
+      @if (assignment.acceptedAt) { <div><dt>Aceptada por conductor</dt><dd>{{ dateLabel(assignment.acceptedAt) }}</dd></div> }
+      @if (assignment.rejectedAt) { <div><dt>Rechazada por conductor</dt><dd>{{ dateLabel(assignment.rejectedAt) }}</dd></div> }
+      @if (assignment.rejectionReason) { <div><dt>Motivo de rechazo</dt><dd>{{ assignment.rejectionReason }}</dd></div> }
+      @if (assignment.expiredAt) { <div><dt>Vencida por servidor</dt><dd>{{ dateLabel(assignment.expiredAt) }}</dd></div> }
       @if (assignment.cancellationReason) { <div><dt>Motivo de cancelaci&oacute;n</dt><dd>{{ assignment.cancellationReason }}</dd></div> }
     </dl>
     <section class="management-detail"><h3>Acciones disponibles</h3><div class="rf-toolbar">
@@ -77,6 +82,7 @@
       @if (canStart(assignment)) { <button class="management-button primary" type="button" (click)="start(assignment)">Iniciar servicio</button> }
       @if (canComplete(assignment)) { <button class="management-button primary" type="button" (click)="complete(assignment)">Completar servicio</button> }
       @if (canCancel(assignment)) { <button class="management-button danger" type="button" (click)="cancel(assignment)">Cancelar asignaci&oacute;n</button> }
+      @if (assignment.status === 'PENDING_RESPONSE') { <p class="management-muted">La respuesta sigue pendiente del conductor móvil vinculado. ADMIN puede cancelarla, pero no aceptarla ni rechazarla.</p> }
       @if (!canEdit(assignment) && !canReserve(assignment) && !canStart(assignment) && !canComplete(assignment) && !canCancel(assignment)) { <p class="management-muted">Esta asignaci&oacute;n es de solo lectura.</p> }
     </div></section>
   }

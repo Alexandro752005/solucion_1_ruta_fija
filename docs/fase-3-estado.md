@@ -1,5 +1,9 @@
 # Estado de la Fase 3
 
+> Archivo histórico del 2026-08-29. No describe el runtime vigente: la ruta
+> operativa actual es PostgreSQL 16 nativo sin Docker, los roles activos son
+> SUPER_ADMIN, ADMIN y CONDUCTOR, y el contrato actual está en F3.4.
+
 - Fase: 3 — Operación web, comunicación y reportes reales.
 - Madurez objetivo acumulada: 50–75 % del MVP.
 - Estado: implementada y validada localmente con Docker el 2026-08-29.

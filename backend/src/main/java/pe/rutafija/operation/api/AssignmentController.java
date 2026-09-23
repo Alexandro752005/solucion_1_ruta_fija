@@ -1,6 +1,7 @@
 package pe.rutafija.operation.api;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -36,6 +37,10 @@ import java.util.UUID;
 @RestController
 @Validated
 @RequestMapping("/api/v1/assignments")
+@Tag(
+        name = "CRM: asignaciones",
+        description = "ADMIN opera el tenant. Puede crear una solicitud MOBILE_CONFIRMATION, pero no aceptar o rechazar por el conductor."
+)
 public class AssignmentController {
 
     private static final Set<String> SORT_PROPERTIES = Set.of(
@@ -79,7 +84,11 @@ public class AssignmentController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    @Operation(summary = "Programar una asignación directamente en estado SCHEDULED")
+    @Operation(
+            summary = "Crear una asignación ADMIN_DIRECT o una solicitud MOBILE_CONFIRMATION",
+            description = "Si responseMode se omite se crea ADMIN_DIRECT en SCHEDULED. MOBILE_CONFIRMATION nace PENDING_RESPONSE "
+                    + "y solo puede recibir respuesta desde /api/v1/mobile/assignments del conductor vinculado."
+    )
     public ResponseEntity<AssignmentResponse> create(
             @Valid @RequestBody AssignmentCreateRequest request,
             @RequestHeader(value = "Idempotency-Key", required = false) String idempotencyKey

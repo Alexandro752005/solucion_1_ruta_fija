@@ -20,10 +20,17 @@ public class OpenApiConfig {
                 .info(new Info()
                         .title("Ruta Fija API")
                         .description(
-                                "API privada del CRM web administrativo y reportes, con sesión móvil "
-                                        + "de conductor mediante refresh opaco en JSON. "
-                                        + "Los roles activos son SUPER_ADMIN, ADMIN y CONDUCTOR; "
-                                        + "la operación de tenant del CRM requiere ADMIN."
+                                "API privada del CRM administrativo y de la aplicación móvil de conductor. "
+                                        + "Los roles activos son SUPER_ADMIN, ADMIN y CONDUCTOR; la operación "
+                                        + "por tenant del CRM requiere ADMIN. Las rutas /api/v1/mobile requieren "
+                                        + "un JWT de CONDUCTOR emitido para sessionChannel=MOBILE y resuelven "
+                                        + "tenant, usuario y conductor en el servidor. "
+                                        + "ADMIN_DIRECT crea una asignación SCHEDULED; MOBILE_CONFIRMATION crea "
+                                        + "PENDING_RESPONSE y solo su conductor móvil puede aceptarla o rechazarla. "
+                                        + "El CRM nunca simula esa respuesta. Los comandos móviles usan clientEventId, "
+                                        + "version y occurredAt; un reintento idéntico se identifica con "
+                                        + "X-Idempotent-Replay. La ubicación conserva solo el punto vigente, con "
+                                        + "consentimiento y sin historial."
                         )
                         .version("v1"))
                 .components(new Components()

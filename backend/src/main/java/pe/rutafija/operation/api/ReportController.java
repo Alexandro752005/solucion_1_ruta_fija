@@ -1,6 +1,7 @@
 package pe.rutafija.operation.api;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ContentDisposition;
@@ -24,6 +25,10 @@ import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/v1/reports")
+@Tag(
+        name = "CRM: reportes",
+        description = "Totales y exportaciones calculados desde asignaciones e incidencias persistidas del tenant autenticado."
+)
 public class ReportController {
 
     private final ReportService reportService;
@@ -45,7 +50,11 @@ public class ReportController {
 
     @GetMapping("/assignments")
     @PreAuthorize("hasRole('ADMIN')")
-    @Operation(summary = "Reporte real de asignaciones por rango de fechas")
+    @Operation(
+            summary = "Reporte real de asignaciones por rango de fechas",
+            description = "Cuenta por scheduledAt las filas persistidas del tenant y entrega todos los estados, incluidos "
+                    + "PENDING_RESPONSE, REJECTED y EXPIRED con cero explícito cuando no existan filas."
+    )
     public ResponseEntity<AssignmentReportResponse> assignments(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to

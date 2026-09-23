@@ -15,6 +15,7 @@ import pe.rutafija.operation.api.dto.IncidentReportResponse;
 import pe.rutafija.operation.api.dto.IncidentResponse;
 import pe.rutafija.operation.api.dto.StatusCountResponse;
 import pe.rutafija.operation.domain.Assignment;
+import pe.rutafija.operation.domain.AssignmentStatus;
 import pe.rutafija.operation.domain.Incident;
 import pe.rutafija.operation.infrastructure.AssignmentRepository;
 import pe.rutafija.operation.infrastructure.IncidentRepository;
@@ -29,7 +30,9 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 /** Reportes obtenidos exclusivamente de asignaciones e incidencias persistidas. */
 @Service
@@ -37,6 +40,20 @@ public class ReportService {
 
     private static final int MAX_RANGE_DAYS = 90;
     private static final int MAX_ITEMS = 10_000;
+    /**
+     * Fixed, documented order for the operational assignment report. The query
+     * remains the source of every non-zero value; this list only makes genuine
+     * zeroes visible instead of silently omitting an operational state.
+     */
+    private static final List<AssignmentStatus> ASSIGNMENT_REPORT_STATUS_ORDER = List.of(
+            AssignmentStatus.PENDING_RESPONSE,
+            AssignmentStatus.SCHEDULED,
+            AssignmentStatus.EN_SERVICIO,
+            AssignmentStatus.COMPLETED,
+            AssignmentStatus.REJECTED,
+            AssignmentStatus.CANCELLED,
+            AssignmentStatus.EXPIRED
+    );
 
     private final CurrentUserService currentUserService;
     private final OperationReportRepository reportRepository;
@@ -88,7 +105,7 @@ public class ReportService {
         return new AssignmentReportResponse(
                 from,
                 to,
-                toResponse(reportRepository.assignmentStatusTotals(
+                assignmentStatusResponse(reportRepository.assignmentStatusTotals(
                         actor.getOrganizationId(), range.fromInclusive(), range.toExclusive()
                 )),
                 page.getContent().stream().map(AssignmentResponse::from).toList()
@@ -169,6 +186,17 @@ public class ReportService {
 
     private List<StatusCountResponse> toResponse(List<StatusTotal> totals) {
         return totals.stream().map(total -> new StatusCountResponse(total.status(), total.total())).toList();
+    }
+
+    private List<StatusCountResponse> assignmentStatusResponse(List<StatusTotal> totals) {
+        Map<AssignmentStatus, Long> actualTotals = new EnumMap<>(AssignmentStatus.class);
+        for (StatusTotal total : totals) {
+            AssignmentStatus status = AssignmentStatus.valueOf(total.status());
+            actualTotals.merge(status, total.total(), Math::addExact);
+        }
+        return ASSIGNMENT_REPORT_STATUS_ORDER.stream()
+                .map(status -> new StatusCountResponse(status.name(), actualTotals.getOrDefault(status, 0L)))
+                .toList();
     }
 
     private record ReportRange(Instant fromInclusive, Instant toExclusive) {

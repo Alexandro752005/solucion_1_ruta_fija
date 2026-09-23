@@ -1,17 +1,30 @@
 import { DriverStatus, VehicleStatus } from '../management/management.models';
 
 export const ASSIGNMENT_STATUSES = [
+  'PENDING_RESPONSE',
   'SCHEDULED',
   'EN_SERVICIO',
   'COMPLETED',
+  'REJECTED',
   'CANCELLED',
+  'EXPIRED',
 ] as const;
 
 export type AssignmentStatus = (typeof ASSIGNMENT_STATUSES)[number];
 
+export const ASSIGNMENT_RESPONSE_MODES = ['ADMIN_DIRECT', 'MOBILE_CONFIRMATION'] as const;
+
+export type AssignmentResponseMode = (typeof ASSIGNMENT_RESPONSE_MODES)[number];
+
 export interface Assignment {
   readonly id: string;
   readonly status: AssignmentStatus;
+  readonly responseMode: AssignmentResponseMode;
+  readonly responseDeadlineAt?: string | null;
+  readonly acceptedAt?: string | null;
+  readonly rejectedAt?: string | null;
+  readonly rejectionReason?: string | null;
+  readonly expiredAt?: string | null;
   readonly version: number;
   readonly driverId: string;
   readonly driverName: string;

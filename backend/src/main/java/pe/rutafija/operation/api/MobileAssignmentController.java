@@ -1,6 +1,8 @@
 package pe.rutafija.operation.api;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -23,6 +25,7 @@ import pe.rutafija.operation.application.MobileCommandExecution;
 import pe.rutafija.operation.domain.AssignmentStatus;
 import pe.rutafija.shared.api.PageResponse;
 import pe.rutafija.shared.api.PageableFactory;
+import pe.rutafija.shared.config.OpenApiConfig;
 
 import java.util.Set;
 import java.util.UUID;
@@ -31,6 +34,11 @@ import java.util.UUID;
 @Validated
 @PreAuthorize("hasRole('CONDUCTOR')")
 @RequestMapping("/api/v1/mobile/assignments")
+@Tag(
+        name = "Móvil conductor: asignaciones",
+        description = "Solo asignaciones propias de una sesión MOBILE. El CRM no dispone de rutas de aceptación o rechazo."
+)
+@SecurityRequirement(name = OpenApiConfig.BEARER_SCHEME)
 public class MobileAssignmentController {
 
     private static final Set<String> SORT_PROPERTIES = Set.of("scheduledAt", "scheduledEndAt", "createdAt", "updatedAt", "status");
@@ -62,7 +70,10 @@ public class MobileAssignmentController {
     }
 
     @PostMapping("/{assignmentId}/accept")
-    @Operation(summary = "Aceptar una solicitud MOBILE_CONFIRMATION propia")
+    @Operation(
+            summary = "Aceptar una solicitud MOBILE_CONFIRMATION propia",
+            description = "Requiere clientEventId, version y occurredAt. Un reintento idéntico devuelve X-Idempotent-Replay: true."
+    )
     public ResponseEntity<AssignmentResponse> accept(
             @PathVariable UUID assignmentId,
             @Valid @RequestBody MobileAssignmentCommandRequest request
@@ -71,7 +82,10 @@ public class MobileAssignmentController {
     }
 
     @PostMapping("/{assignmentId}/reject")
-    @Operation(summary = "Rechazar una solicitud MOBILE_CONFIRMATION propia")
+    @Operation(
+            summary = "Rechazar una solicitud MOBILE_CONFIRMATION propia",
+            description = "Solo el conductor vinculado puede rechazar antes del plazo; el CRM nunca suplanta esta acción."
+    )
     public ResponseEntity<AssignmentResponse> reject(
             @PathVariable UUID assignmentId,
             @Valid @RequestBody MobileAssignmentRejectRequest request

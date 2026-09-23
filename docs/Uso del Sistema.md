@@ -9,10 +9,12 @@ Windows y usa PostgreSQL 16 instalado localmente.
 El CRM permite gestionar organizaciones, usuarios, grupos, conductores,
 vehículos, asignaciones, incidencias, comunicados, reportes y auditoría.
 
-La solución vigente incluye una sesión API mínima para la futura aplicación de
-conductor, pero todavía no incluye Flutter, GPS, mapas, aceptación o rechazo
-por conductor, notificaciones push, correo ni almacenamiento externo. Las
-asignaciones administrativas nacen como SCHEDULED.
+La solución vigente incluye una API móvil real para el futuro conductor:
+sesión JSON, asignaciones propias, aceptación/rechazo auténticos, incidencias,
+comunicados y ubicación vigente con consentimiento. Todavía no incluye Flutter,
+GPS de fondo, mapas, notificaciones push, correo ni almacenamiento externo. El
+CRM crea asignaciones administrativas como SCHEDULED y nunca simula una
+respuesta del conductor.
 
 ## 2. Requisitos
 
@@ -75,7 +77,7 @@ Estos pasos se ejecutan una sola vez sobre una base de desarrollo vacía.
    ~~~powershell
    .\scripts\Invoke-RutaFijaFlywayF13.ps1
    .\scripts\Grant-RutaFijaApplicationPrivilegesF13.ps1
-   .\scripts\Test-RutaFijaF33MobileOperations.ps1
+   .\scripts\Test-RutaFijaF34ContractReports.ps1
    ~~~
 
 4. Instale dependencias web.
@@ -166,9 +168,11 @@ críticas generan eventos de auditoría que no pueden editarse ni eliminarse.
 ### 7.4 Reportes y auditoría
 
 Reportes obtiene disponibilidad, asignaciones e incidencias desde datos
-persistidos. Puede limitar fechas y descargar resultados cuando el módulo lo
-habilite. Auditoría es de solo lectura: filtra, pagina y muestra detalle de
-eventos sin permitir modificarlos.
+persistidos. El reporte de asignaciones incluye siempre PENDING_RESPONSE,
+SCHEDULED, EN_SERVICIO, COMPLETED, REJECTED, CANCELLED y EXPIRED; un cero solo
+indica ausencia de filas del estado en el período. PDF/XLSX usan el mismo
+resultado real. Auditoría es de solo lectura: filtra, pagina y muestra detalle
+de eventos sin permitir modificarlos.
 
 ## 8. Verificación técnica
 
@@ -186,7 +190,7 @@ Verificación completa nativa:
 .\verificar_ruta_fija.bat
 ~~~
 
-La salida esperada termina en F3_3_NATIVE_VERIFY=PASS. Las pruebas usan solo
+La salida esperada termina en F3_4_NATIVE_VERIFY=PASS. Las pruebas usan solo
 ruta_fija_test y limpian datos al finalizar.
 
 Auditoría específica de las operaciones móviles:
@@ -199,6 +203,17 @@ Su resultado esperado empieza con `F3_3_MOBILE_OPERATIONS_AUDIT=PASS`.
 Verifica canal móvil separado, conductor activo y vinculado, rutas propias,
 V1-V10, recibos idempotentes, ubicación vigente sin historial, ausencia de
 coordenadas en auditoría y privilegios DML sin DDL.
+
+Auditoría de contrato y reportes reales F3.4:
+
+~~~powershell
+.\scripts\Test-RutaFijaF34ContractReports.ps1
+~~~
+
+Su resultado esperado es `F3_4_CONTRACT_REPORTS_AUDIT=PASS`. Además de los
+controles F3.3, comprueba OpenAPI/DTOs, la frontera que impide al CRM aceptar o
+rechazar por un conductor, etiquetas Angular para estados móviles y el uso de
+totales persistidos en JSON, PDF y XLSX.
 
 Validación del CRM unificado en ADMIN:
 
