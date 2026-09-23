@@ -4,16 +4,15 @@ Cliente Flutter Android exclusivo del rol `CONDUCTOR`. Se comunica con Spring
 Boot por `/api/v1/mobile`; nunca accede a PostgreSQL, no contiene credenciales
 de base de datos y no reutiliza la cookie de sesión del CRM.
 
-## Estado actual: F4.2
+## Estado actual: F4.3
 
-M1, M2 y M3 están implementados: base, navegación, sesión JSON de conductor,
-refresh rotativo protegido, perfil propio y disponibilidad real. El avance
-verificable es **28/80 puntos**.
+M1, M2, M3 y M4 están implementados: base, navegación, sesión JSON de
+conductor, refresh rotativo protegido, perfil, disponibilidad y asignaciones
+propias idempotentes. El avance verificable es **46/80 puntos**.
 
-La aplicación no implementa todavía asignaciones, aceptación/rechazo,
-incidencias, comunicados, GPS, permisos de ubicación, fotos, FCM ni cola
-offline. Las rutas de esos módulos siguen señalando honestamente que están
-pendientes.
+La aplicación no implementa todavía incidencias, comunicados, GPS, permisos de
+ubicación, fotos, FCM ni una cola offline automática. Las rutas de esos módulos
+siguen señalando honestamente que están pendientes.
 
 ## Seguridad de sesión
 
@@ -24,6 +23,9 @@ pendientes.
   reutilizar la familia de tokens del backend.
 - No se registran contraseñas, tokens ni cuerpos HTTP. Los errores del backend
   se muestran mediante su código y mensaje uniforme.
+- Antes de mutar una asignación, el cliente guarda un único `clientEventId`,
+  versión e instante en almacenamiento protegido. Ante un resultado desconocido
+  conserva ese evento y pide un reintento explícito; no crea otro comando.
 
 ## Comandos de validación
 
@@ -45,14 +47,14 @@ $env:Path = 'D:\dev\flutter\bin;' + $env:Path
 flutter --version
 ~~~
 
-Desde la raíz del repositorio, la auditoría completa es:
+Desde la raíz del repositorio, la auditoría completa de F4.3 es:
 
 ~~~powershell
-.\scripts\Test-RutaFijaF42MobileSessionProfileAvailability.ps1
+.\scripts\Test-RutaFijaF43MobileAssignments.ps1
 ~~~
 
 La salida aprobada empieza con
-`F4_2_MOBILE_SESSION_PROFILE_AVAILABILITY=PASS`.
+`F4_3_MOBILE_ASSIGNMENTS=PASS` y declara `total=46/80`.
 
 ## Ejecutar en desarrollo
 
@@ -74,6 +76,11 @@ Debe existir una cuenta `CONDUCTOR` activa y vinculada, creada desde el CRM.
 No guarde usuario, contraseña, token ni el puerto `5432` en
 `RF_API_BASE_URL`. Para release solo se permite una URL HTTPS que termine
 exactamente en `/api/v1`.
+
+Para probar M4, el ADMIN crea una asignación `MOBILE_CONFIRMATION` para el
+conductor vinculado. La app solo muestra las asignaciones propias y permite
+aceptar/rechazar, iniciar o completar cuando el backend autoriza el estado. No
+existe un botón CRM que suplante la respuesta del conductor.
 
 ## Android y recursos limitados
 

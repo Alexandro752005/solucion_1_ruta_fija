@@ -109,3 +109,7 @@ F4_2_MOBILE_SESSION_PROFILE_AVAILABILITY=PASS ... total=28/80 android=READY ... 
 F4.2 queda lista para evaluación cuando la salida anterior sea positiva. La
 siguiente puerta será F4.3: asignaciones móviles idempotentes, sin fingir una
 aceptación desde el CRM.
+
+> Estado histórico: este documento describe el cierre de F4.2. F4.3 incorpora
+> posteriormente M4; consulte [Ejecución F4.3](ejecucion-f4-3-asignaciones-moviles.md)
+> para su alcance y controles propios.

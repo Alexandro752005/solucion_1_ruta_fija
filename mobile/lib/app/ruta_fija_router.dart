@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/session/mobile_session_controller.dart';
 import '../core/navigation/conductor_destination.dart';
+import '../features/assignments/data/mobile_assignment_repository.dart';
 import '../features/bootstrap/presentation/conductor_navigation_shell.dart';
 import '../features/profile/data/mobile_driver_repository.dart';
 import 'ruta_fija_environment.dart';
@@ -15,12 +16,14 @@ final class RutaFijaRouter {
     required RouteFijaEnvironment environment,
     required MobileSessionController sessionController,
     required MobileDriverGateway driverGateway,
+    required MobileAssignmentGateway assignmentGateway,
   }) {
     return ConductorNavigationShell(
       destination: ConductorDestination.home,
       environment: environment,
       sessionController: sessionController,
       driverGateway: driverGateway,
+      assignmentGateway: assignmentGateway,
     );
   }
 
@@ -29,6 +32,7 @@ final class RutaFijaRouter {
     required RouteFijaEnvironment environment,
     required MobileSessionController sessionController,
     required MobileDriverGateway driverGateway,
+    required MobileAssignmentGateway assignmentGateway,
   }) {
     final destination = ConductorDestination.fromPath(settings.name);
     return MaterialPageRoute<void>(
@@ -38,6 +42,7 @@ final class RutaFijaRouter {
         environment: environment,
         sessionController: sessionController,
         driverGateway: driverGateway,
+        assignmentGateway: assignmentGateway,
       ),
     );
   }

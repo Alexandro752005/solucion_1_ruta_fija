@@ -3,11 +3,12 @@
 Ruta Fija es un monolito modular para administrar organizaciones, usuarios,
 grupos, conductores, vehículos, asignaciones, incidencias, comunicados,
 reportes y auditoría. El alcance vigente incluye el CRM web administrativo, la
-API móvil operativa y Flutter Android del conductor (M1–M3, 28/80 puntos).
+API móvil operativa y Flutter Android del conductor (M1–M4, 46/80 puntos).
 F3.4 completa OpenAPI/DTOs, la matriz de aislamiento e idempotencia y los
 reportes reales de estados móviles. F4.1 aporta bootstrap, navegación, tema y
 configuración de entorno; F4.2 agrega sesión JSON real, refresh protegido,
-perfil propio y disponibilidad sin adelantar asignaciones, GPS, FCM, SMTP ni
+perfil propio y disponibilidad. F4.3 agrega lista, detalle y comandos de
+asignaciones propios con reintento idempotente, sin adelantar GPS, FCM, SMTP ni
 servicios externos.
 
 La operación local usa PostgreSQL 16 instalado en Windows, Java 21 y Angular.
@@ -23,7 +24,7 @@ No se necesita Docker para iniciar, probar, detener ni recuperar el sistema.
 | Esquema | Flyway V1–V10 y Hibernate con ddl-auto=validate |
 | Seguridad | JWT, refresh en cookie HttpOnly web y JSON móvil, roles separados de migración, aplicación y pruebas |
 | Tiempo real | WebSocket con ticket efímero por medio del proxy Angular |
-| Móvil | Flutter 3.47.5, Android `pe.rutafija.conductor`, M1–M3 reales: sesión, perfil y disponibilidad |
+| Móvil | Flutter 3.47.5, Android `pe.rutafija.conductor`, M1–M4 reales: sesión, perfil, disponibilidad y asignaciones idempotentes |
 
 El backend está dividido en identity, organization, fleet, operation, audit y
 shared. PostgreSQL conserva las reglas críticas: aislamiento de roles,
@@ -264,6 +265,8 @@ Documentos principales:
 - [Ejecución F4.1: base Flutter](docs/ejecucion-f4-1-base-flutter.md)
 - [Ejecución F4.2: sesión, perfil y disponibilidad](docs/ejecucion-f4-2-sesion-perfil-disponibilidad.md)
 - [Evidencia F4.2](docs/evidencia-f4-2-sesion-perfil-disponibilidad-2026-09-23.md)
+- [Ejecución F4.3: asignaciones móviles](docs/ejecucion-f4-3-asignaciones-moviles.md)
+- [Evidencia F4.3](docs/evidencia-f4-3-asignaciones-moviles-2026-09-23.md)
 - [Manual móvil Flutter](mobile/README.md)
 - [Plan de migración nativa](docs/plan-f1-postgresql-nativo-sin-docker.md)
 

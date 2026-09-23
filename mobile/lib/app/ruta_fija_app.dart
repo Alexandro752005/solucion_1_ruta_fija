@@ -53,6 +53,7 @@ class _RutaFijaAppState extends State<RutaFijaApp> {
             environment: widget.environment,
             sessionController: session,
             driverGateway: widget.dependencies.driverGateway,
+            assignmentGateway: widget.dependencies.assignmentGateway,
           ),
           home: switch (state.status) {
             MobileSessionStatus.restoring => const _SessionRestorePage(),
@@ -63,6 +64,7 @@ class _RutaFijaAppState extends State<RutaFijaApp> {
               environment: widget.environment,
               sessionController: session,
               driverGateway: widget.dependencies.driverGateway,
+              assignmentGateway: widget.dependencies.assignmentGateway,
             ),
           },
         );

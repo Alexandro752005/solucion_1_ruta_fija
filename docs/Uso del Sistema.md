@@ -11,10 +11,10 @@ vehículos, asignaciones, incidencias, comunicados, reportes y auditoría.
 
 La solución vigente incluye API móvil real y Flutter Android del conductor:
 tema, navegación, sesión JSON separada, refresh protegido, perfil propio y
-disponibilidad real (M1–M3, 28/80). Aún no incluye asignaciones móviles, GPS de
-fondo, mapas, notificaciones push, correo, fotos ni almacenamiento offline. El
-CRM crea asignaciones administrativas como SCHEDULED y nunca simula una
-respuesta del conductor.
+disponibilidad real, además de asignaciones propias idempotentes (M1–M4,
+46/80). Aún no incluye GPS de fondo, mapas, notificaciones push, correo, fotos
+ni una cola offline automática. El CRM nunca simula una respuesta del
+conductor.
 
 ## 2. Requisitos
 
@@ -246,6 +246,18 @@ refresh se guarda en almacenamiento seguro, que HTTP solo existe en debug y que
 el conductor no puede forzar `RESERVADO` o `EN_SERVICIO`. El resultado esperado
 empieza con `F4_2_MOBILE_SESSION_PROFILE_AVAILABILITY=PASS` y declara
 `total=28/80`, `android=READY` y `docker=0`.
+
+Auditoría de asignaciones móviles idempotentes F4.3:
+
+~~~powershell
+.\scripts\Test-RutaFijaF43MobileAssignments.ps1
+~~~
+
+Primero valida el contrato F3.4 y el catálogo PostgreSQL nativo en solo
+lectura. Luego comprueba que Flutter persiste un único evento antes de enviarlo,
+usa las rutas propias del conductor, respeta `X-Idempotent-Replay` y no habilita una
+aceptación ficticia desde el CRM. La salida esperada empieza con
+`F4_3_MOBILE_ASSIGNMENTS=PASS` y declara `total=46/80`.
 
 Validación del CRM unificado en ADMIN:
 

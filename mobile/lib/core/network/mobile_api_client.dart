@@ -29,16 +29,38 @@ final class MobileApiClient {
   Future<Map<String, dynamic>> getObject(
     String path, {
     bool authenticated = true,
+    Map<String, String>? queryParameters,
+  }) async => (await getObjectResponse(
+    path,
+    authenticated: authenticated,
+    queryParameters: queryParameters,
+  )).object;
+
+  Future<MobileApiObjectResponse> getObjectResponse(
+    String path, {
+    bool authenticated = true,
+    Map<String, String>? queryParameters,
   }) async {
     final response = await _execute(
       method: 'GET',
       path: path,
       authenticated: authenticated,
+      queryParameters: queryParameters,
     );
-    return _decodeObject(response, authenticated: authenticated);
+    return _decodeObjectResponse(response, authenticated: authenticated);
   }
 
   Future<Map<String, dynamic>> postObject(
+    String path,
+    Map<String, Object?> body, {
+    bool authenticated = true,
+  }) async => (await postObjectResponse(
+    path,
+    body,
+    authenticated: authenticated,
+  )).object;
+
+  Future<MobileApiObjectResponse> postObjectResponse(
     String path,
     Map<String, Object?> body, {
     bool authenticated = true,
@@ -49,7 +71,7 @@ final class MobileApiClient {
       body: body,
       authenticated: authenticated,
     );
-    return _decodeObject(response, authenticated: authenticated);
+    return _decodeObjectResponse(response, authenticated: authenticated);
   }
 
   Future<Map<String, dynamic>> putObject(
@@ -63,7 +85,10 @@ final class MobileApiClient {
       body: body,
       authenticated: authenticated,
     );
-    return _decodeObject(response, authenticated: authenticated);
+    return (await _decodeObjectResponse(
+      response,
+      authenticated: authenticated,
+    )).object;
   }
 
   Future<void> postNoContent(
@@ -85,6 +110,7 @@ final class MobileApiClient {
     required String path,
     required bool authenticated,
     Map<String, Object?>? body,
+    Map<String, String>? queryParameters,
     bool allowRefresh = true,
     String? correlationId,
   }) async {
@@ -95,6 +121,7 @@ final class MobileApiClient {
       body: body,
       authenticated: authenticated,
       correlationId: requestCorrelationId,
+      queryParameters: queryParameters,
     );
 
     if (authenticated && response.statusCode == 401 && allowRefresh) {
@@ -106,6 +133,7 @@ final class MobileApiClient {
           path: path,
           body: body,
           authenticated: true,
+          queryParameters: queryParameters,
           allowRefresh: false,
           correlationId: requestCorrelationId,
         );
@@ -122,8 +150,15 @@ final class MobileApiClient {
     required bool authenticated,
     required String correlationId,
     Map<String, Object?>? body,
+    Map<String, String>? queryParameters,
   }) async {
-    final request = http.Request(method, environment.endpoint(path));
+    final endpoint = environment.endpoint(path);
+    final request = http.Request(
+      method,
+      queryParameters == null
+          ? endpoint
+          : endpoint.replace(queryParameters: queryParameters),
+    );
     request.headers.addAll({
       'accept': 'application/json',
       'cache-control': 'no-store',
@@ -161,7 +196,7 @@ final class MobileApiClient {
     }
   }
 
-  Future<Map<String, dynamic>> _decodeObject(
+  Future<MobileApiObjectResponse> _decodeObjectResponse(
     http.Response response, {
     required bool authenticated,
   }) async {
@@ -171,7 +206,10 @@ final class MobileApiClient {
       if (decoded is! Map) {
         throw const FormatException('La respuesta no es un objeto JSON.');
       }
-      return Map<String, dynamic>.from(decoded);
+      return MobileApiObjectResponse(
+        object: Map<String, dynamic>.from(decoded),
+        headers: response.headers,
+      );
     } on FormatException {
       throw const MobileNetworkException(
         'Ruta Fija devolvió una respuesta no válida. Inténtelo nuevamente.',
@@ -242,6 +280,24 @@ final class MobileApiClient {
   String? _nonBlank(Object? value) {
     if (value is String && value.trim().isNotEmpty) {
       return value.trim();
+    }
+    return null;
+  }
+}
+
+/// A successful JSON object and its safe response metadata.
+final class MobileApiObjectResponse {
+  const MobileApiObjectResponse({required this.object, required this.headers});
+
+  final Map<String, dynamic> object;
+  final Map<String, String> headers;
+
+  String? header(String name) {
+    final normalized = name.toLowerCase();
+    for (final entry in headers.entries) {
+      if (entry.key.toLowerCase() == normalized) {
+        return entry.value;
+      }
     }
     return null;
   }

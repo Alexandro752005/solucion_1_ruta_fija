@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import '../core/network/mobile_api_client.dart';
 import '../core/session/mobile_secure_token_store.dart';
 import '../core/session/mobile_session_controller.dart';
+import '../features/assignments/data/mobile_assignment_command_store.dart';
+import '../features/assignments/data/mobile_assignment_repository.dart';
 import '../features/auth/data/mobile_auth_repository.dart';
 import '../features/profile/data/mobile_driver_repository.dart';
 import 'ruta_fija_environment.dart';
@@ -12,6 +14,7 @@ final class RutaFijaDependencies {
   RutaFijaDependencies({
     required this.sessionController,
     required this.driverGateway,
+    required this.assignmentGateway,
     required this.httpClient,
   });
 
@@ -30,16 +33,22 @@ final class RutaFijaDependencies {
       environment: environment,
       accessTokenProvider: sessionController,
     );
+    final assignmentGateway = MobileAssignmentRepository(
+      authenticatedApi,
+      MobileSecureAssignmentCommandStore(),
+    );
 
     return RutaFijaDependencies(
       sessionController: sessionController,
       driverGateway: MobileDriverRepository(authenticatedApi),
+      assignmentGateway: assignmentGateway,
       httpClient: httpClient,
     );
   }
 
   final MobileSessionController sessionController;
   final MobileDriverGateway driverGateway;
+  final MobileAssignmentGateway assignmentGateway;
   final http.Client httpClient;
 
   void dispose() {

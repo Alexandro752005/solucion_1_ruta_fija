@@ -4,6 +4,8 @@ import '../../../app/ruta_fija_environment.dart';
 import '../../../core/navigation/conductor_destination.dart';
 import '../../../core/presentation/mobile_error_message.dart';
 import '../../../core/session/mobile_session_controller.dart';
+import '../../assignments/data/mobile_assignment_repository.dart';
+import '../../assignments/presentation/assignments_page.dart';
 import '../../profile/data/mobile_driver_repository.dart';
 import '../../profile/presentation/availability_page.dart';
 import '../../profile/presentation/conductor_home_page.dart';
@@ -15,6 +17,7 @@ class ConductorNavigationShell extends StatelessWidget {
     required this.environment,
     required this.sessionController,
     required this.driverGateway,
+    required this.assignmentGateway,
     super.key,
   });
 
@@ -22,6 +25,7 @@ class ConductorNavigationShell extends StatelessWidget {
   final RouteFijaEnvironment environment;
   final MobileSessionController sessionController;
   final MobileDriverGateway driverGateway;
+  final MobileAssignmentGateway assignmentGateway;
 
   Future<void> _logout(BuildContext context) async {
     try {
@@ -56,6 +60,10 @@ class ConductorNavigationShell extends StatelessWidget {
             ),
             ConductorDestination.availability => AvailabilityPage(
               driverGateway: driverGateway,
+            ),
+            ConductorDestination.assignments => AssignmentsPage(
+              driverGateway: assignmentGateway,
+              driverId: sessionController.state.user!.driverId,
             ),
             ConductorDestination.profile => ProfilePage(
               driverGateway: driverGateway,
