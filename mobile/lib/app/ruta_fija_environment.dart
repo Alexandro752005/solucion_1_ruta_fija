@@ -8,6 +8,7 @@ final class RouteFijaEnvironment {
     'RF_API_BASE_URL',
     defaultValue: defaultApiBaseUrl,
   );
+  static const _isReleaseBuild = bool.fromEnvironment('dart.vm.product');
 
   /// Base URL used only by repositories in future phases.
   final String apiBaseUrl;
@@ -28,11 +29,12 @@ final class RouteFijaEnvironment {
         uri.fragment.isEmpty &&
         uri.path == '/api/v1';
 
-    if (!valid) {
+    if (!valid || (_isReleaseBuild && uri.scheme != 'https')) {
       throw ArgumentError.value(
         value,
         'RF_API_BASE_URL',
-        'Debe ser una URL HTTP(S) terminada en /api/v1, sin credenciales ni consulta.',
+        'Debe ser una URL HTTP(S) terminada en /api/v1, sin credenciales ni consulta. '
+            'La compilación release exige HTTPS.',
       );
     }
 

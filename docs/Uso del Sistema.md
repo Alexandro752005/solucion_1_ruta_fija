@@ -9,11 +9,12 @@ Windows y usa PostgreSQL 16 instalado localmente.
 El CRM permite gestionar organizaciones, usuarios, grupos, conductores,
 vehículos, asignaciones, incidencias, comunicados, reportes y auditoría.
 
-La solución vigente incluye una API móvil real y la base Flutter Android del
-conductor: tema, navegación y URL API configurable para M1. Aún no incluye
-sesión funcional, GPS de fondo, mapas, notificaciones push, correo ni
-almacenamiento externo. El CRM crea asignaciones administrativas como SCHEDULED
-y nunca simula una respuesta del conductor.
+La solución vigente incluye API móvil real y Flutter Android del conductor:
+tema, navegación, sesión JSON separada, refresh protegido, perfil propio y
+disponibilidad real (M1–M3, 28/80). Aún no incluye asignaciones móviles, GPS de
+fondo, mapas, notificaciones push, correo, fotos ni almacenamiento offline. El
+CRM crea asignaciones administrativas como SCHEDULED y nunca simula una
+respuesta del conductor.
 
 ## 2. Requisitos
 
@@ -24,8 +25,8 @@ y nunca simula una respuesta del conductor.
 | PostgreSQL 16 + psql | Base de datos local en puerto 5432 |
 | Java 21 | API Spring Boot |
 | Node.js 24.16.x + npm | CRM Angular |
-| Flutter 3.47.5 | Base y pruebas de `mobile/` |
-| Android SDK | Necesario después para APK o dispositivo; el titular acepta sus licencias |
+| Flutter 3.47.5 | Cliente, pruebas y APK de `mobile/` |
+| Android SDK API 36 + NDK 28.2 | APK sin Android Studio ni emulador |
 | Visual Studio Code | Recomendado para tareas y edición |
 
 Antes de iniciar, confirme que PostgreSQL es un servicio local y que su puerto
@@ -229,8 +230,22 @@ Debe terminar con `F4_1_ANDROID_SETUP=PASS`. El segundo resultado esperado
 empieza con `F4_1_FLUTTER_FOUNDATION=PASS`. Comprueba la arquitectura M1, la
 configuración `RF_API_BASE_URL`, la ausencia de dependencias funcionales
 adelantadas, el identificador Android y ejecuta `flutter analyze` y
-`flutter test`. Si Android SDK aún no está listo, informa
-`android=PENDING_OWNER_LICENSE` sin fingir un APK.
+`flutter test`. La alternativa histórica `android=PENDING_OWNER_LICENSE` solo
+aplica antes de que el titular acepte las licencias; en este equipo F4.1 ya
+confirmó `android=READY`. F4.2 es la auditoría vigente para la APK debug y las
+dependencias de sesión.
+
+Auditoría completa de sesión, perfil y disponibilidad F4.2:
+
+~~~powershell
+.\scripts\Test-RutaFijaF42MobileSessionProfileAvailability.ps1
+~~~
+
+Esta revisión ejecuta análisis, pruebas y APK debug, además de verificar que el
+refresh se guarda en almacenamiento seguro, que HTTP solo existe en debug y que
+el conductor no puede forzar `RESERVADO` o `EN_SERVICIO`. El resultado esperado
+empieza con `F4_2_MOBILE_SESSION_PROFILE_AVAILABILITY=PASS` y declara
+`total=28/80`, `android=READY` y `docker=0`.
 
 Validación del CRM unificado en ADMIN:
 

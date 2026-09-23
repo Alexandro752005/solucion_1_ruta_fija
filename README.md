@@ -3,11 +3,12 @@
 Ruta Fija es un monolito modular para administrar organizaciones, usuarios,
 grupos, conductores, vehículos, asignaciones, incidencias, comunicados,
 reportes y auditoría. El alcance vigente incluye el CRM web administrativo, la
-API móvil operativa y la base Flutter Android del conductor (M1, 8/80 puntos).
+API móvil operativa y Flutter Android del conductor (M1–M3, 28/80 puntos).
 F3.4 completa OpenAPI/DTOs, la matriz de aislamiento e idempotencia y los
 reportes reales de estados móviles. F4.1 aporta bootstrap, navegación, tema y
-configuración de entorno; todavía no incluye sesión funcional, FCM, SMTP, GPS
-en segundo plano ni servicios externos.
+configuración de entorno; F4.2 agrega sesión JSON real, refresh protegido,
+perfil propio y disponibilidad sin adelantar asignaciones, GPS, FCM, SMTP ni
+servicios externos.
 
 La operación local usa PostgreSQL 16 instalado en Windows, Java 21 y Angular.
 No se necesita Docker para iniciar, probar, detener ni recuperar el sistema.
@@ -22,7 +23,7 @@ No se necesita Docker para iniciar, probar, detener ni recuperar el sistema.
 | Esquema | Flyway V1–V10 y Hibernate con ddl-auto=validate |
 | Seguridad | JWT, refresh en cookie HttpOnly web y JSON móvil, roles separados de migración, aplicación y pruebas |
 | Tiempo real | WebSocket con ticket efímero por medio del proxy Angular |
-| Móvil | Flutter 3.47.5 estable, Android `pe.rutafija.conductor`, M1 preparado sin datos simulados |
+| Móvil | Flutter 3.47.5, Android `pe.rutafija.conductor`, M1–M3 reales: sesión, perfil y disponibilidad |
 
 El backend está dividido en identity, organization, fleet, operation, audit y
 shared. PostgreSQL conserva las reglas críticas: aislamiento de roles,
@@ -35,7 +36,7 @@ de conductor y vehículo.
 - PostgreSQL 16 instalado como servicio local, con psql disponible.
 - Java 21.
 - Node.js 24.16.x y npm.
-- Flutter 3.47.5 estable para `mobile/`; para APK o dispositivo el titular ejecuta `scripts\Initialize-RutaFijaAndroidSdkF41.ps1` y acepta personalmente las licencias Android.
+- Flutter 3.47.5 estable para `mobile/`; Android SDK API 36, Build-Tools 36.0.0, platform-tools y NDK 28.2.13676358 permiten compilar la APK sin Android Studio ni emulador.
 - Visual Studio Code, recomendado.
 
 La instancia debe estar limitada a 127.0.0.1 y ::1. No se publique el puerto
@@ -261,6 +262,8 @@ Documentos principales:
 - [Ejecución F3.4](docs/ejecucion-f3-4-contrato-reportes.md)
 - [Evidencia F3.4](docs/evidencia-f3-4-contrato-reportes-2026-09-22.md)
 - [Ejecución F4.1: base Flutter](docs/ejecucion-f4-1-base-flutter.md)
+- [Ejecución F4.2: sesión, perfil y disponibilidad](docs/ejecucion-f4-2-sesion-perfil-disponibilidad.md)
+- [Evidencia F4.2](docs/evidencia-f4-2-sesion-perfil-disponibilidad-2026-09-23.md)
 - [Manual móvil Flutter](mobile/README.md)
 - [Plan de migración nativa](docs/plan-f1-postgresql-nativo-sin-docker.md)
 

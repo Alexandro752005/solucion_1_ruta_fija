@@ -11,7 +11,7 @@ enum ConductorDestination {
   assignments('/assignments', 'Asignaciones', Icons.route_outlined, 'M4'),
   incidents('/incidents', 'Incidencias', Icons.report_problem_outlined, 'M5'),
   announcements('/announcements', 'Comunicados', Icons.campaign_outlined, 'M6'),
-  profile('/profile', 'Perfil', Icons.person_outline, 'M2/M7');
+  profile('/profile', 'Perfil', Icons.person_outline, 'M2');
 
   const ConductorDestination(this.path, this.label, this.icon, this.milestone);
 

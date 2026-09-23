@@ -67,8 +67,8 @@ if (-not (Test-Path -LiteralPath $mobileRoot -PathType Container)) {
 $pubspec = Get-Utf8Text 'mobile\pubspec.yaml'
 Assert-Contains -Text $pubspec -Pattern '(?m)^name:\s*ruta_fija_conductor\r?$' -Description 'nombre de paquete Flutter estable'
 Assert-Contains -Text $pubspec -Pattern '(?m)^publish_to:\s*''none''\r?$' -Description 'paquete no publicable'
-if ($pubspec -match '(?m)^\s*(dio|http|flutter_secure_storage|geolocator|permission_handler|firebase_)\s*:') {
-    throw 'F4.1 incorporo una dependencia funcional antes de su fase autorizada.'
+if ($pubspec -match '(?m)^\s*(dio|geolocator|permission_handler|firebase_)\s*:') {
+    throw 'La base Flutter incorpora una dependencia posterior a F4.2.'
 }
 
 $environment = Get-Utf8Text 'mobile\lib\app\ruta_fija_environment.dart'
@@ -80,7 +80,7 @@ $router = Get-Utf8Text 'mobile\lib\app\ruta_fija_router.dart'
 Assert-Contains -Text $router -Pattern 'onGenerateRoute' -Description 'navegacion centralizada'
 $shell = Get-Utf8Text 'mobile\lib\features\bootstrap\presentation\conductor_navigation_shell.dart'
 Assert-Contains -Text $shell -Pattern 'Pendiente de construc' -Description 'frontera honesta de modulos no implementados'
-Assert-Contains -Text $shell -Pattern 'no muestran datos simulados' -Description 'ausencia de datos simulados en M1'
+Assert-Contains -Text $shell -Pattern 'datos locales ni respuestas simuladas|no muestran datos simulados' -Description 'ausencia de datos simulados en modulos futuros'
 $androidBuild = Get-Utf8Text 'mobile\android\app\build.gradle.kts'
 Assert-Contains -Text $androidBuild -Pattern 'applicationId\s*=\s*"pe\.rutafija\.conductor"' -Description 'identificador Android de Ruta Fija'
 $manifest = Get-Utf8Text 'mobile\android\app\src\main\AndroidManifest.xml'

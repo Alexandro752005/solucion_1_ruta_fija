@@ -41,6 +41,11 @@ F4.1 abre los días 7–9 de la Etapa 2 y entrega solamente M1 de la matriz móv
 
 No se implementan login real, refresh, secure storage, llamadas HTTP funcionales, GPS, permisos, eventos offline, Firebase, fotos, mapas, historial de ubicación, emulador ni APK. La API de F3.4 permanece sin modificaciones.
 
+> Estado histórico: este límite corresponde estrictamente al cierre de F4.1.
+> F4.2, aprobado después, incorpora `http` y `flutter_secure_storage` para M2 y
+> M3; su alcance y sus controles se documentan en
+> [Ejecución F4.2](ejecucion-f4-2-sesion-perfil-disponibilidad.md).
+
 ## Resultado local del 2026-09-23
 
 - Flutter 3.47.5 estable quedó instalado fuera del repositorio en `D:\dev\flutter`; su archivo oficial se verificó con SHA-256 antes de extraerse y su carpeta `bin` se añadió al `PATH` del usuario.

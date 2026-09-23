@@ -7,7 +7,6 @@ plugins {
 android {
     namespace = "pe.rutafija.conductor"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
