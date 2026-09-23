@@ -1,7 +1,8 @@
 {
   "recommendations": [
-    "ms-azuretools.vscode-containers",
     "angular.ng-template",
-    "vmware.vscode-boot-dev-pack"
+    "vmware.vscode-boot-dev-pack",
+    "Dart-Code.dart-code",
+    "Dart-Code.flutter"
   ]
 }

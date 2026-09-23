@@ -2,12 +2,12 @@
 
 Ruta Fija es un monolito modular para administrar organizaciones, usuarios,
 grupos, conductores, vehículos, asignaciones, incidencias, comunicados,
-reportes y auditoría. El alcance vigente incluye el CRM web administrativo y
-una API móvil operativa y contratada para el futuro conductor Flutter. No
-incluye todavía Flutter, FCM, SMTP, GPS en segundo plano ni servicios externos.
+reportes y auditoría. El alcance vigente incluye el CRM web administrativo, la
+API móvil operativa y la base Flutter Android del conductor (M1, 8/80 puntos).
 F3.4 completa OpenAPI/DTOs, la matriz de aislamiento e idempotencia y los
-reportes reales de estados móviles; no introduce pantallas móviles ni historial
-GPS.
+reportes reales de estados móviles. F4.1 aporta bootstrap, navegación, tema y
+configuración de entorno; todavía no incluye sesión funcional, FCM, SMTP, GPS
+en segundo plano ni servicios externos.
 
 La operación local usa PostgreSQL 16 instalado en Windows, Java 21 y Angular.
 No se necesita Docker para iniciar, probar, detener ni recuperar el sistema.
@@ -22,6 +22,7 @@ No se necesita Docker para iniciar, probar, detener ni recuperar el sistema.
 | Esquema | Flyway V1–V10 y Hibernate con ddl-auto=validate |
 | Seguridad | JWT, refresh en cookie HttpOnly web y JSON móvil, roles separados de migración, aplicación y pruebas |
 | Tiempo real | WebSocket con ticket efímero por medio del proxy Angular |
+| Móvil | Flutter 3.47.5 estable, Android `pe.rutafija.conductor`, M1 preparado sin datos simulados |
 
 El backend está dividido en identity, organization, fleet, operation, audit y
 shared. PostgreSQL conserva las reglas críticas: aislamiento de roles,
@@ -34,6 +35,7 @@ de conductor y vehículo.
 - PostgreSQL 16 instalado como servicio local, con psql disponible.
 - Java 21.
 - Node.js 24.16.x y npm.
+- Flutter 3.47.5 estable para `mobile/`; Android SDK solo es necesario para APK o dispositivo.
 - Visual Studio Code, recomendado.
 
 La instancia debe estar limitada a 127.0.0.1 y ::1. No se publique el puerto
@@ -258,6 +260,8 @@ Documentos principales:
 - [Contrato API F3.4](docs/contrato-api-f3-4-movil.md)
 - [Ejecución F3.4](docs/ejecucion-f3-4-contrato-reportes.md)
 - [Evidencia F3.4](docs/evidencia-f3-4-contrato-reportes-2026-09-22.md)
+- [Ejecución F4.1: base Flutter](docs/ejecucion-f4-1-base-flutter.md)
+- [Manual móvil Flutter](mobile/README.md)
 - [Plan de migración nativa](docs/plan-f1-postgresql-nativo-sin-docker.md)
 
 Los archivos de Compose y Dockerfile permanecen como compatibilidad histórica

@@ -374,6 +374,29 @@
       ],
       "options": { "cwd": "${workspaceFolder}" },
       "problemMatcher": []
+    },
+    {
+      "label": "Ruta Fija: analizar Flutter conductor (F4.1)",
+      "type": "process",
+      "command": "flutter",
+      "args": ["analyze"],
+      "options": { "cwd": "${workspaceFolder}\\mobile" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Ruta Fija: probar y auditar base Flutter (F4.1)",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\Test-RutaFijaF41FlutterFoundation.ps1"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
     }
   ]
 }

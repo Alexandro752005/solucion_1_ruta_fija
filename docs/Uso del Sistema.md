@@ -9,12 +9,11 @@ Windows y usa PostgreSQL 16 instalado localmente.
 El CRM permite gestionar organizaciones, usuarios, grupos, conductores,
 vehículos, asignaciones, incidencias, comunicados, reportes y auditoría.
 
-La solución vigente incluye una API móvil real para el futuro conductor:
-sesión JSON, asignaciones propias, aceptación/rechazo auténticos, incidencias,
-comunicados y ubicación vigente con consentimiento. Todavía no incluye Flutter,
-GPS de fondo, mapas, notificaciones push, correo ni almacenamiento externo. El
-CRM crea asignaciones administrativas como SCHEDULED y nunca simula una
-respuesta del conductor.
+La solución vigente incluye una API móvil real y la base Flutter Android del
+conductor: tema, navegación y URL API configurable para M1. Aún no incluye
+sesión funcional, GPS de fondo, mapas, notificaciones push, correo ni
+almacenamiento externo. El CRM crea asignaciones administrativas como SCHEDULED
+y nunca simula una respuesta del conductor.
 
 ## 2. Requisitos
 
@@ -25,6 +24,8 @@ respuesta del conductor.
 | PostgreSQL 16 + psql | Base de datos local en puerto 5432 |
 | Java 21 | API Spring Boot |
 | Node.js 24.16.x + npm | CRM Angular |
+| Flutter 3.47.5 | Base y pruebas de `mobile/` |
+| Android SDK | Necesario después para APK o dispositivo; el titular acepta sus licencias |
 | Visual Studio Code | Recomendado para tareas y edición |
 
 Antes de iniciar, confirme que PostgreSQL es un servicio local y que su puerto
@@ -214,6 +215,18 @@ Su resultado esperado es `F3_4_CONTRACT_REPORTS_AUDIT=PASS`. Además de los
 controles F3.3, comprueba OpenAPI/DTOs, la frontera que impide al CRM aceptar o
 rechazar por un conductor, etiquetas Angular para estados móviles y el uso de
 totales persistidos en JSON, PDF y XLSX.
+
+Auditoría de la base Flutter F4.1:
+
+~~~powershell
+.\scripts\Test-RutaFijaF41FlutterFoundation.ps1
+~~~
+
+El resultado esperado empieza con `F4_1_FLUTTER_FOUNDATION=PASS`. Comprueba la
+arquitectura M1, la configuración `RF_API_BASE_URL`, la ausencia de dependencias
+funcionales adelantadas, el identificador Android y ejecuta `flutter analyze` y
+`flutter test`. Si Android SDK aún no está instalado, informa
+`android=PENDING_OWNER_LICENSE` sin fingir un APK.
 
 Validación del CRM unificado en ADMIN:
 
