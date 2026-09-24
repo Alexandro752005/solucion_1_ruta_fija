@@ -27,7 +27,7 @@ String mobileErrorMessage(Object error) {
       case 'VEHICLE_NOT_ELIGIBLE':
         return 'El vehículo ya no está disponible para esta operación.';
       case 'RESOURCE_NOT_FOUND':
-        return 'La asignación ya no está disponible para su sesión.';
+        return 'El recurso ya no está disponible para su sesión.';
       default:
         return error.message;
     }

@@ -11,10 +11,10 @@ vehículos, asignaciones, incidencias, comunicados, reportes y auditoría.
 
 La solución vigente incluye API móvil real y Flutter Android del conductor:
 tema, navegación, sesión JSON separada, refresh protegido, perfil propio y
-disponibilidad real, además de asignaciones propias idempotentes (M1–M4,
-46/80). Aún no incluye GPS de fondo, mapas, notificaciones push, correo, fotos
-ni una cola offline automática. El CRM nunca simula una respuesta del
-conductor.
+disponibilidad real, asignaciones propias idempotentes, incidencias propias y
+comunicados con lectura explícita (M1–M6, 58/80). Aún no incluye GPS de fondo,
+mapas, notificaciones push, correo, fotos ni una cola offline automática. El
+CRM nunca simula una respuesta del conductor.
 
 ## 2. Requisitos
 
@@ -258,6 +258,20 @@ lectura. Luego comprueba que Flutter persiste un único evento antes de enviarlo
 usa las rutas propias del conductor, respeta `X-Idempotent-Replay` y no habilita una
 aceptación ficticia desde el CRM. La salida esperada empieza con
 `F4_3_MOBILE_ASSIGNMENTS=PASS` y declara `total=46/80`.
+
+Auditoría de incidencias y comunicados móviles F4.4:
+
+~~~powershell
+.\scripts\Test-RutaFijaF44MobileIncidentsAnnouncements.ps1
+~~~
+
+Primero conserva las comprobaciones nativas de F4.3/F3.4. Después verifica que
+la incidencia nace solo para el conductor de sesión, que no se envían tenant ni
+identidades en el body, que un resultado de red no origina una cola automática,
+y que un comunicado solo se marca leído mediante confirmación humana e
+idempotente. También ejecuta análisis, pruebas Flutter, APK debug y firma v2.
+La salida esperada empieza con
+`F4_4_MOBILE_INCIDENTS_ANNOUNCEMENTS=PASS` y declara `total=58/80`.
 
 Validación del CRM unificado en ADMIN:
 

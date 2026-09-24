@@ -4,15 +4,16 @@ Cliente Flutter Android exclusivo del rol `CONDUCTOR`. Se comunica con Spring
 Boot por `/api/v1/mobile`; nunca accede a PostgreSQL, no contiene credenciales
 de base de datos y no reutiliza la cookie de sesión del CRM.
 
-## Estado actual: F4.3
+## Estado actual: F4.4
 
 M1, M2, M3 y M4 están implementados: base, navegación, sesión JSON de
 conductor, refresh rotativo protegido, perfil, disponibilidad y asignaciones
-propias idempotentes. El avance verificable es **46/80 puntos**.
+propias idempotentes. F4.4 completa M5 y M6: incidencias propias y comunicados
+visibles para su audiencia con lectura explícita. El avance verificable es
+**58/80 puntos**.
 
-La aplicación no implementa todavía incidencias, comunicados, GPS, permisos de
-ubicación, fotos, FCM ni una cola offline automática. Las rutas de esos módulos
-siguen señalando honestamente que están pendientes.
+La aplicación no implementa todavía GPS, permisos de ubicación, fotos, FCM ni
+una cola offline automática. M7–M9 siguen pendientes.
 
 ## Seguridad de sesión
 
@@ -26,6 +27,11 @@ siguen señalando honestamente que están pendientes.
 - Antes de mutar una asignación, el cliente guarda un único `clientEventId`,
   versión e instante en almacenamiento protegido. Ante un resultado desconocido
   conserva ese evento y pide un reintento explícito; no crea otro comando.
+- Una incidencia se atribuye en el servidor al conductor de la sesión. Si la
+  red deja su resultado desconocido, la app pide revisar la lista y no crea una
+  cola ni reenvío automático que pueda duplicarla.
+- Abrir un comunicado no registra lectura. Cuando el servidor exige acuse, el
+  conductor lo confirma mediante una acción humana y una ruta idempotente.
 
 ## Comandos de validación
 
@@ -47,14 +53,14 @@ $env:Path = 'D:\dev\flutter\bin;' + $env:Path
 flutter --version
 ~~~
 
-Desde la raíz del repositorio, la auditoría completa de F4.3 es:
+Desde la raíz del repositorio, la auditoría completa de F4.4 es:
 
 ~~~powershell
-.\scripts\Test-RutaFijaF43MobileAssignments.ps1
+.\scripts\Test-RutaFijaF44MobileIncidentsAnnouncements.ps1
 ~~~
 
 La salida aprobada empieza con
-`F4_3_MOBILE_ASSIGNMENTS=PASS` y declara `total=46/80`.
+`F4_4_MOBILE_INCIDENTS_ANNOUNCEMENTS=PASS` y declara `total=58/80`.
 
 ## Ejecutar en desarrollo
 
@@ -80,7 +86,10 @@ exactamente en `/api/v1`.
 Para probar M4, el ADMIN crea una asignación `MOBILE_CONFIRMATION` para el
 conductor vinculado. La app solo muestra las asignaciones propias y permite
 aceptar/rechazar, iniciar o completar cuando el backend autoriza el estado. No
-existe un botón CRM que suplante la respuesta del conductor.
+existe un botón CRM que suplante la respuesta del conductor. Para M5, el
+conductor reporta una incidencia propia; el backend fija su origen y estado.
+Para M6, el ADMIN publica un comunicado dirigido a la audiencia del conductor:
+abrirlo no confirma nada y el acuse se realiza solo mediante el botón explícito.
 
 ## Android y recursos limitados
 

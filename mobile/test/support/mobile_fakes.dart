@@ -1,9 +1,13 @@
 import 'package:ruta_fija_conductor/core/session/mobile_secure_token_store.dart';
+import 'package:ruta_fija_conductor/features/announcements/data/mobile_announcement_repository.dart';
+import 'package:ruta_fija_conductor/features/announcements/domain/mobile_announcement_models.dart';
 import 'package:ruta_fija_conductor/features/assignments/data/mobile_assignment_command_store.dart';
 import 'package:ruta_fija_conductor/features/assignments/data/mobile_assignment_repository.dart';
 import 'package:ruta_fija_conductor/features/assignments/domain/mobile_assignment_models.dart';
 import 'package:ruta_fija_conductor/features/auth/data/mobile_auth_repository.dart';
 import 'package:ruta_fija_conductor/features/auth/domain/mobile_auth_models.dart';
+import 'package:ruta_fija_conductor/features/incidents/data/mobile_incident_repository.dart';
+import 'package:ruta_fija_conductor/features/incidents/domain/mobile_incident_models.dart';
 import 'package:ruta_fija_conductor/features/profile/data/mobile_driver_repository.dart';
 import 'package:ruta_fija_conductor/features/profile/domain/mobile_driver_models.dart';
 
@@ -352,5 +356,152 @@ final class FakeMobileAssignmentGateway implements MobileAssignmentGateway {
       expiredAt: source.expiredAt,
       notes: source.notes,
     );
+  }
+}
+
+MobileIncident testIncident({
+  String id = '44444444-4444-4444-8444-444444444444',
+  MobileIncidentCategory category = MobileIncidentCategory.averia,
+  MobileIncidentStatus status = MobileIncidentStatus.open,
+  String description = 'El vehículo presenta una alerta de prueba.',
+}) {
+  final now = DateTime.utc(2026, 9, 24, 14);
+  return MobileIncident(
+    id: id,
+    version: 0,
+    driverId: '22222222-2222-4222-8222-222222222222',
+    driverName: 'Conductora de prueba',
+    assignmentId: '33333333-3333-4333-8333-333333333333',
+    category: category,
+    source: MobileIncidentSource.mobileApp,
+    status: status,
+    description: description,
+    reportedAt: now,
+    followUpNote: null,
+    followedUpByName: null,
+    followedUpAt: null,
+    resolvedAt: null,
+    createdAt: now,
+    updatedAt: now,
+  );
+}
+
+final class FakeMobileIncidentGateway implements MobileIncidentGateway {
+  FakeMobileIncidentGateway({List<MobileIncident>? incidents})
+    : _incidents = incidents ?? [testIncident()];
+
+  final List<MobileIncident> _incidents;
+  final List<MobileIncidentCategory> createdCategories = [];
+  final List<String> createdDescriptions = [];
+  final List<String?> createdAssignmentIds = [];
+  Object? failure;
+
+  @override
+  Future<MobileIncident> create({
+    required MobileIncidentCategory category,
+    required String description,
+    String? assignmentId,
+  }) async {
+    _throwIfNeeded();
+    createdCategories.add(category);
+    createdDescriptions.add(description);
+    createdAssignmentIds.add(assignmentId);
+    final created = testIncident(
+      id: '55555555-5555-4555-8555-555555555555',
+      category: category,
+      description: description.trim(),
+    );
+    _incidents.insert(0, created);
+    return created;
+  }
+
+  @override
+  Future<MobileIncident> get(String incidentId) async {
+    _throwIfNeeded();
+    return _incidents.firstWhere((item) => item.id == incidentId);
+  }
+
+  @override
+  Future<MobileIncidentPage> list({int page = 0, int size = 20}) async {
+    _throwIfNeeded();
+    return MobileIncidentPage(
+      items: _incidents,
+      page: page,
+      size: size,
+      totalItems: _incidents.length,
+      totalPages: _incidents.isEmpty ? 0 : 1,
+    );
+  }
+
+  void _throwIfNeeded() {
+    if (failure != null) {
+      throw failure!;
+    }
+  }
+}
+
+MobileAnnouncement testAnnouncement({
+  String id = '66666666-6666-4666-8666-666666666666',
+  bool requireReadAck = true,
+  DateTime? readAt,
+}) {
+  return MobileAnnouncement(
+    id: id,
+    title: 'Comunicado de prueba',
+    body: 'Revise esta información operativa antes de iniciar el servicio.',
+    requireReadAck: requireReadAck,
+    createdAt: DateTime.utc(2026, 9, 24, 14),
+    deliveredAt: DateTime.utc(2026, 9, 24, 14, 1),
+    readAt: readAt,
+  );
+}
+
+final class FakeMobileAnnouncementGateway implements MobileAnnouncementGateway {
+  FakeMobileAnnouncementGateway({List<MobileAnnouncement>? announcements})
+    : _announcements = announcements ?? [testAnnouncement()];
+
+  final List<MobileAnnouncement> _announcements;
+  final List<String> markedReadIds = [];
+  Object? failure;
+
+  @override
+  Future<MobileAnnouncement> get(String announcementId) async {
+    _throwIfNeeded();
+    return _announcements.firstWhere((item) => item.id == announcementId);
+  }
+
+  @override
+  Future<MobileAnnouncementPage> list({int page = 0, int size = 20}) async {
+    _throwIfNeeded();
+    return MobileAnnouncementPage(
+      items: _announcements,
+      page: page,
+      size: size,
+      totalItems: _announcements.length,
+      totalPages: _announcements.isEmpty ? 0 : 1,
+    );
+  }
+
+  @override
+  Future<MobileAnnouncementReadResult> markRead(String announcementId) async {
+    _throwIfNeeded();
+    markedReadIds.add(announcementId);
+    final index = _announcements.indexWhere(
+      (item) => item.id == announcementId,
+    );
+    final readAt =
+        _announcements[index].readAt ?? DateTime.utc(2026, 9, 24, 15);
+    _announcements[index] = _announcements[index].withReadAt(readAt);
+    return MobileAnnouncementReadResult(
+      announcementId: announcementId,
+      deliveredAt: _announcements[index].deliveredAt,
+      readAt: readAt,
+    );
+  }
+
+  void _throwIfNeeded() {
+    if (failure != null) {
+      throw failure!;
+    }
   }
 }
