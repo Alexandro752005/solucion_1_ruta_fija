@@ -45,6 +45,9 @@ jobs:
           $migratorPassword = [Guid]::NewGuid().ToString('N')
           $appPassword = [Guid]::NewGuid().ToString('N')
           $testPassword = [Guid]::NewGuid().ToString('N')
+          Write-Output ('::add-mask::' + $migratorPassword)
+          Write-Output ('::add-mask::' + $appPassword)
+          Write-Output ('::add-mask::' + $testPassword)
 
           $rolesSql = @"
           SET password_encryption = 'scram-sha-256';
