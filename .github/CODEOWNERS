@@ -1,0 +1,10 @@
+# Reviews are requested automatically for dependency and CI changes.
+/backend/pom.xml @Alexandro752005
+/backend/.mvn/ @Alexandro752005
+/frontend/package.json @Alexandro752005
+/frontend/package-lock.json @Alexandro752005
+/mobile/pubspec.yaml @Alexandro752005
+/mobile/pubspec.lock @Alexandro752005
+/.github/workflows/ @Alexandro752005
+/.github/dependabot.yml @Alexandro752005
+/.github/CODEOWNERS @Alexandro752005

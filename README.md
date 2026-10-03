@@ -1,274 +1,157 @@
-# Ruta Fija — CRM Web Administrativo y Reportes
+# Ruta Fija
 
-Ruta Fija es un monolito modular para administrar organizaciones, usuarios,
-grupos, conductores, vehículos, asignaciones, incidencias, comunicados,
-reportes y auditoría. El alcance vigente incluye el CRM web administrativo, la
-API móvil operativa y Flutter Android del conductor (M1–M4, 46/80 puntos).
-F3.4 completa OpenAPI/DTOs, la matriz de aislamiento e idempotencia y los
-reportes reales de estados móviles. F4.1 aporta bootstrap, navegación, tema y
-configuración de entorno; F4.2 agrega sesión JSON real, refresh protegido,
-perfil propio y disponibilidad. F4.3 agrega lista, detalle y comandos de
-asignaciones propios con reintento idempotente, sin adelantar GPS, FCM, SMTP ni
-servicios externos.
+[![CI nativa](https://github.com/Alexandro752005/solucion_1_ruta_fija/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Alexandro752005/solucion_1_ruta_fija/actions/workflows/ci.yml)
+[![Java 21](https://img.shields.io/badge/Java-21-blue)](backend/pom.xml)
+[![PostgreSQL 16](https://img.shields.io/badge/PostgreSQL-16-336791)](docs/Uso%20del%20Sistema.md)
 
-La operación local usa PostgreSQL 16 instalado en Windows, Java 21 y Angular.
-No se necesita Docker para iniciar, probar, detener ni recuperar el sistema.
+CRM web administrativo, API operativa y cliente Android para la gestión de Ruta Fija. Este README describe **el código publicado en `main`**: el CRM y la API están implementados; Flutter incluye sesión, perfil, disponibilidad y asignaciones propias (M1–M4). Funciones posteriores que aún estén en desarrollo local no se consideran publicadas ni aprobadas por este documento. La demo pública y la puerta G5 siguen pendientes de validación funcional.
 
-## Arquitectura y tecnologías
+## Arquitectura
 
-| Componente | Decisión |
+```text
+Angular CRM (ADMIN / SUPER_ADMIN) ─┐
+                                   ├─ HTTPS/REST + WebSocket ─ Spring Boot API
+Flutter Android (CONDUCTOR) ────────┘                          │
+                                                                ├─ Flyway: migraciones
+                                                                └─ PostgreSQL 16: datos y auditoría
+```
+
+El backend es un monolito modular Java 21/Spring Boot 3.5: `identity`, `organization`, `fleet`, `operation`, `audit` y `shared`. Controladores exponen HTTP, servicios aplican reglas y transacciones, repositorios persisten, y Flyway modifica el esquema. Hibernate solo valida el esquema. El CRM Angular 22 consume `/api/v1`; Flutter usa `/api/v1/mobile` sin conectarse a PostgreSQL. JWT, permisos por rol y organización, auditoría y protección de idempotencia son responsabilidades del backend.
+
+| Carpeta | Contenido |
 | --- | --- |
-| CRM | Angular 22 en http://localhost:4200 |
-| API | Java 21, Spring Boot 3.5.16 en http://127.0.0.1:8080 |
-| Persistencia | PostgreSQL 16 local, puerto 5432 |
-| Esquema | Flyway V1–V10 y Hibernate con ddl-auto=validate |
-| Seguridad | JWT, refresh en cookie HttpOnly web y JSON móvil, roles separados de migración, aplicación y pruebas |
-| Tiempo real | WebSocket con ticket efímero por medio del proxy Angular |
-| Móvil | Flutter 3.47.5, Android `pe.rutafija.conductor`, M1–M4 reales: sesión, perfil, disponibilidad y asignaciones idempotentes |
+| `backend/` | API, reglas de negocio, Flyway V1–V10 y pruebas Java |
+| `frontend/` | CRM Angular, pruebas Vitest y proxy de desarrollo |
+| `mobile/` | Cliente Flutter Android del conductor |
+| `scripts/` | Aprovisionamiento, migraciones, seguridad y pruebas nativas |
+| `docs/` | Manual de uso, contratos, decisiones y evidencias por fase |
+| `.github/` | CI, Dependabot y propietarios de código |
 
-El backend está dividido en identity, organization, fleet, operation, audit y
-shared. PostgreSQL conserva las reglas críticas: aislamiento de roles,
-auditoría append-only, UTC, extensión btree_gist y prevención de solapamientos
-de conductor y vehículo.
+## Requisitos
 
-## Requisitos de una estación nueva
+- Windows 10/11, PowerShell y Git para los scripts de operación local.
+- Java 21; Node.js 24.16.x y npm 11; PostgreSQL 16 con `psql` en el puerto local 5432.
+- Flutter 3.47.5 y Android SDK solo para ejecutar o compilar `mobile/`.
+- Acceso administrativo **local** a PostgreSQL para el aprovisionamiento inicial. No reutilice credenciales ajenas ni publique el puerto 5432.
 
-- Windows 10/11, PowerShell y Git.
-- PostgreSQL 16 instalado como servicio local, con psql disponible.
-- Java 21.
-- Node.js 24.16.x y npm.
-- Flutter 3.47.5 estable para `mobile/`; Android SDK API 36, Build-Tools 36.0.0, platform-tools y NDK 28.2.13676358 permiten compilar la APK sin Android Studio ni emulador.
-- Visual Studio Code, recomendado.
+La ejecución diaria es nativa. La base de desarrollo esperada por los scripts se llama `solucion_ruta_fija_1`; las pruebas usan exclusivamente `ruta_fija_test`. El nombre visible de un servidor en pgAdmin no sustituye al host JDBC `127.0.0.1`.
 
-La instancia debe estar limitada a 127.0.0.1 y ::1. No se publique el puerto
-5432 hacia la red. La tarea F1.6 permite comprobarlo.
+## Instalación inicial con PostgreSQL
 
-## Primera preparación nativa
+Estos comandos se ejecutan desde PowerShell en la raíz de una copia nueva del repositorio. Lea primero el [manual de uso](docs/Uso%20del%20Sistema.md): los pasos de bootstrap solo son válidos para una base de desarrollo **vacía**.
 
-1. Clone el repositorio y entre a su carpeta.
+```powershell
+git clone https://github.com/Alexandro752005/solucion_1_ruta_fija.git
+Set-Location .\solucion_1_ruta_fija
+```
 
-   ~~~powershell
-   git clone https://github.com/Alexandro752005/solucion_1_ruta_fija.git
-   Set-Location solucion_1_ruta_fija
-   ~~~
+1. Instale PostgreSQL 16 y cree una base vacía llamada `solucion_ruta_fija_1` en `127.0.0.1:5432`. Mantenga el servicio local y cierre el acceso de red externa.
+2. Prepare los archivos privados y las cuentas técnicas separadas. Los scripts piden los datos de bootstrap de forma interactiva; nunca los añada a Git.
 
-2. Cree en PostgreSQL una base vacía llamada solucion_ruta_fija_1 y un usuario
-   administrativo local que será su bootstrap. El usuario debe poder crear los
-   tres roles técnicos durante el primer aprovisionamiento. No use ni comparta
-   la contraseña de otra persona.
-
-3. Cree la configuración privada. La contraseña se solicita de manera oculta y
-   el archivo resultante queda ignorado por Git.
-
-   ~~~powershell
+   ```powershell
    .\scripts\Initialize-RutaFijaNativeConfig.ps1
-   ~~~
-
-4. En una base vacía, cree los roles rf_migrator, rf_app y rf_test, junto con
-   la base aislada ruta_fija_test.
-
-   ~~~powershell
    .\scripts\Initialize-RutaFijaPostgresqlRoles.ps1
-   ~~~
+   ```
 
-5. Elija una sola ruta según el estado de la base.
+3. **Solo en una base nueva y vacía**, aplique las migraciones y privilegios de aplicación; valide el contrato resultante.
 
-   - Para una base nueva y vacía, el bootstrap actual aplica V1-V10 y luego
-     concede el DML mínimo de aplicación:
+   ```powershell
+   .\scripts\Invoke-RutaFijaFlywayF13.ps1
+   .\scripts\Grant-RutaFijaApplicationPrivilegesF13.ps1
+   .\scripts\Test-RutaFijaF34ContractReports.ps1
+   ```
 
-     ~~~powershell
-     .\scripts\Invoke-RutaFijaFlywayF13.ps1
-     .\scripts\Grant-RutaFijaApplicationPrivilegesF13.ps1
-     .\scripts\Test-RutaFijaF34ContractReports.ps1
-     ~~~
+4. Instale las dependencias web bloqueadas por `package-lock.json`.
 
-   - Para una base existente que ya está exactamente en V8, no use el
-     bootstrap. Aplique V9/V10 mediante el migrador protegido de F3.3:
-
-     ~~~powershell
-     .\scripts\Invoke-RutaFijaF33V9V10Migration.ps1
-     .\scripts\Test-RutaFijaF34ContractReports.ps1
-     ~~~
-
-6. Instale las dependencias del CRM y valide el entorno.
-
-   ~~~powershell
+   ```powershell
    Set-Location frontend
    npm.cmd ci
    Set-Location ..
-   .\verificar_ruta_fija.bat
-   ~~~
+   ```
 
-Los scripts de los pasos 3 a 5 protegen los destinos: desarrollo,
-ruta_fija_test y recuperación no se pueden intercambiar de forma accidental.
-No ejecute nuevamente el bootstrap inicial contra una base con datos.
+Los secretos quedan en `backend/.local/`, que Git ignora. Use [la plantilla sin credenciales](backend/ruta-fija-native.env.example) solo como referencia. Una base existente se actualiza mediante el procedimiento de migración correspondiente; nunca se reinicializa ni se restaura sin respaldo y revisión.
 
-## Inicio y cierre diario
+## Ejecutar y detener
 
-Desde la raíz:
+La ruta recomendada inicia backend y frontend, verifica salud y registra únicamente los procesos propios:
 
-~~~powershell
+```powershell
 .\iniciar_ruta_fija.bat
-~~~
+```
 
-Cuando el inicio sea correcto:
+| Servicio | URL local |
+| --- | --- |
+| CRM | http://localhost:4200 |
+| API | http://127.0.0.1:8080/api/v1 |
+| Salud | http://127.0.0.1:8080/actuator/health |
+| OpenAPI | http://127.0.0.1:8080/v3/api-docs |
 
-- CRM: http://localhost:4200
-- API: http://127.0.0.1:8080/api/v1
-- Salud: http://127.0.0.1:8080/actuator/health
-- OpenAPI: http://127.0.0.1:8080/v3/api-docs
-
-Para detener únicamente el backend y el CRM, conservando PostgreSQL como
-servicio local:
-
-~~~powershell
+```powershell
 .\finalizar_ruta_fija.bat
-~~~
+```
 
-El inicio normal no crea usuarios de demostración. Las semillas se mantienen
-desactivadas para no introducir cuentas o contraseñas conocidas en la base
-local.
+El cierre detiene los procesos de Ruta Fija, pero no elimina datos ni detiene el servicio PostgreSQL. El inicio normal no crea cuentas de demostración: solicite una cuenta autorizada al responsable de la instancia.
 
-## Pruebas y tiempo real
+Para desarrollar cada proceso por separado, abra **dos terminales** tras completar el bootstrap. En la primera:
 
-Ejecute las pruebas de backend contra la base aislada ruta_fija_test:
+```powershell
+.\scripts\Import-RutaFijaNativeEnvironment.ps1 -Scope Runtime
+Set-Location backend
+.\mvnw.cmd spring-boot:run
+```
 
-~~~powershell
+En la segunda, desde la raíz:
+
+```powershell
+Set-Location frontend
+npm.cmd ci
+npm.cmd start -- --host localhost --port 4200
+```
+
+La importación inyecta secretos solo en el proceso de PowerShell actual. No imprima su contenido, no suba `.env` ni incluya contraseñas en capturas.
+
+## Qué funciona sin base de datos
+
+El frontend se puede instalar, revisar, probar y compilar sin PostgreSQL ni API:
+
+```powershell
+Set-Location frontend
+npm.cmd ci
+npm.cmd run typecheck
+npm.cmd run test:ci
+npm.cmd run build
+```
+
+También se puede abrir su interfaz con `npm.cmd start`, pero el inicio de sesión, las listas, reportes, WebSocket y las acciones reales **no funcionarán** sin API y PostgreSQL. El backend no tiene un modo H2 ni una persistencia en memoria equivalente. Las pruebas de integración Java requieren `ruta_fija_test` aislada; no apunte pruebas a la base de desarrollo.
+
+## Validación y cliente móvil
+
+```powershell
 .\verificar_ruta_fija.bat
-~~~
+```
 
-La salida aprobada termina con F3_4_NATIVE_VERIFY=PASS. Para comprobar el
-proxy REST y WebSocket desde Angular, con 8080 y 4200 libres:
+La verificación nativa ejecuta la integración contra `ruta_fija_test`. Para el cliente Android:
 
-~~~powershell
-.\scripts\Invoke-RutaFijaRealtimeProxySmoke.ps1 -Action Verify
-~~~
+```powershell
+Set-Location mobile
+flutter pub get
+flutter analyze
+flutter test
+flutter build apk --debug
+```
 
-El smoke genera datos temporales solamente en ruta_fija_test, verifica login,
-refresh, ticket de un solo uso y stream.ready, y luego limpia la base.
+El APK debug no es una publicación productiva. Para usar un dispositivo físico con una API local, consulte [la guía móvil](mobile/README.md) y configure el acceso de red o `adb reverse` de forma explícita.
 
-## Seguridad local y recuperación
+## Entrega y despliegue
 
-Abra una consola como Administrador una sola vez para aplicar el listener
-loopback de PostgreSQL. El script solo modifica listen_addresses mediante
-ALTER SYSTEM y reinicia el servicio PostgreSQL 16.
+1. Cree una rama corta y un PR; exija las comprobaciones de CI y revisión humana antes de integrar en `main`.
+2. Revise cambios de dependencias por ecosistema. Los parches y menores se agrupan; Angular, Spring Boot y otras versiones mayores se migran en PR separados con pruebas de regresión.
+3. Antes de publicar, haga un respaldo recuperable de PostgreSQL. Aplique migraciones Flyway con la cuenta `rf_migrator`, nunca con la cuenta de aplicación ni con un superusuario en el runtime.
+4. Compile JAR, frontend y APK de la revisión aprobada; entregue secretos por variables/almacenamiento privado y compruebe salud, login, flujo ADMIN–CONDUCTOR–CRM, reportes y auditoría.
+5. Si falla la validación, revierta la versión de aplicación y use el procedimiento de recuperación de datos **ensayado**; no revierta SQL de Flyway a mano sobre una base con datos.
 
-~~~powershell
-.\scripts\Set-RutaFijaPostgresqlLoopbackF16.ps1
-.\scripts\Test-RutaFijaNativeSecurityF16.ps1
-~~~
+El repositorio no define aún un despliegue productivo permanente. Un túnel temporal puede servir para una demostración supervisada, con PostgreSQL privado, pero no sustituye TLS, copias, monitoreo ni una revisión de seguridad de producción. La demo F5.2 y la aprobación G5 no se declaran concluidas aquí.
 
-La auditoría confirma listener local, HBA con SCRAM, mínimo privilegio para
-rf_migrator/rf_app/rf_test, archivos secretos ignorados y CI nativa.
+## Colaborar y obtener ayuda
 
-El respaldo post-migración usa pg_dump y pg_restore nativos, nunca borra una
-base de recuperación existente y conserva el archivo en backups/, ruta
-excluida de Git:
-
-~~~powershell
-.\scripts\Invoke-RutaFijaRecoveryEvidenceF17.ps1
-~~~
-
-Antes de la migración de roles V6, ejecute la línea base F2.1A con API y CRM
-detenidos. El control crea un dump pre-V6 y restaura una copia nueva sin tocar
-desarrollo:
-
-~~~powershell
-.\scripts\Invoke-RutaFijaF21aBaseline.ps1
-~~~
-
-F2.1B ensaya V6 contra una recuperación temporal con datos legacy controlados.
-No aplica V6 al CRM todavía; eso se hará de forma atómica en F2.2:
-
-~~~powershell
-.\scripts\Invoke-RutaFijaF21bV6Rehearsal.ps1
-~~~
-
-La aplicación real de V6, solo después de F2.1A/F2.1B y con API/CRM detenidos,
-está protegida por su propio comando:
-
-~~~powershell
-.\scripts\Invoke-RutaFijaF22AdminMigration.ps1
-~~~
-
-V6 deja como roles de aplicación `SUPER_ADMIN`, `ADMIN` y `CONDUCTOR`. F2.3
-alinea el CRM Angular al mismo contrato: ADMIN recibe toda la navegación de su
-tenant y no existe administración de coordinadores de grupo en la interfaz.
-F2.4 ejecuta la puerta G2: consolida la evidencia de roles, tenant, sesiones,
-historia de grupos y operación nativa antes de iniciar la API móvil.
-
-F3.1B añade V7 y V8 al esquema ya consolidado: `ADMIN_DIRECT` y
-`MOBILE_CONFIRMATION` distinguen las asignaciones directas de las que requieren
-respuesta auténtica del conductor; `driver_current_location` retiene solo un
-punto vigente por conductor. F3.2 añade sesión JSON separada para un
-`CONDUCTOR` vinculado y activo. F3.3 agrega V9/V10 y las rutas propias bajo
-`/api/v1/mobile`: perfil, disponibilidad, asignaciones, respuesta, inicio,
-finalización, incidencias, comunicados, acuses y ubicación vigente. Una acción
-del CRM no puede fingir aceptación o rechazo de un conductor. Para una base
-existente en V8, ejecute primero el comando protegido de F3.3 que crea backup,
-ensayo aislado y solo después aplica V9/V10.
-
-F3.4 no altera Flyway: publica el contrato OpenAPI/DTO completo, alinea el CRM
-para mostrar estados móviles sin fingir una respuesta del conductor y reporta
-`PENDING_RESPONSE`, `REJECTED` y `EXPIRED` desde filas persistidas. El arranque
-nativo ahora valida F3.4 antes de iniciar backend y CRM.
-
-## Automatización y documentación
-
-Las tareas Ruta Fija de VS Code cubren aprovisionamiento, arranque, pruebas,
-proxy WebSocket, auditoría F1.6, evidencia de recuperación F1.7, auditoría de
-sesión móvil histórica F3.2, auditoría de operaciones móviles F3.3 y contrato
-con reportes reales F3.4.
-
-La integración continua crea una instancia PostgreSQL 16 efímera del runner
-para las pruebas de integración. No requiere un motor de contenedores instalado
-en el equipo del desarrollador.
-
-Documentos principales:
-
-- [Uso del Sistema](<docs/Uso del Sistema.md>)
-- [Ejecución nativa F1.4](docs/ejecucion-nativa-f1-4.md)
-- [Ejecución nativa F1.5](docs/ejecucion-nativa-f1-5.md)
-- [Seguridad local F1.6](docs/ejecucion-nativa-f1-6.md)
-- [Evidencia F1.6](docs/evidencia-f1-6-seguridad-local-2026-09-22.md)
-- [Recuperación F1.7](docs/ejecucion-nativa-f1-7.md)
-- [Evidencia F1.7](docs/evidencia-f1-7-recuperacion-post-migracion-2026-09-21.md)
-- [Línea base F2.1A](docs/ejecucion-nativa-f2-1a.md)
-- [Caracterización pre-V6](docs/f2-1a-caracterizacion-pre-v6.md)
-- [Evidencia F2.1A](docs/evidencia-f2-1a-linea-base-pre-v6-2026-09-22.md)
-- [Ensayo aislado F2.1B](docs/ejecucion-nativa-f2-1b.md)
-- [ADR-002 de V6](docs/decisiones/ADR-002-candidata-v6-ensayo-aislado.md)
-- [Evidencia F2.1B](docs/evidencia-f2-1b-ensayo-v6-2026-09-22.md)
-- [Ejecución nativa F2.2](docs/ejecucion-nativa-f2-2.md)
-- [Auditoría backend F2.2](docs/auditoria-f2-2-backend-admin.md)
-- [Evidencia F2.2](docs/evidencia-f2-2-consolidacion-admin-2026-09-22.md)
-- [ADR-003 de historia de grupos](docs/decisiones/ADR-003-group-coordinator-historia-sin-autorizacion.md)
-- [Ejecución nativa F2.3](docs/ejecucion-nativa-f2-3.md)
-- [Contrato API F2.3](docs/contrato-api-f2-3-admin.md)
-- [Auditoría CRM F2.3](docs/auditoria-f2-3-frontend-admin.md)
-- [Evidencia de cierre F2.3](docs/evidencia-f2-3-crm-admin-2026-09-22.md)
-- [Cierre G2 / F2.4](docs/ejecucion-nativa-f2-4-g2.md)
-- [Evidencia G2 / F2.4](docs/evidencia-g2-consolidacion-admin-2026-09-22.md)
-- [ADR-004: contrato móvil y ubicación vigente](docs/decisiones/ADR-004-contrato-movil-estados-y-ubicacion.md)
-- [Ejecución F3.1A](docs/ejecucion-f3-1a-adr-contrato-movil.md)
-- [Ejecución F3.1B: V7 y V8](docs/ejecucion-f3-1b-v7-v8.md)
-- [Evidencia F3.1B](docs/evidencia-f3-1b-v7-v8-2026-09-22.md)
-- [ADR-005: sesión móvil separada](docs/decisiones/ADR-005-sesion-movil-separada.md)
-- [Ejecución F3.2](docs/ejecucion-f3-2-sesion-movil.md)
-- [Evidencia F3.2](docs/evidencia-f3-2-sesion-movil-2026-09-22.md)
-- [ADR-006: operaciones móviles e idempotencia](docs/decisiones/ADR-006-operaciones-moviles-e-idempotencia.md)
-- [Ejecución F3.3](docs/ejecucion-f3-3-operaciones-moviles.md)
-- [Evidencia F3.3](docs/evidencia-f3-3-operaciones-moviles-2026-09-22.md)
-- [Contrato API F3.4](docs/contrato-api-f3-4-movil.md)
-- [Ejecución F3.4](docs/ejecucion-f3-4-contrato-reportes.md)
-- [Evidencia F3.4](docs/evidencia-f3-4-contrato-reportes-2026-09-22.md)
-- [Ejecución F4.1: base Flutter](docs/ejecucion-f4-1-base-flutter.md)
-- [Ejecución F4.2: sesión, perfil y disponibilidad](docs/ejecucion-f4-2-sesion-perfil-disponibilidad.md)
-- [Evidencia F4.2](docs/evidencia-f4-2-sesion-perfil-disponibilidad-2026-09-23.md)
-- [Ejecución F4.3: asignaciones móviles](docs/ejecucion-f4-3-asignaciones-moviles.md)
-- [Evidencia F4.3](docs/evidencia-f4-3-asignaciones-moviles-2026-09-23.md)
-- [Manual móvil Flutter](mobile/README.md)
-- [Plan de migración nativa](docs/plan-f1-postgresql-nativo-sin-docker.md)
-
-Los archivos de Compose y Dockerfile permanecen como compatibilidad histórica
-y no forman parte del camino operativo aprobado.
+Lea [CONTRIBUTING.md](CONTRIBUTING.md) antes de abrir un PR y [la guía de mantenimiento](docs/mantenimiento-a1.md) para triage de Dependabot, CI y ramas. Para instalación y operación detalladas use [Uso del Sistema](docs/Uso%20del%20Sistema.md). No publique secretos, datos personales ni volcados de base de datos en issues o PR.
