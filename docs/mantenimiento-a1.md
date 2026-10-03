@@ -56,7 +56,7 @@ El frontend aún no tiene ESLint ni el backend Checkstyle/Spotless; `typecheck` 
 
 Orden recomendado para majors: actualice primero parches del major actual; congele una línea base verde; lea notas de migración oficiales y compatibilidades; migre Angular y su CLI/build/compiler junto con TypeScript soportado en un PR; migre Spring Boot y sus starters/Flyway/springdoc en otro; ejecute regresión CRM–API–móvil–BD y un ensayo de migración/rollback; integre solo con revisión y evidencia. Nunca mezcle Angular, Spring Boot y acciones CI en un mismo PR mayor.
 
-El run de `main` observado el 2026-09-24 falló en `Verify backend`, no en instalación de PostgreSQL ni en frontend. El PR de mantenimiento reprodujo el fallo: `./mvnw: Permission denied` (código 126). El archivo estaba versionado con modo Git `100644`; ahora se versiona ejecutable (`100755`). Además, el CI no otorgaba a `rf_test` DML sobre tablas creadas después por `rf_migrator`; se añadieron privilegios por defecto en la **base efímera de CI** para que las integraciones puedan usar sus tablas sin privilegios DDL. La segunda corrección requiere confirmación en un nuevo run completo.
+El run de `main` observado el 2026-09-24 falló en `Verify backend`, no en instalación de PostgreSQL ni en frontend. El PR de mantenimiento reprodujo el fallo: `./mvnw: Permission denied` (código 126). El archivo estaba versionado con modo Git `100644`; ahora se versiona ejecutable (`100755`). Además, el CI no otorgaba a `rf_test` DML sobre tablas creadas después por `rf_migrator`; se añadieron privilegios por defecto en la **base efímera de CI** para que las integraciones puedan usar sus tablas sin privilegios DDL. Ambos ajustes fueron confirmados con `mvn verify` y el control de integraciones sin saltos en el PR #15.
 
 El log público del primer run del PR también mostraba contraseñas **efímeras** generadas para la base de pruebas del runner. Se añadieron máscaras de GitHub Actions antes de exportarlas a `GITHUB_ENV`. Esos valores no corresponden al PostgreSQL local ni a secretos persistentes, pero ningún run futuro debe imprimirlos.
 
@@ -71,3 +71,13 @@ Antes de una demostración pública: respaldo restaurable, secretos fuera del re
 ## Fase 5. Puerta de `main`
 
 Integre solo una revisión con checks verdes, diff revisado y sin secretos. Configure en GitHub una regla de rama para `main` con PR, conversación resuelta, review y checks obligatorios; la configuración del repositorio no puede establecerse solo mediante archivos versionados. Cierre PRs obsoletos después de conservar trazabilidad y confirme que Dependabot abrió nuevos PRs agrupados. La limpieza de ramas no sustituye la estabilización del CI ni la validación manual del producto.
+
+## Resultado del mantenimiento (2026-10-02)
+
+- [PR #15](https://github.com/Alexandro752005/solucion_1_ruta_fija/pull/15): CI nativa corregida, secretos efímeros enmascarados, Angular 22.2.1 sin alertas de `npm audit`, Dependabot agrupado, CODEOWNERS, README y CONTRIBUTING. Backend, frontend y móvil pasaron.
+- [PR #18](https://github.com/Alexandro752005/solucion_1_ruta_fija/pull/18): Maven wrapper 3.9.16 y JaCoCo 0.8.15 agrupados, con los tres jobs verdes.
+- [PR #20](https://github.com/Alexandro752005/solucion_1_ruta_fija/pull/20): checkout v7, setup-java v6 y setup-node v7 fijados por SHA; checkout no conserva el token Git. Tres jobs verdes.
+- [PR #16](https://github.com/Alexandro752005/solucion_1_ruta_fija/pull/16): jsdom 30.1.1, compatible con Node 24.16 y validado sobre el `main` actualizado.
+- Los PR obsoletos de Angular/Maven se cerraron al regenerarse los grupos. Siete ramas antiguas se cerraron y eliminaron con comprobación de SHA; los saltos mayores de backend y TypeScript/Node quedan trazados en [#21](https://github.com/Alexandro752005/solucion_1_ruta_fija/issues/21) y [#22](https://github.com/Alexandro752005/solucion_1_ruta_fija/issues/22). Solo queda abierto el PR móvil [#19](https://github.com/Alexandro752005/solucion_1_ruta_fija/pull/19), que requiere validación funcional en Android real antes de fusionarse.
+
+Pendientes honestos: configurar la protección de `main` en GitHub, incorporar linters de estilo reales mediante PRs propios y completar el flujo funcional de demo F5.2/G5. Los cambios locales de desarrollo posteriores a M1–M4 no se integraron en este mantenimiento. La base PostgreSQL del usuario no se inició ni se modificó durante esta operación.
