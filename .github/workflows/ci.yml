@@ -9,6 +9,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   backend-native-postgresql:
     name: Backend verify with native PostgreSQL 16
@@ -62,6 +66,10 @@ jobs:
           REVOKE ALL ON SCHEMA public FROM PUBLIC, rf_app;
           GRANT USAGE, CREATE ON SCHEMA public TO rf_migrator;
           GRANT USAGE ON SCHEMA public TO rf_test;
+          ALTER DEFAULT PRIVILEGES FOR ROLE rf_migrator IN SCHEMA public
+            GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO rf_test;
+          ALTER DEFAULT PRIVILEGES FOR ROLE rf_migrator IN SCHEMA public
+            GRANT USAGE, SELECT, UPDATE ON SEQUENCES TO rf_test;
           "@
           $databaseSql | & sudo -u postgres psql -X -v ON_ERROR_STOP=1 -d ruta_fija_test
           if ($LASTEXITCODE -ne 0) { throw 'No se pudo aislar ruta_fija_test en CI.' }
@@ -114,11 +122,38 @@ jobs:
       - name: Audit frontend dependencies
         run: npm audit --audit-level=high
 
-      - name: Lint frontend when configured
-        run: npm run lint --if-present
+      - name: Type-check frontend
+        run: npm run typecheck
 
       - name: Run frontend tests
         run: npm run test:ci
 
       - name: Build production frontend
         run: npm run build
+
+  mobile:
+    name: Mobile analyze and test (Flutter 3.47.5)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter 3.47.5
+        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
+        with:
+          flutter-version: '3.47.5'
+          channel: stable
+          cache: true
+
+      - name: Install locked dependencies
+        run: flutter pub get --enforce-lockfile
+
+      - name: Analyze mobile source
+        run: flutter analyze --no-pub
+
+      - name: Test mobile
+        run: flutter test --no-pub
