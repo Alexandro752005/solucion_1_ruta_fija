@@ -29,8 +29,8 @@ if ($settings['APP_SEED_ENABLED'] -ne 'false') {
 if ($settings['REFRESH_COOKIE_SECURE'] -ne 'false') {
     throw 'La configuracion local HTTP exige REFRESH_COOKIE_SECURE=false.'
 }
-if ($settings['APP_CORS_ALLOWED_ORIGINS'] -ne 'http://localhost:4200') {
-    throw 'El origen local aprobado es http://localhost:4200.'
+if ($settings['APP_CORS_ALLOWED_ORIGINS'] -ne 'http://localhost:4300,http://127.0.0.1:4300') {
+    throw 'Los orígenes locales aprobados son http://localhost:4300 y http://127.0.0.1:4300.'
 }
 
 $jwtBytes = $null

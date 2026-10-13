@@ -91,6 +91,29 @@ final class MobileApiClient {
     )).object;
   }
 
+  Future<void> putNoContent(
+    String path,
+    Map<String, Object?> body, {
+    bool authenticated = true,
+  }) async {
+    final response = await _execute(
+      method: 'PUT',
+      path: path,
+      body: body,
+      authenticated: authenticated,
+    );
+    await _throwIfUnsuccessful(response, authenticated: authenticated);
+  }
+
+  Future<void> deleteNoContent(String path, {bool authenticated = true}) async {
+    final response = await _execute(
+      method: 'DELETE',
+      path: path,
+      authenticated: authenticated,
+    );
+    await _throwIfUnsuccessful(response, authenticated: authenticated);
+  }
+
   Future<void> postNoContent(
     String path,
     Map<String, Object?> body, {

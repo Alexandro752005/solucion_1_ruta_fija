@@ -56,6 +56,8 @@ class _RutaFijaAppState extends State<RutaFijaApp> {
             assignmentGateway: widget.dependencies.assignmentGateway,
             incidentGateway: widget.dependencies.incidentGateway,
             announcementGateway: widget.dependencies.announcementGateway,
+            deviceLocationGateway: widget.dependencies.deviceLocationGateway,
+            offlineSyncController: widget.dependencies.offlineSyncController,
           ),
           home: switch (state.status) {
             MobileSessionStatus.restoring => const _SessionRestorePage(),
@@ -69,6 +71,7 @@ class _RutaFijaAppState extends State<RutaFijaApp> {
               assignmentGateway: widget.dependencies.assignmentGateway,
               incidentGateway: widget.dependencies.incidentGateway,
               announcementGateway: widget.dependencies.announcementGateway,
+              offlineSyncController: widget.dependencies.offlineSyncController,
             ),
           },
         );
@@ -82,15 +85,20 @@ class _SessionRestorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            CircularProgressIndicator(),
-            SizedBox(height: 16),
-            Text('Verificando sesión protegida…'),
-          ],
+    return Scaffold(
+      body: Semantics(
+        container: true,
+        liveRegion: true,
+        label: 'Verificando sesión protegida',
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ExcludeSemantics(child: CircularProgressIndicator()),
+              SizedBox(height: 16),
+              Text('Verificando sesión protegida…'),
+            ],
+          ),
         ),
       ),
     );

@@ -14,7 +14,7 @@ public final class RunRutaFijaFlyway {
             "jdbc:postgresql://127.0.0.1:5432/solucion_ruta_fija_1";
     private static final String EXPECTED_USER = "rf_migrator";
     private static final List<String> EXPECTED_VERSIONS = List.of(
-            "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
+            "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
     );
 
     private RunRutaFijaFlyway() {
@@ -44,12 +44,12 @@ public final class RunRutaFijaFlyway {
         MigrationInfo[] appliedBefore = flyway.info().applied();
         MigrationInfo[] pendingBefore = flyway.info().pending();
         if (appliedBefore.length != 0 || pendingBefore.length != EXPECTED_VERSIONS.size()) {
-            throw new IllegalStateException("El bootstrap exige una base vacia con exactamente V1-V10 pendientes.");
+            throw new IllegalStateException("El bootstrap exige una base vacia con exactamente V1-V12 pendientes.");
         }
 
         MigrateResult result = flyway.migrate();
         if (result.migrationsExecuted != EXPECTED_VERSIONS.size()) {
-            throw new IllegalStateException("Flyway no aplico exactamente las diez migraciones esperadas.");
+            throw new IllegalStateException("Flyway no aplico exactamente las doce migraciones esperadas.");
         }
 
         List<String> appliedVersions = Arrays.stream(flyway.info().applied())
@@ -58,10 +58,10 @@ public final class RunRutaFijaFlyway {
                 .map(Object::toString)
                 .toList();
         if (!EXPECTED_VERSIONS.equals(appliedVersions)) {
-            throw new IllegalStateException("El historial Flyway final no corresponde exactamente a V1-V10.");
+            throw new IllegalStateException("El historial Flyway final no corresponde exactamente a V1-V12.");
         }
 
-        System.out.println("F3_3_FLYWAY_BOOTSTRAP=PASS migrations=10");
+        System.out.println("F3_3_FLYWAY_BOOTSTRAP=PASS migrations=12");
         System.out.println("El bootstrap no inicio Spring Boot, API, CRM ni Docker.");
     }
 

@@ -20,7 +20,8 @@ enum MobileIncidentCategory {
 enum MobileIncidentStatus {
   open('OPEN', 'Abierta'),
   followUp('FOLLOW_UP', 'En seguimiento'),
-  resolved('RESOLVED', 'Resuelta');
+  resolved('RESOLVED', 'Resuelta'),
+  driverClosed('CLOSED_BY_DRIVER', 'Cerrada por conductor');
 
   const MobileIncidentStatus(this.apiValue, this.label);
 
@@ -63,11 +64,16 @@ final class MobileIncident {
     required this.source,
     required this.status,
     required this.description,
+    required this.reportedById,
+    required this.reportedByName,
     required this.reportedAt,
     required this.followUpNote,
     required this.followedUpByName,
     required this.followedUpAt,
     required this.resolvedAt,
+    required this.driverClosedById,
+    required this.driverClosedByName,
+    required this.driverClosedAt,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -81,13 +87,61 @@ final class MobileIncident {
   final MobileIncidentSource source;
   final MobileIncidentStatus status;
   final String description;
+  final String reportedById;
+  final String reportedByName;
   final DateTime reportedAt;
   final String? followUpNote;
   final String? followedUpByName;
   final DateTime? followedUpAt;
   final DateTime? resolvedAt;
+  final String? driverClosedById;
+  final String? driverClosedByName;
+  final DateTime? driverClosedAt;
   final DateTime createdAt;
   final DateTime updatedAt;
+
+  bool get wasClosedByDriver => status == MobileIncidentStatus.driverClosed;
+
+  bool canBeClosedBy(String userId) {
+    final normalizedUserId = userId.trim();
+    return source == MobileIncidentSource.mobileApp &&
+        normalizedUserId.isNotEmpty &&
+        reportedById == normalizedUserId &&
+        driverClosedById == null &&
+        driverClosedAt == null &&
+        (status == MobileIncidentStatus.open ||
+            status == MobileIncidentStatus.followUp);
+  }
+
+  MobileIncident withDriverClosure({
+    required String actorId,
+    required String actorName,
+    required DateTime closedAt,
+  }) {
+    return MobileIncident(
+      id: id,
+      version: version + 1,
+      driverId: driverId,
+      driverName: driverName,
+      assignmentId: assignmentId,
+      category: category,
+      source: source,
+      status: MobileIncidentStatus.driverClosed,
+      description: description,
+      reportedById: reportedById,
+      reportedByName: reportedByName,
+      reportedAt: reportedAt,
+      followUpNote: followUpNote,
+      followedUpByName: followedUpByName,
+      followedUpAt: followedUpAt,
+      resolvedAt: resolvedAt,
+      driverClosedById: actorId,
+      driverClosedByName: actorName,
+      driverClosedAt: closedAt.toUtc(),
+      createdAt: createdAt,
+      updatedAt: closedAt.toUtc(),
+    );
+  }
 
   factory MobileIncident.fromJson(Map<String, dynamic> json) {
     return MobileIncident(
@@ -100,11 +154,16 @@ final class MobileIncident {
       source: MobileIncidentSource.fromApi(json['source']),
       status: MobileIncidentStatus.fromApi(json['status']),
       description: _requiredText(json['description'], 'description'),
+      reportedById: _requiredText(json['reportedById'], 'reportedById'),
+      reportedByName: _requiredText(json['reportedByName'], 'reportedByName'),
       reportedAt: _requiredDate(json['reportedAt'], 'reportedAt'),
       followUpNote: _optionalText(json['followUpNote']),
       followedUpByName: _optionalText(json['followedUpByName']),
       followedUpAt: _optionalDate(json['followedUpAt']),
       resolvedAt: _optionalDate(json['resolvedAt']),
+      driverClosedById: _optionalText(json['driverClosedById']),
+      driverClosedByName: _optionalText(json['driverClosedByName']),
+      driverClosedAt: _optionalDate(json['driverClosedAt']),
       createdAt: _requiredDate(json['createdAt'], 'createdAt'),
       updatedAt: _requiredDate(json['updatedAt'], 'updatedAt'),
     );

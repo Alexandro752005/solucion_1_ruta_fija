@@ -43,7 +43,7 @@ Variables de ejecución:
 | SPRING_FLYWAY_URL / USERNAME | Desarrollo con rf_migrator |
 | JWT_SECRET_BASE64 | Secreto local de al menos 32 bytes |
 | APP_SEED_ENABLED | false para el runtime normal |
-| APP_CORS_ALLOWED_ORIGINS | http://localhost:4200 |
+| APP_CORS_ALLOWED_ORIGINS | http://localhost:4300,http://127.0.0.1:4300 |
 | REFRESH_COOKIE_SECURE | false solo para HTTP local |
 
 ## Esquema y roles
@@ -73,7 +73,9 @@ Desde la raíz del repositorio se usa:
 .\iniciar_ruta_fija.bat
 ~~~
 
-El iniciador empaqueta el JAR, levanta la API en 127.0.0.1:8080 y comprueba:
+El iniciador activa PostgreSQL 16 con inicio manual, empaqueta el JAR solo si
+las fuentes cambiaron, levanta la API con memoria limitada en 127.0.0.1:8080 y
+comprueba:
 
 - Salud: http://127.0.0.1:8080/actuator/health
 - OpenAPI: http://127.0.0.1:8080/v3/api-docs
@@ -84,6 +86,8 @@ Para detener procesos administrados:
 ~~~powershell
 .\finalizar_ruta_fija.bat
 ~~~
+
+El cierre también detiene PostgreSQL 16 sin eliminar la base ni sus datos.
 
 ## Pruebas
 

@@ -79,7 +79,7 @@ export const INCIDENT_CATEGORIES = [
 
 export type IncidentCategory = (typeof INCIDENT_CATEGORIES)[number];
 
-export const INCIDENT_STATUSES = ['OPEN', 'FOLLOW_UP', 'RESOLVED'] as const;
+export const INCIDENT_STATUSES = ['OPEN', 'FOLLOW_UP', 'RESOLVED', 'CLOSED_BY_DRIVER'] as const;
 
 export type IncidentStatus = (typeof INCIDENT_STATUSES)[number];
 
@@ -100,6 +100,9 @@ export interface Incident {
   readonly followedUpByName?: string | null;
   readonly followedUpAt?: string | null;
   readonly resolvedAt?: string | null;
+  readonly driverClosedById?: string | null;
+  readonly driverClosedByName?: string | null;
+  readonly driverClosedAt?: string | null;
   readonly createdAt: string;
   readonly updatedAt: string;
 }

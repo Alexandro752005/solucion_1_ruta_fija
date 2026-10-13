@@ -3,29 +3,36 @@
 Ruta Fija es un monolito modular para administrar organizaciones, usuarios,
 grupos, conductores, vehículos, asignaciones, incidencias, comunicados,
 reportes y auditoría. El alcance vigente incluye el CRM web administrativo, la
-API móvil operativa y Flutter Android del conductor (M1–M6, 58/80 puntos).
+API móvil operativa y Flutter Android del conductor. M1–M8 están aprobados
+con 71/80 puntos; M9 aprobó su auditoría automática con 80/80 y queda pendiente
+de validación física antes de su cierre VERDE.
 F3.4 completa OpenAPI/DTOs, la matriz de aislamiento e idempotencia y los
 reportes reales de estados móviles. F4.1 aporta bootstrap, navegación, tema y
 configuración de entorno; F4.2 agrega sesión JSON real, refresh protegido,
 perfil propio y disponibilidad. F4.3 agrega lista, detalle y comandos de
 asignaciones propios con reintento idempotente. F4.4 agrega incidencias propias
-y comunicados con confirmación de lectura explícita, sin adelantar GPS, FCM,
-SMTP ni servicios externos.
+y comunicados con confirmación de lectura explícita. M7 agrega ubicación
+puntual y voluntaria en primer plano. M8 conserva, en orden, solo
+disponibilidad, inicio y cierre de servicio ante una falla temporal de red; no
+ejecuta envíos en segundo plano.
 
 La operación local usa PostgreSQL 16 instalado en Windows, Java 21 y Angular.
-No se necesita Docker para iniciar, probar, detener ni recuperar el sistema.
+
+La versión actual del esquema es Flyway **V1–V12**. Si una instalación ya está
+en V1–V11, antes de iniciar el backend aplique el migrador protegido M8 descrito
+en [Ejecución M8](docs/ejecucion-m8-offline-minimo.md).
 
 ## Arquitectura y tecnologías
 
 | Componente | Decisión |
 | --- | --- |
-| CRM | Angular 22 en http://localhost:4200 |
+| CRM | Angular 22 en http://127.0.0.1:4300 |
 | API | Java 21, Spring Boot 3.5.16 en http://127.0.0.1:8080 |
 | Persistencia | PostgreSQL 16 local, puerto 5432 |
-| Esquema | Flyway V1–V10 y Hibernate con ddl-auto=validate |
+| Esquema | Flyway V1–V12 y Hibernate con ddl-auto=validate |
 | Seguridad | JWT, refresh en cookie HttpOnly web y JSON móvil, roles separados de migración, aplicación y pruebas |
 | Tiempo real | WebSocket con ticket efímero por medio del proxy Angular |
-| Móvil | Flutter 3.47.5, Android `pe.rutafija.conductor`, M1–M6 reales: sesión, perfil, disponibilidad, asignaciones idempotentes, incidencias y comunicados |
+| Móvil | Flutter 3.47.5, Android `pe.rutafija.conductor`; M1–M8 aprobados (71/80) y M9 con auditoría automática 80/80, pendiente de validación física: sesión, perfil, disponibilidad, asignaciones idempotentes, incidencias, comunicados, ubicación puntual, sincronización offline limitada, calidad y evidencia |
 
 El backend está dividido en identity, organization, fleet, operation, audit y
 shared. PostgreSQL conserva las reglas críticas: aislamiento de roles,
@@ -74,7 +81,7 @@ La instancia debe estar limitada a 127.0.0.1 y ::1. No se publique el puerto
 
 5. Elija una sola ruta según el estado de la base.
 
-   - Para una base nueva y vacía, el bootstrap actual aplica V1-V10 y luego
+   - Para una base nueva y vacía, el bootstrap actual aplica V1-V12 y luego
      concede el DML mínimo de aplicación:
 
      ~~~powershell
@@ -112,19 +119,27 @@ Desde la raíz:
 .\iniciar_ruta_fija.bat
 ~~~
 
+El iniciador solicita autorización de Windows para activar PostgreSQL 16 y lo
+deja con inicio manual. Después levanta únicamente el backend y el CRM. Para
+reducir consumo, reutiliza el JAR si no cambiaron las fuentes; si detecta
+cambios lo recompila una sola vez con memoria limitada.
+
 Cuando el inicio sea correcto:
 
-- CRM: http://localhost:4200
+- CRM: http://127.0.0.1:4300
 - API: http://127.0.0.1:8080/api/v1
 - Salud: http://127.0.0.1:8080/actuator/health
 - OpenAPI: http://127.0.0.1:8080/v3/api-docs
 
-Para detener únicamente el backend y el CRM, conservando PostgreSQL como
-servicio local:
+Para detener el backend, el CRM y PostgreSQL:
 
 ~~~powershell
 .\finalizar_ruta_fija.bat
 ~~~
+
+El cierre puede volver a solicitar autorización de Windows. Detener el
+servicio no elimina la base ni sus datos; evita que los procesos del proyecto
+continúen consumiendo memoria cuando Ruta Fija no está en uso.
 
 El inicio normal no crea usuarios de demostración. Las semillas se mantienen
 desactivadas para no introducir cuentas o contraseñas conocidas en la base
@@ -139,7 +154,7 @@ Ejecute las pruebas de backend contra la base aislada ruta_fija_test:
 ~~~
 
 La salida aprobada termina con F3_4_NATIVE_VERIFY=PASS. Para comprobar el
-proxy REST y WebSocket desde Angular, con 8080 y 4200 libres:
+proxy REST y WebSocket desde Angular, con 8080 y 4300 libres:
 
 ~~~powershell
 .\scripts\Invoke-RutaFijaRealtimeProxySmoke.ps1 -Action Verify
@@ -214,12 +229,19 @@ para mostrar estados móviles sin fingir una respuesta del conductor y reporta
 `PENDING_RESPONSE`, `REJECTED` y `EXPIRED` desde filas persistidas. El arranque
 nativo ahora valida F3.4 antes de iniciar backend y CRM.
 
+M7 añade consentimiento y ubicación puntual en primer plano; conserva a lo
+sumo un punto vigente por conductor. M8 añade V12 y una cola protegida, visible
+y FIFO de máximo 10 eventos para disponibilidad, inicio y cierre de servicio.
+La cola solamente avanza por una acción explícita del conductor; GPS,
+incidencias, comunicados y aceptar/rechazar una asignación quedan fuera de ella.
+
 ## Automatización y documentación
 
 Las tareas Ruta Fija de VS Code cubren aprovisionamiento, arranque, pruebas,
 proxy WebSocket, auditoría F1.6, evidencia de recuperación F1.7, auditoría de
-sesión móvil histórica F3.2, auditoría de operaciones móviles F3.3 y contrato
-con reportes reales F3.4.
+sesión móvil histórica F3.2, auditoría de operaciones móviles F3.3, contrato
+con reportes reales F3.4, ubicación puntual M7, sincronización offline mínima
+M8 y calidad/evidencia M9.
 
 La integración continua crea una instancia PostgreSQL 16 efímera del runner
 para las pruebas de integración. No requiere un motor de contenedores instalado
@@ -270,6 +292,18 @@ Documentos principales:
 - [Evidencia F4.3](docs/evidencia-f4-3-asignaciones-moviles-2026-09-23.md)
 - [Ejecución F4.4: incidencias y comunicados](docs/ejecucion-f4-4-incidencias-comunicados.md)
 - [Evidencia F4.4](docs/evidencia-f4-4-incidencias-comunicados-2026-09-24.md)
+- [ADR-007: ubicación puntual M7](docs/decisiones/ADR-007-ubicacion-foreground-m7.md)
+- [ADR-008: offline mínimo M8](docs/decisiones/ADR-008-offline-minimo-m8.md)
+- [ADR-009: calidad y evidencia M9](docs/decisiones/ADR-009-calidad-evidencia-m9.md)
+- [Ejecución M7](docs/ejecucion-m7-ubicacion-foreground.md)
+- [Ejecución M8](docs/ejecucion-m8-offline-minimo.md)
+- [Evidencia automática M8](docs/evidencia-m8-offline-minimo-2026-09-26.md)
+- [Ejecución M9](docs/ejecucion-m9-calidad-evidencia.md)
+- [Evidencia M9](docs/evidencia-m9-calidad-evidencia-2026-09-26.md)
+- [Ejecución F5.1: regresión integral](docs/ejecucion-f5-1-regresion-integral.md)
+- [Evidencia F5.1](docs/evidencia-f5-1-regresion-integral-2026-09-30.md)
+- [Ejecución F5.2: demo temporal](docs/ejecucion-f5-2-demo-temporal.md)
+- [Evidencia F5.2](docs/evidencia-f5-2-demo-temporal-2026-09-30.md)
 - [Manual móvil Flutter](mobile/README.md)
 - [Plan de migración nativa](docs/plan-f1-postgresql-nativo-sin-docker.md)
 

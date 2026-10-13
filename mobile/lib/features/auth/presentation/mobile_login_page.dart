@@ -70,17 +70,22 @@ class _MobileLoginPageState extends State<MobileLoginPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Icon(
-                        Icons.route_outlined,
-                        size: 56,
-                        color: theme.colorScheme.primary,
+                      ExcludeSemantics(
+                        child: Icon(
+                          Icons.route_outlined,
+                          size: 56,
+                          color: theme.colorScheme.primary,
+                        ),
                       ),
                       const SizedBox(height: 20),
-                      Text(
-                        'Acceso del conductor',
-                        textAlign: TextAlign.center,
-                        style: theme.textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.w800,
+                      Semantics(
+                        header: true,
+                        child: Text(
+                          'Acceso del conductor',
+                          textAlign: TextAlign.center,
+                          style: theme.textTheme.headlineSmall?.copyWith(
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 8),
@@ -192,24 +197,29 @@ class _MessageCard extends StatelessWidget {
     final foreground = isError
         ? scheme.onErrorContainer
         : scheme.onSecondaryContainer;
+    final kind = isError ? 'Error de acceso' : 'Aviso de acceso';
     return Semantics(
+      container: true,
+      label: '$kind: $message',
       liveRegion: true,
-      child: Card(
-        color: background,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(
-                isError ? Icons.error_outline : Icons.info_outline,
-                color: foreground,
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(message, style: TextStyle(color: foreground)),
-              ),
-            ],
+      child: ExcludeSemantics(
+        child: Card(
+          color: background,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  isError ? Icons.error_outline : Icons.info_outline,
+                  color: foreground,
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(message, style: TextStyle(color: foreground)),
+                ),
+              ],
+            ),
           ),
         ),
       ),

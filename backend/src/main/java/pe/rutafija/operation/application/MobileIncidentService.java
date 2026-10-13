@@ -7,9 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pe.rutafija.audit.application.AuditService;
 import pe.rutafija.operation.api.dto.IncidentResponse;
+import pe.rutafija.operation.api.dto.mobile.MobileIncidentCloseRequest;
 import pe.rutafija.operation.api.dto.mobile.MobileIncidentCreateRequest;
 import pe.rutafija.operation.domain.Assignment;
 import pe.rutafija.operation.domain.Incident;
+import pe.rutafija.operation.domain.IncidentSource;
+import pe.rutafija.operation.domain.IncidentStatus;
 import pe.rutafija.operation.infrastructure.AssignmentRepository;
 import pe.rutafija.operation.infrastructure.IncidentRepository;
 import pe.rutafija.shared.api.PageResponse;
@@ -100,6 +103,44 @@ public class MobileIncidentService {
         return IncidentResponse.from(incident);
     }
 
+    @Transactional
+    public IncidentResponse close(UUID incidentId, MobileIncidentCloseRequest request) {
+        MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
+        Incident incident = findOwnIncident(actor, incidentId);
+        if (incident.getSource() != IncidentSource.MOBILE_APP
+                || !incident.getReportedBy().getId().equals(actor.user().getId())) {
+            throw notFound();
+        }
+        if (incident.getStatus() == IncidentStatus.CLOSED_BY_DRIVER
+                && incident.getDriverClosedBy() != null
+                && incident.getDriverClosedBy().getId().equals(actor.user().getId())) {
+            return IncidentResponse.from(incident);
+        }
+        assertVersion(incident, request.version());
+        IncidentStatus previousStatus = incident.getStatus();
+        try {
+            incident.closeByMobileReporter(actor.user(), Instant.now(clock));
+        } catch (IllegalStateException exception) {
+            throw invalidState(exception.getMessage());
+        }
+        incident = incidentRepository.saveAndFlush(incident);
+        auditService.record(actor.user(), "INCIDENT_CLOSED_BY_MOBILE_REPORTER", "INCIDENT", incident.getId(), Map.of(
+                "previousStatus", previousStatus.name(),
+                "finalStatus", incident.getStatus().name()
+        ));
+        eventPublisher.publish(
+                actor.user().getOrganizationId(),
+                actor.driver().getGroup().getId(),
+                "incident.closed-by-driver",
+                Map.of(
+                        "incidentId", incident.getId().toString(),
+                        "driverId", actor.driver().getId().toString(),
+                        "status", incident.getStatus().name()
+                )
+        );
+        return IncidentResponse.from(incident);
+    }
+
     private Incident findOwnIncident(MobileDriverActor actor, UUID incidentId) {
         return incidentRepository.findByIdAndOrganization_IdAndDriver_Id(
                         incidentId, actor.user().getOrganizationId(), actor.driver().getId()
@@ -112,6 +153,26 @@ public class MobileIncidentService {
                 HttpStatus.NOT_FOUND,
                 ErrorCode.RESOURCE_NOT_FOUND,
                 "El recurso solicitado no existe"
+        );
+    }
+
+    private void assertVersion(Incident incident, Long version) {
+        if (version == null || incident.getVersion() != version) {
+            throw new ApplicationException(
+                    HttpStatus.CONFLICT,
+                    ErrorCode.RESOURCE_VERSION_CONFLICT,
+                    "La incidencia fue modificada; actualice los datos antes de cerrarla"
+            );
+        }
+    }
+
+    private ApplicationException invalidState(String message) {
+        return new ApplicationException(
+                HttpStatus.CONFLICT,
+                ErrorCode.INCIDENT_INVALID_STATE,
+                message == null || message.isBlank()
+                        ? "La incidencia ya no admite cierre por el conductor"
+                        : message
         );
     }
 }

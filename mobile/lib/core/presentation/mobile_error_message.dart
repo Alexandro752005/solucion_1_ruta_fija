@@ -22,6 +22,8 @@ String mobileErrorMessage(Object error) {
         return 'El plazo de respuesta de esta asignación ya venció.';
       case 'RESOURCE_VERSION_CONFLICT':
         return 'La asignación fue modificada. Actualice los datos e intente de nuevo.';
+      case 'INCIDENT_INVALID_STATE':
+        return 'La incidencia ya no admite este cierre. Actualice la pantalla para ver su estado vigente.';
       case 'MOBILE_EVENT_CONFLICT':
         return 'Ese evento ya no puede reutilizarse. Actualice la asignación.';
       case 'VEHICLE_NOT_ELIGIBLE':

@@ -96,6 +96,55 @@ void main() {
   );
 
   test(
+    'closes an existing own incident without sending identity or status',
+    () async {
+      final client = MockClient((request) async {
+        expect(request.method, 'POST');
+        expect(
+          request.url.path,
+          '/api/v1/mobile/incidents/44444444-4444-4444-8444-444444444444/close',
+        );
+        expect(request.headers['authorization'], 'Bearer access-token');
+        final body = Map<String, dynamic>.from(jsonDecode(request.body));
+        expect(body, {'version': 3});
+        for (final forbidden in const [
+          'driverId',
+          'userId',
+          'organizationId',
+          'tenantId',
+          'source',
+          'status',
+          'driverClosedAt',
+        ]) {
+          expect(body.containsKey(forbidden), isFalse);
+        }
+        return http.Response(
+          jsonEncode(
+            _incidentJson(
+              status: 'CLOSED_BY_DRIVER',
+              version: 4,
+              driverClosedById: '11111111-1111-4111-8111-111111111111',
+              driverClosedByName: 'Conductora de prueba',
+              driverClosedAt: '2026-09-24T15:31:00Z',
+            ),
+          ),
+          200,
+        );
+      });
+
+      final closed = await repository(client)
+          .close('44444444-4444-4444-8444-444444444444', version: 3);
+
+      expect(closed.status, MobileIncidentStatus.driverClosed);
+      expect(closed.driverClosedByName, 'Conductora de prueba');
+      expect(
+        closed.canBeClosedBy('11111111-1111-4111-8111-111111111111'),
+        isFalse,
+      );
+    },
+  );
+
+  test(
     'rejects a blank or oversized description before calling the API',
     () async {
       final client = MockClient(
@@ -121,23 +170,35 @@ void main() {
   );
 }
 
-Map<String, dynamic> _incidentJson({String category = 'AVERIA'}) {
+Map<String, dynamic> _incidentJson({
+  String category = 'AVERIA',
+  String status = 'OPEN',
+  int version = 0,
+  String? driverClosedById,
+  String? driverClosedByName,
+  String? driverClosedAt,
+}) {
   return {
     'id': '44444444-4444-4444-8444-444444444444',
-    'version': 0,
+    'version': version,
     'driverId': '22222222-2222-4222-8222-222222222222',
     'driverName': 'Conductora de prueba',
     'assignmentId': null,
     'category': category,
     'source': 'MOBILE_APP',
-    'status': 'OPEN',
+    'status': status,
     'description': 'Demora confirmada en el recorrido.',
+    'reportedById': '11111111-1111-4111-8111-111111111111',
+    'reportedByName': 'Conductora de prueba',
     'reportedAt': '2026-09-24T15:30:00Z',
     'followUpNote': null,
     'followedUpById': null,
     'followedUpByName': null,
     'followedUpAt': null,
     'resolvedAt': null,
+    'driverClosedById': driverClosedById,
+    'driverClosedByName': driverClosedByName,
+    'driverClosedAt': driverClosedAt,
     'createdAt': '2026-09-24T15:30:00Z',
     'updatedAt': '2026-09-24T15:30:00Z',
   };

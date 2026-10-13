@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import pe.rutafija.fleet.domain.Driver;
@@ -38,6 +39,18 @@ public interface DriverRepository extends JpaRepository<Driver, UUID> {
 
     @EntityGraph(attributePaths = {"organization", "group", "user"})
     Optional<Driver> findByIdAndOrganization_Id(UUID id, UUID organizationId);
+
+    @Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
+    @EntityGraph(attributePaths = {"organization", "group", "user"})
+    @Query("""
+            select driver from Driver driver
+             where driver.id = :driverId
+               and driver.organization.id = :organizationId
+            """)
+    Optional<Driver> lockByIdAndOrganizationId(
+            @Param("driverId") UUID driverId,
+            @Param("organizationId") UUID organizationId
+    );
 
     @EntityGraph(attributePaths = {"organization", "group", "user"})
     Optional<Driver> findByUser_Id(UUID userId);

@@ -4,16 +4,22 @@ Cliente Flutter Android exclusivo del rol `CONDUCTOR`. Se comunica con Spring
 Boot por `/api/v1/mobile`; nunca accede a PostgreSQL, no contiene credenciales
 de base de datos y no reutiliza la cookie de sesión del CRM.
 
-## Estado actual: F4.4
+## Estado actual: M9 en validación física
 
 M1, M2, M3 y M4 están implementados: base, navegación, sesión JSON de
 conductor, refresh rotativo protegido, perfil, disponibilidad y asignaciones
 propias idempotentes. F4.4 completa M5 y M6: incidencias propias y comunicados
-visibles para su audiencia con lectura explícita. El avance verificable es
-**58/80 puntos**.
+visibles para su audiencia con lectura explícita. M7 aprobado añade consentimiento y
+ubicación manual en primer plano: un único punto voluntario, sin historial ni
+seguimiento continuo. M8 aprobada agrega una cola persistente y visible, de
+máximo diez eventos FIFO, para disponibilidad, inicio y cierre de servicio
+cuando ocurre una falla temporal de red. El avance aprobado es **71/80 puntos**.
+M9 aprobó la auditoría automática con 80/80: pruebas críticas, accesibilidad
+básica, APK debug firmada y evidencia reproducible. Falta la validación física
+del conductor antes de declarar el VERDE formal.
 
-La aplicación no implementa todavía GPS, permisos de ubicación, fotos, FCM ni
-una cola offline automática. M7–M9 siguen pendientes.
+La aplicación no implementa ubicación continua, fotos, FCM, notificaciones
+push ni sincronización en segundo plano.
 
 ## Seguridad de sesión
 
@@ -32,6 +38,15 @@ una cola offline automática. M7–M9 siguen pendientes.
   cola ni reenvío automático que pueda duplicarla.
 - Abrir un comunicado no registra lectura. Cuando el servidor exige acuse, el
   conductor lo confirma mediante una acción humana y una ruta idempotente.
+- La ubicación se solicita solo desde **Perfil → Gestionar ubicación**, después
+   de consentimiento explícito y mientras la aplicación está abierta. No se
+   guardan coordenadas en el dispositivo ni se inicia un rastreo continuo.
+- M8 solo conserva disponibilidad, inicio y cierre de servicio. Cada evento
+  conserva su UUID, fecha y carga exactos; un conflicto o rechazo bloquea la
+  secuencia hasta que el conductor la concilie y descarte conscientemente.
+- La cola es privada para la combinación usuario/conductor, se limpia al cerrar
+  sesión y nunca usa temporizadores, detección de conectividad ni trabajo en
+  segundo plano.
 
 ## Comandos de validación
 
@@ -62,6 +77,36 @@ Desde la raíz del repositorio, la auditoría completa de F4.4 es:
 La salida aprobada empieza con
 `F4_4_MOBILE_INCIDENTS_ANNOUNCEMENTS=PASS` y declara `total=58/80`.
 
+Para M7, la auditoría específica es:
+
+~~~powershell
+.\scripts\Test-RutaFijaM7ForegroundLocation.ps1
+~~~
+
+Su resultado aprobado comienza con `M7_FOREGROUND_LOCATION_AUDIT=PASS` y
+declara `total=66/80`.
+
+Para M8, después de que PostgreSQL esté en V12, ejecute:
+
+~~~powershell
+.\scripts\Test-RutaFijaM8OfflineMinimum.ps1
+~~~
+
+El resultado técnico esperado es
+`M8_OFFLINE_MINIMUM_AUDIT=PASS` y declara `total=71/80`. M8 ya fue aprobada
+después de su prueba física. Su guía conserva el procedimiento reproducible en
+[Ejecución M8](../docs/ejecucion-m8-offline-minimo.md).
+
+Para M9, ejecute desde la raíz:
+
+~~~powershell
+.\scripts\Test-RutaFijaM9QualityEvidence.ps1
+~~~
+
+El resultado técnico esperado inicia con `M9_QUALITY_EVIDENCE_AUDIT=PASS` y
+declara `total=80/80`. Aún requiere la validación física de interfaz indicada
+en [Ejecución M9](../docs/ejecucion-m9-calidad-evidencia.md).
+
 ## Ejecutar en desarrollo
 
 Para un emulador debug, la URL predeterminada es:
@@ -90,6 +135,14 @@ existe un botón CRM que suplante la respuesta del conductor. Para M5, el
 conductor reporta una incidencia propia; el backend fija su origen y estado.
 Para M6, el ADMIN publica un comunicado dirigido a la audiencia del conductor:
 abrirlo no confirma nada y el acuse se realiza solo mediante el botón explícito.
+Para M7, el conductor abre **Perfil → Gestionar ubicación** y confirma el
+envío de un único punto actual. Puede eliminar el punto vigente o retirar el
+consentimiento desde la misma pantalla.
+Para M8, al fallar temporalmente una disponibilidad, inicio o cierre, aparece
+un contador en el icono de sincronización superior. El conductor abre
+**Pendientes de sincronización** y pulsa **Sincronizar pendientes**; ante un
+conflicto revisa el estado actual y descarta únicamente la primera acción
+bloqueada antes de continuar.
 
 ## Android y recursos limitados
 

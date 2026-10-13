@@ -43,6 +43,7 @@ final class MobileDriverProfile {
     required this.fullName,
     required this.groupName,
     required this.availabilityStatus,
+    required this.locationConsent,
     required this.primaryVehicle,
   });
 
@@ -50,6 +51,7 @@ final class MobileDriverProfile {
   final String fullName;
   final String groupName;
   final MobileAvailabilityStatus availabilityStatus;
+  final bool locationConsent;
   final MobileVehicle? primaryVehicle;
 
   factory MobileDriverProfile.fromJson(Map<String, dynamic> json) {
@@ -61,6 +63,7 @@ final class MobileDriverProfile {
       availabilityStatus: MobileAvailabilityStatus.fromApi(
         _requiredString(json, 'availabilityStatus'),
       ),
+      locationConsent: _requiredBoolean(json, 'locationConsent'),
       primaryVehicle: rawVehicle is Map
           ? MobileVehicle.fromJson(Map<String, dynamic>.from(rawVehicle))
           : null,
@@ -69,17 +72,31 @@ final class MobileDriverProfile {
 }
 
 final class MobileAvailability {
-  const MobileAvailability({required this.driverId, required this.status});
+  const MobileAvailability({
+    required this.driverId,
+    required this.status,
+    required this.updatedAt,
+  });
 
   final String driverId;
   final MobileAvailabilityStatus status;
+  final DateTime updatedAt;
 
   factory MobileAvailability.fromJson(Map<String, dynamic> json) {
     return MobileAvailability(
       driverId: _requiredString(json, 'driverId'),
       status: MobileAvailabilityStatus.fromApi(_requiredString(json, 'status')),
+      updatedAt: _requiredDateTime(json, 'updatedAt'),
     );
   }
+}
+
+bool _requiredBoolean(Map<String, dynamic> json, String key) {
+  final value = json[key];
+  if (value is bool) {
+    return value;
+  }
+  throw FormatException('Falta el campo booleano $key en el perfil móvil.');
 }
 
 String _requiredString(Map<String, dynamic> json, String key) {
@@ -88,4 +105,17 @@ String _requiredString(Map<String, dynamic> json, String key) {
     return value.trim();
   }
   throw FormatException('Falta el campo $key en el perfil móvil.');
+}
+
+DateTime _requiredDateTime(Map<String, dynamic> json, String key) {
+  final value = json[key];
+  if (value is String && value.trim().isNotEmpty) {
+    final parsed = DateTime.tryParse(value);
+    if (parsed != null) {
+      return parsed.toUtc();
+    }
+  }
+  throw FormatException(
+    'Falta o no es valida la fecha $key en el perfil movil.',
+  );
 }

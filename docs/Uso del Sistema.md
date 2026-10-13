@@ -11,10 +11,15 @@ vehículos, asignaciones, incidencias, comunicados, reportes y auditoría.
 
 La solución vigente incluye API móvil real y Flutter Android del conductor:
 tema, navegación, sesión JSON separada, refresh protegido, perfil propio y
-disponibilidad real, asignaciones propias idempotentes, incidencias propias y
-comunicados con lectura explícita (M1–M6, 58/80). Aún no incluye GPS de fondo,
-mapas, notificaciones push, correo, fotos ni una cola offline automática. El
-CRM nunca simula una respuesta del conductor.
+disponibilidad real, asignaciones propias idempotentes, incidencias propias,
+comunicados con lectura explícita y ubicación puntual voluntaria en primer
+plano. M1–M8 están aprobados con 71/80: M8 conserva de forma visible y FIFO un
+máximo de 10 cambios de disponibilidad, inicio o cierre ante una falla temporal
+de red. M9 aprobó su auditoría automática con 80/80 para pruebas críticas,
+accesibilidad básica, APK debug y evidencia reproducible; queda pendiente la
+validación física. No incluye GPS de fondo, mapas,
+notificaciones push, correo, fotos ni sincronización en segundo plano. El CRM
+nunca simula una respuesta del conductor.
 
 ## 2. Requisitos
 
@@ -72,7 +77,7 @@ Estos pasos se ejecutan una sola vez sobre una base de desarrollo vacía.
    .\scripts\Initialize-RutaFijaPostgresqlRoles.ps1
    ~~~
 
-3. Para una base nueva, aplique el bootstrap actual V1-V10, otorgue el DML
+3. Para una base nueva, aplique el bootstrap actual V1-V12, otorgue el DML
    mínimo de aplicación y compruebe estructura, auditoría, constraints, UTC,
    privacidad e idempotencia móvil.
 
@@ -101,11 +106,16 @@ Ejecute:
 .\iniciar_ruta_fija.bat
 ~~~
 
+Acepte la solicitud de administrador de Windows: se usa solamente para iniciar
+PostgreSQL 16 y configurarlo con inicio manual. El backend y el CRM se ejecutan
+con el usuario normal y con límites de memoria. El JAR se recompila solo cuando
+las fuentes del backend son más recientes que el artefacto existente.
+
 Cuando termine correctamente, abra:
 
 | Recurso | Dirección |
 | --- | --- |
-| CRM | http://localhost:4200 |
+| CRM | http://127.0.0.1:4300 |
 | API | http://127.0.0.1:8080/api/v1 |
 | Estado de API | http://127.0.0.1:8080/actuator/health |
 | Contrato OpenAPI | http://127.0.0.1:8080/v3/api-docs |
@@ -116,9 +126,24 @@ Para detener solamente procesos administrados por Ruta Fija:
 .\finalizar_ruta_fija.bat
 ~~~
 
-PostgreSQL se conserva como servicio local y la base de datos no se elimina.
+El cierre detiene backend, CRM y PostgreSQL 16; puede solicitar nuevamente la
+autorización de Windows. La base de datos y sus datos no se eliminan.
 El inicio normal mantiene las semillas desactivadas, por lo que no se publican
 usuarios ni contraseñas de demostración.
+
+### Actualización para una instalación existente
+
+Si la base ya se encuentra exactamente en Flyway V1–V10, detenga API y CRM,
+aplique primero V11 y después V12. Si ya se encuentra en V1–V11, aplique solo
+V12. Ambos procesos generan un backup comprobable:
+
+~~~powershell
+.\scripts\Invoke-RutaFijaF44DriverIncidentClosureMigration.ps1
+.\scripts\Invoke-RutaFijaM8V12Migration.ps1
+~~~
+
+Después consulte [Ajuste F4.4.1: cierre de incidencias por conductor](ajuste-f4-4-cierre-incidencias-conductor.md)
+y [Ejecución M8: offline mínimo, limitado y visible](ejecucion-m8-offline-minimo.md).
 
 ## 6. Acceso y navegación
 
@@ -203,7 +228,7 @@ Auditoría específica de las operaciones móviles:
 
 Su resultado esperado empieza con `F3_3_MOBILE_OPERATIONS_AUDIT=PASS`.
 Verifica canal móvil separado, conductor activo y vinculado, rutas propias,
-V1-V10, recibos idempotentes, ubicación vigente sin historial, ausencia de
+V1-V12, recibos idempotentes, ubicación vigente sin historial, ausencia de
 coordenadas en auditoría y privilegios DML sin DDL.
 
 Auditoría de contrato y reportes reales F3.4:
@@ -273,6 +298,79 @@ idempotente. También ejecuta análisis, pruebas Flutter, APK debug y firma v2.
 La salida esperada empieza con
 `F4_4_MOBILE_INCIDENTS_ANNOUNCEMENTS=PASS` y declara `total=58/80`.
 
+Auditoría de ubicación puntual M7:
+
+~~~powershell
+.\scripts\Test-RutaFijaM7ForegroundLocation.ps1
+~~~
+
+Su resultado esperado empieza con `M7_FOREGROUND_LOCATION_AUDIT=PASS` y
+declara `total=66/80`. Comprueba el consentimiento, una captura voluntaria en
+primer plano, un único punto vigente y la ausencia de seguimiento continuo.
+
+Auditoría de sincronización offline mínima M8:
+
+~~~powershell
+.\scripts\Test-RutaFijaM8OfflineMinimum.ps1
+~~~
+
+El resultado técnico esperado es
+`M8_OFFLINE_MINIMUM_AUDIT=PASS m8=5/80 total=71/80`. Encadena las regresiones
+M1–M7, comprueba Flyway V1–V12, recibos durables, FIFO, límite de 10,
+idempotencia, privacidad y ausencia de ejecución fuera del primer plano. M8 ya
+fue aprobado tras la prueba física documentada en
+[Ejecución M8](ejecucion-m8-offline-minimo.md).
+
+Auditoría final de calidad, APK y evidencia M9:
+
+~~~powershell
+.\scripts\Test-RutaFijaM9QualityEvidence.ps1
+~~~
+
+La salida técnica esperada empieza con
+`M9_QUALITY_EVIDENCE_AUDIT=PASS m9=9/80 total=80/80`. Conserva las regresiones
+M1–M8, comprueba etiquetas y regiones vivas de accesibilidad, análisis y
+pruebas Flutter, APK debug, firma v2, hash SHA-256 y procedencia Git. M9 fue
+aprobado con `VERDE` después de la ejecución en un dispositivo Android real;
+la lista de [Ejecución M9](ejecucion-m9-calidad-evidencia.md) se conserva para
+futuras regresiones físicas.
+
+Regresión integral web–móvil–base de datos F5.1:
+
+~~~powershell
+.\scripts\Test-RutaFijaF51IntegralRegression.ps1
+~~~
+
+La salida aprobada empieza con `F5_1_INTEGRAL_REGRESSION=PASS`. La auditoría
+comprueba en secuencia PostgreSQL/Flyway, backend, Angular y Flutter, junto con
+el flujo ADMIN → CONDUCTOR → base de datos → CRM, reportes, auditoría y
+aislamiento multiempresa. Si PostgreSQL estaba detenido, el script lo inicia
+solo durante la prueba y vuelve a detenerlo al finalizar. Consulte la
+[ejecución F5.1](ejecucion-f5-1-regresion-integral.md) y su
+[evidencia](evidencia-f5-1-regresion-integral-2026-09-30.md).
+
+Demo pública temporal F5.2:
+
+~~~powershell
+.\iniciar_demo_temporal.bat
+~~~
+
+El comando crea una URL HTTPS aleatoria para CRM, API y WebSocket. PostgreSQL
+permanece privado en 127.0.0.1:5432. Para validar la sesión activa:
+
+~~~powershell
+.\scripts\Test-RutaFijaF52QuickDemo.ps1 -RequireLive
+~~~
+
+Para revocar la URL y liberar todos los recursos:
+
+~~~powershell
+.\finalizar_demo_temporal.bat
+~~~
+
+Consulte [F5.2 — Demo gratuita temporal](ejecucion-f5-2-demo-temporal.md) para
+el comando Flutter y el guion ADMIN → CONDUCTOR → CRM → reporte/auditoría.
+
 Validación del CRM unificado en ADMIN:
 
 ~~~powershell
@@ -290,7 +388,7 @@ Para cerrar la consolidacion de roles antes de iniciar la API movil:
 .\scripts\Test-RutaFijaG2AdminClosure.ps1
 ~~~
 
-Mantenga libres 8080 y 4200. La salida esperada empieza con
+Mantenga libres 8080 y 4300. La salida esperada empieza con
 G2_ADMIN_CONSOLIDATION=PASS. La guia de controles esta en
 [F2.4 / G2](ejecucion-nativa-f2-4-g2.md) y la
 [evidencia G2](evidencia-g2-consolidacion-admin-2026-09-22.md).
@@ -301,7 +399,7 @@ Para revisar REST, login, refresh y WebSocket desde el proxy Angular:
 .\scripts\Invoke-RutaFijaRealtimeProxySmoke.ps1 -Action Verify
 ~~~
 
-Antes del smoke, cierre el runtime normal para liberar 8080 y 4200.
+Antes del smoke, cierre el runtime normal para liberar 8080 y 4300.
 
 ## 9. Seguridad y backup
 

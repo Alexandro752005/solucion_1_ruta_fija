@@ -67,7 +67,8 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ruta-fija-crm:build:production"
+              "buildTarget": "ruta-fija-crm:build:production",
+              "proxyConfig": "proxy.conf.json"
             },
             "development": {
               "buildTarget": "ruta-fija-crm:build:development",

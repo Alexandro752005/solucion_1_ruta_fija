@@ -33,9 +33,9 @@
             <td><strong>{{ categoryLabel(incident.category) }}</strong><small>{{ incident.description }}</small></td>
             <td>{{ incident.driverName }}</td>
             <td>{{ incident.assignmentId ? 'Relacionada' : 'Sin asignaci&oacute;n' }}</td>
-            <td><span class="management-status" [class.success]="incident.status === 'RESOLVED'" [class.warning]="incident.status !== 'RESOLVED'">{{ statusLabel(incident.status) }}</span></td>
+            <td><span class="management-status" [class.success]="incident.status === 'RESOLVED' || incident.status === 'CLOSED_BY_DRIVER'" [class.warning]="incident.status !== 'RESOLVED' && incident.status !== 'CLOSED_BY_DRIVER'">{{ statusLabel(incident.status) }}</span></td>
             <td>{{ incident.reportedByName }}</td>
-            <td><button class="management-button compact" type="button" (click)="viewDetails(incident)">{{ incident.status === 'RESOLVED' ? 'Ver detalle' : 'Ver / Actualizar' }}</button></td>
+            <td><button class="management-button compact" type="button" (click)="viewDetails(incident)">{{ incident.status === 'RESOLVED' ? 'Ver detalle' : incident.status === 'CLOSED_BY_DRIVER' ? 'Ver / Atender' : 'Ver / Actualizar' }}</button></td>
           </tr>
         }</tbody>
       </table></div>
@@ -66,8 +66,11 @@
       <div><dt>Descripci&oacute;n</dt><dd>{{ incident.description }}</dd></div><div><dt>&Uacute;ltimo seguimiento</dt><dd>{{ incident.followUpNote || 'Sin seguimiento' }}</dd></div>
       @if (incident.followedUpByName) { <div><dt>Seguimiento por</dt><dd>{{ incident.followedUpByName }}</dd></div> }
       @if (incident.followedUpAt) { <div><dt>Fecha de seguimiento</dt><dd>{{ dateLabel(incident.followedUpAt) }}</dd></div> }
+      @if (incident.driverClosedByName) { <div><dt>Cerrada por conductor</dt><dd>{{ incident.driverClosedByName }}</dd></div> }
+      @if (incident.driverClosedAt) { <div><dt>Fecha de cierre del conductor</dt><dd>{{ dateLabel(incident.driverClosedAt) }}</dd></div> }
     </dl>
-    @if (incident.status !== 'RESOLVED' && selectedForFollowUp() === null) { <section class="management-detail"><button class="management-button primary" type="button" (click)="beginFollowUp(incident)">Registrar seguimiento</button></section> }
+    @if (incident.status === 'CLOSED_BY_DRIVER') { <section class="management-detail"><p>El conductor cerró este reporte desde la aplicación. El hecho y el cierre se conservan; el ADMIN puede iniciar su atención sin crear una incidencia nueva.</p></section> }
+    @if (incident.status !== 'RESOLVED' && selectedForFollowUp() === null) { <section class="management-detail"><button class="management-button primary" type="button" (click)="beginFollowUp(incident)">{{ incident.status === 'CLOSED_BY_DRIVER' ? 'Atender incidencia' : 'Registrar seguimiento' }}</button></section> }
     @if (selectedForFollowUp()) {
       <section class="management-detail"><h3>Nuevo seguimiento</h3><form class="management-form" [formGroup]="followUpForm" (ngSubmit)="submitFollowUp()" novalidate><div class="field"><label for="follow-up-note">Nota de seguimiento</label><textarea id="follow-up-note" maxlength="1000" formControlName="note" [attr.aria-invalid]="followUpForm.controls.note.invalid && followUpForm.controls.note.touched"></textarea>@if (followUpForm.controls.note.invalid && followUpForm.controls.note.touched) { <p class="management-field-error">Ingresa una nota de seguimiento.</p> }</div><label class="checkbox-field"><input type="checkbox" formControlName="resolve" /> Marcar como resuelta</label><div class="management-actions"><button class="management-button" type="button" (click)="cancelFollowUp()">Cancelar seguimiento</button><button class="management-button primary" type="submit" [disabled]="followUpSaving()">{{ followUpSaving() ? 'Guardando&hellip;' : 'Guardar seguimiento' }}</button></div></form></section>
     }

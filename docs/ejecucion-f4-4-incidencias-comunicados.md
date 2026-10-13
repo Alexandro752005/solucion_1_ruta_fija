@@ -4,8 +4,10 @@
 
 F4.4 continúa los días 7–9 de la Etapa 2 después de F4.3. Entrega M5 y M6
 contra las rutas móviles reales que F3.3/F3.4 ya dejaron protegidas. No cambia
-el esquema PostgreSQL, el backend, Angular, las dependencias Flutter ni el
-contrato OpenAPI.
+el contrato de asignaciones, las dependencias Flutter ni los limites de M7/M8.
+El ajuste F4.4.1 incorpora una migracion V11, una transicion auditable de
+incidencias y sus vistas CRM/movil, sin borrar registros ni cambiar el alcance
+de comunicados.
 
 | Módulo | Puntos | Estado después de F4.4 |
 | --- | ---: | --- |
@@ -31,6 +33,7 @@ Flutter consume exclusivamente estas rutas de la sesión `MOBILE`:
 | Lista | `GET /mobile/incidents` | Solo incidencias del conductor autenticado. |
 | Detalle | `GET /mobile/incidents/{id}` | Un identificador ajeno se resuelve como no disponible. |
 | Reporte | `POST /mobile/incidents` | El backend fija conductor, tenant, hora, origen `MOBILE_APP` y estado `OPEN`. |
+| Cierre | `POST /mobile/incidents/{id}/close` | Solo el mismo conductor que lo reporto desde movil puede cerrarlo con su `version`. |
 
 El formulario solicita categoría y descripción de 1 a 1000 caracteres. El
 cliente completa el `occurredAt` técnico que exige el contrato, pero el backend

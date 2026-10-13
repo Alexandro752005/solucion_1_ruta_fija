@@ -73,12 +73,26 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               DriverProfileDetails(profile: snapshot.requireData),
               const SizedBox(height: 20),
-              const Card(
+              Card(
                 child: Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Text(
-                    'La gestión de consentimiento y ubicación se habilitará en M7. '
-                    'Esta pantalla no solicita permisos de ubicación todavía.',
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Ubicación actual'),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'Puede compartir un único punto solo mientras usa la aplicación. ',
+                      ),
+                      const SizedBox(height: 12),
+                      FilledButton.icon(
+                        key: const Key('profile-manage-location'),
+                        onPressed: () =>
+                            Navigator.of(context).pushNamed('/location'),
+                        icon: const Icon(Icons.my_location_outlined),
+                        label: const Text('Gestionar ubicación'),
+                      ),
+                    ],
                   ),
                 ),
               ),

@@ -73,7 +73,7 @@ class _ConductorHomePageState extends State<ConductorHomePage> {
               const SizedBox(height: 12),
               const Text(
                 'Los datos provienen de su perfil real. Asignaciones, incidencias, '
-                'comunicados y ubicación se habilitan en sus módulos posteriores.',
+                'comunicados y ubicación se gestionan desde sus módulos propios.',
               ),
             ],
           ),

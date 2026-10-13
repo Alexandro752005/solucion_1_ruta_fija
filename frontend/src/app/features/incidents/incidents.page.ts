@@ -251,7 +251,12 @@ export class IncidentsPage {
   }
 
   statusLabel(status: IncidentStatus): string {
-    return ({ OPEN: 'Abierta', FOLLOW_UP: 'En seguimiento', RESOLVED: 'Resuelta' } as Record<IncidentStatus, string>)[status];
+    return ({
+      OPEN: 'Abierta',
+      FOLLOW_UP: 'En seguimiento',
+      RESOLVED: 'Resuelta',
+      CLOSED_BY_DRIVER: 'Cerrada por conductor',
+    } as Record<IncidentStatus, string>)[status];
   }
 
   dateLabel(value: string): string {

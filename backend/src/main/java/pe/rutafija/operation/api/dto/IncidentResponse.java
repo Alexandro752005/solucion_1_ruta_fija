@@ -26,6 +26,9 @@ public record IncidentResponse(
         String followedUpByName,
         Instant followedUpAt,
         Instant resolvedAt,
+        UUID driverClosedById,
+        String driverClosedByName,
+        Instant driverClosedAt,
         Instant createdAt,
         Instant updatedAt
 ) {
@@ -48,6 +51,9 @@ public record IncidentResponse(
                 incident.getFollowedUpBy() == null ? null : incident.getFollowedUpBy().getFullName(),
                 incident.getFollowedUpAt(),
                 incident.getResolvedAt(),
+                incident.getDriverClosedBy() == null ? null : incident.getDriverClosedBy().getId(),
+                incident.getDriverClosedBy() == null ? null : incident.getDriverClosedBy().getFullName(),
+                incident.getDriverClosedAt(),
                 incident.getCreatedAt(),
                 incident.getUpdatedAt()
         );

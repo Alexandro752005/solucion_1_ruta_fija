@@ -31,12 +31,20 @@ final class MobileSessionController extends ChangeNotifier
   factory MobileSessionController({
     required MobileAuthGateway authGateway,
     required MobileRefreshTokenStore tokenStore,
-  }) => MobileSessionController._(authGateway, tokenStore);
+    Future<void> Function(MobileAuthenticatedUser? user)? onLocalSessionCleared,
+  }) =>
+      MobileSessionController._(authGateway, tokenStore, onLocalSessionCleared);
 
-  MobileSessionController._(this._authGateway, this._tokenStore);
+  MobileSessionController._(
+    this._authGateway,
+    this._tokenStore,
+    this._onLocalSessionCleared,
+  );
 
   final MobileAuthGateway _authGateway;
   final MobileRefreshTokenStore _tokenStore;
+  final Future<void> Function(MobileAuthenticatedUser? user)?
+  _onLocalSessionCleared;
   MobileSessionState _state = const MobileSessionState.restoring();
   String? _accessToken;
   Future<bool>? _refreshInFlight;
@@ -153,11 +161,16 @@ final class MobileSessionController extends ChangeNotifier
   }
 
   Future<void> _clearLocalSession() async {
+    final user = _state.user;
     _accessToken = null;
     try {
       await _tokenStore.clear();
     } finally {
-      _setState(const MobileSessionState.unauthenticated());
+      try {
+        await _onLocalSessionCleared?.call(user);
+      } finally {
+        _setState(const MobileSessionState.unauthenticated());
+      }
     }
   }
 

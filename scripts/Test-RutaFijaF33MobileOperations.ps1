@@ -182,11 +182,11 @@ SELECT current_database(),
 '@
 
 $expectedCatalog = @(
-    $developmentDatabase, 'rf_migrator', 'UTC', '1,2,3,4,5,6,7,8,9,10',
+    $developmentDatabase, 'rf_migrator', 'UTC', '1,2,3,4,5,6,7,8,9,10,11,12',
     't', 't', 't', 't', 't', 't', 't', 't', 't', 't', 't', 't', 't', 'f', 't'
 ) -join '|'
 if ($catalog -ne $expectedCatalog) {
-    throw 'El catalogo PostgreSQL no satisface el contrato V9/V10 y de privacidad F3.3.'
+    throw 'El catalogo PostgreSQL no satisface el contrato V9/V10, la extension V11, V12 y la privacidad F3.3.'
 }
 
-Write-Output 'F3_3_MOBILE_OPERATIONS_AUDIT=PASS flyway=V1-V10 mobile=own_routes idempotency=durable location=current_only privacy=no_coordinate_audit privileges=DML_without_DDL docker=0'
+Write-Output 'F3_3_MOBILE_OPERATIONS_AUDIT=PASS flyway=V1-V12 mobile=own_routes idempotency=durable location=current_only privacy=no_coordinate_audit privileges=DML_without_DDL'

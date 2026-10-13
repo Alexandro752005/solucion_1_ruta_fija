@@ -81,4 +81,21 @@ void main() {
       expect(controller.state.status, MobileSessionStatus.unauthenticated);
     },
   );
+
+  test('clears owner-scoped protected operations when the session ends', () async {
+    final clearedOwners = <String?>[];
+    final controller = MobileSessionController(
+      authGateway: FakeMobileAuthGateway(),
+      tokenStore: InMemoryRefreshTokenStore(),
+      onLocalSessionCleared: (user) async {
+        clearedOwners.add(user?.id);
+      },
+    );
+
+    await controller.login(email: 'driver@test.dev', password: 'password');
+    await controller.invalidateSession();
+
+    expect(clearedOwners, ['11111111-1111-4111-8111-111111111111']);
+    expect(controller.state.status, MobileSessionStatus.unauthenticated);
+  });
 }

@@ -7,12 +7,15 @@ import pe.rutafija.audit.application.AuditService;
 import pe.rutafija.fleet.domain.Driver;
 import pe.rutafija.fleet.domain.DriverAvailabilityStatus;
 import pe.rutafija.fleet.domain.DriverVehicleLink;
+import pe.rutafija.fleet.infrastructure.DriverRepository;
 import pe.rutafija.fleet.infrastructure.DriverVehicleLinkRepository;
 import pe.rutafija.operation.api.dto.mobile.MobileAvailabilityRequest;
 import pe.rutafija.operation.api.dto.mobile.MobileAvailabilityResponse;
 import pe.rutafija.operation.api.dto.mobile.MobileDriverProfileResponse;
 import pe.rutafija.operation.api.dto.mobile.MobileLocationConsentRequest;
 import pe.rutafija.operation.api.dto.mobile.MobileLocationUpdateRequest;
+import pe.rutafija.operation.api.dto.mobile.MobileSyncEventRequest;
+import pe.rutafija.operation.domain.MobileCommandType;
 import pe.rutafija.operation.config.MobileOperationProperties;
 import pe.rutafija.operation.infrastructure.DriverCurrentLocationStore;
 import pe.rutafija.shared.exception.ApplicationException;
@@ -31,26 +34,32 @@ import java.util.Map;
 public class MobileDriverService {
 
     private final MobileDriverContextService mobileDriverContextService;
+    private final DriverRepository driverRepository;
     private final DriverVehicleLinkRepository driverVehicleLinkRepository;
     private final DriverCurrentLocationStore currentLocationStore;
     private final MobileOperationProperties properties;
+    private final MobileCommandProcessor commandProcessor;
     private final AuditService auditService;
     private final OperationEventPublisher eventPublisher;
     private final Clock clock;
 
     public MobileDriverService(
             MobileDriverContextService mobileDriverContextService,
+            DriverRepository driverRepository,
             DriverVehicleLinkRepository driverVehicleLinkRepository,
             DriverCurrentLocationStore currentLocationStore,
             MobileOperationProperties properties,
+            MobileCommandProcessor commandProcessor,
             AuditService auditService,
             OperationEventPublisher eventPublisher,
             Clock clock
     ) {
         this.mobileDriverContextService = mobileDriverContextService;
+        this.driverRepository = driverRepository;
         this.driverVehicleLinkRepository = driverVehicleLinkRepository;
         this.currentLocationStore = currentLocationStore;
         this.properties = properties;
+        this.commandProcessor = commandProcessor;
         this.auditService = auditService;
         this.eventPublisher = eventPublisher;
         this.clock = clock;
@@ -72,36 +81,50 @@ public class MobileDriverService {
     @Transactional
     public MobileAvailabilityResponse changeAvailability(MobileAvailabilityRequest request) {
         MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
-        Driver driver = actor.driver();
-        if (request.status() != DriverAvailabilityStatus.DISPONIBLE
-                && request.status() != DriverAvailabilityStatus.DESCANSO
-                && request.status() != DriverAvailabilityStatus.NO_DISPONIBLE) {
-            throw new ApplicationException(
-                    HttpStatus.CONFLICT,
-                    ErrorCode.AVAILABILITY_INVALID_TRANSITION,
-                    "RESERVADO y EN_SERVICIO solo cambian por una asignacion"
-            );
-        }
-        try {
-            driver.changeAdministrativeAvailability(request.status());
-        } catch (IllegalStateException exception) {
-            throw new ApplicationException(
-                    HttpStatus.CONFLICT,
-                    ErrorCode.AVAILABILITY_INVALID_TRANSITION,
-                    "La transicion de disponibilidad no esta permitida"
-            );
-        }
-        if (!allowsCurrentLocation(driver)) {
-            currentLocationStore.deleteByDriverId(driver.getId());
-        }
-        auditService.record(actor.user(), "MOBILE_DRIVER_AVAILABILITY_CHANGED", "DRIVER", driver.getId(), Map.of(
-                "status", driver.getAvailabilityStatus().name()
-        ));
-        eventPublisher.publish(actor.user().getOrganizationId(), driver.getGroup().getId(), "driver.status.changed", Map.of(
-                "driverId", driver.getId().toString(),
-                "status", driver.getAvailabilityStatus().name()
-        ));
-        return availabilityResponse(driver);
+        return applyAvailabilityChange(actor, lockOwnDriver(actor), request.status());
+    }
+
+    /**
+     * Applies a bounded outbox availability event under the same durable receipt
+     * mechanism as assignment commands. The updatedAt token prevents a stale
+     * device intention from overwriting a later administrative change.
+     */
+    @Transactional(noRollbackFor = ApplicationException.class)
+    public MobileCommandExecution<MobileAvailabilityResponse> syncAvailability(MobileSyncEventRequest event) {
+        MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
+        Driver driver = lockOwnDriver(actor);
+        String requestHash = commandProcessor.hash(
+                MobileCommandType.AVAILABILITY_CHANGE.name()
+                        + "|" + driver.getId()
+                        + "|" + event.occurredAt()
+                        + "|" + event.targetAvailability()
+                        + "|" + event.expectedAvailabilityUpdatedAt()
+        );
+        return commandProcessor.execute(
+                actor,
+                event.eventId(),
+                event.occurredAt(),
+                MobileCommandType.AVAILABILITY_CHANGE,
+                null,
+                requestHash,
+                receipt -> new MobileAvailabilityResponse(
+                        driver.getId(),
+                        DriverAvailabilityStatus.valueOf(receipt.getServerState()),
+                        driver.getUpdatedAt()
+                ),
+                () -> driver.getAvailabilityStatus().name(),
+                () -> {
+                    if (!driver.getUpdatedAt().equals(event.expectedAvailabilityUpdatedAt())) {
+                        throw new ApplicationException(
+                                HttpStatus.CONFLICT,
+                                ErrorCode.RESOURCE_VERSION_CONFLICT,
+                                "La disponibilidad cambio; actualice antes de conciliar"
+                        );
+                    }
+                    return applyAvailabilityChange(actor, driver, event.targetAvailability());
+                },
+                response -> response.status().name()
+        );
     }
 
     @Transactional
@@ -194,6 +217,52 @@ public class MobileDriverService {
     }
 
     private MobileAvailabilityResponse availabilityResponse(Driver driver) {
-        return new MobileAvailabilityResponse(driver.getId(), driver.getAvailabilityStatus());
+        return new MobileAvailabilityResponse(driver.getId(), driver.getAvailabilityStatus(), driver.getUpdatedAt());
+    }
+
+    private Driver lockOwnDriver(MobileDriverActor actor) {
+        return driverRepository.lockByIdAndOrganizationId(actor.driver().getId(), actor.user().getOrganizationId())
+                .orElseThrow(() -> new ApplicationException(
+                        HttpStatus.NOT_FOUND,
+                        ErrorCode.RESOURCE_NOT_FOUND,
+                        "El conductor de la sesion no existe"
+                ));
+    }
+
+    private MobileAvailabilityResponse applyAvailabilityChange(
+            MobileDriverActor actor,
+            Driver driver,
+            DriverAvailabilityStatus requested
+    ) {
+        if (requested != DriverAvailabilityStatus.DISPONIBLE
+                && requested != DriverAvailabilityStatus.DESCANSO
+                && requested != DriverAvailabilityStatus.NO_DISPONIBLE) {
+            throw new ApplicationException(
+                    HttpStatus.CONFLICT,
+                    ErrorCode.AVAILABILITY_INVALID_TRANSITION,
+                    "RESERVADO y EN_SERVICIO solo cambian por una asignacion"
+            );
+        }
+        try {
+            driver.changeAdministrativeAvailability(requested);
+        } catch (IllegalStateException exception) {
+            throw new ApplicationException(
+                    HttpStatus.CONFLICT,
+                    ErrorCode.AVAILABILITY_INVALID_TRANSITION,
+                    "La transicion de disponibilidad no esta permitida"
+            );
+        }
+        if (!allowsCurrentLocation(driver)) {
+            currentLocationStore.deleteByDriverId(driver.getId());
+        }
+        Driver persisted = driverRepository.saveAndFlush(driver);
+        auditService.record(actor.user(), "MOBILE_DRIVER_AVAILABILITY_CHANGED", "DRIVER", persisted.getId(), Map.of(
+                "status", persisted.getAvailabilityStatus().name()
+        ));
+        eventPublisher.publish(actor.user().getOrganizationId(), persisted.getGroup().getId(), "driver.status.changed", Map.of(
+                "driverId", persisted.getId().toString(),
+                "status", persisted.getAvailabilityStatus().name()
+        ));
+        return availabilityResponse(persisted);
     }
 }

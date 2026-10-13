@@ -74,6 +74,13 @@ public class Incident {
     @Column(name = "resolved_at")
     private Instant resolvedAt;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "driver_closed_by")
+    private AppUser driverClosedBy;
+
+    @Column(name = "driver_closed_at")
+    private Instant driverClosedAt;
+
     @Version
     @Column(nullable = false)
     private long version;
@@ -154,6 +161,32 @@ public class Incident {
         }
     }
 
+    /**
+     * The MOBILE reporter may close their own report exactly once. The event is
+     * retained even if an ADMIN later moves it to follow-up or formal resolution.
+     */
+    public boolean closeByMobileReporter(AppUser actor, Instant occurredAt) {
+        AppUser requiredActor = Objects.requireNonNull(actor);
+        Instant requiredOccurredAt = Objects.requireNonNull(occurredAt);
+        if (source != IncidentSource.MOBILE_APP || !reportedBy.getId().equals(requiredActor.getId())) {
+            throw new IllegalStateException("Solo el conductor que reportó desde móvil puede cerrar esta incidencia");
+        }
+        if (status == IncidentStatus.CLOSED_BY_DRIVER && driverClosedBy != null
+                && driverClosedBy.getId().equals(requiredActor.getId())) {
+            return false;
+        }
+        if (driverClosedAt != null || driverClosedBy != null) {
+            throw new IllegalStateException("El conductor ya cerró esta incidencia y no puede modificarla nuevamente");
+        }
+        if (status != IncidentStatus.OPEN && status != IncidentStatus.FOLLOW_UP) {
+            throw new IllegalStateException("Esta incidencia ya no admite cierre por el conductor");
+        }
+        status = IncidentStatus.CLOSED_BY_DRIVER;
+        driverClosedBy = requiredActor;
+        driverClosedAt = requiredOccurredAt;
+        return true;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -212,6 +245,14 @@ public class Incident {
 
     public Instant getResolvedAt() {
         return resolvedAt;
+    }
+
+    public AppUser getDriverClosedBy() {
+        return driverClosedBy;
+    }
+
+    public Instant getDriverClosedAt() {
+        return driverClosedAt;
     }
 
     public long getVersion() {

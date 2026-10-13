@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pe.rutafija.operation.api.dto.IncidentResponse;
+import pe.rutafija.operation.api.dto.mobile.MobileIncidentCloseRequest;
 import pe.rutafija.operation.api.dto.mobile.MobileIncidentCreateRequest;
 import pe.rutafija.operation.application.MobileIncidentService;
 import pe.rutafija.shared.api.PageResponse;
@@ -68,5 +69,16 @@ public class MobileIncidentController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .cacheControl(CacheControl.noStore())
                 .body(mobileIncidentService.create(request));
+    }
+
+    @PostMapping("/{incidentId}/close")
+    @Operation(summary = "Cerrar una incidencia propia creada desde móvil")
+    public ResponseEntity<IncidentResponse> close(
+            @PathVariable UUID incidentId,
+            @Valid @RequestBody MobileIncidentCloseRequest request
+    ) {
+        return ResponseEntity.ok()
+                .cacheControl(CacheControl.noStore())
+                .body(mobileIncidentService.close(incidentId, request));
     }
 }

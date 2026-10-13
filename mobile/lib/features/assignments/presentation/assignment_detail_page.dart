@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/network/mobile_api_exception.dart';
+import '../../../core/offline/mobile_offline.dart';
 import '../../../core/presentation/mobile_error_message.dart';
 import '../data/mobile_assignment_repository.dart';
 import '../domain/mobile_assignment_models.dart';
@@ -114,6 +115,18 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
       if (!mounted) {
         return;
       }
+      if (result.queued) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              result.blocked
+                  ? 'La acción requiere conciliación. Abra Pendientes de sincronización antes de volver a intentarlo.'
+                  : 'La acción quedó guardada en Pendientes de sincronización. Se enviará en orden cuando usted pulse Sincronizar.',
+            ),
+          ),
+        );
+        return;
+      }
       _changed = true;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -141,6 +154,12 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
             ),
           ),
         );
+      } else if (error is MobileOfflinePendingActionException) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(error.message)));
+      } else if (error is StateError) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(error.message)));
       } else if (error is MobileNetworkException) {
         await _refreshPendingOnly();
         if (!mounted) {
@@ -169,7 +188,8 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
 
   Future<void> _retryPending() async {
     final command = _pendingCommand;
-    if (command == null || _submitting) {
+    final assignment = _assignment;
+    if (command == null || assignment == null || _submitting) {
       return;
     }
     final confirmed = await _confirm(command.command, retry: true);
@@ -178,8 +198,23 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
     }
     setState(() => _submitting = true);
     try {
-      final result = await widget.driverGateway.retry(command);
+      final result = await widget.driverGateway.retry(
+        command,
+        fallbackAssignment: assignment,
+      );
       if (!mounted) {
+        return;
+      }
+      if (result.queued) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              result.blocked
+                  ? 'La acción requiere conciliación. Abra Pendientes de sincronización antes de volver a intentarlo.'
+                  : 'La acción quedó guardada en Pendientes de sincronización.',
+            ),
+          ),
+        );
         return;
       }
       _changed = true;

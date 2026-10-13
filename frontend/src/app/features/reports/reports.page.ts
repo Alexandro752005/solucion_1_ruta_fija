@@ -186,6 +186,7 @@ export class ReportsPage {
       OPEN: 'Abierta',
       FOLLOW_UP: 'En seguimiento',
       RESOLVED: 'Resuelta',
+      CLOSED_BY_DRIVER: 'Cerrada por conductor',
       AVERIA: 'Avería',
       ACCIDENTE: 'Accidente',
       RETRASO: 'Retraso',

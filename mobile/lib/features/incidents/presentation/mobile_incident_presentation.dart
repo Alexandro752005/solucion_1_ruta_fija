@@ -11,6 +11,7 @@ Color incidentStatusColor(BuildContext context, MobileIncidentStatus status) {
     MobileIncidentStatus.open => colors.error,
     MobileIncidentStatus.followUp => colors.tertiary,
     MobileIncidentStatus.resolved => Colors.green.shade700,
+    MobileIncidentStatus.driverClosed => Colors.blueGrey.shade700,
   };
 }
 

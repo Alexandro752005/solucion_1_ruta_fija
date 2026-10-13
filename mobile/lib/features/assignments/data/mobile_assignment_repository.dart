@@ -1,11 +1,13 @@
 import '../../../core/network/correlation_id.dart';
 import '../../../core/network/mobile_api_client.dart';
 import '../../../core/network/mobile_api_exception.dart';
+import '../../../core/offline/mobile_offline.dart';
 import 'mobile_assignment_command_store.dart';
 import '../domain/mobile_assignment_models.dart';
 
 typedef MobileClientEventIdFactory = String Function();
 typedef MobileUtcClock = DateTime Function();
+typedef MobileOfflineOwnerProvider = MobileOfflineQueueOwner Function();
 
 abstract interface class MobileAssignmentGateway {
   Future<MobileAssignmentPage> list({
@@ -27,20 +29,25 @@ abstract interface class MobileAssignmentGateway {
   });
 
   Future<MobileAssignmentCommandResult> retry(
-    MobilePendingAssignmentCommand command,
-  );
+    MobilePendingAssignmentCommand command, {
+    MobileAssignment? fallbackAssignment,
+  });
 }
 
 final class MobileAssignmentRepository implements MobileAssignmentGateway {
   MobileAssignmentRepository(
     this._apiClient,
     this._commandStore, {
+    this.offlineSyncController,
+    this.offlineOwnerProvider,
     this.clientEventIdFactory = createCorrelationId,
     this.utcClock = _nowUtc,
   });
 
   final MobileApiClient _apiClient;
   final MobileAssignmentCommandStore _commandStore;
+  final MobileOfflineSyncController? offlineSyncController;
+  final MobileOfflineOwnerProvider? offlineOwnerProvider;
   final MobileClientEventIdFactory clientEventIdFactory;
   final MobileUtcClock utcClock;
 
@@ -99,6 +106,10 @@ final class MobileAssignmentRepository implements MobileAssignmentGateway {
         'La acción no está permitida para el estado actual de la asignación.',
       );
     }
+    if (command == MobileAssignmentCommandType.start ||
+        command == MobileAssignmentCommandType.complete) {
+      return _sendServiceThroughOfflineBoundary(assignment, command);
+    }
     final existing = await _pendingForAssignment(
       assignment.driverId,
       assignment.id,
@@ -123,9 +134,98 @@ final class MobileAssignmentRepository implements MobileAssignmentGateway {
 
   @override
   Future<MobileAssignmentCommandResult> retry(
-    MobilePendingAssignmentCommand command,
-  ) {
+    MobilePendingAssignmentCommand command, {
+    MobileAssignment? fallbackAssignment,
+  }) {
+    if (command.command == MobileAssignmentCommandType.start ||
+        command.command == MobileAssignmentCommandType.complete) {
+      if (fallbackAssignment == null) {
+        throw StateError(
+          'Se requiere la asignación actual para recuperar este servicio.',
+        );
+      }
+      return _adoptLegacyServiceCommand(command, fallbackAssignment);
+    }
     return _deliver(command);
+  }
+
+  Future<MobileAssignmentCommandResult> _sendServiceThroughOfflineBoundary(
+    MobileAssignment assignment,
+    MobileAssignmentCommandType command,
+  ) async {
+    final sync = offlineSyncController;
+    final ownerProvider = offlineOwnerProvider;
+    if (sync == null || ownerProvider == null) {
+      throw StateError(
+        'La cola M8 no fue configurada para iniciar o cerrar servicios.',
+      );
+    }
+    final owner = ownerProvider();
+    if (owner.driverId != assignment.driverId) {
+      throw StateError(
+        'La asignación no pertenece al conductor de la sesión actual.',
+      );
+    }
+    final submission = command == MobileAssignmentCommandType.start
+        ? await sync.submitServiceStart(
+            owner: owner,
+            assignmentId: assignment.id,
+            version: assignment.version,
+          )
+        : await sync.submitServiceComplete(
+            owner: owner,
+            assignmentId: assignment.id,
+            version: assignment.version,
+          );
+    return MobileAssignmentCommandResult(
+      assignment: assignment,
+      replayed: submission.replayed,
+      queued: !submission.delivered,
+      blocked: submission.blocked,
+    );
+  }
+
+  Future<MobileAssignmentCommandResult> _adoptLegacyServiceCommand(
+    MobilePendingAssignmentCommand command,
+    MobileAssignment fallbackAssignment,
+  ) async {
+    final sync = offlineSyncController;
+    final ownerProvider = offlineOwnerProvider;
+    if (sync == null || ownerProvider == null) {
+      throw StateError(
+        'La cola M8 no fue configurada para recuperar este servicio.',
+      );
+    }
+    final owner = ownerProvider();
+    if (owner.driverId != command.driverId) {
+      throw StateError('La acción pendiente no pertenece al conductor actual.');
+    }
+    final event = command.command == MobileAssignmentCommandType.start
+        ? MobileOfflineEvent.serviceStart(
+            owner: owner,
+            eventId: command.clientEventId,
+            occurredAt: command.occurredAt,
+            assignmentId: command.assignmentId,
+            version: command.version,
+          )
+        : MobileOfflineEvent.serviceComplete(
+            owner: owner,
+            eventId: command.clientEventId,
+            occurredAt: command.occurredAt,
+            assignmentId: command.assignmentId,
+            version: command.version,
+          );
+    final submission = await sync.submitPersistedEvent(event);
+    await _commandStore.delete(command);
+    final assignment = submission.delivered
+        ? await get(command.assignmentId)
+        : fallbackAssignment;
+    return MobileAssignmentCommandResult(
+      assignment: assignment,
+      replayed: submission.replayed,
+      queued: !submission.delivered,
+      blocked: submission.blocked,
+    );
   }
 
   Future<MobileAssignmentCommandResult> _deliver(

@@ -265,10 +265,14 @@ final class MobileAssignmentCommandResult {
   const MobileAssignmentCommandResult({
     required this.assignment,
     required this.replayed,
+    this.queued = false,
+    this.blocked = false,
   });
 
   final MobileAssignment assignment;
   final bool replayed;
+  final bool queued;
+  final bool blocked;
 }
 
 String _requiredString(Map<String, dynamic> json, String key) {

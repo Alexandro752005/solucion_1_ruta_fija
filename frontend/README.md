@@ -15,7 +15,7 @@ npm.cmd ci
 npm.cmd start
 ```
 
-El servidor de desarrollo publica el CRM en `http://localhost:4200` y redirige
+El servidor de desarrollo publica el CRM en `http://127.0.0.1:4300` y redirige
 `/api` al backend mediante `proxy.conf.json`.
 
 ## Verificación

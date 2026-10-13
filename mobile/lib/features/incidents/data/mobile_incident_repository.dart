@@ -8,6 +8,8 @@ abstract interface class MobileIncidentGateway {
 
   Future<MobileIncident> get(String incidentId);
 
+  Future<MobileIncident> close(String incidentId, {required int version});
+
   Future<MobileIncident> create({
     required MobileIncidentCategory category,
     required String description,
@@ -42,6 +44,22 @@ final class MobileIncidentRepository implements MobileIncidentGateway {
     final normalizedId = _requiredIdentifier(incidentId, 'incidentId');
     final response = await _apiClient.getObject(
       'mobile/incidents/$normalizedId',
+    );
+    return MobileIncident.fromJson(response);
+  }
+
+  @override
+  Future<MobileIncident> close(
+    String incidentId, {
+    required int version,
+  }) async {
+    final normalizedId = _requiredIdentifier(incidentId, 'incidentId');
+    if (version < 0) {
+      throw ArgumentError.value(version, 'version', 'La versión no es válida.');
+    }
+    final response = await _apiClient.postObject(
+      'mobile/incidents/$normalizedId/close',
+      {'version': version},
     );
     return MobileIncident.fromJson(response);
   }

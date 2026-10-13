@@ -26,7 +26,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
- * Executes an assignment command exactly once per global event id. PostgreSQL
+ * Executes a permitted mobile command exactly once per global event id. PostgreSQL
  * advisory locking closes the read-then-insert race without keeping a lock past
  * the transaction; the durable receipt is saved in the same transaction as the
  * business transition.
@@ -59,6 +59,7 @@ public class MobileCommandProcessor {
             Assignment receiptAssignment,
             String requestHash,
             Function<MobileCommandReceipt, T> replay,
+            Supplier<String> failureServerState,
             Supplier<T> apply,
             Function<T, String> serverState
     ) {
@@ -66,8 +67,8 @@ public class MobileCommandProcessor {
         Objects.requireNonNull(eventId);
         Objects.requireNonNull(clientOccurredAt);
         Objects.requireNonNull(commandType);
-        Objects.requireNonNull(receiptAssignment);
         Objects.requireNonNull(requestHash);
+        Objects.requireNonNull(failureServerState);
 
         Instant serverNow = Instant.now(clock);
         if (clientOccurredAt.isAfter(serverNow.plus(MAX_CLIENT_CLOCK_AHEAD))) {
@@ -108,7 +109,8 @@ public class MobileCommandProcessor {
             ));
             return new MobileCommandExecution<>(result, false);
         } catch (ApplicationException exception) {
-            receiptRepository.saveAndFlush(MobileCommandReceipt.rejected(
+            MobileCommandReceipt receipt = exception.getStatus() == HttpStatus.CONFLICT
+                    ? MobileCommandReceipt.conflict(
                     eventId,
                     actor.user().getOrganization(),
                     actor.driver(),
@@ -116,11 +118,25 @@ public class MobileCommandProcessor {
                     receiptAssignment,
                     requestHash,
                     (short) exception.getStatus().value(),
-                    receiptAssignment.getStatus().name(),
+                    failureServerState.get(),
                     exception.getCode().name(),
                     clientOccurredAt,
                     processedAt
-            ));
+            )
+                    : MobileCommandReceipt.rejected(
+                    eventId,
+                    actor.user().getOrganization(),
+                    actor.driver(),
+                    commandType,
+                    receiptAssignment,
+                    requestHash,
+                    (short) exception.getStatus().value(),
+                    failureServerState.get(),
+                    exception.getCode().name(),
+                    clientOccurredAt,
+                    processedAt
+            );
+            receiptRepository.saveAndFlush(receipt);
             throw exception;
         }
     }
@@ -141,11 +157,12 @@ public class MobileCommandProcessor {
             Assignment assignment,
             String requestHash
     ) {
+        UUID existingAssignmentId = existing.getAssignment() == null ? null : existing.getAssignment().getId();
+        UUID requestedAssignmentId = assignment == null ? null : assignment.getId();
         if (!existing.getOrganization().getId().equals(actor.user().getOrganizationId())
                 || !existing.getDriver().getId().equals(actor.driver().getId())
                 || existing.getCommandType() != commandType
-                || existing.getAssignment() == null
-                || !existing.getAssignment().getId().equals(assignment.getId())
+                || !Objects.equals(existingAssignmentId, requestedAssignmentId)
                 || !existing.getRequestHash().equals(requestHash)) {
             throw new ApplicationException(
                     HttpStatus.CONFLICT,

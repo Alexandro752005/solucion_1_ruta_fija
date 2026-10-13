@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/network/mobile_api_exception.dart';
 import '../../../core/presentation/mobile_error_message.dart';
 import '../data/mobile_incident_repository.dart';
 import '../domain/mobile_incident_models.dart';
@@ -9,11 +10,13 @@ class IncidentDetailPage extends StatefulWidget {
   const IncidentDetailPage({
     required this.incidentId,
     required this.incidentGateway,
+    required this.userId,
     super.key,
   });
 
   final String incidentId;
   final MobileIncidentGateway incidentGateway;
+  final String userId;
 
   @override
   State<IncidentDetailPage> createState() => _IncidentDetailPageState();
@@ -23,6 +26,7 @@ class _IncidentDetailPageState extends State<IncidentDetailPage> {
   MobileIncident? _incident;
   Object? _error;
   bool _loading = true;
+  bool _closing = false;
 
   @override
   void initState() {
@@ -49,6 +53,73 @@ class _IncidentDetailPageState extends State<IncidentDetailPage> {
     } finally {
       if (mounted) {
         setState(() => _loading = false);
+      }
+    }
+  }
+
+  Future<void> _confirmClose() async {
+    final incident = _incident;
+    if (_closing ||
+        incident == null ||
+        !incident.canBeClosedBy(widget.userId)) {
+      return;
+    }
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Cerrar incidencia'),
+        content: const Text(
+          'No se eliminará el reporte. Cambiará a "Cerrada por conductor" y no podrá reabrirlo ni modificarlo desde esta aplicación. El ADMIN podrá atenderlo después desde el CRM.',
+        ),
+        actions: [
+          TextButton(
+            key: const Key('incident-close-cancel'),
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: const Text('Volver'),
+          ),
+          FilledButton(
+            key: const Key('incident-close-confirm'),
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: const Text('Cerrar definitivamente'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed == true) {
+      await _close(incident);
+    }
+  }
+
+  Future<void> _close(MobileIncident incident) async {
+    setState(() => _closing = true);
+    try {
+      final closed = await widget.incidentGateway.close(
+        incident.id,
+        version: incident.version,
+      );
+      if (!mounted) {
+        return;
+      }
+      setState(() => _incident = closed);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'La incidencia quedó cerrada por el conductor y conserva su historial.',
+          ),
+        ),
+      );
+    } catch (error) {
+      if (!mounted) {
+        return;
+      }
+      final message = error is MobileNetworkException
+          ? 'No se pudo confirmar el cierre por la red. Actualice o vuelva a intentar: el servidor no creará otro reporte.'
+          : mobileErrorMessage(error);
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(message)));
+    } finally {
+      if (mounted) {
+        setState(() => _closing = false);
       }
     }
   }
@@ -124,6 +195,7 @@ class _IncidentDetailPageState extends State<IncidentDetailPage> {
                         'Reportada',
                         incidentDateTimeLabel(incident.reportedAt),
                       ),
+                      _DetailRow('Reportada por', incident.reportedByName),
                       _DetailRow('Origen', incident.source.label),
                       if (incident.assignmentId != null)
                         _DetailRow(
@@ -144,11 +216,68 @@ class _IncidentDetailPageState extends State<IncidentDetailPage> {
                           'Resuelta',
                           incidentDateTimeLabel(incident.resolvedAt!),
                         ),
+                      if (incident.driverClosedByName != null)
+                        _DetailRow('Cerrada por', incident.driverClosedByName!),
+                      if (incident.driverClosedAt != null)
+                        _DetailRow(
+                          'Fecha de cierre del conductor',
+                          incidentDateTimeLabel(incident.driverClosedAt!),
+                        ),
                     ],
                   ),
                 ),
               ),
               const SizedBox(height: 16),
+              if (incident.canBeClosedBy(widget.userId)) ...[
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Si el hecho ya fue solucionado, puede cerrar este reporte una sola vez.',
+                        ),
+                        const SizedBox(height: 8),
+                        const Text(
+                          'No se elimina ni se duplica. El cierre es irreversible para el conductor y queda disponible para la atención del ADMIN.',
+                        ),
+                        const SizedBox(height: 16),
+                        FilledButton.icon(
+                          key: const Key('incident-close'),
+                          onPressed: _closing ? null : _confirmClose,
+                          icon: _closing
+                              ? const SizedBox(
+                                  height: 18,
+                                  width: 18,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  ),
+                                )
+                              : const Icon(Icons.task_alt_outlined),
+                          label: Text(
+                            _closing
+                                ? 'Cerrando…'
+                                : 'Cerrar incidencia definitivamente',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+              ],
+              if (incident.wasClosedByDriver) ...[
+                const Card(
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Text(
+                      'Esta incidencia fue cerrada por el conductor. No puede reabrirla ni modificarla desde la aplicación; el ADMIN conserva la atención desde el CRM.',
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+              ],
               const Card(
                 child: Padding(
                   padding: EdgeInsets.all(16),

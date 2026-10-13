@@ -214,6 +214,7 @@ public class MobileAssignmentService {
                 receiptAssignment,
                 requestHash,
                 receipt -> AssignmentResponse.from(findOwnAssignment(actor, receipt.getAssignment().getId())),
+                () -> receiptAssignment.getStatus().name(),
                 () -> mutation.apply(lockOwnAssignment(actor, assignmentId), Instant.now(clock)),
                 response -> response.status().name()
         );

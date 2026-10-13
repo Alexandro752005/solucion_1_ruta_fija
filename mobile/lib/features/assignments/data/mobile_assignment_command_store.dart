@@ -10,6 +10,8 @@ abstract interface class MobileAssignmentCommandStore {
   Future<void> write(MobilePendingAssignmentCommand command);
 
   Future<void> delete(MobilePendingAssignmentCommand command);
+
+  Future<void> clearAll();
 }
 
 /// Protected, narrow persistence for a command whose outcome is still unknown.
@@ -69,6 +71,16 @@ final class MobileSecureAssignmentCommandStore
   @override
   Future<void> delete(MobilePendingAssignmentCommand command) {
     return _storage.delete(key: _keyFor(command));
+  }
+
+  @override
+  Future<void> clearAll() async {
+    final values = await _storage.readAll();
+    for (final key in values.keys) {
+      if (key.startsWith(_keyPrefix)) {
+        await _storage.delete(key: key);
+      }
+    }
   }
 
   String _keyFor(MobilePendingAssignmentCommand command) {

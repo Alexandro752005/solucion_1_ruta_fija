@@ -8,9 +8,14 @@ import 'incident_report_page.dart';
 import 'mobile_incident_presentation.dart';
 
 class IncidentsPage extends StatefulWidget {
-  const IncidentsPage({required this.incidentGateway, super.key});
+  const IncidentsPage({
+    required this.incidentGateway,
+    required this.userId,
+    super.key,
+  });
 
   final MobileIncidentGateway incidentGateway;
+  final String userId;
 
   @override
   State<IncidentsPage> createState() => _IncidentsPageState();
@@ -114,15 +119,16 @@ class _IncidentsPageState extends State<IncidentsPage> {
   }
 
   Future<void> _openIncident(MobileIncident incident) async {
-    final changed = await Navigator.of(context).push<bool>(
+    await Navigator.of(context).push<bool>(
       MaterialPageRoute(
         builder: (_) => IncidentDetailPage(
           incidentId: incident.id,
           incidentGateway: widget.incidentGateway,
+          userId: widget.userId,
         ),
       ),
     );
-    if (changed == true && mounted) {
+    if (mounted) {
       await _reload();
     }
   }

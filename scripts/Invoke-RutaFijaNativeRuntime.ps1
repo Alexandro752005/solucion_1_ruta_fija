@@ -6,7 +6,11 @@ param(
     [string]$ConfigPath,
 
     [ValidateRange(15, 180)]
-    [int]$StartupTimeoutSeconds = 90
+    [int]$StartupTimeoutSeconds = 90,
+
+    [switch]$RunFullAudit,
+
+    [string]$PublicDemoOrigin
 )
 
 Set-StrictMode -Version Latest
@@ -25,9 +29,9 @@ $runtimeDirectory = Join-Path $repoRoot '.runtime'
 $statePath = Join-Path $runtimeDirectory 'ruta-fija-native-runtime.json'
 
 $backendPort = 8080
-$frontendPort = 4200
+$frontendPort = 4300
 $backendHealthUri = 'http://127.0.0.1:8080/actuator/health'
-$frontendUri = 'http://localhost:4200/'
+$frontendUri = 'http://127.0.0.1:4300/'
 $expectedDevelopmentUrl = 'jdbc:postgresql://127.0.0.1:5432/solucion_ruta_fija_1'
 
 function Get-ProcessByIdSafely {
@@ -276,8 +280,8 @@ function Test-RutaFijaRuntime {
     $null = Test-FrontendPage -TimeoutSeconds 10
 
     if (-not $Quiet) {
-        Write-Output 'F1_1B_RUNTIME=PASS backend=UP frontend=UP ports=8080,4200'
-        Write-Output 'CRM=http://localhost:4200 API=http://127.0.0.1:8080'
+        Write-Output 'F1_1B_RUNTIME=PASS backend=UP frontend=UP ports=8080,4300'
+        Write-Output 'CRM=http://127.0.0.1:4300 API=http://127.0.0.1:8080'
     }
 }
 
@@ -294,13 +298,31 @@ function Get-ValidatedRuntimeSettings {
         SPRING_FLYWAY_URL = $expectedDevelopmentUrl
         SPRING_FLYWAY_USERNAME = 'rf_migrator'
         APP_SEED_ENABLED = 'false'
-        APP_CORS_ALLOWED_ORIGINS = 'http://localhost:4200'
+        APP_CORS_ALLOWED_ORIGINS = 'http://localhost:4300,http://127.0.0.1:4300'
         REFRESH_COOKIE_SECURE = 'false'
     }
     foreach ($entry in $expected.GetEnumerator()) {
         if (-not $settings.Contains($entry.Key) -or $settings[$entry.Key] -ne $entry.Value) {
             throw "La configuración nativa no cumple $($entry.Key) para F1.1B."
         }
+    }
+    if (-not [string]::IsNullOrWhiteSpace($PublicDemoOrigin)) {
+        $normalizedDemoOrigin = $PublicDemoOrigin.Trim().TrimEnd('/')
+        $demoUri = $null
+        if (-not [Uri]::TryCreate($normalizedDemoOrigin, [UriKind]::Absolute, [ref]$demoUri) -or
+            $demoUri.Scheme -ne 'https' -or
+            $demoUri.Port -ne 443 -or
+            $demoUri.AbsolutePath -ne '/' -or
+            -not [string]::IsNullOrWhiteSpace($demoUri.Query) -or
+            -not [string]::IsNullOrWhiteSpace($demoUri.Fragment) -or
+            $demoUri.Host -notmatch '^[a-z0-9-]+\.trycloudflare\.com$') {
+            throw 'PublicDemoOrigin debe ser un origen HTTPS temporal de trycloudflare.com sin ruta, consulta ni fragmento.'
+        }
+
+        $settings['APP_CORS_ALLOWED_ORIGINS'] = (
+            $settings['APP_CORS_ALLOWED_ORIGINS'] + ',' + $normalizedDemoOrigin
+        )
+        $settings['REFRESH_COOKIE_SECURE'] = 'true'
     }
     return $settings
 }
@@ -409,6 +431,78 @@ function Assert-PortIsFree {
     throw "El puerto $Port sigue ocupado por PID $owner después del cierre controlado."
 }
 
+function Get-BackendJar {
+    return @(
+        Get-ChildItem -LiteralPath (Join-Path $backendRoot 'target') -Filter '*.jar' -File -ErrorAction SilentlyContinue |
+            Where-Object { $_.Name -notlike '*.original' } |
+            Sort-Object LastWriteTimeUtc -Descending |
+            Select-Object -First 1
+    )
+}
+
+function Test-BackendBuildRequired {
+    param($BackendJar)
+
+    $backendJars = @($BackendJar)
+    if ($backendJars.Count -ne 1) {
+        return $true
+    }
+
+    $buildInputs = [System.Collections.Generic.List[IO.FileInfo]]::new()
+    foreach ($relativePath in @('pom.xml', '.mvn\maven.config', '.mvn\jvm.config')) {
+        $candidate = Join-Path $backendRoot $relativePath
+        if (Test-Path -LiteralPath $candidate -PathType Leaf) {
+            $buildInputs.Add((Get-Item -LiteralPath $candidate))
+        }
+    }
+
+    $sourceRoot = Join-Path $backendRoot 'src'
+    if (Test-Path -LiteralPath $sourceRoot -PathType Container) {
+        foreach ($sourceFile in Get-ChildItem -LiteralPath $sourceRoot -Recurse -File) {
+            $buildInputs.Add($sourceFile)
+        }
+    }
+
+    return @($buildInputs | Where-Object {
+            $_.LastWriteTimeUtc -gt $backendJars[0].LastWriteTimeUtc
+        }).Count -gt 0
+}
+
+function Get-OrBuildBackendJar {
+    $backendJar = @(Get-BackendJar)
+    if (-not (Test-BackendBuildRequired -BackendJar $backendJar)) {
+        Write-Host '[Ruta Fija] Reutilizando el JAR vigente; no se recompila Maven.'
+        return $backendJar
+    }
+
+    Write-Host '[Ruta Fija] Hay cambios de backend; compilando una sola vez con memoria limitada.'
+    $previousMavenOptions = [Environment]::GetEnvironmentVariable('MAVEN_OPTS', 'Process')
+    try {
+        [Environment]::SetEnvironmentVariable(
+            'MAVEN_OPTS',
+            '-Xms64m -Xmx384m -XX:MaxMetaspaceSize=256m -XX:+UseSerialGC',
+            'Process'
+        )
+        Push-Location $backendRoot
+        try {
+            & .\mvnw.cmd --batch-mode --no-transfer-progress -Dmaven.test.skip=true package
+            if ($LASTEXITCODE -ne 0) {
+                throw 'No se pudo empaquetar el backend para el arranque nativo.'
+            }
+        } finally {
+            Pop-Location
+        }
+    } finally {
+        [Environment]::SetEnvironmentVariable('MAVEN_OPTS', $previousMavenOptions, 'Process')
+    }
+
+    $backendJar = @(Get-BackendJar)
+    if ($backendJar.Count -ne 1) {
+        throw 'No se encontró un JAR ejecutable del backend después del empaquetado.'
+    }
+    return $backendJar
+}
+
 function Invoke-NativeStart {
     $previousEnvironment = [ordered]@{}
     $startedProcesses = [System.Collections.Generic.List[object]]::new()
@@ -421,9 +515,11 @@ function Invoke-NativeStart {
             return
         }
 
-        & $schemaAuditScript -ConfigPath $ConfigPath
-        if ($LASTEXITCODE -ne 0) {
-            throw 'La auditoria de contrato y reportes F3.4 no fue aprobada; no se iniciara el sistema.'
+        if ($RunFullAudit) {
+            & $schemaAuditScript -ConfigPath $ConfigPath
+            if ($LASTEXITCODE -ne 0) {
+                throw 'La auditoria de contrato y reportes F3.4 no fue aprobada; no se iniciara el sistema.'
+            }
         }
 
         if (-not (Test-Path -LiteralPath (Join-Path $frontendRoot 'node_modules\@angular\cli\bin\ng.js') -PathType Leaf)) {
@@ -431,32 +527,14 @@ function Invoke-NativeStart {
         }
         [IO.Directory]::CreateDirectory($runtimeDirectory) | Out-Null
 
-        Push-Location $backendRoot
-        try {
-            & .\mvnw.cmd --batch-mode --no-transfer-progress -DskipTests package
-            if ($LASTEXITCODE -ne 0) {
-                throw 'No se pudo empaquetar el backend para el arranque nativo.'
-            }
-        } finally {
-            Pop-Location
-        }
-
-        $backendJar = @(
-            Get-ChildItem -LiteralPath (Join-Path $backendRoot 'target') -Filter '*.jar' -File |
-                Where-Object { $_.Name -notlike '*.original' } |
-                Sort-Object LastWriteTimeUtc -Descending |
-                Select-Object -First 1
-        )
-        if ($backendJar.Count -ne 1) {
-            throw 'No se encontró un JAR ejecutable del backend después del empaquetado.'
-        }
+        $backendJar = Get-OrBuildBackendJar
 
         $javaPath = Get-JavaExecutable
         $backendOutput = Join-Path $runtimeDirectory 'backend.stdout.log'
         $backendError = Join-Path $runtimeDirectory 'backend.stderr.log'
         Set-Content -LiteralPath $backendOutput -Value $null -Encoding UTF8
         Set-Content -LiteralPath $backendError -Value $null -Encoding UTF8
-        $backendProcess = Start-Process -FilePath $javaPath -ArgumentList @('-jar', ('"{0}"' -f $backendJar[0].FullName), '--spring.profiles.active=local', '--server.address=127.0.0.1') -WorkingDirectory $backendRoot -RedirectStandardOutput $backendOutput -RedirectStandardError $backendError -WindowStyle Hidden -PassThru
+        $backendProcess = Start-Process -FilePath $javaPath -ArgumentList @('-Xms64m', '-Xmx384m', '-XX:MaxMetaspaceSize=256m', '-XX:+UseSerialGC', '-Dfile.encoding=UTF-8', '-jar', ('"{0}"' -f $backendJar[0].FullName), '--spring.profiles.active=local', '--server.address=127.0.0.1') -WorkingDirectory $backendRoot -RedirectStandardOutput $backendOutput -RedirectStandardError $backendError -WindowStyle Hidden -PassThru
         $startedProcesses.Add($backendProcess)
 
         $null = Test-BackendHealth -TimeoutSeconds $StartupTimeoutSeconds
@@ -470,7 +548,12 @@ function Invoke-NativeStart {
         $frontendError = Join-Path $runtimeDirectory 'frontend.stderr.log'
         Set-Content -LiteralPath $frontendOutput -Value $null -Encoding UTF8
         Set-Content -LiteralPath $frontendError -Value $null -Encoding UTF8
-        $frontendProcess = Start-Process -FilePath $node.Source -ArgumentList @(('"{0}"' -f $angularCli), 'serve', '--host', 'localhost', '--port', '4200', '--configuration', 'development') -WorkingDirectory $frontendRoot -RedirectStandardOutput $frontendOutput -RedirectStandardError $frontendError -WindowStyle Hidden -PassThru
+        $frontendConfiguration = if ([string]::IsNullOrWhiteSpace($PublicDemoOrigin)) {
+            'development'
+        } else {
+            'production'
+        }
+        $frontendProcess = Start-Process -FilePath $node.Source -ArgumentList @('--max-old-space-size=512', ('"{0}"' -f $angularCli), 'serve', '--host', '127.0.0.1', '--port', '4300', '--configuration', $frontendConfiguration, '--hmr=false') -WorkingDirectory $frontendRoot -RedirectStandardOutput $frontendOutput -RedirectStandardError $frontendError -WindowStyle Hidden -PassThru
         $startedProcesses.Add($frontendProcess)
 
         $null = Test-FrontendPage -TimeoutSeconds $StartupTimeoutSeconds

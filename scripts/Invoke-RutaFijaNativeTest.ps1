@@ -149,14 +149,20 @@ switch ($Action) {
                 Pop-Location
             }
 
+            # flyway_schema_history.version is text.  A lexical MAX would report
+            # '9' after V10/V11/V12, so assert the ordered, successful versioned
+            # manifest instead of relying on string ordering.
             $migration = Invoke-TestPsql -Settings $settings -Sql @'
-select coalesce(max(version), '') from flyway_schema_history where success = true;
+select coalesce(string_agg(version::text, ',' order by installed_rank), '')
+  from flyway_schema_history
+ where success = true
+   and version is not null;
 '@
-            if (@($migration | Where-Object { $_ -eq '10' }).Count -ne 1) {
-                throw 'F3.4 no confirmo Flyway V1-V10 en ruta_fija_test.'
+            if (@($migration | Where-Object { $_.Trim() -eq '1,2,3,4,5,6,7,8,9,10,11,12' }).Count -ne 1) {
+                throw 'F3.4 no confirmo Flyway V1-V12 en ruta_fija_test.'
             }
             & $f34AuditScript -ConfigPath $ConfigPath
-            Write-Output 'F3_4_NATIVE_VERIFY=PASS flyway=V1-V10 contract_reports=PASS docker=0'
+            Write-Output 'F3_4_NATIVE_VERIFY=PASS flyway=V1-V12 contract_reports=PASS docker=0'
         }
         finally {
             Clear-TestData -Settings $settings

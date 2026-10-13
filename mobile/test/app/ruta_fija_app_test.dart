@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:ruta_fija_conductor/app/ruta_fija_app.dart';
 import 'package:ruta_fija_conductor/app/ruta_fija_dependencies.dart';
 import 'package:ruta_fija_conductor/app/ruta_fija_environment.dart';
+import 'package:ruta_fija_conductor/core/network/mobile_api_exception.dart';
 import 'package:ruta_fija_conductor/core/session/mobile_session_controller.dart';
 import 'package:ruta_fija_conductor/features/assignments/domain/mobile_assignment_models.dart';
 import 'package:ruta_fija_conductor/features/incidents/domain/mobile_incident_models.dart';
@@ -21,6 +22,7 @@ void main() {
     required FakeMobileAssignmentGateway assignmentGateway,
     FakeMobileIncidentGateway? incidentGateway,
     FakeMobileAnnouncementGateway? announcementGateway,
+    FakeMobileDeviceLocationGateway? deviceLocationGateway,
   }) {
     return RutaFijaDependencies(
       sessionController: MobileSessionController(
@@ -32,6 +34,9 @@ void main() {
       incidentGateway: incidentGateway ?? FakeMobileIncidentGateway(),
       announcementGateway:
           announcementGateway ?? FakeMobileAnnouncementGateway(),
+      deviceLocationGateway:
+          deviceLocationGateway ?? FakeMobileDeviceLocationGateway(),
+      offlineSyncController: testOfflineSyncController(),
       httpClient: http.Client(),
     );
   }
@@ -52,6 +57,130 @@ void main() {
     expect(find.text('Acceso del conductor'), findsOneWidget);
     expect(find.textContaining('no usa la sesión web del CRM'), findsOneWidget);
     expect(find.byKey(const Key('mobile-login-submit')), findsOneWidget);
+  });
+
+  testWidgets('keeps login controls reachable with 140 percent text scaling', (
+    tester,
+  ) async {
+    final dependenciesForTest = dependencies(
+      authGateway: FakeMobileAuthGateway(),
+      driverGateway: FakeMobileDriverGateway(),
+      assignmentGateway: FakeMobileAssignmentGateway(),
+    );
+    await tester.pumpWidget(
+      MediaQuery(
+        data: const MediaQueryData(textScaler: TextScaler.linear(1.4)),
+        child: RutaFijaApp(
+          environment: environment,
+          dependencies: dependenciesForTest,
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final submit = find.byKey(const Key('mobile-login-submit'));
+    await tester.ensureVisible(submit);
+    expect(submit, findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('announces a login error through a live semantic region', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+    try {
+      final dependenciesForTest = dependencies(
+        authGateway: FakeMobileAuthGateway(
+          loginFailure: const MobileApiException(
+            status: 401,
+            code: 'AUTH_INVALID_CREDENTIALS',
+            message: 'No usar este mensaje técnico.',
+          ),
+        ),
+        driverGateway: FakeMobileDriverGateway(),
+        assignmentGateway: FakeMobileAssignmentGateway(),
+      );
+      await tester.pumpWidget(
+        RutaFijaApp(
+          environment: environment,
+          dependencies: dependenciesForTest,
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.enterText(
+        find.byType(TextFormField).at(0),
+        'driver@test.dev',
+      );
+      await tester.enterText(
+        find.byType(TextFormField).at(1),
+        'incorrect-password',
+      );
+      await tester.tap(find.byKey(const Key('mobile-login-submit')));
+      await tester.pumpAndSettle();
+
+      final error = find.bySemanticsLabel(
+        'Error de acceso: El correo o la contraseña no son correctos.',
+      );
+      expect(error, findsOneWidget);
+      expect(
+        tester
+            .getSemantics(error)
+            .getSemanticsData()
+            .flagsCollection
+            .isLiveRegion,
+        isTrue,
+      );
+    } finally {
+      semantics.dispose();
+    }
+  });
+
+  testWidgets('announces the pending-sync state to assistive technology', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+    try {
+      final dependenciesForTest = dependencies(
+        authGateway: FakeMobileAuthGateway(),
+        driverGateway: FakeMobileDriverGateway(),
+        assignmentGateway: FakeMobileAssignmentGateway(),
+      );
+      await tester.pumpWidget(
+        RutaFijaApp(
+          environment: environment,
+          dependencies: dependenciesForTest,
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.enterText(
+        find.byType(TextFormField).at(0),
+        'driver@test.dev',
+      );
+      await tester.enterText(
+        find.byType(TextFormField).at(1),
+        'correct-password',
+      );
+      await tester.tap(find.byKey(const Key('mobile-login-submit')));
+      await tester.pumpAndSettle();
+
+      expect(
+        find.bySemanticsLabel(
+          'Abrir pendientes de sincronización. No hay acciones pendientes.',
+        ),
+        findsOneWidget,
+      );
+      await tester.tap(find.byKey(const Key('pending-sync-open')));
+      await tester.pumpAndSettle();
+      expect(find.text('Pendientes de sincronización'), findsOneWidget);
+      expect(
+        find.bySemanticsLabel(
+          RegExp('Estado de sincronización: no hay acciones pendientes'),
+        ),
+        findsOneWidget,
+      );
+    } finally {
+      semantics.dispose();
+    }
   });
 
   testWidgets('authenticates and exposes only the own mobile profile', (
@@ -172,6 +301,50 @@ void main() {
       'Demora comprobada en la ruta.',
     ]);
     expect(incidentGateway.createdAssignmentIds, [isNull]);
+  });
+
+  testWidgets('closes an own mobile incident once without deleting it', (
+    tester,
+  ) async {
+    final incidentGateway = FakeMobileIncidentGateway();
+    final dependenciesForTest = dependencies(
+      authGateway: FakeMobileAuthGateway(),
+      driverGateway: FakeMobileDriverGateway(),
+      assignmentGateway: FakeMobileAssignmentGateway(),
+      incidentGateway: incidentGateway,
+    );
+    await tester.pumpWidget(
+      RutaFijaApp(environment: environment, dependencies: dependenciesForTest),
+    );
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextFormField).at(0), 'driver@test.dev');
+    await tester.enterText(
+      find.byType(TextFormField).at(1),
+      'correct-password',
+    );
+    await tester.tap(find.byKey(const Key('mobile-login-submit')));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const Key('nav-incidents')));
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.byKey(const Key('incident-44444444-4444-4444-8444-444444444444')),
+    );
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('incident-close')), findsOneWidget);
+
+    await tester.ensureVisible(find.byKey(const Key('incident-close')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('incident-close')));
+    await tester.pumpAndSettle();
+    expect(find.text('Cerrar incidencia'), findsOneWidget);
+    await tester.tap(find.byKey(const Key('incident-close-confirm')));
+    await tester.pumpAndSettle();
+
+    expect(incidentGateway.closedIncidentIds, [
+      '44444444-4444-4444-8444-444444444444',
+    ]);
+    expect(find.byKey(const Key('incident-close')), findsNothing);
   });
 
   testWidgets(

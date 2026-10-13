@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/offline/mobile_offline.dart';
 import '../../../core/presentation/mobile_error_message.dart';
 import '../data/mobile_driver_repository.dart';
 import '../domain/mobile_driver_models.dart';
 
 class AvailabilityPage extends StatefulWidget {
-  const AvailabilityPage({required this.driverGateway, super.key});
+  const AvailabilityPage({
+    required this.driverGateway,
+    required this.offlineSyncController,
+    required this.offlineOwner,
+    super.key,
+  });
 
   final MobileDriverGateway driverGateway;
+  final MobileOfflineSyncController offlineSyncController;
+  final MobileOfflineQueueOwner offlineOwner;
 
   @override
   State<AvailabilityPage> createState() => _AvailabilityPageState();
@@ -65,27 +73,54 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
 
     setState(() => _saving = true);
     try {
-      final updated = await widget.driverGateway.changeAvailability(selected);
+      final submission = await widget.offlineSyncController.submitAvailability(
+        owner: widget.offlineOwner,
+        targetAvailability: selected.apiValue,
+        expectedAvailabilityUpdatedAt: current.updatedAt,
+      );
       if (!mounted) {
         return;
       }
-      setState(() {
-        _availability = updated;
-        _selectedStatus = updated.status.canBeChosenByDriver
-            ? updated.status
-            : null;
-      });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            'Disponibilidad actualizada a ${updated.status.label}.',
+      if (submission.delivered) {
+        await _load();
+        if (!mounted) {
+          return;
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              submission.replayed
+                  ? 'El cambio anterior fue confirmado sin duplicarlo.'
+                  : 'Disponibilidad actualizada a ${selected.label}.',
+            ),
           ),
-        ),
-      );
+        );
+      } else {
+        if (submission.blocked) {
+          await _load();
+          if (!mounted) {
+            return;
+          }
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              submission.blocked
+                  ? 'El cambio requiere conciliación. Abra Pendientes de sincronización antes de intentarlo nuevamente.'
+                  : 'El cambio quedó guardado en Pendientes de sincronización.',
+            ),
+          ),
+        );
+      }
     } catch (error) {
       if (mounted) {
+        final message = error is MobileOfflinePendingActionException
+            ? error.message
+            : error is StateError
+            ? error.message
+            : mobileErrorMessage(error);
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(mobileErrorMessage(error))));
+            .showSnackBar(SnackBar(content: Text(message)));
       }
     } finally {
       if (mounted) {
@@ -139,7 +174,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
         ),
         const SizedBox(height: 8),
         const Text(
-          'El estado se consulta y actualiza directamente en Ruta Fija.',
+          'El cambio se intenta en Ruta Fija; ante una falla temporal queda visible para sincronizarlo manualmente.',
         ),
         const SizedBox(height: 20),
         Card(
