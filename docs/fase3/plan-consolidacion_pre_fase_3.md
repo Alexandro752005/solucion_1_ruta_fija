@@ -534,3 +534,120 @@ Resguardo externo/bundle, copia verificable, revisión confidencial, checkpoint 
 
 **Entrega de P-00R:** diagnóstico, inventario completo, conjuntos de conservación, integración propuesta y puertas concretas. La tarea finaliza aquí, sin ejecutar el plan.
 
+
+## 9. Ejecución de conservación e higiene — 2026-10-13
+
+Las secciones 1–8 conservan el diagnóstico y la propuesta originales del 12 de octubre. Esta sección registra la ejecución posterior autorizada: **resguardo y checkpoint completados, higiene aplicada; integración de main y validación funcional pendientes**. La conservación sigue identificada como WIP.
+
+### 9.1. Precondiciones y diferencias desde el informe
+
+La raíz Git, HEAD inicial `087202418bafb220749c2b1558ce173e114892b5`, rama inicial `etapa-2/f02-postgresql-local`, un worktree y referencias main/origin/main `36173545a5f48f2fad41a5482ec80764b98764b6` coincidían con el cierre de P-00R. El índice estaba vacío de cambios preparados y mantenía su hash original.
+
+Se comprobaron **76 modificaciones y 64 archivos sin seguimiento**, incluyendo este plan, antes de la higiene: 131 rutas útiles y nueve generados excluidos. No hubo altas/bajas respecto del inventario esperado. Los archivos de control de la revisión previa conservaron sus hashes, salvo las dos correcciones editoriales del propio plan realizadas al cerrar P-00R. No se repitió la auditoría arquitectónica ni se actualizó ninguna referencia por red.
+
+Se revisaron los candidatos contra siete valores privados existentes y formas de tokens/claves, sin encontrar coincidencias en la selección ni mostrar valores. Esta comprobación dirigida no equivale a una auditoría completa de secretos.
+
+### 9.2. Resguardo externo verificado
+
+**Destino:** `D:\UTP\CICLO X UTP\INTEGRADOR I\APF1\resguardos_ruta_fija\2026-10-13_pre-higiene_5063a165`.
+
+| Componente | Ubicación dentro del resguardo | Resultado |
+|---|---|---|
+| Historia Git previa | `historia/ruta-fija.bundle` | Bundle completo de referencias locales; verificado y clonado sin checkout. El clon pasa fsck y conserva todos los objetos de las referencias originales, incluidos tag y árbol internos. |
+| Árbol fuente completo | `fuentes/` | **618 archivos**: 563 rastreados y 55 nuevos útiles. Copia en bytes y hashes verificados. |
+| Configuración privada/local | `privado/configuracion/` | Cinco archivos locales, separados de las fuentes; también se preservó configuración Git local. Sin valores en el informe. |
+| Respaldos ya existentes | `privado/respaldos/` | **20 archivos**, 717.863 bytes, sin omisiones. Es conservación de archivos existentes, no un nuevo dump ni una restauración de PostgreSQL. |
+| Exportaciones originales | `privado/exportaciones-originales/` | Cinco copias verificadas antes de mover los originales al archivo externo. |
+| Control de captura | `control/` | Índice original, inventario, selección explícita, patch binario rastreado, verificador y resultados. |
+
+El manifiesto inicial cubre **655 archivos**; todas las copias coincidieron por tamaño y SHA-256, sin omisiones. Se reconstruyeron adicionalmente 618 fuentes en `reconstruccion-verificada/`, desde el resguardo, sin restaurar secretos ni ejecutar aplicaciones. La selección y el índice originales se preservaron antes de crear la rama.
+
+El directorio externo tiene ACL protegida, con acceso para el usuario actual, SYSTEM y Administradores. Los archivos privados y las exportaciones permanecen separados de las fuentes y no entraron en Git.
+
+Archivos para verificar el resguardo:
+
+- `manifiesto-resguardo.json` y `manifiesto-resguardo.sha256`.
+- SHA-256 del manifiesto inicial: `cb28e6d998af7e5a844b09b57d99cc31a8c31f4d17451cd90da66e7c022342e5`.
+- `control/verificacion-resguardo.json`, `control/verificacion-reconstruccion.json` y `control/conservar_repo.py`.
+- Repetición de la comprobación de las copias: ejecutar el verificador existente con acción `verify` y `--backup` apuntando al destino anterior. No usar `--compare-origin` después de la higiene: el índice, documentación y exclusiones cambiaron de forma autorizada y las exportaciones se movieron.
+
+V11 y V12 conservan los hashes publicados en 4.5, tanto en el resguardo como en la copia de trabajo y los blobs del checkpoint. El manifest registra los bytes originales; no se confundieron con checksums Flyway.
+
+**Límite concreto:** se conservó también `backups/f1-7/solucion_ruta_fija_1_20260922T034141Z_f17.dump`, cuyo tamaño original es cero. Su copia es exacta, pero ese archivo no aporta un respaldo recuperable. No se consultó ni alteró la BD.
+
+Las cachés, dependencias descargadas, compilados, logs, estados de procesos y binarios locales se excluyeron deliberadamente del respaldo fuente; permanecen en el repositorio local. No hubo limpieza masiva.
+
+### 9.3. Rama y commits
+
+**Rama activa de conservación:** `conservacion/pre-fase3-2026-10-13`, creada después de verificar el resguardo y desde el HEAD inicial. No se cambió la punta de la rama original ni de main/origin/main.
+
+| Registro | Identificación | Alcance |
+|---|---|---|
+| Checkpoint WIP | `e0b4ee5ee0947be90b2b67a8aba2ba810be0ac6a` — `WIP: preservar implementacion local antes de fase 3` | **131 rutas**: 76 modificaciones y 55 altas; V11/V12, DTO, servicios, clientes, pruebas, scripts y documentos como conjunto. Padre `087202418bafb220749c2b1558ce173e114892b5`. |
+| Higiene versionable | Commit que incorpora esta sección — `chore: higiene controlada y documentacion de Ruta Fija` | Solo `.gitignore`, `README.md`, `docs/README.md` y este plan. Separado del WIP. |
+
+El SHA exacto del commit de higiene se registra al finalizar en `control/cierre-higiene.json` del resguardo y en la entrega de la tarea. La propia sección se identifica por el commit que la contiene para evitar una autorreferencia de hash. Puede localizarse con el log del plan.
+
+La preparación utilizó las rutas concretas de `control/rutas-checkpoint.nul`, sin adición de la raíz ni de carpetas completas. La revisión del índice confirmó exclusión de privados/generados y blobs V11/V12 idénticos. `diff --cached --check` del WIP señaló 14 líneas del plan original con dos espacios intencionales de salto Markdown; se preservaron y registraron como excepción de formato. No se presentó ese control como aprobado sin observaciones ni como validación funcional.
+
+### 9.4. Exclusiones aplicadas
+
+Se añadieron únicamente estas reglas ancladas al `.gitignore` existente:
+
+```gitignore
+/.angular/
+/archivos de texto/codigo_backend.txt
+/archivos de texto/codigo_front.txt
+/archivos de texto/codigo_persistencia_postgresql.txt
+/archivos de texto/código_extra.txt
+/estructura.txt
+```
+
+Las exportaciones se excluyen por sus nombres concretos: no se ignora de forma general todo TXT ni toda la carpeta. Se conservaron las excepciones y reglas anteriores, incluidas plantillas, tareas y Wrapper Maven.
+
+En `.vscode/settings.json` se fusionaron **21 patrones por mapa** de `files.exclude` y `search.exclude`, para dependencias, builds, cachés, runtime/logs, herramientas locales y las cinco exportaciones conocidas. Se conservaron todas las claves/valores previos, incluidas exclusiones de búsqueda, watchers y preferencias de Java, TypeScript, tareas y Git. No se forzó su versionado; permanece ignorado.
+
+Los controles de reglas sobre las fuentes capturadas y una matriz de recursos versionables confirman que las nuevas exclusiones no ocultan fuentes, SQL, pruebas, lockfiles, wrappers ni plantillas necesarias. Los artefactos Gradle que ya estaban ignorados antes de esta tarea siguen sujetos a la verificación de Android desde copia limpia; no se ocultaron mediante reglas nuevas.
+
+### 9.5. Exportaciones archivadas sin borrado definitivo
+
+Se revisaron referencias en el árbol fuente completo. Las cinco exportaciones solo aparecían en este plan; no había consumidores operativos en README, tareas, CI ni scripts. Los originales se movieron con `Move-Item -LiteralPath` después de verificar la copia externa; se comprobaron origen/destino resueltos dentro del alcance y hash posterior. No se reemplazó ningún destino.
+
+Cada destino de la tabla es relativo a `privado/archivados/` del resguardo externo. La copia adicional previa sigue en `privado/exportaciones-originales/`.
+
+| Origen dentro del repositorio | Destino relativo de archivo | SHA-256 verificado |
+|---|---|---|
+| `archivos de texto/codigo_backend.txt` | `archivos de texto/codigo_backend.txt` | `b8b271c92b867ab28bf0daec3f6a88ebdbce820c1010ff59449eec58ee9ea8e5` |
+| `archivos de texto/codigo_front.txt` | `archivos de texto/codigo_front.txt` | `eb6d0b8e6f0026df3ed0f64b4bfea77632b2a87428e59295d96712a8d312f322` |
+| `archivos de texto/codigo_persistencia_postgresql.txt` | `archivos de texto/codigo_persistencia_postgresql.txt` | `1734f4706e5732e5287c54f30024332535c7eb85d1eb2c51379ef0b3e2fc8151` |
+| `archivos de texto/código_extra.txt` | `archivos de texto/código_extra.txt` | `44549bdb070f5c7191040c3ad84353fd3b1881bb4598ed46a40e01cfc6e90c05` |
+| `estructura.txt` | `estructura.txt` | `ff2ae49d17ea5c9d8c86a55be5c5308b7275345eed13733e68174f4694cf1f51` |
+
+El registro `control/archivado-exportaciones.json` conserva rutas absolutas, tamaños, hashes, método de traslado y copia adicional. No se borró definitivamente ningún archivo.
+
+### 9.6. Documentación, referencias y retiro
+
+Se creó [docs/README.md](../README.md) como índice breve de documentación vigente para trabajar, evidencia histórica y pendientes, y se añadió un enlace desde el README raíz. No se movió ni eliminó ningún documento o script funcional/referenciado.
+
+Antes de la higiene se comprobaron **66 enlaces locales de README**, **39 destinos de tareas**, **77 destinos literales de scripts** y cinco rutas usadas por CI, sin destinos ausentes. Los enlaces añadidos se resolvieron tras la edición. Son comprobaciones de existencia: no evalúan rutas dinámicas, instalaciones ni comportamiento en ejecución.
+
+Los candidatos a revisión para retiro son el aplicador/runner histórico V11 y el contrato de recuperación F1.3/G2. Se mantienen en sus ubicaciones porque tienen consumidores; cualquier retiro requiere antes sustituir o actualizar esos consumidores. Los documentos de fases antiguas se clasifican como históricos, sin eliminarlos por nombre, fecha o prefijo.
+
+### 9.7. Comprobaciones de cierre y límites
+
+- Fuentes funcionales, scripts, pruebas, configuración funcional, lockfiles y migraciones mantienen sus hashes de captura. Las únicas ediciones autorizadas sobre archivos capturados son `.gitignore`, el README raíz y la adición de esta sección al plan; el índice documental es nuevo.
+- Los bytes originales del diagnóstico del plan permanecen como prefijo, sin reescritura de las secciones 1–8.
+- V11/V12 mantienen los bytes de 4.5 y están confirmadas en Git. Esto no declara su aplicación en PostgreSQL.
+- Las exclusiones Git y de VS Code se comprobaron sobre las fuentes y recursos necesarios; `settings.json` permanece ignorado y conserva preferencias anteriores.
+- Las cinco exportaciones están archivadas con hashes y copia adicional; las cachés y dependencias locales se mantienen.
+- El commit de higiene se revisó con una selección limitada a cuatro rutas y control de whitespace de sus cambios.
+- La rama original, main y origin/main conservan sus puntas iniciales. No se publicaron cambios ni se crearon worktrees asociados adicionales.
+
+**No ejecutado:** integración de main, reparación de lógica o scripts operativos, compilaciones, suites, servicios, consultas/migraciones/restauraciones de BD, demo, instalación de agentes/herramientas o publicación.
+
+**Pendiente para integrar main:** partir del WIP y la higiene ya confirmados, preparar un worktree de consolidación y conciliar README, package.json/lock, Wrapper/CI y mantenimiento de la referencia local. Sigue pendiente incorporar los cinco commits de main.
+
+**Pendiente para validar desde copia limpia:** resolver BAT dañados, receta V11/V12, guardas 4200/4300 y auditor de recuperación; comprobar requisitos/artefactos Android; ejecutar builds/suites/CI y recorrido humano vinculados al SHA integrado, más respaldo actual y restauración PostgreSQL aislada. La higiene completada no aprueba R2–R5 ni el inicio funcional de fase 3.
+
+El cierre verificable, los dos SHA y los resultados detallados están en `control/cierre-higiene.json` del resguardo. R0/R1 y la higiene están completados; las condiciones de integración y validación permanecen abiertas.
+

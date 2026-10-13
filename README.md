@@ -249,6 +249,7 @@ en el equipo del desarrollador.
 
 Documentos principales:
 
+- [Índice de documentación vigente, evidencia histórica y pendientes](docs/README.md)
 - [Uso del Sistema](<docs/Uso del Sistema.md>)
 - [Ejecución nativa F1.4](docs/ejecucion-nativa-f1-4.md)
 - [Ejecución nativa F1.5](docs/ejecucion-nativa-f1-5.md)
