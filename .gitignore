@@ -109,3 +109,8 @@ pgpass.conf
 **/__pycache__/
 *.pyc
 *.exit
+
+# Mutable observer working files; named acceptance snapshots stay versioned
+/docs/evidencia/auditoria-ide-2026-10-23/ide/diagnostics.current.json
+/docs/evidencia/auditoria-ide-2026-10-23/ide/bridge-request.json
+/docs/evidencia/auditoria-ide-2026-10-23/ide/bridge-response.json
