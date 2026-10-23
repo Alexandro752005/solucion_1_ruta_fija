@@ -1,0 +1,25 @@
+{
+  "runId" : "44b3d67a-69ce-4169-89b4-62ebe8a40160",
+  "observedAt" : "2026-10-19T09:14:06.762986200Z",
+  "readOnly" : true,
+  "database" : "ruta_fija_test",
+  "runtimeRole" : "rf_test",
+  "accountId" : "3fb1f499-81d2-45dd-8e60-b53f6eb7ff79",
+  "driverId" : "5712d0db-e92b-4988-9809-a49d04a194ef",
+  "fixtureDisabledNotDeleted" : true,
+  "temporaryRefreshCredentialsRevoked" : true,
+  "unitPeriodRevokedHistoryPreserved" : true,
+  "personalApprovalPreserved" : true,
+  "activeMarkerReleased" : true,
+  "advisoryLockFree" : true,
+  "privateFixtureSecretsRemoved" : true,
+  "ledger" : {
+    "SUPER_ADMIN" : 1,
+    "ADMIN" : 3,
+    "CONDUCTOR" : 1
+  },
+  "historicalCreationPreserved" : true,
+  "globalCleanupExecuted" : false,
+  "L01RecoveryPublicKeySha256" : "5569d8c89e2118dede5ca39253a03735f1eb13b88a070beab45b245ce5914433",
+  "result" : "PASS_READ_ONLY_EXACT_CASE_CLOSURE"
+}

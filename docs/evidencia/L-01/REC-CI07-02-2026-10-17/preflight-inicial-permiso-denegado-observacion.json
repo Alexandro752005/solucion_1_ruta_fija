@@ -1,0 +1,9 @@
+{
+    "sourceToolChunkId":  "135312",
+    "phase":  "START",
+    "observedSqlState":  "42501",
+    "applicationDmlExecuted":  false,
+    "resolution":  "REUSE_V22_V23_ROLE_CREATION_ADVISORY_LOCKS",
+    "databasePermissionsChanged":  false,
+    "fixtureOrLedgerChanged":  false
+}

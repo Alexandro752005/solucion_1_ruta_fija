@@ -1,0 +1,31 @@
+{
+  "runId": "a999ef52-d87f-498d-9251-1581cbb72562",
+  "archivedAt": "2026-10-22T21:24:54.887067+00:00",
+  "humanReport": "Sí, aceptó y sale estado programada, todo bien.",
+  "offerId": "6ad87efd-c9a5-4d06-943c-72c863f76772",
+  "serviceId": "961b62f8-1d30-469f-a88d-5db10884e663",
+  "offerStatusAtRead": "SCHEDULED",
+  "serviceStatusAtRead": "CONFIRMED",
+  "driverAvailabilityAtRead": "RESERVADO",
+  "acceptedAtServer": "2026-10-22T21:22:43.446836Z",
+  "acceptedBeforeDeadline": true,
+  "databaseEvidence": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/oferta-observacion-a7e57bb9-efd6-4703-989a-3cfd87841a8d.json",
+  "databaseEvidenceSha256": "ac98af75490d697c24163efbb1f3fc74e903b9f59cccd8cd95d093408fb3a67d",
+  "httpAcceptEvents": [
+    {
+      "channel": "PHONE_PROXY_REAL_BACKEND",
+      "method": "POST",
+      "finishedAt": "2026-10-22T21:22:43.570371900Z",
+      "path": "/api/v1/mobile/assignments/6ad87efd-c9a5-4d06-943c-72c863f76772/accept",
+      "status": 200,
+      "startedAt": "2026-10-22T21:22:43.335207500Z"
+    }
+  ],
+  "humanAcceptanceConfirmed": true,
+  "syntheticParticipantOnly": true,
+  "databaseWritesByObservation": 0,
+  "httpCommandsSubmittedByObservation": 0,
+  "manualPhoneResult": "PENDING",
+  "TEST_CLEANUP_RELEASED": false,
+  "pilotEnabled": false
+}

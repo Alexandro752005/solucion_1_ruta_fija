@@ -1,0 +1,99 @@
+{
+  "observedAtUtc": "2026-10-23T16:06:27.459977+00:00",
+  "result": "PASS_ROOT_CONFIG_FRONTEND_AND_IDE_OBSERVER_REVIEW",
+  "reviewer": "mobile_nofix independent of parent-authored settings/frontend/observer/check-runner changes",
+  "reviewedFiles": [
+    {
+      "path": ".vscode/settings.json",
+      "sha256": "b129b68e3807e4304b3033456fb1e37a7a2e31165c5fedb7006eadcf49d7a593"
+    },
+    {
+      "path": "analysis_options.yaml",
+      "sha256": "09e3dac794c9a7eb226312c9004cfb1f73474bfd5cb3d7174bd751dd7c38a4da"
+    },
+    {
+      "path": "mobile/analysis_options.yaml",
+      "sha256": "fe994f27e5b83c122bab0c2ef62317cc0f590c8df1028f367578ff7f3fd6e195"
+    },
+    {
+      "path": "frontend/angular.json",
+      "sha256": "d3333389b35e47d16fdb07ed441904c38bab99e3d697a1cd392beaecfcc2a189"
+    },
+    {
+      "path": "frontend/vitest-base.config.mts",
+      "sha256": "84b956b2b8a226756bbda842cf20e155ea6693253033358a9be12edf6f1e1396"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/ide/bridge/extension.js",
+      "sha256": "2bdeede3d2b284363ec70d6f9f6ac85a4bb38ec0dc8e6128f884f8128e942ca7"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/ide/bridge/package.json",
+      "sha256": "4e5a6d90a732e988f7602b2547d20135d1f95a907a7b3809cc968e84f8a11c9e"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/ide/package_bridge.py",
+      "sha256": "96d949262bd7be6035f8be4cfc03f86cd04d084e69afe2bcfccd7af788065df7"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/frontend/run_checks.py",
+      "sha256": "f9d648bdc4991540006be426544ff32dd193356d4d52f5bb630ce19b82bce2c1"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/frontend/test-ci.result.json",
+      "sha256": "0dcba740e1c878e3c0dcb115e8d81493462525c593bf3d936cc453fd257107b6"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/frontend/test-ci.native.log",
+      "sha256": "505bb45009e2df1c6baad813c2213291949c83f086e0584040da81930ecb8333"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/mobile/qa-observations/diagnostics.current-at-qa.json",
+      "sha256": "d60331a12ba3f594029121b0160b43cf3d23187a1009e092a83d7d16dea15927"
+    }
+  ],
+  "independenceException": {
+    "path": "analysis_options.yaml",
+    "implementationAuthor": "this mobile reviewer, following exact coordinator-specified exclusion list",
+    "classification": "Author self-verification only; independent coordinator review remains required",
+    "otherAuthoredCurrentTest": "mobile/test/features/profile/mobile_driver_repository_test.dart is self-authored correction; tested233 local passes but not independently approved by this record"
+  },
+  "checks": {
+    "settingsOnlyDartAnalysisExcludedFoldersChanged": true,
+    "javaModeAndOtherSettingsPreserved": true,
+    "rootAndIdeOnlySevenArchiveGeneratedExclusions": true,
+    "mobileOriginalLintRulesUnchanged": true,
+    "allMobileProductionLibFilesMatchSignedReleaseManifest": 87,
+    "vitestRenameBytesIdentical": true,
+    "angularOnlyRunnerConfigChanged": true,
+    "nativeFrontendTestsPassed": 241,
+    "nativeFrontendFilesPassed": 47,
+    "nativeExitCode": 0,
+    "noWarningSuppressionAddedToRunner": true,
+    "currentNativeLogHasNoCjsWarning": true,
+    "ideBeforeErrors": 1633,
+    "ideBeforeWarnings": 83,
+    "ideBeforeOnlySource": "dart",
+    "ideAfterErrors": 0,
+    "ideAfterWarnings": 0,
+    "observerReadsActualLanguageDiagnostics": true,
+    "observerDoesNotCreateClearDeleteDiagnosticCollections": true,
+    "installedObserverJavaScriptMatchesArchivedSource": true,
+    "installedPackageDiffOnlyVsCodeMetadataAndFormatting": true,
+    "fixedCommandRunnerUsesNativeExitCode": true
+  },
+  "observerCapabilitiesCaveat": "The observer does not mutate diagnostic collections. It is not capability-wise read-only: its explicit allowlist can restart language servers, switch Java mode or request Java compilation. The archived current request is capture; this review did not invoke any bridge action.",
+  "observedBridgeRequest": {
+    "id": "capture-after-scope",
+    "action": "capture"
+  },
+  "productionRuntimeTouchedByReviewer": false,
+  "dbOrBatOrDeviceExecutedByReviewer": false,
+  "frontendWarningBeforeEvidence": "CJS warning origin reported by coordinator; this review verifies unchanged config bytes, explicit .mts loader path and absence in the current native log, not a preserved before-warning log",
+  "remainingLimits": [
+    "Root analyzer YAML and mobile test changes require independent coordinator approval because this reviewer implemented them",
+    "No real native launcher, PostgreSQL or Android execution performed by this review",
+    "IDE snapshot reflects active language providers in their current mode, not full Java compilation assurance",
+    "Temporary observer remained installed at review; cleanup is coordinator responsibility after final capture"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "observedAt": "2026-10-20T08:32:46.943442+00:00",
+  "localDate": "2026-10-20",
+  "result": "PASS_SAFETY_INTERRUPTION_INCREMENT_ONLY",
+  "lotStatus": "EN_CURSO",
+  "database": "ruta_fija_test",
+  "schemaVersion": "40",
+  "backendDistinctPassed": 124,
+  "backendSafetyPassed": 16,
+  "flutterDistinctPassed": 59,
+  "crmComponentPassed": 36,
+  "flutterAnalyze": "NO_ISSUES",
+  "crmTypecheck": "PASS",
+  "crmDevelopmentBuild": "PASS",
+  "backendPackage": "PASS",
+  "apkDebug": "PASS_BUILD_ONLY",
+  "artifactManifest": "artifacts/L-05-incremento-4-2026-10-20/manifest.json",
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 2
+  },
+  "acceptances": 2,
+  "accountsCreatedPersistently": 0,
+  "externalMailSent": false,
+  "globalCleanupExecuted": false,
+  "humanTrial": false,
+  "physicalDevice": false,
+  "pilotEnabled": false,
+  "L06Started": false,
+  "limits": [
+    "MockMvc plus real PostgreSQL, no new TCP client journey.",
+    "Multiple-segment handover and business races remain pending.",
+    "Device and calibration L-08; no human trial or legal compliance claim."
+  ]
+}

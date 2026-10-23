@@ -1,0 +1,32 @@
+<section class="management-page">
+  <a routerLink="/vehicles">Volver a vehículos</a><h1>Mantenimiento de unidad</h1><p>UNIDAD-{{ vehicleId }}</p>
+  <p>Los días se interpretan en America/Lima. Un mantenimiento abierto bloquea reservas desde su inicio hasta el retorno ADMIN confirmado, aunque termine su previsión. El retorno libera desde el día siguiente; no prueba elegibilidad operativa.</p>
+  @if (error()) { <p role="alert">{{ error() }}</p> } @if (notice()) { <p role="status">{{ notice() }}</p> }
+  <button class="management-button" (click)="refresh()" [disabled]="busy()">Consultar estado</button>
+  @if (uncertain()) { <p>Respuesta incierta: consulta el estado y el historial antes de continuar.</p> }
+  @if (view(); as v) {
+    <p>Versión {{ v.version }} · {{ v.mechanicallyBlockedNow ? 'Bloqueada ahora por mantenimiento' : 'Sin bloqueo de mantenimiento ahora' }}</p>
+    <fieldset [disabled]="busy() || uncertain()"><legend>Acción explícita</legend>
+      <label>Motivo sin datos personales <input id="maintenance-reason" [(ngModel)]="reason" maxlength="160" /></label>
+      <label><input type="checkbox" id="maintenance-confirmed" [(ngModel)]="confirmed" />Confirmo únicamente la acción que pulse a continuación.</label>
+      <h2>Nuevo trabajo</h2>
+      <label>Tipo <select id="maintenance-kind" [(ngModel)]="kind"><option value="PREVENTIVE">Preventivo</option><option value="URGENT">Avería urgente: bloqueo inmediato</option></select></label>
+      @if (kind === 'PREVENTIVE') { <label>Primer día <input type="date" id="maintenance-startDate" [(ngModel)]="startDate" /></label> }
+      <label>Último día previsto (incluido) <input type="date" id="maintenance-endDate" [(ngModel)]="endDate" /></label>
+      @if (kind === 'PREVENTIVE') { <button (click)="check()">Revisar todos los compromisos desde el inicio</button> }
+      @if (preview(); as p) { <p>{{ p.canConfirmPreventive ? 'Sin compromisos detectados; el servidor volverá a comprobar.' : 'Hay compromisos que resolver antes de confirmar.' }}</p>
+        @for (c of p.commitments; track c.assignmentId) { <p>ASIGNACIÓN-{{ c.assignmentId }} · {{ c.status }} · {{ c.scheduledAt | date:'short': '-0500' }}</p> } }
+      <button (click)="create()">Registrar mantenimiento</button>
+      <h2>Fin del trabajo y retorno</h2><p>Completar trabajo conserva el bloqueo. Autorizar retorno exige comprobación documental y ausencia de otros bloqueos.</p>
+      <label>Código del responsable <input [(ngModel)]="responsibleReference" maxlength="160" /></label>
+      <label>Referencia de comprobación <input [(ngModel)]="evidenceReference" maxlength="160" /></label>
+      @for (r of v.records; track r.id) {
+        <article><h3>TRABAJO-{{ r.id }} · {{ r.kind }} · {{ r.status }}</h3><p>Inicio: {{ r.startsAt | date:'short':'-0500' }} · Fin previsto: {{ r.plannedEndsAt | date:'short':'-0500' }} · Fin de bloqueo: {{ r.blockingEndsAt ? (r.blockingEndsAt | date:'short':'-0500') : 'Sin retorno confirmado' }}</p>
+          @if (r.status === 'OPEN') { <button (click)="work(r.id)">Acreditar trabajo terminado</button><button (click)="cancel(r.id)">Cancelar solo si aún no comenzó</button> }
+        </article>
+      }
+      <button (click)="authorizeReturn()">Autorizar retorno desde el día siguiente</button>
+    </fieldset>
+    <h2>Historial</h2>@for (h of v.history; track h.id) { <p>{{ h.resultingVersion }} · {{ h.action }} · CUENTA-{{ h.actorId }} · {{ h.occurredAt | date:'short':'-0500' }}</p> }
+  }
+</section>

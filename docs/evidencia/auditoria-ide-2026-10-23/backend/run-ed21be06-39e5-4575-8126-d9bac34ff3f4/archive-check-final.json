@@ -1,0 +1,18 @@
+﻿{
+    "recordedAt":  "2026-10-23T16:16:45.8630277+00:00",
+    "result":  "PASS_TEST_XML_SOURCE_ARCHIVE_AND_VALIDATED_JAR_PRESERVED_OUTSIDE_TARGET",
+    "archivedTestReports":  50,
+    "tests":  257,
+    "reportIndex":  "surefire-reports-preserved.json",
+    "sourceFiles":  650,
+    "sourceIndex":  "compiled-source-inputs.json",
+    "sourceSnapshot":  "compiled-source-inputs.zip",
+    "sourceSnapshotSha256":  "73fb1a30a42a12c3e63efe3267f7e99eb763d8a1f8be748d1defe38042e8bea1",
+    "validatedJarSnapshot":  "ruta-fija-backend-auditoria-validada.jar",
+    "validatedJarSha256":  "bf17109f3986c6176c1461389cbc9382902fba4c6a609cf66dd48a3561a5c7b8",
+    "failedNewTestReportPreserved":  "../correcciones-9cd90f87-411f-4492-bc84-1e087bb670d0/Mockito-restub-failed-report-preserved.xml",
+    "noRuntimeProcessStarted":  true,
+    "noDatabaseAccess":  true,
+    "supersedes":  "archive-check.json",
+    "toolingIncident":  "Initial archive orchestrator omitted explicit System.IO.Compression assembly load; archive did not exist, XML/source hashes/JAR copy remained valid; initial null receipt preserved. Corrected with explicit assembly loads, Stop-on-error, archive entries all verified."
+}

@@ -1,0 +1,17 @@
+﻿Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): false
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=Ruta Fija Candidato Local, OU=APF3 Validacion Local, O=Ruta Fija, L=Lima, C=PE
+Signer #1 certificate SHA-256 digest: 181da8d8cf0c18d56a424d0ed22fb9424a2bdf904c8e0dff7395a512c658bb45
+Signer #1 certificate SHA-1 digest: ef0a05de2a3c7fa047d7f3958498997b249af377
+Signer #1 certificate MD5 digest: a012110d0cbb68c806ca6fe5f44f5204
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 3072
+Signer #1 public key SHA-256 digest: 4195cbce7429e9a2fa089ff8fb3b38262699bf57cf077a06983172360e976071
+Signer #1 public key SHA-1 digest: fd3182ec38916d57eefccc409c96bda32e0f249d
+Signer #1 public key MD5 digest: f1091519318977c0ef7b56140c1cea36

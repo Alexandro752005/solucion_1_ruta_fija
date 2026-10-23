@@ -1,0 +1,20 @@
+{
+    "observedAt":  "2026-10-23T03:03:10.4323438+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "package":  "pe.rutafija.conductor.l08",
+    "componentResolvedFromAndroid":  "pe.rutafija.conductor.l08/pe.rutafija.conductor.MainActivity",
+    "launchAcceptedByAndroid":  true,
+    "testAppInTopResumedActivityObserved":  true,
+    "deviceAwakeAtLastObservation":  false,
+    "keyguardShowingAtLastObservation":  true,
+    "wakeKeyEventAttempt":  "REFUSED_ANDROID_INJECT_EVENTS_PERMISSION",
+    "permissionEscalationAttempted":  false,
+    "deviceUnlockAttempted":  false,
+    "credentialsOrConsentEnteredByAgent":  false,
+    "gpsPointCountAtLatestRead":  18,
+    "latestPersistedGpsAt":  "2026-10-23T02:44:23.788383Z",
+    "gpsResumptionAccredited":  false,
+    "priorPrincipalBinaryRestored":  false,
+    "TEST_CLEANUP_RELEASED":  false,
+    "result":  "TEST_APP_LAUNCH_ACCEPTED_PENDING_PERSONAL_UNLOCK"
+}

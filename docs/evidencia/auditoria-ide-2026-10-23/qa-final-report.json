@@ -1,0 +1,337 @@
+{
+  "reviewedAtUtc": "2026-10-23T20:07:29.915991+00:00",
+  "result": "PASS_INDEPENDENT_FINAL_AUDIT_REPORT_NO_DOCUMENTARY_BLOCKERS_PENDING_NEW_AUDIT_SEAL",
+  "reviewer": "A-MOB / A-QA independent of root report writer",
+  "scope": "Read-only review of final narrative, logs, JSON, XML, source hashes and OS extension registry. No new tests, database connections, BAT execution, device or service action. Only this new QA JSON is written.",
+  "report": {
+    "path": "AUDITORIA_INTEGRAL_IDE_Y_EJECUTABLES_2026-10-23.md",
+    "sha256": "fcc6d6ade85b3289486bc0071583951b1b97a089304028e8b8a4f57146f205c1"
+  },
+  "checksPassed": 23,
+  "checksTotal": 23,
+  "checks": [
+    {
+      "name": "Local report links exist, except the two authorized audit-seal outputs pending root generation",
+      "passed": true,
+      "details": {
+        "existing": 25,
+        "pending": [
+          "docs/evidencia/auditoria-ide-2026-10-23/manifest-auditoria.sha256",
+          "docs/evidencia/auditoria-ide-2026-10-23/verificacion-final.json"
+        ]
+      }
+    },
+    {
+      "name": "IDE initial 1633 errors / 83 warnings, both named final snapshots 0/0",
+      "passed": true,
+      "details": {
+        "latestCapturedAt": "2026-10-23T20:04:16.186Z"
+      }
+    },
+    {
+      "name": "Observer removal receipt exit0 and current extension registry excludes observer",
+      "passed": true,
+      "details": {
+        "registryPath": "C:\\Users\\Ale\\.vscode\\extensions\\extensions.json",
+        "registrySha256": "b3f95ebcf7adae1fab188679c16cee1c035faaf7d23cd7196f0789472b746353",
+        "matchingObserverEntries": 0
+      }
+    },
+    {
+      "name": "Rejected optional browser-profile cleanup remains disclosed without retry",
+      "passed": true
+    },
+    {
+      "name": "Mobile final 233 pass / 7 connected skips, root and package analysis clean",
+      "passed": true
+    },
+    {
+      "name": "Frontend commands exit0; native Vitest log 241 tests in 47 files; no CommonJS or build-budget warning",
+      "passed": true
+    },
+    {
+      "name": "Actual preserved Surefire XML: 50 classes / 257 tests, zero failures/errors/skips, hashes exact",
+      "passed": true,
+      "details": {
+        "tests": 257,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "name": "Compiled source/resource inventory has 650 entries matching live source hashes",
+      "passed": true,
+      "details": {
+        "entries": 650,
+        "mismatches": []
+      }
+    },
+    {
+      "name": "Fresh javac 406 main + 185 test sources, zero javac warnings/errors, tooling warnings retained",
+      "passed": true
+    },
+    {
+      "name": "Runtime JAR current hash matches report and refresh receipt; distinct historical candidate JAR preserved",
+      "passed": true
+    },
+    {
+      "name": "731 sums independent local suite pass totals once",
+      "passed": true
+    },
+    {
+      "name": "Before/after complete database fingerprints equal for 121 tables (16 native / 105 test)",
+      "passed": true
+    },
+    {
+      "name": "Native V12; test V50 with 50 versioned and 1 repeatable success, protected ledger and acceptances",
+      "passed": true
+    },
+    {
+      "name": "Actual negative guards refuse native V12, test without readonly and Clean before business activity",
+      "passed": true
+    },
+    {
+      "name": "Actual health and readiness HTTP200 / UP",
+      "passed": true
+    },
+    {
+      "name": "Anonymous browser only: login renders, expected refresh401, no JS exception/console error/transport failure",
+      "passed": true
+    },
+    {
+      "name": "Recorded real start, stop and verifier BATs exit0",
+      "passed": true
+    },
+    {
+      "name": "Runtime severity events are zero; Commons Logging notices remain explicitly acknowledged",
+      "passed": true,
+      "details": [
+        {
+          "path": "runtime/backend.stdout.log",
+          "ERROR": 0,
+          "WARN": 0,
+          "commonsNotices": 2
+        },
+        {
+          "path": "runtime/backend.stderr.log",
+          "ERROR": 0,
+          "WARN": 0,
+          "commonsNotices": 0
+        },
+        {
+          "path": "runtime/frontend.stdout.log",
+          "ERROR": 0,
+          "WARN": 0,
+          "commonsNotices": 0
+        },
+        {
+          "path": "runtime/frontend.stderr.log",
+          "ERROR": 0,
+          "WARN": 0,
+          "commonsNotices": 0
+        }
+      ]
+    },
+    {
+      "name": "42 ownership/static mock checks and 79 PowerShell parse checks, not represented as business end-to-end tests",
+      "passed": true
+    },
+    {
+      "name": "Historical427 archive preservation is supported by independent prior full hash review and unchanged frozen manifest",
+      "passed": true
+    },
+    {
+      "name": "Report keeps native migration pending, skips unclaimed, no authenticated operations or real-pilot certification",
+      "passed": true
+    },
+    {
+      "name": "Report UTF8 bytes intact and unchanged during review",
+      "passed": true
+    },
+    {
+      "name": "Static sealer review: create-only new manifest/proof, preserve old digest, named snapshots and no service execution",
+      "passed": true
+    }
+  ],
+  "reviewedFiles": [
+    {
+      "path": "AUDITORIA_INTEGRAL_IDE_Y_EJECUTABLES_2026-10-23.md",
+      "sha256": "fcc6d6ade85b3289486bc0071583951b1b97a089304028e8b8a4f57146f205c1"
+    },
+    {
+      "path": "backend/README.md",
+      "sha256": "0ab18d635b542c4c9e61c569bbf413cc7d3bba9224eeb1979a7b2bb40522555a"
+    },
+    {
+      "path": "docs/Uso del Sistema.md",
+      "sha256": "b126e157e3082df61a805e1f373a8c1f1e941c75f1fe8e29c634eb04b618b9e0"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/backend/README.md",
+      "sha256": "47c10512c2caabf725e43d0cb60af14d9c27d20f5411601f7a1760d92ff6ca08"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/backend/run-ed21be06-39e5-4575-8126-d9bac34ff3f4/compiled-source-inputs.json",
+      "sha256": "2e75a925b90646f071383be92d24b3b59e8abf5539e89a982d4b5b6efe6f1a5f"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/backend/run-ed21be06-39e5-4575-8126-d9bac34ff3f4/runtime-jar-refresh/refresh.json",
+      "sha256": "dee080f85eccfe919de90a042b6d2a6abf88d5b05726389bea2eae6fa4d4a97d"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/backend/run-ed21be06-39e5-4575-8126-d9bac34ff3f4/surefire-reports-preserved.json",
+      "sha256": "6322c1894b7ab7421931175837930b876b4a437db23179aef1b036fe8d7500c5"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/backend/run-ed21be06-39e5-4575-8126-d9bac34ff3f4/warnings-classified.json",
+      "sha256": "d5ada6d9fa6f800bd96da50057fd9f0bf395ff795f0393483ff8f94dad802b82"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/backend/summary.json",
+      "sha256": "f73162d271f1e2e0c9a2bcf208ea56c44563d8f8df332d28362e9af56e456df8"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/browser-login.png",
+      "sha256": "9d894e9220b3c3ee979bf5155ace0e424d0d9c5bb1627fd22056b4a438faffbe"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/browser-smoke.json",
+      "sha256": "32befeafc394cfd36f582403647865b7e528a502711588c677c65eb50538be9f"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/finalize_audit.py",
+      "sha256": "330604a74d8dc1ba64958f191166496c40831a3d8f56c717ca3b97167ba40614"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/frontend/build.native.log",
+      "sha256": "d391264929e4640a24b3f9c5feff4a496b4d836c56ac97acb59c5a49011785e5"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/frontend/build.result.json",
+      "sha256": "edf3197f689ac30bcfd1db05f2d817cafb118201dacdf7d2ec4b4bf073082837"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/frontend/test-ci.native.log",
+      "sha256": "505bb45009e2df1c6baad813c2213291949c83f086e0584040da81930ecb8333"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/frontend/test-ci.result.json",
+      "sha256": "0dcba740e1c878e3c0dcb115e8d81493462525c593bf3d936cc453fd257107b6"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/frontend/typecheck.result.json",
+      "sha256": "d3edabe3e76622fafe2bee1a8532f75893f544ece57f2eb27bdd1beff19423f2"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/ide/diagnostics.after-resume.json",
+      "sha256": "3e1842df9cac559f939152fe8e5e218d7bff599f35ce1e4adcbde0f6a6db22bb"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/ide/diagnostics.final.json",
+      "sha256": "c0571822b65be76420650d9ea7ebc9d60f407154382acdcc6274d42c36758a94"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/ide/diagnostics.initial.json",
+      "sha256": "0d57bc2f6695dec17c6c5ea3f4473a30463e7428bb7e471ccf8b8655b9e4160a"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/ide/temporary-tools-retired.json",
+      "sha256": "fff3fc78f7a3f4b3a9752271a7195f03861bac75600ea3c835384424fcd4e94d"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "sha256": "24b41118e46cfcb135f6b79a4937969d980982ee4d2a4098e580cbfe698d2fd8"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/launchers/fingerprint-antes-smoke.json",
+      "sha256": "fbc0c8045e61b13c63ea83e0be8ee291d0310a43a96105b564e238465a98a1a9"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/launchers/guardas-ejecutadas.json",
+      "sha256": "a646f29a36cb02ead0bfd65bbd3b95433868f5dc376356556ec13013ba7375db"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/launchers/parser-todos-ps1-final.json",
+      "sha256": "e4f75629e138aa5b677be55a03111eadd70d3a5dda830b9e2beb1fc9fa9c1539"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/launchers/qa-mocks-lease-demo-final.json",
+      "sha256": "2b0352f728e60d26a470f8c104a4aaaacbd88c2d586e0cd850b2ba44830b591a"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/launchers/verificar-bat-real.json",
+      "sha256": "44d8c2fb44266161dcf597ffb4a15dbd4a61c407dc2e15805d02b2cc67086458"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/mobile/flutter-analyze-mobile-after.log",
+      "sha256": "d4d71ae5470bd59dba5c0cde5683c4b182a3139f45d52e48f823fc88e2d655ce"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/mobile/flutter-analyze-workspace-root-after.log",
+      "sha256": "7cdbe5013adefc67449db87f6e3482327442e0292e00209e588c6da5161d1765"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/mobile/flutter-test-complete-after.log",
+      "sha256": "424f440631a1369d0e9851ec7f04b5c97abd6b7a25ba08de027e1826053a3e3e"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/mobile/qa-java-warning-patch.json",
+      "sha256": "40ad6bbae6dfa203f208d016b9b0a85cc8809815fd8fa70bf131aa9a47fba68d"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/mobile/qa-launcher-observability-final.json",
+      "sha256": "582676be7369a519b4a21304cbfbaf7c094e413f55bc4961e1bf097557cccf30"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/mobile/qa-root-config.json",
+      "sha256": "a42b5e79e5191473243cc4523ef4fcec3a6f8c6c862de3a348bc57ef2cb6b05c"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/mobile/resultado-mobile-ide.json",
+      "sha256": "cf93841c95875124816d3312449dd310678fb065044960e5395f58abc0b84f33"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/qa-root-static.json",
+      "sha256": "3d7e0bff8c5298ff5e475ee2c7cd72b799fc5b866b98341a0683b7bf732b36fd"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/runtime/fingerprint-after-smoke.json",
+      "sha256": "420c5cdc7c843db37fd1c07484adb825b717a60e0fa3c7f0fceeb55e926b3cda"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/runtime/http-checks.json",
+      "sha256": "4cc51eecd7e4fc6ebac47ddbee2f65d6f9bd989b2de3cc287208244557c7020b"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/runtime/ports-after.json",
+      "sha256": "04cbd742995a040717b14baaa1fdfa26fd503764c60c97a9c713121c2267ef8b"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/runtime/qa-independent-ops.json",
+      "sha256": "490f42bc84c195c6c73b6fd5d219945ac358a0e7c28c8d528a913a29565ad19d"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/runtime/start-bat.json",
+      "sha256": "f5fe7014f96223bba6e0e765c81bc542180db701ed35bdd4960dc2c807e4da80"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/runtime/stop-bat.json",
+      "sha256": "2e7952b40693ba0e80a895a23411979a6fa7b3ae5fa80185115aa6080ddb72f0"
+    }
+  ],
+  "expectedPendingOutputs": [
+    "docs/evidencia/auditoria-ide-2026-10-23/manifest-auditoria.sha256",
+    "docs/evidencia/auditoria-ide-2026-10-23/verificacion-final.json"
+  ],
+  "findings": [],
+  "sealerReview": "Static only; coordinator executes check/seal/verify and owns final operational confirmation. Mutable bridge current/request/response deliberately excluded; immutable named IDE snapshots remain included.",
+  "limitations": [
+    "731 is sum of final Java257+Angular241+Flutter233, not repeated verifier runs counted again. Seven connected Flutter tests remain skips.",
+    "Native database remains V12; only explicit read-only test V50 smoke validated. No authenticated write flow or native migration certified.",
+    "Zero IDE/javac diagnostics is distinct from dependency JVM/Commons Logging notices and intentional negative tests.",
+    "427 historical archive entries were fully checked by prior independent reviews in this audit; this final pass rechecks frozen manifest digest and existing preservation proof without rewriting history.",
+    "Optional browser profile cleanup was rejected by automatic review, disclosed and not retried.",
+    "Observer registry absence is an OS file read; the earlier named capture includes the observer because capture precedes uninstall."
+  ]
+}

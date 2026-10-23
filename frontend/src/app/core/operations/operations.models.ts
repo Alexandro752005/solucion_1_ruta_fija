@@ -4,6 +4,8 @@ export const ASSIGNMENT_STATUSES = [
   'PENDING_RESPONSE',
   'SCHEDULED',
   'EN_SERVICIO',
+  'INTERRUPTED',
+  'TRANSFERRED',
   'COMPLETED',
   'REJECTED',
   'CANCELLED',
@@ -17,6 +19,13 @@ export const ASSIGNMENT_RESPONSE_MODES = ['ADMIN_DIRECT', 'MOBILE_CONFIRMATION']
 export type AssignmentResponseMode = (typeof ASSIGNMENT_RESPONSE_MODES)[number];
 
 export interface Assignment {
+  readonly serviceId?:string|null;
+  readonly serviceTypeVersionId?: string|null;
+  readonly marginBeforeMinutes?: number|null;
+  readonly marginAfterMinutes?: number|null;
+  readonly marginReferenceStatus?: string;
+  readonly routeVersionId?: string | null;
+  readonly routeReferenceStatus?: string;
   readonly id: string;
   readonly status: AssignmentStatus;
   readonly responseMode: AssignmentResponseMode;
@@ -49,6 +58,9 @@ export interface Assignment {
 }
 
 export interface AssignmentPayload {
+  readonly serviceTypeVersionId: string;
+  readonly responseMode?: 'MOBILE_CONFIRMATION';
+  readonly routeVersionId: string;
   readonly driverId: string;
   readonly vehicleId: string;
   readonly originText: string;
@@ -74,6 +86,12 @@ export const INCIDENT_CATEGORIES = [
   'AVERIA',
   'ACCIDENTE',
   'RETRASO',
+  'LICENCIA_VENCIDA',
+  'IMPOSIBILIDAD_SERVICIO',
+  'UBICACION_NO_CORROBORADA',
+  'RIESGO_SEGURIDAD',
+  'ACCESO_PARADA',
+  'FALLO_PLATAFORMA',
   'OTRO',
 ] as const;
 
@@ -82,6 +100,8 @@ export type IncidentCategory = (typeof INCIDENT_CATEGORIES)[number];
 export const INCIDENT_STATUSES = ['OPEN', 'FOLLOW_UP', 'RESOLVED', 'CLOSED_BY_DRIVER'] as const;
 
 export type IncidentStatus = (typeof INCIDENT_STATUSES)[number];
+export const INCIDENT_SEVERITIES = ['LOW','MEDIUM','HIGH','CRITICAL'] as const;
+export type IncidentSeverity = (typeof INCIDENT_SEVERITIES)[number];
 
 export interface Incident {
   readonly id: string;
@@ -90,9 +110,15 @@ export interface Incident {
   readonly driverName: string;
   readonly assignmentId?: string | null;
   readonly category: IncidentCategory;
+  readonly severity?:IncidentSeverity|'UNASSESSED';
+  readonly responsibleAdminId?:string|null;
+  readonly previousIncidentId?:string|null;
+  readonly relationReason?:'RECURRENCE'|'CLOSURE_ERROR'|null;
+  readonly operationalEffect?:'NO_INTERRUPTION_RECORDED'|'INTERRUPTION_RECORDED';
   readonly status: IncidentStatus;
   readonly description: string;
-  readonly reportedById: string;
+  readonly source?: 'CRM_WEB' | 'MOBILE_APP' | 'SYSTEM';
+  readonly reportedById?: string | null;
   readonly reportedByName: string;
   readonly reportedAt: string;
   readonly followUpNote?: string | null;
@@ -112,12 +138,17 @@ export interface IncidentPayload {
   readonly assignmentId?: string;
   readonly category: IncidentCategory;
   readonly description: string;
+  readonly severity:IncidentSeverity;
+  readonly operationKey:string;
+  readonly previousIncidentId?:string;
+  readonly relationReason?:'RECURRENCE'|'CLOSURE_ERROR';
 }
 
 export interface IncidentFollowUpPayload {
   readonly version: number;
   readonly note: string;
   readonly resolve: boolean;
+  readonly operationKey:string;
 }
 
 export const ANNOUNCEMENT_AUDIENCES = ['ORGANIZATION', 'GROUP'] as const;
@@ -141,7 +172,8 @@ export interface AnnouncementPayload {
   readonly body: string;
   readonly audienceType: AnnouncementAudience;
   readonly audienceId?: string;
-  readonly requireReadAck?: false;
+  readonly requireReadAck?: boolean;
+  readonly operationKey: string;
 }
 
 export interface StatusCount {

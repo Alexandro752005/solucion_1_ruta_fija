@@ -1,0 +1,28 @@
+{
+  "lot": "L-03",
+  "localDate": "2026-10-19",
+  "builtFor": "FUNCTIONAL_LOCAL_ONLY_NO_DEPLOYMENT",
+  "backendFinalMainSourcesRepackaged": true,
+  "files": [
+    {
+      "path": "artifacts/L-03-2026-10-19/ruta-fija-backend.jar",
+      "bytes": 90889589,
+      "sha256": "24d247525e009167dd5a490845b4191d4f31d3aa628e0ecb98e5b0704fac0dab",
+      "privateConfigurationOrTrialHarnessEntries": 0
+    },
+    {
+      "path": "artifacts/L-03-2026-10-19/conductor-debug.apk",
+      "bytes": 185146628,
+      "sha256": "7caf016767e11c8fe75bde65f561a59f5b533c2844147154fa18626ed7508baf",
+      "privateConfigurationOrTrialHarnessEntries": 0
+    },
+    {
+      "path": "artifacts/L-03-2026-10-19/crm-local.zip",
+      "bytes": 1510549,
+      "sha256": "51575095daa7d1471be71e91f1df551805b585281ab7ada602e5209e620c3a31",
+      "privateConfigurationOrTrialHarnessEntries": 0
+    }
+  ],
+  "pilotEnabled": false,
+  "L04Started": false
+}

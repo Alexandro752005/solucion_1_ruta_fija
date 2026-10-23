@@ -1,0 +1,15 @@
+﻿{
+    "checkedAt":  "2026-10-23T05:36:22.7279236+00:00",
+    "newFlutterDirectedTestsPassed":  8,
+    "flutterAnalyzePassed":  true,
+    "contrastTestsFailedBeforeFix":  2,
+    "apkBitIdenticalRebuildVerified":  true,
+    "priorFrozenFilesVerified":  728,
+    "newPostflightToolCompile":  "PASS_APPROVED_LOCAL_DEPENDENCY_ACCESS",
+    "phoneCaseClosed":  true,
+    "singleAppInstalled":  true,
+    "currentContractVersion":  "0.8.0",
+    "globalAcceptance":  "NO_GO",
+    "physicalNoFixSignalStillPending":  true,
+    "sourceCopiesArchived":  6
+}

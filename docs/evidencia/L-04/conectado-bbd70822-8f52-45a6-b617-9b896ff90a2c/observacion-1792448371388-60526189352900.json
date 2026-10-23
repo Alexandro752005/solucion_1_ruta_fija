@@ -1,0 +1,28 @@
+{
+  "runId" : "bbd70822-8f52-45a6-b617-9b896ff90a2c",
+  "organizationId" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+  "adminId" : "92ebc07c-1319-4850-a734-f792cb299979",
+  "ledgerBefore" : {
+    "SUPER_ADMIN" : 1,
+    "ADMIN" : 3,
+    "CONDUCTOR" : 1
+  },
+  "termsAcceptancesBefore" : 2,
+  "phase" : "NORMAL_ONBOARDING_HTTP",
+  "observedAt" : "2026-10-19T22:19:31.387320300Z",
+  "httpEvents" : [ {
+    "startedAt" : "2026-10-19T22:19:30.820746800Z",
+    "method" : "POST",
+    "path" : "/groups",
+    "status" : 201,
+    "finishedAt" : "2026-10-19T22:19:31.300354400Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:31.305324300Z",
+    "method" : "POST",
+    "path" : "/vehicles",
+    "status" : 201,
+    "finishedAt" : "2026-10-19T22:19:31.387320300Z"
+  } ],
+  "groupId" : "fe150a44-1273-49b2-b85b-b003671d62cb",
+  "vehicleId" : "d8ada4fd-09b8-4080-8246-d8bf40fa335f"
+}

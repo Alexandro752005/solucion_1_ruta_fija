@@ -1,0 +1,12 @@
+﻿{
+    "recordedAt":  "2026-10-23T06:47:33.5833336+00:00",
+    "path":  "scripts/Sign-RutaFijaL08Closure.ps1",
+    "previousSourceSha256":  "fd7d678f486828823c3e85b1f9756e365c54ca52673d9a399ef94c03e23f6f93",
+    "sha256":  "6390bdd178e745a2ba408e98af5618d7fbbab8f452b664e5459247520a3dc339",
+    "snapshot":  "sources/exit-code-correction-2026-10-23/Sign-RutaFijaL08Closure.ps1",
+    "priorSourceSnapshotAndManifestPreserved":  true,
+    "change":  "Append explicit exit0 after successful verification assertions and receipt",
+    "parseErrors":  0,
+    "executionProof":  "closure-signature-81ec2af7-f709-483a-905a-26379620cc56/exit-code-correction.json",
+    "independentQaPendingCoordinator":  true
+}

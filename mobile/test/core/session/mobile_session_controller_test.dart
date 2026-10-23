@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ruta_fija_conductor/core/network/mobile_api_exception.dart';
 import 'package:ruta_fija_conductor/core/session/mobile_session_controller.dart';
+import 'package:ruta_fija_conductor/features/auth/domain/mobile_auth_models.dart';
 
 import '../../support/mobile_fakes.dart';
 
@@ -21,6 +22,43 @@ void main() {
     expect(controller.accessToken, 'a1');
     expect(store.value, 'r1');
     expect(auth.refreshedTokens, isEmpty);
+  });
+
+  test('verification-required login creates no session until a one-time code is verified', () async {
+    final store = InMemoryRefreshTokenStore();
+    final auth = FakeMobileAuthGateway(
+      session: testSession(
+        accessToken: 'verified-access',
+        refreshToken: 'verified-refresh',
+      ),
+      loginChallenge: MobileEmailOtpChallenge(
+        verificationToken: 'verification-token',
+        otpExpiresAt: DateTime.utc(2026, 10, 14, 12, 5),
+        challengeExpiresAt: DateTime.utc(2026, 10, 14, 12, 30),
+        emailSent: true,
+      ),
+    );
+    final controller = MobileSessionController(
+      authGateway: auth,
+      tokenStore: store,
+    );
+
+    await controller.login(email: 'driver@test.dev', password: 'password');
+
+    expect(
+      controller.state.status,
+      MobileSessionStatus.emailVerificationRequired,
+    );
+    expect(controller.accessToken, isNull);
+    expect(store.value, isNull);
+
+    await controller.verifyEmailOtp('123456');
+
+    expect(auth.verificationTokens, ['verification-token']);
+    expect(auth.verifiedCodes, ['123456']);
+    expect(controller.state.status, MobileSessionStatus.authenticated);
+    expect(controller.accessToken, 'verified-access');
+    expect(store.value, 'verified-refresh');
   });
 
   test('restore rotates the protected refresh token before exposing an authenticated state', () async {
@@ -82,20 +120,23 @@ void main() {
     },
   );
 
-  test('clears owner-scoped protected operations when the session ends', () async {
-    final clearedOwners = <String?>[];
-    final controller = MobileSessionController(
-      authGateway: FakeMobileAuthGateway(),
-      tokenStore: InMemoryRefreshTokenStore(),
-      onLocalSessionCleared: (user) async {
-        clearedOwners.add(user?.id);
-      },
-    );
+  test(
+    'clears owner-scoped protected operations when the session ends',
+    () async {
+      final clearedOwners = <String?>[];
+      final controller = MobileSessionController(
+        authGateway: FakeMobileAuthGateway(),
+        tokenStore: InMemoryRefreshTokenStore(),
+        onLocalSessionCleared: (user) async {
+          clearedOwners.add(user?.id);
+        },
+      );
 
-    await controller.login(email: 'driver@test.dev', password: 'password');
-    await controller.invalidateSession();
+      await controller.login(email: 'driver@test.dev', password: 'password');
+      await controller.invalidateSession();
 
-    expect(clearedOwners, ['11111111-1111-4111-8111-111111111111']);
-    expect(controller.state.status, MobileSessionStatus.unauthenticated);
-  });
+      expect(clearedOwners, ['11111111-1111-4111-8111-111111111111']);
+      expect(controller.state.status, MobileSessionStatus.unauthenticated);
+    },
+  );
 }

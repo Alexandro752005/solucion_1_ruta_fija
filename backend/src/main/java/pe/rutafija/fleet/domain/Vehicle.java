@@ -103,10 +103,10 @@ public class Vehicle {
     public void changeAdministrativeStatus(VehicleStatus status) {
         VehicleStatus requested = Objects.requireNonNull(status);
         if (!requested.canBeSetAdministratively()) {
-            throw new IllegalArgumentException("EN_SERVICIO solo puede ser gestionado por una asignación");
+            throw new IllegalArgumentException("El estado de ejecución o atención se gestiona desde su servicio y revisión segura");
         }
-        if (this.status == VehicleStatus.EN_SERVICIO) {
-            throw new IllegalArgumentException("Un vehículo EN_SERVICIO solo puede liberarse al cerrar o cancelar su asignación");
+        if (this.status == VehicleStatus.EN_SERVICIO || this.status == VehicleStatus.ATENCION) {
+            throw new IllegalArgumentException("El vehículo requiere cerrar su ejecución o completar la revisión segura de atención");
         }
         this.status = requested;
         this.active = requested != VehicleStatus.INACTIVO;
@@ -125,6 +125,16 @@ public class Vehicle {
         }
         status = VehicleStatus.DISPONIBLE;
         active = true;
+    }
+    public void finishTransferredService(){if(status==VehicleStatus.EN_SERVICIO)status=active?VehicleStatus.DISPONIBLE:VehicleStatus.INACTIVO;}
+
+    /** Preserve active/withdrawn evidence while the interruption holds this unit. */
+    public void enterSafetyAttention(){status=VehicleStatus.ATENCION;}
+    public void finishSafetyAttention(boolean ready) {
+        if(ready){
+            if(status!=VehicleStatus.ATENCION&&status!=VehicleStatus.INACTIVO)throw new IllegalStateException("La unidad no está pendiente de revisión segura.");
+            status=active?VehicleStatus.DISPONIBLE:VehicleStatus.INACTIVO;
+        } else deactivate();
     }
 
     public void activate() {

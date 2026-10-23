@@ -1,0 +1,92 @@
+{
+    "checkedAtUtc":  "2026-10-23T16:19:36.5432697+00:00",
+    "reviewer":  "Independent A-OPS; read-only operating system queries",
+    "recordedProcesses":  [
+                              {
+                                  "service":  "backend",
+                                  "recordedPid":  2720,
+                                  "pidCurrentlyAbsent":  true
+                              },
+                              {
+                                  "service":  "frontend",
+                                  "recordedPid":  17604,
+                                  "pidCurrentlyAbsent":  true
+                              }
+                          ],
+    "ports":  [
+                  {
+                      "port":  5432,
+                      "listeners":  [
+                                        {
+                                            "LocalAddress":  "::1",
+                                            "LocalPort":  5432,
+                                            "OwningProcess":  3888
+                                        },
+                                        {
+                                            "LocalAddress":  "127.0.0.1",
+                                            "LocalPort":  5432,
+                                            "OwningProcess":  3888
+                                        }
+                                    ]
+                  },
+                  {
+                      "port":  8080,
+                      "listeners":  [
+
+                                    ]
+                  },
+                  {
+                      "port":  4300,
+                      "listeners":  [
+
+                                    ]
+                  },
+                  {
+                      "port":  4311,
+                      "listeners":  [
+
+                                    ]
+                  },
+                  {
+                      "port":  55438,
+                      "listeners":  [
+
+                                    ]
+                  },
+                  {
+                      "port":  55439,
+                      "listeners":  [
+
+                                    ]
+                  },
+                  {
+                      "port":  55440,
+                      "listeners":  [
+
+                                    ]
+                  },
+                  {
+                      "port":  55441,
+                      "listeners":  [
+
+                                    ]
+                  },
+                  {
+                      "port":  56441,
+                      "listeners":  [
+
+                                    ]
+                  },
+                  {
+                      "port":  56442,
+                      "listeners":  [
+
+                                    ]
+                  }
+              ],
+    "runtimeStateAbsent":  true,
+    "demoStateAbsent":  true,
+    "postgresLeaseAbsent":  true,
+    "servicesStartedOrStoppedByReviewer":  false,
+    "databaseConnectionOpenedByReviewer":  false
+}

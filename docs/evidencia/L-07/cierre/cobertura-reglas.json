@@ -1,0 +1,127 @@
+{
+  "source": "docs/evidencia/L-07/reglas-fuente-L07.json",
+  "criteria": [
+    {
+      "id": "AC-V3-Q-080-01",
+      "criterion": "El KPI identifica periodo, completados y total programado, con estado de corroboración separado.",
+      "mappedLocalCriterion": "CI-L07-01",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-080-02",
+      "criterion": "Una oferta aceptada, cancelación o interrupción no se cuenta como servicio completado.",
+      "mappedLocalCriterion": "CI-L07-01",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-082-01",
+      "criterion": "El archivo de ADMIN solo contiene datos operativos permitidos de su empresa.",
+      "mappedLocalCriterion": "CI-L07-02",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-082-02",
+      "criterion": "La exportación propia no revela otros conductores ni equivale a descargar puntos GPS detallados.",
+      "mappedLocalCriterion": "CI-L07-02",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-083-01",
+      "criterion": "Una corrección genera nueva emisión distinguible y conserva la emisión anterior.",
+      "mappedLocalCriterion": "CI-L07-02",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-083-02",
+      "criterion": "No se sobrescribe el reporte original ni se oculta el cambio de tiempos.",
+      "mappedLocalCriterion": "CI-L07-02",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-084-01",
+      "criterion": "Una aceptación, rechazo, vencimiento, cambio crítico o denegación relevante genera evento auditable diseñado.",
+      "mappedLocalCriterion": "CI-L07-03",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-084-02",
+      "criterion": "Un refresco corriente no crea automáticamente un evento obligatorio ni se guardan OTP o contraseñas.",
+      "mappedLocalCriterion": "CI-L07-03",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-085-01",
+      "criterion": "ADMIN consulta eventos de aprobación/reasignación de su empresa.",
+      "mappedLocalCriterion": "CI-L07-04",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-085-02",
+      "criterion": "SUPER_ADMIN no obtiene detalle operativo personal de todas las empresas por defecto.",
+      "mappedLocalCriterion": "CI-L07-04",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-086-01",
+      "criterion": "Se aplica objetivo de seis meses a auditoría operativa, con excepción justificada de caso abierto.",
+      "mappedLocalCriterion": "CI-L07-06",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-086-02",
+      "criterion": "No se conserva todo dato personal indefinidamente ni se prolongan puntos GPS a seis meses por estar referenciados en auditoría.",
+      "mappedLocalCriterion": "CI-L07-06",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-087-01",
+      "criterion": "Una corrección conserva valor original y nuevo con autor y motivo, bajo permiso de consulta.",
+      "mappedLocalCriterion": "CI-L07-05",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-087-02",
+      "criterion": "Un token o contraseña no aparece en valores históricos; auditar no elude retención GPS.",
+      "mappedLocalCriterion": "CI-L07-05",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-088-01",
+      "criterion": "Un servicio próximo sin aceptación aparece antes que incorporación ordinaria, después de alertas críticas.",
+      "mappedLocalCriterion": "CI-L07-07",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-088-02",
+      "criterion": "Un contador de ofertas pendientes no se presenta como servicios ya cubiertos.",
+      "mappedLocalCriterion": "CI-L07-07",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-089-01",
+      "criterion": "La oferta visible no oculta el servicio aceptado próximo ni su acceso a inicio.",
+      "mappedLocalCriterion": "CI-L07-08",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-089-02",
+      "criterion": "Aceptar una oferta no inicia servicio ni permite solapamiento con uno ya confirmado.",
+      "mappedLocalCriterion": "CI-L07-08",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-090-01",
+      "criterion": "Cambiar tamaño de texto o foto opcional no cambia estado principal del conductor.",
+      "mappedLocalCriterion": "CI-L07-09",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    },
+    {
+      "id": "AC-V3-Q-090-02",
+      "criterion": "Editar perfil no cambia libremente correo verificado, identidad o documentación aprobada.",
+      "mappedLocalCriterion": "CI-L07-09",
+      "result": "VERIFICADO_LOCAL_CON_LIMITES_DE_MATRIZ"
+    }
+  ],
+  "normativeRegistryModified": false,
+  "notice": "Los objetivos físicos/operativos siguen pendientes; foto se limita por la decisión posterior de ocultación de PII. No equivale a habilitación real ni a retirar todas las categorías del piloto."
+}

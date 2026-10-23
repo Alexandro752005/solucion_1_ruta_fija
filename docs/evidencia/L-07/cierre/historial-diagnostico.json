@@ -1,0 +1,48 @@
+{
+  "result": "RESOLVED_WITHOUT_EXTRA_PERSISTENT_ACCOUNTS",
+  "connectedAttempts": [
+    {
+      "at": "2026-10-21T17:08:37.562128200Z",
+      "phase": "FLUTTER_HOME"
+    },
+    {
+      "phase": "FLUTTER_HOME",
+      "at": "2026-10-21T17:10:35.060500100Z"
+    }
+  ],
+  "connectedCorrections": [
+    {
+      "problem": "Existing server200 response timed out while a reused real socket was observed inside one blocking Flutter runAsync",
+      "change": "Only the connected test helper keeps pumping fake-clock callbacks while waiting for real HTTP; production timeouts unchanged"
+    },
+    {
+      "problem": "Guarded expect executed in an HTTP completion during tester.pump",
+      "change": "Assert response outside the completion callback; same case passes all three stages"
+    },
+    {
+      "problem": "Evidence path copied from the previous lot",
+      "change": "Corrected to L07 before the first case execution; no evidence was written to L06"
+    }
+  ],
+  "finalReview": [
+    {
+      "problem": "New report downloads lacked audit events",
+      "change": "Authorized rendered exports record REPORT_EXPORTED with actor/org/id/format/hash; refresh/denied requests never record successful downloads"
+    },
+    {
+      "problem": "Initial added JDBC assertion read unflushed JPA audit rows",
+      "change": "Flush test persistence context before checking; no production flush/control bypass"
+    },
+    {
+      "problem": "Unfiltered report test selection also executed an inherited old test expecting ADMIN completion",
+      "change": "Preserve the scenario as a negative ADMIN completion assertion required by L05, retaining live attention and unit period. Re-executed that exact scenario and17 report cases; failed bulk run not counted as a passing suite"
+    }
+  ],
+  "selectiveRetirement": "PASS_TWO_PRIVATE_CLIENT_DIAGNOSTICS_REMOVED",
+  "globalCleanup": false,
+  "newPersistentAccounts": {
+    "SUPER_ADMIN": 0,
+    "ADMIN": 0,
+    "CONDUCTOR": 1
+  }
+}

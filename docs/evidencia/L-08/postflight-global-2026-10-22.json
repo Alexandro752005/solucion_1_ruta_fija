@@ -1,0 +1,45 @@
+{
+  "result": "PASS_POST_CAP25_SEALS_AND_RETIRED_CASE_PRESERVED",
+  "observedAt": "2026-10-23T01:20:31.645973+00:00",
+  "L08Status": "EN_CURSO",
+  "pilotEnabled": false,
+  "verifiedEvidenceManifests": {
+    "docs/evidencia/L-08/cap25-860c1cdb-b062-469a-9a3f-156ea23bb656/manifest-caso-cerrado.sha256": {
+      "files": 22,
+      "sha256": "1a72d34aaeb94b67328dafbb92af57c0b5459808dbc2ebdbef0a08de6975fdcb"
+    },
+    "docs/evidencia/L-08/incremento-2-mision-y-controles/manifest-corte-post-cap25.sha256": {
+      "files": 75,
+      "sha256": "7091e94d1d3f26416ca4e9831202a2f8488aa4566b1a2f648fe056d47fc1afe2"
+    }
+  },
+  "CAP25HistoricalLedger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 4,
+    "CONDUCTOR": 20
+  },
+  "sharedTestHistoricalLedgerFromReadOnlyPhysicalPostflight": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 7
+  },
+  "physicalCaseReopened": false,
+  "newCap25AccountsBeyondAuthorizedMaximum": 0,
+  "cleanupReleasedForBothCases": true,
+  "ownedPortsReleased": [
+    4311,
+    4312,
+    4313,
+    4314,
+    4315,
+    55438,
+    55439
+  ],
+  "sharedNativePostgresServiceRemainsRunning": true,
+  "final3Regenerated": false,
+  "publishedTermsChanged": false,
+  "smtpAdditionalSends": 0,
+  "gitOrGitHubCommands": 0,
+  "deployments": 0,
+  "pendingHumanInput": "Availability of same local Wi-Fi and phone session, no authorization for a new case/LAN inferred"
+}

@@ -1,0 +1,258 @@
+{
+  "observedAt": "2026-10-19T20:12:24.714001+00:00",
+  "localDate": "2026-10-19",
+  "lot": "L-03",
+  "result": "PASS_FUNCTIONAL_LOCAL_PILOT_BLOCKED",
+  "database": "ruta_fija_test",
+  "runtimeRole": "rf_test",
+  "migratorRole": "rf_migrator",
+  "schemaVersion": "32",
+  "nativeBackend": {
+    "distinctTests": 97,
+    "httpSpringPostgresRollback": 87,
+    "postgresTwoConnectionRaces": 6,
+    "terminalGeometryUnit": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "suites": [
+      {
+        "class": "pe.rutafija.fleet.GroupMembershipIntegrationTest",
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "evidence": "docs/evidencia/L-03/aceptacion-V32/final-97/TEST-pe.rutafija.fleet.GroupMembershipIntegrationTest.xml",
+        "cases": [
+          "groupCanBeRetiredWithoutCommitmentsAndItsHistoricalMembershipRemains",
+          "pendingServiceAndOpenReassignmentAreVisibleAndBlockRetirement",
+          "addingAnOccupiedResourceDoesNotHideItsExistingCommitment",
+          "exactRetryIsIdempotentAndChangedPayloadOrStaleVersionIsRejected",
+          "oneDriverCanBelongToSeveralGroupsWithoutCreatingAUnitLinkOrPrivilege",
+          "invalidCommandsDoNotChangeMembershipsOrVersion",
+          "vehicleMembershipDoesNotCreateDriverVehiclePeriodAndQueryHasNoPersonalFields",
+          "unrelatedDriverUpdatesDoNotReactivateAnExplicitlyRemovedMembership",
+          "foreignResourcesAndGroupsAreHiddenAndSuperAdminCannotOperateTenantMemberships"
+        ]
+      },
+      {
+        "class": "pe.rutafija.qualification.DeclaredAvailabilityIntegrationTest",
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "evidence": "docs/evidencia/L-03/aceptacion-V32/final-97/TEST-pe.rutafija.qualification.DeclaredAvailabilityIntegrationTest.xml",
+        "cases": [
+          "declarationDoesNotClearItselfWhenDriverIsDeactivated",
+          "declarationCannotBeImpersonatedByAdminAndRetainsTenantScope",
+          "declarationSurvivesAnActualMobileLoginAndLogout",
+          "declarationStartsUnknownAndOnlyExplicitConductorIntentionWritesIt",
+          "declarationCannotInvalidateAnAcceptedFutureServiceOrCancelIt",
+          "declarationPersistsAcrossReadsNewSessionsAndComputedOccupation",
+          "declarationDoesNotGrantEligibilityOrManufactureAssignedStates",
+          "declarationReloadsAnOccupiedDriverCachedBeforeTheSchedulingLock"
+        ]
+      },
+      {
+        "class": "pe.rutafija.qualification.MaintenanceIntegrationTest",
+        "tests": 54,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "evidence": "docs/evidencia/L-03/aceptacion-V32/final-97/TEST-pe.rutafija.qualification.MaintenanceIntegrationTest.xml",
+        "cases": [
+          "mobileStartRechecksTheWholeWindowAfterAnAuthenticAcceptance",
+          "revokingOneFuturePeriodOnlyInvalidatesServicesThatLoseTheirOwnCoverage",
+          "periodCannotExtendBeyondReviewedValidityWhileApprovalAndAccountSurvive",
+          "companyPeriodRequiresEndEvenWithAllCurrentReviews",
+          "mobileAcceptanceChecksTheEntireDrivingWindowEvenWhenLicenseIsValidNow",
+          "periodCannotBeRevokedWhileItsUnitIsInService",
+          "nullDocumentItemsAreRejectedBeforeAnyReviewMutation",
+          "ordinaryHistoryReferencesCannotRepeatRestrictedPersonalInformation",
+          "operationalSuspensionDoesNotDisableAccountAndResumeRequiresAReviewedCurrentPeriod",
+          "personalRenewalIsAppendOnlyAndKeepsStableIdentityAndDriver",
+          "realBearerFiltersAndObjectScopeRejectForeignDriversAndConductorAdministration",
+          "missingIdentityIsRejectedByTheActualIdentityGate",
+          "activationRequiresCurrentLicenseAndExpirationKeepsPersonalApprovalAndLimitedConsultation",
+          "categoryM2CannotBeApprovedByInferringCategoryFromWheelsOrRows",
+          "legacyDriverWithoutLinkedRequestRemainsUnapprovedAndCannotBeAdoptedByReading",
+          "inactiveProvisionedConductorRetainsOwnLimitedQualificationButCannotOperate",
+          "operationalReturnSwitchFailsClosedAndPreservesTheApprovedDossier",
+          "revokingAFuturePeriodDoesNotDetachTheSameUnitFromTheCurrentService",
+          "reserveRejectsLicenseThatNoLongerCoversThePlannedWindow",
+          "ordinaryStatusSeparatesHistoricalApprovalAndOperationalEligibilityWithoutPii",
+          "missingCurrentTermsAreRejectedByTheActualTermsGate",
+          "staleVersionCannotReplaceCurrentReview",
+          "overlappingPeriodIsRejectedWithoutReplacingTheExistingPeriod",
+          "mobileLoginAndRefreshRecomputeLimitedAndOperationalScopesAgainstCurrentServerState",
+          "anUnapprovedInspectionCannotBeMarkedConforming",
+          "limaDateIncludesTheWholeFinalDayAndPreservesHistoricalPeriod",
+          "ambiguousHistoricalRequestsRemainBlockedWithoutChoosingOneImplicitly",
+          "unknownReviewDoesNotEnableAUnitOrTurnTheHistoricalDriverActive",
+          "materialTypoCanBeCorrectedBackToReviewedRootWithoutReplacingThePerson",
+          "catNeedsExplicitApplicableCoverage",
+          "aRejectedUnitRequestCannotBeLinkedToAnotherOrganizationsVehicle",
+          "foreignVehicleCannotBeSubmittedForReview",
+          "operationalTokenCannotEnableTheOfflineRouteExcludedByTheContract",
+          "administrativeStartRechecksTheWholeWindowAfterAValidReservation",
+          "adjacentPeriodsAreAllowedAndRevokePreservesHistoryWithoutDeletingApproval",
+          "incorporationSummaryUsesTheSameEligibilityAndCurrentTemporalCardinality",
+          "unknownInsuranceCannotBeApprovedAsSoatOrCat",
+          "sameOperationIsIdempotentAndChangedPayloadOrStaleVersionConflicts",
+          "plateCorrectionKeepsVehicleAndOriginalServiceSnapshotAndRequiresReviewAgain",
+          "rootDniCannotBeReplacedByMaterialCorrection",
+          "unitRequestIsOwnScopedIdempotentAndDoesNotCreateVehicleOrActivateDriver",
+          "suspensionCancelsFutureOccupationsAndPreservesInServiceForSafeHandover",
+          "explicitRenewalDuringOverrunPreservesBothPeriodsAndPhysicalOccupation",
+          "expiryMaintenanceRequiresSafeHandoverAndClosureDoesNotDeleteTheUnitPeriod",
+          "canonicalPlateCannotBeRecreatedAcrossOrganizations",
+          "documentsMustCoverTheReleaseDayAndOngoingServiceBlocksReturn",
+          "aSecondUnfinishedJobAndMissingDocumentsPreventReturn",
+          "materialUnitCorrectionCannotInvalidateCommittedServicesThroughTheOrdinaryForm",
+          "cancelOnlyBeforeStartAndKeepOriginalRecords",
+          "urgentPreservesOngoingServiceAndMarksFutureForReassignment",
+          "idempotencyVersionsTenantAndRoleAreEnforced",
+          "earlyReturnRequiresWorkAndDocumentsThenReleasesOnlyNextLimaDay",
+          "preventiveUsesFullLimaDaysAndRemainsBlockedAfterEstimate",
+          "previewIncludesEveryFutureCommitmentBeyondTheEstimatedEnd"
+        ]
+      },
+      {
+        "class": "pe.rutafija.qualification.RouteAssignmentIntegrationTest",
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "evidence": "docs/evidencia/L-03/aceptacion-V32/final-97/TEST-pe.rutafija.qualification.RouteAssignmentIntegrationTest.xml",
+        "cases": [
+          "routeReadsAreTenantScopedAndConductorCannotEditTheCatalog",
+          "routeVersionRemainsCapturedAfterCatalogRevisionAndRetirement",
+          "routeIsRequiredAndOriginMustMatchItsCapturedVersion",
+          "routeFinalizedPersistsOwnDeclarationWithoutInventingTerminalEvidence",
+          "routeChangeRejectsStartedAndStaleServicesWithoutReplacingThem",
+          "routeCreationIdempotencyRejectsDifferentPayload",
+          "routeReplacementFailureAfterCancellationMarksTheWholePhysicalTransactionForRollback",
+          "routeAcceptanceReloadsOccupationCachedBeforeTheSchedulingLock",
+          "routeReplacementPreservesOldAcceptanceAndRequiresFreshConductorAcceptance"
+        ]
+      },
+      {
+        "class": "pe.rutafija.routing.RouteCatalogIntegrationTest",
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "evidence": "docs/evidencia/L-03/aceptacion-V32/final-97/TEST-pe.rutafija.routing.RouteCatalogIntegrationTest.xml",
+        "cases": [
+          "invalidStopOrderDuplicatesPartialCoordinatesAndTooFewStopsAreRejected",
+          "editingAppendsWithoutChangingTheOldDefinitionOrItsHash",
+          "retiringPreservesVersionsAndPreventsImplicitEditing",
+          "foreignRouteIsHiddenAndSuperAdminCannotUseTenantCatalog",
+          "staleVersionOrReusedKeyWithOtherContentCannotReplaceTheCurrentRoute",
+          "immutableVersionCannotBeOverwrittenEvenThroughTheTestDatabase",
+          "createsAnOrderedRouteAndIdempotentRetryKeepsTheSameImmutableVersion"
+        ]
+      },
+      {
+        "class": "pe.rutafija.routing.TerminalCorroborationPolicyTest",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "evidence": "docs/evidencia/L-03/aceptacion-V32/final-97/TEST-pe.rutafija.routing.TerminalCorroborationPolicyTest.xml",
+        "cases": [
+          "staleFutureAndPoorAccuracyRemainUncorroborated",
+          "exactTimeAndAccuracyLimitsAreInclusive",
+          "pointsInsideAndOutsideRadiusAreDistinguished",
+          "missingPointOrTerminalNeverCorroborates"
+        ]
+      },
+      {
+        "class": "pe.rutafija.support.L02TemporalConcurrencyTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "evidence": "docs/evidencia/L-03/aceptacion-V32/final-97/TEST-pe.rutafija.support.L02TemporalConcurrencyTest.xml",
+        "cases": [
+          "sameDriverCannotHoldOverlappingDifferentUnitsConcurrently",
+          "sameUnitCannotBelongToDifferentDriversConcurrently"
+        ]
+      },
+      {
+        "class": "pe.rutafija.support.L03GroupSnapshotConcurrencyTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "evidence": "docs/evidencia/L-03/aceptacion-V32/final-97/TEST-pe.rutafija.support.L03GroupSnapshotConcurrencyTest.xml",
+        "cases": [
+          "retirementCommittedFirstPreventsANewAssignmentFromCapturingAnInactiveGroup",
+          "committedAssignmentIsVisibleBeforeTheRetirementLockCanContinue"
+        ]
+      },
+      {
+        "class": "pe.rutafija.support.L03MaintenanceSchedulingConcurrencyTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "evidence": "docs/evidencia/L-03/aceptacion-V32/final-97/TEST-pe.rutafija.support.L03MaintenanceSchedulingConcurrencyTest.xml",
+        "cases": [
+          "maintenanceCommittedFirstIsVisibleBeforeReservationCanContinue",
+          "reservationCommittedFirstIsVisibleBeforePreventiveCanContinue"
+        ]
+      }
+    ]
+  },
+  "crm": {
+    "componentTestsPassed": 20,
+    "typecheck": "PASS",
+    "developmentBuild": "PASS",
+    "realBrowserCase": "2e734706-f7ef-4947-b940-1f64fd13f86a"
+  },
+  "flutter": {
+    "targetedTestsPassed": 28,
+    "analyze": "PASS_NO_ISSUES",
+    "debugApk": "PASS",
+    "realHttpRoleRejection": "PASS_403",
+    "mobileHappyPathTcpTested": false,
+    "physicalDeviceTested": false
+  },
+  "backendPackage": "PASS_FINAL_MAIN_SOURCES",
+  "postflight": "PASS_READ_ONLY_FLYWAY_AND_PRESERVATION",
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 1
+  },
+  "remainingHistoricalQuotas": {
+    "SUPER_ADMIN": 0,
+    "ADMIN": 1,
+    "CONDUCTOR": 19
+  },
+  "acceptances": 2,
+  "historicalSha256Preserved": {
+    "ledgerSha256": "6f71d5455a50172f6e144b11611b51dbfcf0b389d3b43d7c026dc9d051ef8abf",
+    "acceptancesSha256": "120a3a856057c51796053a20046dd9aa628953105ace67caf4bbff2d29674d28",
+    "humanFixturesSha256": "6fe63b280060af868fea97a860eb9e2bbcb05e4d65538f6a7b64c74993ec7580",
+    "L02ClosedCaseSha256": "899b2f8be6231c5af331535016fdab120f90a4ec55f0d029f04ebd169581ba54"
+  },
+  "smtpExternalAttempts": 0,
+  "committedAccountCreations": 0,
+  "rollbackFixturesMayCreateTemporaryAccounts": true,
+  "selectiveCleanup": "PASS_EXACT_SELECTIVE_CLOSE",
+  "TEST_CLEANUP_RELEASED": true,
+  "globalCleanupExecuted": false,
+  "globalHistoricalCleanupGuardStillRequired": true,
+  "pilotEnabled": false,
+  "L04Started": false,
+  "limitations": [
+    "MockMvc HTTP uses real filters/services/PostgreSQL, not independent TCP clients.",
+    "Concurrency fixtures use two PostgreSQL connections and technical resources, not two concurrent browser clients.",
+    "Connected CRM smoke predates final scheduling-lock/cache hardening; final native regressions verify that delta.",
+    "Flutter positive own-route contract is covered by Spring/PostgreSQL and client models/widgets separately; positive mobile TCP and physical device not executed.",
+    "Final declaration suite rerun restores durable eight-case XML after one-case logging check; reruns are not added to 97 distinct cases.",
+    "Test-only logging properties corrected; generated test credential fragments in owned L03 logs redacted with explicit journal. No closed L01/L02 evidence rewritten."
+  ]
+}

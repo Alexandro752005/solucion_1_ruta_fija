@@ -25,6 +25,38 @@ import java.util.UUID;
 @Table(name = "assignment")
 public class Assignment {
 
+    @Column(name="service_type_version_id")
+    private UUID serviceTypeVersionId;
+
+    @jakarta.persistence.Column(name="service_id", updatable=false)
+    private UUID serviceId;
+    @Column(name="handover_id",updatable=false)
+    private UUID handoverId;
+    @Column(name="transferred_at")
+    private Instant transferredAt;
+    public UUID getHandoverId(){return handoverId;}
+    public Instant getTransferredAt(){return transferredAt;}
+    public void captureHandover(UUID id){if(handoverId!=null)throw new IllegalStateException("El relevo es inmutable.");handoverId=Objects.requireNonNull(id);}
+    public void transfer(Instant now){if(status!=AssignmentStatus.EN_SERVICIO||startedAt==null||now.isBefore(startedAt))throw new IllegalStateException("El relevo requiere un tramo iniciado.");status=AssignmentStatus.TRANSFERRED;transferredAt=now;}
+
+    public UUID getServiceId(){return serviceId;}
+    public void captureService(UUID id){
+        if(serviceId!=null)throw new IllegalStateException("El servicio de una oferta es inmutable.");
+        serviceId=Objects.requireNonNull(id);
+    }
+    @Column(name="margin_before_minutes")
+    private Integer marginBeforeMinutes;
+    @Column(name="margin_after_minutes")
+    private Integer marginAfterMinutes;
+
+    public void captureServiceType(UUID version,int before,int after) {
+        if(serviceTypeVersionId!=null||before<0||after<0)throw new IllegalStateException("La captura de márgenes es inmutable y requiere configuración expresa.");
+        serviceTypeVersionId=Objects.requireNonNull(version);marginBeforeMinutes=before;marginAfterMinutes=after;
+    }
+    public UUID getServiceTypeVersionId(){return serviceTypeVersionId;}
+    public Integer getMarginBeforeMinutes(){return marginBeforeMinutes;}
+    public Integer getMarginAfterMinutes(){return marginAfterMinutes;}
+
     @Id
     private UUID id;
 
@@ -39,6 +71,16 @@ public class Assignment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vehicle_id", nullable = false)
     private Vehicle vehicle;
+
+    @Column(name = "vehicle_plate_snapshot",length=15)
+    private String vehiclePlateSnapshot;
+
+    @Column(name="route_version_id", updatable=false)
+    private UUID routeVersionId;
+
+    @Column(name="creation_payload_sha256",length=64,updatable=false)
+    @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.CHAR)
+    private String creationPayloadSha256;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by", nullable = false, updatable = false)
@@ -88,6 +130,11 @@ public class Assignment {
     @Column(name = "completed_at")
     private Instant completedAt;
 
+    @Column(name="interrupted_at")
+    private Instant interruptedAt;
+    @Column(name="interruption_reason",length=32)
+    private String interruptionReason;
+
     @Column(name = "cancelled_at")
     private Instant cancelledAt;
 
@@ -115,6 +162,13 @@ public class Assignment {
     protected Assignment() {
     }
 
+    public void captureRoute(UUID versionId,String payloadSha256) {
+        if(routeVersionId!=null)throw new IllegalStateException("La versión capturada no se sustituye");
+        routeVersionId=Objects.requireNonNull(versionId);creationPayloadSha256=Objects.requireNonNull(payloadSha256);
+    }
+    public UUID getRouteVersionId(){return routeVersionId;}
+    public String getCreationPayloadSha256(){return creationPayloadSha256;}
+
     private Assignment(
             Organization organization,
             Driver driver,
@@ -133,6 +187,7 @@ public class Assignment {
         this.organization = Objects.requireNonNull(organization);
         this.driver = Objects.requireNonNull(driver);
         this.vehicle = Objects.requireNonNull(vehicle);
+        this.vehiclePlateSnapshot = vehicle.getPlate();
         this.createdBy = Objects.requireNonNull(createdBy);
         this.originText = requiredText(originText, "El origen es obligatorio");
         this.destinationText = requiredText(destinationText, "El destino es obligatorio");
@@ -144,8 +199,8 @@ public class Assignment {
         this.responseMode = Objects.requireNonNull(responseMode);
 
         if (responseMode == AssignmentResponseMode.MOBILE_CONFIRMATION) {
-            if (responseDeadlineAt == null || !responseDeadlineAt.isBefore(scheduledAt)) {
-                throw new IllegalArgumentException("El plazo de respuesta debe ser anterior al inicio programado");
+            if (responseDeadlineAt == null || responseDeadlineAt.isAfter(scheduledAt)) {
+                throw new IllegalArgumentException("El plazo de respuesta no puede superar el inicio programado");
             }
             this.status = AssignmentStatus.PENDING_RESPONSE;
             this.responseDeadlineAt = responseDeadlineAt;
@@ -209,6 +264,7 @@ public class Assignment {
         requireScheduledAndNotReserved();
         this.driver = Objects.requireNonNull(driver);
         this.vehicle = Objects.requireNonNull(vehicle);
+        this.vehiclePlateSnapshot = vehicle.getPlate();
         this.originText = requiredText(originText, "El origen es obligatorio");
         this.destinationText = requiredText(destinationText, "El destino es obligatorio");
         validateSchedule(scheduledAt, scheduledEndAt);
@@ -284,6 +340,14 @@ public class Assignment {
         completedAt = Objects.requireNonNull(occurredAt);
     }
 
+    public void interrupt(Instant serverNow,String reason) {
+        if(status!=AssignmentStatus.EN_SERVICIO||startedAt==null||serverNow.isBefore(startedAt))
+            throw new IllegalStateException("La interrupción requiere una ejecución iniciada.");
+        status=AssignmentStatus.INTERRUPTED;interruptedAt=Objects.requireNonNull(serverNow);interruptionReason=Objects.requireNonNull(reason);
+    }
+    public Instant getInterruptedAt(){return interruptedAt;}
+    public String getInterruptionReason(){return interruptionReason;}
+
     public void cancel(String reason, Instant occurredAt) {
         if (status != AssignmentStatus.PENDING_RESPONSE
                 && status != AssignmentStatus.SCHEDULED
@@ -310,6 +374,8 @@ public class Assignment {
     public Driver getDriver() {
         return driver;
     }
+
+    public String getVehiclePlateSnapshot(){return vehiclePlateSnapshot;}
 
     public Vehicle getVehicle() {
         return vehicle;

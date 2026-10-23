@@ -1,0 +1,91 @@
+{
+    "observedAt":  "2026-10-23T05:04:29.8798795+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "action":  "click",
+    "label":  "Iniciar sesión",
+    "automatedUiInstrumentation":  true,
+    "humanAccessibilityConfirmation":  false,
+    "nodes":  [
+                  {
+                      "text":  "",
+                      "description":  "Ruta Fija Conductor",
+                      "bounds":  "[48,141][516,210]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Acceso del conductor",
+                      "bounds":  "[72,583][1008,661]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Inicie sesión con la cuenta vinculada a su conductor. La aplicación no usa la sesión web del CRM.",
+                      "bounds":  "[72,685][1008,781]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Error de acceso: El correo o la contraseña no son correctos.",
+                      "bounds":  "[72,841][1008,1033]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Iniciar sesión",
+                      "bounds":  "[72,1513][1008,1657]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Completar recuperación autorizada",
+                      "bounds":  "[72,1681][1008,1825]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Tengo una invitación",
+                      "bounds":  "[72,1825][1008,1969]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Consultar mi solicitud",
+                      "bounds":  "[72,1969][1008,2113]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "El token de renovación se conserva únicamente en el almacenamiento protegido del dispositivo.",
+                      "bounds":  "[72,2161][1008,2257]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  }
+              ]
+}

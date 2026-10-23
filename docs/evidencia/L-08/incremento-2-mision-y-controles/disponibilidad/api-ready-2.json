@@ -1,0 +1,14 @@
+{
+  "runId" : "7a84a97e-79b8-4b3a-b316-545e6b954d55",
+  "result" : "READY_ACTUAL_SPRING_API_READ_ONLY_TEST",
+  "database" : "ruta_fija_test",
+  "role" : "rf_test",
+  "schemaVersion" : "48",
+  "serverPort" : 4312,
+  "startedAt" : "2026-10-22T16:45:52.767203300Z",
+  "readOnlyDatasource" : true,
+  "mailRefused" : true,
+  "schedulersRemoved" : true,
+  "identityAndTermsGatesEnabled" : true,
+  "businessRoutesBlockedByTestFilter" : true
+}

@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, OnDestroy, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { DatePipe } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
 
@@ -6,26 +8,32 @@ import { ApiErrorService } from '../../core/api/api-error.service';
 import { UiError } from '../../core/api/api-error.model';
 import { AuthSessionService } from '../../core/auth/auth-session.service';
 import { ManagementApiService } from '../../core/management/management-api.service';
-import { ManagedUser, UserCreatePayload, UserUpdatePayload } from '../../core/management/management.models';
+import {
+  ConductorRecoveryStartPayload,
+  ConductorRecoveryStarted,
+  ConductorRecoveryStatus,
+  ManagedUser,
+  RecoveryEvidenceMethod,
+} from '../../core/management/management.models';
 import { ConfirmDialogComponent } from '../../shared/ui/confirm-dialog.component';
 import { ModalComponent } from '../../shared/ui/modal.component';
 import { PageHeaderComponent } from '../../shared/ui/page-header.component';
 import { PaginationComponent } from '../../shared/ui/pagination.component';
 
-type OrganizationUserRole = 'ADMIN' | 'CONDUCTOR';
+type OrganizationUserRole = 'CONDUCTOR';
 
 @Component({
   selector: 'rf-users-page',
-  imports: [ReactiveFormsModule, PageHeaderComponent, ModalComponent, ConfirmDialogComponent, PaginationComponent],
+  imports: [ReactiveFormsModule, RouterLink, DatePipe, PageHeaderComponent, ModalComponent, ConfirmDialogComponent, PaginationComponent],
   templateUrl: './users.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersPage {
+export class UsersPage implements OnDestroy {
   private readonly api = inject(ManagementApiService);
   private readonly apiErrors = inject(ApiErrorService);
   readonly session = inject(AuthSessionService);
 
-  readonly roles: readonly OrganizationUserRole[] = ['ADMIN', 'CONDUCTOR'];
+  readonly roles: readonly OrganizationUserRole[] = ['CONDUCTOR'];
   readonly users = signal<readonly ManagedUser[]>([]);
   readonly loading = signal(true);
   readonly saving = signal(false);
@@ -39,6 +47,12 @@ export class UsersPage {
   readonly editing = signal<ManagedUser | null>(null);
   readonly formOpen = signal(false);
   readonly pendingStatusUser = signal<ManagedUser | null>(null);
+  readonly recoveryTarget = signal<ManagedUser | null>(null);
+  readonly recoveryStarted = signal<ConductorRecoveryStarted | null>(null);
+  readonly recoveryStatus = signal<ConductorRecoveryStatus | null>(null);
+  readonly recoverySaving = signal(false);
+  readonly recoveryError = signal<UiError | null>(null);
+  readonly pendingRecoveryCancel = signal(false);
   readonly error = signal<UiError | null>(null);
   readonly notice = signal<string | null>(null);
   readonly organizationName = computed(
@@ -62,6 +76,33 @@ export class UsersPage {
     role: new FormControl<OrganizationUserRole>('CONDUCTOR', {
       nonNullable: true,
       validators: [Validators.required],
+    }),
+  });
+
+  readonly recoveryForm = new FormGroup({
+    newEmail: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.email, Validators.maxLength(180)],
+    }),
+    evidenceMethod: new FormControl<RecoveryEvidenceMethod>('PRIOR_SECURE_CONTACT', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    evidenceReference: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.maxLength(200)],
+    }),
+    reason: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.maxLength(300)],
+    }),
+    expedienteReviewed: new FormControl(false, {
+      nonNullable: true,
+      validators: [Validators.requiredTrue],
+    }),
+    independentEvidenceConfirmed: new FormControl(false, {
+      nonNullable: true,
+      validators: [Validators.requiredTrue],
     }),
   });
 
@@ -106,25 +147,12 @@ export class UsersPage {
   }
 
   startCreate(): void {
-    this.notice.set(null);
-    this.error.set(null);
-    this.resetForm(false);
-    this.formOpen.set(true);
+    this.informOnboarding();
   }
 
   startEdit(user: ManagedUser): void {
-    this.notice.set(null);
-    this.error.set(null);
-    this.editing.set(user);
-    this.form.reset({
-      email: user.email,
-      password: '',
-      fullName: user.fullName,
-      phone: user.phone ?? '',
-      role: user.role as OrganizationUserRole,
-    });
-    this.form.controls.password.disable();
-    this.formOpen.set(true);
+    void user;
+    this.informOnboarding();
   }
 
   closeForm(): void {
@@ -134,40 +162,7 @@ export class UsersPage {
   }
 
   submit(): void {
-    this.notice.set(null);
-    this.error.set(null);
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-
-    const current = this.editing();
-    const value = this.form.getRawValue();
-    this.saving.set(true);
-    const request = current === null
-      ? this.api.createUser({
-          email: value.email.trim(),
-          password: value.password,
-          fullName: value.fullName.trim(),
-          phone: value.phone.trim() || undefined,
-          role: value.role,
-        } satisfies UserCreatePayload)
-      : this.api.updateUser(current.id, {
-          email: value.email.trim(),
-          fullName: value.fullName.trim(),
-          phone: value.phone.trim() || undefined,
-          role: value.role,
-        } satisfies UserUpdatePayload);
-
-    request.pipe(finalize(() => this.saving.set(false))).subscribe({
-      next: () => {
-        this.notice.set(current === null ? 'Usuario creado correctamente.' : 'Usuario actualizado correctamente.');
-        this.resetForm();
-        this.load(0);
-      },
-      error: (error: unknown) =>
-        this.error.set(this.apiErrors.toUiError(error, 'No se pudo guardar el usuario.')),
-    });
+    this.informOnboarding();
   }
 
   requestToggleActive(user: ManagedUser): void {
@@ -200,6 +195,118 @@ export class UsersPage {
         this.pendingStatusUser.set(null);
       },
     });
+  }
+
+  startRecovery(user: ManagedUser): void {
+    if (user.role !== 'CONDUCTOR' || !user.active) return;
+    this.recoveryError.set(null);
+    this.recoveryStarted.set(null);
+    this.recoveryStatus.set(null);
+    this.recoveryForm.reset({
+      newEmail: '',
+      evidenceMethod: 'PRIOR_SECURE_CONTACT',
+      evidenceReference: '',
+      reason: '',
+      expedienteReviewed: false,
+      independentEvidenceConfirmed: false,
+    });
+    this.recoveryTarget.set(user);
+  }
+
+  closeRecovery(): void {
+    if (this.recoverySaving()) return;
+    this.recoveryTarget.set(null);
+    this.recoveryStarted.set(null);
+    this.recoveryStatus.set(null);
+    this.recoveryError.set(null);
+    this.pendingRecoveryCancel.set(false);
+    this.recoveryForm.reset();
+  }
+
+  ngOnDestroy(): void {
+    this.recoveryTarget.set(null);
+    this.recoveryStarted.set(null);
+    this.recoveryStatus.set(null);
+    this.recoveryForm.reset();
+    this.resetForm();
+  }
+
+  private informOnboarding(): void {
+    this.resetForm();
+    this.error.set(null);
+    this.notice.set('La incorporación y revisión de identidad se realizan desde Solicitudes y su expediente restringido.');
+  }
+
+  submitRecovery(): void {
+    const user = this.recoveryTarget();
+    if (!user || this.recoveryStarted() || this.recoveryForm.invalid || this.recoverySaving()) {
+      this.recoveryForm.markAllAsTouched();
+      return;
+    }
+    this.recoveryError.set(null);
+    const value = this.recoveryForm.getRawValue();
+    const payload: ConductorRecoveryStartPayload = {
+      newEmail: value.newEmail.trim(),
+      evidenceMethod: value.evidenceMethod,
+      evidenceReference: value.evidenceReference.trim(),
+      reason: value.reason.trim(),
+      expedienteReviewed: value.expedienteReviewed,
+      independentEvidenceConfirmed: value.independentEvidenceConfirmed,
+      passwordResetRequired: true,
+    };
+    this.recoverySaving.set(true);
+    this.api.startConductorRecovery(user.id, payload)
+      .pipe(finalize(() => this.recoverySaving.set(false)))
+      .subscribe({
+        next: (started) => this.recoveryStarted.set(started),
+        error: (error: unknown) => this.recoveryError.set(
+          this.apiErrors.toUiError(error, 'No se pudo iniciar la recuperación autorizada.'),
+        ),
+      });
+  }
+
+  refreshRecoveryStatus(): void {
+    const user = this.recoveryTarget();
+    const started = this.recoveryStarted();
+    if (!user || !started || this.recoverySaving()) return;
+    this.recoverySaving.set(true);
+    this.api.getConductorRecovery(user.id, started.recoveryId)
+      .pipe(finalize(() => this.recoverySaving.set(false)))
+      .subscribe({
+        next: (status) => this.recoveryStatus.set(status),
+        error: (error: unknown) => this.recoveryError.set(
+          this.apiErrors.toUiError(error, 'No se pudo consultar el estado de la recuperación.'),
+        ),
+      });
+  }
+
+  requestRecoveryCancel(): void {
+    if (this.recoveryStarted() && this.recoveryStatus()?.status !== 'COMPLETED') {
+      this.pendingRecoveryCancel.set(true);
+    }
+  }
+
+  cancelRecovery(): void {
+    const user = this.recoveryTarget();
+    const started = this.recoveryStarted();
+    if (!user || !started || this.recoverySaving()) return;
+    this.recoverySaving.set(true);
+    this.api.cancelConductorRecovery(user.id, started.recoveryId)
+      .pipe(finalize(() => this.recoverySaving.set(false)))
+      .subscribe({
+        next: (status) => {
+          this.recoveryStatus.set(status);
+          this.pendingRecoveryCancel.set(false);
+          this.recoveryStarted.set(null);
+        },
+        error: (error: unknown) => {
+          this.recoveryError.set(this.apiErrors.toUiError(
+            error,
+            'No se pudo cancelar la recuperación. Actualice el estado antes de reintentar.',
+          ));
+          this.pendingRecoveryCancel.set(false);
+        },
+      });
   }
 
   previousPage(): void {

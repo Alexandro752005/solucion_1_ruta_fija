@@ -1,0 +1,335 @@
+{
+  "browser": "Edge",
+  "role": "SUPER_ADMIN",
+  "requestedNativeZoom": 3,
+  "checks": [
+    {
+      "id": "BROWSER_PRESENT",
+      "result": "PASS"
+    },
+    {
+      "id": "BROWSER_STARTED",
+      "result": "PASS"
+    },
+    {
+      "id": "ROUTE_DASHBOARD",
+      "result": "PASS"
+    },
+    {
+      "id": "NATIVE_ZOOM_DASHBOARD",
+      "result": "PASS"
+    },
+    {
+      "id": "PHYSICAL_CLIENT_1280_720_DASHBOARD",
+      "result": "PASS",
+      "width": 426,
+      "height": 240,
+      "factor": 3
+    },
+    {
+      "id": "PAGE_REFLOW_DASHBOARD",
+      "result": "PASS",
+      "width": 426,
+      "documentWidth": 421
+    },
+    {
+      "id": "NO_OPERATIONAL_ALERT_DASHBOARD",
+      "result": "PASS"
+    },
+    {
+      "id": "NO_EMAIL_IN_ORDINARY_VIEW_DASHBOARD",
+      "result": "PASS"
+    },
+    {
+      "id": "CONTROLS_LABELLED_DASHBOARD",
+      "result": "PASS",
+      "unlabelled": []
+    },
+    {
+      "id": "TABLES_BOUNDED_DASHBOARD",
+      "result": "PASS"
+    },
+    {
+      "id": "AX_NAMED_CONTROLS_DASHBOARD",
+      "result": "PASS",
+      "tables": 0,
+      "unnamedControls": []
+    },
+    {
+      "id": "REAL_API_READ_DASHBOARD",
+      "result": "PASS"
+    },
+    {
+      "id": "SUCCESSFUL_READS_DASHBOARD",
+      "result": "PASS"
+    },
+    {
+      "id": "ROUTE_ORGANIZATIONS",
+      "result": "PASS"
+    },
+    {
+      "id": "NATIVE_ZOOM_ORGANIZATIONS",
+      "result": "PASS"
+    },
+    {
+      "id": "PHYSICAL_CLIENT_1280_720_ORGANIZATIONS",
+      "result": "PASS",
+      "width": 426,
+      "height": 240,
+      "factor": 3
+    },
+    {
+      "id": "PAGE_REFLOW_ORGANIZATIONS",
+      "result": "PASS",
+      "width": 426,
+      "documentWidth": 421
+    },
+    {
+      "id": "NO_OPERATIONAL_ALERT_ORGANIZATIONS",
+      "result": "PASS"
+    },
+    {
+      "id": "NO_EMAIL_IN_ORDINARY_VIEW_ORGANIZATIONS",
+      "result": "PASS"
+    },
+    {
+      "id": "CONTROLS_LABELLED_ORGANIZATIONS",
+      "result": "PASS",
+      "unlabelled": []
+    },
+    {
+      "id": "TABLES_BOUNDED_ORGANIZATIONS",
+      "result": "PASS"
+    },
+    {
+      "id": "AX_NAMED_CONTROLS_ORGANIZATIONS",
+      "result": "PASS",
+      "tables": 1,
+      "unnamedControls": []
+    },
+    {
+      "id": "REAL_API_READ_ORGANIZATIONS",
+      "result": "PASS"
+    },
+    {
+      "id": "SUCCESSFUL_READS_ORGANIZATIONS",
+      "result": "PASS"
+    },
+    {
+      "id": "ROUTE_PLATFORM-ADMINS",
+      "result": "PASS"
+    },
+    {
+      "id": "NATIVE_ZOOM_PLATFORM-ADMINS",
+      "result": "PASS"
+    },
+    {
+      "id": "PHYSICAL_CLIENT_1280_720_PLATFORM-ADMINS",
+      "result": "PASS",
+      "width": 426,
+      "height": 240,
+      "factor": 3
+    },
+    {
+      "id": "PAGE_REFLOW_PLATFORM-ADMINS",
+      "result": "PASS",
+      "width": 426,
+      "documentWidth": 421
+    },
+    {
+      "id": "NO_OPERATIONAL_ALERT_PLATFORM-ADMINS",
+      "result": "PASS"
+    },
+    {
+      "id": "NO_EMAIL_IN_ORDINARY_VIEW_PLATFORM-ADMINS",
+      "result": "PASS"
+    },
+    {
+      "id": "CONTROLS_LABELLED_PLATFORM-ADMINS",
+      "result": "PASS",
+      "unlabelled": []
+    },
+    {
+      "id": "TABLES_BOUNDED_PLATFORM-ADMINS",
+      "result": "PASS"
+    },
+    {
+      "id": "AX_NAMED_CONTROLS_PLATFORM-ADMINS",
+      "result": "PASS",
+      "tables": 1,
+      "unnamedControls": []
+    },
+    {
+      "id": "REAL_API_READ_PLATFORM-ADMINS",
+      "result": "PASS"
+    },
+    {
+      "id": "SUCCESSFUL_READS_PLATFORM-ADMINS",
+      "result": "PASS"
+    },
+    {
+      "id": "ROUTE_PLATFORM-AUDIT",
+      "result": "PASS"
+    },
+    {
+      "id": "NATIVE_ZOOM_PLATFORM-AUDIT",
+      "result": "PASS"
+    },
+    {
+      "id": "PHYSICAL_CLIENT_1280_720_PLATFORM-AUDIT",
+      "result": "PASS",
+      "width": 426,
+      "height": 240,
+      "factor": 3
+    },
+    {
+      "id": "PAGE_REFLOW_PLATFORM-AUDIT",
+      "result": "PASS",
+      "width": 426,
+      "documentWidth": 421
+    },
+    {
+      "id": "NO_OPERATIONAL_ALERT_PLATFORM-AUDIT",
+      "result": "PASS"
+    },
+    {
+      "id": "NO_EMAIL_IN_ORDINARY_VIEW_PLATFORM-AUDIT",
+      "result": "PASS"
+    },
+    {
+      "id": "CONTROLS_LABELLED_PLATFORM-AUDIT",
+      "result": "PASS",
+      "unlabelled": []
+    },
+    {
+      "id": "TABLES_BOUNDED_PLATFORM-AUDIT",
+      "result": "PASS"
+    },
+    {
+      "id": "AX_NAMED_CONTROLS_PLATFORM-AUDIT",
+      "result": "PASS",
+      "tables": 1,
+      "unnamedControls": []
+    },
+    {
+      "id": "REAL_API_READ_PLATFORM-AUDIT",
+      "result": "PASS"
+    },
+    {
+      "id": "SUCCESSFUL_READS_PLATFORM-AUDIT",
+      "result": "PASS"
+    }
+  ],
+  "pages": [
+    {
+      "path": "/dashboard",
+      "dpr": 3,
+      "width": 426,
+      "height": 240,
+      "outerWidth": 1304,
+      "outerHeight": 812,
+      "cssZoom": "1",
+      "pageScale": 1,
+      "documentWidth": 421,
+      "title": "Resumen",
+      "alerts": 0,
+      "tables": [],
+      "unlabelled": [],
+      "piiEmailVisible": false,
+      "accessibility": {
+        "tables": 0,
+        "unnamedControls": []
+      }
+    },
+    {
+      "path": "/organizations",
+      "dpr": 3,
+      "width": 426,
+      "height": 240,
+      "outerWidth": 1304,
+      "outerHeight": 812,
+      "cssZoom": "1",
+      "pageScale": 1,
+      "documentWidth": 421,
+      "title": "Organizaciones",
+      "alerts": 0,
+      "tables": [
+        {
+          "rows": 2,
+          "headers": 5,
+          "parentWidth": 338,
+          "scrollWidth": 672,
+          "overflow": "auto"
+        }
+      ],
+      "unlabelled": [],
+      "piiEmailVisible": false,
+      "accessibility": {
+        "tables": 1,
+        "unnamedControls": []
+      }
+    },
+    {
+      "path": "/platform-admins",
+      "dpr": 3,
+      "width": 426,
+      "height": 240,
+      "outerWidth": 1304,
+      "outerHeight": 812,
+      "cssZoom": "1",
+      "pageScale": 1,
+      "documentWidth": 421,
+      "title": "Cuentas ADMIN",
+      "alerts": 0,
+      "tables": [
+        {
+          "rows": 3,
+          "headers": 6,
+          "parentWidth": 338,
+          "scrollWidth": 676,
+          "overflow": "auto"
+        }
+      ],
+      "unlabelled": [],
+      "piiEmailVisible": false,
+      "accessibility": {
+        "tables": 1,
+        "unnamedControls": []
+      }
+    },
+    {
+      "path": "/platform-audit",
+      "dpr": 3,
+      "width": 426,
+      "height": 240,
+      "outerWidth": 1304,
+      "outerHeight": 812,
+      "cssZoom": "1",
+      "pageScale": 1,
+      "documentWidth": 421,
+      "title": "Auditoría de plataforma",
+      "alerts": 0,
+      "tables": [
+        {
+          "rows": 20,
+          "headers": 5,
+          "parentWidth": 338,
+          "scrollWidth": 812,
+          "overflow": "auto"
+        }
+      ],
+      "unlabelled": [],
+      "piiEmailVisible": false,
+      "accessibility": {
+        "tables": 1,
+        "unnamedControls": []
+      }
+    }
+  ],
+  "version": "Edg/155.0.4283.62",
+  "screenshot": {
+    "file": "Edge-SUPER_ADMIN-300-platform-admins.png",
+    "sha256": "b642551841625bca5971aaac671b6787b55fc1bba264e64136ca5efd4b0890ef"
+  },
+  "result": "PASS_OPERATIONAL_READ_ONLY_NATIVE_BROWSER_ZOOM"
+}

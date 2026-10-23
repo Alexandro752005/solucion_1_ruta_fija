@@ -1,0 +1,19 @@
+{
+  "result": "PASS_RECONCILED_APPLIED_V50_AND_PRESERVATION",
+  "originalMigrationPostcheckFailurePreserved": true,
+  "cause": "Postcheck queried version49 instead of50 after applying V50; no repeated migration or history repair.",
+  "rehearsalSha256": "6369ce59e6403d80890ffb281c5c21f858a611579bbb74843187eee39c5e1fef",
+  "originalMigrationLogSha256": "79e7d918ada1f11cadfb502de13333fdc55428c46a43ef35df197d7305a7c973",
+  "postflightSha256": "eb19671676b7ff21f3047b2db70a173fd69d9ce9baa7c5d634b6fe010bf0ce36",
+  "schema": "50",
+  "validatedMigrations": 51,
+  "historicalLedger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 6
+  },
+  "termsAcceptances": 2,
+  "allPreviousTableRowsAndHistoricalFilesPreserved": true,
+  "globalCleanup": false,
+  "personalRetirementsOutsideRollbackFixtures": false
+}

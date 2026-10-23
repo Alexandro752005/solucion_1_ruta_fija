@@ -1,0 +1,810 @@
+{
+  "source": "specs/registro.json",
+  "unchangedRegistry": true,
+  "questions": [
+    {
+      "id": "Q-025",
+      "moduleId": "MOD-GRP",
+      "dimension": "DATOS",
+      "question": "¿Qué recursos debe representar un grupo para la operación: conductores, vehículos o ambos?",
+      "decisionTopic": "Composición de grupo",
+      "reason": "Definir composición de grupo y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Un grupo organiza conductores, unidades o ambos dentro de la misma empresa. Pertenecer al grupo no crea un vínculo conductor-unidad, no habilita documentos y no evita las validaciones individuales de disponibilidad, horarios y permisos.",
+      "decisionRefs": [
+        "D-Q-025"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "USUARIO_ADJUNTO_Y_PRECISION_TECNICA",
+        "source": "ruta_fija_registro_descubrimiento_v1(1).json",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-026",
+      "moduleId": "MOD-GRP",
+      "dimension": "DATOS",
+      "question": "¿Un conductor puede pertenecer a más de un grupo de la misma empresa?",
+      "decisionTopic": "Cardinalidad de grupos",
+      "reason": "Definir cardinalidad de grupos y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "El conductor puede integrar varios grupos de su empresa. Se impiden membresías duplicadas y se comprueban sus conflictos y los de su unidad entre todos los grupos.",
+      "decisionRefs": [
+        "D-V3-Q-026"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-026",
+        "sourceAnswerPointer": "/questions/1",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-026-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Varios grupos de la misma empresa",
+        "answeredAtClientReported": "2026-10-11T15:55:00.283Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "requiresUserConfirmation": false,
+      "reviewNotes": "No había respuesta. Se completa con una propuesta de organización en varios grupos; requiere decisión del usuario.",
+      "implementationStatus": "NO_REVISADA",
+      "userNotes": "",
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-027",
+      "moduleId": "MOD-GRP",
+      "dimension": "ACTORES_PERMISOS",
+      "question": "¿Pertenecer a un grupo debe cambiar los permisos del conductor?",
+      "decisionTopic": "Efecto de grupo en permisos",
+      "reason": "Definir efecto de grupo en permisos y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Pertenecer a un grupo no cambia los permisos del conductor. Los permisos dependen del rol autorizado y su vigencia; los únicos roles son SUPER_ADMIN, ADMIN y CONDUCTOR.",
+      "decisionRefs": [
+        "D-Q-027"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-028",
+      "moduleId": "MOD-GRP",
+      "dimension": "EXCEPCIONES",
+      "question": "¿Cuándo puede eliminarse un grupo que tiene asignaciones pendientes?",
+      "decisionTopic": "Eliminación de grupo en uso",
+      "reason": "Definir eliminación de grupo en uso y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Se impide eliminar un grupo mientras tenga asignaciones o servicios vinculados pendientes o en ejecución, incluidos servicios que quedaron pendientes de reasignación. Deben completarse los compromisos pendientes antes de permitir su eliminación. El CRM muestra los compromisos que la bloquean y el servidor vuelve a comprobarlos al confirmar. Al eliminarlo se conserva la referencia histórica de los servicios y se impide su uso nuevo, sin producir estados genéricos de error.",
+      "decisionRefs": [
+        "D-Q-028"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "reviewNotes": "Se conserva evidencia histórica; eliminar un grupo no elimina los registros de servicios.",
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-029",
+      "moduleId": "MOD-VEH",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿Puede una unidad estar vinculada simultáneamente a dos conductores dentro de la empresa?",
+      "decisionTopic": "Exclusividad conductor/unidad",
+      "reason": "Definir exclusividad conductor/unidad y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Una unidad no puede mantener vínculos autorizados con dos conductores para periodos superpuestos. Puede tener vínculos sucesivos con distintos conductores si no se solapan sus vigencias ni existe una operación en curso incompatible. Se comprueba la exclusividad en el servidor, incluso ante solicitudes simultáneas.",
+      "decisionRefs": [
+        "D-Q-029"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-030",
+      "moduleId": "MOD-VEH",
+      "dimension": "DATOS",
+      "question": "¿Puede una misma unidad operar para más de una empresa de la plataforma?",
+      "decisionTopic": "Unidad entre empresas",
+      "reason": "Definir unidad entre empresas y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Una unidad no puede operar simultáneamente para dos empresas. Su identidad interna y el historial se conservan ante un eventual traslado; el proceso de transferencia no habilita pertenencias operativas superpuestas.",
+      "decisionRefs": [
+        "D-Q-030"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-031",
+      "moduleId": "MOD-VEH",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿Qué condiciones habilitan documental y operativamente una unidad y cuáles solo afectan su disponibilidad horaria?",
+      "decisionTopic": "Elegibilidad documental de unidad",
+      "reason": "Definir elegibilidad documental de unidad y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "ADMIN revisa documentos y el servidor deriva la elegibilidad con su vigencia y los bloqueos. Para cada oferta se comprueban además vínculo y horario. La ocupación de un servicio solo afecta disponibilidad, sin invalidar la revisión documental.",
+      "decisionRefs": [
+        "D-V3-Q-031"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-031",
+        "sourceAnswerPointer": "/questions/12",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-031-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Documentos y disponibilidad separados",
+        "answeredAtClientReported": "2026-10-11T16:21:31.931Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "requiresUserConfirmation": false,
+      "reviewNotes": "Evita deshabilitar documentalmente una unidad por el mero hecho de estar ocupada.",
+      "implementationStatus": "NO_REVISADA",
+      "userNotes": "",
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-032",
+      "moduleId": "MOD-VEH",
+      "dimension": "ACTORES_PERMISOS",
+      "question": "Si una unidad propia se incorpora a una empresa, ¿quién debe validar esa incorporación?",
+      "decisionTopic": "Aprobación de unidad propia",
+      "reason": "Definir aprobación de unidad propia y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "El ADMIN de la empresa revisa y valida la incorporación de una unidad propia, sus datos y la documentación exigida. La validación no asigna automáticamente rutas ni servicios y debe respetar la pertenencia empresarial y la exclusividad de los vínculos.",
+      "decisionRefs": [
+        "D-Q-032"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "USUARIO_ADJUNTO_Y_PRECISION_TECNICA",
+        "source": "ruta_fija_registro_descubrimiento_v1(1).json",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-033",
+      "moduleId": "MOD-VEH",
+      "dimension": "ACTORES_PERMISOS",
+      "question": "Si una unidad asignada deja de estar disponible, ¿quién puede sustituirla?",
+      "decisionTopic": "Permiso de sustitución de unidad",
+      "reason": "Definir permiso de sustitución de unidad y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "El ADMIN autoriza la sustitución de unidad y la desvinculación. Debe registrar motivo, vigencias y las asignaciones afectadas. La nueva unidad debe quedar revisada y vinculada antes de ofrecer el servicio al conductor. Una sustitución que cambie los datos de una asignación pendiente o aceptada exige anular su versión anterior y solicitar aceptación de la nueva; no se modifica silenciosamente lo que el conductor aceptó.",
+      "decisionRefs": [
+        "D-Q-033"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-034",
+      "moduleId": "MOD-VEH",
+      "dimension": "ESTADOS",
+      "question": "¿Qué vigencia tiene el vínculo conductor-unidad y qué ocurre con él cuando termina un servicio?",
+      "decisionTopic": "Duración del vínculo de unidad",
+      "reason": "Definir duración del vínculo de unidad y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "El vínculo conductor-unidad tiene una vigencia autorizada por el ADMIN; puede fijarse un periodo de inicio y fin, por ejemplo del 10/10/2026 al 10/11/2026. Finalizar o cancelar un servicio libera únicamente su ocupación horaria y no rompe ese vínculo. Dentro de su vigencia el conductor puede recibir nuevos servicios compatibles con la misma unidad. El vínculo finaliza por su vencimiento registrado, cuando tenga fin programado, o por desvinculación autorizada; no se reserva un servicio cuya conducción prevista quede fuera de su vigencia.",
+      "decisionRefs": [
+        "D-Q-034"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "reviewNotes": "El usuario confirma vínculos con periodo propio; la interpretación inclusiva de fechas sin hora se documenta aparte como propuesta.",
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-035",
+      "moduleId": "MOD-VEH",
+      "dimension": "DATOS",
+      "question": "¿Cómo se ingresa una placa y cómo se conserva la identidad e historial del vehículo si cambia?",
+      "decisionTopic": "Corrección de identificador de unidad",
+      "reason": "Definir corrección de identificador de unidad y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "La unidad conserva un identificador interno estable aunque cambie su placa. El ADMIN ingresa y corrige la placa mediante texto, conservando placas anteriores, vigencias, motivo y autor del cambio. Los servicios anteriores conservan la identificación histórica que les correspondía. No se crea una nueva unidad por cambiar la placa y no se exige fotografía, cámara ni OCR para capturarla.",
+      "decisionRefs": [
+        "D-Q-035"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-036",
+      "moduleId": "MOD-MNT",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿Qué condición de mantenimiento debe impedir reservar una unidad para un servicio?",
+      "decisionTopic": "Bloqueo por mantenimiento",
+      "reason": "Definir bloqueo por mantenimiento y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Cada mantenimiento programado bloquea todo el día correspondiente en America/Lima. Si la unidad no vuelve a operación, permanece bloqueada hasta confirmación de ADMIN. Es más conservador y reduce capacidad de servicios.",
+      "decisionRefs": [
+        "D-V3-Q-036"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-036",
+        "sourceAnswerPointer": "/questions/13",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-036-B",
+        "selectedOptionRank": 2,
+        "selectedOptionLabel": "Bloquear el día completo",
+        "answeredAtClientReported": "2026-10-11T16:22:13.138Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "requiresUserConfirmation": false,
+      "reviewNotes": "Se distingue mantenimiento programado de bloqueo por avería o mantenimiento que continúa activo.",
+      "implementationStatus": "NO_REVISADA",
+      "userNotes": "",
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-037",
+      "moduleId": "MOD-MNT",
+      "dimension": "DEPENDENCIAS",
+      "question": "Si se programa mantenimiento sobre una unidad ya reservada, ¿qué debe suceder con esa reserva?",
+      "decisionTopic": "Mantenimiento sobre reserva",
+      "reason": "Definir mantenimiento sobre reserva y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "El mantenimiento preventivo no se confirma mientras solape asignaciones. ADMIN cambia el mantenimiento o cancela, reprograma o reemplaza las asignaciones afectadas con nueva aceptación. Una avería urgente aplica bloqueo inmediato y deja los servicios afectados pendientes de reasignación.",
+      "decisionRefs": [
+        "D-V3-Q-037"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-037",
+        "sourceAnswerPointer": "/questions/14",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-037-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Resolver antes de confirmar",
+        "answeredAtClientReported": "2026-10-11T16:22:52.882Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "requiresUserConfirmation": false,
+      "reviewNotes": "Se distingue mantenimiento preventivo, que debe resolver conflictos antes de confirmarse, de indisponibilidad urgente.",
+      "implementationStatus": "NO_REVISADA",
+      "userNotes": "",
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-038",
+      "moduleId": "MOD-MNT",
+      "dimension": "ACTORES_PERMISOS",
+      "question": "¿Quién debe autorizar que una unidad salga de mantenimiento y vuelva a estar disponible?",
+      "decisionTopic": "Retorno a operación",
+      "reason": "Definir retorno a operación y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "El ADMIN confirma que el mantenimiento terminó y autoriza el retorno de la unidad, registrando responsable, fecha y evidencia disponible del trabajo. El servidor comprueba que no subsistan otros bloqueos ni documentos vencidos. Llegar a la hora estimada de salida no habilita automáticamente una unidad que sigue en mantenimiento.",
+      "decisionRefs": [
+        "D-Q-038"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "USUARIO_ADJUNTO_Y_PRECISION_TECNICA",
+        "source": "ruta_fija_registro_descubrimiento_v1(1).json",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-039",
+      "moduleId": "MOD-MNT",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿Cuál debe ser el criterio principal para generar un mantenimiento preventivo?",
+      "decisionTopic": "Disparador preventivo",
+      "reason": "Definir disparador preventivo y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "En el MVP, el ADMIN puede programar mantenimiento preventivo manualmente cuando lo considere necesario. Debe registrar unidad, motivo e intervalo previsto. No se presupone automatización por kilometraje, sensores o integraciones; la programación respeta los conflictos de Q-036 y Q-037.",
+      "decisionRefs": [
+        "D-Q-039"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "USUARIO_ADJUNTO_Y_PRECISION_TECNICA",
+        "source": "ruta_fija_registro_descubrimiento_v1(1).json",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-040",
+      "moduleId": "MOD-RTE",
+      "dimension": "DATOS",
+      "question": "¿Qué información mínima debe tener una ruta para poder usarse en un servicio?",
+      "decisionTopic": "Ruta habilitada",
+      "reason": "Definir ruta habilitada y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "La definición de una ruta utilizable contiene una parada de inicio, una parada de fin y al menos una parada intermedia, identificadas y ordenadas. Los datos mínimos se validan antes de programar un servicio. Esta validación del catálogo se distingue de la ejecución: la expresión recorrido incompleto se usa para un servicio cuyo recorrido no fue finalizado por el conductor.",
+      "decisionRefs": [
+        "D-Q-040"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "reviewNotes": "Se conserva el mínimo de paradas de Q-040. La aclaración nueva sobre recorrido incompleto se aplica a la ejecución de Q-044.",
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-041",
+      "moduleId": "MOD-RTE",
+      "dimension": "DATOS",
+      "question": "¿Una misma ruta debe poder reutilizarse en varios horarios y servicios?",
+      "decisionTopic": "Reutilización de ruta",
+      "reason": "Definir reutilización de ruta y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Una ruta puede reutilizarse en varios horarios y servicios. Cada servicio mantiene su programación, asignación y versión de ruta; reutilizarla no permite solapar conductor o unidad ni copiar el estado de ejecución de otro servicio.",
+      "decisionRefs": [
+        "D-Q-041"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "USUARIO_ADJUNTO_Y_PRECISION_TECNICA",
+        "source": "ruta_fija_registro_descubrimiento_v1(1).json",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-042",
+      "moduleId": "MOD-RTE",
+      "dimension": "DEPENDENCIAS",
+      "question": "Si se cambia una ruta que ya tiene servicios programados, ¿qué versión deben usar esos servicios?",
+      "decisionTopic": "Versionado de ruta",
+      "reason": "Definir versionado de ruta y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "El servicio conserva la versión de la ruta que estaba vigente al crear su asignación o reserva. Editar la ruta genera una versión nueva para usos posteriores y no cambia silenciosamente servicios programados, aceptados, iniciados o finalizados. Si el ADMIN cambia expresamente la ruta de una asignación todavía no iniciada, se conserva el cambio y se requiere aceptación de la nueva versión.",
+      "decisionRefs": [
+        "D-Q-042"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "USUARIO_ADJUNTO_Y_PRECISION_TECNICA",
+        "source": "ruta_fija_registro_descubrimiento_v1(1).json",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-043",
+      "moduleId": "MOD-RTE",
+      "dimension": "ACTORES_PERMISOS",
+      "question": "¿Puede el conductor modificar el recorrido durante la ejecución de un servicio?",
+      "decisionTopic": "Desvío autorizado",
+      "reason": "Definir desvío autorizado y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "El conductor no puede modificar manualmente el recorrido asignado. Si necesita desviarse por una incidencia, debe comunicarla al ADMIN; registrar lo que ocurrió no equivale a editar la definición de la ruta. La política de interrupciones y gravedad se precisa en el módulo de incidencias.",
+      "decisionRefs": [
+        "D-Q-043"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "USUARIO_ADJUNTO_Y_PRECISION_TECNICA",
+        "source": "ruta_fija_registro_descubrimiento_v1(1).json",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-044",
+      "moduleId": "MOD-RTE",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿Cómo se registra que el conductor completó el recorrido de un servicio?",
+      "decisionTopic": "Validación de paradas",
+      "reason": "Definir validación de paradas y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Un recorrido se registra como completado cuando el conductor responsable pulsa Ruta finalizada y el servidor valida el cierre de un servicio iniciado, su asignación aceptada y su participación vigente. Sin un cierre válido el servicio no queda finalizado correctamente. La comprobación de ubicación de Q-060 aporta evidencia adicional y puede generar observaciones; el botón registra la declaración de cumplimiento, no demuestra por sí solo todo el recorrido. No se declara una parada fallida únicamente porque pasó un tiempo estimado.",
+      "decisionRefs": [
+        "D-Q-044"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "reviewNotes": "Se sustituye la respuesta que confundía una parada no configurada con no llegar a una parada. No se declara una parada fallida por tiempo estimado.",
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-045",
+      "moduleId": "MOD-AVL",
+      "dimension": "ACTORES_PERMISOS",
+      "question": "¿Quién debe declarar la disponibilidad de un conductor para recibir asignaciones?",
+      "decisionTopic": "Autor de disponibilidad",
+      "reason": "Definir autor de disponibilidad y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "CONDUCTOR declara su disponibilidad en la app. El sistema la distingue de su aprobación, habilitación documental, vinculación de unidad y ocupaciones horarias. Declararse disponible no confirma una asignación ni obliga a aceptarla.",
+      "decisionRefs": [
+        "D-Q-045"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "USUARIO_ADJUNTO_Y_PRECISION_TECNICA",
+        "source": "ruta_fija_registro_descubrimiento_v1(1).json",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-046",
+      "moduleId": "MOD-AVL",
+      "dimension": "ESTADOS",
+      "question": "¿La disponibilidad debe declararse para un periodo concreto o mantenerse hasta que se cambie?",
+      "decisionTopic": "Vigencia de disponibilidad",
+      "reason": "Definir vigencia de disponibilidad y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "La disponibilidad declarada se mantiene hasta que el conductor la cambie válidamente. No obstante, la posibilidad de recibir una oferta se recalcula para cada horario según documentos, unidad vinculada, mantenimiento, descansos y asignaciones o reservas existentes. La declaración no elimina esos bloqueos.",
+      "decisionRefs": [
+        "D-Q-046"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "USUARIO_ADJUNTO_Y_PRECISION_TECNICA",
+        "source": "ruta_fija_registro_descubrimiento_v1(1).json",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-047",
+      "moduleId": "MOD-AVL",
+      "dimension": "EXCEPCIONES",
+      "question": "Si el conductor se desconecta de la app, ¿cómo debe interpretarse su disponibilidad declarada?",
+      "decisionTopic": "Desconexión y disponibilidad",
+      "reason": "Definir desconexión y disponibilidad y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Cerrar la app o perder la conexión no cambia automáticamente la disponibilidad declarada. El ADMIN puede emitir una oferta elegible y se intenta notificar por los canales habilitados. El conductor debe abrir la app con conexión y aceptar antes de que venza la reserva; recibir una notificación no equivale a aceptar y no se garantiza su entrega inmediata. La aplicación no opera offline.",
+      "decisionRefs": [
+        "D-Q-047"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "reviewNotes": "La discrepancia anterior por aceptación desaparece con Q-052 vigente. Se conserva disponibilidad sin prometer entrega de push.",
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-048",
+      "moduleId": "MOD-AVL",
+      "dimension": "DEPENDENCIAS",
+      "question": "Si el conductor marca que no está disponible mientras tiene una asignación aceptada, ¿qué debe prevalecer?",
+      "decisionTopic": "Cambio de disponibilidad con compromiso",
+      "reason": "Definir cambio de disponibilidad con compromiso y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Una asignación aceptada constituye un compromiso confirmado. Mientras ese compromiso siga vigente, el conductor no puede cambiar unilateralmente su disponibilidad para invalidarlo. Si surge una imposibilidad real, la comunica al ADMIN, quien decide y registra cancelación, reprogramación o reemplazo. Cambiar la disponibilidad no cancela ni libera automáticamente una asignación aceptada.",
+      "decisionRefs": [
+        "D-Q-048"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "reviewNotes": "Es coherente con la aceptación obligatoria; una imposibilidad se atiende por el ADMIN sin borrar compromisos automáticamente.",
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-049",
+      "moduleId": "MOD-AVL",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿Cómo debe mostrarse y qué puede recibir un conductor aprobado que todavía espera una unidad?",
+      "decisionTopic": "Elegibilidad para disponibilidad",
+      "reason": "Definir elegibilidad para disponibilidad y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Se muestra Aprobado, pendiente de asignación de unidad. El conductor puede solicitar unidad de la empresa y consultar el avance. ADMIN resuelve esa cola; no se permite disponibilidad operativa ni ofertas mientras falte una unidad revisada y vinculada.",
+      "decisionRefs": [
+        "D-V3-Q-049"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-049",
+        "sourceAnswerPointer": "/questions/15",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-049-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Pendiente de unidad, con solicitud",
+        "answeredAtClientReported": "2026-10-11T16:24:08.545Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "requiresUserConfirmation": false,
+      "reviewNotes": "No se inventa bajo revisión documental: conductor APROBADO y unidad PENDIENTE_ASIGNACION son estados separados.",
+      "implementationStatus": "NO_REVISADA",
+      "userNotes": "",
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-104",
+      "moduleId": "MOD-VEH",
+      "dimension": "EXCEPCIONES",
+      "question": "Si el servicio se retrasa y vence la vinculación conductor-unidad durante su ejecución, ¿qué procedimiento debe seguir ADMIN para cerrar, renovar o relevar ese vínculo?",
+      "decisionTopic": "Vencimiento de vínculo durante ejecución",
+      "reason": "La programación no puede superar la vigencia prevista; falta el caso de retraso real y la extensión autorizada.",
+      "status": "RESPONDIDA",
+      "answer": "Se alerta antes del vencimiento. ADMIN puede renovar la misma vinculación si no hay conflicto y siguen vigentes los documentos; registra la nueva autorización sin alterar el periodo histórico. Si no puede renovarla, coordina interrupción segura o relevo con nueva aceptación. Un vencimiento inesperado genera incidencia, bloquea nuevas ofertas y exige resolver el tramo afectado.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "decisionRefs": [
+        "D-V3-Q-104"
+      ],
+      "repeatPolicy": "No repetir si una decisión vigente resuelve este detalle.",
+      "origin": "HUECO_REAL_DETECTADO_EN_REVISION_V2",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-104",
+        "sourceAnswerPointer": "/questions/19",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-104-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Renovación de ADMIN o relevo seguro",
+        "answeredAtClientReported": "2026-10-11T16:31:18.524Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-106",
+      "moduleId": "MOD-GPS",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿Qué criterios deben definir una ubicación válida para corroborar el terminal: radio permitido, antigüedad máxima y precisión mínima?",
+      "decisionTopic": "Criterios de corroboración de llegada",
+      "reason": "El comportamiento de cierre está resuelto, pero faltan parámetros medibles y probarlos con terminales y teléfonos reales.",
+      "status": "RESPONDIDA",
+      "answer": "Al cerrar se corrobora terminal solo con un punto a no más de 200 m del terminal configurado, con antigüedad máxima de 2 minutos y precisión horizontal reportada de 100 m o mejor. Sin cumplimiento queda no corroborado o con discrepancia para revisión. Se calibra en el piloto.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "decisionRefs": [
+        "D-V3-Q-106"
+      ],
+      "repeatPolicy": "No repetir si una decisión vigente resuelve este detalle.",
+      "origin": "HUECO_REAL_DETECTADO_EN_REVISION_V2",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-106",
+        "sourceAnswerPointer": "/questions/34",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-106-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "200 m, 2 minutos y precisión de 100 m",
+        "answeredAtClientReported": "2026-10-11T17:07:55.604Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "PENDIENTE_VERIFICACION"
+    },
+    {
+      "id": "POL-LINK-DATES",
+      "moduleId": "MOD-VEH",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿Cómo se interpreta el último día de una vinculación de unidad cuando ADMIN no indica una hora?",
+      "decisionTopic": "Límite temporal de vínculos",
+      "reason": "El vínculo de unidad tiene un periodo autorizado independiente de los servicios. America/Lima es la referencia para fechas sin hora.",
+      "decisionRefs": [
+        "D-V3-POL-LINK-DATES"
+      ],
+      "repeatPolicy": "No repetir una decisión respondida; preguntar solo por el detalle que siga realmente abierto.",
+      "status": "RESPONDIDA",
+      "answer": "Con fechas sin hora, el inicio incluye su día y el vínculo sigue vigente durante todo el día final en America/Lima. Se almacena un fin exclusivo al comienzo del día siguiente. Si se indica una hora exacta, se respeta ese instante.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "POL-LINK-DATES",
+        "sourceAnswerPointer": "/questions/17",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "POL-LINK-DATES-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Incluir todo el día final",
+        "answeredAtClientReported": "2026-10-11T16:25:27.784Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA",
+      "formDecisionKind": "POLITICA"
+    },
+    {
+      "id": "POL-LINK-END",
+      "moduleId": "MOD-VEH",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿En qué casos puede existir una vinculación de unidad sin fecha de fin programada?",
+      "decisionTopic": "Fin programado de vinculación",
+      "reason": "La unidad conserva su vínculo hasta el fin autorizado o una desvinculación válida. Finalizar un servicio libera su ocupación, no su vínculo.",
+      "decisionRefs": [
+        "D-V3-POL-LINK-END"
+      ],
+      "repeatPolicy": "No repetir una decisión respondida; preguntar solo por el detalle que siga realmente abierto.",
+      "status": "RESPONDIDA",
+      "answer": "La vinculación de una unidad empresarial exige fecha final. Una unidad propia puede quedar vinculada sin fin programado hasta desvinculación autorizada. Toda oferta debe caber en la vigencia aplicable y pasar los controles de elegibilidad.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "POL-LINK-END",
+        "sourceAnswerPointer": "/questions/18",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "POL-LINK-END-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Fin en unidad empresarial; propio opcional",
+        "answeredAtClientReported": "2026-10-11T16:31:08.036Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA",
+      "formDecisionKind": "POLITICA"
+    }
+  ],
+  "verificationTasks": [
+    {
+      "id": "VT-V3-OPEN-REQUIRED-DOCUMENTS-01",
+      "statement": "Identificar modalidad real y aprobar la lista exacta, vigencias y excepciones con contraste normativo; este formulario solo decide cómo organizarla.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "OPEN-REQUIRED-DOCUMENTS"
+      ],
+      "decisionRefs": [
+        "D-V3-OPEN-REQUIRED-DOCUMENTS"
+      ],
+      "moduleRefs": [
+        "MOD-DRV",
+        "MOD-VEH",
+        "MOD-AUTH"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-Q-106-01",
+      "statement": "Probar geometría del terminal y precisión de dispositivos. La corroboración no demuestra todo el recorrido ni evita falsificación por sí sola.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-106"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-106"
+      ],
+      "moduleRefs": [
+        "MOD-GPS",
+        "MOD-SRV",
+        "MOD-RTE"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-MAINTENANCE-DAYS",
+      "statement": "Especificar validación para mantenimiento que abarca varias fechas, bloqueo de días afectados y retorno real, preservando la decisión de día completo.",
+      "status": "PENDIENTE_DETALLE_DE_PROCESO",
+      "questionRefs": [
+        "Q-036",
+        "Q-037"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-036",
+        "D-V3-Q-037"
+      ],
+      "moduleRefs": [
+        "MOD-MNT",
+        "MOD-ASG"
+      ],
+      "evidence": null
+    }
+  ]
+}

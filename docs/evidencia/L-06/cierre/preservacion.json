@@ -1,0 +1,115 @@
+{
+  "observedAt": "2026-10-21T06:41:46.441286+00:00",
+  "result": "PASS",
+  "protectedFiles": [
+    {
+      "path": "backups/L-00-2026-10-13-final3/source-snapshot.zip",
+      "sha256": "3806510606a1565f23b8c526a13cc1049bc79141babdb8e1316f042488b3d11b",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-00/source-manifest.sha256",
+      "sha256": "e78d7002d5c85b24200be21b8fd88ce770d36333ca49caa5351248cfd0e28bad",
+      "matches": true
+    },
+    {
+      "path": "docs/legal/publicado/terminos-admin-v1.0.0.md",
+      "sha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+      "matches": true
+    },
+    {
+      "path": "artifacts/L-01-superadmin-titular-2026-10-17/ruta-fija-recovery-cli.jar",
+      "sha256": "91913ff7c11cabfaa01881fcbfb24bbf5ed347564c0140d73a757bc96d38e24a",
+      "matches": true
+    },
+    {
+      "path": "docs/actas/L-01-cierre-funcional-local-2026-10-17.md",
+      "sha256": "c9bf0fe7ea79c5dbfd77b9883bf21673e29ea3b6fe5d22a6ecb6119bebeff227",
+      "matches": true
+    },
+    {
+      "path": "docs/actas/L-02-cierre-funcional-local-2026-10-19.md",
+      "sha256": "7fdc07dadeab1d82c366664a725aab05c15d8a207473a6fbe9fedf7870b487e7",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/CI07-manual-contrastado-2026-10-17/observacion-1792227077200.json",
+      "sha256": "9319f045f65fd4ee61b9a07edec3000e5ea6ac0e75618d99e2c4896843b8a719",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/CI07-manual-contrastado-2026-10-17/observacion-1792287275662.json",
+      "sha256": "e0a986d10e09f8fbb289061753b3e36759b0cae24e53731ede4bba8640d5fffb",
+      "matches": true
+    },
+    {
+      "path": "docs/actas/L-03-cierre-funcional-local-2026-10-19.md",
+      "sha256": "a2c082de5d4930d635988f60a61b15293555967e3eccd677122233162a415797",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-03/matriz-final-funcional-local-2026-10-19.md",
+      "sha256": "e35c9d0b8f13d968278b8b32ede6c440395c0a86464a897fe79c1187bbf8ec23",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-03/manifest-cierre.sha256",
+      "sha256": "9336e09b4238235c20cd8e4e90fc2adbaaaa1863891149e21dee339b21a27e02",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-03/fuentes-cierre.sha256",
+      "sha256": "cb1d0657f83d7f7727670fc1750436f35f885fd115660e53cc6aa144c033ec03",
+      "matches": true
+    }
+  ],
+  "closedL05ManifestSha256": "800d9bfc38c7845aacf9ed70a52f89a2d7199f2830d2ddb38b729c57faeebbf4",
+  "closedL05FrozenFilesVerified": 406,
+  "mutableCoordinationFilesExcluded": [
+    "docs/backlog-producto-ruta-fija-v3.1.md",
+    "docs/seguimiento/tareas.json",
+    "memory/current.md",
+    "memory/target.md"
+  ],
+  "L05IncrementManifests": [
+    {
+      "path": "docs/evidencia/L-05/incremento-1-ejecucion/manifest.sha256",
+      "sha256": "f7ceaf359f5917e837ba0e32ccf671d961812a8496bdb7b58711ff62fad63a53",
+      "filesVerified": 28
+    },
+    {
+      "path": "docs/evidencia/L-05/incremento-2-gps/manifest.sha256",
+      "sha256": "cdbe9561c825e5052f3108df1c26128dd93e3d62d5fae481feee953764032ed4",
+      "filesVerified": 51
+    },
+    {
+      "path": "docs/evidencia/L-05/incremento-3-tiempos/manifest.sha256",
+      "sha256": "bbfd76ad258ccfc62bf5034966d6b94f7044ee94cf839d3c9b0ba6ea988c5ce8",
+      "filesVerified": 39
+    },
+    {
+      "path": "docs/evidencia/L-05/incremento-4-interrupcion/manifest.sha256",
+      "sha256": "72310162de8b399ee345f1912455f284dc3c79964031445e48df8252a3461405",
+      "filesVerified": 31
+    },
+    {
+      "path": "docs/evidencia/L-05/incremento-5-relevo/manifest.sha256",
+      "sha256": "d8f0743e4b68a235661890ddbc0e4c57b3f85b2c4b56131af2e2216860b565b5",
+      "filesVerified": 32
+    }
+  ],
+  "L06Increment1ManifestSha256": "24a58f876b0e834dc3e4209f6d7f86ac9f6da95f685f13042ef789e9b8871c82",
+  "L06Increment1FilesVerified": 13,
+  "databaseOriginalFieldsPreserved": {
+    "acceptanceCount": 2,
+    "acceptancesSha256": "120a3a856057c51796053a20046dd9aa628953105ace67caf4bbff2d29674d28",
+    "humanFixturesSha256": "6fe63b280060af868fea97a860eb9e2bbcb05e4d65538f6a7b64c74993ec7580",
+    "publishedTermsSha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+    "L02ClosedCaseSha256": "899b2f8be6231c5af331535016fdab120f90a4ec55f0d029f04ebd169581ba54",
+    "scheduledServicesSha256": "a1646fcd951e0bdf6341188df48958554ab4aa55690da4dfae844bc9b03c1ee8",
+    "offersSha256": "31c7d511769ff61fd16f8da23789acb3dbaf27afb98033f7253b9147ff824fa4"
+  },
+  "originalDatabaseRowsPreserved": true,
+  "final3Regenerated": false,
+  "limits": "Old source checksums are historical snapshots. Current production sources match L06 increment1; harness corrections are identified separately."
+}

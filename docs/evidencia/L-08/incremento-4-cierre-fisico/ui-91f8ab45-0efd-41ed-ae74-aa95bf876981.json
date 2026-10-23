@@ -1,0 +1,982 @@
+{
+    "observedAt":  "2026-10-23T04:54:15.3138670+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "action":  "home",
+    "label":  "",
+    "automatedUiInstrumentation":  true,
+    "humanAccessibilityConfirmation":  false,
+    "nodes":  [
+                  {
+                      "text":  "Todas",
+                      "description":  "",
+                      "bounds":  "[49,115][189,232]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Comunicación",
+                      "description":  "",
+                      "bounds":  "[189,115][433,232]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Entretenimiento",
+                      "description":  "",
+                      "bounds":  "[433,115][700,232]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Fotografía",
+                      "description":  "",
+                      "bounds":  "[700,115][893,232]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Herramientas",
+                      "description":  "",
+                      "bounds":  "[893,115][921,232]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Abrir los ajustes del Cajón de aplicaciones",
+                      "bounds":  "[921,115][1017,211]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Pseudocode",
+                      "bounds":  "[36,241][235,252]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Pseudocode",
+                      "description":  "",
+                      "bounds":  "[36,241][235,252]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Radio FM",
+                      "bounds":  "[238,241][437,252]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Radio FM",
+                      "description":  "",
+                      "bounds":  "[238,241][437,252]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "RAR",
+                      "bounds":  "[439,241][638,252]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "RAR",
+                      "description":  "",
+                      "bounds":  "[439,241][638,252]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Reloj",
+                      "bounds":  "[641,241][840,252]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Reloj",
+                      "description":  "",
+                      "bounds":  "[641,241][840,252]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "ReVanced Manager Plus",
+                      "bounds":  "[842,241][1041,252]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "ReVanced Manager Plus",
+                      "description":  "",
+                      "bounds":  "[842,241][1041,252]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Ruta Fija Conductor",
+                      "bounds":  "[36,252][235,569]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Ruta Fija Conductor",
+                      "bounds":  "[49,269][221,441]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Ruta Fija Conductor",
+                      "description":  "",
+                      "bounds":  "[36,447][235,569]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Ruta Fija Pruebas",
+                      "bounds":  "[238,252][437,569]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Ruta Fija Pruebas",
+                      "bounds":  "[251,269][423,441]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Ruta Fija Pruebas",
+                      "description":  "",
+                      "bounds":  "[238,447][437,569]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Seguridad",
+                      "bounds":  "[439,252][638,569]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Seguridad",
+                      "bounds":  "[452,269][624,441]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Seguridad",
+                      "description":  "",
+                      "bounds":  "[439,447][638,569]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Seguridad",
+                      "bounds":  "[641,252][840,569]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Seguridad",
+                      "bounds":  "[654,269][826,441]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Seguridad",
+                      "description":  "",
+                      "bounds":  "[641,447][840,569]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Servicios y comentarios",
+                      "bounds":  "[842,252][1041,569]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Servicios y comentarios",
+                      "bounds":  "[855,269][1027,441]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Servicios y comentarios",
+                      "description":  "",
+                      "bounds":  "[842,447][1041,569]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "ShareMe",
+                      "bounds":  "[36,569][235,886]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "ShareMe",
+                      "bounds":  "[49,586][221,758]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "ShareMe",
+                      "description":  "",
+                      "bounds":  "[36,764][235,886]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Sofascore",
+                      "bounds":  "[238,569][437,886]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Sofascore",
+                      "bounds":  "[251,586][423,758]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Sofascore",
+                      "description":  "",
+                      "bounds":  "[238,764][437,886]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Spotify",
+                      "bounds":  "[439,569][638,886]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Spotify",
+                      "bounds":  "[452,586][624,758]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Spotify",
+                      "description":  "",
+                      "bounds":  "[439,764][638,886]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "TapScanner",
+                      "bounds":  "[641,569][840,886]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "TapScanner",
+                      "bounds":  "[654,586][826,758]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "TapScanner",
+                      "description":  "",
+                      "bounds":  "[641,764][840,886]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Teléfono",
+                      "bounds":  "[842,569][1041,886]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Teléfono",
+                      "bounds":  "[855,586][1027,758]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Teléfono",
+                      "description":  "",
+                      "bounds":  "[842,764][1041,886]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Telegram",
+                      "bounds":  "[36,886][235,1203]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Telegram",
+                      "bounds":  "[49,903][221,1075]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Telegram",
+                      "description":  "",
+                      "bounds":  "[36,1081][235,1203]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Teleprompter",
+                      "bounds":  "[238,886][437,1203]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Teleprompter",
+                      "bounds":  "[251,903][423,1075]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Teleprompter",
+                      "description":  "",
+                      "bounds":  "[238,1081][437,1203]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Temas",
+                      "bounds":  "[439,886][638,1203]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Temas",
+                      "bounds":  "[452,903][624,1075]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Temas",
+                      "description":  "",
+                      "bounds":  "[439,1081][638,1203]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "TeraBox",
+                      "bounds":  "[641,886][840,1203]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "TeraBox",
+                      "bounds":  "[654,903][826,1075]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "TeraBox",
+                      "description":  "",
+                      "bounds":  "[641,1081][840,1203]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Threads",
+                      "bounds":  "[842,886][1041,1203]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Threads",
+                      "bounds":  "[855,903][1027,1075]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Threads",
+                      "description":  "",
+                      "bounds":  "[842,1081][1041,1203]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "TikTok",
+                      "bounds":  "[36,1203][235,1520]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "TikTok",
+                      "bounds":  "[49,1220][221,1392]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "TikTok",
+                      "description":  "",
+                      "bounds":  "[36,1398][235,1520]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Tinder",
+                      "bounds":  "[238,1203][437,1520]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Tinder",
+                      "bounds":  "[251,1220][423,1392]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Tinder",
+                      "description":  "",
+                      "bounds":  "[238,1398][437,1520]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Truecaller",
+                      "bounds":  "[439,1203][638,1520]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Truecaller",
+                      "bounds":  "[452,1220][624,1392]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Truecaller",
+                      "description":  "",
+                      "bounds":  "[439,1398][638,1520]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Twitch",
+                      "bounds":  "[641,1203][840,1520]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Twitch",
+                      "bounds":  "[654,1220][826,1392]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Twitch",
+                      "description":  "",
+                      "bounds":  "[641,1398][840,1520]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Udemy",
+                      "bounds":  "[842,1203][1041,1520]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Udemy",
+                      "bounds":  "[855,1220][1027,1392]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Udemy",
+                      "description":  "",
+                      "bounds":  "[842,1398][1041,1520]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "UTP+app",
+                      "bounds":  "[36,1520][235,1837]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "UTP+app",
+                      "bounds":  "[49,1537][221,1709]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "UTP+app",
+                      "description":  "",
+                      "bounds":  "[36,1715][235,1837]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Voice Scroll",
+                      "bounds":  "[238,1520][437,1837]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Voice Scroll",
+                      "bounds":  "[251,1537][423,1709]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Voice Scroll",
+                      "description":  "",
+                      "bounds":  "[238,1715][437,1837]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "VPN Super Unlimited Proxy",
+                      "bounds":  "[439,1520][638,1837]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "VPN Super Unlimited Proxy",
+                      "bounds":  "[452,1537][624,1709]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "VPN Super Unlimited Proxy",
+                      "description":  "",
+                      "bounds":  "[439,1715][638,1837]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "WhatsApp",
+                      "bounds":  "[641,1520][840,1837]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "WhatsApp",
+                      "bounds":  "[654,1537][826,1709]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "WhatsApp",
+                      "description":  "",
+                      "bounds":  "[641,1715][840,1837]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Word",
+                      "bounds":  "[842,1520][1041,1837]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Word",
+                      "bounds":  "[855,1537][1027,1709]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Word",
+                      "description":  "",
+                      "bounds":  "[842,1715][1041,1837]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "X",
+                      "bounds":  "[36,1837][235,2154]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "X",
+                      "bounds":  "[49,1854][221,2026]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "X",
+                      "description":  "",
+                      "bounds":  "[36,2032][235,2154]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Xuper",
+                      "bounds":  "[238,1837][437,2154]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Xuper",
+                      "bounds":  "[251,1854][423,2026]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Xuper",
+                      "description":  "",
+                      "bounds":  "[238,2032][437,2154]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Yape",
+                      "bounds":  "[439,1837][638,2154]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Yape",
+                      "bounds":  "[452,1854][624,2026]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Yape",
+                      "description":  "",
+                      "bounds":  "[439,2032][638,2154]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "YouTube",
+                      "bounds":  "[641,1837][840,2154]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "YouTube",
+                      "bounds":  "[654,1854][826,2026]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "YouTube",
+                      "description":  "",
+                      "bounds":  "[641,2032][840,2154]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Zoom",
+                      "bounds":  "[842,1837][1041,2154]",
+                      "class":  "android.widget.RelativeLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Zoom",
+                      "bounds":  "[855,1854][1027,2026]",
+                      "class":  "android.widget.ImageView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Zoom",
+                      "description":  "",
+                      "bounds":  "[842,2032][1041,2154]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Barra de búsqueda",
+                      "bounds":  "[43,2190][1036,2261]",
+                      "class":  "android.widget.FrameLayout",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "[INPUT_REDACTED]",
+                      "description":  "",
+                      "bounds":  "[173,2190][907,2261]",
+                      "class":  "android.widget.EditText",
+                      "package":  "com.mi.android.globallauncher",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  }
+              ]
+}

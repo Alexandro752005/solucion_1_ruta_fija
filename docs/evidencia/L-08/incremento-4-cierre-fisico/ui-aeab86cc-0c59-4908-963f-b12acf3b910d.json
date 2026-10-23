@@ -1,0 +1,50 @@
+{
+    "observedAt":  "2026-10-23T04:45:06.2567521+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "action":  "down",
+    "label":  "",
+    "automatedUiInstrumentation":  true,
+    "humanAccessibilityConfirmation":  false,
+    "nodes":  [
+                  {
+                      "text":  "",
+                      "description":  "Volver",
+                      "bounds":  "[12,566][156,710]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Detalle de asignación",
+                      "bounds":  "[216,583][1032,694]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Ruta asignada: solo consulta\nSYNTHETIC L08 route 3f0ba758-6eb9-4d2f-b948-dd1c7de3c430 · revisión 1\n1. SYNTHETIC start · START\n2. SYNTHETIC middle · INTERMEDIATE\n3. SYNTHETIC end without physical geometry · END\nSin declaración de ruta finalizada\nTerminal: Sin corroboración registrada\nLa declaración no demuestra todo el recorrido GPS. La falta de evidencia no se presenta como corroboración.",
+                      "bounds":  "[60,722][1020,1392]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Completar servicio",
+                      "bounds":  "[60,1440][1020,1584]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Las acciones se validan en el servidor. La aplicación no puede aceptar ni rechazar por otro conductor, ni duplicar un evento al reintentar.",
+                      "bounds":  "[60,1632][1020,2261]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  }
+              ]
+}

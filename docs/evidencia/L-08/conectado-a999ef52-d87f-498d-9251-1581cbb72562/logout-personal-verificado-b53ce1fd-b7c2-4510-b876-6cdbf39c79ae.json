@@ -1,0 +1,32 @@
+{
+  "runId": "a999ef52-d87f-498d-9251-1581cbb72562",
+  "archivedAt": "2026-10-22T22:03:04.734224+00:00",
+  "humanReport": "Sí, regresó al LOGIN correctamente.",
+  "result": "PASS_PERSONAL_LOGOUT_HTTP204_AUDIT_AND_LATEST_SESSION_FAMILY_REVOCATION_ONLY",
+  "logoutHttpEvents": [
+    {
+      "channel": "PHONE_PROXY_REAL_BACKEND",
+      "method": "POST",
+      "finishedAt": "2026-10-22T22:01:18.046729600Z",
+      "path": "/api/v1/mobile/auth/logout",
+      "status": 204,
+      "startedAt": "2026-10-22T22:01:17.899208500Z"
+    }
+  ],
+  "databaseEvidence": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/oferta-observacion-28f05e7e-6cbf-4f30-8a03-c882a0bf7b8b.json",
+  "databaseEvidenceSha256": "89225d62c44443d39f6c25f20dcf63973c66ecd1f9ddc09cc6a84e1de1512350",
+  "latestCreatedSessionFamilyUsableRefreshTokens": 0,
+  "latestCreatedSessionFamilyLastRevokedAt": "2026-10-22T22:01:17.990625Z",
+  "mobileLogoutAuditAt": "2026-10-22T22:01:18.043257Z",
+  "otherEarlierSessionUsableRefreshTokensPendingSelectiveRetirement": 1,
+  "allAccountSessionsRevokedClaimed": false,
+  "remainingEarlierFamilyHandledByExistingSelectiveCleanup": true,
+  "serviceCompleted": true,
+  "historicalGpsPointsAtRead": 14,
+  "currentLocationRows": 0,
+  "coordinatesOrTokensRecorded": false,
+  "manualPhoneResult": "PENDING",
+  "humanHarnessConfirmationsPending": true,
+  "TEST_CLEANUP_RELEASED": false,
+  "pilotEnabled": false
+}

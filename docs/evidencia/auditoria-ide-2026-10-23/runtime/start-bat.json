@@ -1,0 +1,5 @@
+﻿{
+    "command":  "iniciar_ruta_fija.bat --smoke-read-only --test-database",
+    "exitCode":  0,
+    "completedAt":  "2026-10-23T16:18:17.8976953+00:00"
+}

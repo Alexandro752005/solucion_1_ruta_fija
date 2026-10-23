@@ -1,0 +1,46 @@
+{
+  "archivedAt": "2026-10-21T23:02:51.086297+00:00",
+  "results": [
+    {
+      "source": "backend/target/l08-crm-final-full-regression.log",
+      "sourceSha256": "2498cb3723b0276d73553f84859ea85ef4dedf31a56c3613dd224c21991456e9",
+      "summaryLines": [
+        "Test Files  47 passed (47)",
+        "Tests  238 passed (238)"
+      ]
+    },
+    {
+      "source": "backend/target/l08-login-focus-before-fix.log",
+      "sourceSha256": "d872be86f87a698f90b0954adc3a5daa0db466a3c136eb765c33358a670750b1",
+      "summaryLines": [
+        "Test Files  1 failed (1)",
+        "Tests  3 failed | 1 passed (4)"
+      ]
+    },
+    {
+      "source": "backend/target/l08-login-focus-after-fix.log",
+      "sourceSha256": "54310285d3bc2eb8e1977dbff96ac28916a0607474881b485117edbba7f08b6a",
+      "summaryLines": [
+        "Test Files  1 passed (1)",
+        "Tests  4 passed (4)"
+      ]
+    },
+    {
+      "source": "backend/target/l08-mobile-analyze-current.log",
+      "sourceSha256": "c6c4f7077f19b8b6a40cf508e9ee49c511ff675bf5d426ef1aa0d4f32a4f7d45",
+      "summaryLines": [
+        "No issues found! (ran in 22.0s)"
+      ]
+    },
+    {
+      "source": "backend/target/l08-mobile-directed-regression.log",
+      "sourceSha256": "46927ca28ef8d9b94c5edec0173cdfa0a9797fa7aff8ec04f8e34672dbba7ab0",
+      "summaryLines": [
+        "00:06 +29: All tests passed!"
+      ]
+    }
+  ],
+  "rawLogsNotCopied": true,
+  "firstFocusFailurePreserved": true,
+  "fullSuiteAfterFocusCorrectionExecuted": false
+}

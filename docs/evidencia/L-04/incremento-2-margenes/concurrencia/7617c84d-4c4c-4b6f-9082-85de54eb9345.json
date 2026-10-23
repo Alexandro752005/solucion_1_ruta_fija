@@ -1,0 +1,14 @@
+{
+  "runId" : "7617c84d-4c4c-4b6f-9082-85de54eb9345",
+  "database" : "ruta_fija_test",
+  "role" : "rf_test",
+  "technicalAccountlessFixture" : true,
+  "technicalLegacyRowMode" : true,
+  "typeId" : "3c2188e6-ca5c-4c93-8c74-99e74c09aeea",
+  "typeVersionId" : "44f317d3-41d7-4e05-b741-1aaa6fd301fe",
+  "resource" : "VEHICLE",
+  "result" : "PASS_PG_BUFFER_EXCLUSION_AND_BOUNDARY",
+  "cleanup" : "EXACT_RESOURCES_REMOVED_TYPE_RETIRED_VERSION_AND_RECEIPT_RETAINED",
+  "accountCreations" : 0,
+  "ledgerPreserved" : true
+}

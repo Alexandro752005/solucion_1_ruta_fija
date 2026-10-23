@@ -1,0 +1,137 @@
+{
+  "runId" : "bbd70822-8f52-45a6-b617-9b896ff90a2c",
+  "organizationId" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+  "adminId" : "92ebc07c-1319-4850-a734-f792cb299979",
+  "ledgerBefore" : {
+    "SUPER_ADMIN" : 1,
+    "ADMIN" : 3,
+    "CONDUCTOR" : 1
+  },
+  "termsAcceptancesBefore" : 2,
+  "phase" : "CRM_INITIAL_OFFER",
+  "observedAt" : "2026-10-19T22:19:33.109772900Z",
+  "httpEvents" : [ {
+    "startedAt" : "2026-10-19T22:19:30.820746800Z",
+    "method" : "POST",
+    "path" : "/groups",
+    "status" : 201,
+    "finishedAt" : "2026-10-19T22:19:31.300354400Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:31.305324300Z",
+    "method" : "POST",
+    "path" : "/vehicles",
+    "status" : 201,
+    "finishedAt" : "2026-10-19T22:19:31.387320300Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:31.396317800Z",
+    "method" : "POST",
+    "path" : "/invitations",
+    "status" : 201,
+    "finishedAt" : "2026-10-19T22:19:31.467314900Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:31.470318Z",
+    "method" : "POST",
+    "path" : "/onboarding/requests",
+    "status" : 202,
+    "finishedAt" : "2026-10-19T22:19:31.768432100Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:31.768432100Z",
+    "method" : "POST",
+    "path" : "/onboarding/otp/verify",
+    "status" : 202,
+    "finishedAt" : "2026-10-19T22:19:31.799425200Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:31.800417Z",
+    "method" : "GET",
+    "path" : "/onboarding/requests/cec07997-611b-4b1d-8087-2da28fadc9cd/documentary-expediente",
+    "status" : 200,
+    "finishedAt" : "2026-10-19T22:19:31.853658400Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:31.854650400Z",
+    "method" : "PUT",
+    "path" : "/onboarding/requests/cec07997-611b-4b1d-8087-2da28fadc9cd/documentary-expediente",
+    "status" : 200,
+    "finishedAt" : "2026-10-19T22:19:31.978568300Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:31.979567400Z",
+    "method" : "POST",
+    "path" : "/onboarding/requests/cec07997-611b-4b1d-8087-2da28fadc9cd/approve",
+    "status" : 200,
+    "finishedAt" : "2026-10-19T22:19:32.074989700Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:32.075986700Z",
+    "method" : "POST",
+    "path" : "/onboarding/requests/cec07997-611b-4b1d-8087-2da28fadc9cd/provision",
+    "status" : 200,
+    "finishedAt" : "2026-10-19T22:19:32.191328200Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:32.193326400Z",
+    "method" : "GET",
+    "path" : "/drivers/c4567be0-3d33-4674-8762-5429f68d1c46/qualification",
+    "status" : 200,
+    "finishedAt" : "2026-10-19T22:19:32.264325600Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:32.266322900Z",
+    "method" : "POST",
+    "path" : "/drivers/c4567be0-3d33-4674-8762-5429f68d1c46/qualification/reviews",
+    "status" : 200,
+    "finishedAt" : "2026-10-19T22:19:32.404315500Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:32.407316400Z",
+    "method" : "POST",
+    "path" : "/drivers/c4567be0-3d33-4674-8762-5429f68d1c46/qualification/reviews",
+    "status" : 200,
+    "finishedAt" : "2026-10-19T22:19:32.471314800Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:32.473313Z",
+    "method" : "POST",
+    "path" : "/drivers/c4567be0-3d33-4674-8762-5429f68d1c46/qualification/periods",
+    "status" : 200,
+    "finishedAt" : "2026-10-19T22:19:32.558824500Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:32.560824900Z",
+    "method" : "POST",
+    "path" : "/drivers/c4567be0-3d33-4674-8762-5429f68d1c46/qualification/activate",
+    "status" : 200,
+    "finishedAt" : "2026-10-19T22:19:32.626421300Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:32.627418200Z",
+    "method" : "POST",
+    "path" : "/mobile/auth/login",
+    "status" : 200,
+    "finishedAt" : "2026-10-19T22:19:32.914268800Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:32.916268900Z",
+    "method" : "PUT",
+    "path" : "/mobile/availability",
+    "status" : 200,
+    "finishedAt" : "2026-10-19T22:19:32.971098800Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:32.971098800Z",
+    "method" : "POST",
+    "path" : "/service-types",
+    "status" : 200,
+    "finishedAt" : "2026-10-19T22:19:33.029097600Z"
+  }, {
+    "startedAt" : "2026-10-19T22:19:33.031096600Z",
+    "method" : "POST",
+    "path" : "/routes",
+    "status" : 200,
+    "finishedAt" : "2026-10-19T22:19:33.101774800Z"
+  } ],
+  "groupId" : "fe150a44-1273-49b2-b85b-b003671d62cb",
+  "vehicleId" : "d8ada4fd-09b8-4080-8246-d8bf40fa335f",
+  "invitationId" : "163bf55d-09a0-42e7-a369-0ad4bac2e351",
+  "requestId" : "cec07997-611b-4b1d-8087-2da28fadc9cd",
+  "driverId" : "c4567be0-3d33-4674-8762-5429f68d1c46",
+  "accountId" : "0794eb2a-bc9a-4334-b617-427bd7f28ef1",
+  "vehicleReviewed" : true,
+  "companyReviewed" : true,
+  "periodId" : "322c1125-ec29-442e-bc81-ccb20fde8677",
+  "serviceTypeId" : "2dbe279d-f85d-4d07-be9a-6b5ddc9ce625",
+  "serviceTypeVersionId" : "93160275-674d-4d81-8062-1158333a8005",
+  "routeId" : "1f7291d9-8271-43a8-9478-b81ee63791df",
+  "routeVersionId" : "772280c7-ba53-441c-8ca9-1de665922b6e",
+  "clientStage" : "CREATE",
+  "browserRefreshFamilyId" : "b8a96596-8838-4ba0-b342-6600db4aee1d"
+}

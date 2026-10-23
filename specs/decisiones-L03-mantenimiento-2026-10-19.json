@@ -1,0 +1,20 @@
+{
+  "id": "MNT-L03-2026-10-19",
+  "source": "Respuesta directa del titular a consulta agrupada MNT-01/MNT-02",
+  "localDate": "2026-10-19",
+  "registeredAtUtc": "2026-10-19T15:31:37.218569+00:00",
+  "approved": [
+    "MNT-01A",
+    "MNT-02A"
+  ],
+  "proposal": "docs/contratos/L-03-mantenimiento-proceso-propuesta.md",
+  "implementationVerified": true,
+  "reopensExistingRules": false,
+  "scope": "L-03 only; no pilot or L04 authorization",
+  "verificationScope": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "evidence": [
+    "docs/evidencia/L-03/aceptacion-V32/final-97/TEST-pe.rutafija.qualification.MaintenanceIntegrationTest.xml",
+    "docs/evidencia/L-03/aceptacion-V32/final-97/TEST-pe.rutafija.support.L03MaintenanceSchedulingConcurrencyTest.xml",
+    "docs/evidencia/L-03/matriz-final-funcional-local-2026-10-19.md"
+  ]
+}

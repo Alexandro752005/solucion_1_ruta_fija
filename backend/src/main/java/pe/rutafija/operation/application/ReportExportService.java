@@ -101,7 +101,23 @@ public class ReportExportService {
         return switch (format) {
             case PDF -> new ReportExport(asPdf(dataset), MediaType.APPLICATION_PDF, basename + ".pdf");
             case XLSX -> new ReportExport(asXlsx(dataset), XLSX_MEDIA_TYPE, basename + ".xlsx");
+            case CSV -> new ReportExport(asCsv(dataset), MediaType.parseMediaType("text/csv;charset=UTF-8"), basename + ".csv");
         };
+    }
+
+    /** Formats share a caller-provided authorized immutable dataset; never query here. */
+    public ReportExport tabular(ReportExportFormat format,String title,String subtitle,List<String> headers,List<List<String>> rows,String basename) {
+        return export(format,new ReportDataset(title,subtitle,headers,rows),basename);
+    }
+
+    private byte[] asCsv(ReportDataset dataset) {
+        var lines=new ArrayList<List<String>>();lines.add(List.of(dataset.title()));lines.add(List.of(dataset.subtitle()));lines.add(dataset.headers());lines.addAll(dataset.rows());
+        return lines.stream().map(row->row.stream().map(this::csvCell).collect(java.util.stream.Collectors.joining(",")))
+            .collect(java.util.stream.Collectors.joining("\r\n","\uFEFF","\r\n")).getBytes(java.nio.charset.StandardCharsets.UTF_8);
+    }
+    private String csvCell(String value) {
+        String text=value==null?"":value;if(!text.isEmpty()&&"=+-@\t\r\n".indexOf(text.charAt(0))>=0)text="'"+text;
+        return "\""+text.replace("\"","\"\"")+"\"";
     }
 
     private List<String> assignmentRow(AssignmentResponse item) {
@@ -181,8 +197,6 @@ public class ReportExportService {
             return output.toByteArray();
         } catch (IOException exception) {
             throw new UncheckedIOException("No fue posible generar el archivo XLSX del reporte", exception);
-        } finally {
-            workbook.dispose();
         }
     }
 

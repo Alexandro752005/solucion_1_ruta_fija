@@ -1,0 +1,12 @@
+﻿{
+    "observedAt":  "2026-10-23T05:13:31.8638410+00:00",
+    "versionCode":  4,
+    "package":  "pe.rutafija.conductor",
+    "firstApkSha256":  "3b5533d3bb70fdd7bd043ed9fa62b002fadcc86c4ceee2554a4dc9cc02a6ae3c",
+    "reproducedApkSha256":  "3b5533d3bb70fdd7bd043ed9fa62b002fadcc86c4ceee2554a4dc9cc02a6ae3c",
+    "bitIdentical":  true,
+    "mobileSourcesUnchanged":  true,
+    "sameCompilerAndLocalDependencyCache":  true,
+    "cleanMachineOrIndependentHost":  false,
+    "result":  "PASS_SAME_RECIPE_BIT_IDENTICAL_LOCAL_APK_REBUILD"
+}

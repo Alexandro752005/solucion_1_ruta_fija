@@ -1,0 +1,33 @@
+{
+  "recordedLocalDate": "2026-10-22",
+  "timezone": "America/Lima",
+  "source": "Explicit user response to grouped question call_6797c0b6ce074975b51a2d82234b0400",
+  "proposal": "docs/operacion/L-08-complementos-pendientes-propuesta.md",
+  "proposalSha256": "1682f87cfc0be9603f89fec214434cc868de309e9bc7f8bdba2abf8a00172e60",
+  "L08-FIS-02": {
+    "answer": "Autorizo; red/sesión disponibles y apruebo criterio",
+    "maximumNewSyntheticConductor": 1,
+    "sourceDatabase": "ruta_fija_test@127.0.0.1:5432",
+    "expectedHistoricalCreationLedgerConductorBefore": 7,
+    "expectedHistoricalCreationLedgerConductorAfter": 8,
+    "samePrivateWifiAnd15MinuteSessionAvailable": true,
+    "maximumBatteryDropPercentagePointsIn15Minutes": 5,
+    "noThermalShutdownOrPersistentCaptureLoss": true,
+    "oldClosedCasesMayBeReopened": false,
+    "statusAtApproval": "AUTHORIZED_NOT_EXECUTED"
+  },
+  "L08-REST-03": {
+    "answer": "Autorizar L08-REST-03 con esos límites",
+    "destination": "ruta_fija_test@127.0.0.1:55440",
+    "source": "ruta_fija_test@127.0.0.1:5432",
+    "schemaVersion": "50",
+    "newAccountsAllowed": 0,
+    "oldRestoreDestinationsMustBePreserved": true,
+    "independentBackupAccreditedByApproval": false,
+    "statusAtApproval": "AUTHORIZED_NOT_EXECUTED"
+  },
+  "pilotEnabled": false,
+  "externalMailAllowed": false,
+  "realAccountsAllowed": false,
+  "definitiveOwnerKeysAllowed": false
+}

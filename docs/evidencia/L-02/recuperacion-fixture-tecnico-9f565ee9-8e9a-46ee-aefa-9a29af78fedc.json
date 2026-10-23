@@ -1,0 +1,14 @@
+{
+  "organizationId" : "9f565ee9-8e9a-46ee-aefa-9a29af78fedc",
+  "observedAt" : "2026-10-19T08:55:31.193655800Z",
+  "periods" : [ {
+    "id" : "556a25d3-ca86-4ba5-b2dc-4523cc5d80cc",
+    "driver_id" : "8f8432b9-76aa-4ed7-8728-15e4e517241d",
+    "vehicle_id" : "a15f48af-e514-4ff0-a957-fb7f386a62f6",
+    "status" : "AUTHORIZED",
+    "reason" : "SYNTHETIC CONSTRAINT ONLY"
+  } ],
+  "accountCreations" : 0,
+  "globalCleanup" : false,
+  "result" : "PASS_EXACT_TECHNICAL_RESOURCES_REMOVED_LEDGER_PRESERVED"
+}

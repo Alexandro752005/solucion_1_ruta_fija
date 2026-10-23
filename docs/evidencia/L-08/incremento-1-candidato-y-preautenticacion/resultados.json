@@ -1,0 +1,62 @@
+{
+  "observedAt": "2026-10-21T23:00:02.227445+00:00",
+  "status": "EN_CURSO_PARTIAL_NOT_CLOSURE",
+  "crm": {
+    "fullRegressionBeforeFocusCorrection": {
+      "tests": 238,
+      "files": 47,
+      "result": "PASS"
+    },
+    "afterFocusCorrection": {
+      "directedTests": 4,
+      "typecheck": "PASS",
+      "productionBuild": "PASS",
+      "realBrowsers": [
+        "Edge155.0.4283.62",
+        "Chrome155.0.8059.85"
+      ],
+      "boundedPublicChecksPerBrowser": 13
+    },
+    "threeNewFocusCasesFailedBeforeFix": true,
+    "npmReportedVulnerabilities": 0,
+    "notFullAccessibilityOrSecurityCertification": true
+  },
+  "mobile": {
+    "analyze": "PASS",
+    "directedTestsWithDoubles": 29,
+    "physicalPublicTrial": "PASS_MANUAL_PUBLIC_PREAUTH_ONLY",
+    "runId": "9f2be6c1-77be-4d2b-8d72-f83dbd6f5247",
+    "requests": 1,
+    "httpStatus": 503,
+    "noAdditionalRequestObservedSeconds": 105,
+    "gpsBatteryTalkBackOperationalLogin": "NOT_VERIFIED",
+    "releaseSigningGuard": "PASS_EXPECTED_REFUSAL_NOT_RELEASE_DELIVERY"
+  },
+  "backend": {
+    "tests": 25,
+    "realHealthAndPostgresCases": 4,
+    "availabilityPolicySyntheticClockCases": 14
+  },
+  "historicalLedger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 6
+  },
+  "acceptances": 2,
+  "pilotEnabled": false,
+  "deploymentExecuted": false,
+  "externalEmailSent": false,
+  "notMeasured": [
+    "load25",
+    "durableP95",
+    "realGPSBattery",
+    "RTO4h",
+    "RPO1h",
+    "independentMonitoring",
+    "alertsDelivered",
+    "human24x7Coverage",
+    "independentBackupCustody",
+    "retirementOtherPurposes",
+    "humanScreenReader"
+  ]
+}

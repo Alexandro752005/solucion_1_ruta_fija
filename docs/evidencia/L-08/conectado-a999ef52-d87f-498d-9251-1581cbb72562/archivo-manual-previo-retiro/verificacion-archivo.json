@@ -1,0 +1,42 @@
+{
+  "runId": "a999ef52-d87f-498d-9251-1581cbb72562",
+  "archivedAt": "2026-10-22T22:05:48.030476+00:00",
+  "result": "PASS_PHYSICAL_FOREGROUND_CASE_ONLY",
+  "reportedResultMatchesLocal": true,
+  "reportedEvidenceSha256": "13661ee0aa87196777bfe5e373dfdd7086c864a95db5c68b5ed449fd0af53e8b",
+  "immutableArchivedResult": "resultado-manual.json",
+  "archivedResultSha256": "13661ee0aa87196777bfe5e373dfdd7086c864a95db5c68b5ed449fd0af53e8b",
+  "humanAndServerChecks": {
+    "humanPhoneInteractionConfirmed": true,
+    "humanPhysicalGpsConfirmed": true,
+    "phoneLoginObserved": true,
+    "phoneAvailabilityObserved": true,
+    "phoneConsentObserved": true,
+    "phone-start-observed": true,
+    "phone-complete-observed": true,
+    "phoneLogoutObserved": true,
+    "persistedCaseServiceCompleted": true
+  },
+  "gpsPointsAtVerification": 14,
+  "serviceCompleted": true,
+  "currentLocationRowsAtRead": 0,
+  "openServiceSegmentsAtRead": 0,
+  "currentMobileSessionFamilyRevoked": true,
+  "olderSessionTokensPendingExistingSelectiveRetirement": 1,
+  "historicalLedger": {
+    "ADMIN": 3,
+    "CONDUCTOR": 7,
+    "SUPER_ADMIN": 1
+  },
+  "termsAcceptancesPreserved": 2,
+  "approvedSyntheticConductorCreationsConsumed": 1,
+  "realParticipantsAccredited": false,
+  "batteryAccredited": false,
+  "operationalTalkBackAccredited": false,
+  "fullPhysicalRouteOrTerminalArrivalAccredited": false,
+  "selectiveCleanupPending": true,
+  "TEST_CLEANUP_RELEASED": false,
+  "L08Status": "EN_CURSO",
+  "pilotEnabled": false,
+  "newLotStarted": false
+}

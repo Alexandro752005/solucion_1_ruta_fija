@@ -1,0 +1,89 @@
+{
+  "contractVersion": "0.4.0",
+  "completionType": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "criteria": [
+    {
+      "id": "CI-L07-01",
+      "criterion": "KPI de servicio/denominador/corte y resultados separados",
+      "status": "VERIFICADO_LOCAL",
+      "evidence": "17 pruebas de reportes y servicio real del caso:cohorte original inmutable, cero denominador, aceptación/cancelación/interrupción/vencimiento separados del cierre iniciado; corrección conserva originales.",
+      "environment": "MockMvc/PostgreSQL rollback y HTTP del caso",
+      "limits": "Legados no certificables se identifican/excluyen, sin backfill; cierre declarado no acredita recorrido físico."
+    },
+    {
+      "id": "CI-L07-02",
+      "criterion": "Emisiones versionadas, CSV/XLSX/PDF y descarga propia aislada",
+      "status": "VERIFICADO_LOCAL",
+      "evidence": "Versiones inmutables, clave idempotente, recuperación504 tras commit y carrera200/200 de una sola emisión; navegador descargó los tres archivos con hashes. Exportación propia Flutter/API y auditoría final por formato.",
+      "environment": "Backend/PostgreSQL, Edge y Flutter HTTP",
+      "limits": "Diálogo de guardado Android simulado; parche final de auditoría comprobado en MockMvc/PG, posterior al conectado."
+    },
+    {
+      "id": "CI-L07-03",
+      "criterion": "Eventos obligatorios y denegaciones relevantes auditados",
+      "status": "VERIFICADO_LOCAL",
+      "evidence": "12 pruebas de alcance,33 unitarias del lote, regresiones de negocio y13 pares acción/entidad contrastados en filas persistidas del caso. REPORT_EXPORTED probado para ambos emisores y rechazos.",
+      "environment": "PostgreSQL/MockMvc, HTTP y revisión de llamadas del núcleo",
+      "limits": "No se atribuyen nuevos ensayos humanos al historial heredado; un evento de exportación acredita preparación servidor, no guardado del usuario."
+    },
+    {
+      "id": "CI-L07-04",
+      "criterion": "Auditoría ADMIN propia/SUPER_ADMIN plataforma/CONDUCTOR sin log global",
+      "status": "VERIFICADO_LOCAL",
+      "evidence": "Aislamiento por rol/empresa/objeto, rechazo de parámetros ajenos,401/403/404 y plataforma sin fallback; vista real Edge plataforma y API de auditoría operativa.",
+      "environment": "PostgreSQL/MockMvc y Edge HTTP",
+      "limits": "SUPER_ADMIN conserva solo administración de plataforma; CONDUCTOR historiales propios, sin log administrativo."
+    },
+    {
+      "id": "CI-L07-05",
+      "criterion": "Cambios por campo/motivo/evidencia y metadatos seguros",
+      "status": "VERIFICADO_LOCAL",
+      "evidence": "Proyección recursiva positiva, redacción antes de guardar/leer, correcciones personales/placa/tiempos e historias originales; cambios de flota/organización/incidencias/ofertas y preferencias.",
+      "environment": "Unitarias, PostgreSQL/MockMvc y corrección HTTP del caso",
+      "limits": "Motivos/evidencias libres permanecen en procesos restringidos; los valores personales no se duplican en auditoría ordinaria."
+    },
+    {
+      "id": "CI-L07-06",
+      "criterion": "Retención por finalidad/calendario/excepciones/copias y ejecución restringida",
+      "status": "VERIFICADO_LOCAL",
+      "evidence": "Diez pruebas SQL/MockMvc de retención,calendario/reautenticación; seis meses Lima,hold exacto≤30d no renovable,plan con hash/revalidación y retiro de1000 eventos en rollback. Emisiones90d sin renovar; referencia/tombstone conservados.",
+      "environment": "PostgreSQL rollback, actores sintéticos y reloj sintético",
+      "limits": "Copias verificadas como política/inventario sintético, no copia/restore real. Herramientas de retiro30/90d de otras categorías siguen pendientes antes del piloto; GPS7d no se amplía."
+    },
+    {
+      "id": "CI-L07-07",
+      "criterion": "Dashboard ADMIN priorizado y resumen SUPER_ADMIN permitido",
+      "status": "VERIFICADO_LOCAL",
+      "evidence": "Seis pruebas PostgreSQL,componentes y dos etapas Edge:criticidad/atención,próximos sin aceptación,reasignación,vencimientos,incidencias/incorporación; plataforma solo agregados.",
+      "environment": "PostgreSQL/MockMvc,dobles y Edge HTTP",
+      "limits": "Colas independientes pueden coincidir; una consulta fallida no se presenta como cero ni como cobertura."
+    },
+    {
+      "id": "CI-L07-08",
+      "criterion": "Inicio móvil con servicio aceptado y oferta separados",
+      "status": "VERIFICADO_LOCAL",
+      "evidence": "Tarjeta principal del compromiso aceptado,oferta/plazo/acciones separadas y acceso a detalle/inicio normales; widget de producción conecta al servidor real.",
+      "environment": "Widgets con dobles y Flutter HTTP/PostgreSQL",
+      "limits": "Sin arranque/aceptación automática,cola offline ni prueba Android físico."
+    },
+    {
+      "id": "CI-L07-09",
+      "criterion": "Perfil/preferencias sin edición directa de identidad ni PII ordinaria",
+      "status": "VERIFICADO_LOCAL",
+      "evidence": "Preferencias propias versionadas,avisos obligatorios y escala accesible conservados; escritura persistida HTTP,vaciado de sesión/dispose y respuestas antiguas; identidad usa sus flujos.",
+      "environment": "PostgreSQL/MockMvc,unitarias/widgets y Flutter HTTP",
+      "limits": "Foto/carga personal no habilitada por la regla posterior de PII; lector de pantalla/Android físico no acreditados."
+    },
+    {
+      "id": "CI-L07-10",
+      "criterion": "Conectados/concurrencia/regresiones/retorno/postflight/inmutables y concordancia",
+      "status": "VERIFICADO_LOCAL",
+      "evidence": "13 etapas del caso,4 Edge/3 Flutter,carrera HTTP misma clave,retorno compatible,retirada selectiva y postflight independiente;190 casos backend distintos,22CRM,42Flutter,builds y sellos.",
+      "environment": "Solo ruta_fija_test/rf_test; migraciones previas rf_migrator",
+      "limits": "Sin suites de limpieza global,restauración total,carga representativa,despliegue,piloto ni L08."
+    }
+  ],
+  "pendingLocalCriteria": [],
+  "pilotEnabled": false,
+  "L08Started": false
+}

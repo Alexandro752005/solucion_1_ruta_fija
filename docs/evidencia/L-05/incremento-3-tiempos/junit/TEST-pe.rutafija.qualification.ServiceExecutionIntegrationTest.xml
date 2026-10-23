@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="46.415" tests="10" errors="0" skipped="0" failures="0" flakes="0">
+  <testcase name="executionTrackingRejectsAvailabilityAndBackgroundAndOutOfSegmentTime" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="3.386">
+    </testcase>
+  <testcase name="executionStartRequiresFunctionalConsentWithoutMutatingOccupation" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="1.153" />
+  <testcase name="executionSummaryIsCodedOwnScopedAndNeverExposesCoordinates" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="1.362" />
+  <testcase name="executionStartRequiresExplicitPermissionServiceAndForeground" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="1.144" />
+  <testcase name="executionCompletionClosesOwnSegmentAndStopsCurrentPoint" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="1.131" />
+  <testcase name="executionStartRecordsServerTimeOnceAndDoesNotAutostartFromAcceptance" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="1.163" />
+  <testcase name="executionAdminCannotDeclareCompletionOrCreateSegments" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="0.952" />
+  <testcase name="executionConsentWithdrawalStopsPointsButAllowsSafeCompletion" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="1.0" />
+  <testcase name="executionDatabaseRejectsRewritingOrDeletingOriginalAndClosedSegments" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="0.963" />
+  <testcase name="executionStaleVersionCannotStartOrCloseAndFreshCommandsPreserveTheSameSegment" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="1.012" />
+</testsuite>

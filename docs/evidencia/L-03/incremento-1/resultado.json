@@ -1,0 +1,28 @@
+{
+  "observedAt": "2026-10-19T15:24:39.213159+00:00",
+  "status": "PASS_GROUP_INCREMENT_ONLY_LOT_IN_PROGRESS",
+  "database": "ruta_fija_test",
+  "schema": "29",
+  "backendNewHttpRollbackPassed": 9,
+  "backendL02HttpRegressionPassed": 44,
+  "postgresL02TemporalRacesPassed": 2,
+  "postgresGroupSnapshotRacesPassed": 2,
+  "backendDistinctPassed": 57,
+  "crmComponentPassed": 5,
+  "crmTypecheck": "PASS",
+  "crmBuild": "PASS",
+  "externalSmtpAttempts": 0,
+  "accountsCreated": 0,
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 1
+  },
+  "acceptancesPreserved": 2,
+  "globalCleanupExecuted": false,
+  "realBrowserForNewGroupScreen": "NOT_EXECUTED",
+  "physicalDevice": "NOT_EXECUTED",
+  "pilotEnabled": false,
+  "L04Started": false,
+  "historicalFailure": "Two L02 races refused V29 at old V28 precondition before writing fixtures; guard extended explicitly to additive V29 and both passed. Historical reports retained."
+}

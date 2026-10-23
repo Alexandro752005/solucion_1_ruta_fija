@@ -1,0 +1,23 @@
+{
+  "decisionId": "SC-L01-LOCAL-01",
+  "version": "1.1.0",
+  "source": "Autorizacion directa del titular en esta conversacion: completar gate automatizado complementario y cerrar autonomamente si todos los criterios locales estan acreditados.",
+  "registeredLocalDate": "2026-10-17",
+  "approved": true,
+  "adendaPath": "docs/contratos/SC-L01-LOCAL-01-adenda-v1.1.0.md",
+  "adendaSha256": "B25E7F1E34A50C20DAA6BDCFA21A33382B0A7D3B478068F3EA0003ED4CE8CC1B",
+  "runId": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "newSyntheticAdminMaximum": 1,
+  "expectedHistoricalAdminBefore": 2,
+  "expectedHistoricalAdminAfter": 3,
+  "automatedAcceptanceOnlyForAdditionalSyntheticAccount": true,
+  "existingHumanAcceptanceMustRemainUnchanged": true,
+  "SC07ApprovalUnchanged": true,
+  "sameProtectedOperationRequiredBeforeAndAfter": true,
+  "backendAndPostgresMustBeRealTestInstances": true,
+  "mailMustBeSimulated": true,
+  "approvalPreviouslyDeniedForAdditionalManualAccountIsHistorical": true,
+  "closureTypeAuthorized": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "noAdditionalEquivalentApprovalRequired": true,
+  "prohibited": ["SQL state forcing", "quota reset", "deleting acceptance", "global cleanup", "repeating CI01 or CI07", "Git or GitHub", "regenerating final3", "real pilot", "L02", "external SMTP", "development or pilot migration"]
+}

@@ -1,0 +1,55 @@
+{
+  "result": "PASS",
+  "localDate": "2026-10-21",
+  "backendCasesReused": 72,
+  "crmComponentCasesReused": 14,
+  "flutterCasesReused": 49,
+  "unnecessaryFullSuitesRepeated": false,
+  "backendCompile": {
+    "command": "mvn.cmd --offline -q -DskipTests test-compile",
+    "result": "PASS",
+    "testsExecuted": false
+  },
+  "flutterAnalyze": {
+    "command": "flutter.bat analyze --no-pub",
+    "result": "PASS_NO_ISSUES"
+  },
+  "crmHarnessSyntax": {
+    "command": [
+      "node",
+      "--check",
+      "frontend/e2e/l06-connected.mjs"
+    ],
+    "exitCode": 0
+  },
+  "flyway": {
+    "command": "L06DatabasePreflight --validate-test",
+    "result": "PASS",
+    "validatedMigrations": 45,
+    "writeMigration": false
+  },
+  "postflight": {
+    "command": "L06ConnectedPostflight",
+    "result": "PASS_EXACT_CONNECTED_RETIREMENT",
+    "readOnly": true
+  },
+  "productionSourcesUnchangedSinceIncrement1": true,
+  "changedHarnessSources": [
+    "backend/src/test/java/pe/rutafija/support/L06ConnectedTrial.java",
+    "frontend/e2e/l06-connected.mjs",
+    "mobile/test/connected/l06_connected_test.dart"
+  ],
+  "addedPostflightSource": "backend/src/test/java/pe/rutafija/support/L06ConnectedPostflight.java",
+  "connected": {
+    "command": "L06ConnectedTrial --run-connected",
+    "attempts": 6,
+    "sameRunOnly": true,
+    "finalResult": "PASS_REAL_CRM_FLUTTER_HTTP_POSTGRES_SIMULATED_MAIL"
+  },
+  "limits": [
+    "No NativePostgresIntegrationTest/global cleanup",
+    "No SMTP or push delivery",
+    "No physical Android or human interaction",
+    "Connected stage harness evolved during diagnosed resumptions; business sources and build artifacts remained identical to increment1."
+  ]
+}

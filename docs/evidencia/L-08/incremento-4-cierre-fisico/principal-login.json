@@ -1,0 +1,39 @@
+﻿{
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "package":  "pe.rutafija.conductor",
+    "versionCode":  4,
+    "events":  [
+                   {
+                       "method":  "POST",
+                       "path":  "/api/v1/mobile/auth/login",
+                       "status":  401,
+                       "startedAt":  "2026-10-23T05:04:25.267941500Z",
+                       "finishedAt":  "2026-10-23T05:04:25.547918700Z",
+                       "channel":  "PHONE_PROXY_REAL_BACKEND"
+                   },
+                   {
+                       "method":  "POST",
+                       "path":  "/api/v1/mobile/auth/login",
+                       "status":  401,
+                       "startedAt":  "2026-10-23T05:06:58.336162600Z",
+                       "finishedAt":  "2026-10-23T05:06:58.589671300Z",
+                       "channel":  "PHONE_PROXY_REAL_BACKEND"
+                   },
+                   {
+                       "method":  "POST",
+                       "path":  "/api/v1/mobile/auth/login",
+                       "status":  200,
+                       "startedAt":  "2026-10-23T05:09:21.721818700Z",
+                       "finishedAt":  "2026-10-23T05:09:22.166819700Z",
+                       "channel":  "PHONE_PROXY_REAL_BACKEND"
+                   }
+               ],
+    "controlledWrongPasswordAttempts":  1,
+    "extra401FromLegacyTextInjection":  1,
+    "nativeAndroidInputSucceeded":  true,
+    "privateStoredPasswordCheckedReadOnly":  true,
+    "credentialsRecorded":  false,
+    "credentialTemporaryFilesRemoved":  true,
+    "newAccountCreated":  false,
+    "result":  "PASS_REAL_PRIMARY_APP_401_REJECTION_THEN_200_LOGIN"
+}

@@ -1,0 +1,28 @@
+{
+  "observedAt": "2026-10-20T02:10:07.451498+00:00",
+  "scope": "LOCAL_BUILD_ONLY_NOT_DEPLOYED",
+  "pilotEnabled": false,
+  "L05Authorized": false,
+  "files": [
+    {
+      "path": "ruta-fija-backend.jar",
+      "sha256": "b9774e48af2abf35595ebc81ea787d4d37e5193f0bad6ff00496e6ff76978267",
+      "bytes": 90948357
+    },
+    {
+      "path": "ruta-fija-conductor-debug.apk",
+      "sha256": "67509eb1e9c98a2007ab9e060b901f5adce6ac702c71b409ba2ba71f0328ffa4",
+      "bytes": 185147153
+    },
+    {
+      "path": "ruta-fija-crm-desarrollo.zip",
+      "sha256": "a98d675e02cbeb055078ab8dfdc6b5bad96882be0f23cca4593b9dd1bbb84b6c",
+      "bytes": 1536105
+    }
+  ],
+  "limitations": [
+    "CRM development bundle",
+    "Android debug build; no physical device validation",
+    "No regeneration of final3"
+  ]
+}

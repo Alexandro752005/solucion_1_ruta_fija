@@ -1,0 +1,16 @@
+{
+    "caseId":  "8c36b010-3560-43bf-a850-dc5ef130c500",
+    "startedAt":  "2026-10-23T06:23:40.6340650+00:00",
+    "finishedAt":  "2026-10-23T06:30:04.7173467+00:00",
+    "result":  "STOPPED_KEEP_CASE_AND_DIAGNOSE",
+    "failurePhase":  "PRECONDITIONS",
+    "failureType":  "PrivilegeNotHeldException",
+    "totalElapsedSeconds":  384.0862835,
+    "thisInvocationElapsedSeconds":  1.1372099,
+    "sourcePort":  55441,
+    "shared5432Touched":  false,
+    "historicalClustersTouched":  false,
+    "reusedInitializedCaseId":  "eaa064c6-0bc7-4378-925e-c547ef673932",
+    "provenance":  "Reconciled from exact launcher output; failure before evidence directory creation. No original JSON overwritten.",
+    "remediation":  "On resuming, verify existing protected ACL instead of reassigning owner; create evidence directory before private preconditions"
+}

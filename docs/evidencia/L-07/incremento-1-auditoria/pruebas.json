@@ -1,0 +1,170 @@
+{
+  "observedAt": "2026-10-21T07:43:39.838108+00:00",
+  "result": "PASS",
+  "backendDistinctTests": 88,
+  "backendRealPostgresMockMvcRollbackTests": 69,
+  "backendUnitTests": 19,
+  "suites": [
+    {
+      "class": "pe.rutafija.audit.application.AuditMetadataPolicyTest",
+      "tests": 8,
+      "cases": [
+        "rejectsNestedSecretsAndUnknownFreeText",
+        "preservesNonPersonalStructuredDifference",
+        "preservesTypedReferencesStatusVersionsAndDates",
+        "boundsCollectionsAndSupportsNullKeysWithoutMutatingInput",
+        "masksPersonalChangesEvenWhenUppercaseOrNumeric",
+        "rejectsPiiInOtherwiseAllowedStringFields",
+        "excludesFreeReasonsReferencesCoordinatesAndLineBreaks",
+        "preservesPublicFingerprintButNeverTokenHashesOrPrivateMaterial"
+      ],
+      "result": "PASS",
+      "rawReportSha256": "c29460ef9a681ff874ab4e2baeb577a5dce75e5ef42aa3dcd711641654dcde7f"
+    },
+    {
+      "class": "pe.rutafija.audit.application.AuditOutcomeTest",
+      "tests": 11,
+      "cases": [
+        "invalidLegacyCorrelationIsHiddenAndDoesNotBecomeAnotherIdentifier",
+        "ordinaryBusinessRejectionIsASuccessfullyRecordedDecision",
+        "publicUuidCorrelationIsPreserved",
+        "denialOutcomeComesFromServerAction(String)[1]",
+        "denialOutcomeComesFromServerAction(String)[2]",
+        "denialOutcomeComesFromServerAction(String)[3]",
+        "denialOutcomeComesFromServerAction(String)[4]",
+        "denialOutcomeComesFromServerAction(String)[5]",
+        "denialOutcomeComesFromServerAction(String)[6]",
+        "denialOutcomeComesFromServerAction(String)[7]",
+        "arbitraryCorrelationContentIsNeverPersisted"
+      ],
+      "result": "PASS",
+      "rawReportSha256": "a063a928bffa0c662094229c2e7d8e64e66e9b2ad0443a449b6d602386520759"
+    },
+    {
+      "class": "pe.rutafija.qualification.AuditScopeIntegrationTest",
+      "tests": 12,
+      "cases": [
+        "auditReadRoutesHaveNoMutableEquivalent",
+        "auditPlatformRejectsInvalidDatesAndOversizedPages",
+        "auditAdministrativeLogIsDeniedToConductor",
+        "auditActualRoleDenialIsRecordedOnceWithoutRequestSecrets",
+        "auditObjectRejectionDoesNotStoreForeignResourceOrGrantAccess",
+        "auditInvalidBearerBeforeAuthorizationHasOneAnonymousSafeDenial",
+        "auditSuperAdminCannotReadTenantOperationalDetail",
+        "auditLegacyNestedMetadataIsRedactedWithoutRewriting",
+        "auditAdminSeesOnlyOwnOrganization",
+        "auditNewWritesRemoveNestedSecretsBeforeStorage",
+        "auditPersonalDifferenceNeverPersistsOriginalValues",
+        "auditSuccessfulConsultationsDoNotCreateRefreshNoise"
+      ],
+      "result": "PASS",
+      "rawReportSha256": "37cc68cd813fd4f2990fea205ae5288c22e721f6eee006d3af65dbdb48d9ccd0"
+    },
+    {
+      "class": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "tests": 24,
+      "cases": [
+        "incidentResponsibilityIsExplicitAndChangedRoundRetainsHistory",
+        "incidentSameCreationKeyReturnsTheSameReportAndChangedPayloadIsRejected",
+        "incidentAttentionRequiresResponsibleAndGenericResolveCannotReplaceStructuredClosure",
+        "incidentCannotAssignConductorForeignAdminOrStaleState",
+        "incidentClosedOriginalCannotBeReopenedButMayHaveANewLinkedCase",
+        "incidentPriorCaseMustBeClosedAndCannotCrossOrganizations",
+        "incidentMissingOrUnassessedHumanSeverityCannotBeRecordedAsKnown",
+        "incidentForeignAdminAndConductorCannotReadOrContributeAcrossOrganizations",
+        "incidentFollowUpKeepsEveryRoundAndOnlyTheLatestProjection",
+        "incidentHistoryAndOperationReceiptsAreScopedAndDoNotExposeIdentity",
+        "incidentDatabaseProtectsClosedOriginalsAndAppendOnlyActionHistory",
+        "incidentConductorCanContributeAfterQualificationLossButNotReopenTheirClosedReport",
+        "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[1]",
+        "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[2]",
+        "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[3]",
+        "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[4]",
+        "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[5]",
+        "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[6]",
+        "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[7]",
+        "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[8]",
+        "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[9]",
+        "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[10]",
+        "incidentClosureValidatesEvidenceAndRecordsServerResultWithoutResourceRelease",
+        "incidentNoEvidenceMustBeExplainedAndPermanentNotesCannotContainPiiOrCoordinates"
+      ],
+      "result": "PASS",
+      "rawReportSha256": "2d4f994ad592ce7778e7a4fbfe18d43c94084df1370dc862eba8db0a5a74d672"
+    },
+    {
+      "class": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "tests": 19,
+      "cases": [
+        "safetyAttentionBlocksNewOperationAndPointsButKeepsOwnConsultation",
+        "safetyQualificationLossRecordsAutomaticIncidentNoticeOnlyOnce",
+        "safetyCancellationPreservesInterruptedParticipationAndHoldsAndAllowsSeparateTimeReview",
+        "safetyOwnInterruptionRetainsServerOriginalsIncidentAndGpsWithoutCompletion",
+        "safetyRolesAndObjectScopeDoNotLetAnotherSurfaceImpersonateTheReporter",
+        "safetyResolutionNeedsFreshStateSafetyConfirmationAndAdmin",
+        "safetyLateOwnIncidentRetainsTheOccurrenceSegmentWithoutNewOperationalEligibility",
+        "safetyIndependentDriverReleaseAndWithdrawalKeepTheUnitBlockedUntilExplicitReadyReview",
+        "safetyPermissionLossAndInactiveDriverDoNotPreventRecordingTheSafeStop",
+        "safetyIncidentClosureDoesNotReleaseEitherInterruptedResource",
+        "safetyReadyReleaseRestoresOnlyEligibilityAndTheExistingAvailabilityDeclaration",
+        "safetyMaintenanceReturnRecordsItsOwnCheckWithoutReactivatingAWithdrawnUnitOrRemovingAttention",
+        "safetyChangedReplayAndStaleVersionNeverCreateAnotherInterruption",
+        "safetyRejectsCoordinatesOrPersonalDataInPermanentSafetyNotes",
+        "safetyQualificationCancellationPersistsNoticeWithoutTouchingStartedExecution",
+        "safetyAdminRecordsOnlyAConfirmedCommunicatedStopWithActualAuthorship",
+        "safetyDatabaseRejectsRewritingAttentionOrReleasingItsResourcesThroughOrdinaryState",
+        "safetyNoStartNoInterruptionAndDelayIsNotACause",
+        "safetyForeignAdminCannotReadInterruptOrResolveTheSameOtherOrganizationCase"
+      ],
+      "result": "PASS",
+      "rawReportSha256": "27139a0d9191d0149aa429a22e74e77bf7bd46e8168989f2c8b842dce2c436b3"
+    },
+    {
+      "class": "pe.rutafija.qualification.AnnouncementNoticeIntegrationTest",
+      "tests": 14,
+      "cases": [
+        "announcementPublicationKeyReplaysExactlyAndRejectsChangedContent",
+        "announcementLegacyWithoutProvenReceptionIsNotGrantedByCurrentGroup",
+        "announcementOrganizationSnapshotIncludesLimitedApprovedAccountButNoAutomaticReading",
+        "announcementTenantRolesAndPersonalDataAreEnforcedByTheActualApi",
+        "noticeLocationTelemetryIsExcludedAndForeignOwnReadIsRejected",
+        "announcementSecondaryMembershipIsCapturedAndPreviousReceptionSurvivesLeavingGroup",
+        "noticeCriticalActualHttpReportUsesExplicitSeverityWithoutInterruptingService",
+        "noticeChannelFailureRemainsVisibleAndDoesNotPretendDeviceDelivery",
+        "announcementSecurityWithdrawalIsVersionedAuditedAndDoesNotEraseReceipts",
+        "announcementDatabaseProtectsRecipientsPublicationAndFirstReadTimestamps",
+        "noticeDurableInboxDoesNotReadAnnouncementAndShowsPendingToAdmin",
+        "announcementJoiningAfterPublicationDoesNotInventPriorReception",
+        "announcementExplicitReadingIsIdempotentAndDoesNotChangeOffers",
+        "noticeProviderNotConfiguredIsVisibleWithoutExternalDeliveryOrFalseSuccess"
+      ],
+      "result": "PASS",
+      "rawReportSha256": "daae94de5afaee43ba5be213c8744ec7a65c22e19c5e3632085ef4ee9a4c3ff6"
+    }
+  ],
+  "crm": {
+    "tests": 6,
+    "testFiles": 2,
+    "transport": "HTTP doubles in API/component tests, NOT a connected browser",
+    "result": "PASS"
+  },
+  "builds": {
+    "backendPackageSkipTests": "PASS",
+    "crmTypecheck": "PASS",
+    "crmProductionBuild": "PASS"
+  },
+  "logHashes": {
+    "l07-audit-filter-and-regressions.log": "65772658f41410779f604b7058d08910467a1a613230f60651f52d8b0712f8f9",
+    "l07-audit-final-targeted.log": "7ea8e34f0f1285014263fafa3dd388266c30b9193fe148fb86abfa24ed949de7",
+    "l07-audit-crm-components.log": "53aa0e05dc691c6c15ef64bca12df47a420f04d5208e1bcbb274dbdcd0ca9bd3",
+    "l07-audit-package.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "l07-audit-final-typecheck.log": "2fd543afadb9ac1fab6d03d6fb51c229772b38de1dee9132a4133e1f9c6e5983",
+    "l07-audit-crm-build.log": "4c51b381046aa51045f22aa8b1aadc55542e1ca401144fe94e9670aa8c39f9fb"
+  },
+  "mail": "double",
+  "externalSends": 0,
+  "mobileTestsNew": 0,
+  "migrations": 0,
+  "newPersistentAccounts": 0,
+  "globalCleanup": false
+}

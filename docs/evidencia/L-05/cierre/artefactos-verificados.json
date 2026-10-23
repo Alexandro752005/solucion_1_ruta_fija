@@ -1,0 +1,28 @@
+{
+  "result": "PASS_LOCAL_BUILDS",
+  "manifestPath": "artifacts/L-05-2026-10-20/manifest.json",
+  "manifestSha256": "eda5bbc9806a35fb071f5aa302e2f68da9a311e5e804d7dce186688c15ff1e96",
+  "files": [
+    {
+      "path": "ruta-fija-backend-0.1.0-SNAPSHOT.jar",
+      "sha256": "2dbe7294a3df5fedfdbaad2ed9f5c875d9c71385de95a44c241b36947394469b",
+      "bytes": 91086423,
+      "origin": "backend/target/ruta-fija-backend-0.1.0-SNAPSHOT.jar"
+    },
+    {
+      "path": "app-debug.apk",
+      "sha256": "5d1fd4837d61b18ac65fe7f23f624aaabba81a45882681d98522cf31012a3b24",
+      "bytes": 185219682,
+      "origin": "artifacts/L-05-incremento-5-2026-10-20/app-debug.apk"
+    },
+    {
+      "path": "crm-development.zip",
+      "sha256": "87b4d09b31744a5c6440bf9a29bc7d48f9dd0218ec45caeafe1a9754266b4115",
+      "bytes": 1567736,
+      "origin": "frontend/dist/ruta-fija-crm/browser"
+    }
+  ],
+  "apkReuseVerifiedAgainstPriorMobileSources": true,
+  "installed": false,
+  "deployed": false
+}

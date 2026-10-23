@@ -1,0 +1,13 @@
+﻿{
+    "observedAt":  "2026-10-23T05:05:24.1303133+00:00",
+    "package":  "pe.rutafija.conductor",
+    "versionCode":  4,
+    "artifactSha256":  "3b5533d3bb70fdd7bd043ed9fa62b002fadcc86c4ceee2554a4dc9cc02a6ae3c",
+    "installedSha256":  "3b5533d3bb70fdd7bd043ed9fa62b002fadcc86c4ceee2554a4dc9cc02a6ae3c",
+    "principalUpdatedInPlace":  true,
+    "principalDataCleared":  false,
+    "exactOldPrincipalRestitutionClaimed":  false,
+    "authorizedCurrentPrincipalReplacement":  true,
+    "trialNotUninstalledYet":  true,
+    "productionRelease":  false
+}

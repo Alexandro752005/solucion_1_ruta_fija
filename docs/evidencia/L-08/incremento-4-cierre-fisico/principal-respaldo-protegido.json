@@ -1,0 +1,14 @@
+﻿{
+    "recordedAt":  "2026-10-23T05:17:55.5360978+00:00",
+    "backupScope":  "EXISTING_PRINCIPAL_INCIDENT_BINARY_AND_FILES_SHARED_PREFS_BEFORE_CURRENT_REPLACEMENT",
+    "priorPreIncidentBinaryAvailable":  false,
+    "incidentApkSha256":  "dc26a0d0c907818fb0d4ca96e08ada01afdbb8e9c9afb09b087c1999aa36fdd7",
+    "dataTarSha256":  "3b63fa28764a02aa30c4fc2e8306a53e4e9cbf4e57b80ff650ae4e3cf003710a",
+    "dataTarBytes":  16896,
+    "principalUninstalled":  false,
+    "principalDataClearCommandUsed":  false,
+    "backupAclInheritanceDisabled":  false,
+    "backupAccess":  "CURRENT_WINDOWS_USER_AND_SYSTEM",
+    "secretsOrPrivateFileContentsInEvidence":  false,
+    "apf1CandidateNotInstalled":  true
+}

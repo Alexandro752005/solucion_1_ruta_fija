@@ -1,0 +1,68 @@
+{
+  "runId": "844b3bf6-f2fa-4666-bd0e-b1f7a1188696",
+  "result": "PASS_REAL_CLIENTS_HTTP_TEST_POSTGRES",
+  "originalEvidence": "docs/evidencia/L-05/conectado-844b3bf6-f2fa-4666-bd0e-b1f7a1188696/resultado.json",
+  "originalEvidenceSha256": "b094daf3b1324af3902184b4c049f8b9c8ef00cbad88fe75a90803ab6258287a",
+  "postflight": "docs/evidencia/L-05/conectado-844b3bf6-f2fa-4666-bd0e-b1f7a1188696/postflight.json",
+  "postflightSha256": "3c6e798c4fae362c29000274329dc7bca190fa494fb2dc3dea10139b7b6a9e92",
+  "crmBrowserStagesPassed": 5,
+  "flutterRepositoryWidgetStagesPassed": 9,
+  "transportFaults": [
+    {
+      "clientStatus": 504,
+      "at": "2026-10-20T13:26:38.073675900Z",
+      "transportFault": "SYNTHETIC_RESPONSE_LOSS_AFTER_SERVER_COMMIT",
+      "backendStatus": 200,
+      "method": "POST",
+      "path": "/api/v1/scheduled-services/c585ae33-b925-4004-8fcc-96a83e08549a/handovers"
+    },
+    {
+      "clientStatus": 504,
+      "at": "2026-10-20T13:26:50.172001900Z",
+      "transportFault": "SYNTHETIC_RESPONSE_LOSS_AFTER_SERVER_COMMIT",
+      "backendStatus": 200,
+      "method": "POST",
+      "path": "/api/v1/mobile/assignments/1070b05b-356c-4f60-8200-f39397673b8d/assume-handover"
+    }
+  ],
+  "noReplayPostCounts": {
+    "prepare": 1,
+    "assume": 1
+  },
+  "race": [
+    {
+      "finishedAt": "2026-10-20T13:34:02.168129600Z",
+      "action": "ASSUME",
+      "status": 200
+    },
+    {
+      "finishedAt": "2026-10-20T13:34:02.168129600Z",
+      "action": "WITHDRAW",
+      "status": 409
+    }
+  ],
+  "raceLoserCode": "RESOURCE_VERSION_CONFLICT",
+  "raceWinner": "ASSUMED",
+  "oneHandoverResolution": true,
+  "returnResult": "PASS_SAME_BINARY_DISABLED_NEW_OPERATIONS_OWN_CONSULTATION_AND_SAFE_COMPLETION",
+  "scopeRejection": "PASS_HTTP403_DRIVER_INACTIVE_NO_OFFER_CHANGE_NORMAL_LOGIN_RENEWAL",
+  "originalSegmentsAtomicBoundary": "2026-10-20T13:26:50.143+00:00",
+  "newSyntheticConductorAccounts": 2,
+  "ledgerBefore": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 2
+  },
+  "ledgerAfter": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 4
+  },
+  "selectiveCleanup": "PASS_TWO_ACCOUNTS_DISABLED_SESSIONS_REVOKED_LEDGER_HISTORY_PRESERVED",
+  "TEST_CLEANUP_RELEASED": true,
+  "externalSmtpAttempts": 0,
+  "humanTrial": false,
+  "physicalDevice": false,
+  "gpsSource": "SYNTHETIC_PERMISSION_AND_SENSOR_DOUBLE",
+  "mail": "SIMULATED_ONLY"
+}

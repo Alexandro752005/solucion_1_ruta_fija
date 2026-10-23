@@ -1,0 +1,15 @@
+﻿{
+    "observedAt":  "2026-10-21T22:49:53.7060879Z",
+    "runId":  "9f2be6c1-77be-4d2b-8d72-f83dbd6f5247",
+    "userAuthorization":  "Autorizar instalación y ensayo limitado",
+    "apkSha256":  "2e0f38e5c99cc32241c2b444cce3d8e1148027da7979cde285a63b0808e28e3a",
+    "package":  "pe.rutafija.conductor.l08",
+    "replaceFlagUsed":  false,
+    "grantPermissionsFlagUsed":  false,
+    "exitCode":  0,
+    "result":  "PASS",
+    "serialRecorded":  false,
+    "appOpened":  false,
+    "databaseConnected":  false,
+    "locationRead":  false
+}

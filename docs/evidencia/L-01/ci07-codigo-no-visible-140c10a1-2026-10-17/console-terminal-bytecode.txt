@@ -1,0 +1,76 @@
+Compiled from "SuperAdminRecoveryCli.java"
+final class pe.rutafija.identity.recoverycli.SuperAdminRecoveryCli$ConsoleTerminal implements pe.rutafija.identity.recoverycli.SuperAdminRecoveryCli$Terminal {
+  private final java.io.Console console;
+
+  private pe.rutafija.identity.recoverycli.SuperAdminRecoveryCli$ConsoleTerminal(java.io.Console);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field console:Ljava/io/Console;
+       9: return
+
+  public java.lang.String readLine(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field console:Ljava/io/Console;
+       4: ldc           #13                 // String %s
+       6: iconst_1
+       7: anewarray     #2                  // class java/lang/Object
+      10: dup
+      11: iconst_0
+      12: aload_1
+      13: aastore
+      14: invokevirtual #15                 // Method java/io/Console.readLine:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+      17: astore_2
+      18: aload_2
+      19: ifnonnull     32
+      22: new           #21                 // class java/lang/IllegalStateException
+      25: dup
+      26: ldc           #23                 // String No se recibi� la entrada solicitada
+      28: invokespecial #25                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      31: athrow
+      32: aload_2
+      33: areturn
+
+  public char[] readSecret(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field console:Ljava/io/Console;
+       4: ldc           #13                 // String %s
+       6: iconst_1
+       7: anewarray     #2                  // class java/lang/Object
+      10: dup
+      11: iconst_0
+      12: aload_1
+      13: aastore
+      14: invokevirtual #28                 // Method java/io/Console.readPassword:(Ljava/lang/String;[Ljava/lang/Object;)[C
+      17: areturn
+
+  public void println(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field console:Ljava/io/Console;
+       4: invokevirtual #32                 // Method java/io/Console.writer:()Ljava/io/PrintWriter;
+       7: aload_1
+       8: invokevirtual #36                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
+      11: aload_0
+      12: getfield      #7                  // Field console:Ljava/io/Console;
+      15: invokevirtual #32                 // Method java/io/Console.writer:()Ljava/io/PrintWriter;
+      18: invokevirtual #41                 // Method java/io/PrintWriter.flush:()V
+      21: return
+
+  public void printf(java.lang.String, java.lang.Object...);
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field console:Ljava/io/Console;
+       4: aload_1
+       5: aload_2
+       6: invokevirtual #44                 // Method java/io/Console.printf:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/Console;
+       9: pop
+      10: aload_0
+      11: getfield      #7                  // Field console:Ljava/io/Console;
+      14: invokevirtual #48                 // Method java/io/Console.flush:()V
+      17: return
+}

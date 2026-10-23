@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 import { ApiErrorService } from '../../core/api/api-error.service';
 import { UiError } from '../../core/api/api-error.model';
@@ -24,7 +25,7 @@ interface PendingVehicleStatus {
 
 @Component({
   selector: 'rf-vehicles-page',
-  imports: [ReactiveFormsModule, PageHeaderComponent, ModalComponent, ConfirmDialogComponent, PaginationComponent],
+  imports: [RouterLink, ReactiveFormsModule, PageHeaderComponent, ModalComponent, ConfirmDialogComponent, PaginationComponent],
   templateUrl: './vehicles.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -42,7 +43,6 @@ export class VehiclesPage {
   readonly statuses = VEHICLE_STATUSES;
   readonly administrativeStatuses: readonly VehicleStatus[] = [
     'DISPONIBLE',
-    'MANTENIMIENTO',
     'INACTIVO',
   ];
   readonly vehicles = signal<readonly Vehicle[]>([]);
@@ -238,6 +238,7 @@ export class VehiclesPage {
     return ({
       DISPONIBLE: 'Disponible',
       EN_SERVICIO: 'En servicio',
+      ATENCION: 'Atención segura pendiente',
       MANTENIMIENTO: 'Mantenimiento',
       INACTIVO: 'Inactivo',
     } as Record<VehicleStatus, string>)[status];

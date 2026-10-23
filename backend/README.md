@@ -1,3 +1,25 @@
+# Backend — instrucciones vigentes 2026-10-23
+
+Este corte sustituye las secciones históricas de ejecución y pruebas conservadas debajo. Java21/Spring Boot3.5.16 y PostgreSQL16 se mantienen. La base normal `solucion_ruta_fija_1` sigue en V12 y el código actual exige V50: el launcher bloquea antes de arrancar Java, sin migraciones automáticas. La fixture `ruta_fija_test` contiene V1 a V50 más una repetible: 51 éxitos, no V0.
+
+Pruebas unitarias seguras desde la raíz:
+
+```powershell
+./scripts/Test-RutaFijaBackendUnitSafe.ps1
+./verificar_ruta_fija.bat
+```
+
+El primer comando es Plan; el BAT ejecuta el runner con `-Execute`. El runner limita las clases a una allowlist inspeccionada, compila fuentes reales y tests en salidas aisladas, conserva JaCoCo y evita SpringBootTest/JPA/DriverManager/infraestructura real. Resultado observado del runner: 50 clases y 257 pruebas, sin fallos/errores/omitidas. No presenta ese resultado como integración completa. Los comandos Maven generales del antecedente no son la entrada segura: Surefire puede incluir clases de integración y tocar la fixture.
+
+`Invoke-RutaFijaNativeTest.ps1 -Action Clean` está bloqueado y Verify delega al runner seguro antes de importar secretos. Las pruebas con PostgreSQL requieren un arnés aislado expresamente autorizado, fuera de esta auditoría. No ejecutar limpieza global ni migrar las bases desde el IDE.
+
+El smoke explícito `iniciar_ruta_fija.bat --smoke-read-only --test-database` conserva la configuración persistente y limita la conexión a lectura con tareas de mantenimiento desactivadas solo durante esa sesión. No permite operaciones de usuarios; el uso normal mantiene las reglas del producto. El cierre conserva PostgreSQL si no posee una lease válida o hay otros clientes/observabilidad incompleta.
+
+[Manual vigente](<../docs/Uso del Sistema.md>) y [evidencia nueva](../docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md). Los archivos/actas/manifiestos de los lotes previos no se reescriben; copia exacta de este README previo en la auditoría nueva.
+
+<details>
+<summary>README anterior conservado como antecedente técnico; comandos y conteos antiguos no vigentes.</summary>
+
 # Ruta Fija — backend
 
 API del CRM Web Administrativo y Reportes, construida como monolito modular con
@@ -127,3 +149,6 @@ puede suministrar X-Correlation-ID seguro; de lo contrario se genera uno.
 - [Consolidación backend ADMIN F2.2](../docs/ejecucion-nativa-f2-2.md)
 - [Auditoría backend F2.2](../docs/auditoria-f2-2-backend-admin.md)
 - [Contrato API ADMIN F2.3](../docs/contrato-api-f2-3-admin.md)
+
+
+</details>

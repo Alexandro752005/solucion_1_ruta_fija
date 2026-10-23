@@ -1,0 +1,18 @@
+{
+  "observedAt": "2026-10-21T23:00:02.227445+00:00",
+  "result": "PASS_READ_ONLY_COMPARISON",
+  "database": "ruta_fija_test",
+  "role": "rf_test",
+  "changedFields": [],
+  "historicalLedger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 6
+  },
+  "termsAcceptances": 2,
+  "historicalLedgerSha256": "e74f3024b6d49de2b264b417d2bd275b748e4f6bd3b7ab1e4d3826647df60be1",
+  "termsAcceptancesSha256": "120a3a856057c51796053a20046dd9aa628953105ace67caf4bbff2d29674d28",
+  "migrationsExecuted": false,
+  "globalCleanupExecuted": false,
+  "newPersistentAccounts": 0
+}

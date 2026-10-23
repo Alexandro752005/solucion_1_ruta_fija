@@ -1,0 +1,18 @@
+{
+    "observedAt":  "2026-10-23T02:57:52.3429739+00:00",
+    "contractVersion":  "0.7.0",
+    "boardContractVersion":  "0.7.0",
+    "decisionContractVersion":  "0.7.0",
+    "statusBoard":  "EN_CURSO",
+    "statusDecision":  "EN_CURSO",
+    "pilotEnabled":  false,
+    "humanCaseRun":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "caseStateMatches":  true,
+    "cleanupReleased":  false,
+    "fixtureTestsPermitted":  false,
+    "localLinksChecked":  69,
+    "missingLinks":  [
+
+                     ],
+    "result":  "PASS_CURRENT_COORDINATION_AND_LINKS_NOT_CLOSURE"
+}

@@ -32,6 +32,7 @@ import pe.rutafija.operation.infrastructure.AssignmentRepository;
 import pe.rutafija.organization.domain.Organization;
 import pe.rutafija.organization.infrastructure.OrganizationRepository;
 import pe.rutafija.support.NativePostgresIntegrationTest;
+import pe.rutafija.support.ApprovedConductorFixture;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -117,6 +118,8 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
         conductor = userRepository.save(user(organization, "conductor." + suffix, UserRole.CONDUCTOR));
         group = groupRepository.save(TransportGroup.active(organization, "Grupo F3.4 " + suffix, "Matriz F3.4"));
         driver = availableDriver(organization, conductor, group, "Conductor F3.4", "F34-" + suffix);
+        // Historical synthetic eligibility for operation regressions, not a real approval.
+        ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, admin, conductor, driver);
         vehicle = linkedVehicle(driver, organization, "F34" + suffix.substring(0, 5));
     }
 
@@ -183,6 +186,7 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
         AppUser otherConductor = userRepository.save(user(otherOrganization, "conductor.external", UserRole.CONDUCTOR));
         TransportGroup otherGroup = groupRepository.save(TransportGroup.active(otherOrganization, "Grupo externo", null));
         Driver otherDriver = availableDriver(otherOrganization, otherConductor, otherGroup, "Conductor externo", "EXT-001");
+        ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, otherAdmin, otherConductor, otherDriver);
         Vehicle otherVehicle = linkedVehicle(otherDriver, otherOrganization, "EXT-401");
         createMobileConfirmation(
                 otherAdmin,
@@ -271,6 +275,7 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
 
         AppUser otherConductor = userRepository.save(user(organization, "conductor.other", UserRole.CONDUCTOR));
         Driver otherDriver = availableDriver(organization, otherConductor, group, "Otro conductor", "F34-OTHER");
+        ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, admin, otherConductor, otherDriver);
         Vehicle otherVehicle = linkedVehicle(otherDriver, organization, "F34-OTH");
         AssignmentCreated sameTenantForeign = createMobileConfirmation(
                 admin,
@@ -292,6 +297,7 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
         AppUser crossConductor = userRepository.save(user(otherOrganization, "conductor.cross", UserRole.CONDUCTOR));
         TransportGroup crossGroup = groupRepository.save(TransportGroup.active(otherOrganization, "Grupo cruzado", null));
         Driver crossDriver = availableDriver(otherOrganization, crossConductor, crossGroup, "Conductor cruzado", "CROSS-001");
+        ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, crossAdmin, crossConductor, crossDriver);
         Vehicle crossVehicle = linkedVehicle(crossDriver, otherOrganization, "CRS-401");
         AssignmentCreated crossTenantForeign = createMobileConfirmation(
                 crossAdmin,
@@ -487,13 +493,15 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
     }
 
     private AppUser user(Organization targetOrganization, String localPart, UserRole role) {
-        return AppUser.organizationUser(
+        AppUser user = AppUser.organizationUser(
                 targetOrganization,
                 localPart + "@rutafija.test",
                 passwordEncoder.encode("Integration-Password-2026"),
                 role.name() + " F3.4",
                 role
         );
+        user.verifyEmail(Instant.now());
+        return user;
     }
 
     private RequestPostProcessor webToken(AppUser user) {
@@ -503,7 +511,8 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
                         .subject(user.getId().toString())
                         .claim("organizationId", user.getOrganizationId().toString())
                         .claim("email", user.getEmail())
-                        .claim("role", user.getRole().name()));
+                        .claim("role", user.getRole().name())
+                        .claim("sessionVersion", user.getSessionVersion()));
     }
 
     private RequestPostProcessor mobileToken(AppUser user, Driver targetDriver) {
@@ -514,6 +523,7 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
                         .claim("organizationId", user.getOrganizationId().toString())
                         .claim("email", user.getEmail())
                         .claim("role", UserRole.CONDUCTOR.name())
+                        .claim("sessionVersion", user.getSessionVersion())
                         .claim("sessionChannel", "MOBILE")
                         .claim("driverId", targetDriver.getId().toString()));
     }

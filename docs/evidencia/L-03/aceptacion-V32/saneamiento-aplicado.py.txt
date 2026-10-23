@@ -1,0 +1,69 @@
+from pathlib import Path
+import hashlib, json, re
+
+ROOT = Path(__file__).resolve().parents[2]
+EVIDENCE = ROOT / 'docs/evidencia/L-03'
+CLASSES = ['fleet.GroupMembershipIntegrationTest', 'qualification.DeclaredAvailabilityIntegrationTest',
+           'qualification.MaintenanceIntegrationTest', 'qualification.RouteAssignmentIntegrationTest',
+           'routing.RouteCatalogIntegrationTest', 'routing.TerminalCorroborationPolicyTest',
+           'support.L02TemporalConcurrencyTest', 'support.L03GroupSnapshotConcurrencyTest',
+           'support.L03MaintenanceSchedulingConcurrencyTest']
+
+def digest(data):
+    return hashlib.sha256(data).hexdigest()
+
+def decode(data):
+    if data.startswith(b'\xff\xfe') or data.startswith(b'\xfe\xff'):
+        return data.decode('utf-16'), 'utf-16'
+    if data.startswith(b'\xef\xbb\xbf'):
+        return data.decode('utf-8-sig'), 'utf-8-sig'
+    try:
+        return data.decode('utf-8'), 'utf-8'
+    except UnicodeDecodeError:
+        return data.decode('cp1252'), 'cp1252'
+
+def sanitize(text):
+    text, count1 = re.subn(r'\b(accessToken|refreshToken|verificationToken|password)\s*=\s*(?!\[PROTECTED|\[REDACTED)([^,\s)\]]{6,})',
+                           lambda m: m[1] + '=[REDACTED]', text)
+    text, count2 = re.subn(r'eyJ[A-Za-z0-9_.-]{10,}', '[REDACTED_GENERATED_TEST_JWT]', text)
+    return text, count1, count2
+
+paths = list(EVIDENCE.rglob('*.log')) + list(EVIDENCE.rglob('*.xml'))
+paths += list((ROOT / 'backend/target').glob('l03-*.log'))
+paths += [ROOT / 'backend/target/surefire-reports' / ('TEST-pe.rutafija.' + name + '.xml') for name in CLASSES]
+paths = sorted(set(p for p in paths if p.exists()))
+prepared = []
+for path in paths:
+    original = path.read_bytes()
+    text, encoding = decode(original)
+    replacement, dto, jwt = sanitize(text)
+    if dto or jwt:
+        prepared.append((path, original, replacement.encode(encoding), dto, jwt))
+
+journal = EVIDENCE / 'saneamiento-registros-generados.json'
+history = json.loads(journal.read_text('utf-8')) if journal.exists() else {
+    'scope': 'L-03 generated logs/XML only; original closed L-01/L-02 evidence excluded',
+    'priorPreparationInterruption': 'An earlier pass redacted some files before cp1252 decoding failed; no complete original-hash journal exists for those first redactions. This journal records the state actually observed by subsequent passes.',
+    'resultFieldsChanged': False,
+    'passes': []
+}
+entry = {'filesInspected': len(paths), 'mutationsPrepared': [
+    {'path': str(p.relative_to(ROOT)).replace('\\', '/'), 'observedBeforeSha256': digest(before),
+     'sanitizedSha256': digest(after), 'dtoValuesRedacted': dto, 'jwtFragmentsRedacted': jwt}
+    for p, before, after, dto, jwt in prepared], 'status': 'PREPARED'}
+history['passes'].append(entry)
+journal.write_text(json.dumps(history, indent=2) + '\n', 'utf-8')
+for path, original, replacement, dto, jwt in prepared:
+    if path.read_bytes() != original:
+        raise RuntimeError('File changed after sanitation preparation')
+    path.write_bytes(replacement)
+    if digest(path.read_bytes()) != digest(replacement):
+        raise RuntimeError('Sanitation hash mismatch')
+entry['status'] = 'APPLIED_AND_VERIFIED'
+for path in paths:
+    value, _ = decode(path.read_bytes())
+    if sanitize(value)[1:] != (0, 0):
+        raise RuntimeError('Unredacted generated credential pattern remains')
+entry['remainingMatchedCredentialPatterns'] = 0
+journal.write_text(json.dumps(history, indent=2) + '\n', 'utf-8')
+print(json.dumps({'filesInspected': len(paths), 'filesSanitizedThisPass': len(prepared), 'remainingMatchedCredentialPatterns': 0}))

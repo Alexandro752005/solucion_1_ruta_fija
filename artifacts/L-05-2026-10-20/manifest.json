@@ -1,0 +1,30 @@
+{
+  "lot": "L-05",
+  "localDate": "2026-10-20",
+  "scope": "FUNCTIONAL_LOCAL_ONLY_PILOT_BLOCKED",
+  "files": [
+    {
+      "path": "ruta-fija-backend-0.1.0-SNAPSHOT.jar",
+      "sha256": "2dbe7294a3df5fedfdbaad2ed9f5c875d9c71385de95a44c241b36947394469b",
+      "bytes": 91086423,
+      "origin": "backend/target/ruta-fija-backend-0.1.0-SNAPSHOT.jar"
+    },
+    {
+      "path": "app-debug.apk",
+      "sha256": "5d1fd4837d61b18ac65fe7f23f624aaabba81a45882681d98522cf31012a3b24",
+      "bytes": 185219682,
+      "origin": "artifacts/L-05-incremento-5-2026-10-20/app-debug.apk"
+    },
+    {
+      "path": "crm-development.zip",
+      "sha256": "87b4d09b31744a5c6440bf9a29bc7d48f9dd0218ec45caeafe1a9754266b4115",
+      "bytes": 1567736,
+      "origin": "frontend/dist/ruta-fija-crm/browser"
+    }
+  ],
+  "backendBuild": "PASS_CURRENT_SOURCE_AFTER_SCOPE_ERROR_FIX",
+  "crmBuild": "PASS_DEVELOPMENT_LOCAL_ONLY",
+  "apkBuild": "REUSED_VALID_INCREMENT5_DEBUG_BUILD_PRODUCTION_MOBILE_SOURCES_UNCHANGED",
+  "installed": false,
+  "deployed": false
+}

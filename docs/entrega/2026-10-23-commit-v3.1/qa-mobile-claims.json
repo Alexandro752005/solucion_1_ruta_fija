@@ -1,0 +1,3762 @@
+{
+  "reviewedAtUtc": "2026-10-23T20:48:10.631797+00:00",
+  "result": "PASS_READONLY_SOURCE_CLAIMS_REVIEW_WITH_REQUIRED_WORDING_LIMITS",
+  "reviewer": "A-MOB/A-QA",
+  "scope": "Source and installed-tool/plugin inspection only. No source changes, tests, builds, database, device, services or Git mutation. Only new unsealed delivery QA evidence written.",
+  "toolVersionsObserved": {
+    "flutter": "3.47.5",
+    "dart": "3.13.4",
+    "angularManifestLockInstalled": "22.2.3",
+    "flutterSecureStorageLockedInstalled": "10.3.4"
+  },
+  "commands": [
+    {
+      "command": "flutter --version --machine",
+      "exitCode": 0,
+      "result": "framework3.47.5 stable; dart3.13.4; flutterRootD:/dev/flutter"
+    },
+    {
+      "command": "dart --version",
+      "exitCode": 0,
+      "result": "Dart3.13.4 stable windows_x64"
+    },
+    {
+      "command": "Read-only rg/source line extraction; installed node_modules/@angular/core and pub package source read",
+      "result": "12 claims tied to exact line ranges and SHA256; missing guessed paths were corrected through file discovery, not treated as absent implementation."
+    }
+  ],
+  "claims": [
+    {
+      "id": "VERSIONS",
+      "conclusion": "Installed Flutter3.47.5 stable / Dart3.13.4; Android client pubspec sdk^3.13.4; Angular manifest, lock and installed package22.2.3.",
+      "sources": [
+        {
+          "path": "mobile/pubspec.yaml",
+          "lineStart": 1,
+          "lineEnd": 20,
+          "sha256": "160a0f2e10d89907c9fa1191667c26055b8be95040050ef37cc256a46ca71bde",
+          "excerpt": [
+            {
+              "line": 1,
+              "text": "name: ruta_fija_conductor"
+            },
+            {
+              "line": 2,
+              "text": "description: \"Cliente Android del conductor para Ruta Fija.\""
+            },
+            {
+              "line": 3,
+              "text": "publish_to: 'none'"
+            },
+            {
+              "line": 4,
+              "text": "version: 0.1.0+2"
+            },
+            {
+              "line": 5,
+              "text": ""
+            },
+            {
+              "line": 6,
+              "text": "environment:"
+            },
+            {
+              "line": 7,
+              "text": "  sdk: ^3.13.4"
+            },
+            {
+              "line": 8,
+              "text": ""
+            },
+            {
+              "line": 9,
+              "text": "dependencies:"
+            },
+            {
+              "line": 10,
+              "text": "  flutter:"
+            },
+            {
+              "line": 11,
+              "text": "    sdk: flutter"
+            },
+            {
+              "line": 12,
+              "text": "  flutter_secure_storage: ^10.3.4"
+            },
+            {
+              "line": 13,
+              "text": "  geolocator: ^14.0.3"
+            },
+            {
+              "line": 14,
+              "text": "  # Local Android codec repair: preserve measured-field presence without"
+            },
+            {
+              "line": 15,
+              "text": "  # weakening the app's accuracy validation. See third_party/.../RUTA_FIJA_PATCH.md."
+            },
+            {
+              "line": 16,
+              "text": "  geolocator_android: 5.0.3+rutafija.1"
+            },
+            {
+              "line": 17,
+              "text": "  http: ^1.6.0"
+            },
+            {
+              "line": 18,
+              "text": ""
+            },
+            {
+              "line": 19,
+              "text": "dependency_overrides:"
+            },
+            {
+              "line": 20,
+              "text": "  geolocator_android:"
+            }
+          ]
+        },
+        {
+          "path": "frontend/package.json",
+          "lineStart": 20,
+          "lineEnd": 37,
+          "sha256": "c4b8bdc21e68596f537fdb02ddf5192905ebbc3ba1e52fa723dfae8296c9e018",
+          "excerpt": [
+            {
+              "line": 20,
+              "text": "  \"dependencies\": {"
+            },
+            {
+              "line": 21,
+              "text": "    \"@angular/common\": \"22.2.3\","
+            },
+            {
+              "line": 22,
+              "text": "    \"@angular/compiler\": \"22.2.3\","
+            },
+            {
+              "line": 23,
+              "text": "    \"@angular/core\": \"22.2.3\","
+            },
+            {
+              "line": 24,
+              "text": "    \"@angular/forms\": \"22.2.3\","
+            },
+            {
+              "line": 25,
+              "text": "    \"@angular/platform-browser\": \"22.2.3\","
+            },
+            {
+              "line": 26,
+              "text": "    \"@angular/router\": \"22.2.3\","
+            },
+            {
+              "line": 27,
+              "text": "    \"rxjs\": \"7.8.2\","
+            },
+            {
+              "line": 28,
+              "text": "    \"tslib\": \"2.8.1\""
+            },
+            {
+              "line": 29,
+              "text": "  },"
+            },
+            {
+              "line": 30,
+              "text": "  \"devDependencies\": {"
+            },
+            {
+              "line": 31,
+              "text": "    \"@angular/build\": \"22.2.3\","
+            },
+            {
+              "line": 32,
+              "text": "    \"@angular/cli\": \"22.2.3\","
+            },
+            {
+              "line": 33,
+              "text": "    \"@angular/compiler-cli\": \"22.2.3\","
+            },
+            {
+              "line": 34,
+              "text": "    \"@types/node\": \"24.13.3\","
+            },
+            {
+              "line": 35,
+              "text": "    \"jsdom\": \"27.1.0\","
+            },
+            {
+              "line": 36,
+              "text": "    \"typescript\": \"6.0.3\","
+            },
+            {
+              "line": 37,
+              "text": "    \"vitest\": \"4.1.12\""
+            }
+          ]
+        },
+        {
+          "path": "frontend/node_modules/@angular/core/package.json",
+          "lineStart": 1,
+          "lineEnd": 5,
+          "sha256": "b95dba3c66336b82df2be3376338fce82cfd2f12312dc38536e3626db90b00f4",
+          "excerpt": [
+            {
+              "line": 1,
+              "text": "{"
+            },
+            {
+              "line": 2,
+              "text": "  \"name\": \"@angular/core\","
+            },
+            {
+              "line": 3,
+              "text": "  \"version\": \"22.2.3\","
+            },
+            {
+              "line": 4,
+              "text": "  \"description\": \"Angular - the core framework\","
+            },
+            {
+              "line": 5,
+              "text": "  \"author\": \"angular\","
+            }
+          ]
+        }
+      ],
+      "limits": "flutter --version --machine and dart --version were executed read-only, exit0; no test/build or network requested. Mobile package version0.1.0+2 is distinct from delivery APK version override and product V3.1."
+    },
+    {
+      "id": "CLIENT_ROLES",
+      "conclusion": "Angular CRM routes admit ADMIN/SUPER_ADMIN by role guard; Flutter authenticated model requires CONDUCTOR. Angular bootstraps AppComponent standalone; frontend guards are presentation gates, not replacement for server authorization.",
+      "sources": [
+        {
+          "path": "frontend/src/main.ts",
+          "lineStart": 1,
+          "lineEnd": 8,
+          "sha256": "ff8389105bae314304597e76209c102f58820d71a8902f2bda31bf3d4d33601c",
+          "excerpt": [
+            {
+              "line": 1,
+              "text": "import { bootstrapApplication } from '@angular/platform-browser';"
+            },
+            {
+              "line": 2,
+              "text": ""
+            },
+            {
+              "line": 3,
+              "text": "import { AppComponent } from './app/app.component';"
+            },
+            {
+              "line": 4,
+              "text": "import { appConfig } from './app/app.config';"
+            },
+            {
+              "line": 5,
+              "text": ""
+            },
+            {
+              "line": 6,
+              "text": "bootstrapApplication(AppComponent, appConfig).catch((error: unknown) => {"
+            },
+            {
+              "line": 7,
+              "text": "  console.error('No se pudo iniciar el CRM.', error);"
+            },
+            {
+              "line": 8,
+              "text": "});"
+            }
+          ]
+        },
+        {
+          "path": "frontend/src/app/app.routes.ts",
+          "lineStart": 22,
+          "lineEnd": 43,
+          "sha256": "4420c540f324ac5397e2cbe2de22780d29e6e596f06a75fcfb6241cee5d518d2",
+          "excerpt": [
+            {
+              "line": 22,
+              "text": "    path: '',"
+            },
+            {
+              "line": 23,
+              "text": "    canActivate: [authGuard],"
+            },
+            {
+              "line": 24,
+              "text": "    canActivateChild: [adminTermsGuard],"
+            },
+            {
+              "line": 25,
+              "text": "    loadComponent: () =>"
+            },
+            {
+              "line": 26,
+              "text": "      import('./layout/app-shell.component').then("
+            },
+            {
+              "line": 27,
+              "text": "        (module) => module.AppShellComponent,"
+            },
+            {
+              "line": 28,
+              "text": "      ),"
+            },
+            {
+              "line": 29,
+              "text": "    children: ["
+            },
+            {
+              "line": 30,
+              "text": "      {path:'platform-audit',title:'Auditoría de plataforma | Ruta Fija',canActivate:[roleGuard],data:{roles:['SUPER_ADMIN']},loadComponent:()=>import('./features/audit/audit.page').then(m=>m.AuditPage)},"
+            },
+            {
+              "line": 31,
+              "text": "      {path:'notices',title:'Bandeja de avisos | Ruta Fija',canActivate:[roleGuard],data:{roles:['ADMIN']},loadComponent:()=>import('./features/announcements/notices.page').then(m=>m.NoticesPage)},"
+            },
+            {
+              "line": 32,
+              "text": "      {"
+            },
+            {
+              "line": 33,
+              "text": "        path: 'platform-admins',"
+            },
+            {
+              "line": 34,
+              "text": "        title: 'Cuentas ADMIN | Ruta Fija',"
+            },
+            {
+              "line": 35,
+              "text": "        canActivate: [roleGuard],"
+            },
+            {
+              "line": 36,
+              "text": "        data: { roles: ['SUPER_ADMIN'] },"
+            },
+            {
+              "line": 37,
+              "text": "        loadComponent: () => import('./features/platform-admins/platform-admins.page').then((module) => module.PlatformAdminsPage),"
+            },
+            {
+              "line": 38,
+              "text": "      },"
+            },
+            {
+              "line": 39,
+              "text": "      {"
+            },
+            {
+              "line": 40,
+              "text": "        path: 'admin-terms',"
+            },
+            {
+              "line": 41,
+              "text": "        title: 'Términos ADMIN | Ruta Fija',"
+            },
+            {
+              "line": 42,
+              "text": "        canActivate: [roleGuard],"
+            },
+            {
+              "line": 43,
+              "text": "        data: { roles: ['ADMIN'] },"
+            }
+          ]
+        },
+        {
+          "path": "frontend/src/app/core/auth/role.guard.ts",
+          "lineStart": 7,
+          "lineEnd": 18,
+          "sha256": "b00b0a32420cb754b69bc73999a7f94cadb3ff9fcd3074f76d44a03e81dd7a40",
+          "excerpt": [
+            {
+              "line": 7,
+              "text": "export const roleGuard: CanActivateFn = (route) => {"
+            },
+            {
+              "line": 8,
+              "text": "  const session = inject(AuthSessionService);"
+            },
+            {
+              "line": 9,
+              "text": "  const router = inject(Router);"
+            },
+            {
+              "line": 10,
+              "text": "  const allowedRoles = route.data['roles'] as readonly UserRole[] | undefined;"
+            },
+            {
+              "line": 11,
+              "text": ""
+            },
+            {
+              "line": 12,
+              "text": "  if (allowedRoles === undefined || allowedRoles.length === 0) {"
+            },
+            {
+              "line": 13,
+              "text": "    return true;"
+            },
+            {
+              "line": 14,
+              "text": "  }"
+            },
+            {
+              "line": 15,
+              "text": ""
+            },
+            {
+              "line": 16,
+              "text": "  return session.hasAnyRole(allowedRoles)"
+            },
+            {
+              "line": 17,
+              "text": "    ? true"
+            },
+            {
+              "line": 18,
+              "text": "    : router.createUrlTree(['/forbidden']);"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/features/auth/domain/mobile_auth_models.dart",
+          "lineStart": 18,
+          "lineEnd": 28,
+          "sha256": "9dc2afcfd7c3576402218c61a29855bd976554b55330e28d652991fb88902b6b",
+          "excerpt": [
+            {
+              "line": 18,
+              "text": "  factory MobileAuthenticatedUser.fromJson(Map<String, dynamic> json) {"
+            },
+            {
+              "line": 19,
+              "text": "    final role = _requiredString(json, 'role');"
+            },
+            {
+              "line": 20,
+              "text": "    if (role != 'CONDUCTOR') {"
+            },
+            {
+              "line": 21,
+              "text": "      throw const FormatException('La sesión no pertenece a un conductor.');"
+            },
+            {
+              "line": 22,
+              "text": "    }"
+            },
+            {
+              "line": 23,
+              "text": ""
+            },
+            {
+              "line": 24,
+              "text": "    return MobileAuthenticatedUser("
+            },
+            {
+              "line": 25,
+              "text": "      id: _requiredString(json, 'id'),"
+            },
+            {
+              "line": 26,
+              "text": "      driverId: _requiredString(json, 'driverId'),"
+            },
+            {
+              "line": 27,
+              "text": "      fullName: _requiredString(json, 'fullName'),"
+            },
+            {
+              "line": 28,
+              "text": "      role: role,"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GPS_FOREGROUND",
+      "conclusion": "The active Flutter flow captures one currentPosition per request only while lifecycle==resumed; it pauses on background. It does not activate the Android foreground-service/ongoing-notification branch.",
+      "sources": [
+        {
+          "path": "mobile/lib/app/ruta_fija_app.dart",
+          "lineStart": 80,
+          "lineEnd": 85,
+          "sha256": "cc39dd2dfe1f52ea47c849f3f43fc4e07146c583eca6da84c6c7475a1a1d8545",
+          "excerpt": [
+            {
+              "line": 80,
+              "text": "  @override"
+            },
+            {
+              "line": 81,
+              "text": "  void didChangeAppLifecycleState(AppLifecycleState state) {"
+            },
+            {
+              "line": 82,
+              "text": "    widget.dependencies.serviceLocation?.setForeground("
+            },
+            {
+              "line": 83,
+              "text": "      state == AppLifecycleState.resumed,"
+            },
+            {
+              "line": 84,
+              "text": "    );"
+            },
+            {
+              "line": 85,
+              "text": "  }"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/features/location/data/geolocator_device_location_gateway.dart",
+          "lineStart": 7,
+          "lineEnd": 11,
+          "sha256": "fdd0334c4e9af97c2b848aaeeec402b29b4de97c8622e1ac798f3ef94729172d",
+          "excerpt": [
+            {
+              "line": 7,
+              "text": "/// One foreground fix per request, preserving the sensor's own capture timestamp."
+            },
+            {
+              "line": 8,
+              "text": "/// The service controller schedules requests; no background location service or stream is created."
+            },
+            {
+              "line": 9,
+              "text": "final class GeolocatorDeviceLocationGateway"
+            },
+            {
+              "line": 10,
+              "text": "    implements MobileDeviceLocationGateway {"
+            },
+            {
+              "line": 11,
+              "text": "  static const _captureTimeout = Duration(seconds: 15);"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/features/location/data/geolocator_device_location_gateway.dart",
+          "lineStart": 29,
+          "lineEnd": 43,
+          "sha256": "fdd0334c4e9af97c2b848aaeeec402b29b4de97c8622e1ac798f3ef94729172d",
+          "excerpt": [
+            {
+              "line": 29,
+              "text": "  Future<MobileCurrentLocation> currentPosition() async {"
+            },
+            {
+              "line": 30,
+              "text": "    try {"
+            },
+            {
+              "line": 31,
+              "text": "      final position = await Geolocator.getCurrentPosition("
+            },
+            {
+              "line": 32,
+              "text": "        locationSettings: const LocationSettings("
+            },
+            {
+              "line": 33,
+              "text": "          accuracy: LocationAccuracy.high,"
+            },
+            {
+              "line": 34,
+              "text": "          timeLimit: _captureTimeout,"
+            },
+            {
+              "line": 35,
+              "text": "        ),"
+            },
+            {
+              "line": 36,
+              "text": "      );"
+            },
+            {
+              "line": 37,
+              "text": "      return fromGeolocatorPosition(position);"
+            },
+            {
+              "line": 38,
+              "text": "    } on MobileDeviceLocationFailure {"
+            },
+            {
+              "line": 39,
+              "text": "      rethrow;"
+            },
+            {
+              "line": 40,
+              "text": "    } on TimeoutException {"
+            },
+            {
+              "line": 41,
+              "text": "      throw const MobileDeviceLocationFailure("
+            },
+            {
+              "line": 42,
+              "text": "        'No se obtuvo la ubicación a tiempo. Verifique el GPS e inténtelo nuevamente.',"
+            },
+            {
+              "line": 43,
+              "text": "        kind: MobileDeviceLocationFailureKind.timeout,"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/features/location/domain/mobile_service_location_controller.dart",
+          "lineStart": 131,
+          "lineEnd": 156,
+          "sha256": "09a4b3e1e003fc965625cfbecfdda21fbdbb943c6ace78cf60519a4343fc86d3",
+          "excerpt": [
+            {
+              "line": 131,
+              "text": "  void setForeground(bool value) {"
+            },
+            {
+              "line": 132,
+              "text": "    if (_foreground == value) return;"
+            },
+            {
+              "line": 133,
+              "text": "    _epoch++;"
+            },
+            {
+              "line": 134,
+              "text": "    _foreground = value;"
+            },
+            {
+              "line": 135,
+              "text": "    _restart();"
+            },
+            {
+              "line": 136,
+              "text": "  }"
+            },
+            {
+              "line": 137,
+              "text": ""
+            },
+            {
+              "line": 138,
+              "text": "  void _restart() {"
+            },
+            {
+              "line": 139,
+              "text": "    _timer?.cancel();"
+            },
+            {
+              "line": 140,
+              "text": "    _timer = null;"
+            },
+            {
+              "line": 141,
+              "text": "    if (_driverId == null) {"
+            },
+            {
+              "line": 142,
+              "text": "      _set(ServiceLocationPhase.idle);"
+            },
+            {
+              "line": 143,
+              "text": "      return;"
+            },
+            {
+              "line": 144,
+              "text": "    }"
+            },
+            {
+              "line": 145,
+              "text": "    if (!_foreground) {"
+            },
+            {
+              "line": 146,
+              "text": "      _set(ServiceLocationPhase.paused);"
+            },
+            {
+              "line": 147,
+              "text": "      return;"
+            },
+            {
+              "line": 148,
+              "text": "    }"
+            },
+            {
+              "line": 149,
+              "text": "    _timer = Timer.periodic(const Duration(seconds: 30), (_) {"
+            },
+            {
+              "line": 150,
+              "text": "      unawaited(tick());"
+            },
+            {
+              "line": 151,
+              "text": "    });"
+            },
+            {
+              "line": 152,
+              "text": "    unawaited(tick());"
+            },
+            {
+              "line": 153,
+              "text": "  }"
+            },
+            {
+              "line": 154,
+              "text": ""
+            },
+            {
+              "line": 155,
+              "text": "  bool _valid(int epoch) =>"
+            },
+            {
+              "line": 156,
+              "text": "      !_disposed && _foreground && _driverId != null && _epoch == epoch;"
+            }
+          ]
+        },
+        {
+          "path": "mobile/third_party/geolocator_android/android/src/main/AndroidManifest.xml",
+          "lineStart": 4,
+          "lineEnd": 10,
+          "sha256": "838469c7d027a4a50a79b331c17a2dae039be92276850324fd923b3bee263a60",
+          "excerpt": [
+            {
+              "line": 4,
+              "text": "    <application>"
+            },
+            {
+              "line": 5,
+              "text": "        <service"
+            },
+            {
+              "line": 6,
+              "text": "                android:enabled=\"true\""
+            },
+            {
+              "line": 7,
+              "text": "                android:exported=\"false\""
+            },
+            {
+              "line": 8,
+              "text": "                android:foregroundServiceType=\"location\""
+            },
+            {
+              "line": 9,
+              "text": "                android:name=\".GeolocatorLocationService\"/>"
+            },
+            {
+              "line": 10,
+              "text": "    </application>"
+            }
+          ]
+        },
+        {
+          "path": "mobile/third_party/geolocator_android/android/src/main/java/com/baseflow/geolocator/MethodCallHandlerImpl.java",
+          "lineStart": 237,
+          "lineEnd": 252,
+          "sha256": "be9092aa6725bebebf6d1ad884070abda64a4baada558c45a697390330b4a1b1",
+          "excerpt": [
+            {
+              "line": 237,
+              "text": "    LocationClient locationClient ="
+            },
+            {
+              "line": 238,
+              "text": "        geolocationManager.createLocationClient(context, forceLocationManager, locationOptions);"
+            },
+            {
+              "line": 239,
+              "text": "    pendingCurrentPositionLocationClients.put(requestId, locationClient);"
+            },
+            {
+              "line": 240,
+              "text": ""
+            },
+            {
+              "line": 241,
+              "text": "    geolocationManager.startPositionUpdates("
+            },
+            {
+              "line": 242,
+              "text": "        locationClient,"
+            },
+            {
+              "line": 243,
+              "text": "        activity,"
+            },
+            {
+              "line": 244,
+              "text": "        (Location location) -> {"
+            },
+            {
+              "line": 245,
+              "text": "          if (replySubmitted[0]) {"
+            },
+            {
+              "line": 246,
+              "text": "            return;"
+            },
+            {
+              "line": 247,
+              "text": "          }"
+            },
+            {
+              "line": 248,
+              "text": ""
+            },
+            {
+              "line": 249,
+              "text": "          replySubmitted[0] = true;"
+            },
+            {
+              "line": 250,
+              "text": "          geolocationManager.stopPositionUpdates(locationClient);"
+            },
+            {
+              "line": 251,
+              "text": "          pendingCurrentPositionLocationClients.remove(requestId);"
+            },
+            {
+              "line": 252,
+              "text": "          result.success(LocationMapper.toHashMap(location));"
+            }
+          ]
+        },
+        {
+          "path": "mobile/third_party/geolocator_android/android/src/main/java/com/baseflow/geolocator/StreamHandlerImpl.java",
+          "lineStart": 119,
+          "lineEnd": 130,
+          "sha256": "eb915fc586ebb0f017f45518e3f87219c346c8b2155b684da14ae219301e527e",
+          "excerpt": [
+            {
+              "line": 119,
+              "text": "    LocationOptions locationOptions = LocationOptions.parseArguments(map);"
+            },
+            {
+              "line": 120,
+              "text": "    ForegroundNotificationOptions foregroundNotificationOptions = null;"
+            },
+            {
+              "line": 121,
+              "text": ""
+            },
+            {
+              "line": 122,
+              "text": "    if (map != null) {"
+            },
+            {
+              "line": 123,
+              "text": "      foregroundNotificationOptions ="
+            },
+            {
+              "line": 124,
+              "text": "          ForegroundNotificationOptions.parseArguments("
+            },
+            {
+              "line": 125,
+              "text": "              (Map<String, Object>) map.get(\"foregroundNotificationConfig\"));"
+            },
+            {
+              "line": 126,
+              "text": "    }"
+            },
+            {
+              "line": 127,
+              "text": "    if (foregroundNotificationOptions != null) {"
+            },
+            {
+              "line": 128,
+              "text": "      Log.e(TAG, \"Geolocator position updates started using Android foreground service\");"
+            },
+            {
+              "line": 129,
+              "text": "      foregroundLocationService.startLocationService(forceLocationManager, locationOptions, events);"
+            },
+            {
+              "line": 130,
+              "text": "      foregroundLocationService.enableBackgroundMode(foregroundNotificationOptions);"
+            }
+          ]
+        }
+      ],
+      "limits": "The dependency declares GeolocatorLocationService; that declaration does not prove this app activates a persistent Android foreground service. No device execution in this review."
+    },
+    {
+      "id": "GPS_CADENCE",
+      "conclusion": "The controller requests immediately and schedules a nominal30s timer; it skips overlap while an attempt is pending. A sensor fix timeout is15s. Consent, permission, started own service and server state are checked before upload.",
+      "sources": [
+        {
+          "path": "mobile/lib/features/location/domain/mobile_service_location_controller.dart",
+          "lineStart": 149,
+          "lineEnd": 165,
+          "sha256": "09a4b3e1e003fc965625cfbecfdda21fbdbb943c6ace78cf60519a4343fc86d3",
+          "excerpt": [
+            {
+              "line": 149,
+              "text": "    _timer = Timer.periodic(const Duration(seconds: 30), (_) {"
+            },
+            {
+              "line": 150,
+              "text": "      unawaited(tick());"
+            },
+            {
+              "line": 151,
+              "text": "    });"
+            },
+            {
+              "line": 152,
+              "text": "    unawaited(tick());"
+            },
+            {
+              "line": 153,
+              "text": "  }"
+            },
+            {
+              "line": 154,
+              "text": ""
+            },
+            {
+              "line": 155,
+              "text": "  bool _valid(int epoch) =>"
+            },
+            {
+              "line": 156,
+              "text": "      !_disposed && _foreground && _driverId != null && _epoch == epoch;"
+            },
+            {
+              "line": 157,
+              "text": "  Future<void> tick() {"
+            },
+            {
+              "line": 158,
+              "text": "    if (_pending != null) return _pending!;"
+            },
+            {
+              "line": 159,
+              "text": "    final work = _cycle();"
+            },
+            {
+              "line": 160,
+              "text": "    _pending = work;"
+            },
+            {
+              "line": 161,
+              "text": "    unawaited("
+            },
+            {
+              "line": 162,
+              "text": "      work.whenComplete(() {"
+            },
+            {
+              "line": 163,
+              "text": "        if (identical(_pending, work)) _pending = null;"
+            },
+            {
+              "line": 164,
+              "text": "      }),"
+            },
+            {
+              "line": 165,
+              "text": "    );"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/features/location/domain/mobile_service_location_controller.dart",
+          "lineStart": 173,
+          "lineEnd": 189,
+          "sha256": "09a4b3e1e003fc965625cfbecfdda21fbdbb943c6ace78cf60519a4343fc86d3",
+          "excerpt": [
+            {
+              "line": 173,
+              "text": "      _set(ServiceLocationPhase.checking);"
+            },
+            {
+              "line": 174,
+              "text": "      final page = await _at("
+            },
+            {
+              "line": 175,
+              "text": "        ServiceLocationStep.discovery,"
+            },
+            {
+              "line": 176,
+              "text": "        () => assignments.list("
+            },
+            {
+              "line": 177,
+              "text": "          status: MobileAssignmentStatus.enServicio,"
+            },
+            {
+              "line": 178,
+              "text": "          size: 2,"
+            },
+            {
+              "line": 179,
+              "text": "        ),"
+            },
+            {
+              "line": 180,
+              "text": "      );"
+            },
+            {
+              "line": 181,
+              "text": "      if (!_valid(epoch)) return;"
+            },
+            {
+              "line": 182,
+              "text": "      final ongoing = page.items"
+            },
+            {
+              "line": 183,
+              "text": "          .where("
+            },
+            {
+              "line": 184,
+              "text": "            (a) =>"
+            },
+            {
+              "line": 185,
+              "text": "                a.driverId == _driverId &&"
+            },
+            {
+              "line": 186,
+              "text": "                a.serviceId != null &&"
+            },
+            {
+              "line": 187,
+              "text": "                a.acceptedAt != null &&"
+            },
+            {
+              "line": 188,
+              "text": "                a.startedAt != null,"
+            },
+            {
+              "line": 189,
+              "text": "          )"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/features/location/domain/mobile_service_location_controller.dart",
+          "lineStart": 213,
+          "lineEnd": 240,
+          "sha256": "09a4b3e1e003fc965625cfbecfdda21fbdbb943c6ace78cf60519a4343fc86d3",
+          "excerpt": [
+            {
+              "line": 213,
+              "text": "  Future<void> _captureAndSend(MobileAssignment a, int epoch) async {"
+            },
+            {
+              "line": 214,
+              "text": "    final profile = await _at(ServiceLocationStep.profile, driver.profile);"
+            },
+            {
+              "line": 215,
+              "text": "    if (!_valid(epoch)) return;"
+            },
+            {
+              "line": 216,
+              "text": "    if (profile.driverId != _driverId ||"
+            },
+            {
+              "line": 217,
+              "text": "        profile.availabilityStatus != MobileAvailabilityStatus.enServicio) {"
+            },
+            {
+              "line": 218,
+              "text": "      _active = null;"
+            },
+            {
+              "line": 219,
+              "text": "      _set(ServiceLocationPhase.idle);"
+            },
+            {
+              "line": 220,
+              "text": "      return;"
+            },
+            {
+              "line": 221,
+              "text": "    }"
+            },
+            {
+              "line": 222,
+              "text": "    if (!profile.locationConsent) {"
+            },
+            {
+              "line": 223,
+              "text": "      _set(ServiceLocationPhase.noConsent);"
+            },
+            {
+              "line": 224,
+              "text": "      return;"
+            },
+            {
+              "line": 225,
+              "text": "    }"
+            },
+            {
+              "line": 226,
+              "text": "    if (!await _at("
+            },
+            {
+              "line": 227,
+              "text": "          ServiceLocationStep.permission,"
+            },
+            {
+              "line": 228,
+              "text": "          device.isLocationServiceEnabled,"
+            },
+            {
+              "line": 229,
+              "text": "        ) ||"
+            },
+            {
+              "line": 230,
+              "text": "        !(await _at("
+            },
+            {
+              "line": 231,
+              "text": "          ServiceLocationStep.permission,"
+            },
+            {
+              "line": 232,
+              "text": "          device.checkPermission,"
+            },
+            {
+              "line": 233,
+              "text": "        )).grantsForeground) {"
+            },
+            {
+              "line": 234,
+              "text": "      if (_valid(epoch)) _set(ServiceLocationPhase.noPermission);"
+            },
+            {
+              "line": 235,
+              "text": "      return;"
+            },
+            {
+              "line": 236,
+              "text": "    }"
+            },
+            {
+              "line": 237,
+              "text": "    if (!_valid(epoch)) return;"
+            },
+            {
+              "line": 238,
+              "text": "    final point = await _at("
+            },
+            {
+              "line": 239,
+              "text": "      ServiceLocationStep.capture,"
+            },
+            {
+              "line": 240,
+              "text": "      device.currentPosition,"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/features/location/data/geolocator_device_location_gateway.dart",
+          "lineStart": 11,
+          "lineEnd": 11,
+          "sha256": "fdd0334c4e9af97c2b848aaeeec402b29b4de97c8622e1ac798f3ef94729172d",
+          "excerpt": [
+            {
+              "line": 11,
+              "text": "  static const _captureTimeout = Duration(seconds: 15);"
+            }
+          ]
+        }
+      ],
+      "limits": "30s is scheduling intent, not a guaranteed capture/upload interval or a continuous background trace; discovery/profile/network can delay or reject an attempt."
+    },
+    {
+      "id": "GPS_NO_FIX",
+      "conclusion": "Signal-degraded means no recent confirmed sensor timestamp strictly older than120s (or initial watch with no confirmed fix), with distinct permission/consent/network states. The UI warns that service continues. It does not create synthetic coordinates and does not close the business service.",
+      "sources": [
+        {
+          "path": "mobile/lib/features/location/domain/mobile_service_location_controller.dart",
+          "lineStart": 90,
+          "lineEnd": 115,
+          "sha256": "09a4b3e1e003fc965625cfbecfdda21fbdbb943c6ace78cf60519a4343fc86d3",
+          "excerpt": [
+            {
+              "line": 90,
+              "text": "  DateTime? _lastCaptureAt;"
+            },
+            {
+              "line": 91,
+              "text": "  DateTime? _signalWatchStartedAt;"
+            },
+            {
+              "line": 92,
+              "text": "  static const maximumCaptureAge = Duration(seconds: 120);"
+            },
+            {
+              "line": 93,
+              "text": "  ServiceLocationPhase get phase => _phase;"
+            },
+            {
+              "line": 94,
+              "text": "  ServiceLocationDiagnostic? get diagnostic => _diagnostic;"
+            },
+            {
+              "line": 95,
+              "text": "  DateTime? get lastCaptureAt => _lastCaptureAt;"
+            },
+            {
+              "line": 96,
+              "text": "  bool get hasActiveService => _active != null;"
+            },
+            {
+              "line": 97,
+              "text": "  String? get activeAssignmentId => _active?.id;"
+            },
+            {
+              "line": 98,
+              "text": "  Duration? get captureAge =>"
+            },
+            {
+              "line": 99,
+              "text": "      _lastCaptureAt == null ? null : clock().difference(_lastCaptureAt!);"
+            },
+            {
+              "line": 100,
+              "text": ""
+            },
+            {
+              "line": 101,
+              "text": "  /// A freshness warning, not proof that the phone lost satellite reception."
+            },
+            {
+              "line": 102,
+              "text": "  /// Permission, consent and network failures keep their own distinct states."
+            },
+            {
+              "line": 103,
+              "text": "  bool get isSignalDegraded {"
+            },
+            {
+              "line": 104,
+              "text": "    if (!_foreground ||"
+            },
+            {
+              "line": 105,
+              "text": "        _active == null ||"
+            },
+            {
+              "line": 106,
+              "text": "        _phase == ServiceLocationPhase.idle ||"
+            },
+            {
+              "line": 107,
+              "text": "        _phase == ServiceLocationPhase.noConsent ||"
+            },
+            {
+              "line": 108,
+              "text": "        _phase == ServiceLocationPhase.noPermission ||"
+            },
+            {
+              "line": 109,
+              "text": "        _phase == ServiceLocationPhase.noConnection ||"
+            },
+            {
+              "line": 110,
+              "text": "        _phase == ServiceLocationPhase.paused ||"
+            },
+            {
+              "line": 111,
+              "text": "        _diagnostic?.kind == ServiceLocationFailureKind.network) {"
+            },
+            {
+              "line": 112,
+              "text": "      return false;"
+            },
+            {
+              "line": 113,
+              "text": "    }"
+            },
+            {
+              "line": 114,
+              "text": "    final since = _lastCaptureAt ?? _signalWatchStartedAt;"
+            },
+            {
+              "line": 115,
+              "text": "    return since != null && clock().difference(since) > maximumCaptureAge;"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/features/location/domain/mobile_service_location_controller.dart",
+          "lineStart": 256,
+          "lineEnd": 262,
+          "sha256": "09a4b3e1e003fc965625cfbecfdda21fbdbb943c6ace78cf60519a4343fc86d3",
+          "excerpt": [
+            {
+              "line": 256,
+              "text": "    await _at("
+            },
+            {
+              "line": 257,
+              "text": "      ServiceLocationStep.upload,"
+            },
+            {
+              "line": 258,
+              "text": "      () => driver.upsertCurrentLocation(point),"
+            },
+            {
+              "line": 259,
+              "text": "    );"
+            },
+            {
+              "line": 260,
+              "text": "    if (!_valid(epoch)) return;"
+            },
+            {
+              "line": 261,
+              "text": "    _lastCaptureAt = point.capturedAt;"
+            },
+            {
+              "line": 262,
+              "text": "    _set(ServiceLocationPhase.sharing);"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/features/location/presentation/service_location_status.dart",
+          "lineStart": 44,
+          "lineEnd": 48,
+          "sha256": "ff2a9ef44dc8103182599efda0bb83dc25e747406a6354ec7c72d54f75af7d4b",
+          "excerpt": [
+            {
+              "line": 44,
+              "text": "      if (controller.isSignalDegraded) {"
+            },
+            {
+              "line": 45,
+              "text": "        state ="
+            },
+            {
+              "line": 46,
+              "text": "            'GPS sin captura reciente: señal degradada. '"
+            },
+            {
+              "line": 47,
+              "text": "            'El servicio continúa; mantenga la app visible y revise la señal. '"
+            },
+            {
+              "line": 48,
+              "text": "            '$state';"
+            }
+          ]
+        },
+        {
+          "path": "mobile/test/features/location/l08_prolonged_no_fix_test.dart",
+          "lineStart": 14,
+          "lineEnd": 32,
+          "sha256": "3beb9122ec8270807b01587e35976137309790456b720df13b4191c7b3724c5a",
+          "excerpt": [
+            {
+              "line": 14,
+              "text": "// local simulations; they do not prove satellite signal loss on the POCO."
+            },
+            {
+              "line": 15,
+              "text": "void main() {"
+            },
+            {
+              "line": 16,
+              "text": "  testWidgets("
+            },
+            {
+              "line": 17,
+              "text": "    'prolonged missing fixes warn strictly after120s without replacing the active service or inventing points',"
+            },
+            {
+              "line": 18,
+              "text": "    (tester) async {"
+            },
+            {
+              "line": 19,
+              "text": "      final h = _Harness(tester);"
+            },
+            {
+              "line": 20,
+              "text": "      await h.start();"
+            },
+            {
+              "line": 21,
+              "text": "      final first = h.driver.uploaded.single;"
+            },
+            {
+              "line": 22,
+              "text": "      h.device.noFix = true;"
+            },
+            {
+              "line": 23,
+              "text": ""
+            },
+            {
+              "line": 24,
+              "text": "      for (var second = 30; second <= 120; second += 30) {"
+            },
+            {
+              "line": 25,
+              "text": "        await tester.pump(const Duration(seconds: 30));"
+            },
+            {
+              "line": 26,
+              "text": "        expect(h.controller.hasActiveService, isTrue);"
+            },
+            {
+              "line": 27,
+              "text": "        expect(h.controller.isSignalDegraded, isFalse);"
+            },
+            {
+              "line": 28,
+              "text": "        expect(h.driver.uploaded, [first]);"
+            },
+            {
+              "line": 29,
+              "text": "      }"
+            },
+            {
+              "line": 30,
+              "text": "      expect(h.controller.diagnostic?.kind, ServiceLocationFailureKind.timeout);"
+            },
+            {
+              "line": 31,
+              "text": "      await tester.pump(const Duration(seconds: 1));"
+            },
+            {
+              "line": 32,
+              "text": "      await h.controller.tick();"
+            }
+          ]
+        },
+        {
+          "path": "mobile/test/features/location/l08_prolonged_no_fix_test.dart",
+          "lineStart": 69,
+          "lineEnd": 88,
+          "sha256": "3beb9122ec8270807b01587e35976137309790456b720df13b4191c7b3724c5a",
+          "excerpt": [
+            {
+              "line": 69,
+              "text": "  );"
+            },
+            {
+              "line": 70,
+              "text": ""
+            },
+            {
+              "line": 71,
+              "text": "  testWidgets('no initial fix also becomes degraded and never fabricates0,0', ("
+            },
+            {
+              "line": 72,
+              "text": "    tester,"
+            },
+            {
+              "line": 73,
+              "text": "  ) async {"
+            },
+            {
+              "line": 74,
+              "text": "    final h = _Harness(tester)..device.noFix = true;"
+            },
+            {
+              "line": 75,
+              "text": "    await h.start();"
+            },
+            {
+              "line": 76,
+              "text": "    for (var second = 30; second <= 120; second += 30) {"
+            },
+            {
+              "line": 77,
+              "text": "      await tester.pump(const Duration(seconds: 30));"
+            },
+            {
+              "line": 78,
+              "text": "    }"
+            },
+            {
+              "line": 79,
+              "text": "    expect(h.controller.isSignalDegraded, isFalse);"
+            },
+            {
+              "line": 80,
+              "text": "    await tester.pump(const Duration(seconds: 1));"
+            },
+            {
+              "line": 81,
+              "text": "    await h.controller.tick();"
+            },
+            {
+              "line": 82,
+              "text": "    await tester.pump();"
+            },
+            {
+              "line": 83,
+              "text": "    expect(h.controller.isSignalDegraded, isTrue);"
+            },
+            {
+              "line": 84,
+              "text": "    expect(h.controller.lastCaptureAt, isNull);"
+            },
+            {
+              "line": 85,
+              "text": "    expect(h.driver.uploaded, isEmpty);"
+            },
+            {
+              "line": 86,
+              "text": "    expect(h.controller.hasActiveService, isTrue);"
+            },
+            {
+              "line": 87,
+              "text": "    expect(find.textContaining('Sin captura confirmada'), findsOneWidget);"
+            },
+            {
+              "line": 88,
+              "text": "    expect(find.textContaining('señal degradada'), findsOneWidget);"
+            }
+          ]
+        }
+      ],
+      "limits": "This is freshness detection, not independent proof of physical satellite loss. UI refresh is event/timer-driven; do not promise a hard150s wall-clock deadline when work can be pending. Historical deterministic tests remain separate from physical no-fix observation."
+    },
+    {
+      "id": "SECURE_SESSION",
+      "conclusion": "Only the rotating refresh token is persisted through MobileSecureTokenStore namespacepe.rutafija.conductor.session; access token is held in memory and cleared on local logout.",
+      "sources": [
+        {
+          "path": "mobile/lib/core/session/mobile_secure_token_store.dart",
+          "lineStart": 11,
+          "lineEnd": 35,
+          "sha256": "a79d2f24710570ba9ccd53afe5271bdfb72b8ac64405f0699e4eb03319013f92",
+          "excerpt": [
+            {
+              "line": 11,
+              "text": "/// Persists only the rotating refresh token in Android's protected storage."
+            },
+            {
+              "line": 12,
+              "text": "final class MobileSecureTokenStore implements MobileRefreshTokenStore {"
+            },
+            {
+              "line": 13,
+              "text": "  MobileSecureTokenStore({FlutterSecureStorage? storage})"
+            },
+            {
+              "line": 14,
+              "text": "    : _storage ="
+            },
+            {
+              "line": 15,
+              "text": "          storage ??"
+            },
+            {
+              "line": 16,
+              "text": "          const FlutterSecureStorage("
+            },
+            {
+              "line": 17,
+              "text": "            aOptions: AndroidOptions("
+            },
+            {
+              "line": 18,
+              "text": "              storageNamespace: 'pe.rutafija.conductor.session',"
+            },
+            {
+              "line": 19,
+              "text": "            ),"
+            },
+            {
+              "line": 20,
+              "text": "          );"
+            },
+            {
+              "line": 21,
+              "text": ""
+            },
+            {
+              "line": 22,
+              "text": "  static const _refreshTokenKey = 'mobile_refresh_token';"
+            },
+            {
+              "line": 23,
+              "text": ""
+            },
+            {
+              "line": 24,
+              "text": "  final FlutterSecureStorage _storage;"
+            },
+            {
+              "line": 25,
+              "text": ""
+            },
+            {
+              "line": 26,
+              "text": "  @override"
+            },
+            {
+              "line": 27,
+              "text": "  Future<String?> readRefreshToken() => _storage.read(key: _refreshTokenKey);"
+            },
+            {
+              "line": 28,
+              "text": ""
+            },
+            {
+              "line": 29,
+              "text": "  @override"
+            },
+            {
+              "line": 30,
+              "text": "  Future<void> writeRefreshToken(String value) =>"
+            },
+            {
+              "line": 31,
+              "text": "      _storage.write(key: _refreshTokenKey, value: value);"
+            },
+            {
+              "line": 32,
+              "text": ""
+            },
+            {
+              "line": 33,
+              "text": "  @override"
+            },
+            {
+              "line": 34,
+              "text": "  Future<void> clear() => _storage.delete(key: _refreshTokenKey);"
+            },
+            {
+              "line": 35,
+              "text": "}"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/core/session/mobile_session_controller.dart",
+          "lineStart": 294,
+          "lineEnd": 320,
+          "sha256": "c686fabf275661781e22b136e1bd3cbf3f8ae5fb6df975ddb8f0967dc4d85268",
+          "excerpt": [
+            {
+              "line": 294,
+              "text": "  Future<void> _establish(MobileAuthSession session, int generation) async {"
+            },
+            {
+              "line": 295,
+              "text": "    if (!_current(generation)) return;"
+            },
+            {
+              "line": 296,
+              "text": "    // A successful server rotation already exists even while its OS write waits."
+            },
+            {
+              "line": 297,
+              "text": "    _refreshTokenForRevocation = session.refreshToken;"
+            },
+            {
+              "line": 298,
+              "text": "    await _serializeTokenMutation(() async {"
+            },
+            {
+              "line": 299,
+              "text": "      if (!_current(generation)) return;"
+            },
+            {
+              "line": 300,
+              "text": "      await _tokenStore.writeRefreshToken(session.refreshToken);"
+            },
+            {
+              "line": 301,
+              "text": "      if (!_current(generation)) await _tokenStore.clear();"
+            },
+            {
+              "line": 302,
+              "text": "    });"
+            },
+            {
+              "line": 303,
+              "text": "    if (!_current(generation)) return;"
+            },
+            {
+              "line": 304,
+              "text": "    _accessToken = session.accessToken;"
+            },
+            {
+              "line": 305,
+              "text": "    _setState("
+            },
+            {
+              "line": 306,
+              "text": "      MobileSessionState.authenticated("
+            },
+            {
+              "line": 307,
+              "text": "        session.user,"
+            },
+            {
+              "line": 308,
+              "text": "        accessScope: session.accessScope,"
+            },
+            {
+              "line": 309,
+              "text": "      ),"
+            },
+            {
+              "line": 310,
+              "text": "    );"
+            },
+            {
+              "line": 311,
+              "text": "  }"
+            },
+            {
+              "line": 312,
+              "text": ""
+            },
+            {
+              "line": 313,
+              "text": "  Future<void> _clearLocalSession() async {"
+            },
+            {
+              "line": 314,
+              "text": "    final user = _state.user;"
+            },
+            {
+              "line": 315,
+              "text": "    _refreshTokenForRevocation = null;"
+            },
+            {
+              "line": 316,
+              "text": "    ++_generation;"
+            },
+            {
+              "line": 317,
+              "text": "    _accessToken = null;"
+            },
+            {
+              "line": 318,
+              "text": "    _setState(const MobileSessionState.unauthenticated());"
+            },
+            {
+              "line": 319,
+              "text": "    try {"
+            },
+            {
+              "line": 320,
+              "text": "      await _serializeTokenMutation(_tokenStore.clear);"
+            }
+          ]
+        }
+      ],
+      "limits": "No device Keystore or stored-token contents were accessed; plugin-source review establishes configured behavior, not hardware attestation."
+    },
+    {
+      "id": "ANDROID_STORAGE_CIPHER",
+      "conclusion": "flutter_secure_storage10.3.4 default AndroidOptions uses custom AES/GCM/NoPadding with RSA-OAEP key wrapping through AndroidKeyStore. Current RSA-wrapped GCM implementation generates16-byte AES key (AES128), tag128bits. EncryptedSharedPreferences defaultfalse is deprecated.",
+      "sources": [
+        {
+          "path": "mobile/pubspec.lock",
+          "lineStart": 121,
+          "lineEnd": 128,
+          "sha256": "f96c9ec8643009233c1799752bd7672bd6c630c1aa8a9dd57ba38b06a164e396",
+          "excerpt": [
+            {
+              "line": 121,
+              "text": "  flutter_secure_storage:"
+            },
+            {
+              "line": 122,
+              "text": "    dependency: \"direct main\""
+            },
+            {
+              "line": 123,
+              "text": "    description:"
+            },
+            {
+              "line": 124,
+              "text": "      name: flutter_secure_storage"
+            },
+            {
+              "line": 125,
+              "text": "      sha256: fe638107c5f69119156ada2db5a57734385fac3f64430bd7252a00d3ead2ca4b"
+            },
+            {
+              "line": 126,
+              "text": "      url: \"https://pub.dev\""
+            },
+            {
+              "line": 127,
+              "text": "    source: hosted"
+            },
+            {
+              "line": 128,
+              "text": "    version: \"10.3.4\""
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\Ale\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\flutter_secure_storage-10.3.4\\lib\\options\\android_options.dart",
+          "lineStart": 58,
+          "lineEnd": 87,
+          "sha256": "269ec3bca33beb5e6a38090a801ae57558688d993016d4c1dce20914ebc8eb07",
+          "excerpt": [
+            {
+              "line": 58,
+              "text": "  /// Standard secure storage using AES-GCM with RSA OAEP key wrapping."
+            },
+            {
+              "line": 59,
+              "text": "  ///"
+            },
+            {
+              "line": 60,
+              "text": "  /// This is the default constructor with strong security:"
+            },
+            {
+              "line": 61,
+              "text": "  /// - RSA/ECB/OAEPWithSHA-256AndMGF1Padding for key protection"
+            },
+            {
+              "line": 62,
+              "text": "  /// - AES/GCM/NoPadding for data encryption"
+            },
+            {
+              "line": 63,
+              "text": "  /// - No biometric authentication required"
+            },
+            {
+              "line": 64,
+              "text": "  /// - API 23+ (Android 6.0+)"
+            },
+            {
+              "line": 65,
+              "text": "  ///"
+            },
+            {
+              "line": 66,
+              "text": "  /// For biometric authentication, use `AndroidOptions.biometric()`."
+            },
+            {
+              "line": 67,
+              "text": "  ///"
+            },
+            {
+              "line": 68,
+              "text": "  /// Advanced users can customize cipher algorithms for specific use cases."
+            },
+            {
+              "line": 69,
+              "text": "  /// Valid combinations:"
+            },
+            {
+              "line": 70,
+              "text": "  /// - AES_CBC_PKCS7Padding storage + any key cipher"
+            },
+            {
+              "line": 71,
+              "text": "  /// - AES_GCM_NoPadding storage + RSA key ciphers (standard RSA wrapping)"
+            },
+            {
+              "line": 72,
+              "text": "  /// - AES_GCM_NoPadding storage + AES_GCM_NoPadding key"
+            },
+            {
+              "line": 73,
+              "text": "  ///   (KeyStore-based, supports biometrics)"
+            },
+            {
+              "line": 74,
+              "text": "  const AndroidOptions({"
+            },
+            {
+              "line": 75,
+              "text": "    @Deprecated('EncryptedSharedPreferences is deprecated and will be '"
+            },
+            {
+              "line": 76,
+              "text": "        'removed in v11. The Jetpack Security library is deprecated by Google. '"
+            },
+            {
+              "line": 77,
+              "text": "        'Your data will be automatically migrated to custom ciphers on first '"
+            },
+            {
+              "line": 78,
+              "text": "        'access. Remove this parameter - it will be ignored.')"
+            },
+            {
+              "line": 79,
+              "text": "    bool encryptedSharedPreferences = false,"
+            },
+            {
+              "line": 80,
+              "text": "    bool resetOnError = true,"
+            },
+            {
+              "line": 81,
+              "text": "    bool migrateOnAlgorithmChange = true,"
+            },
+            {
+              "line": 82,
+              "text": "    bool migrateWithBackup = false,"
+            },
+            {
+              "line": 83,
+              "text": "    bool enforceBiometrics = false,"
+            },
+            {
+              "line": 84,
+              "text": "    KeyCipherAlgorithm keyCipherAlgorithm ="
+            },
+            {
+              "line": 85,
+              "text": "        KeyCipherAlgorithm.RSA_ECB_OAEPwithSHA_256andMGF1Padding,"
+            },
+            {
+              "line": 86,
+              "text": "    StorageCipherAlgorithm storageCipherAlgorithm ="
+            },
+            {
+              "line": 87,
+              "text": "        StorageCipherAlgorithm.AES_GCM_NoPadding,"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\Ale\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\flutter_secure_storage-10.3.4\\android\\src\\main\\java\\com\\it_nomads\\fluttersecurestorage\\ciphers\\StorageCipherFactory.java",
+          "lineStart": 108,
+          "lineEnd": 118,
+          "sha256": "21307a7ec1c941bd43d36a816882e923ef686e971a6d553254d16fbef8a855f0",
+          "excerpt": [
+            {
+              "line": 108,
+              "text": "    /* package */ StorageCipher createStorageCipher(Context context, KeyCipher keyCipher,"
+            },
+            {
+              "line": 109,
+              "text": "                                               Cipher cipher, StorageCipherAlgorithm algorithm) throws Exception {"
+            },
+            {
+              "line": 110,
+              "text": "        // For AES_GCM_NoPadding, choose implementation based on KeyCipher type"
+            },
+            {
+              "line": 111,
+              "text": "        if (algorithm == StorageCipherAlgorithm.AES_GCM_NoPadding) {"
+            },
+            {
+              "line": 112,
+              "text": "            if (isKeyStoreKeyCipher(keyCipher)) {"
+            },
+            {
+              "line": 113,
+              "text": "                // Use KeyStore-based implementation (biometric/PIN auth capable)"
+            },
+            {
+              "line": 114,
+              "text": "                return new StorageCipherImplementationAES23(context, keyCipher, cipher, config);"
+            },
+            {
+              "line": 115,
+              "text": "            } else {"
+            },
+            {
+              "line": 116,
+              "text": "                // Use RSA-wrapped implementation (standard secure storage)"
+            },
+            {
+              "line": 117,
+              "text": "                return new StorageCipherImplementationGCM(context, keyCipher, cipher, config);"
+            },
+            {
+              "line": 118,
+              "text": "            }"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\Ale\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\flutter_secure_storage-10.3.4\\android\\src\\main\\java\\com\\it_nomads\\fluttersecurestorage\\ciphers\\StorageCipherImplementationGCM.java",
+          "lineStart": 17,
+          "lineEnd": 20,
+          "sha256": "8b1d4f051dd5f14ebfccd375b235de1aaab9e4854aa800832cef94833aa3585b",
+          "excerpt": [
+            {
+              "line": 17,
+              "text": "public class StorageCipherImplementationGCM implements StorageCipher {"
+            },
+            {
+              "line": 18,
+              "text": "    private static final int keySize = 16;"
+            },
+            {
+              "line": 19,
+              "text": "    private static final int AUTHENTICATION_TAG_SIZE = 128;"
+            },
+            {
+              "line": 20,
+              "text": "    private static final String KEY_ALGORITHM = \"AES\";"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\Ale\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\flutter_secure_storage-10.3.4\\android\\src\\main\\java\\com\\it_nomads\\fluttersecurestorage\\ciphers\\StorageCipherImplementationGCM.java",
+          "lineStart": 58,
+          "lineEnd": 65,
+          "sha256": "8b1d4f051dd5f14ebfccd375b235de1aaab9e4854aa800832cef94833aa3585b",
+          "excerpt": [
+            {
+              "line": 58,
+              "text": "        // No stored key - generate new one (first initialization)"
+            },
+            {
+              "line": 59,
+              "text": "        byte[] key = new byte[keySize];"
+            },
+            {
+              "line": 60,
+              "text": "        secureRandom.nextBytes(key);"
+            },
+            {
+              "line": 61,
+              "text": "        secretKey = new SecretKeySpec(key, KEY_ALGORITHM);"
+            },
+            {
+              "line": 62,
+              "text": ""
+            },
+            {
+              "line": 63,
+              "text": "        byte[] encryptedKey = rsaCipher.wrap(secretKey);"
+            },
+            {
+              "line": 64,
+              "text": "        editor.putString(SHARED_PREFERENCES_KEY, Base64.encodeToString(encryptedKey, Base64.DEFAULT));"
+            },
+            {
+              "line": 65,
+              "text": "        editor.apply();"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\Ale\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\flutter_secure_storage-10.3.4\\android\\src\\main\\java\\com\\it_nomads\\fluttersecurestorage\\ciphers\\KeyCipherImplementationRSA18.java",
+          "lineStart": 26,
+          "lineEnd": 39,
+          "sha256": "846cf0176c8ad8531648114bffbe2cf02caf638a75c26fa2960903b4f60cc393",
+          "excerpt": [
+            {
+              "line": 26,
+              "text": "class KeyCipherImplementationRSA18 implements KeyCipher {"
+            },
+            {
+              "line": 27,
+              "text": ""
+            },
+            {
+              "line": 28,
+              "text": "    private static final String TAG = \"RSACipher18\";"
+            },
+            {
+              "line": 29,
+              "text": "    private static final String KEYSTORE_PROVIDER_ANDROID = \"AndroidKeyStore\";"
+            },
+            {
+              "line": 30,
+              "text": "    private static final String TYPE_RSA = \"RSA\";"
+            },
+            {
+              "line": 31,
+              "text": "    protected final String keyAlias;"
+            },
+            {
+              "line": 32,
+              "text": "    protected final Context context;"
+            },
+            {
+              "line": 33,
+              "text": "    protected final FlutterSecureStorageConfig config;"
+            },
+            {
+              "line": 34,
+              "text": ""
+            },
+            {
+              "line": 35,
+              "text": "    public KeyCipherImplementationRSA18(Context context, FlutterSecureStorageConfig config) throws Exception {"
+            },
+            {
+              "line": 36,
+              "text": "        this.context = context;"
+            },
+            {
+              "line": 37,
+              "text": "        this.config = config;"
+            },
+            {
+              "line": 38,
+              "text": "        keyAlias = createKeyAlias();"
+            },
+            {
+              "line": 39,
+              "text": "        createRSAKeysIfNeeded(context);"
+            }
+          ]
+        },
+        {
+          "path": "C:\\Users\\Ale\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\flutter_secure_storage-10.3.4\\android\\src\\main\\java\\com\\it_nomads\\fluttersecurestorage\\ciphers\\KeyCipherImplementationRSAOAEP.java",
+          "lineStart": 47,
+          "lineEnd": 54,
+          "sha256": "4b9a921c528ba576dc40c42ff597ea7ada57fee199aefefc23e672fbeb88efdd",
+          "excerpt": [
+            {
+              "line": 47,
+              "text": "    @Override"
+            },
+            {
+              "line": 48,
+              "text": "    protected Cipher getRSACipher() throws Exception {"
+            },
+            {
+              "line": 49,
+              "text": "        return Cipher.getInstance(\"RSA/ECB/OAEPPadding\", \"AndroidKeyStoreBCWorkaround\");"
+            },
+            {
+              "line": 50,
+              "text": "    }"
+            },
+            {
+              "line": 51,
+              "text": ""
+            },
+            {
+              "line": 52,
+              "text": "    protected AlgorithmParameterSpec getAlgorithmParameterSpec() {"
+            },
+            {
+              "line": 53,
+              "text": "        return new OAEPParameterSpec(\"SHA-256\", \"MGF1\", MGF1ParameterSpec.SHA1, PSource.PSpecified.DEFAULT);"
+            },
+            {
+              "line": 54,
+              "text": "    }"
+            }
+          ]
+        }
+      ],
+      "limits": "Do not claim token AES256, Jetpack EncryptedSharedPreferences, biometrics, StrongBox or hardware-backed key attestation. Backup AES256-GCM is a different subsystem. Existing previously migrated data is not inspected here. OAEP source explicitly uses SHA256 digest with MGF1SHA1."
+    },
+    {
+      "id": "IDEMPOTENCY",
+      "conclusion": "Assignment commands send clientEventId/version/occurredAt in JSON; server emits X-Idempotent-Replay response header, which Flutter reads case-insensitively. Onboarding uses a request Idempotency-Key header. Correlation ID is a separate trace header.",
+      "sources": [
+        {
+          "path": "mobile/lib/features/assignments/domain/mobile_assignment_models.dart",
+          "lineStart": 239,
+          "lineEnd": 251,
+          "sha256": "e3749e0c28269b3561c12058401c723644ba502d1f288e26abf264194773c7cb",
+          "excerpt": [
+            {
+              "line": 239,
+              "text": "  Map<String, Object?> toRequestBody() {"
+            },
+            {
+              "line": 240,
+              "text": "    final body = <String, Object?>{"
+            },
+            {
+              "line": 241,
+              "text": "      'clientEventId': clientEventId,"
+            },
+            {
+              "line": 242,
+              "text": "      'version': version,"
+            },
+            {
+              "line": 243,
+              "text": "      'occurredAt': occurredAt.toUtc().toIso8601String(),"
+            },
+            {
+              "line": 244,
+              "text": "    };"
+            },
+            {
+              "line": 245,
+              "text": "    final reason = rejectionReason?.trim();"
+            },
+            {
+              "line": 246,
+              "text": "    if (command == MobileAssignmentCommandType.reject &&"
+            },
+            {
+              "line": 247,
+              "text": "        reason != null &&"
+            },
+            {
+              "line": 248,
+              "text": "        reason.isNotEmpty) {"
+            },
+            {
+              "line": 249,
+              "text": "      body['reason'] = reason;"
+            },
+            {
+              "line": 250,
+              "text": "    }"
+            },
+            {
+              "line": 251,
+              "text": "    return body;"
+            }
+          ]
+        },
+        {
+          "path": "backend/src/main/java/pe/rutafija/operation/api/MobileAssignmentController.java",
+          "lineStart": 114,
+          "lineEnd": 118,
+          "sha256": "887c5b3663fba2803ded8d89f0f8264875504490fbcca1b2dd7783d5ee5772ab",
+          "excerpt": [
+            {
+              "line": 114,
+              "text": "    private ResponseEntity<AssignmentResponse> commandResponse(MobileCommandExecution<AssignmentResponse> result) {"
+            },
+            {
+              "line": 115,
+              "text": "        return ResponseEntity.ok()"
+            },
+            {
+              "line": 116,
+              "text": "                .cacheControl(CacheControl.noStore())"
+            },
+            {
+              "line": 117,
+              "text": "                .header(\"X-Idempotent-Replay\", Boolean.toString(result.replayed()))"
+            },
+            {
+              "line": 118,
+              "text": "                .body(result.value());"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/features/assignments/data/mobile_assignment_repository.dart",
+          "lineStart": 295,
+          "lineEnd": 311,
+          "sha256": "6481f93895b6aad9cea75387d9a77bdec08b0b5ce86a0f5f4ffec3a30376abb1",
+          "excerpt": [
+            {
+              "line": 295,
+              "text": "    try {"
+            },
+            {
+              "line": 296,
+              "text": "      final body = command.toRequestBody();"
+            },
+            {
+              "line": 297,
+              "text": "      if (gps != null) body['gps'] = gps;"
+            },
+            {
+              "line": 298,
+              "text": "      final response = await _apiClient.postObjectResponse("
+            },
+            {
+              "line": 299,
+              "text": "        'mobile/assignments/${command.assignmentId}/${command.command.endpointSegment}',"
+            },
+            {
+              "line": 300,
+              "text": "        body,"
+            },
+            {
+              "line": 301,
+              "text": "      );"
+            },
+            {
+              "line": 302,
+              "text": "      final assignment = MobileAssignment.fromJson(response.object);"
+            },
+            {
+              "line": 303,
+              "text": "      onStateChanged?.call(assignment);"
+            },
+            {
+              "line": 304,
+              "text": "      final replayed ="
+            },
+            {
+              "line": 305,
+              "text": "          response.header('x-idempotent-replay')?.toLowerCase() == 'true';"
+            },
+            {
+              "line": 306,
+              "text": "      if (enableInMemoryRetryQueue) {"
+            },
+            {
+              "line": 307,
+              "text": "        await _commandStore.delete(command);"
+            },
+            {
+              "line": 308,
+              "text": "      }"
+            },
+            {
+              "line": 309,
+              "text": "      return MobileAssignmentCommandResult("
+            },
+            {
+              "line": 310,
+              "text": "        assignment: assignment,"
+            },
+            {
+              "line": 311,
+              "text": "        replayed: replayed,"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/features/auth/data/mobile_conductor_onboarding_repository.dart",
+          "lineStart": 39,
+          "lineEnd": 50,
+          "sha256": "fa804f4f22b6be4ccc012d626ed22773d2775f98aa7bed8a20ff2b1c05fb99fe",
+          "excerpt": [
+            {
+              "line": 39,
+              "text": "    final response = await _apiClient.postObject("
+            },
+            {
+              "line": 40,
+              "text": "      'onboarding/requests',"
+            },
+            {
+              "line": 41,
+              "text": "      {"
+            },
+            {
+              "line": 42,
+              "text": "        'email': email.trim(),"
+            },
+            {
+              "line": 43,
+              "text": "        'password': password,"
+            },
+            {
+              "line": 44,
+              "text": "        'fullName': fullName.trim(),"
+            },
+            {
+              "line": 45,
+              "text": "        'phone': phone?.trim().isEmpty == true ? null : phone?.trim(),"
+            },
+            {
+              "line": 46,
+              "text": "        'invitationCode': invitationCode.trim(),"
+            },
+            {
+              "line": 47,
+              "text": "      },"
+            },
+            {
+              "line": 48,
+              "text": "      authenticated: false,"
+            },
+            {
+              "line": 49,
+              "text": "      headers: {'Idempotency-Key': idempotencyKey},"
+            },
+            {
+              "line": 50,
+              "text": "    );"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/core/network/mobile_api_client.dart",
+          "lineStart": 288,
+          "lineEnd": 306,
+          "sha256": "6e94fcf60946b35049b97bed448cd344be17e47f20dacb670d6d819b8506b341",
+          "excerpt": [
+            {
+              "line": 288,
+              "text": "    request.headers.addAll({"
+            },
+            {
+              "line": 289,
+              "text": "      'accept': 'application/json',"
+            },
+            {
+              "line": 290,
+              "text": "      'cache-control': 'no-store',"
+            },
+            {
+              "line": 291,
+              "text": "      'x-correlation-id': correlationId,"
+            },
+            {
+              "line": 292,
+              "text": "    });"
+            },
+            {
+              "line": 293,
+              "text": "    if (headers != null) {"
+            },
+            {
+              "line": 294,
+              "text": "      request.headers.addAll(headers);"
+            },
+            {
+              "line": 295,
+              "text": "    }"
+            },
+            {
+              "line": 296,
+              "text": ""
+            },
+            {
+              "line": 297,
+              "text": "    if (authenticated) {"
+            },
+            {
+              "line": 298,
+              "text": "      final accessToken = accessTokenProvider?.accessToken;"
+            },
+            {
+              "line": 299,
+              "text": "      if (accessToken == null || accessToken.isEmpty) {"
+            },
+            {
+              "line": 300,
+              "text": "        throw const MobileApiException("
+            },
+            {
+              "line": 301,
+              "text": "          status: 401,"
+            },
+            {
+              "line": 302,
+              "text": "          code: 'MOBILE_SESSION_REQUIRED',"
+            },
+            {
+              "line": 303,
+              "text": "          message: 'Inicie sesión nuevamente para continuar.',"
+            },
+            {
+              "line": 304,
+              "text": "        );"
+            },
+            {
+              "line": 305,
+              "text": "      }"
+            },
+            {
+              "line": 306,
+              "text": "      request.headers['authorization'] = 'Bearer $accessToken';"
+            }
+          ]
+        }
+      ],
+      "limits": "Do not describe X-Idempotent-Replay as a request header or imply every mutation uses Idempotency-Key. This read-only check does not rerun transaction/replay integration."
+    },
+    {
+      "id": "ASSIGNMENT_STATES",
+      "conclusion": "Assignment API states are PENDING_RESPONSE,SCHEDULED,EN_SERVICIO,INTERRUPTED,TRANSFERRED,COMPLETED,REJECTED,CANCELLED,EXPIRED. Driver availability separately uses DISPONIBLE,RESERVADO,EN_SERVICIO,ATENCION,DESCANSO,NO_DISPONIBLE. RESERVADO is not the assignment API status.",
+      "sources": [
+        {
+          "path": "mobile/lib/features/assignments/domain/mobile_assignment_models.dart",
+          "lineStart": 1,
+          "lineEnd": 10,
+          "sha256": "e3749e0c28269b3561c12058401c723644ba502d1f288e26abf264194773c7cb",
+          "excerpt": [
+            {
+              "line": 1,
+              "text": "enum MobileAssignmentStatus {"
+            },
+            {
+              "line": 2,
+              "text": "  pendingResponse('PENDING_RESPONSE', 'Pendiente de respuesta'),"
+            },
+            {
+              "line": 3,
+              "text": "  scheduled('SCHEDULED', 'Programada'),"
+            },
+            {
+              "line": 4,
+              "text": "  enServicio('EN_SERVICIO', 'En servicio'),"
+            },
+            {
+              "line": 5,
+              "text": "  interrupted('INTERRUPTED', 'Interrumpida'),"
+            },
+            {
+              "line": 6,
+              "text": "  transferred('TRANSFERRED', 'Tramo relevado'),"
+            },
+            {
+              "line": 7,
+              "text": "  completed('COMPLETED', 'Completada'),"
+            },
+            {
+              "line": 8,
+              "text": "  rejected('REJECTED', 'Rechazada'),"
+            },
+            {
+              "line": 9,
+              "text": "  cancelled('CANCELLED', 'Cancelada'),"
+            },
+            {
+              "line": 10,
+              "text": "  expired('EXPIRED', 'Vencida');"
+            }
+          ]
+        },
+        {
+          "path": "backend/src/main/java/pe/rutafija/operation/domain/AssignmentStatus.java",
+          "lineStart": 3,
+          "lineEnd": 14,
+          "sha256": "16d1447d9c8e716c7919962795f5bf6cd2a1f1f2d135d79397e92837f48c339a",
+          "excerpt": [
+            {
+              "line": 3,
+              "text": "/** Persisted online offer/execution states; interruption never certifies completion. */"
+            },
+            {
+              "line": 4,
+              "text": "public enum AssignmentStatus {"
+            },
+            {
+              "line": 5,
+              "text": "    PENDING_RESPONSE,"
+            },
+            {
+              "line": 6,
+              "text": "    SCHEDULED,"
+            },
+            {
+              "line": 7,
+              "text": "    EN_SERVICIO,"
+            },
+            {
+              "line": 8,
+              "text": "    INTERRUPTED,"
+            },
+            {
+              "line": 9,
+              "text": "    TRANSFERRED,"
+            },
+            {
+              "line": 10,
+              "text": "    COMPLETED,"
+            },
+            {
+              "line": 11,
+              "text": "    REJECTED,"
+            },
+            {
+              "line": 12,
+              "text": "    CANCELLED,"
+            },
+            {
+              "line": 13,
+              "text": "    EXPIRED"
+            },
+            {
+              "line": 14,
+              "text": "}"
+            }
+          ]
+        },
+        {
+          "path": "backend/src/main/java/pe/rutafija/fleet/domain/DriverAvailabilityStatus.java",
+          "lineStart": 3,
+          "lineEnd": 10,
+          "sha256": "95bb2feeec00a0b420d6fc0ed51a57735ab537cb328fb047fcb19e2c1501e5b6",
+          "excerpt": [
+            {
+              "line": 3,
+              "text": "public enum DriverAvailabilityStatus {"
+            },
+            {
+              "line": 4,
+              "text": "    DISPONIBLE,"
+            },
+            {
+              "line": 5,
+              "text": "    RESERVADO,"
+            },
+            {
+              "line": 6,
+              "text": "    EN_SERVICIO,"
+            },
+            {
+              "line": 7,
+              "text": "    ATENCION,"
+            },
+            {
+              "line": 8,
+              "text": "    DESCANSO,"
+            },
+            {
+              "line": 9,
+              "text": "    NO_DISPONIBLE"
+            },
+            {
+              "line": 10,
+              "text": "}"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/features/assignments/domain/mobile_assignment_models.dart",
+          "lineStart": 124,
+          "lineEnd": 148,
+          "sha256": "e3749e0c28269b3561c12058401c723644ba502d1f288e26abf264194773c7cb",
+          "excerpt": [
+            {
+              "line": 124,
+              "text": "  bool get requiresMobileResponse {"
+            },
+            {
+              "line": 125,
+              "text": "    return status == MobileAssignmentStatus.pendingResponse &&"
+            },
+            {
+              "line": 126,
+              "text": "        responseMode == MobileAssignmentResponseMode.mobileConfirmation;"
+            },
+            {
+              "line": 127,
+              "text": "  }"
+            },
+            {
+              "line": 128,
+              "text": ""
+            },
+            {
+              "line": 129,
+              "text": "  bool get canStart {"
+            },
+            {
+              "line": 130,
+              "text": "    return status == MobileAssignmentStatus.scheduled &&"
+            },
+            {
+              "line": 131,
+              "text": "        handoverId == null &&"
+            },
+            {
+              "line": 132,
+              "text": "        reservedAt != null &&"
+            },
+            {
+              "line": 133,
+              "text": "        acceptedAt != null &&"
+            },
+            {
+              "line": 134,
+              "text": "        responseMode == MobileAssignmentResponseMode.mobileConfirmation;"
+            },
+            {
+              "line": 135,
+              "text": "  }"
+            },
+            {
+              "line": 136,
+              "text": ""
+            },
+            {
+              "line": 137,
+              "text": "  bool get canComplete =>"
+            },
+            {
+              "line": 138,
+              "text": "      status == MobileAssignmentStatus.enServicio &&"
+            },
+            {
+              "line": 139,
+              "text": "      acceptedAt != null &&"
+            },
+            {
+              "line": 140,
+              "text": "      startedAt != null;"
+            },
+            {
+              "line": 141,
+              "text": ""
+            },
+            {
+              "line": 142,
+              "text": "  bool allows(MobileAssignmentCommandType command) {"
+            },
+            {
+              "line": 143,
+              "text": "    return switch (command) {"
+            },
+            {
+              "line": 144,
+              "text": "      MobileAssignmentCommandType.accept ||"
+            },
+            {
+              "line": 145,
+              "text": "      MobileAssignmentCommandType.reject => requiresMobileResponse,"
+            },
+            {
+              "line": 146,
+              "text": "      MobileAssignmentCommandType.start => canStart,"
+            },
+            {
+              "line": 147,
+              "text": "      MobileAssignmentCommandType.complete => canComplete,"
+            },
+            {
+              "line": 148,
+              "text": "    };"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/features/location/domain/mobile_service_location_controller.dart",
+          "lineStart": 335,
+          "lineEnd": 355,
+          "sha256": "09a4b3e1e003fc965625cfbecfdda21fbdbb943c6ace78cf60519a4343fc86d3",
+          "excerpt": [
+            {
+              "line": 335,
+              "text": "      // Only fixed protocol codes become diagnostic data, never server text."
+            },
+            {
+              "line": 336,
+              "text": "      final cause = switch (error.code) {"
+            },
+            {
+              "line": 337,
+              "text": "        'LOCATION_CAPTURE_TOO_OLD' => ServiceLocationApiCause.captureTime,"
+            },
+            {
+              "line": 338,
+              "text": "        'LOCATION_CONSENT_REQUIRED' => ServiceLocationApiCause.consent,"
+            },
+            {
+              "line": 339,
+              "text": "        'LOCATION_PERMISSION_NOT_REPORTED' =>"
+            },
+            {
+              "line": 340,
+              "text": "          ServiceLocationApiCause.permission,"
+            },
+            {
+              "line": 341,
+              "text": "        'LOCATION_STATE_NOT_ALLOWED' => ServiceLocationApiCause.state,"
+            },
+            {
+              "line": 342,
+              "text": "        'AUTH_TOKEN_INVALID' ||"
+            },
+            {
+              "line": 343,
+              "text": "        'AUTH_TOKEN_EXPIRED' ||"
+            },
+            {
+              "line": 344,
+              "text": "        'MOBILE_SESSION_REQUIRED' ||"
+            },
+            {
+              "line": 345,
+              "text": "        'MOBILE_SESSION_CHANGED' => ServiceLocationApiCause.session,"
+            },
+            {
+              "line": 346,
+              "text": "        'VALIDATION_ERROR' => ServiceLocationApiCause.validation,"
+            },
+            {
+              "line": 347,
+              "text": "        _ => ServiceLocationApiCause.other,"
+            },
+            {
+              "line": 348,
+              "text": "      };"
+            },
+            {
+              "line": 349,
+              "text": "      return ServiceLocationDiagnostic("
+            },
+            {
+              "line": 350,
+              "text": "        step: step,"
+            },
+            {
+              "line": 351,
+              "text": "        kind: ServiceLocationFailureKind.apiRejected,"
+            },
+            {
+              "line": 352,
+              "text": "        httpStatus: error.status >= 100 && error.status <= 599"
+            },
+            {
+              "line": 353,
+              "text": "            ? error.status"
+            },
+            {
+              "line": 354,
+              "text": "            : null,"
+            },
+            {
+              "line": 355,
+              "text": "        apiCause: cause,"
+            }
+          ]
+        }
+      ],
+      "limits": "Keep display labels distinct from protocol codes. Location error handling classifies specific LOCATION_*,AUTH_*,MOBILE_* and VALIDATION_ERROR codes rather than treating every API failure as no-fix."
+    },
+    {
+      "id": "NOTICES",
+      "conclusion": "Mobile notices are a paged server inbox fetched on view initialization or explicit user refresh, with explicit read acknowledgement. No Android push provider/device delivery is configured. CRM has a distinct readonly WebSocket operation-event channel.",
+      "sources": [
+        {
+          "path": "mobile/lib/features/announcements/presentation/notices_page.dart",
+          "lineStart": 20,
+          "lineEnd": 29,
+          "sha256": "098d534121ccf070b0698235b0908a2fbf3da3c6ce3d529bf8fcc77a5e769b41",
+          "excerpt": [
+            {
+              "line": 20,
+              "text": "  void initState() {"
+            },
+            {
+              "line": 21,
+              "text": "    super.initState();"
+            },
+            {
+              "line": 22,
+              "text": "    _load();"
+            },
+            {
+              "line": 23,
+              "text": "  }"
+            },
+            {
+              "line": 24,
+              "text": ""
+            },
+            {
+              "line": 25,
+              "text": "  Future<void> _load() async {"
+            },
+            {
+              "line": 26,
+              "text": "    if (_busy) return;"
+            },
+            {
+              "line": 27,
+              "text": "    setState(() => _busy = true);"
+            },
+            {
+              "line": 28,
+              "text": "    try {"
+            },
+            {
+              "line": 29,
+              "text": "      final result = await widget.gateway.list(page: _page);"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/features/announcements/presentation/notices_page.dart",
+          "lineStart": 72,
+          "lineEnd": 78,
+          "sha256": "098d534121ccf070b0698235b0908a2fbf3da3c6ce3d529bf8fcc77a5e769b41",
+          "excerpt": [
+            {
+              "line": 72,
+              "text": "        const Text("
+            },
+            {
+              "line": 73,
+              "text": "          'Consultar no confirma lectura. Leer un aviso no sustituye Leído del comunicado ni responde ofertas.',"
+            },
+            {
+              "line": 74,
+              "text": "        ),"
+            },
+            {
+              "line": 75,
+              "text": "        TextButton("
+            },
+            {
+              "line": 76,
+              "text": "          key: const Key('notices-refresh'),"
+            },
+            {
+              "line": 77,
+              "text": "          onPressed: _busy ? null : _load,"
+            },
+            {
+              "line": 78,
+              "text": "          child: const Text('Consultar confirmaciones'),"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/features/announcements/data/mobile_notice_repository.dart",
+          "lineStart": 48,
+          "lineEnd": 65,
+          "sha256": "073102328b517f5cb27dd2a85aaffce5611d109f0653d85335b77ff842f8cbee",
+          "excerpt": [
+            {
+              "line": 48,
+              "text": "  Future<MobileNoticePage> list({int page = 0}) async {"
+            },
+            {
+              "line": 49,
+              "text": "    if (page < 0) throw ArgumentError('Página inválida');"
+            },
+            {
+              "line": 50,
+              "text": "    return MobileNoticePage.fromJson("
+            },
+            {
+              "line": 51,
+              "text": "      await api.getObject("
+            },
+            {
+              "line": 52,
+              "text": "        'mobile/notices',"
+            },
+            {
+              "line": 53,
+              "text": "        queryParameters: {'page': '$page', 'size': '20'},"
+            },
+            {
+              "line": 54,
+              "text": "      ),"
+            },
+            {
+              "line": 55,
+              "text": "    );"
+            },
+            {
+              "line": 56,
+              "text": "  }"
+            },
+            {
+              "line": 57,
+              "text": ""
+            },
+            {
+              "line": 58,
+              "text": "  @override"
+            },
+            {
+              "line": 59,
+              "text": "  Future<MobileNotice> read(String id) async {"
+            },
+            {
+              "line": 60,
+              "text": "    if (id.trim().isEmpty) throw ArgumentError('Referencia de aviso requerida');"
+            },
+            {
+              "line": 61,
+              "text": "    return MobileNotice.fromJson("
+            },
+            {
+              "line": 62,
+              "text": "      await api.postObject("
+            },
+            {
+              "line": 63,
+              "text": "        'mobile/notices/${Uri.encodeComponent(id)}/read',"
+            },
+            {
+              "line": 64,
+              "text": "        const {},"
+            },
+            {
+              "line": 65,
+              "text": "        allowSessionRefresh: false,"
+            }
+          ]
+        },
+        {
+          "path": "backend/src/main/java/pe/rutafija/operation/infrastructure/UnconfiguredExternalNoticeChannel.java",
+          "lineStart": 3,
+          "lineEnd": 8,
+          "sha256": "62fa22f3124e48c3cfd7c3b2dffad3fd13278a3ba4827a70cc24da2fe1758f65",
+          "excerpt": [
+            {
+              "line": 3,
+              "text": "import pe.rutafija.operation.application.ExternalNoticeChannel;"
+            },
+            {
+              "line": 4,
+              "text": "/** Deliberately no SDK, credentials, device registration, network call or retry. */"
+            },
+            {
+              "line": 5,
+              "text": "@Component"
+            },
+            {
+              "line": 6,
+              "text": "public class UnconfiguredExternalNoticeChannel implements ExternalNoticeChannel {"
+            },
+            {
+              "line": 7,
+              "text": "    @Override public Availability availability(){return new Availability(false,\"PROVIDER_AND_DEVICE_NOT_PREPARED\");}"
+            },
+            {
+              "line": 8,
+              "text": "}"
+            }
+          ]
+        },
+        {
+          "path": "frontend/src/app/core/operations/operation-realtime.service.ts",
+          "lineStart": 56,
+          "lineEnd": 63,
+          "sha256": "1b050f3fd12362414e6447bff7f0e197f1c1260379ec2e0485fcd3a5e81fd7a0",
+          "excerpt": [
+            {
+              "line": 56,
+              "text": "  private openSocket(ticket: string): void {"
+            },
+            {
+              "line": 57,
+              "text": "    const socketUrl = new URL('/ws/operations', globalThis.location.origin);"
+            },
+            {
+              "line": 58,
+              "text": "    socketUrl.protocol = globalThis.location.protocol === 'https:' ? 'wss:' : 'ws:';"
+            },
+            {
+              "line": 59,
+              "text": "    socketUrl.searchParams.set('ticket', ticket);"
+            },
+            {
+              "line": 60,
+              "text": ""
+            },
+            {
+              "line": 61,
+              "text": "    const socket = new WebSocket(socketUrl.toString());"
+            },
+            {
+              "line": 62,
+              "text": "    this.socket = socket;"
+            },
+            {
+              "line": 63,
+              "text": "    socket.onmessage = (event: MessageEvent<unknown>) => this.handleMessage(event.data);"
+            }
+          ]
+        }
+      ],
+      "limits": "Do not claim Firebase/FCM push, persistent Android notification, external delivery confirmation or periodic mobile inbox polling. GPS30s scheduling is unrelated to inbox refresh."
+    },
+    {
+      "id": "ONLINE_COMPOSITION",
+      "conclusion": "Live composition explicitly sets enableInMemoryRetryQueue:false; old offline classes exist in source but are not wired into the application composition/router. Server confirmation is required; a lost outcome is reconciled by reading current state.",
+      "sources": [
+        {
+          "path": "mobile/lib/app/ruta_fija_dependencies.dart",
+          "lineStart": 50,
+          "lineEnd": 85,
+          "sha256": "dc747fbfe21e9ce604b28c250d640b50d9c36715d3c83b984ac23aad19bd8371",
+          "excerpt": [
+            {
+              "line": 50,
+              "text": "  factory RutaFijaDependencies.create(RouteFijaEnvironment environment) {"
+            },
+            {
+              "line": 51,
+              "text": "    final httpClient = http.Client();"
+            },
+            {
+              "line": 52,
+              "text": "    final publicApi = MobileApiClient("
+            },
+            {
+              "line": 53,
+              "text": "      httpClient: httpClient,"
+            },
+            {
+              "line": 54,
+              "text": "      environment: environment,"
+            },
+            {
+              "line": 55,
+              "text": "    );"
+            },
+            {
+              "line": 56,
+              "text": "    final assignmentCommandStore = MobileSessionAssignmentCommandStore();"
+            },
+            {
+              "line": 57,
+              "text": "    final sessionController = MobileSessionController("
+            },
+            {
+              "line": 58,
+              "text": "      authGateway: MobileAuthRepository(publicApi),"
+            },
+            {
+              "line": 59,
+              "text": "      tokenStore: MobileSecureTokenStore(),"
+            },
+            {
+              "line": 60,
+              "text": "      onLocalSessionCleared: (user) async {"
+            },
+            {
+              "line": 61,
+              "text": "        await assignmentCommandStore.clearAll();"
+            },
+            {
+              "line": 62,
+              "text": "      },"
+            },
+            {
+              "line": 63,
+              "text": "    );"
+            },
+            {
+              "line": 64,
+              "text": "    final authenticatedApi = MobileApiClient("
+            },
+            {
+              "line": 65,
+              "text": "      httpClient: httpClient,"
+            },
+            {
+              "line": 66,
+              "text": "      environment: environment,"
+            },
+            {
+              "line": 67,
+              "text": "      accessTokenProvider: sessionController,"
+            },
+            {
+              "line": 68,
+              "text": "    );"
+            },
+            {
+              "line": 69,
+              "text": "    final deviceLocationGateway = GeolocatorDeviceLocationGateway();"
+            },
+            {
+              "line": 70,
+              "text": "    final executionLocationGate = MobileExecutionLocationGate("
+            },
+            {
+              "line": 71,
+              "text": "      device: deviceLocationGateway,"
+            },
+            {
+              "line": 72,
+              "text": "      isForeground: () =>"
+            },
+            {
+              "line": 73,
+              "text": "          WidgetsBinding.instance.lifecycleState == AppLifecycleState.resumed,"
+            },
+            {
+              "line": 74,
+              "text": "    );"
+            },
+            {
+              "line": 75,
+              "text": "    MobileServiceLocationController? serviceLocation;"
+            },
+            {
+              "line": 76,
+              "text": "    final driverGateway = MobileDriverRepository(authenticatedApi);"
+            },
+            {
+              "line": 77,
+              "text": "    final assignmentGateway = MobileAssignmentRepository("
+            },
+            {
+              "line": 78,
+              "text": "      authenticatedApi,"
+            },
+            {
+              "line": 79,
+              "text": "      assignmentCommandStore,"
+            },
+            {
+              "line": 80,
+              "text": "      enableInMemoryRetryQueue: false,"
+            },
+            {
+              "line": 81,
+              "text": "      startGpsProofProvider: executionLocationGate.beforeStart,"
+            },
+            {
+              "line": 82,
+              "text": "      beforeComplete: (a) async {"
+            },
+            {
+              "line": 83,
+              "text": "        await serviceLocation?.beforeComplete(a);"
+            },
+            {
+              "line": 84,
+              "text": "      },"
+            },
+            {
+              "line": 85,
+              "text": "      onStateChanged: (a) => serviceLocation?.observe(a),"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/features/assignments/data/mobile_assignment_repository.dart",
+          "lineStart": 254,
+          "lineEnd": 269,
+          "sha256": "6481f93895b6aad9cea75387d9a77bdec08b0b5ce86a0f5f4ffec3a30376abb1",
+          "excerpt": [
+            {
+              "line": 254,
+              "text": "  Future<MobileAssignmentCommandResult> retry("
+            },
+            {
+              "line": 255,
+              "text": "    MobilePendingAssignmentCommand command,"
+            },
+            {
+              "line": 256,
+              "text": "  ) async {"
+            },
+            {
+              "line": 257,
+              "text": "    if (!enableInMemoryRetryQueue) {"
+            },
+            {
+              "line": 258,
+              "text": "      throw StateError("
+            },
+            {
+              "line": 259,
+              "text": "        'La cola de reintento no está habilitada en este cliente.',"
+            },
+            {
+              "line": 260,
+              "text": "      );"
+            },
+            {
+              "line": 261,
+              "text": "    }"
+            },
+            {
+              "line": 262,
+              "text": "    final current = await get(command.assignmentId);"
+            },
+            {
+              "line": 263,
+              "text": "    if (_alreadyApplied(command.command, current.status)) {"
+            },
+            {
+              "line": 264,
+              "text": "      if (enableInMemoryRetryQueue) {"
+            },
+            {
+              "line": 265,
+              "text": "        await _commandStore.delete(command);"
+            },
+            {
+              "line": 266,
+              "text": "      }"
+            },
+            {
+              "line": 267,
+              "text": "      return MobileAssignmentCommandResult(assignment: current, replayed: true);"
+            },
+            {
+              "line": 268,
+              "text": "    }"
+            },
+            {
+              "line": 269,
+              "text": "    return _deliver(command);"
+            }
+          ]
+        },
+        {
+          "path": "mobile/lib/core/offline/mobile_offline_outbox.dart",
+          "lineStart": 6,
+          "lineEnd": 12,
+          "sha256": "c3da5cd877088153330459524f45e62a709a591a33da0048fc5dc7fce2fe5500",
+          "excerpt": [
+            {
+              "line": 6,
+              "text": "/// FIFO coordinator for the deliberately bounded, foreground-only M8 outbox."
+            },
+            {
+              "line": 7,
+              "text": "///"
+            },
+            {
+              "line": 8,
+              "text": "/// It does not observe connectivity, schedule background work, or submit any"
+            },
+            {
+              "line": 9,
+              "text": "/// request itself. A presentation/application service asks for [nextReady],"
+            },
+            {
+              "line": 10,
+              "text": "/// sends that exact body, and reports the result through one of the mutation"
+            },
+            {
+              "line": 11,
+              "text": "/// methods below. This separation makes retries explicit and auditable."
+            },
+            {
+              "line": 12,
+              "text": "final class MobileOfflineOutbox {"
+            }
+          ]
+        }
+      ],
+      "limits": "Presence of dormant legacy outbox code is not a delivered offline capability, and its existence means wording zero offline classes/files would also be false. No deferred operation is enabled in current composition."
+    },
+    {
+      "id": "ADMIN_TERMS",
+      "conclusion": "Terms acceptance is an authenticated, explicit ADMIN acknowledgement of documentversion+SHA256+acceptedtrue, persisted with ADMIN/organization/document/time and audited. It is not a personal cryptographic signature of that human.",
+      "sources": [
+        {
+          "path": "backend/src/main/java/pe/rutafija/terms/api/dto/AcceptAdminTermsRequest.java",
+          "lineStart": 8,
+          "lineEnd": 19,
+          "sha256": "c7fb03a47e91629914730683d831e41f0e9bd9e164181d5efb2b8bf961682262",
+          "excerpt": [
+            {
+              "line": 8,
+              "text": "public record AcceptAdminTermsRequest("
+            },
+            {
+              "line": 9,
+              "text": "        @NotBlank"
+            },
+            {
+              "line": 10,
+              "text": "        @Size(max = 40)"
+            },
+            {
+              "line": 11,
+              "text": "        String version,"
+            },
+            {
+              "line": 12,
+              "text": ""
+            },
+            {
+              "line": 13,
+              "text": "        @NotBlank"
+            },
+            {
+              "line": 14,
+              "text": "        @Pattern(regexp = \"[0-9a-f]{64}\")"
+            },
+            {
+              "line": 15,
+              "text": "        String contentSha256,"
+            },
+            {
+              "line": 16,
+              "text": ""
+            },
+            {
+              "line": 17,
+              "text": "        @NotNull"
+            },
+            {
+              "line": 18,
+              "text": "        Boolean accepted"
+            },
+            {
+              "line": 19,
+              "text": ") {"
+            }
+          ]
+        },
+        {
+          "path": "backend/src/main/java/pe/rutafija/terms/application/AdminTermsService.java",
+          "lineStart": 84,
+          "lineEnd": 101,
+          "sha256": "2096b081bf54a9fba25c19cad0212a28ed5db14f274d88918d73960f3f6aa683",
+          "excerpt": [
+            {
+              "line": 84,
+              "text": "    public AdminTermsAcceptanceResponse acceptCurrentTerms(AcceptAdminTermsRequest request) {"
+            },
+            {
+              "line": 85,
+              "text": "        AuthenticatedUser actor = requireAdmin();"
+            },
+            {
+              "line": 86,
+              "text": "        if (!Boolean.TRUE.equals(request.accepted())) {"
+            },
+            {
+              "line": 87,
+              "text": "            throw new ApplicationException("
+            },
+            {
+              "line": 88,
+              "text": "                    HttpStatus.BAD_REQUEST,"
+            },
+            {
+              "line": 89,
+              "text": "                    ErrorCode.VALIDATION_ERROR,"
+            },
+            {
+              "line": 90,
+              "text": "                    \"La aceptación explícita debe ser verdadera\""
+            },
+            {
+              "line": 91,
+              "text": "            );"
+            },
+            {
+              "line": 92,
+              "text": "        }"
+            },
+            {
+              "line": 93,
+              "text": ""
+            },
+            {
+              "line": 94,
+              "text": "        AdminTermsDocument document = requireCurrentDocument();"
+            },
+            {
+              "line": 95,
+              "text": "        assertDocumentHash(document);"
+            },
+            {
+              "line": 96,
+              "text": "        if (!document.getVersion().equals(request.version())"
+            },
+            {
+              "line": 97,
+              "text": "                || !constantTimeEquals(document.getContentSha256(), request.contentSha256())) {"
+            },
+            {
+              "line": 98,
+              "text": "            throw new ApplicationException("
+            },
+            {
+              "line": 99,
+              "text": "                    HttpStatus.CONFLICT,"
+            },
+            {
+              "line": 100,
+              "text": "                    ErrorCode.RESOURCE_VERSION_CONFLICT,"
+            },
+            {
+              "line": 101,
+              "text": "                    \"La versión o huella de términos ya no corresponde al documento vigente\""
+            }
+          ]
+        },
+        {
+          "path": "backend/src/main/java/pe/rutafija/terms/application/AdminTermsService.java",
+          "lineStart": 111,
+          "lineEnd": 146,
+          "sha256": "2096b081bf54a9fba25c19cad0212a28ed5db14f274d88918d73960f3f6aa683",
+          "excerpt": [
+            {
+              "line": 111,
+              "text": "        if (admin.getRole() != UserRole.ADMIN"
+            },
+            {
+              "line": 112,
+              "text": "                || !admin.isActive()"
+            },
+            {
+              "line": 113,
+              "text": "                || !admin.isEmailVerified()"
+            },
+            {
+              "line": 114,
+              "text": "                || admin.getOrganizationId() == null"
+            },
+            {
+              "line": 115,
+              "text": "                || !admin.getOrganizationId().equals(actor.organizationId())) {"
+            },
+            {
+              "line": 116,
+              "text": "            throw new ApplicationException("
+            },
+            {
+              "line": 117,
+              "text": "                    HttpStatus.FORBIDDEN,"
+            },
+            {
+              "line": 118,
+              "text": "                    ErrorCode.FORBIDDEN_ROLE,"
+            },
+            {
+              "line": 119,
+              "text": "                    \"Solo un ADMIN activo de una organización puede aceptar estos términos\""
+            },
+            {
+              "line": 120,
+              "text": "            );"
+            },
+            {
+              "line": 121,
+              "text": "        }"
+            },
+            {
+              "line": 122,
+              "text": ""
+            },
+            {
+              "line": 123,
+              "text": "        Optional<AdminTermsAcceptance> existing = acceptanceRepository"
+            },
+            {
+              "line": 124,
+              "text": "                .findByAdminUser_IdAndDocument_Id(admin.getId(), document.getId());"
+            },
+            {
+              "line": 125,
+              "text": "        if (existing.isPresent()) {"
+            },
+            {
+              "line": 126,
+              "text": "            return response(existing.get());"
+            },
+            {
+              "line": 127,
+              "text": "        }"
+            },
+            {
+              "line": 128,
+              "text": ""
+            },
+            {
+              "line": 129,
+              "text": "        Instant acceptedAt = Instant.now(clock);"
+            },
+            {
+              "line": 130,
+              "text": "        AdminTermsAcceptance acceptance = acceptanceRepository.save(AdminTermsAcceptance.record("
+            },
+            {
+              "line": 131,
+              "text": "                admin,"
+            },
+            {
+              "line": 132,
+              "text": "                admin.getOrganization(),"
+            },
+            {
+              "line": 133,
+              "text": "                document,"
+            },
+            {
+              "line": 134,
+              "text": "                acceptedAt"
+            },
+            {
+              "line": 135,
+              "text": "        ));"
+            },
+            {
+              "line": 136,
+              "text": "        auditService.record("
+            },
+            {
+              "line": 137,
+              "text": "                admin,"
+            },
+            {
+              "line": 138,
+              "text": "                \"ADMIN_TERMS_ACCEPTED\","
+            },
+            {
+              "line": 139,
+              "text": "                \"ADMIN_TERMS_DOCUMENT\","
+            },
+            {
+              "line": 140,
+              "text": "                document.getId(),"
+            },
+            {
+              "line": 141,
+              "text": "                Map.of("
+            },
+            {
+              "line": 142,
+              "text": "                        \"version\", document.getVersion(),"
+            },
+            {
+              "line": 143,
+              "text": "                        \"contentSha256\", document.getContentSha256(),"
+            },
+            {
+              "line": 144,
+              "text": "                        \"synthetic\", document.isSynthetic()"
+            },
+            {
+              "line": 145,
+              "text": "                )"
+            },
+            {
+              "line": 146,
+              "text": "        );"
+            }
+          ]
+        },
+        {
+          "path": "backend/src/main/java/pe/rutafija/terms/domain/AdminTermsAcceptance.java",
+          "lineStart": 25,
+          "lineEnd": 44,
+          "sha256": "aa910f1fb3cff8f0352c559459fbf38d4b4c9d54a07c0e1d7e6f561748a8cf2d",
+          "excerpt": [
+            {
+              "line": 25,
+              "text": "    @ManyToOne(fetch = FetchType.LAZY, optional = false)"
+            },
+            {
+              "line": 26,
+              "text": "    @JoinColumn(name = \"admin_user_id\", nullable = false, updatable = false)"
+            },
+            {
+              "line": 27,
+              "text": "    private AppUser adminUser;"
+            },
+            {
+              "line": 28,
+              "text": ""
+            },
+            {
+              "line": 29,
+              "text": "    @ManyToOne(fetch = FetchType.LAZY, optional = false)"
+            },
+            {
+              "line": 30,
+              "text": "    @JoinColumn(name = \"organization_id\", nullable = false, updatable = false)"
+            },
+            {
+              "line": 31,
+              "text": "    private Organization organization;"
+            },
+            {
+              "line": 32,
+              "text": ""
+            },
+            {
+              "line": 33,
+              "text": "    @ManyToOne(fetch = FetchType.LAZY, optional = false)"
+            },
+            {
+              "line": 34,
+              "text": "    @JoinColumn(name = \"document_id\", nullable = false, updatable = false)"
+            },
+            {
+              "line": 35,
+              "text": "    private AdminTermsDocument document;"
+            },
+            {
+              "line": 36,
+              "text": ""
+            },
+            {
+              "line": 37,
+              "text": "    @Column(name = \"document_version\", nullable = false, length = 40, updatable = false)"
+            },
+            {
+              "line": 38,
+              "text": "    private String documentVersion;"
+            },
+            {
+              "line": 39,
+              "text": ""
+            },
+            {
+              "line": 40,
+              "text": "    @Column(name = \"content_sha256\", nullable = false, length = 64, updatable = false)"
+            },
+            {
+              "line": 41,
+              "text": "    private String contentSha256;"
+            },
+            {
+              "line": 42,
+              "text": ""
+            },
+            {
+              "line": 43,
+              "text": "    @Column(name = \"accepted_at\", nullable = false, updatable = false)"
+            },
+            {
+              "line": 44,
+              "text": "    private Instant acceptedAt;"
+            }
+          ]
+        }
+      ],
+      "limits": "SHA256 binds document content; it does not establish a human Ed25519 signature. SUPER_ADMIN recovery/acta signing are different flows. No legal-effect conclusion is made."
+    }
+  ],
+  "requiredWordingCorrections": [
+    {
+      "priority": "HIGH_DOCUMENTATION",
+      "claimToReject": "GPS runs as persistent Android ForegroundService with ongoing notification/background tracking",
+      "correction": "Current captures run only with UIresumed, serviceactive and consent, without activating persistent foreground-service mode.",
+      "claimId": "GPS_FOREGROUND"
+    },
+    {
+      "priority": "HIGH_DOCUMENTATION",
+      "claimToReject": "Refresh tokens use AES256/EncryptedSharedPreferences by default",
+      "correction": "Default installed plugin10.3.4 uses custom AES128-GCM plus RSAOAEP/AndroidKeystore; no hardware attestation established.",
+      "claimId": "ANDROID_STORAGE_CIPHER"
+    },
+    {
+      "priority": "HIGH_DOCUMENTATION",
+      "claimToReject": "Android push notifications delivered or polling inbox every30s",
+      "correction": "Mobile inbox initial/manual fetch; external provider unavailable; GPS timer and CRM WebSocket are separate.",
+      "claimId": "NOTICES"
+    },
+    {
+      "priority": "MEDIUM_DOCUMENTATION",
+      "claimToReject": "X-Idempotent-Replay is a request header for all commands",
+      "correction": "Response header; assignment request body contains clientEventId/version/occurredAt, onboarding request usesIdempotency-Key.",
+      "claimId": "IDEMPOTENCY"
+    },
+    {
+      "priority": "MEDIUM_DOCUMENTATION",
+      "claimToReject": "Terms acceptance records a personal cryptographic human signature",
+      "correction": "Explicit authenticated acceptance of version+SHA256+accepted plus audit; no human signature in request.",
+      "claimId": "ADMIN_TERMS"
+    }
+  ],
+  "findingsAreProductDefects": false,
+  "remainingExecutionNotClaimed": [
+    "No physical GPS loss validation",
+    "No new native APK build/install or key hardware attestation",
+    "No new authenticated API/DB/idempotency execution",
+    "No external push delivery or pilot readiness",
+    "Parent owns Git preparation and commit decision; this child ran no Git commands"
+  ],
+  "historicalEvidenceModified": false
+}

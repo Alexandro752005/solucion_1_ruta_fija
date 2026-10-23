@@ -1,0 +1,11 @@
+{
+  "result": "PASS_POINTER_GLOBAL_STATUS_RECONCILED_BINARY_SELECTION_UNCHANGED",
+  "pointer": "artifacts/L-08-app-principal-vigente.json",
+  "antecedentSha256": "8b2f31ee575cedaa17621c27f63403e997671a98897f58151cd2d174d8314acc",
+  "currentSha256": "1875602bee4d91c12ec24df1b23ef114be0d5b4fecba6f7ab4315bb2c8505fac",
+  "sameInstalledArtifactSha256": "3b5533d3bb70fdd7bd043ed9fa62b002fadcc86c4ceee2554a4dc9cc02a6ae3c",
+  "apkInstalledOrReplaced": false,
+  "binarySelectionUnchanged": true,
+  "productionRelease": false,
+  "pilotEnabled": false
+}

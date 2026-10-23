@@ -33,6 +33,7 @@ import pe.rutafija.identity.infrastructure.AppUserRepository;
 import pe.rutafija.operation.domain.AssignmentStatus;
 import pe.rutafija.operation.infrastructure.AssignmentRepository;
 import pe.rutafija.operation.infrastructure.DriverCurrentLocationStore;
+import pe.rutafija.pilotquota.application.ConductorProvisioningPolicy;
 import pe.rutafija.shared.api.PageResponse;
 import pe.rutafija.shared.exception.ApplicationException;
 import pe.rutafija.shared.exception.ErrorCode;
@@ -48,6 +49,8 @@ import java.util.UUID;
 
 @Service
 public class FleetManagementService {
+
+    private void rejectLegacyPeriodChange(){throw new pe.rutafija.shared.exception.ApplicationException(org.springframework.http.HttpStatus.CONFLICT, pe.rutafija.shared.exception.ErrorCode.RESOURCE_CONFLICT,"Gestiona el vínculo mediante periodos autorizados de incorporación.");}
 
     private static final List<AssignmentStatus> ACTIVE_OPERATION_STATUSES = List.of(
             AssignmentStatus.PENDING_RESPONSE,
@@ -65,6 +68,10 @@ public class FleetManagementService {
     private final CurrentUserService currentUserService;
     private final AuditService auditService;
     private final Clock clock;
+    private final ConductorProvisioningPolicy provisioningPolicy;
+    private final GroupMembershipService memberships;
+    private final pe.rutafija.operation.application.OrganizationSchedulingLock scheduling;
+    private final pe.rutafija.qualification.application.OperationalQualificationPolicy qualification;
 
     public FleetManagementService(
             TransportGroupRepository groupRepository,
@@ -76,7 +83,11 @@ public class FleetManagementService {
             DriverCurrentLocationStore currentLocationStore,
             CurrentUserService currentUserService,
             AuditService auditService,
-            Clock clock
+            Clock clock,
+            ConductorProvisioningPolicy provisioningPolicy,
+            GroupMembershipService memberships,
+            pe.rutafija.operation.application.OrganizationSchedulingLock scheduling,
+            pe.rutafija.qualification.application.OperationalQualificationPolicy qualification
     ) {
         this.groupRepository = groupRepository;
         this.driverRepository = driverRepository;
@@ -88,6 +99,10 @@ public class FleetManagementService {
         this.currentUserService = currentUserService;
         this.auditService = auditService;
         this.clock = clock;
+        this.provisioningPolicy = provisioningPolicy;
+        this.memberships = memberships;
+        this.scheduling = scheduling;
+        this.qualification=qualification;
     }
 
     @Transactional(readOnly = true)
@@ -106,7 +121,7 @@ public class FleetManagementService {
 
     @Transactional
     public TransportGroupResponse createGroup(TransportGroupCreateRequest request) {
-        AppUser actor = currentUserService.requireTenantActor();
+        AppUser actor = fleetWriter();
         if (groupRepository.existsByOrganization_IdAndNameIgnoreCase(
                 actor.getOrganizationId(),
                 request.name().strip()
@@ -125,8 +140,11 @@ public class FleetManagementService {
 
     @Transactional
     public TransportGroupResponse updateGroup(UUID groupId, TransportGroupUpdateRequest request) {
-        AppUser actor = currentUserService.requireTenantActor();
+        AppUser actor = fleetWriter();
         TransportGroup group = findTenantGroup(groupId, actor.getOrganizationId());
+        if (request.expectedVersion() == null || group.getVersion() != request.expectedVersion()) {
+            throw conflict("El grupo cambió; consulta de nuevo antes de editar.");
+        }
         if (!group.getName().equalsIgnoreCase(request.name().strip())
                 && groupRepository.existsByOrganization_IdAndNameIgnoreCase(
                         actor.getOrganizationId(),
@@ -134,22 +152,27 @@ public class FleetManagementService {
                 )) {
             throw conflict("Ya existe un grupo con ese nombre");
         }
-        if (!request.active() && group.isActive() && driverRepository.existsByGroup_IdAndActiveTrue(group.getId())) {
-            throw conflict("No puede desactivar un grupo que todavía tiene conductores activos");
+        if (!request.active() && group.isActive()) {
+            memberships.guardRetirement(groupId, actor.getOrganizationId());
         }
 
+        var groupChanges=pe.rutafija.audit.application.AuditChanges.combine(
+            pe.rutafija.audit.application.AuditChanges.fields("active",group.isActive(),request.active()),
+            pe.rutafija.audit.application.AuditChanges.masked("name",group.getName(),request.name().strip()),
+            pe.rutafija.audit.application.AuditChanges.masked("description",group.getDescription(),optionalText(request.description())));
         group.update(request.name(), request.description());
         if (request.active()) {
             group.activate();
         } else {
             group.deactivate();
         }
+        groupRepository.flush();
         auditService.record(
                 actor,
                 request.active() ? "GROUP_UPDATED" : "GROUP_DISABLED",
                 "TRANSPORT_GROUP",
                 group.getId(),
-                Map.of("active", group.isActive())
+                Map.of("active", group.isActive(),"changes",groupChanges,"reasonRequired",false)
         );
         return groupResponse(group);
     }
@@ -194,7 +217,8 @@ public class FleetManagementService {
 
     @Transactional
     public DriverResponse createDriver(DriverCreateRequest request) {
-        AppUser actor = currentUserService.requireTenantActor();
+        AppUser actor = fleetWriter();
+        provisioningPolicy.rejectLegacyCreation();
         if (driverRepository.existsByOrganization_IdAndDocumentNumberIgnoreCase(
                 actor.getOrganizationId(),
                 request.documentNumber().strip()
@@ -220,8 +244,18 @@ public class FleetManagementService {
 
     @Transactional
     public DriverResponse updateDriver(UUID driverId, DriverUpdateRequest request) {
-        AppUser actor = currentUserService.requireTenantActor();
+        AppUser actor = fleetWriter();
         Driver driver = findTenantDriver(driverId, actor.getOrganizationId());
+        UUID existingUserId = driver.getUser() == null ? null : driver.getUser().getId();
+        provisioningPolicy.requireApproved(existingUserId, actor.getOrganizationId(), driverId);
+        if (!java.util.Objects.equals(existingUserId, request.userId())
+                || !driver.getFullName().equals(request.fullName().strip())
+                || !java.util.Objects.equals(optionalText(driver.getPhone()), optionalText(request.phone()))
+                || !driver.getDocumentType().equals(request.documentType())
+                || !driver.getDocumentNumber().equals(request.documentNumber().strip())
+                || !java.util.Objects.equals(optionalText(driver.getLicenseNumber()), optionalText(request.licenseNumber()))) {
+            provisioningPolicy.rejectIdentityChange();
+        }
         if (!driver.getDocumentNumber().equalsIgnoreCase(request.documentNumber().strip())
                 && driverRepository.existsByOrganization_IdAndDocumentNumberIgnoreCase(
                         actor.getOrganizationId(),
@@ -232,6 +266,7 @@ public class FleetManagementService {
 
         TransportGroup group = findActiveTenantGroup(request.groupId(), actor.getOrganizationId());
         AppUser user = resolveDriverUser(request.userId(), actor.getOrganizationId(), driver.getId());
+        var driverChanges=pe.rutafija.audit.application.AuditChanges.fields("groupId",driver.getGroup().getId(),group.getId());
         driver.update(
                 user,
                 group,
@@ -241,33 +276,35 @@ public class FleetManagementService {
                 request.documentNumber(),
                 request.licenseNumber()
         );
-        auditService.record(actor, "DRIVER_UPDATED", "DRIVER", driver.getId(), Map.of());
+        auditService.record(actor, "DRIVER_UPDATED", "DRIVER", driver.getId(), Map.of("changes",driverChanges,"reasonRequired",false));
         return DriverResponse.from(driver);
     }
 
     @Transactional
     public DriverResponse activateDriver(UUID driverId) {
-        AppUser actor = currentUserService.requireTenantActor();
+        AppUser actor = fleetWriter();
         Driver driver = findTenantDriver(driverId, actor.getOrganizationId());
-        findActiveTenantGroup(driver.getGroup().getId(), actor.getOrganizationId());
+        provisioningPolicy.requireApproved(driver.getUser() == null ? null : driver.getUser().getId(),
+                actor.getOrganizationId(), driverId);
+        provisioningPolicy.requireActivation(driver.getId(), actor.getOrganizationId());
         if (driver.getUser() != null && !driver.getUser().isActive()) {
             throw invalidDriver("No puede activar un conductor con un usuario asociado inactivo");
         }
-        driver.activate();
-        auditService.record(actor, "DRIVER_ACTIVATED", "DRIVER", driver.getId(), Map.of());
+        boolean wasActive=driver.isActive();driver.activate();
+        auditService.record(actor, "DRIVER_ACTIVATED", "DRIVER", driver.getId(), Map.of("changes",pe.rutafija.audit.application.AuditChanges.fields("active",wasActive,driver.isActive())));
         return DriverResponse.from(driver);
     }
 
     @Transactional
     public DriverResponse deactivateDriver(UUID driverId) {
-        AppUser actor = currentUserService.requireTenantActor();
+        AppUser actor = fleetWriter();
         Driver driver = findTenantDriver(driverId, actor.getOrganizationId());
         if (assignmentRepository.existsByDriver_IdAndStatusIn(driver.getId(), ACTIVE_OPERATION_STATUSES)) {
             throw conflict("No puede desactivar un conductor con asignaciones programadas o en servicio");
         }
-        driver.deactivate();
+        boolean wasActive=driver.isActive();driver.deactivate();
         currentLocationStore.deleteByDriverId(driver.getId());
-        auditService.record(actor, "DRIVER_DISABLED", "DRIVER", driver.getId(), Map.of());
+        auditService.record(actor, "DRIVER_DISABLED", "DRIVER", driver.getId(), Map.of("changes",pe.rutafija.audit.application.AuditChanges.fields("active",wasActive,driver.isActive())));
         return DriverResponse.from(driver);
     }
 
@@ -297,7 +334,10 @@ public class FleetManagementService {
 
     @Transactional
     public VehicleResponse createVehicle(VehicleCreateRequest request) {
-        AppUser actor = currentUserService.requireTenantActor();
+        AppUser actor = fleetWriter();
+        if (vehicleRepository.existsByCanonicalPlate(request.plate())) {
+            throw conflict("La identidad de la unidad ya está registrada; requiere revisión y no puede duplicarse.");
+        }
         if (vehicleRepository.existsByOrganization_IdAndPlateIgnoreCase(
                 actor.getOrganizationId(),
                 request.plate().strip()
@@ -319,8 +359,14 @@ public class FleetManagementService {
 
     @Transactional
     public VehicleResponse updateVehicle(UUID vehicleId, VehicleUpdateRequest request) {
-        AppUser actor = currentUserService.requireTenantActor();
+        AppUser actor = fleetWriter();
         Vehicle vehicle = findTenantVehicle(vehicleId, actor.getOrganizationId());
+        boolean material=!java.util.Objects.equals(vehicle.getBrand(),optionalText(request.brand()))
+                ||!java.util.Objects.equals(vehicle.getModel(),optionalText(request.model()))||!java.util.Objects.equals(vehicle.getYear(),request.year());
+        if(material&&assignmentRepository.existsByVehicle_IdAndStatusIn(vehicleId,ACTIVE_OPERATION_STATUSES))
+            throw conflict("Resuelve los compromisos antes de corregir datos documentales de la unidad; no se invalidan durante un servicio.");
+        if(!vehicle.getPlate().equalsIgnoreCase(request.plate().strip()))
+            throw conflict("La placa se corrige con original, motivo e historial en el expediente restringido de incorporación.");
         if (!vehicle.getPlate().equalsIgnoreCase(request.plate().strip())
                 && vehicleRepository.existsByOrganization_IdAndPlateIgnoreCase(
                         actor.getOrganizationId(),
@@ -329,6 +375,11 @@ public class FleetManagementService {
             throw conflict("Ya existe un vehículo con esa placa");
         }
 
+        var vehicleChanges=pe.rutafija.audit.application.AuditChanges.combine(
+            pe.rutafija.audit.application.AuditChanges.fields("year",vehicle.getYear(),request.year()),
+            pe.rutafija.audit.application.AuditChanges.masked("brand",vehicle.getBrand(),optionalText(request.brand())),
+            pe.rutafija.audit.application.AuditChanges.masked("model",vehicle.getModel(),optionalText(request.model())),
+            pe.rutafija.audit.application.AuditChanges.masked("color",vehicle.getColor(),optionalText(request.color())));
         vehicle.update(
                 request.plate(),
                 request.brand(),
@@ -336,18 +387,26 @@ public class FleetManagementService {
                 request.year(),
                 request.color()
         );
-        auditService.record(actor, "VEHICLE_UPDATED", "VEHICLE", vehicle.getId(), Map.of());
+        auditService.record(actor, "VEHICLE_UPDATED", "VEHICLE", vehicle.getId(), Map.of("changes",vehicleChanges,"reasonRequired",false));
         return VehicleResponse.from(vehicle);
     }
 
     @Transactional
     public VehicleResponse changeVehicleStatus(UUID vehicleId, VehicleStatusRequest request) {
-        AppUser actor = currentUserService.requireTenantActor();
+        AppUser actor = fleetWriter();
         Vehicle vehicle = findTenantVehicle(vehicleId, actor.getOrganizationId());
+        if(qualification.safetyVehicleBlocks(vehicleId,actor.getOrganizationId())&&request.status()!=pe.rutafija.fleet.domain.VehicleStatus.INACTIVO)
+            throw conflict("La unidad conserva atención segura pendiente; su revisión no se sustituye desde el estado ordinario.");
+        if (request.status() == pe.rutafija.fleet.domain.VehicleStatus.MANTENIMIENTO
+                || (vehicle.getStatus() == pe.rutafija.fleet.domain.VehicleStatus.MANTENIMIENTO
+                    && request.status() == pe.rutafija.fleet.domain.VehicleStatus.DISPONIBLE)) {
+            throw conflict("Gestiona la programación y el retorno real desde Mantenimiento, con motivo y comprobación.");
+        }
         if (request.status() != pe.rutafija.fleet.domain.VehicleStatus.DISPONIBLE
                 && assignmentRepository.existsByVehicle_IdAndStatusIn(vehicle.getId(), ACTIVE_OPERATION_STATUSES)) {
             throw conflict("No puede cambiar la disponibilidad del vehículo con asignaciones programadas o en servicio");
         }
+        var previousStatus=vehicle.getStatus();
         try {
             vehicle.changeAdministrativeStatus(request.status());
         } catch (IllegalArgumentException exception) {
@@ -362,17 +421,27 @@ public class FleetManagementService {
                 "VEHICLE_STATUS_CHANGED",
                 "VEHICLE",
                 vehicle.getId(),
-                Map.of("status", vehicle.getStatus().name())
+                Map.of("status", vehicle.getStatus().name(),"changes",pe.rutafija.audit.application.AuditChanges.fields("status",previousStatus,vehicle.getStatus()))
         );
         return VehicleResponse.from(vehicle);
     }
 
     @Transactional
     public DriverDetailResponse linkVehicle(UUID driverId, UUID vehicleId) {
+        rejectLegacyPeriodChange();
         AppUser actor = currentUserService.requireTenantActor();
-        Driver driver = findTenantDriver(driverId, actor.getOrganizationId());
-        Vehicle vehicle = findTenantVehicle(vehicleId, actor.getOrganizationId());
+        // All link writers acquire Driver -> Vehicle, including an absent link.
+        Driver driver = driverRepository.lockByIdAndOrganizationId(driverId, actor.getOrganizationId())
+                .orElseThrow(this::notFound);
+        Vehicle vehicle = vehicleRepository.lockByIdAndOrganizationId(vehicleId, actor.getOrganizationId())
+                .orElseThrow(this::notFound);
         ensureLinkEligible(driver, vehicle);
+        if (driverVehicleLinkRepository.existsByDriver_IdAndActiveTrueAndVehicle_IdNot(driverId, vehicleId)) {
+            throw conflict("El conductor ya tiene una unidad vinculada activa; se requiere la desvinculacion autorizada antes de otra vinculacion.");
+        }
+        if (driverVehicleLinkRepository.existsByVehicle_IdAndActiveTrueAndDriver_IdNot(vehicleId, driverId)) {
+            throw conflict("La unidad ya tiene un conductor vinculado activo; no se permiten vinculos simultaneos.");
+        }
 
         DriverVehicleLink link = driverVehicleLinkRepository.findByDriver_IdAndVehicle_Id(
                 driver.getId(),
@@ -399,9 +468,11 @@ public class FleetManagementService {
 
     @Transactional
     public void unlinkVehicle(UUID driverId, UUID vehicleId) {
+        rejectLegacyPeriodChange();
         AppUser actor = currentUserService.requireTenantActor();
-        Driver driver = findTenantDriver(driverId, actor.getOrganizationId());
-        findTenantVehicle(vehicleId, actor.getOrganizationId());
+        Driver driver = driverRepository.lockByIdAndOrganizationId(driverId, actor.getOrganizationId())
+                .orElseThrow(this::notFound);
+        vehicleRepository.lockByIdAndOrganizationId(vehicleId, actor.getOrganizationId()).orElseThrow(this::notFound);
         DriverVehicleLink link = driverVehicleLinkRepository.findByDriver_IdAndVehicle_Id(driver.getId(), vehicleId)
                 .filter(DriverVehicleLink::isActive)
                 .orElseThrow(this::notFound);
@@ -416,9 +487,11 @@ public class FleetManagementService {
 
     @Transactional
     public DriverDetailResponse markPrimaryVehicle(UUID driverId, UUID vehicleId) {
+        rejectLegacyPeriodChange();
         AppUser actor = currentUserService.requireTenantActor();
-        Driver driver = findTenantDriver(driverId, actor.getOrganizationId());
-        findTenantVehicle(vehicleId, actor.getOrganizationId());
+        Driver driver = driverRepository.lockByIdAndOrganizationId(driverId, actor.getOrganizationId())
+                .orElseThrow(this::notFound);
+        vehicleRepository.lockByIdAndOrganizationId(vehicleId, actor.getOrganizationId()).orElseThrow(this::notFound);
         DriverVehicleLink existing = driverVehicleLinkRepository.findByDriver_IdAndVehicle_Id(driver.getId(), vehicleId)
                 .filter(DriverVehicleLink::isActive)
                 .orElseThrow(this::notFound);
@@ -465,6 +538,8 @@ public class FleetManagementService {
     }
 
     private void ensureLinkEligible(Driver driver, Vehicle vehicle) {
+        provisioningPolicy.requireApproved(driver.getUser() == null ? null : driver.getUser().getId(),
+                driver.getOrganizationId(), driver.getId());
         if (!driver.isActive()) {
             throw invalidDriver("El conductor no está activo");
         }
@@ -490,6 +565,10 @@ public class FleetManagementService {
         return group;
     }
 
+    private AppUser fleetWriter() {
+        AppUser actor=currentUserService.requireTenantActor();scheduling.acquire(actor.getOrganizationId());return actor;
+    }
+
     private Driver findTenantDriver(UUID driverId, UUID organizationId) {
         return driverRepository.findByIdAndOrganization_Id(driverId, organizationId)
                 .orElseThrow(this::notFound);
@@ -510,6 +589,10 @@ public class FleetManagementService {
             return "";
         }
         return value.strip().toLowerCase(Locale.ROOT);
+    }
+
+    private static String optionalText(String value) {
+        return value == null || value.isBlank() ? null : value.strip();
     }
 
     private ApplicationException notFound() {

@@ -1,0 +1,48 @@
+{
+  "observedAt": "2026-10-19T09:52:36.372787+00:00",
+  "result": "PASS",
+  "files": [
+    {
+      "path": "backups/L-00-2026-10-13-final3/source-snapshot.zip",
+      "expectedSha256": "3806510606A1565F23B8C526A13CC1049BC79141BABDB8E1316F042488B3D11B",
+      "actualSha256": "3806510606A1565F23B8C526A13CC1049BC79141BABDB8E1316F042488B3D11B",
+      "preserved": true
+    },
+    {
+      "path": "docs/evidencia/L-00/source-manifest.sha256",
+      "expectedSha256": "E78D7002D5C85B24200BE21B8FD88CE770D36333CA49CAA5351248CFD0E28BAD",
+      "actualSha256": "E78D7002D5C85B24200BE21B8FD88CE770D36333CA49CAA5351248CFD0E28BAD",
+      "preserved": true
+    },
+    {
+      "path": "docs/legal/publicado/terminos-admin-v1.0.0.md",
+      "expectedSha256": "20FFD9525CB19EC51387BF11859CF34100A5117B00DE8F428BFEB8B9A4DC6417",
+      "actualSha256": "20FFD9525CB19EC51387BF11859CF34100A5117B00DE8F428BFEB8B9A4DC6417",
+      "preserved": true
+    },
+    {
+      "path": "docs/actas/L-01-cierre-funcional-local-2026-10-17.md",
+      "expectedSha256": "C9BF0FE7EA79C5DBFD77B9883BF21673E29EA3B6FE5D22A6ECB6119BEBEFF227",
+      "actualSha256": "C9BF0FE7EA79C5DBFD77B9883BF21673E29EA3B6FE5D22A6ECB6119BEBEFF227",
+      "preserved": true
+    },
+    {
+      "path": "docs/evidencia/L-01/ensayos-humanos-140c10a1-be0f-4d08-a6d4-c796e2ed107a/observacion-1792227077200.json",
+      "expectedSha256": "9319F045F65FD4EE61B9A07EDEC3000E5EA6AC0E75618D99E2C4896843B8A719",
+      "actualSha256": "9319F045F65FD4EE61B9A07EDEC3000E5EA6AC0E75618D99E2C4896843B8A719",
+      "preserved": true
+    },
+    {
+      "path": "docs/evidencia/L-01/ensayos-humanos-140c10a1-be0f-4d08-a6d4-c796e2ed107a/observacion-1792287275662.json",
+      "expectedSha256": "E0A986D10E09F8FBB289061753B3E36759B0CAE24E53731EDE4BBA8640D5FFFB",
+      "actualSha256": "E0A986D10E09F8FBB289061753B3E36759B0CAE24E53731EDE4BBA8640D5FFFB",
+      "preserved": true
+    },
+    {
+      "path": "artifacts/L-01-superadmin-titular-2026-10-17/ruta-fija-recovery-cli.jar",
+      "expectedSha256": "91913FF7C11CABFAA01881FCBFB24BBF5ED347564C0140D73A757BC96D38E24A",
+      "actualSha256": "91913FF7C11CABFAA01881FCBFB24BBF5ED347564C0140D73A757BC96D38E24A",
+      "preserved": true
+    }
+  ]
+}

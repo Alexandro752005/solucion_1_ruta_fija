@@ -1,0 +1,14 @@
+{
+  "observedAt": "2026-10-21T16:54:53.926034200Z",
+  "result": "PASS_READ_ONLY",
+  "database": "ruta_fija_test",
+  "role": "rf_test",
+  "auditCount": 282,
+  "auditSha256": "29f34e1bc3c58aca3d1c9a2098b2b0a16ade30206122e2ce7415166b60b8eded",
+  "globalCleanup": false,
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 5
+  }
+}

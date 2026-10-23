@@ -1,0 +1,3252 @@
+﻿[
+    {
+        "path":  "backend/pom.xml",
+        "sha256":  "55ec13d4ec18cbdfc94c61b220461e9d9b285b35f766eea51f0851ff838b7f55",
+        "bytes":  5678
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/adminlifecycle/api/AdminLifecycleContract.java",
+        "sha256":  "7cd2e3896d8706d55c6ae5c23a4bcfaf7e998d1570fefe1be9b4337bf03d173f",
+        "bytes":  3174
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/adminlifecycle/api/AdminLifecycleController.java",
+        "sha256":  "e86a51d5da30162548f5c7874eb1e3f56eedf4eee59f93c003f6be85f2006219",
+        "bytes":  4426
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/adminlifecycle/application/AdminLifecycleService.java",
+        "sha256":  "405adfa553df08c9f55181bc2b3a2d2c396dd803fdfaaf8a78480e29bf45e63d",
+        "bytes":  18402
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/adminlifecycle/infrastructure/AdminActivationRepository.java",
+        "sha256":  "1a61b21c4207ec95fe982bf2fe9625422dbee80b4f0aa505f580e5c36586b8b6",
+        "bytes":  7074
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/audit/api/AuditEventController.java",
+        "sha256":  "eb4a3bc84f0821d66a8bbf5e64d1d4fd30395c9e6862a4b977cc4fae81568e43",
+        "bytes":  2896
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/audit/api/dto/AuditEventResponse.java",
+        "sha256":  "beced19c478de3af0473dcecd3fdf525efedb5424ef3574fbd5fde02d24c6d5d",
+        "bytes":  1492
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/audit/api/PlatformAuditEventController.java",
+        "sha256":  "86211da2d005441cdaddddcae68168c202ff60ae285eee0628395710a32b4059",
+        "bytes":  1727
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/audit/application/AuditChanges.java",
+        "sha256":  "c3aa57ca9fa1386b247de97aa58d6b58fc3ab60647fd9fafeaf959ac8a4e6180",
+        "bytes":  1505
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/audit/application/AuditCorrelationId.java",
+        "sha256":  "0f5a2aac566b35435a1fa8fad9cc10e8cdd30b05002f8de4520984f1357aa04d",
+        "bytes":  441
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/audit/application/AuditMetadataPolicy.java",
+        "sha256":  "6d506062c4e418363d6a1cab19bdb2df5bd7fac47fcb92c0381bf787bce23f05",
+        "bytes":  4708
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/audit/application/AuditQueryService.java",
+        "sha256":  "915ecd2b78ccb4a2b289dede6f732fbfe87d7960d6c151ad132e6deeb96cca2b",
+        "bytes":  4769
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/audit/application/AuditService.java",
+        "sha256":  "2d33711e7927d35b35b2d8d623450bfe64b1b0519eb27cd51e2f9a37234c06f5",
+        "bytes":  3264
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/audit/application/SecurityDenialRecorder.java",
+        "sha256":  "ce9bb2911abb8de184e370d6217b787d7eb21155f5fe6013e5647fe93dc8bb56",
+        "bytes":  2058
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/audit/domain/AuditEvent.java",
+        "sha256":  "0ff1e3dc29bd514070ed97760f6f49d454ea17f4fb36e0e3d4b5bcb7522c362b",
+        "bytes":  2907
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/audit/infrastructure/AuditEventRepository.java",
+        "sha256":  "e264513a957fcc689047f6e1403439441c0f817d70621b3c1013b4f9a0e7f43b",
+        "bytes":  921
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/audit/infrastructure/AuditEventSpecifications.java",
+        "sha256":  "0f44e355d91996db3e912de4e895051d1179bbcd654b0544b6ff1e10a6f71f3a",
+        "bytes":  2931
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/audit/package-info.java",
+        "sha256":  "7ea24826b5b5337689229ac639f47be6e6b7ceb11e05d25c82c4e1b097eca02f",
+        "bytes":  81
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/availability/domain/AvailabilityPolicy.java",
+        "sha256":  "eeb1ebdbc44b23c6f34ca64331e57de645a9476fe3b495aeab7d9b6764dfe33c",
+        "bytes":  2715
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/availability/monitor/AvailabilityMonitor.java",
+        "sha256":  "7facb14c2947a68f7f3801123b0656c83e8dcb0f999ce002aca298aa206d943b",
+        "bytes":  5671
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/availability/monitor/AvailabilityMonitorCli.java",
+        "sha256":  "2ea4fbeb5200849b16bf99226999800a36ecb1cb3f7f769192e333d44ab875e6",
+        "bytes":  8563
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/availability/monitor/HttpAvailabilityProbe.java",
+        "sha256":  "dfb3be8636f5995f4228db8a7b2b15b5358b5411c907d36c925b7f9a5820403d",
+        "bytes":  7158
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/availability/monitor/LocalAlertAdapter.java",
+        "sha256":  "36d16866ee4e79a51d089fb020b470021703b074e0354fa17a4dfa8672588ce3",
+        "bytes":  2473
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/availability/monitor/MonitorConfiguration.java",
+        "sha256":  "89a820a6924e0c0b2c36e93dea30cfb0159940b88644ca83dd8756864388accd",
+        "bytes":  3180
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/availability/monitor/MonitorJournal.java",
+        "sha256":  "5bd246f0b21d0834d60a699453a2e9c64afbde86534b8aeee2913a8b6673e896",
+        "bytes":  5615
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/availability/monitor/ProbeResult.java",
+        "sha256":  "263f963f0721b0d615a3a1d2eb3d746f315d523dd028a48437cfd9519dba59cf",
+        "bytes":  505
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/backup/AuthenticatedBackupArchive.java",
+        "sha256":  "b1193e59978fbba107786c80414e86a1d49a1a23e0d619fe13c2be65d372cc5c",
+        "bytes":  3703
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/backup/DatabaseIntegrity.java",
+        "sha256":  "394befad3c75b0df758910059bf721f748398296db49b838de2601d97d07796e",
+        "bytes":  4977
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/backup/IsolatedTestRestoreCli.java",
+        "sha256":  "2084d73856838c36b737d71d36938d7a373085a65d21a9f6c392d026da7f4c9b",
+        "bytes":  10851
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/backup/SqlLiteralArrayCast.java",
+        "sha256":  "8eff4db7d6aa1cf9700519c5908c6838800171c24caa3d39b71745df473d8688",
+        "bytes":  1318
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/backup/TestDatabaseBackupCli.java",
+        "sha256":  "bc9211fa7c342c4fe9b2710c9f6c76e7ee389d516177c3d2c503e17e31d55625",
+        "bytes":  7539
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/dashboard/api/DashboardContract.java",
+        "sha256":  "52321a5cbab43cfaac1c0b30a68285ea640f3e95b82634a6f26bf7c9f167d7d9",
+        "bytes":  597
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/dashboard/api/DashboardController.java",
+        "sha256":  "60d9ce6496f8f2e2237133ae7aec1ac96efb4c68ecc53040f80ae17108ee049a",
+        "bytes":  1057
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/dashboard/application/DashboardService.java",
+        "sha256":  "abc128767894ad59e6d5a2410fa3b3ba0053bff3da48ba1804a99dd5ba6b4ad0",
+        "bytes":  5092
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/DriverController.java",
+        "sha256":  "d15ef9007584929af7e2aeba07884878995018eebb2da08c36b9d575c1065406",
+        "bytes":  7218
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/dto/DriverCreateRequest.java",
+        "sha256":  "c5ee96a9e3f29df7f4d443b1742fd0fdc2127a3b80cb94c5f28323195f064ad3",
+        "bytes":  540
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/dto/DriverDetailResponse.java",
+        "sha256":  "76a068cc745a255b354530fcfd3dd4d712db8cff3adfc7044b66d5f36db1eb26",
+        "bytes":  361
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/dto/DriverResponse.java",
+        "sha256":  "e5e4821e57755c1558b03053d256f53bf23255efe100595d362c1d1c0f1c8e4e",
+        "bytes":  1496
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/dto/DriverUpdateRequest.java",
+        "sha256":  "2cadb2cda0e6dd6917b9b639bc4322450a5887146fbaff6896e414588ea65026",
+        "bytes":  540
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/dto/DriverVehicleResponse.java",
+        "sha256":  "ac458399f3b8dec4a4ef4efc59e337e6f9011ff4a202f5027a5bd2ec3ecd33ad",
+        "bytes":  825
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/dto/GroupResourceContract.java",
+        "sha256":  "a35e94d2f1aac8ac8fd5c6f41793bd7faf82e97959acccddd5516f969348fa51",
+        "bytes":  1128
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/dto/TransportGroupCreateRequest.java",
+        "sha256":  "18541e2ceca3f0abebe6805c2a2470e3cbf928beeff57db46eaed1809ecf33db",
+        "bytes":  270
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/dto/TransportGroupResponse.java",
+        "sha256":  "adc688c3aa98aff9653f976d1d5f4d5fbf4087a37095d29158680d56464189e4",
+        "bytes":  723
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/dto/TransportGroupUpdateRequest.java",
+        "sha256":  "647de68bd69db4732ba74e1c1f41acc7f98a96fe3842febddffaa351b4120a5f",
+        "bytes":  428
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/dto/VehicleCreateRequest.java",
+        "sha256":  "6132585ea7cc0ae919c997abe4b62383aceb8e41d5dd53ff8e990b53f479f218",
+        "bytes":  460
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/dto/VehicleResponse.java",
+        "sha256":  "4f0e14f36d472142e1e1560e4f18278e7371fdf888c3878a30809838bad94de4",
+        "bytes":  919
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/dto/VehicleStatusRequest.java",
+        "sha256":  "f9470a06ce8320c96a588a92c19e07860413878583744e22449c55f52cf5439a",
+        "bytes":  201
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/dto/VehicleUpdateRequest.java",
+        "sha256":  "173537328ac74392892f13787f4d2bf362d79223a6024be8256ce9a0e53f129e",
+        "bytes":  460
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/GroupMembershipController.java",
+        "sha256":  "deffd3cc4709c2c705c9cbb28229a0211a7dc0a28cad2dc3e59f8c64652a26a2",
+        "bytes":  1086
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/package-info.java",
+        "sha256":  "e64af5a485ebbde79c7b5eeb2460ab43d6c5000cf022130f4bd52c5535e48488",
+        "bytes":  107
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/TransportGroupController.java",
+        "sha256":  "5c043c0e6924dd672c77cca38d0366b0c642cba6fa84930b74114b6a84da6bfa",
+        "bytes":  4593
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/api/VehicleController.java",
+        "sha256":  "81ecaa74680f8fa79ccbeb946fa38f66210d662b45b83d1364822aeec5e60efb",
+        "bytes":  4540
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/application/FleetManagementService.java",
+        "sha256":  "3ee1a308be3b0cc1349d0d9da3c93d0aad094245819f6bd305b22ffdd481eb26",
+        "bytes":  30247
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/application/GroupMembershipService.java",
+        "sha256":  "fefbbd12a1905fbee020a1138c8810864204ec242b3a69e27713b446f91657d1",
+        "bytes":  8586
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/domain/Driver.java",
+        "sha256":  "25c8b847d7984b3bcd4f3b6cbfb9b9c723a2cc54729c05fd564eaa75fe5a97f9",
+        "bytes":  12397
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/domain/DriverAvailabilityStatus.java",
+        "sha256":  "95bb2feeec00a0b420d6fc0ed51a57735ab537cb328fb047fcb19e2c1501e5b6",
+        "bytes":  170
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/domain/DriverGroupMembership.java",
+        "sha256":  "0dfb9f7d66d0cd11832aba705a7e0b6a54b6dba9482f8c563e18deeee35d0e8e",
+        "bytes":  1094
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/domain/DriverVehicleLink.java",
+        "sha256":  "65cf8c2bc19d571d340e6c2a82e5d94dc22eff15b98dcec260c1f1da9db87e18",
+        "bytes":  2438
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/domain/DriverVehicleLinkId.java",
+        "sha256":  "695cef862e76ed52cf4309178c5071995db4f486aeff3c2b1293f8d06fc61a46",
+        "bytes":  1114
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/domain/GroupCoordinator.java",
+        "sha256":  "77456ad7377654e9563434eb0aa5a96a9cc81d8312cf7007250328650d3abc7e",
+        "bytes":  1291
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/domain/GroupCoordinatorId.java",
+        "sha256":  "c89fb5e4057929e8ecef4d22a775b74914d3452507b5d4588ebe287c8b398f31",
+        "bytes":  1078
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/domain/TransportGroup.java",
+        "sha256":  "30975ed375a5f224c5c6fd415bf381630561b5bdfffcbfaba1f2022caf1951d1",
+        "bytes":  3245
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/domain/Vehicle.java",
+        "sha256":  "5c357e872b2f4e06cafcad742723592d1ae80b46c69b5e422496018228aa1765",
+        "bytes":  6536
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/domain/VehicleStatus.java",
+        "sha256":  "dd47049440e8dda7055ebc9ca071b28116d7d1eae49fa6ba89fbacc16d0c95ba",
+        "bytes":  256
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/infrastructure/DriverRepository.java",
+        "sha256":  "373e902768d0f79fe995b553b1d888ac6fdf4d30441fdcca953a5427497cfe2e",
+        "bytes":  2918
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/infrastructure/DriverVehicleLinkRepository.java",
+        "sha256":  "95cdd305b31b31a32228324c16116cd0acfa98c8b8a44190282ea3292a39669f",
+        "bytes":  1521
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/infrastructure/GroupCoordinatorHistoryRepository.java",
+        "sha256":  "30eae81530a8ef1c7c56c206a22a2ce049f14079ff2134d965140478fc57beec",
+        "bytes":  784
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/infrastructure/package-info.java",
+        "sha256":  "e1cab1496a0730b7279e03e3ef6269d1c16e36ef14489139f8761d14ca3a9d91",
+        "bytes":  95
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/infrastructure/TransportGroupRepository.java",
+        "sha256":  "23a421d538d07dd229ae7a16a178cf1007e9e020e4debdd5bb7e50401962d5dc",
+        "bytes":  1563
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/infrastructure/VehicleRepository.java",
+        "sha256":  "88555ad87cee2bf382131b63d7cc17fbfa507f07d2bdfc285fca8fb0319827bf",
+        "bytes":  2395
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/package-info.java",
+        "sha256":  "bbd201142cc3a686410c05aef1923d736b08599b9a74ecbb886403424780024a",
+        "bytes":  114
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/AuthController.java",
+        "sha256":  "37b7c510f9479f95c6b8083610f61b391c16b51c2607e194b4d45e0f71284797",
+        "bytes":  7377
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/ConductorRecoveryAuthController.java",
+        "sha256":  "32e4746700762dcc47dd7f35da6f37a9c2895724e51133541989811375de1cce",
+        "bytes":  3296
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/ConductorRecoveryController.java",
+        "sha256":  "109f8aa3767e87551ce886b44bc43f81f86eb23e4cf327aea8b8811c9f46f94a",
+        "bytes":  3263
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/ConductorRecoveryOtpResendRequest.java",
+        "sha256":  "5c92dbe19103554bb0e02d1b739499e9700200e91c2600680dea9d6339e31de3",
+        "bytes":  243
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/AuthenticatedUserResponse.java",
+        "sha256":  "55255e282d4220a04c7560a2c328591254b98481d7b9afc56ddc09d8ce966c59",
+        "bytes":  739
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/AuthTokenResponse.java",
+        "sha256":  "20cfbd5fd063d9199782bd258e1e647ed9cf047499eebf25edd54e545afc8d27",
+        "bytes":  195
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/CompleteConductorPasswordResetRequest.java",
+        "sha256":  "3c26b035dd33f7b61ef59db200044fdfe15dddfb15d9be5caaf4add32bdfa3f3",
+        "bytes":  317
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/ConductorPasswordResetCompletedResponse.java",
+        "sha256":  "780bb1ab8f8a32680b71a1cda79b39ddb78ec9c4429672ca8a7884afc4ea8169",
+        "bytes":  226
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/ConductorRecoveryOtpResponse.java",
+        "sha256":  "e39c9544b00c3572f8d90b36cd20bf584c5d26974dcd6e97e45b29c5b6b5b7d5",
+        "bytes":  429
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/ConductorRecoveryStartedResponse.java",
+        "sha256":  "be64e9a2bfa06ba44cdd46e393eeded2e13839836f6fd625fa251c721715a73d",
+        "bytes":  448
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/ConductorRecoveryStatusResponse.java",
+        "sha256":  "c3d23af0461d63c579fbff3637d7e8176fb30ce7b98c61a902229b02d856c6fa",
+        "bytes":  1776
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/EmailOtpChallengeResponse.java",
+        "sha256":  "f6406359aa3f9573421b30cb75158b512f94a2d857ee5d506dc2076d253018b8",
+        "bytes":  597
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/EmailOtpResendRequest.java",
+        "sha256":  "c533c35a2500192bacc3142d508ffc57dada56a6746da05cf06089e6e7d4200c",
+        "bytes":  235
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/EmailOtpVerificationRequest.java",
+        "sha256":  "4c3b96fd79772726168a964fbfea0a93027a8bd60f4e2f5dae626292e4e1a807",
+        "bytes":  398
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/LoginRequest.java",
+        "sha256":  "07b9aaff2ac6d868f157bbe06d93ccf60885dc2f3da739197761c07869fa76f6",
+        "bytes":  606
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/MobileAuthenticatedUserResponse.java",
+        "sha256":  "090030169889b916a649050a8b9cd951437e8db4787c4a47d9d10c2f855e1dd6",
+        "bytes":  765
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/MobileAuthTokenResponse.java",
+        "sha256":  "9b8c3ce4f19d6810ebfe930620699826ae8a0c461e05d6388644d0a771e67cf6",
+        "bytes":  477
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/MobileLoginResponse.java",
+        "sha256":  "3d08e904f9d5bc06ed3328b5b053296f95fa884b64230daeea755674c9b61f18",
+        "bytes":  1306
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/MobileRefreshTokenRequest.java",
+        "sha256":  "aa19410623137b8751b766c716e794fde20662bf20d3a7e2bb8da954b9d87ad9",
+        "bytes":  353
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/StartConductorRecoveryRequest.java",
+        "sha256":  "b225553a35a8a30cc207bbed91c2c1618b0aa3f16bb6e234c73efe3edc705cb3",
+        "bytes":  707
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/SuperAdminRecoveryChallengeResponse.java",
+        "sha256":  "aa68ad63fbe76372ae7b12b959251ec36271222cf0d96b449a16be8e8ed87697",
+        "bytes":  316
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/SuperAdminRecoveryCompletionRequest.java",
+        "sha256":  "a1f1f26fa9edb5ebbf092826e3add004fd9cba59106a4094e16104e736e75502",
+        "bytes":  422
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/SuperAdminRecoveryCompletionResponse.java",
+        "sha256":  "fe54f577c5883c4b7bc369a98203acd477ef5b72b4e02646ec73eb97a1fde002",
+        "bytes":  225
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/SuperAdminRecoveryEnrollmentRequest.java",
+        "sha256":  "3e180ef77679796b471d6f37f61fad6d9ea3d977edefde556e078db535f19147",
+        "bytes":  310
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/SuperAdminRecoveryEnrollmentResponse.java",
+        "sha256":  "4bb5f79f46348a0803d779dfe82324ba9701eeaffe5fb4d680b968cf5222d06f",
+        "bytes":  285
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/SuperAdminRecoveryProofRequest.java",
+        "sha256":  "5b2a4b06e2bcf4cd9906992aec5d7682034ed84064cee3cc1a1c1f5241c3b128",
+        "bytes":  395
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/SuperAdminRecoveryProofResponse.java",
+        "sha256":  "25ab1a8df32206c7550e97bc690685c53ed1f8f6ee02cff3385ff5b378ef94b1",
+        "bytes":  245
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/SuperAdminRecoveryStartRequest.java",
+        "sha256":  "ee0dc9028c8100f351d360264b7895b2de630d468828787a3b43042fc7b9305c",
+        "bytes":  350
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/UserCreateRequest.java",
+        "sha256":  "3b8b028d31ab691e209005cdbd5b2f6bd6e3f0512dbab2f6dbc48831ba1dc83e",
+        "bytes":  547
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/UserResponse.java",
+        "sha256":  "101e9bb87daabaed01095750af208a6b1a3e3518f4ff56e99c36926194649b12",
+        "bytes":  934
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/UserUpdateRequest.java",
+        "sha256":  "d9c30727c99c84d55bdc727c3cbf5538f896749a617898abe863e37524a117eb",
+        "bytes":  485
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/VerifyConductorRecoveryOtpRequest.java",
+        "sha256":  "efee294539c2074c5b30d2ca4e01a8009e6dbca08f05e6adb48ecbb73eebfa65",
+        "bytes":  460
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/dto/WebLoginResponse.java",
+        "sha256":  "1593d782cf9a7b6b817b57716ebedb7716b7235ff5d7ac8dd8d60d5f9da14807",
+        "bytes":  971
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/MobileAuthController.java",
+        "sha256":  "42c137123fe79b5ac9b98db8d6c1017746dac9aeb94049b0c92ccd57b27e3351",
+        "bytes":  4758
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/RefreshCookieService.java",
+        "sha256":  "066601b9b433fc7e67964a6d329f0c5bb1ee058e68e16995b13fb2729d0b0bd9",
+        "bytes":  1257
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/SuperAdminRecoveryController.java",
+        "sha256":  "a780155ccdd1feb535081e3062a1ca8526e6a8b6d2e06d1e0f5d0cb4a0e44a5c",
+        "bytes":  6014
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/api/UserController.java",
+        "sha256":  "fe1d03159927ca483b0c86b5f4c0b6fefdd8644a59f115ce964cccde6f9981e2",
+        "bytes":  4766
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/AuthService.java",
+        "sha256":  "54809f18e2e6c4541133ddf3150cfbceecff1510f284965dbeff20901876c68a",
+        "bytes":  17864
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/ConductorRecoveryService.java",
+        "sha256":  "8bc201c009fae1e0a7871f5ab56d127a223cd460c045e3dea583644e3554eeb6",
+        "bytes":  16162
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/EmailOtpCodeRejectedException.java",
+        "sha256":  "19608c1292f33d3a3aaf4cd229e96d763aa85ad462ebbc43f95153ee9db30946",
+        "bytes":  824
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/EmailOtpService.java",
+        "sha256":  "2e21e37613d2a8a6225a033fbf22db278eaa20c6aaa1bb0b90174a9ed4395ad3",
+        "bytes":  23025
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/EmailOtpTicket.java",
+        "sha256":  "bd254b02c9c6d3cc3cead618e46b2537057708c8a51e3e77f489efd418f762c3",
+        "bytes":  232
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/IssuedSession.java",
+        "sha256":  "d5f81c859a723777ebb3e2aef9c918fc68ec862db7f14ef13b5b4b0e51ecd08a",
+        "bytes":  183
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/JwtService.java",
+        "sha256":  "7cd54ecc048e086e5fcc4ec22d2c593bc30a25a1c5ea6ce6aaf2d4b7a4e3cd52",
+        "bytes":  3334
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/LoginRateLimiter.java",
+        "sha256":  "c9f663b9b57a41af07978e7aa95f0172b530c4c68512963fdee50fed340467bd",
+        "bytes":  5159
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/MobileIssuedSession.java",
+        "sha256":  "fd218fedfdf2950278340c70db37d17b27f0cb7c52c830595b9903e476fbeb9b",
+        "bytes":  177
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/MobileLoginResult.java",
+        "sha256":  "d576821e8facdd6f15fae0d535eb14b8dcb3f14e89cff4b9ab451130ea8a413f",
+        "bytes":  230
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/OpaqueTokenService.java",
+        "sha256":  "7b306f94ef4c0859210369f4e6bdeed5d675cc564cec5ee64bf76fc34e780564",
+        "bytes":  2135
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/OtpCodeGenerator.java",
+        "sha256":  "51d24952a6487e27a35aacce717a4d1bce83d48dd616262df438534d7a2adcdf",
+        "bytes":  388
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/OtpCodeHasher.java",
+        "sha256":  "3968819583e58c853eb15c13390f80aabffc0880576df05ad990fc116332f036",
+        "bytes":  1398
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/OtpEmailSender.java",
+        "sha256":  "941807b584bf5db51b1c4193fbfed37b93be189d9a086d926f1151c95f4698ff",
+        "bytes":  249
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/RecoveryProofRejectedException.java",
+        "sha256":  "871bed4d2a997d7c382e62e22e59846de72a8f966c3b0fe25069fe9a45d6c0ec",
+        "bytes":  605
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/SuperAdminRecoveryService.java",
+        "sha256":  "393adc4c71777b67996a1a53d4753ff74e9f0229a90638f8111dc8df94b73ad5",
+        "bytes":  18715
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/UserManagementService.java",
+        "sha256":  "6240b5dbd46289e9d0670be2b7c2b118169cb40775c4eb7ce89a54f1e0bf8905",
+        "bytes":  10589
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/WebLoginResult.java",
+        "sha256":  "7f46d085dece315ff0b9abeacd2a9a1fa34cbbf2522b8b0757ac687c1e6dcf88",
+        "bytes":  221
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/domain/AppUser.java",
+        "sha256":  "88dcf35525eb1a18f7580677db1c470ace170bd1b814dc6c1b25f1e5e2a55912",
+        "bytes":  7633
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/domain/ConductorRecoveryRequest.java",
+        "sha256":  "50839238f437acee8850d6dcfe7e38ae16c0c02a5f3e5164166692f9bd4411c7",
+        "bytes":  9039
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/domain/ConductorRecoveryStatus.java",
+        "sha256":  "13161c952cf0eefac8086e5e24a87f062c10652406f6a588a4f1e69d1e3d8714",
+        "bytes":  152
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/domain/EmailOtpChallenge.java",
+        "sha256":  "139b2faf000f4e739027935b1f05bc99c55ac618e750bf577032f83b31152b97",
+        "bytes":  7921
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/domain/EmailOtpPurpose.java",
+        "sha256":  "4502faed8d1add33a576602c33c619f8d245baa149236ed1e8e3d3ac8e857dbd",
+        "bytes":  152
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/domain/RecoveryEvidenceMethod.java",
+        "sha256":  "028dd7dc541ee5b7660c509aa0eb484cc0202afb2f87e61038972deb61eefb3d",
+        "bytes":  117
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/domain/RefreshToken.java",
+        "sha256":  "ac2cffd12303b7f21f38bc1c395f9ce74ac69de0b609433da7c1c1edb447ce4f",
+        "bytes":  3007
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/domain/SuperAdminRecoveryChallenge.java",
+        "sha256":  "a8404269656dfe3aaea719ab5fa28b3ba2d8fe359cae01045fac0cf1976b69ec",
+        "bytes":  4356
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/domain/SuperAdminRecoveryCredential.java",
+        "sha256":  "8dd7013c5f407a6859e552a030f23eb14c2867981a7981a60081a48798fb1bed",
+        "bytes":  3125
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/domain/UserRole.java",
+        "sha256":  "d20c6812f4f5cc9225ae51a6526b9b48c0f3fb8a1dabac3604d3cad448ab0c00",
+        "bytes":  105
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/infrastructure/AppUserRepository.java",
+        "sha256":  "2c842d0f794b8880981a61d506e94d375c89603a1df2954c7cdd85ab83426a94",
+        "bytes":  2593
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/infrastructure/ConductorRecoveryRequestRepository.java",
+        "sha256":  "b6f70152089de0854a68825a94901a88cdaf82ba50540c86d0dc4e9f297b0d5e",
+        "bytes":  1662
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/infrastructure/DevDataSeeder.java",
+        "sha256":  "810bb56fb771e0138777b5d6a8e61c01c45c8829de597ac91f72cf6331b999f1",
+        "bytes":  3950
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/infrastructure/DevSeedProperties.java",
+        "sha256":  "211765d86812aaebf45a019ed0be56ba5bedcb43fbaf15f3f7bf2d9c41b078cb",
+        "bytes":  243
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/infrastructure/EmailOtpChallengeRepository.java",
+        "sha256":  "77f87da8e2277628fccab64985c978cf1655d9e1ecf063400569f47ecbd5ccb8",
+        "bytes":  973
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/infrastructure/RefreshTokenRepository.java",
+        "sha256":  "5b5776329086f4c61ba5242b243f726c9fe4fca9d70a9954b594445345e7db27",
+        "bytes":  1625
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/infrastructure/SmtpOtpEmailSender.java",
+        "sha256":  "fbb1fd67a5cfbc95624a94b0aa4f2ad9dc14997aa1ad045b35d38907d8554548",
+        "bytes":  3963
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/infrastructure/SuperAdminRecoveryChallengeRepository.java",
+        "sha256":  "642f97235c147cc231673bc789570c9db1f2fc577a07bb5546385af223c35429",
+        "bytes":  952
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/infrastructure/SuperAdminRecoveryCredentialRepository.java",
+        "sha256":  "48108d1551c49d8f110aee1553eeb6ae9ff80a4b9a58d9f8dc9509fdd746fef4",
+        "bytes":  908
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/package-info.java",
+        "sha256":  "2a423b4dbf35acdd0407157e70b2a266375bfc5cad0d80ca4b86a48dbb5a1587",
+        "bytes":  115
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/recoverycli/SuperAdminRecoveryCli.java",
+        "sha256":  "e57eaeadd28fff8904b1fa7f0f39b0c55a2f954577aba7087fca68d67777317e",
+        "bytes":  36701
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/invitation/api/dto/CreatedInvitationResponse.java",
+        "sha256":  "e99aa0447d2ce4c9e4cd3a0d43e77ceeb069e3deb42c3e5cdd493d695045ba78",
+        "bytes":  341
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/invitation/api/dto/CreateInvitationRequest.java",
+        "sha256":  "7a7213feb2960827290f7c21fec5f1a46e4a104322af9bdf263480e725d516c4",
+        "bytes":  288
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/invitation/api/dto/InvitationSummaryResponse.java",
+        "sha256":  "1e3326cbdcb6df7668d5cb8dbe9d467d80a5f5971b5695cfd0737656fcc8f4c2",
+        "bytes":  289
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/invitation/api/dto/InvitationValidationRequest.java",
+        "sha256":  "fbe6ed43252629784bc77d790384ea67a751bebaa7efbf8a8dd806bdcca71c2a",
+        "bytes":  313
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/invitation/api/dto/InvitationValidationResponse.java",
+        "sha256":  "e8345449dea5bb762ef7094728b76e593f143f7cd8b6ebab8dd600d7afbd4fc8",
+        "bytes":  362
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/invitation/api/InvitationController.java",
+        "sha256":  "da8b84e7d406c3752c39693b52721dc7cd7cbc62d4e8293d6f948ec7a2f8a6fe",
+        "bytes":  5042
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/invitation/application/InvitationCodeGenerator.java",
+        "sha256":  "f0bc1cddd7d8ad59152502feebcf53bfd7674dc130c9c8a65cc79406a7bfdd69",
+        "bytes":  397
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/invitation/application/InvitationCodeHasher.java",
+        "sha256":  "1d67b96be455aa5a2231e60553ae432c8942f02d406147252255aa7cff4fdf9e",
+        "bytes":  2053
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/invitation/application/InvitationService.java",
+        "sha256":  "407370f75bf06c203e87e24b09c848b245b44324da84105daf657bb9bd20466b",
+        "bytes":  11107
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/invitation/application/InvitationValidationResult.java",
+        "sha256":  "e69138037c3aae43b7ece301289d6927bcca92e5f14587dd4fdb95ce42f4f070",
+        "bytes":  718
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/invitation/infrastructure/InvitationJdbcRepository.java",
+        "sha256":  "a436dda2ff604072fb82bb0f968c098902489e9f7de71d1588fb3c6d0dc32e25",
+        "bytes":  9486
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/maintenance/api/MaintenanceContract.java",
+        "sha256":  "44b5d719504fd02d3db5ff84c71188e82cb27de501f949af42b27078a9a7ab4d",
+        "bytes":  1747
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/maintenance/api/VehicleMaintenanceController.java",
+        "sha256":  "1a92719fb4373f5a94b49ef092e0717f49789c48dd902f520722ba3465659d05",
+        "bytes":  1863
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/maintenance/application/VehicleMaintenanceService.java",
+        "sha256":  "7490fcad61167930514ac32c3ca2f131c1965c59ab0abeb95b437c27b16147eb",
+        "bytes":  15971
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/api/ConductorDocumentaryController.java",
+        "sha256":  "6042c3f367906a60de6d02eed65eb300f001ffb66208acb0fbd23ac36258e7d2",
+        "bytes":  3976
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/api/ConductorOnboardingAccessController.java",
+        "sha256":  "93d0d7e7be40cc803bc7343a4266625c12c73dc744d5ad82a18259088199b83b",
+        "bytes":  2853
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/api/ConductorOnboardingController.java",
+        "sha256":  "d1777dbc0a4e78a9b16110ab8580b39f1c614f961d0c550d836d26360c9884ca",
+        "bytes":  4979
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/api/DriverIncorporationStatusController.java",
+        "sha256":  "6a66f42c184217b291d0b65b9324f5ba891fece31783786a76023c0c1d9d4b86",
+        "bytes":  1000
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/api/dto/ConductorDocumentaryContract.java",
+        "sha256":  "03b8261ea7399d6ef38e7fde67b4ddb4eed5ff1350126b30acad45c4a3c741f0",
+        "bytes":  2798
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/api/dto/ConductorOnboardingAcceptedResponse.java",
+        "sha256":  "a42cc95a7b42ed900969f29769f08ae61bd28ccf3e76304b749461124f53fbe2",
+        "bytes":  168
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/api/dto/ConductorOnboardingExpedienteResponse.java",
+        "sha256":  "c73985f3b1d71d2054189743d57235cd3f6a8f4d61db43ceb74c2dc0c1e21df2",
+        "bytes":  325
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/api/dto/ConductorOnboardingOtpResponse.java",
+        "sha256":  "339f411b901f5800cf719db6a8b6e160b03b15ebf6c2d4c2535376aca323efb3",
+        "bytes":  246
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/api/dto/ConductorOnboardingRequestSummaryResponse.java",
+        "sha256":  "09e7d20a51a518b1c539b883e803f454f8a18c4b7d80d3132241513198321cbb",
+        "bytes":  257
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/api/dto/DriverIncorporationStatusResponse.java",
+        "sha256":  "799ec87668fa98418b3e6b97fbdd12374b5281956c0b141f2d6587f02f828d8a",
+        "bytes":  793
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/api/dto/ResendConductorOnboardingOtpRequest.java",
+        "sha256":  "e6cc1dcdadfe263b4c37d0b88b7b45493476189b3a1270838f6c6a222edf8fbf",
+        "bytes":  251
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/api/dto/StartConductorOnboardingRequest.java",
+        "sha256":  "59d498b271ab8b0426804c0ea566d72da13f7794a2657311434f22811eb615e7",
+        "bytes":  496
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/api/dto/VerifyConductorOnboardingOtpRequest.java",
+        "sha256":  "b451cca1a1b5bb265f64d1530afa12d807e6245eab3746acbb3a507a29cdc808",
+        "bytes":  359
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/application/ConductorDocumentaryCatalog.java",
+        "sha256":  "509e310ee64469e50e704aea106cfcce0b5f632035684aecd2eba7eb7f6bb62d",
+        "bytes":  2333
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/application/ConductorDocumentaryService.java",
+        "sha256":  "7fba05cfb0832dcd1de5be378c34e0ce58b2a7304ae3da6044bbdaf4f523726d",
+        "bytes":  32609
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/application/ConductorOnboardingAccessService.java",
+        "sha256":  "735aa103a54d4518b6c5a66574e8e9019a4fca409353952118ba11ab696aa82c",
+        "bytes":  4475
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/application/ConductorOnboardingReviewService.java",
+        "sha256":  "0712c1b398574fca68cef0e0f31e3d0fe469d6d301312be9d68c64254d715e48",
+        "bytes":  3364
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/application/ConductorOnboardingService.java",
+        "sha256":  "86e9999f406b558affe7c13ac1f6b77a52c9e92a975a9ab843ae161902a8abaa",
+        "bytes":  24274
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/application/DriverIncorporationStatusService.java",
+        "sha256":  "dda9ab55a23b8893f16bf8837fce5cca66ae17a9341d74b0c8f03924b09f5b4d",
+        "bytes":  9491
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/application/OnboardingInvitationRejectedException.java",
+        "sha256":  "9e0fd636b257dc9fbafc9f3a8168a19783379b6e5058ccc0d7ef7bc5bea0ec3e",
+        "bytes":  839
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/application/OnboardingOtpRejectedException.java",
+        "sha256":  "854a7a26a540eff80d3ccf63413ec24610adba690eb23f2c078fd8d1be6d6139",
+        "bytes":  829
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/infrastructure/ConductorDocumentaryRepository.java",
+        "sha256":  "44af68ba44f8406a0e9fdce78946f6bfbc90212518dc38c9439369b8749a05b4",
+        "bytes":  15197
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/infrastructure/ConductorOnboardingAccessRepository.java",
+        "sha256":  "ff23e2e1bc3009923f1e3e2ce0b294c57e8d142e3f848196ebff2a584a4e4926",
+        "bytes":  8397
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/infrastructure/ConductorOnboardingRepository.java",
+        "sha256":  "db5ecc6665fc66c34dd8adaacf73c945130224b83a138c621c7366fa724d58a1",
+        "bytes":  19026
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/AnnouncementAttentionContract.java",
+        "sha256":  "70690b8d08db315e8f1edbbfe77e791c9b08a5464da5e8a3cd6374ae561a3a44",
+        "bytes":  792
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/AnnouncementAttentionController.java",
+        "sha256":  "f872c19bd4f44d8618b0fa173bdac938f2ceaff62845d1c467cb8ab3e013f2b1",
+        "bytes":  1319
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/AnnouncementController.java",
+        "sha256":  "ba098c7539b4a8701f258c25011672671fae4a99eb2a5648bc5906cadb7dd83d",
+        "bytes":  2802
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/AssignmentController.java",
+        "sha256":  "81f928dff80757e4d65f8db04a34d82e3aa5fece61d86201b88dead009c0487a",
+        "bytes":  7622
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/AnnouncementCreateRequest.java",
+        "sha256":  "3a8414cb7a1bbb35e15fbe45dc724da28ec90ecbc57636546a287fc2edba08b1",
+        "bytes":  559
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/AnnouncementResponse.java",
+        "sha256":  "d984ba057ce625bc909247c92037a799e7d6075658cf88e0d8c61705fed939d3",
+        "bytes":  1088
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/AssignmentCancelRequest.java",
+        "sha256":  "43ec52d17f012d48eaf0a60c4ed8342019198b2d770afa05be950d6cbfc69bd5",
+        "bytes":  356
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/AssignmentCreateRequest.java",
+        "sha256":  "1e7881ac8b4d2e4590fea194cfdd829628a6f1683fddaef494374bf0d5c4b89b",
+        "bytes":  2340
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/AssignmentReportResponse.java",
+        "sha256":  "34065160654f927165bf8e740a6b5f6f61e2c6d84f5a86d645b7fae4bd570385",
+        "bytes":  273
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/AssignmentResponse.java",
+        "sha256":  "f874fd1601ccbd8df5b493905f5d51d6b11657c70ae0d382594657fe6dba38de",
+        "bytes":  4530
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/AssignmentUpdateRequest.java",
+        "sha256":  "c6fe25c718577d899b2591ee0fc196b06aa6f6e1b2d7129acb8416cf78219e7a",
+        "bytes":  652
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/AssignmentVersionRequest.java",
+        "sha256":  "590e4dccee1e2d5d76f825b3a9c39e4e3df4d536adf42c5146454613fe3f42b7",
+        "bytes":  205
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/AvailabilityReportResponse.java",
+        "sha256":  "4c896990e3d6338a072751b9a04258fcd30ea7fc068ab9e37c5e41d3aa14ef9e",
+        "bytes":  357
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/DriverAvailabilityRequest.java",
+        "sha256":  "ea2b2b7111c8248db7c36cd5b16b71196fc12580cd063661a0d060d5a80d86fb",
+        "bytes":  232
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/IncidentCreateRequest.java",
+        "sha256":  "648c90fbde05c5c250c14d5f6f8a3e18faa54570f411b71682bee721e4621fcd",
+        "bytes":  646
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/IncidentFollowUpRequest.java",
+        "sha256":  "1119100dfc52f5b5c5da8c5c72c721937bb5b9eb59e7e7aeab8204b35bdc85df",
+        "bytes":  426
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/IncidentReportResponse.java",
+        "sha256":  "a1626b67912d344216b90164516622418bf3b92f69e3ddccab00518b6766dbf8",
+        "bytes":  321
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/IncidentResponse.java",
+        "sha256":  "5436afbbde83ac37c5fdd48a8f864b22f0e1308a94b0d766f51c9d04ffe5b4c9",
+        "bytes":  3282
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileAnnouncementReadResponse.java",
+        "sha256":  "5880594153e205531df2dcfd01dd33792035783465fc13e3b1a7273949928350",
+        "bytes":  204
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileAnnouncementResponse.java",
+        "sha256":  "7460098a4e62629ad32f45d28022cc8772cf8d9868c99cbf29ea727d97cecee9",
+        "bytes":  943
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileAssignmentCommandRequest.java",
+        "sha256":  "56ee006a46bbf62859d723a8af0ced85b2d5d6cc1985acee5240880e78233678",
+        "bytes":  1402
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileAssignmentRejectRequest.java",
+        "sha256":  "c75359a91aa444ae656655be4e204045b21461217efa9f72ceadc0bfbbceaa5e",
+        "bytes":  926
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileAvailabilityRequest.java",
+        "sha256":  "0aebb445a86f0a34ed12029063e1fee5322d7dcf7ab0b68f34449ec49a5484dd",
+        "bytes":  239
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileAvailabilityResponse.java",
+        "sha256":  "1fe818daf6795ba0d6efb65aa2ff6c26a2e2d55ba00e6a1787c3bc4a3200e156",
+        "bytes":  662
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileDriverProfileResponse.java",
+        "sha256":  "c3638ef78a060bfb7b8ade7ec5ad62439b91c3202a2c77976c26e5029df4d0fd",
+        "bytes":  1542
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileGpsStartProof.java",
+        "sha256":  "19b4a99c422510250d74375c55aab66e7f811bd81e75e3bf3b5253d463677223",
+        "bytes":  567
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileIncidentCloseRequest.java",
+        "sha256":  "e5cd3a7a9011e5515eb223e743ca1aa53b66b8728e65f96a7c761135afa84a45",
+        "bytes":  320
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileIncidentCreateRequest.java",
+        "sha256":  "46eb2ae407be65596560ecb9d9b64176bacb8942f2f1dd6409ded351dbe37764",
+        "bytes":  690
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileLocationConsentRequest.java",
+        "sha256":  "54ed03010755857d99262067403f6fe648efd6335a9ab1b070bb4032825f2280",
+        "bytes":  329
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileLocationUpdateRequest.java",
+        "sha256":  "e22c1e08fcf7a5aad0c2746f3f87520ca88296d4d83dcfea54a041b7f1cf34a0",
+        "bytes":  1895
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileSyncEventRequest.java",
+        "sha256":  "e09a043a227268e9b4a4ee36ee31d9022988e15bfc28873d15c312b8200241cc",
+        "bytes":  862
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileSyncEventResult.java",
+        "sha256":  "ba69fac413407dc5cf50e0844774c24780b3343f6d43b6d4f0518bca75103dea",
+        "bytes":  307
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileSyncEventsRequest.java",
+        "sha256":  "1b20e00ab3d698c61d653a3e08aa32c53b9c326f6a3f8693c3ef4eb91cda0acd",
+        "bytes":  400
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileSyncEventsResponse.java",
+        "sha256":  "a428d2570fa9b231ae79918628a68901b44e3941c4269d2872585a8014d26f8b",
+        "bytes":  235
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileSyncEventStatus.java",
+        "sha256":  "2a8a23d91f4e378f98e7e54ea92cdfb252988b9c86e9f335c2c5201e639d46ce",
+        "bytes":  201
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileSyncEventType.java",
+        "sha256":  "23f2be2340bf5f14af4e04c1733ec718df7aa8af9cdcc42546955cd256668ab1",
+        "bytes":  221
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileVehicleResponse.java",
+        "sha256":  "f24d79e3d78ae5b9b2dd0f52c4143780e4211e83dc290d1e2afbeb58cf3b2a69",
+        "bytes":  204
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/OperationStreamTicketResponse.java",
+        "sha256":  "c176904f22e78303ca96a8ebbff12eccb4a7aa2dabf5f6fa692459ee972f2ae5",
+        "bytes":  217
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/package-info.java",
+        "sha256":  "5a9152f22705c9d66d87071dd9858943b6d70cf7e48912c98206abca865c20fb",
+        "bytes":  114
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/dto/StatusCountResponse.java",
+        "sha256":  "dd9acfd17061169ba6037370f3b51ad5f99fb09c0a1abca4960d666a1ca87edb",
+        "bytes":  105
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/IncidentController.java",
+        "sha256":  "6ceb44f96d6a253afda7f25ad70a105fda5fb1ea12fb647a9b027bc052616439",
+        "bytes":  4353
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/IncidentWorkflowContract.java",
+        "sha256":  "f3f1f6193e7504eae469cf626ea7aaaaad703539480a886e3509aba682bff06b",
+        "bytes":  1589
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/IncidentWorkflowController.java",
+        "sha256":  "6fa7d0a94253e408c679c0717f2c99b8aab478f4100eec156f4d6f3a48024b59",
+        "bytes":  1772
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/MobileAnnouncementController.java",
+        "sha256":  "d34c890bf5210fceaf428d99c2a9e57ef7282a1cc172e3e740d2b166c6350726",
+        "bytes":  3266
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/MobileAssignmentController.java",
+        "sha256":  "887c5b3663fba2803ded8d89f0f8264875504490fbcca1b2dd7783d5ee5772ab",
+        "bytes":  5489
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/MobileDriverController.java",
+        "sha256":  "cbec76b7e22ec33724bf76a8de188ab82ea9ea6a008f08e2bb17ca6c3fe9fcda",
+        "bytes":  4157
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/MobileIncidentController.java",
+        "sha256":  "39c30e8d4be6c0951ff2050ee4e5293d1eee782e3526556851ab1c5fbd9ea45f",
+        "bytes":  4786
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/MobileOfflineSyncController.java",
+        "sha256":  "bf504d310d764024e8bc6909742e06ec214f7725a9e38c2633b814329ab93f5f",
+        "bytes":  2180
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/OperationNoticeContract.java",
+        "sha256":  "e24406377a0f4365ff920e779dd255b107f5cc3b16e422d11c9ebc93f18f2be4",
+        "bytes":  340
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/OperationNoticeController.java",
+        "sha256":  "df7090559a25fd760201103807eeacd90fa6e696999ebeb17b541d34b1a9e539",
+        "bytes":  1827
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/OperationStreamController.java",
+        "sha256":  "7eaf4d667cfed591fae23de48b4881cb11b7ce3f3f9c9646a1f17967a9239f7a",
+        "bytes":  1232
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/ReportController.java",
+        "sha256":  "41448302a81db71a548830993ca5b92669f25d17006a76768e9c01a74b90991f",
+        "bytes":  5440
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/ScheduledServiceContract.java",
+        "sha256":  "a3b547f063af85381e778a54a6a468b8f7948a87d2386c810cd857b907718d74",
+        "bytes":  1225
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/ScheduledServiceController.java",
+        "sha256":  "97a89ff63f448ed2fde614f63eeecd15bc1e15369ff167de7b8f250949639c56",
+        "bytes":  1730
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/ServiceAttentionContract.java",
+        "sha256":  "1d559eb56ee1b86d817a6e5da308916653f6e546f4d4708f4adb302892d1c907",
+        "bytes":  1859
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/ServiceAttentionController.java",
+        "sha256":  "f13a402dc8d069557e2e3c4c1b20ccefbb8665f336fbb7c4c9642f508f5b8da6",
+        "bytes":  2035
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/ServiceExecutionController.java",
+        "sha256":  "b8ad5e14eca6cf954c572664914bcb2fc07cf2679b983f35bbb6b595551daabd",
+        "bytes":  2371
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/ServiceGpsContract.java",
+        "sha256":  "21b63ec271944affbb4dd949526e2db0f850c3a9feff439c92e834092396946f",
+        "bytes":  2033
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/ServiceGpsController.java",
+        "sha256":  "ebe765c24cf537a3bf137edadaf71cd4e6312e07d3b1dbc514741243dcc32713",
+        "bytes":  2773
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/ServiceHandoverContract.java",
+        "sha256":  "b67964d278cbfbe445124516a2b554646d8e0fab628e3f069baaf0778313ec86",
+        "bytes":  1451
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/ServiceHandoverController.java",
+        "sha256":  "407cc689edfb5383dc48bc07c9f90dbf77a8939add2605b503c4fdf3a3f2af95",
+        "bytes":  2639
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/ServiceTimeContract.java",
+        "sha256":  "a89521289ed54391054265dd7a5058d2f30ba7a5984edf24a4099817435faf55",
+        "bytes":  1549
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/ServiceTimeController.java",
+        "sha256":  "d61f651106ba1587a91a537b4caf51604ddeba221aef9a6e6ebded86a6607b56",
+        "bytes":  1530
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/ServiceTypeContract.java",
+        "sha256":  "e8797ecda94852ef9af7c4932f577a9402d19963693e48f96b9868700bf18c25",
+        "bytes":  1650
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/api/ServiceTypeController.java",
+        "sha256":  "71b6a98bd3925005263fe2e8a01f1f5f9bd222e942a084a6370d3dc5dbcd5729",
+        "bytes":  2486
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/AnnouncementDelivery.java",
+        "sha256":  "aa5c12ddb6b88b64cef33d36c9a4266b4dbc21f845a24e6e5cc6b44c121e5f28",
+        "bytes":  7125
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/AnnouncementService.java",
+        "sha256":  "f852783c2845ad4335e23beea4984d24ebd5408df9bf224c0dd44610ec157469",
+        "bytes":  6662
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/AssignmentCreationResult.java",
+        "sha256":  "57895b870044114346c9372ef6467a55da44580f4a98c33792e6257342bf6c02",
+        "bytes":  193
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/ExternalNoticeChannel.java",
+        "sha256":  "2e313a9300b42158cbedfa4f51d1ef60d03912a447568a6beabea2ba5e81c35d",
+        "bytes":  274
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/IncidentService.java",
+        "sha256":  "70c2a2de05273966de98b7a80e20728e0616e9578275bfd4dd1d9fda6f66e311",
+        "bytes":  8184
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/IncidentWorkflow.java",
+        "sha256":  "98a6307e09be2447d970c9705cf1285a46daa6972b7f4330fd22c04b1ea23b3e",
+        "bytes":  17063
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/MobileAnnouncementService.java",
+        "sha256":  "336d58f92c804b81bc87f4f0ff37f201412df23e6b6e9b125057906105252af4",
+        "bytes":  5691
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/MobileAssignmentService.java",
+        "sha256":  "351e34c9611fa21fd505064cbcf3fb056d95df54033453297ee8a05f965af988",
+        "bytes":  22883
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/MobileCommandExecution.java",
+        "sha256":  "3449aae8a0d9edabf336955fc4c8bc7d53ad3c67a040b17bb1210de5f3fc4462",
+        "bytes":  194
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/MobileCommandProcessor.java",
+        "sha256":  "90b45551692d742ff3d089e8f67d204dfcbcd9b0a1407db645f28e7f443f7ca4",
+        "bytes":  7750
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/MobileDriverService.java",
+        "sha256":  "f2fda0e956468d6dbd0d7650a0f1860f730ed7ef7082b05c27f3937b1c60f4b6",
+        "bytes":  16323
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/MobileIncidentService.java",
+        "sha256":  "e45b41d2eafe2b1240378d9da58cd8a0b6d5204f04d8257889b0825b46617328",
+        "bytes":  9516
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/MobileOfflineSyncService.java",
+        "sha256":  "95d9ebc3fe900abdfc0f3bed7751e02a936ab09148028f05278d7875272a8375",
+        "bytes":  5832
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/MobileOperationMaintenanceService.java",
+        "sha256":  "35e05751953ccf4b67847dbe4d2e5870c91442b25c1f712b2713c1e0cc5f7b43",
+        "bytes":  2517
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/OfferExpiryService.java",
+        "sha256":  "df97db1424b8184e683637202a508486e1bb4dcc8f42943ea30f56ad43a7e490",
+        "bytes":  2403
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/OfferSchedulingPolicy.java",
+        "sha256":  "9bfdb45bc2d467909c3468ccfe3ef65c94ad971a6cacf94bf0a58622837e2bb3",
+        "bytes":  9098
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/OperationChangedEvent.java",
+        "sha256":  "1d42d43a4f02c46225910006ce0bc0d3fb28a23932c28573230f93157a8a773f",
+        "bytes":  598
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/OperationEventPublisher.java",
+        "sha256":  "55ad06fd390fb3c6930eca9cc360efac53abfd72ae3bc998ddbebbf87a17c58d",
+        "bytes":  1166
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/OperationNoticeRecorder.java",
+        "sha256":  "77f6a92854ca0675464ae649afbfaa1843f137ff8bcdddd63f496e784329cd97",
+        "bytes":  6010
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/OperationNoticeService.java",
+        "sha256":  "987fa1e72069a36f4420da486c2b0f68c3782bae5e7100e123c16fb9b9616255",
+        "bytes":  4353
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/OperationService.java",
+        "sha256":  "1b5dbcab9795060305409fc0c2a463174bdcfa0e1cc8cde6cce09b0c31343c9a",
+        "bytes":  28083
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/OrganizationSchedulingLock.java",
+        "sha256":  "acb3200cf8df70f5164faac702c69a5d0305224f5ac5b2539d9f28d82deba951",
+        "bytes":  569
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/package-info.java",
+        "sha256":  "22da445e66f2db0fba001227dbcb65f83001e39a497f738e263d0834ff7a67f5",
+        "bytes":  120
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/ReportExport.java",
+        "sha256":  "0d3fdfd535f04b56b4cb2820f78e71d50338bab44b2abe30c1326370241e5a69",
+        "bytes":  175
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/ReportExportFormat.java",
+        "sha256":  "b6a484530c9fecdb7053f88b3951e32b678f5bb472f9ab945096305c72198a27",
+        "bytes":  741
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/ReportExportService.java",
+        "sha256":  "c5062521e7f11ee7f3194ff481f93c66cd71f039e2d2ea4112727193ba53f115",
+        "bytes":  13306
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/ReportService.java",
+        "sha256":  "dae3feec8693f97ff2b2e91a50a0078a2fab0bd35ed78218bd1118ea2cf86272",
+        "bytes":  8618
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/ScheduledServiceDispatch.java",
+        "sha256":  "0fb387f025406b0fd40e45222dd234269a0b3b8d67df7a8c1c5b34ad8a5c1a28",
+        "bytes":  8382
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/ScheduledServiceStore.java",
+        "sha256":  "f795756b855e6bb71aa552aa4d74135723990c4b8dcbccdf9243630014402a7e",
+        "bytes":  3606
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/ServiceAttention.java",
+        "sha256":  "45f96f6e8b47c439d4bf4b1b667f5ff9ef966f72aff18de97d8ce7d57231295f",
+        "bytes":  15981
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/ServiceExecution.java",
+        "sha256":  "0beba2536fa48812e86b220ec3db3720ff29f5affe6cea97b19a402fd70c3452",
+        "bytes":  7229
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/ServiceGpsAccess.java",
+        "sha256":  "1440f91531eae1c50cd0a5e1a8ddca0ff8d39bb46c352c34b17c3c621b192c01",
+        "bytes":  13666
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/ServiceGpsRetention.java",
+        "sha256":  "3578cd31b3a6d62dea5cffa655cac1f9cecbb62bf374f0d74e5d5b1549880557",
+        "bytes":  1903
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/ServiceHandover.java",
+        "sha256":  "b78babde821097062b0dcee5bb484512999fa6ae236763520be69545aba539f3",
+        "bytes":  18838
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/ServiceTimeCorrections.java",
+        "sha256":  "c26ccba0a5b7f2ad6edd62fc0afd8691a02ea0b88b963c63fef62c79c864af36",
+        "bytes":  15501
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/ServiceTypeService.java",
+        "sha256":  "2d5d5484b1ebfd04d7a1eaeadedc37a46388b0b5d89570e0c027d938eea6ca42",
+        "bytes":  9381
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/config/MobileOperationProperties.java",
+        "sha256":  "117fb1fcadf84b88ca0c615dd8fc5a7abafdd704e941eab1e686e0b6e4d2df95",
+        "bytes":  1074
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/config/OperationProperties.java",
+        "sha256":  "1449d277249d549b2858b0184d42f17885afee84ea59a8abef154b7ae2b89b52",
+        "bytes":  475
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/domain/Announcement.java",
+        "sha256":  "34d5d94d147eaafe85cd21dfd5968c9ca4955988747820153c85c26fbb4f1a83",
+        "bytes":  4457
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/domain/AnnouncementAudienceType.java",
+        "sha256":  "cd3f7e4777976bedf310f7df3a86daef056ade08ca75a4206385ed4e69b46648",
+        "bytes":  176
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/domain/AnnouncementRecipient.java",
+        "sha256":  "0e5e716f2c936ec2b4e7f543e7ff5046b6589b57523d536bd7a86c5ab1979066",
+        "bytes":  731
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/domain/Assignment.java",
+        "sha256":  "ab2a685dfd1466798cf4063d0308d8e36deef3f8e9c8f44e3c98231dd21d5d79",
+        "bytes":  17676
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/domain/AssignmentResponseMode.java",
+        "sha256":  "c59350a2501078dafc43e737e4632ed4e2ebac78c11c3eb6ec932882877e4db4",
+        "bytes":  204
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/domain/AssignmentStatus.java",
+        "sha256":  "16d1447d9c8e716c7919962795f5bf6cd2a1f1f2d135d79397e92837f48c339a",
+        "bytes":  305
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/domain/Incident.java",
+        "sha256":  "6349fc9da30295d8a86d587a78e76fa56026355d63a97b935b633e1100ac27e7",
+        "bytes":  10583
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/domain/IncidentCategory.java",
+        "sha256":  "0d96a9a8af888d0402adbc133d70a6086227e8d690084693ce9e2d8e561cd3f4",
+        "bytes":  264
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/domain/IncidentSeverity.java",
+        "sha256":  "3bd5fbe3d11a2a64c02bbb94db40d9844fb15cd49bae7cd8285d01702a33b718",
+        "bytes":  202
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/domain/IncidentSource.java",
+        "sha256":  "ec208714ab0956858ffd1bb98f77c50cc907e98f5b7f0e12cfc0fb554aa84685",
+        "bytes":  194
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/domain/IncidentStatus.java",
+        "sha256":  "bcc82f18db0b2dba56bcbaa83d9a4966cc8e469768d9b70824f9c89a62029ee3",
+        "bytes":  130
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/domain/MobileCommandReceipt.java",
+        "sha256":  "b268fffb5a58cfc93fd3f180b8b3b5322ce89e456c14cecd8633517849c3cde6",
+        "bytes":  6149
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/domain/MobileCommandResultStatus.java",
+        "sha256":  "670bf85066447b90a9ed4b4d1da0979e851a1797de0720a17092b60afa5adca3",
+        "bytes":  172
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/domain/MobileCommandType.java",
+        "sha256":  "9f146b67930a850aca798928620ccedede116876126ae0c3568eddcc0f856a90",
+        "bytes":  331
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/domain/OfferResponseWindow.java",
+        "sha256":  "4a5a7539b83ef46def18126eac82db0de2aac983cc38c177ceda6b2407ec1810",
+        "bytes":  823
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/domain/package-info.java",
+        "sha256":  "5a88e0d7f93e39d207fe132d1f494d6537160ba9e8aa1430650ce7c9c635937c",
+        "bytes":  102
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/infrastructure/AnnouncementReceiptStore.java",
+        "sha256":  "22aeb208711ea3fecabc702e02f0d952386d2cd13e94286d806fc05f365ded3b",
+        "bytes":  2543
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/infrastructure/AnnouncementRepository.java",
+        "sha256":  "22d708f528c4c53966df04f3fe4bf412efe24ad349fd66bb25b331bd6229ad2f",
+        "bytes":  2636
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/infrastructure/AssignmentRepository.java",
+        "sha256":  "3d0346f70f27ef5ed19c6693a0c4ff55138657dce3c1d3ba27e5762c95877b4f",
+        "bytes":  6696
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/infrastructure/AssignmentSpecifications.java",
+        "sha256":  "9931839b7be69155d68b2c14650509a9d598cd83fd9025e6ce59322e45bb5ab2",
+        "bytes":  1685
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/infrastructure/DriverCurrentLocationStore.java",
+        "sha256":  "c3dd8f9e8ecb6b683ff6332e1c638cd6e26edb2d24b6fe27e9750a5e249566ac",
+        "bytes":  4313
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/infrastructure/IncidentRepository.java",
+        "sha256":  "9205ab88bb9dbaea4d699d80de3b6beda53364ef06b5df72aa1b7caf367830dc",
+        "bytes":  2460
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/infrastructure/IncidentSpecifications.java",
+        "sha256":  "54d7a6e6244df2180e680d1e45c09b054be5f71733ec67f5836d7bc52f35a0ec",
+        "bytes":  1725
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/infrastructure/MobileCommandReceiptRepository.java",
+        "sha256":  "1a8d8c9a1cb474f15f1b45b885d1178a29e6511c00c1f18d26bd90a2217d8cca",
+        "bytes":  522
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/infrastructure/OperationReportRepository.java",
+        "sha256":  "fa01b2dd9a6dbba4215b7d4ce4278bb67a0c16db1977cd35cfa68243d968d9e3",
+        "bytes":  4176
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/infrastructure/package-info.java",
+        "sha256":  "4af348c9264becd2c107136a03c92eb7b65235a923b9b362e9b7981b9292791b",
+        "bytes":  121
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/infrastructure/PostgresMobileEventLock.java",
+        "sha256":  "4f56c95b4d55d4c3362b09e4de69caba51f5b00616cc42b8553e91e09c65453d",
+        "bytes":  720
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/infrastructure/StatusTotal.java",
+        "sha256":  "88f48c5055f4c3bf0edd16b1b922ae7b90b6626148d5256c7a167dc9022be789",
+        "bytes":  191
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/infrastructure/UnconfiguredExternalNoticeChannel.java",
+        "sha256":  "62fa22f3124e48c3cfd7c3b2dffad3fd13278a3ba4827a70cc24da2fe1758f65",
+        "bytes":  456
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/realtime/OperationStreamBroadcaster.java",
+        "sha256":  "4a1b6f209110082bdd9e3e5049fad4b9713f64551c4a7c9fe1394e3628031842",
+        "bytes":  4700
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/realtime/OperationStreamHandshakeInterceptor.java",
+        "sha256":  "e895b1156c75af851921cfdde216703d1318f94fad886c39297698614c473709",
+        "bytes":  2785
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/realtime/OperationStreamTicket.java",
+        "sha256":  "04f3ab8c17ed12020c4e79e43f62f102a239810cf8373d6477f61f2527613bc6",
+        "bytes":  260
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/realtime/OperationStreamTicketService.java",
+        "sha256":  "90d0abf1119c393e1732e6b6134d703aac4753f97cce39db89c86552462ecd8f",
+        "bytes":  3391
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/realtime/OperationWebSocketConfig.java",
+        "sha256":  "29f5654da0d19e7274d3050e97c8e1d67bc304aceb41f34c129deefab50e6d90",
+        "bytes":  1356
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/realtime/OperationWebSocketHandler.java",
+        "sha256":  "968750034a1d3e61403ce52a0c0afd42764927a501e76078d5c72edda968d2d6",
+        "bytes":  2133
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/organization/api/dto/OrganizationCreateRequest.java",
+        "sha256":  "f4446d5fd5533dce0985273c6cf3ebfdfec2c390b88387021ae1d35ce3fa2222",
+        "bytes":  376
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/organization/api/dto/OrganizationResponse.java",
+        "sha256":  "1b5244ec2a207e700bff2f9e2c75a64953bb22eb431995c46675a925cb485438",
+        "bytes":  864
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/organization/api/dto/OrganizationUpdateRequest.java",
+        "sha256":  "775f10e0ab228946cbb7d1ab067c049155ec8d45eb580e6bf65e81ebce45a645",
+        "bytes":  479
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/organization/api/OrganizationController.java",
+        "sha256":  "867567e1c5e6dbb561f5d80aafd6d1b15aa50e98e097ce6f3a060eef44fa7e2b",
+        "bytes":  3591
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/organization/api/package-info.java",
+        "sha256":  "3389ab685dfe4faae23d4d9ba385d563881c3a857384332bff7bd4f3b05dc3cb",
+        "bytes":  113
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/organization/application/OrganizationManagementService.java",
+        "sha256":  "107a37f1cd282757f8b53f6c7ee65a3c04776672fa83f779ccce286c55f2a629",
+        "bytes":  5195
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/organization/application/package-info.java",
+        "sha256":  "7284ca4904d51424670da67a48255261edd9a67db654343b1e54cef7f38b4973",
+        "bytes":  122
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/organization/domain/Organization.java",
+        "sha256":  "64536ed0635de560211240b12b33d371d3389674559dc70d1c8fbb1563af675a",
+        "bytes":  3136
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/organization/domain/OrganizationStatus.java",
+        "sha256":  "4316ce97a64f266a5ab4a6dfe7a9cb1a18038f8663e43de2d54b6189fb784e99",
+        "bytes":  117
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/organization/infrastructure/OrganizationRepository.java",
+        "sha256":  "f1ae7b7610da88bbf31e0e0578f2c533c0a392989f7f9b7d5d2d6c9b7f76a25a",
+        "bytes":  628
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/organization/package-info.java",
+        "sha256":  "7ddfee8d5926dc6d5801a7fb06ab6b931e64a9530ce96cda0928a8a889f5765f",
+        "bytes":  107
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/personidentity/api/PersonIdentityContract.java",
+        "sha256":  "91bc989473419a456c29ab1128c6f3a9cb5296eb98bb766c057241f2e5d9f79f",
+        "bytes":  1261
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/personidentity/api/PersonIdentityController.java",
+        "sha256":  "2754ea003b4a13b829a7c69804ef7559ba69d1d5aaa53d8af140f9ac0c955a67",
+        "bytes":  1629
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/personidentity/application/PersonIdentityGateAuthorizationManager.java",
+        "sha256":  "70c767be9b839e5c06fa66bfc0bf16cbd5c5c778eebd3fe34fd1f4939f16d877",
+        "bytes":  2599
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/personidentity/application/PersonIdentityService.java",
+        "sha256":  "b5137615e937bb5c64e8eacd1dd2a097b6a01ddef5dfa6ff737f652f5cc4c8ed",
+        "bytes":  12949
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/personidentity/infrastructure/PersonIdentityRepository.java",
+        "sha256":  "41bb27774e8900bbfcf3a6250636edb1d3527de1d6c81551e3d675fc9178ec73",
+        "bytes":  3652
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/pilotquota/application/ConductorProvisioningPolicy.java",
+        "sha256":  "976f1a947f17f4242a1865dcdace0996629f4e937245277ab001fc6152880736",
+        "bytes":  2774
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/pilotquota/application/PilotCreationQuotaService.java",
+        "sha256":  "6b64fff31f2e69d7e6396ac7d7c3931bb384897d26bdbcddb7b96203127dd707",
+        "bytes":  1616
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/preferences/api/MobilePreferencesContract.java",
+        "sha256":  "9bfede7a12acf2ce1153d435351756cc6df9e1d78271fece890e120d8da2e2fc",
+        "bytes":  582
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/preferences/api/MobilePreferencesController.java",
+        "sha256":  "563a4d912dd804d82ad12cd7ea371c7def1e5d8e201c44be1e6033c9315e11d5",
+        "bytes":  1059
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/preferences/application/MobilePreferencesService.java",
+        "sha256":  "7a0fda123960e05b0eebd8913eca7d805cac3fb153b3391d4466ac5e33b1020c",
+        "bytes":  3378
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/qualification/api/DriverQualificationController.java",
+        "sha256":  "cf9c5c3e8dda48133aeb643c346c8f7547b40b7e1feb5ce48a9f89e419f9610f",
+        "bytes":  4245
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/qualification/api/QualificationContract.java",
+        "sha256":  "b92335670f207f4ad7ec6b31db6efbbb6ec255fe9b5414802ab2ea34d004bedd",
+        "bytes":  4381
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/qualification/application/DriverQualificationService.java",
+        "sha256":  "008a5c0e4e32c40496c33fdc5ec3c5282cbccaa6f0857a0efb96059fe74c307c",
+        "bytes":  27589
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/qualification/application/OperationalQualificationPolicy.java",
+        "sha256":  "7f61f76aad24a645afdecab8b358b7660e9385d984cdc2f74dcc403fc6d5c792",
+        "bytes":  11015
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/qualification/application/QualificationCatalog.java",
+        "sha256":  "1d1a51a1efef58e53203cb71b18bf56a280dd7975999c99c639b8f25b0d9c077",
+        "bytes":  1812
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/qualification/application/QualificationMaintenanceService.java",
+        "sha256":  "ab3a95167c50528fd54f05194dd7ab287de9c779fc9062f9590014502662c474",
+        "bytes":  2436
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/qualification/infrastructure/QualificationRepository.java",
+        "sha256":  "08dfcfaaa21db642f3f1d8b00d33a6c71e0a0a57ffd60bb95ce4d423607bff86",
+        "bytes":  6852
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/reporting/api/ServiceReportContract.java",
+        "sha256":  "9fa9acdb2f5971fecfa0936d2df2c75772a7b1105f0058d6159d92548478e862",
+        "bytes":  1599
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/reporting/api/ServiceReportController.java",
+        "sha256":  "c95097e8450c520b04aca7434e6eb57de3fcbaea9d3125fb0ff3c42b052b1ca9",
+        "bytes":  2834
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/reporting/application/ServiceReportExport.java",
+        "sha256":  "7fd413e0d234adf0b253d9eccaeca017794f75def8323eda872a10006eea3171",
+        "bytes":  2571
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/reporting/application/ServiceReportQuery.java",
+        "sha256":  "3edcea13b0e2a4d94dcfa7c32c9c70c2b42632a61e276f9eb87462c6066764cd",
+        "bytes":  10141
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/reporting/application/ServiceReportService.java",
+        "sha256":  "e568ce46f4463b7939634e45387ccde3411d7b4f95d0bf1fba410c2f88ace973",
+        "bytes":  9504
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/retention/application/RetentionCalendar.java",
+        "sha256":  "6107b7182b17de3a4c83fa4a5b4a6c20b15e0ace18cfc0e8249ad3bd1b2011b8",
+        "bytes":  1132
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/retention/application/RetentionProcedure.java",
+        "sha256":  "bc3ed95e105202f1715e3fd516c68fa011bca949babadae6617a5e1a4bd50d4b",
+        "bytes":  14311
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/retention/cli/RetentionTechnicalCli.java",
+        "sha256":  "90fd73ae8779df514e1be6491540f6bce51b9958ff5dcbae26de3c18694d7ed6",
+        "bytes":  9834
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/routing/api/AssignmentRouteController.java",
+        "sha256":  "a869a585f8434b993857913abdd8784cb44d3a4aa8060bca2a8c0f62458414ef",
+        "bytes":  1786
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/routing/api/RouteContract.java",
+        "sha256":  "4efe19ba3d1d4c297ffa7ec4b8f2dc2782066c59ba9767bc66243614b394d363",
+        "bytes":  2073
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/routing/api/RouteController.java",
+        "sha256":  "a7b28dd74471806683d3ba4b282c3757b33bd0027ab8dea732035efd8dc0fcc3",
+        "bytes":  1737
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/routing/application/AssignmentRouteReplacementService.java",
+        "sha256":  "fd6a4c138205585e0e4d6324542220510fbca3fc07f5651a1fa4a8633ee9427f",
+        "bytes":  5497
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/routing/application/RouteCatalogService.java",
+        "sha256":  "552f9b235dd9c3231ac167e04caca1d8fb78b19ede6aae96b6dc772a1cd7f5d1",
+        "bytes":  12549
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/routing/application/RouteDeclarationService.java",
+        "sha256":  "b9ebb83bc819d0c2bad7af07ef35b6b7f9cef43f38b983baa935debeb5421111",
+        "bytes":  2975
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/routing/application/TerminalCorroborationPolicy.java",
+        "sha256":  "18888f315399f42f9535a6fd4a348582aaf1a53dc9952288baf5a759a9abe53b",
+        "bytes":  1584
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/RutaFijaApplication.java",
+        "sha256":  "c443ba86e91933b183ba09a50422928078c8d9289047d1790d9e6b7f15c782ec",
+        "bytes":  513
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/api/PageableFactory.java",
+        "sha256":  "82ecb1d2c3c5cc73ee5ca12b94fab1ff4a3115c43c62dd55182d2a6105ebbf9f",
+        "bytes":  1313
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/api/PageResponse.java",
+        "sha256":  "c1a19f65a920b0677cbfec4e58a30370ab9bb92bf86804f60896c1407a278691",
+        "bytes":  641
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/config/OpenApiConfig.java",
+        "sha256":  "e370054b642e80bd83e97c277137323fab25ea25668b33730e95c0bf0e04ee28",
+        "bytes":  3056
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/config/SecurityConfig.java",
+        "sha256":  "137b26c838163443f786ee7056023b9f76ddd14d1cfdf9f967e199f48528f694",
+        "bytes":  12818
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/config/SecurityProperties.java",
+        "sha256":  "e815037c78ae8e66fcc8b7da6ce5d4604d11dc6907383b91d36c16e7ff4d6150",
+        "bytes":  1492
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/config/TimeConfig.java",
+        "sha256":  "ab0263d8303d191e2e4049e4c2a96e4dbe95239559964eb9e9c21f439eaab46a",
+        "bytes":  292
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/exception/ApiErrorResponse.java",
+        "sha256":  "77154757c6773631b8d8764eff3ea395021cad0e5b5fb9faecdc0866bd3440e7",
+        "bytes":  736
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/exception/ApplicationException.java",
+        "sha256":  "acad25e026ddef91a30a275f3e0aa8072a4803166c50518ffdb3027bac47676a",
+        "bytes":  610
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/exception/ErrorCode.java",
+        "sha256":  "2171fe04e1fad4b062d2662e360609922e5ca2b200fbb292a9c4f8db53316fca",
+        "bytes":  1392
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/exception/ExternalServiceUnavailableException.java",
+        "sha256":  "8349609b5ad69f833fce2cc49ee06efde7f0787b553f79a6078dbe70d20824c5",
+        "bytes":  620
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/exception/FieldErrorDetail.java",
+        "sha256":  "35600372deef688eb840dc91ed1e3352cabc476b167ee7dca89540c444a9252c",
+        "bytes":  104
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/exception/GlobalExceptionHandler.java",
+        "sha256":  "bcca182a2440351403e02777b08945bceb8819536ddb8ca947e45dfe4d2a698b",
+        "bytes":  13938
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/exception/InvalidCredentialsException.java",
+        "sha256":  "ddd8c94c44b1b41158ff4da4c4cab374ced129864e8a8ca5ddff68ca7714d7aa",
+        "bytes":  486
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/exception/InvalidRefreshTokenException.java",
+        "sha256":  "cf478dce71676f6172355496df90a58cb17247c8bfc0270bded791d5f41c917f",
+        "bytes":  478
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/exception/RateLimitExceededException.java",
+        "sha256":  "67d92d1a88e109515de1902f3097cee4071a8d46b37948aea950f34d84a0c3bb",
+        "bytes":  727
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/exception/RefreshTokenReuseException.java",
+        "sha256":  "cdca9420fd880a55d5731554c9659c8448941384f642293f5534352ed9b8970c",
+        "bytes":  499
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/observability/CorrelationIdFilter.java",
+        "sha256":  "6315d2293d27ea8abef8aafc51dce23ae2b22e17d13d57d9ac5aa725282396dd",
+        "bytes":  1872
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/package-info.java",
+        "sha256":  "fa1783e2629ce507bf709e114709a2c4584d8db91d9293d8a1325c88719b0c46",
+        "bytes":  105
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/security/ApiOriginValidationFilter.java",
+        "sha256":  "13144842eb2d53782f7548c3a2ad426cb62356fe389c941087e3b2f135c78ebd",
+        "bytes":  3265
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/security/AuthenticatedUser.java",
+        "sha256":  "2f40270006b03b0a4cdc889377193b62335106482b4b9ef23287b2dbc6d40d21",
+        "bytes":  329
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/security/CurrentUserProvider.java",
+        "sha256":  "18721eba562689f93effee73550e7550d297d4f796ad9c860604a23dbbf093e0",
+        "bytes":  8087
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/security/CurrentUserService.java",
+        "sha256":  "48e923fb95a522f00a03d6c5b368c5f7a32cc94a12c1c51fe4b44fa2e7e874e2",
+        "bytes":  2807
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/security/JsonAccessDeniedHandler.java",
+        "sha256":  "cc2a811c074e7e138c6a51a5a8cd5c2dcc84c136d744570170e787fe1e421088",
+        "bytes":  1664
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/security/JsonAuthenticationEntryPoint.java",
+        "sha256":  "00b500e96dffa07b07567bb7b8f0e03ed2c3f24bb206be4f27da6589402a449f",
+        "bytes":  2606
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/security/MobileDriverActor.java",
+        "sha256":  "1b8223511284176dfda68a03d160c24718e7e2e4a95086cc46fce9e1a1e2d62e",
+        "bytes":  273
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/security/MobileDriverContextService.java",
+        "sha256":  "f336f93b60cb3d5dea77d2f1877b0aa79644dfbfc8667b053e65b597387c495d",
+        "bytes":  5389
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/security/PersonalDataView.java",
+        "sha256":  "5f508801d8b5a93fd44b648d1658dc5fca1f5a7898aaa9c76e8956306c2c0bd0",
+        "bytes":  375
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/security/SecurityDenialAuditFilter.java",
+        "sha256":  "237bc07e8d6e6529255c8c5bc349b0d1a500b661b25ab067e50ba7d669d1efa4",
+        "bytes":  2620
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/security/TrustedOriginValidator.java",
+        "sha256":  "0c631b3daa6819de615cedf8a8ed9bfae8aece31029c71ed8d5534230a96d5a7",
+        "bytes":  3638
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/terms/api/AdminTermsController.java",
+        "sha256":  "3e8090f782272fd89e23fbbb229be4732de944c7af0195249a2268b9923030c9",
+        "bytes":  2089
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/terms/api/dto/AcceptAdminTermsRequest.java",
+        "sha256":  "c7fb03a47e91629914730683d831e41f0e9bd9e164181d5efb2b8bf961682262",
+        "bytes":  468
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/terms/api/dto/AdminTermsAcceptanceResponse.java",
+        "sha256":  "adedf30760b3b3cf5ab69d0bf58f431f4ca45fd242f8acaa2f42c5eb1ec41d8c",
+        "bytes":  334
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/terms/api/dto/AdminTermsCurrentResponse.java",
+        "sha256":  "df544fdfde4c9eac3b0871f17141276cab6cb4d7ecb80a6b59d844588c5e4467",
+        "bytes":  296
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/terms/application/AdminTermsGateAuthorizationManager.java",
+        "sha256":  "fc243c2600a7508e958625a60353fb8905bb09d879d47583255f3e0a71d06cec",
+        "bytes":  3318
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/terms/application/AdminTermsService.java",
+        "sha256":  "2096b081bf54a9fba25c19cad0212a28ed5db14f274d88918d73960f3f6aa683",
+        "bytes":  15336
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/terms/domain/AdminTermsAcceptance.java",
+        "sha256":  "aa910f1fb3cff8f0352c559459fbf38d4b4c9d54a07c0e1d7e6f561748a8cf2d",
+        "bytes":  3311
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/terms/domain/AdminTermsContentHash.java",
+        "sha256":  "e0ce42c7ac772ec5ddacf0ca9400c232831e8294046f1b05379c50e7201a6b92",
+        "bytes":  766
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/terms/domain/AdminTermsDocument.java",
+        "sha256":  "d1b94c6001348cd54e9cd9183573bee4a41f3d2b0c6aa6eab012df983d0d8185",
+        "bytes":  2850
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/terms/infrastructure/AdminTermsAcceptanceRepository.java",
+        "sha256":  "deeb297335fd05b5f1e2f0a710e13a1068d21116d85913741b3d958ff280f9dd",
+        "bytes":  418
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/terms/infrastructure/AdminTermsDocumentRepository.java",
+        "sha256":  "120ed89c9f1448af504ebd061572964dccdff804ab12b429719cd93c02478c53",
+        "bytes":  550
+    },
+    {
+        "path":  "backend/src/main/resources/application.yml",
+        "sha256":  "0f9c57a5af31b20a1252c3cb44738102744649c07a473957847c92f7bf26b53a",
+        "bytes":  3179
+    },
+    {
+        "path":  "backend/src/main/resources/application-dev.yml",
+        "sha256":  "f08987df9ed90481b9603bfd8e5200bda1b35795ca9f4bd411586630f9726bc9",
+        "bytes":  173
+    },
+    {
+        "path":  "backend/src/main/resources/application-docker.yml",
+        "sha256":  "d71d265a4a92b931755f23836abea1dcba2d5f0c9e6c567e8fcc747ed89d1104",
+        "bytes":  52
+    },
+    {
+        "path":  "backend/src/main/resources/application-local.properties",
+        "sha256":  "8e0926a88ccad164d9d5e4f3a5a0b9ca8c9214467b9692fe2b7b8163cfb90f71",
+        "bytes":  1301
+    },
+    {
+        "path":  "backend/src/main/resources/application-prod.yml",
+        "sha256":  "807643cef8f49842a6c3e710846547710716922babd513ff47db9037201453f2",
+        "bytes":  390
+    },
+    {
+        "path":  "backend/src/main/resources/application-test.yml",
+        "sha256":  "06c794e2cf08a4a7ccedfa88866c585b44de4bc5d1a295854a41661d07c99b2b",
+        "bytes":  785
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V1__identity_organization_audit.sql",
+        "sha256":  "e0ec7ff4067d36b9dde47133787b0b7e6fa4e47d629941fc56894539b98967a9",
+        "bytes":  2805
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V10__mobile_command_receipts.sql",
+        "sha256":  "c86f224c1623b7f19bf73bf20482449933da9015cf0072c7dab8889da1f94be2",
+        "bytes":  2205
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V11__driver_closed_mobile_incidents.sql",
+        "sha256":  "d7003c519b27ada672aa587475cc8217d2d9c238d4b2185d416ac101ad9bf005",
+        "bytes":  1399
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V12__mobile_offline_availability_receipts.sql",
+        "sha256":  "c0db4c94be12e132ab352351c0518c322c41c349c606ba9c85c200846a80344f",
+        "bytes":  1026
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V13__email_verification_otp.sql",
+        "sha256":  "381c0d9198b22b00aa4acb9cc29ce57bb8cc48fd3049f34dcba41b36fe9d7655",
+        "bytes":  1178
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V14__super_admin_recovery.sql",
+        "sha256":  "750fc7f2a2dd925b472ae43fbb203f8134b9617648e010d94d9b26a1ccb9d992",
+        "bytes":  1995
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V15__admin_terms_versions_and_acceptances.sql",
+        "sha256":  "c2d68f7ca9dc08f2a1e58c75ca9694985849ac01a4933e6c19c59f560bb342ba",
+        "bytes":  2476
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V16__organization_invitations_and_validation_limits.sql",
+        "sha256":  "b5b5912331afe9dc2b5737563160a39b327070dd41c4cd659c2417eac95922bb",
+        "bytes":  2403
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V17__assisted_conductor_recovery.sql",
+        "sha256":  "2d558ef584ce0c4b484a5b8fedde29a304314b6ed91de26e5fe2e13078918dd3",
+        "bytes":  3081
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V18__conductor_onboarding_requests.sql",
+        "sha256":  "4581e7a7193b6946804e944fba936474cd35b484da542334e55dfffbf3816383",
+        "bytes":  4307
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V19__onboarding_acceptance_constraints.sql",
+        "sha256":  "e6d3a1428996dc0615bea07a5db1269035a70da2d6b3b5c681c95a2c25c53613",
+        "bytes":  293
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V2__fleet_administration.sql",
+        "sha256":  "a237b4d7891e8627388579f75ec4a4a67b43313f4014d0ae15c6b2537e662e6c",
+        "bytes":  3370
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V20__onboarding_applicant_access.sql",
+        "sha256":  "09de2f221b68f550f4caf830879497950561d73bb7c328baaf22611a64a5f2b6",
+        "bytes":  792
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V21__onboarding_documentary_review.sql",
+        "sha256":  "f4324c12ee36a6c63a5eff9aa4cdffb6f56584d0ef70f1e2b6d55f8b16efd8a8",
+        "bytes":  5900
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V22__pilot_historical_creation_limits.sql",
+        "sha256":  "8d6f983fa6759dd177fc1c8e1f2f039323370770606b372fea03448581277d95",
+        "bytes":  3979
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V23__record_only_inserted_pilot_accounts.sql",
+        "sha256":  "a8ea30d50e0d5ff7f0644d75fecc38f4eb4edda06b6f56e5a0e14ee9929a2986",
+        "bytes":  2785
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V24__admin_lifecycle.sql",
+        "sha256":  "9b821eff361100b5e251d89b58aee11f669dfa7d44c18688a0263d8d3e30b820",
+        "bytes":  4581
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V25__onboarding_account_continuity.sql",
+        "sha256":  "a94b58b5aa354f2de42bb57d89b0dcad115f6e1af6c90bdc08ca79eacc17347c",
+        "bytes":  1554
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V26__common_person_identity.sql",
+        "sha256":  "74c73faab92e56639a6dde3ecc3f892706ffe2fb7b9acb326efd0eaaf550c9ec",
+        "bytes":  3262
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V27__driver_qualification_and_temporal_units.sql",
+        "sha256":  "8f8fee2e3ae6bbe1f9581aad64ba8b429c067ce07f038480f95e77bf876ab2fc",
+        "bytes":  7579
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V28__system_qualification_incidents.sql",
+        "sha256":  "c14fa038278ef99db7fdc2157442472e1ed2b38e93120a8affb9908d0d5f40f1",
+        "bytes":  712
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V29__group_resource_memberships.sql",
+        "sha256":  "8233ede5cbe841876382796bcc566a37a50e3587ac2c437a6448a3691d33845e",
+        "bytes":  6170
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V3__operation_assignments_incidents_announcements.sql",
+        "sha256":  "7346f4effca78e3f7a73a283f936eeea8d240b71f08f38cf5081b3c86efdcc17",
+        "bytes":  3967
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V30__versioned_route_catalog.sql",
+        "sha256":  "3da2d409a3b6fda1478f4d8625b0679060cca3d6c909bc2233c55e8f151ca20f",
+        "bytes":  4482
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V31__vehicle_maintenance_and_declared_availability.sql",
+        "sha256":  "d372b7e8c772afd002f5350b6582914654529a3e9c5ab6d8c4dd69a1fb521bd1",
+        "bytes":  7176
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V32__assignment_route_receipts.sql",
+        "sha256":  "d0dca65961b3d287585ebee647cff663a0a19f1755c3a2d6256848d6a224fa63",
+        "bytes":  4122
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V33__offer_deadline_at_service_start.sql",
+        "sha256":  "445cb26051ea812f8ddad274ae3bd55afbd6f29a7c3e7f1472df28420de505aa",
+        "bytes":  2658
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V34__service_type_margins_and_reservation_windows.sql",
+        "sha256":  "7f5a2770711d533602fdc645e72efd61b0112365231f9767f5d944c9db0864f9",
+        "bytes":  6403
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V35__scheduled_service_and_offer_history.sql",
+        "sha256":  "0511b0b23e3e6fddcc8391e8f49e7b1987b5c62de13a742effa6f2e15a1a6699",
+        "bytes":  5629
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V36__service_execution_segments.sql",
+        "sha256":  "a924be713cafebb2d267799e1e1a3027e9a336d85336546e067ddad60b651120",
+        "bytes":  4023
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V37__bounded_service_gps.sql",
+        "sha256":  "191312905a780feed669f0c25e092e8bbc4dae34bc934da90aec833ac602fa6d",
+        "bytes":  9667
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V38__route_declaration_gps_expiry_unlink.sql",
+        "sha256":  "6c38fd62fcf00c4592acd4acd41a13f69e5b59b06d3b853363292a2dee3a279b",
+        "bytes":  845
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V39__service_time_correction_history.sql",
+        "sha256":  "61cc3516ecf999de43bda3038382fdb4be08845519511e494845feefec1ccf27",
+        "bytes":  4297
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V4__remove_mobile_only_driver_status.sql",
+        "sha256":  "2f32281bd2a5c5f4b77f9de7ad66a8348afa42a4f26529fda919ec6b0b1f07cd",
+        "bytes":  585
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V40__safe_service_interruption.sql",
+        "sha256":  "2f7649dbcff7024bc2b92228530a489de2b7c67e4d8bc5153d76c1742c794c66",
+        "bytes":  16579
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V41__accepted_service_handover.sql",
+        "sha256":  "f1fb6b63cda0d8cd1a74282ac4cc884ba801220e98e65a1ed6f6e1d365bddd21",
+        "bytes":  17441
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V42__handover_guard_unambiguous_alias.sql",
+        "sha256":  "06acf1733226c9db3e783b65d4cea60c739e3e05cc9fb1c956f25375b203888b",
+        "bytes":  3074
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V43__incident_catalog_and_terminal_guard.sql",
+        "sha256":  "f9a7fc4b941d2417b80da4a709e3d5cf1abd453b113d1ad840f95f6b6d7e564e",
+        "bytes":  4663
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V44__announcement_recipients_and_durable_notices.sql",
+        "sha256":  "1d1dadf6d4dc6edd3162d5635bc64cbf234e2eb563d0988d51a189c3d39ff9e0",
+        "bytes":  7307
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V45__versioned_service_report_emissions.sql",
+        "sha256":  "bc666b040d6c8822d59d535ebe5a6af67b830a4cfa2cb43d08dfd8a4d86ec41c",
+        "bytes":  3738
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V46__purpose_bound_retention.sql",
+        "sha256":  "c79f79e0dbb087343805da9437be239ca4764dd108e442745951a4905032cd0c",
+        "bytes":  21998
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V47__mobile_preferences.sql",
+        "sha256":  "8317009b29c749a1a2d5d3a1eeef92c4a9912debc3c9a7bf4947d3f78b5d2458",
+        "bytes":  779
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V48__report_provenance_and_scope_guards.sql",
+        "sha256":  "842e8d8f017d06830cd2782545bf07f40fe8052b452136be08161a83f89c0680",
+        "bytes":  7508
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V49__purpose_bound_personal_retirement.sql",
+        "sha256":  "78a082e97a79fc7b4adfd554cabf01519b59250319562b8f52d82797dcaa5ce2",
+        "bytes":  49627
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V5__assignment_overlap_exclusion_constraints.sql",
+        "sha256":  "af77001f33c7379b8e9510614daa1f35c503997b269a3d41530ed31d02f6b00e",
+        "bytes":  745
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V50__retired_owner_trigger_record_projection.sql",
+        "sha256":  "2b7088c94e8b81219e7dd0d0ae4d570ba493c2c0c6f162a30494c99dd167f843",
+        "bytes":  1321
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V6__unify_administrative_roles_to_admin.sql",
+        "sha256":  "9be06c6d0267e055e4db75c16aa15774f6dad7cbdfc0c69d0282f1aac6f8b622",
+        "bytes":  952
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V7__mobile_assignment_workflow.sql",
+        "sha256":  "2ac09ae19d515e4e35e0df9d8cb06f7fe9a4d955b824908a269fd2ea012ed357",
+        "bytes":  5194
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V8__mobile_current_location.sql",
+        "sha256":  "c1d969decd45cc9c6ec441a79f8b516a65a5d512bd38f9174d32f04a79750aa1",
+        "bytes":  1776
+    },
+    {
+        "path":  "backend/src/main/resources/db/migration/V9__mobile_incidents_and_announcement_receipts.sql",
+        "sha256":  "eb71bc34c37bad6f84ba896df1a02ba8959040f61d55dc7830c2066d88240405",
+        "bytes":  1234
+    },
+    {
+        "path":  "backend/src/main/resources/db/test-migration/R__native_test_role_privileges.sql",
+        "sha256":  "62b878820bcefe8f4f56bcd00e9ab3e0813575cefcfae22ca356103b46bb282d",
+        "bytes":  904
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/adminlifecycle/AdminLifecycleFlowIT.java",
+        "sha256":  "3acd822515f52862a14d8116e90aaee310eaaadebce319fb5849cfca48fce7ed",
+        "bytes":  32106
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/audit/application/AuditChangesTest.java",
+        "sha256":  "8e6b9aec49b0eb5615e8fecf3b517e07e31b072a4e247466f67de9279585eb17",
+        "bytes":  1246
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/audit/application/AuditMetadataPolicyTest.java",
+        "sha256":  "b1f911326776f63d5399e3f3b032e094e3f7ce0f71a970f2b7fa6df65c54bf0a",
+        "bytes":  3220
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/audit/application/AuditOutcomeTest.java",
+        "sha256":  "6b2ee42f4610cc185537ab5ab4d4209aaed87b76f2fbd553b4964d41162751c9",
+        "bytes":  2273
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/availability/AvailabilityHealthIntegrationTest.java",
+        "sha256":  "2239b4401782b8dd95e4aad59b4ab7a1f3dd60f4b668d1b5cbbfe265b6bb8884",
+        "bytes":  4326
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/availability/AvailabilityPolicyTest.java",
+        "sha256":  "41c0db43e70527d943ea232a54cc62cd035e02d77e101dd460a735e124c398fc",
+        "bytes":  5199
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/availability/monitor/AvailabilityMonitorCliTest.java",
+        "sha256":  "4e4bf639e59bc50779f66b7776d6b76eaae0fff9fa11d59c726e34a45ad91788",
+        "bytes":  8285
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/availability/monitor/AvailabilityMonitorHttpTest.java",
+        "sha256":  "5ab10bd43ed2118dc09567c33fef287be446a5ceeb3d0d4bab5fa71efff97356",
+        "bytes":  9733
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/availability/monitor/HttpAvailabilityProbeTest.java",
+        "sha256":  "d844abfc0df1cc477ef0d8bd4e8e932c672d6fc0608e50c4233b7e24d7ef3dfb",
+        "bytes":  7625
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/availability/monitor/MonitorConfigurationTest.java",
+        "sha256":  "d8a67b8dc09ad2a10b0a6924a6f19968fb87a5f2de75f8bc7be14363fbc710db",
+        "bytes":  4841
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/availability/monitor/MonitorHttpFixture.java",
+        "sha256":  "83a26ce938aeefefd716ca4422393d0a9122e091af30d2ecfc87eede6410ff32",
+        "bytes":  4350
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/backup/AuthenticatedBackupArchiveTest.java",
+        "sha256":  "bf72d882f5f4ff22ef587c2b0df213dc62c7424a162917b2cf78c04d76d6c703",
+        "bytes":  4162
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/backup/BackupCliGuardTest.java",
+        "sha256":  "013fc7c9063c8f6fadf8e40181666e70e0d99498d1f12d71784d2daea20e23ec",
+        "bytes":  568
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/backup/RestoreIntegrityComparisonTest.java",
+        "sha256":  "bde17ce3a54766e9af3dede138da699c8160e9cbf8b6a097af9183eb90f2dda8",
+        "bytes":  1221
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/backup/SqlLiteralArrayCastTest.java",
+        "sha256":  "ed92fd635ef84dabe7c32e62d0e18078582438db41581f62b7cc9b943f9aa076",
+        "bytes":  1664
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/fleet/api/FleetManagementIT.java",
+        "sha256":  "abed7a36e01739e385c179373b03903da3a27b29c679431f385106010d97cdb9",
+        "bytes":  18025
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/fleet/GroupMembershipIntegrationTest.java",
+        "sha256":  "07aca3fc77a283a0f30a4f566c927ef79f857da76c43723cc50320b0566d65b4",
+        "bytes":  11342
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/identity/api/AuthFlowIT.java",
+        "sha256":  "c241610c4452a24f40eebfe00dd4304a0300d556ca6af7e0ceba90df259833ba",
+        "bytes":  12565
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/identity/api/ConductorRecoveryFlowIT.java",
+        "sha256":  "e6d7a17575a00c4a77b24ff6739abb65de3d505b55804db9a748559ad23ab952",
+        "bytes":  25025
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/identity/api/EmailOtpFlowIT.java",
+        "sha256":  "0aa9161529785dec57c2d50b65c85a635cee2c64d038df347fcd8e5a6c0ab043",
+        "bytes":  12310
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/identity/api/MobileAuthFlowIT.java",
+        "sha256":  "3d54198f7cdcb5e7e50ef16e69fb7c247c4cf8cc6706be68ae02ff88be29b890",
+        "bytes":  21170
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/identity/api/SuperAdminRecoveryBoundariesIT.java",
+        "sha256":  "295695402936299d858f1b08f43edce66fd18784aff8eeaa3483f89e49dfdbbb",
+        "bytes":  9087
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/identity/api/SuperAdminRecoveryFlowIT.java",
+        "sha256":  "a330cd7f07be44ff3537c00194a80506e7b660798be4c46ecf09adfcdf6a986b",
+        "bytes":  18427
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/identity/application/LoginRateLimiterTest.java",
+        "sha256":  "2f3cceeffa4b6a1da7e597c439bc3eadc387dfd036ee6dc27b2beeb39af76573",
+        "bytes":  3501
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/identity/application/OpaqueTokenServiceTest.java",
+        "sha256":  "3d4d00d5442568b26409571c882e5bd81e3b77a7d66678114ea3abee307c0c18",
+        "bytes":  1429
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/identity/domain/ConductorRecoveryRequestTest.java",
+        "sha256":  "2b5e4e893d85d54182f1fba85540bdc7d2ab5ec3775da41903ce5aad1fb25637",
+        "bytes":  1682
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/identity/domain/EmailOtpChallengeTest.java",
+        "sha256":  "67b2892364c23508ded03155b5214b2c0b87ef3790180d8d02e947edec2a4936",
+        "bytes":  4133
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/identity/domain/RefreshTokenTest.java",
+        "sha256":  "1494ceb60251351b4974000c92ebc771fe2ead7b5b2c7f8307dc1721d04b5cfb",
+        "bytes":  1154
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/identity/infrastructure/SmtpOtpEmailSenderTest.java",
+        "sha256":  "0c148af4cedb1b4f555d1e457341d1c2bc9c6db352eb37f31b120057e5b21be4",
+        "bytes":  5087
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/identity/recoverycli/SuperAdminRecoveryCliBackendIT.java",
+        "sha256":  "de0b4c81830c00cea5182d38bbf239da1f24fdf98c8dcba659960f9b97404078",
+        "bytes":  15586
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/identity/recoverycli/SuperAdminRecoveryCliTest.java",
+        "sha256":  "2933f83b8af49c664f151934f724fef10d37168825d4fa578582bee993b8b41d",
+        "bytes":  18217
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/invitation/api/InvitationFlowIT.java",
+        "sha256":  "9adbdb9b3e3cbfc3544a8cb68669975901ca3eac21c5d18b7c200b9371cd3fb0",
+        "bytes":  19096
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/invitation/application/InvitationCodeHasherTest.java",
+        "sha256":  "01c685f652e1d0d99e8d048ded052643adb3606c6820779be3c9c887b520a69d",
+        "bytes":  1180
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/invitation/application/InvitationServiceBoundaryTest.java",
+        "sha256":  "c60ae9fc58fb3980b1edcddbafc3f76d4f223a7ca67cd320a137601d65dda9fb",
+        "bytes":  825
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/onboarding/api/ConductorDocumentaryFlowIT.java",
+        "sha256":  "249085f8e8113ad2e5e5211dfb3ed19acd75d8dc69265f300edcf2d3e431bd5c",
+        "bytes":  53686
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/onboarding/api/ConductorOnboardingAccessIT.java",
+        "sha256":  "0a1a70602f66553b18cbd37096260cb303eccfa0e6e7577fe4b50e22fa875d92",
+        "bytes":  16062
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/onboarding/api/ConductorOnboardingFlowIT.java",
+        "sha256":  "cae3b21745f0fb4ce5cd20b3485f7e7f5085f27fd7c73c4d4fbad9659e03719a",
+        "bytes":  26277
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/operation/api/MobileContractReportIT.java",
+        "sha256":  "a4ddb8f362941dff3dc84cdc70da3cab30ba4eff829b048dde60018dd0e0b099",
+        "bytes":  29057
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/operation/api/MobileOfflineRegistrationTest.java",
+        "sha256":  "809a92a542a4c7ac80c1ab619ab70021cdb9887c3d6b3676d212092273255fc4",
+        "bytes":  1486
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/operation/api/MobileOfflineSyncIT.java",
+        "sha256":  "487f7f78b35823976d843136e94c89b1bb2b655b7cb637656402c3472755b238",
+        "bytes":  13561
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/operation/api/MobileOperationFlowIT.java",
+        "sha256":  "30bdda35c1fb71fd51da9016fa97d3a92cb14e9b34abdb4802a47e6adddaa0c9",
+        "bytes":  36928
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/operation/api/OperationFlowIT.java",
+        "sha256":  "0c09d948d22f296e13694a64b88885698023343be4d76a98dc90978d43af65ab",
+        "bytes":  27866
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/operation/application/ReportExportResourceTest.java",
+        "sha256":  "d492bd8cae5eb80de8c4c2900df0ccddbb4f9529c844d1b3d44ca03fa93bcb2c",
+        "bytes":  2004
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/operation/domain/IncidentClosureContractTest.java",
+        "sha256":  "2672812b2466a2124dfd959944e67ef86e397bce2fbcf0c0bcdda6a7294c492a",
+        "bytes":  3637
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/operation/domain/OfferResponseWindowTest.java",
+        "sha256":  "760a6747d9033580a75a0e2b43cd148e0914b44e8df5da2d3826b6fe86a3fa30",
+        "bytes":  1076
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/operation/realtime/OperationStreamBroadcasterTest.java",
+        "sha256":  "3fc91e10bfe3267d74089bca9205542acb1b103040860c8835fd4bdf19715188",
+        "bytes":  3784
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/personidentity/PersonIdentityFlowIT.java",
+        "sha256":  "f8745ebc6317f9eacc164934dd764f44c366e31021437e882b331de725baa25e",
+        "bytes":  23653
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/personidentity/PersonIdentityGateAuthorizationManagerTest.java",
+        "sha256":  "d3acac98957098142ba1b2da07e536e03d751bb7d6df883a774cbf5c75082c6c",
+        "bytes":  4718
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/personidentity/PersonIdentityTermsBootstrapIT.java",
+        "sha256":  "af274b6573c977ec1acc122d0ead7c9a91382cc0da0eb96ea65547ccaefcf5e5",
+        "bytes":  2922
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/pilotquota/LegacyConductorProvisioningIT.java",
+        "sha256":  "5b2b55c317ec0d88ede5dec43aa5532445741151fe0a4697e8ff22fadc3b1454",
+        "bytes":  6375
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/pilotquota/PilotCreationQuotaIT.java",
+        "sha256":  "6bdfbbad13065d3bbde4f8c864ce47eeedbf2d926fe5c800df25b63ceac00b53",
+        "bytes":  10765
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/preferences/MobilePreferencesContractTest.java",
+        "sha256":  "5f557cc6ffcdc1b0ed1a823c95113274ef753fcbcbbe2017cc852a872d29de57",
+        "bytes":  1814
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/AnnouncementNoticeIntegrationTest.java",
+        "sha256":  "855484d4a714b7b39c30ace57ce8462a0f6c51bcd5dfea323807e3f5c6e81d4d",
+        "bytes":  16079
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/AuditChangesIntegrationTest.java",
+        "sha256":  "e41a42b00729936d5f06153ecbfdda60e570b8d8325f5184fbaa78ef5d27d698",
+        "bytes":  3524
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/AuditScopeIntegrationTest.java",
+        "sha256":  "720c9bd192b943739104ccb907ac281e1494bd330f496ce011017f07f06eed4f",
+        "bytes":  9528
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/DashboardIntegrationTest.java",
+        "sha256":  "172b121401dd17d517fb5ad573b8886b8dd460f93946ab74cf0afdd5d2faf2f2",
+        "bytes":  5285
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/DeclaredAvailabilityIntegrationTest.java",
+        "sha256":  "b7c74154992ff4d0ec88709eb281fe2926fc848d13e5cf1989f21536df10554a",
+        "bytes":  8541
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/IncidentResponsibilityTransferIntegrationTest.java",
+        "sha256":  "458259e3f46da2cdad8998f5a16d3abfa1d1ac980d8906a4b2a87358fb9b3e4f",
+        "bytes":  4505
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/IncidentWorkflowIntegrationTest.java",
+        "sha256":  "59eb806a4aa1446a1fe0c028f28afcd3cfefa3c03c8e77ee2dfb05430c8b8d67",
+        "bytes":  16640
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/MaintenanceIntegrationTest.java",
+        "sha256":  "ab8b51a050747394b7fb5b146d1a918b5d8069701a0252f323338ed2adef266c",
+        "bytes":  11980
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/MobilePreferencesIntegrationTest.java",
+        "sha256":  "ab51fec00c39605d460952980a5e929b6ab2212bd588942885e6562573128e57",
+        "bytes":  3014
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/OfferAcceptanceIntegrationTest.java",
+        "sha256":  "aa3e50370b7fd7123f3a4c2b92b72fcdc04e61906ec71fc8f6f6484576c14eff",
+        "bytes":  13276
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/QualificationIntegrationTest.java",
+        "sha256":  "3c87f90ec96b42fdeba0224854122f7c88d3ebff60398ec6083c6ea73b098a6e",
+        "bytes":  68036
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/QualificationReturnGateIntegrationTest.java",
+        "sha256":  "23d7cde1c8d85ee92da7b88baef28cca604bba7808d7c27c5f5a5513542c49c5",
+        "bytes":  1615
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/RetentionIntegrationTest.java",
+        "sha256":  "e6def2ff402b4649f576ec4f34ee7d77869d511c6dee6f4d1953bf97d09cc79e",
+        "bytes":  15370
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/RouteAssignmentIntegrationTest.java",
+        "sha256":  "06115a9a2040fdcbfd4c12e8065dda1d25e557c2eaa585c7f4fb934a46933fba",
+        "bytes":  13919
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/ScheduledServiceIntegrationTest.java",
+        "sha256":  "2bc28879ffe1fea8b7f7eed627ca44ddfd1a2b46fe62f5d9f9cec8ed4d9e66f6",
+        "bytes":  20172
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/ServiceAttentionIntegrationTest.java",
+        "sha256":  "f0ba63e2545ad24575b955046753645afac80dd30e390accdf3ec20ffcfd8713",
+        "bytes":  24522
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/ServiceExecutionIntegrationTest.java",
+        "sha256":  "81baa01d7b3328df334ae74128efdbfb38d829e0962cf7bcea11c63bc2827bbe",
+        "bytes":  13278
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/ServiceGpsIntegrationTest.java",
+        "sha256":  "4d73198a43fdd7d924efcd0b1c2fa347a1d76a408f7833246692e41ae26682e1",
+        "bytes":  21034
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/ServiceHandoverIntegrationTest.java",
+        "sha256":  "1c12d944f8977cc53d27c6235695fd8a2a9c9c734e4a6d5131c841f3f55802e3",
+        "bytes":  20048
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/ServiceMarginIntegrationTest.java",
+        "sha256":  "d43c049089517fb71609b97f0291c8b015f0a318cdfdf8771f3f7726f79a1e29",
+        "bytes":  16577
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/ServiceReportIntegrationTest.java",
+        "sha256":  "763c528b0e506a9393aad7340da1104290b8a3195c1903aabf1c1db426b10071",
+        "bytes":  18589
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/qualification/ServiceTimeIntegrationTest.java",
+        "sha256":  "6ec7cac650359c29757138f31f8d02a0c243ebac8c622b164fbd8ce0550624e2",
+        "bytes":  15086
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/retention/PersonalRetirementIntegrationTest.java",
+        "sha256":  "45c64886ff6da16b7a2742f8e963457e4a32a8491c8d360f153d5927455e5966",
+        "bytes":  23260
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/retention/RetentionCalendarTest.java",
+        "sha256":  "aeec09dd72061f3210f6eb1c998e49d07e8e958380247842d3a14255a032aa8b",
+        "bytes":  1498
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/retention/RetentionProcedureSecurityTest.java",
+        "sha256":  "b8f59b9711217eb653a02c65d7384a423023dd041594d41f77ee274917c62092",
+        "bytes":  8696
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/routing/RouteCatalogIntegrationTest.java",
+        "sha256":  "62a96c8498c4498e0aab5b2a4503ba4fec16eb49d3ed3dd7a4239fff39f67f87",
+        "bytes":  8850
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/routing/TerminalCorroborationPolicyTest.java",
+        "sha256":  "04740ccbcfcfe4628bc3bd4c0f3d7263e1a93b0e72d209fc64c3e7dffcf3e465",
+        "bytes":  1592
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/shared/config/SecurityConfigTest.java",
+        "sha256":  "c586b323cb0fb6279f40e5a22614c9788986f865547be50dd00bff50f363f391",
+        "bytes":  4436
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/shared/exception/AvailabilityErrorHttpTest.java",
+        "sha256":  "8b689b410ad8c58220a6a72268d75e3467b4e9c689db92b9e75fde1c9a7447c7",
+        "bytes":  5162
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/shared/exception/GlobalExceptionHandlerTest.java",
+        "sha256":  "eb2f78aa6da0b59bfde9fd45a4fe7182bcfb6a74a3a82ac5842514b8a4ddb12d",
+        "bytes":  2271
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/shared/exception/SafeLoggingDefaultsTest.java",
+        "sha256":  "56d1c97440174c98b17b7e8735c3cbbce88730cd23e5a17a58b8352240273cce",
+        "bytes":  1191
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/shared/observability/CorrelationIdFilterTest.java",
+        "sha256":  "fcbe6a4142b8c737296fc40c202cedd5b687489c89746d6f460525fc83f8c5ea",
+        "bytes":  1436
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/shared/security/ApiOriginValidationFilterTest.java",
+        "sha256":  "ca1ae47b9c64f313b9ae9b5a93a92f9ee1ce2320306aeb8ef52e184a7eecd5f0",
+        "bytes":  3467
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/shared/security/CurrentUserProviderTest.java",
+        "sha256":  "a2d9cd102d9d7741853326762cfe40f20adf9aaa677d822d5b68f438ca46b2fd",
+        "bytes":  6469
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/shared/security/CurrentUserWriteAuthorizationIT.java",
+        "sha256":  "0ee391dd76564bdce10102fe9c2054be1bb81a7b1ab8f5dee294875078b39a24",
+        "bytes":  10468
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/shared/security/L05AuthorizationLockIntegrationTest.java",
+        "sha256":  "2f27d4a8af08e09fe8f5ef1bfd3f87fafd084f6fe8df5a928d6dca6174eeeca6",
+        "bytes":  5807
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/shared/security/PersonalDataProjectionTest.java",
+        "sha256":  "9566edbc1a277839842716105162407705b363fccc8f636cf0c61c1b28e0d965",
+        "bytes":  2131
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/shared/security/TrustedOriginValidatorTest.java",
+        "sha256":  "8b86e3788e0e3ea7c6d97b57822770431c2512aa3474b527c0c3bd1fe1943543",
+        "bytes":  2874
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/AdminTermsPublicationStorageIT.java",
+        "sha256":  "bbe84063be17f4b14925bda5c82340ac059c785c3352a2a3f83b834bb9621277",
+        "bytes":  3725
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ApprovedAdminTermsPublication.java",
+        "sha256":  "df728dc0733ae6b193c7ade8a78be39afedd1d1c6ab93cbba96e20b3a17b4494",
+        "bytes":  7841
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ApprovedAdminTermsPublicationTest.java",
+        "sha256":  "6b33c7a88e20532592be0ea48321ea7235a40319aa23cc62633aa69902561cc0",
+        "bytes":  3102
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ApprovedConductorFixture.java",
+        "sha256":  "90f5f46cfb1c4c19f1497307c2154c0aece74129f3b7bcaa345a1d8ccd1e6b3d",
+        "bytes":  3628
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ConnectedL01ClientsIT.java",
+        "sha256":  "fe75ea603dab70b2e196f355adde5a0f04eae5783c9767bd59ffbeed2cb64058",
+        "bytes":  15354
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/FixtureJson.java",
+        "sha256":  "3eb1fb2bbb023b5b6a7b6f7e45db304573730cf13321777b7910accefc217f3f",
+        "bytes":  1202
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/FixtureJsonTest.java",
+        "sha256":  "9ac9e60bab39f3133b5ffbb6902c96aa41da7063f683a0a9b90a4bbe7194b2f8",
+        "bytes":  2522
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L02CleanupProtectionTest.java",
+        "sha256":  "8cb1a1fb1fa162f2f7277786b1842955bf48d3089f33dd98a9f81b7b9ded5f35",
+        "bytes":  1551
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L02ClosedCaseVerification.java",
+        "sha256":  "d0cafc77f7a5044e5324c77d229105a02f904c98263c2ad29c0bf8e66ae094df",
+        "bytes":  5154
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L02ConnectedTrial.java",
+        "sha256":  "7ae4f184c55d5d34e4a8decbe22226e4681a2a576749f21f398404e3e23a79a3",
+        "bytes":  25919
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L02DatabasePreflight.java",
+        "sha256":  "419ffe724029b789328ce931a4f34039f8d98c974a50b04b06d632edb35fc02e",
+        "bytes":  15976
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L02PostgresIntegrationTest.java",
+        "sha256":  "1f04506c01b0828b4db892125e87000214539802351b78e87d3f10d5347940ba",
+        "bytes":  4472
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L02TechnicalFixtureRecovery.java",
+        "sha256":  "5c8f0a2a88e08fdd6b6269c762a89f37433d51330571ddcc7b9b8fab122b221a",
+        "bytes":  4532
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L02TemporalConcurrencyTest.java",
+        "sha256":  "7636ed77e7d45aeafd2e2aac2c00492774c0a89d578f093e845634929aa599c9",
+        "bytes":  10446
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L03ConnectedPostflight.java",
+        "sha256":  "08085c0d292f6ab525f3d52931753c99e8158a145938d301a6d99c88ba2a0aa8",
+        "bytes":  4060
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L03ConnectedTrial.java",
+        "sha256":  "3b0d5d5f8fcacb13e030cdb46a70069cb0568bf4e549a0fa8dbfd891886803c8",
+        "bytes":  15222
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L03DatabasePreflight.java",
+        "sha256":  "567ce9bb0e2c58ea6df71433a5c82eead15c306ca45f54a0a801008e3b671882",
+        "bytes":  17917
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L03GroupSnapshotConcurrencyTest.java",
+        "sha256":  "97f9aa247201eaf0f7963492e28d14aa2acd5a887d92d0a99dc2d279dbe13080",
+        "bytes":  8059
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L03MaintenanceSchedulingConcurrencyTest.java",
+        "sha256":  "733d8f5da96255395f74b25b344023d2ed0f9ae1e920f1a83c715d5bfc318960",
+        "bytes":  6332
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L04BufferedReservationConcurrencyTest.java",
+        "sha256":  "25141ebfab0f790ab54315e221c387b52634d011e6a55f44dcde461e406da87a",
+        "bytes":  8870
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L04ConnectedPostflight.java",
+        "sha256":  "58d102c1838db384071e6a053360b805f43afef179c76ce6d54e5d1ddf9aab4b",
+        "bytes":  6198
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L04ConnectedTrial.java",
+        "sha256":  "54d9d6dffd3f9c0e904d2b84540f59a1d89461142da6505214b3422ef3b9c2b8",
+        "bytes":  36332
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L04DatabasePreflight.java",
+        "sha256":  "78aec78a4ce69ff8f76647b751bb8806b81078e10a13b799b51c9f59fd3fb05a",
+        "bytes":  18334
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L04MarginPostflight.java",
+        "sha256":  "a8a2193cd6a74d38df059ec8a9ebf7421923b3fc62eb476aec55a86fce398856",
+        "bytes":  4896
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L04ServiceOfferConcurrencyTest.java",
+        "sha256":  "917822d20cefc307b71c76547ff0d7e291473374a5c16926a7d516f762f36901",
+        "bytes":  8521
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L04ServicePostflight.java",
+        "sha256":  "4fc0add187bbc628291c21beab2c840891ec9d987500d974e09c4ce438aa7411",
+        "bytes":  4049
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L05ConnectedGuardProbe.java",
+        "sha256":  "f2f72294f1b49eb1341f940c55098c2b746e77b2e49fa2825a835dd9e03b9c0d",
+        "bytes":  581
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L05ConnectedPostflight.java",
+        "sha256":  "b13cc498e546dccbb91daf55cbb42d303728bcad41d0691a9dbea1d4aff98821",
+        "bytes":  7910
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L05ConnectedTrial.java",
+        "sha256":  "d73bf8b87306b7783a61614c9550257ce95041420ba784ddb1a25a858168119b",
+        "bytes":  60684
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L05DatabasePreflight.java",
+        "sha256":  "4418a534706bb26456276b8a08590836ef567f55763128551bcb7732f64a113e",
+        "bytes":  20531
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L06ConnectedGuardProbe.java",
+        "sha256":  "181cedb0d3621375eb27a77a726d1db3c0ba49a0bd55698a8fcd31cf47c9fbe3",
+        "bytes":  591
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L06ConnectedPostflight.java",
+        "sha256":  "5ce861a01452537af91d686d5c64d50074186362aef2ecb96f3800ba7d639b0f",
+        "bytes":  10938
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L06ConnectedTrial.java",
+        "sha256":  "461f2d194e403e6f2ec5f9c2768c5b4098ec5663b2eabe9b9a7e12001d4d4b25",
+        "bytes":  50911
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L06DatabasePreflight.java",
+        "sha256":  "0706f9bb3b9a02c8a4aea16402d6780e61767f8f628c949bfaf9ab7e6d4cc144",
+        "bytes":  22190
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L07AuditReadProbe.java",
+        "sha256":  "edf6e61d630aec2468edb2dccbc1d91c810b1ba308ee275d16f4d5432dce805c",
+        "bytes":  2422
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L07ConnectedGuardProbe.java",
+        "sha256":  "8d9a745edb10d67d46588937603c2fc73907ec267c4e9e0f98525449829a17ef",
+        "bytes":  512
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L07ConnectedPostflight.java",
+        "sha256":  "c21fc22f57377abb97499ec37001d7d54cc8c9b3701d22ff6059fbc64cf89b9a",
+        "bytes":  10722
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L07ConnectedTrial.java",
+        "sha256":  "272c3a3ef564ac9bc5f125c6f3eb9b16eaf88abc7a8ec10896b388fd818da42f",
+        "bytes":  52735
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L07DatabasePreflight.java",
+        "sha256":  "1a0dab963302bc0d31343defa2b69f435c2068f697e1e5bcf2b36d5a65c185fe",
+        "bytes":  22685
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08AvailabilityObservedEvidence.java",
+        "sha256":  "847060bcad4c319df58df0c4b6c798faedbdbe3acefb931945b24d1ec069dd1c",
+        "bytes":  8172
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08AvailabilityRehearsal.java",
+        "sha256":  "8ea219971ac78ec243a36cc642e5ab04710b3d9a41e2c06013e986676040a73a",
+        "bytes":  33519
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08CandidateApiReadOnlyProbe.java",
+        "sha256":  "b2fc38b78826f2bd4da45dfc1555c68fecc064ac30dd6b11d29836058c550372",
+        "bytes":  21650
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08CapacityDatabaseSetup.java",
+        "sha256":  "a232ccbfdcb9e4af5446d44e6c6463f2022793d406b8ebb65bcf24f3d8be6fd0",
+        "bytes":  16248
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08CapacityMeasurement.java",
+        "sha256":  "6a7e02fccb7c4550d04619b89860fd8c6317c48377214d232f5bfe2a141cb5d2",
+        "bytes":  37795
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08CapacityMeasurementTest.java",
+        "sha256":  "685b37ee639979c56cfe9806d7ea3cb3b8f7f31908e84bc19fb98df49c3a1b8c",
+        "bytes":  6569
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08CapacityPostflight.java",
+        "sha256":  "3dac47f87434c69f9512cb47b37b0dde410c57ce893ed1c704229f5b70c88216",
+        "bytes":  9622
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08CapacityRetirementRace.java",
+        "sha256":  "a64a0419cbab22e44108c659b382bf6d78d61c9e6a3f32c487cc79c3a431d1d4",
+        "bytes":  14873
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08CapacityTrial.java",
+        "sha256":  "2c91530d3b39468ebd60c60f447964fc46a54721546ea54a76e73639c585933b",
+        "bytes":  56257
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08ConnectedGuardProbe.java",
+        "sha256":  "282b38a0201f56ab814a65bbbd18fef5f31e60a178756d510cc4b0e4e9eb2209",
+        "bytes":  729
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08ConnectedProtectionProbe.java",
+        "sha256":  "b8f26a679d87fe09eadbfe70c7e26708f4ee0f77164529c318be1a868f8adb50",
+        "bytes":  3490
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08ConnectedServicePreparationTest.java",
+        "sha256":  "9a24ff787cda929985cd78f45fd43f1192898d6bb7074751cef953c01a05f4cf",
+        "bytes":  8592
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08ConnectedTrial.java",
+        "sha256":  "4c2aecacdd903a238b688be32238d16c3b1c94103271732646a047f3a3c814a9",
+        "bytes":  53269
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08DatabaseLocaleProbe.java",
+        "sha256":  "61014403453c57444ea65384b86ced1bfe1e9409cf6687251beea29de75f2d1c",
+        "bytes":  1843
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08DatabasePreflight.java",
+        "sha256":  "56f39a967e3faece55ca5e2fe912f50633d1fe205d3faef3b22f5d08fb8e871f",
+        "bytes":  30785
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08DesktopReadOnlyTrial.java",
+        "sha256":  "fb406f8f9ff8c5f8ac74598992145dec39413b8151e197c05327f28623a95588",
+        "bytes":  20030
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08PhysicalComplementPolicyTest.java",
+        "sha256":  "a08cfe0df97ed1d78ea151d3f6a7deefe346ec2e872bf5b64602173c829d932c",
+        "bytes":  2000
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08PhysicalFinalPostflight.java",
+        "sha256":  "bd686fa359ce4b734ef59cf3d825440584a75ab927080eed907222e2d0c133a0",
+        "bytes":  7558
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08PhysicalNetworkProbe.java",
+        "sha256":  "8966c89ae39652066f1095143339ff01300f743714fb66829fac21f04b13f4f7",
+        "bytes":  2606
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08PhysicalProgressProbe.java",
+        "sha256":  "3c0b7b8a3c40bcc95e1d6c9e21a0f2557959d1d4588a371c28154454bb71150f",
+        "bytes":  5552
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08ReadOnlyHealthServer.java",
+        "sha256":  "5f9ba404b33e4b18f2cd03a45e8860bd7b3bd4e7406d9da5adc7abaecc986808",
+        "bytes":  10749
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08Rest03BusinessTrial.java",
+        "sha256":  "afdd1c90d3ea31b5a2adb4a8cfef69694f5e04001dcb502f040ef4b5b5a4082c",
+        "bytes":  20165
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08Rest03Equivalence.java",
+        "sha256":  "48673467061e2394af347f44760e0d772a5e910dc59100f0cdb17f20eff6f3da",
+        "bytes":  9147
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08Rest03RestoreCli.java",
+        "sha256":  "e03e6196f6cd7fad447b252b078bde4c5334a8dee0ae4f13b4aa85191668e30b",
+        "bytes":  11848
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08Rest03TargetGuardTest.java",
+        "sha256":  "be838556e43d8ec7e68e9f30f59ad7b65cdc2ba2b62e7f8aab0c9d583d28dd0e",
+        "bytes":  1372
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08RestoredApiReadOnlyProbe.java",
+        "sha256":  "e6ea39cfef836a53b75c358a0dd463eb73643d7f6b6e268260e2ced28dd4c2aa",
+        "bytes":  22248
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08RestoredConstraintCollationProof.java",
+        "sha256":  "1e2f41a838c1f1f9f43791c24217923ac78010c68b7397368ad9c92e5242e9b6",
+        "bytes":  11247
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08RestoredSnapshotReconciliation.java",
+        "sha256":  "9c9d61f227a744b4168700e5e541e81ed7241c9297c347de7252108c3c7020d3",
+        "bytes":  10351
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08RestoreSchemaDifferences.java",
+        "sha256":  "307bf0d241b5738ab8c036925fdd4562f65ccc0cd8e89264a6178913387b8275",
+        "bytes":  3220
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08RetentionAdvisoryLockTest.java",
+        "sha256":  "49bd0d96d4b3c799d3c42f10ca3c88f1b48082eb382988f16e3caf4abdb547d7",
+        "bytes":  6861
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08V50Preflight.java",
+        "sha256":  "be72866fc57b3c15f6db09d21972957a0f4f07cfb390217205f5960f9c10dad7",
+        "bytes":  31092
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualL01AutomatedTermsComplement.java",
+        "sha256":  "241f7bcfafa0a474be1d3fadf2bae9181dfeb6de2997ab2c25e474798ea282d7",
+        "bytes":  26700
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualL01AutomatedTermsComplementTest.java",
+        "sha256":  "2f4c3a991664adfd05bee2e46d4c422ec4caf6723a4fb4586cd43ee640e41f38",
+        "bytes":  2981
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualL01HumanTrial.java",
+        "sha256":  "db1f419fbf6658b29151a564770444383ed41242746af221e0d4263c9303e63e",
+        "bytes":  12471
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualL01HumanTrialServer.java",
+        "sha256":  "d7550e7a08cc7809d60b5be96c4741ea644b00ed98ab19a67a2ff5869f53a07c",
+        "bytes":  63388
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualL01HumanTrialTest.java",
+        "sha256":  "de89e303edcdc541e572ad5587ff189197a8e7b2527e4487148cad3442a58f47",
+        "bytes":  18925
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualL01RecoveryFixtureKeyReplacement.java",
+        "sha256":  "7ea457f9fd06809a67728f39fb02776c6c8815910bc78cf2785af05f2d87e801",
+        "bytes":  19680
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualL01RecoveryFixtureKeyReplacementTest.java",
+        "sha256":  "574c6f92c4d158f5e6addd0e54b900d732cda8a9fedbf8b44dbc9ac034c288ae",
+        "bytes":  18720
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualL01RecoveryFixtureRepair.java",
+        "sha256":  "b8f8579fd02b25e7690d39fc895a8d23b0eb7222cda589e3809dc729aa5699c2",
+        "bytes":  16150
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualL01RecoveryFixtureRepairTest.java",
+        "sha256":  "c41e33b3d586e935aa07f9d150e7227e7e1f4178143ad53f87aa6443e9affca5",
+        "bytes":  15798
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualOtpCaseRecovery.java",
+        "sha256":  "0c1dfe4e2b61e18d04d36ef86cceb346cad493ce8a6e1c058419082af3b19fb1",
+        "bytes":  13168
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualOtpCaseRecoveryIT.java",
+        "sha256":  "bc2d498a3ac92299030b5ecdf6f427b1f0e6825a577d42a40df9269c27576da0",
+        "bytes":  12641
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualOtpCaseRecoveryTest.java",
+        "sha256":  "da318800bfd3c534dbc468c204b9d13c8470c85541db554a48e4c2525cfd9278",
+        "bytes":  2305
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualOtpConsoleInputTest.java",
+        "sha256":  "bece698b5d84fdfac47ca9e4a2630dc6cd708b4222c96c02b62ea7a170ba9d91",
+        "bytes":  4700
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualOtpDeliveryValidation.java",
+        "sha256":  "0592acdb4a51f86667f40ddef9f40bb51e22857ea7d880212006917d4fb75fa1",
+        "bytes":  37566
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualOtpEvidenceVerification.java",
+        "sha256":  "192a4c1643adbf7985ea4fff515edd0e7a5673660b736ef6888b46f79977ebfa",
+        "bytes":  10018
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualOtpEvidenceVerificationTest.java",
+        "sha256":  "45346cef46454f5be557f54b9af78342fd2be4aa30f95d0f3c96e21509c2e482",
+        "bytes":  4087
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualOtpValidationHarnessIT.java",
+        "sha256":  "15971519ccb0dc8f93de71cf80da4af8ba1ef97d75fdc95168409e153a42bb5c",
+        "bytes":  3613
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/NativePostgresIntegrationTest.java",
+        "sha256":  "5c0bad334c3877e2adf8dfa60b1b562d129f19ba9c7304b4c1b85fe563439f77",
+        "bytes":  1158
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/NativePostgresTestDatabase.java",
+        "sha256":  "cb69e29e4efcec38e66816e1460fef79aad2866a74b1a7379db9d9f31bb18ea0",
+        "bytes":  15534
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/terms/api/AdminTermsFlowIT.java",
+        "sha256":  "0b63c6f64a824bc3e67a0dae823dcb1951cf02d2ff7a53a3c4d1bb87a3f7aaca",
+        "bytes":  19083
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/terms/api/AdminTermsGateFlowIT.java",
+        "sha256":  "1cc5cee461a886e818546ee2959bf38b101ec3e14266da7b7064e3a14040d6f8",
+        "bytes":  7634
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/terms/application/AdminTermsGateAuthorizationManagerTest.java",
+        "sha256":  "f1e62ead3f158abbc4ab9ec3f223406b8abd4b6a249f90ad1b8e9caaf642a962",
+        "bytes":  5309
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/terms/application/AdminTermsServiceTest.java",
+        "sha256":  "c92bf31dd65d35d7c7c14e6633dd8c5e1c1c3847f0aa674dc9a699038f540801",
+        "bytes":  4825
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/terms/domain/AdminTermsContentHashTest.java",
+        "sha256":  "84c2309731c38d9c8ad78848ea6454b647e0c74a7a4899bcbf8b1219c4031526",
+        "bytes":  379
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/terms/domain/AdminTermsDocumentTest.java",
+        "sha256":  "dd4c3f9e8dceda03aa6937072176505b32893e35e352c8e9b169b671eb4df484",
+        "bytes":  1667
+    },
+    {
+        "path":  "scripts/Test-RutaFijaBackendUnitSafe.ps1",
+        "sha256":  "848b5d30002a4108de1f7c5232b6f48a7ebabc2672d6dd55ab734315834cafcc",
+        "bytes":  10361
+    }
+]

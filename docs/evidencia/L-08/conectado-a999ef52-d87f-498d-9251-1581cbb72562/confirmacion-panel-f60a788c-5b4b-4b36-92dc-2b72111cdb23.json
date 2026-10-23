@@ -1,0 +1,14 @@
+{
+  "runId": "a999ef52-d87f-498d-9251-1581cbb72562",
+  "archivedAt": "2026-10-22T20:37:29.974034+00:00",
+  "humanReport": "sÍ, ingresé correctamente al panel del conductor",
+  "phonePanelHumanConfirmed": true,
+  "previousHttpLoginObserved": true,
+  "previousHttpAvailabilityObserved": true,
+  "newLoginExecutionClaimed": false,
+  "batteryChargedConfirmed": false,
+  "gpsOrServiceAccredited": false,
+  "manualPhoneResult": "PENDING",
+  "TEST_CLEANUP_RELEASED": false,
+  "pilotEnabled": false
+}

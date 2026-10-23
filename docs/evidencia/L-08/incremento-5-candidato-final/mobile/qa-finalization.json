@@ -1,0 +1,85 @@
+﻿{
+    "observedAtUtc":  "2026-10-23T06:35:42.3161110+00:00",
+    "reviewer":  "mobile_nofix independent of coordination finalization author",
+    "reviewedFile":  "scripts/finalize_l08_candidate.py",
+    "sha256":  "2019062482d4b6fdb199da1880ca4efff1ba013200c4024694c22669d55ac2aa",
+    "result":  "PASS_STATIC_REVIEW_NO_BLOCKERS_EXECUTION_GATES_REQUIRED",
+    "mainExecutedByReviewer":  false,
+    "globalDocumentsModifiedByReviewer":  false,
+    "checks":  {
+                   "pythonAst":  "PASS",
+                   "staticLocalTemplateLinksResolvedInsideWorkspace":  50,
+                   "outsideWorkspaceBrokenLinks":  0,
+                   "assertStatements":  0,
+                   "runtimeRequireGuardsNotDisabledByPythonOptimization":  true,
+                   "originalEightCoordinationBackupsCheckedBeforeWrites":  true,
+                   "contractAndMatrix08ExactAntecedentsCheckedBeforeWrites":  true,
+                   "lotOrderAndPreviousVersionCheckedBeforeWrites":  true,
+                   "mobileQaResultAndLiveSourceHashesChecked":  true,
+                   "coordinationQaResultAndReviewedFileHashesChecked":  true,
+                   "artifactBinaryHashesChecked":  true,
+                   "releaseRebuildPassSameCertificateBitIdenticalAndCandidateHashChecked":  true,
+                   "correctedOpsPostflightPortsAndOwnedJvmAbsenceRequired":  true,
+                   "amendedHttpFailureObservationUsed":  true,
+                   "localGoSeparatedFromRealPilotNoGo":  true,
+                   "noFixPhysicalNotClaimed":  true,
+                   "noHumanSignatureClaimed":  true,
+                   "unknownAcademicRubricNotCertified":  true
+               },
+    "resolvedFindings":  [
+                             {
+                                 "id":  "QAF-01",
+                                 "finding":  "Three relative links escaped workspace by one level",
+                                 "resolution":  "Matrix artifact, increment index report and increment index artifact links corrected",
+                                 "status":  "CORRECTED_REVIEWED"
+                             },
+                             {
+                                 "id":  "QAF-02",
+                                 "finding":  "Exact0.8 antecedent and coordination backup preconditions missing",
+                                 "resolution":  "Eight originals compared to backups and contract/matrix compared to0.8 antecedents before writes",
+                                 "status":  "CORRECTED_REVIEWED"
+                             },
+                             {
+                                 "id":  "QAF-03",
+                                 "finding":  "Mobile QA read without validating result/source hashes",
+                                 "resolution":  "Mobile and coordination QA PASS values plus hashes now required",
+                                 "status":  "CORRECTED_REVIEWED"
+                             },
+                             {
+                                 "id":  "QAF-04",
+                                 "finding":  "Rebuild only checked sameCertificate",
+                                 "resolution":  "PASS, identical APK, exact candidate binary hash and signer hash now required",
+                                 "status":  "CORRECTED_REVIEWED"
+                             },
+                             {
+                                 "id":  "QAF-05",
+                                 "finding":  "OPS successful result alone did not verify corrected launcher child postflight",
+                                 "resolution":  "Corrected port/JVM absence required; amended HTTP-failure timing replaces initial PG-only interval",
+                                 "status":  "CORRECTED_REVIEWED"
+                             },
+                             {
+                                 "id":  "QAF-06",
+                                 "finding":  "Lot/version guards were placed after some document writes",
+                                 "resolution":  "Guards moved into preflight, rerun refused after version transition",
+                                 "status":  "CORRECTED_REVIEWED"
+                             },
+                             {
+                                 "id":  "QAF-07",
+                                 "finding":  "Python assert guards could disappear under optimization",
+                                 "resolution":  "Explicit require raises RuntimeError; zero Assert AST nodes remain",
+                                 "status":  "CORRECTED_REVIEWED"
+                             }
+                         ],
+    "pendingExecutionChecks":  [
+                                   "Coordinator must execute main only after actual release/rebuild and corrected OPS postflight satisfy preflight",
+                                   "Verify generated document links and JSON concordance after execution; current template review does not substitute rendered output validation",
+                                   "Cryptographic act signature and tamper rejection must be emitted and verified before final delivery",
+                                   "Final immutable manifest and preservation execution remain coordinator responsibilities"
+                               ],
+    "scopeLimits":  [
+                        "Read-only static QA; no PostgreSQL, phone, process or infrastructure changes",
+                        "Release API.invalid has no live service; physical debugv4 and releasev5 evidence remain distinct",
+                        "Local simulated no-fix is not satellite-loss observation",
+                        "Real operations and participant gates remain NO_GO_PILOTO_REAL"
+                    ]
+}

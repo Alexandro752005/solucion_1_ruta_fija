@@ -1,0 +1,86 @@
+{
+  "observedAtUtc": "2026-10-23T16:13:49.868562+00:00",
+  "result": "PASS_INDEPENDENT_FINAL_LAUNCHER_GUARD_REVIEW_NO_BLOCKERS",
+  "reviewer": "mobile_nofix independent of OPS source author",
+  "reviewedFiles": [
+    {
+      "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+      "sha256": "298d7cb7975aeb32787c7e05bc9065acb04b8657edf35589a7050cab3ffeb167"
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaQuickDemo.ps1",
+      "sha256": "e24de70cfc6e610a600d27058b163812151afd624ff3bcf12f40f3ffc497ffa7"
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaNativeTest.ps1",
+      "sha256": "3b318571892f5828799f6b007fde861e2a498f1d13e21ef1c8a30265b8379fb2"
+    },
+    {
+      "path": "scripts/Test-RutaFijaNativePreflight.ps1",
+      "sha256": "fedf6ede15abf21cc568a6ec10ce356cc7da7902e5e43e560cdeca769b47c010"
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaPostgresqlLease.ps1",
+      "sha256": "295a2626b0fc61a05bbabd57c0e1ed8c25ea7a71e4c4a7102c9221944eb3ac18"
+    },
+    {
+      "path": "scripts/Test-RutaFijaLocalSecretPolicy.ps1",
+      "sha256": "edeee8f8b94217eb10dabf92e71a0ebc06782fef4c23d2e5d1a983285ec538c0"
+    },
+    {
+      "path": "scripts/Test-RutaFijaLauncherSafety.ps1",
+      "sha256": "0454ebf8b25abd83fef5635b434d3a473ef5f7409b1949290f26fa9631be3908"
+    },
+    {
+      "path": "scripts/Set-RutaFijaPostgresqlService.ps1",
+      "sha256": "e6fb23a7902deef097c1740269cbc33973d529d8f46385221a9bac3e956e297f"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/launchers/qa-mocks-lease-demo-final.json",
+      "sha256": "2b0352f728e60d26a470f8c104a4aaaacbd88c2d586e0cd850b2ba44830b591a"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/launchers/parser-todos-ps1-final.json",
+      "sha256": "e4f75629e138aa5b677be55a03111eadd70d3a5dda830b9e2beb1fc9fa9c1539"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/launchers/lease-observabilidad-readonly.json",
+      "sha256": "f752624d4e59ad248f796648ac94c89ce43fe03caec93548d5b90c97832496d6"
+    }
+  ],
+  "supersedesEarlierSourceReview": "qa-launcher-observability.json preserves initial findings and review; this addendum approves the newer hashes",
+  "checks": {
+    "authorMocks42AllPass": true,
+    "currentSourcesMatchAllMockHashes": true,
+    "recordedParser79NoErrors": true,
+    "foreignNullBackendTypeConservativelyCounted": true,
+    "unobservableUnknownSessionRejectsAutomaticStop": true,
+    "hiddenProcessStartTimeRejectsOwnershipStop": true,
+    "unownedAlreadyRunningServiceMayRemainUntouchedWithHiddenStartTime": true,
+    "cloudflaredPidReuseNowChecksCreationTime": true,
+    "nativePortAndV50SchemaGuardsPrecedePublicTunnel": true,
+    "missingCloudflaredNoLongerAutoInstalls": true,
+    "successTextNoLongerClaimsPostgresqlStoppedUnconditionally": true,
+    "migrationCountClarified50VersionedPlusOneRepeatable": true
+  },
+  "resolvedSincePriorReview": [
+    {
+      "id": "QA-LAUNCH-02",
+      "status": "CORRECTED_REVIEWED",
+      "change": "Demo stop reports actual lease-policy-dependent PostgreSQL outcome"
+    },
+    {
+      "id": "QA-LAUNCH-03",
+      "status": "CORRECTED_REVIEWED",
+      "change": "Demo schema2 stores exact cloudflared creation time and validates it before managed stop"
+    }
+  ],
+  "method": "Read sources and compare recorded source hashes/mocks/parser. No BAT or launcher invocation, PostgreSQL query, external tunnel, service action or secret-file read by reviewer.",
+  "limitations": [
+    "Client inspection remains a point-in-time check; new connections can race after it",
+    "When ordinary role cannot observe background/session identity fully, auto-stop correctly refuses; no broader database grant was added",
+    "Real native smoke results are separate coordinator evidence, not proven by these ownership mocks",
+    "Explicit public-demo Start remains a network-exposing action and was not invoked by reviewer",
+    "Low-level explicit service administrator actions remain intentionally powerful and are not ordinary automatic-stop guarantees"
+  ]
+}

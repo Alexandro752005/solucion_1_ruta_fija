@@ -5,6 +5,7 @@ import jakarta.validation.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
@@ -60,6 +61,20 @@ public class GlobalExceptionHandler {
                 exception.getStatus(),
                 exception.getCode(),
                 exception.getMessage(),
+                List.of(),
+                request
+        );
+    }
+
+    @ExceptionHandler(ExternalServiceUnavailableException.class)
+    ResponseEntity<ApiErrorResponse> handleExternalServiceUnavailable(
+            ExternalServiceUnavailableException exception,
+            HttpServletRequest request
+    ) {
+        return response(
+                HttpStatus.SERVICE_UNAVAILABLE,
+                exception.getCode(),
+                exception.getUserMessage(),
                 List.of(),
                 request
         );
@@ -272,7 +287,14 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     ResponseEntity<ApiErrorResponse> handleUnexpected(Exception exception, HttpServletRequest request) {
-        log.error("Unexpected request failure", exception);
+        if (dependencyUnavailable(exception)) {
+            // Never log an exception message, JDBC URL, query or authentication DTO.
+            log.warn("Request dependency unavailable type={}", exception.getClass().getSimpleName());
+            return response(HttpStatus.SERVICE_UNAVAILABLE, ErrorCode.SERVICE_UNAVAILABLE,
+                    "El servicio no está disponible temporalmente. No se confirmó la operación.",
+                    List.of(), request);
+        }
+        log.error("Unexpected request failure type={}", exception.getClass().getSimpleName());
         return response(
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 ErrorCode.INTERNAL_ERROR,
@@ -280,6 +302,26 @@ public class GlobalExceptionHandler {
                 List.of(),
                 request
         );
+    }
+
+    @ExceptionHandler(DataAccessResourceFailureException.class)
+    ResponseEntity<ApiErrorResponse> handleResourceUnavailable(
+            DataAccessResourceFailureException exception, HttpServletRequest request) {
+        return handleUnexpected(exception, request);
+    }
+
+    private boolean dependencyUnavailable(Throwable failure) {
+        Throwable cause = failure;
+        for (int depth = 0; cause != null && depth < 16; depth++, cause = cause.getCause()) {
+            if (cause instanceof DataAccessResourceFailureException
+                    || cause instanceof java.sql.SQLTransientConnectionException
+                    || cause instanceof java.sql.SQLNonTransientConnectionException
+                    || cause instanceof java.sql.SQLRecoverableException
+                    || cause instanceof org.hibernate.exception.JDBCConnectionException) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private ResponseEntity<ApiErrorResponse> response(

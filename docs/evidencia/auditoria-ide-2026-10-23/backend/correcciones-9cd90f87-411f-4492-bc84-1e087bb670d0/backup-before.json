@@ -1,0 +1,232 @@
+﻿[
+    {
+        "path":  "backend/src/main/java/pe/rutafija/availability/monitor/HttpAvailabilityProbe.java",
+        "sha256":  "1147f87bcc6e4a703ce25b015b674cc2832d835811707b0a0afffd6bc544d663",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/availability/monitor/HttpAvailabilityProbe.java"
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/domain/DriverGroupMembership.java",
+        "sha256":  "66a00becdd3ce1c0010351ba5869bbf2a567544451ccc3126e5010c8ceab515c",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/fleet/domain/DriverGroupMembership.java"
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/domain/DriverVehicleLinkId.java",
+        "sha256":  "fbeaae2c39dfaac362c8142738958c8fd85d7d4e54ed8968e6c5de6ea1b46f97",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/fleet/domain/DriverVehicleLinkId.java"
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/fleet/domain/GroupCoordinatorId.java",
+        "sha256":  "959c5d93a00fe5e2305a50510f9bd85f7d5dc3a7bc3a56467e18e52544bc335c",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/fleet/domain/GroupCoordinatorId.java"
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/EmailOtpCodeRejectedException.java",
+        "sha256":  "3a89194c40439f8657b5581df86673cb0d922452fac02c1ccbe8f885b12f0b9f",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/identity/application/EmailOtpCodeRejectedException.java"
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/application/RecoveryProofRejectedException.java",
+        "sha256":  "c0cf023fcf84f74bce18b963f5a4b3fd685e0e1bc561a7725fc8173b6a246571",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/identity/application/RecoveryProofRejectedException.java"
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/identity/recoverycli/SuperAdminRecoveryCli.java",
+        "sha256":  "02d090d6dffa108cd6191bffe537d7352f47bd04f492033bad2095f7cd1f60fc",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/identity/recoverycli/SuperAdminRecoveryCli.java"
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/application/OnboardingInvitationRejectedException.java",
+        "sha256":  "1e2da76ab5b4ca35307ee626845605496efe5ad6e009d02a2474bff0027ab80a",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/onboarding/application/OnboardingInvitationRejectedException.java"
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/onboarding/application/OnboardingOtpRejectedException.java",
+        "sha256":  "0119d7709a8afe45a5772823023304d061f0fc8d9615cb8f46736e58a528d5c0",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/onboarding/application/OnboardingOtpRejectedException.java"
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/operation/application/ReportExportService.java",
+        "sha256":  "ae42741bec5d91c989e112560111bf96df33a935380df7946038008566c94fca",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/operation/application/ReportExportService.java"
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/personidentity/application/PersonIdentityGateAuthorizationManager.java",
+        "sha256":  "f7cd11688731a2d53cbddabefb88c2517332f8f278d4f9819e05a67ae7ef807e",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/personidentity/application/PersonIdentityGateAuthorizationManager.java"
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/exception/ApplicationException.java",
+        "sha256":  "7b21cf6ef725730b64f1e3b02b98a4b388fd3a7ce84a1de4277bda2187fd9e39",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/shared/exception/ApplicationException.java"
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/exception/ExternalServiceUnavailableException.java",
+        "sha256":  "687f8e348c8dc25037e42a0e4a1ec8b64a8dc1727440cfc2b7ca983c7b5c3647",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/shared/exception/ExternalServiceUnavailableException.java"
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/exception/InvalidCredentialsException.java",
+        "sha256":  "5c6451058b3078fb770bb6c2f5813667087dfa91122cac0f9ce393d8eef87448",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/shared/exception/InvalidCredentialsException.java"
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/exception/InvalidRefreshTokenException.java",
+        "sha256":  "9b6233b232e8312bdb9d7b1935dca4c51ab0757d0462e209bfcbf58d5cf27807",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/shared/exception/InvalidRefreshTokenException.java"
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/exception/RateLimitExceededException.java",
+        "sha256":  "c894dc6e993ffc60f2dbafc7712328124185691a0054d799d91dd91d99dd02eb",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/shared/exception/RateLimitExceededException.java"
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/shared/exception/RefreshTokenReuseException.java",
+        "sha256":  "a79389e97271eed3af2bd29fe12ddec749f27dca030c68fed467f68e8338e0ed",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/shared/exception/RefreshTokenReuseException.java"
+    },
+    {
+        "path":  "backend/src/main/java/pe/rutafija/terms/application/AdminTermsGateAuthorizationManager.java",
+        "sha256":  "de087b20b99f18a0e69fd0c2efe22d245b4197eab3c28f6117a6b1120cc557f6",
+        "backup":  "backup/backend/src/main/java/pe/rutafija/terms/application/AdminTermsGateAuthorizationManager.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/personidentity/PersonIdentityGateAuthorizationManagerTest.java",
+        "sha256":  "bf315a9dcae33864ac41966818d2ca8103ca6ee45e5d0587876000698c712399",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/personidentity/PersonIdentityGateAuthorizationManagerTest.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L02ClosedCaseVerification.java",
+        "sha256":  "985313ab08ba89be3793687440af5466f1460543783ff0ad03a56f2e6bfd2a7f",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L02ClosedCaseVerification.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L02ConnectedTrial.java",
+        "sha256":  "e542f96d2e6f8b7030a9568dd64160c0da67113955fdb0f74ecca7545b6a3447",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L02ConnectedTrial.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L02DatabasePreflight.java",
+        "sha256":  "0bcde9a99bcc9167e62b5cfe25c0c8e4c0db9bf572397ace66ffbd88a5697f04",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L02DatabasePreflight.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L03ConnectedTrial.java",
+        "sha256":  "14c7c8ddd328574306d602ac602cda378b0b91874519b5c55e22844f4c341c04",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L03ConnectedTrial.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L03DatabasePreflight.java",
+        "sha256":  "ff84d12141bd9cb4af19002764ad17904f8fad9db89bc53f80ba676ae99b72a1",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L03DatabasePreflight.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L04ConnectedTrial.java",
+        "sha256":  "a9776c0d3e23a9c9796320f3b769ff77417e87868a005879b2b487afb2704242",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L04ConnectedTrial.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L04DatabasePreflight.java",
+        "sha256":  "80d148f9e0a40512b84742a74610b84c79359d5126f30058660cbae4044091b7",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L04DatabasePreflight.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L05ConnectedTrial.java",
+        "sha256":  "dc072f2419e1ab08d4615fcdbb9c260c6f6b9b5e0b48f04ffc6b6ba587524c40",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L05ConnectedTrial.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L05DatabasePreflight.java",
+        "sha256":  "80ab9f1f5987fff9123dd917b15e069b59ccbd249950be0851408193c5a099b0",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L05DatabasePreflight.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L06ConnectedTrial.java",
+        "sha256":  "32284804224950ad384642a7110a7a39b193f51acc6e548902d1380f7fb31a2e",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L06ConnectedTrial.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L06DatabasePreflight.java",
+        "sha256":  "7afedb359dfaea4dcd3b6b75f6fbcfd617fb9616874257cedd7ae29ed4446057",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L06DatabasePreflight.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L07ConnectedTrial.java",
+        "sha256":  "70d8ae218bdab0f3518d17a2df9cf0236af4b26a66b1d0a8bed28fa79d1c3d9d",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L07ConnectedTrial.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L07DatabasePreflight.java",
+        "sha256":  "358e47ad4f0148601b9f220de6a46c3d58fb6edbea6b271e576525aa2492dcfc",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L07DatabasePreflight.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08CapacityRetirementRace.java",
+        "sha256":  "b08c34d17fd2c17b5d60395a2ed013c253ed78878f65e9c2063069612fe2bfe2",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L08CapacityRetirementRace.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08CapacityTrial.java",
+        "sha256":  "5577efae0164d163139de87c335e46a026d6df831e059ccfd47c995f42a62663",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L08CapacityTrial.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08ConnectedTrial.java",
+        "sha256":  "130c0d28e3fadffd13131593eeb04d8928df494c64fbc6d2ec7d7914529e8443",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L08ConnectedTrial.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08DatabasePreflight.java",
+        "sha256":  "2a20d548cb3acdca022f7c97ae8ef5985e57b879e25c5195bbbf663cf4ede496",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L08DatabasePreflight.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/L08V50Preflight.java",
+        "sha256":  "e073c485df65e250c1072b4514876e2345075f285fdc943f7bb92347f8bb916f",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/L08V50Preflight.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualL01AutomatedTermsComplement.java",
+        "sha256":  "bb421e897be8790e989d12077f978977967aae5f835069f892d22826a0c7121b",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/ManualL01AutomatedTermsComplement.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualL01HumanTrial.java",
+        "sha256":  "510d89d63b00386f941ba0a456616dda8ab84f18e5cc36f1378bb9fac562713d",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/ManualL01HumanTrial.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualL01HumanTrialServer.java",
+        "sha256":  "6a9d3759a360405a8b70aaa8aee0621c6e54ed143d3525a67a87a14a5f5d7f6b",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/ManualL01HumanTrialServer.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualL01RecoveryFixtureKeyReplacementTest.java",
+        "sha256":  "09e9b7573baaf383e42c716dac9b4a00f827ddfb727ba6cd56e7a77503678b41",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/ManualL01RecoveryFixtureKeyReplacementTest.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualL01RecoveryFixtureRepairTest.java",
+        "sha256":  "7c4266bfe844bd6345917811809c22dbc6dd59834a9885f69c20175056691b2d",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/ManualL01RecoveryFixtureRepairTest.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualOtpCaseRecovery.java",
+        "sha256":  "f1845a66bb65c524d7ff7ff95e61ffad7fced7281300f894e301af5b5de92956",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/ManualOtpCaseRecovery.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualOtpDeliveryValidation.java",
+        "sha256":  "0b4b61b62870bc8fe163cf2476ccfbdb74502d44386c37d6ad6c7422223b4259",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/ManualOtpDeliveryValidation.java"
+    },
+    {
+        "path":  "backend/src/test/java/pe/rutafija/support/ManualOtpEvidenceVerification.java",
+        "sha256":  "e82487ca20cf3fa82b1ad61705f0d751a4870d637e401f445e354fc37ba02cfa",
+        "backup":  "backup/backend/src/test/java/pe/rutafija/support/ManualOtpEvidenceVerification.java"
+    },
+    {
+        "path":  "scripts/Test-RutaFijaBackendUnitSafe.ps1",
+        "sha256":  "bb5d4c79e090f7fcfccb1b43a0cf6eb3665c28f622b5a04e0f05d212de2aa57f",
+        "backup":  "backup/scripts/Test-RutaFijaBackendUnitSafe.ps1"
+    }
+]

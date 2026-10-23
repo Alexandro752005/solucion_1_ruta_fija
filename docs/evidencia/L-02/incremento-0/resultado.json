@@ -1,0 +1,135 @@
+{
+  "project": "Ruta Fija V3.1",
+  "lot": "L-02",
+  "lotStatus": "EN_CURSO",
+  "increment": "L02.0",
+  "localDate": "2026-10-18",
+  "observedAtUtc": "2026-10-19T04:20:08.730202+00:00",
+  "authorization": "OK VERDE",
+  "cardinalityDecision": "CARD-01_ONE_CURRENT_VEHICLE_PER_CONDUCTOR",
+  "implementationStatus": "IMPLEMENTED_AND_COMPILED_NOT_FUNCTIONALLY_VERIFIED",
+  "compilations": [
+    {
+      "command": "mvnw.cmd --offline --batch-mode --no-transfer-progress compile",
+      "directory": "backend",
+      "exitCode": 0,
+      "log": "backend-compile.log"
+    },
+    {
+      "command": "npm.cmd run typecheck",
+      "directory": "frontend",
+      "exitCode": 0,
+      "log": "crm-typecheck.log"
+    },
+    {
+      "command": "npm.cmd run build:development",
+      "directory": "frontend",
+      "exitCode": 0,
+      "log": "crm-build.log"
+    }
+  ],
+  "logEncoding": "Original PowerShell redirection bytes preserved; UTF16 BOM detected while reading; no reexecution required",
+  "newTestsAdded": false,
+  "testSuitesExecuted": false,
+  "existingPrivacyTestFixtureAdapted": true,
+  "databaseQueried": false,
+  "databaseWrites": false,
+  "historicalQuotaCountersReadThisTurn": false,
+  "newSyntheticAccountsCreated": 0,
+  "mailAttempts": 0,
+  "migrationsExecuted": false,
+  "runtimeApplicationStarted": false,
+  "offlineEnabled": false,
+  "pilotEnabled": false,
+  "L03Started": false,
+  "gitOrGithubActions": false,
+  "final3Regenerated": false,
+  "independentQaStatus": "PENDING",
+  "nativeConcurrencyVerified": false,
+  "fullTemporalLinkModelImplemented": false,
+  "sourceFiles": [
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/api/dto/DriverIncorporationStatusResponse.java",
+      "sha256": "799EC87668FA98418B3E6B97FBDD12374B5281956C0B141F2D6587F02F828D8A"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/api/DriverIncorporationStatusController.java",
+      "sha256": "6A66F42C184217B291D0B65B9324F5BA891FECE31783786A76023C0C1D9D4B86"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/application/DriverIncorporationStatusService.java",
+      "sha256": "E54E6444B76F58F21A04962B24717A59F54B4A5E2B8EC74A5CC8DB360499B070"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/infrastructure/DriverVehicleLinkRepository.java",
+      "sha256": "95CDD305B31B31A32228324C16116CD0ACFA98C8B8A44190282EA3292A39669F"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/infrastructure/VehicleRepository.java",
+      "sha256": "1539483E09A20D8FAD128EC86326EE51C50CD3974BFF363CB2D477148DA306B7"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/application/FleetManagementService.java",
+      "sha256": "49385DC807544027A8561025E6B9DEBBDE720DFF44E2C4200E2BCE3CE1976ED1"
+    },
+    {
+      "path": "frontend/src/app/core/management/management.models.ts",
+      "sha256": "0DB4200FAB745A3E3C229C731B66E8F1CB842C7B31EAEDDDB8B34BE8C047CD7C"
+    },
+    {
+      "path": "frontend/src/app/core/management/management-api.service.ts",
+      "sha256": "4338EFD81482C2F803A2D70DE4684E51554E66DB254890430E16C506755D0B51"
+    },
+    {
+      "path": "frontend/src/app/features/drivers/drivers.page.ts",
+      "sha256": "65CE858A44DEE8B4CD3FF5969879FEA8099D16D6C376A0609DA37D9470431CA6"
+    },
+    {
+      "path": "frontend/src/app/features/drivers/drivers.page.html",
+      "sha256": "90D42406B0D0B0F3F5A66790CFAD2E3650D72A119DAE923203EF312EEA417710"
+    },
+    {
+      "path": "frontend/src/app/features/drivers/drivers.page.spec.ts",
+      "sha256": "5C79D9195D3C15051F40ADFE12350EDA2F4E96C56F6338DD0537B8398F0862B7"
+    }
+  ],
+  "immutableArtifacts": [
+    {
+      "path": "backups/L-00-2026-10-13-final3/source-snapshot.zip",
+      "sha256": "3806510606A1565F23B8C526A13CC1049BC79141BABDB8E1316F042488B3D11B"
+    },
+    {
+      "path": "docs/evidencia/L-00/source-manifest.sha256",
+      "sha256": "E78D7002D5C85B24200BE21B8FD88CE770D36333CA49CAA5351248CFD0E28BAD"
+    },
+    {
+      "path": "docs/legal/publicado/terminos-admin-v1.0.0.md",
+      "sha256": "20FFD9525CB19EC51387BF11859CF34100A5117B00DE8F428BFEB8B9A4DC6417"
+    },
+    {
+      "path": "docs/actas/L-01-cierre-funcional-local-2026-10-17.md",
+      "sha256": "C9BF0FE7EA79C5DBFD77B9883BF21673E29EA3B6FE5D22A6ECB6119BEBEFF227"
+    },
+    {
+      "path": "docs/evidencia/L-01/ensayos-humanos-140c10a1-be0f-4d08-a6d4-c796e2ed107a/observacion-1792227077200.json",
+      "sha256": "9319F045F65FD4EE61B9A07EDEC3000E5EA6AC0E75618D99E2C4896843B8A719"
+    },
+    {
+      "path": "docs/evidencia/L-01/ensayos-humanos-140c10a1-be0f-4d08-a6d4-c796e2ed107a/observacion-1792287275662.json",
+      "sha256": "E0A986D10E09F8FBB289061753B3E36759B0CAE24E53731EDE4BBA8640D5FFFB"
+    }
+  ],
+  "checks": {
+    "JavaCompile": "PASS",
+    "TypeScriptCompile": "PASS",
+    "AngularTemplatesBuild": "PASS",
+    "newDocumentationLinks": "PASS"
+  },
+  "backupTestFixtureNote": "drivers.page.spec.reconstructed.ts is a source reconstruction removing only the compatibility insertion, not claimed as original byte snapshot",
+  "remainingSubphases": [
+    "L02.1 personal validity/suspension/material corrections",
+    "L02.2 unit review and temporal links",
+    "L02.3 CRM/Android continuity after provisioning",
+    "L02.4 functional connected verification and independent review"
+  ]
+}

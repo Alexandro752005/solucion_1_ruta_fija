@@ -1,0 +1,72 @@
+{
+  "capturedAt": "2026-10-23T21:05:12.415Z",
+  "workspace": "d:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3",
+  "errors": 0,
+  "warnings": 0,
+  "diagnostics": [],
+  "documents": [
+    {
+      "file": "git\\scm0\\input",
+      "dirty": false,
+      "language": "scminput"
+    },
+    {
+      "file": "d:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3\\docs\\Uso del Sistema.md",
+      "dirty": false,
+      "language": "markdown"
+    },
+    {
+      "file": "d:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3\\backend\\.local\\ruta-fija-native.env",
+      "dirty": false,
+      "language": "dotenv"
+    },
+    {
+      "file": "d:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3\\docs\\Uso del Sistema.md.git",
+      "dirty": false,
+      "language": "plaintext"
+    },
+    {
+      "file": "d:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3\\docs\\Uso del Sistema.md.git",
+      "dirty": false,
+      "language": "plaintext"
+    }
+  ],
+  "extensions": [
+    "GitHub.copilot-chat",
+    "vscode.debug-auto-launch",
+    "vscode.emmet",
+    "vscode.extension-editing",
+    "vscode.git",
+    "vscode.git-base",
+    "vscode.github",
+    "vscode.github-authentication",
+    "vscode.json-language-features",
+    "vscode.markdown-language-features",
+    "vscode.markdown-math",
+    "vscode.merge-conflict",
+    "vscode.mermaid-markdown-features",
+    "vscode.microsoft-authentication",
+    "vscode.terminal-suggest",
+    "Dart-Code.dart-code",
+    "Dart-Code.flutter",
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "EditorConfig.EditorConfig",
+    "esbenp.prettier-vscode",
+    "GitHub.vscode-pull-request-github",
+    "humao.rest-client",
+    "mechatroner.rainbow-csv",
+    "ms-vscode-remote.remote-containers",
+    "openai.chatgpt",
+    "openai.codex-audio",
+    "redhat.java",
+    "rutafija-local.rutafija-local-qa-observer",
+    "vscjava.migrate-java-to-azure",
+    "vscjava.vscode-java-debug",
+    "vscjava.vscode-java-dependency",
+    "vscjava.vscode-java-pack",
+    "vscjava.vscode-java-test",
+    "vscjava.vscode-maven",
+    "Vue.volar"
+  ]
+}

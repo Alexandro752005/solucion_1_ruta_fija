@@ -1,4 +1,5 @@
 import '../../../core/network/mobile_api_client.dart';
+import '../../../core/network/correlation_id.dart';
 import '../domain/mobile_incident_models.dart';
 
 typedef MobileIncidentUtcClock = DateTime Function();
@@ -13,7 +14,20 @@ abstract interface class MobileIncidentGateway {
   Future<MobileIncident> create({
     required MobileIncidentCategory category,
     required String description,
+    required MobileIncidentSeverity severity,
     String? assignmentId,
+    String? operationKey,
+    DateTime? occurredAt,
+    String? previousIncidentId,
+    String? relationReason,
+  });
+  Future<List<MobileIncidentAction>> history(String incidentId);
+  Future<MobileIncidentOperation> operation(String operationKey);
+  Future<MobileIncident> information(
+    String incidentId, {
+    required int version,
+    required String operationKey,
+    required String note,
   });
 }
 
@@ -60,6 +74,7 @@ final class MobileIncidentRepository implements MobileIncidentGateway {
     final response = await _apiClient.postObject(
       'mobile/incidents/$normalizedId/close',
       {'version': version},
+      allowSessionRefresh: false,
     );
     return MobileIncident.fromJson(response);
   }
@@ -68,8 +83,16 @@ final class MobileIncidentRepository implements MobileIncidentGateway {
   Future<MobileIncident> create({
     required MobileIncidentCategory category,
     required String description,
+    required MobileIncidentSeverity severity,
     String? assignmentId,
+    String? operationKey,
+    DateTime? occurredAt,
+    String? previousIncidentId,
+    String? relationReason,
   }) async {
+    if (severity == MobileIncidentSeverity.unassessed) {
+      throw ArgumentError('Selecciona una gravedad explícita.');
+    }
     final normalizedDescription = description.trim();
     if (normalizedDescription.isEmpty || normalizedDescription.length > 1000) {
       throw ArgumentError.value(
@@ -84,13 +107,63 @@ final class MobileIncidentRepository implements MobileIncidentGateway {
     final body = <String, Object?>{
       'category': category.apiValue,
       'description': normalizedDescription,
-      'occurredAt': utcClock().toUtc().toIso8601String(),
+      'occurredAt': (occurredAt ?? utcClock()).toUtc().toIso8601String(),
+      'severity': severity.apiValue,
+      'operationKey': operationKey ?? createCorrelationId(),
     };
     if (normalizedAssignmentId != null) {
       body['assignmentId'] = normalizedAssignmentId;
     }
-    final response = await _apiClient.postObject('mobile/incidents', body);
+    if (previousIncidentId != null) {
+      if (!['RECURRENCE', 'CLOSURE_ERROR'].contains(relationReason)) {
+        throw ArgumentError('Selecciona el motivo del caso posterior.');
+      }
+      body['previousIncidentId'] = previousIncidentId;
+      body['relationReason'] = relationReason;
+    }
+    final response = await _apiClient.postObject(
+      'mobile/incidents',
+      body,
+      allowSessionRefresh: false,
+    );
     return MobileIncident.fromJson(response);
+  }
+
+  @override
+  Future<List<MobileIncidentAction>> history(
+    String incidentId,
+  ) async => (await _apiClient.getList(
+    'mobile/incidents/${_requiredIdentifier(incidentId, 'incidentId')}/history',
+  )).map(MobileIncidentAction.fromJson).toList();
+  @override
+  Future<MobileIncidentOperation> operation(
+    String operationKey,
+  ) async => MobileIncidentOperation.fromJson(
+    await _apiClient.getObject(
+      'mobile/incidents/operations/${_requiredIdentifier(operationKey, 'operationKey')}',
+    ),
+  );
+  @override
+  Future<MobileIncident> information(
+    String incidentId, {
+    required int version,
+    required String operationKey,
+    required String note,
+  }) async {
+    if (version < 0 || note.trim().isEmpty || note.trim().length > 1000) {
+      throw ArgumentError('Completa una nota válida.');
+    }
+    return MobileIncident.fromJson(
+      await _apiClient.postObject(
+        'mobile/incidents/${_requiredIdentifier(incidentId, 'incidentId')}/information',
+        {
+          'operationKey': operationKey,
+          'expectedVersion': version,
+          'note': note.trim(),
+        },
+        allowSessionRefresh: false,
+      ),
+    );
   }
 
   String _requiredIdentifier(String value, String field) {

@@ -1,0 +1,38 @@
+{
+  "observedAt": "2026-10-20T07:42:46.464907+00:00",
+  "localDate": "2026-10-20",
+  "result": "PASS_TIME_CORRECTIONS_INCREMENT_ONLY",
+  "lotStatus": "EN_CURSO",
+  "database": "ruta_fija_test",
+  "schemaVersion": "39",
+  "backendDistinctPassed": 46,
+  "backendTimePassed": 15,
+  "backendAuthorizationRacePassed": 1,
+  "flutterDistinctPassed": 24,
+  "crmComponentPassed": 20,
+  "flutterAnalyze": "NO_ISSUES",
+  "crmTypecheck": "PASS",
+  "crmDevelopmentBuild": "PASS",
+  "backendPackage": "PASS",
+  "apkDebug": "PASS_BUILD_ONLY",
+  "artifactManifest": "artifacts/L-05-incremento-3-2026-10-20/manifest.json",
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 2
+  },
+  "acceptances": 2,
+  "accountsCreatedPersistently": 0,
+  "externalMailSent": false,
+  "globalCleanupExecuted": false,
+  "humanTrial": false,
+  "physicalDevice": false,
+  "pilotEnabled": false,
+  "L06Started": false,
+  "limits": [
+    "Time corrections on completed services; multiple-segment/interrupt terminal integration awaits handover increment.",
+    "SQL authorization race is not a TCP business race.",
+    "No new persistent accounts, real browser/mobile connection, device or human trial.",
+    "Safety interruption decision approved; implementation remains pending in this cut."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "observedAt": "2026-10-19T09:53:27.561839+00:00",
+  "result": "PASS_DOCUMENT_CONCORDANCE",
+  "L02Status": "VERIFICADA",
+  "closureType": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "criteriaVerified": 10,
+  "brokenClosureLinks": [],
+  "currentContractMatchesVersioned": true,
+  "currentMatrixMatchesFinal": true,
+  "boardBacklogAndProjectMemoryConcordant": true,
+  "L03Status": "POR_AUDITAR_NO_INICIADA",
+  "pilotEnabled": false,
+  "immutableFilesPreserved": 7,
+  "sourceFilesHashed": 656,
+  "globalCleanupProtectionContinues": true,
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 1
+  },
+  "TEST_CLEANUP_RELEASED": true,
+  "manifestExcludesItself": true
+}

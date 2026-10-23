@@ -40,6 +40,8 @@ public class IncidentService {
     private final AuditService auditService;
     private final OperationEventPublisher eventPublisher;
     private final Clock clock;
+    private final ServiceExecution execution;
+    private final IncidentWorkflow workflow;
 
     public IncidentService(
             IncidentRepository incidentRepository,
@@ -48,7 +50,7 @@ public class IncidentService {
             CurrentUserService currentUserService,
             AuditService auditService,
             OperationEventPublisher eventPublisher,
-            Clock clock
+            Clock clock,ServiceExecution execution,IncidentWorkflow workflow
     ) {
         this.incidentRepository = incidentRepository;
         this.assignmentRepository = assignmentRepository;
@@ -57,6 +59,8 @@ public class IncidentService {
         this.auditService = auditService;
         this.eventPublisher = eventPublisher;
         this.clock = clock;
+        this.execution=execution;
+        this.workflow=workflow;
     }
 
     @Transactional(readOnly = true)
@@ -75,19 +79,21 @@ public class IncidentService {
         Page<Incident> incidents = incidentRepository.search(
                 actor.getOrganizationId(), driverId, status, category, from, to, pageable
         );
-        return PageResponse.from(incidents, IncidentResponse::from);
+        return PageResponse.from(incidents, workflow::view);
     }
 
     @Transactional(readOnly = true)
     public IncidentResponse getIncident(UUID incidentId) {
         AppUser actor = requireOperationalActor();
         Incident incident = findTenantIncident(incidentId, actor.getOrganizationId());
-        return IncidentResponse.from(incident);
+        return workflow.view(incident);
     }
 
     @Transactional
     public IncidentResponse createIncident(IncidentCreateRequest request) {
         AppUser actor = requireOperationalActor();
+        workflow.beforeWrite(actor);
+        var replay=workflow.replayReport(actor,request.operationKey(),request);if(replay.isPresent())return replay.get();
         Driver driver = findTenantDriver(request.driverId(), actor.getOrganizationId());
         Assignment assignment = request.assignmentId() == null
                 ? null
@@ -102,7 +108,7 @@ public class IncidentService {
             }
         }
 
-        Incident incident = incidentRepository.saveAndFlush(Incident.report(
+        Incident incident = Incident.report(
                 actor.getOrganization(),
                 driver,
                 assignment,
@@ -110,31 +116,21 @@ public class IncidentService {
                 request.category(),
                 request.description(),
                 Instant.now(clock)
-        ));
+        );
+        workflow.prepareReport(incident,actor,request.severity(),request.previousIncidentId(),request.relationReason());
+        execution.linkIncident(incident,assignment);incident=incidentRepository.saveAndFlush(incident);
+        workflow.recordReport(incident,actor,request.operationKey(),request);
         auditService.record(actor, "INCIDENT_REPORTED_FROM_CRM", "INCIDENT", incident.getId(), Map.of(
                 "category", incident.getCategory().name(),
                 "source", "CRM_WEB"
         ));
         eventPublisher.publish(actor.getOrganizationId(), incident.getDriver().getGroup().getId(), "incident.reported", eventData(incident));
-        return IncidentResponse.from(incident);
+        return workflow.view(incident);
     }
 
     @Transactional
     public IncidentResponse followUpIncident(UUID incidentId, IncidentFollowUpRequest request) {
-        AppUser actor = requireOperationalActor();
-        Incident incident = findTenantIncident(incidentId, actor.getOrganizationId());
-        assertVersion(incident, request.version());
-        try {
-            incident.followUp(request.note(), request.resolve(), actor, Instant.now(clock));
-        } catch (IllegalStateException exception) {
-            throw invalidState(exception.getMessage());
-        }
-        incident = incidentRepository.saveAndFlush(incident);
-        auditService.record(actor, "INCIDENT_FOLLOWED_UP", "INCIDENT", incident.getId(), Map.of(
-                "resolved", request.resolve()
-        ));
-        eventPublisher.publish(actor.getOrganizationId(), incident.getDriver().getGroup().getId(), "incident.followed-up", eventData(incident));
-        return IncidentResponse.from(incident);
+        return workflow.followUp(incidentId,request);
     }
 
     private AppUser requireOperationalActor() {

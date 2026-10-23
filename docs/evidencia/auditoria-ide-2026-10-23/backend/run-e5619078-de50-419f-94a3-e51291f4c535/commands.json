@@ -1,0 +1,40 @@
+﻿[
+    {
+        "label":  "00-toolchain",
+        "arguments":  [
+                          "--version"
+                      ],
+        "exitCode":  0,
+        "log":  "00-toolchain.log"
+    },
+    {
+        "label":  "01-compile-test-compile",
+        "arguments":  [
+                          "--batch-mode",
+                          "--no-transfer-progress",
+                          "--offline",
+                          "-f",
+                          "D:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3\\docs\\evidencia\\auditoria-ide-2026-10-23\\backend\\run-e5619078-de50-419f-94a3-e51291f4c535\\audit-pom.xml",
+                          "-Djacoco.destFile=D:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3\\backend\\target\\auditoria-ide-e5619078-de50-419f-94a3-e51291f4c535\\jacoco-auditoria.exec",
+                          "compile",
+                          "test-compile"
+                      ],
+        "exitCode":  0,
+        "log":  "01-compile-test-compile.log"
+    },
+    {
+        "label":  "02-safe-unit-tests",
+        "arguments":  [
+                          "--batch-mode",
+                          "--no-transfer-progress",
+                          "--offline",
+                          "-f",
+                          "D:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3\\docs\\evidencia\\auditoria-ide-2026-10-23\\backend\\run-e5619078-de50-419f-94a3-e51291f4c535\\audit-pom.xml",
+                          "-Djacoco.destFile=D:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3\\backend\\target\\auditoria-ide-e5619078-de50-419f-94a3-e51291f4c535\\jacoco-auditoria.exec",
+                          "test",
+                          "-Dtest=AdminTermsContentHashTest,AdminTermsDocumentTest,AdminTermsServiceTest,ApiOriginValidationFilterTest,ApprovedAdminTermsPublicationTest,AuditChangesTest,AuditMetadataPolicyTest,AuditOutcomeTest,AuthenticatedBackupArchiveTest,AvailabilityErrorHttpTest,AvailabilityMonitorCliTest,AvailabilityMonitorHttpTest,AvailabilityPolicyTest,BackupCliGuardTest,ConductorRecoveryRequestTest,CorrelationIdFilterTest,CurrentUserProviderTest,EmailOtpChallengeTest,GlobalExceptionHandlerTest,HttpAvailabilityProbeTest,IncidentClosureContractTest,InvitationCodeHasherTest,InvitationServiceBoundaryTest,L08CapacityMeasurementTest,L08ConnectedServicePreparationTest,L08PhysicalComplementPolicyTest,L08Rest03TargetGuardTest,LoginRateLimiterTest,MobileOfflineRegistrationTest,MobilePreferencesContractTest,MonitorConfigurationTest,OfferResponseWindowTest,OpaqueTokenServiceTest,OperationStreamBroadcasterTest,PersonalDataProjectionTest,PersonIdentityGateAuthorizationManagerTest,RefreshTokenTest,RestoreIntegrityComparisonTest,RetentionCalendarTest,RetentionProcedureSecurityTest,SafeLoggingDefaultsTest,SecurityConfigTest,SmtpOtpEmailSenderTest,SqlLiteralArrayCastTest,SuperAdminRecoveryCliTest,TerminalCorroborationPolicyTest,TrustedOriginValidatorTest"
+                      ],
+        "exitCode":  0,
+        "log":  "02-safe-unit-tests.log"
+    }
+]

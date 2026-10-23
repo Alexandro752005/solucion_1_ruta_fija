@@ -1,0 +1,11 @@
+{
+  "observedAtUtc": "2026-10-23T15:59:43.486084+00:00",
+  "result": "PASS_READ_ONLY_FROZEN_L08_ARCHIVE_UNCHANGED",
+  "manifest": "docs/evidencia/L-08/incremento-5-candidato-final/manifest-cierre.sha256",
+  "manifestSha256": "2708399adc572cacf8a3d3f09ba31e507604717e6817ed66e7c871c4a148ac5a",
+  "entriesChecked": 427,
+  "historicalSourceInventoryManifestsAlsoUnchanged": 15,
+  "mismatches": [],
+  "originalVerificationRewritten": false,
+  "oldEvidenceWrittenByThisCheck": false
+}

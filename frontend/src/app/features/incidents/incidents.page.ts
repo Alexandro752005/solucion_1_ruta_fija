@@ -2,6 +2,9 @@ import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, signa
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { IncidentWorkflowApiService } from '../../core/operations/incident-workflow-api.service';
+import { IncidentWorkflowPanel } from './incident-workflow-panel';
 
 import { ApiErrorService } from '../../core/api/api-error.service';
 import { UiError } from '../../core/api/api-error.model';
@@ -16,6 +19,7 @@ import {
   Incident,
   IncidentCategory,
   IncidentStatus,
+  IncidentSeverity, INCIDENT_SEVERITIES,
 } from '../../core/operations/operations.models';
 import { OperationsApiService } from '../../core/operations/operations-api.service';
 import { ModalComponent } from '../../shared/ui/modal.component';
@@ -24,12 +28,13 @@ import { PaginationComponent } from '../../shared/ui/pagination.component';
 
 @Component({
   selector: 'rf-incidents-page',
-  imports: [ReactiveFormsModule, PageHeaderComponent, ModalComponent, PaginationComponent],
+  imports: [ReactiveFormsModule, PageHeaderComponent, ModalComponent, PaginationComponent,IncidentWorkflowPanel],
   templateUrl: './incidents.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IncidentsPage {
   private readonly api = inject(OperationsApiService);
+  private readonly workflow=inject(IncidentWorkflowApiService);
   private readonly managementApi = inject(ManagementApiService);
   private readonly apiErrors = inject(ApiErrorService);
   private readonly session = inject(AuthSessionService);
@@ -37,6 +42,10 @@ export class IncidentsPage {
   private readonly destroyRef = inject(DestroyRef);
 
   readonly categories = INCIDENT_CATEGORIES;
+  readonly severities=INCIDENT_SEVERITIES;
+  readonly createUncertain=signal(false);
+  readonly attentionBlocked=signal(false);
+  private createKey:string|null=null;
   readonly statuses = INCIDENT_STATUSES;
   readonly incidents = signal<readonly Incident[]>([]);
   readonly drivers = signal<readonly Driver[]>([]);
@@ -66,6 +75,9 @@ export class IncidentsPage {
     driverId: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     assignmentId: new FormControl('', { nonNullable: true }),
     category: new FormControl<IncidentCategory>('AVERIA', { nonNullable: true, validators: [Validators.required] }),
+    severity:new FormControl<IncidentSeverity|''>('',{nonNullable:true,validators:[Validators.required]}),
+    previousIncidentId:new FormControl('',{nonNullable:true}),
+    relationReason:new FormControl<''|'RECURRENCE'|'CLOSURE_ERROR'>('',{nonNullable:true}),
     description: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required, Validators.maxLength(1000)],
@@ -133,14 +145,15 @@ export class IncidentsPage {
   }
 
   startCreate(): void {
+    if(this.createUncertain())return;
     this.error.set(null);
     this.notice.set(null);
-    this.form.reset({ driverId: '', assignmentId: '', category: 'AVERIA', description: '' });
+    this.form.reset({ driverId: '', assignmentId: '', category: 'AVERIA', description: '',severity:'',previousIncidentId:'',relationReason:'' });
     this.formOpen.set(true);
   }
 
   closeForm(): void {
-    if (!this.saving()) {
+    if (!this.saving()&&!this.createUncertain()) {
       this.formOpen.set(false);
     }
   }
@@ -152,7 +165,7 @@ export class IncidentsPage {
   }
 
   closeDetails(): void {
-    if (!this.followUpSaving()) {
+    if (!this.followUpSaving()&&!this.attentionBlocked()) {
       this.detailOpen.set(false);
       this.selectedIncident.set(null);
       this.selectedForFollowUp.set(null);
@@ -161,6 +174,7 @@ export class IncidentsPage {
   }
 
   submit(): void {
+    if(this.saving()||this.createUncertain())return;
     this.error.set(null);
     this.notice.set(null);
     if (this.form.invalid) {
@@ -168,6 +182,9 @@ export class IncidentsPage {
       return;
     }
     const value = this.form.getRawValue();
+    if(!value.severity)return;
+    if(value.previousIncidentId&&!value.relationReason){this.form.controls.relationReason.setErrors({required:true});return;}
+    this.createKey=crypto.randomUUID();
     this.saving.set(true);
     this.api
       .createIncident({
@@ -175,19 +192,33 @@ export class IncidentsPage {
         assignmentId: value.assignmentId || undefined,
         category: value.category,
         description: value.description.trim(),
+        severity:value.severity,operationKey:this.createKey,
+        ...(value.previousIncidentId?{previousIncidentId:value.previousIncidentId,relationReason:value.relationReason as 'RECURRENCE'|'CLOSURE_ERROR'}:{}),
       })
       .pipe(finalize(() => this.saving.set(false)))
       .subscribe({
         next: () => {
-          this.notice.set('Incidencia registrada correctamente.');
-          this.form.reset({ driverId: '', assignmentId: '', category: 'AVERIA', description: '' });
-          this.formOpen.set(false);
-          this.load(0);
+          this.creationConfirmed();
         },
-        error: (error: unknown) =>
-          this.error.set(this.apiErrors.toUiError(error, 'No se pudo registrar la incidencia.')),
+        error: (error: unknown) => {
+          this.error.set(this.apiErrors.toUiError(error, 'No se pudo registrar la incidencia.'));
+          this.createUncertain.set(!(error instanceof HttpErrorResponse)||![400,401,403,404,409,422,429].includes(error.status));
+          if(!this.createUncertain())this.createKey=null;
+        },
       });
   }
+
+  startRelated(incident:Incident){
+    if(this.attentionBlocked()||this.createUncertain())return;this.closeDetails();this.startCreate();
+    this.form.patchValue({driverId:incident.driverId,previousIncidentId:incident.id});
+  }
+  severityLabel(s:string){return ({LOW:'Baja',MEDIUM:'Media',HIGH:'Alta',CRITICAL:'Crítica',UNASSESSED:'Sin evaluar'} as Record<string,string>)[s]??s;}
+  consultCreation(){
+    if(!this.createUncertain()||!this.createKey)return;
+    this.workflow.operation(this.createKey).subscribe({next:r=>{if(r.kind==='REPORT'&&r.operationKey===this.createKey)this.creationConfirmed();},error:e=>this.error.set(this.apiErrors.toUiError(e,'No hay confirmación del reporte. Conserva el formulario y consulta de nuevo.'))});
+  }
+  private creationConfirmed(){this.createKey=null;this.createUncertain.set(false);this.notice.set('Incidencia confirmada por el servidor.');this.form.reset({driverId:'',assignmentId:'',category:'AVERIA',description:'',severity:'',previousIncidentId:'',relationReason:''});this.formOpen.set(false);this.load(0);}
+  attentionChanged(){const current=this.selectedIncident();if(!current)return;this.workflow.get(current.id).subscribe({next:r=>{this.selectedIncident.set(r);this.notice.set('Atención confirmada por el servidor.');this.load();},error:e=>this.error.set(this.apiErrors.toUiError(e))});}
 
   selectAssignment(assignmentId: string): void {
     this.form.controls.assignmentId.setValue(assignmentId);
@@ -198,7 +229,7 @@ export class IncidentsPage {
   }
 
   beginFollowUp(incident: Incident): void {
-    if (incident.status === 'RESOLVED') {
+    if (incident.status === 'RESOLVED' || incident.status === 'CLOSED_BY_DRIVER') {
       return;
     }
     this.selectedForFollowUp.set(incident);
@@ -223,6 +254,7 @@ export class IncidentsPage {
     this.followUpSaving.set(true);
     this.api
       .followUpIncident(incident.id, {
+        operationKey:crypto.randomUUID(),
         version: incident.version,
         note: value.note.trim(),
         resolve: value.resolve,
@@ -246,6 +278,12 @@ export class IncidentsPage {
       AVERIA: 'Avería',
       ACCIDENTE: 'Accidente',
       RETRASO: 'Retraso',
+      LICENCIA_VENCIDA: 'Vencimiento de licencia',
+      IMPOSIBILIDAD_SERVICIO: 'Imposibilidad de prestar el servicio',
+      UBICACION_NO_CORROBORADA: 'Ubicación discrepante o no corroborada',
+      RIESGO_SEGURIDAD: 'Riesgo de seguridad',
+      ACCESO_PARADA: 'Problema de acceso a la parada',
+      FALLO_PLATAFORMA: 'Fallo técnico de la plataforma',
       OTRO: 'Otro',
     } as Record<IncidentCategory, string>)[category];
   }

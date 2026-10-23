@@ -1,0 +1,11 @@
+# Workspace archives are immutable evidence, not independently runnable packages.
+# The live Flutter package keeps its own mobile/analysis_options.yaml and lints.
+analyzer:
+  exclude:
+    - backend/target/**
+    - docs/evidencia/**
+    - memory/backup/**
+    - backups/**
+    - artifacts/**
+    - .runtime/**
+    - .worktrees/**

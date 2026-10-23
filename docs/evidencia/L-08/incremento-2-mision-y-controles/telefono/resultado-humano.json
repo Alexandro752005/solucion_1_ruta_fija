@@ -1,0 +1,30 @@
+{
+  "runId": "0dcdd52e-c57a-4a5d-b04a-5c9c3fd0657c",
+  "artifactSha256": "577fd76904d9e6109a396dd72a859c362d074f62ed6b870b0538e225fff0b28c",
+  "device": "Poco X3 Pro Android13/API33",
+  "result": "PASS_MANUAL_PUBLIC_PREAUTH_503_ONLY",
+  "reportedByUser": "Realic? los pasos1,2y3; aviso rojo de indisponibilidad y campos requeridos en rojo.",
+  "exactVisibleMessage": "Ruta Fija no est? disponible temporalmente. No se confirm? la operaci?n. Intente nuevamente m?s tarde",
+  "fieldMessagesReported": [
+    "Ingrese su correo electr?nico",
+    "Ingrese su contrase?a"
+  ],
+  "fieldSequenceRegression": "PASS_2_WIDGET_TESTS_NOT_A_REPLACEMENT_FOR_PHYSICAL_OBSERVATION",
+  "fieldMessageReappearanceReproducedInWidgetSequence": false,
+  "recordedRequests": [
+    {
+      "at": "2026-10-22T16:53:56.610Z",
+      "method": "POST",
+      "path": "/api/v1/mobile/auth/login",
+      "status": 503,
+      "correlationId": "e2779fca-1ecc-429f-b276-b872e59f20f9",
+      "responseDurationMs": 4.837
+    }
+  ],
+  "noRetryCountBeyondRecordedObservationClaimed": true,
+  "serverPortRecheckedAbsent": true,
+  "ownedUsbReverseRecheckedAbsent": true,
+  "databaseOrSmtpUsed": false,
+  "operationalLoginGpsBatteryTalkBackAccredited": false,
+  "noCoordinatesOrCredentialsRecorded": true
+}

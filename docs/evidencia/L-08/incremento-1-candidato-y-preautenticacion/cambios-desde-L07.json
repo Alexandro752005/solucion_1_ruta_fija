@@ -1,0 +1,61 @@
+{
+  "baseline": "docs/evidencia/L-07/cierre/fuentes.sha256",
+  "baselineSourceCount": 915,
+  "currentSourceCount": 920,
+  "changed": [
+    {
+      "path": "backend/src/main/resources/application.yml",
+      "previousSha256": "f487da97e6a1845cea4b8e9b40ef4a612075f313fb5fd0bef3ef2ee9900b41dd",
+      "currentSha256": "3f57066d2592b308a4ba5872ca37714f7d1a62c0a15ab29e61068e9ed83acc88"
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "previousSha256": "ef8acd0b962310f52982cd9cc03b1084e2d842339ce98a4e1e5027cd5c82dc94",
+      "currentSha256": "6818f9b06051abab64081e8cc853049b54c2632d35b0807033c7582f26f0d85e"
+    },
+    {
+      "path": "frontend/package.json",
+      "previousSha256": "b2a99db739e82810e248cc4900b633a0b197b39374804e3db56c4b656f4f9069",
+      "currentSha256": "c4b8bdc21e68596f537fdb02ddf5192905ebbc3ba1e52fa723dfae8296c9e018"
+    },
+    {
+      "path": "frontend/src/app/core/operations/operations.models.spec.ts",
+      "previousSha256": "d86a88c4897d43e29cb261db6edd04689aabce4ca4beae19619d4ffaff4bcff0",
+      "currentSha256": "00ccb6ff40f425f77e0236d38a8f8b7b0a69d556689ef9979ca6dd33333f76f4"
+    },
+    {
+      "path": "frontend/src/app/features/auth/login.page.spec.ts",
+      "previousSha256": "e848220262e78030ef8fac97a87bd01c925cd54bc4f69bfec795d0020e93c54b",
+      "currentSha256": "d320fff12afc4fbc7cf908864b1671178f1e0f98f7f23fd0d0d96fd8aa1163ec"
+    },
+    {
+      "path": "frontend/src/app/features/auth/login.page.ts",
+      "previousSha256": "6b861fcce21f533a8e2cc0445f9b0995581d547873f22ec711d79a2d51d7cfcf",
+      "currentSha256": "643da4dc652f6b3a459960bfda26fcea1f151a19749e17c758e8f204c7f2019d"
+    },
+    {
+      "path": "frontend/src/app/features/drivers/drivers.page.spec.ts",
+      "previousSha256": "5c79d9195d3c15051f40adfe12350eda2f4e96c56f6338dd0537b8398f0862b7",
+      "currentSha256": "ac96efeb8bc42d52bc9a6b44f80da1af08fdd48e46160de410e47da0c880af92"
+    },
+    {
+      "path": "frontend/src/app/layout/app-shell.component.spec.ts",
+      "previousSha256": "ddcffa3875a5e7c3a6ee75beaee429a0e566e5b4ab5507902145b2a437275693",
+      "currentSha256": "c121e8cd065937bd7372588b395f3163f93c31cc48775ff62348f7217c459315"
+    },
+    {
+      "path": "mobile/android/app/src/main/AndroidManifest.xml",
+      "previousSha256": "c1da83d1b340fed4e9b5cc7f064dd1c4bd0b78fdd58995b4f915b5c4227b0293",
+      "currentSha256": "f96852df882679cd4050fbfd92e442fbb4e4c37b662228795d824438a7bd8caf"
+    }
+  ],
+  "added": [
+    "backend/src/main/java/pe/rutafija/availability/domain/AvailabilityPolicy.java",
+    "backend/src/test/java/pe/rutafija/availability/AvailabilityPolicyTest.java",
+    "backend/src/test/java/pe/rutafija/availability/AvailabilityHealthIntegrationTest.java",
+    "frontend/e2e/l08-public-accessibility.mjs",
+    "frontend/e2e/l08-phone-preauth.mjs"
+  ],
+  "noGitUsed": true,
+  "closedSourceManifestUnmodified": true
+}

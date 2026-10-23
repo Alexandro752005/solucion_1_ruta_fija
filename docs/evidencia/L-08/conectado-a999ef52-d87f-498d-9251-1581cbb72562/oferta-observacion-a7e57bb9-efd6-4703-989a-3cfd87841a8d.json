@@ -1,0 +1,26 @@
+{
+  "runId" : "a999ef52-d87f-498d-9251-1581cbb72562",
+  "observedAt" : "2026-10-22T21:24:00.721144300Z",
+  "offerId" : "6ad87efd-c9a5-4d06-943c-72c863f76772",
+  "serviceId" : "961b62f8-1d30-469f-a88d-5db10884e663",
+  "offerStatus" : "SCHEDULED",
+  "acceptedAt" : "2026-10-22T21:22:43.446836Z",
+  "startedAt" : null,
+  "completedAt" : null,
+  "responseDeadlineAt" : "2026-10-22T21:28:46.626477Z",
+  "serverObservedAt" : "2026-10-22T21:24:01.032780Z",
+  "responseDeadlineStillFuture" : true,
+  "serviceStatus" : "CONFIRMED",
+  "driverAvailability" : "RESERVADO",
+  "locationConsent" : false,
+  "historicalLedger" : {
+    "ADMIN" : 3,
+    "CONDUCTOR" : 7,
+    "SUPER_ADMIN" : 1
+  },
+  "termsAcceptancesPreserved" : 2,
+  "databaseWrites" : 0,
+  "httpCommandsSubmitted" : 0,
+  "TEST_CLEANUP_RELEASED" : false,
+  "manualPhoneResult" : "PENDING"
+}

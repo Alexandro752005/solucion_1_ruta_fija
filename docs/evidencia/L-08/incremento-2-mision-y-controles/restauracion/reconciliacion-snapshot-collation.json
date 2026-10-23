@@ -1,0 +1,26 @@
+{
+  "result" : "PASS_READ_ONLY_RECONCILED_SQL_SNAPSHOT_INTEGRITY_NOT_SERVICE_RTO",
+  "caseId" : "c748e5ab-c20a-43d6-9c17-af5d0a703dab",
+  "observedAt" : "2026-10-22T22:11:16.599176100Z",
+  "originalArchiveSha256" : "6e914b7a79bf5c705d52aebc8e1c2b768f0d61f695265738e330bad2ef727dee",
+  "gcmTagReverified" : true,
+  "rawMismatchCategoriesPreserved" : [ "schema:acl", "schema:constraints", "schema:indexes" ],
+  "literalArraySpellingCounts" : {
+    "constraints" : 74,
+    "indexes" : 7
+  },
+  "allOriginalTableAndSchemaCountsAndHashesMatchAfterExplicitReversibleSpelling" : true,
+  "privateAuthorityPermissionsExplicitlyChecked" : true,
+  "ownerImplicitPrivilegesExpandedOnlyFor" : "retention_execution_authority",
+  "staticContrastSha256" : "91431aa46fe3f8b04b6244940dfc053e1dde70d1a84849a6412b331d3d732ab2",
+  "allOtherConstraintSpellingsPreserved" : true,
+  "constraintHashOrderingCollation" : "C",
+  "constraintOrderingCollationReadFromOriginalSqlExpression" : true,
+  "v46TwoCategoryCheckSpellingMask" : 0,
+  "v46SpellingVariantsMaximum" : 4,
+  "databaseWrites" : 0,
+  "restoreRepeated" : false,
+  "source5432Accessed" : false,
+  "serviceRtoAccredited" : false,
+  "independentBackupAccredited" : false
+}

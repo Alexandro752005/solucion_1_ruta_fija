@@ -42,6 +42,11 @@ public class MobileDriverService {
     private final AuditService auditService;
     private final OperationEventPublisher eventPublisher;
     private final Clock clock;
+    private final OrganizationSchedulingLock scheduling;
+    private final pe.rutafija.operation.infrastructure.AssignmentRepository assignments;
+    private final pe.rutafija.qualification.application.OperationalQualificationPolicy qualification;
+    private final jakarta.persistence.EntityManager entityManager;
+    private final ServiceExecution execution;
 
     public MobileDriverService(
             MobileDriverContextService mobileDriverContextService,
@@ -52,7 +57,12 @@ public class MobileDriverService {
             MobileCommandProcessor commandProcessor,
             AuditService auditService,
             OperationEventPublisher eventPublisher,
-            Clock clock
+            Clock clock,
+            OrganizationSchedulingLock scheduling,
+            pe.rutafija.operation.infrastructure.AssignmentRepository assignments,
+            pe.rutafija.qualification.application.OperationalQualificationPolicy qualification,
+            jakarta.persistence.EntityManager entityManager,
+            ServiceExecution execution
     ) {
         this.mobileDriverContextService = mobileDriverContextService;
         this.driverRepository = driverRepository;
@@ -63,11 +73,14 @@ public class MobileDriverService {
         this.auditService = auditService;
         this.eventPublisher = eventPublisher;
         this.clock = clock;
+        this.scheduling = scheduling; this.assignments = assignments; this.qualification = qualification;
+        this.entityManager = entityManager;
+        this.execution = execution;
     }
 
     @Transactional(readOnly = true)
     public MobileDriverProfileResponse profile() {
-        MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
+        MobileDriverActor actor = mobileDriverContextService.requireMobileConsultation();
         List<DriverVehicleLink> links = driverVehicleLinkRepository.findAllByDriver_IdAndActiveTrue(actor.driver().getId());
         return MobileDriverProfileResponse.from(actor.driver(), links);
     }
@@ -129,8 +142,8 @@ public class MobileDriverService {
 
     @Transactional
     public MobileDriverProfileResponse changeLocationConsent(MobileLocationConsentRequest request) {
-        MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
-        Driver driver = actor.driver();
+        MobileDriverActor actor = mobileDriverContextService.requireMobileConsultation();
+        Driver driver = lockOwnDriver(actor);
         try {
             driver.recordLocationConsent(request.consent());
         } catch (IllegalStateException exception) {
@@ -148,8 +161,9 @@ public class MobileDriverService {
 
     @Transactional
     public void upsertCurrentLocation(MobileLocationUpdateRequest request) {
-        MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
-        Driver driver = actor.driver();
+        // A loss of operational qualification while driving must not fabricate a loss of GPS evidence.
+        MobileDriverActor actor = mobileDriverContextService.requireMobileConsultation();
+        Driver driver = lockOwnDriver(actor);
         if (!driver.isLocationConsent()) {
             throw new ApplicationException(
                     HttpStatus.CONFLICT,
@@ -157,11 +171,12 @@ public class MobileDriverService {
                     "Debe otorgar consentimiento funcional antes de enviar ubicacion"
             );
         }
-        if (!Boolean.TRUE.equals(request.permissionGranted())) {
+        if (!Boolean.TRUE.equals(request.permissionGranted()) || !Boolean.TRUE.equals(request.locationServiceEnabled())
+                || !Boolean.TRUE.equals(request.foreground())) {
             throw new ApplicationException(
                     HttpStatus.CONFLICT,
                     ErrorCode.LOCATION_PERMISSION_NOT_REPORTED,
-                    "La aplicacion movil debe confirmar el permiso del sistema operativo"
+                    "La aplicación debe declarar permiso, ubicación habilitada y primer plano"
             );
         }
         if (!allowsCurrentLocation(driver)) {
@@ -169,12 +184,18 @@ public class MobileDriverService {
             throw new ApplicationException(
                     HttpStatus.CONFLICT,
                     ErrorCode.LOCATION_STATE_NOT_ALLOWED,
-                    "La ubicacion vigente solo se admite en DISPONIBLE o EN_SERVICIO"
+                    "La ubicación solo se admite durante un servicio propio iniciado"
             );
         }
 
         Instant receivedAt = Instant.now(clock);
-        if (request.capturedAt().isAfter(receivedAt.plus(properties.locationTtl()))
+        var ongoing=assignments.findMobileAssignments(driver.getOrganizationId(),driver.getId(),
+            pe.rutafija.operation.domain.AssignmentStatus.EN_SERVICIO,org.springframework.data.domain.PageRequest.of(0,2)).getContent();
+        var segment=ongoing.size()==1?execution.active(ongoing.getFirst()):null;
+        if(segment==null)
+            throw new ApplicationException(HttpStatus.CONFLICT,ErrorCode.LOCATION_STATE_NOT_ALLOWED,"No hay un tramo propio en ejecución; no se guarda seguimiento histórico inferido.");
+        if (request.capturedAt().isAfter(receivedAt)
+                || request.capturedAt().isBefore(segment.startedAt())
                 || request.capturedAt().isBefore(receivedAt.minus(properties.locationCaptureMaxAge()))) {
             throw new ApplicationException(
                     HttpStatus.BAD_REQUEST,
@@ -185,12 +206,14 @@ public class MobileDriverService {
         currentLocationStore.upsert(
                 driver.getId(),
                 driver.getOrganizationId(),
+                segment.id(),
                 request.latitude().setScale(6, RoundingMode.HALF_UP),
                 request.longitude().setScale(6, RoundingMode.HALF_UP),
                 request.accuracyM().setScale(2, RoundingMode.HALF_UP),
                 request.capturedAt(),
                 receivedAt,
-                receivedAt.plus(properties.locationTtl())
+                receivedAt.plus(properties.locationTtl()).isBefore(request.capturedAt().plus(java.time.Duration.ofDays(7)))
+                    ?receivedAt.plus(properties.locationTtl()):request.capturedAt().plus(java.time.Duration.ofDays(7))
         );
         // No coordinates, accuracy or client timestamp enter audit metadata or WebSocket payloads.
         auditService.record(actor.user(), "MOBILE_CURRENT_LOCATION_UPSERTED", "DRIVER", driver.getId(), Map.of(
@@ -203,7 +226,8 @@ public class MobileDriverService {
 
     @Transactional
     public void deleteCurrentLocation() {
-        MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
+        MobileDriverActor actor = mobileDriverContextService.requireMobileConsultation();
+        lockOwnDriver(actor);
         currentLocationStore.deleteByDriverId(actor.driver().getId());
         auditService.record(actor.user(), "MOBILE_CURRENT_LOCATION_CLEARED", "DRIVER", actor.driver().getId(), Map.of());
         eventPublisher.publish(actor.user().getOrganizationId(), actor.driver().getGroup().getId(), "driver.location.cleared", Map.of(
@@ -212,21 +236,28 @@ public class MobileDriverService {
     }
 
     private boolean allowsCurrentLocation(Driver driver) {
-        return driver.getAvailabilityStatus() == DriverAvailabilityStatus.DISPONIBLE
-                || driver.getAvailabilityStatus() == DriverAvailabilityStatus.EN_SERVICIO;
+        return driver.getAvailabilityStatus() == DriverAvailabilityStatus.EN_SERVICIO;
     }
 
     private MobileAvailabilityResponse availabilityResponse(Driver driver) {
-        return new MobileAvailabilityResponse(driver.getId(), driver.getAvailabilityStatus(), driver.getUpdatedAt());
+        boolean commitments=assignments.existsByDriver_IdAndStatusIn(driver.getId(),List.of(pe.rutafija.operation.domain.AssignmentStatus.SCHEDULED,pe.rutafija.operation.domain.AssignmentStatus.EN_SERVICIO));
+        return new MobileAvailabilityResponse(driver.getId(), driver.getAvailabilityStatus(), driver.getUpdatedAt(),
+                driver.getDeclaredAvailabilityStatus(),driver.getDeclaredAvailabilityAt(),!commitments
+                && driver.getAvailabilityStatus()!=DriverAvailabilityStatus.RESERVADO && driver.getAvailabilityStatus()!=DriverAvailabilityStatus.EN_SERVICIO && driver.getAvailabilityStatus()!=DriverAvailabilityStatus.ATENCION);
     }
 
     private Driver lockOwnDriver(MobileDriverActor actor) {
-        return driverRepository.lockByIdAndOrganizationId(actor.driver().getId(), actor.user().getOrganizationId())
+        scheduling.acquire(actor.user().getOrganizationId());
+        Driver driver=driverRepository.lockByIdAndOrganizationId(actor.driver().getId(), actor.user().getOrganizationId())
                 .orElseThrow(() -> new ApplicationException(
                         HttpStatus.NOT_FOUND,
                         ErrorCode.RESOURCE_NOT_FOUND,
                         "El conductor de la sesion no existe"
                 ));
+        // The identity lookup may have cached Driver before waiting for the
+        // scheduling lock. Reload current state before applying an intention.
+        entityManager.refresh(driver,jakarta.persistence.LockModeType.PESSIMISTIC_WRITE);
+        return driver;
     }
 
     private MobileAvailabilityResponse applyAvailabilityChange(
@@ -243,8 +274,13 @@ public class MobileDriverService {
                     "RESERVADO y EN_SERVICIO solo cambian por una asignacion"
             );
         }
+        if (requested != DriverAvailabilityStatus.DISPONIBLE && assignments.existsByDriver_IdAndStatusIn(driver.getId(),
+                List.of(pe.rutafija.operation.domain.AssignmentStatus.SCHEDULED,pe.rutafija.operation.domain.AssignmentStatus.EN_SERVICIO)))
+            throw new ApplicationException(HttpStatus.CONFLICT,ErrorCode.AVAILABILITY_INVALID_TRANSITION,"La declaración no puede invalidar compromisos aceptados; coordina su resolución expresa.");
+        if (requested == DriverAvailabilityStatus.DISPONIBLE && !qualification.eligible(driver.getId(),driver.getOrganizationId(),true))
+            throw new ApplicationException(HttpStatus.CONFLICT,ErrorCode.DRIVER_NOT_ELIGIBLE,"La declaración no concede habilitación operativa.");
         try {
-            driver.changeAdministrativeAvailability(requested);
+            driver.declareAvailability(requested,Instant.now(clock));
         } catch (IllegalStateException exception) {
             throw new ApplicationException(
                     HttpStatus.CONFLICT,

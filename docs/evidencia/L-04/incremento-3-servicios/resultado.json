@@ -1,0 +1,38 @@
+{
+  "observedAt": "2026-10-20T02:10:07.451498+00:00",
+  "result": "PASS_LOCAL_ACCEPTANCE_EVIDENCE",
+  "database": "ruta_fija_test",
+  "schemaVersion": "35",
+  "runtimeRole": "rf_test",
+  "backendDistinctPassed": 121,
+  "crmComponentPassed": 28,
+  "flutterIsolatedPassed": 15,
+  "flutterConnectedStages": 2,
+  "crmConnectedStages": 3,
+  "connectedRunId": "bbd70822-8f52-45a6-b617-9b896ff90a2c",
+  "connectedResult": "PASS_REAL_CRM_BROWSER_FLUTTER_HTTP_POSTGRES_SIMULATED_MAIL",
+  "returnResult": "PASS_SAME_BINARY_DISABLED_NEW_OFFERS_WITH_EXACT_HTTP_ROLLBACK",
+  "TEST_CLEANUP_RELEASED": true,
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 2
+  },
+  "remainingHistoricalQuota": {
+    "SUPER_ADMIN": 0,
+    "ADMIN": 1,
+    "CONDUCTOR": 18
+  },
+  "termsAcceptances": 2,
+  "approvedNewPersistentConductorCount": 1,
+  "externalSmtpAttempts": 0,
+  "pilotEnabled": false,
+  "L05Authorized": false,
+  "limitations": [
+    "Automated synthetic trials, no human claims",
+    "No physical Android/GPS calibration",
+    "Pilot operational prerequisites remain blocked",
+    "Connected flow tests normal future schedule; missed planned start edge verified separately afterward",
+    "No destructive cleanup or schema downgrade"
+  ]
+}

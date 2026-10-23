@@ -8,6 +8,12 @@ import java.util.UUID;
 public record MobileAvailabilityResponse(
         UUID driverId,
         DriverAvailabilityStatus status,
-        Instant updatedAt
+        Instant updatedAt,
+        DriverAvailabilityStatus declaredStatus,
+        Instant declaredAt,
+        boolean canChangeDeclaration
 ) {
+    public MobileAvailabilityResponse(UUID driverId, DriverAvailabilityStatus status, Instant updatedAt) {
+        this(driverId,status,updatedAt,null,null,status!=DriverAvailabilityStatus.RESERVADO&&status!=DriverAvailabilityStatus.EN_SERVICIO);
+    }
 }

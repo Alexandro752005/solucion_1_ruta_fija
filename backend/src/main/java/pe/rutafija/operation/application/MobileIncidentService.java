@@ -36,6 +36,8 @@ public class MobileIncidentService {
     private final AuditService auditService;
     private final OperationEventPublisher eventPublisher;
     private final Clock clock;
+    private final ServiceExecution execution;
+    private final IncidentWorkflow workflow;
 
     public MobileIncidentService(
             MobileDriverContextService mobileDriverContextService,
@@ -43,7 +45,7 @@ public class MobileIncidentService {
             AssignmentRepository assignmentRepository,
             AuditService auditService,
             OperationEventPublisher eventPublisher,
-            Clock clock
+            Clock clock,ServiceExecution execution,IncidentWorkflow workflow
     ) {
         this.mobileDriverContextService = mobileDriverContextService;
         this.incidentRepository = incidentRepository;
@@ -51,32 +53,37 @@ public class MobileIncidentService {
         this.auditService = auditService;
         this.eventPublisher = eventPublisher;
         this.clock = clock;
+        this.execution=execution;
+        this.workflow=workflow;
     }
 
     @Transactional(readOnly = true)
     public PageResponse<IncidentResponse> list(Pageable pageable) {
-        MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
+        MobileDriverActor actor = mobileDriverContextService.requireMobileConsultation();
         Page<Incident> incidents = incidentRepository.findMobileIncidents(
                 actor.user().getOrganizationId(), actor.driver().getId(), pageable
         );
-        return PageResponse.from(incidents, IncidentResponse::from);
+        return PageResponse.from(incidents, workflow::view);
     }
 
     @Transactional(readOnly = true)
     public IncidentResponse get(UUID incidentId) {
-        MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
-        return IncidentResponse.from(findOwnIncident(actor, incidentId));
+        MobileDriverActor actor = mobileDriverContextService.requireMobileConsultation();
+        return workflow.view(findOwnIncident(actor, incidentId));
     }
 
     @Transactional
     public IncidentResponse create(MobileIncidentCreateRequest request) {
-        MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
+        MobileDriverActor actor = mobileDriverContextService.requireMobileConsultation();
+        workflow.beforeWrite(actor.user());
+        var replay=workflow.replayReport(actor.user(),request.operationKey(),request);if(replay.isPresent())return replay.get();
         Assignment assignment = request.assignmentId() == null
                 ? null
                 : assignmentRepository.findMobileAssignment(
                         request.assignmentId(), actor.user().getOrganizationId(), actor.driver().getId()
                 ).orElseThrow(this::notFound);
-        Incident incident = incidentRepository.saveAndFlush(Incident.reportFromMobile(
+        if(assignment==null||assignment.getStartedAt()==null)mobileDriverContextService.requireMobileDriver();
+        Incident incident = Incident.reportFromMobile(
                 actor.user().getOrganization(),
                 actor.driver(),
                 assignment,
@@ -84,7 +91,10 @@ public class MobileIncidentService {
                 request.category(),
                 request.description(),
                 Instant.now(clock)
-        ));
+        );
+        workflow.prepareReport(incident,actor.user(),request.severity(),request.previousIncidentId(),request.relationReason());
+        execution.linkIncident(incident,assignment);incident=incidentRepository.saveAndFlush(incident);
+        workflow.recordReport(incident,actor.user(),request.operationKey(),request);
         auditService.record(actor.user(), "INCIDENT_REPORTED_FROM_MOBILE", "INCIDENT", incident.getId(), Map.of(
                 "category", incident.getCategory().name(),
                 "source", incident.getSource().name()
@@ -100,12 +110,13 @@ public class MobileIncidentService {
                         "source", incident.getSource().name()
                 )
         );
-        return IncidentResponse.from(incident);
+        return workflow.view(incident);
     }
 
     @Transactional
     public IncidentResponse close(UUID incidentId, MobileIncidentCloseRequest request) {
-        MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
+        MobileDriverActor actor = mobileDriverContextService.requireMobileConsultation();
+        workflow.beforeWrite(actor.user());
         Incident incident = findOwnIncident(actor, incidentId);
         if (incident.getSource() != IncidentSource.MOBILE_APP
                 || !incident.getReportedBy().getId().equals(actor.user().getId())) {
@@ -114,7 +125,7 @@ public class MobileIncidentService {
         if (incident.getStatus() == IncidentStatus.CLOSED_BY_DRIVER
                 && incident.getDriverClosedBy() != null
                 && incident.getDriverClosedBy().getId().equals(actor.user().getId())) {
-            return IncidentResponse.from(incident);
+            return workflow.view(incident);
         }
         assertVersion(incident, request.version());
         IncidentStatus previousStatus = incident.getStatus();
@@ -124,6 +135,7 @@ public class MobileIncidentService {
             throw invalidState(exception.getMessage());
         }
         incident = incidentRepository.saveAndFlush(incident);
+        workflow.recordDriverClosure(incident,actor.user());
         auditService.record(actor.user(), "INCIDENT_CLOSED_BY_MOBILE_REPORTER", "INCIDENT", incident.getId(), Map.of(
                 "previousStatus", previousStatus.name(),
                 "finalStatus", incident.getStatus().name()
@@ -138,7 +150,21 @@ public class MobileIncidentService {
                         "status", incident.getStatus().name()
                 )
         );
-        return IncidentResponse.from(incident);
+        return workflow.view(incident);
+    }
+
+    @Transactional(readOnly=true)
+    public java.util.List<pe.rutafija.operation.api.IncidentWorkflowContract.Action> history(UUID id){
+        var actor=mobileDriverContextService.requireMobileConsultation();return workflow.ownHistory(findOwnIncident(actor,id));
+    }
+    @Transactional(readOnly=true)
+    public pe.rutafija.operation.api.IncidentWorkflowContract.Operation operation(UUID key){
+        var actor=mobileDriverContextService.requireMobileConsultation();return workflow.operation(actor.user(),key);
+    }
+    @Transactional
+    public IncidentResponse information(UUID id,pe.rutafija.operation.api.IncidentWorkflowContract.Information command){
+        var actor=mobileDriverContextService.requireMobileConsultation();workflow.beforeWrite(actor.user());
+        return workflow.information(findOwnIncident(actor,id),actor.user(),command);
     }
 
     private Incident findOwnIncident(MobileDriverActor actor, UUID incidentId) {

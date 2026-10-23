@@ -99,6 +99,36 @@ void main() {
       );
     },
   );
+
+  test(
+    'sends the onboarding idempotency key as a public request header',
+    () async {
+      final client = MockClient((request) async {
+        expect(request.url.path, '/api/v1/onboarding/requests');
+        expect(request.headers['idempotency-key'], 'synthetic-operation-001');
+        expect(request.headers.containsKey('authorization'), isFalse);
+        return http.Response(
+          jsonEncode({
+            'verificationToken': 'synthetic-verification-token',
+            'otpExpiresAt': '2026-10-15T18:05:00Z',
+            'challengeExpiresAt': '2026-10-15T18:30:00Z',
+            'emailSent': true,
+          }),
+          202,
+        );
+      });
+      final api = MobileApiClient(httpClient: client, environment: environment);
+
+      final response = await api.postObject(
+        'onboarding/requests',
+        {'email': 'synthetic@example.test'},
+        authenticated: false,
+        headers: {'Idempotency-Key': 'synthetic-operation-001'},
+      );
+
+      expect(response['verificationToken'], 'synthetic-verification-token');
+    },
+  );
 }
 
 final class _TokenProvider implements MobileAccessTokenProvider {

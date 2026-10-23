@@ -1,0 +1,562 @@
+{
+  "result": "PASS",
+  "selection": "l08-v50-retention-and-restore-regression",
+  "tests": 112,
+  "postgresRollbackTests": 81,
+  "otherUnitCryptoLoopbackTests": 31,
+  "suites": [
+    {
+      "name": "pe.rutafija.availability.monitor.AvailabilityMonitorCliTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "boundary": "UNIT_CRYPTO_OR_LOOPBACK_HTTP_NO_BUSINESS_DATABASE",
+      "cases": [
+        {
+          "name": "duplicateOptionsAndAcceleratedProductionCadenceAreRefused",
+          "status": "PASS"
+        },
+        {
+          "name": "cooperativeStopAfterARealHttpSampleWritesTheFinalJournalWithoutInterruptingItsFileChannel",
+          "status": "PASS"
+        },
+        {
+          "name": "standaloneJvmObservesRealHttpFailureAndRecoveryWithRealTimestampsAndExplicitAcceleratedScope",
+          "status": "PASS"
+        },
+        {
+          "name": "invalidConfigurationNeverEchoesAccidentallySuppliedSecretsOrCreatesFiles",
+          "status": "PASS"
+        },
+        {
+          "name": "configurationCheckHasNoFilesystemOrNetworkSideEffects",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "name": "pe.rutafija.backup.AuthenticatedBackupArchiveTest",
+      "tests": "10",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "boundary": "UNIT_CRYPTO_OR_LOOPBACK_HTTP_NO_BUSINESS_DATABASE",
+      "cases": [
+        {
+          "name": "authenticatesFullPostgresStreamWithoutPersistingPlaintext",
+          "status": "PASS"
+        },
+        {
+          "name": "equalPlaintextsUseDifferentNonces",
+          "status": "PASS"
+        },
+        {
+          "name": "refusesShortOrMissingKey",
+          "status": "PASS"
+        },
+        {
+          "name": "truncatedArchiveNeverPasses",
+          "status": "PASS"
+        },
+        {
+          "name": "returnsRestoreBytesOnlyAfterFullAuthentication",
+          "status": "PASS"
+        },
+        {
+          "name": "corruptedTagNeverPasses",
+          "status": "PASS"
+        },
+        {
+          "name": "wrongKeyNeverPasses",
+          "status": "PASS"
+        },
+        {
+          "name": "wrongMagicIsRejected",
+          "status": "PASS"
+        },
+        {
+          "name": "restoreBytesRefuseUnboundedMemoryOrOversizedDump",
+          "status": "PASS"
+        },
+        {
+          "name": "rejectsAuthenticatedNonPostgresContent",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "name": "pe.rutafija.backup.BackupCliGuardTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "boundary": "UNIT_CRYPTO_OR_LOOPBACK_HTTP_NO_BUSINESS_DATABASE",
+      "cases": [
+        {
+          "name": "restoreWithoutExactAuthorizationHasNonzeroExitStatus",
+          "status": "PASS"
+        },
+        {
+          "name": "backupWithoutExplicitConfigurationHasNonzeroExitStatus",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "name": "pe.rutafija.backup.RestoreIntegrityComparisonTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "boundary": "UNIT_CRYPTO_OR_LOOPBACK_HTTP_NO_BUSINESS_DATABASE",
+      "cases": [
+        {
+          "name": "changedCountHashMissingOrAdditionalObjectStillFails",
+          "status": "PASS"
+        },
+        {
+          "name": "jdbcLongCountsMatchParsedArchiveIntegersWithoutIgnoringAnyField",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "name": "pe.rutafija.qualification.RetentionIntegrationTest",
+      "tests": "64",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "boundary": "SPRING_REAL_POSTGRESQL_ROLLBACK",
+      "cases": [
+        {
+          "name": "mobileStartRechecksTheWholeWindowAfterAnAuthenticAcceptance",
+          "status": "PASS"
+        },
+        {
+          "name": "revokingOneFuturePeriodOnlyInvalidatesServicesThatLoseTheirOwnCoverage",
+          "status": "PASS"
+        },
+        {
+          "name": "periodCannotExtendBeyondReviewedValidityWhileApprovalAndAccountSurvive",
+          "status": "PASS"
+        },
+        {
+          "name": "companyPeriodRequiresEndEvenWithAllCurrentReviews",
+          "status": "PASS"
+        },
+        {
+          "name": "mobileAcceptanceChecksTheEntireDrivingWindowEvenWhenLicenseIsValidNow",
+          "status": "PASS"
+        },
+        {
+          "name": "periodCannotBeRevokedWhileItsUnitIsInService",
+          "status": "PASS"
+        },
+        {
+          "name": "nullDocumentItemsAreRejectedBeforeAnyReviewMutation",
+          "status": "PASS"
+        },
+        {
+          "name": "ordinaryHistoryReferencesCannotRepeatRestrictedPersonalInformation",
+          "status": "PASS"
+        },
+        {
+          "name": "operationalSuspensionDoesNotDisableAccountAndResumeRequiresAReviewedCurrentPeriod",
+          "status": "PASS"
+        },
+        {
+          "name": "personalRenewalIsAppendOnlyAndKeepsStableIdentityAndDriver",
+          "status": "PASS"
+        },
+        {
+          "name": "realBearerFiltersAndObjectScopeRejectForeignDriversAndConductorAdministration",
+          "status": "PASS"
+        },
+        {
+          "name": "missingIdentityIsRejectedByTheActualIdentityGate",
+          "status": "PASS"
+        },
+        {
+          "name": "activationRequiresCurrentLicenseAndExpirationKeepsPersonalApprovalAndLimitedConsultation",
+          "status": "PASS"
+        },
+        {
+          "name": "expiryMaintenanceRequiresSafeHandoverAndAdminCannotCompleteOrDeleteTheUnitPeriod",
+          "status": "PASS"
+        },
+        {
+          "name": "categoryM2CannotBeApprovedByInferringCategoryFromWheelsOrRows",
+          "status": "PASS"
+        },
+        {
+          "name": "legacyDriverWithoutLinkedRequestRemainsUnapprovedAndCannotBeAdoptedByReading",
+          "status": "PASS"
+        },
+        {
+          "name": "inactiveProvisionedConductorRetainsOwnLimitedQualificationButCannotOperate",
+          "status": "PASS"
+        },
+        {
+          "name": "operationalReturnSwitchFailsClosedAndPreservesTheApprovedDossier",
+          "status": "PASS"
+        },
+        {
+          "name": "revokingAFuturePeriodDoesNotDetachTheSameUnitFromTheCurrentService",
+          "status": "PASS"
+        },
+        {
+          "name": "ordinaryStatusSeparatesHistoricalApprovalAndOperationalEligibilityWithoutPii",
+          "status": "PASS"
+        },
+        {
+          "name": "missingCurrentTermsAreRejectedByTheActualTermsGate",
+          "status": "PASS"
+        },
+        {
+          "name": "staleVersionCannotReplaceCurrentReview",
+          "status": "PASS"
+        },
+        {
+          "name": "overlappingPeriodIsRejectedWithoutReplacingTheExistingPeriod",
+          "status": "PASS"
+        },
+        {
+          "name": "mobileLoginAndRefreshRecomputeLimitedAndOperationalScopesAgainstCurrentServerState",
+          "status": "PASS"
+        },
+        {
+          "name": "anUnapprovedInspectionCannotBeMarkedConforming",
+          "status": "PASS"
+        },
+        {
+          "name": "limaDateIncludesTheWholeFinalDayAndPreservesHistoricalPeriod",
+          "status": "PASS"
+        },
+        {
+          "name": "ambiguousHistoricalRequestsRemainBlockedWithoutChoosingOneImplicitly",
+          "status": "PASS"
+        },
+        {
+          "name": "unknownReviewDoesNotEnableAUnitOrTurnTheHistoricalDriverActive",
+          "status": "PASS"
+        },
+        {
+          "name": "materialTypoCanBeCorrectedBackToReviewedRootWithoutReplacingThePerson",
+          "status": "PASS"
+        },
+        {
+          "name": "catNeedsExplicitApplicableCoverage",
+          "status": "PASS"
+        },
+        {
+          "name": "aRejectedUnitRequestCannotBeLinkedToAnotherOrganizationsVehicle",
+          "status": "PASS"
+        },
+        {
+          "name": "foreignVehicleCannotBeSubmittedForReview",
+          "status": "PASS"
+        },
+        {
+          "name": "administrativeReservationCannotReplaceConductorAcceptanceEvenWithInvalidDocuments",
+          "status": "PASS"
+        },
+        {
+          "name": "operationalTokenCannotEnableTheOfflineRouteExcludedByTheContract",
+          "status": "PASS"
+        },
+        {
+          "name": "administrativeStartCannotReplaceConductorEvenAfterAnAuthenticAcceptance",
+          "status": "PASS"
+        },
+        {
+          "name": "adjacentPeriodsAreAllowedAndRevokePreservesHistoryWithoutDeletingApproval",
+          "status": "PASS"
+        },
+        {
+          "name": "incorporationSummaryUsesTheSameEligibilityAndCurrentTemporalCardinality",
+          "status": "PASS"
+        },
+        {
+          "name": "unknownInsuranceCannotBeApprovedAsSoatOrCat",
+          "status": "PASS"
+        },
+        {
+          "name": "sameOperationIsIdempotentAndChangedPayloadOrStaleVersionConflicts",
+          "status": "PASS"
+        },
+        {
+          "name": "plateCorrectionKeepsVehicleAndOriginalServiceSnapshotAndRequiresReviewAgain",
+          "status": "PASS"
+        },
+        {
+          "name": "rootDniCannotBeReplacedByMaterialCorrection",
+          "status": "PASS"
+        },
+        {
+          "name": "unitRequestIsOwnScopedIdempotentAndDoesNotCreateVehicleOrActivateDriver",
+          "status": "PASS"
+        },
+        {
+          "name": "suspensionCancelsFutureOccupationsAndPreservesInServiceForSafeHandover",
+          "status": "PASS"
+        },
+        {
+          "name": "explicitRenewalDuringOverrunPreservesBothPeriodsAndPhysicalOccupation",
+          "status": "PASS"
+        },
+        {
+          "name": "executionTrackingRejectsAvailabilityAndBackgroundAndOutOfSegmentTime",
+          "status": "PASS"
+        },
+        {
+          "name": "executionStartRequiresFunctionalConsentWithoutMutatingOccupation",
+          "status": "PASS"
+        },
+        {
+          "name": "executionSummaryIsCodedOwnScopedAndNeverExposesCoordinates",
+          "status": "PASS"
+        },
+        {
+          "name": "executionStartRequiresExplicitPermissionServiceAndForeground",
+          "status": "PASS"
+        },
+        {
+          "name": "executionCompletionClosesOwnSegmentAndStopsCurrentPoint",
+          "status": "PASS"
+        },
+        {
+          "name": "executionStartRecordsServerTimeOnceAndDoesNotAutostartFromAcceptance",
+          "status": "PASS"
+        },
+        {
+          "name": "executionAdminCannotDeclareCompletionOrCreateSegments",
+          "status": "PASS"
+        },
+        {
+          "name": "executionConsentWithdrawalStopsPointsButAllowsSafeCompletion",
+          "status": "PASS"
+        },
+        {
+          "name": "executionDatabaseRejectsRewritingOrDeletingOriginalAndClosedSegments",
+          "status": "PASS"
+        },
+        {
+          "name": "executionStaleVersionCannotStartOrCloseAndFreshCommandsPreserveTheSameSegment",
+          "status": "PASS"
+        },
+        {
+          "name": "retentionNonexpiredWrongHashForeignScopeAndUnapprovedDirectDeletesAreRejected",
+          "status": "PASS"
+        },
+        {
+          "name": "retentionBoundedVolumeRetiresOneThousandExactSyntheticEventsAndNoOthers",
+          "status": "PASS"
+        },
+        {
+          "name": "retentionExactPlanPurgesOnlyExpiredSelectedRowsAndReplaysOnce",
+          "status": "PASS"
+        },
+        {
+          "name": "retentionReportContentExpiresWithoutDeletingImmutableReference",
+          "status": "PASS"
+        },
+        {
+          "name": "retentionHoldApprovedAfterAPlanMakesTheOriginalSelectionStale",
+          "status": "PASS"
+        },
+        {
+          "name": "retentionCalendarSqlMatchesLimaJavaAndExactReadDeadline",
+          "status": "PASS"
+        },
+        {
+          "name": "retentionHoldRejectsMoreThan30DaysAndRepeatedRenewal",
+          "status": "PASS"
+        },
+        {
+          "name": "retentionCopiesInheritExpiryAndRestoreAccessRequiresWithdrawalReapplied",
+          "status": "PASS"
+        },
+        {
+          "name": "retentionHoldIsExactApprovedBoundedAndNeverMakesOrdinaryReadVisible",
+          "status": "PASS"
+        },
+        {
+          "name": "retentionTechnicalServiceRequiresAuthenticatedRoleReauthenticationAndClearsPassword",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "name": "pe.rutafija.retention.PersonalRetirementIntegrationTest",
+      "tests": "17",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "boundary": "SPRING_REAL_POSTGRESQL_ROLLBACK",
+      "cases": [
+        {
+          "name": "foreignOrganizationSelectionAndUnapprovedOwnerCustodyAreRejected",
+          "status": "PASS"
+        },
+        {
+          "name": "documentChangeAfterApprovalMakesThePlanStaleAtomically",
+          "status": "PASS"
+        },
+        {
+          "name": "hmacRetirementRemovesOnlySelectedPersonalLinksAndLeavesGlobalKeyUntouched",
+          "status": "PASS"
+        },
+        {
+          "name": "adminDelegatesBeforeDeactivationAndTechnicalActorPreparesAfterwardWithoutReactivation",
+          "status": "PASS"
+        },
+        {
+          "name": "cancellationRecordsTheActualTransitionAndDoesNotInventAnEarlierFinish",
+          "status": "PASS"
+        },
+        {
+          "name": "aNewUnselectedRequestAfterPreparationIsRejectedRatherThanPurgedByInference",
+          "status": "PASS"
+        },
+        {
+          "name": "conductorRecoveryEvidenceExpiresFromActualFinishAndUnknownAnchorCannotBeInferred",
+          "status": "PASS"
+        },
+        {
+          "name": "approvedExactPurposeHoldChangesDueWithoutInventingAUniversalMaximum",
+          "status": "PASS"
+        },
+        {
+          "name": "personalCopyKeepsItsOriginalExpiryAndRequiresRetirementBeforeAnyLateRestore",
+          "status": "PASS"
+        },
+        {
+          "name": "successorInventoryConservesTheOriginalUnimplementedCatalogAsHistory",
+          "status": "PASS"
+        },
+        {
+          "name": "acceptanceRetirementUses90DaysAndNeverChangesPublishedDocument",
+          "status": "PASS"
+        },
+        {
+          "name": "rawDocumentaryIdentityAndTermsMutationsCannotMintAnAuthorityOrUseASessionFlag",
+          "status": "PASS"
+        },
+        {
+          "name": "activeAccountCannotBeRetiredAndDeactivationAfterPreparationRequiresAFreshFingerprint",
+          "status": "PASS"
+        },
+        {
+          "name": "documentarySelectionRejectsIncompleteSharedIdentityButAllowsAllSameTenantRequests",
+          "status": "PASS"
+        },
+        {
+          "name": "consumedOwnerChallengeCanRetireWithoutDeletingOrRotatingEnrolledCredential",
+          "status": "PASS"
+        },
+        {
+          "name": "accountRetirementPreservesLedgerAndOtherPurposeTermsUntilTheirOwnDeadline",
+          "status": "PASS"
+        },
+        {
+          "name": "documentaryRetirementHonorsExactDeadlineAndScrubsStructuredHistoryWithoutDeletingItsIds",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "name": "pe.rutafija.retention.RetentionCalendarTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "boundary": "UNIT_CRYPTO_OR_LOOPBACK_HTTP_NO_BUSINESS_DATABASE",
+      "cases": [
+        {
+          "name": "leapYearFebruaryAndLimaLocalDayArePreserved",
+          "status": "PASS"
+        },
+        {
+          "name": "reportDeadlineUsesActualPilotEndAnd90Days",
+          "status": "PASS"
+        },
+        {
+          "name": "ordinaryReadEndsAtExactDeadlineAndHoldDoesNotRenewTheAnchor",
+          "status": "PASS"
+        },
+        {
+          "name": "clampsToLastDayWithoutReplacingSixCalendarMonthsWith180Days",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "name": "pe.rutafija.retention.RetentionProcedureSecurityTest",
+      "tests": "6",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "boundary": "UNIT_CRYPTO_OR_LOOPBACK_HTTP_NO_BUSINESS_DATABASE",
+      "cases": [
+        {
+          "name": "delegatedPreparationRequiresSuccessfulOwnerReauthenticationBeforeSql",
+          "status": "PASS"
+        },
+        {
+          "name": "disabledTechnicalProcedureNeverCallsDatabaseAndClearsInput",
+          "status": "PASS"
+        },
+        {
+          "name": "personalSelectionWithoutCurrentTermsIsDeniedAndClearsPassword",
+          "status": "PASS"
+        },
+        {
+          "name": "successfulSyntheticReauthenticationUsesExactHashAndClearsInput",
+          "status": "PASS"
+        },
+        {
+          "name": "disabledDelegatedPreparationDoesNotReadOrWriteAnySelection",
+          "status": "PASS"
+        },
+        {
+          "name": "wrongReauthenticationNeverExecutesSqlAndClearsInput",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "name": "pe.rutafija.support.L02CleanupProtectionTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "boundary": "UNIT_CRYPTO_OR_LOOPBACK_HTTP_NO_BUSINESS_DATABASE",
+      "cases": [
+        {
+          "name": "historicalCaseRemainsProtectedAfterTheActiveMarkerWasReleased",
+          "status": "PASS"
+        },
+        {
+          "name": "l08MarkerCannotBeRemovedOrIgnoredByCleanupPreflight",
+          "status": "PASS"
+        }
+      ]
+    }
+  ],
+  "globalCleanup": false,
+  "smtp": false,
+  "originalV49Run": {
+    "tests": 98,
+    "errors": 4,
+    "failures": 0,
+    "cause": "retention trigger accessed nonexistent record field",
+    "preservedDiagnosticPath": "backend/target/l08-v49-directed-regression.log",
+    "sha256": "9c52b42146f11b52c89c6be24f5f2984928083f354a1cb15a49552233f333358"
+  },
+  "limits": [
+    "No physical GPS or real participants",
+    "No concurrent retention race between independently committed transactions credited",
+    "No pilot lifecycle persisted by rollback fixtures"
+  ]
+}

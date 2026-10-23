@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 public record TransportGroupUpdateRequest(
         @NotBlank @Size(max = 120) String name,
         @Size(max = 300) String description,
-        @NotNull Boolean active
+        @NotNull Boolean active,
+        @NotNull @jakarta.validation.constraints.Min(0) Long expectedVersion
 ) {
 }

@@ -1,0 +1,148 @@
+{
+  "observedAt": "2026-10-21T22:27:39.692Z",
+  "scope": "PUBLIC_UI_ONLY_EXISTING_L07_BUILD_NO_BACKEND_NO_ACCOUNTS",
+  "results": [
+    {
+      "browser": "Edge",
+      "scope": "PUBLIC_LOGIN_ACTIVATION_ONLY_NO_BACKEND",
+      "checks": [
+        {
+          "id": "BROWSER_STARTED",
+          "result": "PASS"
+        },
+        {
+          "id": "VIEWPORT_1280_720",
+          "result": "PASS",
+          "width": 1280,
+          "height": 720,
+          "scrollWidth": 1265
+        },
+        {
+          "id": "LOGIN_NO_HORIZONTAL_CLIPPING",
+          "result": "PASS"
+        },
+        {
+          "id": "KEYBOARD_FORM_ORDER",
+          "result": "PASS",
+          "order": [
+            {
+              "tag": "INPUT",
+              "id": "email",
+              "label": ""
+            },
+            {
+              "tag": "INPUT",
+              "id": "password",
+              "label": ""
+            },
+            {
+              "tag": "BUTTON",
+              "id": "",
+              "label": "Mostrar contraseña"
+            },
+            {
+              "tag": "BUTTON",
+              "id": "",
+              "label": "Ingresar al sistema"
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "label": "Activar mi cuenta ADMIN"
+            }
+          ]
+        },
+        {
+          "id": "KEYBOARD_FOCUS_INDICATOR",
+          "result": "PASS",
+          "visible": true,
+          "outline": "none",
+          "width": "0px",
+          "shadow": "rgba(245, 196, 0, 0.45) 0px 0px 0px 3px"
+        }
+      ],
+      "version": "Edg/155.0.4283.62",
+      "result": "FAIL_KEEP_OBSERVATION",
+      "phase": "LOGIN",
+      "reason": "PUBLIC_UI_WAIT"
+    },
+    {
+      "browser": "Chrome",
+      "scope": "PUBLIC_LOGIN_ACTIVATION_ONLY_NO_BACKEND",
+      "checks": [
+        {
+          "id": "BROWSER_STARTED",
+          "result": "PASS"
+        },
+        {
+          "id": "VIEWPORT_1280_720",
+          "result": "PASS",
+          "width": 1280,
+          "height": 720,
+          "scrollWidth": 1265
+        },
+        {
+          "id": "LOGIN_NO_HORIZONTAL_CLIPPING",
+          "result": "PASS"
+        },
+        {
+          "id": "KEYBOARD_FORM_ORDER",
+          "result": "PASS",
+          "order": [
+            {
+              "tag": "INPUT",
+              "id": "email",
+              "label": ""
+            },
+            {
+              "tag": "INPUT",
+              "id": "password",
+              "label": ""
+            },
+            {
+              "tag": "BUTTON",
+              "id": "",
+              "label": "Mostrar contraseña"
+            },
+            {
+              "tag": "BUTTON",
+              "id": "",
+              "label": "Ingresar al sistema"
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "label": "Activar mi cuenta ADMIN"
+            }
+          ]
+        },
+        {
+          "id": "KEYBOARD_FOCUS_INDICATOR",
+          "result": "PASS",
+          "visible": true,
+          "outline": "none",
+          "width": "0px",
+          "shadow": "rgba(245, 196, 0, 0.45) 0px 0px 0px 3px"
+        }
+      ],
+      "version": "Chrome/155.0.8059.85",
+      "result": "FAIL_KEEP_OBSERVATION",
+      "phase": "LOGIN",
+      "reason": "PUBLIC_UI_WAIT"
+    }
+  ],
+  "backendConnected": false,
+  "screenReaderHumanExecuted": false,
+  "pilotEnabled": false,
+  "outputDirectory": "backend/target/l08-public-browser-1792621622385",
+  "apiCalls": [
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/refresh"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/refresh"
+    }
+  ]
+}

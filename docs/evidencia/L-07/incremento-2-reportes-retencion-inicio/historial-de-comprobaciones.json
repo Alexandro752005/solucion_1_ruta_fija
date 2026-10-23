@@ -1,0 +1,40 @@
+{
+  "notice": "Failed attempts preserved; final results are actual reruns, not reclassified failures. No global cleanup or successful extra SUPER_ADMIN creation.",
+  "resolved": [
+    {
+      "phase": "report first run",
+      "problem": "Three test/wire assumptions: nullable percentage omission, actual terminal code and required mobile session401",
+      "resolution": "Explicit null percentage and assertions aligned to actual contract; final report15 pass"
+    },
+    {
+      "phase": "retention compile",
+      "problem": "Test helper accepted one UUID, new SQL cases needed bound varargs",
+      "resolution": "Savepoint helper added, no production guard removed"
+    },
+    {
+      "phase": "retention fixtures",
+      "problem": "Historical SUPER_ADMIN quota correctly rejected another account",
+      "resolution": "Use existing synthetic public reference, never alter its credentials; success reauthentication independently tested with unpersisted unit actor"
+    },
+    {
+      "phase": "report retirement",
+      "problem": "V46 PLpgSQL variable/alias ambiguity",
+      "resolution": "New V48 corrects the function; V46 preserved; exact retirement tests pass"
+    },
+    {
+      "phase": "ordinary-change tests",
+      "problem": "Tests used PUT or an unavailable detail endpoint",
+      "resolution": "Use existing PATCH/POST and scoped list APIs, no API exception"
+    },
+    {
+      "phase": "mobile tests",
+      "problem": "Expected export path omitted emissions; integer-only test map rejected null",
+      "resolution": "Fixture corrected to implemented contract;42 regressions pass"
+    },
+    {
+      "phase": "other driver report fixture",
+      "problem": "Offer endpoints did not match captured route",
+      "resolution": "Use the actual route stop names; own/foreign scope passes"
+    }
+  ]
+}

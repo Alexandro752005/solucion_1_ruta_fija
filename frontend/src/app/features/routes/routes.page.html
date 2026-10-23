@@ -1,0 +1,45 @@
+<section class="management-page">
+  <rf-page-header title="Rutas" description="Define paradas y conserva las versiones utilizadas por cada servicio.">
+    <button page-actions class="management-button primary" type="button" (click)="newRoute()" [disabled]="saving() || uncertain()">Nueva ruta</button>
+  </rf-page-header>
+  @if (error(); as e) { <p class="management-alert error" role="alert">{{ e.message }}</p> }
+  @if (notice(); as n) { <p class="management-alert success" role="status">{{ n }}</p> }
+  @if (uncertain()) { <section class="management-panel"><p>El resultado no está confirmado. No se enviará de nuevo automáticamente.</p><button class="management-button" type="button" (click)="reconcile()" [disabled]="loading()">Consultar resultado del cambio</button></section> }
+  <section class="management-panel">
+    <h2>Catálogo de la organización</h2>
+    <button class="management-button" type="button" (click)="load()" [disabled]="loading()">Actualizar lista</button>
+    @if (loading()) { <p role="status">Consultando…</p> }
+    <ul>@for (r of routes(); track r.id) { <li><button class="management-button" type="button" (click)="choose(r.id)" [disabled]="saving() || uncertain()">{{ r.name }}</button> · {{ r.active ? 'Activa' : 'Retirada' }}</li> } @empty { <li>Sin rutas en esta página.</li> }</ul>
+    <button type="button" class="management-button" (click)="load(offset() - 100)" [disabled]="offset() === 0 || loading()">Anterior</button>
+    <button type="button" class="management-button" (click)="load(offset() + 100)" [disabled]="routes().length < 100 || loading()">Siguiente</button>
+  </section>
+  @if (editing()) {
+    <section class="management-panel">
+      <h2>{{ selected() ? 'Nueva versión de la ruta' : 'Definir ruta' }}</h2>
+      <p>Editar conserva las versiones de servicios anteriores. Usa nombres de lugares y referencias sin datos personales.</p>
+      <fieldset [disabled]="saving() || uncertain() || (selected() !== null && !selected()!.active)">
+        <label for="route-name">Nombre</label><input id="route-name" [(ngModel)]="name" maxlength="120" />
+        @for (stop of stops; track stop.key; let i = $index) {
+          <div class="management-form">
+            <strong>{{ i === 0 ? 'Inicio' : i === stops.length - 1 ? 'Fin' : 'Parada intermedia' }}</strong>
+            <label [for]="'route-stop-' + stop.key">Lugar</label><input [id]="'route-stop-' + stop.key" [(ngModel)]="stop.name" maxlength="120" />
+            <label [for]="'route-lat-' + stop.key">Latitud del lugar, opcional</label><input [id]="'route-lat-' + stop.key" [(ngModel)]="stop.latitude" inputmode="decimal" />
+            <label [for]="'route-lng-' + stop.key">Longitud del lugar, opcional</label><input [id]="'route-lng-' + stop.key" [(ngModel)]="stop.longitude" inputmode="decimal" />
+            @if (i > 0 && i < stops.length - 1) {
+              <button type="button" (click)="moveStop(i,-1)" [disabled]="i === 1">Subir</button><button type="button" (click)="moveStop(i,1)" [disabled]="i === stops.length - 2">Bajar</button><button type="button" (click)="removeStop(i)" [disabled]="stops.length <= 3">Quitar intermedia</button>
+            }
+          </div>
+        }
+        <button class="management-button" type="button" (click)="addStop()" [disabled]="stops.length >= 100">Añadir parada intermedia</button>
+      </fieldset>
+      <label for="route-reason">Motivo sin datos personales</label><input id="route-reason" [(ngModel)]="reason" maxlength="160" [disabled]="saving() || uncertain()" />
+      <button class="management-button primary" type="button" (click)="save()" [disabled]="saving() || uncertain() || (selected() !== null && !selected()!.active)">Guardar nueva versión</button>
+      @if (selected(); as v) { <button class="management-button" type="button" (click)="changeStatus(!v.active)" [disabled]="saving() || uncertain()">{{ v.active ? 'Retirar para usos nuevos' : 'Reactivar para usos nuevos' }}</button> }
+    </section>
+  }
+  @if (selected(); as v) {
+    <section class="management-panel"><h2>Historial de versiones</h2>
+      @for (revision of v.versions; track revision.id) { <details><summary>Revisión {{ revision.revision }} · {{ revision.name }} · {{ revision.createdAt }}</summary><ol>@for (stop of revision.stops; track stop.key) { <li>{{ stop.name }} · {{ stop.kind }}</li> }</ol><p>Huella del contenido: <code>{{ revision.contentSha256 }}</code></p></details> }
+    </section>
+  }
+</section>

@@ -1,0 +1,37 @@
+{
+    "result":  "INCIDENT_RECORDED_LOCALLY",
+    "syntheticHttpFixtures":  true,
+    "observations":  [
+                         {
+                             "startedAt":  "2026-10-23T06:30:53.5620920+00:00",
+                             "finishedAt":  "2026-10-23T06:30:55.6632510+00:00",
+                             "result":  "INCIDENT_REQUIRES_HUMAN_ACK",
+                             "api":  {
+                                         "healthy":  true,
+                                         "httpStatus":  200,
+                                         "elapsedSeconds":  0.0139358
+                                     },
+                             "angular":  {
+                                             "healthy":  true,
+                                             "httpStatus":  200,
+                                             "elapsedSeconds":  0.0134323
+                                         },
+                             "proxy":  {
+                                           "healthy":  true,
+                                           "httpStatus":  200,
+                                           "elapsedSeconds":  0.013816799999999999
+                                       },
+                             "postgresAcceptsConnections":  false,
+                             "postgresElapsedSeconds":  2.0592603,
+                             "incidentRecorded":  true,
+                             "externalAlertDelivered":  false
+                         }
+                     ],
+    "elapsedSeconds":  2.1017349999999997,
+    "configuredDetectionUpperBoundSeconds":  105,
+    "independentHostAccredited":  false,
+    "human24x7Accredited":  false,
+    "externalAlertsAccredited":  false,
+    "postgresSqlIntegrityChecked":  false,
+    "productionEnabled":  false
+}

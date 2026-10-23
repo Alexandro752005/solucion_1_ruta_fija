@@ -1,0 +1,37 @@
+{
+    "result":  "ALL_PROBES_HEALTHY",
+    "syntheticHttpFixtures":  true,
+    "observations":  [
+                         {
+                             "startedAt":  "2026-10-23T06:30:36.5372988+00:00",
+                             "finishedAt":  "2026-10-23T06:30:36.8587988+00:00",
+                             "result":  "HEALTHY",
+                             "api":  {
+                                         "healthy":  true,
+                                         "httpStatus":  200,
+                                         "elapsedSeconds":  0.1623697
+                                     },
+                             "angular":  {
+                                             "healthy":  true,
+                                             "httpStatus":  200,
+                                             "elapsedSeconds":  0.0198336
+                                         },
+                             "proxy":  {
+                                           "healthy":  true,
+                                           "httpStatus":  200,
+                                           "elapsedSeconds":  0.0167016
+                                       },
+                             "postgresAcceptsConnections":  true,
+                             "postgresElapsedSeconds":  0.1194585,
+                             "incidentRecorded":  false,
+                             "externalAlertDelivered":  false
+                         }
+                     ],
+    "elapsedSeconds":  0.34361739999999996,
+    "configuredDetectionUpperBoundSeconds":  105,
+    "independentHostAccredited":  false,
+    "human24x7Accredited":  false,
+    "externalAlertsAccredited":  false,
+    "postgresSqlIntegrityChecked":  false,
+    "productionEnabled":  false
+}

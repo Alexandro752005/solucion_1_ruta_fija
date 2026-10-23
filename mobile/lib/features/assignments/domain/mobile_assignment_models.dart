@@ -2,6 +2,8 @@ enum MobileAssignmentStatus {
   pendingResponse('PENDING_RESPONSE', 'Pendiente de respuesta'),
   scheduled('SCHEDULED', 'Programada'),
   enServicio('EN_SERVICIO', 'En servicio'),
+  interrupted('INTERRUPTED', 'Interrumpida'),
+  transferred('TRANSFERRED', 'Tramo relevado'),
   completed('COMPLETED', 'Completada'),
   rejected('REJECTED', 'Rechazada'),
   cancelled('CANCELLED', 'Cancelada'),
@@ -14,6 +16,8 @@ enum MobileAssignmentStatus {
 
   bool get isTerminal {
     return this == completed ||
+        this == interrupted ||
+        this == transferred ||
         this == rejected ||
         this == cancelled ||
         this == expired;
@@ -50,7 +54,7 @@ enum MobileAssignmentCommandType {
   accept('accept', 'Aceptar asignación'),
   reject('reject', 'Rechazar asignación'),
   start('start', 'Iniciar servicio'),
-  complete('complete', 'Completar servicio');
+  complete('complete', 'Ruta finalizada');
 
   const MobileAssignmentCommandType(this.endpointSegment, this.label);
 
@@ -68,6 +72,8 @@ enum MobileAssignmentCommandType {
 
 final class MobileAssignment {
   const MobileAssignment({
+    this.serviceId,
+    this.handoverId,
     required this.id,
     required this.status,
     required this.responseMode,
@@ -92,6 +98,8 @@ final class MobileAssignment {
   });
 
   final String id;
+  final String? serviceId;
+  final String? handoverId;
   final MobileAssignmentStatus status;
   final MobileAssignmentResponseMode responseMode;
   final int version;
@@ -119,10 +127,17 @@ final class MobileAssignment {
   }
 
   bool get canStart {
-    return status == MobileAssignmentStatus.scheduled && reservedAt != null;
+    return status == MobileAssignmentStatus.scheduled &&
+        handoverId == null &&
+        reservedAt != null &&
+        acceptedAt != null &&
+        responseMode == MobileAssignmentResponseMode.mobileConfirmation;
   }
 
-  bool get canComplete => status == MobileAssignmentStatus.enServicio;
+  bool get canComplete =>
+      status == MobileAssignmentStatus.enServicio &&
+      acceptedAt != null &&
+      startedAt != null;
 
   bool allows(MobileAssignmentCommandType command) {
     return switch (command) {
@@ -135,6 +150,8 @@ final class MobileAssignment {
 
   factory MobileAssignment.fromJson(Map<String, dynamic> json) {
     return MobileAssignment(
+      serviceId: _nullableString(json, 'serviceId'),
+      handoverId: _nullableString(json, 'handoverId'),
       id: _requiredString(json, 'id'),
       status: MobileAssignmentStatus.fromApi(_requiredString(json, 'status')),
       responseMode: MobileAssignmentResponseMode.fromApi(
@@ -265,14 +282,10 @@ final class MobileAssignmentCommandResult {
   const MobileAssignmentCommandResult({
     required this.assignment,
     required this.replayed,
-    this.queued = false,
-    this.blocked = false,
   });
 
   final MobileAssignment assignment;
   final bool replayed;
-  final bool queued;
-  final bool blocked;
 }
 
 String _requiredString(Map<String, dynamic> json, String key) {

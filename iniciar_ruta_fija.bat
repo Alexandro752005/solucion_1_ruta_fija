@@ -28,19 +28,26 @@ if not exist "backend\.local\ruta-fija-bootstrap.env" (
   endlocal & exit /b 1
 )
 
-echo [Ruta Fija] Activando PostgreSQL 16 solo para esta sesion...
-%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\Set-RutaFijaPostgresqlService.ps1" -Action Start
+set "RF_RUNTIME_MODE="
+if /I "%~1"=="--smoke-read-only" set "RF_RUNTIME_MODE=-SmokeReadOnly"
+if not "%~1"=="" if /I not "%~1"=="--smoke-read-only" (endlocal & exit /b 2)
+if not "%~2"=="" if /I not "%~2"=="--test-database" (endlocal & exit /b 2)
+if /I "%~2"=="--test-database" if /I not "%~1"=="--smoke-read-only" (endlocal & exit /b 2)
+if /I "%~2"=="--test-database" set "RF_RUNTIME_MODE=-SmokeReadOnly -SmokeTestDatabase"
+if not "%~3"=="" (endlocal & exit /b 2)
+echo [Ruta Fija] Preparando PostgreSQL con propiedad controlada...
+"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\Invoke-RutaFijaPostgresqlLease.ps1" -Action Start -Execute
 if errorlevel 1 (
   echo [Ruta Fija] No se pudo activar PostgreSQL. Acepte la solicitud de administrador.
   endlocal & exit /b 1
 )
 
 echo [Ruta Fija] Iniciando backend y CRM en modo de bajo consumo...
-%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\Invoke-RutaFijaNativeRuntime.ps1" -Action Start -StartupTimeoutSeconds 180
+"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\Invoke-RutaFijaNativeRuntime.ps1" -Action Start -StartupTimeoutSeconds 180 %RF_RUNTIME_MODE%
 if errorlevel 1 (
   echo [Ruta Fija] F1.1B no aprobo el inicio nativo. Revise .runtime\backend.stderr.log o .runtime\frontend.stderr.log.
   echo [Ruta Fija] Revirtiendo PostgreSQL porque el proyecto no inicio...
-  %SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\Set-RutaFijaPostgresqlService.ps1" -Action Stop
+  "%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\Invoke-RutaFijaPostgresqlLease.ps1" -Action StopOwned -Execute
   endlocal & exit /b 1
 )
 

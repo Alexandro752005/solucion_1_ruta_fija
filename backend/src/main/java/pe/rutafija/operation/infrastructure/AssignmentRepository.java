@@ -20,6 +20,14 @@ import java.util.UUID;
 
 public interface AssignmentRepository extends JpaRepository<Assignment, UUID>, JpaSpecificationExecutor<Assignment> {
 
+    @Query("select distinct a.organization.id from Assignment a where a.status=pe.rutafija.operation.domain.AssignmentStatus.PENDING_RESPONSE and a.responseDeadlineAt<=:now")
+    List<UUID> findOrganizationsWithDueOffers(@Param("now") Instant now);
+
+    @Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
+    @EntityGraph(attributePaths={"organization","driver","driver.group","vehicle","createdBy"})
+    @Query("select a from Assignment a where a.organization.id=:org and a.status=pe.rutafija.operation.domain.AssignmentStatus.PENDING_RESPONSE and a.responseDeadlineAt<=:now order by a.id")
+    List<Assignment> lockDueOffers(@Param("org") UUID organizationId,@Param("now") Instant now);
+
     @EntityGraph(attributePaths = {"organization", "driver", "driver.group", "vehicle", "createdBy"})
     @Override
     Page<Assignment> findAll(Specification<Assignment> specification, Pageable pageable);

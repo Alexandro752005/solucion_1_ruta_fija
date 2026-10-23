@@ -1,0 +1,57 @@
+{
+  "localDate": "2026-10-20",
+  "status": "PASS_LOCAL_INCREMENTAL_BUILDS_ONLY",
+  "items": [
+    {
+      "evidenceManifest": "docs/evidencia/L-05/incremento-1-ejecucion/manifest.sha256",
+      "evidenceManifestSha256": "f7ceaf359f5917e837ba0e32ccf671d961812a8496bdb7b58711ff62fad63a53",
+      "artifactManifest": "artifacts/L-05-incremento-1-2026-10-19/manifest.json",
+      "artifactManifestSha256": "7b321762cebb48958c8d0a6eb45b013f69809c4d155a93d1276be93bee5fe5a0",
+      "files": [
+        {
+          "path": "ruta-fija-backend-0.1.0-SNAPSHOT.jar",
+          "sha256": "bc0ba3456a9a335b4db94d30775aa0eebfe951765b0bc9fa06224d081a4adc07",
+          "bytes": 90962188
+        }
+      ]
+    },
+    {
+      "evidenceManifest": "docs/evidencia/L-05/incremento-2-gps/manifest.sha256",
+      "evidenceManifestSha256": "cdbe9561c825e5052f3108df1c26128dd93e3d62d5fae481feee953764032ed4",
+      "artifactManifest": "artifacts/L-05-incremento-2-2026-10-19/manifest.json",
+      "artifactManifestSha256": "7a756789b8ac121ecadc617c83b665da3850cb2b6c9c1b92768697b603fcb0de",
+      "files": [
+        {
+          "path": "ruta-fija-backend-0.1.0-SNAPSHOT.jar",
+          "sha256": "63ff9ce5d2c5243727b5f4774d6fde3e5d9a0c285f636c7ab82a95f9ac15e43b",
+          "bytes": 90995741
+        },
+        {
+          "path": "app-debug.apk",
+          "sha256": "2063d205a8707b7098cd4f0a6ddf721d553bb78b0fe85eebdf6150954dc34cd7",
+          "bytes": 185182725
+        }
+      ]
+    },
+    {
+      "evidenceManifest": "docs/evidencia/L-05/incremento-3-tiempos/manifest.sha256",
+      "evidenceManifestSha256": "bbfd76ad258ccfc62bf5034966d6b94f7044ee94cf839d3c9b0ba6ea988c5ce8",
+      "artifactManifest": "artifacts/L-05-incremento-3-2026-10-20/manifest.json",
+      "artifactManifestSha256": "4d370579dcb1f2e6996607ff9f9de94e88effb91797f97536886fbd0037cc146",
+      "files": [
+        {
+          "path": "ruta-fija-backend-0.1.0-SNAPSHOT.jar",
+          "sha256": "a567255bf6422923bde00d7a9abf3044bd2e03492404b8bb0440a4423f70abf4",
+          "bytes": 91022204
+        },
+        {
+          "path": "app-debug.apk",
+          "sha256": "21beb38e293dd1dd150f4e86899c7ffc2a26dad39fa7948fcb5e3c62d0780b33",
+          "bytes": 185194084
+        }
+      ]
+    }
+  ],
+  "deployed": false,
+  "installed": false
+}

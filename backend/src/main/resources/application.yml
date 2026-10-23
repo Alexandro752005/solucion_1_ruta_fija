@@ -45,6 +45,17 @@ management:
       probes:
         enabled: true
       show-details: never
+      show-components: never
+      group:
+        readiness:
+          include: readinessState,db
+        liveness:
+          include: livenessState
+  health:
+    # SMTP delivery is validated only through an explicitly authorized OTP case.
+    # Availability probes must never authenticate to an external mail provider.
+    mail:
+      enabled: false
   info:
     env:
       enabled: true
@@ -66,10 +77,16 @@ app:
   operations:
     stream-ticket-ttl: ${OPERATION_STREAM_TICKET_TTL:PT2M}
   mobile:
+    offline-sync:
+      enabled: false
     location-ttl: ${MOBILE_LOCATION_TTL:PT5M}
     location-capture-max-age: ${MOBILE_LOCATION_CAPTURE_MAX_AGE:PT5M}
     pending-expiry-sweep: ${MOBILE_PENDING_EXPIRY_SWEEP:PT1M}
   security:
+    person-identity-gate:
+      enabled: true
+    admin-terms-gate:
+      enabled: ${ADMIN_TERMS_GATE_ENABLED:true}
     jwt:
       issuer: ${JWT_ISSUER:ruta-fija-api}
       secret-base64: ${JWT_SECRET_BASE64}
@@ -91,5 +108,12 @@ app:
       max-tracked-accounts: ${LOGIN_RATE_LIMIT_MAX_ACCOUNTS:10000}
 
 logging:
+  level:
+    org.springframework.web: WARN
+    org.springframework.security: WARN
+    org.springframework.jdbc.core: WARN
+    org.hibernate.SQL: 'OFF'
+    org.hibernate.orm.jdbc.bind: 'OFF'
+    org.hibernate.engine.jdbc.spi.SqlExceptionHelper: 'OFF'
   pattern:
     level: "%5p [correlationId:%X{correlationId:-}]"

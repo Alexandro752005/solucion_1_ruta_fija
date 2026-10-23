@@ -1,0 +1,17 @@
+{
+  "observedAt": "2026-10-20T02:10:07.451498+00:00",
+  "archives": [
+    {
+      "archive": "incremento-1",
+      "evidenceFilesVerified": 29,
+      "result": "PASS"
+    },
+    {
+      "archive": "incremento-2-margenes",
+      "evidenceFilesVerified": 35,
+      "result": "PASS"
+    }
+  ],
+  "note": "Historical source/planning hashes are not relabeled as current.",
+  "result": "PASS"
+}

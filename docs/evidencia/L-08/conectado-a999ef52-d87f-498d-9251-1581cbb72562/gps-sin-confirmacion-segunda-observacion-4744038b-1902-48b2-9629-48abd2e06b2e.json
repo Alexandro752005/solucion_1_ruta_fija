@@ -1,0 +1,18 @@
+{
+  "runId": "a999ef52-d87f-498d-9251-1581cbb72562",
+  "archivedAt": "2026-10-22T21:41:16.319738+00:00",
+  "humanReport": "sigue apareciendo el mismo aviso, \"GPS sin confirmación\"",
+  "afterRequested90SecondObservation": true,
+  "gpsVerified": false,
+  "databaseEvidence": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/oferta-observacion-13c13ccf-12fd-46a7-8d72-a8cfc4f84357.json",
+  "databaseEvidenceSha256": "04f4bc1ae520ad2401c53061b2dcbb31ddde0e0c57ed029a84bb848bff91ccb2",
+  "serviceStatusAtRead": "IN_SERVICE",
+  "startedAtServer": "2026-10-22T21:28:01.474477Z",
+  "serviceGpsPointCountAtRead": 0,
+  "physicalExceptionCauseNotYetObserved": true,
+  "localAndroidConversionDefectFoundSeparately": true,
+  "serviceRestarted": false,
+  "coordinatesRecorded": false,
+  "TEST_CLEANUP_RELEASED": false,
+  "pilotEnabled": false
+}

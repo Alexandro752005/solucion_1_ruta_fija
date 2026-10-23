@@ -1,0 +1,20 @@
+{
+  "observedAt": "2026-10-19T15:57:33.507089+00:00",
+  "result": "CANCELLED_OWN_PREFLIGHT_READ_LOCK",
+  "database": "ruta_fija_test",
+  "waitingMigratorBackendPid": 11504,
+  "ownPreflightBlockingBackendPid": 15720,
+  "ownedJavaProcessStopped": 16200,
+  "otherProcessesTargeted": false,
+  "cause": "Read-only snapshot kept ACCESS SHARE on driver until after migrate; ALTER driver needed ACCESS EXCLUSIVE.",
+  "sourceMigrationEditedAfterAttempt": false,
+  "postCancellationSchema": "30",
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 1
+  },
+  "acceptanceCount": 2,
+  "failedHistoryCheckedByPreflight": true,
+  "globalCleanupExecuted": false
+}

@@ -1,0 +1,56 @@
+{
+  "version": "0.3.0",
+  "lot": "L-06",
+  "localDate": "2026-10-20",
+  "status": "EN_CURSO",
+  "authorization": "OK VERDE",
+  "decisions": [
+    {
+      "id": "INC-L06-01",
+      "status": "CONFIRMADA_USUARIO",
+      "literalAnswer": "Aprobar INC-L06-01",
+      "localDate": "2026-10-20",
+      "proposal": "docs/contratos/L-06-decisiones-operativas-propuesta.md",
+      "proposalSha256": "ff6d95fec508ea9bc49317e4ded1f0c3c77d67a3ea4ac7eb074d07f548eed12a"
+    },
+    {
+      "id": "INC-L06-02",
+      "status": "CONFIRMADA_USUARIO",
+      "literalAnswer": "Aprobar INC-L06-02",
+      "localDate": "2026-10-20",
+      "proposal": "docs/contratos/L-06-decisiones-operativas-propuesta.md",
+      "proposalSha256": "ff6d95fec508ea9bc49317e4ded1f0c3c77d67a3ea4ac7eb074d07f548eed12a"
+    }
+  ],
+  "pending": [],
+  "proposal": "docs/contratos/L-06-decisiones-operativas-propuesta.md",
+  "proposalSha256": "ff6d95fec508ea9bc49317e4ded1f0c3c77d67a3ea4ac7eb074d07f548eed12a",
+  "pilotEnabled": false,
+  "L07Started": false,
+  "postgresServiceUserConfirmation": "LISTO YA ESTÁ ABIERTO Y EN SERVICIO",
+  "connectedCaseAuthorization": {
+    "id": "L06-CON-01",
+    "status": "CONFIRMADA_USUARIO",
+    "localDate": "2026-10-20",
+    "literalAnswer": "Autorizar máximo un CONDUCTOR sintético para L-06",
+    "runId": "51e69ee6-e4a0-4c3f-9a35-f19de0072422",
+    "maxNewConductorAccounts": 1,
+    "database": "ruta_fija_test",
+    "mail": "SIMULATED_ONLY",
+    "expectedLedgerBefore": {
+      "SUPER_ADMIN": 1,
+      "ADMIN": 3,
+      "CONDUCTOR": 4
+    },
+    "expectedLedgerAfter": {
+      "SUPER_ADMIN": 1,
+      "ADMIN": 3,
+      "CONDUCTOR": 5
+    },
+    "proposal": "docs/operacion/L-06-caso-conectado-propuesta.md",
+    "proposalSha256": "406dd7479a640815a5712ea37751a92003834174f6dd6e22b40b15d1c6d2619c",
+    "reopenPreviousCases": false,
+    "pilotEnabled": false,
+    "L07Started": false
+  }
+}

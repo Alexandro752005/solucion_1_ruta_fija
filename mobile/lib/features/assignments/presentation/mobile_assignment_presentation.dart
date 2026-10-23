@@ -15,7 +15,9 @@ Color assignmentStatusColor(
     MobileAssignmentStatus.scheduled => scheme.primary,
     MobileAssignmentStatus.enServicio => scheme.secondary,
     MobileAssignmentStatus.completed => Colors.green.shade700,
+    MobileAssignmentStatus.transferred => scheme.outline,
     MobileAssignmentStatus.rejected ||
+    MobileAssignmentStatus.interrupted ||
     MobileAssignmentStatus.cancelled ||
     MobileAssignmentStatus.expired => scheme.error,
   };

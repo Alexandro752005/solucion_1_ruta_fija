@@ -147,6 +147,8 @@ void main() {
         'accuracyM': 8.2,
         'capturedAt': '2026-09-25T12:00:00.000Z',
         'permissionGranted': true,
+        'locationServiceEnabled': true,
+        'foreground': true,
       });
       expect(requests[1].body, isNot(contains('driverId')));
       expect(requests[2].method, 'DELETE');

@@ -1,0 +1,101 @@
+{
+  "recordedLocalDate": "2026-10-17",
+  "timezone": "America/Lima",
+  "runId": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "evidenceType": "CURATED_READ_ONLY_OBSERVATION_NOT_RAW_PROCESS_OUTPUT",
+  "operatorReported": {
+    "setupBlockSubmittedWithoutLineBreaksOrStatementSeparators": true,
+    "errorCategory": "ParserError",
+    "errorId": "UnexpectedToken",
+    "successfulNewKeyGenerationReported": false,
+    "secretsIncludedInThisRecord": false
+  },
+  "diagnosis": {
+    "cause": "POWERSHELL_STATEMENTS_JOINED_WITHOUT_SEPARATORS",
+    "rejectedSubmissionExecuted": false,
+    "passwordOrCryptographicFailure": false,
+    "existingCaseRecoveryOrNewIdentityRequired": false
+  },
+  "metadataAtUtc": "2026-10-18T00:24:47.8610837Z",
+  "metadataOnly": {
+    "newKeyDirectoryExists": false,
+    "newPrimaryExists": false,
+    "newCopyExists": false,
+    "markerExists": true,
+    "markerSha256": "83A91866767A8EFC56CBF7ED553191D53610F5A264E0E9A6C0D86CBBE79FF205",
+    "cliJarSha256": "91913FF7C11CABFAA01881FCBFB24BBF5ED347564C0140D73A757BC96D38E24A",
+    "listeners": [
+      {"address": "127.0.0.1", "port": 8091, "processId": 22648},
+      {"address": "127.0.0.1", "port": 4311, "processId": 22648}
+    ],
+    "privateKeyFilesRead": false,
+    "privatePathsRecorded": false
+  },
+  "inspectionCommand": "scripts/Invoke-RutaFijaL01HumanTrial.ps1 -InspectRunId 140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "inspectionAtUtc": "2026-10-18T00:24:49.089356600Z",
+  "selectedInspectionFacts": {
+    "database": "ruta_fija_test",
+    "role": "rf_test",
+    "schema": "V26",
+    "readOnly": true,
+    "writes": 0,
+    "smtpAttempts": 0,
+    "historicalCreations": {"SUPER_ADMIN": 1, "ADMIN": 2, "CONDUCTOR": 0},
+    "remainingSlots": {"SUPER_ADMIN": 0, "ADMIN": 2, "CONDUCTOR": 20},
+    "caseAccounts": 2,
+    "caseOrganizations": 1,
+    "identityBindings": 2,
+    "termsAcceptanceCount": 1,
+    "publishedFileHashMatches": true,
+    "publishedTermsSha256": "20FFD9525CB19EC51387BF11859CF34100A5117B00DE8F428BFEB8B9A4DC6417",
+    "cleanupLockHeld": true,
+    "markerPresentAndMatches": true,
+    "standardCleanupRefusedByMarker": true,
+    "codeRepairPreservedOnce": true,
+    "noPriorKeyReplacement": true,
+    "keyPreparationPublicAuditCount": 0,
+    "currentRecoveryPublicKeyFingerprintSha256": "5b727e9aa6252667a1cbdc30f7575fb5007f9d8bb159d0e4dd2b5dcb27fbe00c",
+    "noCompletedRecovery": true,
+    "noLiveChallenge": true,
+    "enrollmentObservedOnce": true,
+    "observationHealthy": true,
+    "inspectorOwnsServingLock": false,
+    "inspectorOwnsServingLockExplanation": "Detached inspection does not acquire the serving process lock; cleanupLockHeld is true."
+  },
+  "priorReloadEvidence": {
+    "path": "docs/evidencia/L-01/rec03-reanudacion-140c10a1-2026-10-18T001928Z.json",
+    "sha256": "985490FB94D143E0B4EA62729C9C769F6ED80DDE028BCB47642A91B9EC85A2DF",
+    "segmentId": "e140a035-8211-4037-82e6-388329f1cfc8",
+    "humanReportedOnlyRunId": true,
+    "historicalCleanupConsoleLineNotReported": true,
+    "browserVisualRenderingNotReported": true
+  },
+  "correction": {
+    "guide": "docs/operacion/L-01-REC-CI07-03-ejecucion.md",
+    "guideVersion": "1.0.1",
+    "scope": "INSTRUCTION_BLOCK_SEPARATORS_AND_SAFE_STOP_ONLY",
+    "newTrialMechanismCreated": false,
+    "launcherModified": false,
+    "cliModified": false,
+    "normalProtocolModified": false,
+    "syntaxEvidence": "docs/evidencia/L-01/rec03-bloque-powershell-sintaxis-2026-10-17.json",
+    "multilineParserErrors": 0,
+    "singleLineParserErrors": 0,
+    "blockExecutedByAgent": false,
+    "runtimeAclApplicationTested": false
+  },
+  "pendingHumanAction": "RUN_CORRECTED_DIRECTORY_SETUP_ONCE_REPORT_WORKSPACE_STATUS_STOP_BEFORE_KEYGEN",
+  "manualAdminResult": "PENDING",
+  "manualRecoveryResult": "PENDING",
+  "testCleanupReleased": false,
+  "scopeChangeApplied": false,
+  "lotStatus": "EN_CURSO",
+  "nextLotStarted": false,
+  "externalEmailSentByAgent": false,
+  "limits": [
+    "Directory absence is metadata at the recorded cut, not a claim about later human activity.",
+    "Parser validation does not execute folder creation, ACL assignment, keygen or recovery.",
+    "No human recovery, original emergency-code delivery, independent custody or prior ADMIN gate is accredited by this record.",
+    "No private key, password, token, emergency-code value or emergency-code hash was read or archived."
+  ]
+}

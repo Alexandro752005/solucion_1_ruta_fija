@@ -1,0 +1,13 @@
+{
+    "checkedAtUtc":  "2026-10-18T00:38:04.1019995Z",
+    "check":  "COPY_INSTRUCTION_PARSE_AND_RUNTIME_SIGNATURE_ONLY",
+    "guideVersion":  "1.0.3",
+    "multilineErrors":  0,
+    "singleLineErrors":  0,
+    "booleanCopyParameterName":  "overwrite",
+    "overwriteArgumentInInstruction":  false,
+    "copyBlockExecuted":  false,
+    "privateFilesRead":  false,
+    "databaseCalls":  0,
+    "smtpAttempts":  0
+}

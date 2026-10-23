@@ -10,6 +10,7 @@ import pe.rutafija.fleet.domain.Driver;
 import pe.rutafija.fleet.infrastructure.DriverRepository;
 import pe.rutafija.identity.domain.AppUser;
 import pe.rutafija.identity.domain.UserRole;
+import pe.rutafija.pilotquota.application.ConductorProvisioningPolicy;
 import pe.rutafija.shared.exception.ApplicationException;
 import pe.rutafija.shared.exception.ErrorCode;
 
@@ -26,17 +27,32 @@ public class MobileDriverContextService {
 
     private final CurrentUserService currentUserService;
     private final DriverRepository driverRepository;
+    private final ConductorProvisioningPolicy conductorProvisioningPolicy;
 
     public MobileDriverContextService(
             CurrentUserService currentUserService,
-            DriverRepository driverRepository
+            DriverRepository driverRepository,
+            ConductorProvisioningPolicy conductorProvisioningPolicy
     ) {
         this.currentUserService = currentUserService;
         this.driverRepository = driverRepository;
+        this.conductorProvisioningPolicy = conductorProvisioningPolicy;
     }
 
-    @Transactional(readOnly = true)
+    // Validation failures must preserve their HTTP status when the caller keeps
+    // a rejected command receipt (noRollbackFor=ApplicationException).
+    @Transactional(readOnly = true, noRollbackFor = ApplicationException.class)
     public MobileDriverActor requireMobileDriver() {
+        var actor=requireMobileConsultation();
+        var token=requireMobileToken();
+        if (!"OPERATIONS".equals(token.getToken().getClaimAsString("accessScope")))
+            throw new ApplicationException(HttpStatus.FORBIDDEN,ErrorCode.DRIVER_INACTIVE,"La sesión solo permite incorporación; renueva la sesión tras habilitarse.");
+        conductorProvisioningPolicy.requireOperationalEligibility(actor.driver().getId(),actor.user().getOrganizationId());
+        return actor;
+    }
+
+    @Transactional(readOnly = true, noRollbackFor = ApplicationException.class)
+    public MobileDriverActor requireMobileConsultation() {
         JwtAuthenticationToken token = requireMobileToken();
         AppUser user = currentUserService.requireTenantActor();
         if (user.getRole() != UserRole.CONDUCTOR) {
@@ -54,13 +70,6 @@ public class MobileDriverContextService {
                         ErrorCode.MOBILE_USER_NOT_DRIVER,
                         "El usuario movil no tiene un conductor vinculado"
                 ));
-        if (!driver.isActive()) {
-            throw new ApplicationException(
-                    HttpStatus.FORBIDDEN,
-                    ErrorCode.DRIVER_INACTIVE,
-                    "El conductor no esta activo"
-            );
-        }
         if (!driver.getOrganizationId().equals(user.getOrganizationId())
                 || !driver.getId().equals(claimedDriverId)) {
             throw new ApplicationException(
@@ -69,6 +78,7 @@ public class MobileDriverContextService {
                     "La sesion movil ya no es valida"
             );
         }
+        conductorProvisioningPolicy.requireApproved(user.getId(), user.getOrganizationId(), driver.getId());
         return new MobileDriverActor(user, driver);
     }
 

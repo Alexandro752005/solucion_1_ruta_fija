@@ -1,0 +1,163 @@
+{
+  "observedAt": "2026-10-21T06:41:46.441286+00:00",
+  "runId": "51e69ee6-e4a0-4c3f-9a35-f19de0072422",
+  "result": "PASS_REAL_CRM_FLUTTER_HTTP_POSTGRES_SIMULATED_MAIL",
+  "accountId": "5c692f75-092e-4efb-9c0a-185722a8ebdb",
+  "driverId": "3c57102a-680f-4b9d-a8f2-6518fc52d042",
+  "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+  "newConductorAccounts": 1,
+  "syntheticOnly": true,
+  "humanTrial": false,
+  "physicalDevice": false,
+  "mail": "SIMULATED_ONLY",
+  "crmStages": 6,
+  "flutterStages": 5,
+  "clientResults": [
+    {
+      "markers": [
+        "L06_CONNECTED_REPORT=PASS_EXPLICIT_SEVERITY_UNKNOWN_RESPONSE_RECEIPT_NO_REPLAY",
+        "L06_CONNECTED_RESULT=PASS_PRODUCTION_WIDGET_REPOSITORY_HTTP_STAGE_REPORT"
+      ],
+      "channel": "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+      "at": "2026-10-21T06:13:54.598574500Z",
+      "stage": "REPORT"
+    },
+    {
+      "markers": [
+        "CONNECTED_L06_CRM_ATTEND=PASS_EXPLICIT_RESPONSIBILITY_APPEND_HISTORY",
+        "CONNECTED_L06_CRM_RESULT=PASS_REAL_BROWSER_HTTP_TEST_DB"
+      ],
+      "channel": "REAL_CRM_BROWSER_HTTP",
+      "at": "2026-10-21T06:14:06.738591100Z",
+      "stage": "ATTEND"
+    },
+    {
+      "stage": "INFORMATION",
+      "markers": [
+        "L06_CONNECTED_INFORMATION=PASS_OWN_APPEND_ONLY_HISTORY",
+        "L06_CONNECTED_RESULT=PASS_PRODUCTION_WIDGET_REPOSITORY_HTTP_STAGE_INFORMATION"
+      ],
+      "channel": "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+      "at": "2026-10-21T06:26:00.013533500Z"
+    },
+    {
+      "stage": "NOTICES",
+      "markers": [
+        "CONNECTED_L06_CRM_NOTICES=PASS_DURABLE_EXTERNAL_NOT_CONFIGURED_VISIBLE_NO_DELIVERY_CLAIM",
+        "CONNECTED_L06_CRM_RESULT=PASS_REAL_BROWSER_HTTP_TEST_DB"
+      ],
+      "channel": "REAL_CRM_BROWSER_HTTP",
+      "at": "2026-10-21T06:26:04.586530200Z"
+    },
+    {
+      "stage": "CLOSE",
+      "markers": [
+        "CONNECTED_L06_CRM_CLOSE=PASS_STRUCTURED_CLOSURE_UNKNOWN_RESPONSE_RECONCILED",
+        "CONNECTED_L06_CRM_RESULT=PASS_REAL_BROWSER_HTTP_TEST_DB"
+      ],
+      "channel": "REAL_CRM_BROWSER_HTTP",
+      "at": "2026-10-21T06:26:07.527345800Z"
+    },
+    {
+      "markers": [
+        "CONNECTED_L06_CRM_RELATED=PASS_NEW_LINKED_CASE_OR_CONFIRMED_EXISTING",
+        "CONNECTED_L06_CRM_RESULT=PASS_REAL_BROWSER_HTTP_TEST_DB"
+      ],
+      "channel": "REAL_CRM_BROWSER_HTTP",
+      "at": "2026-10-21T06:28:16.097290Z",
+      "stage": "RELATED"
+    },
+    {
+      "markers": [
+        "CONNECTED_L06_CRM_PUBLISH=PASS_IMPORTANT_SECONDARY_GROUP_SNAPSHOT_NO_DUPLICATE_POST",
+        "CONNECTED_L06_CRM_RESULT=PASS_REAL_BROWSER_HTTP_TEST_DB"
+      ],
+      "channel": "REAL_CRM_BROWSER_HTTP",
+      "at": "2026-10-21T06:28:18.946926900Z",
+      "stage": "PUBLISH"
+    },
+    {
+      "markers": [
+        "L06_CONNECTED_INBOX=PASS_DURABLE_NOTICE_READ_SEPARATE_FROM_ANNOUNCEMENT_ACK",
+        "L06_CONNECTED_RESULT=PASS_PRODUCTION_WIDGET_REPOSITORY_HTTP_STAGE_CONSULT_INBOX"
+      ],
+      "channel": "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+      "at": "2026-10-21T06:28:31.128965700Z",
+      "stage": "CONSULT_INBOX"
+    },
+    {
+      "markers": [
+        "L06_CONNECTED_READ_ACK=PASS_FORMER_GROUP_RECEPTION_RETAINED_NEW_MESSAGES_REJECTED_EXPLICIT_ACK",
+        "L06_CONNECTED_RESULT=PASS_PRODUCTION_WIDGET_REPOSITORY_HTTP_STAGE_READ_ACK"
+      ],
+      "channel": "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+      "at": "2026-10-21T06:29:49.401251500Z",
+      "stage": "READ_ACK"
+    },
+    {
+      "markers": [
+        "CONNECTED_L06_CRM_WITHDRAW=PASS_EXPLICIT_SECURITY_WITHDRAWAL_UNKNOWN_RESPONSE_RECONCILED",
+        "CONNECTED_L06_CRM_RESULT=PASS_REAL_BROWSER_HTTP_TEST_DB"
+      ],
+      "channel": "REAL_CRM_BROWSER_HTTP",
+      "at": "2026-10-21T06:29:52.918691200Z",
+      "stage": "WITHDRAW"
+    },
+    {
+      "at": "2026-10-21T06:31:48.240747700Z",
+      "stage": "WITHDRAWN",
+      "markers": [
+        "L06_CONNECTED_WITHDRAWN=PASS_SERVER_ACCESS_REVOKED_NOTICE_HIDDEN",
+        "L06_CONNECTED_RESULT=PASS_PRODUCTION_WIDGET_REPOSITORY_HTTP_STAGE_WITHDRAWN"
+      ],
+      "channel": "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP"
+    }
+  ],
+  "incidentId": "de202585-c21c-4b77-bb08-a73b24405d0f",
+  "relatedIncidentId": "c9caebbc-3498-4486-8b84-578ab57d700e",
+  "announcementId": "cda088fd-8569-490f-a312-96eb9bea2713",
+  "lostResponses": {
+    "reportLostDelivered": true,
+    "closureLostDelivered": true,
+    "publishLostDelivered": true,
+    "withdrawalLostDelivered": true
+  },
+  "incidentRace": {
+    "startedAt": "2026-10-21T06:31:48.465413100Z",
+    "finishedAt": "2026-10-21T06:31:48.784994Z",
+    "secondStatus": 409,
+    "firstStatus": 200
+  },
+  "announcementRace": {
+    "startedAt": "2026-10-21T06:31:49.386085700Z",
+    "withdrawStatus": 200,
+    "finishedAt": "2026-10-21T06:31:49.492084600Z",
+    "readStatus": 200
+  },
+  "criticalNoticeResult": "PASS_DURABLE_NOT_CONFIGURED_WITHOUT_AUTOMATIC_INTERRUPTION",
+  "returnResult": "PASS_SAME_BINARY_DISABLED_OPERATIONS_OWN_CONSULTATION_PRESERVED",
+  "returnBlockers": [
+    "OPERATIONAL_FEATURE_DISABLED"
+  ],
+  "returnOperationStatus": 409,
+  "returnOperationCode": "RESOURCE_CONFLICT",
+  "retiredConductorTokenStatus": 403,
+  "selectiveCleanup": "PASS_ONE_ACCOUNT_DISABLED_SESSIONS_PERIOD_REVOKED_HISTORY_LEDGER_PRESERVED",
+  "ledgerBefore": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 4
+  },
+  "ledgerAfter": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 5
+  },
+  "TEST_CLEANUP_RELEASED": true,
+  "externalSmtpAttempts": 0,
+  "externalPushAttempts": 0,
+  "sourceResultPath": "docs/evidencia/L-06/conectado-51e69ee6-e4a0-4c3f-9a35-f19de0072422/resultado.json",
+  "sourceResultSha256": "949c6b002c9f91df848d3ba22ef691068769c7f72d6c6fab0ec02b18e752b744",
+  "postflightPath": "docs/evidencia/L-06/conectado-51e69ee6-e4a0-4c3f-9a35-f19de0072422/postflight.json",
+  "postflightSha256": "2fa4bbe7fba5da931d94d4aa1f62255724b40966f3041a47cb4d2b59af927bac"
+}

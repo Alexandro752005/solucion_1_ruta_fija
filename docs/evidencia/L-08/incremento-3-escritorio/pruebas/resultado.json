@@ -1,0 +1,109 @@
+{
+  "observedAt": "2026-10-23T02:13:40.294164+00:00",
+  "suites": {
+    "L08Rest03TargetGuardTest": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "refusesSharedDevelopmentPilotOtherDestinationsAndUrlOptions",
+        "permitsOnlyTheExplicitNewDestination",
+        "refusesImplicitOldOrLocaleAuthorization"
+      ]
+    },
+    "BackupCliGuardTest": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "restoreWithoutExactAuthorizationHasNonzeroExitStatus",
+        "backupWithoutExplicitConfigurationHasNonzeroExitStatus"
+      ]
+    },
+    "AuthenticatedBackupArchiveTest": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "authenticatesFullPostgresStreamWithoutPersistingPlaintext",
+        "equalPlaintextsUseDifferentNonces",
+        "refusesShortOrMissingKey",
+        "truncatedArchiveNeverPasses",
+        "returnsRestoreBytesOnlyAfterFullAuthentication",
+        "corruptedTagNeverPasses",
+        "wrongKeyNeverPasses",
+        "wrongMagicIsRejected",
+        "restoreBytesRefuseUnboundedMemoryOrOversizedDump",
+        "rejectsAuthenticatedNonPostgresContent"
+      ]
+    },
+    "SqlLiteralArrayCastTest": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "handlesQuotedCommaAndEscapedQuoteAndPreservesChangesInRoleValues",
+        "restoresOnlyTheKnownConstraintSpellingWithoutChangingItsPredicate",
+        "doesNotEraseBoundedOrUnknownCastsOrNonliteralExpressions",
+        "restoresTheIndexArrayGroupingAndKeepsEveryOtherToken"
+      ]
+    },
+    "RestoreIntegrityComparisonTest": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "changedCountHashMissingOrAdditionalObjectStillFails",
+        "jdbcLongCountsMatchParsedArchiveIntegersWithoutIgnoringAnyField"
+      ]
+    },
+    "L08PhysicalComplementPolicyTest": {
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "refusesRisingBatteryAndInvalidPercentages",
+        "preservesOriginalProfileAndSeparateCaseReference",
+        "requiresTheFullApprovedInterval",
+        "permitsOnlyRfc1918LiteralAddresses",
+        "requiresActualPointsAndExistingProductFreshness",
+        "respectsFivePercentagePointBoundary",
+        "refusesChargingAndMissingPersonalCondition"
+      ]
+    },
+    "L08ConnectedServicePreparationTest": {
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "preservesExistingFutureStartRegardlessOfPriorRejection",
+        "renewsExpiredOrBoundaryStartOnlyForKnownRejectedPrecommitAttempt",
+        "rejectsEitherIncorrectTerminalKind",
+        "rejectsFewerThanThreeStops",
+        "refusesToRenewAnExpiredOrBoundaryStartWhenOutcomeIsUncertain",
+        "rejectsBlankOriginOrDestinationNames",
+        "rejectsAnotherCatalogEvenIfItsVersionIdentifierMatches",
+        "permitsPreparationWhenNoPriorSubmissionRemainsUnconfirmed",
+        "initializesAnUnpreparedStartThirtyMinutesInTheFuture",
+        "rejectsHistoricalVersionInsteadOfSilentlySelectingTheNewCurrentVersion",
+        "rejectsAbsentOrDuplicatedRequestedVersion",
+        "rejectsAnInactiveCatalog",
+        "refusesAnotherSubmissionWhenThePreviousOutcomeIsUnconfirmed",
+        "buildsPayloadFromExactCurrentVersionRatherThanFirstVersionOrConstants"
+      ]
+    }
+  },
+  "backupDirectedTests": 21,
+  "physicalHarnessDirectedTests": 21,
+  "databaseFixtureTests": 0,
+  "countsAreSeparateExecutionsNotUniqueProductCoverage": true,
+  "humanOutcomeAccreditedByUnitTests": false,
+  "credentialsOrSystemPropertiesArchived": false
+}

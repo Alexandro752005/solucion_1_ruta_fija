@@ -1,0 +1,50 @@
+{
+    "observedAt":  "2026-10-23T04:44:47.7367351+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "action":  "down",
+    "label":  "",
+    "automatedUiInstrumentation":  true,
+    "humanAccessibilityConfirmation":  false,
+    "nodes":  [
+                  {
+                      "text":  "",
+                      "description":  "Volver",
+                      "bounds":  "[12,656][156,800]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Detalle de asignación",
+                      "bounds":  "[216,673][1032,784]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Tiempos de mi participación\nLas correcciones conservan las horas originales y no cambian los puntos GPS. Solo ADMIN puede registrar la corrección.\nTramo 1\nOriginal: 22/10/2026 21:34 → Sin cierre\nVigente para revisión: 22/10/2026 21:34 → Sin cierre",
+                      "bounds":  "[60,812][1020,1608]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Consultar tiempos y solicitudes",
+                      "bounds":  "[120,812][960,954]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Solicitud de mis puntos GPS\nLa vista ordinaria muestra solo el resumen del servicio. Los puntos requieren revisión ADMIN y verificación de su cuenta; no se conservan más de siete días y solicitar acceso no amplía ese plazo.",
+                      "bounds":  "[60,1608][1020,2261]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  }
+              ]
+}

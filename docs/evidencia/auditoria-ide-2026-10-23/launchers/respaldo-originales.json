@@ -1,0 +1,121 @@
+{
+  "recordedAtUtc": "2026-10-23T15:56:25.638391+00:00",
+  "purpose": "Exact pre-change live launcher/manual backup; historical manifests/evidence/actas are NOT modified",
+  "authorization": "Root explicitly authorizes safe evolution of live files after exact backup and new supersession record",
+  "files": [
+    {
+      "source": "iniciar_ruta_fija.bat",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/iniciar_ruta_fija.bat",
+      "sha256": "bd0eefe92d133a7e72d677bb2b52c91ae6fa4a8530a317e254b4f7085d0cdaed",
+      "bytes": 2181,
+      "exact": true
+    },
+    {
+      "source": "finalizar_ruta_fija.bat",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/finalizar_ruta_fija.bat",
+      "sha256": "a73f9f95c5867516470d20e5b8880cf80e4e434810af4ab0eb1b4928a41329c5",
+      "bytes": 1538,
+      "exact": true
+    },
+    {
+      "source": "verificar_ruta_fija.bat",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/verificar_ruta_fija.bat",
+      "sha256": "b36190199c9deb2cf0e5da8a04aae4e3d8f3701424afc5e1deea46971a4161f6",
+      "bytes": 156,
+      "exact": true
+    },
+    {
+      "source": "iniciar_demo_temporal.bat",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/iniciar_demo_temporal.bat",
+      "sha256": "00029cc54ef86ad96dc2694fa68b4f5c6663650684b56b7fdf7d985226363162",
+      "bytes": 817,
+      "exact": true
+    },
+    {
+      "source": "finalizar_demo_temporal.bat",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/finalizar_demo_temporal.bat",
+      "sha256": "6ddcaff2fe891ae123a74c26b2362f998511530eac42432013ffa6134ff786d8",
+      "bytes": 666,
+      "exact": true
+    },
+    {
+      "source": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Invoke-RutaFijaNativeRuntime.ps1",
+      "sha256": "d0a2dec4272b000bcc2e5997258a28938d58f02ad2b9f304311bf112bb8a7b60",
+      "bytes": 24057,
+      "exact": true
+    },
+    {
+      "source": "scripts/Invoke-RutaFijaNativeTest.ps1",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Invoke-RutaFijaNativeTest.ps1",
+      "sha256": "ebc1a5c6ba70c808b4f262b4886424ea3c99452a747891010d55dd35e745c954",
+      "bytes": 5648,
+      "exact": true
+    },
+    {
+      "source": "scripts/Invoke-RutaFijaQuickDemo.ps1",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Invoke-RutaFijaQuickDemo.ps1",
+      "sha256": "7b4eee4ce175de62aaae856fd03854cdbbd32f65eacf803a0f2e49337a2489c9",
+      "bytes": 14549,
+      "exact": true
+    },
+    {
+      "source": "scripts/Test-RutaFijaNativePreflight.ps1",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Test-RutaFijaNativePreflight.ps1",
+      "sha256": "2a7bc9e041b4b366fa2a08d1cdcbeadf7f301bf95c98302db0caff2d404b3343",
+      "bytes": 5946,
+      "exact": true
+    },
+    {
+      "source": "scripts/Set-RutaFijaPostgresqlService.ps1",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Set-RutaFijaPostgresqlService.ps1",
+      "sha256": "e6fb23a7902deef097c1740269cbc33973d529d8f46385221a9bac3e956e297f",
+      "bytes": 3470,
+      "exact": true
+    },
+    {
+      "source": "scripts/Import-RutaFijaNativeEnvironment.ps1",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Import-RutaFijaNativeEnvironment.ps1",
+      "sha256": "28043b663143f7c3b9ac144f2998e463d60fb2598da0e8773bea89b966b435a1",
+      "bytes": 6010,
+      "exact": true
+    },
+    {
+      "source": "scripts/Install-RutaFijaCloudflared.ps1",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Install-RutaFijaCloudflared.ps1",
+      "sha256": "24aad5b2cc7ce581820728bbd00275f4c44f5ec8d7f3e632b0648e611f128900",
+      "bytes": 3952,
+      "exact": true
+    },
+    {
+      "source": "scripts/Test-RutaFijaF52QuickDemo.ps1",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Test-RutaFijaF52QuickDemo.ps1",
+      "sha256": "6e1725851b6e0d1f5c66155cd6f80715ff5cec22f469eda6b00baa53d44250b2",
+      "bytes": 5249,
+      "exact": true
+    },
+    {
+      "source": "docs/Uso del Sistema.md",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/docs/Uso del Sistema.md",
+      "sha256": "13667a4d46f851dfd1f6f3db3840a2e054e508a5024794e85867a717dd88484a",
+      "bytes": 17166,
+      "exact": true
+    },
+    {
+      "source": "backend/README.md",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/backend/README.md",
+      "sha256": "b93518bdd67ebfb42488f3e9c61accbe168367772846a1bf1d2fb1d107bb090b",
+      "bytes": 4562,
+      "exact": true
+    },
+    {
+      "source": "docs/ejecucion-nativa-f1-1b.md",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/docs/ejecucion-nativa-f1-1b.md",
+      "sha256": "5ffee7d8c97adaa3de2cd4f7e1c2b4175d05cc2db4719481dae3642ee3d9c483",
+      "bytes": 2682,
+      "exact": true
+    }
+  ],
+  "privateSecretFilesCopied": false,
+  "historicalEvidenceModified": false
+}

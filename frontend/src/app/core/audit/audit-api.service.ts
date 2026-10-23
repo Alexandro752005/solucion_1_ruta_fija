@@ -20,6 +20,14 @@ export class AuditApiService {
     return this.http.get<AuditEvent>(this.url(`/audit-events/${id}`));
   }
 
+  platformList(query: AuditEventQuery = {}): Observable<AuditEventPage> {
+    return this.http.get<AuditEventPage>(this.url('/platform/audit-events'), { params: this.params(query) });
+  }
+
+  platformGet(id: string): Observable<AuditEvent> {
+    return this.http.get<AuditEvent>(this.url(`/platform/audit-events/${encodeURIComponent(id)}`));
+  }
+
   private url(path: string): string {
     return this.runtimeConfig.apiUrl(path);
   }

@@ -23,6 +23,8 @@ import pe.rutafija.organization.infrastructure.OrganizationRepository;
 import pe.rutafija.support.NativePostgresIntegrationTest;
 
 import java.util.UUID;
+import java.util.Base64;
+import java.time.Instant;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
@@ -74,13 +76,15 @@ class AuthFlowIT extends NativePostgresIntegrationTest {
                     "Integration Test",
                     "America/Lima"
             ));
-            return userRepository.save(AppUser.organizationUser(
+            AppUser user = AppUser.organizationUser(
                     organization,
                     EMAIL,
                     passwordEncoder.encode(PASSWORD),
                     "Integration Admin",
                     UserRole.ADMIN
-            ));
+            );
+            user.verifyEmail(Instant.now());
+            return userRepository.save(user);
         });
     }
 
@@ -91,6 +95,9 @@ class AuthFlowIT extends NativePostgresIntegrationTest {
 
         assertThat(accessToken).isNotBlank();
         assertThat(login.getResponse().getContentAsString()).doesNotContain("refreshToken");
+        JsonNode claims = objectMapper.readTree(Base64.getUrlDecoder().decode(accessToken.split("\\.")[1]));
+        assertThat(claims.has("email")).isFalse();
+        assertThat(claims.has("fullName")).isFalse();
 
         mockMvc.perform(get("/api/v1/auth/me")
                         .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
@@ -99,6 +106,8 @@ class AuthFlowIT extends NativePostgresIntegrationTest {
                 .andExpect(header().string("X-Correlation-ID", "integration-me"))
                 .andExpect(jsonPath("$.id").value(testUser.getId().toString()))
                 .andExpect(jsonPath("$.organizationId").value(testUser.getOrganizationId().toString()))
+                .andExpect(jsonPath("$.email").value(""))
+                .andExpect(jsonPath("$.fullName").value("CUENTA-" + testUser.getId()))
                 .andExpect(jsonPath("$.role").value("ADMIN"));
     }
 
@@ -117,6 +126,29 @@ class AuthFlowIT extends NativePostgresIntegrationTest {
                 .andExpect(jsonPath("$.correlationId").isNotEmpty());
 
         assertThat(countAuditEvents("LOGIN_FAILED")).isEqualTo(auditEventsBefore + 1);
+    }
+
+    @Test
+    void tenantAdminCannotProvisionAnotherAdminThroughConductorUserManagement() throws Exception {
+        String proposedAdminEmail = "blocked.admin." + UUID.randomUUID() + "@rutafija.test";
+
+        mockMvc.perform(post("/api/v1/users")
+                        .with(jwt().jwt(jwt -> jwt
+                                .subject(testUser.getId().toString())
+                                .claim("organizationId", testUser.getOrganizationId().toString())
+                                .claim("email", EMAIL)
+                                .claim("role", "ADMIN")))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(java.util.Map.of(
+                                "email", proposedAdminEmail,
+                                "password", "Temporary-Blocked-Password-2026",
+                                "fullName", "Blocked Admin",
+                                "role", "ADMIN"
+                        ))))
+                .andExpect(status().isForbidden())
+                .andExpect(jsonPath("$.code").value("FORBIDDEN_ROLE"));
+
+        assertThat(userRepository.existsByEmailIgnoreCase(proposedAdminEmail)).isFalse();
     }
 
     @Test

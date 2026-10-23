@@ -1,0 +1,369 @@
+{
+    "builtAt":  "2026-10-23T04:54:55.5222937+00:00",
+    "artifact":  "Ruta-Fija-Conductor.apk",
+    "package":  "pe.rutafija.conductor",
+    "label":  "Ruta Fija Conductor",
+    "versionCode":  3,
+    "buildType":  "debug",
+    "signer":  "EXISTING_ANDROID_DEBUG_CERTIFICATE",
+    "packageVerifiedBeforeInstallation":  true,
+    "sha256":  "1271ca0e2cddda6dee8f7de9e3b20c87943d211bdd46a4017630502bccdba7ae",
+    "apiBaseUrl":  "http://192.168.18.4:4311/api/v1",
+    "apiScope":  "LOCAL_PRIVATE_LAB_REQUIRES_PC_SERVER",
+    "productionRelease":  false,
+    "exactPreviousPrincipalBinaryRestitution":  false,
+    "singleCurrentPrincipalAppAuthorized":  true,
+    "installedByBuilder":  false,
+    "pilotEnabled":  false,
+    "buildLog":  "backend/target/l08-single-app-build-83e3c8d6-5db9-42a9-ad1b-1db841cdd79a.log",
+    "sourceHashes":  [
+                         {
+                             "path":  "mobile/lib/app/ruta_fija_app.dart",
+                             "sha256":  "cc39dd2dfe1f52ea47c849f3f43fc4e07146c583eca6da84c6c7475a1a1d8545"
+                         },
+                         {
+                             "path":  "mobile/lib/app/ruta_fija_dependencies.dart",
+                             "sha256":  "dc747fbfe21e9ce604b28c250d640b50d9c36715d3c83b984ac23aad19bd8371"
+                         },
+                         {
+                             "path":  "mobile/lib/app/ruta_fija_environment.dart",
+                             "sha256":  "4dd51f2fd4064061a8695fea1f3bbf3a5ae24133a212d06a2373c4267763115a"
+                         },
+                         {
+                             "path":  "mobile/lib/app/ruta_fija_router.dart",
+                             "sha256":  "3f1e7f1b3d81fe19cc0473bcf3a8e7a34fc57c49e9fd17318a3677cd99d0e415"
+                         },
+                         {
+                             "path":  "mobile/lib/app/ruta_fija_theme.dart",
+                             "sha256":  "817f70fada0a54cb0c64e59a395748c37350172306023c53a8b1d3d667c67cdc"
+                         },
+                         {
+                             "path":  "mobile/lib/core/navigation/conductor_destination.dart",
+                             "sha256":  "04f00654492ea85e890beb65090004efe322e926ddb24ae4343beabf1928ea1d"
+                         },
+                         {
+                             "path":  "mobile/lib/core/network/correlation_id.dart",
+                             "sha256":  "d2cc6b7eb5a68801200eb06b6140e4e484f99d337814bae6e61bc4ceac55ec72"
+                         },
+                         {
+                             "path":  "mobile/lib/core/network/mobile_access_token_provider.dart",
+                             "sha256":  "9f40ddb9bdbef6fd1c3a45f857caa1f4c469040f77f65ee02f0d42e35bda5416"
+                         },
+                         {
+                             "path":  "mobile/lib/core/network/mobile_api_client.dart",
+                             "sha256":  "6e94fcf60946b35049b97bed448cd344be17e47f20dacb670d6d819b8506b341"
+                         },
+                         {
+                             "path":  "mobile/lib/core/network/mobile_api_exception.dart",
+                             "sha256":  "0c2f15da4375e013f1401b74d94b3d16a62887049ff5d10daa5d9961fe31ec8f"
+                         },
+                         {
+                             "path":  "mobile/lib/core/offline/mobile_offline.dart",
+                             "sha256":  "2cb92436690a3aabb2cbc77c04d13fe681c771e84b597073a4da2f91ffea4913"
+                         },
+                         {
+                             "path":  "mobile/lib/core/offline/mobile_offline_event.dart",
+                             "sha256":  "b0766dd1585b89f7e783688d8be7d899265edcf5bbee8883dd1cde49b0ece043"
+                         },
+                         {
+                             "path":  "mobile/lib/core/offline/mobile_offline_outbox.dart",
+                             "sha256":  "c3da5cd877088153330459524f45e62a709a591a33da0048fc5dc7fce2fe5500"
+                         },
+                         {
+                             "path":  "mobile/lib/core/offline/mobile_offline_queue_store.dart",
+                             "sha256":  "fde766d619f20b6db969a97b5fe3b5b4e467327dccb62954d6635128aa43f004"
+                         },
+                         {
+                             "path":  "mobile/lib/core/offline/mobile_offline_sync_controller.dart",
+                             "sha256":  "c516a15195bd4c352891efe76d69201dc61f39d1aef0c7e3023c95c37c611fec"
+                         },
+                         {
+                             "path":  "mobile/lib/core/presentation/mobile_date_time.dart",
+                             "sha256":  "ec06046c1055d7f1c766fc1563a165b38f6a983bf043f9f696b4651ca295b1bb"
+                         },
+                         {
+                             "path":  "mobile/lib/core/presentation/mobile_error_message.dart",
+                             "sha256":  "bb7f245adef44f06f269aeacb7742937a87dc864550d089c2187271330e4805e"
+                         },
+                         {
+                             "path":  "mobile/lib/core/session/mobile_secure_token_store.dart",
+                             "sha256":  "a79d2f24710570ba9ccd53afe5271bdfb72b8ac64405f0699e4eb03319013f92"
+                         },
+                         {
+                             "path":  "mobile/lib/core/session/mobile_session_controller.dart",
+                             "sha256":  "c686fabf275661781e22b136e1bd3cbf3f8ae5fb6df975ddb8f0967dc4d85268"
+                         },
+                         {
+                             "path":  "mobile/lib/features/announcements/data/mobile_announcement_repository.dart",
+                             "sha256":  "496d7ec34f37315036ac2fb8448e2f54a2149dcbfdff7b885d5e69ed2da08d70"
+                         },
+                         {
+                             "path":  "mobile/lib/features/announcements/data/mobile_notice_repository.dart",
+                             "sha256":  "073102328b517f5cb27dd2a85aaffce5611d109f0653d85335b77ff842f8cbee"
+                         },
+                         {
+                             "path":  "mobile/lib/features/announcements/domain/mobile_announcement_models.dart",
+                             "sha256":  "211719edec4c0c1d68ac7bbe72d143df4d6ecc4e679f8f6ea33c213fc0129756"
+                         },
+                         {
+                             "path":  "mobile/lib/features/announcements/presentation/announcement_detail_page.dart",
+                             "sha256":  "94b267b0f1f658c9a52e3a68ee7586136bfd20a891d0c6665181879a5f125816"
+                         },
+                         {
+                             "path":  "mobile/lib/features/announcements/presentation/announcements_page.dart",
+                             "sha256":  "da18e607a737d92494a06e00047888b9659528aefb5c148e50cef76a7e164995"
+                         },
+                         {
+                             "path":  "mobile/lib/features/announcements/presentation/mobile_announcement_presentation.dart",
+                             "sha256":  "214a2e3e71d3f54193c92c30762c072b83f8165bf13c4d900237391dea11ab65"
+                         },
+                         {
+                             "path":  "mobile/lib/features/announcements/presentation/notices_page.dart",
+                             "sha256":  "098d534121ccf070b0698235b0908a2fbf3da3c6ce3d529bf8fcc77a5e769b41"
+                         },
+                         {
+                             "path":  "mobile/lib/features/assignments/data/mobile_assignment_command_store.dart",
+                             "sha256":  "ee99ea3b5eea4dc3970fcf37766234f5ffc41ebf29f8d7b845909180a02ad611"
+                         },
+                         {
+                             "path":  "mobile/lib/features/assignments/data/mobile_assignment_repository.dart",
+                             "sha256":  "6481f93895b6aad9cea75387d9a77bdec08b0b5ce86a0f5f4ffec3a30376abb1"
+                         },
+                         {
+                             "path":  "mobile/lib/features/assignments/data/mobile_service_attention_repository.dart",
+                             "sha256":  "fee592bdce3af1e6a8957433ad7426b271991e88b6849778626f46da4be142de"
+                         },
+                         {
+                             "path":  "mobile/lib/features/assignments/data/mobile_service_handover_repository.dart",
+                             "sha256":  "bc2934419aeb2b08ff948677cd5999c5a167fb9ca1c5c84034c061a891b5852d"
+                         },
+                         {
+                             "path":  "mobile/lib/features/assignments/data/mobile_service_time_repository.dart",
+                             "sha256":  "a6c2db4205394c5becf6c7a681627f0eebd3ce3fb6547655e6ec1a5865023f79"
+                         },
+                         {
+                             "path":  "mobile/lib/features/assignments/domain/mobile_assignment_models.dart",
+                             "sha256":  "e3749e0c28269b3561c12058401c723644ba502d1f288e26abf264194773c7cb"
+                         },
+                         {
+                             "path":  "mobile/lib/features/assignments/domain/mobile_route_models.dart",
+                             "sha256":  "8690e40f6694f1c4d38d64e4bfa456252f6fa9b204703353005d1db318442afe"
+                         },
+                         {
+                             "path":  "mobile/lib/features/assignments/presentation/assignment_detail_page.dart",
+                             "sha256":  "980df4538abd13d7e55debecb5b1d423703cdc6193d9c147870d77bad871ed9e"
+                         },
+                         {
+                             "path":  "mobile/lib/features/assignments/presentation/assignments_page.dart",
+                             "sha256":  "d230d8c35045f24e7c85786d9ebb57ac4b8d31e68ac8d3b71ecdb99c7f8117f8"
+                         },
+                         {
+                             "path":  "mobile/lib/features/assignments/presentation/mobile_assignment_presentation.dart",
+                             "sha256":  "272dcd67487a7220e82c57b812c1337225c47e99642d92abd9a7a3729db92e7e"
+                         },
+                         {
+                             "path":  "mobile/lib/features/assignments/presentation/service_attention_panel.dart",
+                             "sha256":  "1bc5cc8473fed7d312308d54464ac86e21b0571c9a69d2ab622f54d8a384f268"
+                         },
+                         {
+                             "path":  "mobile/lib/features/assignments/presentation/service_handover_panel.dart",
+                             "sha256":  "1e41eccd9d966f6988762bbf5dafd47b28b38298c4abd439184234d47cf07db6"
+                         },
+                         {
+                             "path":  "mobile/lib/features/assignments/presentation/service_time_panel.dart",
+                             "sha256":  "af288a0bcd35fa41659299be32d714da97540ae9e66aba6711eb02370913b878"
+                         },
+                         {
+                             "path":  "mobile/lib/features/auth/data/mobile_applicant_access_repository.dart",
+                             "sha256":  "1205d26d0b95c8fd707ca709b3497c324c6f0e60ae6c4ecfbb07d2934715f24b"
+                         },
+                         {
+                             "path":  "mobile/lib/features/auth/data/mobile_applicant_documentary_repository.dart",
+                             "sha256":  "239267278fe85a9306367dfd9da34aa465578716184957236f5676fb8c09d536"
+                         },
+                         {
+                             "path":  "mobile/lib/features/auth/data/mobile_auth_repository.dart",
+                             "sha256":  "0e695239665c97f504347b118b5945e8d0d3ff45ec492c4f0c451c58bd08ceaf"
+                         },
+                         {
+                             "path":  "mobile/lib/features/auth/data/mobile_conductor_onboarding_repository.dart",
+                             "sha256":  "fa804f4f22b6be4ccc012d626ed22773d2775f98aa7bed8a20ff2b1c05fb99fe"
+                         },
+                         {
+                             "path":  "mobile/lib/features/auth/data/mobile_conductor_recovery_repository.dart",
+                             "sha256":  "627ab8b5a2da90fbb8bc28fe40b4c570537b210dcf685ff77f7ba5668bc04173"
+                         },
+                         {
+                             "path":  "mobile/lib/features/auth/domain/mobile_applicant_access_models.dart",
+                             "sha256":  "8a649ab919c58dbe721a32f48d245e52e4792d6f8178cde1bfbe857824ad97a8"
+                         },
+                         {
+                             "path":  "mobile/lib/features/auth/domain/mobile_applicant_documentary_models.dart",
+                             "sha256":  "8e1e4be3441c5f84036df8f74b481a438b9bc83a0575ec38681bff53901f10ac"
+                         },
+                         {
+                             "path":  "mobile/lib/features/auth/domain/mobile_auth_models.dart",
+                             "sha256":  "9dc2afcfd7c3576402218c61a29855bd976554b55330e28d652991fb88902b6b"
+                         },
+                         {
+                             "path":  "mobile/lib/features/auth/domain/mobile_conductor_onboarding_models.dart",
+                             "sha256":  "5c2900a9bb8f8548ef3683177ff10d30eeba0fff33588a751a79f565f177edd8"
+                         },
+                         {
+                             "path":  "mobile/lib/features/auth/presentation/mobile_applicant_dossier.dart",
+                             "sha256":  "596c2b28c461530582e393f5a83d754dba7e2b5b8e7d95927135b806f85fcbef"
+                         },
+                         {
+                             "path":  "mobile/lib/features/auth/presentation/mobile_applicant_requests_page.dart",
+                             "sha256":  "ba134a0ee8a86a14d0f23c89f765895cded085517af86c0ab66a6310b7dc9dfe"
+                         },
+                         {
+                             "path":  "mobile/lib/features/auth/presentation/mobile_conductor_onboarding_page.dart",
+                             "sha256":  "29276390c725cace8d8d0befebd9c2955271cd10abb130bbf9c0e1f2a3f9f65c"
+                         },
+                         {
+                             "path":  "mobile/lib/features/auth/presentation/mobile_login_page.dart",
+                             "sha256":  "98ce0af10584c33f2871f61225691e8ec43cc0df7b21a9804d5c6a894e7a05c0"
+                         },
+                         {
+                             "path":  "mobile/lib/features/bootstrap/presentation/conductor_navigation_shell.dart",
+                             "sha256":  "d20a1af66de02b7a5ab7544a7691cf4a672f0f0e039e47a56e4afa22ea6f22d3"
+                         },
+                         {
+                             "path":  "mobile/lib/features/incidents/data/mobile_incident_repository.dart",
+                             "sha256":  "8fc0a21969eb8bc73428815ea708b6f6b825ba4a34ba3030eda02592641dab44"
+                         },
+                         {
+                             "path":  "mobile/lib/features/incidents/domain/mobile_incident_models.dart",
+                             "sha256":  "057cc5afa8bf7594096fb9f7c820de4371bc41cbe17f90ab1d643f8f94a4d174"
+                         },
+                         {
+                             "path":  "mobile/lib/features/incidents/presentation/incident_detail_page.dart",
+                             "sha256":  "5e54ebc167314232e5e02083607a809cb1ea988e5c1a637b6a1e16a9e78d070e"
+                         },
+                         {
+                             "path":  "mobile/lib/features/incidents/presentation/incident_history_panel.dart",
+                             "sha256":  "0a21cf8ac5285e70f820d3c658019df220475f0a266d77bdf700eb6da7167daa"
+                         },
+                         {
+                             "path":  "mobile/lib/features/incidents/presentation/incident_report_page.dart",
+                             "sha256":  "debbc25b19a0aa3f75b450ed4eb094e1136bf57b689ff92c1f4f77fe39616c65"
+                         },
+                         {
+                             "path":  "mobile/lib/features/incidents/presentation/incidents_page.dart",
+                             "sha256":  "ad7bcce41308ccce2af384e692562b2ede0069bb095f50c50f6fc5ba2ab4f795"
+                         },
+                         {
+                             "path":  "mobile/lib/features/incidents/presentation/mobile_incident_presentation.dart",
+                             "sha256":  "34e0b714fc37427ca425314fecd27315c0c2f745ab048379c1bc0c454de14b20"
+                         },
+                         {
+                             "path":  "mobile/lib/features/location/data/geolocator_device_location_gateway.dart",
+                             "sha256":  "fdd0334c4e9af97c2b848aaeeec402b29b4de97c8622e1ac798f3ef94729172d"
+                         },
+                         {
+                             "path":  "mobile/lib/features/location/data/mobile_service_gps_repository.dart",
+                             "sha256":  "64d6b6136e5656ea403623bd347077260c7b8edcf68160bfca7a5b55d64c48dc"
+                         },
+                         {
+                             "path":  "mobile/lib/features/location/domain/mobile_execution_location_gate.dart",
+                             "sha256":  "a80510781ec01cb1c377202205ce1cfff5f4a57a1e6a37f9c2b7062c3a274066"
+                         },
+                         {
+                             "path":  "mobile/lib/features/location/domain/mobile_foreground_location.dart",
+                             "sha256":  "b4144749e4da936a4e6bd959aba59037eb1a6ac3eace65b3a83b0e548359f121"
+                         },
+                         {
+                             "path":  "mobile/lib/features/location/domain/mobile_service_location_controller.dart",
+                             "sha256":  "47986561651920cd4ff6eea8b4f49d8b869db9f18f5205c902890b2331ba168f"
+                         },
+                         {
+                             "path":  "mobile/lib/features/location/presentation/foreground_location_page.dart",
+                             "sha256":  "6aba1fcafd955056ba3612d888e086e31e2c036838b765682862a38ed1c7dd08"
+                         },
+                         {
+                             "path":  "mobile/lib/features/location/presentation/service_gps_access_panel.dart",
+                             "sha256":  "b69fa332aae1ce62eddab441b71328602363180a0ea838fd70f46b3c89ab931d"
+                         },
+                         {
+                             "path":  "mobile/lib/features/location/presentation/service_location_status.dart",
+                             "sha256":  "0a369274fbc23f039c11932d38f6b81d3e2463052236411811683ea1b44bd13c"
+                         },
+                         {
+                             "path":  "mobile/lib/features/preferences/data/mobile_preferences_repository.dart",
+                             "sha256":  "19a05eb69e2d16b0e1146355aa001147b3b70b45ffe659a76549aab1fbb68690"
+                         },
+                         {
+                             "path":  "mobile/lib/features/preferences/domain/mobile_preferences.dart",
+                             "sha256":  "f8394aeeabe78e0f0680788351b51f0c022d0f545ff390573579d542942fb4f4"
+                         },
+                         {
+                             "path":  "mobile/lib/features/preferences/presentation/mobile_preferences_panel.dart",
+                             "sha256":  "9831ea0f3a70fa98301764f2680429c76b3b79b32f7c74f58862260b5610f7a7"
+                         },
+                         {
+                             "path":  "mobile/lib/features/profile/data/mobile_driver_repository.dart",
+                             "sha256":  "cadf8f336f9638a800b91dce66064dbdd6ad74ca1ae2166ed4e3149e5d1df752"
+                         },
+                         {
+                             "path":  "mobile/lib/features/profile/domain/mobile_driver_models.dart",
+                             "sha256":  "a7f654b3921a77e029497783aa42f0c70e26f241ca83baaf04b99d0fb615edc8"
+                         },
+                         {
+                             "path":  "mobile/lib/features/profile/presentation/availability_page.dart",
+                             "sha256":  "cbedc248120d13411ada61307a48a15c69766de99aef853621c8341a8cdd4d75"
+                         },
+                         {
+                             "path":  "mobile/lib/features/profile/presentation/conductor_home_page.dart",
+                             "sha256":  "5b082782f201d9e93aae0bbdbc50dc076db791222eb8d5883e20aab9dc838821"
+                         },
+                         {
+                             "path":  "mobile/lib/features/profile/presentation/driver_profile_details.dart",
+                             "sha256":  "871e6da257744c775047986489044dff4235f0f132d40c83e7940bc779a3f8f0"
+                         },
+                         {
+                             "path":  "mobile/lib/features/profile/presentation/profile_page.dart",
+                             "sha256":  "8a66cfda10bbadccbf90ddeefd0e2ee3f0186404f025e98479cb12bb8e9d1a21"
+                         },
+                         {
+                             "path":  "mobile/lib/features/qualification/data/mobile_qualification_repository.dart",
+                             "sha256":  "0fc5800355b7f3cfc8822a06040dafb057670ceca5e22b41aada2c321f105593"
+                         },
+                         {
+                             "path":  "mobile/lib/features/qualification/domain/mobile_qualification.dart",
+                             "sha256":  "79327601eb8b5b10f609688f78afc7596c4c864df71f2c62044712d613097dac"
+                         },
+                         {
+                             "path":  "mobile/lib/features/qualification/presentation/mobile_qualification_gate.dart",
+                             "sha256":  "f81e1c34ab3bb94e544dc67419d10eeee1360083c140b3ccca45c94ad092163a"
+                         },
+                         {
+                             "path":  "mobile/lib/features/qualification/presentation/mobile_qualification_page.dart",
+                             "sha256":  "bcad8c34335c0cf770553b32856e8e28155c7786119c90a5071c59d0816e68bb"
+                         },
+                         {
+                             "path":  "mobile/lib/features/reports/data/android_report_file_gateway.dart",
+                             "sha256":  "c7c074029df131b05e927e54b5a1e79ff36e18d48ee818dde91956d9d51f627e"
+                         },
+                         {
+                             "path":  "mobile/lib/features/reports/data/mobile_service_report_repository.dart",
+                             "sha256":  "90331481d823d109e803c203f1efb6abbecacc18cf4b29ff16452cd8ab0d563f"
+                         },
+                         {
+                             "path":  "mobile/lib/features/reports/domain/mobile_service_report.dart",
+                             "sha256":  "1542e8c829b465b9e09a0e129ee70e29545427eab19bbd040228d0d62f0415ec"
+                         },
+                         {
+                             "path":  "mobile/lib/features/reports/presentation/mobile_reports_page.dart",
+                             "sha256":  "83574a2c836c3e66566d476956b4192213a67b76d559b61efd5140237e43c132"
+                         },
+                         {
+                             "path":  "mobile/lib/features/sync/presentation/pending_sync_page.dart",
+                             "sha256":  "5082befcd26a5cb040c3d35de0c84bf88b0cc66a66eeeeeefe3330dff2ab21b8"
+                         },
+                         {
+                             "path":  "mobile/lib/main.dart",
+                             "sha256":  "f3813ec6d51631a2056433474d3bfe66f7daba4892858cacc35bd709e293a341"
+                         }
+                     ]
+}

@@ -1,0 +1,68 @@
+{
+  "attempts": [
+    {
+      "phase": "FLUTTER_INTERRUPT",
+      "at": "2026-10-20T13:27:26.611817900Z"
+    },
+    {
+      "phase": "NORMAL_QUALIFICATION_HTTP_P0",
+      "at": "2026-10-20T13:29:28.455715900Z"
+    },
+    {
+      "phase": "BUSINESS_RACE_PREPARE",
+      "at": "2026-10-20T13:31:09.548724400Z"
+    },
+    {
+      "phase": "RETURN_COMPATIBLE_DISABLED_OPERATIONS",
+      "at": "2026-10-20T13:34:15.963453600Z"
+    }
+  ],
+  "sources": [
+    {
+      "path": "backend/target/l05-connected-attempt-1.log",
+      "sha256": "eec039ce6e035a57011ae61dc7e25466d9cbe0ab207a5d187a5e8b443ad27d12",
+      "published": false,
+      "reason": "Raw server/transaction diagnostics excluded; only controlled markers and sanitized summaries archived"
+    },
+    {
+      "path": "backend/target/l05-connected-attempt-2.log",
+      "sha256": "6ab0acb78e5be28a5ef73a7db34d4b7a1c9e027e58c4d1544bfdc75a8a40d66c",
+      "published": false,
+      "reason": "Raw server/transaction diagnostics excluded; only controlled markers and sanitized summaries archived"
+    },
+    {
+      "path": "backend/target/l05-connected-attempt-3.log",
+      "sha256": "76db173f8d786e3903de3a23c9e8bbf8c80b9a4db1243f3c2fe856452f9836e9",
+      "published": false,
+      "reason": "Raw server/transaction diagnostics excluded; only controlled markers and sanitized summaries archived"
+    },
+    {
+      "path": "backend/target/l05-connected-attempt-4.log",
+      "sha256": "b641b463a18a07915610d49289f4f83a8feae1f1c5d55bbeff04cdab18d65981",
+      "published": false,
+      "reason": "Raw server/transaction diagnostics excluded; only controlled markers and sanitized summaries archived"
+    },
+    {
+      "path": "backend/target/l05-connected-attempt-5.log",
+      "sha256": "8cb2fa01306d7f965a85c2934afd50cd6978c740f650189b4a4b889aa1081db1",
+      "published": false,
+      "reason": "Raw server/transaction diagnostics excluded; only controlled markers and sanitized summaries archived"
+    },
+    {
+      "path": "backend/target/l05-final-scope-regression.log",
+      "sha256": "71800eb41b8260c3e16026a7f7454efe1ee61811a13687c404696a1cba8d9037",
+      "published": false,
+      "reason": "Raw server/transaction diagnostics excluded; only controlled markers and sanitized summaries archived"
+    }
+  ],
+  "facts": [
+    "Initial Flutter interruption returned HTTP200 and persisted; the client failed afterward. Its exact client exception was not retained. Preserved the case and resumed read-only observation without another interruption POST.",
+    "Resume initially refused qualification blockers caused by the same interruption. Corrected test runner to observe without reactivation or availability redeclaration.",
+    "A restricted INCORPORATION session could consult but its acceptance rejection was overridden by transaction rollback, yielding HTTP500. MobileDriverContextService now retains its validation status; connected HTTP403 DRIVER_INACTIVE left the offer unchanged, followed by normal login and successful own acceptance.",
+    "Return check initially reused a previous creation key and rejected for idempotency instead of the disabled feature. Continued the same started service, removed that harness interference and proved the specific OPERATIONAL_FEATURE_DISABLED blocker and safe own completion."
+  ],
+  "accountsCreated": 2,
+  "quotaReset": false,
+  "globalCleanup": false,
+  "allFailedObservationsRetained": true
+}

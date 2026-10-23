@@ -4,8 +4,8 @@ import 'package:geolocator/geolocator.dart';
 
 import '../domain/mobile_foreground_location.dart';
 
-/// Android adapter. It obtains one foreground point only after the UI asks for
-/// it; no stream, service, notification, or background execution is created.
+/// One foreground fix per request, preserving the sensor's own capture timestamp.
+/// The service controller schedules requests; no background location service or stream is created.
 final class GeolocatorDeviceLocationGateway
     implements MobileDeviceLocationGateway {
   static const _captureTimeout = Duration(seconds: 15);
@@ -34,21 +34,18 @@ final class GeolocatorDeviceLocationGateway
           timeLimit: _captureTimeout,
         ),
       );
-      return MobileCurrentLocation(
-        latitude: position.latitude,
-        longitude: position.longitude,
-        accuracyMeters: position.accuracy,
-        // The server accepts only a recent capture. Mark it at the completion
-        // of this one-shot acquisition rather than retaining a prior point.
-        capturedAt: DateTime.now().toUtc(),
-      );
+      return fromGeolocatorPosition(position);
+    } on MobileDeviceLocationFailure {
+      rethrow;
     } on TimeoutException {
       throw const MobileDeviceLocationFailure(
         'No se obtuvo la ubicación a tiempo. Verifique el GPS e inténtelo nuevamente.',
+        kind: MobileDeviceLocationFailureKind.timeout,
       );
     } catch (_) {
       throw const MobileDeviceLocationFailure(
         'No fue posible obtener la ubicación actual del dispositivo.',
+        kind: MobileDeviceLocationFailureKind.provider,
       );
     }
   }
@@ -75,4 +72,22 @@ final class GeolocatorDeviceLocationGateway
     }
     return MobileDeviceLocationPermission.denied;
   }
+}
+
+/// Preserve sensor provenance; an absent accuracy must not become a perfect fix.
+MobileCurrentLocation fromGeolocatorPosition(Position position) {
+  if (!position.hasAccuracy ||
+      !position.accuracy.isFinite ||
+      position.accuracy < 0) {
+    throw const MobileDeviceLocationFailure(
+      'La lectura no informa una precisión válida. Compruebe el GPS.',
+      kind: MobileDeviceLocationFailureKind.invalidAccuracy,
+    );
+  }
+  return MobileCurrentLocation(
+    latitude: position.latitude,
+    longitude: position.longitude,
+    accuracyMeters: position.accuracy,
+    capturedAt: position.timestamp.toUtc(),
+  );
 }

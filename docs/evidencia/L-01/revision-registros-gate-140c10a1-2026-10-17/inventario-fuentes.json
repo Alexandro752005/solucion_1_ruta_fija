@@ -1,0 +1,67 @@
+{
+    "runId":  "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+    "scope":  "Existing workspace artifacts and same-case public state; no browser profiles, terminal history, environment files or private keys",
+    "searchedRoots":  [
+                          "backend/target",
+                          "backend/.local",
+                          "docs/evidencia/L-01",
+                          "frontend"
+                      ],
+    "caseIdentifierMatchingFiles":  [
+                                        "backend/.local\\l01-human-trial-state.json",
+                                        "docs/evidencia/L-01\\ensayos-humanos-140c10a1-be0f-4d08-a6d4-c796e2ed107a\\observacion-1792227077200.json",
+                                        "docs/evidencia/L-01\\gate-omitido-140c10a1-2026-10-17\\inspeccion-solo-lectura.json",
+                                        "docs/evidencia/L-01\\gate-omitido-140c10a1-2026-10-17\\inspeccion-solo-lectura-stdout-historico.log",
+                                        "docs/evidencia/L-01\\bootstrap-recuperacion-140c10a1-2026-10-17\\inspeccion-inicial.log",
+                                        "docs/evidencia/L-01\\revision-registros-gate-140c10a1-2026-10-17\\historia-backend-solo-lectura.json",
+                                        "docs/evidencia/L-01\\bootstrap-recuperacion-140c10a1-2026-10-17\\inspeccion-final.log",
+                                        "backend/target\\l01-human-bootstrap-case-after-2026-10-17.log",
+                                        "backend/target\\l01-human-bootstrap-case-before-2026-10-17.log",
+                                        "docs/evidencia/L-01\\revision-registros-gate-140c10a1-2026-10-17\\stdout-original.log"
+                                    ],
+    "networkTraceFilesFound":  [
+
+                               ],
+    "humanArchives":  [
+                          {
+                              "file":  "observacion-1792227077200.json",
+                              "sha256":  "9319F045F65FD4EE61B9A07EDEC3000E5EA6AC0E75618D99E2C4896843B8A719"
+                          }
+                      ],
+    "sourceFilesReviewed":  [
+                                {
+                                    "file":  "backend/src/test/java/pe/rutafija/support/ManualL01HumanTrialServer.java",
+                                    "sha256":  "339FBA4E29C0BE4944291482C01DD0922992AEA294935F5E0C45A062115EEFC7"
+                                },
+                                {
+                                    "file":  "backend/src/main/java/pe/rutafija/identity/application/AuthService.java",
+                                    "sha256":  "D5C6484441385F89A3ECC660B916CA648F991A9F8C68E0B1A03FA9DF6B13C993"
+                                },
+                                {
+                                    "file":  "backend/src/main/java/pe/rutafija/adminlifecycle/application/AdminLifecycleService.java",
+                                    "sha256":  "405ADFA553DF08C9F55181BC2B3A2D2C396DD803FDFAAF8A78480E29BF45E63D"
+                                },
+                                {
+                                    "file":  "backend/src/main/java/pe/rutafija/terms/application/AdminTermsGateAuthorizationManager.java",
+                                    "sha256":  "944710AD5D4C0ABBF0F4866C05B41B6659D2AD23A309A6C8DBA91F8DDE56F84B"
+                                },
+                                {
+                                    "file":  "backend/src/main/java/pe/rutafija/shared/security/JsonAccessDeniedHandler.java",
+                                    "sha256":  "CC2A811C074E7E138C6A51A5A8CD5C2DCC84C136D744570170E787FE1E421088"
+                                },
+                                {
+                                    "file":  "backend/src/main/java/pe/rutafija/shared/exception/GlobalExceptionHandler.java",
+                                    "sha256":  "6AA2E25328FF156CE9CB87A84D2557DA8C3AB3CFD32180F0D7EFD4B3FB143D33"
+                                },
+                                {
+                                    "file":  "frontend/src/app/features/admin-activation/admin-activation.page.ts",
+                                    "sha256":  "DDD8CC737109064C4BF30A29A74A89E302CD11EE4B39A7C2086D7C218E67FA11"
+                                }
+                            ],
+    "negativeHttpNotArchivedByCurrentObserver":  true,
+    "browserOrTerminalPrivateHistoryInspected":  false,
+    "databaseWrites":  0,
+    "httpRequests":  0,
+    "newSyntheticAdminsCreated":  0,
+    "REC_CI03_01":  "NOT_AUTHORIZED_FOR_NOW"
+}

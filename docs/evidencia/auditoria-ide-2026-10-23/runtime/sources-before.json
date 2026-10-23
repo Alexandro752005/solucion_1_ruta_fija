@@ -1,0 +1,14 @@
+﻿[
+    {
+        "Path":  "D:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3\\scripts\\Invoke-RutaFijaNativeRuntime.ps1",
+        "Hash":  "298D7CB7975AEB32787C7E05BC9065ACB04B8657EDF35589A7050CAB3FFEB167"
+    },
+    {
+        "Path":  "D:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3\\scripts\\Invoke-RutaFijaPostgresqlLease.ps1",
+        "Hash":  "295A2626B0FC61A05BBABD57C0E1ED8C25EA7A71E4C4A7102C9221944EB3AC18"
+    },
+    {
+        "Path":  "D:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3\\backend\\target\\ruta-fija-backend-0.1.0-SNAPSHOT.jar",
+        "Hash":  "BF17109F3986C6176C1461389CBC9382902FBA4C6A609CF66DD48A3561A5C7B8"
+    }
+]

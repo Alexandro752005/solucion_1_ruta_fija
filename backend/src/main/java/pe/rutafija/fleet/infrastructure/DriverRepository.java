@@ -19,7 +19,10 @@ public interface DriverRepository extends JpaRepository<Driver, UUID> {
     @Query("""
             select driver from Driver driver
              where driver.organization.id = :organizationId
-               and (:groupId is null or driver.group.id = :groupId)
+               and (:groupId is null or exists (
+                    select membership.driverId from DriverGroupMembership membership
+                     where membership.driverId = driver.id and membership.groupId = :groupId
+                       and membership.organizationId = :organizationId and membership.active = true))
                and (:status is null or driver.availabilityStatus = :status)
                and (:active is null or driver.active = :active)
                and (
@@ -41,7 +44,8 @@ public interface DriverRepository extends JpaRepository<Driver, UUID> {
     Optional<Driver> findByIdAndOrganization_Id(UUID id, UUID organizationId);
 
     @Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
-    @EntityGraph(attributePaths = {"organization", "group", "user"})
+    // Related rows have their own lifecycle locks. Fetching them here makes
+    // Hibernate elevate organization SHARE locks and can deadlock tenant writes.
     @Query("""
             select driver from Driver driver
              where driver.id = :driverId

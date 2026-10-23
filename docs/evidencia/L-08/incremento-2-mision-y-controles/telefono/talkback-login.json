@@ -1,0 +1,10 @@
+{
+  "scope": "MANUAL_PHYSICAL_LOGIN_ONLY",
+  "result": "USER_CONFIRMED_PUBLIC_LOGIN_READER_WORKS",
+  "question": "Announce email,password,Ingresar,unavailability message and understandable focus order using TalkBack; no repeated login",
+  "literalAnswer": "S?, todo funciona bien en el movil.",
+  "perLabelDetailedTranscriptAvailable": false,
+  "operationalFlowAccredited": false,
+  "gpsOrBatteryAccredited": false,
+  "credentialsOrCoordinatesRecorded": false
+}

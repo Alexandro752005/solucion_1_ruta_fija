@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "lot": "L-06",
+  "localDate": "2026-10-21",
+  "status": "VERIFICADA",
+  "completionType": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "contractVersion": "0.3.0",
+  "decisionsAntecedent": "specs/decisiones-L06-2026-10-20.json",
+  "actPath": "docs/actas/L-06-cierre-funcional-local-2026-10-21.md",
+  "matrixPath": "docs/evidencia/L-06/matriz-L06.md",
+  "evidencePath": "docs/evidencia/L-06/cierre/README.md",
+  "runId": "51e69ee6-e4a0-4c3f-9a35-f19de0072422",
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 5
+  },
+  "TEST_CLEANUP_RELEASED": true,
+  "pilotEnabled": false,
+  "L07Started": false,
+  "L07Authorized": false,
+  "operationalVerificationPending": [
+    "VT-V3-Q-074-01"
+  ],
+  "originalOperationalCriteriaNotMarkedSatisfied": true
+}

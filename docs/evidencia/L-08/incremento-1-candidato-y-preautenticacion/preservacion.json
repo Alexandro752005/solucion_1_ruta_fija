@@ -1,0 +1,75 @@
+{
+  "observedAt": "2026-10-21T23:00:02.227445+00:00",
+  "result": "PASS",
+  "protectedFiles": [
+    {
+      "path": "backups/L-00-2026-10-13-final3/source-snapshot.zip",
+      "sha256": "3806510606a1565f23b8c526a13cc1049bc79141babdb8e1316f042488b3d11b",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-00/source-manifest.sha256",
+      "sha256": "e78d7002d5c85b24200be21b8fd88ce770d36333ca49caa5351248cfd0e28bad",
+      "matches": true
+    },
+    {
+      "path": "docs/legal/publicado/terminos-admin-v1.0.0.md",
+      "sha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+      "matches": true
+    },
+    {
+      "path": "artifacts/L-01-superadmin-titular-2026-10-17/ruta-fija-recovery-cli.jar",
+      "sha256": "91913ff7c11cabfaa01881fcbfb24bbf5ed347564c0140d73a757bc96d38e24a",
+      "matches": true
+    },
+    {
+      "path": "docs/actas/L-01-cierre-funcional-local-2026-10-17.md",
+      "sha256": "c9bf0fe7ea79c5dbfd77b9883bf21673e29ea3b6fe5d22a6ecb6119bebeff227",
+      "matches": true
+    },
+    {
+      "path": "docs/actas/L-02-cierre-funcional-local-2026-10-19.md",
+      "sha256": "7fdc07dadeab1d82c366664a725aab05c15d8a207473a6fbe9fedf7870b487e7",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/CI07-manual-contrastado-2026-10-17/observacion-1792227077200.json",
+      "sha256": "9319f045f65fd4ee61b9a07edec3000e5ea6ac0e75618d99e2c4896843b8a719",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/CI07-manual-contrastado-2026-10-17/observacion-1792287275662.json",
+      "sha256": "e0a986d10e09f8fbb289061753b3e36759b0cae24e53731ede4bba8640d5fffb",
+      "matches": true
+    },
+    {
+      "path": "docs/actas/L-03-cierre-funcional-local-2026-10-19.md",
+      "sha256": "a2c082de5d4930d635988f60a61b15293555967e3eccd677122233162a415797",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-03/matriz-final-funcional-local-2026-10-19.md",
+      "sha256": "e35c9d0b8f13d968278b8b32ede6c440395c0a86464a897fe79c1187bbf8ec23",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-03/manifest-cierre.sha256",
+      "sha256": "9336e09b4238235c20cd8e4e90fc2adbaaaa1863891149e21dee339b21a27e02",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-03/fuentes-cierre.sha256",
+      "sha256": "cb1d0657f83d7f7727670fc1750436f35f885fd115660e53cc6aa144c033ec03",
+      "matches": true
+    }
+  ],
+  "L07FrozenFilesVerified": 144,
+  "L07FrozenFailures": [],
+  "mutableCoordinationFilesExcludedAndBackedUp": [
+    "docs/backlog-producto-ruta-fija-v3.1.md",
+    "docs/seguimiento/tareas.json",
+    "memory/current.md",
+    "memory/target.md"
+  ],
+  "final3Regenerated": false
+}

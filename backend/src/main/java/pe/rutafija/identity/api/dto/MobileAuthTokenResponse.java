@@ -10,6 +10,7 @@ public record MobileAuthTokenResponse(
         String tokenType,
         long expiresIn,
         long refreshExpiresIn,
-        MobileAuthenticatedUserResponse user
+        MobileAuthenticatedUserResponse user,
+        String accessScope
 ) {
 }

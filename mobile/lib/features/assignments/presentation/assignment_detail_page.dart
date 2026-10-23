@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/network/mobile_api_exception.dart';
-import '../../../core/offline/mobile_offline.dart';
 import '../../../core/presentation/mobile_error_message.dart';
 import '../data/mobile_assignment_repository.dart';
+import '../data/mobile_service_time_repository.dart';
+import '../data/mobile_service_attention_repository.dart';
+import '../data/mobile_service_handover_repository.dart';
 import '../domain/mobile_assignment_models.dart';
+import '../domain/mobile_route_models.dart';
 import 'mobile_assignment_presentation.dart';
+import 'service_time_panel.dart';
+import 'service_attention_panel.dart';
+import 'service_handover_panel.dart';
+import '../../location/data/mobile_service_gps_repository.dart';
+import '../../location/presentation/service_gps_access_panel.dart';
 
 class AssignmentDetailPage extends StatefulWidget {
   const AssignmentDetailPage({
@@ -25,10 +33,13 @@ class AssignmentDetailPage extends StatefulWidget {
 
 class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
   MobileAssignment? _assignment;
+  MobileAssignedRoute? _route;
   MobilePendingAssignmentCommand? _pendingCommand;
   Object? _error;
   bool _loading = true;
   bool _submitting = false;
+  bool _safetyBlocked = false;
+  bool _handoverBlocked = false;
   bool _changed = false;
 
   @override
@@ -48,6 +59,8 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
       final result = await Future.wait([
         widget.driverGateway.get(widget.assignmentId),
         widget.driverGateway.pendingForDriver(widget.driverId),
+        if (widget.driverGateway case MobileRouteGateway routes)
+          routes.assignedRoute(widget.assignmentId),
       ]);
       if (!mounted) {
         return;
@@ -55,6 +68,7 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
       final pending = result[1] as List<MobilePendingAssignmentCommand>;
       setState(() {
         _assignment = result[0] as MobileAssignment;
+        _route = result.length > 2 ? result[2] as MobileAssignedRoute : null;
         _pendingCommand = pending
             .where((command) => command.assignmentId == widget.assignmentId)
             .firstOrNull;
@@ -70,29 +84,14 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
     }
   }
 
-  Future<void> _refreshPendingOnly() async {
-    try {
-      final pending = await widget.driverGateway.pendingForDriver(
-        widget.driverId,
-      );
-      if (mounted) {
-        setState(() {
-          _pendingCommand = pending
-              .where((command) => command.assignmentId == widget.assignmentId)
-              .firstOrNull;
-        });
-      }
-    } catch (_) {
-      // The original error remains the user-facing source of truth.
-    }
-  }
-
   Future<void> _submit(MobileAssignmentCommandType command) async {
     final assignment = _assignment;
-    if (assignment == null || _submitting) {
+    if (assignment == null ||
+        _submitting ||
+        _safetyBlocked ||
+        _handoverBlocked) {
       return;
     }
-
     String? rejectionReason;
     if (command == MobileAssignmentCommandType.reject) {
       rejectionReason = await _askRejectionReason();
@@ -104,7 +103,6 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
     if (!confirmed || !mounted) {
       return;
     }
-
     setState(() => _submitting = true);
     try {
       final result = await widget.driverGateway.send(
@@ -115,24 +113,12 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
       if (!mounted) {
         return;
       }
-      if (result.queued) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              result.blocked
-                  ? 'La acción requiere conciliación. Abra Pendientes de sincronización antes de volver a intentarlo.'
-                  : 'La acción quedó guardada en Pendientes de sincronización. Se enviará en orden cuando usted pulse Sincronizar.',
-            ),
-          ),
-        );
-        return;
-      }
       _changed = true;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
             result.replayed
-                ? 'Se recuperó la confirmación anterior de forma segura.'
+                ? 'El servidor confirmó la acción sin duplicarla.'
                 : '${command.label} confirmado.',
           ),
         ),
@@ -143,32 +129,26 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
         return;
       }
       if (error is MobileAssignmentPendingCommandException) {
-        await _refreshPendingOnly();
+        await _load();
         if (!mounted) {
           return;
         }
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text(
-              'Ya existe una acción pendiente. Reinténtela sin crear un evento nuevo.',
+              'Hay una acción sin confirmación. Consulte el estado actual antes de crear otra.',
             ),
           ),
         );
-      } else if (error is MobileOfflinePendingActionException) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(error.message)));
-      } else if (error is StateError) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(error.message)));
       } else if (error is MobileNetworkException) {
-        await _refreshPendingOnly();
+        await _load();
         if (!mounted) {
           return;
         }
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text(
-              'No se conoce aún el resultado. La acción se guardó para reintentarla exactamente igual.',
+              'No se recibió confirmación. Consulte el estado actual cuando vuelva la conexión.',
             ),
           ),
         );
@@ -188,8 +168,11 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
 
   Future<void> _retryPending() async {
     final command = _pendingCommand;
-    final assignment = _assignment;
-    if (command == null || assignment == null || _submitting) {
+    if (command == null ||
+        _assignment == null ||
+        _submitting ||
+        _safetyBlocked ||
+        _handoverBlocked) {
       return;
     }
     final confirmed = await _confirm(command.command, retry: true);
@@ -198,23 +181,8 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
     }
     setState(() => _submitting = true);
     try {
-      final result = await widget.driverGateway.retry(
-        command,
-        fallbackAssignment: assignment,
-      );
+      final result = await widget.driverGateway.retry(command);
       if (!mounted) {
-        return;
-      }
-      if (result.queued) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              result.blocked
-                  ? 'La acción requiere conciliación. Abra Pendientes de sincronización antes de volver a intentarlo.'
-                  : 'La acción quedó guardada en Pendientes de sincronización.',
-            ),
-          ),
-        );
         return;
       }
       _changed = true;
@@ -222,7 +190,7 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
         SnackBar(
           content: Text(
             result.replayed
-                ? 'El servidor confirmó el evento anterior sin duplicarlo.'
+                ? 'El estado del servidor confirma la acción anterior.'
                 : '${command.command.label} confirmado.',
           ),
         ),
@@ -232,25 +200,9 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
       if (!mounted) {
         return;
       }
-      if (error is MobileNetworkException) {
-        await _refreshPendingOnly();
-        if (!mounted) {
-          return;
-        }
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              'La confirmación continúa pendiente. Inténtelo más tarde.',
-            ),
-          ),
-        );
-      } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(mobileErrorMessage(error))));
-        if (error is MobileApiException) {
-          await _load();
-        }
-      }
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(mobileErrorMessage(error))));
+      await _load();
     } finally {
       if (mounted) {
         setState(() => _submitting = false);
@@ -268,7 +220,7 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
         title: Text(retry ? 'Reintentar acción' : command.label),
         content: Text(
           retry
-              ? 'Se enviará exactamente el mismo evento guardado. No se creará otra acción.'
+              ? 'Primero se consultará el estado actual. Si la acción no consta, se repetirá la misma solicitud idempotente.'
               : _confirmationText(command),
         ),
         actions: [
@@ -325,7 +277,7 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
       MobileAssignmentCommandType.accept => 'Aceptará esta solicitud. Ruta Fija reservará su disponibilidad; el vehículo seguirá disponible hasta iniciar el servicio.',
       MobileAssignmentCommandType.reject => 'Rechazará esta solicitud. Esta decisión se registrará como respuesta auténtica del conductor.',
       MobileAssignmentCommandType.start => 'Iniciará el servicio. El conductor y el vehículo pasarán a EN SERVICIO si el servidor confirma las condiciones.',
-      MobileAssignmentCommandType.complete => 'Completará el servicio. Esta operación cerrará la asignación si el servidor confirma el estado actual.',
+      MobileAssignmentCommandType.complete => 'Declaras Ruta finalizada para tu servicio aceptado e iniciado. El servidor comprueba la evidencia de terminal disponible; declararlo no acredita todo el recorrido GPS.',
     };
   }
 
@@ -345,10 +297,10 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
   }
 
   Widget _body(BuildContext context) {
-    if (_loading) {
+    if (_loading && _assignment == null) {
       return const Center(child: CircularProgressIndicator());
     }
-    if (_error != null || _assignment == null) {
+    if (_assignment == null) {
       return Center(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -382,6 +334,8 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
         physics: const AlwaysScrollableScrollPhysics(),
         padding: const EdgeInsets.all(20),
         children: [
+          if (_loading) const LinearProgressIndicator(),
+          if (_error != null) Text(mobileErrorMessage(_error!)),
           Row(
             children: [
               Expanded(
@@ -397,17 +351,98 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
           ),
           const SizedBox(height: 20),
           _DetailsCard(assignment: assignment),
+          if (assignment.serviceId != null &&
+              widget.driverGateway is MobileServiceHandoverGateway)
+            ServiceHandoverPanel(
+              key: ValueKey('handover-${assignment.id}'),
+              assignment: assignment,
+              gateway: widget.driverGateway as MobileServiceHandoverGateway,
+              externalBlocked:
+                  _submitting || _pendingCommand != null || _safetyBlocked,
+              onBlocked: (value) {
+                if (mounted) setState(() => _handoverBlocked = value);
+              },
+              onChanged: _load,
+            ),
+          if (assignment.serviceId != null &&
+              assignment.startedAt != null &&
+              widget.driverGateway is MobileServiceAttentionGateway)
+            ServiceAttentionPanel(
+              key: ValueKey('attention-${assignment.id}'),
+              assignment: assignment,
+              gateway: widget.driverGateway as MobileServiceAttentionGateway,
+              externalBlocked:
+                  _submitting || _pendingCommand != null || _handoverBlocked,
+              onBlocked: (value) {
+                if (mounted) setState(() => _safetyBlocked = value);
+              },
+              onChanged: _load,
+            ),
+          if (assignment.serviceId != null &&
+              assignment.startedAt != null &&
+              widget.driverGateway is MobileServiceTimeGateway)
+            ServiceTimePanel(
+              key: ValueKey('times-${assignment.id}'),
+              assignmentId: assignment.id,
+              gateway: widget.driverGateway as MobileServiceTimeGateway,
+            ),
+          if (assignment.serviceId != null &&
+              assignment.startedAt != null &&
+              widget.driverGateway is MobileServiceGpsGateway)
+            ServiceGpsAccessPanel(
+              key: ValueKey('gps-${assignment.serviceId}'),
+              serviceId: assignment.serviceId!,
+              gateway: widget.driverGateway as MobileServiceGpsGateway,
+            ),
+          if (_route case final route?) ...[
+            const SizedBox(height: 16),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Ruta asignada: solo consulta'),
+                    Text(
+                      route.name == null
+                          ? 'Ruta histórica sin versión registrada'
+                          : '${route.name} · revisión ${route.revision}',
+                    ),
+                    for (var i = 0; i < route.stops.length; i++)
+                      Text(
+                        '${i + 1}. ${route.stops[i].name} · ${route.stops[i].kind}',
+                      ),
+                    Text(
+                      route.declaredAt == null
+                          ? 'Sin declaración de ruta finalizada'
+                          : 'Ruta finalizada declarada: ${route.declaredAt!.toLocal()}',
+                    ),
+                    Text(
+                      'Terminal: ${route.terminalResult ?? 'Sin corroboración registrada'}',
+                    ),
+                    const Text(
+                      'La declaración no demuestra todo el recorrido GPS. La falta de evidencia no se presenta como corroboración.',
+                    ),
+                    if (route.replacementAssignmentId != null)
+                      Text(
+                        'Programación sustituida: ${route.replacementAssignmentId} requiere su propia aceptación.',
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ],
           const SizedBox(height: 16),
           if (_pendingCommand != null)
             _PendingActionCard(
               command: _pendingCommand!,
-              saving: _submitting,
+              saving: _submitting || _safetyBlocked || _handoverBlocked,
               onRetry: _retryPending,
             )
           else
             _ActionPanel(
               assignment: assignment,
-              saving: _submitting,
+              saving: _submitting || _safetyBlocked || _handoverBlocked,
               onCommand: _submit,
             ),
           const SizedBox(height: 16),
@@ -448,6 +483,12 @@ class _DetailsCard extends StatelessWidget {
               assignmentDateTimeLabel(assignment.scheduledEndAt),
             ),
             _DetailRow('Vehículo', assignment.vehiclePlate),
+            if (assignment.serviceId != null) ...[
+              _DetailRow('Servicio', 'SERVICIO-${assignment.serviceId}'),
+              const Text(
+                'Esta oferta no sustituye otras aceptaciones. Rechazarla o su vencimiento no cancela el servicio; ADMIN debe reasignarlo expresamente.',
+              ),
+            ],
             _DetailRow('Grupo', assignment.groupName),
             _DetailRow('Modo', assignment.responseMode.label),
             if (assignment.responseDeadlineAt != null)
@@ -539,8 +580,8 @@ class _PendingActionCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             const Text(
-              'No cree otra acción. Reintentar enviará el mismo evento y el servidor '
-              'responderá sin duplicar la transición.',
+              'No cree otra acción. Consulte primero el estado actual del servidor; si no consta, repita la solicitud. '
+              '',
             ),
             const SizedBox(height: 16),
             FilledButton.icon(
@@ -553,7 +594,9 @@ class _PendingActionCard extends StatelessWidget {
                       child: CircularProgressIndicator(strokeWidth: 2),
                     )
                   : Icon(assignmentCommandIcon(command.command)),
-              label: Text(saving ? 'Reintentando…' : 'Reintentar exactamente'),
+              label: Text(
+                saving ? 'Reintentando…' : 'Consultar estado y reintentar',
+              ),
             ),
           ],
         ),

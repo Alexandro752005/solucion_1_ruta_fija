@@ -1,0 +1,1564 @@
+﻿Compiled from "SXSSFWorkbook.java"
+public class org.apache.poi.xssf.streaming.SXSSFWorkbook implements org.apache.poi.ss.usermodel.Workbook {
+  public static final int DEFAULT_WINDOW_SIZE;
+
+  protected final org.apache.poi.xssf.usermodel.XSSFWorkbook _wb;
+
+  protected final org.apache.poi.xssf.model.SharedStringsTable _sharedStringSource;
+
+  protected org.apache.commons.compress.archivers.zip.Zip64Mode zip64Mode;
+
+  public org.apache.poi.xssf.streaming.SXSSFWorkbook();
+    Code:
+       0: aload_0
+       1: aconst_null
+       2: invokespecial #1                  // Method "<init>":(Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;)V
+       5: return
+
+  public org.apache.poi.xssf.streaming.SXSSFWorkbook(org.apache.poi.xssf.usermodel.XSSFWorkbook);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: bipush        100
+       4: invokespecial #3                  // Method "<init>":(Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;I)V
+       7: return
+
+  public org.apache.poi.xssf.streaming.SXSSFWorkbook(org.apache.poi.xssf.usermodel.XSSFWorkbook, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: iconst_0
+       4: invokespecial #4                  // Method "<init>":(Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;IZ)V
+       7: return
+
+  public org.apache.poi.xssf.streaming.SXSSFWorkbook(org.apache.poi.xssf.usermodel.XSSFWorkbook, int, boolean);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: iload_3
+       4: iconst_0
+       5: invokespecial #5                  // Method "<init>":(Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;IZZ)V
+       8: return
+
+  public org.apache.poi.xssf.streaming.SXSSFWorkbook(org.apache.poi.xssf.usermodel.XSSFWorkbook, int, boolean, boolean);
+    Code:
+       0: aload_0
+       1: invokespecial #6                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: new           #7                  // class java/util/HashMap
+       8: dup
+       9: invokespecial #8                  // Method java/util/HashMap."<init>":()V
+      12: putfield      #9                  // Field _sxFromXHash:Ljava/util/Map;
+      15: aload_0
+      16: new           #7                  // class java/util/HashMap
+      19: dup
+      20: invokespecial #8                  // Method java/util/HashMap."<init>":()V
+      23: putfield      #10                 // Field _xFromSxHash:Ljava/util/Map;
+      26: aload_0
+      27: bipush        100
+      29: putfield      #11                 // Field _randomAccessWindowSize:I
+      32: aload_0
+      33: getstatic     #12                 // Field org/apache/commons/compress/archivers/zip/Zip64Mode.Always:Lorg/apache/commons/compress/archivers/zip/Zip64Mode;
+      36: putfield      #13                 // Field zip64Mode:Lorg/apache/commons/compress/archivers/zip/Zip64Mode;
+      39: aload_0
+      40: iconst_1
+      41: putfield      #14                 // Field shouldCalculateSheetDimensions:Z
+      44: aload_0
+      45: iload_2
+      46: invokevirtual #15                 // Method setRandomAccessWindowSize:(I)V
+      49: aload_0
+      50: iload_3
+      51: invokevirtual #16                 // Method setCompressTempFiles:(Z)V
+      54: aload_1
+      55: ifnonnull     92
+      58: aload_0
+      59: new           #17                 // class org/apache/poi/xssf/usermodel/XSSFWorkbook
+      62: dup
+      63: invokespecial #18                 // Method org/apache/poi/xssf/usermodel/XSSFWorkbook."<init>":()V
+      66: putfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+      69: aload_0
+      70: iload         4
+      72: ifeq          85
+      75: aload_0
+      76: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+      79: invokevirtual #20                 // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getSharedStringSource:()Lorg/apache/poi/xssf/model/SharedStringsTable;
+      82: goto          86
+      85: aconst_null
+      86: putfield      #21                 // Field _sharedStringSource:Lorg/apache/poi/xssf/model/SharedStringsTable;
+      89: goto          161
+      92: aload_0
+      93: aload_1
+      94: putfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+      97: aload_0
+      98: iload         4
+     100: ifeq          113
+     103: aload_0
+     104: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+     107: invokevirtual #20                 // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getSharedStringSource:()Lorg/apache/poi/xssf/model/SharedStringsTable;
+     110: goto          114
+     113: aconst_null
+     114: putfield      #21                 // Field _sharedStringSource:Lorg/apache/poi/xssf/model/SharedStringsTable;
+     117: aload_0
+     118: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+     121: invokevirtual #22                 // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.iterator:()Ljava/util/Iterator;
+     124: astore        5
+     126: aload         5
+     128: invokeinterface #23,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+     133: ifeq          161
+     136: aload         5
+     138: invokeinterface #24,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     143: checkcast     #25                 // class org/apache/poi/ss/usermodel/Sheet
+     146: astore        6
+     148: aload_0
+     149: aload         6
+     151: checkcast     #26                 // class org/apache/poi/xssf/usermodel/XSSFSheet
+     154: invokevirtual #27                 // Method createAndRegisterSXSSFSheet:(Lorg/apache/poi/xssf/usermodel/XSSFSheet;)Lorg/apache/poi/xssf/streaming/SXSSFSheet;
+     157: pop
+     158: goto          126
+     161: return
+
+  public org.apache.poi.xssf.streaming.SXSSFWorkbook(int);
+    Code:
+       0: aload_0
+       1: aconst_null
+       2: iload_1
+       3: invokespecial #3                  // Method "<init>":(Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;I)V
+       6: return
+
+  public int getRandomAccessWindowSize();
+    Code:
+       0: aload_0
+       1: getfield      #11                 // Field _randomAccessWindowSize:I
+       4: ireturn
+
+  protected void setRandomAccessWindowSize(int);
+    Code:
+       0: iload_1
+       1: ifeq          9
+       4: iload_1
+       5: iconst_m1
+       6: if_icmpge     19
+       9: new           #28                 // class java/lang/IllegalArgumentException
+      12: dup
+      13: ldc           #29                 // String rowAccessWindowSize must be greater than 0 or -1
+      15: invokespecial #30                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      18: athrow
+      19: aload_0
+      20: iload_1
+      21: putfield      #11                 // Field _randomAccessWindowSize:I
+      24: return
+
+  public void setZip64Mode(org.apache.commons.compress.archivers.zip.Zip64Mode);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #13                 // Field zip64Mode:Lorg/apache/commons/compress/archivers/zip/Zip64Mode;
+       5: return
+
+  public boolean isCompressTempFiles();
+    Code:
+       0: aload_0
+       1: getfield      #31                 // Field _compressTmpFiles:Z
+       4: ireturn
+
+  public void setCompressTempFiles(boolean);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: putfield      #31                 // Field _compressTmpFiles:Z
+       5: return
+
+  public void setShouldCalculateSheetDimensions(boolean);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: putfield      #14                 // Field shouldCalculateSheetDimensions:Z
+       5: return
+
+  public boolean shouldCalculateSheetDimensions();
+    Code:
+       0: aload_0
+       1: getfield      #14                 // Field shouldCalculateSheetDimensions:Z
+       4: ireturn
+
+  protected org.apache.poi.xssf.model.SharedStringsTable getSharedStringSource();
+    Code:
+       0: aload_0
+       1: getfield      #21                 // Field _sharedStringSource:Lorg/apache/poi/xssf/model/SharedStringsTable;
+       4: areturn
+
+  protected org.apache.poi.xssf.streaming.SheetDataWriter createSheetDataWriter() throws java.io.IOException;
+    Code:
+       0: aload_0
+       1: getfield      #31                 // Field _compressTmpFiles:Z
+       4: ifeq          19
+       7: new           #32                 // class org/apache/poi/xssf/streaming/GZIPSheetDataWriter
+      10: dup
+      11: aload_0
+      12: getfield      #21                 // Field _sharedStringSource:Lorg/apache/poi/xssf/model/SharedStringsTable;
+      15: invokespecial #33                 // Method org/apache/poi/xssf/streaming/GZIPSheetDataWriter."<init>":(Lorg/apache/poi/xssf/model/SharedStringsTable;)V
+      18: areturn
+      19: new           #34                 // class org/apache/poi/xssf/streaming/SheetDataWriter
+      22: dup
+      23: aload_0
+      24: getfield      #21                 // Field _sharedStringSource:Lorg/apache/poi/xssf/model/SharedStringsTable;
+      27: invokespecial #35                 // Method org/apache/poi/xssf/streaming/SheetDataWriter."<init>":(Lorg/apache/poi/xssf/model/SharedStringsTable;)V
+      30: areturn
+
+  org.apache.poi.xssf.usermodel.XSSFSheet getXSSFSheet(org.apache.poi.xssf.streaming.SXSSFSheet);
+    Code:
+       0: aload_0
+       1: getfield      #9                  // Field _sxFromXHash:Ljava/util/Map;
+       4: aload_1
+       5: invokeinterface #36,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      10: checkcast     #26                 // class org/apache/poi/xssf/usermodel/XSSFSheet
+      13: areturn
+
+  org.apache.poi.xssf.streaming.SXSSFSheet getSXSSFSheet(org.apache.poi.xssf.usermodel.XSSFSheet);
+    Code:
+       0: aload_0
+       1: getfield      #10                 // Field _xFromSxHash:Ljava/util/Map;
+       4: aload_1
+       5: invokeinterface #36,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      10: checkcast     #37                 // class org/apache/poi/xssf/streaming/SXSSFSheet
+      13: areturn
+
+  void registerSheetMapping(org.apache.poi.xssf.streaming.SXSSFSheet, org.apache.poi.xssf.usermodel.XSSFSheet);
+    Code:
+       0: aload_0
+       1: getfield      #9                  // Field _sxFromXHash:Ljava/util/Map;
+       4: aload_1
+       5: aload_2
+       6: invokeinterface #38,  3           // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      11: pop
+      12: aload_0
+      13: getfield      #10                 // Field _xFromSxHash:Ljava/util/Map;
+      16: aload_2
+      17: aload_1
+      18: invokeinterface #38,  3           // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      23: pop
+      24: return
+
+  void deregisterSheetMapping(org.apache.poi.xssf.usermodel.XSSFSheet);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #39                 // Method getSXSSFSheet:(Lorg/apache/poi/xssf/usermodel/XSSFSheet;)Lorg/apache/poi/xssf/streaming/SXSSFSheet;
+       5: astore_2
+       6: aload_2
+       7: ifnull        39
+      10: aload_2
+      11: invokevirtual #40                 // Method org/apache/poi/xssf/streaming/SXSSFSheet.getSheetDataWriter:()Lorg/apache/poi/xssf/streaming/SheetDataWriter;
+      14: invokestatic  #41                 // Method org/apache/poi/util/IOUtils.closeQuietly:(Ljava/io/Closeable;)V
+      17: aload_0
+      18: getfield      #9                  // Field _sxFromXHash:Ljava/util/Map;
+      21: aload_2
+      22: invokeinterface #42,  2           // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+      27: pop
+      28: aload_0
+      29: getfield      #10                 // Field _xFromSxHash:Ljava/util/Map;
+      32: aload_1
+      33: invokeinterface #42,  2           // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+      38: pop
+      39: return
+
+  protected org.apache.poi.xssf.usermodel.XSSFSheet getSheetFromZipEntryName(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #9                  // Field _sxFromXHash:Ljava/util/Map;
+       4: invokeinterface #43,  1           // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+       9: invokeinterface #44,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+      14: astore_2
+      15: aload_2
+      16: invokeinterface #23,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      21: ifeq          60
+      24: aload_2
+      25: invokeinterface #24,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      30: checkcast     #26                 // class org/apache/poi/xssf/usermodel/XSSFSheet
+      33: astore_3
+      34: aload_1
+      35: aload_3
+      36: invokevirtual #45                 // Method org/apache/poi/xssf/usermodel/XSSFSheet.getPackagePart:()Lorg/apache/poi/openxml4j/opc/PackagePart;
+      39: invokevirtual #46                 // Method org/apache/poi/openxml4j/opc/PackagePart.getPartName:()Lorg/apache/poi/openxml4j/opc/PackagePartName;
+      42: invokevirtual #47                 // Method org/apache/poi/openxml4j/opc/PackagePartName.getName:()Ljava/lang/String;
+      45: iconst_1
+      46: invokevirtual #48                 // Method java/lang/String.substring:(I)Ljava/lang/String;
+      49: invokevirtual #49                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      52: ifeq          57
+      55: aload_3
+      56: areturn
+      57: goto          15
+      60: aconst_null
+      61: areturn
+
+  protected void injectData(org.apache.poi.openxml4j.util.ZipEntrySource, java.io.OutputStream) throws java.io.IOException;
+    Code:
+       0: aload_0
+       1: aload_2
+       2: invokevirtual #50                 // Method createArchiveOutputStream:(Ljava/io/OutputStream;)Lorg/apache/commons/compress/archivers/zip/ZipArchiveOutputStream;
+       5: astore_3
+       6: aload_1
+       7: invokeinterface #51,  1           // InterfaceMethod org/apache/poi/openxml4j/util/ZipEntrySource.getEntries:()Ljava/util/Enumeration;
+      12: astore        4
+      14: aload         4
+      16: invokeinterface #52,  1           // InterfaceMethod java/util/Enumeration.hasMoreElements:()Z
+      21: ifeq          286
+      24: aload         4
+      26: invokeinterface #53,  1           // InterfaceMethod java/util/Enumeration.nextElement:()Ljava/lang/Object;
+      31: checkcast     #54                 // class org/apache/commons/compress/archivers/zip/ZipArchiveEntry
+      34: astore        5
+      36: new           #54                 // class org/apache/commons/compress/archivers/zip/ZipArchiveEntry
+      39: dup
+      40: aload         5
+      42: invokevirtual #55                 // Method org/apache/commons/compress/archivers/zip/ZipArchiveEntry.getName:()Ljava/lang/String;
+      45: invokespecial #56                 // Method org/apache/commons/compress/archivers/zip/ZipArchiveEntry."<init>":(Ljava/lang/String;)V
+      48: astore        6
+      50: aload         5
+      52: invokevirtual #57                 // Method org/apache/commons/compress/archivers/zip/ZipArchiveEntry.getSize:()J
+      55: lconst_0
+      56: lcmp
+      57: iflt          70
+      60: aload         6
+      62: aload         5
+      64: invokevirtual #57                 // Method org/apache/commons/compress/archivers/zip/ZipArchiveEntry.getSize:()J
+      67: invokevirtual #58                 // Method org/apache/commons/compress/archivers/zip/ZipArchiveEntry.setSize:(J)V
+      70: aload         5
+      72: invokevirtual #59                 // Method org/apache/commons/compress/archivers/zip/ZipArchiveEntry.getTime:()J
+      75: lconst_0
+      76: lcmp
+      77: iflt          90
+      80: aload         6
+      82: aload         5
+      84: invokevirtual #59                 // Method org/apache/commons/compress/archivers/zip/ZipArchiveEntry.getTime:()J
+      87: invokevirtual #60                 // Method org/apache/commons/compress/archivers/zip/ZipArchiveEntry.setTime:(J)V
+      90: aload_3
+      91: aload         6
+      93: invokevirtual #61                 // Method org/apache/commons/compress/archivers/zip/ZipArchiveOutputStream.putArchiveEntry:(Lorg/apache/commons/compress/archivers/zip/ZipArchiveEntry;)V
+      96: aload_1
+      97: aload         5
+      99: invokeinterface #62,  2           // InterfaceMethod org/apache/poi/openxml4j/util/ZipEntrySource.getInputStream:(Lorg/apache/commons/compress/archivers/zip/ZipArchiveEntry;)Ljava/io/InputStream;
+     104: astore        7
+     106: aconst_null
+     107: astore        8
+     109: aload         7
+     111: instanceof    #63                 // class org/apache/poi/openxml4j/util/ZipArchiveThresholdInputStream
+     114: ifeq          126
+     117: aload         7
+     119: checkcast     #63                 // class org/apache/poi/openxml4j/util/ZipArchiveThresholdInputStream
+     122: iconst_0
+     123: invokevirtual #64                 // Method org/apache/poi/openxml4j/util/ZipArchiveThresholdInputStream.setGuardState:(Z)V
+     126: aload_0
+     127: aload         5
+     129: invokevirtual #55                 // Method org/apache/commons/compress/archivers/zip/ZipArchiveEntry.getName:()Ljava/lang/String;
+     132: invokevirtual #65                 // Method getSheetFromZipEntryName:(Ljava/lang/String;)Lorg/apache/poi/xssf/usermodel/XSSFSheet;
+     135: astore        9
+     137: aload         9
+     139: ifnull        173
+     142: aload         9
+     144: instanceof    #66                 // class org/apache/poi/xssf/usermodel/XSSFChartSheet
+     147: ifne          173
+     150: aload_0
+     151: aload         9
+     153: invokevirtual #39                 // Method getSXSSFSheet:(Lorg/apache/poi/xssf/usermodel/XSSFSheet;)Lorg/apache/poi/xssf/streaming/SXSSFSheet;
+     156: astore        10
+     158: aload         7
+     160: aload_3
+     161: aload_0
+     162: aload         10
+     164: invokevirtual #67                 // Method createSheetInjector:(Lorg/apache/poi/xssf/streaming/SXSSFSheet;)Lorg/apache/poi/xssf/streaming/SXSSFWorkbook$ISheetInjector;
+     167: invokestatic  #68                 // Method copyStreamAndInjectWorksheet:(Ljava/io/InputStream;Ljava/io/OutputStream;Lorg/apache/poi/xssf/streaming/SXSSFWorkbook$ISheetInjector;)V
+     170: goto          180
+     173: aload         7
+     175: aload_3
+     176: invokestatic  #69                 // Method org/apache/poi/util/IOUtils.copy:(Ljava/io/InputStream;Ljava/io/OutputStream;)J
+     179: pop2
+     180: aload         7
+     182: ifnull        267
+     185: aload         8
+     187: ifnull        210
+     190: aload         7
+     192: invokevirtual #70                 // Method java/io/InputStream.close:()V
+     195: goto          267
+     198: astore        9
+     200: aload         8
+     202: aload         9
+     204: invokevirtual #72                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     207: goto          267
+     210: aload         7
+     212: invokevirtual #70                 // Method java/io/InputStream.close:()V
+     215: goto          267
+     218: astore        9
+     220: aload         9
+     222: astore        8
+     224: aload         9
+     226: athrow
+     227: astore        11
+     229: aload         7
+     231: ifnull        264
+     234: aload         8
+     236: ifnull        259
+     239: aload         7
+     241: invokevirtual #70                 // Method java/io/InputStream.close:()V
+     244: goto          264
+     247: astore        12
+     249: aload         8
+     251: aload         12
+     253: invokevirtual #72                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     256: goto          264
+     259: aload         7
+     261: invokevirtual #70                 // Method java/io/InputStream.close:()V
+     264: aload         11
+     266: athrow
+     267: aload_3
+     268: invokevirtual #73                 // Method org/apache/commons/compress/archivers/zip/ZipArchiveOutputStream.closeArchiveEntry:()V
+     271: goto          283
+     274: astore        13
+     276: aload_3
+     277: invokevirtual #73                 // Method org/apache/commons/compress/archivers/zip/ZipArchiveOutputStream.closeArchiveEntry:()V
+     280: aload         13
+     282: athrow
+     283: goto          14
+     286: aload_3
+     287: invokevirtual #74                 // Method org/apache/commons/compress/archivers/zip/ZipArchiveOutputStream.finish:()V
+     290: aload_1
+     291: invokeinterface #75,  1           // InterfaceMethod org/apache/poi/openxml4j/util/ZipEntrySource.close:()V
+     296: goto          314
+     299: astore        14
+     301: aload_3
+     302: invokevirtual #74                 // Method org/apache/commons/compress/archivers/zip/ZipArchiveOutputStream.finish:()V
+     305: aload_1
+     306: invokeinterface #75,  1           // InterfaceMethod org/apache/poi/openxml4j/util/ZipEntrySource.close:()V
+     311: aload         14
+     313: athrow
+     314: return
+    Exception table:
+       from    to  target type
+         190   195   198   Class java/lang/Throwable
+         109   180   218   Class java/lang/Throwable
+         109   180   227   any
+         239   244   247   Class java/lang/Throwable
+         218   229   227   any
+          96   267   274   any
+         274   276   274   any
+           6   286   299   any
+         299   301   299   any
+
+  protected org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream createArchiveOutputStream(java.io.OutputStream);
+    Code:
+       0: getstatic     #12                 // Field org/apache/commons/compress/archivers/zip/Zip64Mode.Always:Lorg/apache/commons/compress/archivers/zip/Zip64Mode;
+       3: aload_0
+       4: getfield      #13                 // Field zip64Mode:Lorg/apache/commons/compress/archivers/zip/Zip64Mode;
+       7: invokevirtual #76                 // Method org/apache/commons/compress/archivers/zip/Zip64Mode.equals:(Ljava/lang/Object;)Z
+      10: ifeq          22
+      13: new           #77                 // class org/apache/poi/xssf/streaming/OpcZipArchiveOutputStream
+      16: dup
+      17: aload_1
+      18: invokespecial #78                 // Method org/apache/poi/xssf/streaming/OpcZipArchiveOutputStream."<init>":(Ljava/io/OutputStream;)V
+      21: areturn
+      22: new           #79                 // class org/apache/commons/compress/archivers/zip/ZipArchiveOutputStream
+      25: dup
+      26: aload_1
+      27: invokespecial #80                 // Method org/apache/commons/compress/archivers/zip/ZipArchiveOutputStream."<init>":(Ljava/io/OutputStream;)V
+      30: astore_2
+      31: aload_2
+      32: aload_0
+      33: getfield      #13                 // Field zip64Mode:Lorg/apache/commons/compress/archivers/zip/Zip64Mode;
+      36: invokevirtual #81                 // Method org/apache/commons/compress/archivers/zip/ZipArchiveOutputStream.setUseZip64:(Lorg/apache/commons/compress/archivers/zip/Zip64Mode;)V
+      39: aload_2
+      40: areturn
+
+  protected org.apache.poi.xssf.streaming.SXSSFWorkbook$ISheetInjector createSheetInjector(org.apache.poi.xssf.streaming.SXSSFSheet) throws java.io.IOException;
+    Code:
+       0: aload_1
+       1: invokedynamic #82,  0             // InvokeDynamic #0:writeSheetData:(Lorg/apache/poi/xssf/streaming/SXSSFSheet;)Lorg/apache/poi/xssf/streaming/SXSSFWorkbook$ISheetInjector;
+       6: areturn
+
+  public org.apache.poi.xssf.usermodel.XSSFWorkbook getXSSFWorkbook();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: areturn
+
+  public int getActiveSheetIndex();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #99                 // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getActiveSheetIndex:()I
+       7: ireturn
+
+  public void setActiveSheet(int);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: invokevirtual #100                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.setActiveSheet:(I)V
+       8: return
+
+  public int getFirstVisibleTab();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #101                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getFirstVisibleTab:()I
+       7: ireturn
+
+  public void setFirstVisibleTab(int);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: invokevirtual #102                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.setFirstVisibleTab:(I)V
+       8: return
+
+  public void setSheetOrder(java.lang.String, int);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: aload_1
+       5: iload_2
+       6: invokevirtual #103                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.setSheetOrder:(Ljava/lang/String;I)V
+       9: return
+
+  public void setSelectedTab(int);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: invokevirtual #104                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.setSelectedTab:(I)V
+       8: return
+
+  public void setSheetName(int, java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: aload_2
+       6: invokevirtual #105                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.setSheetName:(ILjava/lang/String;)V
+       9: return
+
+  public java.lang.String getSheetName(int);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: invokevirtual #106                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getSheetName:(I)Ljava/lang/String;
+       8: areturn
+
+  public int getSheetIndex(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: aload_1
+       5: invokevirtual #107                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getSheetIndex:(Ljava/lang/String;)I
+       8: ireturn
+
+  public int getSheetIndex(org.apache.poi.ss.usermodel.Sheet);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: aload_0
+       5: aload_1
+       6: checkcast     #37                 // class org/apache/poi/xssf/streaming/SXSSFSheet
+       9: invokevirtual #108                // Method getXSSFSheet:(Lorg/apache/poi/xssf/streaming/SXSSFSheet;)Lorg/apache/poi/xssf/usermodel/XSSFSheet;
+      12: invokevirtual #109                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getSheetIndex:(Lorg/apache/poi/ss/usermodel/Sheet;)I
+      15: ireturn
+
+  public org.apache.poi.xssf.streaming.SXSSFSheet createSheet();
+    Code:
+       0: aload_0
+       1: aload_0
+       2: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       5: invokevirtual #110                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.createSheet:()Lorg/apache/poi/xssf/usermodel/XSSFSheet;
+       8: invokevirtual #27                 // Method createAndRegisterSXSSFSheet:(Lorg/apache/poi/xssf/usermodel/XSSFSheet;)Lorg/apache/poi/xssf/streaming/SXSSFSheet;
+      11: areturn
+
+  org.apache.poi.xssf.streaming.SXSSFSheet createAndRegisterSXSSFSheet(org.apache.poi.xssf.usermodel.XSSFSheet);
+    Code:
+       0: new           #37                 // class org/apache/poi/xssf/streaming/SXSSFSheet
+       3: dup
+       4: aload_0
+       5: aload_1
+       6: invokespecial #111                // Method org/apache/poi/xssf/streaming/SXSSFSheet."<init>":(Lorg/apache/poi/xssf/streaming/SXSSFWorkbook;Lorg/apache/poi/xssf/usermodel/XSSFSheet;)V
+       9: astore_2
+      10: goto          23
+      13: astore_3
+      14: new           #113                // class java/lang/IllegalStateException
+      17: dup
+      18: aload_3
+      19: invokespecial #114                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/Throwable;)V
+      22: athrow
+      23: aload_0
+      24: aload_2
+      25: aload_1
+      26: invokevirtual #115                // Method registerSheetMapping:(Lorg/apache/poi/xssf/streaming/SXSSFSheet;Lorg/apache/poi/xssf/usermodel/XSSFSheet;)V
+      29: aload_2
+      30: areturn
+    Exception table:
+       from    to  target type
+           0    10    13   Class java/io/IOException
+
+  public org.apache.poi.xssf.streaming.SXSSFSheet createSheet(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_0
+       2: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       5: aload_1
+       6: invokevirtual #116                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.createSheet:(Ljava/lang/String;)Lorg/apache/poi/xssf/usermodel/XSSFSheet;
+       9: invokevirtual #27                 // Method createAndRegisterSXSSFSheet:(Lorg/apache/poi/xssf/usermodel/XSSFSheet;)Lorg/apache/poi/xssf/streaming/SXSSFSheet;
+      12: areturn
+
+  public org.apache.poi.ss.usermodel.Sheet cloneSheet(int);
+    Code:
+       0: new           #113                // class java/lang/IllegalStateException
+       3: dup
+       4: ldc           #117                // String Not Implemented
+       6: invokespecial #118                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+       9: athrow
+
+  public int getNumberOfSheets();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #119                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getNumberOfSheets:()I
+       7: ireturn
+
+  public java.util.Iterator<org.apache.poi.ss.usermodel.Sheet> sheetIterator();
+    Code:
+       0: new           #120                // class org/apache/poi/xssf/streaming/SXSSFWorkbook$SheetIterator
+       3: dup
+       4: aload_0
+       5: invokespecial #121                // Method org/apache/poi/xssf/streaming/SXSSFWorkbook$SheetIterator."<init>":(Lorg/apache/poi/xssf/streaming/SXSSFWorkbook;)V
+       8: areturn
+
+  public java.util.Spliterator<org.apache.poi.ss.usermodel.Sheet> spliterator();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #122                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.spliterator:()Ljava/util/Spliterator;
+       7: areturn
+
+  public org.apache.poi.xssf.streaming.SXSSFSheet getSheetAt(int);
+    Code:
+       0: aload_0
+       1: aload_0
+       2: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       5: iload_1
+       6: invokevirtual #123                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getSheetAt:(I)Lorg/apache/poi/xssf/usermodel/XSSFSheet;
+       9: invokevirtual #39                 // Method getSXSSFSheet:(Lorg/apache/poi/xssf/usermodel/XSSFSheet;)Lorg/apache/poi/xssf/streaming/SXSSFSheet;
+      12: areturn
+
+  public org.apache.poi.xssf.streaming.SXSSFSheet getSheet(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_0
+       2: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       5: aload_1
+       6: invokevirtual #124                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getSheet:(Ljava/lang/String;)Lorg/apache/poi/xssf/usermodel/XSSFSheet;
+       9: invokevirtual #39                 // Method getSXSSFSheet:(Lorg/apache/poi/xssf/usermodel/XSSFSheet;)Lorg/apache/poi/xssf/streaming/SXSSFSheet;
+      12: areturn
+
+  public void removeSheetAt(int);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: invokevirtual #123                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getSheetAt:(I)Lorg/apache/poi/xssf/usermodel/XSSFSheet;
+       8: astore_2
+       9: aload_0
+      10: aload_2
+      11: invokevirtual #39                 // Method getSXSSFSheet:(Lorg/apache/poi/xssf/usermodel/XSSFSheet;)Lorg/apache/poi/xssf/streaming/SXSSFSheet;
+      14: astore_3
+      15: aload_0
+      16: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+      19: iload_1
+      20: invokevirtual #125                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.removeSheetAt:(I)V
+      23: aload_0
+      24: aload_2
+      25: invokevirtual #126                // Method deregisterSheetMapping:(Lorg/apache/poi/xssf/usermodel/XSSFSheet;)V
+      28: aload_3
+      29: invokevirtual #127                // Method org/apache/poi/xssf/streaming/SXSSFSheet.dispose:()Z
+      32: pop
+      33: goto          60
+      36: astore        4
+      38: getstatic     #128                // Field LOG:Lorg/apache/logging/log4j/Logger;
+      41: invokeinterface #129,  1          // InterfaceMethod org/apache/logging/log4j/Logger.atWarn:()Lorg/apache/logging/log4j/LogBuilder;
+      46: aload         4
+      48: invokeinterface #130,  2          // InterfaceMethod org/apache/logging/log4j/LogBuilder.withThrowable:(Ljava/lang/Throwable;)Lorg/apache/logging/log4j/LogBuilder;
+      53: ldc           #131                // String Failed to dispose old sheet
+      55: invokeinterface #132,  2          // InterfaceMethod org/apache/logging/log4j/LogBuilder.log:(Ljava/lang/String;)V
+      60: return
+    Exception table:
+       from    to  target type
+          28    33    36   Class java/io/IOException
+
+  public org.apache.poi.ss.usermodel.Font createFont();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #133                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.createFont:()Lorg/apache/poi/xssf/usermodel/XSSFFont;
+       7: areturn
+
+  public org.apache.poi.ss.usermodel.Font findFont(boolean, short, short, java.lang.String, boolean, boolean, short, byte);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: iload_2
+       6: iload_3
+       7: aload         4
+       9: iload         5
+      11: iload         6
+      13: iload         7
+      15: iload         8
+      17: invokevirtual #134                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.findFont:(ZSSLjava/lang/String;ZZSB)Lorg/apache/poi/xssf/usermodel/XSSFFont;
+      20: areturn
+
+  public int getNumberOfFonts();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #135                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getNumberOfFonts:()I
+       7: ireturn
+
+  public int getNumberOfFontsAsInt();
+    Code:
+       0: aload_0
+       1: invokevirtual #136                // Method getNumberOfFonts:()I
+       4: ireturn
+
+  public org.apache.poi.ss.usermodel.Font getFontAt(int);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: invokevirtual #137                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getFontAt:(I)Lorg/apache/poi/xssf/usermodel/XSSFFont;
+       8: areturn
+
+  public org.apache.poi.ss.usermodel.CellStyle createCellStyle();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #138                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.createCellStyle:()Lorg/apache/poi/xssf/usermodel/XSSFCellStyle;
+       7: areturn
+
+  public int getNumCellStyles();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #139                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getNumCellStyles:()I
+       7: ireturn
+
+  public org.apache.poi.ss.usermodel.CellStyle getCellStyleAt(int);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: invokevirtual #140                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getCellStyleAt:(I)Lorg/apache/poi/xssf/usermodel/XSSFCellStyle;
+       8: areturn
+
+  public void close() throws java.io.IOException;
+    Code:
+       0: aload_0
+       1: getfield      #10                 // Field _xFromSxHash:Ljava/util/Map;
+       4: invokeinterface #43,  1           // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+       9: invokeinterface #44,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+      14: astore_1
+      15: aload_1
+      16: invokeinterface #23,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      21: ifeq          79
+      24: aload_1
+      25: invokeinterface #24,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      30: checkcast     #37                 // class org/apache/poi/xssf/streaming/SXSSFSheet
+      33: astore_2
+      34: aload_2
+      35: invokevirtual #40                 // Method org/apache/poi/xssf/streaming/SXSSFSheet.getSheetDataWriter:()Lorg/apache/poi/xssf/streaming/SheetDataWriter;
+      38: astore_3
+      39: aload_3
+      40: ifnull        47
+      43: aload_3
+      44: invokevirtual #141                // Method org/apache/poi/xssf/streaming/SheetDataWriter.close:()V
+      47: goto          76
+      50: astore_3
+      51: getstatic     #128                // Field LOG:Lorg/apache/logging/log4j/Logger;
+      54: invokeinterface #129,  1          // InterfaceMethod org/apache/logging/log4j/Logger.atWarn:()Lorg/apache/logging/log4j/LogBuilder;
+      59: aload_3
+      60: invokeinterface #130,  2          // InterfaceMethod org/apache/logging/log4j/LogBuilder.withThrowable:(Ljava/lang/Throwable;)Lorg/apache/logging/log4j/LogBuilder;
+      65: ldc           #142                // String An exception occurred while closing sheet data writer for sheet {}.
+      67: aload_2
+      68: invokevirtual #143                // Method org/apache/poi/xssf/streaming/SXSSFSheet.getSheetName:()Ljava/lang/String;
+      71: invokeinterface #144,  3          // InterfaceMethod org/apache/logging/log4j/LogBuilder.log:(Ljava/lang/String;Ljava/lang/Object;)V
+      76: goto          15
+      79: aload_0
+      80: invokevirtual #145                // Method dispose:()Z
+      83: pop
+      84: aload_0
+      85: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+      88: invokevirtual #146                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.close:()V
+      91: return
+    Exception table:
+       from    to  target type
+          34    47    50   Class java/io/IOException
+
+  public void write(java.io.OutputStream) throws java.io.IOException;
+    Code:
+       0: aload_0
+       1: invokevirtual #147                // Method flushSheets:()V
+       4: ldc           #148                // String poi-sxssf-template
+       6: ldc           #149                // String .xlsx
+       8: invokestatic  #150                // Method org/apache/poi/util/TempFile.createTempFile:(Ljava/lang/String;Ljava/lang/String;)Ljava/io/File;
+      11: astore_2
+      12: aload_2
+      13: invokevirtual #151                // Method java/io/File.toPath:()Ljava/nio/file/Path;
+      16: iconst_0
+      17: anewarray     #152                // class java/nio/file/OpenOption
+      20: invokestatic  #153                // Method java/nio/file/Files.newOutputStream:(Ljava/nio/file/Path;[Ljava/nio/file/OpenOption;)Ljava/io/OutputStream;
+      23: astore        4
+      25: aconst_null
+      26: astore        5
+      28: aload_0
+      29: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+      32: aload         4
+      34: invokevirtual #154                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.write:(Ljava/io/OutputStream;)V
+      37: aload         4
+      39: ifnull        124
+      42: aload         5
+      44: ifnull        67
+      47: aload         4
+      49: invokevirtual #155                // Method java/io/OutputStream.close:()V
+      52: goto          124
+      55: astore        6
+      57: aload         5
+      59: aload         6
+      61: invokevirtual #72                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+      64: goto          124
+      67: aload         4
+      69: invokevirtual #155                // Method java/io/OutputStream.close:()V
+      72: goto          124
+      75: astore        6
+      77: aload         6
+      79: astore        5
+      81: aload         6
+      83: athrow
+      84: astore        7
+      86: aload         4
+      88: ifnull        121
+      91: aload         5
+      93: ifnull        116
+      96: aload         4
+      98: invokevirtual #155                // Method java/io/OutputStream.close:()V
+     101: goto          121
+     104: astore        8
+     106: aload         5
+     108: aload         8
+     110: invokevirtual #72                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     113: goto          121
+     116: aload         4
+     118: invokevirtual #155                // Method java/io/OutputStream.close:()V
+     121: aload         7
+     123: athrow
+     124: new           #156                // class org/apache/poi/openxml4j/util/ZipSecureFile
+     127: dup
+     128: aload_2
+     129: invokespecial #157                // Method org/apache/poi/openxml4j/util/ZipSecureFile."<init>":(Ljava/io/File;)V
+     132: astore        4
+     134: aconst_null
+     135: astore        5
+     137: new           #158                // class org/apache/poi/openxml4j/util/ZipFileZipEntrySource
+     140: dup
+     141: aload         4
+     143: invokespecial #159                // Method org/apache/poi/openxml4j/util/ZipFileZipEntrySource."<init>":(Lorg/apache/commons/compress/archivers/zip/ZipFile;)V
+     146: astore        6
+     148: aconst_null
+     149: astore        7
+     151: aload_0
+     152: aload         6
+     154: aload_1
+     155: invokevirtual #160                // Method injectData:(Lorg/apache/poi/openxml4j/util/ZipEntrySource;Ljava/io/OutputStream;)V
+     158: aload         6
+     160: ifnull        245
+     163: aload         7
+     165: ifnull        188
+     168: aload         6
+     170: invokevirtual #161                // Method org/apache/poi/openxml4j/util/ZipFileZipEntrySource.close:()V
+     173: goto          245
+     176: astore        8
+     178: aload         7
+     180: aload         8
+     182: invokevirtual #72                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     185: goto          245
+     188: aload         6
+     190: invokevirtual #161                // Method org/apache/poi/openxml4j/util/ZipFileZipEntrySource.close:()V
+     193: goto          245
+     196: astore        8
+     198: aload         8
+     200: astore        7
+     202: aload         8
+     204: athrow
+     205: astore        9
+     207: aload         6
+     209: ifnull        242
+     212: aload         7
+     214: ifnull        237
+     217: aload         6
+     219: invokevirtual #161                // Method org/apache/poi/openxml4j/util/ZipFileZipEntrySource.close:()V
+     222: goto          242
+     225: astore        10
+     227: aload         7
+     229: aload         10
+     231: invokevirtual #72                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     234: goto          242
+     237: aload         6
+     239: invokevirtual #161                // Method org/apache/poi/openxml4j/util/ZipFileZipEntrySource.close:()V
+     242: aload         9
+     244: athrow
+     245: aload         4
+     247: ifnull        332
+     250: aload         5
+     252: ifnull        275
+     255: aload         4
+     257: invokevirtual #162                // Method org/apache/poi/openxml4j/util/ZipSecureFile.close:()V
+     260: goto          332
+     263: astore        6
+     265: aload         5
+     267: aload         6
+     269: invokevirtual #72                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     272: goto          332
+     275: aload         4
+     277: invokevirtual #162                // Method org/apache/poi/openxml4j/util/ZipSecureFile.close:()V
+     280: goto          332
+     283: astore        6
+     285: aload         6
+     287: astore        5
+     289: aload         6
+     291: athrow
+     292: astore        11
+     294: aload         4
+     296: ifnull        329
+     299: aload         5
+     301: ifnull        324
+     304: aload         4
+     306: invokevirtual #162                // Method org/apache/poi/openxml4j/util/ZipSecureFile.close:()V
+     309: goto          329
+     312: astore        12
+     314: aload         5
+     316: aload         12
+     318: invokevirtual #72                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     321: goto          329
+     324: aload         4
+     326: invokevirtual #162                // Method org/apache/poi/openxml4j/util/ZipSecureFile.close:()V
+     329: aload         11
+     331: athrow
+     332: aload_2
+     333: invokevirtual #163                // Method java/io/File.delete:()Z
+     336: istore_3
+     337: goto          350
+     340: astore        13
+     342: aload_2
+     343: invokevirtual #163                // Method java/io/File.delete:()Z
+     346: istore_3
+     347: aload         13
+     349: athrow
+     350: iload_3
+     351: ifne          381
+     354: new           #112                // class java/io/IOException
+     357: dup
+     358: new           #164                // class java/lang/StringBuilder
+     361: dup
+     362: invokespecial #165                // Method java/lang/StringBuilder."<init>":()V
+     365: ldc           #166                // String Could not delete temporary file after processing:
+     367: invokevirtual #167                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     370: aload_2
+     371: invokevirtual #168                // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+     374: invokevirtual #169                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     377: invokespecial #170                // Method java/io/IOException."<init>":(Ljava/lang/String;)V
+     380: athrow
+     381: return
+    Exception table:
+       from    to  target type
+          47    52    55   Class java/lang/Throwable
+          28    37    75   Class java/lang/Throwable
+          28    37    84   any
+          96   101   104   Class java/lang/Throwable
+          75    86    84   any
+         168   173   176   Class java/lang/Throwable
+         151   158   196   Class java/lang/Throwable
+         151   158   205   any
+         217   222   225   Class java/lang/Throwable
+         196   207   205   any
+         255   260   263   Class java/lang/Throwable
+         137   245   283   Class java/lang/Throwable
+         137   245   292   any
+         304   309   312   Class java/lang/Throwable
+         283   294   292   any
+          12   332   340   any
+         340   342   340   any
+
+  public void writeAvoidingTempFiles(java.io.OutputStream) throws java.io.IOException;
+    Code:
+       0: aload_0
+       1: invokevirtual #147                // Method flushSheets:()V
+       4: invokestatic  #171                // Method org/apache/commons/io/output/UnsynchronizedByteArrayOutputStream.builder:()Lorg/apache/commons/io/output/UnsynchronizedByteArrayOutputStream$Builder;
+       7: invokevirtual #172                // Method org/apache/commons/io/output/UnsynchronizedByteArrayOutputStream$Builder.get:()Lorg/apache/commons/io/output/UnsynchronizedByteArrayOutputStream;
+      10: astore_2
+      11: aconst_null
+      12: astore_3
+      13: aload_0
+      14: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+      17: aload_2
+      18: invokevirtual #154                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.write:(Ljava/io/OutputStream;)V
+      21: aload_2
+      22: invokevirtual #173                // Method org/apache/commons/io/output/UnsynchronizedByteArrayOutputStream.toInputStream:()Ljava/io/InputStream;
+      25: astore        4
+      27: aconst_null
+      28: astore        5
+      30: new           #174                // class org/apache/commons/compress/archivers/zip/ZipArchiveInputStream
+      33: dup
+      34: aload         4
+      36: invokespecial #175                // Method org/apache/commons/compress/archivers/zip/ZipArchiveInputStream."<init>":(Ljava/io/InputStream;)V
+      39: astore        6
+      41: aconst_null
+      42: astore        7
+      44: new           #176                // class org/apache/poi/openxml4j/util/ZipInputStreamZipEntrySource
+      47: dup
+      48: new           #63                 // class org/apache/poi/openxml4j/util/ZipArchiveThresholdInputStream
+      51: dup
+      52: aload         6
+      54: invokespecial #177                // Method org/apache/poi/openxml4j/util/ZipArchiveThresholdInputStream."<init>":(Ljava/io/InputStream;)V
+      57: invokespecial #178                // Method org/apache/poi/openxml4j/util/ZipInputStreamZipEntrySource."<init>":(Lorg/apache/poi/openxml4j/util/ZipArchiveThresholdInputStream;)V
+      60: astore        8
+      62: aconst_null
+      63: astore        9
+      65: aload_0
+      66: aload         8
+      68: aload_1
+      69: invokevirtual #160                // Method injectData:(Lorg/apache/poi/openxml4j/util/ZipEntrySource;Ljava/io/OutputStream;)V
+      72: aload         8
+      74: ifnull        159
+      77: aload         9
+      79: ifnull        102
+      82: aload         8
+      84: invokevirtual #179                // Method org/apache/poi/openxml4j/util/ZipInputStreamZipEntrySource.close:()V
+      87: goto          159
+      90: astore        10
+      92: aload         9
+      94: aload         10
+      96: invokevirtual #72                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+      99: goto          159
+     102: aload         8
+     104: invokevirtual #179                // Method org/apache/poi/openxml4j/util/ZipInputStreamZipEntrySource.close:()V
+     107: goto          159
+     110: astore        10
+     112: aload         10
+     114: astore        9
+     116: aload         10
+     118: athrow
+     119: astore        11
+     121: aload         8
+     123: ifnull        156
+     126: aload         9
+     128: ifnull        151
+     131: aload         8
+     133: invokevirtual #179                // Method org/apache/poi/openxml4j/util/ZipInputStreamZipEntrySource.close:()V
+     136: goto          156
+     139: astore        12
+     141: aload         9
+     143: aload         12
+     145: invokevirtual #72                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     148: goto          156
+     151: aload         8
+     153: invokevirtual #179                // Method org/apache/poi/openxml4j/util/ZipInputStreamZipEntrySource.close:()V
+     156: aload         11
+     158: athrow
+     159: aload         6
+     161: ifnull        246
+     164: aload         7
+     166: ifnull        189
+     169: aload         6
+     171: invokevirtual #180                // Method org/apache/commons/compress/archivers/zip/ZipArchiveInputStream.close:()V
+     174: goto          246
+     177: astore        8
+     179: aload         7
+     181: aload         8
+     183: invokevirtual #72                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     186: goto          246
+     189: aload         6
+     191: invokevirtual #180                // Method org/apache/commons/compress/archivers/zip/ZipArchiveInputStream.close:()V
+     194: goto          246
+     197: astore        8
+     199: aload         8
+     201: astore        7
+     203: aload         8
+     205: athrow
+     206: astore        13
+     208: aload         6
+     210: ifnull        243
+     213: aload         7
+     215: ifnull        238
+     218: aload         6
+     220: invokevirtual #180                // Method org/apache/commons/compress/archivers/zip/ZipArchiveInputStream.close:()V
+     223: goto          243
+     226: astore        14
+     228: aload         7
+     230: aload         14
+     232: invokevirtual #72                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     235: goto          243
+     238: aload         6
+     240: invokevirtual #180                // Method org/apache/commons/compress/archivers/zip/ZipArchiveInputStream.close:()V
+     243: aload         13
+     245: athrow
+     246: aload         4
+     248: ifnull        333
+     251: aload         5
+     253: ifnull        276
+     256: aload         4
+     258: invokevirtual #70                 // Method java/io/InputStream.close:()V
+     261: goto          333
+     264: astore        6
+     266: aload         5
+     268: aload         6
+     270: invokevirtual #72                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     273: goto          333
+     276: aload         4
+     278: invokevirtual #70                 // Method java/io/InputStream.close:()V
+     281: goto          333
+     284: astore        6
+     286: aload         6
+     288: astore        5
+     290: aload         6
+     292: athrow
+     293: astore        15
+     295: aload         4
+     297: ifnull        330
+     300: aload         5
+     302: ifnull        325
+     305: aload         4
+     307: invokevirtual #70                 // Method java/io/InputStream.close:()V
+     310: goto          330
+     313: astore        16
+     315: aload         5
+     317: aload         16
+     319: invokevirtual #72                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     322: goto          330
+     325: aload         4
+     327: invokevirtual #70                 // Method java/io/InputStream.close:()V
+     330: aload         15
+     332: athrow
+     333: aload_2
+     334: ifnull        409
+     337: aload_3
+     338: ifnull        359
+     341: aload_2
+     342: invokevirtual #181                // Method org/apache/commons/io/output/UnsynchronizedByteArrayOutputStream.close:()V
+     345: goto          409
+     348: astore        4
+     350: aload_3
+     351: aload         4
+     353: invokevirtual #72                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     356: goto          409
+     359: aload_2
+     360: invokevirtual #181                // Method org/apache/commons/io/output/UnsynchronizedByteArrayOutputStream.close:()V
+     363: goto          409
+     366: astore        4
+     368: aload         4
+     370: astore_3
+     371: aload         4
+     373: athrow
+     374: astore        17
+     376: aload_2
+     377: ifnull        406
+     380: aload_3
+     381: ifnull        402
+     384: aload_2
+     385: invokevirtual #181                // Method org/apache/commons/io/output/UnsynchronizedByteArrayOutputStream.close:()V
+     388: goto          406
+     391: astore        18
+     393: aload_3
+     394: aload         18
+     396: invokevirtual #72                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     399: goto          406
+     402: aload_2
+     403: invokevirtual #181                // Method org/apache/commons/io/output/UnsynchronizedByteArrayOutputStream.close:()V
+     406: aload         17
+     408: athrow
+     409: return
+    Exception table:
+       from    to  target type
+          82    87    90   Class java/lang/Throwable
+          65    72   110   Class java/lang/Throwable
+          65    72   119   any
+         131   136   139   Class java/lang/Throwable
+         110   121   119   any
+         169   174   177   Class java/lang/Throwable
+          44   159   197   Class java/lang/Throwable
+          44   159   206   any
+         218   223   226   Class java/lang/Throwable
+         197   208   206   any
+         256   261   264   Class java/lang/Throwable
+          30   246   284   Class java/lang/Throwable
+          30   246   293   any
+         305   310   313   Class java/lang/Throwable
+         284   295   293   any
+         341   345   348   Class java/lang/Throwable
+          13   333   366   Class java/lang/Throwable
+          13   333   374   any
+         384   388   391   Class java/lang/Throwable
+         366   376   374   any
+
+  protected void flushSheets() throws java.io.IOException;
+    Code:
+       0: aload_0
+       1: getfield      #10                 // Field _xFromSxHash:Ljava/util/Map;
+       4: invokeinterface #43,  1           // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+       9: invokeinterface #44,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+      14: astore_1
+      15: aload_1
+      16: invokeinterface #23,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      21: ifeq          45
+      24: aload_1
+      25: invokeinterface #24,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      30: checkcast     #37                 // class org/apache/poi/xssf/streaming/SXSSFSheet
+      33: astore_2
+      34: aload_2
+      35: invokevirtual #182                // Method org/apache/poi/xssf/streaming/SXSSFSheet.deriveDimension:()V
+      38: aload_2
+      39: invokevirtual #183                // Method org/apache/poi/xssf/streaming/SXSSFSheet.flushRows:()V
+      42: goto          15
+      45: return
+
+  public boolean dispose();
+    Code:
+       0: iconst_1
+       1: istore_1
+       2: aload_0
+       3: getfield      #9                  // Field _sxFromXHash:Ljava/util/Map;
+       6: invokeinterface #184,  1          // InterfaceMethod java/util/Map.keySet:()Ljava/util/Set;
+      11: invokeinterface #185,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      16: astore_2
+      17: aload_2
+      18: invokeinterface #23,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      23: ifeq          85
+      26: aload_2
+      27: invokeinterface #24,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      32: checkcast     #37                 // class org/apache/poi/xssf/streaming/SXSSFSheet
+      35: astore_3
+      36: aload_3
+      37: invokevirtual #127                // Method org/apache/poi/xssf/streaming/SXSSFSheet.dispose:()Z
+      40: ifeq          51
+      43: iload_1
+      44: ifeq          51
+      47: iconst_1
+      48: goto          52
+      51: iconst_0
+      52: istore_1
+      53: goto          82
+      56: astore        4
+      58: getstatic     #128                // Field LOG:Lorg/apache/logging/log4j/Logger;
+      61: invokeinterface #129,  1          // InterfaceMethod org/apache/logging/log4j/Logger.atWarn:()Lorg/apache/logging/log4j/LogBuilder;
+      66: aload         4
+      68: invokeinterface #130,  2          // InterfaceMethod org/apache/logging/log4j/LogBuilder.withThrowable:(Ljava/lang/Throwable;)Lorg/apache/logging/log4j/LogBuilder;
+      73: ldc           #186                // String Failed to dispose sheet
+      75: invokeinterface #132,  2          // InterfaceMethod org/apache/logging/log4j/LogBuilder.log:(Ljava/lang/String;)V
+      80: iconst_0
+      81: istore_1
+      82: goto          17
+      85: iload_1
+      86: ireturn
+    Exception table:
+       from    to  target type
+          36    53    56   Class java/io/IOException
+
+  public int getNumberOfNames();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #187                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getNumberOfNames:()I
+       7: ireturn
+
+  public org.apache.poi.ss.usermodel.Name getName(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: aload_1
+       5: invokevirtual #188                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getName:(Ljava/lang/String;)Lorg/apache/poi/xssf/usermodel/XSSFName;
+       8: areturn
+
+  public java.util.List<? extends org.apache.poi.ss.usermodel.Name> getNames(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: aload_1
+       5: invokevirtual #189                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getNames:(Ljava/lang/String;)Ljava/util/List;
+       8: areturn
+
+  public java.util.List<? extends org.apache.poi.ss.usermodel.Name> getAllNames();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #190                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getAllNames:()Ljava/util/List;
+       7: areturn
+
+  public org.apache.poi.ss.usermodel.Name createName();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #191                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.createName:()Lorg/apache/poi/xssf/usermodel/XSSFName;
+       7: areturn
+
+  public void removeName(org.apache.poi.ss.usermodel.Name);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: aload_1
+       5: invokevirtual #192                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.removeName:(Lorg/apache/poi/ss/usermodel/Name;)V
+       8: return
+
+  public void setPrintArea(int, java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: aload_2
+       6: invokevirtual #193                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.setPrintArea:(ILjava/lang/String;)V
+       9: return
+
+  public void setPrintArea(int, int, int, int, int);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: iload_2
+       6: iload_3
+       7: iload         4
+       9: iload         5
+      11: invokevirtual #194                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.setPrintArea:(IIIII)V
+      14: return
+
+  public java.lang.String getPrintArea(int);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: invokevirtual #195                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getPrintArea:(I)Ljava/lang/String;
+       8: areturn
+
+  public void removePrintArea(int);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: invokevirtual #196                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.removePrintArea:(I)V
+       8: return
+
+  public org.apache.poi.ss.usermodel.Row$MissingCellPolicy getMissingCellPolicy();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #197                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getMissingCellPolicy:()Lorg/apache/poi/ss/usermodel/Row$MissingCellPolicy;
+       7: areturn
+
+  public void setMissingCellPolicy(org.apache.poi.ss.usermodel.Row$MissingCellPolicy);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: aload_1
+       5: invokevirtual #198                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.setMissingCellPolicy:(Lorg/apache/poi/ss/usermodel/Row$MissingCellPolicy;)V
+       8: return
+
+  public org.apache.poi.ss.usermodel.DataFormat createDataFormat();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #199                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.createDataFormat:()Lorg/apache/poi/xssf/usermodel/XSSFDataFormat;
+       7: areturn
+
+  public int addPicture(byte[], int);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: aload_1
+       5: iload_2
+       6: invokevirtual #200                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.addPicture:([BI)I
+       9: ireturn
+
+  public java.util.List<? extends org.apache.poi.ss.usermodel.PictureData> getAllPictures();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #201                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getAllPictures:()Ljava/util/List;
+       7: areturn
+
+  public org.apache.poi.ss.usermodel.CreationHelper getCreationHelper();
+    Code:
+       0: new           #202                // class org/apache/poi/xssf/streaming/SXSSFCreationHelper
+       3: dup
+       4: aload_0
+       5: invokespecial #203                // Method org/apache/poi/xssf/streaming/SXSSFCreationHelper."<init>":(Lorg/apache/poi/xssf/streaming/SXSSFWorkbook;)V
+       8: areturn
+
+  protected boolean isDate1904();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #204                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.isDate1904:()Z
+       7: ireturn
+
+  public boolean isHidden();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #205                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.isHidden:()Z
+       7: ireturn
+
+  public void setHidden(boolean);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: invokevirtual #206                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.setHidden:(Z)V
+       8: return
+
+  public boolean isSheetHidden(int);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: invokevirtual #207                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.isSheetHidden:(I)Z
+       8: ireturn
+
+  public boolean isSheetVeryHidden(int);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: invokevirtual #208                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.isSheetVeryHidden:(I)Z
+       8: ireturn
+
+  public org.apache.poi.ss.usermodel.SheetVisibility getSheetVisibility(int);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: invokevirtual #209                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getSheetVisibility:(I)Lorg/apache/poi/ss/usermodel/SheetVisibility;
+       8: areturn
+
+  public void setSheetHidden(int, boolean);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: iload_2
+       6: invokevirtual #210                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.setSheetHidden:(IZ)V
+       9: return
+
+  public void setSheetVisibility(int, org.apache.poi.ss.usermodel.SheetVisibility);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: aload_2
+       6: invokevirtual #211                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.setSheetVisibility:(ILorg/apache/poi/ss/usermodel/SheetVisibility;)V
+       9: return
+
+  public int linkExternalWorkbook(java.lang.String, org.apache.poi.ss.usermodel.Workbook);
+    Code:
+       0: new           #113                // class java/lang/IllegalStateException
+       3: dup
+       4: ldc           #117                // String Not Implemented
+       6: invokespecial #118                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+       9: athrow
+
+  public void addToolPack(org.apache.poi.ss.formula.udf.UDFFinder);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: aload_1
+       5: invokevirtual #212                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.addToolPack:(Lorg/apache/poi/ss/formula/udf/UDFFinder;)V
+       8: return
+
+  public void setForceFormulaRecalculation(boolean);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: iload_1
+       5: invokevirtual #213                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.setForceFormulaRecalculation:(Z)V
+       8: return
+
+  public boolean getForceFormulaRecalculation();
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #214                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getForceFormulaRecalculation:()Z
+       7: ireturn
+
+  public org.apache.poi.ss.SpreadsheetVersion getSpreadsheetVersion();
+    Code:
+       0: getstatic     #215                // Field org/apache/poi/ss/SpreadsheetVersion.EXCEL2007:Lorg/apache/poi/ss/SpreadsheetVersion;
+       3: areturn
+
+  public int addOlePackage(byte[], java.lang.String, java.lang.String, java.lang.String) throws java.io.IOException;
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: aload_1
+       5: aload_2
+       6: aload_3
+       7: aload         4
+       9: invokevirtual #216                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.addOlePackage:([BLjava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
+      12: ireturn
+
+  public org.apache.poi.ss.formula.EvaluationWorkbook createEvaluationWorkbook();
+    Code:
+       0: aload_0
+       1: invokestatic  #217                // Method org/apache/poi/xssf/streaming/SXSSFEvaluationWorkbook.create:(Lorg/apache/poi/xssf/streaming/SXSSFWorkbook;)Lorg/apache/poi/xssf/streaming/SXSSFEvaluationWorkbook;
+       4: areturn
+
+  public org.apache.poi.ss.usermodel.CellReferenceType getCellReferenceType();
+    Code:
+       0: aload_0
+       1: invokevirtual #218                // Method getXSSFWorkbook:()Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: invokevirtual #219                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.getCellReferenceType:()Lorg/apache/poi/ss/usermodel/CellReferenceType;
+       7: areturn
+
+  public void setCellReferenceType(org.apache.poi.ss.usermodel.CellReferenceType);
+    Code:
+       0: aload_0
+       1: invokevirtual #218                // Method getXSSFWorkbook:()Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+       4: aload_1
+       5: invokevirtual #220                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.setCellReferenceType:(Lorg/apache/poi/ss/usermodel/CellReferenceType;)V
+       8: return
+
+  public org.apache.poi.ss.usermodel.Sheet getSheet(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #221                // Method getSheet:(Ljava/lang/String;)Lorg/apache/poi/xssf/streaming/SXSSFSheet;
+       5: areturn
+
+  public org.apache.poi.ss.usermodel.Sheet getSheetAt(int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: invokevirtual #222                // Method getSheetAt:(I)Lorg/apache/poi/xssf/streaming/SXSSFSheet;
+       5: areturn
+
+  public org.apache.poi.ss.usermodel.Sheet createSheet(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #223                // Method createSheet:(Ljava/lang/String;)Lorg/apache/poi/xssf/streaming/SXSSFSheet;
+       5: areturn
+
+  public org.apache.poi.ss.usermodel.Sheet createSheet();
+    Code:
+       0: aload_0
+       1: invokevirtual #224                // Method createSheet:()Lorg/apache/poi/xssf/streaming/SXSSFSheet;
+       4: areturn
+
+  static {};
+    Code:
+       0: ldc           #2                  // class org/apache/poi/xssf/streaming/SXSSFWorkbook
+       2: invokestatic  #226                // Method org/apache/poi/logging/PoiLogManager.getLogger:(Ljava/lang/Class;)Lorg/apache/logging/log4j/Logger;
+       5: putstatic     #128                // Field LOG:Lorg/apache/logging/log4j/Logger;
+       8: return
+}

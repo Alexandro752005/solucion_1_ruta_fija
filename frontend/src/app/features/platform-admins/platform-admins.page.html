@@ -1,0 +1,90 @@
+<section class="management-page">
+  <rf-page-header title="Cuentas ADMIN" description="Gestiona el alta y reemplazo por organización y la entrega de activación.">
+    <button page-actions class="management-button primary" type="button" [disabled]="saving() || loading() || mustRefresh() || !identityStatus()?.identityVerified" (click)="open('create')">Preparar alta ADMIN</button>
+  </rf-page-header>
+  <p>El piloto admite cuatro altas ADMIN acumuladas. Desactivar una cuenta no recupera una creación; recuperar la misma cuenta conserva su identidad.</p>
+  @if (saving()) { <p role="status">Esperando la confirmación del servidor…</p> }
+  @if (identityStatus(); as identity) {
+    @if (!identity.identityVerified) {
+      <section class="management-panel" aria-labelledby="owner-identity-title">
+        <h2 id="owner-identity-title">Identidad del titular pendiente</h2>
+        <p>Antes de gestionar ADMIN, registra expresamente tu identidad en la revisión restringida. Requiere tu contraseña actual y el documento original; esta declaración propia no afirma una comprobación independiente.</p>
+        <button class="management-button primary" type="button" [disabled]="saving() || mustRefresh()" (click)="open('owner')">Revisar mi identidad como titular</button>
+      </section>
+    }
+  }
+  @if (error(); as message) { <div class="management-alert error" role="alert">{{ message }}</div> }
+  @if (notice(); as message) { <p role="status">{{ message }}</p> }
+  @if (credential(); as issued) {
+    <section class="management-panel" aria-labelledby="activation-credential-title">
+      <h2 id="activation-credential-title">Credencial de activación · CUENTA-{{ issued.adminUserId }}</h2>
+      <p>Entrega por el canal comprobado. Abre «Activar mi cuenta ADMIN» desde el inicio de sesión. Esta presentación se elimina al ocultar o salir.</p>
+      <code>{{ issued.credential }}</code>
+      <p>Vence: {{ issued.credentialExpiresAt | date:'medium' }}</p>
+      <button class="management-button" type="button" (click)="hideCredential()">Ocultar credencial</button>
+    </section>
+  }
+  <section class="management-panel">
+    <header><h2>Cuentas registradas</h2><button class="management-button" type="button" (click)="load()" [disabled]="loading() || saving()">Consultar cuentas</button></header>
+    @if (loading()) { <p role="status">Consultando cuentas&hellip;</p> }
+    @else if (!identityStatus()?.identityVerified) { <p>La gestión de cuentas requiere completar la comprobación de identidad del titular.</p> }
+    @else if (admins().length === 0) { <p>No hay cuentas ADMIN para mostrar.</p> }
+    @else {
+      <div class="management-table-wrap"><table class="management-table">
+        <thead><tr><th>Cuenta</th><th>Organización</th><th>Estado de cuenta</th><th>Identidad</th><th>Activación</th><th>Acciones</th></tr></thead>
+        <tbody>@for (admin of admins(); track admin.adminUserId) {
+          <tr><td>CUENTA-{{ admin.adminUserId }}</td><td>{{ admin.organizationId }}</td><td>{{ admin.active ? 'Activa' : 'Inactiva' }}</td><td>{{ admin.identityVerified ? 'Comprobada' : 'Pendiente de revisión' }}</td><td>{{ statusLabel(admin.status) }}</td>
+            <td><button class="management-button compact" type="button" [disabled]="saving() || mustRefresh()" (click)="open('replace', admin)">Preparar reemplazo</button>
+              @if (!admin.identityVerified) { <button class="management-button compact" type="button" [disabled]="saving() || mustRefresh()" (click)="open('review', admin)">Revisar identidad administrativa</button> }
+              @if (admin.active) { <button class="management-button compact danger" type="button" [disabled]="saving() || mustRefresh()" (click)="open('revoke', admin)">Revocar acceso</button> }
+              @if (admin.status === 'PENDING_CLAIM' || admin.status === 'IN_PROGRESS') { <button class="management-button compact" type="button" [disabled]="saving() || mustRefresh()" (click)="open('rotate', admin)">Renovar credencial</button> }
+            </td>
+          </tr>
+        }</tbody>
+      </table></div>
+    }
+  </section>
+</section>
+<rf-modal [open]="formMode() !== null" [title]="formMode() === 'owner' ? 'Revisión restringida · Identidad del titular' : formMode() === 'review' ? 'Revisión restringida · Identidad ADMIN' : formMode() === 'create' ? 'Revisión restringida · Alta ADMIN' : formMode() === 'replace' ? 'Revisión restringida · Reemplazo ADMIN' : formMode() === 'revoke' ? 'Revocar acceso ADMIN' : 'Renovar credencial'" (closed)="closeForm()">
+  @if (formMode(); as mode) {
+    <form class="management-form" [formGroup]="form" (ngSubmit)="submit()">
+      @if (selected(); as current) { <p>CUENTA-{{ current.adminUserId }} · Organización {{ current.organizationId }}</p> }
+      @if (mode === 'create') {
+        <label for="admin-organization">Organización activa<select id="admin-organization" formControlName="organizationId"><option value="">Selecciona una organización</option>@for (org of organizations(); track org.id) { <option [value]="org.id">{{ org.legalName }} · {{ org.id }}</option> }</select></label>
+      }
+      @if (mode === 'create' || mode === 'replace') {
+        <label for="admin-registration-email">Correo para el alta<input id="admin-registration-email" formControlName="email" type="email" maxlength="180" autocomplete="off" /></label>
+        <label for="admin-registration-name">Nombre para el alta<input id="admin-registration-name" formControlName="fullName" maxlength="160" autocomplete="off" /></label>
+      }
+      @if (mode === 'create' || mode === 'replace' || mode === 'owner' || mode === 'review') {
+        <p>Revisión de identidad administrativa restringida a SUPER_ADMIN. Contrasta la identidad con el original sin subir ni conservar copias. Los datos personales no aparecen en el listado y se limpian al enviar o cerrar esta vista.</p>
+        <label for="admin-identity-document">DNI comprobado<input id="admin-identity-document" formControlName="identityDocumentNumber" inputmode="numeric" pattern="[0-9]{8}" minlength="8" maxlength="8" autocomplete="off" aria-describedby="admin-identity-privacy" /></label>
+        <p id="admin-identity-privacy">Ocho dígitos. Se envía exclusivamente para comprobar la identidad; el registro común conserva una huella protegida y no devuelve el número.</p>
+        @if (mode !== 'owner') {
+          <label for="admin-identity-method">Método de revisión de identidad<select id="admin-identity-method" formControlName="identityReviewMethod"><option value="IN_PERSON">Revisión presencial</option><option value="PRIOR_SECURE_CONTACT">Contacto previamente establecido</option></select></label>
+        }
+        <label for="admin-identity-reference">Referencia de la comprobación sin datos personales<input id="admin-identity-reference" formControlName="identityReviewReference" maxlength="160" autocomplete="off" /></label>
+        <label><input type="checkbox" formControlName="originalReviewed" /> Revisé el documento original mediante el método indicado, sin conservar una copia.</label>
+        <label><input type="checkbox" formControlName="identityConfirmed" /> Confirmo que el documento corresponde a la persona titular de esta cuenta.</label>
+      }
+      @if (mode === 'owner') {
+        <label for="owner-current-password">Contraseña actual<input id="owner-current-password" type="password" formControlName="currentPassword" maxlength="72" autocomplete="off" /></label>
+        <label><input type="checkbox" formControlName="ownerDeclaration" /> Declaro expresamente que es mi propia identidad como titular de la instalación. Esta declaración quedará auditada y no sustituye una revisión por terceros.</label>
+      }
+      @if (mode === 'replace') {
+        <p>El reemplazo exige una creación disponible. La sustitución y revocación del ADMIN saliente deben completarse conforme al flujo de activación.</p>
+        <label for="admin-replacement-method">Comprobación independiente<select id="admin-replacement-method" formControlName="verificationMethod"><option value="PRIOR_SECURE_CONTACT">Contacto previamente registrado</option><option value="IN_PERSON">Comprobación presencial</option></select></label>
+        <label for="admin-replacement-reference">Referencia sin secretos<input id="admin-replacement-reference" formControlName="verificationReference" maxlength="160" autocomplete="off" /></label>
+        <label><input type="checkbox" formControlName="identityChecked" /> Confirmo la identidad mediante la comprobación independiente.</label>
+        <label><input type="checkbox" formControlName="replacementAuthorized" /> Confirmo la autorización del reemplazo.</label>
+      }
+      @if (mode === 'revoke') {
+        <p>La revocación se aplica ahora a la cuenta y sus sesiones. Puedes preparar el reemplazo después; una cuenta inactiva no recupera el cupo histórico.</p>
+        <label><input type="checkbox" formControlName="revocationConfirmed" /> Confirmo la revocación inmediata del acceso de esta cuenta ADMIN.</label>
+      }
+      @if (mode !== 'owner') { <label for="admin-decision-reason">Motivo sin datos personales<textarea id="admin-decision-reason" formControlName="reason" maxlength="500"></textarea></label> }
+      @if (form.invalid && form.touched) { <p role="alert">Completa los campos y confirmaciones requeridos.</p> }
+      <div class="management-actions"><button class="management-button" type="button" [disabled]="saving()" (click)="closeForm()">Cancelar</button><button class="management-button primary" type="submit" [disabled]="saving() || mustRefresh()">{{ saving() ? 'Esperando confirmación…' : 'Confirmar operación' }}</button></div>
+    </form>
+  }
+</rf-modal>

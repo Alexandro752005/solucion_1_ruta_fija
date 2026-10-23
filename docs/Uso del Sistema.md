@@ -1,3 +1,78 @@
+# Uso vigente de los ejecutables — corte 2026-10-23
+
+Esta sección reemplaza las instrucciones de arranque, cierre y pruebas del manual histórico conservado al final. Corresponde a Ruta Fija V3.1 en este workspace; no cambia el acta firmada ni los archivos de L-00 a L-08. La aplicación confirma acciones con el servidor y no incorpora una cola offline.
+
+## Comandos y alcance
+
+Desde la raíz del proyecto, en Windows PowerShell:
+
+| Entrada | Acción vigente | Límite comprobado |
+|---|---|---|
+| `iniciar_ruta_fija.bat` | Configuración privada, PostgreSQL con lease, gate SELECT V50 y arranque controlado API/CRM | Actualmente la base normal `solucion_ruta_fija_1` está en V12: rechaza el inicio antes de Java/Angular; no migra automáticamente |
+| `iniciar_ruta_fija.bat --smoke-read-only --test-database` | Smoke explícito sobre `ruta_fija_test` con credenciales de prueba, conexiones de solo lectura y tareas de mantenimiento desactivadas solo durante esa sesión | Comprueba salud/UI e inicio/cierre; no habilita operaciones que escriben. No autenticar ni confirmar servicios durante este smoke |
+| `finalizar_ruta_fija.bat` | Cierra procesos registrados de API/CRM; si existe demo, retira primero su túnel | Conserva PostgreSQL cuando ya estaba activo, hay otros clientes, falta lease o no puede demostrar observabilidad completa |
+| `verificar_ruta_fija.bat` | Runner unitario backend con allowlist inspeccionada y salidas aisladas | No usa PostgreSQL, no ejecuta integración ni limpieza; 50 clases/257 pruebas aprobadas en la auditoría del runner |
+| `iniciar_demo_temporal.bat` | Demo pública temporal CRM/API mediante herramienta ya disponible | No se ejecutó demo pública en esta auditoría. La base normal V12 impide un arranque del backend V50; no autoriza exposición de datos |
+| `finalizar_demo_temporal.bat` | Retira túnel identificado y runtime propio; aplica lease PostgreSQL | No detiene procesos ajenos por nombre ni un servicio PostgreSQL compartido sin comprobaciones |
+
+Los BAT de demo tenían bytes de control y separadores de ruta rotos; quedaron corregidos. Los cinco BAT usan la ruta absoluta de Windows PowerShell y rutas de scripts basadas en su propia carpeta. Conservan un código distinto de cero al fallar; `verificar_ruta_fija.bat` propaga el código del runner.
+
+## Estado real de las bases y gate de arranque
+
+La inspección SELECT con `default_transaction_read_only=on` confirmó:
+
+| Base | Estado observado | Uso permitido en este corte |
+|---|---|---|
+| `solucion_ruta_fija_1` | 12 migraciones versionadas V1 a V12, sin fallos | Destino normal conservado. Se bloquea el backend V50 hasta una migración planificada y autorizada fuera de esta auditoría |
+| `ruta_fija_test` | 50 migraciones versionadas V1 a V50 + 1 migración repetible, 51 éxitos totales, sin fallos | Fixture histórica protegida. Solo smoke explícito con todas las conexiones de aplicación en modo lectura; no limpiar ni migrar |
+
+El número 51 incluye la migración repetible: **no existe V0 en el historial consultado**. Esta es una aclaración factual nueva; el documento firmado anterior se preserva byte por byte.
+
+`Start` valida el historial completo V1 a V50 antes de lanzar la API. La política compartida con la demo exige **50 éxitos y ninguna repetible en la base normal**, o **51 éxitos en la base de pruebas**, incluyendo exclusivamente `R__native_test_role_privileges.sql`. Esa repetible vive en `db/test-migration`, solo se carga con el perfil de pruebas y rechaza cualquier base distinta de `ruta_fija_test`; no se aplica a desarrollo. Se corrigió la antigua exigencia indiscriminada de 51 entradas mediante doce casos sintéticos y regresión de los lanzadores. Desactiva Flyway para el runtime normal: las migraciones corresponden a herramientas expresas, nunca a abrir un BAT. Mantiene las semillas desactivadas. El modo normal conserva las tareas de mantenimiento del producto. El modo smoke desactiva únicamente en su proceso las tareas móvil y de cualificación y configura JDBC/Hikari en lectura. El archivo privado no se modifica para seleccionar el modo smoke; `--test-database` se rechaza si falta `--smoke-read-only`.
+
+API y Angular usan procesos separados. Con un inicio aprobado, CRM escucha en `http://127.0.0.1:4300`, API en `http://127.0.0.1:8080/api/v1` y salud en `http://127.0.0.1:8080/actuator/health`. Angular reenvía `/api` y `/ws` al backend8080 mediante `frontend/proxy.conf.json`; sus configuraciones development/production referencian ese proxy. Abrir la raíz Angular no demuestra por sí solo operación autenticada.
+
+## Seguridad de cierre y PostgreSQL
+
+El estado de runtime v2 conserva PID, ruta completa de ejecutable, instante de creación UTC, puerto esperado y marcador de comando absoluto. El cierre exige esa identidad; un estado antiguo/no verificable o un PID reutilizado se rechaza. No terminar procesos Java/Node manualmente por nombre.
+
+PostgreSQL es un servicio compartido de Windows. El launcher adquiere lease solamente cuando encontró el servicio detenido y lo inició. Si ya estaba ejecutándose, no adquiere propiedad. Para detener automáticamente exige la misma instancia del servicio y una inspección SELECT de todas las sesiones ajenas. Una sesión con `backend_type` oculto/NULL se cuenta por sus columnas de identidad visibles; observabilidad incompleta conserva el servicio. La inspección es puntual y no una reserva exclusiva del servidor.
+
+La parada global existe como opción separada, nunca invocada por los BAT:
+
+```powershell
+./scripts/Invoke-RutaFijaPostgresqlLease.ps1 -Action StopGlobal -Execute -AuthorizeGlobalServiceStop
+```
+
+Solo corresponde al operador que autoriza interrumpir todo el servicio y sus clientes. Cerrar el proyecto normalmente utiliza `StopOwned` y puede dejar PostgreSQL activo; no se presenta ese estado como un cierre de todos los servicios del equipo.
+
+## Secretos y comprobaciones sin arranque
+
+Los archivos `backend/.local/ruta-fija-native.env` y `ruta-fija-bootstrap.env` permanecen en su ruta privada. Se corrigieron sus ACL: solo el usuario actual y SYSTEM tienen acceso; el respaldo contiene únicamente sus descriptores ACL, jamás el contenido. El preflight comprueba exclusión local declarada y permisos antes de importar variables, sin invocar Git ni inspeccionar su índice.
+
+```powershell
+./scripts/Invoke-RutaFijaNativeRuntime.ps1
+./scripts/Invoke-RutaFijaNativeTest.ps1
+./scripts/Invoke-RutaFijaPostgresqlLease.ps1
+./scripts/Test-RutaFijaBackendUnitSafe.ps1
+./scripts/Test-RutaFijaLauncherSafety.ps1
+```
+
+Las fuentes vigentes de esas cinco entradas definen Plan como modo por defecto: no arrancan procesos de aplicación, abren conexiones ni compilan. El modo Test del runtime requiere `-Action Test` explícito. Para revisar un runtime ya abierto: `Invoke-RutaFijaNativeRuntime.ps1 -Action Test`; consulta identidad de procesos y endpoints. `Invoke-RutaFijaNativeTest.ps1 -Action Preflight` realiza únicamente SELECT en la base de prueba; no equivale a ejecutar pruebas.
+
+`Invoke-RutaFijaNativeTest.ps1 -Action Clean` está bloqueado antes de importar secretos o conectar. La versión histórica ejecutaba TRUNCATE masivo al finalizar Verify y exigía V14: esa entrada fue sustituida, no debe recuperarse ni ejecutarse contra la fixture protegida. Tampoco ejecutar `mvnw.cmd test` o `verify` sin delimitar las clases: existen integraciones capaces de acceder a PostgreSQL.
+
+## Evidencia y diagnóstico
+
+La actualización para el commit de entrega está descrita en [Runtime y evaluación de la Solución 1](runtime-y-evaluacion-solucion-1-v3.1.md), con la versión real de Angular, el alcance de la telemetría, la separación entre 50 migraciones de runtime y una repetible de pruebas, y los requisitos pendientes del piloto. El respaldo exacto de la versión previa de este manual y de los dos launchers modificados se conserva en `docs/entrega/2026-10-23-commit-v3.1/`; los manifiestos de los cortes anteriores permanecen históricos.
+
+[Auditoría de launchers](evidencia/auditoria-ide-2026-10-23/launchers/README.md): respaldo exacto de los 16 archivos originales, hashes, ACL, esquemas, parsers de todos los scripts y mocks de propiedad. El arranque normal rechazado en V12 y los negativos de Clean/smoke tienen evidencia ejecutada. Los resultados de smoke real se incorporan en la auditoría raíz cuando se ejecuten; esta guía no los da por aprobados por anticipado.
+
+Si falla el inicio, conservar `.runtime/backend.stderr.log` y `.runtime/frontend.stderr.log` y el estado registrado. La falta de esquema V50, permisos privados, JDK21, dependencias Angular o identidad verificable se resuelve por su causa; no ejecutar migraciones, borrar estados ni matar procesos para ocultar el error. QuickDemo exige cloudflared ya disponible y rechaza su ausencia sin instalación ni descarga automática. Antes de abrir cualquier túnel comprueba los puertos locales y el esquema; la base V12 bloquea esa vía. La instalación revisada de una herramienta y cualquier exposición pública requieren una decisión independiente; no se ejecutaron en esta auditoría.
+
+<details>
+<summary>Manual anterior conservado como antecedente; sus comandos de bootstrap, migración, Git, limpieza y offline no son instrucciones vigentes de este corte.</summary>
+
 # Uso del Sistema
 
 Guía de instalación y operación del CRM Web Administrativo y Reportes de
@@ -448,3 +523,6 @@ datos son importantes.
 
 Consulte también el [README principal](../README.md), las guías de
 [F1.4](ejecucion-nativa-f1-4.md) y [F1.5](ejecucion-nativa-f1-5.md).
+
+
+</details>

@@ -1,0 +1,204 @@
+{
+  "runId" : "44b3d67a-69ce-4169-89b4-62ebe8a40160",
+  "organizationId" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+  "adminId" : "92ebc07c-1319-4850-a734-f792cb299979",
+  "ledgerBefore" : {
+    "SUPER_ADMIN" : 1,
+    "ADMIN" : 3,
+    "CONDUCTOR" : 0
+  },
+  "termsAcceptancesBefore" : 2,
+  "phase" : "CRM_CONNECTED_QUALIFICATION",
+  "observedAt" : "2026-10-19T08:59:05.728327600Z",
+  "httpEvents" : [ {
+    "status" : 201,
+    "path" : "/groups",
+    "method" : "POST",
+    "startedAt" : "2026-10-19T08:55:46.005542Z",
+    "finishedAt" : "2026-10-19T08:55:46.557321300Z"
+  }, {
+    "status" : 201,
+    "path" : "/vehicles",
+    "method" : "POST",
+    "startedAt" : "2026-10-19T08:55:46.564323400Z",
+    "finishedAt" : "2026-10-19T08:55:46.636842500Z"
+  }, {
+    "status" : 201,
+    "path" : "/invitations",
+    "method" : "POST",
+    "startedAt" : "2026-10-19T08:55:46.644842700Z",
+    "finishedAt" : "2026-10-19T08:55:46.727841Z"
+  }, {
+    "status" : 202,
+    "path" : "/onboarding/requests",
+    "method" : "POST",
+    "startedAt" : "2026-10-19T08:55:46.731842500Z",
+    "finishedAt" : "2026-10-19T08:55:47.052044500Z"
+  }, {
+    "status" : 202,
+    "path" : "/onboarding/otp/verify",
+    "method" : "POST",
+    "startedAt" : "2026-10-19T08:55:47.052044500Z",
+    "finishedAt" : "2026-10-19T08:55:47.091639500Z"
+  }, {
+    "status" : 200,
+    "path" : "/onboarding/requests/75e0c833-c0ad-4fa8-bc36-f27221ac30c7/documentary-expediente",
+    "method" : "GET",
+    "startedAt" : "2026-10-19T08:55:47.092640300Z",
+    "finishedAt" : "2026-10-19T08:55:47.147388800Z"
+  }, {
+    "status" : 200,
+    "path" : "/onboarding/requests/75e0c833-c0ad-4fa8-bc36-f27221ac30c7/documentary-expediente",
+    "method" : "PUT",
+    "startedAt" : "2026-10-19T08:55:47.148384900Z",
+    "finishedAt" : "2026-10-19T08:55:47.231386600Z"
+  }, {
+    "status" : 200,
+    "path" : "/onboarding/requests/75e0c833-c0ad-4fa8-bc36-f27221ac30c7/approve",
+    "method" : "POST",
+    "startedAt" : "2026-10-19T08:55:47.232390500Z",
+    "finishedAt" : "2026-10-19T08:55:47.284386400Z"
+  }, {
+    "status" : 200,
+    "path" : "/onboarding/requests/75e0c833-c0ad-4fa8-bc36-f27221ac30c7/provision",
+    "method" : "POST",
+    "startedAt" : "2026-10-19T08:55:47.286386400Z",
+    "finishedAt" : "2026-10-19T08:55:47.398899700Z"
+  }, {
+    "status" : 200,
+    "path" : "/mobile/auth/login",
+    "method" : "POST",
+    "startedAt" : "2026-10-19T08:55:47.399900100Z",
+    "finishedAt" : "2026-10-19T08:55:47.752018500Z"
+  }, {
+    "observedAt" : "2026-10-19T08:55:53.148221400Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/qualification",
+    "method" : "GET",
+    "channel" : "client-real-http"
+  }, {
+    "observedAt" : "2026-10-19T08:55:53.202222900Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/qualification/personal-catalog",
+    "method" : "GET",
+    "channel" : "client-real-http"
+  }, {
+    "observedAt" : "2026-10-19T08:55:53.238221400Z",
+    "status" : 403,
+    "path" : "/api/v1/mobile/me",
+    "method" : "GET",
+    "channel" : "client-real-http"
+  }, {
+    "observedAt" : "2026-10-19T08:55:53.277224600Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/qualification",
+    "method" : "GET",
+    "channel" : "client-real-http"
+  }, {
+    "observedAt" : "2026-10-19T08:55:53.400746400Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/qualification/unit-requests",
+    "method" : "POST",
+    "channel" : "client-real-http"
+  }, {
+    "observedAt" : "2026-10-19T08:55:53.466748800Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/qualification/unit-requests",
+    "method" : "POST",
+    "channel" : "client-real-http"
+  }, {
+    "observedAt" : "2026-10-19T08:55:53.508744600Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/qualification",
+    "method" : "GET",
+    "channel" : "client-real-http"
+  }, {
+    "observedAt" : "2026-10-19T08:55:57.192217800Z",
+    "status" : 200,
+    "path" : "/api/v1/auth/refresh",
+    "method" : "POST",
+    "channel" : "client-real-http"
+  }, {
+    "observedAt" : "2026-10-19T08:55:57.214224800Z",
+    "status" : 200,
+    "path" : "/api/v1/auth/me",
+    "method" : "GET",
+    "channel" : "client-real-http"
+  }, {
+    "observedAt" : "2026-10-19T08:55:57.248856800Z",
+    "status" : 200,
+    "path" : "/api/v1/admin/terms/current",
+    "method" : "GET",
+    "channel" : "client-real-http"
+  }, {
+    "observedAt" : "2026-10-19T08:55:57.788265800Z",
+    "status" : 200,
+    "path" : "/api/v1/drivers/5712d0db-e92b-4988-9809-a49d04a194ef/qualification",
+    "method" : "GET",
+    "channel" : "client-real-http"
+  }, {
+    "observedAt" : "2026-10-19T08:55:57.903781900Z",
+    "status" : 200,
+    "path" : "/api/v1/drivers/5712d0db-e92b-4988-9809-a49d04a194ef/qualification/expediente",
+    "method" : "GET",
+    "channel" : "client-real-http"
+  }, {
+    "observedAt" : "2026-10-19T08:55:58.261436100Z",
+    "status" : 200,
+    "path" : "/api/v1/drivers/5712d0db-e92b-4988-9809-a49d04a194ef/qualification/reviews",
+    "method" : "POST",
+    "channel" : "client-real-http"
+  }, {
+    "path" : "/onboarding/requests/75e0c833-c0ad-4fa8-bc36-f27221ac30c7/documentary-expediente",
+    "status" : 200,
+    "finishedAt" : "2026-10-19T08:58:45.904008100Z",
+    "startedAt" : "2026-10-19T08:58:45.448642100Z",
+    "method" : "GET"
+  }, {
+    "path" : "/api/v1/auth/refresh",
+    "status" : 200,
+    "observedAt" : "2026-10-19T08:58:47.222339500Z",
+    "channel" : "client-real-http",
+    "method" : "POST"
+  }, {
+    "path" : "/api/v1/auth/me",
+    "status" : 200,
+    "observedAt" : "2026-10-19T08:58:47.290897800Z",
+    "channel" : "client-real-http",
+    "method" : "GET"
+  }, {
+    "path" : "/api/v1/admin/terms/current",
+    "status" : 200,
+    "observedAt" : "2026-10-19T08:58:47.374898700Z",
+    "channel" : "client-real-http",
+    "method" : "GET"
+  }, {
+    "path" : "/api/v1/drivers/5712d0db-e92b-4988-9809-a49d04a194ef/qualification",
+    "status" : 200,
+    "observedAt" : "2026-10-19T08:58:47.630630400Z",
+    "channel" : "client-real-http",
+    "method" : "GET"
+  }, {
+    "path" : "/api/v1/drivers/5712d0db-e92b-4988-9809-a49d04a194ef/qualification/expediente",
+    "status" : 200,
+    "observedAt" : "2026-10-19T08:58:47.765782400Z",
+    "channel" : "client-real-http",
+    "method" : "GET"
+  }, {
+    "path" : "/api/v1/drivers/5712d0db-e92b-4988-9809-a49d04a194ef/qualification/reviews",
+    "status" : 200,
+    "observedAt" : "2026-10-19T08:58:48.304288700Z",
+    "channel" : "client-real-http",
+    "method" : "POST"
+  } ],
+  "groupId" : "89d52c0d-5223-480d-bd3e-3f614f201957",
+  "vehicleId" : "31d8e857-4e37-495d-8474-5b8def193684",
+  "invitationId" : "a64daf4c-4a8c-4362-ab82-b01b05b09f59",
+  "requestId" : "75e0c833-c0ad-4fa8-bc36-f27221ac30c7",
+  "driverId" : "5712d0db-e92b-4988-9809-a49d04a194ef",
+  "accountId" : "3fb1f499-81d2-45dd-8e60-b53f6eb7ff79",
+  "flutterPassed" : true,
+  "browserRefreshFamilyId" : "69581e24-e7f4-4860-ab0b-ce6914a48e24",
+  "result" : "PENDING_KEEP_CASE",
+  "failedPhase" : "CRM_CONNECTED_QUALIFICATION"
+}

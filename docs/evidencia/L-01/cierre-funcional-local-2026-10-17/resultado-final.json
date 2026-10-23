@@ -1,0 +1,57 @@
+{
+  "project": "Ruta Fija V3.1",
+  "lot": "L-01",
+  "status": "VERIFICADA",
+  "closureType": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "completedAtUtc": "2026-10-18T02:43:19.464832+00:00",
+  "localDate": "2026-10-17",
+  "runId": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "SC03LocalResult": "PASS_SC03_MANUAL_ACCEPTANCE_WITH_AUTOMATED_GATE",
+  "SC07LocalResult": "PASS_LOCAL_TEMPORARY_COPY_ONLY",
+  "manualAcceptancePreserved": true,
+  "gateOrigin": "AUTOMATED_SYNTHETIC_ONLY",
+  "originalManualFullGateResultUnchanged": "PENDING",
+  "allTwelveLocalCriteriaVerified": true,
+  "localMandatoryRemainingCriteria": [],
+  "originalRealPilotRequirementsSatisfied": false,
+  "pilotEnabled": false,
+  "L02Started": false,
+  "L02Authorized": false,
+  "TEST_CLEANUP_RELEASED": true,
+  "historicalCreations": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 0
+  },
+  "remainingSlots": {
+    "SUPER_ADMIN": 0,
+    "ADMIN": 1,
+    "CONDUCTOR": 20
+  },
+  "termsAcceptanceCount": 2,
+  "selectiveCleanup": "ADDED_SYNTHETIC_ADMIN_DISABLED_SESSIONS_REVOKED_CAPABILITIES_REMOVED",
+  "globalDatabaseCleanupExecuted": false,
+  "CI01Repeated": false,
+  "CI07Repeated": false,
+  "externalSmtpAttempts": 0,
+  "final3Regenerated": false,
+  "gitOrGithubCommandsExecuted": false,
+  "developmentOrPilotMigrationsExecuted": false,
+  "act": "docs/actas/L-01-cierre-funcional-local-2026-10-17.md",
+  "matrix": "docs/evidencia/L-01/matriz-final-funcional-local-2026-10-17.md",
+  "checks": {
+    "newMarkdownLinks": "PASS",
+    "PowerShellParsers": "PASS_ZERO_ERRORS",
+    "frozenSourcesMatchCurrent": "PASS",
+    "canonicalStatusConcordance": "PASS",
+    "immutableFilesHashes": "PASS",
+    "nativePostgresReadOnlyCorrespondence": "PASS",
+    "unitTests": {
+      "ManualL01AutomatedTermsComplementTest": 4,
+      "ManualL01HumanTrialTest": 23,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  }
+}

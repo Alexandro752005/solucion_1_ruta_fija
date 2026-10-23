@@ -31,7 +31,7 @@
             <td>{{ vehicle.year || 'No registrado' }}</td>
             <td>{{ vehicle.color || 'No registrado' }}</td>
             <td><span class="management-status" [class.success]="vehicle.status === 'DISPONIBLE'" [class.warning]="vehicle.status === 'MANTENIMIENTO'" [class.muted]="vehicle.status === 'INACTIVO'">{{ statusLabel(vehicle.status) }}</span></td>
-            <td><button class="management-button compact" type="button" (click)="viewDetails(vehicle)">Ver detalle</button></td>
+            <td><button class="management-button compact" type="button" (click)="viewDetails(vehicle)">Ver detalle</button> @if (canManage()) { <a class="management-button compact" [routerLink]="['/vehicles', vehicle.id, 'maintenance']">Mantenimiento</a> }</td>
           </tr>
         }</tbody>
       </table></div>

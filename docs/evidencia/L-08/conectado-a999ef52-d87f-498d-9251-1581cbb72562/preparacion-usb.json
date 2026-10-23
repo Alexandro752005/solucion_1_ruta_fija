@@ -1,0 +1,10 @@
+{
+    "runId":  "a999ef52-d87f-498d-9251-1581cbb72562",
+    "observedAt":  "2026-10-22T20:14:21.4565637+00:00",
+    "reverseCreatedForThisCase":  true,
+    "localPort":  4311,
+    "locationPermissionGrantedByTool":  false,
+    "serialRecorded":  false,
+    "originalAppModified":  false,
+    "result":  "READY_FOR_PERSONAL_SYNTHETIC_LOGIN"
+}

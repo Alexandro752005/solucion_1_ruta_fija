@@ -1,0 +1,94 @@
+{
+  "runId": "a999ef52-d87f-498d-9251-1581cbb72562",
+  "observedAt": "2026-10-22T21:14:15.179542+00:00",
+  "result": "PASS_14_PURE_UNIT_HARNESS_FIX_RUNTIME_SERVICE_NOT_YET_RETRIED",
+  "tests": 14,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "distinctTestsNot12Plus14": true,
+  "testCases": [
+    {
+      "name": "preservesExistingFutureStartRegardlessOfPriorRejection",
+      "timeSeconds": "0.317"
+    },
+    {
+      "name": "renewsExpiredOrBoundaryStartOnlyForKnownRejectedPrecommitAttempt",
+      "timeSeconds": "0.002"
+    },
+    {
+      "name": "rejectsEitherIncorrectTerminalKind",
+      "timeSeconds": "0.092"
+    },
+    {
+      "name": "rejectsFewerThanThreeStops",
+      "timeSeconds": "0.002"
+    },
+    {
+      "name": "refusesToRenewAnExpiredOrBoundaryStartWhenOutcomeIsUncertain",
+      "timeSeconds": "0.001"
+    },
+    {
+      "name": "rejectsBlankOriginOrDestinationNames",
+      "timeSeconds": "0.003"
+    },
+    {
+      "name": "rejectsAnotherCatalogEvenIfItsVersionIdentifierMatches",
+      "timeSeconds": "0.003"
+    },
+    {
+      "name": "permitsPreparationWhenNoPriorSubmissionRemainsUnconfirmed",
+      "timeSeconds": "0.002"
+    },
+    {
+      "name": "initializesAnUnpreparedStartThirtyMinutesInTheFuture",
+      "timeSeconds": "0.001"
+    },
+    {
+      "name": "rejectsHistoricalVersionInsteadOfSilentlySelectingTheNewCurrentVersion",
+      "timeSeconds": "0.001"
+    },
+    {
+      "name": "rejectsAbsentOrDuplicatedRequestedVersion",
+      "timeSeconds": "0.003"
+    },
+    {
+      "name": "rejectsAnInactiveCatalog",
+      "timeSeconds": "0.002"
+    },
+    {
+      "name": "refusesAnotherSubmissionWhenThePreviousOutcomeIsUnconfirmed",
+      "timeSeconds": "0.002"
+    },
+    {
+      "name": "buildsPayloadFromExactCurrentVersionRatherThanFirstVersionOrConstants",
+      "timeSeconds": "0.012"
+    }
+  ],
+  "sourceAndClassSha256": {
+    "backend/src/test/java/pe/rutafija/support/L08ConnectedTrial.java": "9cb7a31822331b05a470e5f278c210a5b8e2a47598b29822b4ef368892feb461",
+    "backend/src/test/java/pe/rutafija/support/L08ConnectedServicePreparationTest.java": "9a24ff787cda929985cd78f45fd43f1192898d6bb7074751cef953c01a05f4cf",
+    "backend/target/test-classes/pe/rutafija/support/L08ConnectedTrial.class": "c5d167fcd8ef0e01a3f4e84694c1d51890679fbc3eaa991d23e33cbaf1e777ac",
+    "backend/target/test-classes/pe/rutafija/support/L08ConnectedServicePreparationTest.class": "7505b8d76e7acb03e2d312d017c418a39b33331b2926862b11be984443f72394"
+  },
+  "diagnosticBefore": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/fallo-preparacion-servicio-diagnostico.json",
+  "readOnlyPostcheck": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/fallo-preparacion-servicio-postcheck-6147d06b-49b1-4c8f-8aac-8abb76fa65e1.json",
+  "readOnlyPostcheckSha256": "012964f0f5651372d726ec46e1359f0b5eb484a8ce9f5951737faa0b5f75f987",
+  "databaseFixtureTestsExecuted": 0,
+  "databaseWrites": 0,
+  "newAccounts": 0,
+  "httpResubmissions": 0,
+  "historicalLedger": {
+    "ADMIN": 3,
+    "CONDUCTOR": 7,
+    "SUPER_ADMIN": 1
+  },
+  "termsAcceptancesPreserved": 2,
+  "markerPreserved": true,
+  "pausedCaseAdvisoryLockFree": true,
+  "TEST_CLEANUP_RELEASED": false,
+  "externalMailAttempts": 0,
+  "normalProductionRulesChanged": false,
+  "manualPhoneResult": "PENDING",
+  "pilotEnabled": false
+}

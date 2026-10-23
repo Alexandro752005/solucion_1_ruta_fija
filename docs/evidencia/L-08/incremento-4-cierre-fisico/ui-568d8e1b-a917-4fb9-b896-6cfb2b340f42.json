@@ -1,0 +1,109 @@
+{
+    "observedAt":  "2026-10-23T05:28:57.7814934+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "action":  "click",
+    "label":  "Confirmar",
+    "automatedUiInstrumentation":  true,
+    "humanAccessibilityConfirmation":  false,
+    "nodes":  [
+                  {
+                      "text":  "",
+                      "description":  "Volver",
+                      "bounds":  "[12,103][156,247]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Detalle de asignación",
+                      "bounds":  "[216,141][724,210]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Solicitud de mis puntos GPS\nLa vista ordinaria muestra solo el resumen del servicio. Los puntos requieren revisión ADMIN y verificación de su cuenta; no se conservan más de siete días y solicitar acceso no amplía ese plazo.",
+                      "bounds":  "[60,259][1020,876]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Consultar solicitudes",
+                      "bounds":  "[120,384][519,528]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Solicitar mis puntos de este servicio",
+                      "bounds":  "[120,528][818,672]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Anteriores",
+                      "bounds":  "[120,672][353,816]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "false",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Siguientes",
+                      "bounds":  "[353,672][588,816]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "false",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Ruta asignada: solo consulta\nSYNTHETIC L08 route 3f0ba758-6eb9-4d2f-b948-dd1c7de3c430 · revisión 1\n1. SYNTHETIC start · START\n2. SYNTHETIC middle · INTERMEDIATE\n3. SYNTHETIC end without physical geometry · END\nRuta finalizada declarada: 2026-10-23 00:28:[REDACTED_NUMBER]\nTerminal: NOT_CORROBORATED_TERMINAL_UNCONFIGURED\nLa declaración no demuestra todo el recorrido GPS. La falta de evidencia no se presenta como corroboración.",
+                      "bounds":  "[60,924][1020,1668]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "No hay una acción móvil disponible para el estado actual. Actualice si la operación fue modificada recientemente.",
+                      "bounds":  "[60,1716][1020,1980]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Las acciones se validan en el servidor. La aplicación no puede aceptar ni rechazar por otro conductor, ni duplicar un evento al reintentar.",
+                      "bounds":  "[60,2028][1020,2261]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Ruta finalizada confirmado.",
+                      "bounds":  "[0,2220][1080,2261]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  }
+              ]
+}

@@ -81,4 +81,16 @@ public class MobileIncidentController {
                 .cacheControl(CacheControl.noStore())
                 .body(mobileIncidentService.close(incidentId, request));
     }
+    @GetMapping("/{incidentId}/history")
+    public ResponseEntity<java.util.List<pe.rutafija.operation.api.IncidentWorkflowContract.Action>> history(@PathVariable UUID incidentId){
+        return ResponseEntity.ok().cacheControl(CacheControl.noStore()).body(mobileIncidentService.history(incidentId));
+    }
+    @GetMapping("/operations/{key}")
+    public ResponseEntity<pe.rutafija.operation.api.IncidentWorkflowContract.Operation> operation(@PathVariable UUID key){
+        return ResponseEntity.ok().cacheControl(CacheControl.noStore()).body(mobileIncidentService.operation(key));
+    }
+    @PostMapping("/{incidentId}/information")
+    public ResponseEntity<IncidentResponse> information(@PathVariable UUID incidentId,@Valid @RequestBody pe.rutafija.operation.api.IncidentWorkflowContract.Information request){
+        return ResponseEntity.ok().cacheControl(CacheControl.noStore()).body(mobileIncidentService.information(incidentId,request));
+    }
 }

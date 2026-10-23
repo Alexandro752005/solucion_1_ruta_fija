@@ -1,0 +1,55 @@
+{
+    "observedAt":  "2026-10-23T05:28:51.3226658+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "action":  "click",
+    "label":  "Completar servicio",
+    "automatedUiInstrumentation":  true,
+    "humanAccessibilityConfirmation":  false,
+    "nodes":  [
+                  {
+                      "text":  "",
+                      "description":  "Ruta finalizada",
+                      "bounds":  "[192,1096][888,1174]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Declaras Ruta finalizada para tu servicio aceptado e iniciado. El servidor comprueba la evidencia de terminal disponible; declararlo no acredita todo el recorrido GPS.",
+                      "bounds":  "[192,1222][888,1462]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Cancelar",
+                      "bounds":  "[358,1534][566,1678]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Confirmar",
+                      "bounds":  "[590,1534][888,1678]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Dismiss",
+                      "bounds":  "[0,331][1080,2261]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  }
+              ]
+}

@@ -1,0 +1,16 @@
+{
+  "runId" : "c78fe5ef-d14b-4f97-bf48-bd01c2c1a79c",
+  "database" : "ruta_fija_test",
+  "role" : "rf_test",
+  "serviceId" : "1dc4a0fd-4f28-412f-bb99-f3fceddbac58",
+  "offerId" : "149b817c-247c-4333-a1a4-135f7581ad77",
+  "groupId" : "16cd8050-f924-413d-8e05-4b225206461f",
+  "driverIds" : [ "943233fd-b3be-4e4f-97ba-a94f231a84dc", "519e8e9b-e5af-49fe-a18e-3075c014bd72" ],
+  "vehicleIds" : [ "710bb408-0cbb-455d-aebd-fdb2d97796a9", "ef5728e9-1feb-4cf0-96e1-f2d05c23980c" ],
+  "result" : "PASS_PG_SINGLE_LIVE_OFFER",
+  "losingSqlState" : "23514",
+  "cleanup" : "EXACT_SERVICE_CANCELLED_HISTORY_AND_INACTIVE_ACCOUNTLESS_RESOURCES_RETAINED",
+  "ledgerPreserved" : true,
+  "accountsCreated" : 0,
+  "normalHttpOrApprovalEvidence" : false
+}

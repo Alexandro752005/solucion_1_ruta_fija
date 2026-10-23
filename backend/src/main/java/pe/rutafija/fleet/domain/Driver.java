@@ -57,6 +57,13 @@ public class Driver {
     @Column(name = "availability_status", nullable = false, length = 25)
     private DriverAvailabilityStatus availabilityStatus;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "declared_availability_status", length = 25)
+    private DriverAvailabilityStatus declaredAvailabilityStatus;
+
+    @Column(name = "declared_availability_at")
+    private Instant declaredAvailabilityAt;
+
     @Column(name = "location_consent", nullable = false)
     private boolean locationConsent;
 
@@ -174,12 +181,27 @@ public class Driver {
         if (availabilityStatus != DriverAvailabilityStatus.EN_SERVICIO) {
             throw new IllegalStateException("El conductor no se encuentra EN_SERVICIO");
         }
-        availabilityStatus = DriverAvailabilityStatus.DISPONIBLE;
+        availabilityStatus = declaredAvailabilityStatus == null ? DriverAvailabilityStatus.DISPONIBLE : declaredAvailabilityStatus;
+    }
+    /** A safe transfer ends this participation without reactivating or declaring availability. */
+    public void finishTransferredService(boolean eligible,boolean otherConfirmed){
+        if(availabilityStatus==DriverAvailabilityStatus.EN_SERVICIO)
+            availabilityStatus=!active||!eligible?DriverAvailabilityStatus.NO_DISPONIBLE:otherConfirmed?DriverAvailabilityStatus.RESERVADO:
+                declaredAvailabilityStatus==null?DriverAvailabilityStatus.NO_DISPONIBLE:declaredAvailabilityStatus;
+    }
+
+    /** The application has validated this driver's still-open original execution. Inactive stays inactive. */
+    public void enterSafetyAttention() { availabilityStatus=DriverAvailabilityStatus.ATENCION; }
+    public void finishSafetyAttention(boolean eligible,boolean anotherConfirmed) {
+        if(availabilityStatus!=DriverAvailabilityStatus.ATENCION && availabilityStatus!=DriverAvailabilityStatus.NO_DISPONIBLE)
+            throw new IllegalStateException("El conductor no está en atención segura.");
+        availabilityStatus=!active||!eligible?DriverAvailabilityStatus.NO_DISPONIBLE:
+            anotherConfirmed?DriverAvailabilityStatus.RESERVADO:declaredAvailabilityStatus==null?DriverAvailabilityStatus.NO_DISPONIBLE:declaredAvailabilityStatus;
     }
 
     public void releaseReservation() {
         if (availabilityStatus == DriverAvailabilityStatus.RESERVADO) {
-            availabilityStatus = DriverAvailabilityStatus.DISPONIBLE;
+            availabilityStatus = declaredAvailabilityStatus == null ? DriverAvailabilityStatus.DISPONIBLE : declaredAvailabilityStatus;
         }
     }
 
@@ -197,12 +219,24 @@ public class Driver {
                     || requested == DriverAvailabilityStatus.NO_DISPONIBLE;
             case NO_DISPONIBLE -> requested == DriverAvailabilityStatus.DISPONIBLE
                     || requested == DriverAvailabilityStatus.DESCANSO;
-            case RESERVADO, EN_SERVICIO -> false;
+            case RESERVADO, EN_SERVICIO, ATENCION -> false;
         };
         if (!valid) {
             throw new IllegalStateException("La transición de disponibilidad no está permitida");
         }
         availabilityStatus = requested;
+    }
+
+    /** Only an explicit authenticated CONDUCTOR intention calls this method.
+     * Computed occupation, suspension, disconnection and logout never manufacture a declaration. */
+    public void declareAvailability(DriverAvailabilityStatus requested, Instant serverNow) {
+        requireActive(); Objects.requireNonNull(requested); Objects.requireNonNull(serverNow);
+        if (requested != DriverAvailabilityStatus.DISPONIBLE && requested != DriverAvailabilityStatus.DESCANSO
+                && requested != DriverAvailabilityStatus.NO_DISPONIBLE)
+            throw new IllegalStateException("El conductor solo declara disponible, descanso o no disponible");
+        if (availabilityStatus == DriverAvailabilityStatus.RESERVADO || availabilityStatus == DriverAvailabilityStatus.EN_SERVICIO || availabilityStatus == DriverAvailabilityStatus.ATENCION)
+            throw new IllegalStateException("La declaración no puede invalidar un compromiso aceptado");
+        availabilityStatus = requested; declaredAvailabilityStatus = requested; declaredAvailabilityAt = serverNow;
     }
 
     /**
@@ -258,6 +292,9 @@ public class Driver {
     public DriverAvailabilityStatus getAvailabilityStatus() {
         return availabilityStatus;
     }
+
+    public DriverAvailabilityStatus getDeclaredAvailabilityStatus() { return declaredAvailabilityStatus; }
+    public Instant getDeclaredAvailabilityAt() { return declaredAvailabilityAt; }
 
     public boolean isLocationConsent() {
         return locationConsent;

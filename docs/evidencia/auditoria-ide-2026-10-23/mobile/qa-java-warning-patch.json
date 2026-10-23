@@ -1,0 +1,310 @@
+{
+  "observedAtUtc": "2026-10-23T16:13:16.797434+00:00",
+  "result": "PASS_INDEPENDENT_JAVA_WARNING_PATCH_REVIEW_NO_BLOCKERS",
+  "reviewer": "mobile_nofix independent of all reviewed Java/runner implementation",
+  "reviewedFiles": [
+    {
+      "path": "backend/src/main/java/pe/rutafija/availability/monitor/HttpAvailabilityProbe.java",
+      "sha256": "dfb3be8636f5995f4228db8a7b2b15b5358b5411c907d36c925b7f9a5820403d"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/domain/DriverGroupMembership.java",
+      "sha256": "0dfb9f7d66d0cd11832aba705a7e0b6a54b6dba9482f8c563e18deeee35d0e8e"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/domain/DriverVehicleLinkId.java",
+      "sha256": "695cef862e76ed52cf4309178c5071995db4f486aeff3c2b1293f8d06fc61a46"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/domain/GroupCoordinatorId.java",
+      "sha256": "c89fb5e4057929e8ecef4d22a775b74914d3452507b5d4588ebe287c8b398f31"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/EmailOtpCodeRejectedException.java",
+      "sha256": "19608c1292f33d3a3aaf4cd229e96d763aa85ad462ebbc43f95153ee9db30946"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/RecoveryProofRejectedException.java",
+      "sha256": "871bed4d2a997d7c382e62e22e59846de72a8f966c3b0fe25069fe9a45d6c0ec"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/recoverycli/SuperAdminRecoveryCli.java",
+      "sha256": "e57eaeadd28fff8904b1fa7f0f39b0c55a2f954577aba7087fca68d67777317e"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/application/OnboardingInvitationRejectedException.java",
+      "sha256": "9e0fd636b257dc9fbafc9f3a8168a19783379b6e5058ccc0d7ef7bc5bea0ec3e"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/application/OnboardingOtpRejectedException.java",
+      "sha256": "854a7a26a540eff80d3ccf63413ec24610adba690eb23f2c078fd8d1be6d6139"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/ReportExportService.java",
+      "sha256": "c5062521e7f11ee7f3194ff481f93c66cd71f039e2d2ea4112727193ba53f115"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/personidentity/application/PersonIdentityGateAuthorizationManager.java",
+      "sha256": "70c767be9b839e5c06fa66bfc0bf16cbd5c5c778eebd3fe34fd1f4939f16d877"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/exception/ApplicationException.java",
+      "sha256": "acad25e026ddef91a30a275f3e0aa8072a4803166c50518ffdb3027bac47676a"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/exception/ExternalServiceUnavailableException.java",
+      "sha256": "8349609b5ad69f833fce2cc49ee06efde7f0787b553f79a6078dbe70d20824c5"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/exception/InvalidCredentialsException.java",
+      "sha256": "ddd8c94c44b1b41158ff4da4c4cab374ced129864e8a8ca5ddff68ca7714d7aa"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/exception/InvalidRefreshTokenException.java",
+      "sha256": "cf478dce71676f6172355496df90a58cb17247c8bfc0270bded791d5f41c917f"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/exception/RateLimitExceededException.java",
+      "sha256": "67d92d1a88e109515de1902f3097cee4071a8d46b37948aea950f34d84a0c3bb"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/exception/RefreshTokenReuseException.java",
+      "sha256": "cdca9420fd880a55d5731554c9659c8448941384f642293f5534352ed9b8970c"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/terms/application/AdminTermsGateAuthorizationManager.java",
+      "sha256": "fc243c2600a7508e958625a60353fb8905bb09d879d47583255f3e0a71d06cec"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/personidentity/PersonIdentityGateAuthorizationManagerTest.java",
+      "sha256": "d3acac98957098142ba1b2da07e536e03d751bb7d6df883a774cbf5c75082c6c"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L02ClosedCaseVerification.java",
+      "sha256": "d0cafc77f7a5044e5324c77d229105a02f904c98263c2ad29c0bf8e66ae094df"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L02ConnectedTrial.java",
+      "sha256": "7ae4f184c55d5d34e4a8decbe22226e4681a2a576749f21f398404e3e23a79a3"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L02DatabasePreflight.java",
+      "sha256": "419ffe724029b789328ce931a4f34039f8d98c974a50b04b06d632edb35fc02e"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L03ConnectedTrial.java",
+      "sha256": "3b0d5d5f8fcacb13e030cdb46a70069cb0568bf4e549a0fa8dbfd891886803c8"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L03DatabasePreflight.java",
+      "sha256": "567ce9bb0e2c58ea6df71433a5c82eead15c306ca45f54a0a801008e3b671882"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L04ConnectedTrial.java",
+      "sha256": "54d9d6dffd3f9c0e904d2b84540f59a1d89461142da6505214b3422ef3b9c2b8"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L04DatabasePreflight.java",
+      "sha256": "78aec78a4ce69ff8f76647b751bb8806b81078e10a13b799b51c9f59fd3fb05a"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L05ConnectedTrial.java",
+      "sha256": "d73bf8b87306b7783a61614c9550257ce95041420ba784ddb1a25a858168119b"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L05DatabasePreflight.java",
+      "sha256": "4418a534706bb26456276b8a08590836ef567f55763128551bcb7732f64a113e"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L06ConnectedTrial.java",
+      "sha256": "461f2d194e403e6f2ec5f9c2768c5b4098ec5663b2eabe9b9a7e12001d4d4b25"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L06DatabasePreflight.java",
+      "sha256": "0706f9bb3b9a02c8a4aea16402d6780e61767f8f628c949bfaf9ab7e6d4cc144"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L07ConnectedTrial.java",
+      "sha256": "272c3a3ef564ac9bc5f125c6f3eb9b16eaf88abc7a8ec10896b388fd818da42f"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L07DatabasePreflight.java",
+      "sha256": "1a0dab963302bc0d31343defa2b69f435c2068f697e1e5bcf2b36d5a65c185fe"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L08CapacityRetirementRace.java",
+      "sha256": "a64a0419cbab22e44108c659b382bf6d78d61c9e6a3f32c487cc79c3a431d1d4"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L08CapacityTrial.java",
+      "sha256": "2c91530d3b39468ebd60c60f447964fc46a54721546ea54a76e73639c585933b"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L08ConnectedTrial.java",
+      "sha256": "4c2aecacdd903a238b688be32238d16c3b1c94103271732646a047f3a3c814a9"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L08DatabasePreflight.java",
+      "sha256": "56f39a967e3faece55ca5e2fe912f50633d1fe205d3faef3b22f5d08fb8e871f"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/L08V50Preflight.java",
+      "sha256": "be72866fc57b3c15f6db09d21972957a0f4f07cfb390217205f5960f9c10dad7"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/ManualL01AutomatedTermsComplement.java",
+      "sha256": "241f7bcfafa0a474be1d3fadf2bae9181dfeb6de2997ab2c25e474798ea282d7"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/ManualL01HumanTrial.java",
+      "sha256": "db1f419fbf6658b29151a564770444383ed41242746af221e0d4263c9303e63e"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/ManualL01HumanTrialServer.java",
+      "sha256": "d7550e7a08cc7809d60b5be96c4741ea644b00ed98ab19a67a2ff5869f53a07c"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/ManualL01RecoveryFixtureKeyReplacementTest.java",
+      "sha256": "574c6f92c4d158f5e6addd0e54b900d732cda8a9fedbf8b44dbc9ac034c288ae"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/ManualL01RecoveryFixtureRepairTest.java",
+      "sha256": "c41e33b3d586e935aa07f9d150e7227e7e1f4178143ad53f87aa6443e9affca5"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/ManualOtpCaseRecovery.java",
+      "sha256": "0c1dfe4e2b61e18d04d36ef86cceb346cad493ce8a6e1c058419082af3b19fb1"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/ManualOtpDeliveryValidation.java",
+      "sha256": "0592acdb4a51f86667f40ddef9f40bb51e22857ea7d880212006917d4fb75fa1"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/ManualOtpEvidenceVerification.java",
+      "sha256": "192a4c1643adbf7985ea4fff515edd0e7a5673660b736ef6888b46f79977ebfa"
+    },
+    {
+      "path": "scripts/Test-RutaFijaBackendUnitSafe.ps1",
+      "sha256": "848b5d30002a4108de1f7c5232b6f48a7ebabc2672d6dd55ab734315834cafcc"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/FixtureJson.java",
+      "sha256": "3eb1fb2bbb023b5b6a7b6f7e45db304573730cf13321777b7910accefc217f3f"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/support/FixtureJsonTest.java",
+      "sha256": "9ac9e60bab39f3133b5ffbb6902c96aa41da7063f683a0a9b90a4bbe7194b2f8"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/operation/application/ReportExportResourceTest.java",
+      "sha256": "d492bd8cae5eb80de8c4c2900df0ccddbb4f9529c844d1b3d44ca03fa93bcb2c"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/terms/application/AdminTermsGateAuthorizationManagerTest.java",
+      "sha256": "f1e62ead3f158abbc4ab9ec3f223406b8abd4b6a249f90ad1b8e9caaf642a962"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/backend/correcciones-9cd90f87-411f-4492-bc84-1e087bb670d0/live-source-changes-final.json",
+      "sha256": "436d9332fcf81f30e8fdeb635c8db1dacc28fe0cfaaababb8f8c8b22f0b49d07"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/backend/correcciones-9cd90f87-411f-4492-bc84-1e087bb670d0/serial-uids-before.json",
+      "sha256": "7f19b870f080ea4a7ee579c4bcda5a412402cea72cfa63f0a480ecbb292bcb74"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/backend/correcciones-9cd90f87-411f-4492-bc84-1e087bb670d0/serial-uids-after.json",
+      "sha256": "5b35408bba98a8e7e47c62c344bf8629706de15e2904a19a9d92fe935c6ed49e"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/backend/run-ed21be06-39e5-4575-8126-d9bac34ff3f4/result.json",
+      "sha256": "c7098bad3151ec1c3430cc579cd9b8ef31a287059a5e27dfb8aa2302d8138fc7"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/backend/run-ed21be06-39e5-4575-8126-d9bac34ff3f4/commands.json",
+      "sha256": "706a10798866aee614998526ce27bd138074c0b7036f7153626bcfd0598bb279"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/backend/run-ed21be06-39e5-4575-8126-d9bac34ff3f4/01-compile-test-compile.log",
+      "sha256": "e32a8eff2841439658cfb7eccc06eb9649969b731f905a87d6b1934adbfcdd21"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/mobile/qa-observations/poi551-close-bytecode.txt",
+      "sha256": "41ea7ea784340067103792834065bb9d5196c27a99cc010dfdea94ef77cbfb6e"
+    }
+  ],
+  "scope": {
+    "changedJavaExisting": 45,
+    "changedSafeRunner": 1,
+    "newHelperAndTests": 4,
+    "backupsHashExact": 46,
+    "existingPolicyBodiesPreserved": 2,
+    "serialUidsPreserved": 28,
+    "jsonHarnessReadBoundariesTyped": 13,
+    "nativeOrDatabaseHarnessExecutedByReviewer": false
+  },
+  "checks": {
+    "allCurrentAndBackupHashesMatchFinalIndex": true,
+    "all28SerialDeclarationsMatchOriginalComputedValues": true,
+    "recordedAfterSerialDescriptorsMatchBefore": true,
+    "authorizationModernMethodKeepsExactOriginalPolicyBody": true,
+    "deprecatedCheckDelegatesToAuthorizeWithoutRecursion": true,
+    "legacyParityCoveredForBothManagers": true,
+    "typedJsonObjectsRejectWrongContainersAndNonStringKeys": true,
+    "copiedJournalStepsReinsertedIntoOwningProofBeforeMutation": true,
+    "poi551CloseCallsDisposeInInstalledBytecode": true,
+    "tryWithResourcesRetainsCloseEvenOnWriteFailure": true,
+    "xlsx250RowsRoundtripAndTempFileCleanupCovered": true,
+    "manualServerCloseNarrowedToSQLExceptionWithoutAddingCatchOrSuppressingFailure": true,
+    "safeRunnerOnlyAddedThreeNewTestClasses": true,
+    "warningFlagsRemainEnabled": true,
+    "freshMainFilesCompiled": 406,
+    "freshTestFilesCompiled": 185,
+    "javacWarnings": 0,
+    "safeSuiteClasses": 50,
+    "independentXmlTotals": {
+      "tests": 257,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "focusedXmlTotals": {
+      "pe.rutafija.operation.application.ReportExportResourceTest": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "pe.rutafija.personidentity.PersonIdentityGateAuthorizationManagerTest": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "pe.rutafija.support.FixtureJsonTest": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "pe.rutafija.terms.application.AdminTermsGateAuthorizationManagerTest": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  },
+  "resolvedEvidenceFinding": {
+    "finding": "Initial newFiles index retained the pre-doThrow hash of the new AdminTerms test",
+    "resolution": "Original index retained; live-source-changes-final.json records new hash and explains the initial Mockito restub failure",
+    "status": "CORRECTED_REVIEWED"
+  },
+  "initialFailureRetained": "run-2ef394c3-1cc1-4885-90bf-93e40035dbcc keeps the failing new Mockito restub test; production behavior was not changed to pass it",
+  "limits": [
+    "No new integration or PostgreSQL test is credited; connected harnesses were compiled only",
+    "Zero javac warnings applies to the fresh current sources under the isolated audit POM, not every possible IDE inspection",
+    "Current backend production bytes have changed since sealed L08; do not replace its signed JAR or rewrite its frozen source hashes",
+    "A launcher JAR refresh must be a separately traceable new artifact with hash, reproducible build provenance and candidate-scope distinction",
+    "Global POI temporary-file strategy test runs in the serial safe suite and resets the strategy; parallel execution of that test needs separate review"
+  ]
+}

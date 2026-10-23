@@ -1,0 +1,14 @@
+{
+  "result": "PASS_ALL_FROZEN_EVIDENCE_AND_PROTECTED_ARTIFACTS_UNCHANGED",
+  "observedAt": "2026-10-23T01:08:27.581791+00:00",
+  "verifiedFrozenFiles": {
+    "L07Frozen": 144,
+    "L08Increment1": 36,
+    "L08PhysicalClosedCase": 451
+  },
+  "protectedFilesVerified": 12,
+  "final3Regenerated": false,
+  "publishedTermsChanged": false,
+  "gitOrGitHubExecuted": false,
+  "physicalCaseManifestSha256": "62498733d6cb86cd884b8fc6e38b9bb367a7c7579811f9443b9303decb93635f"
+}

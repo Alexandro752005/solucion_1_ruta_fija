@@ -1,0 +1,154 @@
+static void enroll(java.lang.String, java.nio.file.Path, pe.rutafija.identity.recoverycli.SuperAdminRecoveryCli$Terminal) throws java.lang.Exception;
+    Code:
+       0: aload_0
+       1: invokestatic  #490                // Method validateApiBase:(Ljava/lang/String;)Ljava/net/URI;
+       4: astore_3
+       5: aload_1
+       6: invokestatic  #330                // Method validatePrivateKeyPath:(Ljava/nio/file/Path;)Ljava/nio/file/Path;
+       9: astore        4
+      11: aload         4
+      13: invokestatic  #334                // Method publicKeyPath:(Ljava/nio/file/Path;)Ljava/nio/file/Path;
+      16: astore        5
+      18: aload         5
+      20: getstatic     #406                // Field java/nio/charset/StandardCharsets.US_ASCII:Ljava/nio/charset/Charset;
+      23: invokestatic  #440                // Method java/nio/file/Files.readString:(Ljava/nio/file/Path;Ljava/nio/charset/Charset;)Ljava/lang/String;
+      26: invokevirtual #444                // Method java/lang/String.strip:()Ljava/lang/String;
+      29: astore        6
+      31: aload         6
+      33: invokestatic  #447                // Method decodePublicKey:(Ljava/lang/String;)Ljava/security/PublicKey;
+      36: astore        7
+      38: aload_2
+      39: ldc_w         #493                // String Contrase�a del archivo de clave privada:
+      42: invokestatic  #350                // Method readSecret:(Lpe/rutafija/identity/recoverycli/SuperAdminRecoveryCli$Terminal;Ljava/lang/String;)[C
+      45: astore        8
+      47: aload         4
+      49: invokestatic  #453                // Method java/nio/file/Files.readAllBytes:(Ljava/nio/file/Path;)[B
+      52: astore        9
+      54: aload         9
+      56: aload         8
+      58: invokestatic  #457                // Method decryptPrivateKey:([B[C)Ljava/security/PrivateKey;
+      61: astore        10
+      63: aload         10
+      65: aload         7
+      67: invokestatic  #461                // Method verifyKeyPair:(Ljava/security/PrivateKey;Ljava/security/PublicKey;)V
+      70: aload         8
+      72: iconst_0
+      73: invokestatic  #434                // Method java/util/Arrays.fill:([CC)V
+      76: aload         9
+      78: invokestatic  #190                // Method wipe:([B)V
+      81: goto          100
+      84: astore        11
+      86: aload         8
+      88: iconst_0
+      89: invokestatic  #434                // Method java/util/Arrays.fill:([CC)V
+      92: aload         9
+      94: invokestatic  #190                // Method wipe:([B)V
+      97: aload         11
+      99: athrow
+     100: aload_2
+     101: ldc_w         #495                // String Token de sesi�n SUPER_ADMIN (entrada oculta):
+     104: invokestatic  #350                // Method readSecret:(Lpe/rutafija/identity/recoverycli/SuperAdminRecoveryCli$Terminal;Ljava/lang/String;)[C
+     107: astore        11
+     109: aconst_null
+     110: astore        12
+     112: aload_2
+     113: ldc_w         #497                // String Contrase�a actual de SUPER_ADMIN:
+     116: invokestatic  #350                // Method readSecret:(Lpe/rutafija/identity/recoverycli/SuperAdminRecoveryCli$Terminal;Ljava/lang/String;)[C
+     119: astore        12
+     121: new           #37                 // class java/lang/String
+     124: dup
+     125: aload         11
+     127: invokespecial #499                // Method java/lang/String."<init>":([C)V
+     130: astore        13
+     132: ldc_w         #500                // String publicKeyX509Base64
+     135: aload         6
+     137: ldc_w         #502                // String currentPassword
+     140: new           #37                 // class java/lang/String
+     143: dup
+     144: aload         12
+     146: invokespecial #499                // Method java/lang/String."<init>":([C)V
+     149: invokestatic  #504                // InterfaceMethod java/util/Map.of:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;
+     152: astore        14
+     154: aload_3
+     155: ldc_w         #507                // String /api/v1/auth/super-admin-recovery/enrollment
+     158: aload         14
+     160: aload         13
+     162: invokestatic  #509                // Method post:(Ljava/net/URI;Ljava/lang/String;Ljava/util/Map;Ljava/lang/String;)Ljava/util/Map;
+     165: astore        15
+     167: aload         15
+     169: ldc_w         #513                // String publicKeyFingerprintSha256
+     172: invokestatic  #515                // Method required:(Ljava/util/Map;Ljava/lang/String;)Ljava/lang/String;
+     175: astore        16
+     177: aload         15
+     179: ldc_w         #519                // String emergencyCodeShownOnce
+     182: invokestatic  #515                // Method required:(Ljava/util/Map;Ljava/lang/String;)Ljava/lang/String;
+     185: astore        17
+     187: aload         17
+     189: ldc_w         #521                // String [A-Za-z0-9_-]{43}
+     192: invokevirtual #523                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+     195: ifne          209
+     198: new           #526                // class java/lang/IllegalStateException
+     201: dup
+     202: ldc_w         #528                // String La API devolvi� un c�digo de emergencia con formato inesperado
+     205: invokespecial #530                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+     208: athrow
+     209: aload_2
+     210: ldc_w         #531                // String Clave p�blica inscrita. Instalaci�n: %s%n
+     213: iconst_1
+     214: anewarray     #2                  // class java/lang/Object
+     217: dup
+     218: iconst_0
+     219: aload         15
+     221: ldc_w         #533                // String installationId
+     224: invokestatic  #515                // Method required:(Ljava/util/Map;Ljava/lang/String;)Ljava/lang/String;
+     227: aastore
+     228: invokeinterface #424,  3          // InterfaceMethod pe/rutafija/identity/recoverycli/SuperAdminRecoveryCli$Terminal.printf:(Ljava/lang/String;[Ljava/lang/Object;)V
+     233: aload_2
+     234: ldc_w         #535                // String Huella SHA-256: %s%n
+     237: iconst_1
+     238: anewarray     #2                  // class java/lang/Object
+     241: dup
+     242: iconst_0
+     243: aload         16
+     245: aastore
+     246: invokeinterface #424,  3          // InterfaceMethod pe/rutafija/identity/recoverycli/SuperAdminRecoveryCli$Terminal.printf:(Ljava/lang/String;[Ljava/lang/Object;)V
+     251: aload_2
+     252: ldc_w         #537                // String C�digo de emergencia (mostrar una sola vez; guardar aparte de la clave privada):
+     255: invokeinterface #433,  2          // InterfaceMethod pe/rutafija/identity/recoverycli/SuperAdminRecoveryCli$Terminal.println:(Ljava/lang/String;)V
+     260: aload_2
+     261: aload         17
+     263: invokeinterface #433,  2          // InterfaceMethod pe/rutafija/identity/recoverycli/SuperAdminRecoveryCli$Terminal.println:(Ljava/lang/String;)V
+     268: aload_2
+     269: aload         5
+     271: invokestatic  #539                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+     274: invokedynamic #542,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     279: invokeinterface #433,  2          // InterfaceMethod pe/rutafija/identity/recoverycli/SuperAdminRecoveryCli$Terminal.println:(Ljava/lang/String;)V
+     284: aload         11
+     286: iconst_0
+     287: invokestatic  #434                // Method java/util/Arrays.fill:([CC)V
+     290: aload         12
+     292: ifnull        326
+     295: aload         12
+     297: iconst_0
+     298: invokestatic  #434                // Method java/util/Arrays.fill:([CC)V
+     301: goto          326
+     304: astore        18
+     306: aload         11
+     308: iconst_0
+     309: invokestatic  #434                // Method java/util/Arrays.fill:([CC)V
+     312: aload         12
+     314: ifnull        323
+     317: aload         12
+     319: iconst_0
+     320: invokestatic  #434                // Method java/util/Arrays.fill:([CC)V
+     323: aload         18
+     325: athrow
+     326: return
+    Exception table:
+       from    to  target type
+          54    70    84   any
+          84    86    84   any
+         112   284   304   any
+         304   306   304   any
+
+  

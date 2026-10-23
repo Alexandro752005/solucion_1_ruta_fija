@@ -1,0 +1,95 @@
+{
+  "scope": "L-03 generated logs/XML only; original closed L-01/L-02 evidence excluded",
+  "priorPreparationInterruption": "An earlier pass redacted some files before cp1252 decoding failed; no complete original-hash journal exists for those first redactions. This journal records the state actually observed by subsequent passes.",
+  "resultFieldsChanged": false,
+  "passes": [
+    {
+      "filesInspected": 132,
+      "mutationsPrepared": [
+        {
+          "path": "backend/target/l03-crosscut-regression-v32.log",
+          "observedBeforeSha256": "2fa7b3e3b5ea611e59d1794b21fbc95169af997c87d2752c3350cf5c3c42d799",
+          "sanitizedSha256": "d3692ebca0ed1d7595a4349bd87a91ca39951ac40e124b23fa17a69dcd519c9b",
+          "dtoValuesRedacted": 3,
+          "jwtFragmentsRedacted": 0
+        },
+        {
+          "path": "backend/target/l03-native-acceptance-final-v32.log",
+          "observedBeforeSha256": "c30ed84cae7035404d0100744957a21119e7b792459877e81d1888b06328810c",
+          "sanitizedSha256": "5d1059d99dba14b859b28d351b6a24ff6e73b4a5524d7a9ca179e5dec92d78c9",
+          "dtoValuesRedacted": 16,
+          "jwtFragmentsRedacted": 0
+        },
+        {
+          "path": "backend/target/surefire-reports/TEST-pe.rutafija.qualification.MaintenanceIntegrationTest.xml",
+          "observedBeforeSha256": "869d7de6d05af14ac743fd86968cbb35a25c4ffbdb66543a250b86abb4d7757b",
+          "sanitizedSha256": "c28d585944639cf5de4125c464d53eb4f1bf20859143fa4375ec3dc6abe1c1f9",
+          "dtoValuesRedacted": 6,
+          "jwtFragmentsRedacted": 0
+        },
+        {
+          "path": "backend/target/surefire-reports/TEST-pe.rutafija.routing.RouteCatalogIntegrationTest.xml",
+          "observedBeforeSha256": "ee120ce47025b0fc8ef3d02147ca888e7f97d5498956b44b4222765fcbd7c31d",
+          "sanitizedSha256": "546117376945ed0124bd0b22fcc443afe08a40a1b46312e9bb419b4ebbdd33a7",
+          "dtoValuesRedacted": 3,
+          "jwtFragmentsRedacted": 0
+        },
+        {
+          "path": "docs/evidencia/L-03/aceptacion-V32/final-97/l03-native-acceptance-final-v32.log",
+          "observedBeforeSha256": "c30ed84cae7035404d0100744957a21119e7b792459877e81d1888b06328810c",
+          "sanitizedSha256": "5d1059d99dba14b859b28d351b6a24ff6e73b4a5524d7a9ca179e5dec92d78c9",
+          "dtoValuesRedacted": 16,
+          "jwtFragmentsRedacted": 0
+        },
+        {
+          "path": "docs/evidencia/L-03/aceptacion-V32/final-97/TEST-pe.rutafija.qualification.MaintenanceIntegrationTest.xml",
+          "observedBeforeSha256": "869d7de6d05af14ac743fd86968cbb35a25c4ffbdb66543a250b86abb4d7757b",
+          "sanitizedSha256": "c28d585944639cf5de4125c464d53eb4f1bf20859143fa4375ec3dc6abe1c1f9",
+          "dtoValuesRedacted": 6,
+          "jwtFragmentsRedacted": 0
+        },
+        {
+          "path": "docs/evidencia/L-03/aceptacion-V32/final-97/TEST-pe.rutafija.routing.RouteCatalogIntegrationTest.xml",
+          "observedBeforeSha256": "ee120ce47025b0fc8ef3d02147ca888e7f97d5498956b44b4222765fcbd7c31d",
+          "sanitizedSha256": "546117376945ed0124bd0b22fcc443afe08a40a1b46312e9bb419b4ebbdd33a7",
+          "dtoValuesRedacted": 3,
+          "jwtFragmentsRedacted": 0
+        },
+        {
+          "path": "docs/evidencia/L-03/aceptacion-V32/l03-crosscut-regression-v32.log",
+          "observedBeforeSha256": "2fa7b3e3b5ea611e59d1794b21fbc95169af997c87d2752c3350cf5c3c42d799",
+          "sanitizedSha256": "d3692ebca0ed1d7595a4349bd87a91ca39951ac40e124b23fa17a69dcd519c9b",
+          "dtoValuesRedacted": 3,
+          "jwtFragmentsRedacted": 0
+        },
+        {
+          "path": "docs/evidencia/L-03/aceptacion-V32/TEST-pe.rutafija.routing.RouteCatalogIntegrationTest.xml",
+          "observedBeforeSha256": "dea13514bb9e3fd575a53e89ecb5961458393f72783b89da75592892e510cfef",
+          "sanitizedSha256": "6d572d5b80bc963e71b050064d05f93dd07c7db24a5577e8dd8019d508d5b080",
+          "dtoValuesRedacted": 3,
+          "jwtFragmentsRedacted": 0
+        }
+      ],
+      "status": "APPLIED_AND_VERIFIED",
+      "remainingMatchedCredentialPatterns": 0
+    },
+    {
+      "filesInspected": 135,
+      "mutationsPrepared": [],
+      "status": "APPLIED_AND_VERIFIED",
+      "remainingMatchedCredentialPatterns": 0
+    },
+    {
+      "filesInspected": 136,
+      "mutationsPrepared": [],
+      "status": "APPLIED_AND_VERIFIED",
+      "remainingMatchedCredentialPatterns": 0
+    },
+    {
+      "filesInspected": 137,
+      "mutationsPrepared": [],
+      "status": "APPLIED_AND_VERIFIED",
+      "remainingMatchedCredentialPatterns": 0
+    }
+  ]
+}

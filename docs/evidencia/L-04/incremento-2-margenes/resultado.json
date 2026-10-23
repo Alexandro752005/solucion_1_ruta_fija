@@ -1,0 +1,98 @@
+{
+  "observedAt": "2026-10-19T21:49:56.915851+00:00",
+  "localDate": "2026-10-19",
+  "lot": "L-04",
+  "lotStatus": "EN_CURSO",
+  "increment": "L04.2",
+  "result": "PASS_INCREMENT_ONLY_NOT_LOT_CLOSURE",
+  "database": "ruta_fija_test",
+  "runtimeRole": "rf_test",
+  "migratorRole": "rf_migrator",
+  "schemaVersion": "34",
+  "backendDistinctPassed": 101,
+  "backendBreakdown": {
+    "marginHttpPg": 18,
+    "offerHttpPgRegression": 14,
+    "maintenanceAndQualificationHttpPgRegression": 54,
+    "routeAssignmentHttpPgRegression": 9,
+    "responseWindowUnit": 4,
+    "postgresTwoConnectionMarginRaces": 2
+  },
+  "reports": [
+    {
+      "path": "docs/evidencia/L-04/incremento-2-margenes/adicional-aislamiento-carreras/TEST-pe.rutafija.support.L04BufferedReservationConcurrencyTest.xml",
+      "name": "pe.rutafija.support.L04BufferedReservationConcurrencyTest",
+      "tests": 2
+    },
+    {
+      "path": "docs/evidencia/L-04/incremento-2-margenes/final-regresion/TEST-pe.rutafija.operation.domain.OfferResponseWindowTest.xml",
+      "name": "pe.rutafija.operation.domain.OfferResponseWindowTest",
+      "tests": 4
+    },
+    {
+      "path": "docs/evidencia/L-04/incremento-2-margenes/final-regresion/TEST-pe.rutafija.qualification.MaintenanceIntegrationTest.xml",
+      "name": "pe.rutafija.qualification.MaintenanceIntegrationTest",
+      "tests": 54
+    },
+    {
+      "path": "docs/evidencia/L-04/incremento-2-margenes/final-regresion/TEST-pe.rutafija.qualification.OfferAcceptanceIntegrationTest.xml",
+      "name": "pe.rutafija.qualification.OfferAcceptanceIntegrationTest",
+      "tests": 14
+    },
+    {
+      "path": "docs/evidencia/L-04/incremento-2-margenes/final-regresion/TEST-pe.rutafija.qualification.RouteAssignmentIntegrationTest.xml",
+      "name": "pe.rutafija.qualification.RouteAssignmentIntegrationTest",
+      "tests": 9
+    },
+    {
+      "path": "docs/evidencia/L-04/incremento-2-margenes/final-regresion/TEST-pe.rutafija.qualification.ServiceMarginIntegrationTest.xml",
+      "name": "pe.rutafija.qualification.ServiceMarginIntegrationTest",
+      "tests": 18
+    }
+  ],
+  "crmComponentPassed": 20,
+  "crmTypecheck": "PASS",
+  "crmDevelopmentBuild": "PASS",
+  "backendPackage": "PASS",
+  "newFlutterTestsExecuted": false,
+  "newBrowserOrTcpTrialExecuted": false,
+  "physicalDeviceTested": false,
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 1
+  },
+  "acceptances": 2,
+  "committedAccountCreations": 0,
+  "rollbackFixturesMayCreateSyntheticAccounts": true,
+  "smtpExternalAttempts": 0,
+  "globalCleanupExecuted": false,
+  "technicalRetirement": "PASS_EXACT_TECHNICAL_RETIREMENT",
+  "retiredTechnicalTypesRetained": 2,
+  "immutableFilesVerified": 8,
+  "previousIncrementEvidenceFilesPreserved": 29,
+  "pilotEnabled": false,
+  "L05Started": false,
+  "verifiedLocalCriteria": [
+    "CI-L04-01",
+    "CI-L04-02",
+    "CI-L04-03",
+    "CI-L04-04"
+  ],
+  "pendingMandatoryCriteria": [
+    "CI-L04-05",
+    "CI-L04-06",
+    "CI-L04-07",
+    "CI-L04-08",
+    "CI-L04-09",
+    "CI-L04-10"
+  ],
+  "limits": [
+    "HTTP tests use real Spring filters/services/PostgreSQL with rollback, not independent TCP clients.",
+    "Two PG races use accountless technical fixtures and a legacy row mode; they prove database exclusion/boundaries, not authentication/approval.",
+    "Technical types remain inactive with immutable revision and retirement receipt; no account quota recovered.",
+    "Synthetic explicit zero margins in regressions are never pilot defaults or legal approval.",
+    "No new Flutter, browser/TCP, physical-device or human trial in this increment.",
+    "Service/offer separation, complete reassignment and uncertainty/integration/closure remain pending."
+  ]
+}

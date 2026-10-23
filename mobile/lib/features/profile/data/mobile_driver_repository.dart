@@ -65,6 +65,7 @@ final class MobileDriverRepository implements MobileDriverGateway {
     return _apiClient.putNoContent(
       'mobile/location/current',
       location.toRequestBody(),
+      allowSessionRefresh: false,
     );
   }
 

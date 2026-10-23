@@ -1,0 +1,30 @@
+{
+  "id": "L08-CAP25-01",
+  "version": "0.1.0",
+  "status": "AUTHORIZED_NOT_EXECUTED",
+  "literalAnswer": "Autorizar L08-CAP25-01 con esos límites",
+  "recordedAt": "2026-10-22T22:23:21.508053+00:00",
+  "caseId": "860c1cdb-b062-469a-9a3f-156ea23bb656",
+  "proposal": "docs/operacion/L-08-CAP25-01-validacion-aislada-propuesta.md",
+  "proposalSha256": "cda897e21d2063589d253dd6c4d18ec39811d11cb7231988e63f7195aa8df8fb",
+  "database": "ruta_fija_test",
+  "host": "127.0.0.1",
+  "port": 55439,
+  "backendPort": 4314,
+  "privateRelativeDirectory": "backend/.local/l08-cap25-860c1cdb-b062-469a-9a3f-156ea23bb656",
+  "maximumSyntheticAccounts": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 4,
+    "CONDUCTOR": 20
+  },
+  "maximumOperatingOrganizations": 4,
+  "simulatedEmailOnly": true,
+  "simulatedGpsOnly": true,
+  "writesTo5432Or55438Authorized": false,
+  "resetHistoricalCountersAuthorized": false,
+  "reopenPreviousCasesAuthorized": false,
+  "globalCleanupAuthorized": false,
+  "realPilotEnabled": false,
+  "executionAccredited": false,
+  "loadOrRetirementRacePassed": false
+}

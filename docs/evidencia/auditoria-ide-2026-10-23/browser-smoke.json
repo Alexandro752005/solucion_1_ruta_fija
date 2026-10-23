@@ -1,0 +1,143 @@
+{
+  "capturedAt": "2026-10-23T16:17:24.880Z",
+  "result": "PASS",
+  "rendered": {
+    "url": "http://127.0.0.1:4300/login",
+    "title": "Iniciar sesión | Ruta Fija",
+    "text": "RUTA FIJA\nCRM OPERATIVO\n\nACCESO ADMINISTRATIVO\n\nIniciar sesión\n\nIngresa con las credenciales asignadas a tu cuenta.\n\nCorreo electrónico\nContraseña\nMostrar\nIngresar al sistema\nActivar mi cuenta ADMIN",
+    "inputs": [
+      {
+        "type": "email",
+        "name": ""
+      },
+      {
+        "type": "password",
+        "name": ""
+      }
+    ],
+    "buttons": [
+      "Mostrar",
+      "Ingresar al sistema"
+    ]
+  },
+  "exceptions": [],
+  "consoleErrors": [],
+  "failedRequests": [],
+  "responses": [
+    {
+      "url": "http://127.0.0.1:4300/login",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/styles.css",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/main.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/chunk-KXTGJQGI.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/chunk-3NNHIZXD.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/chunk-SVUJLKMT.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/chunk-P6NISSRF.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/chunk-OLSLN3A7.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/chunk-VUJOFXKG.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/@fs/D:/UTP/CICLO%20X%20UTP/INTEGRADOR%20I/APF3/solucion_1_ruta_fija_3/frontend/.angular/cache/22.2.3/ruta-fija-crm/vite/deps/@angular_platform-browser.js?v=c2b509ca",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/@fs/D:/UTP/CICLO%20X%20UTP/INTEGRADOR%20I/APF3/solucion_1_ruta_fija_3/frontend/.angular/cache/22.2.3/ruta-fija-crm/vite/deps/rxjs.js?v=c2b509ca",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/@fs/D:/UTP/CICLO%20X%20UTP/INTEGRADOR%20I/APF3/solucion_1_ruta_fija_3/frontend/.angular/cache/22.2.3/ruta-fija-crm/vite/deps/@angular_common_http.js?v=c2b509ca",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/@fs/D:/UTP/CICLO%20X%20UTP/INTEGRADOR%20I/APF3/solucion_1_ruta_fija_3/frontend/.angular/cache/22.2.3/ruta-fija-crm/vite/deps/@angular_core.js?v=c2b509ca",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/@vite/client",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/@fs/D:/UTP/CICLO%20X%20UTP/INTEGRADOR%20I/APF3/solucion_1_ruta_fija_3/frontend/.angular/cache/22.2.3/ruta-fija-crm/vite/deps/_xhr-chunk-B3fdIW_R.js?v=2e8e6196",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/@fs/D:/UTP/CICLO%20X%20UTP/INTEGRADOR%20I/APF3/solucion_1_ruta_fija_3/frontend/.angular/cache/22.2.3/ruta-fija-crm/vite/deps/platform-browser-CnML7n3a.js?v=2e8e6196",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/@fs/D:/UTP/CICLO%20X%20UTP/INTEGRADOR%20I/APF3/solucion_1_ruta_fija_3/frontend/.angular/cache/22.2.3/ruta-fija-crm/vite/deps/http-B6Rlu4Yu.js?v=2e8e6196",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/@fs/D:/UTP/CICLO%20X%20UTP/INTEGRADOR%20I/APF3/solucion_1_ruta_fija_3/frontend/.angular/cache/22.2.3/ruta-fija-crm/vite/deps/@angular_router.js?v=c2b509ca",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/@fs/D:/UTP/CICLO%20X%20UTP/INTEGRADOR%20I/APF3/solucion_1_ruta_fija_3/frontend/node_modules/vite/dist/client/env.mjs",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/@fs/D:/UTP/CICLO%20X%20UTP/INTEGRADOR%20I/APF3/solucion_1_ruta_fija_3/frontend/.angular/cache/22.2.3/ruta-fija-crm/vite/deps/_resource-chunk-D1QEvFz_.js?v=2e8e6196",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/@fs/D:/UTP/CICLO%20X%20UTP/INTEGRADOR%20I/APF3/solucion_1_ruta_fija_3/frontend/.angular/cache/22.2.3/ruta-fija-crm/vite/deps/esm5-Doa4YBQt.js?v=2e8e6196",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/@fs/D:/UTP/CICLO%20X%20UTP/INTEGRADOR%20I/APF3/solucion_1_ruta_fija_3/frontend/.angular/cache/22.2.3/ruta-fija-crm/vite/deps/common-DVSCsHua.js?v=2e8e6196",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/@fs/D:/UTP/CICLO%20X%20UTP/INTEGRADOR%20I/APF3/solucion_1_ruta_fija_3/frontend/.angular/cache/22.2.3/ruta-fija-crm/vite/deps/core-BH2tsCam.js?v=2e8e6196",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/config/runtime-config.json",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/api/v1/auth/refresh",
+      "status": 401
+    },
+    {
+      "url": "http://127.0.0.1:4300/chunk-2P4XLHDO.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/chunk-FM2B4WLU.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4300/@fs/D:/UTP/CICLO%20X%20UTP/INTEGRADOR%20I/APF3/solucion_1_ruta_fija_3/frontend/.angular/cache/22.2.3/ruta-fija-crm/vite/deps/@angular_forms.js?v=c2b509ca",
+      "status": 200
+    }
+  ],
+  "databaseWritesRequested": false,
+  "signedIn": false,
+  "browser": "Microsoft Edge headless, dedicated temporary profile"
+}

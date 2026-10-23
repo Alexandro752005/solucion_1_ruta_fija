@@ -1,0 +1,23 @@
+{
+  "runId": "0dcdd52e-c57a-4a5d-b04a-5c9c3fd0657c",
+  "observedAt": "2026-10-22T16:53:56.615Z",
+  "state": "HTTP_UNAVAILABILITY_DOUBLE_OBSERVED",
+  "scope": "PUBLIC_PHYSICAL_PREAUTH_ONLY_NO_OPERATIONAL_ACCOUNT",
+  "errorEnvelope": "ApiErrorResponse-v1",
+  "deliberateUnavailableDouble": true,
+  "events": [
+    {
+      "at": "2026-10-22T16:53:56.610Z",
+      "method": "POST",
+      "path": "/api/v1/mobile/auth/login",
+      "status": 503,
+      "correlationId": "e2779fca-1ecc-429f-b276-b872e59f20f9",
+      "responseDurationMs": 4.837
+    }
+  ],
+  "databaseConnected": false,
+  "mailAdapterPresent": false,
+  "credentialsOrRequestBodiesRecorded": false,
+  "manualOutcome": "PENDING_USER_REPORT",
+  "pilotEnabled": false
+}

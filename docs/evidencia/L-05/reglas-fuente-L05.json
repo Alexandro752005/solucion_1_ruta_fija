@@ -1,0 +1,1949 @@
+{
+  "questions": [
+    {
+      "id": "Q-050",
+      "moduleId": "MOD-ASG",
+      "dimension": "ALCANCE",
+      "question": "¿Qué compromiso representa una asignación operativa antes de que empiece un servicio?",
+      "decisionTopic": "Significado de asignación",
+      "reason": "Definir significado de asignación y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Al emitir una oferta, el ADMIN solicita un servicio concreto y reserva provisionalmente el horario del conductor y de su unidad vinculada. El compromiso confirmado nace cuando el conductor acepta la versión vigente y el servidor vuelve a comprobar su elegibilidad. Ese compromiso existe antes de comenzar el servicio. La aceptación no inicia la conducción; el inicio requiere la acción de Q-059.",
+      "decisionRefs": [
+        "D-Q-050"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "reviewNotes": "El compromiso nace al aceptar antes del inicio, no después de comenzar a conducir.",
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-051",
+      "moduleId": "MOD-ASG",
+      "dimension": "ACTORES_PERMISOS",
+      "question": "¿Quién tiene autoridad para crear una asignación operativa?",
+      "decisionTopic": "Autor de asignación",
+      "reason": "Definir autor de asignación y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "El ADMIN de la empresa crea las ofertas y gestiona las asignaciones operativas de sus conductores y unidades. Administrador de Flotas u operador son descripciones del mismo rol ADMIN, no roles adicionales. CONDUCTOR acepta o rechaza su oferta; SUPER_ADMIN no sustituye al ADMIN en la gestión ordinaria de estos servicios.",
+      "decisionRefs": [
+        "D-Q-051"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-052",
+      "moduleId": "MOD-ASG",
+      "dimension": "ESTADOS",
+      "question": "¿El conductor debe aceptar una asignación antes de que quede confirmada?",
+      "decisionTopic": "Aceptación de asignación",
+      "reason": "Definir aceptación de asignación y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Sí. Una asignación solo queda CONFIRMADA después de que el conductor destinatario acepte su versión vigente desde la app con conexión y el servidor valide las condiciones. Estar disponible o tener unidad vinculada no sustituye la aceptación. El ADMIN crea la oferta y no puede marcarla aceptada por el conductor. Un cambio sustancial de conductor, unidad, ruta u horario antes del inicio requiere nueva aceptación.",
+      "decisionRefs": [
+        "D-Q-052"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "reviewNotes": "Sustituye el flujo previo de confirmación directa ADMIN sin aceptación.",
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-053",
+      "moduleId": "MOD-ASG",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿Qué plazo debe tener la reserva horaria de una oferta mientras el conductor la acepta?",
+      "decisionTopic": "Vigencia de reserva",
+      "reason": "Definir vigencia de reserva y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "10 minutos.\nLa oferta vence a los 10 minutos o al inicio de la prestación ofertada, lo que ocurra primero. La liberación y validación siguen las mismas reglas. Favorece despacho rápido y exige que el conductor revise la app con mediana frecuencia.",
+      "decisionRefs": [
+        "D-V3-Q-053"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-053",
+        "sourceAnswerPointer": "/questions/16",
+        "answerOrigin": "OPCION_PROPIA",
+        "selectedOptionId": "CUSTOM",
+        "selectedOptionRank": null,
+        "selectedOptionLabel": "Opción propia",
+        "answeredAtClientReported": "2026-10-11T16:25:19.007Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "requiresUserConfirmation": false,
+      "reviewNotes": "Quince minutos es un valor inicial recomendado, no una cifra confirmada por el usuario.",
+      "implementationStatus": "NO_REVISADA",
+      "userNotes": "",
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-054",
+      "moduleId": "MOD-ASG",
+      "dimension": "EXCEPCIONES",
+      "question": "Si dos ADMIN intentan reservar conductor o unidad para horarios incompatibles, ¿qué obtiene el segundo?",
+      "decisionTopic": "Conflicto de reserva",
+      "reason": "Definir conflicto de reserva y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Tiene prioridad la primera reserva o asignación incompatible registrada válidamente por el servidor, aunque todavía espere aceptación. El segundo intento se rechaza por conflicto y conserva los datos del formulario. Se comprueban conductor y unidad, sus vigencias y márgenes. No se sobrescribe la primera oferta. Al expirar, rechazarse o cancelarse esa reserva, su intervalo puede volver a ofrecerse, siempre que no exista otro bloqueo.",
+      "decisionRefs": [
+        "D-Q-054"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "reviewNotes": "La prioridad ahora incluye la reserva provisional; esperar a la confirmación permitiría ofertas simultáneas incompatibles.",
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-055",
+      "moduleId": "MOD-ASG",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿Qué margen entre servicios debe dejarse para poder reservar al mismo conductor de nuevo?",
+      "decisionTopic": "Separación entre compromisos",
+      "reason": "Definir separación entre compromisos y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Se aplica un margen configurable según el tipo de servicio, suficiente para traslado, preparación y descansos exigibles. Las reservas y las aceptaciones deben respetarlo tanto para el conductor como para la unidad. Si un servicio se retrasa, se recalcula la disponibilidad y se avisa al ADMIN para resolver las asignaciones posteriores. No se asume un margen universal; la configuración del tipo de servicio debe estar definida antes de usarlo.",
+      "decisionRefs": [
+        "D-Q-055"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "USUARIO_ADJUNTO_Y_PRECISION_TECNICA",
+        "source": "ruta_fija_registro_descubrimiento_v1(1).json",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-056",
+      "moduleId": "MOD-ASG",
+      "dimension": "ESTADOS",
+      "question": "Si vence una reserva sin aceptación, ¿qué debe ocurrir con los recursos reservados?",
+      "decisionTopic": "Liberación por vencimiento",
+      "reason": "Definir liberación por vencimiento y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Al vencer el plazo sin aceptación, la oferta pasa a EXPIRADA y se liberan sus reservas horarias del conductor y la unidad. Se conserva el vínculo conductor-unidad dentro de su periodo autorizado. El servicio permanece programado y pendiente de una nueva oferta o reasignación; su inicio sigue bloqueado hasta obtener una aceptación válida. Se avisa al ADMIN y se conserva el historial. No se reofrece automáticamente sin una decisión del ADMIN.",
+      "decisionRefs": [
+        "D-Q-056"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-057",
+      "moduleId": "MOD-ASG",
+      "dimension": "FLUJO_NORMAL",
+      "question": "Si el conductor rechaza una oferta o comunica una imposibilidad después de aceptarla, ¿cómo se gestiona el reemplazo?",
+      "decisionTopic": "Gestión de rechazo de asignación",
+      "reason": "Definir gestión de rechazo de asignación y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Si el conductor rechaza una oferta, se registra el rechazo, se libera la reserva horaria y el servicio queda pendiente de nueva oferta o reasignación. El CRM muestra candidatos habilitados y disponibles con unidad vinculada, pero el ADMIN decide el reemplazo; el nuevo conductor también debe aceptar. Si la asignación ya fue aceptada, se registra una imposibilidad sobrevenida y el ADMIN gestiona su cancelación o sustitución; no se trata como un rechazo retroactivo ni se borra la aceptación original.",
+      "decisionRefs": [
+        "D-Q-057"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-058",
+      "moduleId": "MOD-ASG",
+      "dimension": "DEPENDENCIAS",
+      "question": "Si se cancela una asignación confirmada antes del inicio, ¿qué debe ocurrir con el servicio vinculado?",
+      "decisionTopic": "Cancelación y servicio",
+      "reason": "Definir cancelación y servicio y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Si el ADMIN cancela una asignación confirmada antes del inicio, el servicio mantiene su programación y queda pendiente de reasignación, con inicio bloqueado. Se libera la ocupación del horario, conservando el vínculo conductor-unidad dentro de su vigencia. Cualquier reemplazo requiere una nueva oferta y aceptación del conductor. Cancelar también el servicio exige una decisión expresa con motivo. Se conservan la aceptación anterior, cancelación y notificaciones.",
+      "decisionRefs": [
+        "D-Q-058"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-059",
+      "moduleId": "MOD-SRV",
+      "dimension": "ESTADOS",
+      "question": "¿Qué hecho debe hacer que un servicio pase de programado a iniciado?",
+      "decisionTopic": "Inicio de servicio",
+      "reason": "Definir inicio de servicio y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "El conductor asignado y que aceptó confirma Iniciar servicio al comenzar realmente la prestación. El servidor valida asignación confirmada y vigente, conductor y unidad habilitados, vínculo válido, márgenes y ausencia de operaciones incompatibles. Se registran responsable, fecha y hora de ejecución y de registro. La hora programada, la creación de la oferta y la aceptación no inician automáticamente el servicio.",
+      "decisionRefs": [
+        "D-Q-059"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-060",
+      "moduleId": "MOD-SRV",
+      "dimension": "ESTADOS",
+      "question": "¿Qué condición debe demostrar que un servicio terminó correctamente?",
+      "decisionTopic": "Finalización de servicio",
+      "reason": "Definir finalización de servicio y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "El servicio debe haber sido iniciado y el conductor responsable de su tramo vigente confirma que completó la prestación mediante Ruta finalizada. El servidor registra el cierre y comprueba automáticamente una ubicación reciente y suficientemente precisa respecto del terminal de la versión de ruta asignada, sin exigir otro botón. Se conservan horas reales, participantes, unidades, resultado, incidencias y evidencia de ubicación. Una discrepancia genera observación y aviso al ADMIN; la falta de evidencia válida queda como llegada no corroborada, sin atribuir fraude automáticamente. Un servicio cancelado o interrumpido no cuenta como cumplimiento correcto. La ubicación aporta evidencia de llegada, sin certificar por sí sola todas las paradas; las incidencias no impeditivas conservan su seguimiento independiente.",
+      "decisionRefs": [
+        "D-Q-060"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "reviewNotes": "Se unifica el texto de la acción con Ruta finalizada, manteniendo la comprobación de ubicación ya respondida.",
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-061",
+      "moduleId": "MOD-SRV",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿Se permite iniciar un servicio sin una asignación confirmada?",
+      "decisionTopic": "Guardia de inicio",
+      "reason": "Definir guardia de inicio y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "No se permite iniciar un servicio sin asignación CONFIRMADA mediante aceptación válida del conductor. El servidor comprueba que corresponde a ese servicio, conductor, unidad vinculada, versión de oferta y horario, además de la habilitación y los conflictos operativos. Una oferta pendiente, vencida, rechazada, cancelada o pendiente de reemplazo bloquea el inicio y muestra el motivo. El ADMIN no puede omitir la aceptación para forzar el inicio.",
+      "decisionRefs": [
+        "D-Q-061"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-062",
+      "moduleId": "MOD-SRV",
+      "dimension": "EXCEPCIONES",
+      "question": "Si el conductor llega tarde, ¿qué debe suceder con el estado del servicio?",
+      "decisionTopic": "Tratamiento de demora",
+      "reason": "Definir tratamiento de demora y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Si se supera la hora prevista sin un inicio válido, el servicio permanece PROGRAMADO con alerta de retraso. No se inicia ni cancela automáticamente. El ADMIN decide si espera, reprograma, ofrece un reemplazo o cancela. La reprogramación o sustitución requiere aceptación de la nueva oferta. Al empezar se conserva la hora programada y se registra la real; una alerta de retraso no hace válida una oferta vencida.",
+      "decisionRefs": [
+        "D-Q-062"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-063",
+      "moduleId": "MOD-SRV",
+      "dimension": "NO_FUNCIONALES",
+      "question": "¿Qué ocurre si se pierde la conexión al aceptar, iniciar o finalizar un servicio?",
+      "decisionTopic": "Inicio sin conexión",
+      "reason": "Definir inicio sin conexión y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "La plataforma no acepta acciones offline ni su sincronización posterior. Sin conexión no se confirma la aceptación, el inicio ni el cierre de un servicio. Al volver la conexión se consulta el estado vigente. Si el servidor completó una acción antes de perderse la respuesta, se recupera ese registro sin duplicarlo. Un inicio o final físico que nunca se registró debe comunicarse como incidencia y tratarse mediante corrección autorizada; no se fabrica una confirmación previa del servidor.",
+      "decisionRefs": [
+        "D-Q-063"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-064",
+      "moduleId": "MOD-SRV",
+      "dimension": "ACTORES_PERMISOS",
+      "question": "¿Quién puede corregir los tiempos de un servicio ya finalizado?",
+      "decisionTopic": "Corrección de ejecución",
+      "reason": "Definir corrección de ejecución y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Solo el ADMIN de la empresa con permiso vigente puede corregir los tiempos de un servicio finalizado. CONDUCTOR puede solicitar la corrección, pero no editar directamente. Se exige motivo y se conservan valores originales y corregidos, autor y fecha. Se valida el orden temporal y la coherencia de los tramos. No se alteran ubicaciones ni evidencias originales; cualquier efecto de la corrección sobre la verificación del cierre queda registrado. No existe un rol operador separado.",
+      "decisionRefs": [
+        "D-Q-064"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-065",
+      "moduleId": "MOD-SRV",
+      "dimension": "DATOS",
+      "question": "Si se reemplaza al conductor durante un servicio, ¿cómo debe conservarse la responsabilidad de cada tramo?",
+      "decisionTopic": "Cambio de conductor durante ejecución",
+      "reason": "Definir cambio de conductor durante ejecución y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Se conserva un historial de tramos con conductor, unidad vinculada, horas reales y puntos de relevo, sin sobrescribir participaciones anteriores. El ADMIN gestiona una oferta para un reemplazo habilitado y con unidad válida; el nuevo conductor debe aceptarla antes de asumir el tramo. Se registra el momento efectivo del relevo, el motivo, autor, pausas y transferencias de pasajeros cuando correspondan. Las incidencias se asocian al tramo de su ocurrencia, aunque se reporten después. El cambio no reinicia la hora inicial del servicio ni convierte participación operativa en atribución automática de culpa.",
+      "decisionRefs": [
+        "D-Q-065"
+      ],
+      "repeatPolicy": "No repetir una decisión vigente. Revisar proposalsToReview para recomendaciones y preguntar solo ante un cambio, contradicción o parámetro realmente pendiente.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      },
+      "requiresUserConfirmation": false,
+      "reviewNotes": "El reemplazo también requiere aceptación; las trazas no implican responsabilidad legal automática.",
+      "implementationStatus": "NO_REVISADA"
+    },
+    {
+      "id": "Q-067",
+      "moduleId": "MOD-INC",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿Qué condiciones de una incidencia obligan a interrumpir un servicio, además de la pérdida de habilitación ya definida?",
+      "decisionTopic": "Incidencia bloqueante",
+      "reason": "Definir incidencia bloqueante y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Se interrumpe ante accidente con riesgo, avería que impide circulación segura o imposibilidad real de prestar el recorrido. El conductor prioriza una detención segura y comunica la incidencia; ADMIN coordina relevo o cancelación. Un retraso o un GPS no corroborado no interrumpen por sí solos.",
+      "decisionRefs": [
+        "D-V3-Q-067"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-067",
+        "sourceAnswerPointer": "/questions/21",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-067-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Seguridad o imposibilidad de continuar",
+        "answeredAtClientReported": "2026-10-11T16:33:43.707Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-075",
+      "moduleId": "MOD-GPS",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿Se permite capturar ubicación solo durante el servicio iniciado o también antes y después, y con qué límite?",
+      "decisionTopic": "Ventana de captura de ubicación",
+      "reason": "Definir ventana de captura de ubicación y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "La captura comienza después de que el servidor registra Iniciar servicio y termina al finalizar, interrumpir o cancelar. Puede obtenerse una lectura puntual al pulsar inicio para validar permiso; no se conserva seguimiento previo ni posterior.",
+      "decisionRefs": [
+        "D-V3-Q-075"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-075",
+        "sourceAnswerPointer": "/questions/29",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-075-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Solo durante un servicio iniciado",
+        "answeredAtClientReported": "2026-10-11T16:55:33.512Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "PENDIENTE_VERIFICACION"
+    },
+    {
+      "id": "Q-076",
+      "moduleId": "MOD-GPS",
+      "dimension": "EXCEPCIONES",
+      "question": "Si el conductor deniega ubicación, ¿se le permite iniciar el servicio o solo conservar consulta, incorporación y acceso a su cuenta? El cierre sin evidencia ya queda no corroborado.",
+      "decisionTopic": "Permiso de ubicación denegado",
+      "reason": "Definir permiso de ubicación denegado y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Si el conductor deniega ubicación, conserva acceso a cuenta, incorporación y consulta, pero no inicia un servicio que requiere seguimiento. La app explica cómo habilitar el permiso. Una pérdida posterior de GPS genera falta de evidencia e incidencia según gravedad, sin fingir ubicación.",
+      "decisionRefs": [
+        "D-V3-Q-076"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-076",
+        "sourceAnswerPointer": "/questions/30",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-076-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Bloquear inicio, mantener consulta y cuenta",
+        "answeredAtClientReported": "2026-10-11T16:55:49.664Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-077",
+      "moduleId": "MOD-GPS",
+      "dimension": "NO_FUNCIONALES",
+      "question": "¿Con qué frecuencia necesita el ADMIN recibir ubicación durante un servicio activo, considerando batería, conexión y presupuesto S/0?",
+      "decisionTopic": "Frecuencia de ubicación",
+      "reason": "Definir frecuencia de ubicación y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Durante un servicio activo se intenta enviar un punto cada 30 segundos con conexión. Se señala retraso de actualización y se solicita una lectura puntual al cierre para corroboración. Se detiene la captura al terminar; no hay cola offline.",
+      "decisionRefs": [
+        "D-V3-Q-077"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-077",
+        "sourceAnswerPointer": "/questions/31",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-077-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Cada 30 segundos",
+        "answeredAtClientReported": "2026-10-11T17:00:11.991Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "PENDIENTE_VERIFICACION"
+    },
+    {
+      "id": "Q-078",
+      "moduleId": "MOD-GPS",
+      "dimension": "ACTORES_PERMISOS",
+      "question": "Además del acceso operativo del ADMIN a su empresa, ¿debe CONDUCTOR consultar o descargar su propio historial de ubicación? No se presume acceso irrestricto de SUPER_ADMIN.",
+      "decisionTopic": "Acceso al historial de ubicación",
+      "reason": "Definir acceso al historial de ubicación y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "La app muestra solo inicio, terminal, horarios y resultado de sus servicios. Los puntos detallados se entregan por una solicitud de acceso verificada, sin impedir los derechos que resulten aplicables.",
+      "decisionRefs": [
+        "D-V3-Q-078"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-078",
+        "sourceAnswerPointer": "/questions/32",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-078-C",
+        "selectedOptionRank": 3,
+        "selectedOptionLabel": "Resumen en app y solicitud del detalle",
+        "answeredAtClientReported": "2026-10-11T17:00:53.086Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-079",
+      "moduleId": "MOD-GPS",
+      "dimension": "DATOS",
+      "question": "¿Durante cuánto tiempo se conservarán las ubicaciones y qué datos permanecerán después de ese plazo?",
+      "decisionTopic": "Retención de ubicación",
+      "reason": "Definir retención de ubicación y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Se conservan puntos detallados 7 días y luego se eliminan. Se mantienen resúmenes sin trayecto detallado y evidencias puntuales justificadas de incidencias. Reduce almacenamiento y el tiempo disponible para revisar recorridos.",
+      "decisionRefs": [
+        "D-V3-Q-079"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-079",
+        "sourceAnswerPointer": "/questions/33",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-079-B",
+        "selectedOptionRank": 2,
+        "selectedOptionLabel": "Puntos durante 7 días",
+        "answeredAtClientReported": "2026-10-11T17:04:03.053Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "PENDIENTE_VERIFICACION"
+    },
+    {
+      "id": "Q-106",
+      "moduleId": "MOD-GPS",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿Qué criterios deben definir una ubicación válida para corroborar el terminal: radio permitido, antigüedad máxima y precisión mínima?",
+      "decisionTopic": "Criterios de corroboración de llegada",
+      "reason": "El comportamiento de cierre está resuelto, pero faltan parámetros medibles y probarlos con terminales y teléfonos reales.",
+      "status": "RESPONDIDA",
+      "answer": "Al cerrar se corrobora terminal solo con un punto a no más de 200 m del terminal configurado, con antigüedad máxima de 2 minutos y precisión horizontal reportada de 100 m o mejor. Sin cumplimiento queda no corroborado o con discrepancia para revisión. Se calibra en el piloto.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "decisionRefs": [
+        "D-V3-Q-106"
+      ],
+      "repeatPolicy": "No repetir si una decisión vigente resuelve este detalle.",
+      "origin": "HUECO_REAL_DETECTADO_EN_REVISION_V2",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-106",
+        "sourceAnswerPointer": "/questions/34",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-106-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "200 m, 2 minutos y precisión de 100 m",
+        "answeredAtClientReported": "2026-10-11T17:07:55.604Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "PENDIENTE_VERIFICACION"
+    }
+  ],
+  "newBusinessRules": [
+    {
+      "id": "BR-V2-Q-050",
+      "statement": "Al emitir una oferta, el ADMIN solicita un servicio concreto y reserva provisionalmente el horario del conductor y de su unidad vinculada.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-ASG",
+      "moduleRefs": [
+        "MOD-ASG"
+      ],
+      "questionRefs": [
+        "Q-050"
+      ],
+      "fullSpecificationQuestionRef": "Q-050",
+      "decisionRefs": [
+        "D-Q-050"
+      ],
+      "acceptanceRefs": [
+        "AC-V2-Q-050"
+      ],
+      "backend": "Crear reserva, validar aceptación y vencimiento, serializar conflictos y preservar versiones.",
+      "crm": "ADMIN emite oferta y atiende rechazo, vencimiento o reasignación.",
+      "app": "CONDUCTOR acepta la oferta vigente, ve plazo y motivo de bloqueo.",
+      "implementationStatus": "NO_REVISADA",
+      "scopeNotice": "Regla de esta revisión; conserva las reglas RF-BR históricas por referencia, sin aprobarlas en bloque."
+    },
+    {
+      "id": "BR-V2-Q-051",
+      "statement": "El ADMIN de la empresa crea las ofertas y gestiona las asignaciones operativas de sus conductores y unidades.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-ASG",
+      "moduleRefs": [
+        "MOD-ASG"
+      ],
+      "questionRefs": [
+        "Q-051"
+      ],
+      "fullSpecificationQuestionRef": "Q-051",
+      "decisionRefs": [
+        "D-Q-051"
+      ],
+      "acceptanceRefs": [
+        "AC-V2-Q-051"
+      ],
+      "backend": "Crear reserva, validar aceptación y vencimiento, serializar conflictos y preservar versiones.",
+      "crm": "ADMIN emite oferta y atiende rechazo, vencimiento o reasignación.",
+      "app": "CONDUCTOR acepta la oferta vigente, ve plazo y motivo de bloqueo.",
+      "implementationStatus": "NO_REVISADA",
+      "scopeNotice": "Regla de esta revisión; conserva las reglas RF-BR históricas por referencia, sin aprobarlas en bloque."
+    },
+    {
+      "id": "BR-V2-Q-052",
+      "statement": "Sí.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-ASG",
+      "moduleRefs": [
+        "MOD-ASG"
+      ],
+      "questionRefs": [
+        "Q-052"
+      ],
+      "fullSpecificationQuestionRef": "Q-052",
+      "decisionRefs": [
+        "D-Q-052"
+      ],
+      "acceptanceRefs": [
+        "AC-V2-Q-052"
+      ],
+      "backend": "Crear reserva, validar aceptación y vencimiento, serializar conflictos y preservar versiones.",
+      "crm": "ADMIN emite oferta y atiende rechazo, vencimiento o reasignación.",
+      "app": "CONDUCTOR acepta la oferta vigente, ve plazo y motivo de bloqueo.",
+      "implementationStatus": "NO_REVISADA",
+      "scopeNotice": "Regla de esta revisión; conserva las reglas RF-BR históricas por referencia, sin aprobarlas en bloque."
+    },
+    {
+      "id": "BR-V2-Q-053",
+      "statement": "Se propone una reserva pendiente de aceptación de quince minutos desde que el servidor registra la oferta, sin superar el inicio previsto de la prestación ofertada.",
+      "status": "SUSTITUIDA",
+      "ownerModuleId": "MOD-ASG",
+      "moduleRefs": [
+        "MOD-ASG"
+      ],
+      "questionRefs": [
+        "Q-053"
+      ],
+      "fullSpecificationQuestionRef": "Q-053",
+      "decisionRefs": [
+        "D-Q-053"
+      ],
+      "acceptanceRefs": [
+        "AC-V2-Q-053"
+      ],
+      "backend": "Crear reserva, validar aceptación y vencimiento, serializar conflictos y preservar versiones.",
+      "crm": "ADMIN emite oferta y atiende rechazo, vencimiento o reasignación.",
+      "app": "CONDUCTOR acepta la oferta vigente, ve plazo y motivo de bloqueo.",
+      "implementationStatus": "NO_REVISADA",
+      "scopeNotice": "Regla de esta revisión; conserva las reglas RF-BR históricas por referencia, sin aprobarlas en bloque.",
+      "supersededBy": "BR-V3-Q-053"
+    },
+    {
+      "id": "BR-V2-Q-054",
+      "statement": "Tiene prioridad la primera reserva o asignación incompatible registrada válidamente por el servidor, aunque todavía espere aceptación.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-ASG",
+      "moduleRefs": [
+        "MOD-ASG"
+      ],
+      "questionRefs": [
+        "Q-054"
+      ],
+      "fullSpecificationQuestionRef": "Q-054",
+      "decisionRefs": [
+        "D-Q-054"
+      ],
+      "acceptanceRefs": [
+        "AC-V2-Q-054"
+      ],
+      "backend": "Crear reserva, validar aceptación y vencimiento, serializar conflictos y preservar versiones.",
+      "crm": "ADMIN emite oferta y atiende rechazo, vencimiento o reasignación.",
+      "app": "CONDUCTOR acepta la oferta vigente, ve plazo y motivo de bloqueo.",
+      "implementationStatus": "NO_REVISADA",
+      "scopeNotice": "Regla de esta revisión; conserva las reglas RF-BR históricas por referencia, sin aprobarlas en bloque."
+    },
+    {
+      "id": "BR-V2-Q-055",
+      "statement": "Se aplica un margen configurable según el tipo de servicio, suficiente para traslado, preparación y descansos exigibles.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-ASG",
+      "moduleRefs": [
+        "MOD-ASG"
+      ],
+      "questionRefs": [
+        "Q-055"
+      ],
+      "fullSpecificationQuestionRef": "Q-055",
+      "decisionRefs": [
+        "D-Q-055"
+      ],
+      "acceptanceRefs": [
+        "AC-V2-Q-055"
+      ],
+      "backend": "Crear reserva, validar aceptación y vencimiento, serializar conflictos y preservar versiones.",
+      "crm": "ADMIN emite oferta y atiende rechazo, vencimiento o reasignación.",
+      "app": "CONDUCTOR acepta la oferta vigente, ve plazo y motivo de bloqueo.",
+      "implementationStatus": "NO_REVISADA",
+      "scopeNotice": "Regla de esta revisión; conserva las reglas RF-BR históricas por referencia, sin aprobarlas en bloque."
+    },
+    {
+      "id": "BR-V2-Q-056",
+      "statement": "Al vencer el plazo sin aceptación, la oferta pasa a EXPIRADA y se liberan sus reservas horarias del conductor y la unidad.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-ASG",
+      "moduleRefs": [
+        "MOD-ASG"
+      ],
+      "questionRefs": [
+        "Q-056"
+      ],
+      "fullSpecificationQuestionRef": "Q-056",
+      "decisionRefs": [
+        "D-Q-056"
+      ],
+      "acceptanceRefs": [
+        "AC-V2-Q-056"
+      ],
+      "backend": "Crear reserva, validar aceptación y vencimiento, serializar conflictos y preservar versiones.",
+      "crm": "ADMIN emite oferta y atiende rechazo, vencimiento o reasignación.",
+      "app": "CONDUCTOR acepta la oferta vigente, ve plazo y motivo de bloqueo.",
+      "implementationStatus": "NO_REVISADA",
+      "scopeNotice": "Regla de esta revisión; conserva las reglas RF-BR históricas por referencia, sin aprobarlas en bloque."
+    },
+    {
+      "id": "BR-V2-Q-057",
+      "statement": "Si el conductor rechaza una oferta, se registra el rechazo, se libera la reserva horaria y el servicio queda pendiente de nueva oferta o reasignación.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-ASG",
+      "moduleRefs": [
+        "MOD-ASG"
+      ],
+      "questionRefs": [
+        "Q-057"
+      ],
+      "fullSpecificationQuestionRef": "Q-057",
+      "decisionRefs": [
+        "D-Q-057"
+      ],
+      "acceptanceRefs": [
+        "AC-V2-Q-057"
+      ],
+      "backend": "Crear reserva, validar aceptación y vencimiento, serializar conflictos y preservar versiones.",
+      "crm": "ADMIN emite oferta y atiende rechazo, vencimiento o reasignación.",
+      "app": "CONDUCTOR acepta la oferta vigente, ve plazo y motivo de bloqueo.",
+      "implementationStatus": "NO_REVISADA",
+      "scopeNotice": "Regla de esta revisión; conserva las reglas RF-BR históricas por referencia, sin aprobarlas en bloque."
+    },
+    {
+      "id": "BR-V2-Q-058",
+      "statement": "Si el ADMIN cancela una asignación confirmada antes del inicio, el servicio mantiene su programación y queda pendiente de reasignación, con inicio bloqueado.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-ASG",
+      "moduleRefs": [
+        "MOD-ASG"
+      ],
+      "questionRefs": [
+        "Q-058"
+      ],
+      "fullSpecificationQuestionRef": "Q-058",
+      "decisionRefs": [
+        "D-Q-058"
+      ],
+      "acceptanceRefs": [
+        "AC-V2-Q-058"
+      ],
+      "backend": "Crear reserva, validar aceptación y vencimiento, serializar conflictos y preservar versiones.",
+      "crm": "ADMIN emite oferta y atiende rechazo, vencimiento o reasignación.",
+      "app": "CONDUCTOR acepta la oferta vigente, ve plazo y motivo de bloqueo.",
+      "implementationStatus": "NO_REVISADA",
+      "scopeNotice": "Regla de esta revisión; conserva las reglas RF-BR históricas por referencia, sin aprobarlas en bloque."
+    },
+    {
+      "id": "BR-V2-Q-059",
+      "statement": "El conductor asignado y que aceptó confirma Iniciar servicio al comenzar realmente la prestación.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-SRV",
+      "moduleRefs": [
+        "MOD-SRV"
+      ],
+      "questionRefs": [
+        "Q-059"
+      ],
+      "fullSpecificationQuestionRef": "Q-059",
+      "decisionRefs": [
+        "D-Q-059"
+      ],
+      "acceptanceRefs": [
+        "AC-V2-Q-059"
+      ],
+      "backend": "Autorizar inicio y cierre; conservar resultado, evidencia y tramos.",
+      "crm": "ADMIN atiende retrasos, correcciones y relevo aceptado.",
+      "app": "Iniciar servicio y Ruta finalizada requieren conexión y estado vigente.",
+      "implementationStatus": "NO_REVISADA",
+      "scopeNotice": "Regla de esta revisión; conserva las reglas RF-BR históricas por referencia, sin aprobarlas en bloque."
+    },
+    {
+      "id": "BR-V2-Q-060",
+      "statement": "El servicio debe haber sido iniciado y el conductor responsable de su tramo vigente confirma que completó la prestación mediante Ruta finalizada.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-SRV",
+      "moduleRefs": [
+        "MOD-SRV"
+      ],
+      "questionRefs": [
+        "Q-060"
+      ],
+      "fullSpecificationQuestionRef": "Q-060",
+      "decisionRefs": [
+        "D-Q-060"
+      ],
+      "acceptanceRefs": [
+        "AC-V2-Q-060"
+      ],
+      "backend": "Autorizar inicio y cierre; conservar resultado, evidencia y tramos.",
+      "crm": "ADMIN atiende retrasos, correcciones y relevo aceptado.",
+      "app": "Iniciar servicio y Ruta finalizada requieren conexión y estado vigente.",
+      "implementationStatus": "NO_REVISADA",
+      "scopeNotice": "Regla de esta revisión; conserva las reglas RF-BR históricas por referencia, sin aprobarlas en bloque."
+    },
+    {
+      "id": "BR-V2-Q-061",
+      "statement": "No se permite iniciar un servicio sin asignación CONFIRMADA mediante aceptación válida del conductor.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-SRV",
+      "moduleRefs": [
+        "MOD-SRV"
+      ],
+      "questionRefs": [
+        "Q-061"
+      ],
+      "fullSpecificationQuestionRef": "Q-061",
+      "decisionRefs": [
+        "D-Q-061"
+      ],
+      "acceptanceRefs": [
+        "AC-V2-Q-061"
+      ],
+      "backend": "Autorizar inicio y cierre; conservar resultado, evidencia y tramos.",
+      "crm": "ADMIN atiende retrasos, correcciones y relevo aceptado.",
+      "app": "Iniciar servicio y Ruta finalizada requieren conexión y estado vigente.",
+      "implementationStatus": "NO_REVISADA",
+      "scopeNotice": "Regla de esta revisión; conserva las reglas RF-BR históricas por referencia, sin aprobarlas en bloque."
+    },
+    {
+      "id": "BR-V2-Q-062",
+      "statement": "Si se supera la hora prevista sin un inicio válido, el servicio permanece PROGRAMADO con alerta de retraso.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-SRV",
+      "moduleRefs": [
+        "MOD-SRV"
+      ],
+      "questionRefs": [
+        "Q-062"
+      ],
+      "fullSpecificationQuestionRef": "Q-062",
+      "decisionRefs": [
+        "D-Q-062"
+      ],
+      "acceptanceRefs": [
+        "AC-V2-Q-062"
+      ],
+      "backend": "Autorizar inicio y cierre; conservar resultado, evidencia y tramos.",
+      "crm": "ADMIN atiende retrasos, correcciones y relevo aceptado.",
+      "app": "Iniciar servicio y Ruta finalizada requieren conexión y estado vigente.",
+      "implementationStatus": "NO_REVISADA",
+      "scopeNotice": "Regla de esta revisión; conserva las reglas RF-BR históricas por referencia, sin aprobarlas en bloque."
+    },
+    {
+      "id": "BR-V2-Q-063",
+      "statement": "La plataforma no acepta acciones offline ni su sincronización posterior.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-SRV",
+      "moduleRefs": [
+        "MOD-SRV"
+      ],
+      "questionRefs": [
+        "Q-063"
+      ],
+      "fullSpecificationQuestionRef": "Q-063",
+      "decisionRefs": [
+        "D-Q-063"
+      ],
+      "acceptanceRefs": [
+        "AC-V2-Q-063"
+      ],
+      "backend": "Autorizar inicio y cierre; conservar resultado, evidencia y tramos.",
+      "crm": "ADMIN atiende retrasos, correcciones y relevo aceptado.",
+      "app": "Iniciar servicio y Ruta finalizada requieren conexión y estado vigente.",
+      "implementationStatus": "NO_REVISADA",
+      "scopeNotice": "Regla de esta revisión; conserva las reglas RF-BR históricas por referencia, sin aprobarlas en bloque."
+    },
+    {
+      "id": "BR-V2-Q-064",
+      "statement": "Solo el ADMIN de la empresa con permiso vigente puede corregir los tiempos de un servicio finalizado.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-SRV",
+      "moduleRefs": [
+        "MOD-SRV"
+      ],
+      "questionRefs": [
+        "Q-064"
+      ],
+      "fullSpecificationQuestionRef": "Q-064",
+      "decisionRefs": [
+        "D-Q-064"
+      ],
+      "acceptanceRefs": [
+        "AC-V2-Q-064"
+      ],
+      "backend": "Autorizar inicio y cierre; conservar resultado, evidencia y tramos.",
+      "crm": "ADMIN atiende retrasos, correcciones y relevo aceptado.",
+      "app": "Iniciar servicio y Ruta finalizada requieren conexión y estado vigente.",
+      "implementationStatus": "NO_REVISADA",
+      "scopeNotice": "Regla de esta revisión; conserva las reglas RF-BR históricas por referencia, sin aprobarlas en bloque."
+    },
+    {
+      "id": "BR-V2-Q-065",
+      "statement": "Se conserva un historial de tramos con conductor, unidad vinculada, horas reales y puntos de relevo, sin sobrescribir participaciones anteriores.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-SRV",
+      "moduleRefs": [
+        "MOD-SRV"
+      ],
+      "questionRefs": [
+        "Q-065"
+      ],
+      "fullSpecificationQuestionRef": "Q-065",
+      "decisionRefs": [
+        "D-Q-065"
+      ],
+      "acceptanceRefs": [
+        "AC-V2-Q-065"
+      ],
+      "backend": "Autorizar inicio y cierre; conservar resultado, evidencia y tramos.",
+      "crm": "ADMIN atiende retrasos, correcciones y relevo aceptado.",
+      "app": "Iniciar servicio y Ruta finalizada requieren conexión y estado vigente.",
+      "implementationStatus": "NO_REVISADA",
+      "scopeNotice": "Regla de esta revisión; conserva las reglas RF-BR históricas por referencia, sin aprobarlas en bloque."
+    },
+    {
+      "id": "BR-V3-Q-053",
+      "statement": "10 minutos.\nLa oferta vence a los 10 minutos o al inicio de la prestación ofertada, lo que ocurra primero. La liberación y validación siguen las mismas reglas. Favorece despacho rápido y exige que el conductor revise la app con mediana frecuencia.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-ASG",
+      "moduleRefs": [
+        "MOD-ASG",
+        "MOD-VEH",
+        "MOD-SRV",
+        "MOD-AUD"
+      ],
+      "questionRefs": [
+        "Q-053"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-053"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-053-01",
+        "AC-V3-Q-053-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-053"
+      ],
+      "backend": "Usar reserva de oferta por 10 minutos desde creación en servidor, con deadline menor o igual al inicio previsto de la prestación ofertada. Relevo usa inicio del nuevo tramo. Validar vigencia en cada aceptación y reserva; liberar ocupación al vencer, sin romper vínculo ni reasignar automáticamente.",
+      "crm": "Mostrar cuenta regresiva de 10 minutos y servicios que requieren nueva oferta al vencer.",
+      "app": "Mostrar plazo real y aceptar o rechazar conectado; no aceptar localmente una oferta ya vencida.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-067",
+      "statement": "Se interrumpe ante accidente con riesgo, avería que impide circulación segura o imposibilidad real de prestar el recorrido. El conductor prioriza una detención segura y comunica la incidencia; ADMIN coordina relevo o cancelación. Un retraso o un GPS no corroborado no interrumpen por sí solos.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-INC",
+      "moduleRefs": [
+        "MOD-INC",
+        "MOD-SRV",
+        "MOD-DRV",
+        "MOD-VEH"
+      ],
+      "questionRefs": [
+        "Q-067"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-067"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-067-01",
+        "AC-V3-Q-067-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-067"
+      ],
+      "backend": "Registrar interrupción segura ante riesgo o imposibilidad real, preservar tramos y resultado. Pérdida de habilitación sigue sus bloqueos ya definidos. Retraso y GPS no corroborado aislados no interrumpen automáticamente.",
+      "crm": "Coordinar relevo o cancelación; conservar lo ejecutado y el motivo.",
+      "app": "Priorizar detención segura ante riesgo y comunicar la incidencia; registrar solo con conexión, sin simular cola offline.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-075",
+      "statement": "La captura comienza después de que el servidor registra Iniciar servicio y termina al finalizar, interrumpir o cancelar. Puede obtenerse una lectura puntual al pulsar inicio para validar permiso; no se conserva seguimiento previo ni posterior.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-GPS",
+      "moduleRefs": [
+        "MOD-GPS",
+        "MOD-SRV",
+        "MOD-NFR"
+      ],
+      "questionRefs": [
+        "Q-075"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-075"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-075-01",
+        "AC-V3-Q-075-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-075"
+      ],
+      "backend": "Aceptar puntos de seguimiento solo para servicio iniciado autorizado; parar captura al finalizar/interrumpir/cancelar. Una lectura puntual para comprobar permiso al inicio no constituye historial previo. Obtener evidencia de cierre en el flujo de cierre, no seguir después.",
+      "crm": "Mostrar ubicación de servicios iniciados, con última hora y sin trayectos personales anteriores o posteriores.",
+      "app": "Activar seguimiento durante servicio y detenerlo al registrar cierre; mostrar que la captura está activa.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-076",
+      "statement": "Si el conductor deniega ubicación, conserva acceso a cuenta, incorporación y consulta, pero no inicia un servicio que requiere seguimiento. La app explica cómo habilitar el permiso. Una pérdida posterior de GPS genera falta de evidencia e incidencia según gravedad, sin fingir ubicación.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-GPS",
+      "moduleRefs": [
+        "MOD-GPS",
+        "MOD-SRV",
+        "MOD-AUTH"
+      ],
+      "questionRefs": [
+        "Q-076"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-076"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-076-01",
+        "AC-V3-Q-076-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-076"
+      ],
+      "backend": "Para un servicio que requiera seguimiento, validar permiso de ubicación antes de registrar inicio. Mantener cuenta, incorporación y consulta si se deniega; pérdida posterior se registra como falta de evidencia según gravedad.",
+      "crm": "Mostrar causa de inicio no disponible; no atribuir fraude automático por denegación o pérdida GPS.",
+      "app": "Explicar cómo habilitar permiso y conservar acceso a cuenta e incorporación.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-077",
+      "statement": "Durante un servicio activo se intenta enviar un punto cada 30 segundos con conexión. Se señala retraso de actualización y se solicita una lectura puntual al cierre para corroboración. Se detiene la captura al terminar; no hay cola offline.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-GPS",
+      "moduleRefs": [
+        "MOD-GPS",
+        "MOD-SRV",
+        "MOD-NFR"
+      ],
+      "questionRefs": [
+        "Q-077"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-077"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-077-01",
+        "AC-V3-Q-077-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-077"
+      ],
+      "backend": "Intentar envío de ubicación cada 30 segundos durante servicio activo y con conexión; no encolar offline. Guardar hora y calidad para mostrar antigüedad. Obtener lectura puntual al cierre dentro de la captura autorizada.",
+      "crm": "Mostrar último punto y su hora; no presentar actualización antigua como posición actual.",
+      "app": "Enviar con permiso y conexión durante el servicio, detener al terminar y obtener evidencia puntual en cierre.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-078",
+      "statement": "La app muestra solo inicio, terminal, horarios y resultado de sus servicios. Los puntos detallados se entregan por una solicitud de acceso verificada, sin impedir los derechos que resulten aplicables.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-GPS",
+      "moduleRefs": [
+        "MOD-GPS",
+        "MOD-REP",
+        "MOD-ORG"
+      ],
+      "questionRefs": [
+        "Q-078"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-078"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-078-01",
+        "AC-V3-Q-078-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-078"
+      ],
+      "backend": "Exponer al conductor solo resumen propio en app: inicio, terminal, horarios y resultado. Tratar puntos detallados mediante solicitud de acceso verificada, limitada a datos propios y a retención; no presumir acceso irrestricto de SUPER_ADMIN.",
+      "crm": "ADMIN consulta operación propia y el procedimiento autorizado de entrega de detalle; no exporta trayectos personales indiscriminadamente.",
+      "app": "Mostrar resumen y vía de solicitud del detalle, sin mapa histórico completo ni descarga directa general de puntos.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-079",
+      "statement": "Se conservan puntos detallados 7 días y luego se eliminan. Se mantienen resúmenes sin trayecto detallado y evidencias puntuales justificadas de incidencias. Reduce almacenamiento y el tiempo disponible para revisar recorridos.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-GPS",
+      "moduleRefs": [
+        "MOD-GPS",
+        "MOD-INC",
+        "MOD-AUD",
+        "MOD-NFR"
+      ],
+      "questionRefs": [
+        "Q-079"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-079"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-079-01",
+        "AC-V3-Q-079-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-079"
+      ],
+      "backend": "Eliminar puntos detallados tras 7 días; mantener resúmenes sin trayecto detallado. Evidencia puntual de incidencia necesita finalidad, alcance y excepción justificados. Definir expiración también en copias; auditoría no debe duplicar permanentemente coordenadas.",
+      "crm": "Mostrar periodo de disponibilidad y evidencia puntual restringida cuando exista excepción justificada.",
+      "app": "Informar que el detalle está sujeto a retención; el resumen propio sigue disponible según su política.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-106",
+      "statement": "Al cerrar se corrobora terminal solo con un punto a no más de 200 m del terminal configurado, con antigüedad máxima de 2 minutos y precisión horizontal reportada de 100 m o mejor. Sin cumplimiento queda no corroborado o con discrepancia para revisión. Se calibra en el piloto.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-GPS",
+      "moduleRefs": [
+        "MOD-GPS",
+        "MOD-SRV",
+        "MOD-RTE"
+      ],
+      "questionRefs": [
+        "Q-106"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-106"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-106-01",
+        "AC-V3-Q-106-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-106"
+      ],
+      "backend": "En el cierre comparar con terminal de la versión de ruta del servicio: distancia <=200 m, antigüedad <=120 s y precisión horizontal reportada <=100 m. Mantener punto y resultado dentro de retención. Sin evidencia válida diferenciar no corroborado de discrepancia, sin acusación ni cierre automático por llegada.",
+      "crm": "Mostrar declarado/corroborado/discrepancia/no corroborado por separado y atender observaciones.",
+      "app": "Ruta finalizada solicita automáticamente comprobación de terminal; no exigir otro botón ni ocultar falta de evidencia.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    }
+  ],
+  "acceptanceCriteria": [
+    {
+      "id": "AC-V2-Q-050",
+      "criterion": "Una oferta enviada está pendiente; al aceptar nace el compromiso confirmado y el servicio sigue PROGRAMADO.",
+      "questionRefs": [
+        "Q-050"
+      ],
+      "ruleRefs": [
+        "BR-V2-Q-050"
+      ],
+      "decisionRefs": [
+        "D-Q-050"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V2-Q-051",
+      "criterion": "Con el rol y la empresa correctos, la operación cumple la respuesta vigente; una precondición incumplida se rechaza sin alterar historial ni recursos ajenos.",
+      "questionRefs": [
+        "Q-051"
+      ],
+      "ruleRefs": [
+        "BR-V2-Q-051"
+      ],
+      "decisionRefs": [
+        "D-Q-051"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V2-Q-052",
+      "criterion": "ADMIN no puede confirmar como aceptación una oferta sin el acto del conductor destinatario.",
+      "questionRefs": [
+        "Q-052"
+      ],
+      "ruleRefs": [
+        "BR-V2-Q-052"
+      ],
+      "decisionRefs": [
+        "D-Q-052"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V2-Q-053",
+      "criterion": "Una aceptación posterior a expiresAt no confirma la oferta. En un relevo, el vencimiento se calcula respecto al inicio previsto del tramo nuevo y no respecto al inicio original del servicio.",
+      "questionRefs": [
+        "Q-053"
+      ],
+      "ruleRefs": [
+        "BR-V2-Q-053"
+      ],
+      "decisionRefs": [
+        "D-Q-053"
+      ],
+      "status": "SUSTITUIDO",
+      "evidence": null,
+      "supersededBy": "AC-V3-Q-053-01"
+    },
+    {
+      "id": "AC-V2-Q-054",
+      "criterion": "Con dos ofertas simultáneas incompatibles, solo la primera reserva válida ocupa el horario, aunque no esté aceptada.",
+      "questionRefs": [
+        "Q-054"
+      ],
+      "ruleRefs": [
+        "BR-V2-Q-054"
+      ],
+      "decisionRefs": [
+        "D-Q-054"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V2-Q-055",
+      "criterion": "Con el rol y la empresa correctos, la operación cumple la respuesta vigente; una precondición incumplida se rechaza sin alterar historial ni recursos ajenos.",
+      "questionRefs": [
+        "Q-055"
+      ],
+      "ruleRefs": [
+        "BR-V2-Q-055"
+      ],
+      "decisionRefs": [
+        "D-Q-055"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V2-Q-056",
+      "criterion": "Una oferta expirada libera su reserva horaria y conserva el vínculo de unidad; un reintento de aceptación no la reactiva.",
+      "questionRefs": [
+        "Q-056"
+      ],
+      "ruleRefs": [
+        "BR-V2-Q-056"
+      ],
+      "decisionRefs": [
+        "D-Q-056"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V2-Q-057",
+      "criterion": "Rechazar una oferta no reasigna automáticamente; el candidato seleccionado por ADMIN debe aceptar su propia oferta.",
+      "questionRefs": [
+        "Q-057"
+      ],
+      "ruleRefs": [
+        "BR-V2-Q-057"
+      ],
+      "decisionRefs": [
+        "D-Q-057"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V2-Q-058",
+      "criterion": "Cancelar la asignación libera su intervalo y deja el servicio sin inicio permitido hasta aceptar un reemplazo.",
+      "questionRefs": [
+        "Q-058"
+      ],
+      "ruleRefs": [
+        "BR-V2-Q-058"
+      ],
+      "decisionRefs": [
+        "D-Q-058"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V2-Q-059",
+      "criterion": "La aceptación y la hora programada no cambian el servicio a INICIADO; debe existir inicio válido del conductor.",
+      "questionRefs": [
+        "Q-059"
+      ],
+      "ruleRefs": [
+        "BR-V2-Q-059"
+      ],
+      "decisionRefs": [
+        "D-Q-059"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V2-Q-060",
+      "criterion": "Una ubicación ausente o incompatible se conserva como observación; una interrupción nunca se presenta como cumplimiento correcto.",
+      "questionRefs": [
+        "Q-060"
+      ],
+      "ruleRefs": [
+        "BR-V2-Q-060"
+      ],
+      "decisionRefs": [
+        "D-Q-060"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V2-Q-061",
+      "criterion": "Una oferta PENDIENTE_ACEPTACION no autoriza Iniciar servicio.",
+      "questionRefs": [
+        "Q-061"
+      ],
+      "ruleRefs": [
+        "BR-V2-Q-061"
+      ],
+      "decisionRefs": [
+        "D-Q-061"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V2-Q-062",
+      "criterion": "El retraso produce alerta sin inicio automático; una oferta expirada sigue siendo inválida.",
+      "questionRefs": [
+        "Q-062"
+      ],
+      "ruleRefs": [
+        "BR-V2-Q-062"
+      ],
+      "decisionRefs": [
+        "D-Q-062"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V2-Q-063",
+      "criterion": "Si el servidor confirmó el inicio y se perdió la respuesta, reconectar recupera un único registro; no carga una cola offline.",
+      "questionRefs": [
+        "Q-063"
+      ],
+      "ruleRefs": [
+        "BR-V2-Q-063"
+      ],
+      "decisionRefs": [
+        "D-Q-063"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V2-Q-064",
+      "criterion": "Una corrección ADMIN conserva tiempos anteriores y motivo; CONDUCTOR no altera tiempos ni GPS.",
+      "questionRefs": [
+        "Q-064"
+      ],
+      "ruleRefs": [
+        "BR-V2-Q-064"
+      ],
+      "decisionRefs": [
+        "D-Q-064"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V2-Q-065",
+      "criterion": "Un relevo registra ambos conductores y unidades, exige aceptación del reemplazo y conserva la hora inicial del servicio.",
+      "questionRefs": [
+        "Q-065"
+      ],
+      "ruleRefs": [
+        "BR-V2-Q-065"
+      ],
+      "decisionRefs": [
+        "D-Q-065"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-053-01",
+      "criterion": "Una oferta con inicio dentro de 6 minutos vence al inicio previsto, sin completar los 10 minutos.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-053"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-053"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-053"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-053-02",
+      "criterion": "A los 10 minutos o al inicio de prestación, lo que ocurra primero, no se acepta la misma oferta ni se rompe el vínculo de unidad.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-053"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-053"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-053"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-067-01",
+      "criterion": "Una avería que impide circulación segura genera incidencia y gestión de interrupción o relevo.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-067"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-067"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-067"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-067-02",
+      "criterion": "La mera falta de corroboración GPS o retraso no convierte por sí solo el servicio en interrumpido.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-067"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-067"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-067"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-075-01",
+      "criterion": "Un servicio iniciado habilita captura y el cierre válido detiene seguimiento.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-075"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-075"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-075"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-075-02",
+      "criterion": "No se guardan puntos de seguimiento anteriores al inicio ni posteriores al cierre.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-075"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-075"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-075"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-076-01",
+      "criterion": "Denegar permiso impide iniciar un servicio que requiere seguimiento, sin borrar la cuenta.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-076"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-076"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-076"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-076-02",
+      "criterion": "Perder GPS tras iniciar no inventa puntos ni acredita por sí solo fraude.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-076"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-076"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-076"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-077-01",
+      "criterion": "Bajo conexión, el objetivo de muestreo es 30 segundos durante el servicio.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-077"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-077"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-077"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-077-02",
+      "criterion": "Sin conexión no se guardan acciones offline para sincronizar después ni se garantiza un punto exacto cada 30 segundos.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-077"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-077"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-077"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-078-01",
+      "criterion": "El conductor ve resumen de su servicio y puede solicitar su detalle por proceso verificado.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-078"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-078"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-078"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-078-02",
+      "criterion": "Una solicitud no revela ubicaciones de otro conductor ni recrea puntos ya eliminados.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-078"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-078"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-078"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-079-01",
+      "criterion": "Tras siete días, el trayecto detallado deja de estar consultable sin excepción justificada y acotada.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-079"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-079"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-079"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-079-02",
+      "criterion": "La retención de auditoría de seis meses no extiende automáticamente la de puntos GPS.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-079"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-079"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-079"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-106-01",
+      "criterion": "Un punto reciente dentro de 200 m y precisión adecuada puede corroborar el terminal al cerrar.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-106"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-106"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-106"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-106-02",
+      "criterion": "Un punto antiguo, impreciso o ausente no corrobora; un punto en terminal no acredita todas las paradas.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-106"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-106"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-106"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    }
+  ],
+  "verificationTasks": [
+    {
+      "id": "VT-V3-Q-075-01",
+      "statement": "Definir aviso de privacidad, finalidad y base aplicable del tratamiento antes del piloto.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-075"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-075"
+      ],
+      "moduleRefs": [
+        "MOD-GPS",
+        "MOD-SRV",
+        "MOD-NFR"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-Q-077-01",
+      "statement": "Medir consumo, batería y capacidad con la carga acordada; ninguna cifra acredita viabilidad con S/0.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-077"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-077"
+      ],
+      "moduleRefs": [
+        "MOD-GPS",
+        "MOD-SRV",
+        "MOD-NFR"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-Q-079-01",
+      "statement": "Contrastar finalidad, obligaciones de la modalidad y gestión de respaldos antes de fijar la política definitiva.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-079"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-079"
+      ],
+      "moduleRefs": [
+        "MOD-GPS",
+        "MOD-INC",
+        "MOD-AUD",
+        "MOD-NFR"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-Q-106-01",
+      "statement": "Probar geometría del terminal y precisión de dispositivos. La corroboración no demuestra todo el recorrido ni evita falsificación por sí sola.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-106"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-106"
+      ],
+      "moduleRefs": [
+        "MOD-GPS",
+        "MOD-SRV",
+        "MOD-RTE"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-GPS-ACCESS",
+      "statement": "Concretar quién verifica y atiende solicitudes de puntos detallados, plazos y alcance por finalidad, respetando retención de siete días.",
+      "status": "PENDIENTE_DETALLE_DE_PROCESO",
+      "questionRefs": [
+        "Q-078",
+        "Q-079"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-078",
+        "D-V3-Q-079"
+      ],
+      "moduleRefs": [
+        "MOD-GPS",
+        "MOD-ORG"
+      ],
+      "evidence": null
+    }
+  ],
+  "operationalPolicies": {
+    "service": {
+      "status": "CONFIRMADA_USUARIO",
+      "baseStates": [
+        "PROGRAMADO",
+        "INICIADO",
+        "FINALIZADO",
+        "CANCELADO",
+        "INTERRUMPIDO"
+      ],
+      "statusMappingNotice": "Mapeo de especificación; no acredita enums ya implementados. Necesidad de reasignación, retraso y corroboración GPS son atributos separados.",
+      "startLabel": "Iniciar servicio",
+      "finishLabel": "Ruta finalizada",
+      "acceptanceStartsService": false,
+      "scheduledTimeStartsService": false,
+      "finishRequiresStartedService": true,
+      "finishBy": "CONDUCTOR_RESPONSABLE_TRAMO_VIGENTE",
+      "gpsCheckIsAutomaticAtClose": true,
+      "arrivalAutoClosesService": false,
+      "gpsCorroborationResults": [
+        "LLEGADA_CORROBORADA",
+        "DISCREPANCIA_GEOGRAFICA",
+        "NO_CORROBORADA"
+      ],
+      "gpsThresholds": {
+        "radiusMeters": 200,
+        "maxAgeSeconds": 120,
+        "maxAccuracyMeters": 100,
+        "questionRef": "Q-106",
+        "status": "OBJETIVO_CONFIRMADO_USUARIO",
+        "verificationStatus": "PENDIENTE_CALIBRACION_PILOTO"
+      },
+      "gpsDoesNotProveAllStops": true,
+      "missingGpsDoesNotAutomaticallyMeanFraud": true,
+      "successfulCompletionExcludes": [
+        "CANCELADO",
+        "INTERRUMPIDO"
+      ],
+      "historyBySegments": true,
+      "replacementRequiresAcceptance": true,
+      "correctionRole": "ADMIN",
+      "driverDirectTimeEditAllowed": false,
+      "originalGpsEvidenceEditable": false,
+      "onlineActionsOnly": true
+    },
+    "gps": {
+      "status": "CONFIRMADA_USUARIO",
+      "trackingWindow": "SOLO_SERVICIO_INICIADO",
+      "prePostTrackingStored": false,
+      "punctualPermissionCheckAtStartAllowed": true,
+      "intervalSeconds": 30,
+      "intervalNature": "INTENTO_CON_CONEXION_OBJETIVO_POR_PROBAR",
+      "offlineQueue": false,
+      "closeGetsAutomaticPunctualEvidence": true,
+      "permissionRequiredToStartTrackedService": true,
+      "permissionDenialRemovesAccountAccess": false,
+      "allPilotServicesTrackingScopeStatus": "PENDIENTE_PRECISAR_CON_MODALIDAD",
+      "driverInAppDetail": "RESUMEN_INICIO_TERMINAL_HORARIOS_RESULTADO",
+      "detailedPointsAccess": "SOLICITUD_VERIFICADA_DATOS_PROPIOS",
+      "pointRetentionDays": 7,
+      "summaryContainsDetailedTrack": false,
+      "incidentEvidenceException": "PUNTUAL_JUSTIFICADA_Y_ACOTADA",
+      "backupPurgeHandlingStatus": "PENDIENTE_PROCEDIMIENTO",
+      "thresholds": {
+        "radiusMeters": 200,
+        "maxAgeSeconds": 120,
+        "maxAccuracyMeters": 100,
+        "questionRef": "Q-106",
+        "status": "OBJETIVO_CONFIRMADO_USUARIO",
+        "verificationStatus": "PENDIENTE_CALIBRACION_PILOTO"
+      }
+    },
+    "assignment": {
+      "acceptanceStatus": "CONFIRMADA_USUARIO",
+      "createdBy": "ADMIN",
+      "acceptedBy": "CONDUCTOR_DESTINATARIO",
+      "acceptanceRequired": true,
+      "adminAcceptanceOnBehalfAllowed": false,
+      "offerStates": [
+        "PENDIENTE_ACEPTACION",
+        "CONFIRMADA",
+        "RECHAZADA",
+        "EXPIRADA",
+        "CANCELADA"
+      ],
+      "confirmationEvent": "ACEPTACION_CONDUCTOR_VALIDADA_EN_SERVIDOR",
+      "holdResources": [
+        "HORARIO_CONDUCTOR",
+        "HORARIO_UNIDAD_PREVIAMENTE_VINCULADA"
+      ],
+      "holdDurationMinutes": 10,
+      "holdDurationStatus": "CONFIRMADA_USUARIO",
+      "holdDurationQuestionRef": "Q-053",
+      "holdDeadlineRule": "MINIMO(EMISION_SERVIDOR_MAS_10_MINUTOS, INICIO_PREVISTO_PRESTACION_OFERTADA)",
+      "initialOfferStartReference": "SERVICE_PLANNED_START_AT",
+      "replacementOfferStartReference": "REPLACEMENT_SEGMENT_PLANNED_START_AT",
+      "offerRequiresFutureAcceptanceDeadline": true,
+      "pendingOffersBlockOverlappingOffers": true,
+      "expiryValidatedOnEveryAcceptanceAndNewHold": true,
+      "expiryDoesNotDependOnlyOnCleanupJob": true,
+      "revalidationAt": [
+        "CREAR_OFERTA",
+        "ACEPTAR_OFERTA",
+        "INICIAR_SERVICIO",
+        "REGISTRAR_RELEVO"
+      ],
+      "revalidate": [
+        "Empresa y permisos",
+        "Destinatario y versión",
+        "Vigencia de oferta",
+        "Estado documental",
+        "Unidad vinculada y periodo autorizado",
+        "Mantenimiento",
+        "Conflictos conductor/unidad",
+        "Margen entre servicios"
+      ],
+      "materialChangesRequireNewAcceptance": [
+        "CONDUCTOR",
+        "UNIDAD",
+        "RUTA",
+        "HORARIO"
+      ],
+      "expiryReleasesLink": false,
+      "expiryReleasesCalendarHold": true,
+      "expiryKeepsServiceProgrammed": true,
+      "autoReplacement": false,
+      "marginByServiceType": {
+        "configuredValues": null,
+        "status": "CONFIGURACION_ADMIN_REQUERIDA",
+        "noUniversalValueAssumed": true
+      }
+    }
+  },
+  "sourceSha256": "ca2794a41907d8081e0b77bd7ee02c3960024798d48442a7d26f053cb730ac50"
+}

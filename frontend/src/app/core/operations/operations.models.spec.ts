@@ -8,6 +8,8 @@ describe('contrato de asignaciones CRM-móvil', () => {
       'PENDING_RESPONSE',
       'SCHEDULED',
       'EN_SERVICIO',
+      'INTERRUPTED',
+      'TRANSFERRED',
       'COMPLETED',
       'REJECTED',
       'CANCELLED',

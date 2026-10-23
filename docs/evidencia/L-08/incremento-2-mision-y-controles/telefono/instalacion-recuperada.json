@@ -1,0 +1,11 @@
+{
+  "observedAt": "2026-10-22T16:37:18.6095557+00:00",
+  "artifactSha256": "577fd76904d9e6109a396dd72a859c362d074f62ed6b870b0538e225fff0b28c",
+  "package": "pe.rutafija.conductor.l08",
+  "result": "PASS_ISOLATED_TEST_UPDATE",
+  "priorWrapperInterruptedByNativeProgress": true,
+  "recoveryAfterDeviceHashConfirmedOldApk": true,
+  "originalApplicationModified": false,
+  "locationGrantedByTool": false,
+  "accountCreated": false
+}

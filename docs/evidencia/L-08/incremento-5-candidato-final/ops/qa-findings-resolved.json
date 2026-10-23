@@ -1,0 +1,41 @@
+{
+    "reviewSource":  "Parent independent review plus postflight",
+    "findings":  [
+                     {
+                         "id":  "OPS-QA-01",
+                         "finding":  "Detection bound omitted remainder of current cycle",
+                         "resolution":  "Interval+8timeouts+5 =105s; DNS must be independently bounded; loopbackIP tested",
+                         "status":  "RESOLVED_SOURCE_AND_DOC"
+                     },
+                     {
+                         "id":  "OPS-QA-02",
+                         "finding":  "DPAPI alone cannot recover AES key after loss of Windows identity",
+                         "resolution":  "Pilot requires authenticated portable offline key wrap and real recovery from another identity/host; remains external prerequisite",
+                         "status":  "RESOLVED_SCOPE_AND_PROCEDURE_NOT_FABRICATED"
+                     },
+                     {
+                         "id":  "OPS-QA-03",
+                         "finding":  "Initial initdb timeout90s",
+                         "resolution":  "Preserve failed case, timeout600s, initial clock06:23:40Z inherited",
+                         "status":  "RESOLVED_RUNTIME_INCLUDED_IN_RTO"
+                     },
+                     {
+                         "id":  "OPS-QA-04",
+                         "finding":  "pg_ctl child inherited pipes, launcher misclassified successful start",
+                         "resolution":  "Exit0 conditional handling plus independent SQL data_directory identity, stop owned pidfile in finally",
+                         "status":  "RESOLVED_SOURCE_RUNTIME_CONTINUATION"
+                     },
+                     {
+                         "id":  "OPS-QA-05",
+                         "finding":  "Unnecessary ACL owner reassignment on resume failed",
+                         "resolution":  "Verify existing protected ACL/currentuser+SYSTEM on resume; source evidence directory created before preconditions",
+                         "status":  "RESOLVED_RUNTIME"
+                     },
+                     {
+                         "id":  "OPS-QA-06",
+                         "finding":  "Oracle javapath launcher Kill left child JVM HTTP fixture alive",
+                         "resolution":  "Original probes retained; kill exactly owned JVM; corrected actualHTTP8.4125473s; directJDK21ownership test passes; final allportsfree",
+                         "status":  "RESOLVED_RUNTIME_WITH_CORRECTION_ANNEX"
+                     }
+                 ]
+}

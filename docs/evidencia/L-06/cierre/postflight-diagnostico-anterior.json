@@ -1,0 +1,6 @@
+{
+  "result": "REFUSED",
+  "check": "CLEANUP_LOCK_MUST_BE_FREE",
+  "causeType": "IllegalStateException",
+  "sqlState": "NONE"
+}

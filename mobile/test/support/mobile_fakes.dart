@@ -6,12 +6,19 @@ import 'package:ruta_fija_conductor/features/assignments/data/mobile_assignment_
 import 'package:ruta_fija_conductor/features/assignments/data/mobile_assignment_repository.dart';
 import 'package:ruta_fija_conductor/features/assignments/domain/mobile_assignment_models.dart';
 import 'package:ruta_fija_conductor/features/auth/data/mobile_auth_repository.dart';
+import 'package:ruta_fija_conductor/features/auth/data/mobile_applicant_access_repository.dart';
+import 'package:ruta_fija_conductor/features/auth/domain/mobile_applicant_access_models.dart';
+import 'package:ruta_fija_conductor/features/auth/data/mobile_conductor_recovery_repository.dart';
+import 'package:ruta_fija_conductor/features/auth/data/mobile_conductor_onboarding_repository.dart';
 import 'package:ruta_fija_conductor/features/auth/domain/mobile_auth_models.dart';
+import 'package:ruta_fija_conductor/features/auth/domain/mobile_conductor_onboarding_models.dart';
 import 'package:ruta_fija_conductor/features/incidents/data/mobile_incident_repository.dart';
 import 'package:ruta_fija_conductor/features/incidents/domain/mobile_incident_models.dart';
 import 'package:ruta_fija_conductor/features/location/domain/mobile_foreground_location.dart';
 import 'package:ruta_fija_conductor/features/profile/data/mobile_driver_repository.dart';
 import 'package:ruta_fija_conductor/features/profile/domain/mobile_driver_models.dart';
+import 'package:ruta_fija_conductor/features/qualification/data/mobile_qualification_repository.dart';
+import 'package:ruta_fija_conductor/features/qualification/domain/mobile_qualification.dart';
 
 MobileAuthSession testSession({
   String accessToken = 'access-token',
@@ -22,6 +29,7 @@ MobileAuthSession testSession({
     refreshToken: refreshToken,
     expiresIn: 900,
     refreshExpiresIn: 604800,
+    accessScope: MobileAccessScope.operations,
     user: const MobileAuthenticatedUser(
       id: '11111111-1111-4111-8111-111111111111',
       driverId: '22222222-2222-4222-8222-222222222222',
@@ -29,6 +37,71 @@ MobileAuthSession testSession({
       role: 'CONDUCTOR',
     ),
   );
+}
+
+final class FakeMobileQualificationGateway
+    implements MobileQualificationGateway {
+  FakeMobileQualificationGateway({MobileQualification? state})
+    : state =
+          state ??
+          MobileQualification(
+            driverId: '22222222-2222-4222-8222-222222222222',
+            version: 0,
+            suspended: false,
+            operationalEnabled: true,
+            personalDocumentsStatus: 'CONFORME',
+            blockers: const [],
+            periods: const [],
+            unitRequests: const [],
+            observedAt: DateTime.utc(2026, 10, 18),
+          );
+  MobileQualification state;
+  int reads = 0;
+  int unitWrites = 0;
+  int documentWrites = 0;
+  MobileQualificationDocumentInput? lastDocument;
+  Object? readFailure;
+  Object? mutationFailure;
+  @override
+  Future<MobileQualification> qualification() async {
+    reads++;
+    if (readFailure != null) throw readFailure!;
+    return state;
+  }
+
+  @override
+  Future<List<MobilePersonalRequirement>> personalCatalog() async => const [
+    MobilePersonalRequirement(
+      id: 'CON-02',
+      title: 'Licencia',
+      mandatory: true,
+      fieldKeys: ['licenseNumber', 'licenseCategory'],
+    ),
+  ];
+  @override
+  Future<MobileQualification> requestUnit({
+    required int expectedVersion,
+    required String operationKey,
+    required String kind,
+    required String reference,
+    String? vehicleId,
+  }) async {
+    unitWrites++;
+    if (mutationFailure != null) throw mutationFailure!;
+    return state;
+  }
+
+  @override
+  Future<MobileQualification> presentDocument({
+    required int expectedVersion,
+    required String operationKey,
+    required MobileQualificationDocumentInput document,
+  }) async {
+    documentWrites++;
+    lastDocument = document;
+    if (mutationFailure != null) throw mutationFailure!;
+    return state;
+  }
 }
 
 final class InMemoryRefreshTokenStore implements MobileRefreshTokenStore {
@@ -55,25 +128,64 @@ final class InMemoryRefreshTokenStore implements MobileRefreshTokenStore {
 final class FakeMobileAuthGateway implements MobileAuthGateway {
   FakeMobileAuthGateway({
     MobileAuthSession? session,
+    this.loginChallenge,
     this.refreshFailure,
     this.loginFailure,
+    this.verificationFailure,
   }) : session = session ?? testSession();
 
   MobileAuthSession session;
+  final MobileEmailOtpChallenge? loginChallenge;
   Object? refreshFailure;
   Object? loginFailure;
+  Object? verificationFailure;
   final List<String> refreshedTokens = [];
   final List<String> loggedOutTokens = [];
+  final List<String> verifiedCodes = [];
+  final List<String> verificationTokens = [];
+  int loginCalls = 0;
 
   @override
-  Future<MobileAuthSession> login({
+  Future<MobileAuthLoginResult> login({
     required String email,
     required String password,
   }) async {
+    loginCalls++;
     if (loginFailure != null) {
       throw loginFailure!;
     }
+    final challenge = loginChallenge;
+    if (challenge != null) {
+      return MobileAuthLoginResult.verificationRequired(challenge);
+    }
+    return MobileAuthLoginResult.authenticated(session);
+  }
+
+  @override
+  Future<MobileAuthSession> verifyEmailOtp({
+    required String verificationToken,
+    required String code,
+  }) async {
+    verificationTokens.add(verificationToken);
+    verifiedCodes.add(code);
+    if (verificationFailure != null) {
+      throw verificationFailure!;
+    }
     return session;
+  }
+
+  @override
+  Future<MobileEmailOtpChallenge> resendEmailOtp(
+    String verificationToken,
+  ) async {
+    verificationTokens.add(verificationToken);
+    return loginChallenge ??
+        MobileEmailOtpChallenge(
+          verificationToken: verificationToken,
+          otpExpiresAt: DateTime.utc(2026, 10, 14, 12, 5),
+          challengeExpiresAt: DateTime.utc(2026, 10, 14, 12, 30),
+          emailSent: true,
+        );
   }
 
   @override
@@ -89,6 +201,145 @@ final class FakeMobileAuthGateway implements MobileAuthGateway {
   Future<void> logout(String refreshToken) async {
     loggedOutTokens.add(refreshToken);
   }
+}
+
+final class FakeMobileConductorRecoveryGateway
+    implements MobileConductorRecoveryGateway {
+  FakeMobileConductorRecoveryGateway({
+    this.otpResult = const MobileConductorRecoveryOtpResult(
+      passwordResetRequired: true,
+      passwordResetToken: 'synthetic-reset-token',
+    ),
+  });
+
+  final MobileConductorRecoveryOtpResult otpResult;
+  final List<(String, String, String)> otpVerifications = [];
+  final List<(String, String, String)> passwordResets = [];
+
+  @override
+  Future<MobileConductorRecoveryOtpResult> verifyOtp({
+    required String recoveryId,
+    required String verificationToken,
+    required String code,
+  }) async {
+    otpVerifications.add((recoveryId, verificationToken, code));
+    return otpResult;
+  }
+
+  @override
+  Future<void> resetPassword({
+    required String recoveryId,
+    required String passwordResetToken,
+    required String newPassword,
+  }) async {
+    passwordResets.add((recoveryId, passwordResetToken, newPassword));
+  }
+}
+
+final class FakeMobileConductorOnboardingGateway
+    implements MobileConductorOnboardingGateway {
+  FakeMobileConductorOnboardingGateway({
+    MobileConductorOnboardingChallenge? challenge,
+    MobileConductorOnboardingAccepted? accepted,
+  }) : challenge =
+           challenge ??
+           MobileConductorOnboardingChallenge(
+             verificationToken: 'synthetic-onboarding-token',
+             otpExpiresAt: DateTime.utc(2026, 10, 15, 18, 5),
+             challengeExpiresAt: DateTime.utc(2026, 10, 15, 18, 30),
+             emailSent: true,
+           ),
+       accepted =
+           accepted ??
+           const MobileConductorOnboardingAccepted(
+             requestId: 'synthetic-request-id',
+             status: 'PENDING_REVIEW',
+           );
+
+  final MobileConductorOnboardingChallenge challenge;
+  final MobileConductorOnboardingAccepted accepted;
+  final List<Map<String, Object?>> starts = [];
+  final List<String> resendTokens = [];
+  final List<(String, String)> verifications = [];
+
+  @override
+  Future<MobileConductorOnboardingChallenge> start({
+    required String email,
+    required String password,
+    required String fullName,
+    String? phone,
+    required String invitationCode,
+    required String idempotencyKey,
+  }) async {
+    starts.add({
+      'email': email,
+      'password': password,
+      'fullName': fullName,
+      'phone': phone,
+      'invitationCode': invitationCode,
+      'idempotencyKey': idempotencyKey,
+    });
+    return challenge;
+  }
+
+  @override
+  Future<MobileConductorOnboardingChallenge> resendOtp(
+    String verificationToken,
+  ) async {
+    resendTokens.add(verificationToken);
+    return challenge;
+  }
+
+  @override
+  Future<MobileConductorOnboardingAccepted> verifyOtp({
+    required String verificationToken,
+    required String code,
+  }) async {
+    verifications.add((verificationToken, code));
+    return accepted;
+  }
+}
+
+final class FakeMobileApplicantAccessGateway
+    implements MobileApplicantAccessGateway {
+  FakeMobileApplicantAccessGateway({this.expiresAt, this.requestsFailure});
+
+  final DateTime? expiresAt;
+  Object? requestsFailure;
+  int loginCalls = 0;
+  int requestCalls = 0;
+  final List<String> loggedOutTokens = [];
+  static const token = 'oa1.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQ';
+
+  @override
+  Future<MobileApplicantAccess> login({
+    required String email,
+    required String password,
+  }) async {
+    loginCalls++;
+    return MobileApplicantAccess(
+      token: token,
+      expiresAt: expiresAt ?? DateTime.now().add(const Duration(minutes: 30)),
+    );
+  }
+
+  @override
+  Future<List<MobileApplicantRequest>> requests(String token) async {
+    requestCalls++;
+    if (requestsFailure != null) throw requestsFailure!;
+    return [
+      MobileApplicantRequest(
+        requestId: 'synthetic-request-id',
+        organizationId: 'synthetic-organization-id',
+        status: 'PENDING_REVIEW',
+        reviewRounds: 0,
+        submittedAt: DateTime.utc(2026, 10, 15),
+      ),
+    ];
+  }
+
+  @override
+  Future<void> logout(String token) async => loggedOutTokens.add(token);
 }
 
 final class FakeMobileDriverGateway implements MobileDriverGateway {
@@ -263,6 +514,8 @@ final class FakeMobileDeviceLocationGateway
 }
 
 MobileAssignment testAssignment({
+  String? serviceId,
+  String? handoverId,
   String id = '33333333-3333-4333-8333-333333333333',
   MobileAssignmentStatus status = MobileAssignmentStatus.pendingResponse,
   MobileAssignmentResponseMode responseMode =
@@ -274,6 +527,8 @@ MobileAssignment testAssignment({
   DateTime? completedAt,
 }) {
   return MobileAssignment(
+    serviceId: serviceId,
+    handoverId: handoverId,
     id: id,
     status: status,
     responseMode: responseMode,
@@ -424,9 +679,8 @@ final class FakeMobileAssignmentGateway implements MobileAssignmentGateway {
 
   @override
   Future<MobileAssignmentCommandResult> retry(
-    MobilePendingAssignmentCommand command, {
-    MobileAssignment? fallbackAssignment,
-  }) async {
+    MobilePendingAssignmentCommand command,
+  ) async {
     final assignment = await get(command.assignmentId);
     final result = await send(
       assignment,
@@ -578,7 +832,12 @@ final class FakeMobileIncidentGateway implements MobileIncidentGateway {
   Future<MobileIncident> create({
     required MobileIncidentCategory category,
     required String description,
+    required MobileIncidentSeverity severity,
     String? assignmentId,
+    String? operationKey,
+    DateTime? occurredAt,
+    String? previousIncidentId,
+    String? relationReason,
   }) async {
     _throwIfNeeded();
     createdCategories.add(category);
@@ -643,6 +902,29 @@ final class FakeMobileIncidentGateway implements MobileIncidentGateway {
     if (failure != null) {
       throw failure!;
     }
+  }
+
+  @override
+  Future<List<MobileIncidentAction>> history(String incidentId) async {
+    _throwIfNeeded();
+    return [];
+  }
+
+  @override
+  Future<MobileIncidentOperation> operation(String operationKey) async {
+    _throwIfNeeded();
+    throw StateError('No synthetic operation receipt was prepared.');
+  }
+
+  @override
+  Future<MobileIncident> information(
+    String incidentId, {
+    required int version,
+    required String operationKey,
+    required String note,
+  }) async {
+    _throwIfNeeded();
+    throw StateError('No synthetic information command was prepared.');
   }
 }
 

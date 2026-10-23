@@ -45,6 +45,7 @@ final class MobileAnnouncementRepository implements MobileAnnouncementGateway {
     final response = await _apiClient.postObject(
       'mobile/announcements/$normalizedId/read',
       const {},
+      allowSessionRefresh: false,
     );
     return MobileAnnouncementReadResult.fromJson(response);
   }

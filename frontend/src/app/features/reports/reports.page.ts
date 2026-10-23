@@ -16,6 +16,7 @@ import {
 } from '../../core/operations/operations.models';
 import { OperationsApiService } from '../../core/operations/operations-api.service';
 import { PageHeaderComponent } from '../../shared/ui/page-header.component';
+import { ServiceReportsComponent } from './service-reports.component';
 
 function dateInputValue(date: Date): string {
   const pad = (number: number) => number.toString().padStart(2, '0');
@@ -30,7 +31,7 @@ export function escapeCsvCell(value: string): string {
 
 @Component({
   selector: 'rf-reports-page',
-  imports: [ReactiveFormsModule, PageHeaderComponent],
+  imports: [ReactiveFormsModule, PageHeaderComponent, ServiceReportsComponent],
   templateUrl: './reports.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -173,6 +174,7 @@ export class ReportsPage {
       DISPONIBLE: 'Disponible',
       RESERVADO: 'Reservado',
       EN_SERVICIO: 'En servicio',
+      ATENCION: 'Atención segura pendiente',
       DESCANSO: 'Descanso',
       NO_DISPONIBLE: 'No disponible',
       MANTENIMIENTO: 'Mantenimiento',
@@ -180,6 +182,8 @@ export class ReportsPage {
       PENDING_RESPONSE: 'Pendiente de respuesta',
       SCHEDULED: 'Programada',
       COMPLETED: 'Completada',
+      INTERRUPTED: 'Interrumpida; atención pendiente',
+      TRANSFERRED: 'Tramo relevado',
       REJECTED: 'Rechazada',
       CANCELLED: 'Cancelada',
       EXPIRED: 'Vencida',

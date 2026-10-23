@@ -1,0 +1,43 @@
+{
+  "observedAt": "2026-10-20T13:43:39.665972+00:00",
+  "result": "PASS_CONCORDANCE",
+  "lot": "L-05",
+  "status": "VERIFICADA",
+  "closureType": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "contractVersion": "0.6.0",
+  "verifiedLocalCriteria": [
+    "CI-L05-01",
+    "CI-L05-02",
+    "CI-L05-03",
+    "CI-L05-04",
+    "CI-L05-05",
+    "CI-L05-06",
+    "CI-L05-07",
+    "CI-L05-08",
+    "CI-L05-09",
+    "CI-L05-10"
+  ],
+  "pendingLocalCriteria": [],
+  "boardStatus": "VERIFICADA",
+  "memoryAndBacklogCurrent": true,
+  "executionHistoryPreserved": true,
+  "previousContractPreserved": "docs/contratos/historico/L-05-v0.5.0.md",
+  "priorMatrixPreserved": "docs/evidencia/L-05/matriz-L05-contrato0.5-antecedente.md",
+  "checkedLocalLinks": 90,
+  "backupFiles": [
+    "memory/backup/2026-10-20-L05-cierre/docs/backlog-producto-ruta-fija-v3.1.md",
+    "memory/backup/2026-10-20-L05-cierre/memory/current.md",
+    "memory/backup/2026-10-20-L05-cierre/memory/target.md",
+    "memory/backup/2026-10-20-L05-cierre/specs/decisiones-L05-2026-10-19.json",
+    "memory/backup/2026-10-20-L05-cierre/docs/actas/L-05-cierre-funcional-local-2026-10-20.md",
+    "memory/backup/2026-10-20-L05-cierre/docs/contratos/L-05.md",
+    "memory/backup/2026-10-20-L05-cierre/docs/ejecucion/L-05.md",
+    "memory/backup/2026-10-20-L05-cierre/docs/seguimiento/tareas.json",
+    "memory/backup/2026-10-20-L05-cierre/docs/evidencia/L-05/matriz-L05.md"
+  ],
+  "TEST_CLEANUP_RELEASED": true,
+  "pilotEnabled": false,
+  "L06Started": false,
+  "L06Authorized": false,
+  "nextGate": "OK VERDE separado para L-06"
+}

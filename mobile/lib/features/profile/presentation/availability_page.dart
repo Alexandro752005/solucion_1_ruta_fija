@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/offline/mobile_offline.dart';
 import '../../../core/presentation/mobile_error_message.dart';
 import '../data/mobile_driver_repository.dart';
 import '../domain/mobile_driver_models.dart';
 
 class AvailabilityPage extends StatefulWidget {
-  const AvailabilityPage({
-    required this.driverGateway,
-    required this.offlineSyncController,
-    required this.offlineOwner,
-    super.key,
-  });
+  const AvailabilityPage({required this.driverGateway, super.key});
 
   final MobileDriverGateway driverGateway;
-  final MobileOfflineSyncController offlineSyncController;
-  final MobileOfflineQueueOwner offlineOwner;
 
   @override
   State<AvailabilityPage> createState() => _AvailabilityPageState();
@@ -46,8 +38,9 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
       }
       setState(() {
         _availability = availability;
-        _selectedStatus = availability.status.canBeChosenByDriver
-            ? availability.status
+        _selectedStatus =
+            availability.declaredStatus?.canBeChosenByDriver == true
+            ? availability.declaredStatus
             : null;
       });
     } catch (error) {
@@ -67,60 +60,31 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
     if (_saving ||
         selected == null ||
         current == null ||
-        selected == current.status) {
+        (selected == current.declaredStatus && current.status == selected)) {
       return;
     }
 
     setState(() => _saving = true);
     try {
-      final submission = await widget.offlineSyncController.submitAvailability(
-        owner: widget.offlineOwner,
-        targetAvailability: selected.apiValue,
-        expectedAvailabilityUpdatedAt: current.updatedAt,
-      );
+      final updated = await widget.driverGateway.changeAvailability(selected);
       if (!mounted) {
         return;
       }
-      if (submission.delivered) {
-        await _load();
-        if (!mounted) {
-          return;
-        }
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              submission.replayed
-                  ? 'El cambio anterior fue confirmado sin duplicarlo.'
-                  : 'Disponibilidad actualizada a ${selected.label}.',
-            ),
+      setState(() {
+        _availability = updated;
+        _selectedStatus = updated.status;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Disponibilidad actualizada a ${updated.status.label}.',
           ),
-        );
-      } else {
-        if (submission.blocked) {
-          await _load();
-          if (!mounted) {
-            return;
-          }
-        }
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              submission.blocked
-                  ? 'El cambio requiere conciliación. Abra Pendientes de sincronización antes de intentarlo nuevamente.'
-                  : 'El cambio quedó guardado en Pendientes de sincronización.',
-            ),
-          ),
-        );
-      }
+        ),
+      );
     } catch (error) {
       if (mounted) {
-        final message = error is MobileOfflinePendingActionException
-            ? error.message
-            : error is StateError
-            ? error.message
-            : mobileErrorMessage(error);
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(message)));
+            .showSnackBar(SnackBar(content: Text(mobileErrorMessage(error))));
       }
     } finally {
       if (mounted) {
@@ -160,7 +124,8 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
     }
 
     final current = _availability!;
-    final canChange = current.status.canBeChosenByDriver;
+    final canChange =
+        current.canChangeDeclaration ?? current.status.canBeChosenByDriver;
     final selectableStatuses = MobileAvailabilityStatus.values
         .where((status) => status.canBeChosenByDriver)
         .toList(growable: false);
@@ -174,7 +139,13 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
         ),
         const SizedBox(height: 8),
         const Text(
-          'El cambio se intenta en Ruta Fija; ante una falla temporal queda visible para sincronizarlo manualmente.',
+          'El cambio se confirma con Ruta Fija antes de actualizar la pantalla.',
+        ),
+        Text(
+          'Declaración propia: ${current.declaredStatus?.label ?? 'Sin declarar'}',
+        ),
+        const Text(
+          'La declaración se conserva al desconectar o cerrar sesión. No sustituye documentos, unidad ni ausencia de compromisos.',
         ),
         const SizedBox(height: 20),
         Card(
@@ -218,16 +189,26 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                   label: Text(status.label),
                 ),
             ],
-            selected: {_selectedStatus ?? current.status},
+            emptySelectionAllowed: true,
+            selected: _selectedStatus == null
+                ? <MobileAvailabilityStatus>{}
+                : {_selectedStatus!},
             onSelectionChanged: _saving
                 ? null
-                : (selection) =>
-                      setState(() => _selectedStatus = selection.single),
+                : (selection) => setState(
+                    () => _selectedStatus = selection.isEmpty
+                        ? null
+                        : selection.single,
+                  ),
           ),
           const SizedBox(height: 20),
           FilledButton.icon(
             key: const Key('availability-save'),
-            onPressed: _saving || _selectedStatus == current.status
+            onPressed:
+                _saving ||
+                    _selectedStatus == null ||
+                    (_selectedStatus == current.declaredStatus &&
+                        _selectedStatus == current.status)
                 ? null
                 : _save,
             icon: _saving

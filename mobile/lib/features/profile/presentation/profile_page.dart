@@ -4,11 +4,15 @@ import '../../../core/presentation/mobile_error_message.dart';
 import '../data/mobile_driver_repository.dart';
 import '../domain/mobile_driver_models.dart';
 import 'driver_profile_details.dart';
+import '../../preferences/domain/mobile_preferences.dart';
+import '../../preferences/presentation/mobile_preferences_panel.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({required this.driverGateway, super.key});
+  const ProfilePage({required this.driverGateway, this.preferences, this.reportsAvailable=false, super.key});
 
   final MobileDriverGateway driverGateway;
+  final MobilePreferencesController? preferences;
+  final bool reportsAvailable;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -72,6 +76,9 @@ class _ProfilePageState extends State<ProfilePage> {
             padding: const EdgeInsets.all(20),
             children: [
               DriverProfileDetails(profile: snapshot.requireData),
+              const Text('La identidad, el correo y los documentos solo cambian por sus flujos de revisión. No se editan aquí.'),
+              if(widget.preferences case final preferences?)MobilePreferencesPanel(controller:preferences),
+              if(widget.reportsAvailable)OutlinedButton.icon(key:const Key('profile-reports'),onPressed:()=>Navigator.of(context).pushNamed('/reports'),icon:const Icon(Icons.summarize_outlined),label:const Text('Mis resultados y reportes')),
               const SizedBox(height: 20),
               Card(
                 child: Padding(

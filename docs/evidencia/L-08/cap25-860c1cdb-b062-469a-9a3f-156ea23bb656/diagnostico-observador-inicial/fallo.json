@@ -1,0 +1,12 @@
+{
+  "result": "STOPPED_BEFORE_LOAD_SAME_DATASET_PRESERVED",
+  "check": "OBSERVER_EXACT_TARGET_REQUIRED",
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 4,
+    "CONDUCTOR": 20
+  },
+  "sampleCount": 0,
+  "cleanupReleased": false,
+  "nextAction": "Exact named-column read-only observer checks using host(inet_server_addr); no new accounts or quota reset."
+}

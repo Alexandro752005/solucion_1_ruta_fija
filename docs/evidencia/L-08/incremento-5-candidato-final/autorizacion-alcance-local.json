@@ -1,0 +1,15 @@
+{
+  "localDate": "2026-10-23",
+  "timezone": "America/Lima",
+  "authority": "Instrucción maestra expresa del usuario en esta sesión",
+  "literalScope": "GO PARA CANDIDATO LOCAL DE ENTREGA",
+  "literalClassification": "VERIFICADA — FUNCIONAL_LOCAL_APROBADA_CANDIDATO_FINAL",
+  "requestedGpsEvidence": "simulación de pérdida prolongada de fix o sin actualización de coordenadas por >120 s",
+  "formalTransitionRequested": "anexo vinculante que separa formalmente la verificación técnica local del despliegue en campo",
+  "explicitAgentWorkAuthorized": true,
+  "costPEN": 0,
+  "scopeChange": "La aceptación del candidato local se separa de la aceptación operativa real original; no se convierten documentos, mocks o autorizaciones en hechos físicos",
+  "fieldCriteriaPreserved": "docs/evidencia/L-08/matriz-L08-v0.8.0-antecedente.md",
+  "productionDeployment": false,
+  "pilotEnabled": false
+}

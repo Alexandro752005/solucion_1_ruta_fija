@@ -1,0 +1,15 @@
+{
+    "caseId":  "8ba8e8bc-ea46-40bd-9848-11a11a79b9fd",
+    "measurementOrigin":  "2026-10-23T01:48:08.5627095Z",
+    "measurementOriginKind":  "FILESYSTEM_DIRECTORY_CREATION_BEFORE_HEALTH_REQUEST",
+    "healthFailureRecordedNoLaterThan":  "2026-10-23T01:48:10.9281387Z",
+    "originalJournalFailure":  "POWERSHELL_BOOLEAN_LITERAL_ERROR_NULL_FILE_PRESERVED",
+    "scenario":  "ISOLATED_DISASTER_DRILL_NEW_DESTINATION_NOT_PRODUCTION_OUTAGE",
+    "unavailableReadinessPort":  4317,
+    "initialDestinationHasNeverServedBusiness":  true,
+    "sourceServiceInterrupted":  false,
+    "oldRestoreTimersReset":  false,
+    "recoveryTarget":  "ruta_fija_test@127.0.0.1:55440",
+    "pilotEnabled":  false,
+    "detectionInstantExact":  false
+}

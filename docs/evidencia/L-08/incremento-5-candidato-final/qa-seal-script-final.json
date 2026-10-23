@@ -1,0 +1,188 @@
+{
+  "reviewedAtUtc": "2026-10-23T06:42:52.256481+00:00",
+  "reviewer": "A-OPS independent of parent author",
+  "script": "scripts/seal_l08_candidate.py",
+  "sourceSha256": "710420d9158620da5be47ea9ba2c774d37e492dc8aade981085d9e355bb4884a",
+  "result": "PASS_SEAL_SCRIPT_REVIEW_AFTER_CORRECTIONS",
+  "parseErrors": 0,
+  "scope": "Read-only AST/source review, in-memory negative guard tests, real SELECT-free nested-file SHA verification; seal/prepare-sources/real closure verify NOT executed",
+  "checks": [
+    {
+      "check": "manifest_empty",
+      "passed": true,
+      "observed": "EMPTY_MANIFEST_REFUSED"
+    },
+    {
+      "check": "manifest_malformed",
+      "passed": true,
+      "observed": "MALFORMED_MANIFEST_LINE"
+    },
+    {
+      "check": "manifest_duplicate",
+      "passed": true,
+      "observed": "DUPLICATE_MANIFEST_ENTRY"
+    },
+    {
+      "check": "manifest_outside",
+      "passed": true,
+      "observed": "MANIFEST_PATH_OUTSIDE_WORKSPACE"
+    },
+    {
+      "check": "verify_truncated_required_inventory",
+      "passed": true,
+      "observed": "MANIFEST_TRUNCATED_REQUIRED_ENTRIES_MISSING"
+    },
+    {
+      "check": "private_backend/.local/not-read.txt",
+      "passed": true,
+      "observed": "PRIVATE_DIRECTORY_REFUSED"
+    },
+    {
+      "check": "private_private/not-read.txt",
+      "passed": true,
+      "observed": "PRIVATE_DIRECTORY_REFUSED"
+    },
+    {
+      "check": "private_artifacts/not-read.p12",
+      "passed": true,
+      "observed": "PRIVATE_EXTENSION_REFUSED"
+    },
+    {
+      "check": "private_artifacts/not-read.dpapi",
+      "passed": true,
+      "observed": "PRIVATE_EXTENSION_REFUSED"
+    },
+    {
+      "check": "private_symlink_ancestor_guard",
+      "passed": true,
+      "observed": "REPARSE_POINT_REFUSED"
+    },
+    {
+      "check": "valid_metadata_binding_in_memory",
+      "passed": true,
+      "observed": "ALL_GUARDS_PASSED_WITH_EXPLICITLY_SYNTHETIC_METADATA"
+    },
+    {
+      "check": "guard_duplicate_lot_ids",
+      "passed": true,
+      "observed": "LOT_STATUS_MISMATCH"
+    },
+    {
+      "check": "guard_duplicate_local_criteria",
+      "passed": true,
+      "observed": "LOCAL_CRITERIA_SET_MISMATCH"
+    },
+    {
+      "check": "guard_wrong_field_criteria",
+      "passed": true,
+      "observed": "FIELD_CRITERIA_SET_MISMATCH"
+    },
+    {
+      "check": "guard_global_pilot_true",
+      "passed": true,
+      "observed": "GLOBAL_PILOT_GATE_MISMATCH"
+    },
+    {
+      "check": "guard_global_operational_go",
+      "passed": true,
+      "observed": "GLOBAL_PILOT_GATE_MISMATCH"
+    },
+    {
+      "check": "guard_wrong_signed_document",
+      "passed": true,
+      "observed": "SIGNATURE_MUST_BIND_EXACT_L08_ACTA"
+    },
+    {
+      "check": "guard_human_signature_classification",
+      "passed": true,
+      "observed": "TECHNICAL_NOT_TITLEHOLDER_SIGNATURE_REQUIRED"
+    },
+    {
+      "check": "guard_titleholder_signature_claim",
+      "passed": true,
+      "observed": "TECHNICAL_NOT_TITLEHOLDER_SIGNATURE_REQUIRED"
+    },
+    {
+      "check": "guard_modified_signature_bytes",
+      "passed": true,
+      "observed": "SIGNATURE_BYTES_CHANGED"
+    },
+    {
+      "check": "guard_modified_public_der_bytes",
+      "passed": true,
+      "observed": "PUBLIC_CERTIFICATE_CHANGED"
+    },
+    {
+      "check": "guard_independent_result_failed",
+      "passed": true,
+      "observed": "INDEPENDENT_SIGNATURE_CHECK_FAILED"
+    },
+    {
+      "check": "guard_independent_wrong_signature",
+      "passed": true,
+      "observed": "INDEPENDENT_SIGNATURE_CHECK_WRONG_FILE"
+    },
+    {
+      "check": "guard_artifact_production_true",
+      "passed": true,
+      "observed": "ARTIFACT_MUST_REMAIN_LOCAL_ONLY"
+    },
+    {
+      "check": "guard_artifact_pilot_true",
+      "passed": true,
+      "observed": "ARTIFACT_MUST_REMAIN_LOCAL_ONLY"
+    },
+    {
+      "check": "nested_archive_L-08-higiene-2026-10-23",
+      "passed": true,
+      "observed": "260 files hash-verified read-only"
+    },
+    {
+      "check": "nested_archive_ops",
+      "passed": true,
+      "observed": "38 files hash-verified read-only"
+    }
+  ],
+  "checksPassed": 27,
+  "checksTotal": 27,
+  "nestedArchives": [
+    {
+      "manifest": "backups/L-08-higiene-2026-10-23/manifest.sha256",
+      "filesVerified": 260,
+      "mismatches": []
+    },
+    {
+      "manifest": "docs/evidencia/L-08/incremento-5-candidato-final/ops/manifest-ops-final.sha256",
+      "filesVerified": 38,
+      "mismatches": []
+    }
+  ],
+  "resolvedFindings": [
+    "SEAL-QA-01",
+    "SEAL-QA-02",
+    "SEAL-QA-03",
+    "SEAL-QA-04",
+    "SEAL-QA-05"
+  ],
+  "sourceReview": {
+    "strictManifestFormatNonemptyNoDuplicates": true,
+    "mandatoryInventoryAndPriorProofShaCount": true,
+    "exactNineLotsTwelveLocalSixFieldIds": true,
+    "globalAndArtifactPilotFalseGuards": true,
+    "exactActaAndTechnicalNotHumanSignature": true,
+    "actualSignatureAndCertificateShaBinding": true,
+    "independentProofSameExactBytes": true,
+    "reviewedDocumentAndSealSourceHashGates": true,
+    "fiveOpsSourcesAndTwoFrozenDocsIncluded": true,
+    "nestedHygieneAndOpsManifestsPreserved": true,
+    "privateExtensionsDirectoriesAndReparseRejected": true,
+    "historicalArchivesRegenerated": false,
+    "newClosureFilesCreateExclusive": true
+  },
+  "limitations": [
+    "In-memory signature metadata fixtures test guard logic, not cryptographic validity; actual independent public verification must execute and pass before real seal",
+    "Actual final closure has not been sealed or verified by this review; guards intentionally require those external execution records",
+    "Review proves integrity checks in current code and current nested files, not resistance to an actor replacing all trusted local records"
+  ],
+  "onlyOutputWritten": "docs/evidencia/L-08/incremento-5-candidato-final/qa-seal-script-final.json"
+}

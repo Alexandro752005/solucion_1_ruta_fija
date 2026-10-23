@@ -1,0 +1,21 @@
+{
+    "checkedAt":  "2026-10-23T06:32:50.7931711+00:00",
+    "ports":  [
+                  {
+                      "port":  55441,
+                      "listening":  false
+                  },
+                  {
+                      "port":  56441,
+                      "listening":  false
+                  },
+                  {
+                      "port":  56442,
+                      "listening":  false
+                  }
+              ],
+    "allOwnPortsFree":  true,
+    "ownedChildJvmAbsent":  true,
+    "noShared5432Write":  true,
+    "noHistoricalClusterStart":  true
+}

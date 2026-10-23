@@ -1,0 +1,22 @@
+{
+  "localDate": "2026-10-19",
+  "scope": "L-02",
+  "deploymentPerformed": false,
+  "artifacts": [
+    {
+      "path": "artifacts/L-02-2026-10-19/conductor-debug.apk",
+      "bytes": 185139774,
+      "sha256": "05f902bb7298d57c6d56e20da6bd2c5ca5671d946f305232bf0db6629c19e05d"
+    },
+    {
+      "path": "artifacts/L-02-2026-10-19/crm-local.zip",
+      "bytes": 236504,
+      "sha256": "1f608f19d7d1e53938611a73c91dbae55f9a352a3a16f34a5267274cb1e208c3"
+    },
+    {
+      "path": "artifacts/L-02-2026-10-19/ruta-fija-backend.jar",
+      "bytes": 90793679,
+      "sha256": "49dbe5744e8850538f0ea867c635d95cce15e1c032197c0ae46c413ac21fc8cc"
+    }
+  ]
+}

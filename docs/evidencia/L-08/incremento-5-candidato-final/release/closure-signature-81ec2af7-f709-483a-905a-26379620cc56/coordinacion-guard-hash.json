@@ -1,0 +1,11 @@
+﻿{
+    "recordedAt":  "2026-10-23T06:45:29.7945640+00:00",
+    "initialCommand":  "SHA guard before powershell.exe -NoProfile -File scripts/Sign-RutaFijaL08Closure.ps1 -Execute",
+    "initialGuard":  "REJECTED_BEFORE_KEY_ACCESS_OR_SIGNATURE",
+    "initialExpectedSha256":  "69241e330350ff4d63655fdb2aa06d27ccd227343572a00c01cf8c8c718cba1b",
+    "actualAndFinallyAuthorizedActaSha256":  "b47807659aa898192e7c1eedd8b658cdf3f3dd0830afc0108bb0eaefa069c0ea",
+    "coordinatorResolution":  "First SHA belonged to rendered-QA receipt, not acta. Coordinator checked actual acta entry against bytes and authorized exact actual hash.",
+    "finalSigningExitCode":  0,
+    "actaModifiedBySigningAgent":  false,
+    "signatureVerification":  "signature-verification.json"
+}

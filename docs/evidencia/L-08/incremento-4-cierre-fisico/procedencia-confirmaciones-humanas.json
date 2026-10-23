@@ -1,0 +1,19 @@
+﻿{
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "archivedAt":  "2026-10-23T05:16:14.6012691+00:00",
+    "priorTalkBackReportSource":  "docs/evidencia/L-08/incremento-3-escritorio/fis02-3f0ba758-6eb9-4d2f-b948-dd1c7de3c430/accesibilidad-observacion.json",
+    "largeScale":  1.5,
+    "largeScaleUserLiteral":  "Se lee bien y ambos botones son accesibles",
+    "largeScaleFlow":  "Dialogo Ruta finalizada con Cancelar y Confirmar",
+    "originalAndroidFontScaleRestored":  0.81,
+    "batteryStartUserLiteral":  "USB desconectado, marca 30 % y app visible",
+    "batteryStartHarnessTime":  "2026-10-23T05:11:04.047767400Z",
+    "batteryStartHarnessPercent":  30,
+    "phoneAutomationExplicitlyAuthorized":  true,
+    "currentPrincipalUserLiteral":  "Deja solo una APK OFICIAL FUNCIONAL, LA QUE SEA CORRECTAMENTE EFICAZ",
+    "phoneCompletionAndLogoutWillUse":  "AUTHORIZED_AGENT_NORMAL_ANDROID_UI",
+    "readerReportIsHuman":  true,
+    "automatedUiTreeIsNotHumanReaderEvidence":  true,
+    "physicalGpsUsesActualAndroidProvider":  true,
+    "mockLocationUsed":  false
+}

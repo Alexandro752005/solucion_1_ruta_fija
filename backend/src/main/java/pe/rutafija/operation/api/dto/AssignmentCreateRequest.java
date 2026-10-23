@@ -10,8 +10,8 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Schema(
-        description = "Alta administrativa de asignación. Si responseMode se omite, se conserva ADMIN_DIRECT. "
-                + "MOBILE_CONFIRMATION exige un plazo UTC futuro y no habilita al CRM a aceptar o rechazar."
+        description = "ADMIN emite una oferta MOBILE_CONFIRMATION, también por omisión. "
+                + "Servidor fija min(emisión+10min,inicio). Solo CONDUCTOR acepta; ADMIN_DIRECT no admite nuevas altas."
 )
 public record AssignmentCreateRequest(
         @NotNull UUID driverId,
@@ -22,15 +22,26 @@ public record AssignmentCreateRequest(
         @NotNull Instant scheduledEndAt,
         @Size(max = 500) String notes,
         @Schema(
-                description = "ADMIN_DIRECT crea SCHEDULED; MOBILE_CONFIRMATION crea PENDING_RESPONSE.",
-                allowableValues = {"ADMIN_DIRECT", "MOBILE_CONFIRMATION"},
-                example = "ADMIN_DIRECT"
+                description = "MOBILE_CONFIRMATION crea PENDING_RESPONSE. ADMIN_DIRECT es únicamente histórico.",
+                allowableValues = {"MOBILE_CONFIRMATION"},
+                example = "MOBILE_CONFIRMATION"
         )
         AssignmentResponseMode responseMode,
         @Schema(
-                description = "Plazo UTC obligatorio solo para MOBILE_CONFIRMATION; lo evalúa el servidor.",
+                description = "Campo heredado ignorado al calcular el plazo. El servidor siempre determina el vencimiento.",
                 example = "2026-09-22T18:00:00Z"
         )
-        Instant responseDeadlineAt
+        Instant responseDeadlineAt,
+        @NotNull UUID routeVersionId,
+        @NotNull UUID serviceTypeVersionId
 ) {
+    /** Kept for source compatibility of historical, non-HTTP fixtures. HTTP requires a route version. */
+    public AssignmentCreateRequest(UUID driverId,UUID vehicleId,String originText,String destinationText,Instant scheduledAt,
+        Instant scheduledEndAt,String notes,AssignmentResponseMode mode,Instant deadline) {
+        this(driverId,vehicleId,originText,destinationText,scheduledAt,scheduledEndAt,notes,mode,deadline,null,null);
+    }
+    public AssignmentCreateRequest(UUID driverId,UUID vehicleId,String originText,String destinationText,Instant scheduledAt,
+        Instant scheduledEndAt,String notes,AssignmentResponseMode mode,Instant deadline,UUID routeVersionId) {
+        this(driverId,vehicleId,originText,destinationText,scheduledAt,scheduledEndAt,notes,mode,deadline,routeVersionId,null);
+    }
 }

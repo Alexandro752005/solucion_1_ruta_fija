@@ -1,0 +1,888 @@
+{
+  "caseId" : "c748e5ab-c20a-43d6-9c17-af5d0a703dab",
+  "binarySha256" : "23a949ace14161e7e3d7110be31836cc03e26c1df59549fa78e303738d5abaa1",
+  "schemaVersion" : "48",
+  "database" : "ruta_fija_test_l08_locale",
+  "databasePort" : 55438,
+  "locale" : "Spanish_Peru.1252",
+  "startedAt" : "2026-10-22T22:25:01.987222500Z",
+  "binaryMigrationCount" : 48,
+  "sqlSnapshotProofSha256" : "ee57c693b21a6b145d70e6236c2ac7937fcb38d7df1b8fd138a80c9e038134a5",
+  "probeSourceSha256" : "e6ea39cfef836a53b75c358a0dd463eb73643d7f6b6e268260e2ced28dd4c2aa",
+  "integrityHelperSourceSha256" : "394befad3c75b0df758910059bf721f748398296db49b838de2601d97d07796e",
+  "readiness" : {
+    "components" : [ "readinessState", "db" ],
+    "observedAt" : "2026-10-22T22:25:12.288052600Z",
+    "status" : "UP",
+    "httpStatus" : 200
+  },
+  "liveness" : {
+    "components" : [ "livenessState" ],
+    "observedAt" : "2026-10-22T22:25:12.294018Z",
+    "status" : "UP",
+    "httpStatus" : 200
+  },
+  "businessRoutesBlockedByTestFilter" : true,
+  "readOnlyPoolAndSessionVerified" : true,
+  "identityAndTermsGatesEnabled" : true,
+  "schedulersAndSeederAbsent" : true,
+  "smtpAdapterReplacedByRefusingDouble" : true,
+  "mailAttempts" : 0,
+  "beforeIntegrity" : {
+    "admin_activation" : {
+      "rowSetSha256" : "89decf0755f08a3ddb09f1aab91905b41480b0fbcee78796d5511772a861079c",
+      "rows" : 2
+    },
+    "admin_activation_event" : {
+      "rowSetSha256" : "3e68a14085fb41580d0a9be0e3fc182bd7ca07aa3bccd24406713b362fc8b4b4",
+      "rows" : 11
+    },
+    "admin_security_revocation" : {
+      "rowSetSha256" : "14a05fc790ad43e2c8630202b22706471243787f71b2e303c0669335d2260417",
+      "rows" : 1
+    },
+    "admin_terms_acceptance" : {
+      "rowSetSha256" : "480553b19483a82b4348e4bbe13b27f0fd82f1e59ebd40cf1a0e5681210d43c2",
+      "rows" : 2
+    },
+    "admin_terms_document" : {
+      "rowSetSha256" : "d4c731ebc5fd6f87ae5c6cdce1f3bd9817f89746ae2c4c54adc110c67838756e",
+      "rows" : 1
+    },
+    "announcement" : {
+      "rowSetSha256" : "f296942b8723af1b477a367bd3b6b73057940a108b4ae3a8e713b200db779450",
+      "rows" : 3
+    },
+    "announcement_receipt" : {
+      "rowSetSha256" : "12c0537a6bbb7b115efa367a0aeaaa06a870318fd578a2ed41c63a8ceb92d307",
+      "rows" : 2
+    },
+    "announcement_recipient" : {
+      "rowSetSha256" : "90d2d044508ecca93e38d71aebb290f7e0af18a6cec58aff2339ad1b066d5191",
+      "rows" : 2
+    },
+    "app_user" : {
+      "rowSetSha256" : "668e6570253522303acba774924a2e42695a1c20158f7644354fcbf985c5b948",
+      "rows" : 10
+    },
+    "assignment" : {
+      "rowSetSha256" : "f089af165d6ce5f2e0f656dc4bec36b5d8940d6151bedd463d7ee194981dfde1",
+      "rows" : 11
+    },
+    "assignment_group_snapshot" : {
+      "rowSetSha256" : "07c5732f94d1668d2cb7c9a98dda7a005900774fd2644a603eb5e800c2b37fe0",
+      "rows" : 11
+    },
+    "assignment_route_declaration" : {
+      "rowSetSha256" : "5c3c69dc426962d6df4d1011bd78259b77c3d8777acb20b73933016031224f5b",
+      "rows" : 3
+    },
+    "assignment_route_history" : {
+      "rowSetSha256" : "da979368753406edf5d14e3c1520c784c09f28fc62fd9373d8b9264171c8a220",
+      "rows" : 10
+    },
+    "assignment_route_replacement" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "audit_event" : {
+      "rowSetSha256" : "84af464f59e9e20b24870d1d0b7ca2dd96e7c88d4a19bbb0b28d32583f97241b",
+      "rows" : 333
+    },
+    "conductor_common_person_bridge" : {
+      "rowSetSha256" : "2dd714b023047eadc2b7f88cc0fb309dff9b5768896c0f375442c84b07209b22",
+      "rows" : 6
+    },
+    "conductor_document_revision" : {
+      "rowSetSha256" : "033ee61cb250a4d8d24476622ebe475afe1eb1fb2d38c736130bba8b0ae22f4f",
+      "rows" : 30
+    },
+    "conductor_onboarding_access_token" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "conductor_onboarding_email_challenge" : {
+      "rowSetSha256" : "d8a651c032320af23bf002a21413d4804f1e9885a9a2d0ba767be5fb91acb784",
+      "rows" : 7
+    },
+    "conductor_onboarding_identity" : {
+      "rowSetSha256" : "82bdee5233fc51b4a66bcf2fae3611c5f2038452ddff02e10da9d47f13af52d0",
+      "rows" : 7
+    },
+    "conductor_onboarding_invitation_failure" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "conductor_onboarding_invitation_guard" : {
+      "rowSetSha256" : "07265aacbf84dda74e63fda607f5731e7ef0f50aa6f98d2a757a7ac3132cc7d9",
+      "rows" : 11
+    },
+    "conductor_onboarding_request" : {
+      "rowSetSha256" : "a89365954edf4a7cd1f1a6c23d5926cbafc48273c5b394fdd6a258c95314353f",
+      "rows" : 7
+    },
+    "conductor_onboarding_review_event" : {
+      "rowSetSha256" : "5195d47fbd536a9d1deb3f54e0df969024af511af7c31261221b22d10d023951",
+      "rows" : 18
+    },
+    "conductor_person_binding" : {
+      "rowSetSha256" : "6718fe931525404652c2bd8d37bbd66d2d053c966239d642f74c34b52e66ca58",
+      "rows" : 6
+    },
+    "conductor_recovery_request" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "driver" : {
+      "rowSetSha256" : "0e586bb2258a779f24055d675c45608da6063b71cb42797621cceb531dd52b4c",
+      "rows" : 8
+    },
+    "driver_current_location" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "driver_qualification_control" : {
+      "rowSetSha256" : "b12e1cf94e6c830d54f5efbe3529d8226932b988d9ea65d4c75a72b433a4e674",
+      "rows" : 6
+    },
+    "driver_unit_period" : {
+      "rowSetSha256" : "16202c9d8999eab1221d9277e75941a5cbac60eac9f84a50b64ff58d6a7134de",
+      "rows" : 6
+    },
+    "driver_unit_request" : {
+      "rowSetSha256" : "86f54a75c95ccc6cd7d5b2fde3c28db8fe3d5e9bc0081933ae13c9086ab29d2b",
+      "rows" : 1
+    },
+    "driver_vehicle_link" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "email_otp_challenge" : {
+      "rowSetSha256" : "bda2178caf9cfe239d409e6b9aaeac54e0a591256124c0383c07d3dbb02e34a1",
+      "rows" : 9
+    },
+    "flyway_schema_history" : {
+      "rowSetSha256" : "663f975576b0c639fc355bea74fbfeede9100cd6308eae3238d0e3a0e179d364",
+      "rows" : 49
+    },
+    "gps_access_request" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "gps_incident_evidence" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "group_coordinator" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "group_driver_membership" : {
+      "rowSetSha256" : "69dbcd1cdfa5dffc57c0ebfcaf8b1513d64b51a5ac14c3d59bcfae462488bd55",
+      "rows" : 9
+    },
+    "group_membership_operation" : {
+      "rowSetSha256" : "61baafbdb6d67f51382b928bc9cdfb4ef66dbe22b873b9481297b48f5e31b41d",
+      "rows" : 2
+    },
+    "group_vehicle_membership" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "incident" : {
+      "rowSetSha256" : "a4f9b140ff979ba6828196cd90f4701149e7e6064455efd5104043e29f61f4de",
+      "rows" : 4
+    },
+    "incident_action" : {
+      "rowSetSha256" : "06e1498c34542a1f494c32e5c1d57fd7e869f277a0329ae2d424d96cd605a01e",
+      "rows" : 10
+    },
+    "invitation_validation_account_guard" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "invitation_validation_failure" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "invitation_validation_origin_guard" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "mobile_command_receipt" : {
+      "rowSetSha256" : "780a6edffb44bd21231aa11cf8689288b1380d6e24d37e9647c6dcee8efc04b9",
+      "rows" : 21
+    },
+    "mobile_preferences" : {
+      "rowSetSha256" : "b43f0a733add1b1f4759185bad4a701a367fe89db712113ae5af1cdcb42f71a2",
+      "rows" : 1
+    },
+    "operation_notice" : {
+      "rowSetSha256" : "8e40d25d7795d8444b06ccbe38a37e9dc536edee67c0cb1283ea50f975b9968f",
+      "rows" : 53
+    },
+    "organization" : {
+      "rowSetSha256" : "8ad805ae0a185de09c7ab087cad553a97ec5b93a8fde4855954bc33539982d2b",
+      "rows" : 2
+    },
+    "organization_invitation" : {
+      "rowSetSha256" : "8d8f1136d78e8f486306dc8baf9e003328b7846d1acf8acfaf475e31e9c4b8f5",
+      "rows" : 8
+    },
+    "person_identity" : {
+      "rowSetSha256" : "500e2facd484ac38cac803708f49ca4167b53630637671ee5ed9b2752bacae6d",
+      "rows" : 9
+    },
+    "person_identity_hash_key" : {
+      "rowSetSha256" : "971f8c111c53c3e68194659918325ed3ef05e50d8d9765a97959768eff05fe74",
+      "rows" : 1
+    },
+    "pilot_account_creation" : {
+      "rowSetSha256" : "07ccb778513e06576164975e708024079ecbd40ab40ea7689d9d0588cfd3ed3a",
+      "rows" : 10
+    },
+    "pilot_lifecycle" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "qualification_operation" : {
+      "rowSetSha256" : "ea8d012686b3d10bfccb8b351a71252b97838c9183ceaaf9c0bf736c2af6c9c4",
+      "rows" : 35
+    },
+    "qualification_review" : {
+      "rowSetSha256" : "213a2a9f5b0affd422a8ec05f2c113f4a1ad2af0b506f87e1cae509d5b251558",
+      "rows" : 54
+    },
+    "qualification_service_attention" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "refresh_token" : {
+      "rowSetSha256" : "e70dffd7888ff342d32c51713eb73c02cc16eba08f2bab881a653046abeb71d7",
+      "rows" : 86
+    },
+    "report_emission" : {
+      "rowSetSha256" : "84f110b301b8c3a97742258d5b4728c422f88fbefb08e3a593b0af5a9cc6649c",
+      "rows" : 4
+    },
+    "report_emission_content" : {
+      "rowSetSha256" : "babe24d68d3f735dd1d2e1a5aaebe81903bcddcdcd2310dbcd44aba22c26517f",
+      "rows" : 4
+    },
+    "report_emission_request" : {
+      "rowSetSha256" : "067aa241464297036688cfe3ab0cf24deffbd40065571661e6b7560b0b53226a",
+      "rows" : 4
+    },
+    "report_emission_retirement" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "report_emission_series" : {
+      "rowSetSha256" : "4019487c96836d8f106c86e87f607a6b6da3ed8faa3afa372e883f00322696f6",
+      "rows" : 2
+    },
+    "retention_audit_hold_approval" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "retention_audit_hold_request" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "retention_controlled_copy" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "retention_copy_evidence" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "retention_execution" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "retention_execution_authority" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "retention_plan" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "retention_plan_item" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "retention_policy_catalog" : {
+      "rowSetSha256" : "d82eada129954b82c5e50f0121aead67b166408b60a6940b26db29eec2112478",
+      "rows" : 9
+    },
+    "route_definition" : {
+      "rowSetSha256" : "ef046a3dfa08f259f1f4d2a0201060a8b8727a59bf3958b3c0c77bab5c7b5ba3",
+      "rows" : 4
+    },
+    "route_operation" : {
+      "rowSetSha256" : "ff9fca517de26dc4c60bc7ea6679365930ea29febcf6dcc2401f6e538a0b07ba",
+      "rows" : 8
+    },
+    "route_version" : {
+      "rowSetSha256" : "5d861e607d53e00cf8fb81f8f034c9058d8e9d502cfac0d9c4829f4243b3123a",
+      "rows" : 4
+    },
+    "scheduled_service" : {
+      "rowSetSha256" : "7357123b20e784c9452161c291377d9ef320189d07bdf683f8cf58e154644774",
+      "rows" : 8
+    },
+    "scheduled_service_operation" : {
+      "rowSetSha256" : "e6c6fde0021c181060ee1d4b4ebfc09c90046eac7fa5870fc1c880c0b753d87f",
+      "rows" : 6
+    },
+    "schema:acl" : {
+      "count" : 1067,
+      "sha256" : "eedbb47f38cd96f3de6e176aaa7af33c326b030b4b27cb79a007e53b8d2faa9e"
+    },
+    "schema:columns" : {
+      "count" : 1424,
+      "sha256" : "fda88d4b1805b81db3478052aafe20a1d1067a4dc35d20eccc8d610576772f99"
+    },
+    "schema:constraints" : {
+      "count" : 659,
+      "sha256" : "1b60875d2630e46a841035cea1805fede04b91cc7c1352a47e5a8a9132bf8e2b"
+    },
+    "schema:functions" : {
+      "count" : 248,
+      "sha256" : "e31fbd61d2b2225392ef0f63f6bd8a16088e0bd6f060b8c65bb60fd4ed73a949"
+    },
+    "schema:indexes" : {
+      "count" : 280,
+      "sha256" : "5d5d95a0167965e99e76d27a9b34617416175d25efee611647b0410f460a966a"
+    },
+    "schema:sequenceState" : {
+      "count" : 0,
+      "sha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "schema:triggers" : {
+      "count" : 102,
+      "sha256" : "a6e92b0b9df77da30e3c4677d537007bcaf99224e4382973e0cd8354198bab1d"
+    },
+    "service_attention" : {
+      "rowSetSha256" : "04edc304a1ff94c8559840258fd393ec6d374eef59f07bf952f3cc08c178a3ee",
+      "rows" : 2
+    },
+    "service_attention_release" : {
+      "rowSetSha256" : "3e66dc04fac57f9bab771d64da9465a0b556040ce222af6f7c29de30215d3e05",
+      "rows" : 4
+    },
+    "service_closure_notice" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "service_execution_segment" : {
+      "rowSetSha256" : "61d7b4a8bdc7693b1b4eff26c14bd42dddb9775b3995407ed60716355d060cf7",
+      "rows" : 7
+    },
+    "service_gps_point" : {
+      "rowSetSha256" : "bcb10c88de52b63e1effdc93de3dafe210c56b8da9d17663889cfd17958c8a93",
+      "rows" : 2
+    },
+    "service_handover" : {
+      "rowSetSha256" : "354fa3536f5e33c373f5bd80895143886b9b61345b82c1bf35612437684be69b",
+      "rows" : 2
+    },
+    "service_handover_resolution" : {
+      "rowSetSha256" : "dda3d87f1bf18988b352ef5fcd2f3ed54a618a2954f80f2f94454c402cb22f93",
+      "rows" : 2
+    },
+    "service_time_correction" : {
+      "rowSetSha256" : "4d014e0b14fc80155c06a221321f5df9bd2fe4bcf9d9f266c30e6d0da37f4209",
+      "rows" : 1
+    },
+    "service_time_correction_segment" : {
+      "rowSetSha256" : "ec2a0233ce0ff3f99610b6e1e019c0f354d8cefb82ec6e761fc0d71669de3b40",
+      "rows" : 1
+    },
+    "service_time_request" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "service_type" : {
+      "rowSetSha256" : "7bb0e142bdd88adf37eb599fc97c24377855695cec83e882abb62a58a5935721",
+      "rows" : 5
+    },
+    "service_type_operation" : {
+      "rowSetSha256" : "9d646eec1978a4ae61d7d2cc668f40379892f34ecdb4ed1edff93a6a9496fed1",
+      "rows" : 8
+    },
+    "service_type_version" : {
+      "rowSetSha256" : "76c525b0b27824e1204c7d3288acbdd132264f908150b8c7e4bf7283129e89f7",
+      "rows" : 5
+    },
+    "super_admin_recovery_challenge" : {
+      "rowSetSha256" : "ebfe32bb6729a87c06f1a0c4aa469bee829f8edbbdcd6a1e87b60dd0a00514c8",
+      "rows" : 2
+    },
+    "super_admin_recovery_credential" : {
+      "rowSetSha256" : "db58ad24727e791c0ace0cfbb72e18b29ed0d58a04e0488a6c693d97c65ee9d8",
+      "rows" : 1
+    },
+    "transport_group" : {
+      "rowSetSha256" : "6f8d48c62045ad177771320036dfe01157f4154a17f143acac7445e9eb579b01",
+      "rows" : 8
+    },
+    "vehicle" : {
+      "rowSetSha256" : "027ff1d6b23bc3e44b45bf02414122911d2a76f69af459995cbefb4869ef998d",
+      "rows" : 9
+    },
+    "vehicle_maintenance" : {
+      "rowSetSha256" : "eadf6647e4ba8a3b085e7e4d5b0ffd997243a9534b6e39f11a5f63ce9ed87ebe",
+      "rows" : 1
+    },
+    "vehicle_maintenance_control" : {
+      "rowSetSha256" : "21be68c15de219dcd3f8e8574ac96019c5eb4b8cf721dca242ec310e6d51d1d0",
+      "rows" : 1
+    },
+    "vehicle_maintenance_operation" : {
+      "rowSetSha256" : "cfb7fe348c1c5885b5bdebf5458a451d08c3cd08209c398af059223836886e91",
+      "rows" : 2
+    },
+    "vehicle_plate_revision" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    }
+  },
+  "afterIntegrity" : {
+    "admin_activation" : {
+      "rowSetSha256" : "89decf0755f08a3ddb09f1aab91905b41480b0fbcee78796d5511772a861079c",
+      "rows" : 2
+    },
+    "admin_activation_event" : {
+      "rowSetSha256" : "3e68a14085fb41580d0a9be0e3fc182bd7ca07aa3bccd24406713b362fc8b4b4",
+      "rows" : 11
+    },
+    "admin_security_revocation" : {
+      "rowSetSha256" : "14a05fc790ad43e2c8630202b22706471243787f71b2e303c0669335d2260417",
+      "rows" : 1
+    },
+    "admin_terms_acceptance" : {
+      "rowSetSha256" : "480553b19483a82b4348e4bbe13b27f0fd82f1e59ebd40cf1a0e5681210d43c2",
+      "rows" : 2
+    },
+    "admin_terms_document" : {
+      "rowSetSha256" : "d4c731ebc5fd6f87ae5c6cdce1f3bd9817f89746ae2c4c54adc110c67838756e",
+      "rows" : 1
+    },
+    "announcement" : {
+      "rowSetSha256" : "f296942b8723af1b477a367bd3b6b73057940a108b4ae3a8e713b200db779450",
+      "rows" : 3
+    },
+    "announcement_receipt" : {
+      "rowSetSha256" : "12c0537a6bbb7b115efa367a0aeaaa06a870318fd578a2ed41c63a8ceb92d307",
+      "rows" : 2
+    },
+    "announcement_recipient" : {
+      "rowSetSha256" : "90d2d044508ecca93e38d71aebb290f7e0af18a6cec58aff2339ad1b066d5191",
+      "rows" : 2
+    },
+    "app_user" : {
+      "rowSetSha256" : "668e6570253522303acba774924a2e42695a1c20158f7644354fcbf985c5b948",
+      "rows" : 10
+    },
+    "assignment" : {
+      "rowSetSha256" : "f089af165d6ce5f2e0f656dc4bec36b5d8940d6151bedd463d7ee194981dfde1",
+      "rows" : 11
+    },
+    "assignment_group_snapshot" : {
+      "rowSetSha256" : "07c5732f94d1668d2cb7c9a98dda7a005900774fd2644a603eb5e800c2b37fe0",
+      "rows" : 11
+    },
+    "assignment_route_declaration" : {
+      "rowSetSha256" : "5c3c69dc426962d6df4d1011bd78259b77c3d8777acb20b73933016031224f5b",
+      "rows" : 3
+    },
+    "assignment_route_history" : {
+      "rowSetSha256" : "da979368753406edf5d14e3c1520c784c09f28fc62fd9373d8b9264171c8a220",
+      "rows" : 10
+    },
+    "assignment_route_replacement" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "audit_event" : {
+      "rowSetSha256" : "84af464f59e9e20b24870d1d0b7ca2dd96e7c88d4a19bbb0b28d32583f97241b",
+      "rows" : 333
+    },
+    "conductor_common_person_bridge" : {
+      "rowSetSha256" : "2dd714b023047eadc2b7f88cc0fb309dff9b5768896c0f375442c84b07209b22",
+      "rows" : 6
+    },
+    "conductor_document_revision" : {
+      "rowSetSha256" : "033ee61cb250a4d8d24476622ebe475afe1eb1fb2d38c736130bba8b0ae22f4f",
+      "rows" : 30
+    },
+    "conductor_onboarding_access_token" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "conductor_onboarding_email_challenge" : {
+      "rowSetSha256" : "d8a651c032320af23bf002a21413d4804f1e9885a9a2d0ba767be5fb91acb784",
+      "rows" : 7
+    },
+    "conductor_onboarding_identity" : {
+      "rowSetSha256" : "82bdee5233fc51b4a66bcf2fae3611c5f2038452ddff02e10da9d47f13af52d0",
+      "rows" : 7
+    },
+    "conductor_onboarding_invitation_failure" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "conductor_onboarding_invitation_guard" : {
+      "rowSetSha256" : "07265aacbf84dda74e63fda607f5731e7ef0f50aa6f98d2a757a7ac3132cc7d9",
+      "rows" : 11
+    },
+    "conductor_onboarding_request" : {
+      "rowSetSha256" : "a89365954edf4a7cd1f1a6c23d5926cbafc48273c5b394fdd6a258c95314353f",
+      "rows" : 7
+    },
+    "conductor_onboarding_review_event" : {
+      "rowSetSha256" : "5195d47fbd536a9d1deb3f54e0df969024af511af7c31261221b22d10d023951",
+      "rows" : 18
+    },
+    "conductor_person_binding" : {
+      "rowSetSha256" : "6718fe931525404652c2bd8d37bbd66d2d053c966239d642f74c34b52e66ca58",
+      "rows" : 6
+    },
+    "conductor_recovery_request" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "driver" : {
+      "rowSetSha256" : "0e586bb2258a779f24055d675c45608da6063b71cb42797621cceb531dd52b4c",
+      "rows" : 8
+    },
+    "driver_current_location" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "driver_qualification_control" : {
+      "rowSetSha256" : "b12e1cf94e6c830d54f5efbe3529d8226932b988d9ea65d4c75a72b433a4e674",
+      "rows" : 6
+    },
+    "driver_unit_period" : {
+      "rowSetSha256" : "16202c9d8999eab1221d9277e75941a5cbac60eac9f84a50b64ff58d6a7134de",
+      "rows" : 6
+    },
+    "driver_unit_request" : {
+      "rowSetSha256" : "86f54a75c95ccc6cd7d5b2fde3c28db8fe3d5e9bc0081933ae13c9086ab29d2b",
+      "rows" : 1
+    },
+    "driver_vehicle_link" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "email_otp_challenge" : {
+      "rowSetSha256" : "bda2178caf9cfe239d409e6b9aaeac54e0a591256124c0383c07d3dbb02e34a1",
+      "rows" : 9
+    },
+    "flyway_schema_history" : {
+      "rowSetSha256" : "663f975576b0c639fc355bea74fbfeede9100cd6308eae3238d0e3a0e179d364",
+      "rows" : 49
+    },
+    "gps_access_request" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "gps_incident_evidence" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "group_coordinator" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "group_driver_membership" : {
+      "rowSetSha256" : "69dbcd1cdfa5dffc57c0ebfcaf8b1513d64b51a5ac14c3d59bcfae462488bd55",
+      "rows" : 9
+    },
+    "group_membership_operation" : {
+      "rowSetSha256" : "61baafbdb6d67f51382b928bc9cdfb4ef66dbe22b873b9481297b48f5e31b41d",
+      "rows" : 2
+    },
+    "group_vehicle_membership" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "incident" : {
+      "rowSetSha256" : "a4f9b140ff979ba6828196cd90f4701149e7e6064455efd5104043e29f61f4de",
+      "rows" : 4
+    },
+    "incident_action" : {
+      "rowSetSha256" : "06e1498c34542a1f494c32e5c1d57fd7e869f277a0329ae2d424d96cd605a01e",
+      "rows" : 10
+    },
+    "invitation_validation_account_guard" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "invitation_validation_failure" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "invitation_validation_origin_guard" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "mobile_command_receipt" : {
+      "rowSetSha256" : "780a6edffb44bd21231aa11cf8689288b1380d6e24d37e9647c6dcee8efc04b9",
+      "rows" : 21
+    },
+    "mobile_preferences" : {
+      "rowSetSha256" : "b43f0a733add1b1f4759185bad4a701a367fe89db712113ae5af1cdcb42f71a2",
+      "rows" : 1
+    },
+    "operation_notice" : {
+      "rowSetSha256" : "8e40d25d7795d8444b06ccbe38a37e9dc536edee67c0cb1283ea50f975b9968f",
+      "rows" : 53
+    },
+    "organization" : {
+      "rowSetSha256" : "8ad805ae0a185de09c7ab087cad553a97ec5b93a8fde4855954bc33539982d2b",
+      "rows" : 2
+    },
+    "organization_invitation" : {
+      "rowSetSha256" : "8d8f1136d78e8f486306dc8baf9e003328b7846d1acf8acfaf475e31e9c4b8f5",
+      "rows" : 8
+    },
+    "person_identity" : {
+      "rowSetSha256" : "500e2facd484ac38cac803708f49ca4167b53630637671ee5ed9b2752bacae6d",
+      "rows" : 9
+    },
+    "person_identity_hash_key" : {
+      "rowSetSha256" : "971f8c111c53c3e68194659918325ed3ef05e50d8d9765a97959768eff05fe74",
+      "rows" : 1
+    },
+    "pilot_account_creation" : {
+      "rowSetSha256" : "07ccb778513e06576164975e708024079ecbd40ab40ea7689d9d0588cfd3ed3a",
+      "rows" : 10
+    },
+    "pilot_lifecycle" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "qualification_operation" : {
+      "rowSetSha256" : "ea8d012686b3d10bfccb8b351a71252b97838c9183ceaaf9c0bf736c2af6c9c4",
+      "rows" : 35
+    },
+    "qualification_review" : {
+      "rowSetSha256" : "213a2a9f5b0affd422a8ec05f2c113f4a1ad2af0b506f87e1cae509d5b251558",
+      "rows" : 54
+    },
+    "qualification_service_attention" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "refresh_token" : {
+      "rowSetSha256" : "e70dffd7888ff342d32c51713eb73c02cc16eba08f2bab881a653046abeb71d7",
+      "rows" : 86
+    },
+    "report_emission" : {
+      "rowSetSha256" : "84f110b301b8c3a97742258d5b4728c422f88fbefb08e3a593b0af5a9cc6649c",
+      "rows" : 4
+    },
+    "report_emission_content" : {
+      "rowSetSha256" : "babe24d68d3f735dd1d2e1a5aaebe81903bcddcdcd2310dbcd44aba22c26517f",
+      "rows" : 4
+    },
+    "report_emission_request" : {
+      "rowSetSha256" : "067aa241464297036688cfe3ab0cf24deffbd40065571661e6b7560b0b53226a",
+      "rows" : 4
+    },
+    "report_emission_retirement" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "report_emission_series" : {
+      "rowSetSha256" : "4019487c96836d8f106c86e87f607a6b6da3ed8faa3afa372e883f00322696f6",
+      "rows" : 2
+    },
+    "retention_audit_hold_approval" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "retention_audit_hold_request" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "retention_controlled_copy" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "retention_copy_evidence" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "retention_execution" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "retention_execution_authority" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "retention_plan" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "retention_plan_item" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "retention_policy_catalog" : {
+      "rowSetSha256" : "d82eada129954b82c5e50f0121aead67b166408b60a6940b26db29eec2112478",
+      "rows" : 9
+    },
+    "route_definition" : {
+      "rowSetSha256" : "ef046a3dfa08f259f1f4d2a0201060a8b8727a59bf3958b3c0c77bab5c7b5ba3",
+      "rows" : 4
+    },
+    "route_operation" : {
+      "rowSetSha256" : "ff9fca517de26dc4c60bc7ea6679365930ea29febcf6dcc2401f6e538a0b07ba",
+      "rows" : 8
+    },
+    "route_version" : {
+      "rowSetSha256" : "5d861e607d53e00cf8fb81f8f034c9058d8e9d502cfac0d9c4829f4243b3123a",
+      "rows" : 4
+    },
+    "scheduled_service" : {
+      "rowSetSha256" : "7357123b20e784c9452161c291377d9ef320189d07bdf683f8cf58e154644774",
+      "rows" : 8
+    },
+    "scheduled_service_operation" : {
+      "rowSetSha256" : "e6c6fde0021c181060ee1d4b4ebfc09c90046eac7fa5870fc1c880c0b753d87f",
+      "rows" : 6
+    },
+    "schema:acl" : {
+      "count" : 1067,
+      "sha256" : "eedbb47f38cd96f3de6e176aaa7af33c326b030b4b27cb79a007e53b8d2faa9e"
+    },
+    "schema:columns" : {
+      "count" : 1424,
+      "sha256" : "fda88d4b1805b81db3478052aafe20a1d1067a4dc35d20eccc8d610576772f99"
+    },
+    "schema:constraints" : {
+      "count" : 659,
+      "sha256" : "1b60875d2630e46a841035cea1805fede04b91cc7c1352a47e5a8a9132bf8e2b"
+    },
+    "schema:functions" : {
+      "count" : 248,
+      "sha256" : "e31fbd61d2b2225392ef0f63f6bd8a16088e0bd6f060b8c65bb60fd4ed73a949"
+    },
+    "schema:indexes" : {
+      "count" : 280,
+      "sha256" : "5d5d95a0167965e99e76d27a9b34617416175d25efee611647b0410f460a966a"
+    },
+    "schema:sequenceState" : {
+      "count" : 0,
+      "sha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "schema:triggers" : {
+      "count" : 102,
+      "sha256" : "a6e92b0b9df77da30e3c4677d537007bcaf99224e4382973e0cd8354198bab1d"
+    },
+    "service_attention" : {
+      "rowSetSha256" : "04edc304a1ff94c8559840258fd393ec6d374eef59f07bf952f3cc08c178a3ee",
+      "rows" : 2
+    },
+    "service_attention_release" : {
+      "rowSetSha256" : "3e66dc04fac57f9bab771d64da9465a0b556040ce222af6f7c29de30215d3e05",
+      "rows" : 4
+    },
+    "service_closure_notice" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "service_execution_segment" : {
+      "rowSetSha256" : "61d7b4a8bdc7693b1b4eff26c14bd42dddb9775b3995407ed60716355d060cf7",
+      "rows" : 7
+    },
+    "service_gps_point" : {
+      "rowSetSha256" : "bcb10c88de52b63e1effdc93de3dafe210c56b8da9d17663889cfd17958c8a93",
+      "rows" : 2
+    },
+    "service_handover" : {
+      "rowSetSha256" : "354fa3536f5e33c373f5bd80895143886b9b61345b82c1bf35612437684be69b",
+      "rows" : 2
+    },
+    "service_handover_resolution" : {
+      "rowSetSha256" : "dda3d87f1bf18988b352ef5fcd2f3ed54a618a2954f80f2f94454c402cb22f93",
+      "rows" : 2
+    },
+    "service_time_correction" : {
+      "rowSetSha256" : "4d014e0b14fc80155c06a221321f5df9bd2fe4bcf9d9f266c30e6d0da37f4209",
+      "rows" : 1
+    },
+    "service_time_correction_segment" : {
+      "rowSetSha256" : "ec2a0233ce0ff3f99610b6e1e019c0f354d8cefb82ec6e761fc0d71669de3b40",
+      "rows" : 1
+    },
+    "service_time_request" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    },
+    "service_type" : {
+      "rowSetSha256" : "7bb0e142bdd88adf37eb599fc97c24377855695cec83e882abb62a58a5935721",
+      "rows" : 5
+    },
+    "service_type_operation" : {
+      "rowSetSha256" : "9d646eec1978a4ae61d7d2cc668f40379892f34ecdb4ed1edff93a6a9496fed1",
+      "rows" : 8
+    },
+    "service_type_version" : {
+      "rowSetSha256" : "76c525b0b27824e1204c7d3288acbdd132264f908150b8c7e4bf7283129e89f7",
+      "rows" : 5
+    },
+    "super_admin_recovery_challenge" : {
+      "rowSetSha256" : "ebfe32bb6729a87c06f1a0c4aa469bee829f8edbbdcd6a1e87b60dd0a00514c8",
+      "rows" : 2
+    },
+    "super_admin_recovery_credential" : {
+      "rowSetSha256" : "db58ad24727e791c0ace0cfbb72e18b29ed0d58a04e0488a6c693d97c65ee9d8",
+      "rows" : 1
+    },
+    "transport_group" : {
+      "rowSetSha256" : "6f8d48c62045ad177771320036dfe01157f4154a17f143acac7445e9eb579b01",
+      "rows" : 8
+    },
+    "vehicle" : {
+      "rowSetSha256" : "027ff1d6b23bc3e44b45bf02414122911d2a76f69af459995cbefb4869ef998d",
+      "rows" : 9
+    },
+    "vehicle_maintenance" : {
+      "rowSetSha256" : "eadf6647e4ba8a3b085e7e4d5b0ffd997243a9534b6e39f11a5f63ce9ed87ebe",
+      "rows" : 1
+    },
+    "vehicle_maintenance_control" : {
+      "rowSetSha256" : "21be68c15de219dcd3f8e8574ac96019c5eb4b8cf721dca242ec310e6d51d1d0",
+      "rows" : 1
+    },
+    "vehicle_maintenance_operation" : {
+      "rowSetSha256" : "cfb7fe348c1c5885b5bdebf5458a451d08c3cd08209c398af059223836886e91",
+      "rows" : 2
+    },
+    "vehicle_plate_revision" : {
+      "rowSetSha256" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows" : 0
+    }
+  },
+  "allTableAndSchemaCountsAndHashesUnchanged" : true,
+  "contextClosedAndPortReleased" : true,
+  "applicationClassOrigin" : "backend/target/l08-restored-api-v48-9c15fbd7-95c5-4f74-95fd-9e7a4206a5b6/application-classes",
+  "noCurrentApplicationClassesOnClasspath" : true,
+  "source5432Accessed" : false,
+  "flywayMigrationsExecuted" : false,
+  "applicationDatabaseWrites" : 0,
+  "businessRecoveryAccredited" : false,
+  "serviceRtoAccredited" : false,
+  "rpoAccredited" : false,
+  "independentBackupAccredited" : false,
+  "finishedAt" : "2026-10-22T22:25:12.922673200Z",
+  "result" : "PASS_PRESERVED_V48_API_READ_ONLY_ON_RESTORED_SNAPSHOT_NOT_BUSINESS_RTO"
+}

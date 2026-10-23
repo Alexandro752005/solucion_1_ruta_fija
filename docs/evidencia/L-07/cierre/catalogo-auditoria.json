@@ -1,0 +1,456 @@
+{
+  "method": "Revisión estática de llamadas literales (no catálogo exhaustivo de acciones dinámicas), contrastada con pruebas y evidencia anterior preservada. Las acciones dinámicas móviles se comprueban en filas del caso.",
+  "staticCallSites": [
+    {
+      "source": "backend/src/main/java/pe/rutafija/terms/application/AdminTermsService.java",
+      "literalActions": [
+        "ADMIN_ACTIVATION_TERMS_ACCEPTED",
+        "ADMIN_TERMS_ACCEPTED",
+        "ADMIN_TERMS_DOCUMENT"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/routing/application/RouteCatalogService.java",
+      "literalActions": [
+        "ROUTE",
+        "ROUTE_"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/retention/application/RetentionProcedure.java",
+      "literalActions": [
+        "AUDIT_EVENT",
+        "RETENTION_HOLD",
+        "RETENTION_HOLD_APPROVED",
+        "RETENTION_HOLD_REQUESTED",
+        "RETENTION_PLAN",
+        "RETENTION_PLAN_EXECUTED",
+        "RETENTION_PLAN_REQUESTED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/reporting/application/ServiceReportService.java",
+      "literalActions": [
+        "REPORT_EMITTED",
+        "REPORT_EXPORTED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/qualification/application/DriverQualificationService.java",
+      "literalActions": [
+        "DRIVER_QUALIFICATION_CHANGED",
+        "QUALIFICATION_EXPEDIENTE_VIEWED",
+        "VEHICLE_IDENTITY_CORRECTED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/qualification/application/QualificationMaintenanceService.java",
+      "literalActions": [
+        "DRIVER_OPERATIONAL_VALIDITY_CHECK"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/preferences/application/MobilePreferencesService.java",
+      "literalActions": [
+        "MOBILE_PREFERENCES_CHANGED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/personidentity/application/PersonIdentityService.java",
+      "literalActions": [
+        "CONDUCTOR_DOSSIER",
+        "CONDUCTOR_IDENTITY_REVIEWED",
+        "PERSON_IDENTITY_REVIEWED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/organization/application/OrganizationManagementService.java",
+      "literalActions": [
+        "ORGANIZATION_CREATED",
+        "ORGANIZATION_UPDATED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/operation/application/AnnouncementDelivery.java",
+      "literalActions": [
+        "ANNOUNCEMENT_ACCESS_WITHDRAWN"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/operation/application/AnnouncementService.java",
+      "literalActions": [
+        "ANNOUNCEMENT_PUBLISHED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/operation/application/IncidentService.java",
+      "literalActions": [
+        "CRM_WEB",
+        "INCIDENT_REPORTED_FROM_CRM"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/operation/application/IncidentWorkflow.java",
+      "literalActions": [
+        "INCIDENT_"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/operation/application/MobileAnnouncementService.java",
+      "literalActions": [
+        "MOBILE_ANNOUNCEMENT_READ"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/operation/application/MobileAssignmentService.java",
+      "literalActions": [
+        "ASSIGNMENT_RESPONSE_EXPIRED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/operation/application/MobileDriverService.java",
+      "literalActions": [
+        "MOBILE_APP",
+        "MOBILE_CURRENT_LOCATION_CLEARED",
+        "MOBILE_CURRENT_LOCATION_UPSERTED",
+        "MOBILE_DRIVER_AVAILABILITY_CHANGED",
+        "MOBILE_LOCATION_CONSENT_CHANGED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/operation/application/MobileIncidentService.java",
+      "literalActions": [
+        "INCIDENT_CLOSED_BY_MOBILE_REPORTER",
+        "INCIDENT_REPORTED_FROM_MOBILE"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/operation/application/OfferExpiryService.java",
+      "literalActions": [
+        "ASSIGNMENT_RESPONSE_EXPIRED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/operation/application/OperationService.java",
+      "literalActions": [
+        "ASSIGNMENT_CANCELLED",
+        "ASSIGNMENT_MOBILE_CONFIRMATION_REQUESTED",
+        "ASSIGNMENT_SCHEDULED",
+        "ASSIGNMENT_UPDATED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/operation/application/ScheduledServiceDispatch.java",
+      "literalActions": [
+        "SCHEDULED_SERVICE",
+        "SERVICE_"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/operation/application/ServiceAttention.java",
+      "literalActions": [
+        "SERVICE_ATTENTION",
+        "SERVICE_INTERRUPTED",
+        "SERVICE_SAFETY_ATTENTION_REVIEWED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/operation/application/ServiceGpsAccess.java",
+      "literalActions": [
+        "GPS_ACCESS_REQUEST",
+        "GPS_INCIDENT_EVIDENCE",
+        "GPS_INCIDENT_POINT_JUSTIFIED",
+        "GPS_OWN_ACCESS_DELIVERED",
+        "GPS_OWN_ACCESS_REQUESTED",
+        "GPS_OWN_ACCESS_REVIEWED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/operation/application/ServiceHandover.java",
+      "literalActions": [
+        "SERVICE_HANDOVER",
+        "SERVICE_HANDOVER_ASSUMED",
+        "SERVICE_HANDOVER_PREPARED",
+        "SERVICE_HANDOVER_SUPERSEDED_BY_OWN_COMPLETION"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/operation/application/ServiceTimeCorrections.java",
+      "literalActions": [
+        "SERVICE_TIMES_CORRECTED",
+        "SERVICE_TIME_CORRECTION_REQUESTED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/operation/application/ServiceTypeService.java",
+      "literalActions": [
+        "SERVICE_TYPE",
+        "SERVICE_TYPE_"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/onboarding/application/ConductorDocumentaryService.java",
+      "literalActions": [
+        "CONDUCTOR_ACCOUNT_PROVISIONED",
+        "CONDUCTOR_DOCUMENTARY_EXPEDIENTE_VIEWED",
+        "CONDUCTOR_DOCUMENTS_REVIEWED",
+        "CONDUCTOR_ONBOARDING_REJECTED",
+        "CONDUCTOR_ONBOARDING_RETURNED",
+        "CONDUCTOR_PERSONAL_APPROVED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/onboarding/application/ConductorOnboardingReviewService.java",
+      "literalActions": [
+        "CONDUCTOR_ONBOARDING_EXPEDIENTE_VIEWED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/onboarding/application/ConductorOnboardingService.java",
+      "literalActions": [
+        "CONDUCTOR_ONBOARDING_OTP_RESENT",
+        "CONDUCTOR_ONBOARDING_OTP_SENT",
+        "CONDUCTOR_ONBOARDING_SUBMITTED",
+        "ORGANIZATION_INVITATION"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/maintenance/application/VehicleMaintenanceService.java",
+      "literalActions": [
+        "VEHICLE_MAINTENANCE_"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/invitation/application/InvitationService.java",
+      "literalActions": [
+        "INVITATION_ISSUED",
+        "INVITATION_REVOKED",
+        "ORGANIZATION_INVITATION"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/identity/application/AuthService.java",
+      "literalActions": [
+        "INVALID_CREDENTIALS",
+        "LOGIN_SUCCESS",
+        "LOGOUT",
+        "MOBILE_LOGIN_DENIED",
+        "MOBILE_LOGIN_SUCCESS",
+        "MOBILE_LOGOUT",
+        "MOBILE_REFRESH_REUSE_DETECTED",
+        "MOBILE_SESSION_REVOKED",
+        "MOBILE_TOKEN_REFRESHED",
+        "REFRESH_REUSE_DETECTED",
+        "TOKEN_REFRESHED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/identity/application/ConductorRecoveryService.java",
+      "literalActions": [
+        "CONDUCTOR_PASSWORD_RESET_COMPLETED",
+        "CONDUCTOR_RECOVERY_AUTHORIZED",
+        "CONDUCTOR_RECOVERY_CANCELLED",
+        "CONDUCTOR_RECOVERY_COMPLETED",
+        "CONDUCTOR_RECOVERY_EMAIL_VERIFIED",
+        "CONDUCTOR_RECOVERY_REQUEST"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/identity/application/EmailOtpService.java",
+      "literalActions": [
+        "ADMIN_ACTIVATION_EMAIL_VERIFIED",
+        "EMAIL_OTP_SENT",
+        "EMAIL_VERIFIED",
+        "SUPER_ADMIN_RECOVERY_EMAIL_VERIFIED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/identity/application/SuperAdminRecoveryService.java",
+      "literalActions": [
+        "REAUTH_FAILED",
+        "SUPER_ADMIN_RECOVERY_COMPLETED",
+        "SUPER_ADMIN_RECOVERY_ENROLLED",
+        "SUPER_ADMIN_RECOVERY_ENROLLMENT_REJECTED",
+        "SUPER_ADMIN_RECOVERY_PROOF_ACCEPTED",
+        "SUPER_ADMIN_RECOVERY_PROOF_REJECTED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/identity/application/UserManagementService.java",
+      "literalActions": [
+        "DRIVER_DISABLED",
+        "ROLE_CHANGED",
+        "USER_ACTIVATED",
+        "USER_CREATED",
+        "USER_DISABLED",
+        "USER_UPDATED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/fleet/application/FleetManagementService.java",
+      "literalActions": [
+        "DRIVER_ACTIVATED",
+        "DRIVER_CREATED",
+        "DRIVER_DISABLED",
+        "DRIVER_PRIMARY_VEHICLE_CHANGED",
+        "DRIVER_UPDATED",
+        "DRIVER_VEHICLE_LINKED",
+        "DRIVER_VEHICLE_UNLINKED",
+        "GROUP_CREATED",
+        "GROUP_DISABLED",
+        "GROUP_UPDATED",
+        "TRANSPORT_GROUP",
+        "VEHICLE_CREATED",
+        "VEHICLE_STATUS_CHANGED",
+        "VEHICLE_UPDATED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/fleet/application/GroupMembershipService.java",
+      "literalActions": [
+        "GROUP_MEMBERSHIP_CHANGED",
+        "TRANSPORT_GROUP"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/audit/application/SecurityDenialRecorder.java",
+      "literalActions": [
+        "HTTP_REQUEST",
+        "SECURITY_ACCESS_DENIED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    },
+    {
+      "source": "backend/src/main/java/pe/rutafija/adminlifecycle/application/AdminLifecycleService.java",
+      "literalActions": [
+        "ADMIN_ACTIVATED",
+        "ADMIN_ACTIVATION_CREDENTIAL_ROTATED",
+        "ADMIN_CREATED",
+        "ADMIN_REPLACEMENT_COMPLETED",
+        "ADMIN_REPLACEMENT_PREPARED",
+        "ADMIN_SECURITY_REVOKED"
+      ],
+      "kind": "STATIC_CALL_SITE_REVIEW_NOT_RUNTIME_PROOF"
+    }
+  ],
+  "currentConnectedPersistedChecks": [
+    {
+      "action": "CONDUCTOR_PERSONAL_APPROVED",
+      "entityId": "4d0d41de-a1c1-4450-b4e2-232b392d3325",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "CONDUCTOR_ACCOUNT_PROVISIONED",
+      "entityId": "4d0d41de-a1c1-4450-b4e2-232b392d3325",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "DRIVER_QUALIFICATION_CHANGED",
+      "entityId": "0cfd4e80-bf27-45f7-996f-e38bba330c2c",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 5
+    },
+    {
+      "action": "ASSIGNMENT_MOBILE_CONFIRMATION_REQUESTED",
+      "entityId": "b9059ea7-5e74-4bc0-9cfd-3e246d7c8038",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "ASSIGNMENT_MOBILE_ACCEPTED",
+      "entityId": "b9059ea7-5e74-4bc0-9cfd-3e246d7c8038",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "ASSIGNMENT_MOBILE_STARTED",
+      "entityId": "b9059ea7-5e74-4bc0-9cfd-3e246d7c8038",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "ASSIGNMENT_MOBILE_COMPLETED",
+      "entityId": "b9059ea7-5e74-4bc0-9cfd-3e246d7c8038",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "SERVICE_TIMES_CORRECTED",
+      "entityId": "0ca7cff4-d53a-4c95-924f-bf4f6a805957",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "MOBILE_PREFERENCES_CHANGED",
+      "entityId": "45bfdde2-192d-4e97-9696-f14c92d910de",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "REPORT_EMITTED",
+      "entityId": "06d0d751-f5fb-4278-80e7-34bc9e57d10f",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "REPORT_EMITTED",
+      "entityId": "6824dc11-b2a2-4e5a-902e-db165fe2f320",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "REPORT_EMITTED",
+      "entityId": "2af79d30-86b6-4e94-8a9f-6954275d94e9",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "L07_SYNTHETIC_FIXTURE_DISABLED",
+      "entityId": "45bfdde2-192d-4e97-9696-f14c92d910de",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    }
+  ],
+  "inheritedEvidence": "Cierres L01…06 preservados, sin repetir OTP/recuperación humana",
+  "finalDownloadChecks": "17 reportes +8 metadata +1 negativa ADMIN, ejecutados en la última corrida dirigida",
+  "noRefreshNoise": "AuditScopeIntegrationTest.auditSuccessfulConsultationsDoNotCreateRefreshNoise y dashboardEmptyQueueIsExplicitAndRefreshDoesNotWriteAudit"
+}

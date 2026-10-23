@@ -1,0 +1,17 @@
+﻿{
+    "runId":  "9f2be6c1-77be-4d2b-8d72-f83dbd6f5247",
+    "recordedAt":  "2026-10-21T22:54:39.2013255+00:00",
+    "stage":  "EMPTY_LOGIN_FORM",
+    "source":  "USER_REPORT_PHYSICAL_DEVICE",
+    "result":  "PASS_MANUAL_PUBLIC_FORM_VALIDATION_ONLY",
+    "appVisible":  true,
+    "credentialsEntered":  false,
+    "credentialValidationMessagesObserved":  true,
+    "userReported":  "App visible; empty form submitted once; credential-required messages displayed.",
+    "httpRequestsObservedSoFar":  0,
+    "databaseConnected":  false,
+    "smtpUsed":  false,
+    "locationUsed":  false,
+    "operationalLoginVerified":  false,
+    "pilotEnabled":  false
+}

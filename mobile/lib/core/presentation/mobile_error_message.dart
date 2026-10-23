@@ -5,7 +5,17 @@ String mobileErrorMessage(Object error) {
     return error.message;
   }
   if (error is MobileApiException) {
+    // A temporary service outage is neither invalid credentials nor permission
+    // denial. Never echo infrastructure diagnostics from a 5xx response.
+    if (error.status == 503) {
+      return 'Ruta Fija no está disponible temporalmente. No se confirmó la operación. Intente nuevamente más tarde.';
+    }
+    if (error.status >= 500) {
+      return 'Ruta Fija no pudo confirmar la operación. Consulte su estado antes de volver a intentarlo.';
+    }
     switch (error.code) {
+      case 'MOBILE_SESSION_CHANGED':
+        return 'La sesión cambió. Vuelva a consultar desde su sesión actual.';
       case 'AUTH_INVALID_CREDENTIALS':
         return 'El correo o la contraseña no son correctos.';
       case 'MOBILE_USER_NOT_DRIVER':

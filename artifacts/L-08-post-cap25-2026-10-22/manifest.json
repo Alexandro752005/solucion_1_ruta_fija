@@ -1,0 +1,19 @@
+{
+  "result": "PASS_PACKAGED_CURRENT_BACKEND_CLASSES_AND_RESOURCE_IDENTITY_NOT_FULL_RELEASE",
+  "recordedAt": "2026-10-23T01:05:20.188497+00:00",
+  "artifact": "artifacts/L-08-post-cap25-2026-10-22/ruta-fija-l08-local.jar",
+  "sha256": "eded50c4bf3706f0f92ca1cb1700e07946db5eca8405189a08ec6d437303aa4f",
+  "compiledClassAndResourceEntriesCompared": 672,
+  "allPackagedEntriesMatchCurrentTargetClasses": true,
+  "schemaVersion": "50",
+  "versionedMigrationsPackaged": 50,
+  "packagingCommand": "mvnw.cmd --offline -DskipTests package",
+  "testsExecutedByPackaging": false,
+  "capacityAndRetirementTestsUsedCurrentCompiledApplicationClasses": true,
+  "jarRuntimeItselfNotYetRehearsed": true,
+  "releaseOrDeploymentAuthorized": false,
+  "debugOrLocalCandidateOnly": true,
+  "privateFilesOrKeysPackaged": false,
+  "previousArtifactsPreserved": true,
+  "gitCommandsExecuted": false
+}

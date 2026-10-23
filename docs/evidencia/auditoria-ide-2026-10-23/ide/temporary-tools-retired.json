@@ -1,0 +1,11 @@
+﻿{
+    "recordedAt":  "2026-10-23T20:05:14.7654002+00:00",
+    "observerUninstallCommand":  "code.cmd --uninstall-extension rutafija-local.rutafija-local-qa-observer",
+    "observerUninstallExitCode":  0,
+    "temporaryProfile":  ".runtime/qa-edge-1792772227178",
+    "profileRetained":  true,
+    "removalRejectedByAutomaticReview":  true,
+    "rejectionReason":  "blocked by policy",
+    "removalRetried":  false,
+    "headlessBrowserProcessAbsent":  true
+}

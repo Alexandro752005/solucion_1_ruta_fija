@@ -1,0 +1,20 @@
+{
+    "caseId":  "eaa064c6-0bc7-4378-925e-c547ef673932",
+    "startedAt":  "2026-10-23T06:23:40.6340650+00:00",
+    "sourcePort":  55441,
+    "shared5432Touched":  false,
+    "historicalClustersTouched":  false,
+    "physicalIndependentMedium":  false,
+    "totalServerLossRecreated":  false,
+    "human24x7Coverage":  false,
+    "costSoles":  0,
+    "previousFailedCaseId":  "24b0f00c-b68c-4ef4-808d-f1e60eaa16b6",
+    "previousFailureEvidenceSha256":  "342151edf010d557f79aae3d7fc09a9d383ffa0fe984d96dfc87c352d9d83031",
+    "clockIncludesPreviousFailureAndIntervention":  true,
+    "result":  "STOPPED_KEEP_CASE_AND_DIAGNOSE",
+    "failurePhase":  "START_OWNED_CLUSTER",
+    "failureType":  "RuntimeException",
+    "finishedAt":  "2026-10-23T06:28:39.3244021+00:00",
+    "totalElapsedSeconds":  298.6923693,
+    "thisInvocationElapsedSeconds":  118.7610804
+}

@@ -1,0 +1,198 @@
+﻿[
+    {
+        "source":  "backend/src/main/java/pe/rutafija/shared/exception/ApplicationException.java",
+        "declaredClass":  "pe.rutafija.shared.exception.ApplicationException",
+        "binaryClass":  "pe.rutafija.shared.exception.ApplicationException",
+        "simpleClass":  "ApplicationException",
+        "preservedSerialVersionUid":  "-4608782410356792063"
+    },
+    {
+        "source":  "backend/src/main/java/pe/rutafija/shared/exception/RateLimitExceededException.java",
+        "declaredClass":  "pe.rutafija.shared.exception.RateLimitExceededException",
+        "binaryClass":  "pe.rutafija.shared.exception.RateLimitExceededException",
+        "simpleClass":  "RateLimitExceededException",
+        "preservedSerialVersionUid":  "6890055844677160843"
+    },
+    {
+        "source":  "backend/src/main/java/pe/rutafija/availability/monitor/HttpAvailabilityProbe.java",
+        "declaredClass":  "pe.rutafija.availability.monitor.HttpAvailabilityProbe.BodyLimitExceeded",
+        "binaryClass":  "pe.rutafija.availability.monitor.HttpAvailabilityProbe$BodyLimitExceeded",
+        "simpleClass":  "BodyLimitExceeded",
+        "preservedSerialVersionUid":  "3922946286742532050"
+    },
+    {
+        "source":  "backend/src/main/java/pe/rutafija/fleet/domain/DriverVehicleLinkId.java",
+        "declaredClass":  "pe.rutafija.fleet.domain.DriverVehicleLinkId",
+        "binaryClass":  "pe.rutafija.fleet.domain.DriverVehicleLinkId",
+        "simpleClass":  "DriverVehicleLinkId",
+        "preservedSerialVersionUid":  "7586697093904843752"
+    },
+    {
+        "source":  "backend/src/main/java/pe/rutafija/fleet/domain/DriverGroupMembership.java",
+        "declaredClass":  "pe.rutafija.fleet.domain.DriverGroupMembership.Key",
+        "binaryClass":  "pe.rutafija.fleet.domain.DriverGroupMembership$Key",
+        "simpleClass":  "Key",
+        "preservedSerialVersionUid":  "4920960030694723187"
+    },
+    {
+        "source":  "backend/src/main/java/pe/rutafija/fleet/domain/GroupCoordinatorId.java",
+        "declaredClass":  "pe.rutafija.fleet.domain.GroupCoordinatorId",
+        "binaryClass":  "pe.rutafija.fleet.domain.GroupCoordinatorId",
+        "simpleClass":  "GroupCoordinatorId",
+        "preservedSerialVersionUid":  "7135091185848990364"
+    },
+    {
+        "source":  "backend/src/main/java/pe/rutafija/shared/exception/InvalidCredentialsException.java",
+        "declaredClass":  "pe.rutafija.shared.exception.InvalidCredentialsException",
+        "binaryClass":  "pe.rutafija.shared.exception.InvalidCredentialsException",
+        "simpleClass":  "InvalidCredentialsException",
+        "preservedSerialVersionUid":  "-6073554907892776511"
+    },
+    {
+        "source":  "backend/src/main/java/pe/rutafija/shared/exception/InvalidRefreshTokenException.java",
+        "declaredClass":  "pe.rutafija.shared.exception.InvalidRefreshTokenException",
+        "binaryClass":  "pe.rutafija.shared.exception.InvalidRefreshTokenException",
+        "simpleClass":  "InvalidRefreshTokenException",
+        "preservedSerialVersionUid":  "-5081090206533403630"
+    },
+    {
+        "source":  "backend/src/main/java/pe/rutafija/identity/application/EmailOtpCodeRejectedException.java",
+        "declaredClass":  "pe.rutafija.identity.application.EmailOtpCodeRejectedException",
+        "binaryClass":  "pe.rutafija.identity.application.EmailOtpCodeRejectedException",
+        "simpleClass":  "EmailOtpCodeRejectedException",
+        "preservedSerialVersionUid":  "5163125322101744604"
+    },
+    {
+        "source":  "backend/src/main/java/pe/rutafija/identity/application/RecoveryProofRejectedException.java",
+        "declaredClass":  "pe.rutafija.identity.application.RecoveryProofRejectedException",
+        "binaryClass":  "pe.rutafija.identity.application.RecoveryProofRejectedException",
+        "simpleClass":  "RecoveryProofRejectedException",
+        "preservedSerialVersionUid":  "-6822411992764496672"
+    },
+    {
+        "source":  "backend/src/main/java/pe/rutafija/shared/exception/ExternalServiceUnavailableException.java",
+        "declaredClass":  "pe.rutafija.shared.exception.ExternalServiceUnavailableException",
+        "binaryClass":  "pe.rutafija.shared.exception.ExternalServiceUnavailableException",
+        "simpleClass":  "ExternalServiceUnavailableException",
+        "preservedSerialVersionUid":  "-3410457561322729441"
+    },
+    {
+        "source":  "backend/src/main/java/pe/rutafija/identity/recoverycli/SuperAdminRecoveryCli.java",
+        "declaredClass":  "pe.rutafija.identity.recoverycli.SuperAdminRecoveryCli.HttpFailure",
+        "binaryClass":  "pe.rutafija.identity.recoverycli.SuperAdminRecoveryCli$HttpFailure",
+        "simpleClass":  "HttpFailure",
+        "preservedSerialVersionUid":  "-3629730560888174975"
+    },
+    {
+        "source":  "backend/src/main/java/pe/rutafija/onboarding/application/OnboardingInvitationRejectedException.java",
+        "declaredClass":  "pe.rutafija.onboarding.application.OnboardingInvitationRejectedException",
+        "binaryClass":  "pe.rutafija.onboarding.application.OnboardingInvitationRejectedException",
+        "simpleClass":  "OnboardingInvitationRejectedException",
+        "preservedSerialVersionUid":  "-9063495426057973732"
+    },
+    {
+        "source":  "backend/src/main/java/pe/rutafija/onboarding/application/OnboardingOtpRejectedException.java",
+        "declaredClass":  "pe.rutafija.onboarding.application.OnboardingOtpRejectedException",
+        "binaryClass":  "pe.rutafija.onboarding.application.OnboardingOtpRejectedException",
+        "simpleClass":  "OnboardingOtpRejectedException",
+        "preservedSerialVersionUid":  "-7138057043148676152"
+    },
+    {
+        "source":  "backend/src/main/java/pe/rutafija/shared/exception/RefreshTokenReuseException.java",
+        "declaredClass":  "pe.rutafija.shared.exception.RefreshTokenReuseException",
+        "binaryClass":  "pe.rutafija.shared.exception.RefreshTokenReuseException",
+        "simpleClass":  "RefreshTokenReuseException",
+        "preservedSerialVersionUid":  "-8429902800360181922"
+    },
+    {
+        "source":  "backend/src/test/java/pe/rutafija/support/L02DatabasePreflight.java",
+        "declaredClass":  "pe.rutafija.support.L02DatabasePreflight.Refused",
+        "binaryClass":  "pe.rutafija.support.L02DatabasePreflight$Refused",
+        "simpleClass":  "Refused",
+        "preservedSerialVersionUid":  "-3949782042426549004"
+    },
+    {
+        "source":  "backend/src/test/java/pe/rutafija/support/L03DatabasePreflight.java",
+        "declaredClass":  "pe.rutafija.support.L03DatabasePreflight.Refused",
+        "binaryClass":  "pe.rutafija.support.L03DatabasePreflight$Refused",
+        "simpleClass":  "Refused",
+        "preservedSerialVersionUid":  "2514079800972365134"
+    },
+    {
+        "source":  "backend/src/test/java/pe/rutafija/support/L04DatabasePreflight.java",
+        "declaredClass":  "pe.rutafija.support.L04DatabasePreflight.Refused",
+        "binaryClass":  "pe.rutafija.support.L04DatabasePreflight$Refused",
+        "simpleClass":  "Refused",
+        "preservedSerialVersionUid":  "403311422032263157"
+    },
+    {
+        "source":  "backend/src/test/java/pe/rutafija/support/L05DatabasePreflight.java",
+        "declaredClass":  "pe.rutafija.support.L05DatabasePreflight.Refused",
+        "binaryClass":  "pe.rutafija.support.L05DatabasePreflight$Refused",
+        "simpleClass":  "Refused",
+        "preservedSerialVersionUid":  "8208895206480771177"
+    },
+    {
+        "source":  "backend/src/test/java/pe/rutafija/support/L06DatabasePreflight.java",
+        "declaredClass":  "pe.rutafija.support.L06DatabasePreflight.Refused",
+        "binaryClass":  "pe.rutafija.support.L06DatabasePreflight$Refused",
+        "simpleClass":  "Refused",
+        "preservedSerialVersionUid":  "4411792199725561630"
+    },
+    {
+        "source":  "backend/src/test/java/pe/rutafija/support/L07DatabasePreflight.java",
+        "declaredClass":  "pe.rutafija.support.L07DatabasePreflight.Refused",
+        "binaryClass":  "pe.rutafija.support.L07DatabasePreflight$Refused",
+        "simpleClass":  "Refused",
+        "preservedSerialVersionUid":  "-4371044921209346866"
+    },
+    {
+        "source":  "backend/src/test/java/pe/rutafija/support/L08DatabasePreflight.java",
+        "declaredClass":  "pe.rutafija.support.L08DatabasePreflight.Refused",
+        "binaryClass":  "pe.rutafija.support.L08DatabasePreflight$Refused",
+        "simpleClass":  "Refused",
+        "preservedSerialVersionUid":  "-3280672175156310262"
+    },
+    {
+        "source":  "backend/src/test/java/pe/rutafija/support/L08V50Preflight.java",
+        "declaredClass":  "pe.rutafija.support.L08V50Preflight.Refused",
+        "binaryClass":  "pe.rutafija.support.L08V50Preflight$Refused",
+        "simpleClass":  "Refused",
+        "preservedSerialVersionUid":  "8573144875016366970"
+    },
+    {
+        "source":  "backend/src/test/java/pe/rutafija/support/ManualL01RecoveryFixtureKeyReplacementTest.java",
+        "declaredClass":  "pe.rutafija.support.ManualL01RecoveryFixtureKeyReplacementTest.RecordingTransactions",
+        "binaryClass":  "pe.rutafija.support.ManualL01RecoveryFixtureKeyReplacementTest$RecordingTransactions",
+        "simpleClass":  "RecordingTransactions",
+        "preservedSerialVersionUid":  "-7780495166934619831"
+    },
+    {
+        "source":  "backend/src/test/java/pe/rutafija/support/ManualL01RecoveryFixtureRepairTest.java",
+        "declaredClass":  "pe.rutafija.support.ManualL01RecoveryFixtureRepairTest.RecordingTransactions",
+        "binaryClass":  "pe.rutafija.support.ManualL01RecoveryFixtureRepairTest$RecordingTransactions",
+        "simpleClass":  "RecordingTransactions",
+        "preservedSerialVersionUid":  "-4416494166643477692"
+    },
+    {
+        "source":  "backend/src/test/java/pe/rutafija/support/ManualOtpCaseRecovery.java",
+        "declaredClass":  "pe.rutafija.support.ManualOtpCaseRecovery.Refused",
+        "binaryClass":  "pe.rutafija.support.ManualOtpCaseRecovery$Refused",
+        "simpleClass":  "Refused",
+        "preservedSerialVersionUid":  "5536447013754832083"
+    },
+    {
+        "source":  "backend/src/test/java/pe/rutafija/support/ManualOtpDeliveryValidation.java",
+        "declaredClass":  "pe.rutafija.support.ManualOtpDeliveryValidation.ValidationFailure",
+        "binaryClass":  "pe.rutafija.support.ManualOtpDeliveryValidation$ValidationFailure",
+        "simpleClass":  "ValidationFailure",
+        "preservedSerialVersionUid":  "5298662823711848232"
+    },
+    {
+        "source":  "backend/src/test/java/pe/rutafija/support/ManualOtpEvidenceVerification.java",
+        "declaredClass":  "pe.rutafija.support.ManualOtpEvidenceVerification.VerificationFailure",
+        "binaryClass":  "pe.rutafija.support.ManualOtpEvidenceVerification$VerificationFailure",
+        "simpleClass":  "VerificationFailure",
+        "preservedSerialVersionUid":  "-5929456894808456629"
+    }
+]

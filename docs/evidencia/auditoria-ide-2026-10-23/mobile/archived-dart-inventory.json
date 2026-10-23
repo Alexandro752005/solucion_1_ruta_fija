@@ -1,0 +1,290 @@
+{
+  "observedAtUtc": "2026-10-23T15:54:15.658376+00:00",
+  "archivedDartCount": 25,
+  "byTopFolder": {
+    "docs": 13,
+    "memory": 12
+  },
+  "entries": [
+    {
+      "path": "docs/evidencia/L-08/incremento-5-candidato-final/sources/mobile/test/features/location/l08_prolonged_no_fix_test.dart",
+      "sha256": "3beb9122ec8270807b01587e35976137309790456b720df13b4191c7b3724c5a",
+      "sameNameCurrentFiles": [
+        "mobile/test/features/location/l08_prolonged_no_fix_test.dart"
+      ],
+      "identicalToCurrentFiles": [
+        "mobile/test/features/location/l08_prolonged_no_fix_test.dart"
+      ]
+    },
+    {
+      "path": "docs/evidencia/L-08/incremento-5-candidato-final/sources/mobile/lib/features/location/domain/mobile_service_location_controller.dart",
+      "sha256": "09a4b3e1e003fc965625cfbecfdda21fbdbb943c6ace78cf60519a4343fc86d3",
+      "sameNameCurrentFiles": [
+        "mobile/lib/features/location/domain/mobile_service_location_controller.dart"
+      ],
+      "identicalToCurrentFiles": [
+        "mobile/lib/features/location/domain/mobile_service_location_controller.dart"
+      ]
+    },
+    {
+      "path": "docs/evidencia/L-08/incremento-5-candidato-final/sources/mobile/lib/features/location/presentation/service_location_status.dart",
+      "sha256": "ff2a9ef44dc8103182599efda0bb83dc25e747406a6354ec7c72d54f75af7d4b",
+      "sameNameCurrentFiles": [
+        "mobile/lib/features/location/presentation/service_location_status.dart"
+      ],
+      "identicalToCurrentFiles": [
+        "mobile/lib/features/location/presentation/service_location_status.dart"
+      ]
+    },
+    {
+      "path": "docs/evidencia/L-08/incremento-5-candidato-final/release/sources/ruta_fija_environment.dart",
+      "sha256": "4dd51f2fd4064061a8695fea1f3bbf3a5ae24133a212d06a2373c4267763115a",
+      "sameNameCurrentFiles": [
+        "mobile/lib/app/ruta_fija_environment.dart"
+      ],
+      "identicalToCurrentFiles": [
+        "mobile/lib/app/ruta_fija_environment.dart"
+      ]
+    },
+    {
+      "path": "docs/evidencia/L-08/incremento-5-candidato-final/mobile/sources/l08_prolonged_no_fix_test.dart",
+      "sha256": "3beb9122ec8270807b01587e35976137309790456b720df13b4191c7b3724c5a",
+      "sameNameCurrentFiles": [
+        "mobile/test/features/location/l08_prolonged_no_fix_test.dart"
+      ],
+      "identicalToCurrentFiles": [
+        "mobile/test/features/location/l08_prolonged_no_fix_test.dart"
+      ]
+    },
+    {
+      "path": "docs/evidencia/L-08/incremento-5-candidato-final/mobile/sources/mobile_service_location_controller.dart",
+      "sha256": "09a4b3e1e003fc965625cfbecfdda21fbdbb943c6ace78cf60519a4343fc86d3",
+      "sameNameCurrentFiles": [
+        "mobile/lib/features/location/domain/mobile_service_location_controller.dart"
+      ],
+      "identicalToCurrentFiles": [
+        "mobile/lib/features/location/domain/mobile_service_location_controller.dart"
+      ]
+    },
+    {
+      "path": "docs/evidencia/L-08/incremento-5-candidato-final/mobile/sources/service_location_status.dart",
+      "sha256": "ff2a9ef44dc8103182599efda0bb83dc25e747406a6354ec7c72d54f75af7d4b",
+      "sameNameCurrentFiles": [
+        "mobile/lib/features/location/presentation/service_location_status.dart"
+      ],
+      "identicalToCurrentFiles": [
+        "mobile/lib/features/location/presentation/service_location_status.dart"
+      ]
+    },
+    {
+      "path": "docs/evidencia/L-08/incremento-4-cierre-fisico/fuentes/mobile/test/app/ruta_fija_theme_contrast_test.dart",
+      "sha256": "58f0f3f5d458716f0837dc4ef5087aa0347674a8fb91f216f679203dbbf949f7",
+      "sameNameCurrentFiles": [
+        "mobile/test/app/ruta_fija_theme_contrast_test.dart"
+      ],
+      "identicalToCurrentFiles": [
+        "mobile/test/app/ruta_fija_theme_contrast_test.dart"
+      ]
+    },
+    {
+      "path": "docs/evidencia/L-08/incremento-4-cierre-fisico/fuentes/mobile/lib/app/ruta_fija_theme.dart",
+      "sha256": "672f63e6ad2a8261e78403605765f07449dce4e568a05aaba1bfe32fc0ac20f9",
+      "sameNameCurrentFiles": [
+        "mobile/lib/app/ruta_fija_theme.dart"
+      ],
+      "identicalToCurrentFiles": [
+        "mobile/lib/app/ruta_fija_theme.dart"
+      ]
+    },
+    {
+      "path": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/correccion-gps/antes/mobile/lib/features/location/data/geolocator_device_location_gateway.dart",
+      "sha256": "fdd0334c4e9af97c2b848aaeeec402b29b4de97c8622e1ac798f3ef94729172d",
+      "sameNameCurrentFiles": [
+        "mobile/lib/features/location/data/geolocator_device_location_gateway.dart"
+      ],
+      "identicalToCurrentFiles": [
+        "mobile/lib/features/location/data/geolocator_device_location_gateway.dart"
+      ]
+    },
+    {
+      "path": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/correccion-gps/antes/mobile/lib/features/location/domain/mobile_foreground_location.dart",
+      "sha256": "51f766eb82593bdb7a59f259556dc8770e040106ea124c800bdc9c1e6ffd10e3",
+      "sameNameCurrentFiles": [
+        "mobile/lib/features/location/domain/mobile_foreground_location.dart"
+      ],
+      "identicalToCurrentFiles": []
+    },
+    {
+      "path": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/correccion-gps/antes/mobile/lib/features/location/domain/mobile_service_location_controller.dart",
+      "sha256": "f6c3e19ab1bda1f08805974d6714c23a6453f60930336f31c4f9a99e370e558e",
+      "sameNameCurrentFiles": [
+        "mobile/lib/features/location/domain/mobile_service_location_controller.dart"
+      ],
+      "identicalToCurrentFiles": []
+    },
+    {
+      "path": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/correccion-gps/antes/mobile/lib/features/location/presentation/service_location_status.dart",
+      "sha256": "03bef753b00017cf4ccb976c650a68222245ee7d240754733e9a2b7241492dd0",
+      "sameNameCurrentFiles": [
+        "mobile/lib/features/location/presentation/service_location_status.dart"
+      ],
+      "identicalToCurrentFiles": []
+    },
+    {
+      "path": "memory/backup/2026-10-19-inicio-L05/mobile/test/connected/l04_connected_test.dart",
+      "sha256": "11d5780b093c2e88093e6bcb7fa617c433834036d2c7548a4428e31de7f22259",
+      "sameNameCurrentFiles": [
+        "mobile/test/connected/l04_connected_test.dart"
+      ],
+      "identicalToCurrentFiles": [
+        "mobile/test/connected/l04_connected_test.dart"
+      ]
+    },
+    {
+      "path": "memory/backup/2026-10-19-inicio-L05/mobile/test/features/assignments/assigned_route_widget_test.dart",
+      "sha256": "c9a4fcc4c092f9e33cc1c9af84e1cce4235c37638242e9c1de47f188c7eba45b",
+      "sameNameCurrentFiles": [
+        "mobile/test/features/assignments/assigned_route_widget_test.dart"
+      ],
+      "identicalToCurrentFiles": [
+        "mobile/test/features/assignments/assigned_route_widget_test.dart"
+      ]
+    },
+    {
+      "path": "memory/backup/2026-10-19-inicio-L05/mobile/test/features/assignments/mobile_assignment_repository_test.dart",
+      "sha256": "86f27472a442a6a02fb73c8a37bee935dd6c453f843006ceeaf477bf85c999de",
+      "sameNameCurrentFiles": [
+        "mobile/test/features/assignments/mobile_assignment_repository_test.dart"
+      ],
+      "identicalToCurrentFiles": []
+    },
+    {
+      "path": "memory/backup/2026-10-19-inicio-L05/mobile/test/features/assignments/mobile_route_models_test.dart",
+      "sha256": "95ecfd0c0f2d8fd888ef753546f57a3bbeef8e5b5fd58f32d4f83f62af58c8db",
+      "sameNameCurrentFiles": [
+        "mobile/test/features/assignments/mobile_route_models_test.dart"
+      ],
+      "identicalToCurrentFiles": [
+        "mobile/test/features/assignments/mobile_route_models_test.dart"
+      ]
+    },
+    {
+      "path": "memory/backup/2026-10-19-inicio-L05/mobile/test/features/assignments/scheduled_service_models_test.dart",
+      "sha256": "4fc2702b10aa0218fe5e404c11a7990e734830395b53f5803397f76427154219",
+      "sameNameCurrentFiles": [
+        "mobile/test/features/assignments/scheduled_service_models_test.dart"
+      ],
+      "identicalToCurrentFiles": []
+    },
+    {
+      "path": "memory/backup/2026-10-19-inicio-L05/mobile/lib/features/assignments/data/mobile_assignment_command_store.dart",
+      "sha256": "ee99ea3b5eea4dc3970fcf37766234f5ffc41ebf29f8d7b845909180a02ad611",
+      "sameNameCurrentFiles": [
+        "mobile/lib/features/assignments/data/mobile_assignment_command_store.dart"
+      ],
+      "identicalToCurrentFiles": [
+        "mobile/lib/features/assignments/data/mobile_assignment_command_store.dart"
+      ]
+    },
+    {
+      "path": "memory/backup/2026-10-19-inicio-L05/mobile/lib/features/assignments/data/mobile_assignment_repository.dart",
+      "sha256": "534cd5646da69daf53b29580d20539273fcc7e06c0237c1a9bcc950eaf43893f",
+      "sameNameCurrentFiles": [
+        "mobile/lib/features/assignments/data/mobile_assignment_repository.dart"
+      ],
+      "identicalToCurrentFiles": []
+    },
+    {
+      "path": "memory/backup/2026-10-19-inicio-L05/mobile/lib/features/assignments/domain/mobile_assignment_models.dart",
+      "sha256": "ab4cdf2586d524f881a20b3fb8ac0a862d15d26449cc12bf25c406e0ef9b4d4d",
+      "sameNameCurrentFiles": [
+        "mobile/lib/features/assignments/domain/mobile_assignment_models.dart"
+      ],
+      "identicalToCurrentFiles": []
+    },
+    {
+      "path": "memory/backup/2026-10-19-inicio-L05/mobile/lib/features/assignments/domain/mobile_route_models.dart",
+      "sha256": "8690e40f6694f1c4d38d64e4bfa456252f6fa9b204703353005d1db318442afe",
+      "sameNameCurrentFiles": [
+        "mobile/lib/features/assignments/domain/mobile_route_models.dart"
+      ],
+      "identicalToCurrentFiles": [
+        "mobile/lib/features/assignments/domain/mobile_route_models.dart"
+      ]
+    },
+    {
+      "path": "memory/backup/2026-10-19-inicio-L05/mobile/lib/features/assignments/presentation/assignments_page.dart",
+      "sha256": "d230d8c35045f24e7c85786d9ebb57ac4b8d31e68ac8d3b71ecdb99c7f8117f8",
+      "sameNameCurrentFiles": [
+        "mobile/lib/features/assignments/presentation/assignments_page.dart"
+      ],
+      "identicalToCurrentFiles": [
+        "mobile/lib/features/assignments/presentation/assignments_page.dart"
+      ]
+    },
+    {
+      "path": "memory/backup/2026-10-19-inicio-L05/mobile/lib/features/assignments/presentation/assignment_detail_page.dart",
+      "sha256": "8540540343cbf19b070fd34630bfcb991328b3b7ec253bf9a9a7e0fc599fa424",
+      "sameNameCurrentFiles": [
+        "mobile/lib/features/assignments/presentation/assignment_detail_page.dart"
+      ],
+      "identicalToCurrentFiles": []
+    },
+    {
+      "path": "memory/backup/2026-10-19-inicio-L05/mobile/lib/features/assignments/presentation/mobile_assignment_presentation.dart",
+      "sha256": "3e9dba2309dda1c9f05fd0cad4207f3181cbbcb2d4b590a6be26045dbca1f1df",
+      "sameNameCurrentFiles": [
+        "mobile/lib/features/assignments/presentation/mobile_assignment_presentation.dart"
+      ],
+      "identicalToCurrentFiles": []
+    }
+  ],
+  "archivedPubspecs": [
+    "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/correccion-gps/antes/mobile/pubspec.yaml"
+  ],
+  "workspaceSettingsSha256AtObservation": "8067c43c2d4b51dc2a450ac27a896fab7f18e8008f4e4dac3d2e99ff7f98d4c9",
+  "dartAnalysisExcludedFoldersAtObservation": [],
+  "installedDartExtension": "Dart-Code3.144.0",
+  "localConfigurationContractSource": "C:/Users/Ale/.vscode/extensions/dart-code.dart-code-3.144.0/package.json:1735",
+  "configurationContract": "Paths relative to workspace or absolute; these also affect project discovery. Do not use wildcard patterns.",
+  "projectSourcesOrFrozenFilesChangedByThisInventory": false,
+  "backendTargetDartCopies": [
+    {
+      "path": "backend/target/l08-mission-before/mobile-tests/l08_login_http_boundary_test.dart",
+      "sha256": "d3deadaecbe71553feb718b3c65c6a9659d891cfd3b20115810cffa74916e6bd"
+    },
+    {
+      "path": "backend/target/l08-mission-before/mobile-tests/l08_login_interaction_test.dart",
+      "sha256": "e6372be69ff1ade13ee66b834787cce2e8a3391de4f9d6955f4ed4c57ad1b57a"
+    },
+    {
+      "path": "backend/target/l08-mission-before/mobile-tests/l08_session_race_test.dart",
+      "sha256": "22543f735f8fc1d24406c69fd3510ac5d0c7c568c29e162c3e809e85bd1b6e99"
+    },
+    {
+      "path": "backend/target/l08-mission-before/mobile-tests/mobile_session_controller.dart",
+      "sha256": "795097180bcfd7f17d4327c794f3b59842c3f1778fbffe3bd38efdae4357ace4"
+    },
+    {
+      "path": "backend/target/l08-mission-before/mobile/lib/features/location/domain/mobile_execution_location_gate.dart",
+      "sha256": "99c62eceff45a808d17cd0957f7f8ec65fafc6dd25766993d1a1b494d441cabf"
+    },
+    {
+      "path": "backend/target/l08-mission-before/mobile/lib/core/network/mobile_access_token_provider.dart",
+      "sha256": "f8236f7a5f8bd82799ecb649f4167a588b67f71978443334ef506d8f33c83f31"
+    },
+    {
+      "path": "backend/target/l08-mission-before/mobile/lib/core/network/mobile_api_client.dart",
+      "sha256": "53e00e510a7d2a3bb1e029e3b475c229f49637a06bedef9435162fa40cabd4e7"
+    },
+    {
+      "path": "backend/target/l08-mission-before/mobile/lib/core/presentation/mobile_error_message.dart",
+      "sha256": "fdca7e1475bbfe102202ec160dc06de7e7a499d982d12f95efaecd30c8d9589b"
+    },
+    {
+      "path": "backend/target/l08-mission-before/mobile/lib/core/session/mobile_session_controller.dart",
+      "sha256": "fed1797111566a2a7182ef2d2d766122666a26d142a28f01eb0f2caaea2a8ab0"
+    }
+  ],
+  "totalArchivedAndGeneratedDartCopies": 34
+}

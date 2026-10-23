@@ -18,9 +18,11 @@ import java.util.Locale;
 public class JsonAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     private final ObjectMapper objectMapper;
+    private final SecurityDenialAuditFilter securityAudit;
 
-    public JsonAuthenticationEntryPoint(ObjectMapper objectMapper) {
+    public JsonAuthenticationEntryPoint(ObjectMapper objectMapper, SecurityDenialAuditFilter securityAudit) {
         this.objectMapper = objectMapper;
+        this.securityAudit = securityAudit;
     }
 
     @Override
@@ -36,6 +38,7 @@ public class JsonAuthenticationEntryPoint implements AuthenticationEntryPoint {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setHeader("Cache-Control", "no-store");
+        if(request.getAttribute(SecurityDenialAuditFilter.ENTERED)==null)securityAudit.persist(request,HttpServletResponse.SC_UNAUTHORIZED);
         objectMapper.writeValue(
                 response.getOutputStream(),
                 ApiErrorResponse.of(

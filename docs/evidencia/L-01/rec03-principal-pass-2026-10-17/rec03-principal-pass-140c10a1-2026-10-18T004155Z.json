@@ -1,0 +1,151 @@
+{
+  "recordedLocalDate": "2026-10-17",
+  "timezone": "America/Lima",
+  "runId": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "inspectionAtUtc": "2026-10-18T00:41:55.013857500Z",
+  "operatorReport": {
+    "requestedCheckTarget": "NEW_PRIMARY",
+    "LOCAL_ENCRYPTED_KEY_CHECK": "PASS_NO_API_NO_MAIL_NO_EMERGENCY_CODE",
+    "PUBLIC_KEY_SHA256": "5569d8c89e2118dede5ca39253a03735f1eb13b88a070beab45b245ce5914433",
+    "copyCreationMarkerReported": false
+  },
+  "metadataOnly": {
+    "checkedAtUtc": "2026-10-18T00:41:54.0403279Z",
+    "files": [
+      {
+        "label": "PRIMARY",
+        "privateExists": true,
+        "privateBytesMetadata": 477,
+        "publicExists": true,
+        "canonicalEd25519": true,
+        "publicKeySha256": "5569d8c89e2118dede5ca39253a03735f1eb13b88a070beab45b245ce5914433"
+      },
+      {
+        "label": "COPY",
+        "privateExists": true,
+        "privateBytesMetadata": 477,
+        "publicExists": true,
+        "canonicalEd25519": true,
+        "publicKeySha256": "5569d8c89e2118dede5ca39253a03735f1eb13b88a070beab45b245ce5914433"
+      }
+    ],
+    "directoryAclRestricted": true,
+    "markerSha256": "83A91866767A8EFC56CBF7ED553191D53610F5A264E0E9A6C0D86CBBE79FF205",
+    "jarSha256": "91913FF7C11CABFAA01881FCBFB24BBF5ED347564C0140D73A757BC96D38E24A",
+    "privateContentsRead": false,
+    "privateCiphertextHashedOrCompared": false,
+    "writes": 0
+  },
+  "databaseInspection": {
+    "database": "ruta_fija_test",
+    "role": "rf_test",
+    "schema": "V26",
+    "historicalCreations": {
+      "SUPER_ADMIN": 1,
+      "ADMIN": 2,
+      "CONDUCTOR": 0
+    },
+    "remainingSlots": {
+      "SUPER_ADMIN": 0,
+      "ADMIN": 2,
+      "CONDUCTOR": 20
+    },
+    "superAdminAccounts": 1,
+    "personIdentityBindings": 2,
+    "personIdentityKeyRecorded": true,
+    "recoveryCredentialPresent": true,
+    "eligibleSyntheticPendingAdmins": 0,
+    "termsAcceptanceCount": 1,
+    "currentTerms": {
+      "id": "f590e228-5d2e-47e4-b144-b0df1198bd49",
+      "version": "1.0.0",
+      "content_sha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+      "synthetic": false
+    },
+    "publishedFileHashMatches": true,
+    "cleanupLockHeld": true,
+    "runId": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+    "caseInventory": {
+      "superAdminAccounts": 1,
+      "superAdminHistoricalCreations": 1,
+      "adminHistoricalCreations": 2,
+      "caseAccounts": 2,
+      "caseOrganizations": 1,
+      "identityBindings": 2,
+      "identityKeyRecords": 1,
+      "recoveryCredentials": 1
+    },
+    "markerPresentAndMatches": true,
+    "stateFilePresent": true,
+    "privateRuntimeKeyFilePresent": true,
+    "syntheticRecoveryFixtureRepairReadOnlyFacts": {
+      "authorizationAndOutputCheck": true,
+      "exactCaseAndMarker": true,
+      "environmentApproved": true,
+      "harnessOwnsCleanupLock": false,
+      "identitiesMatch": true,
+      "identityReviewed": true,
+      "credentialMatches": true,
+      "termsAndAcceptancePreserved": true,
+      "historicalLedgerPreserved": true,
+      "noCompletedRecovery": true,
+      "noLiveChallenge": true,
+      "noPriorRepair": false,
+      "enrollmentObservedOnce": true,
+      "observationHealthy": true
+    },
+    "syntheticRecoveryFixtureRepairRequiresServingLock": true,
+    "syntheticRecoveryFixtureKeyPreparationReadOnlyFacts": {
+      "exactCaseAndMarker": true,
+      "environmentApproved": true,
+      "harnessOwnsCleanupLock": false,
+      "identitiesMatch": true,
+      "identityReviewed": true,
+      "credentialMatches": true,
+      "termsAndAcceptancePreserved": true,
+      "historicalLedgerPreserved": true,
+      "noCompletedRecovery": true,
+      "noLiveChallenge": true,
+      "enrollmentObservedOnce": true,
+      "observationHealthy": true,
+      "authorization": true,
+      "codeRepairAuthorization": true,
+      "codeRepairPreservedOnce": true,
+      "segmentMatches": true,
+      "noPriorKeyReplacement": true
+    },
+    "syntheticRecoveryFixtureKeyPreparationRequiresServingLock": true,
+    "syntheticRecoveryFixtureKeyPreparationPublicAudits": [],
+    "currentRecoveryPublicKeyFingerprintSha256": "5b727e9aa6252667a1cbdc30f7575fb5007f9d8bb159d0e4dd2b5dcb27fbe00c",
+    "passwordRecaptureEligibility": "PREPARED_CREDENTIALS_REQUIRE_REVIEW_NO_PASSWORD_OVERWRITE",
+    "legacyExactFirstRejectionCause": "NOT_RECORDED_CANNOT_RECONSTRUCT",
+    "latestRecordedBootstrapReason": "PASSWORD_HASH_STORED_BY_NORMAL_ENCODER_LEDGER_PRESERVED",
+    "standardCleanupRefusedByMarker": true,
+    "inspectionAtUtc": "2026-10-18T00:41:55.013857500Z",
+    "readOnly": true,
+    "smtpAttempts": 0,
+    "writes": 0
+  },
+  "primaryReadPassReported": true,
+  "primaryPassFingerprintMatchesPublicFile": true,
+  "copyPresenceMetadataVerified": true,
+  "copyPublicFileMatchesPrimary": true,
+  "copyReadPassReported": false,
+  "privateFilesReadByAgent": false,
+  "privateCiphertextEqualityOrIntegrityClaimed": false,
+  "actualFixtureKeyReplacementExecuted": false,
+  "manualAdminResult": "PENDING",
+  "manualRecoveryResult": "PENDING",
+  "testCleanupReleased": false,
+  "scopeChangeApplied": false,
+  "lotStatus": "EN_CURSO",
+  "L02Started": false,
+  "nextHumanAction": "PERSONAL_CHECK_NEW_COPY_ONCE_REPORT_PASS_AND_PUBLIC_FINGERPRINT_THEN_STOP",
+  "limits": [
+    "Primary decryption result is reported by the human operator using the requested existing CLI command; the agent did not enter the password or decrypt it.",
+    "Copy presence and identical public files do not establish encrypted-copy readability or ciphertext equality.",
+    "The copy creation console marker was not reported; its filesystem presence was checked instead, without reconstructing that console output.",
+    "New public key has not yet replaced the enrolled fixture key.",
+    "Two files on one PC do not establish independent custody."
+  ]
+}

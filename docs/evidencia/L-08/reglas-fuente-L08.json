@@ -1,0 +1,1407 @@
+{
+  "source": "specs/registro.json",
+  "sourceSha256": "ca2794a41907d8081e0b77bd7ee02c3960024798d48442a7d26f053cb730ac50",
+  "questions": [
+    {
+      "id": "Q-088",
+      "moduleId": "MOD-UX",
+      "dimension": "FRONTEND",
+      "question": "¿Qué decisión operativa debe facilitar primero el dashboard del ADMIN: resolver incidencias, gestionar ofertas pendientes, reasignar servicios o revisar incorporación?",
+      "decisionTopic": "Objetivo del dashboard",
+      "reason": "Definir objetivo del dashboard y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Tras las alertas críticas, la prioridad es resolver servicios próximos sin aceptación confirmada o que necesitan reasignación. Luego se muestran ofertas por vencer, incidencias e incorporación pendiente.",
+      "decisionRefs": [
+        "D-V3-Q-088"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-088",
+        "sourceAnswerPointer": "/questions/42",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-088-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Servicios próximos sin asignación válida",
+        "answeredAtClientReported": "2026-10-11T17:14:58.250Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-089",
+      "moduleId": "MOD-UX",
+      "dimension": "FRONTEND",
+      "question": "En el inicio móvil, ¿qué tiene prioridad cuando conviven una oferta pendiente de aceptación y un servicio ya aceptado próximo a comenzar?",
+      "decisionTopic": "Prioridad de inicio móvil",
+      "reason": "Definir prioridad de inicio móvil y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "El servicio aceptado próximo a iniciar ocupa la tarjeta principal con su acción de inicio. La oferta pendiente aparece claramente con vencimiento y acciones de aceptar o rechazar, sin ocultar el compromiso existente.",
+      "decisionRefs": [
+        "D-V3-Q-089"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-089",
+        "sourceAnswerPointer": "/questions/43",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-089-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Servicio aceptado próximo, oferta destacada",
+        "answeredAtClientReported": "2026-10-11T17:16:38.298Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-090",
+      "moduleId": "MOD-UX",
+      "dimension": "ACTORES_PERMISOS",
+      "question": "¿Qué campos del perfil puede cambiar CONDUCTOR directamente, separándolos de identidad, correo de recuperación y documentos que requieren revisión?",
+      "decisionTopic": "Edición de perfil",
+      "reason": "Definir edición de perfil y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "CONDUCTOR puede cambiar preferencias de avisos, tamaño de texto y una foto de perfil opcional. Identidad, contacto verificado, correo y documentos usan solicitudes o flujos específicos con revisión o verificación; una foto nunca sustituye un documento.",
+      "decisionRefs": [
+        "D-V3-Q-090"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-090",
+        "sourceAnswerPointer": "/questions/44",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-090-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Preferencias y foto opcional",
+        "answeredAtClientReported": "2026-10-11T17:16:53.425Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-092",
+      "moduleId": "MOD-NFR",
+      "dimension": "NO_FUNCIONALES",
+      "question": "¿Cuántas empresas y conductores conectados simultáneamente debe soportar el MVP inicial?",
+      "decisionTopic": "Carga objetivo inicial",
+      "reason": "Definir carga objetivo inicial y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Objetivo inicial: hasta 3 empresas, 30 CONDUCTOR y 3 ADMIN conectados simultáneamente en total, además de 1 SUPER_ADMIN. No se promete esta capacidad antes de una prueba con servicios y GPS según los intervalos elegidos.",
+      "decisionRefs": [
+        "D-V3-Q-092"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-092",
+        "sourceAnswerPointer": "/questions/45",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-092-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "3 empresas, 30 conductores y 3 ADMIN",
+        "answeredAtClientReported": "2026-10-11T17:17:44.313Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "PENDIENTE_VERIFICACION"
+    },
+    {
+      "id": "Q-093",
+      "moduleId": "MOD-NFR",
+      "dimension": "NO_FUNCIONALES",
+      "question": "Bajo esa carga, ¿qué tiempo de respuesta debe tener la creación de una oferta y el registro de su aceptación en el servidor?",
+      "decisionTopic": "Latencia de asignación",
+      "reason": "Definir latencia de asignación y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Bajo la carga elegida, al menos el 95 % de creaciones de oferta y aceptaciones válidas se confirma en servidor en 2 segundos o menos. Se comprueban conflictos y no se declara éxito antes de guardar; los tiempos de red del usuario se informan aparte.",
+      "decisionRefs": [
+        "D-V3-Q-093"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-093",
+        "sourceAnswerPointer": "/questions/46",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-093-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "95 % en 2 segundos o menos",
+        "answeredAtClientReported": "2026-10-11T17:18:13.817Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "PENDIENTE_VERIFICACION"
+    },
+    {
+      "id": "Q-094",
+      "moduleId": "MOD-NFR",
+      "dimension": "NO_FUNCIONALES",
+      "question": "¿Cuál es la duración máxima aceptable de una interrupción de plataforma durante el horario operativo, sin modo offline?",
+      "decisionTopic": "Disponibilidad objetivo",
+      "reason": "Definir disponibilidad objetivo y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "El objetivo es recuperar una interrupción ordinaria en máximo 30 minutos dentro del horario operativo. Al detectarla se comunica estado y se suspenden acciones nuevas; no se acumulan inicios o aceptaciones offline. Superar el umbral exige decisión operativa de ADMIN.",
+      "decisionRefs": [
+        "D-V3-Q-094"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-094",
+        "sourceAnswerPointer": "/questions/47",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-094-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Hasta 30 minutos por interrupción",
+        "answeredAtClientReported": "2026-10-11T17:18:24.673Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "PENDIENTE_VERIFICACION"
+    },
+    {
+      "id": "Q-095",
+      "moduleId": "MOD-NFR",
+      "dimension": "NO_FUNCIONALES",
+      "question": "Si se pierde el servidor, ¿cuál es el tiempo máximo objetivo para recuperar la operación?",
+      "decisionTopic": "Objetivo de recuperación RTO",
+      "reason": "Definir objetivo de recuperación rto y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Tras pérdida total del servidor, el objetivo es restaurar datos y servicio en 4 horas desde la detección. Se prepara un procedimiento y se prueba con respaldo real en recursos sin gasto; si no se alcanza, no se promete ese plazo.",
+      "decisionRefs": [
+        "D-V3-Q-095"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-095",
+        "sourceAnswerPointer": "/questions/48",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-095-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Recuperar en 4 horas",
+        "answeredAtClientReported": "2026-10-11T17:18:38.529Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "PENDIENTE_VERIFICACION"
+    },
+    {
+      "id": "Q-096",
+      "moduleId": "MOD-NFR",
+      "dimension": "NO_FUNCIONALES",
+      "question": "Ante un fallo, ¿cuánto historial reciente como máximo sería aceptable perder y con qué frecuencia deben existir respaldos?",
+      "decisionTopic": "Objetivo de recuperación RPO",
+      "reason": "Definir objetivo de recuperación rpo y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Objetivo de pérdida máxima: 1 hora. Se generan respaldos o incrementos al menos cada hora, cifrados y recuperables fuera del servidor original, con comprobación diaria y prueba de restauración. Se verifica cuota y espacio sin nuevos gastos antes de afirmar cumplimiento.",
+      "decisionRefs": [
+        "D-V3-Q-096"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-096",
+        "sourceAnswerPointer": "/questions/49",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-096-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Máximo 1 hora de datos",
+        "answeredAtClientReported": "2026-10-11T17:21:19.392Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "PENDIENTE_VERIFICACION"
+    },
+    {
+      "id": "Q-097",
+      "moduleId": "MOD-NFR",
+      "dimension": "NO_FUNCIONALES",
+      "question": "¿Cuál es la versión más antigua de Android que usan realmente los conductores del piloto?",
+      "decisionTopic": "Compatibilidad móvil",
+      "reason": "Definir compatibilidad móvil y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Se toma Android 10 como mínimo provisional de producto, condicionado a confirmar que todos los conductores del piloto cumplen y que el stack funciona. Si hay equipos inferiores se vuelve a evaluar; no se promete soporte hasta probar.",
+      "decisionRefs": [
+        "D-V3-Q-097"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-097",
+        "sourceAnswerPointer": "/questions/50",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-097-B",
+        "selectedOptionRank": 2,
+        "selectedOptionLabel": "Objetivo provisional Android 10 o superior",
+        "answeredAtClientReported": "2026-10-11T17:21:36.865Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "PENDIENTE_VERIFICACION"
+    },
+    {
+      "id": "Q-098",
+      "moduleId": "MOD-NFR",
+      "dimension": "NO_FUNCIONALES",
+      "question": "¿Qué navegadores y resoluciones usa el ADMIN para el CRM?",
+      "decisionTopic": "Compatibilidad CRM",
+      "reason": "Definir compatibilidad crm y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Objetivo inicial: Chrome y Edge en sus versiones estables vigentes al piloto, resolución útil desde 1280 × 720. Se registra la versión y se prueban tablas, zoom y formularios. El móvil usa la app del conductor; CRM completo en teléfono queda fuera del piloto.",
+      "decisionRefs": [
+        "D-V3-Q-098"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-098",
+        "sourceAnswerPointer": "/questions/51",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-098-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Chrome y Edge de escritorio, desde 1280 × 720",
+        "answeredAtClientReported": "2026-10-11T17:24:03.024Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "PENDIENTE_VERIFICACION"
+    },
+    {
+      "id": "Q-099",
+      "moduleId": "MOD-NFR",
+      "dimension": "NO_FUNCIONALES",
+      "question": "¿Qué necesidades de accesibilidad deben cubrirse en el MVP, incluida lectura, contraste, tamaño de texto y navegación por teclado en el CRM?",
+      "decisionTopic": "Accesibilidad objetivo",
+      "reason": "Definir accesibilidad objetivo y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "El MVP exige contraste legible, texto escalable, acciones que no dependan solo de color, etiquetas y errores claros, foco visible y navegación por teclado en CRM. La app respeta tamaño de texto y ofrece controles identificables; se prueban los flujos críticos con lector de pantalla, sin declarar certificación.",
+      "decisionRefs": [
+        "D-V3-Q-099"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-099",
+        "sourceAnswerPointer": "/questions/52",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-099-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Accesibilidad base verificable",
+        "answeredAtClientReported": "2026-10-11T17:24:07.064Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "PENDIENTE_VERIFICACION"
+    }
+  ],
+  "newBusinessRules": [
+    {
+      "id": "BR-V3-Q-088",
+      "statement": "Tras las alertas críticas, la prioridad es resolver servicios próximos sin aceptación confirmada o que necesitan reasignación. Luego se muestran ofertas por vencer, incidencias e incorporación pendiente.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-UX",
+      "moduleRefs": [
+        "MOD-UX",
+        "MOD-ASG",
+        "MOD-INC"
+      ],
+      "questionRefs": [
+        "Q-088"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-088"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-088-01",
+        "AC-V3-Q-088-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-088"
+      ],
+      "backend": "Entregar al dashboard colas por criticidad, proximidad de inicio y asignación válida; mantener alertas de seguridad por encima de la prioridad ordinaria. No usar disponibilidad declarada como aceptación.",
+      "crm": "Tras alertas críticas, priorizar próximos servicios sin asignación válida/reasignación, luego ofertas por vencer, incidencias e incorporación.",
+      "app": "No altera el inicio móvil; mantiene correspondencia con estados del servidor.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-089",
+      "statement": "El servicio aceptado próximo a iniciar ocupa la tarjeta principal con su acción de inicio. La oferta pendiente aparece claramente con vencimiento y acciones de aceptar o rechazar, sin ocultar el compromiso existente.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-UX",
+      "moduleRefs": [
+        "MOD-UX",
+        "MOD-ASG",
+        "MOD-SRV"
+      ],
+      "questionRefs": [
+        "Q-089"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-089"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-089-01",
+        "AC-V3-Q-089-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-089"
+      ],
+      "backend": "Exponer servicio aceptado próximo y oferta pendiente con sus estados y deadlines independientes; volver a comprobar conflictos al aceptar.",
+      "crm": "Conservar la misma información operativa que utiliza la app sin fusionar oferta y servicio.",
+      "app": "Fijar servicio aceptado próximo en tarjeta principal con Iniciar; destacar oferta y vencimiento separados con aceptar/rechazar.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-090",
+      "statement": "CONDUCTOR puede cambiar preferencias de avisos, tamaño de texto y una foto de perfil opcional. Identidad, contacto verificado, correo y documentos usan solicitudes o flujos específicos con revisión o verificación; una foto nunca sustituye un documento.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-UX",
+      "moduleRefs": [
+        "MOD-UX",
+        "MOD-AUTH",
+        "MOD-DRV"
+      ],
+      "questionRefs": [
+        "Q-090"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-090"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-090-01",
+        "AC-V3-Q-090-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-090"
+      ],
+      "backend": "Permitir edición directa de preferencias de avisos/texto y foto de perfil opcional. Identidad, contacto verificado, correo y documentos usan sus procesos específicos; una foto no verifica documentos ni se convierte en foto de placa.",
+      "crm": "Gestionar solicitudes de cambios que requieren revisión; no tratar preferencias como nueva revisión documental.",
+      "app": "Editar preferencias y foto opcional; guiar cambios de identidad/correo/documentos al flujo correspondiente.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-092",
+      "statement": "Objetivo inicial: hasta 3 empresas, 30 CONDUCTOR y 3 ADMIN conectados simultáneamente en total, además de 1 SUPER_ADMIN. No se promete esta capacidad antes de una prueba con servicios y GPS según los intervalos elegidos.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-NFR",
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-ORG",
+        "MOD-ASG",
+        "MOD-GPS"
+      ],
+      "questionRefs": [
+        "Q-092"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-092"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-092-01",
+        "AC-V3-Q-092-02"
+      ],
+      "requirementRefs": [
+        "RNF-V3-Q-092"
+      ],
+      "backend": "Objetivo de carga: 3 empresas, 30 conductores y 3 ADMIN concurrentes en total más 1 SUPER_ADMIN. Medir con ofertas, concurrencia y GPS elegidos sobre recursos reales sin gasto; no declarar capacidad acreditada.",
+      "crm": "Validar funcionamiento de flujos críticos bajo la carga sin mostrar métricas internas innecesarias en el flujo operativo.",
+      "app": "Probar aceptación e inicio bajo carga junto con ubicación cada 30 segundos.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-093",
+      "statement": "Bajo la carga elegida, al menos el 95 % de creaciones de oferta y aceptaciones válidas se confirma en servidor en 2 segundos o menos. Se comprueban conflictos y no se declara éxito antes de guardar; los tiempos de red del usuario se informan aparte.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-NFR",
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-ASG"
+      ],
+      "questionRefs": [
+        "Q-093"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-093"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-093-01",
+        "AC-V3-Q-093-02"
+      ],
+      "requirementRefs": [
+        "RNF-V3-Q-093"
+      ],
+      "backend": "Objetivo p95 <=2 s desde recepción en servidor hasta confirmación durable de creación de oferta/aceptación bajo carga Q-092. Medir red y notificaciones aparte; no omitir transacciones, conflictos o auditoría.",
+      "crm": "Mostrar progreso, respuesta y recuperación de resultado sin duplicados si se pierde respuesta.",
+      "app": "Esperar confirmación del servidor antes de mostrar aceptación exitosa; consultar estado tras respuesta perdida.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-094",
+      "statement": "El objetivo es recuperar una interrupción ordinaria en máximo 30 minutos dentro del horario operativo. Al detectarla se comunica estado y se suspenden acciones nuevas; no se acumulan inicios o aceptaciones offline. Superar el umbral exige decisión operativa de ADMIN.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-NFR",
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-SRV"
+      ],
+      "questionRefs": [
+        "Q-094"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-094"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-094-01",
+        "AC-V3-Q-094-02"
+      ],
+      "requirementRefs": [
+        "RNF-V3-Q-094"
+      ],
+      "backend": "Objetivo de interrupción ordinaria <=30 min durante horario operativo del piloto, aún por concretar. Detectar y comunicar fallo; no aceptar ni encolar acciones offline.",
+      "crm": "Mostrar indisponibilidad y coordinar decisión operativa si se supera el umbral.",
+      "app": "Mantener mensaje de desconexión y bloquear acciones que requieren servidor sin simular inicios offline.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-095",
+      "statement": "Tras pérdida total del servidor, el objetivo es restaurar datos y servicio en 4 horas desde la detección. Se prepara un procedimiento y se prueba con respaldo real en recursos sin gasto; si no se alcanza, no se promete ese plazo.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-NFR",
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-AUD"
+      ],
+      "questionRefs": [
+        "Q-095"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-095"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-095-01",
+        "AC-V3-Q-095-02"
+      ],
+      "requirementRefs": [
+        "RNF-V3-Q-095"
+      ],
+      "backend": "Objetivo RTO <=4 h desde detectar pérdida total hasta operación restaurada y comprobada. Preparar y probar respaldo y destino dentro de recursos sin gasto.",
+      "crm": "Comunicar recuperación de pérdida total y verificar operación antes de reabrir acciones.",
+      "app": "Reconectar a operación comprobada y consultar compromisos vigentes sin reproducir acciones offline.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-096",
+      "statement": "Objetivo de pérdida máxima: 1 hora. Se generan respaldos o incrementos al menos cada hora, cifrados y recuperables fuera del servidor original, con comprobación diaria y prueba de restauración. Se verifica cuota y espacio sin nuevos gastos antes de afirmar cumplimiento.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-NFR",
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-AUD",
+        "MOD-GPS"
+      ],
+      "questionRefs": [
+        "Q-096"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-096"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-096-01",
+        "AC-V3-Q-096-02"
+      ],
+      "requirementRefs": [
+        "RNF-V3-Q-096"
+      ],
+      "backend": "Objetivo RPO <=1 h con respaldos/incrementos al menos horarios, cifrados y recuperables fuera del servidor, comprobación diaria y restauración probada. Definir cuotas, retención y acceso sin pagos.",
+      "crm": "Administración supervisa respaldo y fallos; no añadir al CONDUCTOR detalles de infraestructura.",
+      "app": "No añade acciones del conductor; conservar coherencia de estados recuperados.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-097",
+      "statement": "Se toma Android 10 como mínimo provisional de producto, condicionado a confirmar que todos los conductores del piloto cumplen y que el stack funciona. Si hay equipos inferiores se vuelve a evaluar; no se promete soporte hasta probar.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-NFR",
+      "moduleRefs": [
+        "MOD-NFR"
+      ],
+      "questionRefs": [
+        "Q-097"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-097"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-097-01",
+        "AC-V3-Q-097-02"
+      ],
+      "requirementRefs": [
+        "RNF-V3-Q-097"
+      ],
+      "backend": "Mantener Android 10 como mínimo provisional de producto. Inventariar equipos y verificar stack/permisos/seguridad antes de declararlo soportado.",
+      "crm": "Registrar equipos del piloto y casos incompatibles para planificación, no como estado de rechazo del conductor.",
+      "app": "Probar flujos críticos, permisos y GPS en Android 10 y versiones superiores presentes en el piloto.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-098",
+      "statement": "Objetivo inicial: Chrome y Edge en sus versiones estables vigentes al piloto, resolución útil desde 1280 × 720. Se registra la versión y se prueban tablas, zoom y formularios. El móvil usa la app del conductor; CRM completo en teléfono queda fuera del piloto.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-NFR",
+      "moduleRefs": [
+        "MOD-NFR"
+      ],
+      "questionRefs": [
+        "Q-098"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-098"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-098-01",
+        "AC-V3-Q-098-02"
+      ],
+      "requirementRefs": [
+        "RNF-V3-Q-098"
+      ],
+      "backend": "Objetivo CRM: Chrome/Edge estables al piloto, área útil >=1280×720. Registrar versiones y probar compatibilidad; CRM completo en teléfono queda fuera del piloto.",
+      "crm": "Validar tablas, zoom, foco y formularios en navegadores y área útil elegidos.",
+      "app": "La app CONDUCTOR conserva su alcance separado; no asumir CRM completo en móvil.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-099",
+      "statement": "El MVP exige contraste legible, texto escalable, acciones que no dependan solo de color, etiquetas y errores claros, foco visible y navegación por teclado en CRM. La app respeta tamaño de texto y ofrece controles identificables; se prueban los flujos críticos con lector de pantalla, sin declarar certificación.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-NFR",
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-UX"
+      ],
+      "questionRefs": [
+        "Q-099"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-099"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-099-01",
+        "AC-V3-Q-099-02"
+      ],
+      "requirementRefs": [
+        "RNF-V3-Q-099"
+      ],
+      "backend": "Definir pruebas de accesibilidad de flujos críticos sin afirmar certificación; datos/errores deben permitir etiquetas y orden comprensibles.",
+      "crm": "Contraste legible, texto escalable, foco visible, teclado, etiquetas/errores claros y lector de pantalla en flujos críticos; respetar Stitch con correcciones justificadas.",
+      "app": "Respetar tamaño de texto, controles identificables y lectura/contraste en flujos críticos; no depender solo de color.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    }
+  ],
+  "nonFunctionalRequirements": [
+    {
+      "id": "RNF-V2-008",
+      "statement": "Objetivos de carga, respuesta, interrupción, RTO y RPO definidos en Q-092 a Q-096; su cumplimiento exige pruebas con recursos reales sin desembolsos.",
+      "status": "CONFIRMADA_USUARIO",
+      "moduleRefs": [
+        "MOD-NFR"
+      ],
+      "questionRefs": [
+        "Q-092",
+        "Q-093",
+        "Q-094",
+        "Q-095",
+        "Q-096"
+      ],
+      "metric": null,
+      "implementationStatus": "NO_REVISADA",
+      "decisionRefs": [
+        "D-V3-Q-092",
+        "D-V3-Q-093",
+        "D-V3-Q-094",
+        "D-V3-Q-095",
+        "D-V3-Q-096"
+      ],
+      "verificationStatus": "PENDIENTE_PRUEBA"
+    },
+    {
+      "id": "RNF-V3-Q-092",
+      "statement": "Objetivo inicial: hasta 3 empresas, 30 CONDUCTOR y 3 ADMIN conectados simultáneamente en total, además de 1 SUPER_ADMIN. No se promete esta capacidad antes de una prueba con servicios y GPS según los intervalos elegidos.",
+      "status": "CONFIRMADA_USUARIO",
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-ORG",
+        "MOD-ASG",
+        "MOD-GPS"
+      ],
+      "questionRefs": [
+        "Q-092"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-092"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-092"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-092-01",
+        "AC-V3-Q-092-02"
+      ],
+      "backend": "Objetivo de carga: 3 empresas, 30 conductores y 3 ADMIN concurrentes en total más 1 SUPER_ADMIN. Medir con ofertas, concurrencia y GPS elegidos sobre recursos reales sin gasto; no declarar capacidad acreditada.",
+      "crm": "Validar funcionamiento de flujos críticos bajo la carga sin mostrar métricas internas innecesarias en el flujo operativo.",
+      "app": "Probar aceptación e inicio bajo carga junto con ubicación cada 30 segundos.",
+      "implementationStatus": "NO_REVISADA",
+      "verificationStatus": "PENDIENTE_PRUEBA",
+      "goalNotObservedCapability": true,
+      "designReference": "Mantener Google Stitch CRM/app como referencia; no se editaron ni midieron diseños en esta consolidación."
+    },
+    {
+      "id": "RNF-V3-Q-093",
+      "statement": "Bajo la carga elegida, al menos el 95 % de creaciones de oferta y aceptaciones válidas se confirma en servidor en 2 segundos o menos. Se comprueban conflictos y no se declara éxito antes de guardar; los tiempos de red del usuario se informan aparte.",
+      "status": "CONFIRMADA_USUARIO",
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-ASG"
+      ],
+      "questionRefs": [
+        "Q-093"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-093"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-093"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-093-01",
+        "AC-V3-Q-093-02"
+      ],
+      "backend": "Objetivo p95 <=2 s desde recepción en servidor hasta confirmación durable de creación de oferta/aceptación bajo carga Q-092. Medir red y notificaciones aparte; no omitir transacciones, conflictos o auditoría.",
+      "crm": "Mostrar progreso, respuesta y recuperación de resultado sin duplicados si se pierde respuesta.",
+      "app": "Esperar confirmación del servidor antes de mostrar aceptación exitosa; consultar estado tras respuesta perdida.",
+      "implementationStatus": "NO_REVISADA",
+      "verificationStatus": "PENDIENTE_PRUEBA",
+      "goalNotObservedCapability": true,
+      "designReference": "Mantener Google Stitch CRM/app como referencia; no se editaron ni midieron diseños en esta consolidación."
+    },
+    {
+      "id": "RNF-V3-Q-094",
+      "statement": "El objetivo es recuperar una interrupción ordinaria en máximo 30 minutos dentro del horario operativo. Al detectarla se comunica estado y se suspenden acciones nuevas; no se acumulan inicios o aceptaciones offline. Superar el umbral exige decisión operativa de ADMIN.",
+      "status": "CONFIRMADA_USUARIO",
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-SRV"
+      ],
+      "questionRefs": [
+        "Q-094"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-094"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-094"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-094-01",
+        "AC-V3-Q-094-02"
+      ],
+      "backend": "Objetivo de interrupción ordinaria <=30 min durante horario operativo del piloto, aún por concretar. Detectar y comunicar fallo; no aceptar ni encolar acciones offline.",
+      "crm": "Mostrar indisponibilidad y coordinar decisión operativa si se supera el umbral.",
+      "app": "Mantener mensaje de desconexión y bloquear acciones que requieren servidor sin simular inicios offline.",
+      "implementationStatus": "NO_REVISADA",
+      "verificationStatus": "PENDIENTE_PRUEBA",
+      "goalNotObservedCapability": true,
+      "designReference": "Mantener Google Stitch CRM/app como referencia; no se editaron ni midieron diseños en esta consolidación."
+    },
+    {
+      "id": "RNF-V3-Q-095",
+      "statement": "Tras pérdida total del servidor, el objetivo es restaurar datos y servicio en 4 horas desde la detección. Se prepara un procedimiento y se prueba con respaldo real en recursos sin gasto; si no se alcanza, no se promete ese plazo.",
+      "status": "CONFIRMADA_USUARIO",
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-AUD"
+      ],
+      "questionRefs": [
+        "Q-095"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-095"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-095"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-095-01",
+        "AC-V3-Q-095-02"
+      ],
+      "backend": "Objetivo RTO <=4 h desde detectar pérdida total hasta operación restaurada y comprobada. Preparar y probar respaldo y destino dentro de recursos sin gasto.",
+      "crm": "Comunicar recuperación de pérdida total y verificar operación antes de reabrir acciones.",
+      "app": "Reconectar a operación comprobada y consultar compromisos vigentes sin reproducir acciones offline.",
+      "implementationStatus": "NO_REVISADA",
+      "verificationStatus": "PENDIENTE_PRUEBA",
+      "goalNotObservedCapability": true,
+      "designReference": "Mantener Google Stitch CRM/app como referencia; no se editaron ni midieron diseños en esta consolidación."
+    },
+    {
+      "id": "RNF-V3-Q-096",
+      "statement": "Objetivo de pérdida máxima: 1 hora. Se generan respaldos o incrementos al menos cada hora, cifrados y recuperables fuera del servidor original, con comprobación diaria y prueba de restauración. Se verifica cuota y espacio sin nuevos gastos antes de afirmar cumplimiento.",
+      "status": "CONFIRMADA_USUARIO",
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-AUD",
+        "MOD-GPS"
+      ],
+      "questionRefs": [
+        "Q-096"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-096"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-096"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-096-01",
+        "AC-V3-Q-096-02"
+      ],
+      "backend": "Objetivo RPO <=1 h con respaldos/incrementos al menos horarios, cifrados y recuperables fuera del servidor, comprobación diaria y restauración probada. Definir cuotas, retención y acceso sin pagos.",
+      "crm": "Administración supervisa respaldo y fallos; no añadir al CONDUCTOR detalles de infraestructura.",
+      "app": "No añade acciones del conductor; conservar coherencia de estados recuperados.",
+      "implementationStatus": "NO_REVISADA",
+      "verificationStatus": "PENDIENTE_PRUEBA",
+      "goalNotObservedCapability": true,
+      "designReference": "Mantener Google Stitch CRM/app como referencia; no se editaron ni midieron diseños en esta consolidación."
+    },
+    {
+      "id": "RNF-V3-Q-097",
+      "statement": "Se toma Android 10 como mínimo provisional de producto, condicionado a confirmar que todos los conductores del piloto cumplen y que el stack funciona. Si hay equipos inferiores se vuelve a evaluar; no se promete soporte hasta probar.",
+      "status": "CONFIRMADA_USUARIO",
+      "moduleRefs": [
+        "MOD-NFR"
+      ],
+      "questionRefs": [
+        "Q-097"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-097"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-097"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-097-01",
+        "AC-V3-Q-097-02"
+      ],
+      "backend": "Mantener Android 10 como mínimo provisional de producto. Inventariar equipos y verificar stack/permisos/seguridad antes de declararlo soportado.",
+      "crm": "Registrar equipos del piloto y casos incompatibles para planificación, no como estado de rechazo del conductor.",
+      "app": "Probar flujos críticos, permisos y GPS en Android 10 y versiones superiores presentes en el piloto.",
+      "implementationStatus": "NO_REVISADA",
+      "verificationStatus": "PENDIENTE_PRUEBA",
+      "goalNotObservedCapability": true,
+      "designReference": "Mantener Google Stitch CRM/app como referencia; no se editaron ni midieron diseños en esta consolidación."
+    },
+    {
+      "id": "RNF-V3-Q-098",
+      "statement": "Objetivo inicial: Chrome y Edge en sus versiones estables vigentes al piloto, resolución útil desde 1280 × 720. Se registra la versión y se prueban tablas, zoom y formularios. El móvil usa la app del conductor; CRM completo en teléfono queda fuera del piloto.",
+      "status": "CONFIRMADA_USUARIO",
+      "moduleRefs": [
+        "MOD-NFR"
+      ],
+      "questionRefs": [
+        "Q-098"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-098"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-098"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-098-01",
+        "AC-V3-Q-098-02"
+      ],
+      "backend": "Objetivo CRM: Chrome/Edge estables al piloto, área útil >=1280×720. Registrar versiones y probar compatibilidad; CRM completo en teléfono queda fuera del piloto.",
+      "crm": "Validar tablas, zoom, foco y formularios en navegadores y área útil elegidos.",
+      "app": "La app CONDUCTOR conserva su alcance separado; no asumir CRM completo en móvil.",
+      "implementationStatus": "NO_REVISADA",
+      "verificationStatus": "PENDIENTE_PRUEBA",
+      "goalNotObservedCapability": true,
+      "designReference": "Mantener Google Stitch CRM/app como referencia; no se editaron ni midieron diseños en esta consolidación."
+    },
+    {
+      "id": "RNF-V3-Q-099",
+      "statement": "El MVP exige contraste legible, texto escalable, acciones que no dependan solo de color, etiquetas y errores claros, foco visible y navegación por teclado en CRM. La app respeta tamaño de texto y ofrece controles identificables; se prueban los flujos críticos con lector de pantalla, sin declarar certificación.",
+      "status": "CONFIRMADA_USUARIO",
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-UX"
+      ],
+      "questionRefs": [
+        "Q-099"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-099"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-099"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-099-01",
+        "AC-V3-Q-099-02"
+      ],
+      "backend": "Definir pruebas de accesibilidad de flujos críticos sin afirmar certificación; datos/errores deben permitir etiquetas y orden comprensibles.",
+      "crm": "Contraste legible, texto escalable, foco visible, teclado, etiquetas/errores claros y lector de pantalla en flujos críticos; respetar Stitch con correcciones justificadas.",
+      "app": "Respetar tamaño de texto, controles identificables y lectura/contraste en flujos críticos; no depender solo de color.",
+      "implementationStatus": "NO_REVISADA",
+      "verificationStatus": "PENDIENTE_PRUEBA",
+      "goalNotObservedCapability": true,
+      "designReference": "Mantener Google Stitch CRM/app como referencia; no se editaron ni midieron diseños en esta consolidación."
+    }
+  ],
+  "acceptanceCriteria": [
+    {
+      "id": "AC-V3-Q-088-01",
+      "criterion": "Un servicio próximo sin aceptación aparece antes que incorporación ordinaria, después de alertas críticas.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-088"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-088"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-088"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-088-02",
+      "criterion": "Un contador de ofertas pendientes no se presenta como servicios ya cubiertos.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-088"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-088"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-088"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-089-01",
+      "criterion": "La oferta visible no oculta el servicio aceptado próximo ni su acceso a inicio.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-089"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-089"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-089"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-089-02",
+      "criterion": "Aceptar una oferta no inicia servicio ni permite solapamiento con uno ya confirmado.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-089"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-089"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-089"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-090-01",
+      "criterion": "Cambiar tamaño de texto o foto opcional no cambia estado principal del conductor.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-090"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-090"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-090"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-090-02",
+      "criterion": "Editar perfil no cambia libremente correo verificado, identidad o documentación aprobada.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-090"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-090"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-090"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-092-01",
+      "criterion": "La prueba futura representa 3 empresas y la concurrencia total acordada, con aislamiento.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-092"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-092"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-092"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-092-02",
+      "criterion": "Elegir el objetivo no se registra como una prueba pasada ni permite contratar infraestructura de pago.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-092"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-092"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-092"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-093-01",
+      "criterion": "La prueba futura mide percentil 95 del procesamiento durable en servidor.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-093"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-093"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-093"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-093-02",
+      "criterion": "Un acuse previo al guardado o un envío push no se usa para cumplir el tiempo de aceptación.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-093"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-093"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-093"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-094-01",
+      "criterion": "El objetivo de interrupción ordinaria es 30 minutos y la medición distingue pérdida total.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-094"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-094"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-094"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-094-02",
+      "criterion": "Durante caída no se confirma ni se encola offline una aceptación o inicio.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-094"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-094"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-094"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-095-01",
+      "criterion": "El ensayo futuro cronometra recuperación completa desde la detección hasta comprobación.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-095"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-095"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-095"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-095-02",
+      "criterion": "Un servidor levantado sin datos íntegros no se considera recuperación cumplida.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-095"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-095"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-095"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-096-01",
+      "criterion": "Un respaldo recuperable fuera del servidor limita pérdida objetivo a una hora en el ensayo.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-096"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-096"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-096"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-096-02",
+      "criterion": "Una copia en el mismo servidor o un archivo ilegible no cumple el respaldo acordado.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-096"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-096"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-096"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-097-01",
+      "criterion": "Android 10 queda registrado como objetivo provisional pendiente de pruebas.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-097"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-097"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-097"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-097-02",
+      "criterion": "Elegirlo no acredita soporte del stack ni justifica afirmar que todos los equipos del piloto lo cumplen.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-097"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-097"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-097"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-098-01",
+      "criterion": "La prueba futura usa versiones concretas de Chrome/Edge y área útil mínima acordada.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-098"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-098"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-098"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-098-02",
+      "criterion": "No se promete Safari, tablet o CRM completo en teléfono por esta elección.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-098"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-098"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-098"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-099-01",
+      "criterion": "Las pruebas futuras cubren teclado, escala, lector de pantalla y contraste de flujos críticos.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-099"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-099"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-099"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-099-02",
+      "criterion": "Una paleta observada en Stitch o pruebas automáticas aisladas no acreditan accesibilidad completa.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-099"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-099"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-099"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    }
+  ],
+  "verificationTasks": [
+    {
+      "id": "VT-V3-Q-092-01",
+      "statement": "Ejecutar prueba representativa de concurrencia, aislamiento, ofertas y GPS con los recursos reales.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-092"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-092"
+      ],
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-ORG",
+        "MOD-ASG",
+        "MOD-GPS"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-Q-093-01",
+      "statement": "Medir el percentil bajo la carga de Q-092; elegir el objetivo no acredita rendimiento.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-093"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-093"
+      ],
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-ASG"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-Q-094-01",
+      "statement": "Definir horario operativo del piloto y comprobar el objetivo. La recuperación de pérdida total se decide en Q-095.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-094"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-094"
+      ],
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-SRV"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-Q-095-01",
+      "statement": "Definir quién ejecuta la restauración y realizar un ensayo completo con tiempos registrados.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-095"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-095"
+      ],
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-AUD"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-Q-096-01",
+      "statement": "Definir retención de respaldos compatible con borrado de datos personales y comprobar restauración e integridad.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-096"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-096"
+      ],
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-AUD",
+        "MOD-GPS"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-Q-097-01",
+      "statement": "Recoger el inventario real y verificar las versiones vigentes de Flutter, librerías y requisitos de seguridad.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-097"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-097"
+      ],
+      "moduleRefs": [
+        "MOD-NFR"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-Q-098-01",
+      "statement": "Recoger navegador, versión, tamaño útil y zoom de los ADMIN del piloto y probar las combinaciones acordadas.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-098"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-098"
+      ],
+      "moduleRefs": [
+        "MOD-NFR"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-Q-099-01",
+      "statement": "Probar los flujos críticos con teclado, escalado y lector de pantalla; verificar los criterios del alcance elegido.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-099"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-099"
+      ],
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-UX"
+      ],
+      "evidence": null
+    }
+  ],
+  "laterDecisions": "Pilot creation limits1/4/20, five reference organizations with at least one not operating, all GPS max7d, no offline, prior local closure addenda and PII masking remain authoritative. CAP-L08-01 pending; do not silently reduce Q092."
+}

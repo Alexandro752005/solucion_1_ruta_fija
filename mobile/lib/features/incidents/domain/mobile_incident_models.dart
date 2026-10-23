@@ -2,6 +2,15 @@ enum MobileIncidentCategory {
   averia('AVERIA', 'Avería'),
   accidente('ACCIDENTE', 'Accidente'),
   retraso('RETRASO', 'Retraso'),
+  licenciaVencida('LICENCIA_VENCIDA', 'Vencimiento de licencia'),
+  imposibilidadServicio('IMPOSIBILIDAD_SERVICIO', 'Imposibilidad de servicio'),
+  ubicacionNoCorroborada(
+    'UBICACION_NO_CORROBORADA',
+    'Ubicación no corroborada',
+  ),
+  riesgoSeguridad('RIESGO_SEGURIDAD', 'Riesgo de seguridad'),
+  accesoParada('ACCESO_PARADA', 'Problema de acceso a la parada'),
+  falloPlataforma('FALLO_PLATAFORMA', 'Fallo técnico de la plataforma'),
   otro('OTRO', 'Otro');
 
   const MobileIncidentCategory(this.apiValue, this.label);
@@ -15,6 +24,23 @@ enum MobileIncidentCategory {
       orElse: () => throw FormatException('Categoría de incidencia inválida.'),
     );
   }
+}
+
+enum MobileIncidentSeverity {
+  unassessed('UNASSESSED', 'Sin evaluar'),
+  low('LOW', 'Baja'),
+  medium('MEDIUM', 'Media'),
+  high('HIGH', 'Alta'),
+  critical('CRITICAL', 'Crítica');
+
+  const MobileIncidentSeverity(this.apiValue, this.label);
+  final String apiValue, label;
+  static MobileIncidentSeverity fromApi(Object? value) => value == null
+      ? unassessed
+      : values.firstWhere(
+          (s) => s.apiValue == value,
+          orElse: () => throw const FormatException('Gravedad inválida.'),
+        );
 }
 
 enum MobileIncidentStatus {
@@ -38,7 +64,8 @@ enum MobileIncidentStatus {
 
 enum MobileIncidentSource {
   mobileApp('MOBILE_APP', 'Aplicación móvil'),
-  crmWeb('CRM_WEB', 'CRM');
+  crmWeb('CRM_WEB', 'CRM'),
+  system('SYSTEM', 'Sistema');
 
   const MobileIncidentSource(this.apiValue, this.label);
 
@@ -76,6 +103,11 @@ final class MobileIncident {
     required this.driverClosedAt,
     required this.createdAt,
     required this.updatedAt,
+    this.severity = MobileIncidentSeverity.unassessed,
+    this.responsibleAdminId,
+    this.previousIncidentId,
+    this.relationReason,
+    this.operationalEffect = 'NO_INTERRUPTION_RECORDED',
   });
 
   final String id;
@@ -87,7 +119,7 @@ final class MobileIncident {
   final MobileIncidentSource source;
   final MobileIncidentStatus status;
   final String description;
-  final String reportedById;
+  final String? reportedById;
   final String reportedByName;
   final DateTime reportedAt;
   final String? followUpNote;
@@ -99,6 +131,12 @@ final class MobileIncident {
   final DateTime? driverClosedAt;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final MobileIncidentSeverity severity;
+  final String? responsibleAdminId, previousIncidentId, relationReason;
+  final String operationalEffect;
+  bool get isClosed =>
+      status == MobileIncidentStatus.resolved ||
+      status == MobileIncidentStatus.driverClosed;
 
   bool get wasClosedByDriver => status == MobileIncidentStatus.driverClosed;
 
@@ -140,6 +178,11 @@ final class MobileIncident {
       driverClosedAt: closedAt.toUtc(),
       createdAt: createdAt,
       updatedAt: closedAt.toUtc(),
+      severity: severity,
+      responsibleAdminId: responsibleAdminId,
+      previousIncidentId: previousIncidentId,
+      relationReason: relationReason,
+      operationalEffect: operationalEffect,
     );
   }
 
@@ -154,7 +197,9 @@ final class MobileIncident {
       source: MobileIncidentSource.fromApi(json['source']),
       status: MobileIncidentStatus.fromApi(json['status']),
       description: _requiredText(json['description'], 'description'),
-      reportedById: _requiredText(json['reportedById'], 'reportedById'),
+      reportedById: json['source'] == 'SYSTEM'
+          ? _optionalText(json['reportedById'])
+          : _requiredText(json['reportedById'], 'reportedById'),
       reportedByName: _requiredText(json['reportedByName'], 'reportedByName'),
       reportedAt: _requiredDate(json['reportedAt'], 'reportedAt'),
       followUpNote: _optionalText(json['followUpNote']),
@@ -166,8 +211,53 @@ final class MobileIncident {
       driverClosedAt: _optionalDate(json['driverClosedAt']),
       createdAt: _requiredDate(json['createdAt'], 'createdAt'),
       updatedAt: _requiredDate(json['updatedAt'], 'updatedAt'),
+      severity: MobileIncidentSeverity.fromApi(json['severity']),
+      responsibleAdminId: _optionalText(json['responsibleAdminId']),
+      previousIncidentId: _optionalText(json['previousIncidentId']),
+      relationReason: _optionalText(json['relationReason']),
+      operationalEffect:
+          json['operationalEffect'] as String? ?? 'NO_INTERRUPTION_RECORDED',
     );
   }
+}
+
+final class MobileIncidentAction {
+  const MobileIncidentAction({
+    required this.operationKey,
+    required this.actorId,
+    required this.kind,
+    required this.detail,
+    required this.recordedAt,
+    required this.resultingVersion,
+  });
+  final String operationKey, actorId, kind;
+  final Map<String, dynamic> detail;
+  final DateTime recordedAt;
+  final int resultingVersion;
+  factory MobileIncidentAction.fromJson(Map<String, dynamic> j) =>
+      MobileIncidentAction(
+        operationKey: j['operationKey'] as String,
+        actorId: j['actorId'] as String,
+        kind: j['kind'] as String,
+        detail: Map<String, dynamic>.from(j['detail'] as Map),
+        recordedAt: DateTime.parse(j['recordedAt'] as String),
+        resultingVersion: (j['resultingVersion'] as num).toInt(),
+      );
+}
+
+final class MobileIncidentOperation {
+  const MobileIncidentOperation({
+    required this.operationKey,
+    required this.incidentId,
+    required this.kind,
+  });
+  final String operationKey, incidentId, kind;
+  factory MobileIncidentOperation.fromJson(Map<String, dynamic> j) =>
+      MobileIncidentOperation(
+        operationKey: j['operationKey'] as String,
+        incidentId: j['incidentId'] as String,
+        kind: j['kind'] as String,
+      );
 }
 
 final class MobileIncidentPage {

@@ -1,0 +1,113 @@
+{
+  "result": "PASS_ARCHIVED_AND_READ_ONLY_POSTFLIGHT",
+  "runId": "6b496135-b86b-4c5b-938f-a60ddcfe32db",
+  "source": "docs/evidencia/L-07/conectado-6b496135-b86b-4c5b-938f-a60ddcfe32db/resultado.json",
+  "sourceSha256": "bec6a165e9f188d9da3079319489cf058d35d77eef5b0a5e89b29813b2a5e7f8",
+  "stages": [
+    "CASE_SERVICES",
+    "FLUTTER_HOME",
+    "FLUTTER_PREFERENCES",
+    "CRM_DASHBOARD",
+    "CRM_PLATFORM",
+    "CRM_INITIAL_EMISSION",
+    "NORMAL_EXECUTION",
+    "NORMAL_TIME_CORRECTION",
+    "CRM_NEXT_EMISSION",
+    "FLUTTER_OWN_REPORT",
+    "EMISSION_HTTP_RACE",
+    "REPORT_SCOPE_DENIALS",
+    "SAME_BINARY_RETURN"
+  ],
+  "clientResults": [
+    {
+      "stage": "HOME",
+      "markers": [
+        "L07_CONNECTED_HOME=PASS_ACCEPTED_FIRST_PENDING_OFFER_SEPARATE_NO_AUTOMATIC_COMMAND",
+        "L07_CONNECTED_RESULT=PASS_PRODUCTION_WIDGET_REPOSITORY_HTTP_STAGE_HOME"
+      ],
+      "channel": "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+      "at": "2026-10-21T17:11:53.914983900Z"
+    },
+    {
+      "stage": "PREFERENCES",
+      "markers": [
+        "L07_CONNECTED_PREFERENCES=PASS_OWN_SERVER_PERSISTENCE_MANDATORY_NOTICES_UNCHANGED",
+        "L07_CONNECTED_RESULT=PASS_PRODUCTION_WIDGET_REPOSITORY_HTTP_STAGE_PREFERENCES"
+      ],
+      "channel": "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+      "at": "2026-10-21T17:12:00.935116700Z"
+    },
+    {
+      "stage": "DASHBOARD",
+      "markers": [
+        "CONNECTED_L07_CRM_DASHBOARD=PASS_ORDERED_TENANT_PRIORITY_QUEUES",
+        "CONNECTED_L07_CRM_RESULT=PASS_REAL_BROWSER_HTTP_TEST_DB"
+      ],
+      "channel": "REAL_CRM_BROWSER_HTTP",
+      "at": "2026-10-21T17:12:04.814347800Z"
+    },
+    {
+      "stage": "PLATFORM_AUDIT",
+      "markers": [
+        "CONNECTED_L07_CRM_PLATFORM=PASS_AGGREGATE_AND_PLATFORM_AUDIT_NO_TENANT_FALLBACK",
+        "CONNECTED_L07_CRM_RESULT=PASS_REAL_BROWSER_HTTP_TEST_DB"
+      ],
+      "channel": "REAL_CRM_BROWSER_HTTP",
+      "at": "2026-10-21T17:12:07.558945200Z"
+    },
+    {
+      "stage": "REPORT_BEFORE",
+      "markers": [
+        "CONNECTED_L07_CRM_ISSUE_RECOVERY=PASS_SAME_OPERATION_KEY_AFTER_LOST_RESPONSE",
+        "CONNECTED_L07_CRM_EXPORTS=PASS_CSV_XLSX_PDF_SAME_PERSISTED_ID_AND_SHA",
+        "CONNECTED_L07_CRM_FILE_HASHES=[{\"format\":\"csv\",\"size\":1618,\"sha256\":\"9b58033463a1740efa7e4b82532f023b09e846c57bbb99b01a0b96b6836b6c53\"},{\"format\":\"pdf\",\"size\":1742,\"sha256\":\"d3569ea6d2d2f3e5f9d01c76de28f6c36b77c16ef30640e61fcb7af2d8786275\"},{\"format\":\"xlsx\",\"size\":4688,\"sha256\":\"e12f712e1e928ef1a5be2f708a17bac71ace2922ff3dbd485d07c30a90ad0ccb\"}]",
+        "CONNECTED_L07_CRM_RESULT=PASS_REAL_BROWSER_HTTP_TEST_DB"
+      ],
+      "channel": "REAL_CRM_BROWSER_HTTP",
+      "at": "2026-10-21T17:12:12.508486800Z"
+    },
+    {
+      "stage": "REPORT_AFTER",
+      "markers": [
+        "CONNECTED_L07_CRM_VERSIONS=PASS_NEW_EMISSION_PREVIOUS_HASH_PRESERVED",
+        "CONNECTED_L07_CRM_EXPORTS=PASS_CSV_XLSX_PDF_SAME_PERSISTED_ID_AND_SHA",
+        "CONNECTED_L07_CRM_FILE_HASHES=[{\"format\":\"csv\",\"size\":1788,\"sha256\":\"2427f21f7bf84f909e7e69ea34968f073fad1c170c5b3b362689b25caae24220\"},{\"format\":\"pdf\",\"size\":1827,\"sha256\":\"fe44568e72a62d537a023ab1c3312d929ac96c13d2c7ab67011c006b287603e9\"},{\"format\":\"xlsx\",\"size\":4741,\"sha256\":\"fe06c401cceeb70720abeb1289a71f4c46a8b9fcd90a550be9e06403bcb0d819\"}]",
+        "CONNECTED_L07_CRM_RESULT=PASS_REAL_BROWSER_HTTP_TEST_DB"
+      ],
+      "channel": "REAL_CRM_BROWSER_HTTP",
+      "at": "2026-10-21T17:12:16.951112800Z"
+    },
+    {
+      "stage": "OWN_REPORT",
+      "markers": [
+        "L07_CONNECTED_OWN_REPORT=PASS_OWN_EMISSION_HTTP_CSV_XLSX_PDF_SAME_REFERENCE_ANDROID_SAVE_DOUBLE_ONLY",
+        "L07_CONNECTED_RESULT=PASS_PRODUCTION_WIDGET_REPOSITORY_HTTP_STAGE_OWN_REPORT"
+      ],
+      "channel": "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+      "at": "2026-10-21T17:12:29.401492900Z"
+    }
+  ],
+  "emissionRace": {
+    "startedAt": "2026-10-21T17:12:29.541383900Z",
+    "emissionId": "a5292963-5cd0-48ad-9d21-7269bf503c34",
+    "contentSha256": "de4d804c22e1738f49cbe408b2bf379a87aafc110e34243eb260ce5bc795e7df",
+    "secondStatus": 200,
+    "finishedAt": "2026-10-21T17:12:29.576962600Z",
+    "samePersistedBody": true,
+    "firstStatus": 200
+  },
+  "scopeResult": "PASS_SERVER_DENIALS_OWN_AND_PLATFORM_BOUNDARIES",
+  "returnResult": "PASS_SAME_BINARY_SCHEMA_RETAINED_NEW_REPORT_ROUTES_DISABLED_OWN_PROFILE_RETAINED",
+  "ledgerBefore": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 5
+  },
+  "ledgerAfter": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 6
+  },
+  "TEST_CLEANUP_RELEASED": true,
+  "finalAuditPatchBoundary": "The connected run precedes the final export-audit addition. That addition is verified by17 report MockMvc/PostgreSQL cases on final code; the connected run is not relabelled as a rerun of that patch. No client production code changed."
+}

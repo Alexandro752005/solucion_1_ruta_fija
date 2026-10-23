@@ -1,0 +1,342 @@
+{
+  "steps" : [ {
+    "sequence" : 1,
+    "name" : "CREATE_INACTIVE_ADMIN",
+    "method" : "POST",
+    "path" : "/api/v1/platform/admins",
+    "requestCorrelationId" : "2a25c56e-16b9-4a19-939a-56d51d8b7be7",
+    "sentAtUtc" : "2026-10-18T02:32:20.831277100Z",
+    "receivedAtUtc" : "2026-10-18T02:32:21.987511200Z",
+    "httpStatus" : 200,
+    "responseBodySha256" : "b327cc21515c4319bfa0e253b750fb0a5b9b0c55f5f124add123dc35680a8acb"
+  }, {
+    "sequence" : 2,
+    "name" : "CLAIM_AND_SET_PASSWORD",
+    "method" : "POST",
+    "path" : "/api/v1/admin-activation/claim",
+    "requestCorrelationId" : "d5c833a3-972f-4e7c-9885-4a62611abe12",
+    "sentAtUtc" : "2026-10-18T02:32:21.997511Z",
+    "receivedAtUtc" : "2026-10-18T02:32:22.793125800Z",
+    "httpStatus" : 200,
+    "responseBodySha256" : "5cebd626e65aa41578ef9fb846e08f5fbca0e9bc1dc17705e60f0979fd9e4cd0"
+  }, {
+    "sequence" : 3,
+    "name" : "SCOPED_STATUS",
+    "method" : "GET",
+    "path" : "/api/v1/admin-activation/status",
+    "requestCorrelationId" : "2f521af6-3a10-4c50-9753-7cbf76fbc7fb",
+    "sentAtUtc" : "2026-10-18T02:32:22.798124400Z",
+    "receivedAtUtc" : "2026-10-18T02:32:22.851122400Z",
+    "httpStatus" : 200,
+    "responseBodySha256" : "ded8f9f5d40ac15a66e53dc86504e41e28299a686cd082805108acbeaa90cb9c"
+  }, {
+    "sequence" : 4,
+    "name" : "BEGIN_SIMULATED_OTP",
+    "method" : "POST",
+    "path" : "/api/v1/admin-activation/otp/begin",
+    "requestCorrelationId" : "1536f060-23a7-4161-b68b-2887c1ddebde",
+    "sentAtUtc" : "2026-10-18T02:32:22.854123600Z",
+    "receivedAtUtc" : "2026-10-18T02:32:22.963640Z",
+    "httpStatus" : 200,
+    "responseBodySha256" : "c64bafdad3b863dcc9e4add6661a80d3f9b25a6390f70475a286c54e27d6d8ec"
+  }, {
+    "sequence" : 5,
+    "name" : "VERIFY_SIMULATED_OTP",
+    "method" : "POST",
+    "path" : "/api/v1/admin-activation/otp/verify",
+    "requestCorrelationId" : "dd6dec1a-bbb9-4ec4-bd07-aaf6f67e79e5",
+    "sentAtUtc" : "2026-10-18T02:32:22.971639600Z",
+    "receivedAtUtc" : "2026-10-18T02:32:23.073671700Z",
+    "httpStatus" : 200,
+    "responseBodySha256" : "6c3e19dc39cf562e9b3cf8060e8ab5580aae743731b80b5f9257d6c1a699d0ca"
+  }, {
+    "sequence" : 6,
+    "name" : "NEGATIVE_TERMS_GATE",
+    "method" : "POST",
+    "path" : "/api/v1/admin-activation/complete",
+    "requestCorrelationId" : "c0475b61-7fd7-46f3-a329-920415d3f74b",
+    "sentAtUtc" : "2026-10-18T02:32:23.081669300Z",
+    "receivedAtUtc" : "2026-10-18T02:32:23.149666800Z",
+    "httpStatus" : 409,
+    "serverCode" : "RESOURCE_CONFLICT",
+    "serverTimestamp" : "2026-10-18T02:32:23.127668400Z",
+    "responseBodySha256" : "136be4c587f01380cf9da2c6ff2a2618271d3e7f9270c895081c19f56cb5614a"
+  }, {
+    "sequence" : 7,
+    "name" : "READ_PUBLISHED_TERMS",
+    "method" : "GET",
+    "path" : "/api/v1/admin-activation/terms",
+    "requestCorrelationId" : "cba8e1e7-9bf7-4feb-a41e-d2b6e2f94e62",
+    "sentAtUtc" : "2026-10-18T02:32:23.155669600Z",
+    "receivedAtUtc" : "2026-10-18T02:32:23.209667600Z",
+    "httpStatus" : 200,
+    "responseBodySha256" : "97abd6a4ecb0689050fd74f2e9d12336623f9c0f19b5c812364527f118fd4afa"
+  }, {
+    "sequence" : 8,
+    "name" : "AUTOMATED_EXPLICIT_ACCEPTANCE",
+    "method" : "POST",
+    "path" : "/api/v1/admin-activation/terms",
+    "requestCorrelationId" : "b2a45d3a-1dcb-4215-a7a3-043c23fd1e4a",
+    "sentAtUtc" : "2026-10-18T02:32:23.210668500Z",
+    "receivedAtUtc" : "2026-10-18T02:32:23.291947Z",
+    "httpStatus" : 200,
+    "responseBodySha256" : "36e23995ddc45395908c3422aab0194a0d74c2ccd963d1dbc25c0a422cb8c206"
+  }, {
+    "sequence" : 9,
+    "name" : "POSITIVE_SAME_OPERATION",
+    "method" : "POST",
+    "path" : "/api/v1/admin-activation/complete",
+    "requestCorrelationId" : "cebd4a7b-8902-4785-9543-7cf356c66e28",
+    "sentAtUtc" : "2026-10-18T02:32:23.295947500Z",
+    "receivedAtUtc" : "2026-10-18T02:32:23.393405500Z",
+    "httpStatus" : 200,
+    "responseBodySha256" : "52a1b83a669265753d3de2b73b658c7a28c236163319af217c52b4e40f122a42"
+  }, {
+    "sequence" : 10,
+    "name" : "ORDINARY_LOGIN",
+    "method" : "POST",
+    "path" : "/api/v1/auth/login",
+    "requestCorrelationId" : "964a0353-b91c-4ac2-9609-53662dc5ce66",
+    "sentAtUtc" : "2026-10-18T02:32:23.409405800Z",
+    "receivedAtUtc" : "2026-10-18T02:32:23.759402300Z",
+    "httpStatus" : 200,
+    "responseBodySha256" : "e8b603292dd7baebc64ae2bf905ee5f44ff967e58e83f1d8cc792b1a3b23263b"
+  }, {
+    "sequence" : 11,
+    "name" : "ORDINARY_GROUPS_ALLOWED",
+    "method" : "GET",
+    "path" : "/api/v1/groups",
+    "requestCorrelationId" : "dc44f0ae-e407-4255-8ac1-043c7659127c",
+    "sentAtUtc" : "2026-10-18T02:32:23.762401100Z",
+    "receivedAtUtc" : "2026-10-18T02:32:23.834402Z",
+    "httpStatus" : 200,
+    "responseBodySha256" : "ec50d4dbc879ef930e74d8cef33e227d952e6923a8838ef3d1ded5e699f71bcc"
+  }, {
+    "sequence" : 12,
+    "name" : "SELECTIVE_REVOKE_AUTOMATED_ADMIN",
+    "method" : "POST",
+    "path" : "/api/v1/platform/admins/05f40f13-be6c-4166-91b7-ac7e400d7911/revoke",
+    "requestCorrelationId" : "1019f9f4-1e20-4281-8e30-fb1e13af654a",
+    "sentAtUtc" : "2026-10-18T02:32:23.876401800Z",
+    "receivedAtUtc" : "2026-10-18T02:32:23.945402900Z",
+    "httpStatus" : 200,
+    "responseBodySha256" : "da1487e6d94880824889202c0768208f58e02f3ecd7ae32feafed0faf400ee5b"
+  }, {
+    "sequence" : 13,
+    "name" : "REVOKED_AUTOMATED_SESSION_DENIED",
+    "method" : "GET",
+    "path" : "/api/v1/groups",
+    "requestCorrelationId" : "f38a1642-38d3-4b00-bf1f-9aca2d23c6c1",
+    "sentAtUtc" : "2026-10-18T02:32:23.954401900Z",
+    "receivedAtUtc" : "2026-10-18T02:32:23.977402800Z",
+    "httpStatus" : 403,
+    "serverCode" : "FORBIDDEN_ROLE",
+    "serverTimestamp" : "2026-10-18T02:32:23.974401Z",
+    "responseBodySha256" : "d3db79b865c622d3b1eaff0c4e82f49fdbc11ca127a93d1a2654664aaa7bbe49"
+  }, {
+    "sequence" : 14,
+    "name" : "REVOKED_AUTOMATED_SESSION_DENIED",
+    "method" : "GET",
+    "path" : "/api/v1/groups",
+    "requestCorrelationId" : "e6b0780e-4452-44b8-8c89-a1765829006a",
+    "sentAtUtc" : "2026-10-18T02:34:05.618466800Z",
+    "receivedAtUtc" : "2026-10-18T02:34:05.891093200Z",
+    "httpStatus" : 403,
+    "serverCode" : "FORBIDDEN_ROLE",
+    "serverTimestamp" : "2026-10-18T02:34:05.842461800Z",
+    "responseBodySha256" : "b82dd4d553e31f879cfb19be3cb04777f3b477a115caeb2c68573a4b6b3f2b78"
+  } ],
+  "runId" : "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "startedAtUtc" : "2026-10-18T02:32:20.500727400Z",
+  "executionOrigin" : "AUTOMATED_SYNTHETIC_ONLY",
+  "humanInterventionRepeated" : false,
+  "database" : "ruta_fija_test",
+  "databaseRole" : "rf_test",
+  "schema" : "V26",
+  "mail" : "SIMULATED_ONLY",
+  "externalSmtpAttempts" : 0,
+  "resendAttempts" : 0,
+  "realHttpServer" : true,
+  "mockMvcOrMockAuthentication" : false,
+  "superAdminCredentialSource" : "REAL_SIGNED_TOKEN_FROM_EXISTING_TEST_JWT_SERVICE_FOR_EXACT_SYNTHETIC_OWNER",
+  "normalAuthorizationFiltersAndBothGatesEnabled" : true,
+  "ownerId" : "088518c1-821c-4316-9f87-090f51ac44e0",
+  "organizationId" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+  "manualAdminId" : "92ebc07c-1319-4850-a734-f792cb299979",
+  "manualAcceptanceId" : "c496b63c-735f-48cc-be56-90f7ec1464e1",
+  "manualAcceptanceEvidence" : {
+    "path" : "docs/evidencia/L-01/ensayos-humanos-140c10a1-be0f-4d08-a6d4-c796e2ed107a/observacion-1792227077200.json",
+    "sha256" : "9319f045f65fd4ee61b9a07edec3000e5ea6ac0e75618d99e2c4896843b8a719"
+  },
+  "manualRecoveryEvidence" : {
+    "path" : "docs/evidencia/L-01/ensayos-humanos-140c10a1-be0f-4d08-a6d4-c796e2ed107a/observacion-1792287275662.json",
+    "sha256" : "e0a986d10e09f8fbb289061753b3e36759b0cae24e53731ede4bba8640d5fffb"
+  },
+  "approvedAdenda" : {
+    "path" : "docs/contratos/SC-L01-LOCAL-01-adenda-v1.1.0.md",
+    "sha256" : "b25e7f1e34a50c20daa6bdcfa21a33382b0a7d3b478068f3ea0003ed4ce8cc1b"
+  },
+  "before" : {
+    "database" : "ruta_fija_test",
+    "role" : "rf_test",
+    "schema" : "V26",
+    "historicalCreations" : {
+      "SUPER_ADMIN" : 1,
+      "ADMIN" : 2,
+      "CONDUCTOR" : 0
+    },
+    "remainingSlots" : {
+      "CONDUCTOR" : 20,
+      "SUPER_ADMIN" : 0,
+      "ADMIN" : 2
+    },
+    "superAdminAccounts" : 1,
+    "personIdentityBindings" : 2,
+    "personIdentityKeyRecorded" : true,
+    "recoveryCredentialPresent" : true,
+    "eligibleSyntheticPendingAdmins" : 0,
+    "termsAcceptanceCount" : 1,
+    "currentTerms" : {
+      "id" : "f590e228-5d2e-47e4-b144-b0df1198bd49",
+      "version" : "1.0.0",
+      "content_sha256" : "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+      "synthetic" : false
+    },
+    "publishedFileHashMatches" : true,
+    "cleanupLockHeld" : true
+  },
+  "creationRequestStarted" : true,
+  "automatedAdminId" : "05f40f13-be6c-4166-91b7-ac7e400d7911",
+  "activationId" : "83f9c824-1abe-43fe-bca8-7538be6de87c",
+  "otpBeginAttempted" : true,
+  "beforeAcceptanceNative" : [ {
+    "account_id" : "05f40f13-be6c-4166-91b7-ac7e400d7911",
+    "organization_id" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+    "active" : false,
+    "activation_id" : "83f9c824-1abe-43fe-bca8-7538be6de87c",
+    "status" : "IN_PROGRESS",
+    "password_set_at" : "2026-10-18T02:32:22.121+00:00",
+    "email_verified_at" : "2026-10-18T02:32:23.026+00:00",
+    "completed_at" : null,
+    "acceptance_id" : null,
+    "document_id" : null,
+    "document_version" : null,
+    "content_sha256" : null,
+    "accepted_at" : null,
+    "identity_verified" : true
+  } ],
+  "negativeGate" : {
+    "validActivationCapability" : true,
+    "code" : "RESOURCE_CONFLICT",
+    "reason" : "Falta la aceptacion expresa de los terminos aprobados actualmente vigentes.",
+    "serverTimestamp" : "2026-10-18T02:32:23.127668400Z",
+    "correlationId" : "c0475b61-7fd7-46f3-a329-920415d3f74b",
+    "httpStatus" : 409
+  },
+  "automatedAcceptanceOrigin" : "AUTOMATED_SYNTHETIC_ONLY_NOT_THE_HUMAN_OPERATOR",
+  "positiveGate" : {
+    "sameMethodAndPath" : true,
+    "httpStatus" : 200,
+    "status" : "COMPLETED"
+  },
+  "afterAcceptanceNative" : [ {
+    "account_id" : "05f40f13-be6c-4166-91b7-ac7e400d7911",
+    "organization_id" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+    "active" : true,
+    "activation_id" : "83f9c824-1abe-43fe-bca8-7538be6de87c",
+    "status" : "COMPLETED",
+    "password_set_at" : "2026-10-18T02:32:22.121+00:00",
+    "email_verified_at" : "2026-10-18T02:32:23.026+00:00",
+    "completed_at" : "2026-10-18T02:32:23.330+00:00",
+    "acceptance_id" : "7978c493-5501-4d09-a714-bd90dceda745",
+    "document_id" : "f590e228-5d2e-47e4-b144-b0df1198bd49",
+    "document_version" : "1.0.0",
+    "content_sha256" : "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+    "accepted_at" : "2026-10-18T02:32:23.265+00:00",
+    "identity_verified" : true
+  } ],
+  "negativeThenAcceptanceThenCompletionServerOrderVerified" : true,
+  "ordinaryLoginAndGroupsAllowed" : true,
+  "automatedOriginAudited" : true,
+  "nativeAutomatedOriginAudits" : [ {
+    "id" : "f6eecbbe-e1e9-4b3d-b9ed-bbae0582a099",
+    "entity_id" : "05f40f13-be6c-4166-91b7-ac7e400d7911",
+    "occurred_at" : "2026-10-18T02:32:23.842+00:00",
+    "action" : "L01_AUTOMATED_SYNTHETIC_GATE_VERIFIED",
+    "metadata" : "{\"runId\": \"140c10a1-be0f-4d08-a6d4-c796e2ed107a\", \"adenda\": \"SC-L01-LOCAL-01 1.1.0\", \"negativeHttp\": 409, \"positiveHttp\": 200, \"executionOrigin\": \"AUTOMATED_SYNTHETIC_ONLY\", \"manualAcceptanceIdPreserved\": \"c496b63c-735f-48cc-be56-90f7ec1464e1\"}"
+  } ],
+  "gateResult" : "PASS_AUTOMATED_REAL_HTTP_POSTGRESQL_SIMULATED_MAIL",
+  "beforeSelectiveCleanup" : {
+    "database" : "ruta_fija_test",
+    "role" : "rf_test",
+    "schema" : "V26",
+    "historicalCreations" : {
+      "SUPER_ADMIN" : 1,
+      "ADMIN" : 3,
+      "CONDUCTOR" : 0
+    },
+    "remainingSlots" : {
+      "CONDUCTOR" : 20,
+      "SUPER_ADMIN" : 0,
+      "ADMIN" : 1
+    },
+    "superAdminAccounts" : 1,
+    "personIdentityBindings" : 3,
+    "personIdentityKeyRecorded" : true,
+    "recoveryCredentialPresent" : true,
+    "eligibleSyntheticPendingAdmins" : 0,
+    "termsAcceptanceCount" : 2,
+    "currentTerms" : {
+      "id" : "f590e228-5d2e-47e4-b144-b0df1198bd49",
+      "version" : "1.0.0",
+      "content_sha256" : "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+      "synthetic" : false
+    },
+    "publishedFileHashMatches" : true,
+    "cleanupLockHeld" : true
+  },
+  "observedAtUtc" : "2026-10-18T02:34:05.920756300Z",
+  "result" : "PASS_AUTOMATED_SYNTHETIC_GATE_ONLY",
+  "lastFailureAtUtc" : "2026-10-18T02:32:23.979400700Z",
+  "lastFailureReason" : "AUTOGATE_HTTP_REVOKED_AUTOMATED_SESSION_DENIED_EXPECTED_401_ACTUAL_403",
+  "resumedAfterAuxiliaryCleanupExpectation" : true,
+  "noLifecycleOtpOrAcceptanceRepeatedDuringResume" : true,
+  "selectiveCleanup" : {
+    "manualAdminAndOwnerUnchanged" : true,
+    "result" : "PASS_ADDED_SYNTHETIC_ADMIN_DISABLED_SESSIONS_REVOKED",
+    "globalCleanupExecuted" : false,
+    "acceptancePreserved" : true,
+    "historicalLedgerPreserved" : true
+  },
+  "afterSelectiveCleanup" : {
+    "database" : "ruta_fija_test",
+    "role" : "rf_test",
+    "schema" : "V26",
+    "historicalCreations" : {
+      "SUPER_ADMIN" : 1,
+      "ADMIN" : 3,
+      "CONDUCTOR" : 0
+    },
+    "remainingSlots" : {
+      "ADMIN" : 1,
+      "SUPER_ADMIN" : 0,
+      "CONDUCTOR" : 20
+    },
+    "superAdminAccounts" : 1,
+    "personIdentityBindings" : 3,
+    "personIdentityKeyRecorded" : true,
+    "recoveryCredentialPresent" : true,
+    "eligibleSyntheticPendingAdmins" : 0,
+    "termsAcceptanceCount" : 2,
+    "currentTerms" : {
+      "id" : "f590e228-5d2e-47e4-b144-b0df1198bd49",
+      "version" : "1.0.0",
+      "content_sha256" : "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+      "synthetic" : false
+    },
+    "publishedFileHashMatches" : true,
+    "cleanupLockHeld" : true
+  },
+  "manualAcceptancePreserved" : true,
+  "SC03LocalResult" : "PASS_SC03_MANUAL_ACCEPTANCE_WITH_AUTOMATED_GATE"
+}

@@ -30,32 +30,44 @@ public record IncidentResponse(
         String driverClosedByName,
         Instant driverClosedAt,
         Instant createdAt,
-        Instant updatedAt
+        Instant updatedAt,
+        UUID executionSegmentId,
+        pe.rutafija.operation.domain.IncidentSeverity severity,
+        UUID responsibleAdminId,
+        UUID previousIncidentId,
+        String relationReason,
+        String operationalEffect
 ) {
     public static IncidentResponse from(Incident incident) {
+        return from(incident,false);
+    }
+    public static IncidentResponse from(Incident incident,boolean interruptionRecorded) {
         return new IncidentResponse(
                 incident.getId(),
                 incident.getVersion(),
                 incident.getDriver().getId(),
-                incident.getDriver().getFullName(),
+                pe.rutafija.shared.security.PersonalDataView.driver(incident.getDriver().getId()),
                 incident.getAssignment() == null ? null : incident.getAssignment().getId(),
                 incident.getCategory(),
                 incident.getSource(),
                 incident.getStatus(),
                 incident.getDescription(),
-                incident.getReportedBy().getId(),
-                incident.getReportedBy().getFullName(),
+                incident.getReportedBy() == null ? null : incident.getReportedBy().getId(),
+                incident.getSource() == IncidentSource.SYSTEM ? "Sistema" : pe.rutafija.shared.security.PersonalDataView.account(incident.getReportedBy().getId()),
                 incident.getReportedAt(),
                 incident.getFollowUpNote(),
                 incident.getFollowedUpBy() == null ? null : incident.getFollowedUpBy().getId(),
-                incident.getFollowedUpBy() == null ? null : incident.getFollowedUpBy().getFullName(),
+                incident.getFollowedUpBy() == null ? null : pe.rutafija.shared.security.PersonalDataView.account(incident.getFollowedUpBy().getId()),
                 incident.getFollowedUpAt(),
                 incident.getResolvedAt(),
                 incident.getDriverClosedBy() == null ? null : incident.getDriverClosedBy().getId(),
-                incident.getDriverClosedBy() == null ? null : incident.getDriverClosedBy().getFullName(),
+                incident.getDriverClosedBy() == null ? null : pe.rutafija.shared.security.PersonalDataView.account(incident.getDriverClosedBy().getId()),
                 incident.getDriverClosedAt(),
                 incident.getCreatedAt(),
-                incident.getUpdatedAt()
+                incident.getUpdatedAt(),incident.getExecutionSegmentId(),incident.getSeverity(),
+                incident.getResponsibleAdmin()==null?null:incident.getResponsibleAdmin().getId(),
+                incident.getPreviousIncidentId(),incident.getRelationReason(),
+                interruptionRecorded?"INTERRUPTION_RECORDED":"NO_INTERRUPTION_RECORDED"
         );
     }
 }

@@ -11,6 +11,7 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'RutaFijaRuntimeSchemaPolicy.ps1')
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $runtimeDirectory = Join-Path $repoRoot '.runtime'
@@ -18,7 +19,7 @@ $demoStatePath = Join-Path $runtimeDirectory 'ruta-fija-quick-demo.json'
 $demoUrlPath = Join-Path $runtimeDirectory 'ruta-fija-demo-url.txt'
 $nativeStatePath = Join-Path $runtimeDirectory 'ruta-fija-native-runtime.json'
 $nativeRuntimeScript = Join-Path $PSScriptRoot 'Invoke-RutaFijaNativeRuntime.ps1'
-$postgresqlScript = Join-Path $PSScriptRoot 'Set-RutaFijaPostgresqlService.ps1'
+$postgresqlScript = Join-Path $PSScriptRoot 'Invoke-RutaFijaPostgresqlLease.ps1'
 $installerScript = Join-Path $PSScriptRoot 'Install-RutaFijaCloudflared.ps1'
 $defaultCloudflaredPath = Join-Path $repoRoot '.tools\cloudflared.exe'
 $localCrmOrigin = 'http://127.0.0.1:4300'
@@ -53,8 +54,7 @@ function Get-CloudflaredExecutable {
         if ($null -ne $command) {
             $candidate = $command.Source
         } else {
-            & $installerScript -DestinationPath $defaultCloudflaredPath
-            $candidate = $defaultCloudflaredPath
+            throw 'CLOUDFLARED_MISSING_NO_AUTOMATIC_DOWNLOAD; tool installation requires a separate reviewed decision'
         }
     }
 
@@ -62,6 +62,29 @@ function Get-CloudflaredExecutable {
         throw 'No se encontró cloudflared. Ejecute Install-RutaFijaCloudflared.ps1.'
     }
     return [IO.Path]::GetFullPath($candidate)
+}
+
+function Assert-DemoPortsFree {
+    foreach($port in @(8080,4300)){
+        if(@(Get-NetTCPConnection -State Listen -LocalPort $port -ErrorAction SilentlyContinue).Count){
+            throw 'DEMO_REQUIRES_FREE_NATIVE_PORTS_BEFORE_ANY_PUBLIC_TUNNEL'
+        }
+    }
+}
+
+function Assert-DemoSchemaReady {
+    & (Join-Path $PSScriptRoot 'Test-RutaFijaLocalSecretPolicy.ps1') -Action Check -Execute | Out-Null
+    $settings=& (Join-Path $PSScriptRoot 'Import-RutaFijaNativeEnvironment.ps1') -Scope Runtime -PassThru
+    if($settings['SPRING_DATASOURCE_URL']-ne'jdbc:postgresql://127.0.0.1:5432/solucion_ruta_fija_1'-or$settings['SPRING_FLYWAY_USERNAME']-ne'rf_migrator'){
+        throw 'DEMO_LOCAL_DATABASE_IDENTITY_REFUSED'
+    }
+    $oldPassword=$env:PGPASSWORD;$oldOptions=$env:PGOPTIONS
+    try{
+        $env:PGPASSWORD=$settings['SPRING_FLYWAY_PASSWORD'];$env:PGOPTIONS='-c default_transaction_read_only=on -c statement_timeout=5000'
+        $query=Get-RuntimeSchemaObservationQuery
+        $rows=@(& 'C:/Program Files/PostgreSQL/16/bin/psql.exe' -X -w -v ON_ERROR_STOP=1 -h 127.0.0.1 -p 5432 -U rf_migrator -d solucion_ruta_fija_1 -At -c $query 2>&1)
+        Assert-RuntimeSchemaObservation -Database 'solucion_ruta_fija_1' -Rows $rows -ExitCode $LASTEXITCODE -TestDatabase $false
+    }finally{$env:PGPASSWORD=$oldPassword;$env:PGOPTIONS=$oldOptions}
 }
 
 function Assert-QuickTunnelConfiguration {
@@ -88,12 +111,12 @@ function Get-DemoState {
         throw 'El estado F5.2 no es JSON válido y no se administrarán procesos sin verificar.'
     }
 
-    if ([int]$state.schemaVersion -ne 1 -or
+    if ([int]$state.schemaVersion -ne 2 -or
         [string]$state.projectRoot -ne [IO.Path]::GetFullPath($repoRoot) -or
         [string]$state.publicOrigin -notmatch '^https://[a-z0-9-]+\.trycloudflare\.com$') {
         throw 'El estado F5.2 no pertenece a este proyecto o contiene una URL inválida.'
     }
-    foreach ($property in @('processId', 'executable', 'commandMarker')) {
+    foreach ($property in @('processId', 'executable', 'commandMarker', 'processStartedAtUtc')) {
         if ($null -eq $state.cloudflared.PSObject.Properties[$property] -or
             [string]::IsNullOrWhiteSpace([string]$state.cloudflared.$property)) {
             throw 'El estado F5.2 no identifica completamente el proceso cloudflared.'
@@ -130,6 +153,7 @@ function Get-CloudflaredManagedState {
     $isManaged = $null -ne $process -and
         $process.ProcessName -ieq 'cloudflared' -and
         $actualExecutable -ieq $expectedExecutable -and
+        $process.StartTime.ToUniversalTime().ToString('o') -eq [string]$State.cloudflared.processStartedAtUtc -and
         $commandLine -match '\btunnel\b' -and
         $commandLine.IndexOf([string]$State.cloudflared.commandMarker, [StringComparison]::OrdinalIgnoreCase) -ge 0
 
@@ -296,6 +320,7 @@ function Start-QuickDemo {
         throw 'El runtime local ya está activo. Ejecute finalizar_ruta_fija.bat antes de iniciar la demo F5.2.'
     }
 
+    Assert-DemoPortsFree
     Assert-QuickTunnelConfiguration
     $cloudflared = Get-CloudflaredExecutable
     [IO.Directory]::CreateDirectory($runtimeDirectory) | Out-Null
@@ -309,8 +334,9 @@ function Start-QuickDemo {
     $cloudflaredProcess = $null
     $state = $null
     try {
-        & $postgresqlScript -Action Start
+        & $postgresqlScript -Action Start -Execute
         $postgresqlStarted = $true
+        Assert-DemoSchemaReady
 
         $processParameters = @{
             FilePath = $cloudflared
@@ -334,7 +360,7 @@ function Start-QuickDemo {
         $nativeStarted = $true
 
         $state = [ordered]@{
-            schemaVersion = 1
+            schemaVersion = 2
             projectRoot = [IO.Path]::GetFullPath($repoRoot)
             startedAtUtc = [DateTime]::UtcNow.ToString('o')
             publicOrigin = $publicOrigin
@@ -342,6 +368,7 @@ function Start-QuickDemo {
                 processId = $cloudflaredProcess.Id
                 executable = $cloudflared
                 commandMarker = $localCrmOrigin
+                processStartedAtUtc = $cloudflaredProcess.StartTime.ToUniversalTime().ToString('o')
             }
         }
         Write-DemoState -State $state
@@ -363,7 +390,7 @@ function Start-QuickDemo {
             try { & $nativeRuntimeScript -Action Stop } catch {}
         }
         if ($postgresqlStarted) {
-            try { & $postgresqlScript -Action Stop } catch {}
+            try { & $postgresqlScript -Action StopOwned -Execute } catch {}
         }
         Remove-DemoState
         throw $startupFailure
@@ -382,9 +409,9 @@ function Stop-QuickDemo {
 
     Stop-ManagedCloudflared -State $state
     & $nativeRuntimeScript -Action Stop
-    & $postgresqlScript -Action Stop
+    & $postgresqlScript -Action StopOwned -Execute
     Remove-DemoState
-    Write-Output 'F5_2_QUICK_DEMO_STOP=PASS tunnel=stopped backend=stopped frontend=stopped postgresql=stopped'
+    Write-Output 'F5_2_QUICK_DEMO_STOP=PASS tunnel=stopped backend=stopped frontend=stopped postgresql=LEASE_POLICY_RESULT_REPORTED_ABOVE'
 }
 
 switch ($Action) {

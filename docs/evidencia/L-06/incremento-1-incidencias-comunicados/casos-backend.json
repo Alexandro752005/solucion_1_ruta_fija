@@ -1,0 +1,438 @@
+{
+  "cases": [
+    {
+      "suite": "pe.rutafija.operation.domain.IncidentClosureContractTest",
+      "name": "conductorClosureCannotBeOverwrittenByAdminResolution",
+      "seconds": "0.494",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.operation.domain.IncidentClosureContractTest",
+      "name": "adminResolutionIsTerminalAndPreservesOriginalReport",
+      "seconds": "0.016",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.operation.domain.IncidentClosureContractTest",
+      "name": "conductorClosureCannotBeMovedBackToFollowUpByAdmin",
+      "seconds": "0.006",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.operation.domain.IncidentClosureContractTest",
+      "name": "catalogCategoryDoesNotInferSeverityOrInterruptAService(IncidentCategory)[1]",
+      "seconds": "0.021",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.operation.domain.IncidentClosureContractTest",
+      "name": "catalogCategoryDoesNotInferSeverityOrInterruptAService(IncidentCategory)[2]",
+      "seconds": "0.006",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.operation.domain.IncidentClosureContractTest",
+      "name": "catalogCategoryDoesNotInferSeverityOrInterruptAService(IncidentCategory)[3]",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.operation.domain.IncidentClosureContractTest",
+      "name": "catalogCategoryDoesNotInferSeverityOrInterruptAService(IncidentCategory)[4]",
+      "seconds": "0.005",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.operation.domain.IncidentClosureContractTest",
+      "name": "catalogCategoryDoesNotInferSeverityOrInterruptAService(IncidentCategory)[5]",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.operation.domain.IncidentClosureContractTest",
+      "name": "catalogCategoryDoesNotInferSeverityOrInterruptAService(IncidentCategory)[6]",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.operation.domain.IncidentClosureContractTest",
+      "name": "catalogCategoryDoesNotInferSeverityOrInterruptAService(IncidentCategory)[7]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.operation.domain.IncidentClosureContractTest",
+      "name": "catalogCategoryDoesNotInferSeverityOrInterruptAService(IncidentCategory)[8]",
+      "seconds": "0.003",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.operation.domain.IncidentClosureContractTest",
+      "name": "catalogCategoryDoesNotInferSeverityOrInterruptAService(IncidentCategory)[9]",
+      "seconds": "0.002",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.operation.domain.IncidentClosureContractTest",
+      "name": "catalogCategoryDoesNotInferSeverityOrInterruptAService(IncidentCategory)[10]",
+      "seconds": "0.001",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.operation.domain.IncidentClosureContractTest",
+      "name": "repeatOwnClosurePreservesTheFirstServerTime",
+      "seconds": "0.004",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentResponsibilityIsExplicitAndChangedRoundRetainsHistory",
+      "seconds": "0.907",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentSameCreationKeyReturnsTheSameReportAndChangedPayloadIsRejected",
+      "seconds": "0.658",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentAttentionRequiresResponsibleAndGenericResolveCannotReplaceStructuredClosure",
+      "seconds": "0.675",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentCannotAssignConductorForeignAdminOrStaleState",
+      "seconds": "0.669",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentClosedOriginalCannotBeReopenedButMayHaveANewLinkedCase",
+      "seconds": "0.683",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentPriorCaseMustBeClosedAndCannotCrossOrganizations",
+      "seconds": "0.614",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentMissingOrUnassessedHumanSeverityCannotBeRecordedAsKnown",
+      "seconds": "0.595",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentForeignAdminAndConductorCannotReadOrContributeAcrossOrganizations",
+      "seconds": "0.639",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentFollowUpKeepsEveryRoundAndOnlyTheLatestProjection",
+      "seconds": "0.65",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentHistoryAndOperationReceiptsAreScopedAndDoNotExposeIdentity",
+      "seconds": "0.618",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentDatabaseProtectsClosedOriginalsAndAppendOnlyActionHistory",
+      "seconds": "0.645",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentConductorCanContributeAfterQualificationLossButNotReopenTheirClosedReport",
+      "seconds": "1.076",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[1]",
+      "seconds": "0.576",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[2]",
+      "seconds": "0.57",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[3]",
+      "seconds": "0.575",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[4]",
+      "seconds": "0.572",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[5]",
+      "seconds": "0.573",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[6]",
+      "seconds": "0.569",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[7]",
+      "seconds": "0.576",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[8]",
+      "seconds": "0.565",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[9]",
+      "seconds": "0.568",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentCatalogPreservesExplicitSeverityWithoutManufacturingInterruption(IncidentCategory)[10]",
+      "seconds": "0.564",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentClosureValidatesEvidenceAndRecordsServerResultWithoutResourceRelease",
+      "seconds": "0.67",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentWorkflowIntegrationTest",
+      "name": "incidentNoEvidenceMustBeExplainedAndPermanentNotesCannotContainPiiOrCoordinates",
+      "seconds": "0.643",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.IncidentResponsibilityTransferIntegrationTest",
+      "name": "incidentTransferBetweenDifferentActiveAdminsKeepsBothRounds",
+      "seconds": "0.317",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyAttentionBlocksNewOperationAndPointsButKeepsOwnConsultation",
+      "seconds": "2.652",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyQualificationLossRecordsAutomaticIncidentNoticeOnlyOnce",
+      "seconds": "1.069",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyCancellationPreservesInterruptedParticipationAndHoldsAndAllowsSeparateTimeReview",
+      "seconds": "1.216",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyOwnInterruptionRetainsServerOriginalsIncidentAndGpsWithoutCompletion",
+      "seconds": "1.003",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyRolesAndObjectScopeDoNotLetAnotherSurfaceImpersonateTheReporter",
+      "seconds": "0.956",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyResolutionNeedsFreshStateSafetyConfirmationAndAdmin",
+      "seconds": "1.058",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyLateOwnIncidentRetainsTheOccurrenceSegmentWithoutNewOperationalEligibility",
+      "seconds": "1.005",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyIndependentDriverReleaseAndWithdrawalKeepTheUnitBlockedUntilExplicitReadyReview",
+      "seconds": "0.994",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyPermissionLossAndInactiveDriverDoNotPreventRecordingTheSafeStop",
+      "seconds": "1.07",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyIncidentClosureDoesNotReleaseEitherInterruptedResource",
+      "seconds": "1.121",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyReadyReleaseRestoresOnlyEligibilityAndTheExistingAvailabilityDeclaration",
+      "seconds": "0.919",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyMaintenanceReturnRecordsItsOwnCheckWithoutReactivatingAWithdrawnUnitOrRemovingAttention",
+      "seconds": "1.027",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyChangedReplayAndStaleVersionNeverCreateAnotherInterruption",
+      "seconds": "0.842",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyRejectsCoordinatesOrPersonalDataInPermanentSafetyNotes",
+      "seconds": "0.818",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyQualificationCancellationPersistsNoticeWithoutTouchingStartedExecution",
+      "seconds": "0.757",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyAdminRecordsOnlyAConfirmedCommunicatedStopWithActualAuthorship",
+      "seconds": "0.819",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyDatabaseRejectsRewritingAttentionOrReleasingItsResourcesThroughOrdinaryState",
+      "seconds": "0.832",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyNoStartNoInterruptionAndDelayIsNotACause",
+      "seconds": "0.767",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.ServiceAttentionIntegrationTest",
+      "name": "safetyForeignAdminCannotReadInterruptOrResolveTheSameOtherOrganizationCase",
+      "seconds": "0.846",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.AnnouncementNoticeIntegrationTest",
+      "name": "announcementPublicationKeyReplaysExactlyAndRejectsChangedContent",
+      "seconds": "1.715",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.AnnouncementNoticeIntegrationTest",
+      "name": "announcementLegacyWithoutProvenReceptionIsNotGrantedByCurrentGroup",
+      "seconds": "0.625",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.AnnouncementNoticeIntegrationTest",
+      "name": "announcementOrganizationSnapshotIncludesLimitedApprovedAccountButNoAutomaticReading",
+      "seconds": "0.673",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.AnnouncementNoticeIntegrationTest",
+      "name": "announcementTenantRolesAndPersonalDataAreEnforcedByTheActualApi",
+      "seconds": "0.718",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.AnnouncementNoticeIntegrationTest",
+      "name": "noticeLocationTelemetryIsExcludedAndForeignOwnReadIsRejected",
+      "seconds": "0.635",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.AnnouncementNoticeIntegrationTest",
+      "name": "announcementSecondaryMembershipIsCapturedAndPreviousReceptionSurvivesLeavingGroup",
+      "seconds": "0.922",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.AnnouncementNoticeIntegrationTest",
+      "name": "noticeCriticalActualHttpReportUsesExplicitSeverityWithoutInterruptingService",
+      "seconds": "0.672",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.AnnouncementNoticeIntegrationTest",
+      "name": "noticeChannelFailureRemainsVisibleAndDoesNotPretendDeviceDelivery",
+      "seconds": "0.586",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.AnnouncementNoticeIntegrationTest",
+      "name": "announcementSecurityWithdrawalIsVersionedAuditedAndDoesNotEraseReceipts",
+      "seconds": "0.732",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.AnnouncementNoticeIntegrationTest",
+      "name": "announcementDatabaseProtectsRecipientsPublicationAndFirstReadTimestamps",
+      "seconds": "0.654",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.AnnouncementNoticeIntegrationTest",
+      "name": "noticeDurableInboxDoesNotReadAnnouncementAndShowsPendingToAdmin",
+      "seconds": "0.658",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.AnnouncementNoticeIntegrationTest",
+      "name": "announcementJoiningAfterPublicationDoesNotInventPriorReception",
+      "seconds": "0.683",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.AnnouncementNoticeIntegrationTest",
+      "name": "announcementExplicitReadingIsIdempotentAndDoesNotChangeOffers",
+      "seconds": "0.632",
+      "result": "PASS"
+    },
+    {
+      "suite": "pe.rutafija.qualification.AnnouncementNoticeIntegrationTest",
+      "name": "noticeProviderNotConfiguredIsVisibleWithoutExternalDeliveryOrFalseSuccess",
+      "seconds": "0.718",
+      "result": "PASS"
+    }
+  ],
+  "uniquePassingCases": 72,
+  "boundary": "58 HTTP/Spring/PostgreSQL rollback, 14 domain cases. No global cleanup; no persistent accounts. Re-executions are not additional cases."
+}

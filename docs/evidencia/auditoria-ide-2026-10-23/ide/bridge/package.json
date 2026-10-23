@@ -1,0 +1,11 @@
+{
+  "name": "rutafija-local-qa-observer",
+  "displayName": "Ruta Fija Local QA Observer (temporary)",
+  "description": "Local audit observer; reads IDE diagnostics without changing them.",
+  "publisher": "rutafija-local",
+  "version": "0.0.1",
+  "engines": { "vscode": "^1.100.0" },
+  "activationEvents": ["onStartupFinished"],
+  "main": "./extension.js",
+  "license": "UNLICENSED"
+}

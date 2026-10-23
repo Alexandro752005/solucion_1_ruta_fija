@@ -1,0 +1,50 @@
+{
+  "observedAt": "2026-10-20T13:39:45.465518+00:00",
+  "localDate": "2026-10-20",
+  "result": "PASS_FUNCTIONAL_LOCAL_CLOSURE",
+  "lot": "L-05",
+  "database": "ruta_fija_test",
+  "role": "rf_test",
+  "schemaVersion": "42",
+  "backendRerunDistinctPassed": 79,
+  "backendNewTests": 1,
+  "backendCurrentEvidenceUnion": 142,
+  "flutterDirectedPassed": 16,
+  "crmDirectedPassed": 16,
+  "priorIncrementEvidenceReused": true,
+  "crmBrowserStagesPassed": 5,
+  "flutterConnectedStagesPassed": 9,
+  "flywayValidation": "PASS",
+  "TEST_CLEANUP_RELEASED": true,
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 4
+  },
+  "termsAcceptances": 2,
+  "externalSmtpAttempts": 0,
+  "globalCleanup": false,
+  "pilotEnabled": false,
+  "L06Started": false,
+  "limits": [
+    "Automated synthetic case; no new human intervention.",
+    "Sensor and permission doubles; no Android physical/GPS calibration/battery evidence.",
+    "Same compiled classes with operations flag disabled; no old binary, down migration or deployment.",
+    "Pilot privacy, legitimate participants, custody and infrastructure remain blocked."
+  ],
+  "status": "VERIFICADA",
+  "closureType": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "verifiedLocalCriteria": [
+    "CI-L05-01",
+    "CI-L05-02",
+    "CI-L05-03",
+    "CI-L05-04",
+    "CI-L05-05",
+    "CI-L05-06",
+    "CI-L05-07",
+    "CI-L05-08",
+    "CI-L05-09",
+    "CI-L05-10"
+  ],
+  "concordance": "PASS_CONCORDANCE"
+}

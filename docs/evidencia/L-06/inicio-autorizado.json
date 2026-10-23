@@ -1,0 +1,26 @@
+{
+  "observedAt": "2026-10-20T18:35:54.921487+00:00",
+  "localDate": "2026-10-20",
+  "lot": "L-06",
+  "authorization": "OK VERDE",
+  "status": "EN_CURSO",
+  "priorLot": "L-05",
+  "priorClosure": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "priorManifestSha256": "800d9bfc38c7845aacf9ed70a52f89a2d7199f2830d2ddb38b729c57faeebbf4",
+  "priorManifestFilesVerified": 410,
+  "priorSourcesVerified": 871,
+  "priorPostflightLedger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 4
+  },
+  "priorPostflightAcceptances": 2,
+  "currentDatabaseVerified": false,
+  "currentDatabasePending": "PostgreSQL stopped; Start-Service rejected by Windows. User asked to start the existing service; no DB changes attempted.",
+  "backup": "memory/backup/2026-10-20-inicio-L06",
+  "pilotEnabled": false,
+  "L07Started": false,
+  "externalMailSent": false,
+  "globalCleanup": false,
+  "final3Regenerated": false
+}

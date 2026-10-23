@@ -1,0 +1,32 @@
+{
+  "runId" : "a999ef52-d87f-498d-9251-1581cbb72562",
+  "observedAt" : "2026-10-22T21:13:07.729521400Z",
+  "pausedCaseAdvisoryLockFree" : true,
+  "rejectedPayloadOriginMatchedRoute" : false,
+  "rejectedPayloadDestinationMatchedRoute" : false,
+  "assignmentsWithExactOperationKey" : 0,
+  "servicesWithExactCaseVersions" : 0,
+  "historicalLedger" : {
+    "ADMIN" : 3,
+    "CONDUCTOR" : 7,
+    "SUPER_ADMIN" : 1
+  },
+  "termsAcceptancesPreserved" : 2,
+  "lastFailureCode" : "HTTP_EXPECTATION_FAILED",
+  "lastServerErrorCode" : "ASSIGNMENT_INVALID_TRANSITION",
+  "failedSubmissionEvents" : [ {
+    "status" : 400,
+    "startedAt" : "2026-10-22T21:03:55.472745200Z",
+    "channel" : "SYNTHETIC_ADMIN_SETUP_HTTP",
+    "method" : "POST",
+    "finishedAt" : "2026-10-22T21:03:55.562903400Z",
+    "path" : "/api/v1/assignments"
+  } ],
+  "routeVersionId" : "30b23a7a-5044-436b-9a24-9adfc052c2d9",
+  "serviceTypeVersionId" : "22d5a62e-7ef0-4c0b-8889-afdd0f361486",
+  "result" : "CONFIRMED_HARNESS_TERMINAL_MISMATCH_NO_OFFER_OR_SERVICE_COMMIT",
+  "databaseWrites" : 0,
+  "httpResubmissions" : 0,
+  "markerPreserved" : true,
+  "TEST_CLEANUP_RELEASED" : false
+}

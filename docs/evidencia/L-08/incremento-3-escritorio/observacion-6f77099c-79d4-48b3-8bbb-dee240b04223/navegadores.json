@@ -1,0 +1,697 @@
+{
+  "observedAt": "2026-10-23T01:38:18.659Z",
+  "scope": "EXISTING_SYNTHETIC_PRINCIPALS_READ_ONLY_BUSINESS_API",
+  "results": [
+    {
+      "browser": "Edge",
+      "role": "ADMIN",
+      "requestedNativeZoom": 1,
+      "checks": [
+        {
+          "id": "BROWSER_PRESENT",
+          "result": "PASS"
+        },
+        {
+          "id": "BROWSER_STARTED",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_DASHBOARD",
+          "result": "FAIL"
+        }
+      ],
+      "pages": [],
+      "version": "Edg/155.0.4283.62",
+      "result": "FAIL_KEEP_OBSERVATION",
+      "phase": "dashboard",
+      "reason": "PHYSICAL_CLIENT_1280_720_DASHBOARD",
+      "failureScreenshot": {
+        "file": "Edge-ADMIN-100-failure.png",
+        "sha256": "15b1af3a3959613c628ffc2d8d1babbd8fc414b6559684c9efe3bea7774d3e92"
+      }
+    },
+    {
+      "browser": "Edge",
+      "role": "ADMIN",
+      "requestedNativeZoom": 2,
+      "checks": [
+        {
+          "id": "BROWSER_PRESENT",
+          "result": "PASS"
+        },
+        {
+          "id": "BROWSER_STARTED",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_DASHBOARD",
+          "result": "FAIL"
+        }
+      ],
+      "pages": [],
+      "version": "Edg/155.0.4283.62",
+      "result": "FAIL_KEEP_OBSERVATION",
+      "phase": "dashboard",
+      "reason": "PHYSICAL_CLIENT_1280_720_DASHBOARD",
+      "failureScreenshot": {
+        "file": "Edge-ADMIN-200-failure.png",
+        "sha256": "14c514844e8a8101c7c97317e422a630a16378ba6b5e9c03bea9639c73b87b8e"
+      }
+    },
+    {
+      "browser": "Edge",
+      "role": "ADMIN",
+      "requestedNativeZoom": 3,
+      "checks": [
+        {
+          "id": "BROWSER_PRESENT",
+          "result": "PASS"
+        },
+        {
+          "id": "BROWSER_STARTED",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_DASHBOARD",
+          "result": "FAIL"
+        }
+      ],
+      "pages": [],
+      "version": "Edg/155.0.4283.62",
+      "result": "FAIL_KEEP_OBSERVATION",
+      "phase": "dashboard",
+      "reason": "PHYSICAL_CLIENT_1280_720_DASHBOARD",
+      "failureScreenshot": {
+        "file": "Edge-ADMIN-300-failure.png",
+        "sha256": "68e9c772682d72c5eb8d637395b414fd441a1acbf92f5f58147963fdac9d72c1"
+      }
+    },
+    {
+      "browser": "Chrome",
+      "role": "ADMIN",
+      "requestedNativeZoom": 1,
+      "checks": [
+        {
+          "id": "BROWSER_PRESENT",
+          "result": "PASS"
+        },
+        {
+          "id": "BROWSER_STARTED",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "PAGE_REFLOW_DASHBOARD",
+          "result": "PASS",
+          "width": 1280,
+          "documentWidth": 1265
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_DASHBOARD",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_DASHBOARD",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_DASHBOARD",
+          "result": "FAIL"
+        }
+      ],
+      "pages": [],
+      "version": "Chrome/155.0.8059.86",
+      "result": "FAIL_KEEP_OBSERVATION",
+      "phase": "dashboard",
+      "reason": "SUCCESSFUL_READS_DASHBOARD",
+      "failureScreenshot": {
+        "file": "Chrome-ADMIN-100-failure.png",
+        "sha256": "ca031de5ef32c9a7b5c53936f8f39372b16f9b36824c672358ec22f573e17e86"
+      }
+    },
+    {
+      "browser": "Chrome",
+      "role": "ADMIN",
+      "requestedNativeZoom": 2,
+      "checks": [
+        {
+          "id": "BROWSER_PRESENT",
+          "result": "PASS"
+        },
+        {
+          "id": "BROWSER_STARTED",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "PAGE_REFLOW_DASHBOARD",
+          "result": "PASS",
+          "width": 640,
+          "documentWidth": 632
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_DASHBOARD",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_DASHBOARD",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_DASHBOARD",
+          "result": "FAIL"
+        }
+      ],
+      "pages": [],
+      "version": "Chrome/155.0.8059.86",
+      "result": "FAIL_KEEP_OBSERVATION",
+      "phase": "dashboard",
+      "reason": "SUCCESSFUL_READS_DASHBOARD",
+      "failureScreenshot": {
+        "file": "Chrome-ADMIN-200-failure.png",
+        "sha256": "01bf28061bf35bcca5b1bac30f492b790fc894057c54b4a7cef2c156844fabb8"
+      }
+    },
+    {
+      "browser": "Chrome",
+      "role": "ADMIN",
+      "requestedNativeZoom": 3,
+      "checks": [
+        {
+          "id": "BROWSER_PRESENT",
+          "result": "PASS"
+        },
+        {
+          "id": "BROWSER_STARTED",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "PAGE_REFLOW_DASHBOARD",
+          "result": "PASS",
+          "width": 426,
+          "documentWidth": 421
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_DASHBOARD",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_DASHBOARD",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_DASHBOARD",
+          "result": "FAIL"
+        }
+      ],
+      "pages": [],
+      "version": "Chrome/155.0.8059.86",
+      "result": "FAIL_KEEP_OBSERVATION",
+      "phase": "dashboard",
+      "reason": "SUCCESSFUL_READS_DASHBOARD",
+      "failureScreenshot": {
+        "file": "Chrome-ADMIN-300-failure.png",
+        "sha256": "06478b4a168136b5f62f15f2f153906321a0a11170b2032defa9a7b50d1c6fc3"
+      }
+    }
+  ],
+  "bootstrap": [
+    {
+      "at": "2026-10-23T01:38:05.653Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:38:09.717Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:38:11.862Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:38:14.075Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:38:15.846Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:38:17.509Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    }
+  ],
+  "requests": [
+    {
+      "at": "2026-10-23T01:38:05.710Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 31.003,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:05.780Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 52.938,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:05.963Z",
+      "method": "POST",
+      "path": "/api/v1/operations/stream-ticket",
+      "status": 405,
+      "source": "READ_ONLY_TEST_BOUNDARY"
+    },
+    {
+      "at": "2026-10-23T01:38:06.118Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/dashboard/admin",
+      "status": 200,
+      "durationMs": 157.526,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:06.188Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/reports/availability",
+      "status": 200,
+      "durationMs": 227.427,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:06.193Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/audit-events",
+      "status": 200,
+      "durationMs": 230.183,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:09.760Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 18.381,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:09.805Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 27.715,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:09.850Z",
+      "method": "POST",
+      "path": "/api/v1/operations/stream-ticket",
+      "status": 405,
+      "source": "READ_ONLY_TEST_BOUNDARY"
+    },
+    {
+      "at": "2026-10-23T01:38:09.907Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/dashboard/admin",
+      "status": 200,
+      "durationMs": 55.571,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:09.914Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/audit-events",
+      "status": 200,
+      "durationMs": 59.901,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:09.935Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/reports/availability",
+      "status": 200,
+      "durationMs": 80.867,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:11.890Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 15.273,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:11.914Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 18.128,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:11.968Z",
+      "method": "POST",
+      "path": "/api/v1/operations/stream-ticket",
+      "status": 405,
+      "source": "READ_ONLY_TEST_BOUNDARY"
+    },
+    {
+      "at": "2026-10-23T01:38:12.040Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/reports/availability",
+      "status": 200,
+      "durationMs": 66.643,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:12.040Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/dashboard/admin",
+      "status": 200,
+      "durationMs": 67.771,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:12.056Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/audit-events",
+      "status": 200,
+      "durationMs": 82.142,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:14.100Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 19.899,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:14.140Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 28.926,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:14.184Z",
+      "method": "POST",
+      "path": "/api/v1/operations/stream-ticket",
+      "status": 405,
+      "source": "READ_ONLY_TEST_BOUNDARY"
+    },
+    {
+      "at": "2026-10-23T01:38:14.229Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/audit-events",
+      "status": 200,
+      "durationMs": 40.04,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:14.241Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/dashboard/admin",
+      "status": 200,
+      "durationMs": 52.716,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:14.313Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/reports/availability",
+      "status": 200,
+      "durationMs": 125.127,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:15.868Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 13.652,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:15.896Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 21.472,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:15.959Z",
+      "method": "POST",
+      "path": "/api/v1/operations/stream-ticket",
+      "status": 405,
+      "source": "READ_ONLY_TEST_BOUNDARY"
+    },
+    {
+      "at": "2026-10-23T01:38:15.990Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/reports/availability",
+      "status": 200,
+      "durationMs": 29.584,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:16.015Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/audit-events",
+      "status": 200,
+      "durationMs": 54.106,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:16.025Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/dashboard/admin",
+      "status": 200,
+      "durationMs": 65.652,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:17.533Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 16.515,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:17.579Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 34.996,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:17.664Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/reports/availability",
+      "status": 200,
+      "durationMs": 42.886,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:17.674Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/audit-events",
+      "status": 200,
+      "durationMs": 52.138,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:38:17.678Z",
+      "method": "POST",
+      "path": "/api/v1/operations/stream-ticket",
+      "status": 405,
+      "source": "READ_ONLY_TEST_BOUNDARY"
+    },
+    {
+      "at": "2026-10-23T01:38:17.693Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/dashboard/admin",
+      "status": 200,
+      "durationMs": 71.802,
+      "source": "REAL_BACKEND"
+    }
+  ],
+  "sources": {
+    "frontend/e2e/l08-operational-accessibility.mjs": "ee4c07d2545c215020fb2c4184c82d5d1838e247fcf03197512820aaa48a7161",
+    "frontend/dist/ruta-fija-crm/browser/index.html": "500b6838d4b4ffc20f00f2a8142bbaa9f1039c303329f7034a5a7fa51d7c34b3",
+    "frontend/package-lock.json": "6818f9b06051abab64081e8cc853049b54c2632d35b0807033c7582f26f0d85e",
+    "frontend/src/styles.scss": "588e9153440c5cf079c250df5d33b7c9f330822c00a1f8b2488053b3995fed88"
+  },
+  "realLoginOrRefreshAccredited": false,
+  "screenReaderHumanExecuted": false,
+  "databaseWritesAllowed": false,
+  "accountsCreated": 0,
+  "mailSent": 0,
+  "pilotEnabled": false
+}

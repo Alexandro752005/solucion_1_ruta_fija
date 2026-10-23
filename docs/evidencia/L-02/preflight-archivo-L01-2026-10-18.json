@@ -1,0 +1,324 @@
+{
+  "observedAtUtc": "2026-10-19T04:11:37.761611+00:00",
+  "localDate": "2026-10-18",
+  "inspection": "FILES_ONLY_NO_DATABASE_SERVICES_OR_SMTP",
+  "result": "PASS_49_CLOSURE_FILES_AND_PRESERVED_CHANGED_MUTABLE_BACKLOG",
+  "L01ManifestNotRewritten": true,
+  "pilotEnabled": false,
+  "testDatabaseQueried": false,
+  "backupPath": "memory/backup/2026-10-18-inicio-L02",
+  "checks": [
+    {
+      "path": "backups/L-00-2026-10-13-final3/source-snapshot.zip",
+      "expectedAtL01Closure": "3806510606A1565F23B8C526A13CC1049BC79141BABDB8E1316F042488B3D11B",
+      "currentSha256": "3806510606A1565F23B8C526A13CC1049BC79141BABDB8E1316F042488B3D11B",
+      "matches": true
+    },
+    {
+      "path": "docs/actas/L-01-cierre-funcional-local-2026-10-17.md",
+      "expectedAtL01Closure": "C9BF0FE7EA79C5DBFD77B9883BF21673E29EA3B6FE5D22A6ECB6119BEBEFF227",
+      "currentSha256": "C9BF0FE7EA79C5DBFD77B9883BF21673E29EA3B6FE5D22A6ECB6119BEBEFF227",
+      "matches": true
+    },
+    {
+      "path": "docs/backlog-producto-ruta-fija-v3.1.md",
+      "expectedAtL01Closure": "18446856DFEA41B35BCD29D13C10C191D7C09FBBC347FC4D842E4DA6C949F77E",
+      "currentSha256": "9AE156164F2645036187E235B5FBE7FF07DE383FCA875B43AA03D6E2E28DE0C5",
+      "matches": false,
+      "normalizedVariantMatchingClosingHash": [],
+      "action": "Preserve current working file; do not restore over local edits"
+    },
+    {
+      "path": "docs/contratos/L-01.md",
+      "expectedAtL01Closure": "229BFC216B354AFB78B285264906425961B81E183940B3C1F3BD199B2FD87E15",
+      "currentSha256": "229BFC216B354AFB78B285264906425961B81E183940B3C1F3BD199B2FD87E15",
+      "matches": true
+    },
+    {
+      "path": "docs/contratos/SC-L01-LOCAL-01-adenda-v1.0.0.md",
+      "expectedAtL01Closure": "9E7C6DC3A94607A4EBF7FBD54D334A82D77827F661BF9F2C240267E29B1345FA",
+      "currentSha256": "9E7C6DC3A94607A4EBF7FBD54D334A82D77827F661BF9F2C240267E29B1345FA",
+      "matches": true
+    },
+    {
+      "path": "docs/contratos/SC-L01-LOCAL-01-adenda-v1.1.0.md",
+      "expectedAtL01Closure": "B25E7F1E34A50C20DAA6BDCFA21A33382B0A7D3B478068F3EA0003ED4CE8CC1B",
+      "currentSha256": "B25E7F1E34A50C20DAA6BDCFA21A33382B0A7D3B478068F3EA0003ED4CE8CC1B",
+      "matches": true
+    },
+    {
+      "path": "docs/contratos/SC-L01-LOCAL-01-aplicacion-v1.1.0-2026-10-17.json",
+      "expectedAtL01Closure": "30000B0E7B039F594BA660DB41AFF4C35AAB0133F69C8E820B00CC7FC7A5C543",
+      "currentSha256": "30000B0E7B039F594BA660DB41AFF4C35AAB0133F69C8E820B00CC7FC7A5C543",
+      "matches": true
+    },
+    {
+      "path": "docs/contratos/SC-L01-LOCAL-01-precision-SC03-aprobada-2026-10-17.json",
+      "expectedAtL01Closure": "FC586C33B1CFF6B95FC1F8C118E5E823A56939DF8623B33A08EF02AD636757A8",
+      "currentSha256": "FC586C33B1CFF6B95FC1F8C118E5E823A56939DF8623B33A08EF02AD636757A8",
+      "matches": true
+    },
+    {
+      "path": "docs/ejecucion/L-01.md",
+      "expectedAtL01Closure": "429D3BD1AE7BB5C581F6B61F45684C90DCA2E60AB9D7A05F63264AFDADB3B064",
+      "currentSha256": "429D3BD1AE7BB5C581F6B61F45684C90DCA2E60AB9D7A05F63264AFDADB3B064",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-00/source-manifest.sha256",
+      "expectedAtL01Closure": "E78D7002D5C85B24200BE21B8FD88CE770D36333CA49CAA5351248CFD0E28BAD",
+      "currentSha256": "E78D7002D5C85B24200BE21B8FD88CE770D36333CA49CAA5351248CFD0E28BAD",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/fuentes/backend/src/test/java/pe/rutafija/support/ManualL01AutomatedTermsComplement.java",
+      "expectedAtL01Closure": "BB421E897BE8790E989D12077F978977967AAE5F835069F892D22826A0C7121B",
+      "currentSha256": "BB421E897BE8790E989D12077F978977967AAE5F835069F892D22826A0C7121B",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/fuentes/backend/src/test/java/pe/rutafija/support/ManualL01AutomatedTermsComplementTest.java",
+      "expectedAtL01Closure": "2F4C3A991664ADFD05BEE2E46D4C422EC4CAF6723A4FB4586CD43EE640E41F38",
+      "currentSha256": "2F4C3A991664ADFD05BEE2E46D4C422EC4CAF6723A4FB4586CD43EE640E41F38",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/fuentes/backend/src/test/java/pe/rutafija/support/ManualL01HumanTrial.java",
+      "expectedAtL01Closure": "510D89D63B00386F941BA0A456616DDA8AB84F18E5CC36F1378BB9FAC562713D",
+      "currentSha256": "510D89D63B00386F941BA0A456616DDA8AB84F18E5CC36F1378BB9FAC562713D",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/fuentes/backend/src/test/java/pe/rutafija/support/ManualL01HumanTrialServer.java",
+      "expectedAtL01Closure": "6A9D3759A360405A8B70AAA8AEE0621C6E54ED143D3525A67A87A14A5F5D7F6B",
+      "currentSha256": "6A9D3759A360405A8B70AAA8AEE0621C6E54ED143D3525A67A87A14A5F5D7F6B",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/fuentes/backend/src/test/java/pe/rutafija/support/ManualL01HumanTrialTest.java",
+      "expectedAtL01Closure": "DE89E303EDCDC541E572AD5587FF189197A8E7B2527E4487148CAD3442A58F47",
+      "currentSha256": "DE89E303EDCDC541E572AD5587FF189197A8E7B2527E4487148CAD3442A58F47",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/fuentes/backend/target/l01-closure-readonly/ManualL01LocalClosureReadOnly.java",
+      "expectedAtL01Closure": "6640EFCA6BB92C75730FAF15921C0FD18E52A6BCB5505C7C3078D371066A9725",
+      "currentSha256": "6640EFCA6BB92C75730FAF15921C0FD18E52A6BCB5505C7C3078D371066A9725",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/fuentes/scripts/Invoke-RutaFijaL01HumanTrial.ps1",
+      "expectedAtL01Closure": "EF31DFB0E7A8FDEA9EE2F24498445EA02F8A9B4E5C84F03E2915301252DCCB8A",
+      "currentSha256": "EF31DFB0E7A8FDEA9EE2F24498445EA02F8A9B4E5C84F03E2915301252DCCB8A",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/fuentes/scripts/Invoke-RutaFijaL01HumanTrialConsoleExit.ps1",
+      "expectedAtL01Closure": "FEA433D2E4CC28D5FB0398607E8E87FDB71B72815694E9D7E27ADF2ED1B2EE65",
+      "currentSha256": "FEA433D2E4CC28D5FB0398607E8E87FDB71B72815694E9D7E27ADF2ED1B2EE65",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/fuentes-producto-actuales.json",
+      "expectedAtL01Closure": "5021039A4059302106EA1FD8FC4817D63F17156E4377D7CB7A0E5C7A8541E91B",
+      "currentSha256": "5021039A4059302106EA1FD8FC4817D63F17156E4377D7CB7A0E5C7A8541E91B",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/pe.rutafija.support.ManualL01AutomatedTermsComplementTest.txt",
+      "expectedAtL01Closure": "8C85665FCA893706054A29BA007D6577DF3895CCBD329CDF4029F4A3AF6C160F",
+      "currentSha256": "8C85665FCA893706054A29BA007D6577DF3895CCBD329CDF4029F4A3AF6C160F",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/pe.rutafija.support.ManualL01HumanTrialTest.txt",
+      "expectedAtL01Closure": "280A70BDCCEE2D576BD14A0AD009DA24816BE014BBC20731ED8565148B723156",
+      "currentSha256": "280A70BDCCEE2D576BD14A0AD009DA24816BE014BBC20731ED8565148B723156",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/regresiones-reutilizadas/l01-analyze.log",
+      "expectedAtL01Closure": "808BF5A0A8D5FB332D25AFD2D351928690E9F5217CBEC97D93EE89A9C6901867",
+      "currentSha256": "808BF5A0A8D5FB332D25AFD2D351928690E9F5217CBEC97D93EE89A9C6901867",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/regresiones-reutilizadas/l01-connected-wrapper-final.log",
+      "expectedAtL01Closure": "C9AED29D18338CC4333B9C9CFC73C0A2634B9D103B9A171893FDA18AE4B5FF60",
+      "currentSha256": "C9AED29D18338CC4333B9C9CFC73C0A2634B9D103B9A171893FDA18AE4B5FF60",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/regresiones-reutilizadas/l01-document-privacy-final.log",
+      "expectedAtL01Closure": "5138ADE0E144387EE04B4066E1584DB4B705A1459DFFF26799746EC9F3C784D9",
+      "currentSha256": "5138ADE0E144387EE04B4066E1584DB4B705A1459DFFF26799746EC9F3C784D9",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/regresiones-reutilizadas/l01-person-final-tests.log",
+      "expectedAtL01Closure": "7B8D6694BBE83A3B19BB22DAC00A04F4A2F8D1BB3AE82DB94973D5B554D0B245",
+      "currentSha256": "7B8D6694BBE83A3B19BB22DAC00A04F4A2F8D1BB3AE82DB94973D5B554D0B245",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/regresiones-reutilizadas/l01-tests.log",
+      "expectedAtL01Closure": "84723B0C665E2458C29788B36BB704D713C9E481B111924A3E108F750AE5F8F7",
+      "currentSha256": "84723B0C665E2458C29788B36BB704D713C9E481B111924A3E108F750AE5F8F7",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/regresiones-reutilizadas/l01-v26-final.log",
+      "expectedAtL01Closure": "8B2C0455683D22DAC72E044295EE536C90A5F3EFCF4FEA5E902251027A4DADA2",
+      "currentSha256": "8B2C0455683D22DAC72E044295EE536C90A5F3EFCF4FEA5E902251027A4DADA2",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/cierre-funcional-local-2026-10-17/resultado-final.json",
+      "expectedAtL01Closure": "C3A1F1E957DCECC0E710049EF364CE888B1B28BA7E9438A8BEF163C505C0311D",
+      "currentSha256": "C3A1F1E957DCECC0E710049EF364CE888B1B28BA7E9438A8BEF163C505C0311D",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/ensayos-humanos-140c10a1-be0f-4d08-a6d4-c796e2ed107a/observacion-1792227077200.json",
+      "expectedAtL01Closure": "9319F045F65FD4EE61B9A07EDEC3000E5EA6AC0E75618D99E2C4896843B8A719",
+      "currentSha256": "9319F045F65FD4EE61B9A07EDEC3000E5EA6AC0E75618D99E2C4896843B8A719",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/ensayos-humanos-140c10a1-be0f-4d08-a6d4-c796e2ed107a/observacion-1792287275662.json",
+      "expectedAtL01Closure": "E0A986D10E09F8FBB289061753B3E36759B0CAE24E53731EDE4BBA8640D5FFFB",
+      "currentSha256": "E0A986D10E09F8FBB289061753B3E36759B0CAE24E53731EDE4BBA8640D5FFFB",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/estado-tecnico.md",
+      "expectedAtL01Closure": "35CBB8EC538AA9490288C35C95317A9988F7E045F5D9E3583A7B670828B69B6D",
+      "currentSha256": "35CBB8EC538AA9490288C35C95317A9988F7E045F5D9E3583A7B670828B69B6D",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/matriz-cierre-L01-revision-2026-10-14.md",
+      "expectedAtL01Closure": "3179FFAB4672A93CE258AE21362B6748569F690992249F9CEF1E5C7654B2ABDA",
+      "currentSha256": "3179FFAB4672A93CE258AE21362B6748569F690992249F9CEF1E5C7654B2ABDA",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/matriz-final-funcional-local-2026-10-17.md",
+      "expectedAtL01Closure": "0911BC7D83EB14CB852EBF73E261A71ACF7F916C49D4A5DEA75AF34D2FF802B4",
+      "currentSha256": "0911BC7D83EB14CB852EBF73E261A71ACF7F916C49D4A5DEA75AF34D2FF802B4",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/REC-CI03-01-automatizado-2026-10-17/contraste-final-nativo-solo-lectura.json",
+      "expectedAtL01Closure": "7D6EDDCB7618B94196BF0A381CC98864E00E07E93AD0F9D54350BBAA01DC601A",
+      "currentSha256": "7D6EDDCB7618B94196BF0A381CC98864E00E07E93AD0F9D54350BBAA01DC601A",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/REC-CI03-01-automatizado-2026-10-17/contraste-final-nativo-solo-lectura.json.sha256",
+      "expectedAtL01Closure": "4C18BF3347F44B56C10CDD0A2CEDA6669AD7235037DEB0F2F6DCDE306CF6133B",
+      "currentSha256": "4C18BF3347F44B56C10CDD0A2CEDA6669AD7235037DEB0F2F6DCDE306CF6133B",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/REC-CI03-01-automatizado-2026-10-17/ejecucion-reanudable.json",
+      "expectedAtL01Closure": "AC8C49AEAA7D7CA81D0E20086C3C3B32C709B83062D445AF8AA21D9DC539C34A",
+      "currentSha256": "AC8C49AEAA7D7CA81D0E20086C3C3B32C709B83062D445AF8AA21D9DC539C34A",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/REC-CI03-01-automatizado-2026-10-17/gate-http-postgresql.json",
+      "expectedAtL01Closure": "AC8C49AEAA7D7CA81D0E20086C3C3B32C709B83062D445AF8AA21D9DC539C34A",
+      "currentSha256": "AC8C49AEAA7D7CA81D0E20086C3C3B32C709B83062D445AF8AA21D9DC539C34A",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/REC-CI03-01-automatizado-2026-10-17/gate-http-postgresql.json.sha256",
+      "expectedAtL01Closure": "BBAA292269EC250B4D2A5069D11753EE7723B6684E6FC290C616850FED6C2DB2",
+      "currentSha256": "BBAA292269EC250B4D2A5069D11753EE7723B6684E6FC290C616850FED6C2DB2",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/REC-CI03-01-automatizado-2026-10-17/huellas-antecedentes-y-final3.json",
+      "expectedAtL01Closure": "120BEEF345D94FB254BA44140A8A58021C7A33B9858CC99104B958DC85DAC462",
+      "currentSha256": "120BEEF345D94FB254BA44140A8A58021C7A33B9858CC99104B958DC85DAC462",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/REC-CI03-01-automatizado-2026-10-17/intento-1-detencion-limpieza-http403.json",
+      "expectedAtL01Closure": "DD82679D09ECCA6B046E5F1E5B17820E452C2002D8BDF0BE6311C4BE8C565144",
+      "currentSha256": "DD82679D09ECCA6B046E5F1E5B17820E452C2002D8BDF0BE6311C4BE8C565144",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/REC-CI03-01-automatizado-2026-10-17/README.md",
+      "expectedAtL01Closure": "4F7BDB15E48AD25CF845B164E621E11A5C0B849BA8D72680E357E49CB9EEC546",
+      "currentSha256": "4F7BDB15E48AD25CF845B164E621E11A5C0B849BA8D72680E357E49CB9EEC546",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/REC-CI03-01-automatizado-2026-10-17/salida-y-protecciones.json",
+      "expectedAtL01Closure": "20C4826437E0CB1E922816B85D486A3A20AA2BEE9E99A9D2299FE79B5D2C3D14",
+      "currentSha256": "20C4826437E0CB1E922816B85D486A3A20AA2BEE9E99A9D2299FE79B5D2C3D14",
+      "matches": true
+    },
+    {
+      "path": "docs/evidencia/L-01/REC-CI03-01-automatizado-2026-10-17/salida-y-protecciones.json.sha256",
+      "expectedAtL01Closure": "1533E4F89AC7835851A922842F727466BF37FF3E4E2509B633240D04E2278C65",
+      "currentSha256": "1533E4F89AC7835851A922842F727466BF37FF3E4E2509B633240D04E2278C65",
+      "matches": true
+    },
+    {
+      "path": "docs/legal/publicado/terminos-admin-v1.0.0.md",
+      "expectedAtL01Closure": "20FFD9525CB19EC51387BF11859CF34100A5117B00DE8F428BFEB8B9A4DC6417",
+      "currentSha256": "20FFD9525CB19EC51387BF11859CF34100A5117B00DE8F428BFEB8B9A4DC6417",
+      "matches": true
+    },
+    {
+      "path": "docs/operacion/L-01-ensayos-humanos-sinteticos.md",
+      "expectedAtL01Closure": "D14EB7F5412D43B1E92D28092A99E8ED9B6C7A849C45BB9A8B973812D20D48F8",
+      "currentSha256": "D14EB7F5412D43B1E92D28092A99E8ED9B6C7A849C45BB9A8B973812D20D48F8",
+      "matches": true
+    },
+    {
+      "path": "docs/operacion/L-01-REC-CI07-03-ejecucion.md",
+      "expectedAtL01Closure": "90249E53760F41CB45B6AA364159544CA7AC5B58A19A7AE664AE8F7A8B49B79D",
+      "currentSha256": "90249E53760F41CB45B6AA364159544CA7AC5B58A19A7AE664AE8F7A8B49B79D",
+      "matches": true
+    },
+    {
+      "path": "docs/seguimiento/tareas.json",
+      "expectedAtL01Closure": "EC43DA3324E8FC02AFD003F9A04015651A6A5B4515D64AB41CC5845AE95CD1C0",
+      "currentSha256": "EC43DA3324E8FC02AFD003F9A04015651A6A5B4515D64AB41CC5845AE95CD1C0",
+      "matches": true
+    },
+    {
+      "path": "memory/current.md",
+      "expectedAtL01Closure": "2EA6591FE403D79E9B6EF9830E5B42769301D5E852472D98115F1EA5356A2B83",
+      "currentSha256": "2EA6591FE403D79E9B6EF9830E5B42769301D5E852472D98115F1EA5356A2B83",
+      "matches": true
+    },
+    {
+      "path": "memory/target.md",
+      "expectedAtL01Closure": "218551B48AFDDFEB19199ED496EC8CCDEAA67DE660CEF776365CA4F68278C6C3",
+      "currentSha256": "218551B48AFDDFEB19199ED496EC8CCDEAA67DE660CEF776365CA4F68278C6C3",
+      "matches": true
+    },
+    {
+      "path": "specs/aclaraciones-L01-Chiclayo-2026-10-15.json",
+      "expectedAtL01Closure": "E022850346687A2CA7EF8F9D4168E83832954C1DCBAF40293441B110866AF12B",
+      "currentSha256": "E022850346687A2CA7EF8F9D4168E83832954C1DCBAF40293441B110866AF12B",
+      "matches": true
+    }
+  ],
+  "changedMutableFiles": [
+    {
+      "path": "docs/backlog-producto-ruta-fija-v3.1.md",
+      "expectedAtL01Closure": "18446856DFEA41B35BCD29D13C10C191D7C09FBBC347FC4D842E4DA6C949F77E",
+      "currentSha256": "9AE156164F2645036187E235B5FBE7FF07DE383FCA875B43AA03D6E2E28DE0C5",
+      "matches": false,
+      "normalizedVariantMatchingClosingHash": [],
+      "action": "Preserve current working file; do not restore over local edits"
+    }
+  ]
+}

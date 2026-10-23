@@ -1,0 +1,9 @@
+{
+    "result":  "PASS_DIRECT_JDK_PROCESS_OWNERSHIP_AND_CLEANUP",
+    "checkedAt":  "2026-10-23T06:33:13.2131611+00:00",
+    "binary":  "C:/Program Files/Java/jdk-21.0.10/bin/java.exe",
+    "ownedPid":  10036,
+    "listenerPidMatchedOwnedProcess":  true,
+    "bothHttpPortsFreeAfterKill":  true,
+    "postgresTouched":  false
+}

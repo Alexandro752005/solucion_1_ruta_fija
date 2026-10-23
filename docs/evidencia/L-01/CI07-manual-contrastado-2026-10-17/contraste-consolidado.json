@@ -1,0 +1,258 @@
+{
+  "recordedLocalDate": "2026-10-17",
+  "timezone": "America/Lima",
+  "runId": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "inspectionAtUtc": "2026-10-18T01:40:55.056433400Z",
+  "humanArchive": {
+    "path": "docs/evidencia/L-01/ensayos-humanos-140c10a1-be0f-4d08-a6d4-c796e2ed107a/observacion-1792287275662.json",
+    "sha256": "E0A986D10E09F8FBB289061753B3E36759B0CAE24E53731EDE4BBA8640D5FFFB",
+    "observedAtUtc": "2026-10-18T01:34:35.651523300Z",
+    "reportedResult": "PASS_LOCAL_TEMPORARY_COPY_ONLY",
+    "hashMatchesOperatorAndSidecar": true
+  },
+  "nativeEvidencePath": "docs/evidencia/L-01/CI07-manual-contrastado-2026-10-17/contraste-nativo-solo-lectura.json",
+  "exactCaseAndRecoveryCorrespondenceVerified": true,
+  "archivedHarnessPredicatePass": true,
+  "manualRecoveryResult": "PASS_LOCAL_TEMPORARY_COPY_ONLY",
+  "manualAdminResult": "PENDING",
+  "persistedChallengeId": "fa9aa2ae-8e4b-4eab-bbb5-55d86f016036",
+  "nativeConsumedAtFullPrecision": "2026-10-18T01:30:47.240995Z",
+  "archivedConsumedAtPublishedPrecision": "2026-10-18T01:30:47.240Z",
+  "nativeMinusArchiveNanos": 995000,
+  "controls": {
+    "challengeConsumed": true,
+    "otpConsumedAndCleared": true,
+    "temporaryVerificationCapabilityCleared": true,
+    "originalEmergencySubstituteRejectedByCurrentHashArchived": true,
+    "rotatedEmergencyCodeMatchesHashArchived": true,
+    "newPublicPreservedDuringNormalRecovery": true,
+    "sessionVersionBefore": 0,
+    "sessionVersionAfter": 1,
+    "observedOldAccessHttpRejections": 3,
+    "observedOldRefreshHttpRejections": 3,
+    "refreshTokensRevokedByCompletionAudit": 5,
+    "allFourteenEarlierRefreshTokensPersistedRevoked": true,
+    "recoveredLoginObservedAndAuditPresent": true,
+    "sameAccountOrganizationIdentityLedgerPreserved": true
+  },
+  "simulatedOtp": {
+    "emissions": 2,
+    "resends": 1,
+    "retainedSendSlots": 2,
+    "withinApprovedThreePerSixtyMinutes": true,
+    "deviationFromNoResendInstruction": true,
+    "externalSmtpRepeated": false,
+    "explanation": "Two mock OTP emissions were observed; do not claim zero resends. The current contract permits resending under the unchanged 3/60-minute limit. CLI resend requires explicit S; this inspection executed no HTTP or send."
+  },
+  "caseInspection": {
+    "database": "ruta_fija_test",
+    "role": "rf_test",
+    "schema": "V26",
+    "historicalCreations": {
+      "SUPER_ADMIN": 1,
+      "ADMIN": 2,
+      "CONDUCTOR": 0
+    },
+    "remainingSlots": {
+      "CONDUCTOR": 20,
+      "SUPER_ADMIN": 0,
+      "ADMIN": 2
+    },
+    "superAdminAccounts": 1,
+    "personIdentityBindings": 2,
+    "personIdentityKeyRecorded": true,
+    "recoveryCredentialPresent": true,
+    "eligibleSyntheticPendingAdmins": 0,
+    "termsAcceptanceCount": 1,
+    "currentTerms": {
+      "id": "f590e228-5d2e-47e4-b144-b0df1198bd49",
+      "version": "1.0.0",
+      "content_sha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+      "synthetic": false
+    },
+    "publishedFileHashMatches": true,
+    "cleanupLockHeld": true,
+    "runId": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+    "caseInventory": {
+      "superAdminAccounts": 1,
+      "superAdminHistoricalCreations": 1,
+      "adminHistoricalCreations": 2,
+      "caseAccounts": 2,
+      "caseOrganizations": 1,
+      "identityBindings": 2,
+      "identityKeyRecords": 1,
+      "recoveryCredentials": 1
+    },
+    "markerPresentAndMatches": true,
+    "stateFilePresent": true,
+    "privateRuntimeKeyFilePresent": true,
+    "syntheticRecoveryFixtureRepairReadOnlyFacts": {
+      "authorizationAndOutputCheck": true,
+      "exactCaseAndMarker": true,
+      "environmentApproved": true,
+      "harnessOwnsCleanupLock": false,
+      "identitiesMatch": false,
+      "identityReviewed": true,
+      "credentialMatches": false,
+      "termsAndAcceptancePreserved": true,
+      "historicalLedgerPreserved": true,
+      "noCompletedRecovery": false,
+      "noLiveChallenge": true,
+      "noPriorRepair": false,
+      "enrollmentObservedOnce": false,
+      "observationHealthy": true
+    },
+    "syntheticRecoveryFixtureRepairRequiresServingLock": true,
+    "syntheticRecoveryFixtureKeyPreparationReadOnlyFacts": {
+      "exactCaseAndMarker": true,
+      "environmentApproved": true,
+      "harnessOwnsCleanupLock": false,
+      "identitiesMatch": false,
+      "identityReviewed": true,
+      "credentialMatches": false,
+      "termsAndAcceptancePreserved": true,
+      "historicalLedgerPreserved": true,
+      "noCompletedRecovery": false,
+      "noLiveChallenge": true,
+      "enrollmentObservedOnce": false,
+      "observationHealthy": true,
+      "authorization": true,
+      "codeRepairAuthorization": true,
+      "codeRepairPreservedOnce": true,
+      "segmentMatches": true,
+      "noPriorKeyReplacement": false
+    },
+    "syntheticRecoveryFixtureKeyPreparationRequiresServingLock": true,
+    "syntheticRecoveryFixtureKeyPreparationPublicAudits": [
+      {
+        "audit_id": "58b926a7-bf2d-4ff1-a978-feea67d1e9c4",
+        "owner_id": "088518c1-821c-4316-9f87-090f51ac44e0",
+        "installation_id": "f0cd888b-57df-4def-9d08-7882ffadebae",
+        "occurred_at": "2026-10-18T01:18:58.039+00:00",
+        "proposal_id": "REC-CI07-03",
+        "proposal_sha256": "1B0886BAC2CB077DEB9C0539D7CE16BE3349723EC74496A49A7531DDF20D38B8",
+        "approval_sha256": "434560CD1674A008405E5B1AA425CC5E8E6C7DDC17475A997EA2B7414C32BBA6",
+        "case_run_id": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+        "segment_id": "e140a035-8211-4037-82e6-388329f1cfc8",
+        "old_public_sha": "5b727e9aa6252667a1cbdc30f7575fb5007f9d8bb159d0e4dd2b5dcb27fbe00c",
+        "new_public_sha": "5569d8c89e2118dede5ca39253a03735f1eb13b88a070beab45b245ce5914433",
+        "replacement_count": "1",
+        "fingerprint_confirmed": "true",
+        "pair_checks_reported": "true",
+        "emergency_available_reported": "true",
+        "preparation_source": "AUTHORIZED_TEST_FIXTURE_MAINTENANCE_NOT_HTTP_ENROLLMENT"
+      }
+    ],
+    "currentRecoveryPublicKeyFingerprintSha256": "5569d8c89e2118dede5ca39253a03735f1eb13b88a070beab45b245ce5914433",
+    "syntheticRecoveryFixtureKeyPreparationAuditCorrespondenceVerified": true,
+    "passwordRecaptureEligibility": "PREPARED_CREDENTIALS_REQUIRE_REVIEW_NO_PASSWORD_OVERWRITE",
+    "legacyExactFirstRejectionCause": "NOT_RECORDED_CANNOT_RECONSTRUCT",
+    "latestRecordedBootstrapReason": "PASSWORD_HASH_STORED_BY_NORMAL_ENCODER_LEDGER_PRESERVED",
+    "standardCleanupRefusedByMarker": true,
+    "inspectionAtUtc": "2026-10-18T01:36:08.056176200Z",
+    "readOnly": true,
+    "smtpAttempts": 0,
+    "writes": 0
+  },
+  "reusedAndImmutableHashes": [
+    {
+      "path": "backups/L-00-2026-10-13-final3/source-snapshot.zip",
+      "sha256": "3806510606A1565F23B8C526A13CC1049BC79141BABDB8E1316F042488B3D11B",
+      "matchesExpected": true
+    },
+    {
+      "path": "docs/evidencia/L-00/source-manifest.sha256",
+      "sha256": "E78D7002D5C85B24200BE21B8FD88CE770D36333CA49CAA5351248CFD0E28BAD",
+      "matchesExpected": true
+    },
+    {
+      "path": "docs/legal/publicado/terminos-admin-v1.0.0.md",
+      "sha256": "20FFD9525CB19EC51387BF11859CF34100A5117B00DE8F428BFEB8B9A4DC6417",
+      "matchesExpected": true
+    },
+    {
+      "path": "artifacts/L-01-superadmin-titular-2026-10-17/ruta-fija-recovery-cli.jar",
+      "sha256": "91913FF7C11CABFAA01881FCBFB24BBF5ED347564C0140D73A757BC96D38E24A",
+      "matchesExpected": true
+    },
+    {
+      "path": "backend/target/l01-v26-final.log",
+      "sha256": "8B2C0455683D22DAC72E044295EE536C90A5F3EFCF4FEA5E902251027A4DADA2",
+      "matchesExpected": true
+    },
+    {
+      "path": "backend/target/l01-document-privacy-final.log",
+      "sha256": "5138ADE0E144387EE04B4066E1584DB4B705A1459DFFF26799746EC9F3C784D9",
+      "matchesExpected": true
+    },
+    {
+      "path": "docs/evidencia/L-01/ensayos-humanos-140c10a1-be0f-4d08-a6d4-c796e2ed107a/observacion-1792227077200.json",
+      "sha256": "9319F045F65FD4EE61B9A07EDEC3000E5EA6AC0E75618D99E2C4896843B8A719",
+      "matchesExpected": true
+    },
+    {
+      "path": "docs/evidencia/L-01/ensayos-humanos-140c10a1-be0f-4d08-a6d4-c796e2ed107a/observacion-1792287275662.json",
+      "sha256": "E0A986D10E09F8FBB289061753B3E36759B0CAE24E53731EDE4BBA8640D5FFFB",
+      "matchesExpected": true
+    },
+    {
+      "path": "backend/target/l01-connected-wrapper-final.log",
+      "sha256": "C9AED29D18338CC4333B9C9CFC73C0A2634B9D103B9A171893FDA18AE4B5FF60",
+      "matchesExpected": true
+    },
+    {
+      "path": "frontend/.angular/l01-person-final-tests.log",
+      "sha256": "7B8D6694BBE83A3B19BB22DAC00A04F4A2F8D1BB3AE82DB94973D5B554D0B245",
+      "matchesExpected": true
+    },
+    {
+      "path": "mobile/.dart_tool/l01-analyze.log",
+      "sha256": "808BF5A0A8D5FB332D25AFD2D351928690E9F5217CBEC97D93EE89A9C6901867",
+      "matchesExpected": true
+    },
+    {
+      "path": "mobile/.dart_tool/l01-tests.log",
+      "sha256": "84723B0C665E2458C29788B36BB704D713C9E481B111924A3E108F750AE5F8F7",
+      "matchesExpected": true
+    }
+  ],
+  "scope": {
+    "localTechnicalRehearsalVerified": true,
+    "originalCI07RealOwnerCustodySatisfied": false,
+    "independentCustodyVerified": false,
+    "legitimateAdminAcceptanceVerified": false,
+    "scopeChangeApplied": false,
+    "bothLocalHumanTrialsVerified": false,
+    "gateCI03StillMissing": true,
+    "additionalAdminAuthorized": false,
+    "lotStatus": "EN_CURSO",
+    "pilotBlocked": true,
+    "L02Started": false
+  },
+  "cleanup": {
+    "markerMatches": true,
+    "advisoryLockHeld": true,
+    "standardCleanupRefused": true,
+    "testCleanupReleased": false,
+    "applicationDataCleaned": false,
+    "historicalCountersReset": false
+  },
+  "verificationOnly": {
+    "transactionReadOnly": true,
+    "transactionRolledBack": true,
+    "applicationWrites": 0,
+    "httpCalls": 0,
+    "smtpAttempts": 0,
+    "privateKeysOrEmergencyHashesRead": false,
+    "manualRecoveryRepeated": false,
+    "newSuitesRun": false
+  },
+  "nextAction": "PRESERVE_PASS_AND_CASE_RESOLVE_CI03_PRE_ACCEPTANCE_GATE_WITH_EXPLICITLY_AUTHORIZED_SCENARIO_ONLY_THEN_APPLY_CONDITIONAL_ADDENDUM_ARCHIVE_RELEASE_AND_REVIEW_CLOSURE",
+  "limits": [
+    "In-memory emergency-code comparisons and observed HTTP session rejection results come from the intact hashed human archive; secrets were not retrieved or checks repeated.",
+    "The native read-only reader independently checks consumption, cleared temporary capability, current public key, session version, audit, recovered account and persisted token revocation.",
+    "Local key checks, exceptional code repair and public-key preparation are documented separately from original enrollment and normal recovery.",
+    "The archive publishes SQL timestamps to milliseconds; native consumption retains the full microsecond value, without modifying the original archive.",
+    "Actual pilot acceptance, legitimate owner custody and privacy/infrastructure preparation remain pending. This is not closure or an applied addendum."
+  ]
+}

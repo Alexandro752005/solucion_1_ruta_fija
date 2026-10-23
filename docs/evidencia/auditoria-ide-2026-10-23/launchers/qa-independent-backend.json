@@ -1,0 +1,81 @@
+﻿{
+    "recordedAt":  "2026-10-23T16:15:43.6261441+00:00",
+    "reviewer":  "BACKEND_QA_AGENT_INDEPENDENT_OF_OPS_AUTHOR",
+    "result":  "PASS_REVIEWED_LAUNCHER_GUARDS_AND_MOCK_TESTS_NO_BLOCKING_FINDINGS",
+    "reviewedSources":  [
+                            {
+                                "path":  "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+                                "sha256":  "298d7cb7975aeb32787c7e05bc9065acb04b8657edf35589a7050cab3ffeb167"
+                            },
+                            {
+                                "path":  "scripts/Invoke-RutaFijaQuickDemo.ps1",
+                                "sha256":  "e24de70cfc6e610a600d27058b163812151afd624ff3bcf12f40f3ffc497ffa7"
+                            },
+                            {
+                                "path":  "scripts/Invoke-RutaFijaNativeTest.ps1",
+                                "sha256":  "3b318571892f5828799f6b007fde861e2a498f1d13e21ef1c8a30265b8379fb2"
+                            },
+                            {
+                                "path":  "scripts/Invoke-RutaFijaPostgresqlLease.ps1",
+                                "sha256":  "295a2626b0fc61a05bbabd57c0e1ed8c25ea7a71e4c4a7102c9221944eb3ac18"
+                            },
+                            {
+                                "path":  "scripts/Set-RutaFijaPostgresqlService.ps1",
+                                "sha256":  "e6fb23a7902deef097c1740269cbc33973d529d8f46385221a9bac3e956e297f"
+                            },
+                            {
+                                "path":  "scripts/Test-RutaFijaNativePreflight.ps1",
+                                "sha256":  "fedf6ede15abf21cc568a6ec10ce356cc7da7902e5e43e560cdeca769b47c010"
+                            },
+                            {
+                                "path":  "scripts/Test-RutaFijaLocalSecretPolicy.ps1",
+                                "sha256":  "edeee8f8b94217eb10dabf92e71a0ebc06782fef4c23d2e5d1a983285ec538c0"
+                            },
+                            {
+                                "path":  "scripts/Test-RutaFijaLauncherSafety.ps1",
+                                "sha256":  "0454ebf8b25abd83fef5635b434d3a473ef5f7409b1949290f26fa9631be3908"
+                            }
+                        ],
+    "execution":  [
+                      {
+                          "command":  "powershell.exe -NoProfile -File scripts/Test-RutaFijaLauncherSafety.ps1 -Execute -EvidenceFile QA_PATH",
+                          "exitCode":  0,
+                          "checks":  42,
+                          "proof":  "qa-independent-backend-mocks.json"
+                      },
+                      {
+                          "command":  "Three explicit Plan commands plus Clean and unknown-action negative guards",
+                          "cases":  5,
+                          "proof":  "qa-independent-backend-plans.json"
+                      },
+                      {
+                          "command":  "powershell.exe -NoProfile -File scripts/Invoke-RutaFijaNativeTest.ps1 -Action Verify",
+                          "exitCode":  0,
+                          "selectedTestClasses":  50,
+                          "tests":  257,
+                          "failures":  0,
+                          "errors":  0,
+                          "skipped":  0,
+                          "proof":  "../backend/native-wrapper-final/verify-command.json",
+                          "run":  "../backend/run-8cbb9b20-4419-461b-a961-2ee2f46dfde7/result.json"
+                      }
+                  ],
+    "reviewedBehavior":  [
+                             "NativeTest Verify delegates only to explicit safe unit suite; no legacy verify or global cleanup fallback",
+                             "NativeTest Clean refuses before config import, service or database access",
+                             "V50 schema gate only reads catalog; Flyway disabled for API startup",
+                             "Read-only smoke additionally disables both default-enabled scheduled writers and seed; read-only connection options configured",
+                             "Owned process shutdown validates project, executable, command marker, PID and start time",
+                             "PostgreSQL ownership lease is acquired only if launcher starts previously stopped service; unowned running instance is preserved",
+                             "Changed instance, hidden process time, protected marker, other clients or unavailable client visibility prevents automatic service stop",
+                             "Quick demo checks native ports before public exposure and cannot automatically install a missing cloudflared binary"
+                         ],
+    "limits":  [
+                   "Reviewer did not start API, frontend, PostgreSQL, public tunnel or perform any real database query",
+                   "Real read-only startup and fingerprints are coordinated separately by root and OPS",
+                   "Client inspection is point-in-time; independent new clients can connect after inspection before service stop; limitation explicitly retained in source comment",
+                   "Direct low-level Set-RutaFijaPostgresqlService.ps1 Stop is privileged global administration; safe launchers use guarded StopOwned instead",
+                   "QuickDemo has no Plan action; unsupported action is rejected by ValidateSet before side effects",
+                   "Unit-safe runner is authored by this reviewer, so its independent source QA comes from mobile agent, not this OPS review"
+               ]
+}

@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/network/mobile_api_exception.dart';
+import '../../../core/network/correlation_id.dart';
 import '../../../core/presentation/mobile_error_message.dart';
 import '../data/mobile_incident_repository.dart';
 import '../domain/mobile_incident_models.dart';
 
 class IncidentReportPage extends StatefulWidget {
-  const IncidentReportPage({required this.incidentGateway, super.key});
+  const IncidentReportPage({
+    required this.incidentGateway,
+    this.previousIncidentId,
+    super.key,
+  });
 
   final MobileIncidentGateway incidentGateway;
+  final String? previousIncidentId;
 
   @override
   State<IncidentReportPage> createState() => _IncidentReportPageState();
@@ -18,6 +24,10 @@ class _IncidentReportPageState extends State<IncidentReportPage> {
   final _formKey = GlobalKey<FormState>();
   final _descriptionController = TextEditingController();
   MobileIncidentCategory _category = MobileIncidentCategory.averia;
+  MobileIncidentSeverity? _severity;
+  String? _relationReason;
+  final String _operationKey = createCorrelationId();
+  DateTime? _occurredAt;
   bool _submitting = false;
   bool _resultUnknown = false;
 
@@ -32,10 +42,16 @@ class _IncidentReportPageState extends State<IncidentReportPage> {
       return;
     }
     setState(() => _submitting = true);
+    _occurredAt ??= DateTime.now().toUtc();
     try {
       await widget.incidentGateway.create(
         category: _category,
         description: _descriptionController.text,
+        severity: _severity!,
+        operationKey: _operationKey,
+        occurredAt: _occurredAt,
+        previousIncidentId: widget.previousIncidentId,
+        relationReason: _relationReason,
       );
       if (!mounted) {
         return;
@@ -48,7 +64,8 @@ class _IncidentReportPageState extends State<IncidentReportPage> {
       if (!mounted) {
         return;
       }
-      if (error is MobileNetworkException) {
+      if (error is MobileNetworkException ||
+          (error is MobileApiException && error.status >= 500)) {
         setState(() => _resultUnknown = true);
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -65,6 +82,30 @@ class _IncidentReportPageState extends State<IncidentReportPage> {
       if (mounted) {
         setState(() => _submitting = false);
       }
+    }
+  }
+
+  Future<void> _consult() async {
+    if (!_resultUnknown || _submitting) return;
+    setState(() => _submitting = true);
+    try {
+      final receipt = await widget.incidentGateway.operation(_operationKey);
+      if (receipt.operationKey != _operationKey || receipt.kind != 'REPORT') {
+        throw const FormatException('No se pudo contrastar el reporte.');
+      }
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Reporte confirmado por el servidor.')),
+        );
+        Navigator.of(context).pop(true);
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(mobileErrorMessage(e))));
+      }
+    } finally {
+      if (mounted) setState(() => _submitting = false);
     }
   }
 
@@ -109,6 +150,54 @@ class _IncidentReportPageState extends State<IncidentReportPage> {
                           setState(() => _category = value);
                         }
                       },
+              ),
+              const SizedBox(height: 16),
+              DropdownButtonFormField<MobileIncidentSeverity>(
+                key: const Key('incident-severity'),
+                initialValue: _severity,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Gravedad evaluada',
+                ),
+                items: [
+                  for (final s in MobileIncidentSeverity.values.where(
+                    (s) => s != MobileIncidentSeverity.unassessed,
+                  ))
+                    DropdownMenuItem(value: s, child: Text(s.label)),
+                ],
+                validator: (v) => v == null ? 'Selecciona la gravedad.' : null,
+                onChanged: _resultUnknown
+                    ? null
+                    : (v) => setState(() => _severity = v),
+              ),
+              if (widget.previousIncidentId != null) ...[
+                Text(
+                  'Caso posterior a INCIDENCIA-${widget.previousIncidentId}. Su cierre se conserva.',
+                ),
+                DropdownButtonFormField<String>(
+                  key: const Key('incident-relation'),
+                  initialValue: _relationReason,
+                  decoration: const InputDecoration(
+                    labelText: 'Motivo del nuevo caso',
+                  ),
+                  items: const [
+                    DropdownMenuItem(
+                      value: 'RECURRENCE',
+                      child: Text('Recurrencia'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'CLOSURE_ERROR',
+                      child: Text('Cierre erróneo anterior'),
+                    ),
+                  ],
+                  validator: (v) => v == null ? 'Selecciona el motivo.' : null,
+                  onChanged: _resultUnknown
+                      ? null
+                      : (v) => setState(() => _relationReason = v),
+                ),
+              ],
+              const Text(
+                'No incluyas datos personales ni coordenadas. La gravedad no interrumpe el servicio por sí sola. Ante riesgo o imposibilidad real, registra la interrupción segura en tu servicio.',
               ),
               const SizedBox(height: 16),
               TextFormField(
@@ -169,6 +258,11 @@ class _IncidentReportPageState extends State<IncidentReportPage> {
               ),
               if (_resultUnknown) ...[
                 const SizedBox(height: 12),
+                OutlinedButton(
+                  key: const Key('incident-consult-operation'),
+                  onPressed: _submitting ? null : _consult,
+                  child: const Text('Consultar confirmación del reporte'),
+                ),
                 OutlinedButton.icon(
                   key: const Key('incident-review-list'),
                   onPressed: () => Navigator.of(context).pop(true),

@@ -1,0 +1,35 @@
+{
+  "runId" : "a999ef52-d87f-498d-9251-1581cbb72562",
+  "observedAt" : "2026-10-22T22:08:07.284875900Z",
+  "historicalLedger" : {
+    "ADMIN" : 3,
+    "CONDUCTOR" : 7,
+    "SUPER_ADMIN" : 1
+  },
+  "antecedentRowCountsWithExactHashesPreserved" : {
+    "pilot_account_creation" : 10,
+    "admin_terms_acceptance" : 2,
+    "scheduled_service" : 8,
+    "assignment" : 11,
+    "incident" : 4,
+    "announcement" : 3,
+    "audit_event" : 333,
+    "report_emission" : 4
+  },
+  "result" : "PASS_READ_ONLY_SELECTIVE_RETIREMENT_AND_PRESERVATION",
+  "manualPhoneResult" : "PASS_PHYSICAL_FOREGROUND_CASE_ONLY",
+  "accountDriverVehicleGroupDisabled" : true,
+  "allCaseRefreshTokensRevoked" : true,
+  "noAuthorizedCasePeriods" : true,
+  "noOpenCaseCommitmentsOrSegments" : true,
+  "caseCurrentLocationRows" : 0,
+  "historicalCaseGpsPointsPreserved" : 14,
+  "termsAcceptancesPreserved" : 2,
+  "cleanupLockFree" : true,
+  "caseMarkerAbsent" : true,
+  "privateFixtureFileAbsent" : true,
+  "archivedManualSha256" : "13661ee0aa87196777bfe5e373dfdd7086c864a95db5c68b5ed449fd0af53e8b",
+  "databaseWritesByThisObservation" : 0,
+  "TEST_CLEANUP_RELEASED" : true,
+  "pilotEnabled" : false
+}

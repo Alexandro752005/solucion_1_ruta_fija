@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { finalize } from 'rxjs';
+import { finalize, forkJoin } from 'rxjs';
 
 import { ApiErrorService } from '../../core/api/api-error.service';
 import { UiError } from '../../core/api/api-error.model';
 import { AuthSessionService } from '../../core/auth/auth-session.service';
 import { ManagementApiService } from '../../core/management/management-api.service';
-import { GroupPayload, TransportGroup } from '../../core/management/management.models';
+import { GroupPayload, GroupResources, TransportGroup } from '../../core/management/management.models';
 import { ConfirmDialogComponent } from '../../shared/ui/confirm-dialog.component';
 import { ModalComponent } from '../../shared/ui/modal.component';
 import { PageHeaderComponent } from '../../shared/ui/page-header.component';
@@ -41,6 +41,12 @@ export class GroupsPage {
   readonly error = signal<UiError | null>(null);
   readonly notice = signal<string | null>(null);
   private deactivationApproved = false;
+  readonly resourcesGroup = signal<TransportGroup | null>(null);
+  readonly resources = signal<GroupResources | null>(null);
+  readonly resourcesLoading = signal(false);
+  readonly resourcesSaving = signal(false);
+  readonly resourcesUncertain = signal(false);
+  readonly resourceCandidates = signal<readonly { id: string; kind: 'DRIVER' | 'VEHICLE' }[]>([]);
 
   readonly form = new FormGroup({
     name: new FormControl('', {
@@ -122,7 +128,19 @@ export class GroupsPage {
     const current = this.editing();
     const value = this.form.getRawValue();
     if (current?.active && !value.active && !this.deactivationApproved) {
-      this.confirmingDeactivation.set(true);
+      this.resourcesLoading.set(true);
+      this.api.getGroupResources(current.id).pipe(finalize(() => this.resourcesLoading.set(false))).subscribe({
+        next: (resources) => {
+          if (resources.commitments.length) {
+            this.resources.set(resources);
+            this.resourcesGroup.set(current);
+            this.error.set(this.apiErrors.toUiError(null, 'Resuelve los compromisos mostrados antes de retirar el grupo.'));
+          } else {
+            this.confirmingDeactivation.set(true);
+          }
+        },
+        error: (error: unknown) => this.error.set(this.apiErrors.toUiError(error, 'No se pudieron comprobar los compromisos.')),
+      });
       return;
     }
 
@@ -137,6 +155,7 @@ export class GroupsPage {
           name: value.name.trim(),
           description: value.description.trim() || undefined,
           active: value.active,
+          expectedVersion: current.version ?? 0,
         });
 
     request.pipe(finalize(() => this.saving.set(false))).subscribe({
@@ -160,7 +179,58 @@ export class GroupsPage {
     this.confirmingDeactivation.set(false);
   }
 
+  openResources(group: TransportGroup): void {
+    this.resourcesGroup.set(group);
+    this.resources.set(null);
+    this.resourceCandidates.set([]);
+    this.resourcesUncertain.set(false);
+    this.reloadResources();
+    forkJoin({ drivers: this.api.listDrivers({ size: 100 }), vehicles: this.api.listVehicles({ size: 100 }) }).subscribe({
+      next: ({ drivers, vehicles }) => this.resourceCandidates.set([
+        ...drivers.items.map((d) => ({ id: d.id, kind: 'DRIVER' as const })),
+        ...vehicles.items.map((v) => ({ id: v.id, kind: 'VEHICLE' as const })),
+      ]),
+      error: (error: unknown) => this.error.set(this.apiErrors.toUiError(error, 'No se pudieron cargar los recursos de la organización.')),
+    });
+  }
+
+  reloadResources(): void {
+    const group = this.resourcesGroup();
+    if (!group || this.resourcesSaving()) return;
+    this.resourcesLoading.set(true);
+    this.api.getGroupResources(group.id).pipe(finalize(() => this.resourcesLoading.set(false))).subscribe({
+      next: (value) => { this.resources.set(value); this.resourcesUncertain.set(false); },
+      error: (error: unknown) => { this.resourcesUncertain.set(true); this.error.set(this.apiErrors.toUiError(error, 'Consulta de recursos no confirmada.')); },
+    });
+  }
+
+  changeMembership(kind: 'DRIVER' | 'VEHICLE', resourceId: string, active: boolean, reason: string): void {
+    const group = this.resourcesGroup();
+    const state = this.resources();
+    if (!group || !state || !state.active || this.resourcesSaving() || this.resourcesLoading() || this.resourcesUncertain() || !reason.trim()) return;
+    this.resourcesSaving.set(true);
+    this.api.changeGroupMembership(group.id, { expectedVersion: state.version, operationKey: crypto.randomUUID(), reason: reason.trim(), resourceKind: kind, resourceId, active })
+      .pipe(finalize(() => this.resourcesSaving.set(false))).subscribe({
+        next: (value) => { this.resources.set(value); this.notice.set('Membresía confirmada. No concede permisos ni vínculo de unidad.'); },
+        error: (error: unknown) => { this.resourcesUncertain.set(true); this.error.set(this.apiErrors.toUiError(error, 'Cambio no confirmado. Consulta el estado antes de otra acción.')); },
+      });
+  }
+
+  addResource(selection: string, reason: string): void {
+    const [kind, id] = selection.split(':');
+    if ((kind === 'DRIVER' || kind === 'VEHICLE') && id) this.changeMembership(kind, id, true, reason);
+  }
+
+  closeResources(): void {
+    if (this.resourcesSaving()) return;
+    this.resourcesGroup.set(null);
+    this.resources.set(null);
+    this.resourceCandidates.set([]);
+  }
+
   previousPage(): void { if (this.page() > 0) this.load(this.page() - 1); }
+  commitmentStatusLabel(status:string):string { return ({PENDING_RESPONSE:'Pendiente de respuesta',SCHEDULED:'Programada',EN_SERVICIO:'En servicio',INTERRUPTED:'Interrumpida',TRANSFERRED:'Tramo relevado',COMPLETED:'Completada',CANCELLED:'Cancelada',EXPIRED:'Vencida',REJECTED:'Rechazada'} as Record<string,string>)[status]??'Compromiso registrado'; }
+  attentionLabel(kind:string|null|undefined):string { return ({SAFETY_ATTENTION:'Atención segura pendiente de conductor o unidad',INTERRUPTED_CONTINUITY:'Continuidad interrumpida pendiente de decisión',PENDING_REASSIGNMENT:'Reasignación pendiente'} as Record<string,string>)[kind??'']??'Compromiso vigente'; }
   nextPage(): void { if (this.page() + 1 < this.totalPages()) this.load(this.page() + 1); }
 
   private resetForm(close = true): void {

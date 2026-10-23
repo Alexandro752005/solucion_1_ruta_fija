@@ -1,0 +1,152 @@
+{
+  "observedAtUtc": "2026-10-23T06:44:13.135617+00:00",
+  "reviewer": "mobile_nofix independent of coordination document author",
+  "result": "PASS_LOCAL_CANDIDATE_DOCUMENTS_NO_BLOCKERS",
+  "reviewedFiles": [
+    {
+      "path": "docs/contratos/L-08.md",
+      "sha256": "b50004699d347af83ac396fd84b21bc21c5939327f0de6f0defa264219f95cdd"
+    },
+    {
+      "path": "docs/evidencia/L-08/matriz-L08.md",
+      "sha256": "e498c72e9a17f1570338ee879a0cd72fd2ba8dfa6baec938c86dfa404fc69e78"
+    },
+    {
+      "path": "docs/actas/L-08-cierre-funcional-global.md",
+      "sha256": "b47807659aa898192e7c1eedd8b658cdf3f3dd0830afc0108bb0eaefa069c0ea"
+    },
+    {
+      "path": "INFORME_FINAL_SUSTENTACION_RUTA_FIJA_V3_1_L08.md",
+      "sha256": "ee220eebcae7c569d7e59d6dc4e936abe69e546a08b26b9fca9f90ec06bc9498"
+    },
+    {
+      "path": "docs/legal/protocolo-transicion-piloto-real.md",
+      "sha256": "7683e72a3dba1f3c009a6c72e59f5872bdb62d42e68787f0204bb9cc21d68453"
+    },
+    {
+      "path": "docs/backlog-producto-ruta-fija-v3.1.md",
+      "sha256": "cce2430609bb8fcdb3ce3a541f1108d883e65176919106d696721ba5bbde21da"
+    },
+    {
+      "path": "docs/seguimiento/tareas.json",
+      "sha256": "e056b895604ad7b5f8983680f71a67f7da0b4bfd5f3f240fbc157409bf70325c"
+    },
+    {
+      "path": "memory/current.md",
+      "sha256": "be7db2c9ac738985a52c4b8b7c8ea5b64d09d6cd72fb924f254e445231304392"
+    },
+    {
+      "path": "memory/target.md",
+      "sha256": "aac68080131a94098b8e744ecf5722923c1ba3587421392bdd2d185c201af579"
+    },
+    {
+      "path": "specs/decisiones-L08-2026-10-21.json",
+      "sha256": "04f772b30c34153cf93c1aaa49161c6c7d959680777516bad14810494dce5b1f"
+    },
+    {
+      "path": "docs/evidencia/L-08/incremento-5-candidato-final/README.md",
+      "sha256": "8e3daa72cec4021c904e0318e25fa441b913255f723cd3994f753b9c03362956"
+    },
+    {
+      "path": "docs/ejecucion/L-08.md",
+      "sha256": "e5b234f66218a7d27652a2e08b7eaf0ac16400fd6de1ad26ea7d885983f4e7c2"
+    },
+    {
+      "path": "docs/contratos/L-08-v0.8.0-antecedente.md",
+      "sha256": "9ed15af92180b7578f3c2942da4492bff5d3d8c9b3d096646d76b564c408b118"
+    },
+    {
+      "path": "docs/evidencia/L-08/matriz-L08-v0.8.0-antecedente.md",
+      "sha256": "f35748e22cb9e9c84d2b000cd7cdefbf84f48b6168118c9545d282468ca478b7"
+    }
+  ],
+  "checks": {
+    "nineLotsVerified": true,
+    "twelveMatrixLocalStatuses": true,
+    "sixFieldCriteriaRemainPending": true,
+    "goLocalAndNoGoRealPilotSeparated": true,
+    "exact08AntecedentsEqualBackups": true,
+    "historicalCoordinationTextPreserved": true,
+    "specsCurrentFieldsConcordantWithTracking": true,
+    "newMarkdownLocalLinksChecked": 54,
+    "missingLinks": [],
+    "actualApkAndJarHashesMatch": true,
+    "releaseRebuildSameSignerAndBytes": true,
+    "opsNumbersMatchFinalSummary": true,
+    "mobileSixAreIncludedIn56": true,
+    "noPhysicalSatelliteLossClaimed": true,
+    "academicRubricUnknownPreserved": true,
+    "noHumanLegalSignatureClaimed": true
+  },
+  "resolvedFindings": [
+    {
+      "id": "QAR-01",
+      "finding": "Specs root retained current contract0.8 and old local pending arrays/note/index alongside0.9 closure",
+      "resolution": "Current fields synchronized to lot0.9 and exact08 backup remains explicit antecedent; finalizer source corrected",
+      "status": "CORRECTED_REVIEWED"
+    }
+  ],
+  "signatureAndSeal": {
+    "actSignedAtReview": false,
+    "publicSignatureVerificationPerformedByThisReview": false,
+    "finalSealVerifiedByThisReview": false,
+    "deliveryRequiresSignatureTamperRejectionAndFinalSeal": true,
+    "reason": "Documents approved before technical signing; later independent proof and final manifest are mandatory"
+  },
+  "toolingIncidents": [
+    {
+      "kind": "read-only console encoding",
+      "initialResult": "UnicodeEncodeError printing arrow under Windows cp1252",
+      "correction": "JSON output escaped non-ASCII on retry; no files modified",
+      "productFailure": false
+    }
+  ],
+  "scopeLimits": [
+    "Document and evidence concordance only; no new physical GPS, database or operational infrastructure test",
+    "Reserved API.invalid remains without a live service; physicalv4 evidence not attributed to releasev5",
+    "No main finalizer execution or global document edits by this reviewer"
+  ],
+  "earlierReviewedAtUtc": "2026-10-23T06:42:44.667722+00:00",
+  "editorialRecheck": {
+    "result": "PASS_FINAL_EDITORIAL_FREEZE_READ_ONLY",
+    "changedFiles": [
+      {
+        "path": "docs/evidencia/L-08/matriz-L08.md",
+        "previousSha256": "78c7878ea2f0d5ef8ff758f5cdca8c1c6afd99c90f2a7a33016bb8144650fff7",
+        "currentSha256": "e498c72e9a17f1570338ee879a0cd72fd2ba8dfa6baec938c86dfa404fc69e78"
+      },
+      {
+        "path": "docs/backlog-producto-ruta-fija-v3.1.md",
+        "previousSha256": "81689057e5406b44c1aa99f32ad02d8c9037f470f3a599ce0cfd5dd2415d5e2d",
+        "currentSha256": "cce2430609bb8fcdb3ce3a541f1108d883e65176919106d696721ba5bbde21da"
+      },
+      {
+        "path": "docs/seguimiento/tareas.json",
+        "previousSha256": "770a59d447fecfdb7b8495185478b5d1e025a6f5135730c9e02382f7ad6a0af4",
+        "currentSha256": "e056b895604ad7b5f8983680f71a67f7da0b4bfd5f3f240fbc157409bf70325c"
+      },
+      {
+        "path": "memory/current.md",
+        "previousSha256": "40875a60fb889285759cf0c8fccc82670fe9136ff7b58dc2fac30e91f0235fd0",
+        "currentSha256": "be7db2c9ac738985a52c4b8b7c8ea5b64d09d6cd72fb924f254e445231304392"
+      },
+      {
+        "path": "memory/target.md",
+        "previousSha256": "66cf06abfcc8a72039811be1612b0f6f1e15038dc5e31228715914790a997c8a",
+        "currentSha256": "aac68080131a94098b8e744ecf5722923c1ba3587421392bdd2d185c201af579"
+      },
+      {
+        "path": "specs/decisiones-L08-2026-10-21.json",
+        "previousSha256": "09bfad831604f9c28a0216d41f81427a3eec494b61bc7b519cd58b546ed364da",
+        "currentSha256": "04f772b30c34153cf93c1aaa49161c6c7d959680777516bad14810494dce5b1f"
+      },
+      {
+        "path": "docs/ejecucion/L-08.md",
+        "previousSha256": "6b96fa26f8cef124db4f92fa5cc7fc53f678a2d3cc090d02eef567a914c2f07e",
+        "currentSha256": "e5b234f66218a7d27652a2e08b7eaf0ac16400fd6de1ad26ea7d885983f4e7c2"
+      }
+    ],
+    "approvedParentFreezeMessage": "FIN EDITORIAL; no more changes to reviewed documents promised",
+    "signatureAndSealStillRequiredBeforeDelivery": true
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "localDate": "2026-10-20",
+  "status": "PASS_LOCAL_INCREMENTAL_BUILDS_ONLY",
+  "evidenceManifestSha256": "72310162de8b399ee345f1912455f284dc3c79964031445e48df8252a3461405",
+  "artifactManifestSha256": "5e1fa364ae36d17b396f976c7cd0ec66d03d3ac9ae4bc549e793f35e2fd4fd3d",
+  "files": [
+    {
+      "path": "ruta-fija-backend-0.1.0-SNAPSHOT.jar",
+      "sha256": "c0e6c301bdc67d8010fa20600eb88236ac03800789e8753ad58349976d5ce1a4",
+      "bytes": 91055266
+    },
+    {
+      "path": "app-debug.apk",
+      "sha256": "8232944a27eefe1fbde44cf8b685989b3b4938fe606fd170f0573e1a2903f32b",
+      "bytes": 185206854
+    }
+  ],
+  "installed": false,
+  "deployed": false
+}

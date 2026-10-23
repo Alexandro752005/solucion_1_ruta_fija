@@ -14,8 +14,43 @@ abstract interface class MobileAssignmentCommandStore {
   Future<void> clearAll();
 }
 
-/// Protected, narrow persistence for a command whose outcome is still unknown.
-/// It is not an automatic offline queue: the conductor explicitly retries it.
+/// Holds an uncertain online result only for this app process.
+final class MobileSessionAssignmentCommandStore
+    implements MobileAssignmentCommandStore {
+  final Map<String, MobilePendingAssignmentCommand> _commands = {};
+
+  @override
+  Future<List<MobilePendingAssignmentCommand>> readForDriver(
+    String driverId,
+  ) async {
+    final commands = _commands.values
+        .where((command) => command.driverId == driverId)
+        .toList(growable: false);
+    return List.unmodifiable(commands);
+  }
+
+  @override
+  Future<void> write(MobilePendingAssignmentCommand command) async {
+    _commands[_keyFor(command)] = command;
+  }
+
+  @override
+  Future<void> delete(MobilePendingAssignmentCommand command) async {
+    _commands.remove(_keyFor(command));
+  }
+
+  @override
+  Future<void> clearAll() async {
+    _commands.clear();
+  }
+
+  String _keyFor(MobilePendingAssignmentCommand command) {
+    return '${command.driverId}:${command.assignmentId}';
+  }
+}
+
+/// Legacy persistent store retained for historical compatibility. The v3.1
+/// application runtime uses [MobileSessionAssignmentCommandStore].
 final class MobileSecureAssignmentCommandStore
     implements MobileAssignmentCommandStore {
   MobileSecureAssignmentCommandStore({FlutterSecureStorage? storage})

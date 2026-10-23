@@ -1,0 +1,8 @@
+{
+    "observedAt":  "2026-10-23T05:31:56.8141395+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "result":  "PASS_EXACT_TEMPORARY_CASE_FIREWALL_RULE_REMOVED_AND_REREAD",
+    "temporaryFirewallRuleRetired":  true,
+    "ruleName":  "RutaFija-L08-FIS02-3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "otherFirewallRulesChanged":  false
+}

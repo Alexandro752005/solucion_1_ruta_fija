@@ -1,0 +1,29 @@
+{
+  "scope": "READ_ONLY_DIAGNOSTICS_ONLY_NO_HUMAN_TRIAL_REPEAT",
+  "applicationOrProtocolChanged": false,
+  "firstAuxiliaryCheck": {
+    "result": "REFUSED_NO_PASS",
+    "reason": "ARCHIVE_NATIVE_CONSUMPTION_MISMATCH",
+    "nativeTimestamp": "2026-10-18T01:30:47.240995Z",
+    "archivePublishedTimestamp": "2026-10-18T01:30:47.240Z",
+    "differenceNanoseconds": 995000,
+    "resolution": "Compare at the archive millisecond precision and also retain the native full-precision instant. Original archive remains unchanged."
+  },
+  "secondAuxiliaryCheck": {
+    "result": "REFUSED_NO_PASS",
+    "reason": "RECOVERY_AUDIT_COUNT_MISMATCH",
+    "incorrectAuxiliaryAssumption": "Exactly one OTP emission in the rehearsal",
+    "observedMockEmissions": 2,
+    "resolution": "Current contract allows resending with a maximum of three per sixty minutes. Final reader checks matching rolling send slots and audit count within that limit; it reports the deviation from the no-resend instruction explicitly."
+  },
+  "finalReader": {
+    "result": "PASS_LOCAL_TEMPORARY_COPY_ONLY",
+    "inspectionAtUtc": "2026-10-18T01:40:55.056433400Z",
+    "readOnlyEffective": true,
+    "transactionRolledBack": true,
+    "applicationWrites": 0,
+    "httpCalls": 0,
+    "smtpAttempts": 0,
+    "manualRecoveryRepeated": false
+  }
+}

@@ -12,6 +12,10 @@ public record MobileIncidentCreateRequest(
         UUID assignmentId,
         @NotNull IncidentCategory category,
         @NotBlank @Size(max = 1000) String description,
-        @NotNull Instant occurredAt
+        @NotNull Instant occurredAt,
+        @NotNull pe.rutafija.operation.domain.IncidentSeverity severity,
+        @NotNull UUID operationKey,
+        UUID previousIncidentId,
+        @Size(max=20) String relationReason
 ) {
 }

@@ -1,0 +1,98 @@
+{
+  "runId" : "2e734706-f7ef-4947-b940-1f64fd13f86a",
+  "ledgerBefore" : {
+    "SUPER_ADMIN" : 1,
+    "ADMIN" : 3,
+    "CONDUCTOR" : 1
+  },
+  "acceptancesBefore" : 2,
+  "phase" : "SELECTIVE_CLOSE",
+  "observedAt" : "2026-10-19T16:31:11.523447900Z",
+  "vehicleId" : "95d84927-72b5-48ad-ab0f-b8191c0664f6",
+  "crmPassed" : true,
+  "flutterPassed" : true,
+  "routeId" : "f8f3925a-6979-49f7-8fe9-f15dbfb82576",
+  "ledgerAfter" : {
+    "SUPER_ADMIN" : 1,
+    "ADMIN" : 3,
+    "CONDUCTOR" : 1
+  },
+  "result" : "PASS_REAL_BROWSER_HTTP_PG_AND_FLUTTER_ROLE_REJECTION",
+  "accountCreations" : 0,
+  "externalMailAttempts" : 0,
+  "cleanup" : "TECHNICAL_UNIT_INACTIVE_ROUTE_RETIRED_PLAN_CANCELLED_REFRESH_FAMILY_REVOKED_HISTORY_RETAINED",
+  "mobileHappyPathTcpTested" : false,
+  "globalCleanup" : false,
+  "httpEvents" : [ {
+    "method" : "POST",
+    "path" : "/api/v1/auth/refresh",
+    "observedAt" : "2026-10-19T16:30:57.083871900Z",
+    "status" : 200
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/auth/me",
+    "observedAt" : "2026-10-19T16:30:57.118874100Z",
+    "status" : 200
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/terms/current",
+    "observedAt" : "2026-10-19T16:30:57.173164800Z",
+    "status" : 200
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/routes",
+    "observedAt" : "2026-10-19T16:30:57.322021300Z",
+    "status" : 200
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/routes",
+    "observedAt" : "2026-10-19T16:30:57.871902400Z",
+    "status" : 200
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/routes",
+    "observedAt" : "2026-10-19T16:30:57.908647100Z",
+    "status" : 200
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/auth/refresh",
+    "observedAt" : "2026-10-19T16:30:58.087646500Z",
+    "status" : 200
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/auth/me",
+    "observedAt" : "2026-10-19T16:30:58.106649100Z",
+    "status" : 200
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/terms/current",
+    "observedAt" : "2026-10-19T16:30:58.130648Z",
+    "status" : 200
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/vehicles/95d84927-72b5-48ad-ab0f-b8191c0664f6/maintenance",
+    "observedAt" : "2026-10-19T16:30:58.206259700Z",
+    "status" : 200
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/vehicles/95d84927-72b5-48ad-ab0f-b8191c0664f6/maintenance/preview",
+    "observedAt" : "2026-10-19T16:30:58.405838800Z",
+    "status" : 200
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/vehicles/95d84927-72b5-48ad-ab0f-b8191c0664f6/maintenance",
+    "observedAt" : "2026-10-19T16:30:58.569821600Z",
+    "status" : 200
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/vehicles/95d84927-72b5-48ad-ab0f-b8191c0664f6/maintenance/0bca782b-9933-4713-8563-b367df1c1c54/cancel",
+    "observedAt" : "2026-10-19T16:30:58.690283500Z",
+    "status" : 200
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/mobile/assignments/95d84927-72b5-48ad-ab0f-b8191c0664f6/route",
+    "observedAt" : "2026-10-19T16:31:10.940526900Z",
+    "status" : 403
+  } ],
+  "TEST_CLEANUP_RELEASED" : true
+}

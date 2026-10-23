@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('Start', 'Stop', 'Test')]
-    [string]$Action = 'Test',
+    [ValidateSet('Plan', 'Start', 'Stop', 'Test')]
+    [string]$Action = 'Plan',
 
     [string]$ConfigPath,
 
@@ -10,11 +10,15 @@ param(
 
     [switch]$RunFullAudit,
 
-    [string]$PublicDemoOrigin
+    [string]$PublicDemoOrigin,
+    [switch]$SmokeReadOnly,
+    [switch]$SmokeTestDatabase
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+if($SmokeTestDatabase-and-not$SmokeReadOnly){throw 'TEST_DATABASE_ALLOWED_ONLY_WITH_EXPLICIT_READ_ONLY_SMOKE'}
+. (Join-Path $PSScriptRoot 'RutaFijaRuntimeSchemaPolicy.ps1')
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
 if ([string]::IsNullOrWhiteSpace($ConfigPath)) {
@@ -121,7 +125,7 @@ function Get-RuntimeState {
         throw 'El estado de ejecución nativa no es JSON válido. F1.1B no administrará procesos no verificables.'
     }
 
-    if ([int]$state.schemaVersion -ne 1 -or
+    if ([int]$state.schemaVersion -ne 2 -or
         [string]$state.projectRoot -ne [IO.Path]::GetFullPath($repoRoot)) {
         throw 'El estado de ejecución nativa no pertenece a este proyecto o versión.'
     }
@@ -132,12 +136,14 @@ function Get-RuntimeState {
             throw "El estado nativo no contiene el servicio $serviceName."
         }
         $service = $serviceProperty.Value
-        foreach ($propertyName in @('processId', 'port', 'commandMarker')) {
+        foreach ($propertyName in @('processId', 'port', 'commandMarker', 'executable', 'processStartedAtUtc')) {
             if ($null -eq $service.PSObject.Properties[$propertyName] -or
                 [string]::IsNullOrWhiteSpace([string]$service.$propertyName)) {
                 throw "El estado nativo de $serviceName está incompleto."
             }
         }
+        $expectedPort = if ($serviceName -eq 'backend') { 8080 } else { 4300 }
+        if ([int]$service.port -ne $expectedPort) { throw 'El estado nativo contiene un puerto ajeno al runtime aprobado.' }
     }
 
     return $state
@@ -176,6 +182,13 @@ function Get-ManagedServiceState {
     $commandLineMatches = -not [string]::IsNullOrWhiteSpace($commandLine) -and
         $commandLine.IndexOf($commandMarker, [StringComparison]::OrdinalIgnoreCase) -ge 0
     $portMatches = $null -ne $portOwner -and $portOwner -eq $processId
+    $instanceMatches = $false
+    if ($null -ne $process) {
+        try {
+            $instanceMatches = $process.StartTime.ToUniversalTime().ToString('o') -eq [string]$service.processStartedAtUtc -and
+                [IO.Path]::GetFullPath($process.Path) -ieq [IO.Path]::GetFullPath([string]$service.executable)
+        } catch { $instanceMatches = $false }
+    }
 
     return [pscustomobject]@{
         ServiceName = $ServiceName
@@ -183,7 +196,7 @@ function Get-ManagedServiceState {
         Port = $port
         ProcessExists = $null -ne $process
         PortOwner = $portOwner
-        IsManaged = $processNameMatches -and $commandLineMatches -and $portMatches
+        IsManaged = $processNameMatches -and $commandLineMatches -and $portMatches -and $instanceMatches
         Reason = if ($null -eq $process) {
             'el proceso ya no existe'
         } elseif (-not $processNameMatches) {
@@ -192,6 +205,8 @@ function Get-ManagedServiceState {
             'la línea de comando no coincide con el proceso iniciado por Ruta Fija'
         } elseif (-not $portMatches) {
             'el PID no controla el puerto esperado'
+        } elseif (-not $instanceMatches) {
+            'el ejecutable o instante de creación no coincide; posible PID reutilizado'
         } else {
             'válido'
         }
@@ -286,6 +301,7 @@ function Test-RutaFijaRuntime {
 }
 
 function Get-ValidatedRuntimeSettings {
+    & (Join-Path $PSScriptRoot 'Test-RutaFijaLocalSecretPolicy.ps1') -Action Check -Execute -ConfigPath $ConfigPath | Out-Null
     $settings = & $nativeImportScript -ConfigPath $ConfigPath -PassThru -Scope Runtime
     if ($null -eq $settings) {
         throw 'No se pudo leer la configuración nativa local.'
@@ -306,6 +322,10 @@ function Get-ValidatedRuntimeSettings {
             throw "La configuración nativa no cumple $($entry.Key) para F1.1B."
         }
     }
+    if($SmokeTestDatabase){
+        $test=& $nativeImportScript -ConfigPath $ConfigPath -PassThru -Scope Test
+        foreach($name in @('SPRING_DATASOURCE_URL','SPRING_DATASOURCE_USERNAME','SPRING_DATASOURCE_PASSWORD','SPRING_FLYWAY_URL','SPRING_FLYWAY_USERNAME','SPRING_FLYWAY_PASSWORD')){$settings[$name]=$test[$name]}
+    }
     if (-not [string]::IsNullOrWhiteSpace($PublicDemoOrigin)) {
         $normalizedDemoOrigin = $PublicDemoOrigin.Trim().TrimEnd('/')
         $demoUri = $null
@@ -325,6 +345,19 @@ function Get-ValidatedRuntimeSettings {
         $settings['REFRESH_COOKIE_SECURE'] = 'true'
     }
     return $settings
+}
+
+function Assert-RuntimeSchemaReady {
+    param([Parameter(Mandatory)]$Settings)
+    $oldPassword=$env:PGPASSWORD; $oldOptions=$env:PGOPTIONS
+    try {
+        $env:PGPASSWORD=$Settings['SPRING_FLYWAY_PASSWORD']
+        $env:PGOPTIONS='-c default_transaction_read_only=on -c statement_timeout=5000'
+        $query=Get-RuntimeSchemaObservationQuery
+        $database=if($SmokeTestDatabase){'ruta_fija_test'}else{'solucion_ruta_fija_1'}
+        $rows=@(& 'C:/Program Files/PostgreSQL/16/bin/psql.exe' -X -w -v ON_ERROR_STOP=1 -h 127.0.0.1 -p 5432 -U rf_migrator -d $database -At -c $query 2>&1)
+        Assert-RuntimeSchemaObservation -Database $database -Rows $rows -ExitCode $LASTEXITCODE -TestDatabase ([bool]$SmokeTestDatabase)
+    } finally {$env:PGPASSWORD=$oldPassword;$env:PGOPTIONS=$oldOptions}
 }
 
 function Set-RuntimeEnvironment {
@@ -352,6 +385,8 @@ function Assert-StartCanProceed {
         $backend = Get-ManagedServiceState -State $state -ServiceName 'backend'
         $frontend = Get-ManagedServiceState -State $state -ServiceName 'frontend'
         if ($backend.IsManaged -and $frontend.IsManaged) {
+            $requestedMode=if($SmokeReadOnly){'SMOKE_READ_ONLY'}else{'NORMAL_LOCAL'}
+            if([string]$state.mode-ne$requestedMode){throw 'El runtime ya activo usa otro modo; no se reutiliza como smoke.'}
             Test-RutaFijaRuntime -State $state -Quiet
             Write-Host 'F1_1B_ALREADY_RUNNING=PASS backend=UP frontend=UP'
             return $false
@@ -456,7 +491,9 @@ function Test-BackendBuildRequired {
         }
     }
 
-    $sourceRoot = Join-Path $backendRoot 'src'
+    # Tests are excluded from this package command; their timestamps do not
+    # invalidate the runtime JAR. Unit compilation has its own safe runner.
+    $sourceRoot = Join-Path $backendRoot 'src/main'
     if (Test-Path -LiteralPath $sourceRoot -PathType Container) {
         foreach ($sourceFile in Get-ChildItem -LiteralPath $sourceRoot -Recurse -File) {
             $buildInputs.Add($sourceFile)
@@ -510,6 +547,11 @@ function Invoke-NativeStart {
 
     try {
         $settings = Get-ValidatedRuntimeSettings
+        Assert-RuntimeSchemaReady -Settings $settings
+        if($SmokeReadOnly){
+            $settings['SPRING_DATASOURCE_HIKARI_CONNECTIONINITSQL']='SET default_transaction_read_only=on'
+            $settings['SPRING_DATASOURCE_URL']+='?options=-c%20default_transaction_read_only%3Don'
+        }
         $previousEnvironment = Set-RuntimeEnvironment -Settings $settings
         if (-not (Assert-StartCanProceed)) {
             return
@@ -534,7 +576,9 @@ function Invoke-NativeStart {
         $backendError = Join-Path $runtimeDirectory 'backend.stderr.log'
         Set-Content -LiteralPath $backendOutput -Value $null -Encoding UTF8
         Set-Content -LiteralPath $backendError -Value $null -Encoding UTF8
-        $backendProcess = Start-Process -FilePath $javaPath -ArgumentList @('-Xms64m', '-Xmx384m', '-XX:MaxMetaspaceSize=256m', '-XX:+UseSerialGC', '-Dfile.encoding=UTF-8', '-jar', ('"{0}"' -f $backendJar[0].FullName), '--spring.profiles.active=local', '--server.address=127.0.0.1') -WorkingDirectory $backendRoot -RedirectStandardOutput $backendOutput -RedirectStandardError $backendError -WindowStyle Hidden -PassThru
+        $backendArguments=@('-Xms64m','-Xmx384m','-XX:MaxMetaspaceSize=256m','-XX:+UseSerialGC','-Dfile.encoding=UTF-8','-jar',('"{0}"' -f $backendJar[0].FullName),'--spring.profiles.active=local','--server.address=127.0.0.1','--spring.flyway.enabled=false','--app.seed.enabled=false')
+        if($SmokeReadOnly){$backendArguments+=@('--app.mobile.maintenance-enabled=false','--app.qualification.maintenance.enabled=false')}
+        $backendProcess = Start-Process -FilePath $javaPath -ArgumentList $backendArguments -WorkingDirectory $backendRoot -RedirectStandardOutput $backendOutput -RedirectStandardError $backendError -WindowStyle Hidden -PassThru
         $startedProcesses.Add($backendProcess)
 
         $null = Test-BackendHealth -TimeoutSeconds $StartupTimeoutSeconds
@@ -562,18 +606,23 @@ function Invoke-NativeStart {
         }
 
         $state = [ordered]@{
-            schemaVersion = 1
+            schemaVersion = 2
+            mode = if($SmokeReadOnly){'SMOKE_READ_ONLY'}else{'NORMAL_LOCAL'}
             projectRoot = [IO.Path]::GetFullPath($repoRoot)
             startedAtUtc = [DateTime]::UtcNow.ToString('o')
             backend = [ordered]@{
                 processId = $backendProcess.Id
                 port = $backendPort
-                commandMarker = $backendJar[0].Name
+                commandMarker = $backendJar[0].FullName
+                executable = $javaPath
+                processStartedAtUtc = $backendProcess.StartTime.ToUniversalTime().ToString('o')
             }
             frontend = [ordered]@{
                 processId = $frontendProcess.Id
                 port = $frontendPort
-                commandMarker = 'ng.js'
+                commandMarker = $angularCli
+                executable = $node.Source
+                processStartedAtUtc = $frontendProcess.StartTime.ToUniversalTime().ToString('o')
             }
         }
         Write-RuntimeState -State $state
@@ -642,6 +691,7 @@ function Invoke-NativeStop {
 }
 
 switch ($Action) {
+    'Plan' { Write-Output 'NATIVE_RUNTIME=PLAN_NO_CONNECTION Start=V50_GATE_NO_MIGRATIONS SmokeTestDatabase=EXPLICIT_READ_ONLY_ONLY' }
     'Start' { Invoke-NativeStart }
     'Stop' { Invoke-NativeStop }
     'Test' { Test-RutaFijaRuntime }

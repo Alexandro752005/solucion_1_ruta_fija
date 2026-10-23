@@ -1,0 +1,12 @@
+{
+    "correction":  "Oracle javapath launcher was killed while child JVM remained; initial failure probe proved PG down only. Original evidence preserved.",
+    "ownedChildJvmPid":  18572,
+    "verifiedBinary":  "C:/Program Files/Java/jdk-21.0.10/bin/java.exe",
+    "httpStopRequestedAt":  "2026-10-23T06:32:41.5460793+00:00",
+    "allFailedProbeCompletedAt":  "2026-10-23T06:32:49.9586266+00:00",
+    "observedHttpFailureDetectionSeconds":  8.4125473,
+    "originalPostgresFailureDetectionSeconds":  2.1171572,
+    "originalSqlRestoreRtoSecondsNoClockReset":  415.025714,
+    "postgresRestorationRepeated":  false,
+    "futureScriptUsesDirectJdk21Binary":  true
+}

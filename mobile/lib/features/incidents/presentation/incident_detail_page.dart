@@ -5,6 +5,8 @@ import '../../../core/presentation/mobile_error_message.dart';
 import '../data/mobile_incident_repository.dart';
 import '../domain/mobile_incident_models.dart';
 import 'mobile_incident_presentation.dart';
+import 'incident_history_panel.dart';
+import 'incident_report_page.dart';
 
 class IncidentDetailPage extends StatefulWidget {
   const IncidentDetailPage({
@@ -27,6 +29,7 @@ class _IncidentDetailPageState extends State<IncidentDetailPage> {
   Object? _error;
   bool _loading = true;
   bool _closing = false;
+  bool _informationBlocked = false;
 
   @override
   void initState() {
@@ -35,6 +38,7 @@ class _IncidentDetailPageState extends State<IncidentDetailPage> {
   }
 
   Future<void> _load() async {
+    if (_informationBlocked) return;
     if (mounted) {
       setState(() {
         _loading = true;
@@ -60,6 +64,7 @@ class _IncidentDetailPageState extends State<IncidentDetailPage> {
   Future<void> _confirmClose() async {
     final incident = _incident;
     if (_closing ||
+        _informationBlocked ||
         incident == null ||
         !incident.canBeClosedBy(widget.userId)) {
       return;
@@ -69,7 +74,7 @@ class _IncidentDetailPageState extends State<IncidentDetailPage> {
       builder: (dialogContext) => AlertDialog(
         title: const Text('Cerrar incidencia'),
         content: const Text(
-          'No se eliminará el reporte. Cambiará a "Cerrada por conductor" y no podrá reabrirlo ni modificarlo desde esta aplicación. El ADMIN podrá atenderlo después desde el CRM.',
+          'El reporte y su cierre se conservarán. No podrá reabrirse ni recibir nuevos seguimientos, tampoco desde el CRM. Una recurrencia o cierre erróneo se registra como un caso posterior vinculado.',
         ),
         actions: [
           TextButton(
@@ -156,137 +161,179 @@ class _IncidentDetailPageState extends State<IncidentDetailPage> {
 
     final incident = _incident!;
     final statusColor = incidentStatusColor(context, incident.status);
-    return Scaffold(
-      appBar: AppBar(title: const Text('Incidencia')),
-      body: SafeArea(
-        child: RefreshIndicator(
-          onRefresh: _load,
-          child: ListView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.all(20),
-            children: [
-              Row(
-                children: [
-                  Icon(incidentCategoryIcon(incident.category), size: 32),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      incident.category.label,
-                      style: Theme.of(context).textTheme.headlineSmall
-                          ?.copyWith(fontWeight: FontWeight.w800),
-                    ),
-                  ),
-                  Chip(
-                    backgroundColor: statusColor.withValues(alpha: 0.14),
-                    side: BorderSide(color: statusColor),
-                    label: Text(incident.status.label),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _DetailRow('Descripción', incident.description),
-                      _DetailRow(
-                        'Reportada',
-                        incidentDateTimeLabel(incident.reportedAt),
+    return PopScope(
+      canPop: !_informationBlocked,
+      child: Scaffold(
+        appBar: AppBar(title: const Text('Incidencia')),
+        body: SafeArea(
+          child: RefreshIndicator(
+            onRefresh: _load,
+            child: ListView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.all(20),
+              children: [
+                Row(
+                  children: [
+                    Icon(incidentCategoryIcon(incident.category), size: 32),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        incident.category.label,
+                        style: Theme.of(context).textTheme.headlineSmall
+                            ?.copyWith(fontWeight: FontWeight.w800),
                       ),
-                      _DetailRow('Reportada por', incident.reportedByName),
-                      _DetailRow('Origen', incident.source.label),
-                      if (incident.assignmentId != null)
-                        _DetailRow(
-                          'Asignación vinculada',
-                          incident.assignmentId!,
-                        ),
-                      if (incident.followUpNote != null)
-                        _DetailRow('Seguimiento', incident.followUpNote!),
-                      if (incident.followedUpByName != null)
-                        _DetailRow('Atendido por', incident.followedUpByName!),
-                      if (incident.followedUpAt != null)
-                        _DetailRow(
-                          'Fecha de seguimiento',
-                          incidentDateTimeLabel(incident.followedUpAt!),
-                        ),
-                      if (incident.resolvedAt != null)
-                        _DetailRow(
-                          'Resuelta',
-                          incidentDateTimeLabel(incident.resolvedAt!),
-                        ),
-                      if (incident.driverClosedByName != null)
-                        _DetailRow('Cerrada por', incident.driverClosedByName!),
-                      if (incident.driverClosedAt != null)
-                        _DetailRow(
-                          'Fecha de cierre del conductor',
-                          incidentDateTimeLabel(incident.driverClosedAt!),
-                        ),
-                    ],
-                  ),
+                    ),
+                    Chip(
+                      backgroundColor: statusColor.withValues(alpha: 0.14),
+                      side: BorderSide(color: statusColor),
+                      label: Text(incident.status.label),
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(height: 16),
-              if (incident.canBeClosedBy(widget.userId)) ...[
+                const SizedBox(height: 20),
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Si el hecho ya fue solucionado, puede cerrar este reporte una sola vez.',
+                        _DetailRow('Descripción', incident.description),
+                        _DetailRow(
+                          'Reportada',
+                          incidentDateTimeLabel(incident.reportedAt),
                         ),
-                        const SizedBox(height: 8),
-                        const Text(
-                          'No se elimina ni se duplica. El cierre es irreversible para el conductor y queda disponible para la atención del ADMIN.',
-                        ),
-                        const SizedBox(height: 16),
-                        FilledButton.icon(
-                          key: const Key('incident-close'),
-                          onPressed: _closing ? null : _confirmClose,
-                          icon: _closing
-                              ? const SizedBox(
-                                  height: 18,
-                                  width: 18,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                  ),
-                                )
-                              : const Icon(Icons.task_alt_outlined),
-                          label: Text(
-                            _closing
-                                ? 'Cerrando…'
-                                : 'Cerrar incidencia definitivamente',
+                        _DetailRow('Reportada por', incident.reportedByName),
+                        _DetailRow('Origen', incident.source.label),
+                        if (incident.assignmentId != null)
+                          _DetailRow(
+                            'Asignación vinculada',
+                            incident.assignmentId!,
                           ),
-                        ),
+                        if (incident.followUpNote != null)
+                          _DetailRow('Seguimiento', incident.followUpNote!),
+                        if (incident.followedUpByName != null)
+                          _DetailRow(
+                            'Atendido por',
+                            incident.followedUpByName!,
+                          ),
+                        if (incident.followedUpAt != null)
+                          _DetailRow(
+                            'Fecha de seguimiento',
+                            incidentDateTimeLabel(incident.followedUpAt!),
+                          ),
+                        if (incident.resolvedAt != null)
+                          _DetailRow(
+                            'Resuelta',
+                            incidentDateTimeLabel(incident.resolvedAt!),
+                          ),
+                        if (incident.driverClosedByName != null)
+                          _DetailRow(
+                            'Cerrada por',
+                            incident.driverClosedByName!,
+                          ),
+                        if (incident.driverClosedAt != null)
+                          _DetailRow(
+                            'Fecha de cierre del conductor',
+                            incidentDateTimeLabel(incident.driverClosedAt!),
+                          ),
                       ],
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
-              ],
-              if (incident.wasClosedByDriver) ...[
+                if (incident.canBeClosedBy(widget.userId)) ...[
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Si el hecho ya fue solucionado, puede cerrar este reporte una sola vez.',
+                          ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            'No se elimina ni se duplica. El cierre es irreversible y queda disponible para consulta del ADMIN. Una recurrencia requiere un caso nuevo vinculado.',
+                          ),
+                          const SizedBox(height: 16),
+                          FilledButton.icon(
+                            key: const Key('incident-close'),
+                            onPressed: _closing || _informationBlocked
+                                ? null
+                                : _confirmClose,
+                            icon: _closing
+                                ? const SizedBox(
+                                    height: 18,
+                                    width: 18,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
+                                  )
+                                : const Icon(Icons.task_alt_outlined),
+                            label: Text(
+                              _closing
+                                  ? 'Cerrando…'
+                                  : 'Cerrar incidencia definitivamente',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                ],
+                if (incident.wasClosedByDriver) ...[
+                  const Card(
+                    child: Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text(
+                        'Esta incidencia fue cerrada por el conductor. No se permite reapertura ni seguimiento adicional, tampoco desde el CRM. El hecho y su cierre se conservan.',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                ],
+                IncidentHistoryPanel(
+                  incident: incident,
+                  gateway: widget.incidentGateway,
+                  onChanged: _load,
+                  onBlocked: (v) {
+                    if (mounted) setState(() => _informationBlocked = v);
+                  },
+                ),
+                if (incident.isClosed)
+                  OutlinedButton(
+                    key: const Key('incident-new-related'),
+                    onPressed: _informationBlocked
+                        ? null
+                        : () async {
+                            final navigator = Navigator.of(context);
+                            final result = await navigator.push<bool>(
+                              MaterialPageRoute(
+                                builder: (_) => IncidentReportPage(
+                                  incidentGateway: widget.incidentGateway,
+                                  previousIncidentId: incident.id,
+                                ),
+                              ),
+                            );
+                            if (mounted &&
+                                navigator.mounted &&
+                                result == true) {
+                              navigator.pop(true);
+                            }
+                          },
+                    child: const Text('Registrar caso posterior sin reabrir'),
+                  ),
                 const Card(
                   child: Padding(
                     padding: EdgeInsets.all(16),
                     child: Text(
-                      'Esta incidencia fue cerrada por el conductor. No puede reabrirla ni modificarla desde la aplicación; el ADMIN conserva la atención desde el CRM.',
+                      'El conductor puede reportar y consultar sus incidencias. El seguimiento y la resolución corresponden al ADMIN desde el CRM.',
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
               ],
-              const Card(
-                child: Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Text(
-                    'El conductor puede reportar y consultar sus incidencias. El seguimiento y la resolución corresponden al ADMIN desde el CRM.',
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

@@ -1,0 +1,613 @@
+﻿{
+    "recordedAt":  "2026-10-23T15:59:45.5105763+00:00",
+    "compiler":  "javac21_Xlint_all_showDeprecation",
+    "sourceWarnings":  85,
+    "affectedFiles":  44,
+    "byKind":  [
+                   {
+                       "kind":  "",
+                       "count":  85
+                   }
+               ],
+    "mainWarnings":  18,
+    "testWarnings":  67,
+    "compileErrors":  0,
+    "notTheIdeDartDiagnosticCount":  true,
+    "records":  [
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/shared/exception/ApplicationException.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.shared.exception.ApplicationException has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/shared/exception/RateLimitExceededException.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.shared.exception.RateLimitExceededException has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/availability/monitor/HttpAvailabilityProbe.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.availability.monitor.HttpAvailabilityProbe.BodyLimitExceeded has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/fleet/domain/DriverVehicleLinkId.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.fleet.domain.DriverVehicleLinkId has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/fleet/domain/DriverGroupMembership.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.fleet.domain.DriverGroupMembership.Key has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/fleet/domain/GroupCoordinatorId.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.fleet.domain.GroupCoordinatorId has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/shared/exception/InvalidCredentialsException.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.shared.exception.InvalidCredentialsException has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/shared/exception/InvalidRefreshTokenException.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.shared.exception.InvalidRefreshTokenException has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/identity/application/EmailOtpCodeRejectedException.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.identity.application.EmailOtpCodeRejectedException has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/identity/application/RecoveryProofRejectedException.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.identity.application.RecoveryProofRejectedException has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/shared/exception/ExternalServiceUnavailableException.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.shared.exception.ExternalServiceUnavailableException has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/identity/recoverycli/SuperAdminRecoveryCli.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.identity.recoverycli.SuperAdminRecoveryCli.HttpFailure has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/onboarding/application/OnboardingInvitationRejectedException.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.onboarding.application.OnboardingInvitationRejectedException has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/onboarding/application/OnboardingOtpRejectedException.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.onboarding.application.OnboardingOtpRejectedException has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/personidentity/application/PersonIdentityGateAuthorizationManager.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "deprecation",
+                        "message":  "check(java.util.function.Supplier\u003corg.springframework.security.core.Authentication\u003e,T) in org.springframework.security.authorization.AuthorizationManager has been deprecated"
+                    },
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/operation/application/ReportExportService.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "deprecation",
+                        "message":  "dispose() in org.apache.poi.xssf.streaming.SXSSFWorkbook has been deprecated"
+                    },
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/terms/application/AdminTermsGateAuthorizationManager.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "deprecation",
+                        "message":  "check(java.util.function.Supplier\u003corg.springframework.security.core.Authentication\u003e,T) in org.springframework.security.authorization.AuthorizationManager has been deprecated"
+                    },
+                    {
+                        "file":  "backend/src/main/java/pe/rutafija/shared/exception/RefreshTokenReuseException.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.shared.exception.RefreshTokenReuseException has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L02ClosedCaseVerification.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L02ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked method invocation: method putAll in interface java.util.Map is applied to given types"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L02ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L02ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked cast"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L02ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked method invocation: method putAll in interface java.util.Map is applied to given types"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L02ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L02DatabasePreflight.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.support.L02DatabasePreflight.Refused has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L03ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked method invocation: method putAll in interface java.util.Map is applied to given types"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L03ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L03DatabasePreflight.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.support.L03DatabasePreflight.Refused has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L04ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked method invocation: method putAll in interface java.util.Map is applied to given types"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L04ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L04ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked cast"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L04ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked method invocation: method putAll in interface java.util.Map is applied to given types"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L04ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L04DatabasePreflight.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.support.L04DatabasePreflight.Refused has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L05ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked method invocation: method putAll in interface java.util.Map is applied to given types"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L05ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L05ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked method invocation: method putAll in interface java.util.Map is applied to given types"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L05ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L05ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked cast"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L05DatabasePreflight.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.support.L05DatabasePreflight.Refused has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L06ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked method invocation: method putAll in interface java.util.Map is applied to given types"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L06ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L06ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked method invocation: method putAll in interface java.util.Map is applied to given types"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L06ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L06ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked cast"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L06DatabasePreflight.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.support.L06DatabasePreflight.Refused has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L07ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked method invocation: method putAll in interface java.util.Map is applied to given types"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L07ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L07ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked method invocation: method putAll in interface java.util.Map is applied to given types"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L07ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L07ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked cast"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L07DatabasePreflight.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.support.L07DatabasePreflight.Refused has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L08CapacityTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L08CapacityTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked method invocation: method putAll in interface java.util.Map is applied to given types"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L08CapacityTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L08CapacityTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked method invocation: method putAll in interface java.util.Map is applied to given types"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L08CapacityTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L08CapacityTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked cast"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L08CapacityRetirementRace.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L08ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked method invocation: method putAll in interface java.util.Map is applied to given types"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L08ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L08ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked method invocation: method putAll in interface java.util.Map is applied to given types"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L08ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L08ConnectedTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked cast"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L08DatabasePreflight.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.support.L08DatabasePreflight.Refused has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/L08V50Preflight.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.support.L08V50Preflight.Refused has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualL01HumanTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualL01HumanTrial.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked cast"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualL01AutomatedTermsComplement.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualL01AutomatedTermsComplement.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualL01AutomatedTermsComplement.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked cast"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualL01AutomatedTermsComplement.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked method invocation: method recoveryEvidenceComplete in class pe.rutafija.support.ManualL01HumanTrialServer is applied to given types"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualL01AutomatedTermsComplement.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualL01AutomatedTermsComplement.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualL01HumanTrialServer.java",
+                        "line":  39,
+                        "column":  7,
+                        "kind":  "other",
+                        "message":  "auto-closeable resource pe.rutafija.support.ManualL01HumanTrialServer has a member method close() that could throw InterruptedException"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualL01HumanTrialServer.java",
+                        "line":  76,
+                        "column":  18,
+                        "kind":  "other",
+                        "message":  "auto-closeable resource pe.rutafija.support.ManualL01HumanTrialServer has a member method close() that could throw InterruptedException"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualL01HumanTrialServer.java",
+                        "line":  86,
+                        "column":  18,
+                        "kind":  "other",
+                        "message":  "auto-closeable resource pe.rutafija.support.ManualL01HumanTrialServer has a member method close() that could throw InterruptedException"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualL01HumanTrialServer.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualL01HumanTrialServer.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked method invocation: method putAll in interface java.util.Map is applied to given types"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualL01HumanTrialServer.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "unchecked",
+                        "message":  "unchecked conversion"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualL01RecoveryFixtureKeyReplacementTest.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.support.ManualL01RecoveryFixtureKeyReplacementTest.RecordingTransactions has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualL01RecoveryFixtureRepairTest.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.support.ManualL01RecoveryFixtureRepairTest.RecordingTransactions has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualOtpCaseRecovery.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.support.ManualOtpCaseRecovery.Refused has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualOtpDeliveryValidation.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.support.ManualOtpDeliveryValidation.ValidationFailure has no definition of serialVersionUID"
+                    },
+                    {
+                        "file":  "backend/src/test/java/pe/rutafija/support/ManualOtpEvidenceVerification.java",
+                        "line":  0,
+                        "column":  0,
+                        "kind":  "serial",
+                        "message":  "serializable class pe.rutafija.support.ManualOtpEvidenceVerification.VerificationFailure has no definition of serialVersionUID"
+                    }
+                ]
+}

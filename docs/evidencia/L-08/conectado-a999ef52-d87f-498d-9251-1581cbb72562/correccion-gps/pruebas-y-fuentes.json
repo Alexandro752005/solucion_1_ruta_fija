@@ -1,0 +1,31 @@
+{
+  "result": "PASS_50_DIRECTED_FLUTTER_TESTS_AND_ANALYZE_PHYSICAL_GPS_PENDING",
+  "conversionRedTestCount": 8,
+  "conversionRedFailures": 6,
+  "conversionRedPassed": 2,
+  "greenTestCount": 50,
+  "newCodecTests": 8,
+  "newTypedDiagnosticTests": 15,
+  "existingRegressionTests": 27,
+  "analyzePassed": true,
+  "databaseFixtureTests": 0,
+  "sensorUsedByAutomatedTests": false,
+  "vendorManifestFilesVerified": 45,
+  "sourceSha256": {
+    "mobile/pubspec.yaml": "160a0f2e10d89907c9fa1191667c26055b8be95040050ef37cc256a46ca71bde",
+    "mobile/pubspec.lock": "f96c9ec8643009233c1799752bd7672bd6c630c1aa8a9dd57ba38b06a164e396",
+    "mobile/lib/features/location/domain/mobile_foreground_location.dart": "b4144749e4da936a4e6bd959aba59037eb1a6ac3eace65b3a83b0e548359f121",
+    "mobile/lib/features/location/data/geolocator_device_location_gateway.dart": "fdd0334c4e9af97c2b848aaeeec402b29b4de97c8622e1ac798f3ef94729172d",
+    "mobile/lib/features/location/domain/mobile_service_location_controller.dart": "47986561651920cd4ff6eea8b4f49d8b869db9f18f5205c902890b2331ba168f",
+    "mobile/lib/features/location/presentation/service_location_status.dart": "0a369274fbc23f039c11932d38f6b81d3e2463052236411811683ea1b44bd13c",
+    "mobile/test/features/location/l08_android_position_contract_test.dart": "24fd0f7cd7a1c9de4bfa98b4ee0b7e2e3b1cb79197cbcd83a864000b86d1109c",
+    "mobile/test/features/location/l08_gps_diagnostic_test.dart": "791d6ee259a72f07a33b3d0d512c3cd1d1252d25338e6bf7e7d351546ed9b985"
+  },
+  "providerTimeoutSeconds": 15,
+  "ordinaryCadenceSeconds": 30,
+  "accuracyValidationPreserved": true,
+  "externalDependencyUpdates": 0,
+  "vendorVersion": "5.0.3+rutafija.1",
+  "realGpsCaptureVerified": false,
+  "serviceRestarted": false
+}

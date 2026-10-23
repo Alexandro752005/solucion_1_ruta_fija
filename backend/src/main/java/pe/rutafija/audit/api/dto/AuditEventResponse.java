@@ -16,19 +16,25 @@ public record AuditEventResponse(
         UUID entityId,
         String correlationId,
         Map<String, Object> metadata,
-        Instant occurredAt
+        Instant occurredAt,
+        UUID organizationId,
+        String scope,
+        String outcome
 ) {
     public static AuditEventResponse from(AuditEvent event, Map<String, Object> safeMetadata) {
         return new AuditEventResponse(
                 event.getId(),
                 event.getUserId(),
-                event.getUserFullName(),
+                event.getUserId() == null ? null : pe.rutafija.shared.security.PersonalDataView.account(event.getUserId()),
                 event.getAction(),
                 event.getEntityType(),
                 event.getEntityId(),
-                event.getCorrelationId(),
+                pe.rutafija.audit.application.AuditCorrelationId.safe(event.getCorrelationId()),
                 safeMetadata,
-                event.getOccurredAt()
+                event.getOccurredAt(),
+                event.getOrganizationId(),
+                event.getOrganizationId()==null?"PLATFORM":"ORGANIZATION",
+                safeMetadata.get("auditOutcome") instanceof String value&&java.util.Set.of("SUCCEEDED","DENIED","FAILED").contains(value)?value:"LEGACY_RECORDED"
         );
     }
 }

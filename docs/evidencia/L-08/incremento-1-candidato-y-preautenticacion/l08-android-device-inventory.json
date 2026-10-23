@@ -1,0 +1,13 @@
+﻿{
+    "observedAt":  "2026-10-21T22:34:48.6688600Z",
+    "source":  "ADB_READ_ONLY_USER_CONNECTED_DEVICE",
+    "deviceCount":  1,
+    "model":  "M2102J20SG",
+    "androidRelease":  "13",
+    "apiLevel":  "33",
+    "adbSecure":  "1",
+    "serialRecorded":  false,
+    "appInstalledByThisStep":  false,
+    "locationRead":  false,
+    "physicalFunctionalTestExecuted":  false
+}

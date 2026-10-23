@@ -32,19 +32,23 @@ public class AnnouncementService {
     private final CurrentUserService currentUserService;
     private final AuditService auditService;
     private final OperationEventPublisher eventPublisher;
+    private final AnnouncementDelivery delivery;
+    private final OrganizationSchedulingLock lock;
 
     public AnnouncementService(
             AnnouncementRepository announcementRepository,
             TransportGroupRepository groupRepository,
             CurrentUserService currentUserService,
             AuditService auditService,
-            OperationEventPublisher eventPublisher
+            OperationEventPublisher eventPublisher,
+            AnnouncementDelivery delivery,OrganizationSchedulingLock lock
     ) {
         this.announcementRepository = announcementRepository;
         this.groupRepository = groupRepository;
         this.currentUserService = currentUserService;
         this.auditService = auditService;
         this.eventPublisher = eventPublisher;
+        this.delivery=delivery;this.lock=lock;
     }
 
     @Transactional(readOnly = true)
@@ -62,8 +66,19 @@ public class AnnouncementService {
     @Transactional
     public AnnouncementResponse createAnnouncement(AnnouncementCreateRequest request) {
         AppUser actor = requireOperationalActor();
+        lock.acquire(actor.getOrganizationId());
+        if(request.operationKey()==null)throw validation("La publicación necesita una clave UUID");
+        String fingerprint=delivery.hash(request);
+        var prior=announcementRepository.findByOrganization_IdAndOperationKey(actor.getOrganizationId(),request.operationKey());
+        if(prior.isPresent()){
+            var original=prior.get();
+            if(!original.getCreatedBy().getId().equals(actor.getId())||!fingerprint.equals(original.getPayloadSha256()))
+                throw new ApplicationException(HttpStatus.CONFLICT,ErrorCode.RESOURCE_CONFLICT,"La clave ya pertenece a otra publicación");
+            return AnnouncementResponse.from(original);
+        }
+        delivery.validateText(request.title());delivery.validateText(request.body());
         UUID audienceId = resolveAudience(actor, request.audienceType(), request.audienceId());
-        Announcement announcement = announcementRepository.saveAndFlush(Announcement.publish(
+        Announcement announcement = Announcement.publish(
                 actor.getOrganization(),
                 actor,
                 request.title(),
@@ -71,7 +86,10 @@ public class AnnouncementService {
                 request.audienceType(),
                 audienceId,
                 Boolean.TRUE.equals(request.requireReadAck())
-        ));
+        );
+        announcement.identifyPublication(request.operationKey(),fingerprint);
+        announcement=announcementRepository.saveAndFlush(announcement);
+        delivery.capture(announcement);
         auditService.record(actor, "ANNOUNCEMENT_PUBLISHED", "ANNOUNCEMENT", announcement.getId(), Map.of(
                 "audienceType", announcement.getAudienceType().name(),
                 "requireReadAck", announcement.isRequireReadAck()

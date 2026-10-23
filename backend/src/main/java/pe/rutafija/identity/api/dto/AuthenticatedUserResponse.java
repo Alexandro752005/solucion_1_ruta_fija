@@ -18,8 +18,8 @@ public record AuthenticatedUserResponse(
                 user.getId(),
                 user.getOrganizationId(),
                 user.getOrganization() == null ? null : user.getOrganization().getTradeName(),
-                user.getEmail(),
-                user.getFullName(),
+                "",
+                pe.rutafija.shared.security.PersonalDataView.account(user.getId()),
                 user.getRole().name()
         );
     }

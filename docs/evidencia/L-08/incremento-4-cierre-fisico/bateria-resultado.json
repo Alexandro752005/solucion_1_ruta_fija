@@ -1,0 +1,20 @@
+﻿{
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "measurement":  {
+                        "result":  "PASS_LIMITED_POCO_15_MINUTES_NO_USB_CHARGING",
+                        "percentOrigin":  "PERSONAL_PHONE_INDICATOR_NOT_AUTOMATED_DRAIN",
+                        "independentBatteryInstrument":  false,
+                        "elapsedSeconds":  959,
+                        "dropPercentagePoints":  2,
+                        "initialPercent":  30,
+                        "finalPercent":  28,
+                        "persistedGpsPointsDuringInterval":  32,
+                        "maximumObservedGpsGapSeconds":  30,
+                        "gpsFreshnessLimitOrigin":  "ServiceLocationStatus existing 120 second stale indication"
+                    },
+    "initialUserLiteral":  "USB desconectado, marca 30 % y app visible",
+    "finalUserLiteral":  "28 %, sin cargador y sin fallo térmico o de la app",
+    "origin":  "PERSONAL_PHONE_INDICATOR_PLUS_REAL_ANDROID_SERVICE_SAMPLES_AND_POSTGRESQL_GPS_TIMESTAMPS",
+    "simulatedBatteryUnplugUsed":  false,
+    "newIntervalStarted":  false
+}

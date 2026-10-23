@@ -1,0 +1,12 @@
+{
+    "result":  "INCIDENT_BACKUP_NOT_CURRENT",
+    "checkedAt":  "2026-10-23T06:30:35.7627806+00:00",
+    "snapshotAgeSeconds":  6000.0199717,
+    "authenticationAgeSeconds":  1.9285231999999999,
+    "reasons":  [
+                    "RPO_AGE_EXCEEDED_3600_SECONDS"
+                ],
+    "independentMediumAccredited":  false,
+    "schedulingAccredited":  false,
+    "operationalRpoAccredited":  false
+}

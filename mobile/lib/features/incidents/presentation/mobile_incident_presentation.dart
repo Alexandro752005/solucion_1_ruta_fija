@@ -20,6 +20,13 @@ IconData incidentCategoryIcon(MobileIncidentCategory category) {
     MobileIncidentCategory.averia => Icons.build_outlined,
     MobileIncidentCategory.accidente => Icons.car_crash_outlined,
     MobileIncidentCategory.retraso => Icons.schedule_outlined,
+    MobileIncidentCategory.licenciaVencida => Icons.badge_outlined,
+    MobileIncidentCategory.imposibilidadServicio => Icons.block_outlined,
+    MobileIncidentCategory.ubicacionNoCorroborada =>
+      Icons.location_off_outlined,
+    MobileIncidentCategory.riesgoSeguridad => Icons.warning_amber_outlined,
+    MobileIncidentCategory.accesoParada => Icons.not_accessible_outlined,
+    MobileIncidentCategory.falloPlataforma => Icons.phonelink_erase_outlined,
     MobileIncidentCategory.otro => Icons.report_problem_outlined,
   };
 }

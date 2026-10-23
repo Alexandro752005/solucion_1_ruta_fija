@@ -1,0 +1,12 @@
+{
+    "observedAt":  "2026-10-22T21:52:18.8368479Z",
+    "runId":  "a999ef52-d87f-498d-9251-1581cbb72562",
+    "package":  "pe.rutafija.conductor.l08",
+    "apkSha256":  "378bedcf4ee12a1a801ed07c9479b1acc5903246dd78c6f9b40212af9a73a588",
+    "installResult":  "SUCCESS_REPLACE_WITHOUT_CLEAR_DATA",
+    "uninstallExecuted":  false,
+    "dataClearExecuted":  false,
+    "operationalServiceRestarted":  false,
+    "permissionGrantCommandsExecuted":  0,
+    "gpsPhysicallyVerified":  false
+}

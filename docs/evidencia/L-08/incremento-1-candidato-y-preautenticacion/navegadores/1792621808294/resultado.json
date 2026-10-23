@@ -1,0 +1,566 @@
+{
+  "observedAt": "2026-10-21T22:30:12.804Z",
+  "scope": "PUBLIC_UI_ONLY_EXISTING_L07_BUILD_NO_BACKEND_NO_ACCOUNTS",
+  "results": [
+    {
+      "browser": "Edge",
+      "scope": "PUBLIC_LOGIN_ACTIVATION_ONLY_NO_BACKEND",
+      "checks": [
+        {
+          "id": "BROWSER_STARTED",
+          "result": "PASS"
+        },
+        {
+          "id": "VIEWPORT_1280_720",
+          "result": "PASS",
+          "width": 1280,
+          "height": 720,
+          "scrollWidth": 1265
+        },
+        {
+          "id": "LOGIN_NO_HORIZONTAL_CLIPPING",
+          "result": "PASS"
+        },
+        {
+          "id": "KEYBOARD_FORM_ORDER",
+          "result": "PASS",
+          "order": [
+            {
+              "tag": "INPUT",
+              "id": "email",
+              "label": ""
+            },
+            {
+              "tag": "INPUT",
+              "id": "password",
+              "label": ""
+            },
+            {
+              "tag": "BUTTON",
+              "id": "",
+              "label": "Mostrar contraseña"
+            },
+            {
+              "tag": "BUTTON",
+              "id": "",
+              "label": "Ingresar al sistema"
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "label": "Activar mi cuenta ADMIN"
+            }
+          ]
+        },
+        {
+          "id": "KEYBOARD_FOCUS_INDICATOR",
+          "result": "PASS",
+          "visible": true,
+          "outline": "none",
+          "width": "0px",
+          "shadow": "rgba(245, 196, 0, 0.45) 0px 0px 0px 3px"
+        },
+        {
+          "id": "EMPTY_SUBMIT_LABELLED_ERRORS_AND_FIRST_INVALID_FOCUS",
+          "result": "PASS",
+          "fields": [
+            {
+              "id": "email",
+              "labelled": true,
+              "described": true
+            },
+            {
+              "id": "password",
+              "labelled": true,
+              "described": true
+            }
+          ]
+        },
+        {
+          "id": "EMPTY_SUBMIT_NO_AUTHENTICATION_REQUEST",
+          "result": "PASS"
+        },
+        {
+          "id": "LOGIN_ACCESSIBILITY_TREE_NAMED_FIELDS",
+          "result": "PASS",
+          "fields": [
+            {
+              "role": "textbox",
+              "name": "Correo electrónico"
+            },
+            {
+              "role": "textbox",
+              "name": "Contraseña"
+            }
+          ]
+        },
+        {
+          "id": "VISIBLE_LOGIN_TEXT_CONTRAST_DIAGNOSTIC",
+          "result": "PASS",
+          "checked": 12,
+          "manualReview": 0
+        },
+        {
+          "id": "CSS_ZOOM_200_DIAGNOSTIC",
+          "result": "PASS",
+          "zoom": "2",
+          "width": 1280,
+          "scrollWidth": 1265
+        },
+        {
+          "id": "ACTIVATION_VISIBLE_CONTROLS_LABELLED",
+          "result": "PASS",
+          "fields": [
+            {
+              "id": "activation-credential",
+              "type": "password",
+              "labelled": true
+            },
+            {
+              "id": "activation-password",
+              "type": "password",
+              "labelled": true
+            },
+            {
+              "id": "activation-confirmation",
+              "type": "password",
+              "labelled": true
+            }
+          ]
+        },
+        {
+          "id": "TESTED_PAGE_NO_EXTERNAL_REQUEST",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_COMMAND_OR_EMAIL_CALL_STARTUP_REFRESH_STUB_ONLY",
+          "result": "PASS"
+        }
+      ],
+      "version": "Edg/155.0.4283.62",
+      "screenshots": [
+        {
+          "file": "Edge-login-errors.png",
+          "size": 26623,
+          "sha256": "c7276739e7130b121eb0743c2e0d7d63d7c12dff49bfe013e94170a75978d637"
+        },
+        {
+          "file": "Edge-css-zoom-200.png",
+          "size": 34019,
+          "sha256": "66a5bdb637513983a43b6ae6af7a101c847c8f46c9d5f5f6f6a2fbfc21c58480"
+        }
+      ],
+      "contrastDiagnostic": [
+        {
+          "selector": "strong",
+          "color": "rgb(17, 17, 17)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 16,
+          "fontWeight": "700",
+          "ratio": 18.883060964594996,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "small",
+          "color": "rgb(101, 101, 95)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 9.92,
+          "fontWeight": "700",
+          "ratio": 5.865828161763765,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "p",
+          "color": "rgb(101, 101, 95)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 11.52,
+          "fontWeight": "800",
+          "ratio": 5.865828161763765,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "h1#login-title",
+          "color": "rgb(17, 17, 17)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 37.6,
+          "fontWeight": "700",
+          "ratio": 18.883060964594996,
+          "threshold": 3,
+          "result": "PASS"
+        },
+        {
+          "selector": "p",
+          "color": "rgb(101, 101, 95)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 16,
+          "fontWeight": "400",
+          "ratio": 5.865828161763765,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "label",
+          "color": "rgb(17, 17, 17)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 13.92,
+          "fontWeight": "750",
+          "ratio": 18.883060964594996,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "p#email-error",
+          "color": "rgb(180, 35, 24)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 12.8,
+          "fontWeight": "400",
+          "ratio": 6.57428861557707,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "label",
+          "color": "rgb(17, 17, 17)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 13.92,
+          "fontWeight": "750",
+          "ratio": 18.883060964594996,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "button",
+          "color": "rgb(17, 17, 17)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 12.16,
+          "fontWeight": "750",
+          "ratio": 18.883060964594996,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "p#password-error",
+          "color": "rgb(180, 35, 24)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 12.8,
+          "fontWeight": "400",
+          "ratio": 6.57428861557707,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "span",
+          "color": "rgb(17, 17, 17)",
+          "background": "rgb(255, 196, 0)",
+          "fontSize": 16,
+          "fontWeight": "800",
+          "ratio": 11.822568552421526,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "a",
+          "color": "rgb(101, 101, 95)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 16,
+          "fontWeight": "700",
+          "ratio": 5.865828161763765,
+          "threshold": 4.5,
+          "result": "PASS"
+        }
+      ],
+      "zoomLimit": "CSS zoom/reflow diagnostic, not a manual browser-toolbar zoom or screen-reader trial",
+      "result": "PASS_PUBLIC_BOUNDED_AUTOMATED"
+    },
+    {
+      "browser": "Chrome",
+      "scope": "PUBLIC_LOGIN_ACTIVATION_ONLY_NO_BACKEND",
+      "checks": [
+        {
+          "id": "BROWSER_STARTED",
+          "result": "PASS"
+        },
+        {
+          "id": "VIEWPORT_1280_720",
+          "result": "PASS",
+          "width": 1280,
+          "height": 720,
+          "scrollWidth": 1265
+        },
+        {
+          "id": "LOGIN_NO_HORIZONTAL_CLIPPING",
+          "result": "PASS"
+        },
+        {
+          "id": "KEYBOARD_FORM_ORDER",
+          "result": "PASS",
+          "order": [
+            {
+              "tag": "INPUT",
+              "id": "email",
+              "label": ""
+            },
+            {
+              "tag": "INPUT",
+              "id": "password",
+              "label": ""
+            },
+            {
+              "tag": "BUTTON",
+              "id": "",
+              "label": "Mostrar contraseña"
+            },
+            {
+              "tag": "BUTTON",
+              "id": "",
+              "label": "Ingresar al sistema"
+            },
+            {
+              "tag": "A",
+              "id": "",
+              "label": "Activar mi cuenta ADMIN"
+            }
+          ]
+        },
+        {
+          "id": "KEYBOARD_FOCUS_INDICATOR",
+          "result": "PASS",
+          "visible": true,
+          "outline": "none",
+          "width": "0px",
+          "shadow": "rgba(245, 196, 0, 0.45) 0px 0px 0px 3px"
+        },
+        {
+          "id": "EMPTY_SUBMIT_LABELLED_ERRORS_AND_FIRST_INVALID_FOCUS",
+          "result": "PASS",
+          "fields": [
+            {
+              "id": "email",
+              "labelled": true,
+              "described": true
+            },
+            {
+              "id": "password",
+              "labelled": true,
+              "described": true
+            }
+          ]
+        },
+        {
+          "id": "EMPTY_SUBMIT_NO_AUTHENTICATION_REQUEST",
+          "result": "PASS"
+        },
+        {
+          "id": "LOGIN_ACCESSIBILITY_TREE_NAMED_FIELDS",
+          "result": "PASS",
+          "fields": [
+            {
+              "role": "textbox",
+              "name": "Correo electrónico"
+            },
+            {
+              "role": "textbox",
+              "name": "Contraseña"
+            }
+          ]
+        },
+        {
+          "id": "VISIBLE_LOGIN_TEXT_CONTRAST_DIAGNOSTIC",
+          "result": "PASS",
+          "checked": 12,
+          "manualReview": 0
+        },
+        {
+          "id": "CSS_ZOOM_200_DIAGNOSTIC",
+          "result": "PASS",
+          "zoom": "2",
+          "width": 1280,
+          "scrollWidth": 1265
+        },
+        {
+          "id": "ACTIVATION_VISIBLE_CONTROLS_LABELLED",
+          "result": "PASS",
+          "fields": [
+            {
+              "id": "activation-credential",
+              "type": "password",
+              "labelled": true
+            },
+            {
+              "id": "activation-password",
+              "type": "password",
+              "labelled": true
+            },
+            {
+              "id": "activation-confirmation",
+              "type": "password",
+              "labelled": true
+            }
+          ]
+        },
+        {
+          "id": "TESTED_PAGE_NO_EXTERNAL_REQUEST",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_COMMAND_OR_EMAIL_CALL_STARTUP_REFRESH_STUB_ONLY",
+          "result": "PASS"
+        }
+      ],
+      "version": "Chrome/155.0.8059.85",
+      "screenshots": [
+        {
+          "file": "Chrome-login-errors.png",
+          "size": 26611,
+          "sha256": "bd268a8cf13412bb28a9707a1692df484b43a207bc7990cde1955a2aeef604de"
+        },
+        {
+          "file": "Chrome-css-zoom-200.png",
+          "size": 34008,
+          "sha256": "e693b8b139d609d57be2753ce3a9aa359866312352b9a23a7ff7e0bd90c5f918"
+        }
+      ],
+      "contrastDiagnostic": [
+        {
+          "selector": "strong",
+          "color": "rgb(17, 17, 17)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 16,
+          "fontWeight": "700",
+          "ratio": 18.883060964594996,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "small",
+          "color": "rgb(101, 101, 95)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 9.92,
+          "fontWeight": "700",
+          "ratio": 5.865828161763765,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "p",
+          "color": "rgb(101, 101, 95)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 11.52,
+          "fontWeight": "800",
+          "ratio": 5.865828161763765,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "h1#login-title",
+          "color": "rgb(17, 17, 17)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 37.6,
+          "fontWeight": "700",
+          "ratio": 18.883060964594996,
+          "threshold": 3,
+          "result": "PASS"
+        },
+        {
+          "selector": "p",
+          "color": "rgb(101, 101, 95)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 16,
+          "fontWeight": "400",
+          "ratio": 5.865828161763765,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "label",
+          "color": "rgb(17, 17, 17)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 13.92,
+          "fontWeight": "750",
+          "ratio": 18.883060964594996,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "p#email-error",
+          "color": "rgb(180, 35, 24)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 12.8,
+          "fontWeight": "400",
+          "ratio": 6.57428861557707,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "label",
+          "color": "rgb(17, 17, 17)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 13.92,
+          "fontWeight": "750",
+          "ratio": 18.883060964594996,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "button",
+          "color": "rgb(17, 17, 17)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 12.16,
+          "fontWeight": "750",
+          "ratio": 18.883060964594996,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "p#password-error",
+          "color": "rgb(180, 35, 24)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 12.8,
+          "fontWeight": "400",
+          "ratio": 6.57428861557707,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "span",
+          "color": "rgb(17, 17, 17)",
+          "background": "rgb(255, 196, 0)",
+          "fontSize": 16,
+          "fontWeight": "800",
+          "ratio": 11.822568552421526,
+          "threshold": 4.5,
+          "result": "PASS"
+        },
+        {
+          "selector": "a",
+          "color": "rgb(101, 101, 95)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": 16,
+          "fontWeight": "700",
+          "ratio": 5.865828161763765,
+          "threshold": 4.5,
+          "result": "PASS"
+        }
+      ],
+      "zoomLimit": "CSS zoom/reflow diagnostic, not a manual browser-toolbar zoom or screen-reader trial",
+      "result": "PASS_PUBLIC_BOUNDED_AUTOMATED"
+    }
+  ],
+  "backendConnected": false,
+  "screenReaderHumanExecuted": false,
+  "pilotEnabled": false,
+  "outputDirectory": "backend/target/l08-public-browser-1792621808294",
+  "apiCalls": [
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/refresh"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/refresh"
+    }
+  ]
+}

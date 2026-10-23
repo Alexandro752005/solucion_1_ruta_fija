@@ -1,0 +1,11 @@
+﻿{
+    "runId":  "9f2be6c1-77be-4d2b-8d72-f83dbd6f5247",
+    "observedAt":  "2026-10-21T22:53:00.8840147+00:00",
+    "isolatedPackage":  "pe.rutafija.conductor.l08",
+    "reverseCreatedByCase":  true,
+    "reverse":  "tcp:4311",
+    "originalAppUntouched":  true,
+    "locationRequested":  false,
+    "databaseConnected":  false,
+    "launchResult":  "PASS_ACTIVITY_STARTED"
+}

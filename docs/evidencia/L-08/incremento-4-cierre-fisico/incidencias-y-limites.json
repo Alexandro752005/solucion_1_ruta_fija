@@ -1,0 +1,54 @@
+﻿{
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "recordedAt":  "2026-10-23T05:25:36.1482894+00:00",
+    "applicationDefect":  {
+                              "issue":  "ACTION_LABEL_CONTRAST_1_571",
+                              "reproducedBy":  "contraste-red.log",
+                              "fix":  "mobile/lib/app/ruta_fija_theme.dart",
+                              "verifiedBy":  [
+                                                 "contraste-y-regresion.log",
+                                                 "flutter-analyze.log",
+                                                 "principal-v4-gps.png"
+                                             ]
+                          },
+    "toolingObservations":  [
+                                {
+                                    "issue":  "ANDROID_NATIVE_INPUT_DENIED_AFTER_SETTING_CHANGE",
+                                    "resolution":  "USER_ENABLED_SECURITY_SETTING_THEN_ADBD_RESTART_ACTIVATED_NATIVE_INPUT",
+                                    "productPassInferredFromDeniedCommand":  false
+                                },
+                                {
+                                    "issue":  "LEGACY_UIAUTOMATOR_MISSING_REPETITIVE_TEST_CLASS",
+                                    "resolution":  "COMPATIBILITY_ANNOTATIONS_FOR_STANDARD_LEGACY_TEST_RUNNER",
+                                    "abortedRunnerMisleadingOkLineCountedAsProductPass":  false
+                                },
+                                {
+                                    "issue":  "ANDROID_SHELL_SPACE_ARGUMENT_SPLIT",
+                                    "resolution":  "ENCODED_UI_SELECTOR_LABELS",
+                                    "productMutationFromFailedButtonSearch":  false
+                                },
+                                {
+                                    "issue":  "EXTRA_401_FROM_LEGACY_TEXT_INJECTION",
+                                    "resolution":  "READ_ONLY_FIXTURE_PASSWORD_MATCH_TRUE_NATIVE_INPUT_200",
+                                    "evidence":  "principal-login.json"
+                                },
+                                {
+                                    "issue":  "FIRST_PEER_PROBE_EXPIRED_WITHOUT_PHONE_REQUEST",
+                                    "resolution":  "SECOND_REAL_PHONE_HTTP200_PROOF_OLD_FAILURE_PRESERVED",
+                                    "failure":  "network-preflight-peer-actual.json",
+                                    "success":  "network-preflight-peer-actual-2.json"
+                                },
+                                {
+                                    "issue":  "SANDBOX_MAVEN_JAR_READ_DENIED_DURING_COMPILATION",
+                                    "resolution":  "SAME_SELECT_ONLY_POSTFLIGHT_COMPILED_WITH_APPROVED_ACCESS",
+                                    "databaseFixturesExecuted":  false
+                                },
+                                {
+                                    "issue":  "SANDBOX_PRIVATE_BACKUP_ACL_CHANGE_DENIED",
+                                    "earlierRecord":  "principal-respaldo-protegido.json",
+                                    "correctedVerifiedRecord":  "principal-respaldo-acl-verificado.json"
+                                }
+                            ],
+    "gpsSignalWithoutPhysicalFixAccredited":  false,
+    "globalAcceptanceAccredited":  false
+}

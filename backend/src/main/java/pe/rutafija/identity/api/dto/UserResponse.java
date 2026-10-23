@@ -22,9 +22,9 @@ public record UserResponse(
         return new UserResponse(
                 user.getId(),
                 user.getOrganizationId(),
-                user.getEmail(),
-                user.getFullName(),
-                user.getPhone(),
+                "",
+                pe.rutafija.shared.security.PersonalDataView.account(user.getId()),
+                null,
                 user.getRole(),
                 user.isActive(),
                 user.getLastLoginAt(),

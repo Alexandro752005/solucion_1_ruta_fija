@@ -1,0 +1,15 @@
+﻿{
+    "sha256":  "2e0f38e5c99cc32241c2b444cce3d8e1148027da7979cde285a63b0808e28e3a",
+    "package":  "package: name=\u0027pe.rutafija.conductor.l08\u0027 versionCode=\u00272\u0027 versionName=\u00270.1.0\u0027 platformBuildVersionName=\u002716\u0027 platformBuildVersionCode=\u002736\u0027 compileSdkVersion=\u002736\u0027 compileSdkVersionCodename=\u002716\u0027",
+    "label":  "application-label:\u0027Ruta Fija Pruebas\u0027",
+    "minSdk":  "sdkVersion:\u002729\u0027",
+    "targetSdk":  "targetSdkVersion:\u002736\u0027",
+    "permissions":  [
+                        "uses-permission: name=\u0027android.permission.INTERNET\u0027",
+                        "uses-permission: name=\u0027android.permission.ACCESS_COARSE_LOCATION\u0027",
+                        "uses-permission: name=\u0027android.permission.ACCESS_FINE_LOCATION\u0027",
+                        "uses-permission: name=\u0027pe.rutafija.conductor.l08.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION\u0027"
+                    ],
+    "debuggable":  true,
+    "installed":  false
+}

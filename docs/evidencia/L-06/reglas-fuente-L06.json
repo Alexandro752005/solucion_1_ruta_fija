@@ -1,0 +1,385 @@
+{
+  "source": "specs/registro.json",
+  "sourceSha256": "ca2794a41907d8081e0b77bd7ee02c3960024798d48442a7d26f053cb730ac50",
+  "questions": [
+    {
+      "id": "Q-066",
+      "moduleId": "MOD-INC",
+      "dimension": "ALCANCE",
+      "question": "¿Qué catálogo mínimo de incidencias necesita el MVP, además de vencimiento de licencia, avería, retraso, imposibilidad de cumplir y discrepancia de ubicación ya contemplados?",
+      "decisionTopic": "Catálogo inicial de incidencias",
+      "reason": "Definir catálogo inicial de incidencias y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "A los tipos existentes se añaden accidente o riesgo de seguridad, problema de acceso a la parada y fallo técnico de la plataforma. Otros exige descripción. La gravedad y el efecto operativo se registran por separado del tipo.",
+      "decisionRefs": [
+        "D-V3-Q-066"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-066",
+        "sourceAnswerPointer": "/questions/20",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-066-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Catálogo mínimo y Otros",
+        "answeredAtClientReported": "2026-10-11T16:31:48.307Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-067",
+      "moduleId": "MOD-INC",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿Qué condiciones de una incidencia obligan a interrumpir un servicio, además de la pérdida de habilitación ya definida?",
+      "decisionTopic": "Incidencia bloqueante",
+      "reason": "Definir incidencia bloqueante y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Se interrumpe ante accidente con riesgo, avería que impide circulación segura o imposibilidad real de prestar el recorrido. El conductor prioriza una detención segura y comunica la incidencia; ADMIN coordina relevo o cancelación. Un retraso o un GPS no corroborado no interrumpen por sí solos.",
+      "decisionRefs": [
+        "D-V3-Q-067"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-067",
+        "sourceAnswerPointer": "/questions/21",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-067-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Seguridad o imposibilidad de continuar",
+        "answeredAtClientReported": "2026-10-11T16:33:43.707Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-069",
+      "moduleId": "MOD-INC",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿Qué información y evidencia mínima debe aportar el ADMIN para cerrar una incidencia?",
+      "decisionTopic": "Condición de cierre de incidencia",
+      "reason": "Definir condición de cierre de incidencia y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "ADMIN registra diagnóstico o motivo, acciones tomadas, resultado y fecha. Adjunta o referencia evidencia cuando la naturaleza del caso la requiere; si no puede obtenerla, explica la razón. Si implica reparación o habilitación, debe completar la comprobación correspondiente antes de devolver a operación.",
+      "decisionRefs": [
+        "D-V3-Q-069"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-069",
+        "sourceAnswerPointer": "/questions/23",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-069-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Resultado y evidencia según el caso",
+        "answeredAtClientReported": "2026-10-11T16:36:30.265Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-070",
+      "moduleId": "MOD-INC",
+      "dimension": "ESTADOS",
+      "question": "¿Qué hecho permite reabrir una incidencia cerrada y quién puede solicitarlo?",
+      "decisionTopic": "Reapertura de incidencia",
+      "reason": "Definir reapertura de incidencia y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "No se puede reabrir una incidencia, esto no está permitido en el MVP.",
+      "decisionRefs": [
+        "D-V3-Q-070"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-070",
+        "sourceAnswerPointer": "/questions/24",
+        "answerOrigin": "OPCION_PROPIA",
+        "selectedOptionId": "CUSTOM",
+        "selectedOptionRank": null,
+        "selectedOptionLabel": "Opción propia",
+        "answeredAtClientReported": "2026-10-11T16:39:41.156Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-072",
+      "moduleId": "MOD-COM",
+      "dimension": "REGLAS_VALIDACIONES",
+      "question": "¿Puede el ADMIN exigir confirmación de lectura en un comunicado y qué efecto tiene que el conductor no la registre?",
+      "decisionTopic": "Acuse de comunicado",
+      "reason": "Definir acuse de comunicado y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "ADMIN puede exigir pulsar Leído en comunicados marcados importantes. La falta de acuse genera un pendiente y aviso a ADMIN, sin bloquear automáticamente servicios ni aceptar ofertas en nombre del conductor.",
+      "decisionRefs": [
+        "D-V3-Q-072"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-072",
+        "sourceAnswerPointer": "/questions/26",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-072-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Acuse en comunicados importantes",
+        "answeredAtClientReported": "2026-10-11T17:26:04.584Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-073",
+      "moduleId": "MOD-COM",
+      "dimension": "DATOS",
+      "question": "Si un conductor deja un grupo, ¿conserva acceso a los comunicados que recibió cuando pertenecía a él?",
+      "decisionTopic": "Destinatarios y cambios de grupo",
+      "reason": "Definir destinatarios y cambios de grupo y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Mientras mantenga su membresía en la empresa, el conductor puede consultar los comunicados que recibió cuando pertenecía al grupo. No recibe nuevos mensajes del grupo. Las retiradas por seguridad se respetan y el acceso termina al salir de la empresa.",
+      "decisionRefs": [
+        "D-V3-Q-073"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-073",
+        "sourceAnswerPointer": "/questions/27",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-073-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Conservar los recibidos mientras siga en empresa",
+        "answeredAtClientReported": "2026-10-11T16:43:28.069Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-074",
+      "moduleId": "MOD-COM",
+      "dimension": "DEPENDENCIAS",
+      "question": "¿Qué avisos deben intentar notificarse fuera de la app y por cuáles canales viables sin gasto adicional?",
+      "decisionTopic": "Avisos externos",
+      "reason": "Definir avisos externos y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Todos los avisos quedan en la bandeja. Se intenta push para oferta, cancelación, reasignación, suspensión e incidencia crítica solo tras comprobar una vía sin gasto y sus límites. Correo se reserva para seguridad y recuperación con un canal probado; ADMIN ve los envíos fallidos.",
+      "decisionRefs": [
+        "D-V3-Q-074"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-074",
+        "sourceAnswerPointer": "/questions/28",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-074-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Bandeja y push para eventos operativos",
+        "answeredAtClientReported": "2026-10-11T16:55:19.240Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "PENDIENTE_VERIFICACION"
+    },
+    {
+      "id": "Q-068",
+      "moduleId": "MOD-INC",
+      "dimension": "ACTORES_PERMISOS",
+      "question": "¿Quién debe hacerse responsable de atender una incidencia reportada?",
+      "decisionTopic": "Responsable de atención",
+      "reason": "Definir responsable de atención y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Cada incidencia tiene un ADMIN responsable de su empresa, designado al atenderla. El conductor aporta información y ADMIN coordina resolución y cierre. Un cambio de responsable queda auditado.",
+      "decisionRefs": [
+        "D-V3-Q-068"
+      ],
+      "repeatPolicy": "Omitir si una respuesta vigente ya resuelve esta decisión. Contrastar la base antes de preguntar.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "removedFromActiveInterview": false,
+      "archiveReason": "DERIVADA_DE_ROLES",
+      "resolvedByQuestionIds": [
+        "Q-002",
+        "Q-051",
+        "Q-057"
+      ],
+      "requiresUserConfirmation": false,
+      "reinstatedAsAnsweredInVersion": "3.0",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-068",
+        "sourceAnswerPointer": "/questions/22",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-068-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Un ADMIN responsable por incidencia",
+        "answeredAtClientReported": "2026-10-11T16:35:44.282Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-071",
+      "moduleId": "MOD-COM",
+      "dimension": "ACTORES_PERMISOS",
+      "question": "¿Quién debe poder publicar un comunicado a todos los conductores de la empresa?",
+      "decisionTopic": "Permiso de publicación",
+      "reason": "Definir permiso de publicación y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "ADMIN puede publicar comunicados dirigidos a todos sus conductores o a grupos de su empresa. CONDUCTOR consulta y confirma lectura cuando corresponda, sin publicar comunicados generales.",
+      "decisionRefs": [
+        "D-V3-Q-071"
+      ],
+      "repeatPolicy": "Omitir si una respuesta vigente ya resuelve esta decisión. Contrastar la base antes de preguntar.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "removedFromActiveInterview": false,
+      "archiveReason": "DERIVADA_DE_ROLES",
+      "resolvedByQuestionIds": [
+        "Q-002",
+        "Q-006",
+        "Q-027"
+      ],
+      "requiresUserConfirmation": false,
+      "reinstatedAsAnsweredInVersion": "3.0",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-071",
+        "sourceAnswerPointer": "/questions/25",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-071-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Publica cualquier ADMIN de su empresa",
+        "answeredAtClientReported": "2026-10-11T16:39:49.119Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    }
+  ],
+  "openDecisions": [
+    {
+      "id": "OPEN-PILOT-RESOURCES",
+      "topic": "Comprobar recursos sin gasto, canal push, horario operativo, almacenamiento, respaldos y objetivos de carga/latencia/RTO/RPO.",
+      "status": "PENDIENTE_DETALLE_O_VERIFICACION",
+      "modules": [
+        "MOD-NFR",
+        "MOD-COM"
+      ],
+      "questionRefs": [
+        "Q-074",
+        "Q-092",
+        "Q-093",
+        "Q-094",
+        "Q-095",
+        "Q-096"
+      ],
+      "reaskAnsweredDecision": false,
+      "discoveredInVersion": "3.0"
+    },
+    {
+      "id": "OPEN-CLOSED-INCIDENT-PROCEDURE",
+      "topic": "Definir el tratamiento de recurrencia o cierre erróneo con una incidencia posterior y eventual vínculo histórico, manteniendo prohibida la reapertura.",
+      "status": "PENDIENTE_DETALLE_O_VERIFICACION",
+      "modules": [
+        "MOD-INC"
+      ],
+      "questionRefs": [
+        "Q-070"
+      ],
+      "reaskAnsweredDecision": false,
+      "discoveredInVersion": "3.0"
+    }
+  ],
+  "verificationTasks": [
+    {
+      "id": "VT-V3-Q-074-01",
+      "statement": "Comprobar cuotas y disponibilidad del canal elegido antes de implementarlo.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-074"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-074"
+      ],
+      "moduleRefs": [
+        "MOD-COM",
+        "MOD-AUTH",
+        "MOD-ASG",
+        "MOD-NFR"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-Q-079-01",
+      "statement": "Contrastar finalidad, obligaciones de la modalidad y gestión de respaldos antes de fijar la política definitiva.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-079"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-079"
+      ],
+      "moduleRefs": [
+        "MOD-GPS",
+        "MOD-INC",
+        "MOD-AUD",
+        "MOD-NFR"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-INCIDENT-CLOSED",
+      "statement": "Precisar tratamiento de cierre erróneo o recurrencia mediante caso posterior, sin habilitar reapertura en el MVP.",
+      "status": "PENDIENTE_DETALLE_DE_PROCESO",
+      "questionRefs": [
+        "Q-070"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-070"
+      ],
+      "moduleRefs": [
+        "MOD-INC"
+      ],
+      "evidence": null
+    }
+  ],
+  "supersedingApprovedDecisions": [
+    "SRV-INT-L05-05",
+    "GPS-RET-L05-03",
+    "GPS-ACCESS-L05-04"
+  ],
+  "noDecisionsInferred": true
+}

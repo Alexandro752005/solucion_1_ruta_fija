@@ -1,0 +1,24 @@
+{
+  "runId" : "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+  "observedAt" : "2026-10-23T03:01:38.300726700Z",
+  "historicalLedger" : {
+    "ADMIN" : 3,
+    "CONDUCTOR" : 8,
+    "SUPER_ADMIN" : 1
+  },
+  "accountActive" : true,
+  "driverActive" : true,
+  "locationConsent" : true,
+  "offerStatus" : "EN_SERVICIO",
+  "serviceStatus" : "IN_SERVICE",
+  "gpsPointCount" : 18,
+  "firstGpsReceivedAt" : "2026-10-23T02:34:18.015497Z",
+  "lastGpsReceivedAt" : "2026-10-23T02:44:23.788383Z",
+  "openSegments" : 1,
+  "termsAcceptances" : 2,
+  "markerAndLockActive" : true,
+  "databaseWrites" : 0,
+  "coordinatesOrSecretsRecorded" : false,
+  "TEST_CLEANUP_RELEASED" : false,
+  "result" : "PASS_EXACT_LIVE_CASE_READ_ONLY_OBSERVATION"
+}

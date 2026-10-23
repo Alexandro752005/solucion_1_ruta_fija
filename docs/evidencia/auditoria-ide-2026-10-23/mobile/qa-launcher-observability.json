@@ -1,0 +1,75 @@
+{
+  "localDate": "2026-10-23",
+  "timezone": "America/Lima",
+  "result": "PASS_INDEPENDENT_STATIC_LAUNCHER_OBSERVABILITY_GUARDS_WITH_LIMITS",
+  "reviewer": "mobile_nofix, independent of launcher implementation author",
+  "method": "Read-only source review, PowerShell Parser.ParseFile and recorded author proof. No launcher, BAT, database query or service action executed by this reviewer.",
+  "sourceHashEvidence": "qa-observations/launcher-parse-readonly.json",
+  "authorMockEvidence": "../launchers/qa-mocks-observabilidad-final.json",
+  "checks": {
+    "powerShellScriptsParsedWithoutExecution": 8,
+    "authorRecordedMocksPassed": 35,
+    "noLeasePreservesExistingService": true,
+    "alreadyRunningServiceDoesNotAcquireOwnership": true,
+    "ownedIdentityUsesServicePidCreationAndExecutable": true,
+    "identityRecheckedAfterClientObservation": true,
+    "backendTypeNullForeignSessionNotDropped": true,
+    "visibleDatabaseUserOrEndpointCountedConservatively": true,
+    "unknownOrUnobservableSessionFailsClosed": true,
+    "unavailableInspectionPreservesLeaseAndService": true,
+    "protectedCaseBlocksOwnedStop": true,
+    "globalStopRequiresSeparateExplicitFlag": true,
+    "normalRuntimeStartRequiresV50SchemaAndDisablesFlyway": true,
+    "testSmokeRequiresExplicitReadOnlyMode": true,
+    "globalTestCleanupRejected": true,
+    "configAclAndExclusionsCheckedWithoutGitCommands": true,
+    "reviewedGuardsDoNotPrintSecretContents": true
+  },
+  "resolvedFindings": [
+    {
+      "id": "QA-LAUNCH-01",
+      "severityBeforeCorrection": "blocking",
+      "finding": "Filtering pg_stat_activity by backend_type can omit other-role sessions whose security-restricted fields are NULL, incorrectly permitting a shared-service stop.",
+      "resolution": "The corrected query returns all other processes. A conservative classifier counts public database/user identities and endpoints; unknown hidden rows reject proof of zero clients. Three focused mocks were added to the existing 32 checks.",
+      "status": "CORRECTED_REVIEWED"
+    }
+  ],
+  "nonBlockingFindings": [
+    {
+      "id": "QA-LAUNCH-02",
+      "severity": "minor_evidence_text",
+      "path": "scripts/Invoke-RutaFijaQuickDemo.ps1",
+      "finding": "Stop-QuickDemo prints postgresql=stopped even when StopOwned successfully preserves an unowned or busy service.",
+      "recommendation": "Describe the lease/client-dependent outcome or propagate the actual result. Do not claim every successful wrapper call stopped PostgreSQL."
+    },
+    {
+      "id": "QA-LAUNCH-03",
+      "severity": "residual_process_identity_risk",
+      "path": "scripts/Invoke-RutaFijaQuickDemo.ps1",
+      "finding": "Cloudflared identity checks PID, executable and command but does not store/check creation time; native runtime and PostgreSQL lease do check it.",
+      "recommendation": "Before claiming complete tunnel PID-reuse protection, check creation time with a focused mock or retain this explicit limitation."
+    }
+  ],
+  "schemaClarification": {
+    "evidence": "../launchers/migraciones-versionadas-y-repetibles.json",
+    "observedCurrentHistory": "50 versioned migrations V1-V50 plus one repeatable SQL migration; 51 successful total",
+    "sealedPriorPhrase": "V0 through V50 was an unsupported interpretation of that total. Preserve sealed bytes and clarify in this new audit; V50 and total51 remain correct.",
+    "defaultRuntimeDatabase": "solucion_ruta_fija_1 remains V12. Refusing normal Start is correct; it does not authorize an automatic upgrade."
+  },
+  "primaryReference": {
+    "title": "PostgreSQL 16 cumulative statistics visibility",
+    "url": "https://www.postgresql.org/docs/16/monitoring-stats.html",
+    "use": "Official documentation confirms ordinary-role visibility restrictions for other sessions. No live query was run by this reviewer."
+  },
+  "limits": [
+    "The 35 recorded checks are ownership mocks and parsing, not a real stop test.",
+    "Client observation is point-in-time; new connections can race after inspection.",
+    "No production, pilot, tunnel or schema-upgrade acceptance is inferred.",
+    "Later source changes require an appended review."
+  ],
+  "toolingIncident": {
+    "purpose": "Generate this JSON review from already-read source observations",
+    "result": "A composite shell command was blocked by automatic policy before execution; no database or service command was run.",
+    "resolution": "The review was written as a plain artifact through the file-edit tool. No execution of the rejected command was retried."
+  }
+}

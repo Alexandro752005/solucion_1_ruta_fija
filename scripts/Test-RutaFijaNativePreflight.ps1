@@ -11,6 +11,7 @@ if ([string]::IsNullOrWhiteSpace($ConfigPath)) {
     $ConfigPath = Join-Path $repoRoot 'backend\.local\ruta-fija-native.env'
 }
 $importScript = Join-Path $PSScriptRoot 'Import-RutaFijaNativeEnvironment.ps1'
+& (Join-Path $PSScriptRoot 'Test-RutaFijaLocalSecretPolicy.ps1') -Action Check -Execute -ConfigPath $ConfigPath
 $settings = & $importScript -ConfigPath $ConfigPath -PassThru
 if ($null -eq $settings) {
     throw 'No se pudo leer la configuracion nativa local.'
@@ -93,19 +94,8 @@ try {
         throw 'El catalogo PostgreSQL no cumple el preflight esperado.'
     }
 
-    Push-Location $repoRoot
-    try {
-        & git check-ignore -q -- 'backend/.local/ruta-fija-native.env'
-        if ($LASTEXITCODE -ne 0) {
-            throw 'El archivo de secretos local no esta ignorado por Git.'
-        }
-        $trackedSecretFile = & git ls-files -- 'backend/.local/ruta-fija-native.env'
-        if (@($trackedSecretFile).Count -gt 0) {
-            throw 'El archivo de secretos local esta versionado; preflight cancelado.'
-        }
-    } finally {
-        Pop-Location
-    }
+    # Local exclusion and file ACL were checked before importing secrets.
+    # This local workflow does not inspect VCS metadata or invoke Git.
 
     $backendRoot = Join-Path $repoRoot 'backend'
     $classpathFile = Join-Path $backendRoot 'target\f1-1a-classpath.txt'

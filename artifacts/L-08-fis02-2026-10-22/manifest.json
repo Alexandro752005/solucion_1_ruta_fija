@@ -1,0 +1,20 @@
+{
+  "runId": "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+  "artifact": "ruta-fija-l08-fis02-debug.apk",
+  "sha256": "dc26a0d0c907818fb0d4ca96e08ada01afdbb8e9c9afb09b087c1999aa36fdd7",
+  "bytes": 169811347,
+  "package": "pe.rutafija.conductor.l08",
+  "buildType": "debug",
+  "apiTarget": "EXACT_AUTHORIZED_PRIVATE_PC_INTERFACE_4311",
+  "accountCredentialsEmbedded": false,
+  "definitiveSigningKeyCreated": false,
+  "originalApplicationReplaced": false,
+  "pilotEnabled": false,
+  "result": "REJECTED_WRONG_PACKAGE_INSTALLED_IN_PRINCIPAL_NOT_L08",
+  "actualPackage": "pe.rutafija.conductor",
+  "claimedPackageWasNotVerifiedBeforeInstallation": true,
+  "originalApplicationBinaryUpdated": true,
+  "originalApplicationPreviousBinaryRestored": false,
+  "applicationDataClearedOrUninstalled": false,
+  "realPilotEnabled": false
+}

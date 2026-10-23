@@ -4,19 +4,24 @@ Cliente Flutter Android exclusivo del rol `CONDUCTOR`. Se comunica con Spring
 Boot por `/api/v1/mobile`; nunca accede a PostgreSQL, no contiene credenciales
 de base de datos y no reutiliza la cookie de sesión del CRM.
 
-## Estado actual: M9 en validación física
+> **Vigencia V3.1:** este checkout aún contiene la cola offline añadida en M8,
+> además de pruebas y pantallas asociadas. La especificación vigente excluye el
+> funcionamiento y las colas offline. Los detalles M8 de este README describen
+> el código heredado, no un comportamiento objetivo; su retiro y el tratamiento
+> de datos ya almacenados deben coordinarse con backend en el lote L-05.
+
+## Estado del código heredado
 
 M1, M2, M3 y M4 están implementados: base, navegación, sesión JSON de
 conductor, refresh rotativo protegido, perfil, disponibilidad y asignaciones
 propias idempotentes. F4.4 completa M5 y M6: incidencias propias y comunicados
 visibles para su audiencia con lectura explícita. M7 aprobado añade consentimiento y
 ubicación manual en primer plano: un único punto voluntario, sin historial ni
-seguimiento continuo. M8 aprobada agrega una cola persistente y visible, de
-máximo diez eventos FIFO, para disponibilidad, inicio y cierre de servicio
-cuando ocurre una falla temporal de red. El avance aprobado es **71/80 puntos**.
-M9 aprobó la auditoría automática con 80/80: pruebas críticas, accesibilidad
-básica, APK debug firmada y evidencia reproducible. Falta la validación física
-del conductor antes de declarar el VERDE formal.
+seguimiento continuo. La iteración anterior agregó una cola persistente para
+disponibilidad, inicio y cierre de servicio. Esa implementación M8 está fuera
+del objetivo v3.1. Las puntuaciones M8/M9 y el estado VERDE de evidencias
+anteriores son cortes históricos; la baseline actual está en
+`../docs/ejecucion/L-00.md`.
 
 La aplicación no implementa ubicación continua, fotos, FCM, notificaciones
 push ni sincronización en segundo plano.
@@ -138,8 +143,9 @@ abrirlo no confirma nada y el acuse se realiza solo mediante el botón explícit
 Para M7, el conductor abre **Perfil → Gestionar ubicación** y confirma el
 envío de un único punto actual. Puede eliminar el punto vigente o retirar el
 consentimiento desde la misma pantalla.
-Para M8, al fallar temporalmente una disponibilidad, inicio o cierre, aparece
-un contador en el icono de sincronización superior. El conductor abre
+El siguiente recorrido describe el comportamiento heredado M8, excluido de
+v3.1: al fallar temporalmente una disponibilidad, inicio o cierre, aparece un
+contador en el icono de sincronización superior. El conductor abre
 **Pendientes de sincronización** y pulsa **Sincronizar pendientes**; ante un
 conflicto revisa el estado actual y descarta únicamente la primera acción
 bloqueada antes de continuar.

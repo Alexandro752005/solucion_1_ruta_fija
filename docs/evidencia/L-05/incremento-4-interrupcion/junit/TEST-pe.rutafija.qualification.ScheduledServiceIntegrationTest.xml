@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="18.286" tests="20" errors="0" skipped="0" failures="0" flakes="0">
+  <testcase name="serviceMissingIdentityUsesTheActualGate" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="0.654">
+    </testcase>
+  <testcase name="serviceCancelledAcceptedOfferPreservesAcceptanceAndProgramWithoutAutoReoffer" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="1.246">
+    </testcase>
+  <testcase name="serviceReofferAfterExpiryNormalizesAndDoesNotRenewTheOldDeadline" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="1.101">
+    </testcase>
+  <testcase name="serviceExplicitCancellationIsSeparateMotivatedAndIdempotent" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="1.008">
+    </testcase>
+  <testcase name="serviceMissingTermsUsesTheActualGate" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="0.594">
+    </testcase>
+  <testcase name="serviceOperationKeyCannotBeRepurposedForDifferentConditions" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="0.976">
+    </testcase>
+  <testcase name="serviceConductorCannotReadOrDispatchTenantPrograms" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="0.811">
+    </testcase>
+  <testcase name="serviceAnotherOrganizationCannotReadCancelOrReoffer" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="0.817">
+    </testcase>
+  <testcase name="serviceCreationOperationIsReadOnlyAndDoesNotRenewItsDeadline" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="0.813">
+    </testcase>
+  <testcase name="serviceNewDriverAndUnitRequireThatRecipientsOwnAcceptanceAndRetainBothPeriods" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="1.424">
+    </testcase>
+  <testcase name="serviceCancellingAFutureCommitmentCannotReleaseAnOngoingPhysicalOccupation" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="1.081">
+    </testcase>
+  <testcase name="serviceExpiryLeavesSchedulePendingWithoutRemovingTheUnitPeriod" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="0.829">
+    </testcase>
+  <testcase name="serviceStaleCommandCannotRetireTheCurrentOffer" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="0.828">
+    </testcase>
+  <testcase name="serviceAcceptedOfferCannotBeRetroactivelyRejected" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="0.832">
+    </testcase>
+  <testcase name="serviceRejectionReleasesOfferOnlyAndNewOfferNeedsFreshAcceptance" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="0.901">
+    </testcase>
+  <testcase name="serviceMaterialTimeReplacementPreservesOldConditionsAndHasReplayReceipt" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="0.88">
+    </testcase>
+  <testcase name="serviceMissedPlannedStartCanBeExplicitlyReassignedBeforeActualStart" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="0.885">
+    </testcase>
+  <testcase name="serviceCandidateReplacementExcludesOnlyItsOwnHoldWithoutReleasingIt" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="0.929">
+    </testcase>
+  <testcase name="serviceStartedCannotBeCancelledOrReassignedAndCompletionIsDistinct" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="0.913">
+    </testcase>
+  <testcase name="serviceInitialOfferCreatesOneDurableProgramAndNoAcceptance" classname="pe.rutafija.qualification.ScheduledServiceIntegrationTest" time="0.732">
+    </testcase>
+</testsuite>

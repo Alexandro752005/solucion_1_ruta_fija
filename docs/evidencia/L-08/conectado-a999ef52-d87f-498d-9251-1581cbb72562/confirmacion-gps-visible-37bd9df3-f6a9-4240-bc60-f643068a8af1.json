@@ -1,0 +1,21 @@
+{
+  "runId": "a999ef52-d87f-498d-9251-1581cbb72562",
+  "archivedAt": "2026-10-22T21:58:03.886006+00:00",
+  "humanReport": "Sí apareció: Última captura confirmada hace 1s.",
+  "humanVisualGpsCaptureConfirmed": true,
+  "offerId": "6ad87efd-c9a5-4d06-943c-72c863f76772",
+  "serviceId": "961b62f8-1d30-469f-a88d-5db10884e663",
+  "databaseEvidence": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/oferta-observacion-9343a32b-0609-4563-9241-e63a12fbcc17.json",
+  "databaseEvidenceSha256": "f083251489aecdbf635f98e53aa87906f88baa99d01a499d8f422057d52875d3",
+  "caseGpsPointCountAtRead": 9,
+  "originalStartedAtPreserved": "2026-10-22T21:28:01.474477Z",
+  "physicalRouteOrTerminalArrivalVerified": false,
+  "batteryVerified": false,
+  "completionAndLogoutPending": true,
+  "humanHarnessConfirmationCommandsNotYetExecuted": true,
+  "coordinatesRecorded": false,
+  "databaseWritesByObservation": 0,
+  "TEST_CLEANUP_RELEASED": false,
+  "manualPhoneResult": "PENDING",
+  "pilotEnabled": false
+}

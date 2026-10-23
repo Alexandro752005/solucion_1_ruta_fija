@@ -1,0 +1,7 @@
+﻿{
+    "result":  "PASS_INDEPENDENT_PUBLIC_SIGNATURE_SUBPROCESS_EXIT_ZERO",
+    "signatureScriptSha256":  "6390bdd178e745a2ba408e98af5618d7fbbab8f452b664e5459247520a3dc339",
+    "processExitCode":  0,
+    "reviewedCorrection":  "Explicit exit0 only after successful positive/public verification and expected negative exit3; no acta or Java change",
+    "privateKeyReadByVerifyOnly":  false
+}

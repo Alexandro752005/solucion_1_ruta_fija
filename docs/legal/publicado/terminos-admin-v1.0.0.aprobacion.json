@@ -1,0 +1,16 @@
+{
+    "documentKey":  "ADMIN_TERMS",
+    "version":  "1.0.0",
+    "decision":  "APROBADO_PARA_PUBLICACION_LOCAL_INMUTABLE",
+    "contentFile":  "terminos-admin-v1.0.0.md",
+    "contentSha256":  "20FFD9525CB19EC51387BF11859CF34100A5117B00DE8F428BFEB8B9A4DC6417",
+    "contentBytes":  21108,
+    "approvalReceivedDateLocal":  "2026-10-17",
+    "timezone":  "America/Lima",
+    "recordedAtUtc":  "2026-10-17T05:14:10.8428230+00:00",
+    "approvalSource":  "Respuesta explicita del titular en esta interaccion",
+    "approvalQuote":  "Apruebo ese contenido exacto para publicación local",
+    "sourceCandidate":  "docs/legal/terminos-admin-v1.0.0-candidato.md",
+    "adminAcceptanceGranted":  false,
+    "L02Authorized":  false
+}

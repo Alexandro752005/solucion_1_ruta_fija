@@ -1,0 +1,21 @@
+{
+  "recordedAtUtc": "2026-10-23T16:15:40.288630+00:00",
+  "result": "PASS_CURRENT_LAUNCHER_AND_MANUAL_CUT",
+  "filesChecked": 51,
+  "mismatches": 0,
+  "manifestSha256": "3427763f99a393ac2450f17e88f57b169a71dfc4296a88031f4c64aa2a09ead1",
+  "runtimeSha256": "298d7cb7975aeb32787c7e05bc9065acb04b8657edf35589a7050cab3ffeb167",
+  "leaseSha256": "295a2626b0fc61a05bbabd57c0e1ed8c25ea7a71e4c4a7102c9221944eb3ac18",
+  "quickDemoSha256": "e24de70cfc6e610a600d27058b163812151afd624ff3bcf12f40f3ffc497ffa7",
+  "manualSha256": "b126e157e3082df61a805e1f373a8c1f1e941c75f1fe8e29c634eb04b618b9e0",
+  "backendReadmeSha256": "0ab18d635b542c4c9e61c569bbf413cc7d3bba9224eeb1979a7b2bb40522555a",
+  "originalsVerified": 16,
+  "embeddedHistoricalDocumentBytesPreserved": true,
+  "localCurrentLinksChecked": 17,
+  "powershellScriptsParsed": 79,
+  "powershellErrors": 0,
+  "mockChecksPassed": 42,
+  "actualSmokeClaimed": false,
+  "ongoingRootSmokeEvidenceMayBeAppended": true,
+  "historicalManifestOrActaWritten": false
+}

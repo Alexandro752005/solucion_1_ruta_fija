@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="pe.rutafija.qualification.RouteAssignmentIntegrationTest" time="7.719" tests="9" errors="0" skipped="0" failures="0" flakes="0">
+  <testcase name="routeReadsAreTenantScopedAndConductorCannotEditTheCatalog" classname="pe.rutafija.qualification.RouteAssignmentIntegrationTest" time="0.801" />
+  <testcase name="routeVersionRemainsCapturedAfterCatalogRevisionAndRetirement" classname="pe.rutafija.qualification.RouteAssignmentIntegrationTest" time="0.836" />
+  <testcase name="routeIsRequiredAndOriginMustMatchItsCapturedVersion" classname="pe.rutafija.qualification.RouteAssignmentIntegrationTest" time="0.825" />
+  <testcase name="routeFinalizedPersistsOwnDeclarationWithoutInventingTerminalEvidence" classname="pe.rutafija.qualification.RouteAssignmentIntegrationTest" time="0.92" />
+  <testcase name="routeChangeRejectsStartedAndStaleServicesWithoutReplacingThem" classname="pe.rutafija.qualification.RouteAssignmentIntegrationTest" time="0.863" />
+  <testcase name="routeCreationIdempotencyRejectsDifferentPayload" classname="pe.rutafija.qualification.RouteAssignmentIntegrationTest" time="0.819" />
+  <testcase name="routeReplacementFailureAfterCancellationMarksTheWholePhysicalTransactionForRollback" classname="pe.rutafija.qualification.RouteAssignmentIntegrationTest" time="0.876" />
+  <testcase name="routeAcceptanceReloadsOccupationCachedBeforeTheSchedulingLock" classname="pe.rutafija.qualification.RouteAssignmentIntegrationTest" time="0.783" />
+  <testcase name="routeReplacementPreservesOldAcceptanceAndRequiresFreshConductorAcceptance" classname="pe.rutafija.qualification.RouteAssignmentIntegrationTest" time="0.974" />
+</testsuite>

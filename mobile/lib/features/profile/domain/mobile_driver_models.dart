@@ -2,6 +2,7 @@ enum MobileAvailabilityStatus {
   disponible('DISPONIBLE', 'Disponible'),
   reservado('RESERVADO', 'Reservado'),
   enServicio('EN_SERVICIO', 'En servicio'),
+  atencion('ATENCION', 'Atención segura pendiente'),
   descanso('DESCANSO', 'Descanso'),
   noDisponible('NO_DISPONIBLE', 'No disponible');
 
@@ -76,17 +77,30 @@ final class MobileAvailability {
     required this.driverId,
     required this.status,
     required this.updatedAt,
+    this.declaredStatus,
+    this.declaredAt,
+    this.canChangeDeclaration,
   });
 
   final String driverId;
   final MobileAvailabilityStatus status;
   final DateTime updatedAt;
+  final MobileAvailabilityStatus? declaredStatus;
+  final DateTime? declaredAt;
+  final bool? canChangeDeclaration;
 
   factory MobileAvailability.fromJson(Map<String, dynamic> json) {
     return MobileAvailability(
       driverId: _requiredString(json, 'driverId'),
       status: MobileAvailabilityStatus.fromApi(_requiredString(json, 'status')),
       updatedAt: _requiredDateTime(json, 'updatedAt'),
+      declaredStatus: json['declaredStatus'] is String
+          ? MobileAvailabilityStatus.fromApi(json['declaredStatus'] as String)
+          : null,
+      declaredAt: json['declaredAt'] is String
+          ? DateTime.parse(json['declaredAt'] as String)
+          : null,
+      canChangeDeclaration: json['canChangeDeclaration'] as bool?,
     );
   }
 }

@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="pe.rutafija.support.L08RetentionAdvisoryLockTest" tests="2" failures="0" errors="0" skipped="0" time="1.681"><testcase name="distinctPlansProceedAndNegativeNamespaceDoesNotUseCleanupGuard" classname="pe.rutafija.support.L08RetentionAdvisoryLockTest" time="1.012" /><testcase name="samePlanWaitsForTheOtherTransactionAndRollbackReleasesIt" classname="pe.rutafija.support.L08RetentionAdvisoryLockTest" time="0.667" /></testsuite>

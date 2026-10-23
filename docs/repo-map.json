@@ -1,0 +1,227 @@
+{
+    "status":  "EN_CURSO_LOCAL",
+    "observedAt":  "2026-10-14",
+    "timezone":  "America/Lima",
+    "executionMode":  "local-only",
+    "root":  ".",
+    "actualPaths":  {
+                        "backend":  "backend",
+                        "crm":  "frontend",
+                        "android":  "mobile",
+                        "specification":  "specs",
+                        "migrations":  "backend/src/main/resources/db/migration",
+                        "nativeTestRunner":  "scripts/Invoke-RutaFijaNativeTest.ps1",
+                        "sourceSnapshotGenerator":  "scripts/New-RutaFijaL00Snapshot.ps1"
+                    },
+    "versionsFromManifestsAndEnvironment":  {
+                                                "backend":  {
+                                                                "java":  "21.0.10+8-LTS",
+                                                                "springBoot":  "3.5.16",
+                                                                "maven":  "3.9.15",
+                                                                "modules":  [
+                                                                                "identity",
+                                                                                "organization",
+                                                                                "fleet",
+                                                                                "operation",
+                                                                                "audit",
+                                                                                "shared"
+                                                                            ],
+                                                                "migrationRange":  "Flyway V1-V13"
+                                                            },
+                                                "crm":  {
+                                                            "node":  "24.16.0",
+                                                            "npm":  "11.13.0",
+                                                            "angular":  "22.1.4",
+                                                            "angularCliAndBuild":  "22.1.6",
+                                                            "typescript":  "6.0.3",
+                                                            "vitest":  "4.1.11"
+                                                        },
+                                                "android":  {
+                                                                "flutter":  "3.47.5",
+                                                                "dart":  "3.13.4",
+                                                                "androidSdk":  "36.0.0",
+                                                                "java":  "21.0.10"
+                                                            },
+                                                "database":  {
+                                                                 "postgresql":  "16.15",
+                                                                 "testDatabase":  "ruta_fija_test"
+                                                             }
+                                            },
+    "verifiedCommands":  {
+                             "backend":  [
+                                             {
+                                                 "command":  ".\\scripts\\Invoke-RutaFijaNativeTest.ps1 -Action Preflight",
+                                                 "result":  "PASS",
+                                                 "summary":  "F1_4_PREFLIGHT=PASS database=ruta_fija_test postgresql=16 docker=0"
+                                             },
+                                             {
+                                                 "command":  ".\\scripts\\Invoke-RutaFijaNativeTest.ps1 -Action Verify",
+                                                 "result":  "PASS",
+                                                 "summary":  "57 tests; 24 unit and 33 integration; zero failures, errors or skips; Flyway V1-V12 validated; BUILD SUCCESS"
+                                             },
+                                             {
+                                                 "command":  ".\\mvnw.cmd verify",
+                                                 "result":  "PASS",
+                                                 "summary":  "2026-10-14: 29 unit and 36 integration tests; zero failures, errors or skips; Flyway validated 14 migrations and ruta_fija_test is at V13; BUILD SUCCESS"
+                                             }
+                                         ],
+                             "crm":  [
+                                         {
+                                             "command":  "npm.cmd run lint",
+                                             "result":  "PASS",
+                                             "summary":  "typecheck; no type errors"
+                                         },
+                                         {
+                                             "command":  "npm.cmd run test:ci",
+                                             "result":  "PASS",
+                                                 "summary":  "2026-10-14: 17 spec files; 43 tests passed"
+                                         },
+                                             {
+                                                 "command":  "npm.cmd run typecheck",
+                                                 "result":  "PASS",
+                                                 "summary":  "2026-10-14: TypeScript checks passed for app and specs"
+                                             },
+                                         {
+                                             "command":  "npm.cmd run build",
+                                             "result":  "PASS",
+                                             "summary":  "production build completed"
+                                         }
+                                     ],
+                             "android":  [
+                                             {
+                                                 "command":  "flutter analyze",
+                                                 "result":  "PASS",
+                                                 "summary":  "2026-10-14: No issues found"
+                                             },
+                                             {
+                                                 "command":  "flutter test",
+                                                 "result":  "PASS",
+                                                 "summary":  "2026-10-14: 43 tests passed"
+                                             },
+                                             {
+                                                 "command":  "flutter build apk --debug",
+                                                 "result":  "PASS",
+                                                 "summary":  "debug APK generated in 154.7 seconds"
+                                             }
+                                         ],
+                             "database":  [
+                                              {
+                                                  "command":  "Invoke-RutaFijaNativeTest.ps1 -Action Preflight",
+                                                  "result":  "PASS",
+                                                  "summary":  "local PostgreSQL 16 test database; runner validates target and test roles before cleanup"
+                                              }
+                                          ]
+                         },
+    "availability":  {
+                         "postgresqlTestDatabase":  {
+                                                        "available":  true,
+                                                        "name":  "ruta_fija_test",
+                                                        "version":  "16.15",
+                                                        "preflight":  "PASS"
+                                                    },
+                         "developmentDatabase":  {
+                                                     "usedForTests":  false
+                                                 },
+                         "emailProvider":  {
+                                               "configured":  false,
+                                               "smtpConfigurationFound":  true,
+                                               "realOtpDeliveryVerified":  false,
+                                               "providerSelected":  "Gmail SMTP",
+                                               "provisionalPilot":  true,
+                                               "s0Only":  true,
+                                               "senderAccountControl":  "USER_CONFIRMED; SMTP credentials not used or displayed by tests",
+                                               "providerDomain":  "gmail.com",
+                                               "providerDomainOwner":  "Google",
+                                               "organizationOwnedCustomDomain":  false,
+                                               "customDomainRequiredForPilot":  false,
+                                               "pilotDomainExceptionApproved":  true,
+                                               "providerChangeAllowedAfterPilot":  true,
+                                               "approvedPilotSettings":  {
+                                                                             "host":  "smtp.gmail.com",
+                                                                             "port":  587,
+                                                                             "authentication":  "required",
+                                                                             "startTls":  "required"
+                                                                         },
+                                               "approvedSender":  "rutafija.dev@gmail.com",
+                                               "approvedRecipient":  "sandrito10xyz@gmail.com",
+                                               "credentialsConfigured":  "NOT_INSPECTED",
+                                               "springBootMailDependencyPresent":  true,
+                                               "appPasswordEligibility":  "NOT_VERIFIED; pending local account check during L-01"
+                                           },
+                         "androidSdk":  {
+                                            "available":  true,
+                                            "licensesAccepted":  false
+                                        },
+                         "physicalAndroidDeviceOrEmulator":  {
+                                                                 "connected":  false,
+                                                                 "verifiedWithAdb":  true
+                                                             },
+                         "localAgentProfiles":  {
+                                                    "available":  true,
+                                                    "profileCount":  6,
+                                                    "staticAuditsPerformed":  [
+                                                                                  "backend",
+                                                                                  "crm",
+                                                                                  "android"
+                                                                              ]
+                                                }
+                     },
+    "baseline":  {
+                     "backend":  "PASS",
+                     "crm":  "PASS",
+                     "androidAnalysis":  "PASS",
+                     "androidTests":  "PASS",
+                     "androidDebugBuild":  "PASS",
+                     "androidDebugApk":  {
+                                             "path":  "mobile/build/app/outputs/flutter-apk/app-debug.apk",
+                                             "bytes":  161486751,
+                                             "sha256":  "A56AC7368927502ACAFD419ADEC8FE54799F140BEA9430F5EE8EE95867A2374A"
+                                         },
+                     "sourceSnapshot":  {
+                                            "path":  "backups/L-00-2026-10-13-final3/source-snapshot.zip",
+                                            "bytes":  292096103,
+                                            "sha256":  "3806510606A1565F23B8C526A13CC1049BC79141BABDB8E1316F042488B3D11B",
+                                            "manifest":  "docs/evidencia/L-00/source-manifest.sha256",
+                                            "manifestSha256":  "E78D7002D5C85B24200BE21B8FD88CE770D36333CA49CAA5351248CFD0E28BAD",
+                                            "sourceFiles":  4496,
+                                            "restoreCheck":  "PASS; extracted locally and matched every file SHA-256"
+                                        },
+                     "lotStatus":  "L-00_VERIFICADA; L-01_EN_CURSO",
+                     "blockingReferences":  [
+
+                                            ],
+                     "deviceInventory":  "OPEN-DEVICE-INVENTORY recorded; no attached device; physical pilot validation assigned to L-08",
+                     "emailDecision":  "Gmail SMTP provisional pilot; S/0 and gmail.com domain exception approved; adapter/config and OTP automated tests are in L-01; real delivery remains pending"
+                 },
+    "currentRoles":  [
+                         "SUPER_ADMIN",
+                         "ADMIN",
+                         "CONDUCTOR"
+                     ],
+    "offlineScope":  "EXCLUDED_BY_REGISTRY_V3_1; legacy implementation remains to be inventoried and safely removed in later lots",
+    "evidence":  [
+                     "docs/ejecucion/L-00.md",
+                     "docs/ejecucion/L-00-inventario.md",
+                     "docs/ejecucion/L-00-trazabilidad.csv",
+                     "docs/ejecucion/L-00-trazabilidad.md",
+                     "docs/evidencia/L-00/baseline.md",
+                     "docs/evidencia/L-00/source-manifest.sha256",
+                     "backups/L-00-2026-10-13-final3/source-snapshot.zip",
+                     "scripts/New-RutaFijaL00Snapshot.ps1",
+                     "docs/contratos/L-00.md",
+                     "docs/contratos/L-01.md",
+                     "docs/ejecucion/L-01.md",
+                     "docs/evidencia/L-01/estado-tecnico.md",
+                     "docs/evidencia/L-01/prueba-smtp-controlada-2026-10-14.md",
+                     "docs/seguimiento/tareas.json",
+                     "docs/evidencia/L-00/decision-Gmail-2026-10-14.md"
+                 ],
+    "warnings":  [
+                     "Flutter doctor reports Android SDK licenses not accepted; debug build still completed successfully.",
+                     "ADB found no connected physical device or emulator.",
+                     "Flutter reported newer package versions outside current dependency constraints; no dependencies were changed.",
+                     "Backend emitted non-blocking deprecation, Mockito self-attach and Hibernate lock follow-on warnings.",
+                     "The L-01 SMTP authentication probe was rejected by Gmail; app-password eligibility remains unverified.",
+                     "Gmail host/auth/STARTTLS configuration, spring-boot-starter-mail and SMTP adapter exist for local profile; L-01 controlled authentication was rejected and no OTP delivery was confirmed."
+                 ]
+}

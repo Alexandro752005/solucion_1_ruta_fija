@@ -25,6 +25,7 @@ import pe.rutafija.identity.infrastructure.AppUserRepository;
 import pe.rutafija.organization.domain.Organization;
 import pe.rutafija.organization.infrastructure.OrganizationRepository;
 import pe.rutafija.support.NativePostgresIntegrationTest;
+import pe.rutafija.support.ApprovedConductorFixture;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -46,7 +47,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(properties = {
         "debug=false",
         "logging.level.root=INFO",
-        "logging.level.org.springframework=INFO"
+        "logging.level.org.springframework=INFO",
+        "app.mobile.offline-sync.enabled=true"
 })
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
@@ -86,13 +88,15 @@ class MobileOfflineSyncIT extends NativePostgresIntegrationTest {
         organization = organizationRepository.save(Organization.active(
                 "Ruta Fija M8 " + suffix, "M8 " + suffix, "America/Lima"
         ));
-        conductor = userRepository.save(AppUser.organizationUser(
+        AppUser conductorCandidate = AppUser.organizationUser(
                 organization,
                 "m8.conductor." + suffix + "@rutafija.test",
                 passwordEncoder.encode("Integration-Password-2026"),
                 "Conductor M8",
                 UserRole.CONDUCTOR
-        ));
+        );
+        conductorCandidate.verifyEmail(Instant.now());
+        conductor = userRepository.save(conductorCandidate);
         TransportGroup group = groupRepository.save(TransportGroup.active(
                 organization, "Grupo M8 " + suffix, "Pruebas de sincronizacion"
         ));
@@ -102,6 +106,14 @@ class MobileOfflineSyncIT extends NativePostgresIntegrationTest {
         );
         driver.changeAdministrativeAvailability(DriverAvailabilityStatus.DISPONIBLE);
         driver = driverRepository.saveAndFlush(driver);
+        // Historical synthetic fixture for this test-only legacy regression.
+        // This does not enable offline routes in any runtime profile.
+        AppUser fixtureAdmin = AppUser.organizationUser(organization,
+                "m8.admin." + suffix + "@rutafija.test", passwordEncoder.encode("Synthetic-Admin-2026"),
+                "Synthetic M8 reviewer", UserRole.ADMIN);
+        fixtureAdmin.verifyEmail(Instant.now());
+        fixtureAdmin = userRepository.save(fixtureAdmin);
+        ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, fixtureAdmin, conductor, driver);
     }
 
     @Test
@@ -261,6 +273,7 @@ class MobileOfflineSyncIT extends NativePostgresIntegrationTest {
                         .claim("organizationId", organization.getId().toString())
                         .claim("email", conductor.getEmail())
                         .claim("role", UserRole.CONDUCTOR.name())
+                        .claim("sessionVersion", conductor.getSessionVersion())
                         .claim("sessionChannel", "MOBILE")
                         .claim("driverId", driver.getId().toString()));
     }

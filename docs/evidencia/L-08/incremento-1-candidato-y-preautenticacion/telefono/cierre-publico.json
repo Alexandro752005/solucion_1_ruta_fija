@@ -1,0 +1,24 @@
+﻿{
+    "runId":  "9f2be6c1-77be-4d2b-8d72-f83dbd6f5247",
+    "observedAt":  "2026-10-21T22:58:43.4729880+00:00",
+    "result":  "PASS_MANUAL_PUBLIC_PREAUTH_ONLY",
+    "serverStopped":  true,
+    "reverseReleasedCaseOnly":  true,
+    "listener4311Remaining":  false,
+    "httpRequests":  1,
+    "postLoginCount":  1,
+    "httpStatuses":  [
+                         503
+                     ],
+    "observedSecondsWithoutAdditionalRequest":  105,
+    "originalApplicationModified":  false,
+    "isolatedAppUninstalled":  false,
+    "applicationDataCleared":  false,
+    "locationRequested":  false,
+    "databaseConnected":  false,
+    "mailSent":  false,
+    "newPersistentAccounts":  0,
+    "operationalAuthenticationVerified":  false,
+    "gpsBatteryTalkBackVerified":  false,
+    "pilotEnabled":  false
+}

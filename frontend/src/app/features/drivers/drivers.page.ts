@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, OnDestroy, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { finalize } from 'rxjs';
 
 import { ApiErrorService } from '../../core/api/api-error.service';
@@ -14,6 +16,7 @@ import {
   DRIVER_STATUSES,
   Driver,
   DriverDetail,
+  DriverIncorporationStatus,
   DriverPayload,
   DriverStatus,
   ManagedUser,
@@ -32,15 +35,18 @@ type PendingDriverAction =
 
 @Component({
   selector: 'rf-drivers-page',
-  imports: [ReactiveFormsModule, PageHeaderComponent, ModalComponent, ConfirmDialogComponent, PaginationComponent],
+  imports: [ReactiveFormsModule, RouterLink, PageHeaderComponent, ModalComponent, ConfirmDialogComponent, PaginationComponent],
   templateUrl: './drivers.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DriversPage {
+export class DriversPage implements OnDestroy {
   private readonly api = inject(ManagementApiService);
   private readonly operationsApi = inject(OperationsApiService);
   private readonly apiErrors = inject(ApiErrorService);
   private readonly session = inject(AuthSessionService);
+  private readonly destroyRef = inject(DestroyRef);
+  private detailRequestSequence = 0;
+  private incorporationRequestSequence = 0;
 
   readonly canManage = computed(() =>
     this.session.hasAnyRole(['ADMIN']),
@@ -74,9 +80,23 @@ export class DriversPage {
   readonly formOpen = signal(false);
   readonly selectedDriver = signal<DriverDetail | null>(null);
   readonly detailOpen = signal(false);
+  readonly incorporationStatus = signal<DriverIncorporationStatus | null>(null);
+  readonly incorporationLoading = signal(false);
+  readonly incorporationError = signal<string | null>(null);
   readonly pendingAction = signal<PendingDriverAction | null>(null);
   readonly error = signal<UiError | null>(null);
   readonly notice = signal<string | null>(null);
+  readonly identityReviewTarget = signal<{ readonly driverId: string; readonly userId: string } | null>(null);
+  readonly identityReviewSaving = signal(false);
+  readonly identityReviewMustRefresh = signal(false);
+  readonly identityReviewForm = new FormGroup({
+    documentNumber: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.pattern(/^[0-9]{8}$/)] }),
+    method: new FormControl<'IN_PERSON' | 'PRIOR_SECURE_CONTACT'>('IN_PERSON', { nonNullable: true }),
+    reference: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.maxLength(160)] }),
+    originalReviewed: new FormControl(false, { nonNullable: true, validators: [Validators.requiredTrue] }),
+    identityConfirmed: new FormControl(false, { nonNullable: true, validators: [Validators.requiredTrue] }),
+    reason: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.maxLength(500)] }),
+  });
 
   readonly form = new FormGroup({
     userId: new FormControl('', { nonNullable: true }),
@@ -114,7 +134,6 @@ export class DriversPage {
     this.load();
     this.loadGroups();
     if (this.canManage()) {
-      this.loadDriverUsers();
       this.loadVehicles();
     }
   }
@@ -138,10 +157,76 @@ export class DriversPage {
           this.page.set(response.page);
           this.totalPages.set(response.totalPages);
           this.totalItems.set(response.totalItems);
+          this.identityReviewMustRefresh.set(false);
         },
         error: (error: unknown) =>
           this.error.set(this.apiErrors.toUiError(error, 'No se pudieron cargar los conductores.')),
       });
+  }
+
+  startIdentityReview(driver: Driver): void {
+    if (!this.canManage() || !driver.userId || this.identityReviewSaving() || this.identityReviewMustRefresh()
+        || this.loading() || this.linking() || this.actionInProgress() || this.detailLoading()) return;
+    this.clearIdentityReview();
+    this.detailOpen.set(false);
+    this.detailRequestSequence++;
+    this.clearIncorporationStatus();
+    this.selectedDriver.set(null);
+    this.pendingAction.set(null);
+    this.error.set(null);
+    this.notice.set(null);
+    // Deliberately do not read/prefill the legacy DNI or fetch personal data.
+    this.identityReviewTarget.set({ driverId: driver.id, userId: driver.userId });
+  }
+
+  closeIdentityReview(): void {
+    if (!this.identityReviewSaving()) this.clearIdentityReview();
+  }
+
+  submitIdentityReview(): void {
+    const target = this.identityReviewTarget();
+    if (!target || !this.canManage() || this.identityReviewSaving() || this.identityReviewMustRefresh()) return;
+    if (this.identityReviewForm.invalid) { this.identityReviewForm.markAllAsTouched(); return; }
+    const value = this.identityReviewForm.getRawValue();
+    const command = this.api.reviewDriverIdentity(target.driverId, { identityReview: {
+      documentType: 'DNI', documentNumber: value.documentNumber, method: value.method,
+      reference: value.reference.trim(), originalReviewed: true, identityConfirmed: true,
+    }, reason: value.reason.trim() });
+    this.identityReviewSaving.set(true);
+    this.error.set(null);
+    this.notice.set(null);
+    this.clearIdentityReview();
+    command.pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.identityReviewSaving.set(false))).subscribe({
+      next: (status) => {
+        if (status.userId !== target.userId || status.identityVerified !== true) {
+          this.identityReviewUnconfirmed();
+          return;
+        }
+        this.notice.set('El servidor confirmó la revisión de identidad de la cuenta. Esto no aprueba el expediente documental ni habilita la operación; consulta el estado actualizado del conductor.');
+        this.load();
+      },
+      error: () => this.identityReviewUnconfirmed(),
+    });
+  }
+
+  private identityReviewUnconfirmed(): void {
+    this.clearIdentityReview();
+    this.identityReviewMustRefresh.set(true);
+    // Server error bodies may contain input fields. Only a fixed message is shown.
+    this.error.set({ message: 'No se confirmó la revisión. Consulta los conductores antes de continuar; la operación no se reintenta automáticamente.', fieldErrors: [] });
+  }
+
+  private clearIdentityReview(): void {
+    this.identityReviewTarget.set(null);
+    this.identityReviewForm.reset({ documentNumber: '', method: 'IN_PERSON', reference: '', originalReviewed: false, identityConfirmed: false, reason: '' });
+  }
+
+  ngOnDestroy(): void {
+    this.detailRequestSequence++;
+    this.clearIncorporationStatus();
+    this.clearIdentityReview();
+    this.resetForm();
+    this.selectedDriver.set(null);
   }
 
   applyFilters(search: string, groupId: string, status: string): void {
@@ -159,54 +244,22 @@ export class DriversPage {
   }
 
   startCreate(): void {
-    this.notice.set(null);
-    this.error.set(null);
-    this.resetForm(false);
-    this.formOpen.set(true);
+    this.informOnboarding();
   }
 
   submit(): void {
-    this.notice.set(null);
-    this.error.set(null);
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-
-    const current = this.editing();
-    const payload = this.payloadFromForm();
-    this.saving.set(true);
-    const request = current === null
-      ? this.api.createDriver(payload)
-      : this.api.updateDriver(current.id, payload);
-
-    request.pipe(finalize(() => this.saving.set(false))).subscribe({
-      next: () => {
-        this.notice.set(current === null ? 'Conductor registrado correctamente.' : 'Conductor actualizado correctamente.');
-        this.resetForm();
-        this.load(0);
-      },
-      error: (error: unknown) =>
-        this.error.set(this.apiErrors.toUiError(error, 'No se pudo guardar el conductor.')),
-    });
+    this.informOnboarding();
   }
 
   startEdit(driver: Driver): void {
-    this.notice.set(null);
+    void driver;
+    this.informOnboarding();
+  }
+
+  private informOnboarding(): void {
+    this.resetForm();
     this.error.set(null);
-    this.editing.set(driver);
-    this.form.reset({
-      userId: driver.userId ?? '',
-      groupId: driver.groupId,
-      fullName: driver.fullName,
-      phone: driver.phone ?? '',
-      documentType: driver.documentType,
-      documentNumber: driver.documentNumber,
-      licenseNumber: driver.licenseNumber ?? '',
-    });
-    this.detailOpen.set(false);
-    this.selectedDriver.set(null);
-    this.formOpen.set(true);
+    this.notice.set('La incorporación y revisión de identidad se realizan desde Solicitudes y su expediente restringido.');
   }
 
   cancelEdit(): void {
@@ -220,25 +273,36 @@ export class DriversPage {
   }
 
   viewDetails(driver: Driver): void {
+    const requestSequence = ++this.detailRequestSequence;
+    this.clearIncorporationStatus();
+    this.selectedDriver.set(null);
     this.detailOpen.set(true);
     this.detailLoading.set(true);
     this.error.set(null);
     this.api
       .getDriver(driver.id)
-      .pipe(finalize(() => this.detailLoading.set(false)))
+      .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => {
+        if (requestSequence === this.detailRequestSequence) this.detailLoading.set(false);
+      }))
       .subscribe({
         next: (detail) => {
+          if (requestSequence !== this.detailRequestSequence || !this.detailOpen()) return;
           this.selectedDriver.set(detail);
           this.vehicleControl.reset('');
+          this.loadIncorporationStatus();
         },
-        error: (error: unknown) =>
-          this.error.set(this.apiErrors.toUiError(error, 'No se pudo cargar el detalle del conductor.')),
+        error: (error: unknown) => {
+          if (requestSequence === this.detailRequestSequence)
+            this.error.set(this.apiErrors.toUiError(error, 'No se pudo cargar el detalle del conductor.'));
+        },
       });
   }
 
   closeDetails(): void {
     if (!this.detailLoading() && !this.linking() && !this.actionInProgress()) {
       this.detailOpen.set(false);
+      this.detailRequestSequence++;
+      this.clearIncorporationStatus();
       this.selectedDriver.set(null);
       this.pendingAction.set(null);
     }
@@ -259,15 +323,19 @@ export class DriversPage {
   }
 
   canChangeAvailability(driver: Driver): boolean {
-    return driver.active
-      && driver.availabilityStatus !== 'RESERVADO'
-      && driver.availabilityStatus !== 'EN_SERVICIO';
+    // Availability is declared by CONDUCTOR. ADMIN uses the restricted,
+    // motivated qualification/suspension flow instead of impersonating it.
+    return false;
   }
 
   linkVehicle(): void {
     const detail = this.selectedDriver();
     if (detail === null || this.vehicleControl.invalid) {
       this.vehicleControl.markAsTouched();
+      return;
+    }
+    if (detail.vehicles.length !== 0) {
+      this.notice.set('Solo se permite una unidad vinculada vigente. La sustitución requiere desvinculación autorizada; no se reemplaza automáticamente.');
       return;
     }
 
@@ -279,6 +347,7 @@ export class DriversPage {
       .subscribe({
         next: (updated) => {
           this.selectedDriver.set(updated);
+          this.loadIncorporationStatus();
           this.vehicleControl.reset('');
           this.notice.set('Vehículo vinculado correctamente.');
         },
@@ -324,10 +393,10 @@ export class DriversPage {
   pendingActionMessage(): string {
     const action = this.pendingAction();
     if (action?.kind === 'active') {
-      return `${action.driver.active ? 'Se desactivará' : 'Se activará'} a ${action.driver.fullName}. ¿Deseas continuar?`;
+      return `${action.driver.active ? 'Se desactivará' : 'Se activará'} al conductor ${action.driver.id}. ¿Deseas continuar?`;
     }
     if (action?.kind === 'availability') {
-      return `La disponibilidad de ${action.driver.fullName} cambiará a ${this.statusLabel(action.status)}. ¿Deseas continuar?`;
+      return `La disponibilidad del conductor ${action.driver.id} cambiará a ${this.statusLabel(action.status)}. ¿Deseas continuar?`;
     }
     if (action?.kind === 'unlink') {
       return `Se desvinculará el vehículo ${action.plate}. ¿Deseas continuar?`;
@@ -374,6 +443,8 @@ export class DriversPage {
             this.pendingAction.set(null);
             this.load();
             this.detailOpen.set(false);
+            this.detailRequestSequence++;
+            this.clearIncorporationStatus();
             this.selectedDriver.set(null);
           },
           error: (error: unknown) => {
@@ -419,6 +490,7 @@ export class DriversPage {
             ...detail,
             vehicles: detail.vehicles.filter((vehicle) => vehicle.vehicleId !== action.vehicleId),
           });
+          this.loadIncorporationStatus();
           this.pendingAction.set(null);
           this.notice.set('Vehículo desvinculado correctamente.');
         },
@@ -440,10 +512,68 @@ export class DriversPage {
   }
 
   linkableVehicles(): readonly Vehicle[] {
+    if ((this.selectedDriver()?.vehicles.length ?? 0) !== 0) return [];
     const linked = new Set(
       this.selectedDriver()?.vehicles.map((vehicle) => vehicle.vehicleId) ?? [],
     );
     return this.vehicles().filter((vehicle) => !linked.has(vehicle.id));
+  }
+
+  loadIncorporationStatus(): void {
+    const driverId = this.selectedDriver()?.driver.id;
+    if (!driverId || !this.detailOpen()) return;
+    const requestSequence = ++this.incorporationRequestSequence;
+    this.incorporationStatus.set(null);
+    this.incorporationError.set(null);
+    this.incorporationLoading.set(true);
+    this.api.getDriverIncorporationStatus(driverId)
+      .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => {
+        if (requestSequence === this.incorporationRequestSequence) this.incorporationLoading.set(false);
+      }))
+      .subscribe({
+        next: (status) => {
+          if (requestSequence !== this.incorporationRequestSequence || !this.detailOpen()
+              || this.selectedDriver()?.driver.id !== driverId) return;
+          if (status.driverId !== driverId) {
+            this.incorporationError.set('No se pudo confirmar el estado de este conductor. Consulta de nuevo.');
+            return;
+          }
+          this.incorporationStatus.set(status);
+        },
+        error: () => {
+          if (requestSequence === this.incorporationRequestSequence && this.detailOpen())
+            this.incorporationError.set('No se pudo consultar la incorporación. Esto no confirma aprobación ni habilitación.');
+        },
+      });
+  }
+
+  incorporationBlockerLabel(code: string): string {
+    return ({
+      INCORPORATION_REQUIRES_REVIEW: 'Debe revisarse la correspondencia con la solicitud.',
+      PERSONAL_APPROVAL_MISSING: 'Falta la aprobación personal.',
+      ACCOUNT_NOT_PROVISIONED: 'Falta completar la cuenta y ficha vinculadas.',
+      ACCOUNT_DISABLED: 'La cuenta está deshabilitada.',
+      IDENTITY_NOT_REVIEWED: 'La identidad requiere revisión restringida.',
+      GROUP_INACTIVE: 'El grupo no está activo.',
+      PERSONAL_DOCUMENTS_EXPIRED: 'Hay documentación personal vencida.',
+      PERSONAL_DOCUMENTS_REVIEW_REQUIRED: 'La documentación personal requiere revisión.',
+      DRIVER_DISABLED: 'La ficha no está habilitada para operar.',
+      UNIT_LINK_MISSING: 'No hay unidad vinculada.',
+      UNIT_LINK_CARDINALITY_CONFLICT: 'Existen varios vínculos activos; requiere revisión, sin corrección automática.',
+      UNIT_AND_SERVICE_REVIEW_PENDING: 'Falta completar la revisión de unidad y servicio antes de operar.',
+    } as Record<string, string>)[code] ?? 'Existe una condición pendiente de revisión.';
+  }
+
+  personalDocumentsLabel(state: string): string {
+    return ({ CURRENT: 'Revisión registrada y vigente', EXPIRED: 'Vencida', UNKNOWN: 'Sin confirmar',
+      REVIEW_REQUIRED: 'Requiere revisión' } as Record<string, string>)[state] ?? 'Sin confirmar';
+  }
+
+  private clearIncorporationStatus(): void {
+    this.incorporationRequestSequence++;
+    this.incorporationStatus.set(null);
+    this.incorporationLoading.set(false);
+    this.incorporationError.set(null);
   }
 
   statusLabel(status: DriverStatus): string {
@@ -451,6 +581,7 @@ export class DriversPage {
       DISPONIBLE: 'Disponible',
       RESERVADO: 'Reservado',
       EN_SERVICIO: 'En servicio',
+      ATENCION: 'Atención segura pendiente',
       DESCANSO: 'Descanso',
       NO_DISPONIBLE: 'No disponible',
     } as Record<DriverStatus, string>)[status];
@@ -460,6 +591,7 @@ export class DriversPage {
     return ({
       DISPONIBLE: 'Disponible',
       EN_SERVICIO: 'En servicio',
+      ATENCION: 'Atención segura pendiente',
       MANTENIMIENTO: 'Mantenimiento',
       INACTIVO: 'Inactivo',
     } as Record<string, string>)[status] ?? 'Estado no disponible';

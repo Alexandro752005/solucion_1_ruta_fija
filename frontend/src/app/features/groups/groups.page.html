@@ -29,7 +29,7 @@
             <td><strong>{{ group.name }}</strong></td>
             <td>{{ group.description || 'Sin descripci&oacute;n' }}</td>
             <td><span class="management-status" [class.success]="group.active" [class.muted]="!group.active">{{ group.active ? 'Activo' : 'Inactivo' }}</span></td>
-            <td>@if (canManage()) { <div class="management-inline-actions"><button class="management-button compact" type="button" (click)="startEdit(group)">Editar</button></div> } @else { <span class="management-muted">Solo lectura</span> }</td>
+            <td>@if (canManage()) { <div class="management-inline-actions"><button class="management-button compact" type="button" (click)="startEdit(group)">Editar</button><button class="management-button compact" type="button" (click)="openResources(group)">Recursos y compromisos</button></div> } @else { <span class="management-muted">Solo lectura</span> }</td>
           </tr>
         }</tbody>
       </table></div>
@@ -48,3 +48,34 @@
 </rf-modal>
 
 <rf-confirm-dialog [open]="confirmingDeactivation()" title="Desactivar grupo" message="El grupo dejar&aacute; de admitir nuevas vinculaciones. El sistema impedir&aacute; el cambio si existen dependencias activas. &iquest;Deseas continuar?" confirmLabel="Desactivar" [danger]="true" (confirmed)="confirmDeactivation()" (cancelled)="cancelDeactivation()" />
+
+<rf-modal [open]="resourcesGroup() !== null" title="Recursos y compromisos del grupo" (closed)="closeResources()">
+  <p>Las membresías organizan recursos. No crean vínculos conductor-unidad ni habilitan conducción.</p>
+  <button class="management-button" type="button" (click)="reloadResources()" [disabled]="resourcesLoading() || resourcesSaving()">Consultar estado</button>
+  @if (resourcesLoading()) { <p role="status">Consultando…</p> }
+  @if (resourcesUncertain()) { <p role="alert">El resultado no está confirmado. Consulta antes de otra acción; no se reenvía automáticamente.</p> }
+  @if (resources(); as state) {
+    <p>Versión {{ state.version }} · {{ state.active ? 'Activo' : 'Retirado' }}</p>
+    <label for="group-resource-reason">Motivo sin datos personales</label>
+    <input id="group-resource-reason" #resourceReason maxlength="160" type="text" />
+    <label for="group-resource-choice">Recurso de la organización</label>
+    <select id="group-resource-choice" #resourceChoice>
+      @for (candidate of resourceCandidates(); track candidate.kind + candidate.id) {
+        <option [value]="candidate.kind + ':' + candidate.id">{{ candidate.kind === 'DRIVER' ? 'CONDUCTOR' : 'UNIDAD' }}-{{ candidate.id }}</option>
+      }
+    </select>
+    <button class="management-button" type="button" (click)="addResource(resourceChoice.value, resourceReason.value)" [disabled]="!state.active || resourcesSaving() || resourcesLoading() || resourcesUncertain()">Agregar membresía</button>
+    <ul>
+      @for (member of state.memberships; track member.kind + member.resourceId) {
+        <li>{{ member.kind === 'DRIVER' ? 'CONDUCTOR' : 'UNIDAD' }}-{{ member.resourceId }} · {{ member.active ? 'Vigente' : 'Retirada' }} · {{ member.source }}
+          @if (member.active && state.active) { <button type="button" class="management-button compact" (click)="changeMembership(member.kind, member.resourceId, false, resourceReason.value)" [disabled]="resourcesSaving() || resourcesLoading() || resourcesUncertain()">Retirar membresía</button> }
+        </li>
+      }
+    </ul>
+    <h3>Compromisos que impiden retirar</h3>
+    @if (!state.commitments.length) { <p>No hay compromisos bloqueantes en esta consulta. El servidor volverá a comprobarlos al confirmar.</p> }
+    <ul>@for (commitment of state.commitments; track commitment.assignmentId + commitment.attentionKind) { <li>SERVICIO-{{ commitment.assignmentId }} · {{ commitmentStatusLabel(commitment.status) }} · {{ attentionLabel(commitment.attentionKind) }} · {{ commitment.scheduledAt }} — {{ commitment.scheduledEndAt }}</li> }</ul>
+    <h3>Historial de cambios</h3>
+    <ul>@for (change of state.history; track change.id) { <li>{{ change.occurredAt }} · CUENTA-{{ change.actorId }} · {{ change.resourceKind }}-{{ change.resourceId }} · {{ change.active ? 'Alta' : 'Retiro' }} · versión {{ change.resultingVersion }}</li> }</ul>
+  }
+</rf-modal>

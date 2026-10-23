@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="pe.rutafija.qualification.ServiceTimeIntegrationTest" time="12.769" tests="15" errors="0" skipped="0" failures="0" flakes="0">
+  <testcase name="timesRequireNonPersonalReasonAndRejectNullSegmentEntries" classname="pe.rutafija.qualification.ServiceTimeIntegrationTest" time="0.88" />
+  <testcase name="timesMissingTermsUsesTheActualGate" classname="pe.rutafija.qualification.ServiceTimeIntegrationTest" time="0.572" />
+  <testcase name="timesNoPointIsReconstructedAfterItsOriginalRetentionExpires" classname="pe.rutafija.qualification.ServiceTimeIntegrationTest" time="0.909" />
+  <testcase name="timesCorrectionsAreIdempotentVersionedAndPreserveThePreviousEffectiveValues" classname="pe.rutafija.qualification.ServiceTimeIntegrationTest" time="0.943" />
+  <testcase name="timesCorrectionAndItsDetailsCannotBeRewrittenOrDeleted" classname="pe.rutafija.qualification.ServiceTimeIntegrationTest" time="0.861" />
+  <testcase name="timesInactiveTenantCannotCorrectDespiteCachedOrganization" classname="pe.rutafija.qualification.ServiceTimeIntegrationTest" time="0.821" />
+  <testcase name="timesMissingIdentityUsesTheActualGate" classname="pe.rutafija.qualification.ServiceTimeIntegrationTest" time="0.559" />
+  <testcase name="timesRejectFutureInvertedUnchangedMissingAndDuplicateSegmentsWithoutMutation" classname="pe.rutafija.qualification.ServiceTimeIntegrationTest" time="0.803" />
+  <testcase name="timesAdminCorrectionPreservesOriginalsAndGpsAndReportsEffectiveCorroboration" classname="pe.rutafija.qualification.ServiceTimeIntegrationTest" time="0.848" />
+  <testcase name="timesForeignAndUnauthenticatedConsultationAreRejected" classname="pe.rutafija.qualification.ServiceTimeIntegrationTest" time="0.859" />
+  <testcase name="timesConductorOnlyRequestsAdminAppliesAndRequestContentIsIdempotent" classname="pe.rutafija.qualification.ServiceTimeIntegrationTest" time="1.142" />
+  <testcase name="timesRejectOverlapWithTheSameResourcesExecutingAnotherService" classname="pe.rutafija.qualification.ServiceTimeIntegrationTest" time="1.168" />
+  <testcase name="timesARevokedSessionCannotCorrectEvenWithAnActorEntityAlreadyCached" classname="pe.rutafija.qualification.ServiceTimeIntegrationTest" time="0.794" />
+  <testcase name="timesCannotCorrectAnOngoingServiceOrRequestBeforeFinalization" classname="pe.rutafija.qualification.ServiceTimeIntegrationTest" time="0.78" />
+  <testcase name="timesRequestMustBelongToTheServiceAndCannotBeReused" classname="pe.rutafija.qualification.ServiceTimeIntegrationTest" time="0.807" />
+</testsuite>

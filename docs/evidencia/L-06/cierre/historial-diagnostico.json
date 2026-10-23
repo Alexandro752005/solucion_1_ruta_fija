@@ -1,0 +1,63 @@
+{
+  "result": "RESOLVED_SAME_CASE",
+  "runId": "51e69ee6-e4a0-4c3f-9a35-f19de0072422",
+  "failedConnectedAttempts": [
+    {
+      "phase": "FLUTTER_INFORMATION",
+      "at": "2026-10-21T06:14:19.734897200Z"
+    },
+    {
+      "at": "2026-10-21T06:26:42.837029300Z",
+      "phase": "CRM_RELATED_NEW_CASE"
+    },
+    {
+      "phase": "FLUTTER_RETAIN_OLD_READ_ACK",
+      "at": "2026-10-21T06:28:36.931210900Z"
+    },
+    {
+      "phase": "FLUTTER_WITHDRAWN_SCOPE",
+      "at": "2026-10-21T06:30:05.159466300Z"
+    },
+    {
+      "at": "2026-10-21T06:32:00.053674300Z",
+      "phase": "SAME_BINARY_RETURN"
+    }
+  ],
+  "diagnoses": [
+    {
+      "phase": "FLUTTER_INFORMATION",
+      "cause": "Wait could match text in editable input before persisted history was rendered.",
+      "correction": "Wait for history Text widget and assert enabled submit; exact one INFORMATION retained."
+    },
+    {
+      "phase": "CRM_RELATED_NEW_CASE",
+      "cause": "Duplicate button label selected the page header and reset the form; no report POST.",
+      "correction": "Scope submit to the form that contains incident-description; one linked case."
+    },
+    {
+      "phase": "FLUTTER_RETAIN_OLD_READ_ACK",
+      "cause": "runAsync swallowed expected real HTTP404 and returned null to a typed cast.",
+      "correction": "Capture/rethrow outside runAsync; expected rejection remains real."
+    },
+    {
+      "phase": "FLUTTER_WITHDRAWN_SCOPE",
+      "cause": "Static refresh label was present before loading completed; disposal left a timer.",
+      "correction": "Wait for enabled refresh and no progress indicator; assert hidden references after actual load."
+    },
+    {
+      "phase": "SAME_BINARY_RETURN",
+      "cause": "Harness expected403 whereas operational eligibility contract returns409 RESOURCE_CONFLICT.",
+      "correction": "Verify sole feature-disabled blocker, specific eligibility message/code, and unchanged availability."
+    },
+    {
+      "phase": "INDEPENDENT_POSTFLIGHT",
+      "cause": "JDBC getString on PostgreSQL boolean returns t; text true comparison failed.",
+      "correction": "Explicit boolean-to-text cast; read-only observer passed. No forced lock release."
+    }
+  ],
+  "originalObservationsRetained": 123,
+  "newSuccessiveAccounts": 0,
+  "counterResets": 0,
+  "globalCleanup": false,
+  "productionLogicChangedByTheseHarnessCorrections": false
+}

@@ -1,0 +1,36 @@
+{
+  "checkedAt": "2026-10-23T20:59:23.023750+00:00",
+  "result": "PASS_REVIEWED_STAGING",
+  "stagedChanges": 3887,
+  "stagedNonDeletedFiles": 3887,
+  "forbiddenPaths": [],
+  "filesOver10MiB": [],
+  "versionedMigrations": 50,
+  "testOnlyRepeatables": 1,
+  "exactIndexBytes": [
+    {
+      "path": "docs/actas/L-08-cierre-funcional-global.md",
+      "sha256": "b47807659aa898192e7c1eedd8b658cdf3f3dd0830afc0108bb0eaefa069c0ea"
+    },
+    {
+      "path": "docs/legal/publicado/terminos-admin-v1.0.0.md",
+      "sha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417"
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+      "sha256": "043a841813e1aacf62d985f283c71a9925fdb76462d7dbdc1af01d58bc2aa34c"
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaQuickDemo.ps1",
+      "sha256": "055738564796a516d76c5f7a924cc3df5b35e6f7b34d8814ea1c5ba12e77223e"
+    },
+    {
+      "path": "scripts/RutaFijaRuntimeSchemaPolicy.ps1",
+      "sha256": "a4bfc9b78b5db8c649a7798cf72931ea3650ead3b52c8bd72dd6398b89835a4d"
+    }
+  ],
+  "HEAD": "38ef416b736c2a6fb3d5b59be81274b6ed603f65",
+  "commitExecuted": false,
+  "remoteContacted": false,
+  "privateValuesPrinted": false
+}

@@ -58,9 +58,13 @@ class _ForegroundLocationPageState extends State<ForegroundLocationPage> {
     if (profile == null || _working) {
       return;
     }
+    if (WidgetsBinding.instance.lifecycleState != AppLifecycleState.resumed) {
+      _showMessage('Abra Ruta Fija en primer plano para compartir ubicación.');
+      return;
+    }
     if (!_stateAllowsLocation(profile.availabilityStatus)) {
       _showMessage(
-        'La ubicación vigente solo puede actualizarse cuando esté Disponible o En servicio.',
+        'La ubicación solo puede actualizarse durante un servicio iniciado.',
       );
       return;
     }
@@ -90,6 +94,9 @@ class _ForegroundLocationPageState extends State<ForegroundLocationPage> {
         updatedProfile = await widget.driverGateway.changeLocationConsent(true);
       }
       final point = await widget.deviceLocationGateway.currentPosition();
+      if (WidgetsBinding.instance.lifecycleState != AppLifecycleState.resumed) {
+        return;
+      }
       await widget.driverGateway.upsertCurrentLocation(point);
 
       if (!mounted) {
@@ -108,6 +115,25 @@ class _ForegroundLocationPageState extends State<ForegroundLocationPage> {
       if (mounted) {
         setState(() => _working = false);
       }
+    }
+  }
+
+  Future<void> _grantConsent() async {
+    final confirmed = await _confirm(
+      title: 'Consentimiento de ubicación del servicio',
+      message: 'Todos los servicios requieren GPS. Se capturará ubicación solo durante el servicio iniciado y en primer plano, con conservación máxima de siete días. Este paso no obtiene ni envía un punto y no inicia el servicio. Puede retirar el consentimiento.',
+      confirmLabel: 'Otorgar consentimiento',
+      key: const Key('location-grant-confirm'),
+    );
+    if (confirmed != true || !mounted) return;
+    setState(() => _working = true);
+    try {
+      final profile = await widget.driverGateway.changeLocationConsent(true);
+      if (mounted) setState(() => _profile = profile);
+    } catch (error) {
+      if (mounted) _showMessage(_messageFor(error));
+    } finally {
+      if (mounted) setState(() => _working = false);
     }
   }
 
@@ -285,8 +311,7 @@ class _ForegroundLocationPageState extends State<ForegroundLocationPage> {
   }
 
   bool _stateAllowsLocation(MobileAvailabilityStatus status) {
-    return status == MobileAvailabilityStatus.disponible ||
-        status == MobileAvailabilityStatus.enServicio;
+    return status == MobileAvailabilityStatus.enServicio;
   }
 
   @override
@@ -336,7 +361,7 @@ class _ForegroundLocationPageState extends State<ForegroundLocationPage> {
           ),
           const SizedBox(height: 8),
           const Text(
-            'Solo se obtiene un punto cuando usted lo solicita con la aplicación abierta. No se realiza seguimiento continuo ni se muestran coordenadas.',
+            'La ubicación se comparte solo durante un servicio iniciado y con la aplicación en primer plano. El consentimiento puede otorgarse antes de iniciar, sin obtener ni enviar ubicación.',
           ),
           const SizedBox(height: 20),
           Card(
@@ -370,13 +395,21 @@ class _ForegroundLocationPageState extends State<ForegroundLocationPage> {
             ),
           ),
           const SizedBox(height: 16),
+          if (!profile.locationConsent)
+            OutlinedButton(
+              key: const Key('location-grant-consent'),
+              onPressed: _working ? null : _grantConsent,
+              child: const Text(
+                'Otorgar consentimiento sin compartir ubicación',
+              ),
+            ),
           if (!canSend)
             Card(
               color: Theme.of(context).colorScheme.errorContainer,
               child: const Padding(
                 padding: EdgeInsets.all(16),
                 child: Text(
-                  'La ubicación vigente solo se permite cuando el conductor está Disponible o En servicio.',
+                  'La ubicación solo se permite durante un servicio iniciado. Estar Disponible no habilita seguimiento.',
                 ),
               ),
             ),

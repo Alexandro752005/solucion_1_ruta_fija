@@ -1,0 +1,74 @@
+{
+  "version": "0.6.0",
+  "lot": "L-05",
+  "localDate": "2026-10-19",
+  "source": "Respuestas expresas del usuario en esta interacción",
+  "status": "CONFIRMADAS_USUARIO",
+  "decisions": [
+    {
+      "id": "GPS-L05-01",
+      "resolves": "OPEN-TRACKED-SERVICES",
+      "decision": "Todos los servicios del piloto requieren GPS; consentimiento y permiso antes de iniciar, captura solo durante servicio y primer plano; sin cola offline."
+    },
+    {
+      "id": "SRV-L05-02",
+      "decision": "ADMIN prepara relevo con motivo, punto y detención/transferencia segura confirmada. Sustituto habilitado acepta su oferta y confirma Asumir relevo online; cierre/apertura de tramos atómicos con hora servidor y conservación del inicio original del servicio.",
+      "implementation": "VERIFICADO_LOCAL_API_INCREMENTO5",
+      "implementationEvidence": "docs/evidencia/L-05/incremento-5-relevo/README.md"
+    },
+    {
+      "id": "GPS-RET-L05-03",
+      "decision": "Máximo siete días desde captura también para evidencia puntual justificada de incidencias. Sin excepciones indefinidas, duplicados de coordenadas en auditoría ni conservación por treinta días."
+    },
+    {
+      "id": "GPS-ACCESS-L05-04",
+      "decision": "Usuario aprueba la propuesta0.1.0: ADMIN de la misma organización verifica y reautentica; revisión operativa48h; autorización restringida solo para solicitante autenticado/reautenticado con máximo15min y nunca después de vencer los puntos. Sin enlace público, correo, archivo persistido o prórroga de siete días.",
+      "proposalPath": "docs/contratos/L-05-acceso-puntos-propuesta.md",
+      "proposalSha256": "7d18513e6fa0afb7ad540966d7f7298a91410c7840430ebe7c6449a9cc122a7e",
+      "status": "CONFIRMADA_USUARIO"
+    },
+    {
+      "id": "SRV-INT-L05-05",
+      "localDate": "2026-10-20",
+      "status": "CONFIRMADA_USUARIO",
+      "implementation": "VERIFICADO_LOCAL_API_INCREMENTO4",
+      "decision": "CONDUCTOR registra interrupción propia; ADMIN puede registrar la comunicada/comprobada con detención segura y autoría real. Cierre interrumpido sin cumplimiento, GPS detenido y atención bloqueante hasta revisión ADMIN separada por recurso. Liberar atención no sustituye disponibilidad, documentación ni MNT-01A/MNT-02A; continuidad requiere relevo aceptado/asumido o cancelación expresa.",
+      "proposalPath": "docs/contratos/L-05-interrupcion-atencion-propuesta.md",
+      "proposalSha256": "9f4215b922c8039b246987d9dd5d4f833de9a4efffe089d92441bad8fe347a82",
+      "implementationEvidence": "docs/evidencia/L-05/incremento-4-interrupcion/README.md"
+    }
+  ],
+  "limits": [
+    "Solo entorno de pruebas autorizado",
+    "No iniciar L-06",
+    "No habilitar piloto ni enviar correo externo",
+    "Calibración y dispositivo físico L-08"
+  ],
+  "updatedLocalDate": "2026-10-20",
+  "connectedCaseAuthorization": {
+    "id": "L05-CON-01",
+    "runId": "844b3bf6-f2fa-4666-bd0e-b1f7a1188696",
+    "localDate": "2026-10-20",
+    "status": "CONFIRMADA_USUARIO",
+    "literalAnswer": "Autorizar el caso con máximo dos CONDUCTOR sintéticos",
+    "maxNewConductorAccounts": 2,
+    "proposalPath": "docs/operacion/L-05-caso-conectado-propuesta.md",
+    "proposalSha256": "2017824249b74162742af9f51cacc871eb06c0f42962bc0d4edf7250a1f0b825",
+    "authorizationPath": "docs/operacion/L-05-caso-conectado-autorizacion.md",
+    "executed": true,
+    "result": "PASS_REAL_CLIENTS_HTTP_TEST_POSTGRES",
+    "resultPath": "docs/evidencia/L-05/conectado-844b3bf6-f2fa-4666-bd0e-b1f7a1188696/resultado.json",
+    "accountsCreated": 2,
+    "TEST_CLEANUP_RELEASED": true
+  },
+  "localClosure": {
+    "localDate": "2026-10-20",
+    "status": "VERIFICADA",
+    "closureType": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+    "act": "docs/actas/L-05-cierre-funcional-local-2026-10-20.md",
+    "matrix": "docs/evidencia/L-05/matriz-L05.md",
+    "pilotEnabled": false,
+    "L06Started": false,
+    "L06Authorized": false
+  }
+}

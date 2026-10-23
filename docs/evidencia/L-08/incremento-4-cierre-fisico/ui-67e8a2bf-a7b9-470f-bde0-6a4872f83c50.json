@@ -1,0 +1,138 @@
+{
+    "observedAt":  "2026-10-23T04:49:10.3551173+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "action":  "down",
+    "label":  "",
+    "automatedUiInstrumentation":  true,
+    "humanAccessibilityConfirmation":  false,
+    "nodes":  [
+                  {
+                      "text":  "",
+                      "description":  "Ruta Fija Conductor",
+                      "bounds":  "[48,520][516,589]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Bandeja de avisos",
+                      "bounds":  "[648,482][792,626]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Mi incorporación",
+                      "bounds":  "[792,482][936,626]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Cerrar sesión",
+                      "bounds":  "[936,482][1080,626]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Preferencias\nLa bandeja, las respuestas de servicio y los avisos de seguridad siempre permanecen disponibles.\nTamaño de texto\nNormal\nSe conserva también el tamaño accesible configurado en Android.",
+                      "bounds":  "[120,698][960,1320]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Sugerencias visuales opcionales en Inicio",
+                      "bounds":  "[180,698][900,861]",
+                      "class":  "android.widget.Switch",
+                      "enabled":  "true",
+                      "checked":  "true"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Guardar preferencias",
+                      "bounds":  "[180,1116][646,1260]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Mis resultados y reportes",
+                      "bounds":  "[120,1320][960,1464]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Ubicación actual\nPuede compartir un único punto solo mientras usa la aplicación. ",
+                      "bounds":  "[120,1524][960,1992]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Gestionar ubicación",
+                      "bounds":  "[180,1788][683,1932]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Inicio\nTab 1 of 6",
+                      "bounds":  "[0,2112][180,2261]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Disponibilidad\nTab 2 of 6",
+                      "bounds":  "[180,2112][360,2261]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Asignaciones\nTab 3 of 6",
+                      "bounds":  "[360,2112][540,2261]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Incidencias\nTab 4 of 6",
+                      "bounds":  "[540,2112][720,2261]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Comunicados\nTab 5 of 6",
+                      "bounds":  "[720,2112][900,2261]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Perfil\nTab 6 of 6",
+                      "bounds":  "[900,2112][1080,2261]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  }
+              ]
+}

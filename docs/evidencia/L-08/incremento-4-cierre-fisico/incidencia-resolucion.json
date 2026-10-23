@@ -1,0 +1,19 @@
+﻿{
+    "recordedAt":  "2026-10-23T05:34:26.7264774+00:00",
+    "initialIncident":  "docs/evidencia/L-08/incremento-3-escritorio/fis02-3f0ba758-6eb9-4d2f-b948-dd1c7de3c430/incidencia-paquete.json",
+    "initialIncidentFilePreserved":  true,
+    "status":  "RESOLVED_AUTHORIZED_CURRENT_PRINCIPAL_REPLACEMENT_SINGLE_APP",
+    "authorization":  "autorizacion-app-unica.json",
+    "replacementPackage":  "pe.rutafija.conductor",
+    "versionCode":  4,
+    "installedSha256":  "3b5533d3bb70fdd7bd043ed9fa62b002fadcc86c4ceee2554a4dc9cc02a6ae3c",
+    "replacementPhysicallyValidated":  true,
+    "bitIdenticalRebuildVerified":  true,
+    "trialPackageRemovedAfterRetirement":  true,
+    "principalUninstalledOrDataCleared":  false,
+    "principalPrivateBackup":  "principal-respaldo-acl-verificado.json",
+    "apf1CandidateInstalled":  false,
+    "exactPreviousPrincipalBinaryRestitutionClaimed":  false,
+    "definitiveProductionSigningAccredited":  false,
+    "pilotEnabled":  false
+}

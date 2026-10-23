@@ -1,0 +1,22 @@
+﻿{
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "startedAt":  "2026-10-23T05:11:04.047767400Z",
+    "lastTelemetryAt":  "2026-10-23T05:26:05.5113350+00:00",
+    "telemetryElapsedSeconds":  901.46356759999992,
+    "harnessFinishedAt":  "2026-10-23T05:27:03.987945100Z",
+    "harnessElapsedSeconds":  959,
+    "personalInitialPercent":  30,
+    "personalFinalPercent":  28,
+    "firstTelemetryPercent":  30,
+    "lastTelemetryPercent":  28,
+    "samples":  30,
+    "allSamplesWithoutPower":  true,
+    "allSamplesAwake":  true,
+    "allSamplesPrincipalResumed":  true,
+    "maximumTemperatureTenthsCelsius":  367,
+    "severeThermalStatusObserved":  false,
+    "aggregationReconciledFromOriginalSamplesWithoutRepeatingInterval":  true,
+    "originalObserverExit":  "SAMPLES_COMPLETED_THEN_MEASURE_OBJECT_ORDERED_DICTIONARY_AGGREGATION_ERROR",
+    "result":  "PASS_REAL_UNPOWERED_TELEMETRY_AND_PERSONALLY_CONFIRMED_INTERVAL",
+    "coordinatesOrSecretsRecorded":  false
+}

@@ -10,6 +10,12 @@ import 'package:ruta_fija_conductor/features/incidents/data/mobile_incident_repo
 import 'package:ruta_fija_conductor/features/incidents/domain/mobile_incident_models.dart';
 
 void main() {
+  for (final category in MobileIncidentCategory.values) {
+    test('catalog accepts explicit ${category.apiValue} without coercion', () {
+      expect(MobileIncidentCategory.fromApi(category.apiValue), category);
+      expect(category.label, isNotEmpty);
+    });
+  }
   final environment = RouteFijaEnvironment.fromApiBaseUrl(
     'https://api.example.test/api/v1',
   );
@@ -24,6 +30,18 @@ void main() {
       utcClock: () => DateTime.utc(2026, 9, 24, 15, 30),
     );
   }
+
+  test('system validity incident is not attributed to a human reporter', () {
+    final data = _incidentJson();
+    data['source'] = 'SYSTEM';
+    data.remove('reportedById');
+    data['reportedByName'] = 'Sistema';
+    final incident = MobileIncident.fromJson(data);
+    expect(incident.source, MobileIncidentSource.system);
+    expect(incident.reportedById, isNull);
+    expect(incident.reportedByName, 'Sistema');
+    expect(incident.canBeClosedBy('current-user-id'), isFalse);
+  });
 
   test(
     'lists only authenticated conductor incidents in reverse report order',
@@ -68,6 +86,8 @@ void main() {
           'category': 'RETRASO',
           'description': 'Demora confirmada en el recorrido.',
           'occurredAt': '2026-09-24T15:30:00.000Z',
+          'severity': 'LOW',
+          'operationKey': '72ce5b57-e282-467e-8d80-676da990b88e',
         });
         for (final forbidden in const [
           'driverId',
@@ -87,6 +107,8 @@ void main() {
 
       final created = await repository(client).create(
         category: MobileIncidentCategory.retraso,
+        severity: MobileIncidentSeverity.low,
+        operationKey: '72ce5b57-e282-467e-8d80-676da990b88e',
         description: '  Demora confirmada en el recorrido.  ',
       );
 
@@ -155,6 +177,7 @@ void main() {
       await expectLater(
         gateway.create(
           category: MobileIncidentCategory.otro,
+          severity: MobileIncidentSeverity.low,
           description: '   ',
         ),
         throwsArgumentError,
@@ -162,6 +185,7 @@ void main() {
       await expectLater(
         gateway.create(
           category: MobileIncidentCategory.otro,
+          severity: MobileIncidentSeverity.low,
           description: 'a' * 1001,
         ),
         throwsArgumentError,

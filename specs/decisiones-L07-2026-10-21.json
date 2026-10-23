@@ -1,0 +1,57 @@
+{
+  "version": "0.6.0",
+  "lot": "L-07",
+  "localDate": "2026-10-21",
+  "status": "VERIFICADA",
+  "authorization": "OK VERDE",
+  "decisions": [
+    {
+      "id": "REP-L07-01",
+      "status": "CONFIRMADA_USUARIO",
+      "proposal": "docs/contratos/L-07-precisiones-propuesta.md",
+      "proposalSha256": "e487357df63ef1e6d4875e7368868a1ae4c0c22d0d000edae13d4c7d3bbfc78b",
+      "literalAnswer": "Aprobar REP-L07-01",
+      "localDate": "2026-10-21"
+    },
+    {
+      "id": "AUD-L07-02",
+      "status": "CONFIRMADA_USUARIO",
+      "proposal": "docs/contratos/L-07-precisiones-propuesta.md",
+      "proposalSha256": "e487357df63ef1e6d4875e7368868a1ae4c0c22d0d000edae13d4c7d3bbfc78b",
+      "literalAnswer": "Aprobar AUD-L07-02",
+      "localDate": "2026-10-21"
+    },
+    {
+      "id": "L07-CON-01",
+      "status": "CONFIRMADA_USUARIO",
+      "proposal": "docs/operacion/L-07-caso-conectado-propuesta.md",
+      "proposalSha256": "21d32f84a0b5951ba5dd0b363c031722203cafab737cb8bb2e0371a7ff903162",
+      "literalAnswer": "Autorizar máximo un CONDUCTOR sintético para L-07",
+      "localDate": "2026-10-21"
+    },
+    {
+      "id": "REP-RET-L07-03",
+      "status": "CONFIRMADA_USUARIO",
+      "proposal": "docs/contratos/L-07-retencion-emisiones-propuesta.md",
+      "proposalSha256": "32f0d16f9c5f4e0d47190dcade65840caa526c0c8121f329786e416a0c5551d8",
+      "literalAnswer": "Aprobar REP-RET-L07-03",
+      "localDate": "2026-10-21"
+    }
+  ],
+  "pendingDetailReview": [],
+  "pilotEnabled": false,
+  "L08Started": false,
+  "newPersistentConnectedCaseAuthorized": true,
+  "pending": [],
+  "connectedCase": {
+    "runId": "6b496135-b86b-4c5b-938f-a60ddcfe32db",
+    "maxNewConductor": 1,
+    "newAdmin": 0,
+    "newSuperAdmin": 0,
+    "status": "VERIFICADO_Y_RETIRADO",
+    "evidence": "docs/evidencia/L-07/conectado-6b496135-b86b-4c5b-938f-a60ddcfe32db/resultado.json",
+    "TEST_CLEANUP_RELEASED": true
+  },
+  "completionType": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "localClosureAct": "docs/actas/L-07-cierre-funcional-local-2026-10-21.md"
+}

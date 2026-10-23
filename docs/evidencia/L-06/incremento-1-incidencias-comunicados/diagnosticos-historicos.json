@@ -1,0 +1,18 @@
+{
+  "result": "RESOLVED",
+  "items": [
+    {
+      "issue": "JPA CHAR64 mapping differed from applied PostgreSQL CHAR64",
+      "resolution": "Explicit CHAR mapping; SQL applied was not edited; current native contexts pass."
+    },
+    {
+      "issue": "Widget tap before enabled-state repaint; notice HTTP double lacked a synthetic token",
+      "resolution": "Explicit repaint and synthetic access-token provider in tests; production authentication unchanged."
+    },
+    {
+      "issue": "Consultation links displaced existing qualification controls",
+      "resolution": "Accessible app-bar menu, disabled during unresolved mutation; original qualification regression passes."
+    }
+  ],
+  "unexecuted": "NativePostgresIntegrationTest and child suites were not executed. Relevant legacy payloads were maintained and compiled; current acceptance uses rollback suites."
+}

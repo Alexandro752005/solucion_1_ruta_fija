@@ -1,0 +1,52 @@
+{
+    "observedAt":  "2026-10-23T02:39:26.9513666+00:00",
+    "result":  "PASS_SHARED_BUILDER_GUARD_REJECTS_WRONG_APK_AND_ACCEPTS_L08_NO_INSTALL",
+    "actualBuilderGuardInvoked":  true,
+    "apkChecks":  [
+                      {
+                          "result":  "PASS",
+                          "sha256":  "dc26a0d0c907818fb0d4ca96e08ada01afdbb8e9c9afb09b087c1999aa36fdd7",
+                          "acceptedAsL08":  false,
+                          "file":  "artifacts/L-08-fis02-2026-10-22/ruta-fija-l08-fis02-debug.apk",
+                          "actualPackage":  "pe.rutafija.conductor"
+                      },
+                      {
+                          "result":  "PASS",
+                          "sha256":  "e74dd49725499e3514c1fd853d81a1479f0614a6c5bfd07ddfa1a9b1c764609b",
+                          "acceptedAsL08":  true,
+                          "file":  "artifacts/L-08-fis02-2026-10-22/correccion-paquete/ruta-fija-l08-fis02-debug.apk",
+                          "actualPackage":  "pe.rutafija.conductor.l08"
+                      }
+                  ],
+    "scriptChecks":  [
+                         {
+                             "parseErrors":  0,
+                             "script":  "Build-RutaFijaL08PhysicalApk.ps1"
+                         },
+                         {
+                             "parseErrors":  0,
+                             "script":  "RutaFijaL08ApkIdentity.ps1"
+                         },
+                         {
+                             "parseErrors":  0,
+                             "script":  "Invoke-RutaFijaL08PhysicalComplement.ps1"
+                         },
+                         {
+                             "parseErrors":  0,
+                             "script":  "Invoke-RutaFijaL08DesktopReadOnly.ps1"
+                         },
+                         {
+                             "parseErrors":  0,
+                             "script":  "Invoke-RutaFijaL08Rest03Database.ps1"
+                         },
+                         {
+                             "parseErrors":  0,
+                             "script":  "Invoke-RutaFijaL08Rest03Business.ps1"
+                         }
+                     ],
+    "installationsExecuted":  0,
+    "accountsCreated":  0,
+    "databaseConnections":  0,
+    "buildsExecuted":  0,
+    "principalPreviousBinaryRestored":  false
+}

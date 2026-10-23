@@ -26,16 +26,16 @@ import java.util.UUID;
 @Service
 public class AuditQueryService {
 
-    private static final Set<String> SENSITIVE_METADATA_KEY_FRAGMENTS = Set.of(
-            "password", "secret", "token", "authorization", "cookie", "latitude", "longitude", "location"
-    );
-
     private final AuditEventRepository repository;
     private final CurrentUserService currentUserService;
+    private final AuditMetadataPolicy metadataPolicy;
+    private final java.time.Clock clock;
 
-    public AuditQueryService(AuditEventRepository repository, CurrentUserService currentUserService) {
+    public AuditQueryService(AuditEventRepository repository, CurrentUserService currentUserService, AuditMetadataPolicy metadataPolicy,java.time.Clock clock) {
         this.repository = repository;
         this.currentUserService = currentUserService;
+        this.metadataPolicy = metadataPolicy;
+        this.clock=clock;
     }
 
     @Transactional(readOnly = true)
@@ -49,7 +49,7 @@ public class AuditQueryService {
         AppUser actor = requireAdmin();
         validateRange(from, to);
         Page<AuditEvent> events = repository.findAll(
-                AuditEventSpecifications.filter(actor.getOrganizationId(), action, entityType, from, to),
+                AuditEventSpecifications.filter(actor.getOrganizationId(), action, entityType, from, to).and(AuditEventSpecifications.visibleAt(clock.instant())),
                 pageable
         );
         return PageResponse.from(events, this::response);
@@ -61,7 +61,7 @@ public class AuditQueryService {
         AuditEvent event = repository.findOne(AuditEventSpecifications.byIdAndOrganization(
                         auditEventId,
                         actor.getOrganizationId()
-                ))
+                ).and(AuditEventSpecifications.visibleAt(clock.instant())))
                 .orElseThrow(this::notFound);
         return response(event);
     }
@@ -89,29 +89,27 @@ public class AuditQueryService {
     }
 
     private AuditEventResponse response(AuditEvent event) {
-        return AuditEventResponse.from(event, safeMetadata(event.getMetadata()));
+        return AuditEventResponse.from(event, metadataPolicy.sanitize(event.getMetadata()));
     }
 
-    private Map<String, Object> safeMetadata(Map<String, Object> metadata) {
-        Map<String, Object> safe = new LinkedHashMap<>();
-        metadata.forEach((key, value) -> {
-            if (!isSensitiveKey(key)) {
-                safe.put(key, value);
-            }
-        });
-        return Map.copyOf(safe);
+    @Transactional(readOnly=true)
+    public PageResponse<AuditEventResponse> platformList(String action,String entityType,Instant from,Instant to,Pageable pageable){
+        currentUserService.requireSuperAdminActor();validateRange(from,to);
+        return PageResponse.from(repository.findAll(AuditEventSpecifications.platform(action,entityType,from,to).and(AuditEventSpecifications.visibleAt(clock.instant())),pageable),this::response);
     }
 
-    private boolean isSensitiveKey(String key) {
-        String normalized = key == null ? "" : key.toLowerCase(java.util.Locale.ROOT);
-        return SENSITIVE_METADATA_KEY_FRAGMENTS.stream().anyMatch(normalized::contains);
+    @Transactional(readOnly=true)
+    public AuditEventResponse platformGet(UUID id){
+        currentUserService.requireSuperAdminActor();
+        var onlyPlatform=AuditEventSpecifications.platform(null,null,null,null).and(AuditEventSpecifications.visibleAt(clock.instant())).and((root,q,cb)->cb.equal(root.get("id"),id));
+        return response(repository.findOne(onlyPlatform).orElseThrow(this::notFound));
     }
 
     private ApplicationException notFound() {
         return new ApplicationException(
                 HttpStatus.NOT_FOUND,
                 ErrorCode.RESOURCE_NOT_FOUND,
-                "El evento de auditoría no existe en la organización activa"
+                "El evento de auditoría no existe en el ámbito autorizado"
         );
     }
 }

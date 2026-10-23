@@ -1,0 +1,41 @@
+release(core): cierre funcional candidato local de entrega v3.1 (L-00 a L-08 verificado)
+
+RESUMEN DEL PROYECTO
+Ruta Fija (Solución 1) es una plataforma para gestión, despacho, telemetría consentida y supervisión del transporte urbano de ruta fija. Mantiene un monolito modular con backend y dos clientes:
+- Backend Java 21 / Spring Boot 3.5.16, Spring Security/JWT, aislamiento por organización, JPA/Hibernate y PostgreSQL 16.
+- CRM Angular 22.2.3 standalone, guardas de sesión y términos, interceptores, tokens de diseño responsivo y sincronización de sesión entre pestañas por BroadcastChannel.
+- Conductor Android pe.rutafija.conductor, Flutter 3.47.5 / Dart 3.13.4, almacenamiento seguro y ubicación voluntaria mientras la app permanece visible.
+- Flyway: 50 migraciones de runtime V1-V50 y una repetible exclusiva de pruebas en db/test-migration; no existe V0 ni V51 en este inventario.
+
+ALCANCE DE LA ENTREGA
+Consolida modelos, servicios, API, seguridad, CRM, cliente Android, suites, scripts nativos y documentación de los lotes L-00 a L-08. Conserva actas, términos publicados, firmas y manifiestos históricos; las fuentes vivas posteriores cuentan con respaldos y registro de sustitución.
+
+COMPORTAMIENTO EN EJECUCIÓN (RUNTIME)
+1. iniciar_ruta_fija.bat valida configuración privada/ACL y administra PostgreSQL mediante lease. Consulta Flyway en lectura: V1-V50, cero fallos, 50 éxitos para la base normal; 51 en ruta_fija_test incluyendo únicamente R__native_test_role_privileges.sql. La política se comparte con la demo y corrige la exigencia errónea de la repetible de pruebas en desarrollo. No migra ni siembra al iniciar.
+2. Con el esquema aprobado, inicia API en 127.0.0.1:8080 y CRM en 127.0.0.1:4300. El proxy Angular canaliza /api y /ws; las comprobaciones de autenticación, origen y organización permanecen en servidor.
+3. El ADMIN se autentica, acepta personalmente la versión/hash inmutable de términos y gestiona los recursos de su organización. Esta aceptación registrada no es una firma criptográfica personal. Las ofertas MOBILE_CONFIRMATION requieren respuesta del conductor y conservan plazos e historial.
+4. El conductor establece disponibilidad, consulta avisos/ofertas y responde con clientEventId, versión y fecha. X-Idempotent-Replay indica repetición en la respuesta del backend; no es una cabecera de solicitud de este flujo ni una garantía universal de idempotencia.
+5. Durante servicio activo, consentimiento y UI visible, el controlador intenta capturar/enviar ubicación cada 30s. La señal se degrada tras más de 120s sin fix, sin inventar 0,0 ni encolar puntos. Este flujo no activa servicio Android persistente/notificación continua; background y cierre suspenden la captura. La bandeja Android no acredita push externo.
+6. finalizar_ruta_fija.bat cierra Java/Node por PID, ejecutable, instante de creación y comando verificados. Libera 8080/4300 y preserva PostgreSQL preexistente o compartido cuando no puede demostrar propiedad y ausencia de otros clientes.
+7. verificar_ruta_fija.bat ejecuta una allowlist unitaria segura en salidas aisladas. Clean rechaza antes de conectar; se evita la antigua limpieza global de ruta_fija_test.
+
+EVALUACIÓN DE OBJETIVOS (DOSSIER V3.1 / APF3)
+- Despacho y trazabilidad cubiertos en los contratos y ensayos locales: oferta, respuesta, reserva, inicio, ejecución y cierre. Disponibilidad del conductor y estado de asignación se distinguen; no se garantiza ausencia universal de carreras.
+- Telemetría: 56 pruebas históricas de ubicación, incluidas seis de no-fix simulado. FIS02 en POCO registró batería 30% a 28% en 959s sin carga, con pantalla/GPS; no certifica autonomía diaria ni pérdida física de satélites.
+- Seguridad: autorización por rol/organización, aceptación versionada de términos y conservación del ledger histórico de altas SUPER_ADMIN=1, ADMIN=3, CONDUCTOR=8, con dos aceptaciones.
+- Continuidad: cifrado AES-256/GCM y restauración SQL sintética íntegra en 415.026s. Ese RTO local no acredita recuperación ante pérdida total del servidor ni independencia operativa.
+- Accesibilidad: TalkBack humano, contraste corregido y escala 150% comprobados en las pantallas/casos ensayados; no se declara certificación WCAG global.
+- Los nueve lotes están verificados dentro de su alcance local aceptado. Esto no demuestra el 100% del impacto urbano, de una rúbrica académica no aportada ni de los requisitos reales de operación.
+
+VALIDACIÓN Y PRESERVACIÓN
+- Auditoría local: 257 pruebas Java, 241 Angular y 233 Flutter aprobadas; siete pruebas Flutter conectadas omitidas para proteger la fixture. Java compila con -Xlint:all sin avisos y las capturas del IDE registran 0 errores/0 advertencias.
+- Smoke histórico de API/CRM en modo lectura: health/readiness UP, login renderizado y cierre controlado; 121 tablas conservan filas/hashes, ledger y Flyway.
+- Corrección de la política de esquema: 12 casos sintéticos y regresión de 42 comprobaciones de lanzadores, sin nuevas migraciones, conexiones de prueba ni despliegues.
+- .gitignore protege entornos, claves, almacenes, runtime, logs, dumps y binarios/archivos de distribución locales; .gitattributes preserva los bytes de actas, términos publicados y evidencia certificada.
+
+DICTAMEN Y CONDICIONES PENDIENTES
+GO PARA CANDIDATO LOCAL DE ENTREGA. NO_GO_PILOTO_REAL.
+La base nativa solucion_ruta_fija_1 permanece en V12 y el inicio normal bloquea hasta una migración respaldada y ensayada; la comprobación sobre ruta_fija_test V50 requiere --smoke-read-only --test-database y no permite operar en escritura.
+La APK release candidata usa HTTPS reservado .invalid sin API operativa; la APKdebugv4 probada en POCO es otro binario/certificado. La distribución y la custodia definitivas requieren trabajo adicional.
+El protocolo PR-01..PR-06 mantiene pendientes privacidad efectiva, ADMIN legítimo/aceptación personal, ceremonia USB Ed25519 del titular, HTTPS/dominio/firma Android definitiva, respaldo/clave/monitoreo/alertas/guardia independientes y validación de participantes/campo.
+La aprobación local no elimina estas condiciones ni certifica ausencia de deuda técnica u operativa. No se ejecuta publicación, push ni activación de piloto mediante este commit.

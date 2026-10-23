@@ -20,6 +20,8 @@ final class MobileCurrentLocation {
       'accuracyM': accuracyMeters,
       'capturedAt': capturedAt.toUtc().toIso8601String(),
       'permissionGranted': true,
+      'locationServiceEnabled': true,
+      'foreground': true,
     };
   }
 }
@@ -49,11 +51,22 @@ abstract interface class MobileDeviceLocationGateway {
   Future<bool> openAppSettings();
 }
 
+enum MobileDeviceLocationFailureKind {
+  timeout,
+  provider,
+  invalidAccuracy,
+  unknown,
+}
+
 final class MobileDeviceLocationFailure implements Exception {
-  const MobileDeviceLocationFailure(this.message);
+  const MobileDeviceLocationFailure(
+    this.message, {
+    this.kind = MobileDeviceLocationFailureKind.unknown,
+  });
 
   final String message;
+  final MobileDeviceLocationFailureKind kind;
 
   @override
-  String toString() => message;
+  String toString() => 'MobileDeviceLocationFailure(${kind.name})';
 }

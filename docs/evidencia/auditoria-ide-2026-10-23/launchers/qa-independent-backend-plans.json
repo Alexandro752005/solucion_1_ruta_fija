@@ -1,0 +1,90 @@
+﻿{
+    "recordedAt":  "2026-10-23T16:15:23.4604548+00:00",
+    "result":  "PASS_THREE_PLAN_COMMANDS_AND_TWO_NEGATIVE_GUARDS",
+    "cases":  [
+                  {
+                      "label":  "NativeTestPlan",
+                      "script":  "scripts/Invoke-RutaFijaNativeTest.ps1",
+                      "arguments":  [
+                                        "-Action",
+                                        "Plan"
+                                    ],
+                      "expectedExitCode":  0,
+                      "actualExitCode":  0,
+                      "passed":  true,
+                      "output":  [
+                                     "NATIVE_TEST=PLAN Verify=ISOLATED_UNIT_ALLOWLIST Preflight=SELECT_ONLY Clean=FORBIDDEN_NO_GLOBAL_CLEANUP"
+                                 ]
+                  },
+                  {
+                      "label":  "NativeTestCleanRejected",
+                      "script":  "scripts/Invoke-RutaFijaNativeTest.ps1",
+                      "arguments":  [
+                                        "-Action",
+                                        "Clean"
+                                    ],
+                      "expectedExitCode":  1,
+                      "actualExitCode":  1,
+                      "passed":  true,
+                      "output":  [
+                                     "GLOBAL_CLEANUP_FORBIDDEN_PROTECTED_RUTA_FIJA_TEST; use a separately authorized isolated harness",
+                                     "En D:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3\\scripts\\Invoke-RutaFijaNativeTest.ps1: 13 Carácter: 25",
+                                     "+ ... eq \u0027Clean\u0027){throw \u0027GLOBAL_CLEANUP_FORBIDDEN_PROTECTED_RUTA_FIJA_TEST; ...",
+                                     "+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+                                     "    + CategoryInfo          : OperationStopped: (GLOBAL_CLEANUP_...solated harness:String) [], RuntimeException",
+                                     "    + FullyQualifiedErrorId : GLOBAL_CLEANUP_FORBIDDEN_PROTECTED_RUTA_FIJA_TEST; use a separately authorized isolated  ",
+                                     "   harness",
+                                     " "
+                                 ]
+                  },
+                  {
+                      "label":  "NativeRuntimePlan",
+                      "script":  "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+                      "arguments":  [
+                                        "-Action",
+                                        "Plan"
+                                    ],
+                      "expectedExitCode":  0,
+                      "actualExitCode":  0,
+                      "passed":  true,
+                      "output":  [
+                                     "NATIVE_RUNTIME=PLAN_NO_CONNECTION Start=V50_GATE_NO_MIGRATIONS SmokeTestDatabase=EXPLICIT_READ_ONLY_ONLY"
+                                 ]
+                  },
+                  {
+                      "label":  "PostgresqlLeasePlan",
+                      "script":  "scripts/Invoke-RutaFijaPostgresqlLease.ps1",
+                      "arguments":  [
+                                        "-Action",
+                                        "Plan"
+                                    ],
+                      "expectedExitCode":  0,
+                      "actualExitCode":  0,
+                      "passed":  true,
+                      "output":  [
+                                     "POSTGRESQL_LEASE=PLAN_NO_SERVICE_ACCESS Start=ACQUIRE_ONLY_IF_STOPPED StopOwned=IDENTITY_AND_CLIENTS StopGlobal=EXPLICIT_SEPARATE"
+                                 ]
+                  },
+                  {
+                      "label":  "QuickDemoUnknownActionRejectedBeforeExecution",
+                      "script":  "scripts/Invoke-RutaFijaQuickDemo.ps1",
+                      "arguments":  [
+                                        "-Action",
+                                        "Plan"
+                                    ],
+                      "expectedExitCode":  1,
+                      "actualExitCode":  1,
+                      "passed":  true,
+                      "output":  [
+                                     "D:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3\\scripts\\Invoke-RutaFijaQuickDemo.ps1 : No se puede validar ",
+                                     "el argumento del parámetro \u0027Action\u0027. El argumento \"Plan\" no pertenece al conjunto \"Start,Stop,Test\" especificado por ",
+                                     "el atributo ValidateSet. Proporcione un argumento que pertenezca al conjunto e intente ejecutar el comando de nuevo.",
+                                     "    + CategoryInfo          : InvalidData: (:) [Invoke-RutaFijaQuickDemo.ps1], ParentContainsErrorRecordException",
+                                     "    + FullyQualifiedErrorId : ParameterArgumentValidationError,Invoke-RutaFijaQuickDemo.ps1",
+                                     " "
+                                 ]
+                  }
+              ],
+    "databaseOrServicesAccessed":  false,
+    "toolingIncident":  "Initial test orchestration incorrectly expected QuickDemo to support Plan. ValidateSet rejected before execution; inspection confirmed QuickDemo supports only Start/Stop/Test. Corrected expectation is unknown-action exit1, not a new product fix."
+}

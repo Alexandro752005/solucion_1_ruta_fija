@@ -1,0 +1,1777 @@
+{
+  "reviewedAtUtc": "2026-10-23T20:50:06.5245458+00:00",
+  "result": "PASS_READONLY_RUNTIME_OBJECTIVES_REVIEW_WITH_EXPLICIT_OPERATIONAL_LIMITS",
+  "reviewer": "A-OPS/A-QA independent of root-authored final schema-policy changes",
+  "scope": "Read-only source/evidence/SDK metadata review and pure in-memory schema-policy tests. No database connection, service/application start or stop, network access, Git mutation, or rule change by this reviewer. Only this new unsealed QA evidence is written.",
+  "latestRuntimeSources": [
+    {
+      "path": "scripts/RutaFijaRuntimeSchemaPolicy.ps1",
+      "sha256": "a4bfc9b78b5db8c649a7798cf72931ea3650ead3b52c8bd72dd6398b89835a4d",
+      "parseErrors": 0
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+      "sha256": "043a841813e1aacf62d985f283c71a9925fdb76462d7dbdc1af01d58bc2aa34c",
+      "parseErrors": 0
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaQuickDemo.ps1",
+      "sha256": "055738564796a516d76c5f7a924cc3df5b35e6f7b34d8814ea1c5ba12e77223e",
+      "parseErrors": 0
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaPostgresqlLease.ps1",
+      "sha256": "295a2626b0fc61a05bbabd57c0e1ed8c25ea7a71e4c4a7102c9221944eb3ac18",
+      "parseErrors": 0
+    }
+  ],
+  "independentSchemaPolicyReview": {
+    "reviewedAtUtc": "2026-10-23T20:50:06.5245458+00:00",
+    "method": "Independent AST extraction of shared pure helper only; synthetic rows, no launcher body executed",
+    "sources": [
+      {
+        "path": "scripts/RutaFijaRuntimeSchemaPolicy.ps1",
+        "sha256": "a4bfc9b78b5db8c649a7798cf72931ea3650ead3b52c8bd72dd6398b89835a4d",
+        "parseErrors": 0
+      },
+      {
+        "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+        "sha256": "043a841813e1aacf62d985f283c71a9925fdb76462d7dbdc1af01d58bc2aa34c",
+        "parseErrors": 0
+      },
+      {
+        "path": "scripts/Invoke-RutaFijaQuickDemo.ps1",
+        "sha256": "055738564796a516d76c5f7a924cc3df5b35e6f7b34d8814ea1c5ba12e77223e",
+        "parseErrors": 0
+      },
+      {
+        "path": "scripts/Invoke-RutaFijaPostgresqlLease.ps1",
+        "sha256": "295a2626b0fc61a05bbabd57c0e1ed8c25ea7a71e4c4a7102c9221944eb3ac18",
+        "parseErrors": 0
+      }
+    ],
+    "casesPassed": 12,
+    "casesTotal": 12,
+    "cases": [
+      {
+        "name": "NormalV50",
+        "accepted": true,
+        "expectedAccepted": true,
+        "passed": true
+      },
+      {
+        "name": "TestV50",
+        "accepted": true,
+        "expectedAccepted": true,
+        "passed": true
+      },
+      {
+        "name": "NormalV12",
+        "accepted": false,
+        "expectedAccepted": false,
+        "passed": true
+      },
+      {
+        "name": "NormalRefusesTestRepeatable",
+        "accepted": false,
+        "expectedAccepted": false,
+        "passed": true
+      },
+      {
+        "name": "WrongRepeatable",
+        "accepted": false,
+        "expectedAccepted": false,
+        "passed": true
+      },
+      {
+        "name": "MissingRepeatable",
+        "accepted": false,
+        "expectedAccepted": false,
+        "passed": true
+      },
+      {
+        "name": "FailedMigration",
+        "accepted": false,
+        "expectedAccepted": false,
+        "passed": true
+      },
+      {
+        "name": "WrongDatabase",
+        "accepted": false,
+        "expectedAccepted": false,
+        "passed": true
+      },
+      {
+        "name": "FailedSelect",
+        "accepted": false,
+        "expectedAccepted": false,
+        "passed": true
+      },
+      {
+        "name": "EmptySelect",
+        "accepted": false,
+        "expectedAccepted": false,
+        "passed": true
+      },
+      {
+        "name": "ExtraRow",
+        "accepted": false,
+        "expectedAccepted": false,
+        "passed": true
+      },
+      {
+        "name": "WrongVersionSequence",
+        "accepted": false,
+        "expectedAccepted": false,
+        "passed": true
+      }
+    ],
+    "helperOnlyFunctionDeclarations": true,
+    "queryStartsSelect": true,
+    "databaseConnected": false,
+    "serviceOrApplicationStarted": false,
+    "notAdditionalUniqueTestsBeyondRootTwelve": true,
+    "rootUniqueSchemaCases": 12,
+    "independentReexecutionAddsNoUniqueTestCount": true,
+    "rootLauncherRegressionCases": 42,
+    "rootLauncherRegressionAllPass": true
+  },
+  "schemaInventory": {
+    "runtimeVersionedFiles": 50,
+    "runtimeVersions": "V1..V50",
+    "runtimeRepeatableFiles": 0,
+    "testOnlyRepeatable": "backend/src/main/resources/db/test-migration/R__native_test_role_privileges.sql",
+    "testObservedSuccessfulApplications": 51,
+    "testObservedVersioned": 50,
+    "testObservedRepeatableApplications": 1,
+    "noV0OrV51Source": true,
+    "noArtificialMigrationAdded": true,
+    "origin": "Runtime Flyway resolves db/migration only. Test profile adds db/test-migration; the repeatable explicitly refuses any database other than ruta_fija_test and grants rf_test DML privileges.",
+    "references": [
+      {
+        "path": "backend/src/main/resources/application.yml",
+        "sha256": "0f9c57a5af31b20a1252c3cb44738102744649c07a473957847c92f7bf26b53a",
+        "lines": [
+          14
+        ]
+      },
+      {
+        "path": "backend/src/main/resources/application-test.yml",
+        "sha256": "06c794e2cf08a4a7ccedfa88866c585b44de4bc5d1a295854a41661d07c99b2b",
+        "lines": [
+          27
+        ]
+      },
+      {
+        "path": "backend/src/main/resources/db/test-migration/R__native_test_role_privileges.sql",
+        "sha256": "62b878820bcefe8f4f56bcd00e9ab3e0813575cefcfae22ca356103b46bb282d",
+        "lines": [
+          5
+        ]
+      },
+      {
+        "path": "backend/src/main/resources/db/test-migration/R__native_test_role_privileges.sql",
+        "sha256": "62b878820bcefe8f4f56bcd00e9ab3e0813575cefcfae22ca356103b46bb282d",
+        "lines": [
+          13,
+          19
+        ]
+      },
+      {
+        "path": "backend/src/test/java/pe/rutafija/support/L08V50Preflight.java",
+        "sha256": "be72866fc57b3c15f6db09d21972957a0f4f07cfb390217205f5960f9c10dad7",
+        "lines": [
+          254
+        ]
+      },
+      {
+        "path": "docs/evidencia/L-08/incremento-2-mision-y-controles/base/l08-v50-postflight.json",
+        "sha256": "0ac8535467739803a20a382b6615be0cb9b591a6f6054dbbfaafbb13c3051c27",
+        "lines": [
+          431
+        ]
+      },
+      {
+        "path": "docs/evidencia/L-08/incremento-2-mision-y-controles/base/l08-v50-postflight.json",
+        "sha256": "0ac8535467739803a20a382b6615be0cb9b591a6f6054dbbfaafbb13c3051c27",
+        "lines": [
+          432
+        ]
+      }
+    ]
+  },
+  "runtimeReview": {
+    "status": "PASS_FINAL_PROFILE_SPECIFIC_GATES_AND_SHARED_POLICY",
+    "defaultMode": "Plan",
+    "normalDatabase": "solucion_ruta_fija_1",
+    "normalRequiredSchema": "V1..V50,50 successful entries,no repeatable,no failure",
+    "smokeDatabase": "ruta_fija_test",
+    "smokeRequiredSchema": "V1..V50 plus exact R__native_test_role_privileges.sql,51 successful entries,no failure",
+    "developmentLastReadOnlyObservation": "V1..V12; normal startup rejected before Java/Angular; no migration performed",
+    "smokeRequiresBothFlags": "--smoke-read-only --test-database",
+    "smokeSessionOnlyFlags": [
+      "JDBC options default_transaction_read_only=on",
+      "Hikari connection init SET default_transaction_read_only=on",
+      "app.mobile.maintenance-enabled=false",
+      "app.qualification.maintenance.enabled=false"
+    ],
+    "normalBusinessSchedulersPreserved": true,
+    "automaticFlywayStartupDisabled": true,
+    "normalSeedDisabled": true,
+    "quickDemoUsesSamePolicy": true,
+    "quickDemoNormalRequires50RuntimeMigrations": true,
+    "publicDemoNotExecuted": true,
+    "identityGuards": "Runtime state v2 binds PID, executable path, full command marker, process creation UTC and expected port. PostgreSQL lease only acquired if launcher observed Stopped and started the service; no ownership or incomplete instance/client visibility preserves the service.",
+    "postgresExistingServiceNeverAcquiresOwnership": true,
+    "hiddenOrUnknownSessionsFailClosed": true,
+    "references": [
+      {
+        "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+        "sha256": "043a841813e1aacf62d985f283c71a9925fdb76462d7dbdc1af01d58bc2aa34c",
+        "lines": [
+          4
+        ]
+      },
+      {
+        "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+        "sha256": "043a841813e1aacf62d985f283c71a9925fdb76462d7dbdc1af01d58bc2aa34c",
+        "lines": [
+          20
+        ]
+      },
+      {
+        "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+        "sha256": "043a841813e1aacf62d985f283c71a9925fdb76462d7dbdc1af01d58bc2aa34c",
+        "lines": [
+          359
+        ]
+      },
+      {
+        "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+        "sha256": "043a841813e1aacf62d985f283c71a9925fdb76462d7dbdc1af01d58bc2aa34c",
+        "lines": [
+          552
+        ]
+      },
+      {
+        "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+        "sha256": "043a841813e1aacf62d985f283c71a9925fdb76462d7dbdc1af01d58bc2aa34c",
+        "lines": [
+          553
+        ]
+      },
+      {
+        "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+        "sha256": "043a841813e1aacf62d985f283c71a9925fdb76462d7dbdc1af01d58bc2aa34c",
+        "lines": [
+          579
+        ]
+      },
+      {
+        "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+        "sha256": "043a841813e1aacf62d985f283c71a9925fdb76462d7dbdc1af01d58bc2aa34c",
+        "lines": [
+          580
+        ]
+      },
+      {
+        "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+        "sha256": "043a841813e1aacf62d985f283c71a9925fdb76462d7dbdc1af01d58bc2aa34c",
+        "lines": [
+          139,
+          188,
+          618,
+          625
+        ]
+      },
+      {
+        "path": "scripts/RutaFijaRuntimeSchemaPolicy.ps1",
+        "sha256": "a4bfc9b78b5db8c649a7798cf72931ea3650ead3b52c8bd72dd6398b89835a4d",
+        "lines": [
+          14
+        ]
+      },
+      {
+        "path": "scripts/RutaFijaRuntimeSchemaPolicy.ps1",
+        "sha256": "a4bfc9b78b5db8c649a7798cf72931ea3650ead3b52c8bd72dd6398b89835a4d",
+        "lines": [
+          15
+        ]
+      },
+      {
+        "path": "scripts/Invoke-RutaFijaQuickDemo.ps1",
+        "sha256": "055738564796a516d76c5f7a924cc3df5b35e6f7b34d8814ea1c5ba12e77223e",
+        "lines": [
+          86
+        ]
+      },
+      {
+        "path": "scripts/Invoke-RutaFijaPostgresqlLease.ps1",
+        "sha256": "295a2626b0fc61a05bbabd57c0e1ed8c25ea7a71e4c4a7102c9221944eb3ac18",
+        "lines": [
+          76
+        ]
+      },
+      {
+        "path": "scripts/Invoke-RutaFijaPostgresqlLease.ps1",
+        "sha256": "295a2626b0fc61a05bbabd57c0e1ed8c25ea7a71e4c4a7102c9221944eb3ac18",
+        "lines": [
+          45
+        ]
+      }
+    ],
+    "historicalEvidence": [
+      {
+        "path": "docs/evidencia/auditoria-ide-2026-10-23/launchers/guardas-ejecutadas.json",
+        "sha256": "a646f29a36cb02ead0bfd65bbd3b95433868f5dc376356556ec13013ba7375db",
+        "lines": [
+          4
+        ]
+      },
+      {
+        "path": "docs/evidencia/auditoria-ide-2026-10-23/launchers/esquemas-readonly.json",
+        "sha256": "c77e1e6eaad962971572a55c19f0f698a82fb77aaa56cd63f8dc663ddbf008b8",
+        "lines": [
+          9
+        ]
+      },
+      {
+        "path": "docs/evidencia/auditoria-ide-2026-10-23/runtime/qa-independent-ops.json",
+        "sha256": "490f42bc84c195c6c73b6fd5d219945ac358a0e7c28c8d528a913a29565ad19d",
+        "lines": [
+          8
+        ]
+      }
+    ],
+    "currentPolicyRealStartupRerun": false,
+    "previousActualReadOnlySmoke": "Earlier audit used runtime SHA298d7cb7975aeb32787c7e05bc9065acb04b8657edf35589a7050cab3ffeb167. Final shared policy change was independently tested with synthetic observations, without repeating DB or startup."
+  },
+  "versions": {
+    "javaLanguageTarget": "21",
+    "selectedJdk": "21.0.10",
+    "springBoot": "3.5.16",
+    "angular": "22.2.3",
+    "flutter": "3.47.5",
+    "dart": "3.13.4",
+    "postgresqlMajor": "16",
+    "provenance": "Build manifests/lock plus locally installed JDK/Flutter/Dart metadata; no download or service started.",
+    "references": [
+      {
+        "path": "backend/pom.xml",
+        "sha256": "55ec13d4ec18cbdfc94c61b220461e9d9b285b35f766eea51f0851ff838b7f55",
+        "lines": [
+          21
+        ]
+      },
+      {
+        "path": "backend/pom.xml",
+        "sha256": "55ec13d4ec18cbdfc94c61b220461e9d9b285b35f766eea51f0851ff838b7f55",
+        "lines": [
+          10
+        ]
+      },
+      {
+        "path": "C:/Program Files/Java/jdk-21.0.10/release",
+        "sha256": "7b8d43d63c5c0d79af90e9425c1fbb00751c954d940f8c51f6bc5d646ed7cf15",
+        "lines": [
+          3
+        ]
+      },
+      {
+        "path": "frontend/package.json",
+        "sha256": "c4b8bdc21e68596f537fdb02ddf5192905ebbc3ba1e52fa723dfae8296c9e018",
+        "lines": [
+          23
+        ]
+      },
+      {
+        "path": "frontend/package-lock.json",
+        "sha256": "6818f9b06051abab64081e8cc853049b54c2632d35b0807033c7582f26f0d85e",
+        "lineStart": 1,
+        "lineEnd": 7208
+      },
+      {
+        "path": "D:/dev/flutter/bin/cache/flutter.version.json",
+        "sha256": "2875cf943e539c17935c7bcd1045b4d0b1721c749e07361cf454c7df766e1771",
+        "lines": [
+          2
+        ]
+      },
+      {
+        "path": "D:/dev/flutter/bin/cache/flutter.version.json",
+        "sha256": "2875cf943e539c17935c7bcd1045b4d0b1721c749e07361cf454c7df766e1771",
+        "lines": [
+          11
+        ]
+      },
+      {
+        "path": "D:/dev/flutter/bin/cache/dart-sdk/version",
+        "sha256": "c7d3b0b427716c3db783f01fbf9196544a7357bf94ec8e3a0a8f786b69aaab22",
+        "lineStart": 1,
+        "lineEnd": 1
+      },
+      {
+        "path": "mobile/pubspec.yaml",
+        "sha256": "160a0f2e10d89907c9fa1191667c26055b8be95040050ef37cc256a46ca71bde",
+        "lines": [
+          7
+        ]
+      }
+    ]
+  },
+  "v31Objectives": {
+    "registryVersion": "3.1",
+    "registryIsRequirementsNotBlanketImplementationCertification": true,
+    "exclusionsPreserved": [
+      "RENIEC external integration",
+      "MTC external integration",
+      "QR",
+      "offline operation",
+      "offline action queue"
+    ],
+    "localLotsVerified": 9,
+    "localLotIds": [
+      "L-00",
+      "L-01",
+      "L-02",
+      "L-03",
+      "L-04",
+      "L-05",
+      "L-06",
+      "L-07",
+      "L-08"
+    ],
+    "localAcceptanceCriteria": 12,
+    "acceptance": "GO PARA CANDIDATO LOCAL DE ENTREGA",
+    "operationalDecision": "NO_GO_PILOTO_REAL",
+    "pilotEnabled": false,
+    "pendingFieldCriteria": [
+      "CI-L08-04",
+      "CI-L08-05",
+      "CI-L08-06",
+      "CI-L08-07",
+      "CI-L08-10",
+      "CI-L08-11"
+    ],
+    "allObjectivesOrProductionCompleteClaimed": false,
+    "references": [
+      {
+        "path": "specs/registro.json",
+        "sha256": "ca2794a41907d8081e0b77bd7ee02c3960024798d48442a7d26f053cb730ac50",
+        "lines": [
+          4
+        ]
+      },
+      {
+        "path": "specs/registro.json",
+        "sha256": "ca2794a41907d8081e0b77bd7ee02c3960024798d48442a7d26f053cb730ac50",
+        "lines": [
+          2726,
+          22324
+        ]
+      },
+      {
+        "path": "specs/registro.json",
+        "sha256": "ca2794a41907d8081e0b77bd7ee02c3960024798d48442a7d26f053cb730ac50",
+        "lines": [
+          2727,
+          11640,
+          22325
+        ]
+      },
+      {
+        "path": "docs/contratos/L-08.md",
+        "sha256": "b50004699d347af83ac396fd84b21bc21c5939327f0de6f0defa264219f95cdd",
+        "lines": [
+          3
+        ]
+      },
+      {
+        "path": "docs/contratos/L-08.md",
+        "sha256": "b50004699d347af83ac396fd84b21bc21c5939327f0de6f0defa264219f95cdd",
+        "lines": [
+          27
+        ]
+      },
+      {
+        "path": "docs/evidencia/L-08/matriz-L08.md",
+        "sha256": "e498c72e9a17f1570338ee879a0cd72fd2ba8dfa6baec938c86dfa404fc69e78",
+        "lines": [
+          3
+        ]
+      },
+      {
+        "path": "docs/evidencia/L-08/incremento-5-candidato-final/verificacion-cierre.json",
+        "sha256": "80e42b198e4b769c82806be20b045233499fc3c9d3f4169c65d533e7b85fcc35",
+        "lines": [
+          8
+        ]
+      }
+    ]
+  },
+  "legalAndTerms": {
+    "publishedAdminTermsVersion": "1.0.0",
+    "publishedSha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+    "publishedTermsHashIntact": true,
+    "personalAdminAcceptanceNotImputed": true,
+    "titleholderEd25519CeremonyNotImputed": true,
+    "legalComplianceCertificationClaimed": false,
+    "fieldGates": [
+      {
+        "id": "PR-01",
+        "name": "Real identification/privacy",
+        "status": "PENDIENTE_REAL",
+        "reference": {
+          "path": "docs/legal/protocolo-transicion-piloto-real.md",
+          "sha256": "7683e72a3dba1f3c009a6c72e59f5872bdb62d42e68787f0204bb9cc21d68453",
+          "lines": [
+            11,
+            41
+          ]
+        }
+      },
+      {
+        "id": "PR-02",
+        "name": "Legitimate ADMIN personal acceptance",
+        "status": "PENDIENTE_REAL",
+        "reference": {
+          "path": "docs/legal/protocolo-transicion-piloto-real.md",
+          "sha256": "7683e72a3dba1f3c009a6c72e59f5872bdb62d42e68787f0204bb9cc21d68453",
+          "lines": [
+            12
+          ]
+        }
+      },
+      {
+        "id": "PR-03",
+        "name": "Titleholder Ed25519 recovery ceremony/offline removable custody",
+        "status": "PENDIENTE_REAL",
+        "reference": {
+          "path": "docs/legal/protocolo-transicion-piloto-real.md",
+          "sha256": "7683e72a3dba1f3c009a6c72e59f5872bdb62d42e68787f0204bb9cc21d68453",
+          "lines": [
+            13
+          ]
+        }
+      },
+      {
+        "id": "PR-04",
+        "name": "Real domain/TLS/distribution/custody",
+        "status": "PENDIENTE_REAL",
+        "reference": {
+          "path": "docs/legal/protocolo-transicion-piloto-real.md",
+          "sha256": "7683e72a3dba1f3c009a6c72e59f5872bdb62d42e68787f0204bb9cc21d68453",
+          "lines": [
+            14
+          ]
+        }
+      },
+      {
+        "id": "PR-05",
+        "name": "Independent monitoring/backups/24x7 guard/representative recovery",
+        "status": "PENDIENTE_REAL",
+        "reference": {
+          "path": "docs/legal/protocolo-transicion-piloto-real.md",
+          "sha256": "7683e72a3dba1f3c009a6c72e59f5872bdb62d42e68787f0204bb9cc21d68453",
+          "lines": [
+            15
+          ]
+        }
+      },
+      {
+        "id": "PR-06",
+        "name": "Real participants/vehicles/titles/routes and physical GPS no-fix",
+        "status": "PENDIENTE_REAL",
+        "reference": {
+          "path": "docs/legal/protocolo-transicion-piloto-real.md",
+          "sha256": "7683e72a3dba1f3c009a6c72e59f5872bdb62d42e68787f0204bb9cc21d68453",
+          "lines": [
+            16
+          ]
+        }
+      }
+    ],
+    "references": [
+      {
+        "path": "docs/legal/publicado/terminos-admin-v1.0.0.md",
+        "sha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+        "lineStart": 1,
+        "lineEnd": 122
+      },
+      {
+        "path": "docs/legal/protocolo-transicion-piloto-real.md",
+        "sha256": "7683e72a3dba1f3c009a6c72e59f5872bdb62d42e68787f0204bb9cc21d68453",
+        "lines": [
+          22
+        ]
+      },
+      {
+        "path": "docs/legal/protocolo-transicion-piloto-real.md",
+        "sha256": "7683e72a3dba1f3c009a6c72e59f5872bdb62d42e68787f0204bb9cc21d68453",
+        "lines": [
+          41
+        ]
+      }
+    ]
+  },
+  "observedEvidenceNotNewlyRerun": {
+    "auditLocalTests": {
+      "javaPassed": 257,
+      "angularPassed": 241,
+      "flutterPassed": 233,
+      "totalPassed": 731,
+      "flutterConnectedSkipped": 7,
+      "skippedNotCountedAsPass": true
+    },
+    "currentSchemaCasesAdditionalToHistorical731": 12,
+    "independentRecheckNotDoubleCounted": true,
+    "readonlySmoke": {
+      "tablesUnchanged": 121,
+      "independentChecksPassed": 207,
+      "authenticatedBusinessWriteTested": false
+    },
+    "restoration": {
+      "newSyntheticSqlRtoSeconds": 415.025714,
+      "includesAllOriginalFailuresAndIntervention": true,
+      "tablesRestored": 2,
+      "rowsRestored": 101,
+      "wholeServerLossOrClientRecoveryAccredited": false,
+      "historicalRest03Seconds": 318.731,
+      "historicalNotNewlyRerun": true
+    },
+    "fis02": {
+      "phone": "POCO Android13",
+      "apk": "debug principalv4",
+      "batteryInitialPercent": 30,
+      "batteryFinalPercent": 28,
+      "batteryElapsedSeconds": 959,
+      "dropPercentagePoints": 2,
+      "gpsPointsDuringInterval": 32,
+      "physicalNoFixObserved": false,
+      "noDailyBatteryLifeExtrapolation": true
+    },
+    "references": [
+      {
+        "path": "docs/evidencia/auditoria-ide-2026-10-23/verificacion-final.json",
+        "sha256": "33aa35c3143fad933c70d71eec3edfe65cd01fa19bf535348de2dad79e70e663",
+        "lines": [
+          18
+        ]
+      },
+      {
+        "path": "docs/evidencia/auditoria-ide-2026-10-23/verificacion-final.json",
+        "sha256": "33aa35c3143fad933c70d71eec3edfe65cd01fa19bf535348de2dad79e70e663",
+        "lines": [
+          17
+        ]
+      },
+      {
+        "path": "docs/evidencia/auditoria-ide-2026-10-23/backend/summary.json",
+        "sha256": "f73162d271f1e2e0c9a2bcf208ea56c44563d8f8df332d28362e9af56e456df8",
+        "lines": [
+          9
+        ]
+      },
+      {
+        "path": "docs/evidencia/auditoria-ide-2026-10-23/frontend/test-ci.native.log",
+        "sha256": "505bb45009e2df1c6baad813c2213291949c83f086e0584040da81930ecb8333",
+        "lines": [
+          15
+        ]
+      },
+      {
+        "path": "docs/evidencia/auditoria-ide-2026-10-23/mobile/resultado-mobile-ide.json",
+        "sha256": "cf93841c95875124816d3312449dd310678fb065044960e5395f58abc0b84f33",
+        "lines": [
+          106
+        ]
+      },
+      {
+        "path": "docs/evidencia/L-08/incremento-5-candidato-final/ops/ops-summary-final.json",
+        "sha256": "965439258272cf664ce8b73f698ccba2eb49d423c28846ab29fe77ccd4b71769",
+        "lines": [
+          5
+        ]
+      },
+      {
+        "path": "docs/evidencia/L-08/incremento-5-candidato-final/ops/ops-summary-final.json",
+        "sha256": "965439258272cf664ce8b73f698ccba2eb49d423c28846ab29fe77ccd4b71769",
+        "lines": [
+          9
+        ]
+      },
+      {
+        "path": "docs/evidencia/L-08/incremento-5-candidato-final/ops/ops-summary-final.json",
+        "sha256": "965439258272cf664ce8b73f698ccba2eb49d423c28846ab29fe77ccd4b71769",
+        "lines": [
+          46
+        ]
+      },
+      {
+        "path": "docs/evidencia/L-08/incremento-4-cierre-fisico/cierre-caso.json",
+        "sha256": "21ccde940a4277ee5e088fb8fe6666a8b54fade0ddde0b96a7402b0c3a7a59e6",
+        "lines": [
+          16
+        ]
+      },
+      {
+        "path": "docs/evidencia/L-08/incremento-4-cierre-fisico/cierre-caso.json",
+        "sha256": "21ccde940a4277ee5e088fb8fe6666a8b54fade0ddde0b96a7402b0c3a7a59e6",
+        "lines": [
+          18
+        ]
+      },
+      {
+        "path": "docs/evidencia/L-08/incremento-4-cierre-fisico/cierre-caso.json",
+        "sha256": "21ccde940a4277ee5e088fb8fe6666a8b54fade0ddde0b96a7402b0c3a7a59e6",
+        "lines": [
+          19
+        ]
+      },
+      {
+        "path": "docs/evidencia/L-08/incremento-4-cierre-fisico/cierre-caso.json",
+        "sha256": "21ccde940a4277ee5e088fb8fe6666a8b54fade0ddde0b96a7402b0c3a7a59e6",
+        "lines": [
+          45
+        ]
+      }
+    ]
+  },
+  "academicAssessment": {
+    "currentReadOnlyMetric": {
+      "scope": "Product only: Java main, Angular src excluding spec, Flutter lib",
+      "javaFiles": 406,
+      "javaNonBlankLines": 25152,
+      "typeScriptFiles": 87,
+      "typeScriptNonBlankLines": 8529,
+      "dartFiles": 87,
+      "dartNonBlankLines": 14811,
+      "totalNonBlankLines": 48492,
+      "javaPercentage": 51.87,
+      "command": "scripts/medir-cumplimiento-java.ps1 -Scope Product"
+    },
+    "historicalL08Metric": {
+      "javaNonBlankLines": 25110,
+      "totalNonBlankLines": 48450,
+      "javaPercentage": 51.83,
+      "historicalSealedReportNotRewritten": true
+    },
+    "academicRubricProvided": false,
+    "academic100PercentCertified": false,
+    "debtFreeClaimed": false,
+    "remainingLimitations": [
+      "Normal development databaseV12 requires separately authorized migration planning",
+      "Seven connected Flutter cases skipped",
+      "Final shared schema policy verified in-memory, no repeated live startup",
+      "All six real-pilot gates remain pending",
+      "No full legal/operational/academic certification from local tests or line-count ratio"
+    ],
+    "references": [
+      {
+        "path": "scripts/medir-cumplimiento-java.ps1",
+        "sha256": "3cebd1779a35af6d09a41da7a32a6f99419aee779a91961eb777bf730cef9017",
+        "lineStart": 1,
+        "lineEnd": 67
+      },
+      {
+        "path": "INFORME_FINAL_SUSTENTACION_RUTA_FIJA_V3_1_L08.md",
+        "sha256": "ee220eebcae7c569d7e59d6dc4e936abe69e546a08b26b9fca9f90ec06bc9498",
+        "lines": [
+          57
+        ]
+      },
+      {
+        "path": "INFORME_FINAL_SUSTENTACION_RUTA_FIJA_V3_1_L08.md",
+        "sha256": "ee220eebcae7c569d7e59d6dc4e936abe69e546a08b26b9fca9f90ec06bc9498",
+        "lines": [
+          21,
+          57
+        ]
+      }
+    ]
+  },
+  "sourceReferences": {
+    "runtime": {
+      "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+      "sha256": "043a841813e1aacf62d985f283c71a9925fdb76462d7dbdc1af01d58bc2aa34c",
+      "lineCount": 698,
+      "references": [
+        {
+          "needle": "$Action = 'Plan'",
+          "lines": [
+            4
+          ]
+        },
+        {
+          "needle": "RutaFijaRuntimeSchemaPolicy.ps1",
+          "lines": [
+            21
+          ]
+        },
+        {
+          "needle": "TEST_DATABASE_ALLOWED_ONLY",
+          "lines": [
+            20
+          ]
+        },
+        {
+          "needle": "SPRING_DATASOURCE_URL = $expectedDevelopmentUrl",
+          "lines": [
+            312
+          ]
+        },
+        {
+          "needle": "if($SmokeTestDatabase)",
+          "lines": [
+            325,
+            357
+          ]
+        },
+        {
+          "needle": "PGOPTIONS=",
+          "lines": [
+            355,
+            360
+          ]
+        },
+        {
+          "needle": "Get-RuntimeSchemaObservationQuery",
+          "lines": [
+            356
+          ]
+        },
+        {
+          "needle": "Assert-RuntimeSchemaObservation -Database",
+          "lines": [
+            359
+          ]
+        },
+        {
+          "needle": "SPRING_DATASOURCE_HIKARI_CONNECTIONINITSQL",
+          "lines": [
+            552
+          ]
+        },
+        {
+          "needle": "default_transaction_read_only%3Don",
+          "lines": [
+            553
+          ]
+        },
+        {
+          "needle": "--spring.flyway.enabled=false",
+          "lines": [
+            579
+          ]
+        },
+        {
+          "needle": "--app.mobile.maintenance-enabled=false",
+          "lines": [
+            580
+          ]
+        },
+        {
+          "needle": "schemaVersion = 2",
+          "lines": [
+            609
+          ]
+        },
+        {
+          "needle": "processStartedAtUtc",
+          "lines": [
+            139,
+            188,
+            618,
+            625
+          ]
+        }
+      ]
+    },
+    "lease": {
+      "path": "scripts/Invoke-RutaFijaPostgresqlLease.ps1",
+      "sha256": "295a2626b0fc61a05bbabd57c0e1ed8c25ea7a71e4c4a7102c9221944eb3ac18",
+      "lineCount": 112,
+      "references": [
+        {
+          "needle": "priorState-ne",
+          "lines": [
+            28
+          ]
+        },
+        {
+          "needle": "hasDatabase-or",
+          "lines": [
+            44
+          ]
+        },
+        {
+          "needle": "CLIENT_OBSERVABILITY_INCOMPLETE",
+          "lines": [
+            45
+          ]
+        },
+        {
+          "needle": "processStartUtc",
+          "lines": [
+            23,
+            69,
+            70,
+            82,
+            83
+          ]
+        },
+        {
+          "needle": "ALREADY_RUNNING_NOT_OWNED",
+          "lines": [
+            76
+          ]
+        },
+        {
+          "needle": "PRESERVED_NO_OWNERSHIP_LEASE",
+          "lines": [
+            88
+          ]
+        },
+        {
+          "needle": "PRESERVED_OTHER_CLIENTS_PRESENT",
+          "lines": [
+            95
+          ]
+        },
+        {
+          "needle": "AuthorizeGlobalServiceStop",
+          "lines": [
+            5,
+            111
+          ]
+        }
+      ]
+    },
+    "gate_evidence": {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/launchers/guardas-ejecutadas.json",
+      "sha256": "a646f29a36cb02ead0bfd65bbd3b95433868f5dc376356556ec13013ba7375db",
+      "lineCount": 18,
+      "references": [
+        {
+          "needle": "normalStart",
+          "lines": [
+            3,
+            4
+          ]
+        },
+        {
+          "needle": "REJECTED_V12",
+          "lines": [
+            4
+          ]
+        }
+      ]
+    },
+    "schemas": {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/launchers/esquemas-readonly.json",
+      "sha256": "c77e1e6eaad962971572a55c19f0f698a82fb77aaa56cd63f8dc663ddbf008b8",
+      "lineCount": 19,
+      "references": [
+        {
+          "needle": "solucion_ruta_fija_1|on|12",
+          "lines": [
+            9
+          ]
+        },
+        {
+          "needle": "ruta_fija_test|on|50",
+          "lines": [
+            15
+          ]
+        }
+      ]
+    },
+    "smoke": {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/runtime/qa-independent-ops.json",
+      "sha256": "490f42bc84c195c6c73b6fd5d219945ac358a0e7c28c8d528a913a29565ad19d",
+      "lineCount": 1218,
+      "references": [
+        {
+          "needle": "PASS_INDEPENDENT",
+          "lines": [
+            3
+          ]
+        },
+        {
+          "needle": "tableComparisons",
+          "lines": [
+            8
+          ]
+        },
+        {
+          "needle": "pilotLedger",
+          "lines": [
+            584,
+            699
+          ]
+        },
+        {
+          "needle": "versionedMigrations",
+          "lines": [
+            25,
+            37
+          ]
+        },
+        {
+          "needle": "repeatableMigrations",
+          "lines": [
+            26,
+            38
+          ]
+        },
+        {
+          "needle": "limits",
+          "lines": [
+            1169
+          ]
+        }
+      ]
+    },
+    "contract": {
+      "path": "docs/contratos/L-08.md",
+      "sha256": "b50004699d347af83ac396fd84b21bc21c5939327f0de6f0defa264219f95cdd",
+      "lineCount": 27,
+      "references": [
+        {
+          "needle": "GO PARA CANDIDATO",
+          "lines": [
+            3
+          ]
+        },
+        {
+          "needle": "GO_LOCAL y NO_GO",
+          "lines": [
+            27
+          ]
+        }
+      ]
+    },
+    "legal": {
+      "path": "docs/legal/protocolo-transicion-piloto-real.md",
+      "sha256": "7683e72a3dba1f3c009a6c72e59f5872bdb62d42e68787f0204bb9cc21d68453",
+      "lineCount": 43,
+      "references": [
+        {
+          "needle": "PR-01",
+          "lines": [
+            11,
+            41
+          ]
+        },
+        {
+          "needle": "PR-02",
+          "lines": [
+            12
+          ]
+        },
+        {
+          "needle": "PR-03",
+          "lines": [
+            13
+          ]
+        },
+        {
+          "needle": "PR-04",
+          "lines": [
+            14
+          ]
+        },
+        {
+          "needle": "PR-05",
+          "lines": [
+            15
+          ]
+        },
+        {
+          "needle": "PR-06",
+          "lines": [
+            16
+          ]
+        },
+        {
+          "needle": "20ffd952",
+          "lines": [
+            22
+          ]
+        },
+        {
+          "needle": "pilotEnabled=false",
+          "lines": [
+            41
+          ]
+        }
+      ]
+    },
+    "published_terms": {
+      "path": "docs/legal/publicado/terminos-admin-v1.0.0.md",
+      "sha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+      "lineCount": 122,
+      "references": []
+    },
+    "registry": {
+      "path": "specs/registro.json",
+      "sha256": "ca2794a41907d8081e0b77bd7ee02c3960024798d48442a7d26f053cb730ac50",
+      "lineCount": 22366,
+      "references": [
+        {
+          "needle": "Registro de descubrimiento revisado",
+          "lines": [
+            4
+          ]
+        },
+        {
+          "needle": "No se usar� conexi�n con RENIEC",
+          "lines": [
+            8
+          ]
+        },
+        {
+          "needle": "No se usar� conexi�n con MTC",
+          "lines": [
+            22
+          ]
+        },
+        {
+          "needle": "No se har� uso de c�digos QR",
+          "lines": [
+            36
+          ]
+        },
+        {
+          "needle": "offlineOperationAllowed",
+          "lines": [
+            2726,
+            22324
+          ]
+        },
+        {
+          "needle": "offlineActionQueueAllowed",
+          "lines": [
+            2727,
+            11640,
+            22325
+          ]
+        }
+      ]
+    },
+    "pom": {
+      "path": "backend/pom.xml",
+      "sha256": "55ec13d4ec18cbdfc94c61b220461e9d9b285b35f766eea51f0851ff838b7f55",
+      "lineCount": 152,
+      "references": [
+        {
+          "needle": "<version>3.5.16",
+          "lines": [
+            10
+          ]
+        },
+        {
+          "needle": "<java.version>21",
+          "lines": [
+            21
+          ]
+        }
+      ]
+    },
+    "angular": {
+      "path": "frontend/package.json",
+      "sha256": "c4b8bdc21e68596f537fdb02ddf5192905ebbc3ba1e52fa723dfae8296c9e018",
+      "lineCount": 44,
+      "references": [
+        {
+          "needle": "\"@angular/core\": \"22.2.3\"",
+          "lines": [
+            23
+          ]
+        }
+      ]
+    },
+    "angular_lock": {
+      "path": "frontend/package-lock.json",
+      "sha256": "6818f9b06051abab64081e8cc853049b54c2632d35b0807033c7582f26f0d85e",
+      "lineCount": 7208,
+      "references": []
+    },
+    "pubspec": {
+      "path": "mobile/pubspec.yaml",
+      "sha256": "160a0f2e10d89907c9fa1191667c26055b8be95040050ef37cc256a46ca71bde",
+      "lineCount": 29,
+      "references": [
+        {
+          "needle": "sdk: ^3.13.4",
+          "lines": [
+            7
+          ]
+        }
+      ]
+    },
+    "java_runtime": {
+      "path": "C:/Program Files/Java/jdk-21.0.10/release",
+      "sha256": "7b8d43d63c5c0d79af90e9425c1fbb00751c954d940f8c51f6bc5d646ed7cf15",
+      "lineCount": 9,
+      "references": [
+        {
+          "needle": "JAVA_VERSION=",
+          "lines": [
+            3
+          ]
+        }
+      ]
+    },
+    "flutter_sdk": {
+      "path": "D:/dev/flutter/bin/cache/flutter.version.json",
+      "sha256": "2875cf943e539c17935c7bcd1045b4d0b1721c749e07361cf454c7df766e1771",
+      "lineCount": 14,
+      "references": [
+        {
+          "needle": "frameworkVersion",
+          "lines": [
+            2
+          ]
+        },
+        {
+          "needle": "dartSdkVersion",
+          "lines": [
+            11
+          ]
+        }
+      ]
+    },
+    "dart_sdk": {
+      "path": "D:/dev/flutter/bin/cache/dart-sdk/version",
+      "sha256": "c7d3b0b427716c3db783f01fbf9196544a7357bf94ec8e3a0a8f786b69aaab22",
+      "lineCount": 1,
+      "references": []
+    },
+    "application": {
+      "path": "backend/src/main/resources/application.yml",
+      "sha256": "0f9c57a5af31b20a1252c3cb44738102744649c07a473957847c92f7bf26b53a",
+      "lineCount": 119,
+      "references": [
+        {
+          "needle": "locations: classpath:db/migration",
+          "lines": [
+            14
+          ]
+        }
+      ]
+    },
+    "application_test": {
+      "path": "backend/src/main/resources/application-test.yml",
+      "sha256": "06c794e2cf08a4a7ccedfa88866c585b44de4bc5d1a295854a41661d07c99b2b",
+      "lineCount": 27,
+      "references": [
+        {
+          "needle": "locations: classpath:db/migration,classpath:db/test-migration",
+          "lines": [
+            27
+          ]
+        }
+      ]
+    },
+    "repeatable_sql": {
+      "path": "backend/src/main/resources/db/test-migration/R__native_test_role_privileges.sql",
+      "sha256": "62b878820bcefe8f4f56bcd00e9ab3e0813575cefcfae22ca356103b46bb282d",
+      "lineCount": 21,
+      "references": [
+        {
+          "needle": "solo se ejecuta",
+          "lines": [
+            1
+          ]
+        },
+        {
+          "needle": "current_database()",
+          "lines": [
+            5
+          ]
+        },
+        {
+          "needle": "GRANT SELECT, INSERT",
+          "lines": [
+            13,
+            19
+          ]
+        },
+        {
+          "needle": "ALTER DEFAULT PRIVILEGES",
+          "lines": [
+            18,
+            20
+          ]
+        }
+      ]
+    },
+    "preflight_v50": {
+      "path": "backend/src/test/java/pe/rutafija/support/L08V50Preflight.java",
+      "sha256": "be72866fc57b3c15f6db09d21972957a0f4f07cfb390217205f5960f9c10dad7",
+      "lineCount": 322,
+      "references": [
+        {
+          "needle": ".locations(\"classpath:db/migration\",\"classpath:db/test-migration\")",
+          "lines": [
+            254
+          ]
+        }
+      ]
+    },
+    "v50_history": {
+      "path": "docs/evidencia/L-08/incremento-2-mision-y-controles/base/l08-v50-postflight.json",
+      "sha256": "0ac8535467739803a20a382b6615be0cb9b591a6f6054dbbfaafbb13c3051c27",
+      "lineCount": 451,
+      "references": [
+        {
+          "needle": "\"historyRows\": 51",
+          "lines": [
+            430
+          ]
+        },
+        {
+          "needle": "\"successfulVersionedHistoryRows\": 50",
+          "lines": [
+            431
+          ]
+        },
+        {
+          "needle": "\"successfulRepeatableHistoryRows\": 1",
+          "lines": [
+            432
+          ]
+        },
+        {
+          "needle": "\"validatedCount\": 51",
+          "lines": [
+            442
+          ]
+        }
+      ]
+    },
+    "ops": {
+      "path": "docs/evidencia/L-08/incremento-5-candidato-final/ops/ops-summary-final.json",
+      "sha256": "965439258272cf664ce8b73f698ccba2eb49d423c28846ab29fe77ccd4b71769",
+      "lineCount": 53,
+      "references": [
+        {
+          "needle": "rtoSqlNewSecondsNoClockReset",
+          "lines": [
+            5
+          ]
+        },
+        {
+          "needle": "historicalRest03SecondsNotRerun",
+          "lines": [
+            9
+          ]
+        },
+        {
+          "needle": "independentMediumAccredited",
+          "lines": [
+            46
+          ]
+        },
+        {
+          "needle": "human24x7Accredited",
+          "lines": [
+            48
+          ]
+        }
+      ]
+    },
+    "fis02": {
+      "path": "docs/evidencia/L-08/incremento-4-cierre-fisico/cierre-caso.json",
+      "sha256": "21ccde940a4277ee5e088fb8fe6666a8b54fade0ddde0b96a7402b0c3a7a59e6",
+      "lineCount": 53,
+      "references": [
+        {
+          "needle": "elapsedSeconds",
+          "lines": [
+            16
+          ]
+        },
+        {
+          "needle": "initialPercent",
+          "lines": [
+            18
+          ]
+        },
+        {
+          "needle": "finalPercent",
+          "lines": [
+            19
+          ]
+        },
+        {
+          "needle": "physicalNoFixSignalAccredited",
+          "lines": [
+            45
+          ]
+        }
+      ]
+    },
+    "audit": {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/verificacion-final.json",
+      "sha256": "33aa35c3143fad933c70d71eec3edfe65cd01fa19bf535348de2dad79e70e663",
+      "lineCount": 29,
+      "references": [
+        {
+          "needle": "javaTests",
+          "lines": [
+            14
+          ]
+        },
+        {
+          "needle": "angularTests",
+          "lines": [
+            15
+          ]
+        },
+        {
+          "needle": "flutterTests",
+          "lines": [
+            16
+          ]
+        },
+        {
+          "needle": "flutterConnectedTestsSkipped",
+          "lines": [
+            17
+          ]
+        },
+        {
+          "needle": "totalPassedLocalTests",
+          "lines": [
+            18
+          ]
+        },
+        {
+          "needle": "developmentDatabaseVersion",
+          "lines": [
+            23
+          ]
+        },
+        {
+          "needle": "testDatabaseVersion",
+          "lines": [
+            24
+          ]
+        }
+      ]
+    },
+    "backend": {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/backend/summary.json",
+      "sha256": "f73162d271f1e2e0c9a2bcf208ea56c44563d8f8df332d28362e9af56e456df8",
+      "lineCount": 31,
+      "references": [
+        {
+          "needle": "finalSafeUnitClasses",
+          "lines": [
+            9
+          ]
+        },
+        {
+          "needle": "finalTests",
+          "lines": [
+            10
+          ]
+        }
+      ]
+    },
+    "angular_tests": {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/frontend/test-ci.native.log",
+      "sha256": "505bb45009e2df1c6baad813c2213291949c83f086e0584040da81930ecb8333",
+      "lineCount": 18,
+      "references": [
+        {
+          "needle": "Tests  241 passed",
+          "lines": [
+            15
+          ]
+        }
+      ]
+    },
+    "mobile_tests": {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/mobile/resultado-mobile-ide.json",
+      "sha256": "cf93841c95875124816d3312449dd310678fb065044960e5395f58abc0b84f33",
+      "lineCount": 162,
+      "references": [
+        {
+          "needle": "\"passed\": 233",
+          "lines": [
+            106
+          ]
+        },
+        {
+          "needle": "\"skippedConnected\": 7",
+          "lines": [
+            69,
+            107
+          ]
+        },
+        {
+          "needle": "skippedTestsNotCountedAsPass",
+          "lines": [
+            124
+          ]
+        }
+      ]
+    },
+    "academic": {
+      "path": "INFORME_FINAL_SUSTENTACION_RUTA_FIJA_V3_1_L08.md",
+      "sha256": "ee220eebcae7c569d7e59d6dc4e936abe69e546a08b26b9fca9f90ec06bc9498",
+      "lineCount": 63,
+      "references": [
+        {
+          "needle": "51,83",
+          "lines": [
+            21,
+            57
+          ]
+        },
+        {
+          "needle": "no certifica un umbral",
+          "lines": [
+            57
+          ]
+        },
+        {
+          "needle": "No se simulan aceptaciones",
+          "lines": [
+            55
+          ]
+        }
+      ]
+    },
+    "matrix": {
+      "path": "docs/evidencia/L-08/matriz-L08.md",
+      "sha256": "e498c72e9a17f1570338ee879a0cd72fd2ba8dfa6baec938c86dfa404fc69e78",
+      "lineCount": 30,
+      "references": [
+        {
+          "needle": "NO_GO_PILOTO_REAL",
+          "lines": [
+            3
+          ]
+        }
+      ]
+    },
+    "sealed": {
+      "path": "docs/evidencia/L-08/incremento-5-candidato-final/verificacion-cierre.json",
+      "sha256": "80e42b198e4b769c82806be20b045233499fc3c9d3f4169c65d533e7b85fcc35",
+      "lineCount": 13,
+      "references": [
+        {
+          "needle": "GO PARA CANDIDATO LOCAL",
+          "lines": [
+            7
+          ]
+        },
+        {
+          "needle": "NO_GO_PILOTO_REAL",
+          "lines": [
+            8
+          ]
+        }
+      ]
+    },
+    "policy": {
+      "path": "scripts/RutaFijaRuntimeSchemaPolicy.ps1",
+      "sha256": "a4bfc9b78b5db8c649a7798cf72931ea3650ead3b52c8bd72dd6398b89835a4d",
+      "lineCount": 20,
+      "references": [
+        {
+          "needle": "function Get-RuntimeSchemaObservationQuery",
+          "lines": [
+            2
+          ]
+        },
+        {
+          "needle": "function Assert-RuntimeSchemaObservation",
+          "lines": [
+            6
+          ]
+        },
+        {
+          "needle": "$expectedCount =",
+          "lines": [
+            14
+          ]
+        },
+        {
+          "needle": "$expectedRepeatable =",
+          "lines": [
+            15
+          ]
+        },
+        {
+          "needle": "$expected =",
+          "lines": [
+            16
+          ]
+        },
+        {
+          "needle": "RUNTIME_SCHEMA_NOT_V50",
+          "lines": [
+            18
+          ]
+        }
+      ]
+    },
+    "quick_demo": {
+      "path": "scripts/Invoke-RutaFijaQuickDemo.ps1",
+      "sha256": "055738564796a516d76c5f7a924cc3df5b35e6f7b34d8814ea1c5ba12e77223e",
+      "lineCount": 421,
+      "references": [
+        {
+          "needle": "RutaFijaRuntimeSchemaPolicy.ps1",
+          "lines": [
+            14
+          ]
+        },
+        {
+          "needle": "Get-RuntimeSchemaObservationQuery",
+          "lines": [
+            84
+          ]
+        },
+        {
+          "needle": "Assert-RuntimeSchemaObservation -Database",
+          "lines": [
+            86
+          ]
+        },
+        {
+          "needle": "CLOUDFLARED_MISSING_NO_AUTOMATIC_DOWNLOAD",
+          "lines": [
+            57
+          ]
+        },
+        {
+          "needle": "Assert-DemoPortsFree",
+          "lines": [
+            67,
+            323
+          ]
+        },
+        {
+          "needle": "Assert-DemoSchemaReady",
+          "lines": [
+            75,
+            339
+          ]
+        },
+        {
+          "needle": "processStartedAtUtc",
+          "lines": [
+            119,
+            156,
+            371
+          ]
+        }
+      ]
+    },
+    "metric_source": {
+      "path": "scripts/medir-cumplimiento-java.ps1",
+      "sha256": "3cebd1779a35af6d09a41da7a32a6f99419aee779a91961eb777bf730cef9017",
+      "lineCount": 67,
+      "references": [
+        {
+          "needle": "Scope = 'Product'",
+          "lines": [
+            5
+          ]
+        },
+        {
+          "needle": "backend/src/main/java",
+          "lines": [
+            43
+          ]
+        },
+        {
+          "needle": "frontend/src",
+          "lines": [
+            44
+          ]
+        },
+        {
+          "needle": "mobile/lib",
+          "lines": [
+            48
+          ]
+        },
+        {
+          "needle": "JavaPercentage =",
+          "lines": [
+            66
+          ]
+        }
+      ]
+    },
+    "schema_tests": {
+      "path": "docs/entrega/2026-10-23-commit-v3.1/schema-policy-verified.json",
+      "sha256": "d768f515cd905f7103382a5f0b852ed12af21bba8af828833d95dfb1eedf5e57",
+      "lineCount": 72,
+      "references": [
+        {
+          "needle": "PASS_PROFILE_AWARE",
+          "lines": [
+            3
+          ]
+        },
+        {
+          "needle": "checksPassed",
+          "lines": [
+            4
+          ]
+        },
+        {
+          "needle": "policySha256",
+          "lines": [
+            67
+          ]
+        },
+        {
+          "needle": "runtimeSha256",
+          "lines": [
+            68
+          ]
+        }
+      ]
+    },
+    "launcher_regression": {
+      "path": "docs/entrega/2026-10-23-commit-v3.1/launcher-final-regression.json",
+      "sha256": "309cffd6c79cc9643d79bd3a48e9adfda2dfc8deb8c37d279bc449cf9e510eda",
+      "lineCount": 213,
+      "references": [
+        {
+          "needle": "PASS_LAUNCHER_STATIC",
+          "lines": [
+            3
+          ]
+        },
+        {
+          "needle": "checksPassed",
+          "lines": [
+            174
+          ]
+        }
+      ]
+    }
+  },
+  "executionLimits": {
+    "newDatabaseConnections": 0,
+    "servicesOrApplicationsStarted": 0,
+    "servicesOrApplicationsStopped": 0,
+    "networkRequests": 0,
+    "gitCommandsExecuted": 0,
+    "gitMutations": 0,
+    "sourceOrBusinessRuleChangesByReviewer": 0,
+    "newPublicEvidenceOnly": true,
+    "githubUsed": false
+  },
+  "gitAuthorizationNote": "User now authorizes local Git staging/commit for this delivery; this read-only reviewer does not perform Git actions or extend authorization to GitHub."
+}

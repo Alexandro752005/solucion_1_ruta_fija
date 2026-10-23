@@ -71,10 +71,71 @@ describe('AuthSessionService', () => {
       organizationId: 'organization-1',
     });
 
-    await expect(result).resolves.toBeUndefined();
+    await expect(result).resolves.toBe('authenticated');
     expect(service.isAuthenticated()).toBe(true);
     expect(service.accessToken()).toBe('access-1');
     expect(service.user()?.organizationId).toBe('organization-1');
+    expect(storageSpy).not.toHaveBeenCalled();
+  });
+
+  it('mantiene el desafío OTP solo en memoria hasta que se verifica', async () => {
+    const storageSpy = vi.spyOn(Storage.prototype, 'setItem');
+    const loginResult = firstValueFrom(
+      service.login({
+        email: 'admin@ruta-fija.pe',
+        password: 'credencial-de-prueba',
+      }),
+    );
+
+    const loginRequest = http.expectOne('/api/v1/auth/login');
+    loginRequest.flush({
+      emailVerificationRequired: true,
+      verification: {
+        verificationToken: 'verification-token-in-memory',
+        otpExpiresAt: '2026-10-14T17:05:00Z',
+        challengeExpiresAt: '2026-10-14T17:30:00Z',
+        emailSent: true,
+      },
+    });
+
+    await expect(loginResult).resolves.toBe('verification-required');
+    expect(service.status()).toBe('anonymous');
+    expect(service.isAuthenticated()).toBe(false);
+    expect(service.accessToken()).toBeNull();
+    expect(service.emailOtpChallenge()?.verificationToken).toBe(
+      'verification-token-in-memory',
+    );
+    http.expectNone('/api/v1/auth/me');
+
+    const verifyResult = firstValueFrom(service.verifyEmailOtp('123456'));
+    const verifyRequest = http.expectOne('/api/v1/auth/otp/verify');
+    expect(verifyRequest.request.body).toEqual({
+      verificationToken: 'verification-token-in-memory',
+      code: '123456',
+    });
+    expect(verifyRequest.request.withCredentials).toBe(true);
+    verifyRequest.flush({
+      accessToken: 'access-after-otp',
+      expiresIn: 900,
+      user: {
+        id: 'user-otp',
+        fullName: 'Admin verificado',
+        role: 'ADMIN',
+      },
+    });
+
+    http.expectOne('/api/v1/auth/me').flush({
+      id: 'user-otp',
+      fullName: 'Admin verificado',
+      email: 'admin@ruta-fija.pe',
+      role: 'ADMIN',
+      organizationId: 'organization-1',
+    });
+    await expect(verifyResult).resolves.toBeUndefined();
+
+    expect(service.emailOtpChallenge()).toBeNull();
+    expect(service.isAuthenticated()).toBe(true);
+    expect(service.accessToken()).toBe('access-after-otp');
     expect(storageSpy).not.toHaveBeenCalled();
   });
 

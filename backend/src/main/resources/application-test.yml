@@ -2,6 +2,12 @@ app:
   seed:
     enabled: false
   security:
+    admin-terms-gate:
+      enabled: false
+    # Historical fixtures isolate their own contracts. PersonIdentityFlowIT
+    # explicitly enables this gate; ordinary runtime keeps it mandatory.
+    person-identity-gate:
+      enabled: false
     refresh-cookie:
       secure: false
 

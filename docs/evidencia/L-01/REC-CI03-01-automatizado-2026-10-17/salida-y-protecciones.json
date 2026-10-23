@@ -1,0 +1,40 @@
+{
+  "database" : "ruta_fija_test",
+  "role" : "rf_test",
+  "schema" : "V26",
+  "historicalCreations" : {
+    "SUPER_ADMIN" : 1,
+    "ADMIN" : 3,
+    "CONDUCTOR" : 0
+  },
+  "remainingSlots" : {
+    "ADMIN" : 1,
+    "SUPER_ADMIN" : 0,
+    "CONDUCTOR" : 20
+  },
+  "superAdminAccounts" : 1,
+  "personIdentityBindings" : 3,
+  "personIdentityKeyRecorded" : true,
+  "recoveryCredentialPresent" : true,
+  "eligibleSyntheticPendingAdmins" : 0,
+  "termsAcceptanceCount" : 2,
+  "currentTerms" : {
+    "id" : "f590e228-5d2e-47e4-b144-b0df1198bd49",
+    "version" : "1.0.0",
+    "content_sha256" : "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+    "synthetic" : false
+  },
+  "publishedFileHashMatches" : true,
+  "cleanupLockHeld" : false,
+  "inspectionAtUtc" : "2026-10-18T02:34:06.192905200Z",
+  "readOnly" : true,
+  "smtpAttempts" : 0,
+  "springStarted" : false,
+  "migrationsExecuted" : false,
+  "runId" : "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "TEST_CLEANUP_RELEASED" : true,
+  "gateEvidence" : "docs/evidencia/L-01/REC-CI03-01-automatizado-2026-10-17/gate-http-postgresql.json",
+  "gateEvidenceSha256" : "ac8c49aeaa7d7ca81d0e20086c3c3b32c709b83062d445af8aa21d9dc539c34a",
+  "globalCleanupExecuted" : false,
+  "privateAutomationCapabilitiesRemoved" : true
+}

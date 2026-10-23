@@ -1,0 +1,13 @@
+{
+    "observedAt":  "2026-10-23T04:55:48.8269354+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "reason":  "SAME_POCO_DHCP_ADDRESS_CHANGED_AFTER_REAL_WIFI_LOSS",
+    "oldPeer":  "192.168.18.3",
+    "newPeer":  "192.168.18.9",
+    "port":  4311,
+    "profile":  "Private",
+    "sameOnePhoneOnly":  true,
+    "firewallRereadPassed":  true,
+    "databaseWrites":  0,
+    "result":  "PASS_EXACT_OWNED_RULE_UPDATED_ONE_CURRENT_PHONE_ONLY"
+}

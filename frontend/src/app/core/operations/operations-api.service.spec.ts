@@ -26,8 +26,10 @@ describe('OperationsApiService', () => {
     TestBed.resetTestingModule();
   });
 
-  it('crea una asignacion SCHEDULED directamente y conserva la clave de idempotencia', async () => {
+  it('emite una oferta PENDING_RESPONSE y conserva la clave de idempotencia', async () => {
     const created = firstValueFrom(service.createAssignment({
+      routeVersionId:'synthetic-route-version',
+      serviceTypeVersionId:'synthetic-type-version',
       driverId: 'driver-1',
       vehicleId: 'vehicle-1',
       originText: 'Terminal Norte',
@@ -44,9 +46,9 @@ describe('OperationsApiService', () => {
       vehicleId: 'vehicle-1',
       originText: 'Terminal Norte',
     });
-    request.flush({ id: 'assignment-1', status: 'SCHEDULED', version: 0 });
+    request.flush({ id: 'assignment-1', status: 'PENDING_RESPONSE', version: 0 });
 
-    await expect(created).resolves.toMatchObject({ id: 'assignment-1', status: 'SCHEDULED' });
+    await expect(created).resolves.toMatchObject({ id: 'assignment-1', status: 'PENDING_RESPONSE' });
   });
 
   it('consulta reportes persistidos con rango y solicita un ticket efimero para tiempo real', async () => {

@@ -1,0 +1,6 @@
+{
+  "result" : "STOPPED_KEEP_CASE",
+  "phase" : "PREFLIGHT",
+  "type" : "IllegalStateException",
+  "check" : "READ_ONLY_SESSION_REQUIRED"
+}

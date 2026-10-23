@@ -1,0 +1,58 @@
+{
+    "observedAt":  "2026-10-23T04:43:58.3195686+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "action":  "inspect",
+    "label":  "",
+    "automatedUiInstrumentation":  true,
+    "humanAccessibilityConfirmation":  false,
+    "nodes":  [
+                  {
+                      "text":  "",
+                      "description":  "Volver",
+                      "bounds":  "[12,434][156,578]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Detalle de asignación",
+                      "bounds":  "[216,472][724,541]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "SYNTHETIC start → SYNTHETIC end without physical geometry",
+                      "bounds":  "[60,650][1020,887]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "En servicio",
+                      "bounds":  "[749,697][1020,841]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Programada\n22/10/2026 21:57\nFin previsto\n22/10/2026 22:27\nVehículo\nSYN-L08-1\nServicio\nSERVICIO-714cbc0c-8d6c-4bc7-9ed4-d6523cb19e09\nEsta oferta no sustituye otras aceptaciones. Rechazarla o su vencimiento no cancela el servicio; ADMIN debe reasignarlo expresamente.\nGrupo\nSYNTHETIC L08 FIS02 3f0ba758\nModo\nRespuesta requerida\nPlazo de respuesta\n22/10/2026 21:37\nAceptada\n22/10/2026 21:30\nIniciada\n22/10/2026 21:34",
+                      "bounds":  "[60,947][1020,2261]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Relevo y continuidad\nInicio original: 22/10/2026 21:34. No se reinicia al cambiar de conductor.",
+                      "bounds":  "[0,0][0,0]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  }
+              ]
+}

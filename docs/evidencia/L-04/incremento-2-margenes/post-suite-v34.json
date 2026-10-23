@@ -1,0 +1,32 @@
+{
+  "observedAt": "2026-10-19T21:45:02.515529400Z",
+  "mode": "READ_ONLY_FLYWAY_VALIDATION",
+  "database": "ruta_fija_test",
+  "role": "rf_test",
+  "caseRunId": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "before": {
+    "schemaVersion": "34",
+    "ledger": {
+      "SUPER_ADMIN": 1,
+      "ADMIN": 3,
+      "CONDUCTOR": 1
+    },
+    "acceptanceCount": 2,
+    "ledgerSha256": "6f71d5455a50172f6e144b11611b51dbfcf0b389d3b43d7c026dc9d051ef8abf",
+    "acceptancesSha256": "120a3a856057c51796053a20046dd9aa628953105ace67caf4bbff2d29674d28",
+    "humanFixturesSha256": "6fe63b280060af868fea97a860eb9e2bbcb05e4d65538f6a7b64c74993ec7580",
+    "publishedTermsSha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+    "L02ClosedCaseSha256": "899b2f8be6231c5af331535016fdab120f90a4ec55f0d029f04ebd169581ba54",
+    "vehicleCanonicalCollisions": 0
+  },
+  "targetVersion": "34",
+  "flywayValidation": {
+    "successful": true,
+    "validatedCount": 35,
+    "code": "NONE",
+    "invalidMigrations": []
+  },
+  "globalCleanupExecuted": false,
+  "developmentOrPilotAccessed": false,
+  "result": "PASS"
+}

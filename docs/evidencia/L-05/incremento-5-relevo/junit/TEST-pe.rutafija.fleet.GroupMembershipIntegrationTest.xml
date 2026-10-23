@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="pe.rutafija.fleet.GroupMembershipIntegrationTest" time="31.477" tests="9" errors="0" skipped="0" failures="0" flakes="0">
+  <testcase name="groupCanBeRetiredWithoutCommitmentsAndItsHistoricalMembershipRemains" classname="pe.rutafija.fleet.GroupMembershipIntegrationTest" time="1.754">
+    </testcase>
+  <testcase name="pendingServiceAndOpenReassignmentAreVisibleAndBlockRetirement" classname="pe.rutafija.fleet.GroupMembershipIntegrationTest" time="0.441">
+    </testcase>
+  <testcase name="addingAnOccupiedResourceDoesNotHideItsExistingCommitment" classname="pe.rutafija.fleet.GroupMembershipIntegrationTest" time="0.232">
+    </testcase>
+  <testcase name="exactRetryIsIdempotentAndChangedPayloadOrStaleVersionIsRejected" classname="pe.rutafija.fleet.GroupMembershipIntegrationTest" time="0.284">
+    </testcase>
+  <testcase name="oneDriverCanBelongToSeveralGroupsWithoutCreatingAUnitLinkOrPrivilege" classname="pe.rutafija.fleet.GroupMembershipIntegrationTest" time="0.311">
+    </testcase>
+  <testcase name="invalidCommandsDoNotChangeMembershipsOrVersion" classname="pe.rutafija.fleet.GroupMembershipIntegrationTest" time="0.193">
+    </testcase>
+  <testcase name="vehicleMembershipDoesNotCreateDriverVehiclePeriodAndQueryHasNoPersonalFields" classname="pe.rutafija.fleet.GroupMembershipIntegrationTest" time="0.169">
+    </testcase>
+  <testcase name="unrelatedDriverUpdatesDoNotReactivateAnExplicitlyRemovedMembership" classname="pe.rutafija.fleet.GroupMembershipIntegrationTest" time="0.127">
+    </testcase>
+  <testcase name="foreignResourcesAndGroupsAreHiddenAndSuperAdminCannotOperateTenantMemberships" classname="pe.rutafija.fleet.GroupMembershipIntegrationTest" time="0.167">
+    </testcase>
+</testsuite>

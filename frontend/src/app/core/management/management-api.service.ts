@@ -1,13 +1,20 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { RuntimeConfigService } from '../config/runtime-config.service';
+import { SKIP_AUTH_REFRESH } from '../auth/auth-http-context';
 import {
   Driver,
   DriverDetail,
+  DriverIncorporationStatus,
   DriverPayload,
+  DriverIdentityReviewPayload,
+  DriverIdentityReviewStatus,
   DriverStatus,
+  ConductorRecoveryStartPayload,
+  ConductorRecoveryStarted,
+  ConductorRecoveryStatus,
   GroupPayload,
   GroupUpdatePayload,
   ManagedUser,
@@ -52,6 +59,29 @@ export class ManagementApiService {
     );
   }
 
+  startConductorRecovery(
+    userId: string,
+    payload: ConductorRecoveryStartPayload,
+  ): Observable<ConductorRecoveryStarted> {
+    return this.http.post<ConductorRecoveryStarted>(
+      this.url(`/users/${userId}/conductor-recovery`),
+      payload,
+    );
+  }
+
+  getConductorRecovery(userId: string, recoveryId: string): Observable<ConductorRecoveryStatus> {
+    return this.http.get<ConductorRecoveryStatus>(
+      this.url(`/users/${userId}/conductor-recovery/${recoveryId}`),
+    );
+  }
+
+  cancelConductorRecovery(userId: string, recoveryId: string): Observable<ConductorRecoveryStatus> {
+    return this.http.post<ConductorRecoveryStatus>(
+      this.url(`/users/${userId}/conductor-recovery/${recoveryId}/cancel`),
+      {},
+    );
+  }
+
   listGroups(query: PageQuery = {}): Observable<PageResult<TransportGroup>> {
     return this.http.get<PageResult<TransportGroup>>(this.url('/groups'), {
       params: this.params(query),
@@ -63,7 +93,17 @@ export class ManagementApiService {
   }
 
   updateGroup(id: string, payload: GroupUpdatePayload): Observable<TransportGroup> {
-    return this.http.patch<TransportGroup>(this.url(`/groups/${id}`), payload);
+    return this.http.patch<TransportGroup>(this.url(`/groups/${id}`), payload,
+      { context: new HttpContext().set(SKIP_AUTH_REFRESH, true) });
+  }
+
+  getGroupResources(id: string): Observable<import('./management.models').GroupResources> {
+    return this.http.get<import('./management.models').GroupResources>(this.url(`/groups/${encodeURIComponent(id)}/resources`));
+  }
+
+  changeGroupMembership(id: string, payload: import('./management.models').GroupMembershipPayload): Observable<import('./management.models').GroupResources> {
+    return this.http.post<import('./management.models').GroupResources>(this.url(`/groups/${encodeURIComponent(id)}/memberships`), payload,
+      { context: new HttpContext().set(SKIP_AUTH_REFRESH, true) });
   }
 
   listDrivers(
@@ -79,6 +119,15 @@ export class ManagementApiService {
 
   getDriver(id: string): Observable<DriverDetail> {
     return this.http.get<DriverDetail>(this.url(`/drivers/${id}`));
+  }
+
+  getDriverIncorporationStatus(id: string): Observable<DriverIncorporationStatus> {
+    return this.http.get<DriverIncorporationStatus>(this.url(`/drivers/${encodeURIComponent(id)}/incorporation-status`));
+  }
+
+  reviewDriverIdentity(id: string, payload: DriverIdentityReviewPayload): Observable<DriverIdentityReviewStatus> {
+    return this.http.post<DriverIdentityReviewStatus>(this.url(`/drivers/${encodeURIComponent(id)}/identity-review`), payload,
+      { context: new HttpContext().set(SKIP_AUTH_REFRESH, true) });
   }
 
   createDriver(payload: DriverPayload): Observable<Driver> {

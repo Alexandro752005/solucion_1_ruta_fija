@@ -1,0 +1,70 @@
+{
+  "observedAtUtc": "2026-10-23T06:35:18.836785+00:00",
+  "result": "PASS",
+  "checks": [
+    {
+      "manifest": "docs/evidencia/L-07/manifest-cierre.sha256",
+      "sha256": "9ba71c3071583695991fb22ecf1eb261de5b9b83f9db76f73ff7da1e2cebcf13",
+      "filesVerified": 148
+    },
+    {
+      "manifest": "docs/evidencia/L-08/incremento-1-candidato-y-preautenticacion/manifest.sha256",
+      "sha256": "f5565a3491d9890d6a0adcc2d8b882b49d40993808f8926bb9fc6113dca861bf",
+      "filesVerified": 36
+    },
+    {
+      "manifest": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/manifest-caso-cerrado.sha256",
+      "sha256": "62498733d6cb86cd884b8fc6e38b9bb367a7c7579811f9443b9303decb93635f",
+      "filesVerified": 451
+    },
+    {
+      "manifest": "docs/evidencia/L-08/cap25-860c1cdb-b062-469a-9a3f-156ea23bb656/manifest-caso-cerrado.sha256",
+      "sha256": "1a72d34aaeb94b67328dafbb92af57c0b5459808dbc2ebdbef0a08de6975fdcb",
+      "filesVerified": 22
+    },
+    {
+      "manifest": "docs/evidencia/L-08/incremento-2-mision-y-controles/manifest-corte-post-cap25.sha256",
+      "sha256": "7091e94d1d3f26416ca4e9831202a2f8488aa4566b1a2f648fe056d47fc1afe2",
+      "filesVerified": 75
+    },
+    {
+      "manifest": "docs/evidencia/L-08/incremento-4-cierre-fisico/manifest-caso-cerrado.sha256",
+      "sha256": "c74aa55d4d3a7e4d43f26d653b48139b420c8346d669b1b3f3e21965bbffeb1d",
+      "filesVerified": 556
+    }
+  ],
+  "filesVerified": 1288,
+  "historicalMutableFilesReconciled": [
+    {
+      "path": "docs/backlog-producto-ruta-fija-v3.1.md",
+      "expectedSha256": "c8e8c01b5f29a2d0d3c3529dbe156292ad07282470123efd66b58cf1eb8fcb69",
+      "preservedHistoricalCopy": "memory/backup/2026-10-21-L08-inicio/docs/backlog-producto-ruta-fija-v3.1.md",
+      "reason": "Mutable coordination superseded by later authorized lots; original L07 bytes verified in backup"
+    },
+    {
+      "path": "docs/seguimiento/tareas.json",
+      "expectedSha256": "4b9c8c102b8cea9a4551039d7d06689f443a86970728b01c5b0287c485bc2847",
+      "preservedHistoricalCopy": "memory/backup/2026-10-21-L08-inicio/docs/seguimiento/tareas.json",
+      "reason": "Mutable coordination superseded by later authorized lots; original L07 bytes verified in backup"
+    },
+    {
+      "path": "memory/current.md",
+      "expectedSha256": "a6eb9a3f3567a1fdc50f7f1d9f79908b494bd1e80b37cb41417f59a6fd96cb0f",
+      "preservedHistoricalCopy": "memory/backup/2026-10-21-L08-inicio/memory/current.md",
+      "reason": "Mutable coordination superseded by later authorized lots; original L07 bytes verified in backup"
+    },
+    {
+      "path": "memory/target.md",
+      "expectedSha256": "8e481db82ee32a09004f0795a0f3b3f4e1ba779827750756c822914aa38987bb",
+      "preservedHistoricalCopy": "memory/backup/2026-10-21-L08-inicio/memory/target.md",
+      "reason": "Mutable coordination superseded by later authorized lots; original L07 bytes verified in backup"
+    }
+  ],
+  "mismatches": [],
+  "protected": {
+    "baseSnapshotSha256": "3806510606a1565f23b8c526a13cc1049bc79141babdb8e1316f042488b3d11b",
+    "termsSha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417"
+  },
+  "TEST_CLEANUP_RELEASED": true,
+  "markerAndPrivateAbsent": true
+}

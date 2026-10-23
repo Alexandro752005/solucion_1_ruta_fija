@@ -1,4 +1,5 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpContext } from '@angular/common/http';
+import { SKIP_AUTH_REFRESH } from '../auth/auth-http-context';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -53,8 +54,11 @@ export class OperationsApiService {
     const headers = idempotencyKey === undefined
       ? undefined
       : new HttpHeaders({ 'Idempotency-Key': idempotencyKey });
-    return this.http.post<Assignment>(this.url('/assignments'), payload, { headers });
+    return this.http.post<Assignment>(this.url('/assignments'), payload, { headers,context:new HttpContext().set(SKIP_AUTH_REFRESH,true) });
   }
+
+  assignmentCreationOperation(key:string):Observable<Assignment>{return this.http.get<Assignment>(this.url('/assignments/creation-operations/'+encodeURIComponent(key)));}
+  getAssignment(id:string):Observable<Assignment>{return this.http.get<Assignment>(this.url('/assignments/'+encodeURIComponent(id)));}
 
   updateAssignment(id: string, payload: AssignmentUpdatePayload): Observable<Assignment> {
     return this.http.patch<Assignment>(this.url(`/assignments/${id}`), payload);
@@ -73,7 +77,7 @@ export class OperationsApiService {
   }
 
   cancelAssignment(id: string, payload: AssignmentCancelPayload): Observable<Assignment> {
-    return this.http.post<Assignment>(this.url(`/assignments/${id}/cancel`), payload);
+    return this.http.post<Assignment>(this.url(`/assignments/${id}/cancel`), payload,{context:new HttpContext().set(SKIP_AUTH_REFRESH,true)});
   }
 
   changeDriverAvailability(id: string, status: AdministrativeDriverStatus): Observable<unknown> {
@@ -95,11 +99,11 @@ export class OperationsApiService {
   }
 
   createIncident(payload: IncidentPayload): Observable<Incident> {
-    return this.http.post<Incident>(this.url('/incidents'), payload);
+    return this.http.post<Incident>(this.url('/incidents'), payload,{context:new HttpContext().set(SKIP_AUTH_REFRESH,true)});
   }
 
   followUpIncident(id: string, payload: IncidentFollowUpPayload): Observable<Incident> {
-    return this.http.patch<Incident>(this.url(`/incidents/${id}/follow-up`), payload);
+    return this.http.patch<Incident>(this.url(`/incidents/${id}/follow-up`), payload,{context:new HttpContext().set(SKIP_AUTH_REFRESH,true)});
   }
 
   listAnnouncements(
@@ -111,7 +115,7 @@ export class OperationsApiService {
   }
 
   createAnnouncement(payload: AnnouncementPayload): Observable<Announcement> {
-    return this.http.post<Announcement>(this.url('/announcements'), payload);
+    return this.http.post<Announcement>(this.url('/announcements'), payload,{context:new HttpContext().set(SKIP_AUTH_REFRESH,true)});
   }
 
   availabilityReport(): Observable<AvailabilityReport> {

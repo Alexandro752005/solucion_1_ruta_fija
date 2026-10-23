@@ -1,0 +1,509 @@
+{
+  "runId" : "51e69ee6-e4a0-4c3f-9a35-f19de0072422",
+  "organizationId" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+  "adminId" : "92ebc07c-1319-4850-a734-f792cb299979",
+  "ledgerBefore" : {
+    "SUPER_ADMIN" : 1,
+    "ADMIN" : 3,
+    "CONDUCTOR" : 4
+  },
+  "termsAcceptancesBefore" : 2,
+  "antecedentRowHashes" : {
+    "pilot_account_creation" : {
+      "05f40f13-be6c-4166-91b7-ac7e400d7911" : "b096d1c3dddea4a58a25213e5ab2fd8136f464794692bb7aa751f38c15eba471",
+      "0794eb2a-bc9a-4334-b617-427bd7f28ef1" : "d7c18f662657055f656d2d62ac5b2d52ba65a38d6745d1415fd5d592b5fdd02d",
+      "088518c1-821c-4316-9f87-090f51ac44e0" : "8cba690a20116a7725e085e2f4d693d2bad945a1df8b2ade981d4f19516c9a5e",
+      "111131ee-1700-4095-b626-30377703ba9d" : "ed7ac5c4badbb8f9762482888b32e424fbfbe39386f64379ebfbc5de13cca290",
+      "3d486a69-9637-48d4-82de-fc17cde83484" : "9e9db91bf9e5195eeb488b780e59e3ebfba730974b08ef9c71f2df0883c4325a",
+      "3fb1f499-81d2-45dd-8e60-b53f6eb7ff79" : "254aa95bed82a42ccb70f4c1fffd7ac2227c1576c5c1f44f6acc75991369f297",
+      "47d19ed8-de66-4742-a638-4a4a219bbb1f" : "32c3d73f6948d63856accb54f947700c024d4bb93e79382db481133ff78036d8",
+      "92ebc07c-1319-4850-a734-f792cb299979" : "3f703acebfb11a30630dbb5a3bac0f77bc790f7d2173a183585b22c185b7eab4"
+    },
+    "admin_terms_acceptance" : {
+      "7978c493-5501-4d09-a714-bd90dceda745" : "7cb7a10dc22c4724e105d742491a873fa502d89a79f10a9c7fd5173eeec939f1",
+      "c496b63c-735f-48cc-be56-90f7ec1464e1" : "1a7524e0f91935677f8d8d40db97e0e626cd90a05aab01a01bb4e6a7ee8fcbd2"
+    },
+    "scheduled_service" : {
+      "0e91d0b4-31fb-46e3-835a-b80f957dcd64" : "b05383e561153460b48ba92a4011ec1bc924983a285c2c5dbc645663fbe8186c",
+      "1dc4a0fd-4f28-412f-bb99-f3fceddbac58" : "42d4ae20b4d78c53681d0773584cec4e8474adb538da201e57d383ff77391c2f",
+      "3d4066d3-8322-49a7-bcd6-6b4674f9628d" : "512322b6ce7f033fa5a58c3593675369697b8d1a967fd97fd40bd2e53e36d453",
+      "7fd33a9e-8e13-49a9-86f6-0dd707e08264" : "5ffe6f297cd62d6de7ca53d59fb3b2307797c78c522296c2978c86ca19e43b44",
+      "b8498841-8744-45b4-b6a8-939e631ffb97" : "7345f81af7630b277801f3426bd2be534900251acccc1a8f387caf2ceee004c2",
+      "c585ae33-b925-4004-8fcc-96a83e08549a" : "a77fdd6e6a020bb1daee68eb24b2a1ae443c3b78e434b7bb9e5404a0d6d9ce4e"
+    },
+    "assignment" : {
+      "1070b05b-356c-4f60-8200-f39397673b8d" : "a01609c90ae80557b683c2345ecffc80540f5a889a56133bca15fdd8f0261814",
+      "149b817c-247c-4333-a1a4-135f7581ad77" : "c698dadf3683cbd39ecb2be47be3b40b064ef2ae32613c38f00016cb32c55e95",
+      "1d4e0c69-ab38-4b34-8840-7da65777d2ba" : "016e731c5a906217b06175cf36969a1fdf8a97aa42f430f2792857130d03fa86",
+      "21b0e16b-a052-40df-9762-d90231b7d95c" : "ca1f2fc06e9b7b617116c61a49f0e2f3d2e8172653e0a80e602119b573336939",
+      "3e23db54-d300-4950-905c-58cdef38750a" : "1c0f4e918f16cc2c19b2a09decb861510e0abc7d30e11fac04aaf22e7c5d8a6f",
+      "669d2a31-2442-4e9a-809d-0cd64eb85a17" : "67b90f9c45f9751edb71686a99bb1cb37a2e8759279165b2ca3a11f192b730fc",
+      "7f8a2de1-f2d0-4aab-9921-c5fb2e096e49" : "19be4791b8a911cdc3c85cae8b0add7437d09c999abda9e7edc9bd987753b9ab",
+      "d8dd3eb2-93f2-44ff-92da-a8a7fd2a08d6" : "1d3f04511c65672f06b666158af662b4f929c5e6e756f3f7b3a05b9be1eb9896",
+      "ff70acc6-1c6b-4b89-b0f8-73ce7f19c195" : "7b19f6bd5c9280ceaf42d7bef6a1c85e0d6d5c23fba86ab0b7a99e7319946c2c"
+    },
+    "incident" : {
+      "73395765-27cb-4a24-ae90-1956a888606e" : "5879e14f3bdc8778eb015cd58aee4d5f03f91032503a453147d08843cf80f761",
+      "e9eb8724-1062-4be1-a7d7-dbafe7520e17" : "539962bf8df6e072cb91e451ffc770fa6d50b6def3459954a2b5a450afb3f588"
+    },
+    "announcement" : { }
+  },
+  "result" : "EN_CURSO_SAME_AUTHORIZED_CASE",
+  "phase" : "CRITICAL_NOTICE_WITHOUT_AUTOMATIC_INTERRUPTION",
+  "observedAt" : "2026-10-21T06:26:04.588517600Z",
+  "httpEvents" : [ {
+    "finishedAt" : "2026-10-21T06:13:02.487307700Z",
+    "startedAt" : "2026-10-21T06:13:01.773373800Z",
+    "method" : "POST",
+    "path" : "/groups",
+    "status" : 201
+  }, {
+    "finishedAt" : "2026-10-21T06:13:02.690179600Z",
+    "startedAt" : "2026-10-21T06:13:02.490308700Z",
+    "method" : "POST",
+    "path" : "/vehicles",
+    "status" : 201
+  }, {
+    "finishedAt" : "2026-10-21T06:13:02.825314700Z",
+    "startedAt" : "2026-10-21T06:13:02.718490400Z",
+    "method" : "POST",
+    "path" : "/invitations",
+    "status" : 201
+  }, {
+    "finishedAt" : "2026-10-21T06:13:03.171099700Z",
+    "startedAt" : "2026-10-21T06:13:02.828312600Z",
+    "method" : "POST",
+    "path" : "/onboarding/requests",
+    "status" : 202
+  }, {
+    "finishedAt" : "2026-10-21T06:13:03.207584800Z",
+    "startedAt" : "2026-10-21T06:13:03.172114500Z",
+    "method" : "POST",
+    "path" : "/onboarding/otp/verify",
+    "status" : 202
+  }, {
+    "finishedAt" : "2026-10-21T06:13:03.277948600Z",
+    "startedAt" : "2026-10-21T06:13:03.209585Z",
+    "method" : "GET",
+    "path" : "/onboarding/requests/4becd521-3bb4-4d66-8306-0e1a289dac42/documentary-expediente",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-21T06:13:03.392243500Z",
+    "startedAt" : "2026-10-21T06:13:03.278956100Z",
+    "method" : "PUT",
+    "path" : "/onboarding/requests/4becd521-3bb4-4d66-8306-0e1a289dac42/documentary-expediente",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-21T06:13:03.441243900Z",
+    "startedAt" : "2026-10-21T06:13:03.393243100Z",
+    "method" : "POST",
+    "path" : "/onboarding/requests/4becd521-3bb4-4d66-8306-0e1a289dac42/approve",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-21T06:13:04.379254800Z",
+    "startedAt" : "2026-10-21T06:13:03.443576700Z",
+    "method" : "POST",
+    "path" : "/onboarding/requests/4becd521-3bb4-4d66-8306-0e1a289dac42/provision",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-21T06:13:04.500923200Z",
+    "startedAt" : "2026-10-21T06:13:04.381255800Z",
+    "method" : "GET",
+    "path" : "/drivers/3c57102a-680f-4b9d-a8f2-6518fc52d042/qualification",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-21T06:13:04.684918700Z",
+    "startedAt" : "2026-10-21T06:13:04.501922Z",
+    "method" : "POST",
+    "path" : "/drivers/3c57102a-680f-4b9d-a8f2-6518fc52d042/qualification/reviews",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-21T06:13:04.756919600Z",
+    "startedAt" : "2026-10-21T06:13:04.698916600Z",
+    "method" : "POST",
+    "path" : "/drivers/3c57102a-680f-4b9d-a8f2-6518fc52d042/qualification/reviews",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-21T06:13:05.012919200Z",
+    "startedAt" : "2026-10-21T06:13:04.760919300Z",
+    "method" : "POST",
+    "path" : "/drivers/3c57102a-680f-4b9d-a8f2-6518fc52d042/qualification/periods",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-21T06:13:05.066918400Z",
+    "startedAt" : "2026-10-21T06:13:05.014920200Z",
+    "method" : "POST",
+    "path" : "/drivers/3c57102a-680f-4b9d-a8f2-6518fc52d042/qualification/activate",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-21T06:13:05.382110600Z",
+    "startedAt" : "2026-10-21T06:13:05.067919400Z",
+    "method" : "POST",
+    "path" : "/mobile/auth/login",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-21T06:13:05.417123500Z",
+    "startedAt" : "2026-10-21T06:13:05.383110100Z",
+    "method" : "GET",
+    "path" : "/mobile/me",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-21T06:13:05.478110700Z",
+    "startedAt" : "2026-10-21T06:13:05.417123500Z",
+    "method" : "PUT",
+    "path" : "/mobile/availability",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-21T06:13:05.512117200Z",
+    "startedAt" : "2026-10-21T06:13:05.481114200Z",
+    "method" : "POST",
+    "path" : "/groups",
+    "status" : 201
+  }, {
+    "finishedAt" : "2026-10-21T06:13:05.581109300Z",
+    "startedAt" : "2026-10-21T06:13:05.515115800Z",
+    "method" : "GET",
+    "path" : "/groups/4786b63d-7fea-4667-bec5-54b83f736ea2/resources",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-21T06:13:05.624140800Z",
+    "startedAt" : "2026-10-21T06:13:05.582112200Z",
+    "method" : "POST",
+    "path" : "/groups/4786b63d-7fea-4667-bec5-54b83f736ea2/memberships",
+    "status" : 200
+  }, {
+    "channel" : "client-real-http",
+    "method" : "POST",
+    "path" : "/api/v1/mobile/incidents",
+    "status" : 201,
+    "observedAt" : "2026-10-21T06:13:53.603738700Z"
+  }, {
+    "backendStatus" : 201,
+    "transportFault" : "SYNTHETIC_RESPONSE_LOSS_AFTER_SERVER_COMMIT",
+    "at" : "2026-10-21T06:13:53.604740800Z",
+    "clientStatus" : 504,
+    "path" : "/api/v1/mobile/incidents",
+    "method" : "POST"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/mobile/incidents/operations/440f1a40-a642-425d-8a83-b5a65856fc73",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:13:53.884150700Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/mobile/incidents",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:13:54.021151200Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "POST",
+    "path" : "/api/v1/auth/refresh",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:04.355632500Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/auth/me",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:04.380630800Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/admin/terms/current",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:04.411635800Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/incidents",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:04.882612500Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "POST",
+    "path" : "/api/v1/operations/stream-ticket",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:04.997618600Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/assignments",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:05.096615100Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/incidents/responsible-candidates",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:05.099613500Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/drivers",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:05.115618600Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/incidents/de202585-c21c-4b77-bb08-a73b24405d0f/history",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:05.180614600Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "POST",
+    "path" : "/api/v1/incidents/de202585-c21c-4b77-bb08-a73b24405d0f/responsibility",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:05.504104Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/incidents/de202585-c21c-4b77-bb08-a73b24405d0f",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:05.545106900Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/incidents/responsible-candidates",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:05.590109800Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/incidents",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:05.608104700Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/incidents/de202585-c21c-4b77-bb08-a73b24405d0f/history",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:05.622105800Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "PATCH",
+    "path" : "/api/v1/incidents/de202585-c21c-4b77-bb08-a73b24405d0f/follow-up",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:05.978019700Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/incidents/de202585-c21c-4b77-bb08-a73b24405d0f",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:06.035759Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/incidents/de202585-c21c-4b77-bb08-a73b24405d0f/history",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:06.101462800Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/incidents/responsible-candidates",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:06.153649400Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/incidents",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:06.185933500Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/mobile/incidents/de202585-c21c-4b77-bb08-a73b24405d0f/history",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:17.542461700Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/mobile/incidents/de202585-c21c-4b77-bb08-a73b24405d0f",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:17.942751800Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/mobile/incidents/de202585-c21c-4b77-bb08-a73b24405d0f/history",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:18.955583700Z"
+  }, {
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/mobile/incidents/de202585-c21c-4b77-bb08-a73b24405d0f/history",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:14:18.970568Z"
+  }, {
+    "path" : "/onboarding/requests/4becd521-3bb4-4d66-8306-0e1a289dac42/documentary-expediente",
+    "status" : 200,
+    "finishedAt" : "2026-10-21T06:25:44.453342400Z",
+    "startedAt" : "2026-10-21T06:25:43.580655700Z",
+    "method" : "GET"
+  }, {
+    "path" : "/drivers/3c57102a-680f-4b9d-a8f2-6518fc52d042/qualification",
+    "status" : 200,
+    "finishedAt" : "2026-10-21T06:25:44.746057700Z",
+    "startedAt" : "2026-10-21T06:25:44.456343700Z",
+    "method" : "GET"
+  }, {
+    "path" : "/mobile/auth/login",
+    "status" : 200,
+    "finishedAt" : "2026-10-21T06:25:45.160687700Z",
+    "startedAt" : "2026-10-21T06:25:44.747053200Z",
+    "method" : "POST"
+  }, {
+    "path" : "/mobile/me",
+    "status" : 200,
+    "finishedAt" : "2026-10-21T06:25:45.220745900Z",
+    "startedAt" : "2026-10-21T06:25:45.182004400Z",
+    "method" : "GET"
+  }, {
+    "path" : "/api/v1/mobile/incidents/de202585-c21c-4b77-bb08-a73b24405d0f/history",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:25:57.640374800Z",
+    "channel" : "client-real-http",
+    "method" : "GET"
+  }, {
+    "path" : "/api/v1/mobile/incidents/de202585-c21c-4b77-bb08-a73b24405d0f",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:25:58.000352400Z",
+    "channel" : "client-real-http",
+    "method" : "GET"
+  }, {
+    "path" : "/api/v1/mobile/incidents/de202585-c21c-4b77-bb08-a73b24405d0f/history",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:25:58.742422800Z",
+    "channel" : "client-real-http",
+    "method" : "GET"
+  }, {
+    "path" : "/api/v1/mobile/incidents/de202585-c21c-4b77-bb08-a73b24405d0f/information",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:25:58.937422300Z",
+    "channel" : "client-real-http",
+    "method" : "POST"
+  }, {
+    "path" : "/api/v1/mobile/incidents/de202585-c21c-4b77-bb08-a73b24405d0f/history",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:25:59.087984700Z",
+    "channel" : "client-real-http",
+    "method" : "GET"
+  }, {
+    "path" : "/api/v1/mobile/incidents/de202585-c21c-4b77-bb08-a73b24405d0f",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:25:59.129735700Z",
+    "channel" : "client-real-http",
+    "method" : "GET"
+  }, {
+    "path" : "/api/v1/mobile/incidents/de202585-c21c-4b77-bb08-a73b24405d0f/history",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:25:59.290025600Z",
+    "channel" : "client-real-http",
+    "method" : "GET"
+  }, {
+    "path" : "/api/v1/mobile/incidents/de202585-c21c-4b77-bb08-a73b24405d0f/history",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:25:59.413064200Z",
+    "channel" : "client-real-http",
+    "method" : "GET"
+  }, {
+    "path" : "/incidents/de202585-c21c-4b77-bb08-a73b24405d0f",
+    "status" : 200,
+    "finishedAt" : "2026-10-21T06:26:00.067533500Z",
+    "startedAt" : "2026-10-21T06:26:00.030534400Z",
+    "method" : "GET"
+  }, {
+    "path" : "/incidents/de202585-c21c-4b77-bb08-a73b24405d0f/assessment",
+    "status" : 200,
+    "finishedAt" : "2026-10-21T06:26:00.113534700Z",
+    "startedAt" : "2026-10-21T06:26:00.067533500Z",
+    "method" : "POST"
+  }, {
+    "path" : "/notices?failures=true&size=100",
+    "status" : 200,
+    "finishedAt" : "2026-10-21T06:26:00.148667300Z",
+    "startedAt" : "2026-10-21T06:26:00.113534700Z",
+    "method" : "GET"
+  }, {
+    "path" : "/api/v1/auth/refresh",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:26:02.702737Z",
+    "channel" : "client-real-http",
+    "method" : "POST"
+  }, {
+    "path" : "/api/v1/auth/me",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:26:02.732738600Z",
+    "channel" : "client-real-http",
+    "method" : "GET"
+  }, {
+    "path" : "/api/v1/admin/terms/current",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:26:02.771742Z",
+    "channel" : "client-real-http",
+    "method" : "GET"
+  }, {
+    "path" : "/api/v1/notices",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:26:04.006254100Z",
+    "channel" : "client-real-http",
+    "method" : "GET"
+  }, {
+    "path" : "/api/v1/notices",
+    "status" : 200,
+    "observedAt" : "2026-10-21T06:26:04.066257200Z",
+    "channel" : "client-real-http",
+    "method" : "GET"
+  } ],
+  "rollbackFixtureGuard" : "PASS_REFUSED_BEFORE_FIXTURE",
+  "groupId" : "b141d4b1-8b15-43a7-bcbd-c9eb25838fbe",
+  "vehicleId" : "732c57b6-8500-454d-95cf-7e2a89a85841",
+  "invitationId" : "4a6aa571-13a1-4957-a94d-7bb7c4414af0",
+  "requestId" : "4becd521-3bb4-4d66-8306-0e1a289dac42",
+  "driverId" : "3c57102a-680f-4b9d-a8f2-6518fc52d042",
+  "accountId" : "5c692f75-092e-4efb-9c0a-185722a8ebdb",
+  "vehicleReviewed" : true,
+  "companyReviewed" : true,
+  "periodId" : "d69ab808-0518-4f0a-8b0a-fc5edd3f38e2",
+  "qualifiedOnce" : true,
+  "secondaryGroupId" : "4786b63d-7fea-4667-bec5-54b83f736ea2",
+  "SECONDARY_MEMBERSHIP" : true,
+  "loseReportOnce" : false,
+  "clientStage" : "NOTICES",
+  "currentIncidentId" : "de202585-c21c-4b77-bb08-a73b24405d0f",
+  "reportLostDelivered" : true,
+  "clientResults" : [ {
+    "markers" : [ "L06_CONNECTED_REPORT=PASS_EXPLICIT_SEVERITY_UNKNOWN_RESPONSE_RECEIPT_NO_REPLAY", "L06_CONNECTED_RESULT=PASS_PRODUCTION_WIDGET_REPOSITORY_HTTP_STAGE_REPORT" ],
+    "channel" : "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+    "at" : "2026-10-21T06:13:54.598574500Z",
+    "stage" : "REPORT"
+  }, {
+    "markers" : [ "CONNECTED_L06_CRM_ATTEND=PASS_EXPLICIT_RESPONSIBILITY_APPEND_HISTORY", "CONNECTED_L06_CRM_RESULT=PASS_REAL_BROWSER_HTTP_TEST_DB" ],
+    "channel" : "REAL_CRM_BROWSER_HTTP",
+    "at" : "2026-10-21T06:14:06.738591100Z",
+    "stage" : "ATTEND"
+  }, {
+    "stage" : "INFORMATION",
+    "markers" : [ "L06_CONNECTED_INFORMATION=PASS_OWN_APPEND_ONLY_HISTORY", "L06_CONNECTED_RESULT=PASS_PRODUCTION_WIDGET_REPOSITORY_HTTP_STAGE_INFORMATION" ],
+    "channel" : "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+    "at" : "2026-10-21T06:26:00.013533500Z"
+  }, {
+    "stage" : "NOTICES",
+    "markers" : [ "CONNECTED_L06_CRM_NOTICES=PASS_DURABLE_EXTERNAL_NOT_CONFIGURED_VISIBLE_NO_DELIVERY_CLAIM", "CONNECTED_L06_CRM_RESULT=PASS_REAL_BROWSER_HTTP_TEST_DB" ],
+    "channel" : "REAL_CRM_BROWSER_HTTP",
+    "at" : "2026-10-21T06:26:04.586530200Z"
+  } ],
+  "FLUTTER_REPORT" : true,
+  "browserRefreshFamilyId" : "80f65a57-b53c-4f65-a331-4a9ee3819771",
+  "CRM_RESPONSIBILITY_FOLLOWUP" : true,
+  "lastClientDiagnostic" : "CLIENT_ASSERTION_FAILED",
+  "lastClientStage" : "INFORMATION",
+  "attemptHistory" : [ {
+    "phase" : "FLUTTER_INFORMATION",
+    "at" : "2026-10-21T06:14:19.734897200Z"
+  } ],
+  "resumeQualificationObservedOnly" : true,
+  "FLUTTER_INFORMATION" : true,
+  "criticalNoticeResult" : "PASS_DURABLE_NOT_CONFIGURED_WITHOUT_AUTOMATIC_INTERRUPTION",
+  "CRITICAL_NOTICE_WITHOUT_AUTOMATIC_INTERRUPTION" : true
+}

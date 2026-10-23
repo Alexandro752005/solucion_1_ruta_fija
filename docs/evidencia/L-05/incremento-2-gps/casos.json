@@ -1,0 +1,452 @@
+{
+  "distinctPassed": 77,
+  "cases": [
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsIncidentCannotAdoptAnotherServicesPointEvenForTheSameConductorAndOrganization",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsDuplicateCaptureDoesNotExtendRetentionAndDifferentCoordinatesCannotRewriteIt",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsMissingIdentityUsesTheActualGate",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsPurgeIsBoundedToTheRequestedTenantEvenWhenAnotherTenantsPointsHaveExpired",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsHistorySurvivesCompletionWithoutAVisibleCurrentSnapshotAndHasFixedSevenDayExpiry",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsQualificationLossPreservesOwnConsultationCaptureAndSafeCloseWithoutPermittingNewStart",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsAnotherConductorAndForeignAdminCannotReadTheRequestOrDeliverItsPoints",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsIncidentEvidenceUsesTheSameExpiryAndIsUnlinkedWhenOriginalPointIsPurged",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsMissingTermsUsesTheActualGate",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsTerminalCorroborationUsesItsOwnStoredPointAndRetainsTheOriginalDeclaration",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsReviewDeadlineIsVisibleButNeverExtendsPointRetentionOrInventsADecision",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsSuperAdminDoesNotGainGlobalCoordinatesOrRequestReviewByItsPlatformRole",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsDeclarationCannotBeDetachedBeforeDeletionOrRewrittenAfterExpiry",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsServerDefaultIntervalAndOwnListRemainStableWhenTheRequestIsConsultedAgain",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsOwnRequestIsIdempotentButCannotRequestAnotherService",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsReviewRequiresIdentityConfirmationAndCannotBeReusedToExtendTheGrant",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsOnlyApprovedReauthenticatedOwnerReceivesPointsAndGrantExpiresExactlyAtFifteenMinutes",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsTerminalDiscrepancyCreatesAnObservationWithoutInferringFraudOrCopyingCoordinates",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsExpiryDuringReviewCannotBeExtendedAndPurgeRemovesCoordinatesButPreservesSummary",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceGpsIntegrationTest",
+      "name": "gpsNoDataReviewDoesNotReconstructOrFabricatePoints",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceExecutionIntegrationTest",
+      "name": "executionTrackingRejectsAvailabilityAndBackgroundAndOutOfSegmentTime",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceExecutionIntegrationTest",
+      "name": "executionStartRequiresFunctionalConsentWithoutMutatingOccupation",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceExecutionIntegrationTest",
+      "name": "executionSummaryIsCodedOwnScopedAndNeverExposesCoordinates",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceExecutionIntegrationTest",
+      "name": "executionStartRequiresExplicitPermissionServiceAndForeground",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceExecutionIntegrationTest",
+      "name": "executionCompletionClosesOwnSegmentAndStopsCurrentPoint",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceExecutionIntegrationTest",
+      "name": "executionStartRecordsServerTimeOnceAndDoesNotAutostartFromAcceptance",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceExecutionIntegrationTest",
+      "name": "executionAdminCannotDeclareCompletionOrCreateSegments",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceExecutionIntegrationTest",
+      "name": "executionConsentWithdrawalStopsPointsButAllowsSafeCompletion",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceExecutionIntegrationTest",
+      "name": "executionDatabaseRejectsRewritingOrDeletingOriginalAndClosedSegments",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ServiceExecutionIntegrationTest",
+      "name": "executionStaleVersionCannotStartOrCloseAndFreshCommandsPreserveTheSameSegment",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceMissingIdentityUsesTheActualGate",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceCancelledAcceptedOfferPreservesAcceptanceAndProgramWithoutAutoReoffer",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceReofferAfterExpiryNormalizesAndDoesNotRenewTheOldDeadline",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceExplicitCancellationIsSeparateMotivatedAndIdempotent",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceMissingTermsUsesTheActualGate",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceOperationKeyCannotBeRepurposedForDifferentConditions",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceConductorCannotReadOrDispatchTenantPrograms",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceAnotherOrganizationCannotReadCancelOrReoffer",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceCreationOperationIsReadOnlyAndDoesNotRenewItsDeadline",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceNewDriverAndUnitRequireThatRecipientsOwnAcceptanceAndRetainBothPeriods",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceCancellingAFutureCommitmentCannotReleaseAnOngoingPhysicalOccupation",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceExpiryLeavesSchedulePendingWithoutRemovingTheUnitPeriod",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceStaleCommandCannotRetireTheCurrentOffer",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceAcceptedOfferCannotBeRetroactivelyRejected",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceRejectionReleasesOfferOnlyAndNewOfferNeedsFreshAcceptance",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceMaterialTimeReplacementPreservesOldConditionsAndHasReplayReceipt",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceMissedPlannedStartCanBeExplicitlyReassignedBeforeActualStart",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceCandidateReplacementExcludesOnlyItsOwnHoldWithoutReleasingIt",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceStartedCannotBeCancelledOrReassignedAndCompletionIsDistinct",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.ScheduledServiceIntegrationTest",
+      "name": "serviceInitialOfferCreatesOneDurableProgramAndNoAcceptance",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.OfferAcceptanceIntegrationTest",
+      "name": "offerIdempotentCreationPreservesOriginalDeadlineAsServerTimeAdvances",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.OfferAcceptanceIntegrationTest",
+      "name": "offerForeignDriverOrVehicleAreHiddenAndCannotCreateATenantCrossingHold",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.OfferAcceptanceIntegrationTest",
+      "name": "offerAdminCannotReserveOrStartInPlaceOfConductor",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.OfferAcceptanceIntegrationTest",
+      "name": "offerDeadlineEqualsEarlierServiceStartWithoutInventedMicrosecondGap",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.OfferAcceptanceIntegrationTest",
+      "name": "offerConductorCannotEmitAndAdminCannotCallTheConductorAcceptanceRoute",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.OfferAcceptanceIntegrationTest",
+      "name": "offerLegacyDirectRecordCannotBeStartedThroughMobileEndpoint",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.OfferAcceptanceIntegrationTest",
+      "name": "offerNewHoldExpiresTheOldReservationWithoutDependingOnTheSweep",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.OfferAcceptanceIntegrationTest",
+      "name": "offerExplicitAdminDirectCannotCreateAnyAssignment",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.OfferAcceptanceIntegrationTest",
+      "name": "offerOmissionAlwaysCreatesPendingWithoutManufacturingAcceptance",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.OfferAcceptanceIntegrationTest",
+      "name": "offerFirstPendingReservationPreventsAnotherIncompatibleHold",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.OfferAcceptanceIntegrationTest",
+      "name": "offerAuthenticAcceptanceJustBeforeDeadlineDoesNotStartTheService",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.OfferAcceptanceIntegrationTest",
+      "name": "offerDeadlineComesFromServerDespiteClientAttemptToExtendIt",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.OfferAcceptanceIntegrationTest",
+      "name": "offerIdempotentReplayAfterExpiryReturnsTheExpiredRecordWithoutRenewingIt",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.OfferAcceptanceIntegrationTest",
+      "name": "offerAcceptanceAtTheExactTenMinuteDeadlineExpiresWithoutAScheduler",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.RouteAssignmentIntegrationTest",
+      "name": "routeReadsAreTenantScopedAndConductorCannotEditTheCatalog",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.RouteAssignmentIntegrationTest",
+      "name": "routeVersionRemainsCapturedAfterCatalogRevisionAndRetirement",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.RouteAssignmentIntegrationTest",
+      "name": "routeIsRequiredAndOriginMustMatchItsCapturedVersion",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.RouteAssignmentIntegrationTest",
+      "name": "routeFinalizedPersistsOwnDeclarationWithoutInventingTerminalEvidence",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.RouteAssignmentIntegrationTest",
+      "name": "routeChangeRejectsStartedAndStaleServicesWithoutReplacingThem",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.RouteAssignmentIntegrationTest",
+      "name": "routeCreationIdempotencyRejectsDifferentPayload",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.RouteAssignmentIntegrationTest",
+      "name": "routeReplacementFailureAfterCancellationMarksTheWholePhysicalTransactionForRollback",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.RouteAssignmentIntegrationTest",
+      "name": "routeAcceptanceReloadsOccupationCachedBeforeTheSchedulingLock",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.qualification.RouteAssignmentIntegrationTest",
+      "name": "routeReplacementPreservesOldAcceptanceAndRequiresFreshConductorAcceptance",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.routing.TerminalCorroborationPolicyTest",
+      "name": "staleFutureAndPoorAccuracyRemainUncorroborated",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.routing.TerminalCorroborationPolicyTest",
+      "name": "exactTimeAndAccuracyLimitsAreInclusive",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.routing.TerminalCorroborationPolicyTest",
+      "name": "pointsInsideAndOutsideRadiusAreDistinguished",
+      "result": "PASS"
+    },
+    {
+      "className": "pe.rutafija.routing.TerminalCorroborationPolicyTest",
+      "name": "missingPointOrTerminalNeverCorroborates",
+      "result": "PASS"
+    }
+  ],
+  "xmlSanitization": [
+    {
+      "path": "docs/evidencia/L-05/incremento-2-gps/junit/TEST-pe.rutafija.qualification.ServiceGpsIntegrationTest.xml",
+      "originalSha256": "44bfd6aefbc4711fb562753b02c434dd7360f7b88ab803e8b7040db262f95704",
+      "archivedSha256": "09bf25f4c63519a77684d822760512b3163fdd5fa3b8123e7835070216e64f6b",
+      "removedSections": [
+        "properties",
+        "system-out",
+        "system-err"
+      ]
+    },
+    {
+      "path": "docs/evidencia/L-05/incremento-2-gps/junit/TEST-pe.rutafija.qualification.ServiceExecutionIntegrationTest.xml",
+      "originalSha256": "a7c484117efb239a26281f8a44347ff627ed518c18a6fff1f6c235435892fb26",
+      "archivedSha256": "22cc1c270e571c65a2050510ebb126ca320b3d1678853d62b33a2668754c4cc0",
+      "removedSections": [
+        "properties",
+        "system-out",
+        "system-err"
+      ]
+    },
+    {
+      "path": "docs/evidencia/L-05/incremento-2-gps/junit/TEST-pe.rutafija.qualification.ScheduledServiceIntegrationTest.xml",
+      "originalSha256": "0dc10b19012ed58bcf124e89c40f669376d0d447c5ae8a1cd22712655a1cf4eb",
+      "archivedSha256": "76259f5c0b9fb6825b6dc0a0a12485cf4424f01927bcb60b118d3e938ea6c512",
+      "removedSections": [
+        "properties",
+        "system-out",
+        "system-err"
+      ]
+    },
+    {
+      "path": "docs/evidencia/L-05/incremento-2-gps/junit/TEST-pe.rutafija.qualification.OfferAcceptanceIntegrationTest.xml",
+      "originalSha256": "55d2b5f19fdedddadd4da48a63035057ae27c81aaaf9f7046c48e9882955b96c",
+      "archivedSha256": "6e9f6aa45e8cdfcad2701afef4ce39ca39ea084c09116774d1ecb29d8eb6d0a1",
+      "removedSections": [
+        "properties",
+        "system-out",
+        "system-err"
+      ]
+    },
+    {
+      "path": "docs/evidencia/L-05/incremento-2-gps/junit/TEST-pe.rutafija.qualification.RouteAssignmentIntegrationTest.xml",
+      "originalSha256": "77ac4177a2f7cccc17ec1a77d9a3deaad7b3ded5f23c86ddcfac45b5527152f8",
+      "archivedSha256": "9f1ab0cf64ed3fcd3e6bda8cde651e15e09d7e1cd5a6b3433a4b263fab27595b",
+      "removedSections": [
+        "properties",
+        "system-out",
+        "system-err"
+      ]
+    },
+    {
+      "path": "docs/evidencia/L-05/incremento-2-gps/junit/TEST-pe.rutafija.routing.TerminalCorroborationPolicyTest.xml",
+      "originalSha256": "9c5c8e0b70f7760880977ec2afe6f3a78f9dd323de485d293d33cf273e73298f",
+      "archivedSha256": "2a8ec3929d2dafe526af90772e7af3f7f8b536c04b96cb05ae8b6023501558b5",
+      "removedSections": [
+        "properties",
+        "system-out",
+        "system-err"
+      ]
+    }
+  ]
+}

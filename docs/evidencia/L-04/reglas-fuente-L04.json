@@ -1,0 +1,422 @@
+{
+  "source": "specs/registro.json",
+  "sourceSha256": "ca2794a41907d8081e0b77bd7ee02c3960024798d48442a7d26f053cb730ac50",
+  "sourceUnmodified": true,
+  "questions": [
+    {
+      "id": "Q-029",
+      "answer": "Una unidad no puede mantener vínculos autorizados con dos conductores para periodos superpuestos. Puede tener vínculos sucesivos con distintos conductores si no se solapan sus vigencias ni existe una operación en curso incompatible. Se comprueba la exclusividad en el servidor, incluso ante solicitudes simultáneas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-030",
+      "answer": "Una unidad no puede operar simultáneamente para dos empresas. Su identidad interna y el historial se conservan ante un eventual traslado; el proceso de transferencia no habilita pertenencias operativas superpuestas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-031",
+      "answer": "ADMIN revisa documentos y el servidor deriva la elegibilidad con su vigencia y los bloqueos. Para cada oferta se comprueban además vínculo y horario. La ocupación de un servicio solo afecta disponibilidad, sin invalidar la revisión documental.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-031",
+        "sourceAnswerPointer": "/questions/12",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-031-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Documentos y disponibilidad separados",
+        "answeredAtClientReported": "2026-10-11T16:21:31.931Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      }
+    },
+    {
+      "id": "Q-032",
+      "answer": "El ADMIN de la empresa revisa y valida la incorporación de una unidad propia, sus datos y la documentación exigida. La validación no asigna automáticamente rutas ni servicios y debe respetar la pertenencia empresarial y la exclusividad de los vínculos.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "USUARIO_ADJUNTO_Y_PRECISION_TECNICA",
+        "source": "ruta_fija_registro_descubrimiento_v1(1).json",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-033",
+      "answer": "El ADMIN autoriza la sustitución de unidad y la desvinculación. Debe registrar motivo, vigencias y las asignaciones afectadas. La nueva unidad debe quedar revisada y vinculada antes de ofrecer el servicio al conductor. Una sustitución que cambie los datos de una asignación pendiente o aceptada exige anular su versión anterior y solicitar aceptación de la nueva; no se modifica silenciosamente lo que el conductor aceptó.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-034",
+      "answer": "El vínculo conductor-unidad tiene una vigencia autorizada por el ADMIN; puede fijarse un periodo de inicio y fin, por ejemplo del 10/10/2026 al 10/11/2026. Finalizar o cancelar un servicio libera únicamente su ocupación horaria y no rompe ese vínculo. Dentro de su vigencia el conductor puede recibir nuevos servicios compatibles con la misma unidad. El vínculo finaliza por su vencimiento registrado, cuando tenga fin programado, o por desvinculación autorizada; no se reserva un servicio cuya conducción prevista quede fuera de su vigencia.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-035",
+      "answer": "La unidad conserva un identificador interno estable aunque cambie su placa. El ADMIN ingresa y corrige la placa mediante texto, conservando placas anteriores, vigencias, motivo y autor del cambio. Los servicios anteriores conservan la identificación histórica que les correspondía. No se crea una nueva unidad por cambiar la placa y no se exige fotografía, cámara ni OCR para capturarla.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-040",
+      "answer": "La definición de una ruta utilizable contiene una parada de inicio, una parada de fin y al menos una parada intermedia, identificadas y ordenadas. Los datos mínimos se validan antes de programar un servicio. Esta validación del catálogo se distingue de la ejecución: la expresión recorrido incompleto se usa para un servicio cuyo recorrido no fue finalizado por el conductor.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-041",
+      "answer": "Una ruta puede reutilizarse en varios horarios y servicios. Cada servicio mantiene su programación, asignación y versión de ruta; reutilizarla no permite solapar conductor o unidad ni copiar el estado de ejecución de otro servicio.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "USUARIO_ADJUNTO_Y_PRECISION_TECNICA",
+        "source": "ruta_fija_registro_descubrimiento_v1(1).json",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-042",
+      "answer": "El servicio conserva la versión de la ruta que estaba vigente al crear su asignación o reserva. Editar la ruta genera una versión nueva para usos posteriores y no cambia silenciosamente servicios programados, aceptados, iniciados o finalizados. Si el ADMIN cambia expresamente la ruta de una asignación todavía no iniciada, se conserva el cambio y se requiere aceptación de la nueva versión.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "USUARIO_ADJUNTO_Y_PRECISION_TECNICA",
+        "source": "ruta_fija_registro_descubrimiento_v1(1).json",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-043",
+      "answer": "El conductor no puede modificar manualmente el recorrido asignado. Si necesita desviarse por una incidencia, debe comunicarla al ADMIN; registrar lo que ocurrió no equivale a editar la definición de la ruta. La política de interrupciones y gravedad se precisa en el módulo de incidencias.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "USUARIO_ADJUNTO_Y_PRECISION_TECNICA",
+        "source": "ruta_fija_registro_descubrimiento_v1(1).json",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-044",
+      "answer": "Un recorrido se registra como completado cuando el conductor responsable pulsa Ruta finalizada y el servidor valida el cierre de un servicio iniciado, su asignación aceptada y su participación vigente. Sin un cierre válido el servicio no queda finalizado correctamente. La comprobación de ubicación de Q-060 aporta evidencia adicional y puede generar observaciones; el botón registra la declaración de cumplimiento, no demuestra por sí solo todo el recorrido. No se declara una parada fallida únicamente porque pasó un tiempo estimado.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-045",
+      "answer": "CONDUCTOR declara su disponibilidad en la app. El sistema la distingue de su aprobación, habilitación documental, vinculación de unidad y ocupaciones horarias. Declararse disponible no confirma una asignación ni obliga a aceptarla.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "USUARIO_ADJUNTO_Y_PRECISION_TECNICA",
+        "source": "ruta_fija_registro_descubrimiento_v1(1).json",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-046",
+      "answer": "La disponibilidad declarada se mantiene hasta que el conductor la cambie válidamente. No obstante, la posibilidad de recibir una oferta se recalcula para cada horario según documentos, unidad vinculada, mantenimiento, descansos y asignaciones o reservas existentes. La declaración no elimina esos bloqueos.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "USUARIO_ADJUNTO_Y_PRECISION_TECNICA",
+        "source": "ruta_fija_registro_descubrimiento_v1(1).json",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-047",
+      "answer": "Cerrar la app o perder la conexión no cambia automáticamente la disponibilidad declarada. El ADMIN puede emitir una oferta elegible y se intenta notificar por los canales habilitados. El conductor debe abrir la app con conexión y aceptar antes de que venza la reserva; recibir una notificación no equivale a aceptar y no se garantiza su entrega inmediata. La aplicación no opera offline.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-048",
+      "answer": "Una asignación aceptada constituye un compromiso confirmado. Mientras ese compromiso siga vigente, el conductor no puede cambiar unilateralmente su disponibilidad para invalidarlo. Si surge una imposibilidad real, la comunica al ADMIN, quien decide y registra cancelación, reprogramación o reemplazo. Cambiar la disponibilidad no cancela ni libera automáticamente una asignación aceptada.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-049",
+      "answer": "Se muestra Aprobado, pendiente de asignación de unidad. El conductor puede solicitar unidad de la empresa y consultar el avance. ADMIN resuelve esa cola; no se permite disponibilidad operativa ni ofertas mientras falte una unidad revisada y vinculada.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-049",
+        "sourceAnswerPointer": "/questions/15",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-049-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Pendiente de unidad, con solicitud",
+        "answeredAtClientReported": "2026-10-11T16:24:08.545Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      }
+    },
+    {
+      "id": "Q-050",
+      "answer": "Al emitir una oferta, el ADMIN solicita un servicio concreto y reserva provisionalmente el horario del conductor y de su unidad vinculada. El compromiso confirmado nace cuando el conductor acepta la versión vigente y el servidor vuelve a comprobar su elegibilidad. Ese compromiso existe antes de comenzar el servicio. La aceptación no inicia la conducción; el inicio requiere la acción de Q-059.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-051",
+      "answer": "El ADMIN de la empresa crea las ofertas y gestiona las asignaciones operativas de sus conductores y unidades. Administrador de Flotas u operador son descripciones del mismo rol ADMIN, no roles adicionales. CONDUCTOR acepta o rechaza su oferta; SUPER_ADMIN no sustituye al ADMIN en la gestión ordinaria de estos servicios.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-052",
+      "answer": "Sí. Una asignación solo queda CONFIRMADA después de que el conductor destinatario acepte su versión vigente desde la app con conexión y el servidor valide las condiciones. Estar disponible o tener unidad vinculada no sustituye la aceptación. El ADMIN crea la oferta y no puede marcarla aceptada por el conductor. Un cambio sustancial de conductor, unidad, ruta u horario antes del inicio requiere nueva aceptación.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-053",
+      "answer": "10 minutos.\nLa oferta vence a los 10 minutos o al inicio de la prestación ofertada, lo que ocurra primero. La liberación y validación siguen las mismas reglas. Favorece despacho rápido y exige que el conductor revise la app con mediana frecuencia.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-053",
+        "sourceAnswerPointer": "/questions/16",
+        "answerOrigin": "OPCION_PROPIA",
+        "selectedOptionId": "CUSTOM",
+        "selectedOptionRank": null,
+        "selectedOptionLabel": "Opción propia",
+        "answeredAtClientReported": "2026-10-11T16:25:19.007Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      }
+    },
+    {
+      "id": "Q-054",
+      "answer": "Tiene prioridad la primera reserva o asignación incompatible registrada válidamente por el servidor, aunque todavía espere aceptación. El segundo intento se rechaza por conflicto y conserva los datos del formulario. Se comprueban conductor y unidad, sus vigencias y márgenes. No se sobrescribe la primera oferta. Al expirar, rechazarse o cancelarse esa reserva, su intervalo puede volver a ofrecerse, siempre que no exista otro bloqueo.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-055",
+      "answer": "Se aplica un margen configurable según el tipo de servicio, suficiente para traslado, preparación y descansos exigibles. Las reservas y las aceptaciones deben respetarlo tanto para el conductor como para la unidad. Si un servicio se retrasa, se recalcula la disponibilidad y se avisa al ADMIN para resolver las asignaciones posteriores. No se asume un margen universal; la configuración del tipo de servicio debe estar definida antes de usarlo.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "USUARIO_ADJUNTO_Y_PRECISION_TECNICA",
+        "source": "ruta_fija_registro_descubrimiento_v1(1).json",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-056",
+      "answer": "Al vencer el plazo sin aceptación, la oferta pasa a EXPIRADA y se liberan sus reservas horarias del conductor y la unidad. Se conserva el vínculo conductor-unidad dentro de su periodo autorizado. El servicio permanece programado y pendiente de una nueva oferta o reasignación; su inicio sigue bloqueado hasta obtener una aceptación válida. Se avisa al ADMIN y se conserva el historial. No se reofrece automáticamente sin una decisión del ADMIN.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-057",
+      "answer": "Si el conductor rechaza una oferta, se registra el rechazo, se libera la reserva horaria y el servicio queda pendiente de nueva oferta o reasignación. El CRM muestra candidatos habilitados y disponibles con unidad vinculada, pero el ADMIN decide el reemplazo; el nuevo conductor también debe aceptar. Si la asignación ya fue aceptada, se registra una imposibilidad sobrevenida y el ADMIN gestiona su cancelación o sustitución; no se trata como un rechazo retroactivo ni se borra la aceptación original.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-058",
+      "answer": "Si el ADMIN cancela una asignación confirmada antes del inicio, el servicio mantiene su programación y queda pendiente de reasignación, con inicio bloqueado. Se libera la ocupación del horario, conservando el vínculo conductor-unidad dentro de su vigencia. Cualquier reemplazo requiere una nueva oferta y aceptación del conductor. Cancelar también el servicio exige una decisión expresa con motivo. Se conservan la aceptación anterior, cancelación y notificaciones.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "kind": "ACLARACION_USUARIO_Y_NORMALIZACION",
+        "source": "Aclaraciones del usuario del 10/10/2026, 01:27:35, America/Lima.",
+        "date": "2026-10-10",
+        "technicalClarificationsAreDerivations": true
+      }
+    },
+    {
+      "id": "Q-104",
+      "answer": "Se alerta antes del vencimiento. ADMIN puede renovar la misma vinculación si no hay conflicto y siguen vigentes los documentos; registra la nueva autorización sin alterar el periodo histórico. Si no puede renovarla, coordina interrupción segura o relevo con nueva aceptación. Un vencimiento inesperado genera incidencia, bloquea nuevas ofertas y exige resolver el tramo afectado.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-104",
+        "sourceAnswerPointer": "/questions/19",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-104-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Renovación de ADMIN o relevo seguro",
+        "answeredAtClientReported": "2026-10-11T16:31:18.524Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      }
+    },
+    {
+      "id": "POL-LINK-DATES",
+      "answer": "Con fechas sin hora, el inicio incluye su día y el vínculo sigue vigente durante todo el día final en America/Lima. Se almacena un fin exclusivo al comienzo del día siguiente. Si se indica una hora exacta, se respeta ese instante.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "POL-LINK-DATES",
+        "sourceAnswerPointer": "/questions/17",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "POL-LINK-DATES-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Incluir todo el día final",
+        "answeredAtClientReported": "2026-10-11T16:25:27.784Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      }
+    },
+    {
+      "id": "POL-LINK-END",
+      "answer": "La vinculación de una unidad empresarial exige fecha final. Una unidad propia puede quedar vinculada sin fin programado hasta desvinculación autorizada. Toda oferta debe caber en la vigencia aplicable y pasar los controles de elegibilidad.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "POL-LINK-END",
+        "sourceAnswerPointer": "/questions/18",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "POL-LINK-END-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Fin en unidad empresarial; propio opcional",
+        "answeredAtClientReported": "2026-10-11T16:31:08.036Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      }
+    }
+  ],
+  "assignmentPolicy": {
+    "acceptanceStatus": "CONFIRMADA_USUARIO",
+    "createdBy": "ADMIN",
+    "acceptedBy": "CONDUCTOR_DESTINATARIO",
+    "acceptanceRequired": true,
+    "adminAcceptanceOnBehalfAllowed": false,
+    "offerStates": [
+      "PENDIENTE_ACEPTACION",
+      "CONFIRMADA",
+      "RECHAZADA",
+      "EXPIRADA",
+      "CANCELADA"
+    ],
+    "confirmationEvent": "ACEPTACION_CONDUCTOR_VALIDADA_EN_SERVIDOR",
+    "holdResources": [
+      "HORARIO_CONDUCTOR",
+      "HORARIO_UNIDAD_PREVIAMENTE_VINCULADA"
+    ],
+    "holdDurationMinutes": 10,
+    "holdDurationStatus": "CONFIRMADA_USUARIO",
+    "holdDurationQuestionRef": "Q-053",
+    "holdDeadlineRule": "MINIMO(EMISION_SERVIDOR_MAS_10_MINUTOS, INICIO_PREVISTO_PRESTACION_OFERTADA)",
+    "initialOfferStartReference": "SERVICE_PLANNED_START_AT",
+    "replacementOfferStartReference": "REPLACEMENT_SEGMENT_PLANNED_START_AT",
+    "offerRequiresFutureAcceptanceDeadline": true,
+    "pendingOffersBlockOverlappingOffers": true,
+    "expiryValidatedOnEveryAcceptanceAndNewHold": true,
+    "expiryDoesNotDependOnlyOnCleanupJob": true,
+    "revalidationAt": [
+      "CREAR_OFERTA",
+      "ACEPTAR_OFERTA",
+      "INICIAR_SERVICIO",
+      "REGISTRAR_RELEVO"
+    ],
+    "revalidate": [
+      "Empresa y permisos",
+      "Destinatario y versión",
+      "Vigencia de oferta",
+      "Estado documental",
+      "Unidad vinculada y periodo autorizado",
+      "Mantenimiento",
+      "Conflictos conductor/unidad",
+      "Margen entre servicios"
+    ],
+    "materialChangesRequireNewAcceptance": [
+      "CONDUCTOR",
+      "UNIDAD",
+      "RUTA",
+      "HORARIO"
+    ],
+    "expiryReleasesLink": false,
+    "expiryReleasesCalendarHold": true,
+    "expiryKeepsServiceProgrammed": true,
+    "autoReplacement": false,
+    "marginByServiceType": {
+      "configuredValues": null,
+      "status": "CONFIGURACION_ADMIN_REQUERIDA",
+      "noUniversalValueAssumed": true
+    }
+  }
+}

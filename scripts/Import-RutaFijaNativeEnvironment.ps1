@@ -41,7 +41,11 @@ $f14Keys = @(
     'RF_TEST_MIGRATOR_USERNAME',
     'RF_TEST_MIGRATOR_PASSWORD'
 )
-$allowedKeys = @($f11aKeys + $f12Keys + $f14Keys)
+$mailKeys = @(
+    'SPRING_MAIL_USERNAME',
+    'SPRING_MAIL_PASSWORD'
+)
+$allowedKeys = @($f11aKeys + $f12Keys + $f14Keys + $mailKeys)
 $settings = [ordered]@{}
 $lineNumber = 0
 
@@ -87,9 +91,14 @@ if ($presentF14Keys.Count -gt 0 -and $presentF14Keys.Count -ne $f14Keys.Count) {
     throw 'La configuracion F1.4 esta incompleta: las variables del migrador de pruebas deben declararse juntas.'
 }
 
+$presentMailKeys = @($mailKeys | Where-Object { $settings.Contains($_) })
+if ($presentMailKeys.Count -gt 0 -and $presentMailKeys.Count -ne $mailKeys.Count) {
+    throw 'La configuracion SMTP requiere SPRING_MAIL_USERNAME y SPRING_MAIL_PASSWORD juntas.'
+}
+
 if ($Scope -eq 'Runtime') {
     $runtimeSettings = [ordered]@{}
-    foreach ($key in @($f11aKeys + @('SPRING_FLYWAY_URL', 'SPRING_FLYWAY_USERNAME', 'SPRING_FLYWAY_PASSWORD'))) {
+    foreach ($key in @($f11aKeys + @('SPRING_FLYWAY_URL', 'SPRING_FLYWAY_USERNAME', 'SPRING_FLYWAY_PASSWORD') + $mailKeys)) {
         if ($settings.Contains($key)) {
             $runtimeSettings[$key] = $settings[$key]
         }

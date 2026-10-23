@@ -44,7 +44,18 @@ public record AssignmentResponse(
         UUID createdById,
         String createdByName,
         Instant createdAt,
-        Instant updatedAt
+        Instant updatedAt,
+        UUID routeVersionId,
+        String routeReferenceStatus,
+        UUID serviceTypeVersionId,
+        Integer marginBeforeMinutes,
+        Integer marginAfterMinutes,
+        String marginReferenceStatus,
+        UUID serviceId,
+        Instant interruptedAt,
+        String interruptionReason,
+        UUID handoverId,
+        Instant transferredAt
 ) {
     public static AssignmentResponse from(Assignment assignment) {
         return new AssignmentResponse(
@@ -58,11 +69,11 @@ public record AssignmentResponse(
                 assignment.getExpiredAt(),
                 assignment.getVersion(),
                 assignment.getDriver().getId(),
-                assignment.getDriver().getFullName(),
+                pe.rutafija.shared.security.PersonalDataView.driver(assignment.getDriver().getId()),
                 assignment.getDriver().getGroup().getId(),
                 assignment.getDriver().getGroup().getName(),
                 assignment.getVehicle().getId(),
-                assignment.getVehicle().getPlate(),
+                assignment.getVehiclePlateSnapshot()==null?"HISTORICAL_PLATE_UNRECORDED":assignment.getVehiclePlateSnapshot(),
                 assignment.getOriginText(),
                 assignment.getDestinationText(),
                 assignment.getScheduledAt(),
@@ -74,9 +85,14 @@ public record AssignmentResponse(
                 assignment.getCancellationReason(),
                 assignment.getNotes(),
                 assignment.getCreatedBy().getId(),
-                assignment.getCreatedBy().getFullName(),
+                pe.rutafija.shared.security.PersonalDataView.account(assignment.getCreatedBy().getId()),
                 assignment.getCreatedAt(),
-                assignment.getUpdatedAt()
+                assignment.getUpdatedAt(),
+                assignment.getRouteVersionId(),
+                assignment.getRouteVersionId()==null?"LEGACY_UNRECORDED":"CAPTURED",
+                assignment.getServiceTypeVersionId(),assignment.getMarginBeforeMinutes(),assignment.getMarginAfterMinutes(),
+                assignment.getServiceTypeVersionId()==null?"LEGACY_MARGIN_UNRECORDED":"CAPTURED",
+                assignment.getServiceId(),assignment.getInterruptedAt(),assignment.getInterruptionReason(),assignment.getHandoverId(),assignment.getTransferredAt()
         );
     }
 }

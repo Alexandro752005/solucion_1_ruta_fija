@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,6 +19,12 @@ import pe.rutafija.operation.application.MobileOfflineSyncService;
 import pe.rutafija.shared.config.OpenApiConfig;
 
 @RestController
+@Profile("test")
+@ConditionalOnProperty(
+        prefix = "app.mobile.offline-sync",
+        name = "enabled",
+        havingValue = "true"
+)
 @PreAuthorize("hasRole('CONDUCTOR')")
 @RequestMapping("/api/v1/mobile/sync")
 @Tag(

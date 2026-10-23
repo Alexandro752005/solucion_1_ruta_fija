@@ -1,0 +1,53 @@
+{
+  "runId": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "metadataInspectionAtUtc": "2026-10-17T16:37:59.3668730Z",
+  "operatorReportedLocalCheckResult": "GENERIC_FAILURE_NO_PASS",
+  "operatorInputKindForLastLocalCheck": "AWAITING_CLARIFICATION_NO_SECRET_VALUE_REQUESTED",
+  "preciseFailureCause": "UNDETERMINED",
+  "clientCodeFindings": {
+    "checkKeyDoesNotUseApiOrMail": true,
+    "hiddenPasswordPromptWasReached": true,
+    "remainingPossibleFailurePhases": [
+      "READ_ENCRYPTED_FILE",
+      "PKCS12_DECRYPT_OR_ENTRY_LOAD",
+      "VERIFY_PRIVATE_PUBLIC_PAIR"
+    ],
+    "genericMessageDoesNotDistinguishPasswordFromFileOrCryptoFailure": true,
+    "noRetryPerformedByAgent": true,
+    "privateKeyDecryptionPerformedByAgent": false
+  },
+  "readOnlyFileMetadata": {
+    "runId": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+    "privateKeyContentsRead": false,
+    "privateKeyHashesComputed": false,
+    "passwordsRequested": false,
+    "apiRequests": 0,
+    "smtpAttempts": 0,
+    "principalExists": true,
+    "principalEncryptedBytesMetadata": 477,
+    "principalPublicFileExists": true,
+    "principalPublicKeySha256": "5b727e9aa6252667a1cbdc30f7575fb5007f9d8bb159d0e4dd2b5dcb27fbe00c",
+    "copiaExists": true,
+    "copiaEncryptedBytesMetadata": 477,
+    "copiaPublicFileExists": true,
+    "copiaPublicKeySha256": "5b727e9aa6252667a1cbdc30f7575fb5007f9d8bb159d0e4dd2b5dcb27fbe00c",
+    "canonicalClientSha256": "91913FF7C11CABFAA01881FCBFB24BBF5ED347564C0140D73A757BC96D38E24A",
+    "metadataInspectionAtUtc": "2026-10-17T16:37:59.3668730Z"
+  },
+  "metadataLimits": {
+    "equalFileLengthDoesNotProveEqualCiphertext": true,
+    "matchingPublicFilesDoesNotProvePrivateContainerIntegrity": true,
+    "actualUserTerminalCopyVariableNotInspected": true,
+    "actualUserPasswordNotKnownOrRequested": true
+  },
+  "lastDatabaseInspection": {
+    "atUtc": "2026-10-17T16:34:14.586167200Z",
+    "evidence": "docs/evidencia/L-01/ci07-clave-local-140c10a1-2026-10-17T163414Z.json",
+    "repeatedForOfflineCommand": false
+  },
+  "manualRecoveryResult": "PENDING",
+  "manualAdminResult": "PENDING",
+  "cleanupReleased": false,
+  "nextAction": "WAIT_FOR_DESCRIPTION_OF_LAST_KEY_PASSWORD_INPUT_BEFORE_ANY_NEW_COMMAND"
+}
+

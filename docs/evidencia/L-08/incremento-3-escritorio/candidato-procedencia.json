@@ -1,0 +1,9 @@
+{
+  "observedAt": "2026-10-23T02:12:11.596288+00:00",
+  "jarSha256": "eded50c4bf3706f0f92ca1cb1700e07946db5eca8405189a08ec6d437303aa4f",
+  "entriesCompared": 672,
+  "mismatches": [],
+  "result": "PASS_PACKAGED_APPLICATION_ENTRIES_STILL_CURRENT",
+  "artifactRegenerated": false,
+  "testHelperChangesIncludedInDeliverable": false
+}

@@ -22,6 +22,10 @@ import pe.rutafija.identity.infrastructure.AppUserRepository;
 import pe.rutafija.organization.domain.Organization;
 import pe.rutafija.organization.infrastructure.OrganizationRepository;
 import pe.rutafija.support.NativePostgresIntegrationTest;
+import pe.rutafija.support.ApprovedConductorFixture;
+import pe.rutafija.fleet.domain.Driver;
+import pe.rutafija.fleet.infrastructure.DriverRepository;
+import pe.rutafija.fleet.infrastructure.TransportGroupRepository;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -67,6 +71,9 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Autowired DriverRepository drivers;
+    @Autowired TransportGroupRepository groups;
+
     private Organization organizationA;
     private AppUser administratorA;
     private AppUser coordinatorA;
@@ -101,19 +108,7 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                 .andExpect(status().isCreated())
                 .andReturn()).path("id").asText();
 
-        String driverId = json(mockMvc.perform(post("/api/v1/drivers")
-                        .with(authenticatedAs(administratorA))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {
-                                  "groupId":"%s",
-                                  "fullName":"Conductora Operativa",
-                                  "documentType":"DNI",
-                                  "documentNumber":"OPERACION-001"
-                                }
-                                """.formatted(groupId)))
-                .andExpect(status().isCreated())
-                .andReturn()).path("id").asText();
+        String driverId = historicalDriver(groupId, "Conductora Operativa", "OPERACION-001", null);
 
         String vehicleId = json(mockMvc.perform(post("/api/v1/vehicles")
                         .with(authenticatedAs(administratorA))
@@ -364,14 +359,7 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                                 """))
                 .andExpect(status().isCreated())
                 .andReturn()).path("id").asText();
-        String driverId = json(mockMvc.perform(post("/api/v1/drivers")
-                        .with(authenticatedAs(administratorA))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {"groupId":"%s","fullName":"Conductor de reservas","documentType":"DNI","documentNumber":"RESERVA-001"}
-                                """.formatted(groupId)))
-                .andExpect(status().isCreated())
-                .andReturn()).path("id").asText();
+        String driverId = historicalDriver(groupId, "Conductor de reservas", "RESERVA-001", null);
         String vehicleId = json(mockMvc.perform(post("/api/v1/vehicles")
                         .with(authenticatedAs(administratorA))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -427,7 +415,7 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
     }
 
     @Test
-    void staleRoleTokenIsRejectedAfterAnAdministratorChangesTheUserRole() throws Exception {
+    void roleIsImmutableAndAStaleSessionIsRejectedAfterDeactivation() throws Exception {
         String suffix = UUID.randomUUID().toString().substring(0, 8);
         AppUser staleCoordinator = userRepository.save(organizationUser(
                 organizationA,
@@ -436,14 +424,15 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
         ));
         RequestPostProcessor staleCoordinatorToken = authenticatedAs(staleCoordinator);
 
-        mockMvc.perform(patch("/api/v1/users/{userId}", staleCoordinator.getId())
-                        .with(authenticatedAs(administratorA))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {"email":"%s","fullName":"Coordinador degradado","phone":"","role":"CONDUCTOR"}
-                                """.formatted(staleCoordinator.getEmail())))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.role").value("CONDUCTOR"));
+        // DC-02B makes role immutable; retain stale-session coverage via revocation.
+        assertThatThrownBy(() -> staleCoordinator.updateDetails(
+                staleCoordinator.getEmail(),
+                "Rol sustituido",
+                staleCoordinator.getPhone(),
+                UserRole.CONDUCTOR
+        )).isInstanceOf(IllegalArgumentException.class);
+        staleCoordinator.deactivate();
+        userRepository.save(staleCoordinator);
 
         mockMvc.perform(get("/api/v1/assignments").with(staleCoordinatorToken))
                 .andExpect(status().isUnauthorized())
@@ -466,14 +455,7 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                                 """))
                 .andExpect(status().isCreated())
                 .andReturn()).path("id").asText();
-        String driverId = json(mockMvc.perform(post("/api/v1/drivers")
-                        .with(authenticatedAs(administratorA))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {"userId":"%s","groupId":"%s","fullName":"Conductor asignado","documentType":"DNI","documentNumber":"ACTIVO-001"}
-                                """.formatted(conductorUser.getId(), groupId)))
-                .andExpect(status().isCreated())
-                .andReturn()).path("id").asText();
+        String driverId = historicalDriver(groupId, "Conductor asignado", "ACTIVO-001", conductorUser);
         String vehicleId = json(mockMvc.perform(post("/api/v1/vehicles")
                         .with(authenticatedAs(administratorA))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -497,6 +479,16 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                 .andExpect(jsonPath("$.code").value("RESOURCE_CONFLICT"));
     }
 
+    private String historicalDriver(String groupId, String name, String document, AppUser existingUser) {
+        // Explicit synthetic historical approval, solely for operational regression fixtures.
+        AppUser conductor = existingUser != null ? existingUser : userRepository.save(organizationUser(
+                organizationA, "fixture." + UUID.randomUUID(), UserRole.CONDUCTOR));
+        Driver driver = drivers.save(Driver.register(organizationA, conductor,
+                groups.findById(UUID.fromString(groupId)).orElseThrow(), name, null, "DNI", document, null));
+        ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, administratorA, conductor, driver);
+        return driver.getId().toString();
+    }
+
     private String assignmentPayload(UUID driverId, UUID vehicleId, Instant start, Instant end, String notes) {
         return assignmentPayload(driverId.toString(), vehicleId.toString(), start, end, notes);
     }
@@ -508,13 +500,15 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
     }
 
     private AppUser organizationUser(Organization organization, String localPart, UserRole role) {
-        return AppUser.organizationUser(
+        AppUser user = AppUser.organizationUser(
                 organization,
                 localPart + "@rutafija.test",
                 passwordEncoder.encode("Integration-Password-2026"),
                 role.name() + " de integración",
                 role
         );
+        user.verifyEmail(Instant.now());
+        return user;
     }
 
     private RequestPostProcessor authenticatedAs(AppUser user) {
@@ -524,7 +518,8 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                         .subject(user.getId().toString())
                         .claim("organizationId", user.getOrganizationId().toString())
                         .claim("email", user.getEmail())
-                        .claim("role", user.getRole().name()));
+                        .claim("role", user.getRole().name())
+                        .claim("sessionVersion", user.getSessionVersion()));
     }
 
     private JsonNode json(MvcResult result) throws Exception {

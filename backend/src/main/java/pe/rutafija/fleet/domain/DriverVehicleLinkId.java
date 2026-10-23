@@ -9,6 +9,8 @@ import java.util.UUID;
 
 @Embeddable
 public class DriverVehicleLinkId implements Serializable {
+    @java.io.Serial
+    private static final long serialVersionUID = 7586697093904843752L;
 
     @Column(name = "driver_id")
     private UUID driverId;

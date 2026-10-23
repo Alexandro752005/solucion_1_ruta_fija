@@ -1,0 +1,23 @@
+﻿{
+    "runId":  "9f2be6c1-77be-4d2b-8d72-f83dbd6f5247",
+    "recordedAt":  "2026-10-21T22:57:59.5036742+00:00",
+    "stage":  "SYNTHETIC_NONACCOUNT_LOGIN_REFUSAL",
+    "source":  "USER_REPORT_PHYSICAL_DEVICE",
+    "result":  "PASS_MANUAL_PUBLIC_HTTP_503_ONLY",
+    "userReportedMessage":  "Ensayo local sin cuenta operativa. No se inició sesión",
+    "realCredentialsEntered":  false,
+    "serverObservationState":  "HTTP_REFUSAL_OBSERVED",
+    "events":  [
+                   {
+                       "at":  "2026-10-21T22:56:58.367Z",
+                       "method":  "POST",
+                       "path":  "/api/v1/mobile/auth/login",
+                       "status":  503
+                   }
+               ],
+    "databaseConnected":  false,
+    "smtpUsed":  false,
+    "locationUsed":  false,
+    "operationalLoginVerified":  false,
+    "pilotEnabled":  false
+}

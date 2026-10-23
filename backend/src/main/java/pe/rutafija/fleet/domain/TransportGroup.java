@@ -35,6 +35,10 @@ public class TransportGroup {
     @Column(nullable = false)
     private boolean active;
 
+    @jakarta.persistence.Version
+    @Column(nullable = false)
+    private long version;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
@@ -94,6 +98,8 @@ public class TransportGroup {
     public boolean isActive() {
         return active;
     }
+
+    public long getVersion() { return version; }
 
     public Instant getCreatedAt() {
         return createdAt;

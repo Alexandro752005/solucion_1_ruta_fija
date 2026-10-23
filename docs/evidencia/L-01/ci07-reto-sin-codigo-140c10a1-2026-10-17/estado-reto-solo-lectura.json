@@ -1,0 +1,76 @@
+{
+  "inspectionAtUtc" : "2026-10-17T09:56:36.782756800Z",
+  "runId" : "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "environment" : {
+    "database" : "ruta_fija_test",
+    "role" : "rf_test",
+    "schema" : "V26",
+    "historicalCreations" : {
+      "SUPER_ADMIN" : 1,
+      "ADMIN" : 2,
+      "CONDUCTOR" : 0
+    },
+    "remainingSlots" : {
+      "ADMIN" : 2,
+      "SUPER_ADMIN" : 0,
+      "CONDUCTOR" : 20
+    },
+    "superAdminAccounts" : 1,
+    "personIdentityBindings" : 2,
+    "personIdentityKeyRecorded" : true,
+    "recoveryCredentialPresent" : true,
+    "eligibleSyntheticPendingAdmins" : 0,
+    "termsAcceptanceCount" : 1,
+    "currentTerms" : {
+      "id" : "f590e228-5d2e-47e4-b144-b0df1198bd49",
+      "version" : "1.0.0",
+      "content_sha256" : "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+      "synthetic" : false
+    },
+    "publishedFileHashMatches" : true,
+    "cleanupLockHeld" : true
+  },
+  "credential" : {
+    "id" : 1,
+    "installation_id" : "f0cd888b-57df-4def-9d08-7882ffadebae",
+    "user_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "enrolled_at" : "2026-10-17T09:40:47.738+00:00",
+    "publicKeyFingerprintSha256" : "5b727e9aa6252667a1cbdc30f7575fb5007f9d8bb159d0e4dd2b5dcb27fbe00c",
+    "matchesObservedHttpEnrollmentFingerprint" : true
+  },
+  "enrollmentAudit" : [ {
+    "id" : "88fa64c4-73b9-4094-8972-577748afa3a8",
+    "user_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "action" : "SUPER_ADMIN_RECOVERY_ENROLLED",
+    "occurred_at" : "2026-10-17T09:40:48.051+00:00"
+  } ],
+  "enrollmentResponseCount" : 1,
+  "ownerSessionVersion" : 0,
+  "sessionVersionBeforeRecovery" : 0,
+  "recoveryChallengeCountForCase" : 1,
+  "recoveryChallengeStateForCase" : [ {
+    "id" : "b4429e57-7a6c-409b-a2da-d6380685b0e8",
+    "user_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "installation_id" : "f0cd888b-57df-4def-9d08-7882ffadebae",
+    "created_at" : "2026-10-17T09:50:04.922+00:00",
+    "expires_at" : "2026-10-17T09:55:04.922+00:00",
+    "failed_proof_attempts" : 0,
+    "proof_verified_at" : null,
+    "consumed_at" : null,
+    "within_original_ttl" : false,
+    "requested_email_matches_case" : true
+  } ],
+  "recoveryCompletedAuditCount" : 0,
+  "termsAcceptanceCountForCase" : 1,
+  "existingManualAdminResult" : "PENDING",
+  "existingManualRecoveryResult" : "PENDING",
+  "preAcceptanceGateRecorded" : false,
+  "cleanupMarkerMatches" : true,
+  "readOnly" : true,
+  "databaseWrites" : 0,
+  "httpRequests" : 0,
+  "smtpAttempts" : 0,
+  "additionalAccountsCreated" : 0,
+  "privateKeyFilesRead" : 0,
+  "emergencyCodeHashesSelected" : false
+}

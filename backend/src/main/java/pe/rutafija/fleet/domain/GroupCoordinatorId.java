@@ -9,6 +9,8 @@ import java.util.UUID;
 
 @Embeddable
 public class GroupCoordinatorId implements Serializable {
+    @java.io.Serial
+    private static final long serialVersionUID = 7135091185848990364L;
 
     @Column(name = "group_id")
     private UUID groupId;

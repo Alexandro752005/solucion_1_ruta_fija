@@ -1,0 +1,39 @@
+{
+    "checkedAt":  "2026-10-23T06:34:33.3402968+00:00",
+    "powershell":  [
+                       {
+                           "file":  "scripts/Test-RutaFijaL08Continuity.ps1",
+                           "sha256":  "e7e8d39c2ecd6681f73f74b1611785c3580dda57fbb18bf0de05aa3398c881ef",
+                           "parseErrors":  0,
+                           "planAction":  "PLAN_NO_FILES_NO_CONNECTIONS",
+                           "planExecuted":  true
+                       },
+                       {
+                           "file":  "scripts/Invoke-RutaFijaL08IndependentBackup.ps1",
+                           "sha256":  "8f3b8a4d63a050806fac17d3872288640b8a14a384c2c5c02ff851f5e7d41969",
+                           "parseErrors":  0,
+                           "planAction":  "PLAN_NO_CONNECTION_NO_FILES",
+                           "planExecuted":  true
+                       },
+                       {
+                           "file":  "scripts/Watch-RutaFijaL08Health.ps1",
+                           "sha256":  "04efdaff650bd2e2ef4155dac5fc7d02b4d40328486eb5504767144d588677dc",
+                           "parseErrors":  0,
+                           "planAction":  "PLAN_NO_NETWORK_NO_FILES",
+                           "planExecuted":  true
+                       },
+                       {
+                           "file":  "scripts/Test-RutaFijaL08BackupAge.ps1",
+                           "sha256":  "6a133a96ddc3d43541c82ef8b7f5e3f42f19ebe1522b0cd351df51cc2ff6d50e",
+                           "parseErrors":  0,
+                           "planAction":  "PLAN_NO_FILES",
+                           "planExecuted":  true
+                       }
+                   ],
+    "javaVersion":  "21.0.10",
+    "javaBinary":  "C:/Program Files/Java/jdk-21.0.10/bin/java.exe",
+    "compileTarget":  "--release21",
+    "javaCompileAndGcmVerify":  "fd3419ac-adc2-4f8f-be83-6e84603f2f16/verify-daily.json",
+    "fullSqlRehearsalRepeatedAfterCleanupGuardChanges":  false,
+    "targetedNewJvmCleanupTest":  "fd3419ac-adc2-4f8f-be83-6e84603f2f16/direct-jdk-process-ownership.json"
+}

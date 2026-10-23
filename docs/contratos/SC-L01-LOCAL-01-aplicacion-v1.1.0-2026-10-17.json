@@ -1,0 +1,67 @@
+{
+  "project": "Ruta Fija V3.1",
+  "lot": "L-01",
+  "decisionId": "SC-L01-LOCAL-01",
+  "version": "1.1.0",
+  "status": "APLICADA",
+  "appliedAtUtc": "2026-10-18T02:40:30.526978+00:00",
+  "registeredLocalDate": "2026-10-17",
+  "source": "Autorizaciones expresas del titular en la conversacion; precision automatizada y cierre autonomo sin solicitar aprobacion equivalente adicional.",
+  "antecedents": [
+    "docs/contratos/L-01-propuesta-validacion-funcional-local.md",
+    "docs/contratos/SC-L01-LOCAL-01-aprobacion-condicionada-2026-10-17.json",
+    "docs/contratos/SC-L01-LOCAL-01-adenda-v1.0.0.md"
+  ],
+  "approvedPrecision": "docs/contratos/SC-L01-LOCAL-01-adenda-v1.1.0.md",
+  "approvedPrecisionSha256": "B25E7F1E34A50C20DAA6BDCFA21A33382B0A7D3B478068F3EA0003ED4CE8CC1B",
+  "authorizationRecord": "docs/contratos/SC-L01-LOCAL-01-precision-SC03-aprobada-2026-10-17.json",
+  "runId": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "originalFullHumanAdminResult": "PENDING_GATE_OMITTED_PRESERVED_AS_HISTORY",
+  "manualAcceptancePreserved": true,
+  "automatedGateOrigin": "AUTOMATED_SYNTHETIC_ONLY",
+  "SC03LocalResult": "PASS_SC03_MANUAL_ACCEPTANCE_WITH_AUTOMATED_GATE",
+  "SC07LocalResult": "PASS_LOCAL_TEMPORARY_COPY_ONLY",
+  "bothFullHumanTrialsClaimed": false,
+  "gateEvidence": {
+    "path": "docs/evidencia/L-01/REC-CI03-01-automatizado-2026-10-17/gate-http-postgresql.json",
+    "sha256": "AC8C49AEAA7D7CA81D0E20086C3C3B32C709B83062D445AF8AA21D9DC539C34A"
+  },
+  "nativeEvidence": {
+    "path": "docs/evidencia/L-01/REC-CI03-01-automatizado-2026-10-17/contraste-final-nativo-solo-lectura.json",
+    "sha256": "7D6EDDCB7618B94196BF0A381CC98864E00E07E93AD0F9D54350BBAA01DC601A"
+  },
+  "exitEvidence": {
+    "path": "docs/evidencia/L-01/REC-CI03-01-automatizado-2026-10-17/salida-y-protecciones.json",
+    "sha256": "20C4826437E0CB1E922816B85D486A3A20AA2BEE9E99A9D2299FE79B5D2C3D14"
+  },
+  "newSyntheticAdminCreations": 1,
+  "historicalCreationsBefore": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 2,
+    "CONDUCTOR": 0
+  },
+  "historicalCreationsAfter": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 0
+  },
+  "allTwelveLocalCriteriaReviewed": true,
+  "localMandatoryRemainingCriteria": [],
+  "originalPilotRequirementsStillPending": [
+    "CI-L01-03_REAL_ADMIN_PERSONAL_ACCEPTANCE",
+    "CI-L01-07_REAL_OWNER_PREPARATION_INDEPENDENT_CUSTODY_AND_TRIAL",
+    "PRIVACY_INFRASTRUCTURE_AND_PREPARATION_GATES"
+  ],
+  "closureType": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "lotStatus": "VERIFICADA",
+  "actPath": "docs/actas/L-01-cierre-funcional-local-2026-10-17.md",
+  "matrixPath": "docs/evidencia/L-01/matriz-final-funcional-local-2026-10-17.md",
+  "TEST_CLEANUP_RELEASED": true,
+  "pilotEnabled": false,
+  "L02Started": false,
+  "L02Authorized": false,
+  "externalSmtpRepeated": false,
+  "CI07Repeated": false,
+  "final3Regenerated": false,
+  "globalDatabaseCleanupExecuted": false
+}

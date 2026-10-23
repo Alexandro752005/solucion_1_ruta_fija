@@ -1,0 +1,147 @@
+{
+  "localDate": "2026-10-19",
+  "status": "VERIFICADA",
+  "closureType": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "database": "ruta_fija_test",
+  "runtimeRole": "rf_test",
+  "schemaVersion": "28",
+  "backend": {
+    "exitCode": 0,
+    "total": 53,
+    "suites": [
+      {
+        "file": "TEST-pe.rutafija.identity.domain.EmailOtpChallengeTest.xml",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "cases": [
+          "allowsExactlyThreeSendsInTheRollingWindowAndExpiresTheOldestAtTheBoundary",
+          "secondFailedAttemptLocksValidationAndInvalidatesCurrentCodeForThirtyMinutes",
+          "expiresOtpAtTheExactFiveMinuteBoundaryAndConsumedCodeIsInactive"
+        ]
+      },
+      {
+        "file": "TEST-pe.rutafija.invitation.application.InvitationCodeHasherTest.xml",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "cases": [
+          "hashesTheOriginWithoutRetainingItsAddress",
+          "preservesLeadingZeroesAndDoesNotStoreTheRawCode"
+        ]
+      },
+      {
+        "file": "TEST-pe.rutafija.invitation.application.InvitationServiceBoundaryTest.xml",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "cases": [
+          "accountAndOriginGuardsExpireAtTheirExactBoundary"
+        ]
+      },
+      {
+        "file": "TEST-pe.rutafija.qualification.QualificationIntegrationTest.xml",
+        "tests": 44,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "cases": [
+          "mobileStartRechecksTheWholeWindowAfterAnAuthenticAcceptance",
+          "revokingOneFuturePeriodOnlyInvalidatesServicesThatLoseTheirOwnCoverage",
+          "periodCannotExtendBeyondReviewedValidityWhileApprovalAndAccountSurvive",
+          "companyPeriodRequiresEndEvenWithAllCurrentReviews",
+          "mobileAcceptanceChecksTheEntireDrivingWindowEvenWhenLicenseIsValidNow",
+          "periodCannotBeRevokedWhileItsUnitIsInService",
+          "nullDocumentItemsAreRejectedBeforeAnyReviewMutation",
+          "ordinaryHistoryReferencesCannotRepeatRestrictedPersonalInformation",
+          "operationalSuspensionDoesNotDisableAccountAndResumeRequiresAReviewedCurrentPeriod",
+          "personalRenewalIsAppendOnlyAndKeepsStableIdentityAndDriver",
+          "realBearerFiltersAndObjectScopeRejectForeignDriversAndConductorAdministration",
+          "missingIdentityIsRejectedByTheActualIdentityGate",
+          "activationRequiresCurrentLicenseAndExpirationKeepsPersonalApprovalAndLimitedConsultation",
+          "categoryM2CannotBeApprovedByInferringCategoryFromWheelsOrRows",
+          "legacyDriverWithoutLinkedRequestRemainsUnapprovedAndCannotBeAdoptedByReading",
+          "inactiveProvisionedConductorRetainsOwnLimitedQualificationButCannotOperate",
+          "operationalReturnSwitchFailsClosedAndPreservesTheApprovedDossier",
+          "revokingAFuturePeriodDoesNotDetachTheSameUnitFromTheCurrentService",
+          "reserveRejectsLicenseThatNoLongerCoversThePlannedWindow",
+          "ordinaryStatusSeparatesHistoricalApprovalAndOperationalEligibilityWithoutPii",
+          "missingCurrentTermsAreRejectedByTheActualTermsGate",
+          "staleVersionCannotReplaceCurrentReview",
+          "overlappingPeriodIsRejectedWithoutReplacingTheExistingPeriod",
+          "mobileLoginAndRefreshRecomputeLimitedAndOperationalScopesAgainstCurrentServerState",
+          "anUnapprovedInspectionCannotBeMarkedConforming",
+          "limaDateIncludesTheWholeFinalDayAndPreservesHistoricalPeriod",
+          "ambiguousHistoricalRequestsRemainBlockedWithoutChoosingOneImplicitly",
+          "unknownReviewDoesNotEnableAUnitOrTurnTheHistoricalDriverActive",
+          "materialTypoCanBeCorrectedBackToReviewedRootWithoutReplacingThePerson",
+          "catNeedsExplicitApplicableCoverage",
+          "aRejectedUnitRequestCannotBeLinkedToAnotherOrganizationsVehicle",
+          "foreignVehicleCannotBeSubmittedForReview",
+          "operationalTokenCannotEnableTheOfflineRouteExcludedByTheContract",
+          "administrativeStartRechecksTheWholeWindowAfterAValidReservation",
+          "adjacentPeriodsAreAllowedAndRevokePreservesHistoryWithoutDeletingApproval",
+          "incorporationSummaryUsesTheSameEligibilityAndCurrentTemporalCardinality",
+          "unknownInsuranceCannotBeApprovedAsSoatOrCat",
+          "sameOperationIsIdempotentAndChangedPayloadOrStaleVersionConflicts",
+          "plateCorrectionKeepsVehicleAndOriginalServiceSnapshotAndRequiresReviewAgain",
+          "rootDniCannotBeReplacedByMaterialCorrection",
+          "unitRequestIsOwnScopedIdempotentAndDoesNotCreateVehicleOrActivateDriver",
+          "suspensionCancelsFutureOccupationsAndPreservesInServiceForSafeHandover",
+          "explicitRenewalDuringOverrunPreservesBothPeriodsAndPhysicalOccupation",
+          "expiryMaintenanceRequiresSafeHandoverAndClosureDoesNotDeleteTheUnitPeriod"
+        ]
+      },
+      {
+        "file": "TEST-pe.rutafija.support.L02CleanupProtectionTest.xml",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "cases": [
+          "historicalCaseRemainsProtectedAfterTheActiveMarkerWasReleased"
+        ]
+      },
+      {
+        "file": "TEST-pe.rutafija.support.L02TemporalConcurrencyTest.xml",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "cases": [
+          "sameDriverCannotHoldOverlappingDifferentUnitsConcurrently",
+          "sameUnitCannotBelongToDifferentDriversConcurrently"
+        ]
+      }
+    ]
+  },
+  "crm": {
+    "passed": 20,
+    "typecheckExit": 0,
+    "testExit": 0,
+    "buildExit": 0
+  },
+  "flutter": {
+    "configuredPassed": 86,
+    "configuredSkippedOptIn": 2,
+    "analyzeExit": 0,
+    "testExit": 0,
+    "debugApkExit": 0,
+    "physicalDeviceExecuted": false
+  },
+  "connectedRunId": "44b3d67a-69ce-4169-89b4-62ebe8a40160",
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 1
+  },
+  "TEST_CLEANUP_RELEASED": true,
+  "globalCleanupExecuted": false,
+  "externalSmtpAttempts": 0,
+  "pilotEnabled": false,
+  "L03Started": false,
+  "artifactsManifest": "artifacts/L-02-2026-10-19/manifest.json"
+}

@@ -1,0 +1,14 @@
+﻿{
+    "result":  "PASS",
+    "archiveFilesVerified":  36,
+    "currentSourcesVerified":  920,
+    "matrixCriteria":  12,
+    "contractVersion":  "0.4.0",
+    "status":  "EN_CURSO",
+    "pilotEnabled":  false,
+    "manifestSha256":  "f5565a3491d9890d6a0adcc2d8b882b49d40993808f8926bb9fc6113dca861bf",
+    "failures":  [
+
+                 ],
+    "observedAt":  "2026-10-21T23:05:07.2376305+00:00"
+}

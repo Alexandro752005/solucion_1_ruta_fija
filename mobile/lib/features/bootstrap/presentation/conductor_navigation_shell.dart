@@ -1,13 +1,11 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 import '../../../app/ruta_fija_environment.dart';
 import '../../../core/navigation/conductor_destination.dart';
-import '../../../core/offline/mobile_offline.dart';
 import '../../../core/presentation/mobile_error_message.dart';
 import '../../../core/session/mobile_session_controller.dart';
 import '../../announcements/data/mobile_announcement_repository.dart';
+import '../../announcements/data/mobile_notice_repository.dart';
 import '../../announcements/presentation/announcements_page.dart';
 import '../../assignments/data/mobile_assignment_repository.dart';
 import '../../assignments/presentation/assignments_page.dart';
@@ -17,6 +15,7 @@ import '../../profile/data/mobile_driver_repository.dart';
 import '../../profile/presentation/availability_page.dart';
 import '../../profile/presentation/conductor_home_page.dart';
 import '../../profile/presentation/profile_page.dart';
+import '../../preferences/domain/mobile_preferences.dart';
 
 class ConductorNavigationShell extends StatefulWidget {
   const ConductorNavigationShell({
@@ -27,7 +26,9 @@ class ConductorNavigationShell extends StatefulWidget {
     required this.assignmentGateway,
     required this.incidentGateway,
     required this.announcementGateway,
-    required this.offlineSyncController,
+    this.noticeGateway,
+    this.preferences,
+    this.reportsAvailable=false,
     super.key,
   });
 
@@ -38,7 +39,9 @@ class ConductorNavigationShell extends StatefulWidget {
   final MobileAssignmentGateway assignmentGateway;
   final MobileIncidentGateway incidentGateway;
   final MobileAnnouncementGateway announcementGateway;
-  final MobileOfflineSyncController offlineSyncController;
+  final MobileNoticeGateway? noticeGateway;
+  final MobilePreferencesController? preferences;
+  final bool reportsAvailable;
 
   @override
   State<ConductorNavigationShell> createState() =>
@@ -46,33 +49,6 @@ class ConductorNavigationShell extends StatefulWidget {
 }
 
 class _ConductorNavigationShellState extends State<ConductorNavigationShell> {
-  @override
-  void initState() {
-    super.initState();
-    _bindOfflineQueue();
-  }
-
-  @override
-  void didUpdateWidget(covariant ConductorNavigationShell oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.sessionController != widget.sessionController ||
-        oldWidget.offlineSyncController != widget.offlineSyncController) {
-      _bindOfflineQueue();
-    }
-  }
-
-  void _bindOfflineQueue() {
-    final user = widget.sessionController.state.user;
-    if (user == null) {
-      return;
-    }
-    unawaited(
-      widget.offlineSyncController.bind(
-        MobileOfflineQueueOwner(userId: user.id, driverId: user.driverId),
-      ),
-    );
-  }
-
   Future<void> _logout(BuildContext context) async {
     try {
       await widget.sessionController.logout();
@@ -84,56 +60,28 @@ class _ConductorNavigationShellState extends State<ConductorNavigationShell> {
     }
   }
 
-  void _openPendingSync(BuildContext context) {
-    Navigator.of(context).pushNamed('/sync-pending');
-  }
-
-  String _pendingSyncLabel(int count) {
-    if (count == 0) {
-      return 'Abrir pendientes de sincronización. No hay acciones pendientes.';
-    }
-    final noun = count == 1 ? 'acción pendiente.' : 'acciones pendientes.';
-    return 'Abrir pendientes de sincronización. $count $noun';
-  }
-
   @override
   Widget build(BuildContext context) {
     final user = widget.sessionController.state.user;
     if (user == null) {
       return const SizedBox.shrink();
     }
-    final offlineOwner = MobileOfflineQueueOwner(
-      userId: user.id,
-      driverId: user.driverId,
-    );
     return Scaffold(
       appBar: AppBar(
         title: const Text('Ruta Fija Conductor'),
         actions: [
-          AnimatedBuilder(
-            animation: widget.offlineSyncController,
-            builder: (context, _) {
-              final count = widget.offlineSyncController.pendingCount;
-              final label = _pendingSyncLabel(count);
-              return Semantics(
-                container: true,
-                button: true,
-                label: label,
-                onTap: () => _openPendingSync(context),
-                child: ExcludeSemantics(
-                  child: IconButton(
-                    key: const Key('pending-sync-open'),
-                    tooltip: label,
-                    onPressed: () => _openPendingSync(context),
-                    icon: Badge(
-                      isLabelVisible: count > 0,
-                      label: Text('$count'),
-                      child: const Icon(Icons.sync_outlined),
-                    ),
-                  ),
-                ),
-              );
-            },
+          if (widget.noticeGateway != null)
+            IconButton(
+              key: const Key('notices-open'),
+              tooltip: 'Bandeja de avisos',
+              onPressed: () => Navigator.of(context).pushNamed('/notices'),
+              icon: const Icon(Icons.notifications_outlined),
+            ),
+          IconButton(
+            key: const Key('qualification-open'),
+            tooltip: 'Mi incorporación',
+            onPressed: () => Navigator.of(context).pushNamed('/qualification'),
+            icon: const Icon(Icons.fact_check_outlined),
           ),
           IconButton(
             tooltip: 'Cerrar sesión',
@@ -148,11 +96,11 @@ class _ConductorNavigationShellState extends State<ConductorNavigationShell> {
           child: switch (widget.destination) {
             ConductorDestination.home => ConductorHomePage(
               driverGateway: widget.driverGateway,
+              assignmentGateway: widget.assignmentGateway,
+              preferences: widget.preferences,
             ),
             ConductorDestination.availability => AvailabilityPage(
               driverGateway: widget.driverGateway,
-              offlineSyncController: widget.offlineSyncController,
-              offlineOwner: offlineOwner,
             ),
             ConductorDestination.assignments => AssignmentsPage(
               driverGateway: widget.assignmentGateway,
@@ -167,6 +115,8 @@ class _ConductorNavigationShellState extends State<ConductorNavigationShell> {
             ),
             ConductorDestination.profile => ProfilePage(
               driverGateway: widget.driverGateway,
+              preferences:widget.preferences,
+              reportsAvailable:widget.reportsAvailable,
             ),
           },
         ),

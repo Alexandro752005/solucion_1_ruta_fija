@@ -1,0 +1,94 @@
+{
+  "observedAtUtc": "2026-10-23T15:59:00.921620+00:00",
+  "authorization": "Explicit parent authorization: correct obsolete live test with exact new backup and SHA; record supersession; never alter historical manifests",
+  "source": "mobile/test/features/profile/mobile_driver_repository_test.dart",
+  "backup": "before/mobile_driver_repository_test.dart.before",
+  "beforeSha256": "fff40e38ebdf60c014b7b9602d030ec0c39d49a435eec56706354274550493ec",
+  "afterSha256": "328c5c27dd5735c340aae690031626ea6d2baff39aa50ee05cb06f87325b5d33",
+  "onlyChange": "Add locationServiceEnabled:true and foreground:true to the exact expected request map; assertions stay exact",
+  "actualProductionCodeChanged": false,
+  "requiredServerContract": [
+    "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileLocationUpdateRequest.java",
+    "backend/src/main/java/pe/rutafija/operation/application/MobileDriverService.java:174-175"
+  ],
+  "why": "Client already sends enabled and foreground proof; old test expected the pre-proof request map, causing the only complete-suite failure",
+  "historicalSourceManifestsPreserved": [
+    {
+      "path": "docs/evidencia/L-00/source-manifest.sha256",
+      "manifestSha256": "e78d7002d5c85b24200be21b8fd88ce770d36333ca49caa5351248cfd0e28bad",
+      "historicalExpectedSourceSha256": "fff40e38ebdf60c014b7b9602d030ec0c39d49a435eec56706354274550493ec"
+    },
+    {
+      "path": "docs/evidencia/L-02/fuentes-cierre.sha256",
+      "manifestSha256": "bfcb7afa572d2d7e2eb146d56e97284126c64b4ad72fc7b2fd5c7a12f4f08ae5",
+      "historicalExpectedSourceSha256": "fff40e38ebdf60c014b7b9602d030ec0c39d49a435eec56706354274550493ec"
+    },
+    {
+      "path": "docs/evidencia/L-03/fuentes-cierre.sha256",
+      "manifestSha256": "cb1d0657f83d7f7727670fc1750436f35f885fd115660e53cc6aa144c033ec03",
+      "historicalExpectedSourceSha256": "fff40e38ebdf60c014b7b9602d030ec0c39d49a435eec56706354274550493ec"
+    },
+    {
+      "path": "docs/evidencia/L-08/incremento-1-candidato-y-preautenticacion/fuentes.sha256",
+      "manifestSha256": "4ec5fd911aa88eb2569ffcd100eca55a9c50751f5dad82f28d2fe65ae3cba8a5",
+      "historicalExpectedSourceSha256": "fff40e38ebdf60c014b7b9602d030ec0c39d49a435eec56706354274550493ec"
+    },
+    {
+      "path": "docs/evidencia/L-08/incremento-2-mision-y-controles/fuentes.sha256",
+      "manifestSha256": "a6f4029ccc5309e5822615eb24e7d7e49e907ee2e9bdbccb6b1fbf750224643f",
+      "historicalExpectedSourceSha256": "fff40e38ebdf60c014b7b9602d030ec0c39d49a435eec56706354274550493ec"
+    },
+    {
+      "path": "docs/evidencia/L-07/cierre/fuentes.sha256",
+      "manifestSha256": "4dfdb04c3834ad454df466ff4ed52ddad9854b710db6aa4484f0b81e15907acd",
+      "historicalExpectedSourceSha256": "fff40e38ebdf60c014b7b9602d030ec0c39d49a435eec56706354274550493ec"
+    },
+    {
+      "path": "docs/evidencia/L-07/incremento-1-auditoria/fuentes.sha256",
+      "manifestSha256": "ead911bca34ee49334a7a7ada7bede7f322c0b7238bdd6a8400c2311ef39da27",
+      "historicalExpectedSourceSha256": "fff40e38ebdf60c014b7b9602d030ec0c39d49a435eec56706354274550493ec"
+    },
+    {
+      "path": "docs/evidencia/L-07/incremento-2-reportes-retencion-inicio/fuentes.sha256",
+      "manifestSha256": "e3552391a1429c6a2cf6c27d1717cfe40c7663c9407443ba7ed76635a49c15f1",
+      "historicalExpectedSourceSha256": "fff40e38ebdf60c014b7b9602d030ec0c39d49a435eec56706354274550493ec"
+    },
+    {
+      "path": "docs/evidencia/L-06/cierre/fuentes.sha256",
+      "manifestSha256": "2b99899737a68f4dca3ce05e2d8d12ba4b3b347f3b01422fe250129926748d15",
+      "historicalExpectedSourceSha256": "fff40e38ebdf60c014b7b9602d030ec0c39d49a435eec56706354274550493ec"
+    },
+    {
+      "path": "docs/evidencia/L-06/incremento-1-incidencias-comunicados/fuentes.sha256",
+      "manifestSha256": "9444cf9567f14f8536beb3e05bd9b9bf5dd7a90d5cbb9ecb5f7c169cac11122d",
+      "historicalExpectedSourceSha256": "fff40e38ebdf60c014b7b9602d030ec0c39d49a435eec56706354274550493ec"
+    },
+    {
+      "path": "docs/evidencia/L-05/cierre/fuentes.sha256",
+      "manifestSha256": "fe477405754a5f1901ccd646b5e5a0880a20fdd207b5ab98e0e7f2a16e841ea5",
+      "historicalExpectedSourceSha256": "fff40e38ebdf60c014b7b9602d030ec0c39d49a435eec56706354274550493ec"
+    },
+    {
+      "path": "docs/evidencia/L-05/incremento-2-gps/fuentes.sha256",
+      "manifestSha256": "1a6fe12019e2d230d52a380d13fb44366d47f0dbd710636d06374e0cc0861bbf",
+      "historicalExpectedSourceSha256": "fff40e38ebdf60c014b7b9602d030ec0c39d49a435eec56706354274550493ec"
+    },
+    {
+      "path": "docs/evidencia/L-05/incremento-3-tiempos/fuentes.sha256",
+      "manifestSha256": "a7ad46eb7a790149f3aff35fa2fc213e6c2eef666897360f2c7e6da9b4cd3bc8",
+      "historicalExpectedSourceSha256": "fff40e38ebdf60c014b7b9602d030ec0c39d49a435eec56706354274550493ec"
+    },
+    {
+      "path": "docs/evidencia/L-05/incremento-4-interrupcion/fuentes.sha256",
+      "manifestSha256": "aaa1caf6923fc23fd50a2706c3572497a1186eee985b31db78d8cc3a4dfba661",
+      "historicalExpectedSourceSha256": "fff40e38ebdf60c014b7b9602d030ec0c39d49a435eec56706354274550493ec"
+    },
+    {
+      "path": "docs/evidencia/L-05/incremento-5-relevo/fuentes.sha256",
+      "manifestSha256": "7049cef33319e77b8d47ba938668468fcb5235b9cfad87ee1f5c5e798e5feefb",
+      "historicalExpectedSourceSha256": "fff40e38ebdf60c014b7b9602d030ec0c39d49a435eec56706354274550493ec"
+    }
+  ],
+  "supersessionScope": "Only this current live test expectation evolves after L08 closure; archived source expectations and signed candidate remain unchanged",
+  "backupExtensionRationale": "Use .dart.before to preserve exact bytes without introducing another detached Dart analysis target"
+}

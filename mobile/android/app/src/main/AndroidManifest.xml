@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
         android:allowBackup="false"
-        android:label="Ruta Fija Conductor"
+        android:label="${rutaFijaAppLabel}"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

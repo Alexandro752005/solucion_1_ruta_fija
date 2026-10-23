@@ -16,6 +16,7 @@ import java.util.Map;
 
 /** Server-driven expiry and privacy cleanup; no client can mark itself expired. */
 @Service
+@org.springframework.boot.autoconfigure.condition.ConditionalOnProperty(name="app.mobile.maintenance-enabled",havingValue="true",matchIfMissing=true)
 public class MobileOperationMaintenanceService {
 
     private final AssignmentRepository assignmentRepository;
@@ -23,52 +24,35 @@ public class MobileOperationMaintenanceService {
     private final AuditService auditService;
     private final OperationEventPublisher eventPublisher;
     private final Clock clock;
+    private final OfferExpiryService expiry;
+    private final ServiceGpsRetention gpsRetention;
 
     public MobileOperationMaintenanceService(
             AssignmentRepository assignmentRepository,
             DriverCurrentLocationStore currentLocationStore,
             AuditService auditService,
             OperationEventPublisher eventPublisher,
-            Clock clock
+            Clock clock,
+            OfferExpiryService expiry,
+            ServiceGpsRetention gpsRetention
     ) {
         this.assignmentRepository = assignmentRepository;
         this.currentLocationStore = currentLocationStore;
         this.auditService = auditService;
         this.eventPublisher = eventPublisher;
         this.clock = clock;
+        this.expiry = expiry;
+        this.gpsRetention = gpsRetention;
     }
 
     @Scheduled(fixedDelayString = "${app.mobile.pending-expiry-sweep:PT1M}")
-    @Transactional
     public void expireDueMobileResponsesAndLocations() {
         Instant now = Instant.now(clock);
-        List<Assignment> dueAssignments = assignmentRepository.findByStatusAndResponseDeadlineAtLessThanEqual(
-                AssignmentStatus.PENDING_RESPONSE, now
-        );
-        for (Assignment assignment : dueAssignments) {
-            if (assignment.expireIfDue(now)) {
-                assignmentRepository.save(assignment);
-                auditService.recordSystem(
-                        assignment.getOrganization(),
-                        "ASSIGNMENT_RESPONSE_EXPIRED",
-                        "ASSIGNMENT",
-                        assignment.getId(),
-                        Map.of("responseMode", assignment.getResponseMode().name())
-                );
-                eventPublisher.publish(
-                        assignment.getOrganizationId(),
-                        assignment.getDriver().getGroup().getId(),
-                        "assignment.expired",
-                        Map.of(
-                                "assignmentId", assignment.getId().toString(),
-                                "status", assignment.getStatus().name(),
-                                "driverId", assignment.getDriver().getId().toString(),
-                                "vehicleId", assignment.getVehicle().getId().toString(),
-                                "version", assignment.getVersion()
-                        )
-                );
-            }
+        // One transaction per organization, always organization lock before rows.
+        for (var organizationId : assignmentRepository.findOrganizationsWithDueOffers(now)) {
+            expiry.expireForOrganization(organizationId);
         }
         currentLocationStore.deleteExpiredBefore(now);
+        gpsRetention.purgeExpired();
     }
 }

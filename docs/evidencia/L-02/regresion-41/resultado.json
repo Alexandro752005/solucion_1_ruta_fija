@@ -1,0 +1,15 @@
+{
+  "database": "ruta_fija_test",
+  "runtimeRole": "rf_test",
+  "nativeHttpTests": 33,
+  "nativeConcurrencyTests": 2,
+  "unitRegressionOtpInvitation": 6,
+  "total": 41,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "processExit": 0,
+  "globalCleanup": false,
+  "mail": "DOUBLE_NO_EXTERNAL_SMTP",
+  "subsequentTargetedRegressionRequired": "scope/user match and name synchronization strengthened after this run"
+}

@@ -1,0 +1,14 @@
+{
+  "observedAt": "2026-10-20T02:10:07.451498+00:00",
+  "currentSourceManifest": "fuentes.sha256",
+  "connectedRunId": "bbd70822-8f52-45a6-b617-9b896ff90a2c",
+  "connectedExecutedBeforeFinalMissedStartEdge": true,
+  "laterMainChange": "Removed generic reoffer planned-start restriction; actual start remains blocked. Covered by final native HTTP regression.",
+  "connectedCaseRepeated": false,
+  "historicalPriorSourcesRelabeled": false,
+  "baselineRegressionCasesReused": 99,
+  "newServiceRegressionCases": 20,
+  "returnGateCases": 1,
+  "newPostgresRaceCases": 1,
+  "caveat": "Counts reuse overlapping suites once; final 20 service and 9 route tests supersede their earlier executions."
+}
