@@ -29,6 +29,8 @@ El backend es un monolito modular con dos clientes. La captura con app visible n
 
 Estos resultados son verificaciones fechadas incluidas en el repositorio; el estado de las nuevas ejecuciones de GitHub Actions se consulta en la sección Checks del PR.
 
+El check de backend en CI selecciona la misma allowlist de 50 clases unitarias seguras del runner local y las tres suites de integración dedicadas de regularización/concurrencia/rectificación, sobre bases efímeras separadas. Exige todos sus reportes y cero omisiones. No ejecuta los arneses históricos/manuales restantes ni su limpieza global, que conservan su evidencia y requieren preparación específica; no se afirma que este check reejecute toda la historia de L-00 a L-08. Frontend ejecuta la suite completa y móvil muestra por separado los casos conectados opt-in omitidos por falta de fixture.
+
 | Validación | Resultado registrado |
 | --- | --- |
 | Backend unitario seguro | **257 pruebas aprobadas**, 50 clases, sin acceder a la base histórica |
