@@ -1,0 +1,16 @@
+{
+  "driverActive": true,
+  "availability": "NO_DISPONIBLE",
+  "emailVerified": true,
+  "groupActive": true,
+  "unitRequestStatus": "APPROVED",
+  "qualificationVersion": 6,
+  "periods": [
+    {
+      "vehicleId": "5d60bdfc-e857-476f-8497-db616e508d13",
+      "status": "AUTHORIZED",
+      "start": "2026-10-24T05:00:00+00:00",
+      "end": "2026-10-26T05:00:00+00:00"
+    }
+  ]
+}

@@ -48,6 +48,7 @@ export class OnboardingRequestsPage implements OnDestroy {
   deadline = '';
   groupId = '';
   reiteration = false;
+  existingBindingConfirmed = false;
 
   readonly resultOptions = [
     { value: 'PENDING', label: 'Pendiente' }, { value: 'CONFORME', label: 'Conforme' },
@@ -108,6 +109,7 @@ export class OnboardingRequestsPage implements OnDestroy {
     this.mustRefresh.set(false);
     this.saving.set(false);
     this.reason = this.deadline = this.groupId = '';
+    this.existingBindingConfirmed = false;
     this.expediente.set(null);
     this.selectedRequestId.set(null);
     this.expedienteError.set(null);
@@ -150,11 +152,22 @@ export class OnboardingRequestsPage implements OnDestroy {
     }));
   }
 
-  act(action: 'return' | 'extend' | 'approve' | 'reject' | 'provision'): void {
+  act(action: 'return' | 'extend' | 'approve' | 'reject' | 'provision' | 'provision-existing' | 'resubmit-existing'): void {
     const id = this.selectedRequestId();
     const base = this.mutationBase();
     if (!id || !base) return;
-    if (['return', 'extend', 'reject'].includes(action) && !this.reason.trim()) {
+    const dossier = this.documentary();
+    if (action === 'provision' && dossier?.existingAccountRegularization) {
+      this.reviewError.set('Este expediente corresponde a una cuenta existente. Utiliza su vinculación sin crear otra cuenta.'); return;
+    }
+    if (action === 'provision-existing' && (!dossier?.existingAccountRegularization
+        || !dossier.existingUserId || !dossier.existingDriverId || !this.existingBindingConfirmed)) {
+      this.reviewError.set('Comprueba la cuenta y ficha existentes y confirma expresamente su conservación antes de vincular.'); return;
+    }
+    if (action === 'resubmit-existing' && (!dossier?.existingAccountRegularization || dossier.status !== 'RETURNED')) {
+      this.reviewError.set('Solo puede reabrirse expresamente la revisión de un expediente de cuenta existente devuelto para subsanación.'); return;
+    }
+    if (['return', 'extend', 'reject', 'resubmit-existing'].includes(action) && !this.reason.trim()) {
       this.reviewError.set('Ingresa un motivo sin datos personales para esta decisión.'); return;
     }
     if (action === 'extend' && !this.deadline) {
@@ -164,7 +177,9 @@ export class OnboardingRequestsPage implements OnDestroy {
       this.reviewError.set('Selecciona un grupo activo. La aprobación personal se conserva sin crear acceso.'); return;
     }
     this.mutate(this.api.review(id, action, { ...base,
-      reason: this.reason.trim() || (action === 'approve' ? 'Aprobación personal tras cotejo documental.' : 'Alta tras aprobación personal y asignación de grupo.'),
+      reason: this.reason.trim() || (action === 'approve' ? 'Aprobación personal tras cotejo documental.'
+        : action === 'provision-existing' ? 'Vinculación del expediente personalmente aprobado con la cuenta y ficha existentes.'
+        : 'Alta tras aprobación personal y asignación de grupo.'),
       ...(action === 'extend' ? { deadline: new Date(this.deadline).toISOString() } : {}),
       ...(action === 'reject' ? { reiteration: this.reiteration } : {}),
       ...(action === 'provision' ? { groupId: this.groupId } : {}),
@@ -192,6 +207,9 @@ export class OnboardingRequestsPage implements OnDestroy {
     return ({ DOCUMENTS_REVIEWED: 'Cotejo documental registrado', DOCUMENTS_CORRECTED: 'Datos subsanados',
       RETURNED: 'Devuelta para subsanar', DEADLINE_EXTENDED: 'Plazo ampliado', RESUBMITTED: 'Reenviada para revisión',
       PERSONAL_APPROVED: 'Aprobación personal', REJECTED: 'Rechazo', ACCOUNT_PROVISIONED: 'Cuenta y conductor creados',
+      LEGACY_REGULARIZATION_OPENED: 'Expediente de cuenta existente abierto',
+      EXISTING_ACCOUNT_LINKED: 'Expediente vinculado a cuenta y conductor existentes',
+      LEGACY_RESUBMITTED: 'Revisión reabierta tras subsanación',
       REAPPLIED: 'Nueva postulación',
     } as Record<string, string>)[action] ?? 'Movimiento de revisión';
   }
@@ -224,6 +242,7 @@ export class OnboardingRequestsPage implements OnDestroy {
   }
 
   private applyDocumentary(detail: DocumentaryExpediente): void {
+    this.existingBindingConfirmed = false;
     this.documentary.set(detail);
     this.expediente.update((expediente) => expediente?.requestId === detail.requestId
       ? { ...expediente, status: detail.status } : expediente);

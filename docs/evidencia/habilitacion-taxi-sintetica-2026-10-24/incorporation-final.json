@@ -1,0 +1,18 @@
+{
+  "driverId": "83562d94-4705-4375-b0a2-201e85d06eaa",
+  "accountId": "c288f13d-8501-43ff-81be-dc14ffaa4332",
+  "requestId": "20507380-22fd-44c9-8025-84b3fe55baee",
+  "incorporationStatus": "APPROVED",
+  "personalApproved": true,
+  "accountProvisioned": true,
+  "accountEnabled": true,
+  "identityReviewed": true,
+  "groupActive": true,
+  "driverEnabled": true,
+  "personalDocumentsStatus": "CURRENT",
+  "activeVehicleLinks": 1,
+  "unitCardinalitySatisfied": true,
+  "operationalEnabled": true,
+  "blockers": [],
+  "observedAt": "2026-10-24T05:45:44.836523Z"
+}

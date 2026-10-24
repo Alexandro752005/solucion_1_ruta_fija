@@ -11,6 +11,7 @@ import {
   DriverPayload,
   DriverIdentityReviewPayload,
   DriverIdentityReviewStatus,
+  DriverIdentityCorrectionPayload,
   DriverStatus,
   ConductorRecoveryStartPayload,
   ConductorRecoveryStarted,
@@ -127,6 +128,11 @@ export class ManagementApiService {
 
   reviewDriverIdentity(id: string, payload: DriverIdentityReviewPayload): Observable<DriverIdentityReviewStatus> {
     return this.http.post<DriverIdentityReviewStatus>(this.url(`/drivers/${encodeURIComponent(id)}/identity-review`), payload,
+      { context: new HttpContext().set(SKIP_AUTH_REFRESH, true) });
+  }
+
+  correctDriverIdentity(id: string, payload: DriverIdentityCorrectionPayload): Observable<DriverIdentityReviewStatus> {
+    return this.http.post<DriverIdentityReviewStatus>(this.url(`/drivers/${encodeURIComponent(id)}/identity-review/corrections`), payload,
       { context: new HttpContext().set(SKIP_AUTH_REFRESH, true) });
   }
 

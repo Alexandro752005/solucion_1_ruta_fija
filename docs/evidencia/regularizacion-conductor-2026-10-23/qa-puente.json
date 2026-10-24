@@ -1,0 +1,15 @@
+﻿{
+    "result":  "PASS",
+    "checks":  9,
+    "details":  [
+                    "Already exited object returns without port probing or termination",
+                    "Exit during empty-port probe is accepted with zero terminations",
+                    "Exit during foreign-owner probe never terminates any process",
+                    "Live foreign port owner is refused with zero terminations",
+                    "Live process without port ownership is refused with zero terminations",
+                    "Termination receives the exact previously verified process object",
+                    "Matching live owner terminates only its exact object once",
+                    "Exit proven after failing probe is accepted with zero terminations",
+                    "Failing probe on a live object remains fail-closed with zero terminations"
+                ]
+}

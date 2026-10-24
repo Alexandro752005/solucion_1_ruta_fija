@@ -1,0 +1,99 @@
+{
+  "result": "PASS",
+  "verifiedAtUtc": "2026-10-24T03:13:32.418522+00:00",
+  "http": [
+    {
+      "method": "GET",
+      "path": "/actuator/health",
+      "status": 200,
+      "origin": "http://127.0.0.1:8080"
+    },
+    {
+      "method": "GET",
+      "path": "/drivers",
+      "status": 200,
+      "origin": "http://127.0.0.1:4300"
+    },
+    {
+      "method": "GET",
+      "path": "/v3/api-docs",
+      "status": 200,
+      "origin": "http://127.0.0.1:8080"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "origin": "http://127.0.0.1:4300"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "origin": "http://127.0.0.1:4300"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/incorporation-status",
+      "status": 200,
+      "origin": "http://127.0.0.1:4300"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/regularization",
+      "status": 400,
+      "origin": "http://127.0.0.1:4300"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 204,
+      "origin": "http://127.0.0.1:4300"
+    }
+  ],
+  "phone": [
+    {
+      "path": "/actuator/health",
+      "status": 200,
+      "source": "REAL_POCO"
+    },
+    {
+      "path": "/api/v1/mobile/me",
+      "status": 401,
+      "source": "REAL_POCO"
+    },
+    {
+      "path": "/api/v1/users",
+      "status": 404,
+      "source": "REAL_POCO"
+    }
+  ],
+  "deployedPaths": [
+    "/api/v1/drivers/{driverId}/regularization",
+    "/api/v1/onboarding/requests/{id}/provision-existing",
+    "/api/v1/onboarding/requests/{id}/resubmit-existing"
+  ],
+  "backendJarSha256": "7da8a59f02ba58be14b64bc36a5a3c888b278ba108f3e125f192b20de0c0f0ba",
+  "nativeChangedTables": [
+    "app_user",
+    "assignment",
+    "audit_event",
+    "operation_notice",
+    "refresh_token"
+  ],
+  "protectedTestUnchanged": true,
+  "protectedTables": 105,
+  "preservedAccounts": 3,
+  "passwordsEmailsRolesIdsAndProfilePreserved": true,
+  "ledgerTermsAcceptancesDriverAndMigrationHistoryPreserved": true,
+  "migrations": 50,
+  "mainAndJarMigrationBytesMatch": true,
+  "cancelledOldTestAssignments": 2,
+  "assignmentRowsPreserved": 2,
+  "cancellationInboxNotices": 4,
+  "manualConfirmationGuard": 400,
+  "driverIdentityReviewed": false,
+  "driverAccountProvisioned": false,
+  "realCasePersonalApprovalOrOtpPerformedByAgent": false,
+  "verificationSessionLoggedOut": true
+}

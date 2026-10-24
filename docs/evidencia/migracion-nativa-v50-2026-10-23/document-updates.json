@@ -1,0 +1,30 @@
+[
+  {
+    "path": "docs/Uso del Sistema.md",
+    "previousSha256": "5a97f24344ad5e7101c56afaa3b3cb16b360d4833ee331f613626c40c3251ca7",
+    "currentSha256": "eac4c68451a272cf9075cb8695a74ddd6674111a2f7b655d90e8aea9676a4d93",
+    "previousBytesPreservedAsSuffix": true,
+    "priorCopy": "docs/evidencia/migracion-nativa-v50-2026-10-23/documentos-previos/docs__Uso del Sistema.md.before"
+  },
+  {
+    "path": "docs/runtime-y-evaluacion-solucion-1-v3.1.md",
+    "previousSha256": "fd03457b64e1904f0c3e3210d2b03cee38af55f19e05d87e8093fdab6a8437d0",
+    "currentSha256": "abaaf89b34849b74a9ae1bda0266ad5427d4bb3705ebd9d472b6cb5ab2030bec",
+    "previousBytesPreservedAsSuffix": true,
+    "priorCopy": "docs/evidencia/migracion-nativa-v50-2026-10-23/documentos-previos/docs__runtime-y-evaluacion-solucion-1-v3.1.md.before"
+  },
+  {
+    "path": "backend/README.md",
+    "previousSha256": "0ab18d635b542c4c9e61c569bbf413cc7d3bba9224eeb1979a7b2bb40522555a",
+    "currentSha256": "f797f118db64b946c070c0d5618c7781b3af31d105bdf4e3560ed5317881d134",
+    "previousBytesPreservedAsSuffix": true,
+    "priorCopy": "docs/evidencia/migracion-nativa-v50-2026-10-23/documentos-previos/backend__README.md.before"
+  },
+  {
+    "path": "README.md",
+    "previousSha256": "35cd4f39428e29180295a27195181e6e3db2f30c6dc0d0da58d2aa6aea4a9011",
+    "currentSha256": "35b02ef84ccfd167361c505692cbf41460cdd1274a1c284dac0f7331988ecc36",
+    "previousBytesPreservedAsSuffix": true,
+    "priorCopy": "docs/evidencia/migracion-nativa-v50-2026-10-23/documentos-previos/README.md.before"
+  }
+]

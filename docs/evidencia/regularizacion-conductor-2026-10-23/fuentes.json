@@ -1,0 +1,136 @@
+{
+  "changed": [
+    {
+      "path": "backend/src/main/java/pe/rutafija/personidentity/application/PersonIdentityService.java",
+      "kind": "MODIFIED",
+      "beforeSha256": "b5137615e937bb5c64e8eacd1dd2a097b6a01ddef5dfa6ff737f652f5cc4c8ed",
+      "sha256": "9c29d866646fc75f930c672bf1b75c461171b9faa8bfac183bfe007736c07213"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/api/ConductorDocumentaryController.java",
+      "kind": "MODIFIED",
+      "beforeSha256": "6042c3f367906a60de6d02eed65eb300f001ffb66208acb0fbd23ac36258e7d2",
+      "sha256": "b188227251745aa3477d584d043aeed3033969edd688b6ff0d14d26e178203cd"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/application/ConductorDocumentaryService.java",
+      "kind": "MODIFIED",
+      "beforeSha256": "7fba05cfb0832dcd1de5be378c34e0ce58b2a7304ae3da6044bbdaf4f523726d",
+      "sha256": "2db42c85893dc6484db014248fecc85ed6540578baace65533ad7b4f84dae49f"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/application/DriverIncorporationStatusService.java",
+      "kind": "MODIFIED",
+      "beforeSha256": "dda9ab55a23b8893f16bf8837fce5cca66ae17a9341d74b0c8f03924b09f5b4d",
+      "sha256": "020cec797465aa23c154c6ea48492cceede3b8917ed1825a8a1ee42abfa73c64"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/api/dto/ConductorDocumentaryContract.java",
+      "kind": "MODIFIED",
+      "beforeSha256": "03b8261ea7399d6ef38e7fde67b4ddb4eed5ff1350126b30acad45c4a3c741f0",
+      "sha256": "27952a2551ef36a2fdff69cf6bf34812caba0570f1e02915ec104b5d34684c47"
+    },
+    {
+      "path": "frontend/src/app/features/drivers/drivers.page.html",
+      "kind": "MODIFIED",
+      "beforeSha256": "6b22a0c94651d446c799d2d5f76274ddcbc224149eba3611e99d3acd9c51d93d",
+      "sha256": "eb1599f22232d430f00fd6f493cac4d95a2cd54b96b58a2358c0a19d69c39ef3"
+    },
+    {
+      "path": "frontend/src/app/features/drivers/drivers.page.spec.ts",
+      "kind": "MODIFIED",
+      "beforeSha256": "ac96efeb8bc42d52bc9a6b44f80da1af08fdd48e46160de410e47da0c880af92",
+      "sha256": "586fd8bf3c5fcf2366ba9be7fa3170885f0079f29957092da4009358dcdb3aca"
+    },
+    {
+      "path": "frontend/src/app/features/drivers/drivers.page.ts",
+      "kind": "MODIFIED",
+      "beforeSha256": "611fd9b64d194dc17c044f476d446e01a9acc4ab8f40f192142cf03f64dae47a",
+      "sha256": "8bba7ee9839919baf88ffa25114ccfd4705957c0bda5cf9324d098a73f289dad"
+    },
+    {
+      "path": "frontend/src/app/features/onboarding/onboarding-requests.page.html",
+      "kind": "MODIFIED",
+      "beforeSha256": "b2ef1383577525e24978c2bfd169788c8240136cc76f965855b65542bbbcb914",
+      "sha256": "ab78e99b2b2c7d06530c9e174e6c563bdcb6a13c54bd72d3e81338e8f1033ee8"
+    },
+    {
+      "path": "frontend/src/app/features/onboarding/onboarding-requests.page.spec.ts",
+      "kind": "MODIFIED",
+      "beforeSha256": "dfaa40ffbc56448c60bebdac0c5cf30ab1a1b122695ba3851f91a7284bed70c5",
+      "sha256": "28cc646ebcb23023d4fd14ad51797e3cae5de16b96d56ae46d874436f5b4920c"
+    },
+    {
+      "path": "frontend/src/app/features/onboarding/onboarding-requests.page.ts",
+      "kind": "MODIFIED",
+      "beforeSha256": "fcd19719d840ff89e1ff9a542f9360421d9519db0fcd0fff5fd33c498e20a761",
+      "sha256": "9fd50d3648e4467460bb2fcd169177504094a18acd4506dc6b0f6a7d51e766c5"
+    },
+    {
+      "path": "frontend/src/app/core/onboarding/onboarding-api.service.ts",
+      "kind": "MODIFIED",
+      "beforeSha256": "95a12b5de268e47ae7e1770d9268cbb03a566c4d0988a9f71ec88cd193814558",
+      "sha256": "4f9b3a8f5aa2482b79d6b69c5a6c247c09462938fad9dd2fcd4df08ecf24e4d0"
+    },
+    {
+      "path": "frontend/src/app/core/onboarding/onboarding.models.ts",
+      "kind": "MODIFIED",
+      "beforeSha256": "c600c53662b5a558a24ea774605e939c9467e71414fb45f46d7b60bcfc071a81",
+      "sha256": "3999164869fa61bfb1207a67e8ef8a533a2eccb78dd1fff4bd96d3510f034019"
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaMobileLocalBridge.ps1",
+      "kind": "MODIFIED",
+      "beforeSha256": "d810303be63081659f0375d5f65d99581fbcfda92192110d8f517402ee428733",
+      "sha256": "5cf9c5ef41a81d76d431b5c8c97d55709762f71e16aba021f6bdf2c180fb8ca4"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/api/LegacyConductorRegularizationController.java",
+      "kind": "NEW",
+      "sha256": "5ace313e22a6fa0d80751f0db5597bfe54b027a6abf5dea5fc9f1c7b3f28730f"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/application/LegacyConductorRegularizationService.java",
+      "kind": "NEW",
+      "sha256": "0a1fd942b68df5c81bf200562921c3d9a74d314b5329897a20c579e60adeaeb0"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/infrastructure/LegacyConductorRegularizationRepository.java",
+      "kind": "NEW",
+      "sha256": "bd31fe55c760fbbd6d4f7646225aa22235a2f6238596e01c36b2104df7f97a29"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/onboarding/api/LegacyConductorReconciliationIT.java",
+      "kind": "NEW",
+      "sha256": "b368e8e612799407dfc944239bf32fa693bbb7ef0aa1a6209c8bf59968ed1dae"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/onboarding/api/LegacyConductorRegularizationConcurrencyIT.java",
+      "kind": "NEW",
+      "sha256": "a4a34435e868f6b98d80cd4f1cc9dd1e6695d3a4f329524b696e2a587224c20b"
+    },
+    {
+      "path": "scripts/Test-RutaFijaMobileBridgeStopRace.ps1",
+      "kind": "NEW",
+      "sha256": "562a732be373e29b18e4d3d3991798b26b23c3aa6ec017041f4e1590909e98c7"
+    }
+  ],
+  "authenticationOtpProvisioningAndApplicantAccessUnchanged": [
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/AuthService.java",
+      "sha256": "54809f18e2e6c4541133ddf3150cfbceecff1510f284965dbeff20901876c68a"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/EmailOtpService.java",
+      "sha256": "2e21e37613d2a8a6225a033fbf22db278eaa20c6aaa1bb0b90174a9ed4395ad3"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/pilotquota/application/ConductorProvisioningPolicy.java",
+      "sha256": "976f1a947f17f4242a1865dcdace0996629f4e937245277ab001fc6152880736"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/infrastructure/ConductorOnboardingAccessRepository.java",
+      "sha256": "ff23e2e1bc3009923f1e3e2ce0b294c57e8d142e3f848196ebff2a584a4e4926"
+    }
+  ]
+}

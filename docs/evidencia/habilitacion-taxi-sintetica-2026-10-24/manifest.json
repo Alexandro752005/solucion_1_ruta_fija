@@ -1,0 +1,72 @@
+{
+  "algorithm": "SHA-256",
+  "recordedAtUtc": "2026-10-24T05:51:12.186658+00:00",
+  "businessOrAuthenticationCodeChanged": false,
+  "files": [
+    {
+      "path": "docs/evidencia/habilitacion-taxi-sintetica-2026-10-24/before-status.json",
+      "bytes": 699,
+      "sha256": "54fc9f2fade8efd82a2f7122f1abb3a0bff191eb85b71a7a9e5751b3c25ba777"
+    },
+    {
+      "path": "docs/evidencia/habilitacion-taxi-sintetica-2026-10-24/completion.json",
+      "bytes": 2918,
+      "sha256": "08def943f18b1bb4cb41fc2705bf0a93344995bb555b69dc055b1c4d230149d9"
+    },
+    {
+      "path": "docs/evidencia/habilitacion-taxi-sintetica-2026-10-24/final-database-state.json",
+      "bytes": 396,
+      "sha256": "3096808f9f7cac8ae40b05bd8b7fb69a68a89a782180d6b5adaad8fbb84e6ba9"
+    },
+    {
+      "path": "docs/evidencia/habilitacion-taxi-sintetica-2026-10-24/final-integrity.json",
+      "bytes": 797,
+      "sha256": "1ccb72520cc5e1f178f38b919024497b4747f822427d75d918dabc9e4af31d6a"
+    },
+    {
+      "path": "docs/evidencia/habilitacion-taxi-sintetica-2026-10-24/fresh-admin-session.json",
+      "bytes": 140,
+      "sha256": "3f3b8b368fa84361a22574f829d905e21260a3ae469fa8e9059fb3b224261954"
+    },
+    {
+      "path": "docs/evidencia/habilitacion-taxi-sintetica-2026-10-24/http-statuses.json",
+      "bytes": 3134,
+      "sha256": "c9157cf0bfbc957f8dc60f3ac28b38d952526531f55af74197c1685f9e54d8c5"
+    },
+    {
+      "path": "docs/evidencia/habilitacion-taxi-sintetica-2026-10-24/incorporation-final.json",
+      "bytes": 580,
+      "sha256": "c546360714ac37a3214efa6287c3a89b2d2a94d821de6986240c2e105160520b"
+    },
+    {
+      "path": "docs/evidencia/habilitacion-taxi-sintetica-2026-10-24/mobile-api-validation.json",
+      "bytes": 368,
+      "sha256": "4e7d26ac7807489d42722c2eeb5d90677e32fb01b266be6e56a5153edcc3e3e2"
+    },
+    {
+      "path": "docs/evidencia/habilitacion-taxi-sintetica-2026-10-24/operations.json",
+      "bytes": 1518,
+      "sha256": "8abdab0e00b0e5d9c3bb61f1f87110846f41069717d412aad26c5c3cdd704ff2"
+    },
+    {
+      "path": "docs/evidencia/habilitacion-taxi-sintetica-2026-10-24/poco-validation.json",
+      "bytes": 1529,
+      "sha256": "39f6967e6313877a3fcb85e41a35de4a6f317d7a248bf2f8b1e853695dcef558"
+    },
+    {
+      "path": "docs/evidencia/habilitacion-taxi-sintetica-2026-10-24/qualification-final.json",
+      "bytes": 6414,
+      "sha256": "7d4989bc4daf1b70cf8f9b4d93ea2edbae65498befc0c09cedc318e53ebd3ec0"
+    },
+    {
+      "path": "docs/evidencia/habilitacion-taxi-sintetica-2026-10-24/session-diagnosis.json",
+      "bytes": 1267,
+      "sha256": "43838fbe3cb59c293f9d2dae249dacbbf7629e3d5b26c4814682136c3792e13c"
+    },
+    {
+      "path": "docs/operacion/cierre-habilitacion-taxi-sintetica-2026-10-24.md",
+      "bytes": 5229,
+      "sha256": "d8c91bed8928d4d6c240b85c96cb466108fc06413be63e0378dba79913de6d58"
+    }
+  ]
+}

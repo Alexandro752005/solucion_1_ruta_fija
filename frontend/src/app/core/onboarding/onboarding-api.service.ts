@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { RuntimeConfigService } from '../config/runtime-config.service';
-import { ConductorOnboardingExpediente, ConductorOnboardingSummary, DocumentaryExpediente, DocumentaryMutation, DocumentarySave } from './onboarding.models';
+import { SKIP_AUTH_REFRESH } from '../auth/auth-http-context';
+import { ConductorOnboardingExpediente, ConductorOnboardingSummary, DocumentaryExpediente, DocumentaryMutation, DocumentarySave, ExistingDriverRegularization, ExistingDriverRegularizationCommand } from './onboarding.models';
 
 @Injectable({ providedIn: 'root' })
 export class OnboardingApiService {
@@ -12,6 +13,13 @@ export class OnboardingApiService {
 
   list(): Observable<readonly ConductorOnboardingSummary[]> {
     return this.http.get<readonly ConductorOnboardingSummary[]>(this.url());
+  }
+
+  regularizeExistingDriver(driverId: string, body: ExistingDriverRegularizationCommand): Observable<ExistingDriverRegularization> {
+    return this.http.post<ExistingDriverRegularization>(
+      this.runtimeConfig.apiUrl(`/drivers/${encodeURIComponent(driverId)}/regularization`), body,
+      { context: new HttpContext().set(SKIP_AUTH_REFRESH, true) },
+    );
   }
 
   expediente(requestId: string): Observable<ConductorOnboardingExpediente> {
@@ -28,10 +36,11 @@ export class OnboardingApiService {
     return this.http.put<DocumentaryExpediente>(`${this.url()}/${encodeURIComponent(requestId)}/documentary-expediente`, body);
   }
 
-  review(requestId: string, action: 'return' | 'extend' | 'approve' | 'reject' | 'provision',
+  review(requestId: string, action: 'return' | 'extend' | 'approve' | 'reject' | 'provision' | 'provision-existing' | 'resubmit-existing',
     body: DocumentaryMutation & { readonly deadline?: string; readonly reiteration?: boolean; readonly groupId?: string },
   ): Observable<DocumentaryExpediente> {
-    return this.http.post<DocumentaryExpediente>(`${this.url()}/${encodeURIComponent(requestId)}/${action}`, body);
+    return this.http.post<DocumentaryExpediente>(`${this.url()}/${encodeURIComponent(requestId)}/${action}`, body,
+      { context: new HttpContext().set(SKIP_AUTH_REFRESH, action === 'provision-existing' || action === 'resubmit-existing') });
   }
 
   private url(): string {

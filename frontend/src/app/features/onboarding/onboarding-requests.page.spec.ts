@@ -4,6 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { OnboardingRequestsPage } from './onboarding-requests.page';
+import { SKIP_AUTH_REFRESH } from '../../core/auth/auth-http-context';
 
 describe('OnboardingRequestsPage', () => {
   const baseUrl = '/api/v1/onboarding/requests';
@@ -253,6 +254,91 @@ describe('OnboardingRequestsPage', () => {
     const undated = http.expectOne(`${baseUrl}/request-1/documentary-expediente`);
     expect(undated.request.body.documents[0].validUntil).toBeNull();
     undated.flush(documentary(5));
+  });
+
+  function openLegacyDossier(status = 'APPROVED') {
+    const fixture = TestBed.createComponent(OnboardingRequestsPage);
+    http.expectOne(baseUrl).flush([summary()]);
+    fixture.componentInstance.openExpediente('request-1');
+    http.expectOne(`${baseUrl}/request-1/expediente`).flush({ requestId: 'request-1', ...personalData() });
+    fixture.componentInstance.loadDocumentary();
+    http.expectOne(`${baseUrl}/request-1/documentary-expediente`).flush({ ...documentary(), status,
+      personalApproved: status === 'APPROVED', existingAccountRegularization: true,
+      existingUserId: 'existing-account', existingDriverId: 'existing-driver' });
+    fixture.detectChanges();
+    return fixture;
+  }
+
+  it('distinguishes legacy binding from new-account provisioning and requires explicit preservation confirmation', () => {
+    const fixture = openLegacyDossier();
+    expect(fixture.nativeElement.textContent).toContain('Vincular expediente a cuenta existente');
+    expect(fixture.nativeElement.textContent).toContain('la cuenta, ficha, grupo e historial');
+    expect(fixture.nativeElement.textContent).not.toContain('Crear cuenta y conductor');
+    expect(fixture.nativeElement.querySelector('#provision-group')).toBeNull();
+    expect(fixture.nativeElement.textContent).not.toContain('Correo verificado');
+    fixture.componentInstance.act('provision-existing');
+    fixture.componentInstance.act('provision');
+    http.expectNone(`${baseUrl}/request-1/provision-existing`);
+    http.expectNone(`${baseUrl}/request-1/provision`);
+    fixture.componentInstance.existingBindingConfirmed = true;
+    fixture.componentInstance.act('provision-existing');
+    const request = http.expectOne(`${baseUrl}/request-1/provision-existing`);
+    expect(request.request.context.get(SKIP_AUTH_REFRESH)).toBe(true);
+    expect(request.request.body.expectedVersion).toBe(3);
+    expect(request.request.body.groupId).toBeUndefined();
+    expect(request.request.body.existingUserId).toBeUndefined();
+    expect(request.request.body.existingDriverId).toBeUndefined();
+    fixture.componentInstance.act('provision-existing');
+    http.expectNone(`${baseUrl}/request-1/provision-existing`);
+    request.flush({ ...documentary(4), status: 'APPROVED', personalApproved: true,
+      existingAccountRegularization: true, existingUserId: 'existing-account', existingDriverId: 'existing-driver',
+      provisionedUserId: 'existing-account', provisionedDriverId: 'existing-driver' });
+    expect(fixture.componentInstance.existingBindingConfirmed).toBe(false);
+    expect(fixture.componentInstance.documentary()?.operationalEnabled).toBe(false);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain('Cuenta vinculada: existing-account');
+    http.expectNone((request) => request.url === '/api/v1/groups');
+  });
+
+  it('keeps legacy dossiers pending without auto-approval or provisioning on opening', () => {
+    const fixture = openLegacyDossier('PENDING_REVIEW');
+    expect(fixture.nativeElement.textContent).toContain('Aprobar personalmente');
+    expect(fixture.nativeElement.textContent).not.toContain('Vincular expediente a cuenta existente');
+    expect(fixture.componentInstance.documentary()?.personalApproved).toBe(false);
+    http.expectNone((request) => request.method !== 'GET');
+  });
+
+  it('requires a fresh server read after an uncertain existing-account binding and suppresses server PII', () => {
+    const fixture = openLegacyDossier();
+    fixture.componentInstance.existingBindingConfirmed = true;
+    fixture.componentInstance.act('provision-existing');
+    http.expectOne(`${baseUrl}/request-1/provision-existing`).flush({ message: 'PRIVATE DNI 12345678' }, { status: 409, statusText: 'Unconfirmed' });
+    fixture.detectChanges();
+    expect(fixture.componentInstance.mustRefresh()).toBe(true);
+    expect(fixture.nativeElement.textContent).not.toContain('PRIVATE DNI');
+    fixture.componentInstance.act('provision-existing');
+    http.expectNone(`${baseUrl}/request-1/provision-existing`);
+  });
+
+  it('reopens a returned legacy review only after an explicit reason without approving or changing documents', () => {
+    const fixture = openLegacyDossier('RETURNED');
+    expect(fixture.nativeElement.textContent).toContain('Reabrir revisión tras subsanación');
+    fixture.componentInstance.act('resubmit-existing');
+    http.expectNone(`${baseUrl}/request-1/resubmit-existing`);
+    fixture.componentInstance.reason = 'Subsanación recibida; corresponde nuevo cotejo personal.';
+    fixture.componentInstance.act('resubmit-existing');
+    const request = http.expectOne(`${baseUrl}/request-1/resubmit-existing`);
+    expect(request.request.context.get(SKIP_AUTH_REFRESH)).toBe(true);
+    expect(request.request.body.expectedVersion).toBe(3);
+    expect(request.request.body.reason).toBe('Subsanación recibida; corresponde nuevo cotejo personal.');
+    expect(request.request.body.documents).toBeUndefined();
+    request.flush({ ...documentary(4), existingAccountRegularization: true, existingUserId: 'existing-account',
+      existingDriverId: 'existing-driver', status: 'PENDING_REVIEW', personalApproved: false,
+      history: [{ action: 'LEGACY_RESUBMITTED', occurredAt: '2026-10-23T12:00:00Z', reason: null, round: 1 }] });
+    fixture.detectChanges();
+    expect(fixture.componentInstance.documentary()?.status).toBe('PENDING_REVIEW');
+    expect(fixture.nativeElement.textContent).toContain('Revisión reabierta tras subsanación');
+    http.expectNone((operation) => /approve|provision/.test(operation.url));
   });
 
   function summary() {

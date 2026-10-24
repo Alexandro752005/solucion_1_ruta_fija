@@ -1,0 +1,25 @@
+{
+  "result": "PASS",
+  "verifiedAtUtc": "2026-10-24T02:57:47.533798+00:00",
+  "authorization": "Owner confirmed both assignments are old tests and requested cancellation preserving history",
+  "source": "EXISTING_ADMIN_API",
+  "assignments": [
+    {
+      "assignmentId": "c994da72-4f66-4c10-9b3a-2b13d4baed0d",
+      "before": "SCHEDULED",
+      "after": "CANCELLED",
+      "versionBefore": 0,
+      "versionAfter": 1
+    },
+    {
+      "assignmentId": "e40f868f-1928-4695-b92f-7edb168a3fff",
+      "before": "SCHEDULED",
+      "after": "CANCELLED",
+      "versionBefore": 0,
+      "versionAfter": 1
+    }
+  ],
+  "rowsPreserved": 2,
+  "deletedRows": 0,
+  "sessionLoggedOut": true
+}

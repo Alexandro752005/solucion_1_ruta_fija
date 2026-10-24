@@ -1,3 +1,11 @@
+# Estado nativo actualizado — 23/10/2026
+
+`solucion_ruta_fija_1` ya contiene **V1–V50**, sin fallos ni repetibles. La migración V13–V50 fue respaldada, ensayada y aplicada expresamente; el inicio normal aprobó con API8080/CRM4300. Los permisos de `rf_app` permiten operar las tablas de aplicación y conservan los REVOKE de auditoría/retención. No se modificó `ruta_fija_test` ni la compuerta de arranque.
+
+[Operación y evidencias](../docs/operacion/migracion-local-v12-v50-2026-10-23.md). Usar los BAT normales de inicio/cierre; no repetir la migración. El estado V12 descrito debajo corresponde al corte anterior conservado.
+
+---
+
 # Backend — instrucciones vigentes 2026-10-23
 
 Este corte sustituye las secciones históricas de ejecución y pruebas conservadas debajo. Java21/Spring Boot3.5.16 y PostgreSQL16 se mantienen. La base normal `solucion_ruta_fija_1` sigue en V12 y el código actual exige V50: el launcher bloquea antes de arrancar Java, sin migraciones automáticas. La fixture `ruta_fija_test` contiene V1 a V50 más una repetible: 51 éxitos, no V0.

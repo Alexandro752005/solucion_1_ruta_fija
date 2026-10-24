@@ -17,12 +17,14 @@ import pe.rutafija.onboarding.infrastructure.ConductorDocumentaryRepository;
 import pe.rutafija.onboarding.infrastructure.ConductorDocumentaryRepository.State;
 import pe.rutafija.onboarding.infrastructure.ConductorOnboardingAccessRepository;
 import pe.rutafija.onboarding.infrastructure.ConductorOnboardingRepository;
+import pe.rutafija.onboarding.infrastructure.LegacyConductorRegularizationRepository;
 import pe.rutafija.organization.infrastructure.OrganizationRepository;
 import pe.rutafija.pilotquota.application.PilotCreationQuotaService;
 import pe.rutafija.personidentity.application.PersonIdentityService;
 import pe.rutafija.shared.exception.ApplicationException;
 import pe.rutafija.shared.exception.ErrorCode;
 import pe.rutafija.shared.security.CurrentUserService;
+import pe.rutafija.terms.application.AdminTermsService;
 
 import java.time.Clock;
 import java.time.Duration;
@@ -52,16 +54,20 @@ public class ConductorDocumentaryService {
     private final AuditService audit;
     private final Clock clock;
     private final PersonIdentityService identities;
+    private final LegacyConductorRegularizationRepository legacy;
+    private final AdminTermsService terms;
 
     public ConductorDocumentaryService(ConductorDocumentaryRepository repository,
             ConductorOnboardingAccessRepository access,ConductorOnboardingRepository invitationGuards,CurrentUserService current,OpaqueTokenService tokens,
             InvitationCodeHasher hasher,AppUserRepository users,DriverRepository drivers,
             TransportGroupRepository groups,OrganizationRepository organizations,PilotCreationQuotaService quota,
-            AuditService audit,Clock clock,PersonIdentityService identities) {
+            AuditService audit,Clock clock,PersonIdentityService identities,
+            LegacyConductorRegularizationRepository legacy,AdminTermsService terms) {
         this.repository=repository;this.access=access;this.invitationGuards=invitationGuards;this.current=current;this.tokens=tokens;this.hasher=hasher;
         this.users=users;this.drivers=drivers;this.groups=groups;this.organizations=organizations;
         this.quota=quota;this.audit=audit;this.clock=clock;
         this.identities=identities;
+        this.legacy=legacy;this.terms=terms;
     }
 
     @Transactional
@@ -151,6 +157,8 @@ public class ConductorDocumentaryService {
     public Dossier resubmit(UUID id,String token,Decision command) {
         UUID identity=applicant(token);State state=repository.lock(id,null,identity).orElseThrow(this::notFound);
         recheckApplicantMutation(state,token);
+        if(legacy.opening(id,state.organizationId()).isPresent())
+            throw conflict("La subsanacion de una cuenta anterior requiere revision presencial y Reabrir revision existente por ADMIN.");
         String hash=payload("RESUBMITTED",command);
         if(replay(state,"APPLICANT",identity,command.operationKey(),hash))return dossier(reload(state),false);
         expected(state,command.expectedVersion());requireStatus(state,"RETURNED");
@@ -158,6 +166,23 @@ public class ConductorDocumentaryService {
         repository.resubmit(id);state=reload(state);
         record(state,"APPLICANT",identity,command.operationKey(),hash,"RESUBMITTED",command.reason());
         return dossier(state,false);
+    }
+
+    /** Returned legacy dossiers are corrected in person through ADMIN; no applicant identity is adopted. */
+    @Transactional
+    public Dossier resubmitExisting(UUID id,Decision command) {
+        AppUser actor=admin();requireLegacyAdmin(actor);
+        State state=lockAdmin(id,actor);String hash=payload("LEGACY_RESUBMITTED",command);
+        legacy.opening(id,actor.getOrganizationId()).orElseThrow(()->conflict("El expediente no corresponde a una regularizacion administrativa explicita."));
+        if(replay(state,"ADMIN",actor.getId(),command.operationKey(),hash))return dossier(reload(state),true);
+        expected(state,command.expectedVersion());requireStatus(state,"RETURNED");
+        if(state.linkedUserId()!=null)throw conflict("Una cuenta provisionada no se devuelve a revision mediante este flujo.");
+        publicText(command.reason(),state,repository.documents(id));
+        repository.resubmit(id);state=reload(state);
+        record(state,"ADMIN",actor.getId(),command.operationKey(),hash,"LEGACY_RESUBMITTED",command.reason());
+        audit.record(actor,"CONDUCTOR_LEGACY_REVIEW_REOPENED","CONDUCTOR_ONBOARDING_REQUEST",id,
+                Map.of("personalApprovalGranted",false,"operationalEnabled",false));
+        return dossier(state,true);
     }
 
     @Transactional
@@ -192,6 +217,8 @@ public class ConductorDocumentaryService {
     @Transactional
     public Dossier provision(UUID id,Decision command) {
         AppUser actor=admin();State state=lockAdmin(id,actor);String hash=payload("ACCOUNT_PROVISIONED",command);
+        if(legacy.opening(id,actor.getOrganizationId()).isPresent())
+            throw conflict("Este expediente regulariza una cuenta existente. Utiliza Vincular cuenta existente.");
         if(replay(state,"ADMIN",actor.getId(),command.operationKey(),hash))return dossier(reload(state),true);
         expected(state,command.expectedVersion());requireStatus(state,"APPROVED");
         if(state.linkedUserId()!=null)throw conflict("La misma identidad ya fue provisionada; consulta su estado.");
@@ -231,10 +258,58 @@ public class ConductorDocumentaryService {
         return dossier(state,true);
     }
 
+    /** Completes a reviewed legacy association without creating accounts or consuming historical quota. */
+    @Transactional
+    public Dossier provisionExisting(UUID id,Decision command) {
+        AppUser actor=admin();requireLegacyAdmin(actor);
+        State state=lockAdmin(id,actor);String hash=payload("EXISTING_ACCOUNT_LINKED",command);
+        var opening=legacy.opening(id,actor.getOrganizationId()).orElseThrow(()->conflict("El expediente no corresponde a una regularizacion administrativa explicita."));
+        if(replay(state,"ADMIN",actor.getId(),command.operationKey(),hash))return dossier(reload(state),true);
+        expected(state,command.expectedVersion());requireStatus(state,"APPROVED");
+        if(state.linkedUserId()!=null)throw conflict("La cuenta ya fue vinculada. Consulta el estado actual.");
+        if(opening.userId()==null||opening.driverId()==null||!opening.identityId().equals(state.identityId())||!legacy.lockBinding(opening))
+            throw conflict("La asociacion explicita requiere conciliacion autorizada.");
+        var user=users.findByIdForUpdate(opening.userId()).orElseThrow(this::notFound);
+        var driver=drivers.lockByIdAndOrganizationId(opening.driverId(),state.organizationId()).orElseThrow(this::notFound);
+        if(!user.isActive()||user.getRole()!=UserRole.CONDUCTOR||!Objects.equals(user.getOrganizationId(),state.organizationId())
+                ||driver.getUser()==null||!user.getId().equals(driver.getUser().getId()))
+            throw conflict("La cuenta y ficha existentes no mantienen el vinculo autorizado en esta organizacion.");
+        UUID retainedGroupId=driver.getGroup().getId();
+        if(command.groupId()!=null&&!command.groupId().equals(retainedGroupId)||!repository.activeGroup(retainedGroupId,state.organizationId()))
+            throw conflict("Selecciona el grupo activo que ya corresponde a la ficha existente. Un traslado requiere su procedimiento propio.");
+        if(legacy.hasOpenWork(driver.getId()))throw conflict("Finaliza las asignaciones pendientes antes de vincular la cuenta.");
+        personalCompliant(state);publicText(command.reason(),state,repository.documents(id));
+        Document personal=repository.documents(id).stream().filter(doc->"CON-01".equals(doc.requirementId())).findFirst().orElseThrow();
+        Document license=repository.documents(id).stream().filter(doc->"CON-02".equals(doc.requirementId())).findFirst().orElseThrow();
+        String type=personal.fields().get("documentType").strip().toUpperCase(Locale.ROOT);
+        String number=personal.fields().get("documentNumber").strip();
+        if(!type.equals(driver.getDocumentType())||!number.equals(driver.getDocumentNumber()))
+            throw conflict("El DNI del expediente no coincide con la ficha existente. Se requiere conciliacion documental autorizada.");
+        String personHash=identities.requireReviewedConductorDocument(user.getId(),type,number);
+        if(!personHash.equals(opening.personHash()))throw conflict("La persona revisada no corresponde a la asociacion original.");
+        String storedLicense=driver.getLicenseNumber();
+        if(storedLicense==null||!storedLicense.equalsIgnoreCase(license.fields().get("licenseNumber").strip()))
+            throw conflict("La licencia revisada no coincide con la ficha existente. Corrige la documentacion mediante el procedimiento autorizado.");
+        var preliminary=repository.identity(state.identityId());
+        if(!user.getEmail().equals(preliminary.email()))
+            throw conflict("El correo de la cuenta cambio desde la apertura. Se requiere conciliar el expediente sin adoptar otra identidad.");
+        if(legacy.hasOnboardingLink(user.getId(),driver.getId()))throw conflict("La cuenta o ficha ya tiene otra provision registrada.");
+        driver.deactivate();drivers.flush();
+        identities.bindConductor(actor,user,type,number,id);
+        repository.provision(id,user.getId(),driver.getId(),now());state=reload(state);
+        record(state,"ADMIN",actor.getId(),command.operationKey(),hash,"EXISTING_ACCOUNT_LINKED",command.reason());
+        audit.record(actor,"CONDUCTOR_EXISTING_ACCOUNT_LINKED","CONDUCTOR_ONBOARDING_REQUEST",id,
+                Map.of("userId",user.getId().toString(),"driverId",driver.getId().toString(),"credentialsPreserved",true,
+                        "emailVerificationGranted",false,"operationalEnabled",false));
+        return dossier(state,true);
+    }
+
     @Transactional(noRollbackFor=OnboardingInvitationRejectedException.class)
     public Dossier reapply(UUID id,String token,Reapply command,String remoteAddress) {
         UUID identityId=applicant(token);
-        repository.find(id,null,identityId).orElseThrow(this::notFound);
+        State visible=repository.find(id,null,identityId).orElseThrow(this::notFound);
+        if(legacy.opening(id,visible.organizationId()).isPresent())
+            throw conflict("Una regularizacion anterior no permite crear otra solicitud ni adoptar la cuenta mediante una invitacion.");
         String hash=payload("REAPPLIED",command);
         var completed=repository.priorOperation(id,"APPLICANT",identityId,command.operationKey());
         if(completed.isPresent()) {
@@ -375,9 +450,12 @@ public class ConductorDocumentaryService {
                     null,null,item.result(),null,item.observation()));
         }
         boolean overdue="RETURNED".equals(state.status())&&state.correctionDeadline()!=null&&!state.correctionDeadline().isAfter(now());
+        var existing=legacy.opening(state.id(),state.organizationId());
         return new Dossier(state.id(),state.status(),state.version(),state.reviewRounds(),state.modality(),state.catalogId(),state.catalogVersion(),
                 state.catalogHash(),ConductorDocumentaryCatalog.REQUIREMENTS,List.copyOf(documents),repository.history(state.id()),
-                state.correctionDeadline(),overdue,state.personalApprovedAt()!=null,state.linkedUserId(),state.linkedDriverId(),false,state.reapplyAfter());
+                state.correctionDeadline(),overdue,state.personalApprovedAt()!=null,state.linkedUserId(),state.linkedDriverId(),false,state.reapplyAfter(),
+                existing.isPresent(),existing.map(LegacyConductorRegularizationRepository.Opening::userId).orElse(null),
+                existing.map(LegacyConductorRegularizationRepository.Opening::driverId).orElse(null));
     }
 
     private State lockAdmin(UUID id,AppUser actor) {
@@ -387,6 +465,7 @@ public class ConductorDocumentaryService {
     }
     private State reload(State state){return repository.find(state.id(),state.organizationId(),null).orElseThrow(this::notFound);}
     private AppUser admin(){AppUser actor=current.requireTenantActor();if(actor.getRole()!=UserRole.ADMIN||!actor.isEmailVerified())throw forbidden("Se requiere ADMIN verificado de la organizacion.");return actor;}
+    private void requireLegacyAdmin(AppUser actor){identities.requireVerified(actor.getId());if(!terms.hasCurrentAcceptanceForCurrentActor())throw forbidden("La regularizacion requiere terminos ADMIN vigentes.");}
     private UUID applicant(String token){if(token==null||!ACCESS.matcher(token).matches())throw unauthorized();return access.findIdentityForActiveToken(tokens.hash(token),now()).orElseThrow(this::unauthorized);}
     private void recheckApplicantMutation(State state,String token) {
         String hash=tokens.hash(token);

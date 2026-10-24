@@ -1,0 +1,95 @@
+{
+  "result": "PASS_REAL_POCO_BOTTOM_NAVIGATION_PRESERVED",
+  "recordedAtUtc": "2026-10-24T06:13:43.924088+00:00",
+  "package": "pe.rutafija.conductor",
+  "previousVersionCode": 4,
+  "installedVersionCode": 5,
+  "uidPreserved": true,
+  "signerPreserved": true,
+  "installedApkSha256": "a800ced26ab28413b218b8dffc927580001e51a380aeca2c9fa6175a6ae3031d",
+  "privateEndpointPreserved": true,
+  "sessionRestoredWithoutCredentials": true,
+  "applicationDataCleared": false,
+  "screens": [
+    {
+      "screen": "after-home",
+      "allSixBottomButtonsVisible": true,
+      "selectedDestination": "Inicio",
+      "bodyHeadingVerified": null,
+      "privateXmlSha256": "a5bdb8ea83c1b6ec8d0404b3afa7b1fc7d0d55aa96a291356562a14c32f03413"
+    },
+    {
+      "screen": "after-incidents",
+      "allSixBottomButtonsVisible": true,
+      "selectedDestination": "Incidencias",
+      "bodyHeadingVerified": "Incidencias",
+      "privateXmlSha256": "307394205bed649566cc7034a817ddd67cd8e4acc1173edb95b2faec5976a957"
+    },
+    {
+      "screen": "after-announcements",
+      "allSixBottomButtonsVisible": true,
+      "selectedDestination": "Comunicados",
+      "bodyHeadingVerified": "Comunicados",
+      "privateXmlSha256": "76ad7f410542527313a2d96bd5bbc30ec339ee76b3db2803817a963ea3f1cdf0"
+    },
+    {
+      "screen": "after-return-home",
+      "allSixBottomButtonsVisible": true,
+      "selectedDestination": "Inicio",
+      "bodyHeadingVerified": null,
+      "privateXmlSha256": "a5bdb8ea83c1b6ec8d0404b3afa7b1fc7d0d55aa96a291356562a14c32f03413"
+    },
+    {
+      "screen": "after-announcements-repeat",
+      "allSixBottomButtonsVisible": true,
+      "selectedDestination": "Comunicados",
+      "bodyHeadingVerified": "Comunicados",
+      "privateXmlSha256": "76ad7f410542527313a2d96bd5bbc30ec339ee76b3db2803817a963ea3f1cdf0"
+    },
+    {
+      "screen": "after-incidents-repeat",
+      "allSixBottomButtonsVisible": true,
+      "selectedDestination": "Incidencias",
+      "bodyHeadingVerified": "Incidencias",
+      "privateXmlSha256": "307394205bed649566cc7034a817ddd67cd8e4acc1173edb95b2faec5976a957"
+    },
+    {
+      "screen": "after-profile",
+      "allSixBottomButtonsVisible": true,
+      "selectedDestination": "Perfil",
+      "bodyHeadingVerified": null,
+      "privateXmlSha256": "36eda5a048b520b3a5b450aa187c5b17a35eae38e70ea4c8ebd73298b5a88a04"
+    },
+    {
+      "screen": "after-final-home",
+      "allSixBottomButtonsVisible": true,
+      "selectedDestination": "Inicio",
+      "bodyHeadingVerified": null,
+      "privateXmlSha256": "a5bdb8ea83c1b6ec8d0404b3afa7b1fc7d0d55aa96a291356562a14c32f03413"
+    }
+  ],
+  "protectedHistoricalDatabaseUnchanged": true,
+  "protectedHistoricalTables": 105,
+  "nativeBusinessTablesUnchanged": true,
+  "normalSessionChangedTables": [
+    "audit_event",
+    "refresh_token"
+  ],
+  "credentialsAndPersonalAttributesMatchEarlierEnablementBaseline": true,
+  "runtime": {
+    "api": 200,
+    "crm": 200
+  },
+  "driverState": {
+    "active": true,
+    "availability": "NO_DISPONIBLE",
+    "locationConsent": false,
+    "currentServices": 0,
+    "openSegments": 0
+  },
+  "incidentCreated": false,
+  "announcementReadingConfirmed": false,
+  "gpsStarted": false,
+  "availabilityChanged": false,
+  "toolingNote": "First UI capture immediately after activity launch returned null root; read-only capture was retried after startup. MIUI theme warning did not prevent later XML dumps."
+}

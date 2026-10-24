@@ -1,0 +1,25 @@
+﻿{
+    "recordedAt":  "2026-10-24T03:02:52.9030224+00:00",
+    "result":  "PASS_FRESH_REAL_BACKEND_COMPILE_TEST_COMPILE_AND_SAFE_UNIT_SUITE",
+    "runId":  "aa229598-2ab8-4103-9034-7462b7514172",
+    "selectedClasses":  50,
+    "xmlReports":  50,
+    "totals":  {
+                   "skipped":  0,
+                   "errors":  0,
+                   "tests":  257,
+                   "failures":  0
+               },
+    "livePomUnchanged":  true,
+    "databaseConnectionsAllowed":  false,
+    "backendApplicationStarted":  false,
+    "sharedTargetCachesOverwritten":  false,
+    "integrationTestsExecuted":  false,
+    "localHttpFixturesAllowed":  true,
+    "externalEmailSent":  false,
+    "gitCommandsExecuted":  false,
+    "outputDirectory":  "backend/target/auditoria-ide-aa229598-2ab8-4103-9034-7462b7514172",
+    "commands":  "commands.json",
+    "selection":  "selected-tests.json",
+    "pomScope":  "pom-scope.json"
+}

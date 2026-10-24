@@ -8,7 +8,7 @@
     <header>
       <div>
         <h2 id="onboarding-list-title">Solicitudes recibidas</h2>
-        <p>La invitación aceptada y el correo verificado mantienen la solicitud pendiente de revisión.</p>
+        <p>Las altas nuevas y las regularizaciones de cuentas existentes requieren revisión y aprobación personal.</p>
       </div>
       <button class="management-button compact" type="button" [disabled]="loading()" (click)="load()">Actualizar</button>
     </header>
@@ -54,7 +54,7 @@
       <dl class="expediente-fields">
         <dt>Estado</dt><dd>{{ statusLabel(detail.status) }}</dd>
         <dt>Nombre declarado</dt><dd>{{ detail.fullName }}</dd>
-        <dt>Correo verificado</dt><dd>{{ detail.email }}</dd>
+        <dt>Correo declarado o de la cuenta</dt><dd>{{ detail.email }}</dd>
         <dt>Teléfono declarado</dt><dd>{{ detail.phone || 'Sin dato declarado' }}</dd>
       </dl>
       <button class="management-button" type="button" (click)="loadDocumentary()" [disabled]="documentaryLoading() || saving()">
@@ -69,6 +69,9 @@
           <h3 id="documentary-title">Revisión personal · catálogo {{ dossier.catalogVersion }}</h3>
           <p>{{ statusLabel(dossier.status) }} · Rondas: {{ dossier.reviewRounds }}</p>
           <p>No se conservan fotos ni PDF. Registra solo datos necesarios y el cotejo visual. Empresa y vehículo se revisan por separado.</p>
+          @if (dossier.existingAccountRegularization) {
+            <p>Regularización de cuenta existente: CUENTA-{{ dossier.existingUserId }} · CONDUCTOR-{{ dossier.existingDriverId }}. Se conservan la cuenta, ficha, grupo e historial. La vinculación no verifica el correo ni habilita la conducción; el titular completa la verificación de correo al entrar en la app.</p>
+          }
           @if (dossier.correctionDeadline) {
             <p>Subsanación hasta {{ dossier.correctionDeadline | date: 'medium' }}. {{ dossier.overdue ? 'Fuera de plazo; sin rechazo automático.' : '' }}</p>
           }
@@ -135,16 +138,26 @@
               <label><input type="checkbox" [(ngModel)]="reiteration" /> Rechazo por reiteración (desde cuatro rondas)</label>
             }
             @if (dossier.status === 'RETURNED') {
+              @if (dossier.existingAccountRegularization) {
+                <p>Tras recibir la subsanación, registra el motivo y reabre expresamente la revisión. Esto no modifica documentos ni aprueba el expediente.</p>
+                <button class="management-button" type="button" (click)="act('resubmit-existing')">Reabrir revisión tras subsanación</button>
+              }
               <label for="review-deadline">Nuevo plazo de subsanación<input id="review-deadline" type="datetime-local" [(ngModel)]="deadline" /></label>
               <button class="management-button" type="button" (click)="act('extend')">Ampliar plazo con motivo</button>
               <label><input type="checkbox" [(ngModel)]="reiteration" /> Rechazo por reiteración (desde cuatro rondas)</label>
               <button class="management-button" type="button" (click)="act('reject')">Rechazar con motivo</button>
             }
             @if (dossier.status === 'APPROVED' && !dossier.provisionedUserId) {
-              <p>Crear cuenta/conductor requiere un grupo activo y cupo histórico disponible. No activa la conducción sin unidad revisada.</p>
-              <button class="management-button" type="button" (click)="loadGroups()">Consultar grupos activos</button>
-              <label for="provision-group">Grupo activo<select id="provision-group" [(ngModel)]="groupId"><option value="">Selecciona un grupo</option>@for (group of activeGroups(); track group.id) { <option [value]="group.id">Grupo {{ group.id }}</option> }</select></label>
-              <button class="management-button primary" type="button" (click)="act('provision')">Crear cuenta y conductor</button>
+              @if (dossier.existingAccountRegularization) {
+                <p>Vincula el expediente aprobado con la cuenta y ficha indicadas. Se conserva el grupo existente y el cupo histórico.</p>
+                <label><input type="checkbox" [(ngModel)]="existingBindingConfirmed" /> Confirmo la vinculación con esta cuenta y conductor existentes, conservando sus identificadores e historial.</label>
+                <button class="management-button primary" type="button" (click)="act('provision-existing')" [disabled]="!existingBindingConfirmed || !dossier.existingUserId || !dossier.existingDriverId">Vincular expediente a cuenta existente</button>
+              } @else {
+                <p>Crear cuenta/conductor requiere un grupo activo y cupo histórico disponible. No activa la conducción sin unidad revisada.</p>
+                <button class="management-button" type="button" (click)="loadGroups()">Consultar grupos activos</button>
+                <label for="provision-group">Grupo activo<select id="provision-group" [(ngModel)]="groupId"><option value="">Selecciona un grupo</option>@for (group of activeGroups(); track group.id) { <option [value]="group.id">Grupo {{ group.id }}</option> }</select></label>
+                <button class="management-button primary" type="button" (click)="act('provision')">Crear cuenta y conductor</button>
+              }
             }
             @if (dossier.provisionedUserId) { <p>Cuenta vinculada: {{ dossier.provisionedUserId }}. No se crea otra cuenta.</p> }
           </fieldset>

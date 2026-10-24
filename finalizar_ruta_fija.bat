@@ -25,6 +25,12 @@ if errorlevel 1 (
   endlocal & exit /b 1
 )
 
+"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\Invoke-RutaFijaMobileLocalBridge.ps1" -Action Stop -Execute
+if errorlevel 1 (
+  echo [Ruta Fija] No se pudo verificar el cierre del puente movil; no se detienen procesos ajenos.
+  endlocal & exit /b 1
+)
+
 echo [Ruta Fija] Backend y CRM detenidos. PostgreSQL se conserva salvo lease propia y sin otros clientes...
 "%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\Invoke-RutaFijaPostgresqlLease.ps1" -Action StopOwned -Execute
 if errorlevel 1 (

@@ -1,0 +1,54 @@
+{
+  "result": "PASS",
+  "integrationCases": 13,
+  "classes": [
+    {
+      "class": "pe.rutafija.onboarding.api.LegacyConductorReconciliationIT",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 41.702,
+      "cases": [
+        "approvalAndExplicitProvisionAreRequiredAndOrdinaryNewAccountProvisionCannotAdoptLegacy",
+        "approvedLegacyCannotChangeGroupOrCreateAnotherIdentityByProvisioning",
+        "existingPreliminaryEmailIsNeverSilentlyAdoptedIntoTheLegacyDossier",
+        "inactiveLegacyAccountCannotOpenOrBeReactivatedByRegularization",
+        "inactiveGroupCannotBeUsedToProvisionAnApprovedExistingAccount",
+        "onlySameTenantAdminCanOpenAndSeeLegacyDossier",
+        "reviewedLegacyDossierLinksSameIdentityThenOtpAllowsIncorporationWithoutOperationalPermission",
+        "reviewedIdentityMustMatchLegacyDriverAndOpeningNeverRepairsDocumentsSilently",
+        "confirmationAndOperationPayloadAreRequiredAndCannotBeReusedForAnotherMeaning",
+        "openingAndProvisionPreserveExistingOtpChallengeAndItsAttemptAndSendBudget",
+        "returnedLegacyDossierCanBeResubmittedByItsAdminWithoutGrantingApproval",
+        "suspendedOrganizationCannotOpenARegularizationWithAnOlderAdminSession"
+      ],
+      "reportSha256": "e67ca258c257d79a44c5da5f8fb4b852c7b2650f704b1b67a23e1fef6b5d2558"
+    },
+    {
+      "class": "pe.rutafija.onboarding.api.LegacyConductorRegularizationConcurrencyIT",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 11.897,
+      "cases": [
+        "simultaneousOpeningPreservesExactlyOneDossierForTheSameAndDifferentOperationKeys"
+      ],
+      "reportSha256": "59ae850eb44c60808bbbf3d4cf7ae36d9705cde868f7f1ea1d4781b65ceeeaea"
+    }
+  ],
+  "databaseIsolation": [
+    "rf_legacy_qa_20261023",
+    "rf_legacy_concurrency_qa_20261023"
+  ],
+  "protectedHistoricalHarnessUsed": false,
+  "smtpMockedNoRealOtpSent": true,
+  "globalTruncateExecuted": false,
+  "finalCompilationIncludesEnvironmentOptIn": true,
+  "pendingStatusRecoveryVerifiedAfterFinalReadQueryChange": true,
+  "commands": [
+    "mvn --offline test-compile failsafe:integration-test failsafe:verify -Dit.test=LegacyConductorReconciliationIT,LegacyConductorRegularizationConcurrencyIT",
+    "mvn --offline test-compile failsafe:integration-test failsafe:verify -Dit.test=LegacyConductorReconciliationIT"
+  ]
+}

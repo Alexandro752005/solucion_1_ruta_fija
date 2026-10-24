@@ -1,0 +1,27 @@
+{
+  "package": "pe.rutafija.conductor",
+  "versionCode": 5,
+  "versionName": "0.1.0",
+  "buildType": "debug",
+  "privateEndpoint": "http://192.168.18.4:4311/api/v1",
+  "apk": "artifacts/mobile-navigation-2026-10-24/ruta-fija-conductor-debug-v5-navegacion.apk",
+  "apkBytes": 96553574,
+  "apkSha256": "a800ced26ab28413b218b8dffc927580001e51a380aeca2c9fa6175a6ae3031d",
+  "signerSha256": "7ad9b72e98103572c0d83e04271c4cbbba9d9cf71cef6f314bb58f2a58855d20",
+  "signerMatchesInstalled": true,
+  "previousVersionCode": 4,
+  "previousApkSha256": "3b5533d3bb70fdd7bd043ed9fa62b002fadcc86c4ceee2554a4dc9cc02a6ae3c",
+  "expectedUid": 10286,
+  "launcher": "pe.rutafija.conductor/.MainActivity",
+  "installed": true,
+  "applicationDataCleared": false,
+  "releaseCandidateArchiveChanged": false,
+  "sourceSha256": {
+    "mobile/lib/app/ruta_fija_router.dart": "e3afecb2765f77cc7275c65e7073ea1f6b5d149162bf11e400491f6078b5bfc7",
+    "mobile/test/app/conductor_navigation_persistence_test.dart": "fd1620b171d0089fcffe2acace4773e35bf2d64861202a2d575e6dc84bf67868"
+  },
+  "uidPreserved": true,
+  "sessionPreserved": true,
+  "realPhoneNavigationVerified": true,
+  "installedAtVerificationUtc": "2026-10-24T06:13:43.924088+00:00"
+}

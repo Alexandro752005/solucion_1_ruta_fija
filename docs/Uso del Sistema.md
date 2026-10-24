@@ -1,3 +1,50 @@
+# Estado vigente de uso local — 24/10/2026
+
+Esta actualización prevalece sobre los cortes históricos conservados debajo. La base normal `solucion_ruta_fija_1` tiene **V1 a V51**, 51 migraciones versionadas aprobadas y ninguna repetible de pruebas. La base histórica protegida `ruta_fija_test` conserva **V1 a V50 más su repetible específica**. El launcher comprueba cada esquema y no ejecuta migraciones ni semillas.
+
+1. Desde la raíz del proyecto, ejecutar `iniciar_ruta_fija.bat` en una consola normal. El CRM usa `http://127.0.0.1:4300` y la salud de la API `http://127.0.0.1:8080/actuator/health`. El puente móvil privado se inicia únicamente si su configuración local está habilitada y es válida para el teléfono autorizado.
+2. Usar las cuentas y contraseñas del archivo privado `backend/.local/accesos/CREDENCIALES_ACTIVAS.md`. La verificación por correo se realiza personalmente mediante el OTP recibido; las credenciales y los códigos no se incorporan al repositorio.
+3. El ADMIN debe aceptar personalmente los términos publicados. Una cuenta CONDUCTOR heredada requiere revisión de identidad coincidente, expediente aprobado, vinculación a su cuenta existente y habilitación vigente. La rectificación de un DNI introducido por error conserva su historial; no crea otra cuenta ni sustituye la aprobación personal.
+4. El escenario Taxi sintético quedó incorporado y habilitado para la prueba local; su evidencia no acredita documentación ni permisos para conducir en un piloto real. Los periodos son temporales: comprobar su vigencia en el servidor antes de operar. Activar al conductor no lo vuelve automáticamente disponible ni inicia un servicio.
+5. El POCO tiene la APK local de depuración **versionCode 5**, actualizada conservando sesión y datos. Incidencias y Comunicados mantienen los seis botones inferiores para las sesiones operativas. Las cuentas con alcance limitado conservan sus consultas propias y los destinos operativos siguen sujetos a habilitación.
+6. Al terminar la prueba, ejecutar `finalizar_ruta_fija.bat`: cierra los procesos propios y el puente identificado, preservando PostgreSQL si era un servicio compartido previamente activo.
+
+Referencias: [regularización de cuenta existente](operacion/regularizacion-conductor-heredado.md), [rectificación de identidad](operacion/rectificar-dni-revision-conductor.md), [cierre del escenario Taxi sintético](operacion/cierre-habilitacion-taxi-sintetica-2026-10-24.md) y [corrección de navegación Android](operacion/correccion-navegacion-inferior-mobile-2026-10-24.md). Continúa la frontera **GO para candidato local / NO_GO para piloto real** definida por el protocolo de transición.
+
+---
+
+# Actualización operativa: correos OTP y móvil integrado — 23/10/2026
+
+El runtime normal mantiene desarrollo en V50 y ahora integra el puente privado del teléfono en `iniciar_ruta_fija.bat`. Ya no requiere ejecutar el auxiliar Python por separado. Se activa únicamente con `backend/.local/ruta-fija-mobile-bridge.json` habilitado, en red privada y para un único teléfono. `finalizar_ruta_fija.bat` comprueba también su cierre. El modo smoke no inicia el puente.
+
+Las tres cuentas conservan sus contraseñas y ahora utilizan los Gmail indicados por el propietario. Los usuarios y contraseñas vigentes están en el archivo privado `backend/.local/accesos/CREDENCIALES_ACTIVAS.md`. La conexión SMTP con TLS se comprobó, pero cada titular debe solicitar e introducir su OTP en la interfaz. Para el conductor heredado sigue pendiente conciliar su expediente de incorporación aprobado antes del login.
+
+Usar una consola normal para iniciar y finalizar. [Procedimiento completo de correo y puente móvil](operacion/correo-otp-y-puente-movil-local.md). Las indicaciones siguientes sobre el auxiliar temporal describen cortes anteriores; prevalece esta actualización.
+
+---
+
+# Actualización operativa — migración nativa aprobada el 23/10/2026
+
+La base **`solucion_ruta_fija_1` ya está en V50**: 38 migraciones nuevas, 50 versionadas en total, sin fallos ni repetibles de pruebas. Se generó un respaldo de 81 446 bytes, se restauró y ensayó en una base aislada y se conservaron los datos originales. La compuerta se mantiene intacta y el inicio normal ya aprobó. El texto V12 conservado debajo describe el corte anterior.
+
+```powershell
+.\iniciar_ruta_fija.bat
+.\scripts\Invoke-RutaFijaNativeRuntime.ps1 -Action Test
+# Después de la prueba manual:
+.\finalizar_ruta_fija.bat
+```
+
+- CRM: **http://127.0.0.1:4300**, formulario comprobado en un navegador real.
+- API: **http://127.0.0.1:8080/actuator/health**, `UP`.
+- El modo normal permite la operación de desarrollo y conserva los trabajos de mantenimiento. El modo smoke de solo lectura continúa siendo una opción separada; no hace falta para el inicio normal.
+- El POCO v4 usa `http://192.168.18.4:4311/api/v1`. Para esta sesión se dejó un puente privado a8080, exclusivo para `192.168.18.9`; se apaga al finalizar el backend. Si se reinicia la sesión con las mismas IP y4311 libre: `python .runtime/migracion-nativa-v50-20261023_1714/start_mobile_bridge.py`. El BAT normal no inicia ese puente temporal automáticamente.
+- Se verificó conectividad móvil por USB y LAN. No se ingresaron credenciales ni se certifica un flujo autenticado completo. Utilizar cuentas de desarrollo, sin trasladar la fixture FIS02.
+- El cierre conserva PostgreSQL porque ya estaba activo antes de iniciar el proyecto. El launcher sigue sin ejecutar migraciones ni semillas al abrirse.
+
+[Informe, comandos, respaldo y límites de esta operación](operacion/migracion-local-v12-v50-2026-10-23.md). Las instrucciones siguientes quedan como antecedente de sus respectivos cortes; prevalece esta actualización para el estado de la base.
+
+---
+
 # Uso vigente de los ejecutables — corte 2026-10-23
 
 Esta sección reemplaza las instrucciones de arranque, cierre y pruebas del manual histórico conservado al final. Corresponde a Ruta Fija V3.1 en este workspace; no cambia el acta firmada ni los archivos de L-00 a L-08. La aplicación confirma acciones con el servidor y no incorpora una cola offline.

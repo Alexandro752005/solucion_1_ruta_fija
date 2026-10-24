@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "unchanged": {
+    "backups/L-00-2026-10-13-final3/source-snapshot.zip": "3806510606a1565f23b8c526a13cc1049bc79141babdb8e1316f042488b3d11b",
+    "docs/legal/publicado/terminos-admin-v1.0.0.md": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+    "backend/target/ruta-fija-backend-0.1.0-SNAPSHOT.jar": "bf17109f3986c6176c1461389cbc9382902fba4c6a609cf66dd48a3561a5c7b8"
+  },
+  "packagedRuntimeMigrationSourcesMatch": 50
+}

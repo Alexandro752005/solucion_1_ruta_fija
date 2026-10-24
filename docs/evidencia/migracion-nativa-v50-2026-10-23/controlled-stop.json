@@ -1,0 +1,10 @@
+﻿{
+    "result":  "PASS",
+    "oldBackendPid":  7296,
+    "oldFrontendPid":  11660,
+    "oldBridgePid":  8468,
+    "ports808043004311Released":  true,
+    "sharedPostgresqlSamePid":  7584,
+    "bridgeAutoStopped":  true,
+    "checkedAtUtc":  "2026-10-23T22:24:52.7304683+00:00"
+}

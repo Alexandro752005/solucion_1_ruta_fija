@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "originalApplicationTables": 15,
+  "originalRows": 142,
+  "originalColumnHashesIdenticalImmediatelyAfterMigration": true,
+  "original14TablesStillIdenticalAfterRuntime": true,
+  "original91AuditRowsStillIdenticalAfterRuntime": true,
+  "runtimeAuditRowsAppended": 18,
+  "newAuditActions": [
+    "SECURITY_ACCESS_DENIED"
+  ],
+  "protectedTestDatabaseIdentical": true
+}

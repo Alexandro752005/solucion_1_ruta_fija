@@ -108,8 +108,31 @@ public class PersonIdentityService {
     }
     @Transactional(readOnly=true)
     public void requireVerified(UUID userId){if(!repository.verified(userId))throw conflict("La identidad documental requiere comprobacion manual autorizada.");}
+    /** A legacy account is linked only to its already personally reviewed exact document. */
+    @Transactional
+    public String requireReviewedConductorDocument(UUID userId,String documentType,String documentNumber){
+        String hash=documentHash(documentType,documentNumber);ensureStableKey();
+        var binding=repository.byUser(userId).orElseThrow(()->conflict("Revisa personalmente la identidad del conductor antes de abrir su regularizacion."));
+        if(!binding.personHash().equals(hash))throw conflict("El documento revisado no coincide con la ficha anterior. Se requiere una conciliacion documental autorizada; esta operacion no corrige identidades.");
+        return hash;
+    }
     public boolean verified(UUID userId){return repository.verified(userId);}
     private void reviewAndBind(AppUser reviewer,AppUser target,IdentityReview review,String method){
+        String hash=validateReviewedDocument(target,review);ensureStableKey();
+        bind(hash,target.getId(),reviewer.getId(),method,review.reference().strip());
+        audit.record(reviewer,"PERSON_IDENTITY_REVIEWED","APP_USER",target.getId(),Map.of("reviewKind",method,"originalRetained",false));
+    }
+    /** Validates personal proof without binding or modifying the existing identity. */
+    public String validateConductorReviewCorrection(AppUser target,IdentityReview review,String reason){
+        safeReason(reason);String hash=validateReviewedDocument(target,review);
+        String normalized=reason.toLowerCase(Locale.ROOT);
+        if(normalized.replaceAll("[^0-9]","").contains(review.documentNumber())||
+                normalized.contains(target.getEmail().toLowerCase(Locale.ROOT))||
+                target.getFullName().length()>3&&normalized.contains(target.getFullName().toLowerCase(Locale.ROOT)))
+            throw validation("El motivo de correccion no debe contener los datos personales comprobados.");
+        ensureStableKey();requireNoOtherLegacyDriver(hash,target.getId());return hash;
+    }
+    private String validateReviewedDocument(AppUser target,IdentityReview review){
         if(review==null||!Boolean.TRUE.equals(review.originalReviewed())||!Boolean.TRUE.equals(review.identityConfirmed()))
             throw forbidden("Confirma la revision visual del original y la identidad de la misma persona.");
         if(!Set.of("IN_PERSON","PRIOR_SECURE_CONTACT").contains(review.method()))throw validation("Metodo de revision no autorizado.");
@@ -119,9 +142,7 @@ public class PersonIdentityService {
                 reference.contains(target.getEmail().toLowerCase(Locale.ROOT))||
                 (target.getFullName().length()>3&&reference.contains(target.getFullName().toLowerCase(Locale.ROOT))))
             throw validation("La referencia de revision no debe contener los datos personales comprobados.");
-        ensureStableKey();
-        bind(hash,target.getId(),reviewer.getId(),method,review.reference().strip());
-        audit.record(reviewer,"PERSON_IDENTITY_REVIEWED","APP_USER",target.getId(),Map.of("reviewKind",method,"originalRetained",false));
+        return hash;
     }
     private void bind(String hash,UUID userId,UUID reviewer,String method,String reference){
         // The authenticated writer already holds its actor lock. Never wait on
@@ -129,13 +150,7 @@ public class PersonIdentityService {
         // explicitly rather than introducing an actor/person lock inversion.
         if(!repository.lockPerson(hash))throw conflict("Existe una revision de identidad concurrente; consulta el resultado antes de volver a intentarlo.");
         repository.lockUser(userId);
-        // A legacy document is only a conflict signal, never proof authorizing
-        // implicit adoption. Its original account must be reviewed separately.
-        for(var legacy:repository.driverDocuments()){
-            if(!Objects.equals(legacy.userId(),userId)&&"DNI".equalsIgnoreCase(legacy.documentType())&&legacy.documentNumber()!=null&&
-                    legacy.documentNumber().matches("[0-9]{8}")&&hash.equals(documentHash("DNI",legacy.documentNumber())))
-                throw conflict("Los registros anteriores requieren conciliacion manual antes de vincular esta identidad a otra cuenta.");
-        }
+        requireNoOtherLegacyDriver(hash,userId);
         var existing=repository.byUser(userId);
         if(existing.isPresent()){
             if(!existing.get().personHash().equals(hash))throw conflict("La cuenta ya corresponde a otra identidad; una correccion requiere un procedimiento autorizado.");
@@ -143,6 +158,15 @@ public class PersonIdentityService {
         }
         if(repository.byHash(hash).isPresent())throw conflict("La persona ya tiene una cuenta; utiliza su recuperacion o el procedimiento autorizado de vinculacion.");
         repository.bind(hash,userId,reviewer,method,reference,now());
+    }
+    private void requireNoOtherLegacyDriver(String hash,UUID userId){
+        // A legacy document is only a conflict signal, never proof authorizing
+        // implicit adoption. Its original account must be reviewed separately.
+        for(var legacy:repository.driverDocuments()){
+            if(!Objects.equals(legacy.userId(),userId)&&"DNI".equalsIgnoreCase(legacy.documentType())&&legacy.documentNumber()!=null&&
+                    legacy.documentNumber().matches("[0-9]{8}")&&hash.equals(documentHash("DNI",legacy.documentNumber())))
+                throw conflict("Los registros anteriores requieren conciliacion manual antes de vincular esta identidad a otra cuenta.");
+        }
     }
     private String documentHash(String type,String number){
         if(!"DNI".equals(type)||number==null||!number.matches("[0-9]{8}"))throw validation("El piloto requiere DNI de ocho digitos revisado; no se consulta RENIEC.");

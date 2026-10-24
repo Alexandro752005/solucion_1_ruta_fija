@@ -51,6 +51,14 @@ if errorlevel 1 (
   endlocal & exit /b 1
 )
 
+if not defined RF_RUNTIME_MODE (
+  "%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\Invoke-RutaFijaMobileLocalBridge.ps1" -Action Start -Execute
+  if errorlevel 1 (
+    echo [Ruta Fija] API y CRM activos; el puente movil no aprobo. Revise .runtime\mobile-bridge.stderr.log.
+    endlocal & exit /b 1
+  )
+)
+
 echo.
 echo [Ruta Fija] CRM disponible en http://127.0.0.1:4300
 echo [Ruta Fija] API disponible en http://127.0.0.1:8080

@@ -1,0 +1,30 @@
+{
+  "reportedMessage": "La sesion no permite esta consulta. Inicia sesion de nuevo.",
+  "frontendMapping": "HTTP 401",
+  "unitIdValid": true,
+  "existingGroupMembershipAndVehicleReviewWereAlreadySaved": true,
+  "freshAdminSessionSucceeded": true,
+  "freshAccessTtlSeconds": 900,
+  "automaticMutationReplayDisabled": true,
+  "historicalBrowserTokenInspected": false,
+  "exactHistorical401Cause": "Not proven; old token/response not retained. Expiration versus revocation cannot be asserted.",
+  "authenticationOrBusinessRulesChanged": false,
+  "sources": [
+    {
+      "path": "frontend/src/app/features/qualification/driver-qualification.page.ts",
+      "sha256": "d4245c79368e25fb7c7fbb6c72830626404ee98043fef51ca61e3a46285e3c2d"
+    },
+    {
+      "path": "frontend/src/app/core/qualification/qualification-api.service.ts",
+      "sha256": "d2dd7bdbab9fdd7b8f38c0a14a2e0cf2007caead88ef6230c3695793924dd55e"
+    },
+    {
+      "path": "frontend/src/app/core/auth/auth.interceptor.ts",
+      "sha256": "3fd7ec2950b84d6c985b621e1b3e309307e7b70771ff187bcdd20d14e08ee5b2"
+    },
+    {
+      "path": "backend/src/main/resources/application.yml",
+      "sha256": "0f9c57a5af31b20a1252c3cb44738102744649c07a473957847c92f7bf26b53a"
+    }
+  ]
+}

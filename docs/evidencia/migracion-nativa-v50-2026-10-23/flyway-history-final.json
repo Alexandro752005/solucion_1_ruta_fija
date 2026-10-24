@@ -1,0 +1,352 @@
+[
+  {
+    "rank": 1,
+    "version": "1",
+    "script": "V1__identity_organization_audit.sql",
+    "checksum": -206354619,
+    "success": true
+  },
+  {
+    "rank": 2,
+    "version": "2",
+    "script": "V2__fleet_administration.sql",
+    "checksum": 91755740,
+    "success": true
+  },
+  {
+    "rank": 3,
+    "version": "3",
+    "script": "V3__operation_assignments_incidents_announcements.sql",
+    "checksum": -1751597743,
+    "success": true
+  },
+  {
+    "rank": 4,
+    "version": "4",
+    "script": "V4__remove_mobile_only_driver_status.sql",
+    "checksum": 758757059,
+    "success": true
+  },
+  {
+    "rank": 5,
+    "version": "5",
+    "script": "V5__assignment_overlap_exclusion_constraints.sql",
+    "checksum": -2092869568,
+    "success": true
+  },
+  {
+    "rank": 6,
+    "version": "6",
+    "script": "V6__unify_administrative_roles_to_admin.sql",
+    "checksum": -531783212,
+    "success": true
+  },
+  {
+    "rank": 7,
+    "version": "7",
+    "script": "V7__mobile_assignment_workflow.sql",
+    "checksum": -981875079,
+    "success": true
+  },
+  {
+    "rank": 8,
+    "version": "8",
+    "script": "V8__mobile_current_location.sql",
+    "checksum": 881987188,
+    "success": true
+  },
+  {
+    "rank": 9,
+    "version": "9",
+    "script": "V9__mobile_incidents_and_announcement_receipts.sql",
+    "checksum": 1411323351,
+    "success": true
+  },
+  {
+    "rank": 10,
+    "version": "10",
+    "script": "V10__mobile_command_receipts.sql",
+    "checksum": 252436321,
+    "success": true
+  },
+  {
+    "rank": 11,
+    "version": "11",
+    "script": "V11__driver_closed_mobile_incidents.sql",
+    "checksum": 1246590680,
+    "success": true
+  },
+  {
+    "rank": 12,
+    "version": "12",
+    "script": "V12__mobile_offline_availability_receipts.sql",
+    "checksum": -1894459664,
+    "success": true
+  },
+  {
+    "rank": 13,
+    "version": "13",
+    "script": "V13__email_verification_otp.sql",
+    "checksum": 1860096776,
+    "success": true
+  },
+  {
+    "rank": 14,
+    "version": "14",
+    "script": "V14__super_admin_recovery.sql",
+    "checksum": 574485202,
+    "success": true
+  },
+  {
+    "rank": 15,
+    "version": "15",
+    "script": "V15__admin_terms_versions_and_acceptances.sql",
+    "checksum": 123150137,
+    "success": true
+  },
+  {
+    "rank": 16,
+    "version": "16",
+    "script": "V16__organization_invitations_and_validation_limits.sql",
+    "checksum": 1336786963,
+    "success": true
+  },
+  {
+    "rank": 17,
+    "version": "17",
+    "script": "V17__assisted_conductor_recovery.sql",
+    "checksum": -2042838536,
+    "success": true
+  },
+  {
+    "rank": 18,
+    "version": "18",
+    "script": "V18__conductor_onboarding_requests.sql",
+    "checksum": 1140863912,
+    "success": true
+  },
+  {
+    "rank": 19,
+    "version": "19",
+    "script": "V19__onboarding_acceptance_constraints.sql",
+    "checksum": 1163257945,
+    "success": true
+  },
+  {
+    "rank": 20,
+    "version": "20",
+    "script": "V20__onboarding_applicant_access.sql",
+    "checksum": 1619129269,
+    "success": true
+  },
+  {
+    "rank": 21,
+    "version": "21",
+    "script": "V21__onboarding_documentary_review.sql",
+    "checksum": -1454160924,
+    "success": true
+  },
+  {
+    "rank": 22,
+    "version": "22",
+    "script": "V22__pilot_historical_creation_limits.sql",
+    "checksum": -71817497,
+    "success": true
+  },
+  {
+    "rank": 23,
+    "version": "23",
+    "script": "V23__record_only_inserted_pilot_accounts.sql",
+    "checksum": -713701575,
+    "success": true
+  },
+  {
+    "rank": 24,
+    "version": "24",
+    "script": "V24__admin_lifecycle.sql",
+    "checksum": -1639470369,
+    "success": true
+  },
+  {
+    "rank": 25,
+    "version": "25",
+    "script": "V25__onboarding_account_continuity.sql",
+    "checksum": 304333950,
+    "success": true
+  },
+  {
+    "rank": 26,
+    "version": "26",
+    "script": "V26__common_person_identity.sql",
+    "checksum": 749008276,
+    "success": true
+  },
+  {
+    "rank": 27,
+    "version": "27",
+    "script": "V27__driver_qualification_and_temporal_units.sql",
+    "checksum": -534188533,
+    "success": true
+  },
+  {
+    "rank": 28,
+    "version": "28",
+    "script": "V28__system_qualification_incidents.sql",
+    "checksum": -66879596,
+    "success": true
+  },
+  {
+    "rank": 29,
+    "version": "29",
+    "script": "V29__group_resource_memberships.sql",
+    "checksum": 542392712,
+    "success": true
+  },
+  {
+    "rank": 30,
+    "version": "30",
+    "script": "V30__versioned_route_catalog.sql",
+    "checksum": 1556153858,
+    "success": true
+  },
+  {
+    "rank": 31,
+    "version": "31",
+    "script": "V31__vehicle_maintenance_and_declared_availability.sql",
+    "checksum": -503425610,
+    "success": true
+  },
+  {
+    "rank": 32,
+    "version": "32",
+    "script": "V32__assignment_route_receipts.sql",
+    "checksum": 1188052913,
+    "success": true
+  },
+  {
+    "rank": 33,
+    "version": "33",
+    "script": "V33__offer_deadline_at_service_start.sql",
+    "checksum": 62323136,
+    "success": true
+  },
+  {
+    "rank": 34,
+    "version": "34",
+    "script": "V34__service_type_margins_and_reservation_windows.sql",
+    "checksum": -1293887710,
+    "success": true
+  },
+  {
+    "rank": 35,
+    "version": "35",
+    "script": "V35__scheduled_service_and_offer_history.sql",
+    "checksum": -855382084,
+    "success": true
+  },
+  {
+    "rank": 36,
+    "version": "36",
+    "script": "V36__service_execution_segments.sql",
+    "checksum": 1863546240,
+    "success": true
+  },
+  {
+    "rank": 37,
+    "version": "37",
+    "script": "V37__bounded_service_gps.sql",
+    "checksum": 1574036722,
+    "success": true
+  },
+  {
+    "rank": 38,
+    "version": "38",
+    "script": "V38__route_declaration_gps_expiry_unlink.sql",
+    "checksum": 79839723,
+    "success": true
+  },
+  {
+    "rank": 39,
+    "version": "39",
+    "script": "V39__service_time_correction_history.sql",
+    "checksum": 301144457,
+    "success": true
+  },
+  {
+    "rank": 40,
+    "version": "40",
+    "script": "V40__safe_service_interruption.sql",
+    "checksum": 1200585482,
+    "success": true
+  },
+  {
+    "rank": 41,
+    "version": "41",
+    "script": "V41__accepted_service_handover.sql",
+    "checksum": -980421109,
+    "success": true
+  },
+  {
+    "rank": 42,
+    "version": "42",
+    "script": "V42__handover_guard_unambiguous_alias.sql",
+    "checksum": -1736215169,
+    "success": true
+  },
+  {
+    "rank": 43,
+    "version": "43",
+    "script": "V43__incident_catalog_and_terminal_guard.sql",
+    "checksum": -1086920676,
+    "success": true
+  },
+  {
+    "rank": 44,
+    "version": "44",
+    "script": "V44__announcement_recipients_and_durable_notices.sql",
+    "checksum": -593861111,
+    "success": true
+  },
+  {
+    "rank": 45,
+    "version": "45",
+    "script": "V45__versioned_service_report_emissions.sql",
+    "checksum": 1534667099,
+    "success": true
+  },
+  {
+    "rank": 46,
+    "version": "46",
+    "script": "V46__purpose_bound_retention.sql",
+    "checksum": -665416234,
+    "success": true
+  },
+  {
+    "rank": 47,
+    "version": "47",
+    "script": "V47__mobile_preferences.sql",
+    "checksum": 1721917847,
+    "success": true
+  },
+  {
+    "rank": 48,
+    "version": "48",
+    "script": "V48__report_provenance_and_scope_guards.sql",
+    "checksum": -1639556804,
+    "success": true
+  },
+  {
+    "rank": 49,
+    "version": "49",
+    "script": "V49__purpose_bound_personal_retirement.sql",
+    "checksum": -1087281022,
+    "success": true
+  },
+  {
+    "rank": 50,
+    "version": "50",
+    "script": "V50__retired_owner_trigger_record_projection.sql",
+    "checksum": -684717977,
+    "success": true
+  }
+]

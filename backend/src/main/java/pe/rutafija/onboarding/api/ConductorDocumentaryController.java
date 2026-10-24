@@ -33,6 +33,10 @@ public class ConductorDocumentaryController {
     public ResponseEntity<Dossier> reject(@PathVariable UUID id,@Valid @RequestBody Decision command){return response(service.reject(id,command));}
     @PostMapping("/requests/{id}/provision") @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Dossier> provision(@PathVariable UUID id,@Valid @RequestBody Decision command){return response(service.provision(id,command));}
+    @PostMapping("/requests/{id}/provision-existing") @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Dossier> provisionExisting(@PathVariable UUID id,@Valid @RequestBody Decision command){return response(service.provisionExisting(id,command));}
+    @PostMapping("/requests/{id}/resubmit-existing") @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Dossier> resubmitExisting(@PathVariable UUID id,@Valid @RequestBody Decision command){return response(service.resubmitExisting(id,command));}
 
     @GetMapping("/applicant/requests/{id}/documentary-status")
     public ResponseEntity<Dossier> applicant(@PathVariable UUID id,@RequestHeader(value="X-Onboarding-Token",required=false)String token){return response(service.applicantDossier(id,token));}

@@ -1,0 +1,8 @@
+{
+  "result": "PASS_RESTORED_V12_MIGRATED_TO_V50_ORIGINAL_DATA_PRESERVED",
+  "database": "rf_v50_rehearsal_20261023_1714",
+  "applied": 38,
+  "total": 50,
+  "preservedTables": 15,
+  "preservedRows": 142
+}

@@ -1,0 +1,22 @@
+{
+  "result": "PASS",
+  "verifiedAtUtc": "2026-10-24T02:22:49.510949+00:00",
+  "database": "solucion_ruta_fija_1",
+  "version": "1.0.0",
+  "documentId": "156fbf6d-665b-43d5-b72d-008f7a4b2e5d",
+  "contentSha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+  "sourceBytes": 21108,
+  "synthetic": false,
+  "inserted": false,
+  "migrations": 50,
+  "acceptanceCount": 0,
+  "acceptancesCreated": 0,
+  "changedTables": [],
+  "protectedTestUnchanged": true,
+  "protectedTables": 105,
+  "backup": "backend/.local/accesos/publicacion-terminos-20261023_212246-4d9fc987/pre-publicacion-terminos.dump",
+  "backupBytes": 655601,
+  "backupSha256": "e09834242678911e886c192bedd026d4365e83048ee88ba4e739ef8f59bf5c75",
+  "backupArchiveListReadable": true,
+  "immutableSourceAndBaseSnapshotUnchanged": true
+}

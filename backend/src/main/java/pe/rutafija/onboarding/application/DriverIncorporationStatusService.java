@@ -55,12 +55,21 @@ public class DriverIncorporationStatusService {
                 "El conductor no existe en el alcance autorizado.");
         var driver = drivers.getFirst();
         UUID accountId = (UUID) driver.get("user_id");
-        // Exact tenant + account + Driver correspondence; never adopt an identity by email/name.
+        // Exact tenant + account + Driver correspondence. A pending legacy association
+        // additionally requires its immutable ADMIN opening event; email/name never link it.
         var requests = jdbc.queryForList("""
-                select id,status,personal_approved_at,provisioned_at,catalog_id,catalog_version,catalog_hash,modality
-                  from conductor_onboarding_request
-                 where organization_id=? and linked_driver_id=? and linked_user_id=?
-                """, actor.getOrganizationId(), driverId, accountId);
+                select r.id,r.status,r.personal_approved_at,r.provisioned_at,r.catalog_id,r.catalog_version,
+                       r.catalog_hash,r.modality,r.linked_driver_id,r.linked_user_id
+                  from conductor_onboarding_request r
+                 where r.organization_id=? and (
+                       (r.linked_driver_id=? and r.linked_user_id=?)
+                    or exists(select 1 from conductor_person_binding b
+                               where b.identity_id=r.identity_id and b.organization_id=r.organization_id
+                                 and b.driver_id=? and b.user_id=?
+                                 and exists(select 1 from conductor_onboarding_review_event e
+                                             where e.request_id=r.id and e.resulting_request_id=r.id
+                                               and e.actor_kind='ADMIN' and e.action='LEGACY_REGULARIZATION_OPENED')))
+                """, actor.getOrganizationId(), driverId, accountId, driverId, accountId);
         boolean unambiguous = requests.size() == 1;
         Map<String,Object> request = unambiguous ? requests.getFirst() : Map.of();
         UUID requestId = unambiguous ? (UUID) request.get("id") : null;
@@ -68,6 +77,7 @@ public class DriverIncorporationStatusService {
                 : requests.isEmpty() ? "NO_LINKED_REQUEST" : "REQUIRES_REVIEW";
         boolean personalApproved = "APPROVED".equals(state) && request.get("personal_approved_at") != null;
         boolean provisioned = personalApproved && request.get("provisioned_at") != null
+                && driverId.equals(request.get("linked_driver_id")) && Objects.equals(accountId,request.get("linked_user_id"))
                 && Boolean.TRUE.equals(driver.get("account_matches"));
         String documents = requestId == null ? "UNKNOWN" : documentaryState(requestId, request, now);
         long links = ((Number)driver.get("active_links")).longValue();

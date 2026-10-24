@@ -1,0 +1,106 @@
+{
+  "result": "PASS_LOCAL_CORRECTION_FEATURE_DEPLOYED_PENDING_PERSONAL_DNI_ENTRY",
+  "recordedAtUtc": "2026-10-24T03:43:07.267649+00:00",
+  "localDate": "2026-10-23",
+  "nativeSchema": "V51",
+  "rootCause": "Mistyped DNI in personal identity review differs from preserved legacy Driver; owner confirmed entry error.",
+  "migration": {
+    "applied": 1,
+    "total": 51,
+    "failed": 0,
+    "historicalV1ThroughV50Unchanged": true,
+    "protectedTestV50PlusRepeatableUnchanged": true
+  },
+  "commands": [
+    {
+      "command": ".runtime/correccion-dni-20261023_223428/probar-backend.ps1",
+      "result": "PASS",
+      "integrationTests": {
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "isolatedDatabase": "rf_identity_correction_qa_20261023",
+      "fixtures": "transaction rollback; no TRUNCATE; no real email"
+    },
+    {
+      "command": "scripts/Test-RutaFijaBackendUnitSafe.ps1 -Execute",
+      "result": "PASS",
+      "totals": {
+        "skipped": 0,
+        "errors": 0,
+        "tests": 257,
+        "failures": 0
+      },
+      "selectedClasses": 50
+    },
+    {
+      "command": "npm.cmd run typecheck",
+      "result": "PASS"
+    },
+    {
+      "command": "npm.cmd run test:ci -- --include=src/app/features/drivers/drivers.page.spec.ts --include=src/app/features/onboarding/onboarding-requests.page.spec.ts",
+      "result": "PASS",
+      "tests": 53
+    },
+    {
+      "command": "npm.cmd run build",
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    {
+      "command": "scripts/Test-RutaFijaRuntimeSchemaPolicy.ps1 -Execute -EvidenceFile <new-path>",
+      "result": "PASS",
+      "syntheticChecks": 14
+    },
+    {
+      "command": "java --class-path <cached-flyway-classpath> .runtime/correccion-dni-20261023_223428/MigrateNativeV51.java",
+      "result": "PASS",
+      "applied": 1
+    },
+    {
+      "command": "mvn --offline -f backend/pom.xml -Dmaven.test.skip=true package",
+      "result": "PASS",
+      "testsAtPackaging": "skipped; prior unit and dedicated IT results recorded separately"
+    },
+    {
+      "command": "finalizar_ruta_fija.bat; iniciar_ruta_fija.bat (sequential invocations)",
+      "result": "PASS",
+      "postgresql": "existing shared process preserved"
+    },
+    {
+      "command": "python .runtime/correccion-dni-20261023_223428/verificar-final.py",
+      "result": "PASS",
+      "api": "UP",
+      "crm": "UP",
+      "realPocoBridge": "PASS"
+    },
+    {
+      "command": "scripts/Publish-RutaFijaAdminTermsLocal.ps1 (check only)",
+      "result": "PASS_PUBLISHED",
+      "acceptances": 1,
+      "publicationExecuted": false
+    }
+  ],
+  "backup": {
+    "path": "backend/.local/accesos/correccion-dni-20261023_223428/pre-correccion-dni-v51.dump",
+    "bytes": 660191,
+    "sha256": "aafea2909eadee7ed9d199593177176a4c536feaddf1c095a9add2c96e1dc9f9",
+    "archiveListReadable": true
+  },
+  "jarSha256": "84fc6f244bb95f9bc3a8fdacf674f4264534d26f44da580af3cb1d28d8cc91e0",
+  "protectedHistoricalTablesUnchanged": 105,
+  "livePersonalCorrectionExecuted": false,
+  "liveConductorApproved": false,
+  "liveConductorEmailVerifiedByAgent": false,
+  "nextHumanAction": "ADMIN enters the personally verified correct DNI through Rectificar DNI ingresado por error, then completes existing documentary regularization.",
+  "toolingNotes": [
+    "Initial verification helper shadowed the Python http module with a list; failed before HTTP or data mutation, then corrected and full verification passed.",
+    "Mockito/JDK dynamic agent notices remain in test tooling output; no frontend build warnings or runtime stderr."
+  ],
+  "gitCommandsExecuted": false,
+  "protectedTestMutationsExecuted": false,
+  "realOtpEmailsSent": false
+}

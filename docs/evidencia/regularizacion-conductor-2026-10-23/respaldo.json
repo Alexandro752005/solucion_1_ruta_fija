@@ -1,0 +1,11 @@
+{
+  "database": "solucion_ruta_fija_1",
+  "privatePath": "backend/.local/accesos/regularizacion-conductor-20261023_215206/pre-regularizacion.dump",
+  "bytes": 657360,
+  "sha256": "4794aa3cb5ff7757563e1816f0cdb600744b3dab1d5118b0c1a8b7fb95e99a37",
+  "archiveListValidated": true,
+  "restorationOfThisArchivePerformed": false,
+  "sourceBackup": "backend/.local/accesos/regularizacion-conductor-20261023_215206/fuentes-previas.zip",
+  "individualOriginalFiles": "backend/.local/accesos/regularizacion-conductor-fuentes",
+  "previousJarPreserved": true
+}

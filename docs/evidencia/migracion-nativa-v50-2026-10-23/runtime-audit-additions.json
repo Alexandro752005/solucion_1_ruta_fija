@@ -1,0 +1,74 @@
+[
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:15:11.467169+00:00"
+  },
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:17:25.658589+00:00"
+  },
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:19:55.520604+00:00"
+  },
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:20:09.430534+00:00"
+  },
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:20:09.629047+00:00"
+  },
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:20:09.888315+00:00"
+  },
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:20:17.039931+00:00"
+  },
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:20:17.228085+00:00"
+  },
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:20:17.45573+00:00"
+  },
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:21:00.63178+00:00"
+  },
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:21:00.853192+00:00"
+  },
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:21:01.067164+00:00"
+  },
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:21:10.850603+00:00"
+  },
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:21:11.144082+00:00"
+  },
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:21:11.38721+00:00"
+  },
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:26:15.44057+00:00"
+  },
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:26:15.912444+00:00"
+  },
+  {
+    "action": "SECURITY_ACCESS_DENIED",
+    "occurredAt": "2026-10-23T22:26:16.308269+00:00"
+  }
+]

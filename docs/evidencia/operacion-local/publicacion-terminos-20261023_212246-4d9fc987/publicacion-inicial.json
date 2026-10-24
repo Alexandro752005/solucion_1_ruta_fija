@@ -1,0 +1,18 @@
+﻿{
+    "result":  "PASS_AFTER_CONCURRENT_LOGIN_REVIEW",
+    "database":  "solucion_ruta_fija_1",
+    "documentId":  "156fbf6d-665b-43d5-b72d-008f7a4b2e5d",
+    "version":  "1.0.0",
+    "contentSha256":  "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+    "documentsBefore":  0,
+    "documentsAfter":  1,
+    "acceptancesCreated":  0,
+    "publicationAtUtc":  "2026-10-24T02:21:09.159221Z",
+    "backup":  "backend/.local/accesos/publicacion-terminos-20261023_212107-b05ba0a6/pre-publicacion-terminos.dump",
+    "backupBytes":  647346,
+    "backupSha256":  "f2a7859122ea98555e6c36451857c74f6bbab69edfdd094683daf593c20d9802",
+    "migrations":  50,
+    "protectedTestUnchanged":  true,
+    "concurrentLoginActivityReviewed":  true,
+    "sourceAndApprovalUnchanged":  true
+}

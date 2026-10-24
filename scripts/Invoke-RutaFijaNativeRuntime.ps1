@@ -522,7 +522,7 @@ function Get-OrBuildBackendJar {
         )
         Push-Location $backendRoot
         try {
-            & .\mvnw.cmd --batch-mode --no-transfer-progress -Dmaven.test.skip=true package
+            & .\mvnw.cmd --batch-mode --no-transfer-progress '-Dmaven.test.skip=true' package
             if ($LASTEXITCODE -ne 0) {
                 throw 'No se pudo empaquetar el backend para el arranque nativo.'
             }
@@ -691,7 +691,7 @@ function Invoke-NativeStop {
 }
 
 switch ($Action) {
-    'Plan' { Write-Output 'NATIVE_RUNTIME=PLAN_NO_CONNECTION Start=V50_GATE_NO_MIGRATIONS SmokeTestDatabase=EXPLICIT_READ_ONLY_ONLY' }
+    'Plan' { Write-Output 'NATIVE_RUNTIME=PLAN_NO_CONNECTION Start=NATIVE_V51_OR_HISTORICAL_TEST_V50_GATE_NO_MIGRATIONS SmokeTestDatabase=EXPLICIT_READ_ONLY_ONLY' }
     'Start' { Invoke-NativeStart }
     'Stop' { Invoke-NativeStop }
     'Test' { Test-RutaFijaRuntime }

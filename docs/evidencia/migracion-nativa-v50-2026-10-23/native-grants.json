@@ -1,0 +1,763 @@
+{
+  "tables": 105,
+  "readonlyTables": [
+    "flyway_schema_history",
+    "pilot_account_creation",
+    "retention_policy_catalog",
+    "retention_audit_hold_request",
+    "retention_audit_hold_approval",
+    "retention_plan",
+    "retention_plan_item",
+    "retention_execution",
+    "retention_controlled_copy",
+    "retention_copy_evidence",
+    "retention_personal_delegation",
+    "retention_personal_plan_delegation",
+    "retention_personal_hold_request",
+    "retention_personal_hold_approval",
+    "retention_personal_retirement",
+    "retention_personal_capability"
+  ],
+  "authorityTablesNoAccess": [
+    "retention_execution_authority",
+    "retention_personal_row_authority"
+  ],
+  "operationalDmlTables": 87,
+  "privileges": {
+    "super_admin_recovery_credential": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "super_admin_recovery_challenge": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "flyway_schema_history": {
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    "organization": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "app_user": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "audit_event": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "transport_group": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "announcement_receipt": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "group_coordinator": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "admin_terms_acceptance": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "admin_terms_document": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "refresh_token": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "invitation_validation_account_guard": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "invitation_validation_origin_guard": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "invitation_validation_failure": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "conductor_onboarding_identity": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "conductor_onboarding_email_challenge": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "conductor_onboarding_invitation_failure": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "conductor_onboarding_invitation_guard": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "conductor_onboarding_request": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "conductor_document_revision": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "conductor_onboarding_review_event": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "conductor_person_binding": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "email_otp_challenge": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "admin_activation": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "pilot_account_creation": {
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    "admin_activation_event": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "admin_security_revocation": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "conductor_onboarding_access_token": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "person_identity": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "conductor_common_person_bridge": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "person_identity_hash_key": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "vehicle_plate_revision": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "driver_qualification_control": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "qualification_review": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "driver_unit_period": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "qualification_operation": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "driver_unit_request": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "qualification_service_attention": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "group_driver_membership": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "group_vehicle_membership": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "group_membership_operation": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "assignment_group_snapshot": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "route_definition": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "route_version": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "route_operation": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "assignment_route_history": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "vehicle_maintenance_control": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "vehicle_maintenance": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "vehicle_maintenance_operation": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "assignment_route_replacement": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "service_type": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "service_type_version": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "service_type_operation": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "scheduled_service_operation": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "service_execution_segment": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "service_gps_point": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "driver_current_location": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "assignment_route_declaration": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "service_closure_notice": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "gps_access_request": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "gps_incident_evidence": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "service_time_request": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "service_time_correction": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "service_time_correction_segment": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "scheduled_service": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "driver": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "vehicle": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "service_attention": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "service_attention_release": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "service_handover": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "service_handover_resolution": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "mobile_command_receipt": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "assignment": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "incident": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "incident_action": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "announcement": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "announcement_recipient": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "operation_notice": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "pilot_lifecycle": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "report_emission_series": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "report_emission": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "report_emission_content": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "report_emission_request": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "report_emission_retirement": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "retention_policy_catalog": {
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    "retention_audit_hold_request": {
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    "retention_audit_hold_approval": {
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    "retention_plan_item": {
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    "mobile_preferences": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "conductor_recovery_request": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "retention_plan": {
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    "retention_execution": {
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    "retention_controlled_copy": {
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    "retention_copy_evidence": {
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    "retention_execution_authority": {
+      "select": false,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    "retention_personal_delegation": {
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    "retention_personal_plan_delegation": {
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    "retention_personal_hold_request": {
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    "retention_personal_hold_approval": {
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    "retention_personal_retirement": {
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    "retention_personal_row_authority": {
+      "select": false,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    },
+    "driver_vehicle_link": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "organization_invitation": {
+      "select": true,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": false
+    },
+    "retention_personal_capability": {
+      "select": true,
+      "insert": false,
+      "update": false,
+      "delete": false,
+      "truncate": false
+    }
+  }
+}

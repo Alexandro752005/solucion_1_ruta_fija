@@ -1,0 +1,248 @@
+{
+  "announcement": {
+    "columns": [
+      "id",
+      "organization_id",
+      "created_by",
+      "title",
+      "body",
+      "audience_type",
+      "audience_id",
+      "require_read_ack",
+      "created_at"
+    ],
+    "rows": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "announcement_receipt": {
+    "columns": [
+      "announcement_id",
+      "user_id",
+      "delivered_at",
+      "read_at"
+    ],
+    "rows": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "app_user": {
+    "columns": [
+      "id",
+      "organization_id",
+      "email",
+      "password_hash",
+      "full_name",
+      "phone",
+      "role",
+      "active",
+      "last_login_at",
+      "created_at",
+      "updated_at"
+    ],
+    "rows": 3,
+    "sha256": "a820452e4702635bfaf459fd20a1151f21e8e6c900229ea843e14761fd2da318"
+  },
+  "assignment": {
+    "columns": [
+      "id",
+      "organization_id",
+      "driver_id",
+      "vehicle_id",
+      "created_by",
+      "status",
+      "origin_text",
+      "destination_text",
+      "scheduled_at",
+      "scheduled_end_at",
+      "reserved_at",
+      "started_at",
+      "completed_at",
+      "cancelled_at",
+      "cancellation_reason",
+      "notes",
+      "idempotency_key",
+      "version",
+      "created_at",
+      "updated_at",
+      "response_mode",
+      "response_deadline_at",
+      "accepted_at",
+      "rejected_at",
+      "rejection_reason",
+      "expired_at"
+    ],
+    "rows": 2,
+    "sha256": "0d40c664465d8d18fe861cf8e0f5026d80bad643d1189927940e6c0d6759c9c5"
+  },
+  "audit_event": {
+    "columns": [
+      "id",
+      "organization_id",
+      "user_id",
+      "action",
+      "entity_type",
+      "entity_id",
+      "correlation_id",
+      "metadata_json",
+      "occurred_at"
+    ],
+    "rows": 91,
+    "sha256": "2b81c39ade1c9d219fcbafac2d8ef2b12847aa35627ea83703e4c81140bb445f"
+  },
+  "driver": {
+    "columns": [
+      "id",
+      "organization_id",
+      "user_id",
+      "group_id",
+      "full_name",
+      "phone",
+      "document_type",
+      "document_number",
+      "license_number",
+      "availability_status",
+      "location_consent",
+      "active",
+      "created_at",
+      "updated_at"
+    ],
+    "rows": 2,
+    "sha256": "d1fca3936690a779bb06ed268fd41c2966ed8ba1ca761b4cc04a2484b0f4afcd"
+  },
+  "driver_current_location": {
+    "columns": [
+      "driver_id",
+      "organization_id",
+      "latitude",
+      "longitude",
+      "accuracy_m",
+      "captured_at",
+      "received_at",
+      "expires_at",
+      "source"
+    ],
+    "rows": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "driver_vehicle_link": {
+    "columns": [
+      "driver_id",
+      "vehicle_id",
+      "is_primary",
+      "active",
+      "linked_at"
+    ],
+    "rows": 3,
+    "sha256": "8e4bd004ecf31b605d584d5e4b7db634e0c234fa41fac235f7173ce0b602a73d"
+  },
+  "group_coordinator": {
+    "columns": [
+      "group_id",
+      "user_id",
+      "assigned_at",
+      "assigned_by"
+    ],
+    "rows": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "incident": {
+    "columns": [
+      "id",
+      "organization_id",
+      "driver_id",
+      "assignment_id",
+      "reported_by",
+      "category",
+      "status",
+      "description",
+      "reported_at",
+      "follow_up_note",
+      "followed_up_by",
+      "followed_up_at",
+      "resolved_at",
+      "version",
+      "created_at",
+      "updated_at",
+      "source",
+      "driver_closed_by",
+      "driver_closed_at"
+    ],
+    "rows": 3,
+    "sha256": "f7987e7d0daa65f16f29c429d36a6b280b60a89aec646dddecade94bfddb5439"
+  },
+  "mobile_command_receipt": {
+    "columns": [
+      "event_id",
+      "organization_id",
+      "driver_id",
+      "command_type",
+      "assignment_id",
+      "request_hash",
+      "result_status",
+      "http_status",
+      "server_state",
+      "error_code",
+      "occurred_at",
+      "processed_at"
+    ],
+    "rows": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "organization": {
+    "columns": [
+      "id",
+      "legal_name",
+      "trade_name",
+      "status",
+      "timezone",
+      "created_at",
+      "updated_at"
+    ],
+    "rows": 1,
+    "sha256": "1f80fd3dc07eced9a7606986cf248476f2afd4d174cd885682f6493681f6e063"
+  },
+  "refresh_token": {
+    "columns": [
+      "id",
+      "user_id",
+      "family_id",
+      "token_hash",
+      "expires_at",
+      "revoked_at",
+      "used_at",
+      "replaced_by_id",
+      "created_at"
+    ],
+    "rows": 34,
+    "sha256": "b5f655b24453c7965c93d4cb22e0f83129d08b7ffa1a58674bf77f58c92f6708"
+  },
+  "transport_group": {
+    "columns": [
+      "id",
+      "organization_id",
+      "name",
+      "description",
+      "active",
+      "created_at",
+      "updated_at"
+    ],
+    "rows": 1,
+    "sha256": "0da225e7f5a4693a1797c9819321647427c20fa4b650ff13b5549916ab4390ea"
+  },
+  "vehicle": {
+    "columns": [
+      "id",
+      "organization_id",
+      "plate",
+      "brand",
+      "model",
+      "year",
+      "color",
+      "status",
+      "active",
+      "created_at",
+      "updated_at"
+    ],
+    "rows": 2,
+    "sha256": "295ed249a082faea3ee9764143844c9858b4a361723705cb1706d336023831bc"
+  }
+}

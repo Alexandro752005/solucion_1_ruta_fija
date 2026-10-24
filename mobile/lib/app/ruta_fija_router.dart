@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/session/mobile_session_controller.dart';
 import '../core/navigation/conductor_destination.dart';
+import '../features/auth/domain/mobile_auth_models.dart';
 import '../features/announcements/data/mobile_announcement_repository.dart';
 import '../features/announcements/data/mobile_notice_repository.dart';
 import '../features/announcements/presentation/notices_page.dart';
@@ -51,8 +52,8 @@ final class RutaFijaRouter {
         incidentGateway: incidentGateway,
         announcementGateway: announcementGateway,
         noticeGateway: noticeGateway,
-        preferences:preferences,
-        reportsAvailable:reportGateway!=null&&reportFiles!=null,
+        preferences: preferences,
+        reportsAvailable: reportGateway != null && reportFiles != null,
       ),
     );
   }
@@ -77,48 +78,74 @@ final class RutaFijaRouter {
       sessionController: sessionController,
       operationalBuilder: builder,
     );
+    Widget shell(ConductorDestination destination) => ConductorNavigationShell(
+      destination: destination,
+      environment: environment,
+      sessionController: sessionController,
+      driverGateway: driverGateway,
+      assignmentGateway: assignmentGateway,
+      incidentGateway: incidentGateway,
+      announcementGateway: announcementGateway,
+      noticeGateway: noticeGateway,
+      preferences: preferences,
+      reportsAvailable: reportGateway != null && reportFiles != null,
+    );
     // These routes use consultation APIs. Loss of operational eligibility must
     // not hide an already-approved member's own incidents or received messages.
+    // Operational sessions keep the shared navigation while consulting them;
+    // the other destinations still enforce their own qualification gate.
     if (settings.name == '/notices' && noticeGateway != null) {
       return MaterialPageRoute<void>(
         settings: settings,
         builder: (_) => NoticesPage(gateway: noticeGateway),
       );
     }
-    if(settings.name=='/reports'&&reportGateway!=null&&reportFiles!=null){
-      return MaterialPageRoute<void>(settings:settings,builder:(_)=>MobileReportsPage(gateway:reportGateway,files:reportFiles));
+    if (settings.name == '/reports' &&
+        reportGateway != null &&
+        reportFiles != null) {
+      return MaterialPageRoute<void>(
+        settings: settings,
+        builder: (_) =>
+            MobileReportsPage(gateway: reportGateway, files: reportFiles),
+      );
     }
     if (settings.name == '/announcements') {
       return MaterialPageRoute<void>(
         settings: settings,
-        builder: (_) => Scaffold(
-          appBar: AppBar(title: const Text('Mis comunicados')),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: AnnouncementsPage(
-                announcementGateway: announcementGateway,
+        builder: (_) =>
+            sessionController.state.accessScope == MobileAccessScope.operations
+            ? shell(ConductorDestination.announcements)
+            : Scaffold(
+                appBar: AppBar(title: const Text('Mis comunicados')),
+                body: SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: AnnouncementsPage(
+                      announcementGateway: announcementGateway,
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
       );
     }
     if (settings.name == '/incidents' && sessionController.state.user != null) {
       return MaterialPageRoute<void>(
         settings: settings,
-        builder: (_) => Scaffold(
-          appBar: AppBar(title: const Text('Mis incidencias')),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: IncidentsPage(
-                incidentGateway: incidentGateway,
-                userId: sessionController.state.user!.id,
+        builder: (_) =>
+            sessionController.state.accessScope == MobileAccessScope.operations
+            ? shell(ConductorDestination.incidents)
+            : Scaffold(
+                appBar: AppBar(title: const Text('Mis incidencias')),
+                body: SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: IncidentsPage(
+                      incidentGateway: incidentGateway,
+                      userId: sessionController.state.user!.id,
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
       );
     }
     if (settings.name == '/qualification') {
@@ -146,20 +173,7 @@ final class RutaFijaRouter {
     final destination = ConductorDestination.fromPath(settings.name);
     return MaterialPageRoute<void>(
       settings: RouteSettings(name: destination.path),
-      builder: (_) => guard(
-        (_) => ConductorNavigationShell(
-          destination: destination,
-          environment: environment,
-          sessionController: sessionController,
-          driverGateway: driverGateway,
-          assignmentGateway: assignmentGateway,
-          incidentGateway: incidentGateway,
-          announcementGateway: announcementGateway,
-          noticeGateway: noticeGateway,
-          preferences:preferences,
-          reportsAvailable:reportGateway!=null&&reportFiles!=null,
-        ),
-      ),
+      builder: (_) => guard((_) => shell(destination)),
     );
   }
 }

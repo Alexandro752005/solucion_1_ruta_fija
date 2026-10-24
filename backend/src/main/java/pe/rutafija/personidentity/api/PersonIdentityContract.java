@@ -20,5 +20,11 @@ public final class PersonIdentityContract {
     public record AdminReview(@NotNull @Valid IdentityReview identityReview,@NotBlank @Size(max=500) String reason) {
         @Override public String toString(){return "AdminReview[redacted]";}
     }
+    public record ConductorReviewCorrection(@NotBlank @Size(max=72) String currentPassword,
+            @NotBlank @Size(min=8,max=100) String operationKey,
+            @NotBlank @Size(max=500) String reason,@NotNull @Valid IdentityReview identityReview,
+            @NotNull @AssertTrue Boolean dataEntryErrorConfirmed,@NotNull @AssertTrue Boolean samePersonConfirmed) {
+        @Override public String toString(){return "ConductorReviewCorrection[redacted]";}
+    }
     public record Status(UUID userId,boolean identityVerified) { }
 }

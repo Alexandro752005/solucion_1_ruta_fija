@@ -42,6 +42,14 @@ public final class ConductorDocumentaryContract {
             @NotBlank @Size(min = 8, max = 100) String operationKey,
             @NotBlank @Pattern(regexp = "[0-9]{6}") String invitationCode) { }
 
+    public record OpenLegacyRegularization(
+            @NotBlank @Size(min = 8, max = 100) String operationKey,
+            @NotBlank @Size(max = 500) String reason,
+            @NotNull @AssertTrue Boolean identityPreservedConfirmed) { }
+
+    public record LegacyRegularizationOpened(UUID requestId, String status,
+                                             UUID existingUserId, UUID existingDriverId) { }
+
     public record Requirement(String requirementId, String title, boolean mandatory, List<String> fieldKeys) { }
 
     public record Document(String requirementId, String entity, Map<String, String> fields,
@@ -56,5 +64,6 @@ public final class ConductorDocumentaryContract {
                           List<Requirement> catalog, List<Document> documents, List<History> history,
                           Instant correctionDeadline, boolean overdue, boolean personalApproved,
                           UUID provisionedUserId, UUID provisionedDriverId, boolean operationalEnabled,
-                          Instant reapplyAfter) { }
+                          Instant reapplyAfter, boolean existingAccountRegularization,
+                          UUID existingUserId, UUID existingDriverId) { }
 }

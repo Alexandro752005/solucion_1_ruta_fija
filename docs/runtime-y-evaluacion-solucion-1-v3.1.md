@@ -1,3 +1,23 @@
+# Actualización del contexto de ejecución — 24/10/2026
+
+El corte vigente incorpora la regularización conservadora de cuentas CONDUCTOR existentes, la rectificación auditada de revisiones de identidad y la migración nativa **V51**. El runtime normal exige V1 a V51 sin repetibles; la fixture histórica de pruebas mantiene V1 a V50 y su repetible específica, sin migración ni limpieza automática al arrancar.
+
+`iniciar_ruta_fija.bat` integra el puente móvil privado cuando está configurado; `finalizar_ruta_fija.bat` comprueba su cierre y preserva el PostgreSQL compartido. La aceptación de términos, los OTP y las decisiones personales de revisión siguen sus compuertas existentes. El escenario Taxi completado es sintético y solo sirve para pruebas locales.
+
+La APK de depuración instalada en el POCO es ahora **versionCode 5**. Las rutas Incidencias y Comunicados conservan la navegación inferior de la sesión operativa. La corrección obtuvo 8 pruebas de regresión, 241 pruebas móviles aprobadas en total, análisis Flutter sin incidencias y ocho comprobaciones físicas en el POCO. Se conservaron la sesión, los datos y el historial; la firma release y el archivo de entrega anterior no cambian por esta APK de prueba.
+
+Consúltese el [uso vigente del sistema](Uso%20del%20Sistema.md), el [cierre de rectificación V51](operacion/cierre-rectificacion-dni-conductor-2026-10-23.md) y la [evidencia de navegación](operacion/correccion-navegacion-inferior-mobile-2026-10-24.md). Los resultados anteriores conservados debajo describen sus respectivos cortes y no sustituyen esta actualización. Se mantiene **GO PARA CANDIDATO LOCAL DE ENTREGA / NO_GO_PILOTO_REAL**.
+
+---
+
+# Actualización comprobada — 23/10/2026, después de la migración nativa
+
+Desarrollo ya pasó de V12 a **V50** con respaldo íntegro, ensayo restaurado, 38 migraciones nuevas, conservación de datos y compuerta estricta aprobada. API8080 y CRM4300 arrancaron en modo normal y se dejaron abiertos; el formulario CRM se verificó en Edge. Se comprobó transporte del POCO por USB y por un puente privado4311→8080. La prueba autenticada completa y el piloto real siguen fuera de esta verificación.
+
+[Informe de migración y runtime](operacion/migracion-local-v12-v50-2026-10-23.md). Las referencias siguientes a desarrollo V12 y a una migración pendiente describen el corte previo de preparación del commit, conservado como antecedente. La regla de no migrar automáticamente y las demás fronteras de alcance se mantienen.
+
+---
+
 # Ruta Fija V3.1 — runtime y evaluación de la Solución 1
 
 Fecha: 23/10/2026, America/Lima. Corte preparado para revisión del commit de entrega. Se contrasta el mensaje solicitado con el código, las actas y los resultados disponibles; no se activan servicios ni se migra ninguna base para redactarlo.

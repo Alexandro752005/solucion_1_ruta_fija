@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "database": "solucion_ruta_fija_1",
+  "applied": 38,
+  "total": 50,
+  "originalTablesPreserved": 15,
+  "originalRowsPreserved": 142,
+  "finishedAtUtc": "2026-10-23T22:13:45.950044+00:00",
+  "testDatabaseChanged": false
+}

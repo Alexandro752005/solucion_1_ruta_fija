@@ -1,0 +1,9 @@
+{
+  "processId": 7596,
+  "backendProcessId": 8068,
+  "bind": "192.168.18.4",
+  "phone": "192.168.18.9",
+  "port": 4311,
+  "upstream": "http://127.0.0.1:8080",
+  "autoStop": "WHEN_EXACT_BACKEND_PROCESS_EXITS"
+}

@@ -1,3 +1,11 @@
+# Estado local vigente — 23/10/2026
+
+Ruta Fija V3.1 tiene la base de desarrollo **`solucion_ruta_fija_1` en V50** y el arranque normal comprobado de API8080/CRM4300. Se aplicaron 38 migraciones después de respaldo y ensayo, manteniendo la compuerta estricta, los datos originales y la fixture de pruebas protegida. El esquema V1–V12 y los comandos de bootstrap históricos descritos debajo corresponden a cortes anteriores.
+
+Para iniciar: `.\iniciar_ruta_fija.bat`. Para terminar: `.\finalizar_ruta_fija.bat`. Consultar el [manual vigente de los ejecutables](<docs/Uso del Sistema.md>) y el [informe de migración con comandos y evidencia](docs/operacion/migracion-local-v12-v50-2026-10-23.md). El acceso móvil local y los requisitos del piloto real tienen su alcance explícito en el informe.
+
+---
+
 # Ruta Fija — CRM Web Administrativo y Reportes
 
 Ruta Fija es un monolito modular para administrar organizaciones, usuarios,

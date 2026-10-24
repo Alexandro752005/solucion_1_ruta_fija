@@ -14,6 +14,19 @@ export interface ConductorOnboardingExpediente {
   readonly phone: string | null;
 }
 
+export interface ExistingDriverRegularizationCommand {
+  readonly operationKey: string;
+  readonly reason: string;
+  readonly identityPreservedConfirmed: true;
+}
+
+export interface ExistingDriverRegularization {
+  readonly requestId: string;
+  readonly status: string;
+  readonly existingUserId: string;
+  readonly existingDriverId: string;
+}
+
 export type DocumentaryResult = 'PENDING' | 'CONFORME' | 'OBSERVADO' | 'NO_APLICA_JUSTIFICADO' | 'POR_CONTRASTAR';
 export interface DocumentaryRequirement {
   readonly requirementId: string;
@@ -58,6 +71,9 @@ export interface DocumentaryExpediente {
   readonly reapplyAfter: string | null;
   readonly provisionedUserId?: string | null;
   readonly provisionedDriverId?: string | null;
+  readonly existingAccountRegularization?: boolean;
+  readonly existingUserId?: string | null;
+  readonly existingDriverId?: string | null;
 }
 export interface DocumentaryMutation {
   readonly expectedVersion: number;

@@ -238,6 +238,13 @@ export interface DriverIdentityReviewStatus {
   readonly identityVerified: boolean;
 }
 
+export interface DriverIdentityCorrectionPayload extends DriverIdentityReviewPayload {
+  readonly currentPassword: string;
+  readonly operationKey: string;
+  readonly dataEntryErrorConfirmed: true;
+  readonly samePersonConfirmed: true;
+}
+
 export const VEHICLE_STATUSES = [
   'DISPONIBLE',
   'EN_SERVICIO',
