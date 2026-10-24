@@ -1,32 +1,84 @@
 version: 2
+
+# Version updates are reviewed weekly. Security updates remain independent and
+# should be reviewed promptly. Major upgrades are intentionally not grouped.
 updates:
   - package-ecosystem: maven
     directory: /backend
     schedule:
       interval: weekly
       day: monday
-      time: "10:00"
+      time: '10:00'
       timezone: America/Lima
-    open-pull-requests-limit: 5
-    labels: [dependencies, backend]
+    open-pull-requests-limit: 3
+    assignees: [Alexandro752005]
+    labels: [enhancement]
+    commit-message:
+      prefix: 'chore(deps-backend)'
+    groups:
+      spring-minor-patch:
+        patterns:
+          - 'org.springframework.boot:*'
+          - 'org.springframework:*'
+        update-types: [minor, patch]
+      maven-other-minor-patch:
+        patterns: ['*']
+        exclude-patterns:
+          - 'org.springframework.boot:*'
+          - 'org.springframework:*'
+        update-types: [minor, patch]
 
   - package-ecosystem: npm
     directory: /frontend
     schedule:
       interval: weekly
       day: monday
-      time: "10:15"
+      time: '10:15'
       timezone: America/Lima
-    open-pull-requests-limit: 5
-    labels: [dependencies, frontend]
+    open-pull-requests-limit: 3
+    assignees: [Alexandro752005]
+    labels: [enhancement]
+    commit-message:
+      prefix: 'chore(deps-frontend)'
+    groups:
+      angular-minor-patch:
+        patterns: ['@angular/*']
+        update-types: [minor, patch]
+      npm-other-minor-patch:
+        patterns: ['*']
+        exclude-patterns: ['@angular/*']
+        update-types: [minor, patch]
+
+  - package-ecosystem: pub
+    directory: /mobile
+    schedule:
+      interval: weekly
+      day: monday
+      time: '10:30'
+      timezone: America/Lima
+    open-pull-requests-limit: 2
+    assignees: [Alexandro752005]
+    labels: [enhancement]
+    commit-message:
+      prefix: 'chore(deps-mobile)'
+    groups:
+      pub-minor-patch:
+        patterns: ['*']
+        update-types: [minor, patch]
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
       day: monday
-      time: "10:30"
+      time: '10:45'
       timezone: America/Lima
-    open-pull-requests-limit: 3
-    labels: [dependencies, ci]
-
+    open-pull-requests-limit: 2
+    assignees: [Alexandro752005]
+    labels: [enhancement]
+    commit-message:
+      prefix: 'chore(deps-ci)'
+    groups:
+      actions-minor-patch:
+        patterns: ['*']
+        update-types: [minor, patch]

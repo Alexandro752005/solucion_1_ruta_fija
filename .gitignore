@@ -45,9 +45,20 @@ test-results/
 backups/
 logs/
 *.log
+*.tmp
+*.rfdb
 uploads/
 tmp/
 .docker-cli-config/
+
+# Generated/private folders at any depth; archived tracked evidence is preserved.
+**/.local/
+**/node_modules/
+**/target/
+**/.dart_tool/
+**/build/
+**/.gradle/
+**/.pub-cache/
 
 # IDE and operating system
 .idea/
