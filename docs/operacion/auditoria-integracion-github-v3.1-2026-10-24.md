@@ -34,3 +34,7 @@ La fuente actual tiene **51 migraciones versionadas V1 a V51**. La evidencia his
 Siguen vigentes **GO PARA CANDIDATO LOCAL DE ENTREGA / NO_GO_PILOTO_REAL**. Los términos ADMIN registran aceptación autenticada y hash SHA-256; no se atribuye una firma criptográfica personal al administrador. La firma técnica del acta y la firma Android tienen alcances distintos. El piloto requiere las compuertas del [protocolo vinculante](../legal/protocolo-transicion-piloto-real.md).
 
 La descripción del Pull Request referencia pruebas y actas fechadas; no presenta sus conteos como una nueva revalidación de todos los lotes. Las credenciales, binarios y respaldos permanecen en el archivo local privado, fuera del contenido del PR.
+
+## Primera comprobación en GitHub
+
+El PR #30 quedó automáticamente fusionable (`mergeable=true`, estado `clean`). El primer job Linux del backend detectó `./mvnw: Permission denied`, código 126, antes de compilar: el wrapper conservaba modo Git `100644`. Se corrige a `100755` mediante `git update-index --chmod=+x backend/mvnw`, sin modificar el contenido del script ni dependencias. Los resultados de CI se vuelven a consultar sobre el nuevo commit; este fallo inicial se conserva como antecedente.
