@@ -43,9 +43,13 @@ public class JwtService {
     }
 
     public String issueMobileAccessToken(AppUser user, UUID driverId) {
+        return issueMobileAccessToken(user,driverId,"INCORPORATION");
+    }
+    public String issueMobileAccessToken(AppUser user, UUID driverId,String accessScope) {
         Objects.requireNonNull(driverId, "driverId is required for a mobile session");
         return encode(baseClaims(user)
                 .claim("sessionChannel", "MOBILE")
+                .claim("accessScope",accessScope)
                 .claim("driverId", driverId.toString()));
     }
 
@@ -65,9 +69,8 @@ public class JwtService {
                 .issuedAt(issuedAt)
                 .expiresAt(issuedAt.plus(properties.jwt().accessTtl()))
                 .subject(user.getId().toString())
-                .claim("email", user.getEmail())
-                .claim("fullName", user.getFullName())
-                .claim("role", user.getRole().name());
+                .claim("role", user.getRole().name())
+                .claim("sessionVersion", user.getSessionVersion());
         if (user.getOrganizationId() != null) {
             claims.claim("organizationId", user.getOrganizationId().toString());
         }

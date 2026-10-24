@@ -1,0 +1,132 @@
+<section class="management-page">
+  <rf-page-header
+    title="Invitaciones"
+    description="Emite, consulta y revoca códigos de incorporación para tu organización."
+    [context]="organizationName()"
+  />
+
+  @if (notice(); as currentNotice) {
+    <div class="management-alert success" role="status">{{ currentNotice }}</div>
+  }
+
+  <section class="management-panel invitation-issue-panel" aria-labelledby="invitation-issue-title">
+    <header>
+      <div>
+        <h2 id="invitation-issue-title">Emitir una invitación</h2>
+        <p>El código queda asociado al correo ingresado y se devuelve una sola vez.</p>
+      </div>
+    </header>
+
+    <form class="management-form invitation-form" [formGroup]="form" (ngSubmit)="issue()" novalidate>
+      <div class="field">
+        <label for="invitation-recipient-email">Correo del destinatario</label>
+        <input
+          id="invitation-recipient-email"
+          type="email"
+          formControlName="recipientEmail"
+          autocomplete="email"
+          maxlength="180"
+          [attr.aria-invalid]="form.controls.recipientEmail.invalid && form.controls.recipientEmail.touched"
+        />
+        @if (form.controls.recipientEmail.invalid && form.controls.recipientEmail.touched) {
+          <p class="management-field-error">Ingresa un correo v&aacute;lido de hasta 180 caracteres.</p>
+        }
+      </div>
+      <button class="management-button primary" type="submit" [disabled]="issuing()">
+        {{ issuing() ? 'Emitiendo&hellip;' : 'Emitir invitaci&oacute;n' }}
+      </button>
+    </form>
+
+    @if (issueError(); as error) {
+      <div class="management-alert error" role="alert">
+        <strong>{{ error.message }}</strong>
+        @if (error.correlationId) { <span>Referencia: {{ error.correlationId }}</span> }
+        @if (issueMayHaveSucceeded()) {
+          <p>Revisa la lista antes de volver a emitir. Si la respuesta se perdi&oacute;, el c&oacute;digo no se puede recuperar desde el historial.</p>
+          <button class="management-button compact" type="button" (click)="load(0)">Actualizar historial</button>
+        }
+      </div>
+    }
+
+    @if (issuedInvitation(); as issued) {
+      <section class="invitation-code-receipt" aria-labelledby="issued-code-title">
+        <div>
+          <h3 id="issued-code-title">C&oacute;digo emitido · Invitación {{ issued.id }}</h3>
+          <p class="invitation-code" aria-label="C&oacute;digo de invitaci&oacute;n">{{ issued.code }}</p>
+          <p>
+            Comparte este c&oacute;digo fuera de Ruta Fija por un canal autorizado. La aplicaci&oacute;n no lo env&iacute;a por correo, enlace ni c&oacute;digo QR.
+          </p>
+          <p>Vence: <time [attr.datetime]="issued.expiresAt">{{ issued.expiresAt | date: 'medium' }}</time></p>
+        </div>
+        <button class="management-button compact" type="button" (click)="dismissCode()">Ocultar c&oacute;digo</button>
+      </section>
+    }
+  </section>
+
+  @if (revokeError(); as error) {
+    <div class="management-alert error" role="alert">
+      <strong>{{ error.message }}</strong>
+      @if (error.correlationId) { <span>Referencia: {{ error.correlationId }}</span> }
+    </div>
+  }
+
+  <section class="management-panel" aria-labelledby="invitation-list-title">
+    <header>
+      <div>
+        <h2 id="invitation-list-title">Historial de invitaciones</h2>
+        <p>{{ totalItems() }} registros. El historial no contiene los c&oacute;digos emitidos.</p>
+      </div>
+    </header>
+
+    @if (listError(); as error) {
+      <div class="management-alert error" role="alert">
+        <strong>{{ error.message }}</strong>
+        @if (error.correlationId) { <span>Referencia: {{ error.correlationId }}</span> }
+        <button class="management-button compact" type="button" (click)="load()">Reintentar</button>
+      </div>
+    } @else if (loading()) {
+      <p class="management-empty" role="status">Cargando invitaciones&hellip;</p>
+    } @else if (invitations().length === 0) {
+      <p class="management-empty">Todav&iacute;a no hay invitaciones para mostrar.</p>
+    } @else {
+      <div class="management-table-wrap">
+        <table class="management-table">
+          <thead>
+            <tr><th>Invitación</th><th>Emisi&oacute;n</th><th>Vencimiento</th><th>Revocaci&oacute;n</th><th>Uso</th><th>Acciones</th></tr>
+          </thead>
+          <tbody>
+            @for (invitation of invitations(); track invitation.id) {
+              <tr>
+                <td>{{ invitation.id }}</td>
+                <td><time [attr.datetime]="invitation.issuedAt">{{ invitation.issuedAt | date: 'medium' }}</time></td>
+                <td><time [attr.datetime]="invitation.expiresAt">{{ invitation.expiresAt | date: 'medium' }}</time></td>
+                <td>@if (invitation.revokedAt) { <time [attr.datetime]="invitation.revokedAt">{{ invitation.revokedAt | date: 'medium' }}</time> } @else { — }</td>
+                <td>@if (invitation.usedAt) { <time [attr.datetime]="invitation.usedAt">{{ invitation.usedAt | date: 'medium' }}</time> } @else { — }</td>
+                <td>
+                  @if (canRevoke(invitation)) {
+                    <button class="management-button compact danger" type="button" (click)="requestRevoke(invitation)">Revocar</button>
+                  } @else {
+                    <span class="management-muted">Sin acciones</span>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+    <rf-pagination [page]="page()" [totalPages]="totalPages()" [totalItems]="totalItems()" (previous)="previousPage()" (next)="nextPage()" />
+  </section>
+</section>
+
+@if (pendingRevoke(); as invitation) {
+  <rf-confirm-dialog
+    [open]="true"
+    title="Revocar invitaci&oacute;n"
+    [message]="'Se impedir&aacute; el uso futuro de la invitaci&oacute;n ' + invitation.id + '. &iquest;Deseas continuar?'"
+    [confirmLabel]="revoking() ? 'Revocando&hellip;' : 'Revocar'"
+    [danger]="true"
+    (confirmed)="confirmRevoke()"
+    (cancelled)="cancelRevoke()"
+  />
+}

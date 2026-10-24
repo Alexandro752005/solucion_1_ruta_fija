@@ -6,4 +6,4 @@ app:
 logging:
   level:
     pe.rutafija: INFO
-    org.springframework.security: INFO
+    org.springframework.security: WARN

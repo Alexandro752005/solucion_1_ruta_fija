@@ -1,6 +1,8 @@
 [CmdletBinding()]
 param(
-    [string]$ProjectRoot
+    [string]$ProjectRoot,
+    [ValidateSet('Product','Legacy')]
+    [string]$Scope = 'Product'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -41,7 +43,10 @@ function Get-SourceFiles {
 $javaFiles = @(Get-SourceFiles -Path (Join-Path $ProjectRoot 'backend/src/main/java') -Filter '*.java')
 $typeScriptFiles = @(Get-SourceFiles -Path (Join-Path $ProjectRoot 'frontend/src') -Filter '*.ts' |
     Where-Object { $_.Name -notlike '*.spec.ts' })
-$dartFiles = @(Get-SourceFiles -Path $ProjectRoot -Filter '*.dart')
+# Compare production code consistently: Java main, Angular without spec, Flutter
+# lib. Legacy includes Dart tests/archived copies and is retained for audit only.
+$dartRoot = if ($Scope -eq 'Product') { Join-Path $ProjectRoot 'mobile/lib' } else { $ProjectRoot }
+$dartFiles = @(Get-SourceFiles -Path $dartRoot -Filter '*.dart')
 
 $javaLines = Get-NonBlankLineCount -Files $javaFiles
 $typeScriptLines = Get-NonBlankLineCount -Files $typeScriptFiles
@@ -50,6 +55,7 @@ $totalLines = $javaLines + $typeScriptLines + $dartLines
 $javaPercentage = if ($totalLines -eq 0) { 0 } else { [Math]::Round((100 * $javaLines / $totalLines), 2) }
 
 [pscustomobject]@{
+    MetricScope = $Scope
     JavaFiles = $javaFiles.Count
     JavaNonBlankLines = $javaLines
     TypeScriptFiles = $typeScriptFiles.Count

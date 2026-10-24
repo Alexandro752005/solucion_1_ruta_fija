@@ -1,0 +1,66 @@
+{
+  "recordedAtUtc": "2026-10-24T03:36:42.244410+00:00",
+  "scope": "Restricted correction of a DNI mistyped in an earlier conductor identity review; same person and existing profile only",
+  "validation": {
+    "typecheck": {
+      "command": "npm.cmd run typecheck",
+      "exitCode": 0,
+      "evidence": "Observed tool execution; stdout not captured to a file"
+    },
+    "selectedTests": {
+      "command": "npm.cmd run test:ci -- --include=src/app/features/drivers/drivers.page.spec.ts --include=src/app/features/onboarding/onboarding-requests.page.spec.ts",
+      "exitCode": 0,
+      "testFilesPassed": 2,
+      "testsPassed": 53,
+      "durationSeconds": 7.54,
+      "testBundleSeconds": 5.431,
+      "evidence": "Observed tool execution; stdout not captured to a file"
+    },
+    "productionBuild": {
+      "command": "npm.cmd run build",
+      "exitCode": 0,
+      "durationSeconds": 8.515,
+      "initialRawSizeKb": 314.64,
+      "initialEstimatedTransferKb": 86.69,
+      "warningsObserved": 0,
+      "errorsObserved": 0,
+      "log": "frontend-build.log",
+      "sha256": "cec0a49061d5207a4d047ee7a93415c4cbe7225c65de0a157fe70873c9d31197"
+    }
+  },
+  "privacyAndStateReview": {
+    "existingModalReused": true,
+    "noExistingDniOrFingerprintRequestedOrPrefilled": true,
+    "currentAdminPasswordAndFourHumanConfirmationsRequired": true,
+    "noAutomaticApprovalProvisioningOrOperationalEnablement": true,
+    "dniAndPasswordClearedImmediatelyOnSubmitCloseAndDestroy": true,
+    "sensitivePayloadNotRetainedForRetryOrBrowserStorage": true,
+    "oneGeneratedOperationKeyPerExplicitSubmission": true,
+    "skipAuthenticationRefreshAndAutomaticPostReplay": true,
+    "uncertainOrRejectedResponseRequiresFreshDriverReadBeforeNewSubmission": true,
+    "fixedStatusBasedErrorsNeverRenderServerErrorBody": true,
+    "wrongResponseAccountDoesNotClaimSuccess": true,
+    "backgroundAndParallelDriverMutationsBlockedWhileRestrictedReviewIsOpenOrSending": true,
+    "profileEmailPasswordAndHistoryRemainServerSideInvariants": true
+  },
+  "sourceSha256": {
+    "frontend/src/app/core/management/management.models.ts": "884d0811a79982a968110519c9744eae60f6ddd69f307e567964edb1d89ee0cb",
+    "frontend/src/app/core/management/management-api.service.ts": "aa0bf01fc14a1e98b340cf928a31b6c2154dae0274a93a0208b77318cb129384",
+    "frontend/src/app/features/drivers/drivers.page.ts": "e7960d180b48965d0148a6d5f5aed6e21902ea6d17e15d47a90bce71e7f20642",
+    "frontend/src/app/features/drivers/drivers.page.html": "3f2a47485afb926c549171070d7d6fd416f0c06bf8b4d2f910c0f18f04ca8ffb",
+    "frontend/src/app/features/drivers/drivers.page.spec.ts": "e02ba7a2d0ed2ccbd7724f2e12439cdcec5d53cccccfa4099748af1c25e21fe4"
+  },
+  "beforeSha256": {
+    "frontend/src/app/core/management/management.models.ts": "12a9667a5b56826444eac636b9144f5c65eaac54482370032f828566f85dc289",
+    "frontend/src/app/core/management/management-api.service.ts": "3ea591265c77fce3a782df685141976ca550501ca35f059652a7e4d6f10b57b2",
+    "frontend/src/app/features/drivers/drivers.page.ts": "8bba7ee9839919baf88ffa25114ccfd4705957c0bda5cf9324d098a73f289dad",
+    "frontend/src/app/features/drivers/drivers.page.html": "eb1599f22232d430f00fd6f493cac4d95a2cd54b96b58a2358c0a19d69c39ef3",
+    "frontend/src/app/features/drivers/drivers.page.spec.ts": "586fd8bf3c5fcf2366ba9be7fa3170885f0079f29957092da4009358dcdb3aca"
+  },
+  "limits": [
+    "UI and mocked HTTP tests do not constitute an actual personal identity review",
+    "No production or local database data was modified by this agent",
+    "No live credential, OTP or DNI was used in the tests",
+    "Backend migration/runtime integration is performed separately by the coordinating agent"
+  ]
+}

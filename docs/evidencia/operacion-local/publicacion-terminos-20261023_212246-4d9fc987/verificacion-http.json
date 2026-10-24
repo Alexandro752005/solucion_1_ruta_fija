@@ -1,0 +1,45 @@
+{
+  "result": "PASS",
+  "verifiedAtUtc": "2026-10-24T02:23:11.452836+00:00",
+  "source": "ACTUAL_CRM_PROXY_WITH_ADMIN_LOGIN",
+  "http": [
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/drivers?page=0&size=1",
+      "status": 403
+    },
+    {
+      "method": "GET",
+      "path": "/admin-terms",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 204
+    }
+  ],
+  "version": "1.0.0",
+  "sourceBytes": 21108,
+  "contentSha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+  "servedContentEqualsApprovedFile": true,
+  "accepted": false,
+  "acceptedAt": null,
+  "personalAcceptanceSubmitted": false,
+  "verificationSessionLoggedOut": true
+}

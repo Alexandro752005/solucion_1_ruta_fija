@@ -1,0 +1,21 @@
+{
+    "id":  "REC-CI07-02",
+    "version":  "0.1.0",
+    "proposalSha256":  "B1B22C7CF2928397E111EF9F7464248E0C04E1A57A1E60E2C57236ED4A58B4A2",
+    "authorized":  true,
+    "authorizedBy":  "USER",
+    "authorizedLocalDate":  "2026-10-17",
+    "recordedAtUtc":  "2026-10-17T15:42:24.3651700Z",
+    "operatorTerminalBOutputCheckPassed":  true,
+    "operatorDiagnosticReply":  "PRINTF, PRINTLN y valor ficticio visibles",
+    "authorizationReply":  "Autorizar REC-CI07-02 con esas condiciones",
+    "runId":  "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+    "ownerId":  "088518c1-821c-4316-9f87-090f51ac44e0",
+    "organizationId":  "1a759298-7831-4aaf-9299-c3920a9cc28a",
+    "installationId":  "f0cd888b-57df-4def-9d08-7882ffadebae",
+    "maximumSuccessfulFixtureRepairs":  1,
+    "hiddenHumanConfirmationBeforeWriteRequired":  true,
+    "productionRecoveryProtocolUnchanged":  true,
+    "sc03Sc07Applied":  false,
+    "L02Authorized":  false
+}

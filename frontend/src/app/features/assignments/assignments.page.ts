@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { finalize } from 'rxjs';
+import { finalize, map } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { ApiErrorService } from '../../core/api/api-error.service';
 import { UiError } from '../../core/api/api-error.model';
@@ -21,6 +23,15 @@ import { ConfirmDialogComponent } from '../../shared/ui/confirm-dialog.component
 import { ModalComponent } from '../../shared/ui/modal.component';
 import { PageHeaderComponent } from '../../shared/ui/page-header.component';
 import { PaginationComponent } from '../../shared/ui/pagination.component';
+import { RoutesApiService, RouteSummary } from '../../core/routes/routes-api.service';
+import { AssignmentRoutePanel } from '../routes/assignment-route-panel';
+import { ServiceTypesApiService, ServiceTypeSummary, AssignmentCandidate, AssignmentCandidates } from '../../core/operations/service-types-api.service';
+import { ScheduledServicesApiService, ScheduledService } from '../../core/operations/scheduled-services-api.service';
+import { ScheduledServicePanel } from './scheduled-service-panel';
+import { ServiceExecutionPanel } from './service-execution-panel';
+import { ServiceTimePanel } from './service-time-panel';
+import { ServiceAttentionPanel } from './service-attention-panel';
+import { ServiceHandoverPanel } from './service-handover-panel';
 
 type AssignmentActionKind = 'reserve' | 'start' | 'complete';
 
@@ -31,7 +42,7 @@ interface PendingAssignmentAction {
 
 @Component({
   selector: 'rf-assignments-page',
-  imports: [ReactiveFormsModule, PageHeaderComponent, ModalComponent, ConfirmDialogComponent, PaginationComponent],
+  imports: [RouterLink, AssignmentRoutePanel, ScheduledServicePanel, ServiceExecutionPanel, ServiceTimePanel, ServiceAttentionPanel, ServiceHandoverPanel, ReactiveFormsModule, PageHeaderComponent, ModalComponent, ConfirmDialogComponent, PaginationComponent],
   templateUrl: './assignments.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -42,6 +53,24 @@ export class AssignmentsPage {
   private readonly session = inject(AuthSessionService);
   private readonly realtime = inject(OperationRealtimeService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly routesApi = inject(RoutesApiService);
+  private readonly serviceTypesApi=inject(ServiceTypesApiService);
+  private readonly servicesApi=inject(ScheduledServicesApiService);
+  readonly reofferTarget=signal<ScheduledService|null>(null);
+  readonly serviceBlocked=signal(false);
+  readonly reofferUncertain=signal(false);
+  readonly creationUncertain=signal(false);private creationKey:string|null=null;
+  readonly cancellationUncertain=signal(false);
+  readonly reofferReason=new FormControl('',{nonNullable:true,validators:[Validators.required,Validators.maxLength(160)]});
+  private reofferKey:string|null=null;
+  readonly typeChoices=signal<readonly ServiceTypeSummary[]>([]);
+  readonly moreTypes=signal(false);private typeOffset=0;
+  readonly candidates=signal<readonly AssignmentCandidate[]>([]);
+  readonly candidateLoading=signal(false);
+  readonly candidateResult=signal<AssignmentCandidates|null>(null);
+  private candidateFingerprint='';private candidateSequence=0;
+  readonly routeChoices = signal<readonly RouteSummary[]>([]);
+  readonly routeLoading = signal(false);
 
   readonly statuses = ASSIGNMENT_STATUSES;
   readonly assignments = signal<readonly Assignment[]>([]);
@@ -77,6 +106,8 @@ export class AssignmentsPage {
   });
 
   readonly form = new FormGroup({
+    serviceTypeVersionId:new FormControl('',{nonNullable:true,validators:[Validators.required]}),
+    routeVersionId: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     driverId: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     vehicleId: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     originText: new FormControl('', {
@@ -102,7 +133,10 @@ export class AssignmentsPage {
     this.load();
     this.loadResources();
     this.realtime.connect();
-    this.realtime.events.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.load());
+    this.realtime.events.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(event => {
+      if(event.event==='service.closure.observed')this.notice.set('Un cierre requiere revisión del terminal. La discrepancia GPS no implica fraude ni demuestra todo el recorrido. Consulta el detalle del servicio.');
+      this.load();
+    });
     this.destroyRef.onDestroy(() => this.realtime.disconnect());
   }
 
@@ -152,19 +186,80 @@ export class AssignmentsPage {
   }
 
   startCreate(): void {
+    if(this.reofferUncertain()||this.creationUncertain()||this.cancellationUncertain()||this.saving()||this.serviceBlocked())return;
     this.error.set(null);
     this.notice.set(null);
     this.resetForm(false);
     this.formOpen.set(true);
+    this.typeOffset=0;this.loadTypes();this.resetCandidates();
+    this.routesApi.list().subscribe({ next: (r) => this.routeChoices.set(r.filter((x) => x.active)), error: (e: unknown) => this.error.set(this.apiErrors.toUiError(e)) });
+  }
+
+  routeChanged(id: string): void {
+    this.resetCandidates();
+    const choice=this.routeChoices().find((r)=>r.currentVersionId===id);
+    this.form.patchValue({ originText: '', destinationText: '' });
+    if (!choice || this.editing()) return; this.routeLoading.set(true);
+    this.routesApi.get(choice.id).subscribe({ next: (v) => { if (this.form.controls.routeVersionId.value === id) {
+      const route=v.versions.find((r)=>r.id===id); if (route && v.active && v.currentVersionId===id) this.form.patchValue({ originText: route.stops[0].name, destinationText: route.stops[route.stops.length-1].name });
+    } this.routeLoading.set(false); }, error: (e: unknown) => { this.routeLoading.set(false); this.error.set(this.apiErrors.toUiError(e)); } });
+  }
+  routeReplaced(): void { this.closeDetails(); this.load(0); this.notice.set('Ruta reemplazada: la nueva programación requiere aceptación CONDUCTOR.'); }
+  serviceChanged(): void { this.closeDetails(); this.load(0); this.notice.set('Servicio actualizado. Consulta su estado, participantes y revisiones pendientes.'); }
+  startReoffer(service:ScheduledService):void {
+    const a=this.selectedAssignment();if(!a||a.id!==service.currentOfferId||this.serviceBlocked())return;
+    this.startCreate();this.reofferTarget.set(service);this.reofferReason.reset('');
+    this.form.patchValue({serviceTypeVersionId:service.serviceTypeVersionId,routeVersionId:service.routeVersionId,
+      scheduledAt:this.toDateTimeLocal(service.scheduledAt),scheduledEndAt:this.toDateTimeLocal(service.scheduledEndAt),
+      originText:a.originText,destinationText:a.destinationText,notes:a.notes??''});
+    this.detailOpen.set(false);this.selectedAssignment.set(null);
+  }
+  reconcileReoffer():void {
+    const s=this.reofferTarget();if(!s||!this.reofferKey||!this.reofferUncertain()||this.saving())return;
+    this.saving.set(true);this.servicesApi.operation(this.reofferKey).pipe(finalize(()=>this.saving.set(false))).subscribe({next:r=>{
+      if(r.serviceId!==s.id||r.action!=='REOFFER'){this.error.set({message:'La operación no corresponde a esta solicitud; conserva el caso.',fieldErrors:[]});return;}
+      this.reofferUncertain.set(false);this.resetForm();this.load(0);this.notice.set('Nueva oferta registrada; requiere aceptación CONDUCTOR.');
+    },error:e=>this.error.set(this.apiErrors.toUiError(e))});
+  }
+  reconcileCreation():void {
+    if(!this.creationKey||!this.creationUncertain()||this.saving())return;this.saving.set(true);
+    this.api.assignmentCreationOperation(this.creationKey).pipe(finalize(()=>this.saving.set(false))).subscribe({next:a=>{
+      if(!a.id||!a.serviceId){this.error.set({message:'La consulta no acredita una oferta y servicio; conserva el caso.',fieldErrors:[]});return;}
+      this.creationUncertain.set(false);this.resetForm();this.load(0);this.notice.set('Emisión localizada en el servidor; consulta su estado vigente.');
+    },error:e=>this.error.set(this.apiErrors.toUiError(e))});
+  }
+
+  loadTypes(more=false):void {
+    const offset=more?this.typeOffset+100:0;
+    this.serviceTypesApi.list(offset).subscribe({next:r=>{this.typeOffset=offset;this.moreTypes.set(r.length===100);this.typeChoices.set([...(more?this.typeChoices():[]),...r.filter(t=>t.active)]);},error:e=>this.error.set(this.apiErrors.toUiError(e))});
+  }
+  resetCandidates():void {this.candidateSequence++;this.candidates.set([]);this.candidateResult.set(null);this.candidateFingerprint='';this.candidateLoading.set(false);this.form.patchValue({driverId:'',vehicleId:''});}
+  private fingerprint():string {const v=this.form.getRawValue();return JSON.stringify([v.serviceTypeVersionId,v.routeVersionId,v.scheduledAt,v.scheduledEndAt,this.reofferTarget()?.id]);}
+  findCandidates(more=false):void {
+    const f=this.form.getRawValue(),start=this.toIso(f.scheduledAt),end=this.toIso(f.scheduledEndAt);
+    if(!f.serviceTypeVersionId||!f.routeVersionId||!start||!end||end<=start){this.error.set({message:'Selecciona tipo, ruta y horario válido antes de buscar.',fieldErrors:[]});return;}
+    const previous=this.candidateResult();if(more&&(previous?.nextOffset==null||this.fingerprint()!==this.candidateFingerprint))return;
+    if(!more)this.resetCandidates();const sequence=++this.candidateSequence,key=this.fingerprint();this.candidateLoading.set(true);this.error.set(null);
+    this.serviceTypesApi.candidates({serviceTypeVersionId:f.serviceTypeVersionId,routeVersionId:f.routeVersionId,scheduledAt:start,scheduledEndAt:end,offset:more?previous?.nextOffset??0:0,
+      ...(this.reofferTarget()?{serviceId:this.reofferTarget()!.id}:{})})
+      .pipe(finalize(()=>{if(sequence===this.candidateSequence)this.candidateLoading.set(false);})).subscribe({next:r=>{
+        if(sequence!==this.candidateSequence||key!==this.fingerprint())return;this.candidateFingerprint=key;this.candidateResult.set(r);
+        this.candidates.set([...(more?this.candidates():[]),...r.items]);
+      },error:e=>{if(sequence===this.candidateSequence)this.error.set(this.apiErrors.toUiError(e));}});
+  }
+  chooseCandidate(c:AssignmentCandidate):void {
+    if(this.candidateFingerprint!==this.fingerprint()||!this.candidates().some(x=>x.driverId===c.driverId&&x.vehicleId===c.vehicleId&&x.periodId===c.periodId))return;
+    this.form.patchValue({driverId:c.driverId,vehicleId:c.vehicleId});
   }
 
   viewDetails(assignment: Assignment): void {
+    if(this.serviceBlocked()||this.cancellationUncertain())return;
     this.selectedAssignment.set(assignment);
     this.detailOpen.set(true);
   }
 
   closeDetails(): void {
-    if (this.actionId() === null) {
+    if (this.actionId() === null&&!this.serviceBlocked()&&!this.cancellationUncertain()) {
       this.detailOpen.set(false);
       this.selectedAssignment.set(null);
       this.pendingAction.set(null);
@@ -179,6 +274,12 @@ export class AssignmentsPage {
   submit(): void {
     this.error.set(null);
     this.notice.set(null);
+    if(this.saving()||this.reofferUncertain()||this.creationUncertain())return;
+    if(this.reofferTarget()&&this.reofferReason.invalid){this.reofferReason.markAsTouched();return;}
+    const selected=this.form.getRawValue();
+    if(!this.editing()&&(this.candidateFingerprint!==this.fingerprint()||!this.candidates().some(c=>c.driverId===selected.driverId&&c.vehicleId===selected.vehicleId))){
+      this.error.set({message:'Consulta y selecciona un candidato para este horario; el servidor volverá a validarlo.',fieldErrors:[]});return;
+    }
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -191,17 +292,26 @@ export class AssignmentsPage {
 
     const current = this.editing();
     this.saving.set(true);
-    const request = current === null
-      ? this.api.createAssignment(payload, this.idempotencyKey())
+    const service=this.reofferTarget();
+    if(service)this.reofferKey=this.idempotencyKey();
+    if(!service&&current===null)this.creationKey=this.idempotencyKey();
+    const request = service
+      ? this.servicesApi.reoffer(service.id,{expectedVersion:service.version,operationKey:this.reofferKey!,reason:this.reofferReason.value.trim(),offer:payload})
+          .pipe(map(v=>v.offers.find(a=>a.id===v.service.currentOfferId)!))
+      : current === null
+      ? this.api.createAssignment(payload, this.creationKey!)
       : this.api.updateAssignment(current.id, { ...payload, version: current.version });
     request.pipe(finalize(() => this.saving.set(false))).subscribe({
       next: () => {
-        this.notice.set(current === null ? 'Asignación programada correctamente.' : 'Asignación actualizada correctamente.');
+        this.notice.set(current === null ? 'Oferta emitida: pendiente de aceptación de CONDUCTOR.' : 'Asignación actualizada correctamente.');
         this.resetForm();
         this.load(0);
       },
-      error: (error: unknown) =>
-        this.error.set(this.apiErrors.toUiError(error, 'No se pudo guardar la asignación.')),
+      error: (error: unknown) => {
+        this.error.set(this.apiErrors.toUiError(error, 'No se pudo guardar la asignación.'));
+        if(service)this.reofferUncertain.set(!(error instanceof HttpErrorResponse)||![400,401,403,404,409,422].includes(error.status));
+        else if(current===null)this.creationUncertain.set(!(error instanceof HttpErrorResponse)||![400,401,403,404,409,422].includes(error.status));
+      },
     });
   }
 
@@ -211,7 +321,9 @@ export class AssignmentsPage {
     }
     this.editing.set(assignment);
     this.form.reset({
+      serviceTypeVersionId:assignment.serviceTypeVersionId??'',
       driverId: assignment.driverId,
+      routeVersionId: assignment.routeVersionId ?? 'LEGACY_UNRECORDED',
       vehicleId: assignment.vehicleId,
       originText: assignment.originText,
       destinationText: assignment.destinationText,
@@ -230,7 +342,7 @@ export class AssignmentsPage {
   }
 
   closeForm(): void {
-    if (!this.saving()) {
+    if (!this.saving()&&!this.reofferUncertain()&&!this.creationUncertain()) {
       this.resetForm();
     }
   }
@@ -254,7 +366,7 @@ export class AssignmentsPage {
   }
 
   cancel(assignment: Assignment): void {
-    if (!this.canCancel(assignment)) {
+    if (!this.canCancel(assignment)||this.cancellationUncertain()) {
       return;
     }
     this.cancellationForm.reset({ reason: '' });
@@ -262,7 +374,7 @@ export class AssignmentsPage {
   }
 
   closeCancellation(): void {
-    if (this.actionId() === null) {
+    if (this.actionId() === null&&!this.cancellationUncertain()) {
       this.cancellationTarget.set(null);
       this.cancellationForm.reset({ reason: '' });
     }
@@ -270,7 +382,7 @@ export class AssignmentsPage {
 
   submitCancellation(): void {
     const assignment = this.cancellationTarget();
-    if (assignment === null || this.cancellationForm.invalid || this.actionId() !== null) {
+    if (assignment === null || this.cancellationForm.invalid || this.actionId() !== null||this.cancellationUncertain()) {
       this.cancellationForm.markAllAsTouched();
       return;
     }
@@ -287,32 +399,39 @@ export class AssignmentsPage {
           this.selectedAssignment.set(null);
           this.load();
         },
-        error: (error: unknown) =>
-          this.error.set(this.apiErrors.toUiError(error, 'No se pudo cancelar la asignación.')),
+        error: (error: unknown) => {
+          this.error.set(this.apiErrors.toUiError(error, 'No se pudo cancelar la oferta.'));
+          this.cancellationUncertain.set(!(error instanceof HttpErrorResponse)||![400,401,403,404,409,422].includes(error.status));
+        },
       });
   }
-
-  canEdit(assignment: Assignment): boolean {
-    return assignment.responseMode === 'ADMIN_DIRECT'
-      && assignment.status === 'SCHEDULED'
-      && assignment.reservedAt === null;
+  reconcileCancellation():void {
+    const a=this.cancellationTarget();if(!a||!this.cancellationUncertain()||this.actionId())return;
+    this.actionId.set(a.id);this.api.getAssignment(a.id).pipe(finalize(()=>this.actionId.set(null))).subscribe({next:current=>{
+      if(current.status!=='CANCELLED'){this.error.set({message:'El servidor aún no confirma una oferta cancelada; conserva el caso sin repetir el comando.',fieldErrors:[]});return;}
+      this.cancellationUncertain.set(false);this.cancellationTarget.set(null);this.detailOpen.set(false);this.selectedAssignment.set(null);
+      this.notice.set('El servidor informa que la oferta está cancelada; el servicio se conserva salvo cancelación expresa separada.');this.load();
+    },error:e=>this.error.set(this.apiErrors.toUiError(e))});
   }
 
-  canReserve(assignment: Assignment): boolean {
-    return assignment.responseMode === 'ADMIN_DIRECT'
-      && assignment.status === 'SCHEDULED'
-      && assignment.reservedAt === null;
+  canEdit(_assignment: Assignment): boolean {
+    return false;
   }
 
-  canStart(assignment: Assignment): boolean {
-    return assignment.status === 'SCHEDULED' && assignment.reservedAt !== null;
+  canReserve(_assignment: Assignment): boolean {
+    return false;
   }
 
-  canComplete(assignment: Assignment): boolean {
-    return assignment.status === 'EN_SERVICIO';
+  canStart(_assignment: Assignment): boolean {
+    return false;
+  }
+
+  canComplete(_assignment: Assignment): boolean {
+    return false; // Ruta finalizada is the responsible conductor's declaration.
   }
 
   canCancel(assignment: Assignment): boolean {
+    if(assignment.serviceId&&assignment.status==='EN_SERVICIO')return false;
     return assignment.status === 'PENDING_RESPONSE'
       || assignment.status === 'SCHEDULED'
       || assignment.status === 'EN_SERVICIO';
@@ -323,6 +442,8 @@ export class AssignmentsPage {
       PENDING_RESPONSE: 'Pendiente de respuesta',
       SCHEDULED: 'Programada',
       EN_SERVICIO: 'En servicio',
+      INTERRUPTED: 'Interrumpida',
+      TRANSFERRED: 'Tramo relevado',
       COMPLETED: 'Completada',
       REJECTED: 'Rechazada',
       CANCELLED: 'Cancelada',
@@ -442,11 +563,11 @@ export class AssignmentsPage {
   }
 
   driverStatusLabel(status: string): string {
-    return ({ DISPONIBLE: 'Disponible', RESERVADO: 'Reservado', EN_SERVICIO: 'En servicio', DESCANSO: 'Descanso', NO_DISPONIBLE: 'No disponible' } as Record<string, string>)[status] ?? 'No disponible';
+    return ({ DISPONIBLE: 'Disponible', RESERVADO: 'Reservado', EN_SERVICIO: 'En servicio', ATENCION: 'Atención segura pendiente', DESCANSO: 'Descanso', NO_DISPONIBLE: 'No disponible' } as Record<string, string>)[status] ?? 'No disponible';
   }
 
   vehicleStatusLabel(status: string): string {
-    return ({ DISPONIBLE: 'Disponible', EN_SERVICIO: 'En servicio', MANTENIMIENTO: 'Mantenimiento', INACTIVO: 'Inactivo' } as Record<string, string>)[status] ?? 'No disponible';
+    return ({ DISPONIBLE: 'Disponible', EN_SERVICIO: 'En servicio', ATENCION: 'Atención segura pendiente', MANTENIMIENTO: 'Mantenimiento', INACTIVO: 'Inactivo' } as Record<string, string>)[status] ?? 'No disponible';
   }
 
   private filterInstant(value: string, endOfDay: boolean): string | undefined {
@@ -463,13 +584,16 @@ export class AssignmentsPage {
       return null;
     }
     return {
+      serviceTypeVersionId:value.serviceTypeVersionId,
       driverId: value.driverId,
+      routeVersionId: value.routeVersionId,
       vehicleId: value.vehicleId,
       originText: value.originText.trim(),
       destinationText: value.destinationText.trim(),
       scheduledAt,
       scheduledEndAt,
       notes: value.notes.trim() || undefined,
+      responseMode: 'MOBILE_CONFIRMATION',
     };
   }
 
@@ -495,9 +619,12 @@ export class AssignmentsPage {
   }
 
   private resetForm(close = true): void {
+    this.reofferTarget.set(null);this.reofferKey=null;this.reofferReason.reset('');
+    this.creationKey=null;
     this.editing.set(null);
     this.form.reset({
       driverId: '',
+      routeVersionId: '',
       vehicleId: '',
       originText: '',
       destinationText: '',

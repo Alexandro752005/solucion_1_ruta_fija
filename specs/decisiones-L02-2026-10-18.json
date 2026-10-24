@@ -1,0 +1,49 @@
+{
+  "project": "Ruta Fija",
+  "baseline": "3.1",
+  "version": "0.1.0",
+  "lot": "L-02",
+  "lotStatus": "EN_CURSO",
+  "localDate": "2026-10-18",
+  "timezone": "America/Lima",
+  "authorization": {
+    "source": "Mensaje directo del titular: OK VERDE posterior al cierre de L01; interpretado para inicio de L02, no de otros lotes",
+    "gate": "OK VERDE",
+    "received": true,
+    "L01ClosureTypePreserved": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+    "pilotEnabled": false,
+    "L03Authorized": false
+  },
+  "confirmedDecisions": [
+    {
+      "id": "CARD-01",
+      "sourceOpenDecisionId": "OPEN-UNIT-CARDINALITY",
+      "status": "CONFIRMADA_USUARIO_PENDIENTE_VERIFICACION_IMPLEMENTACION_COMPLETA",
+      "source": "Respuesta explicita del titular a la pregunta agrupada de cardinalidad",
+      "exactAnswer": "Una sola unidad vigente por CONDUCTOR",
+      "maximumSimultaneousAuthorizedVehiclesPerConductor": 1,
+      "maximumSimultaneousAuthorizedConductorsPerVehicle": 1,
+      "consecutivePeriodsAllowed": true,
+      "overlappingServicesAllowed": false,
+      "implicitSubstitutionAllowed": false,
+      "serviceClosureEndsVehicleLink": false,
+      "existingLinksModifiedByThisDecisionRecord": false,
+      "sourceRegistryPreservedUnchanged": true
+    }
+  ],
+  "subphases": [
+    "L02.0 contrato y estado sin PII / proteccion heredada",
+    "L02.1 vigencia, suspension y correccion material",
+    "L02.2 solicitud/revision de unidad y vinculos temporales",
+    "L02.3 continuidad CRM/Android posprovision",
+    "L02.4 verificacion y cierre respaldado"
+  ],
+  "existingL01AcceptancePreserved": true,
+  "realDatabaseWritesAuthorizedByThisRecord": false,
+  "externalSmtpAuthorized": false,
+  "final3RegenerationAuthorized": false,
+  "developmentOrPilotMigrationsAuthorized": false,
+  "phaseContract": "docs/contratos/L-02.md",
+  "phaseExecution": "docs/ejecucion/L-02.md",
+  "phaseMatrix": "docs/evidencia/L-02/matriz-L02.md"
+}

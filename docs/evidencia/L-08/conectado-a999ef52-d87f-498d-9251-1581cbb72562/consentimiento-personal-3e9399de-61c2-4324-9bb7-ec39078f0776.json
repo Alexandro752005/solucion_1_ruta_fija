@@ -1,0 +1,30 @@
+{
+  "runId": "a999ef52-d87f-498d-9251-1581cbb72562",
+  "archivedAt": "2026-10-22T21:27:02.230114+00:00",
+  "humanReport": "Aparece \"Consentimiento activo\"",
+  "offerId": "6ad87efd-c9a5-4d06-943c-72c863f76772",
+  "serviceId": "961b62f8-1d30-469f-a88d-5db10884e663",
+  "locationConsentAtRead": true,
+  "startedAtRead": null,
+  "persistedCaseGpsPointCountAtRead": 0,
+  "databaseObservedAt": "2026-10-22T21:26:02.430066Z",
+  "databaseEvidence": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/oferta-observacion-27df3d06-d29d-4000-bf06-4abb3b2523a3.json",
+  "databaseEvidenceSha256": "1212903fc07553004df682297c42c3ac82bcfc50f5ecac29bc89b2d54a6b069a",
+  "consentHttpEvents": [
+    {
+      "channel": "PHONE_PROXY_REAL_BACKEND",
+      "method": "PUT",
+      "finishedAt": "2026-10-22T21:24:57.479399100Z",
+      "path": "/api/v1/mobile/location/consent",
+      "status": 200,
+      "startedAt": "2026-10-22T21:24:57.431090300Z"
+    }
+  ],
+  "consentConfirmedPersonally": true,
+  "syntheticAccountRealDevice": true,
+  "gpsCaptureAccredited": false,
+  "databaseWritesByObservation": 0,
+  "manualPhoneResult": "PENDING",
+  "TEST_CLEANUP_RELEASED": false,
+  "pilotEnabled": false
+}

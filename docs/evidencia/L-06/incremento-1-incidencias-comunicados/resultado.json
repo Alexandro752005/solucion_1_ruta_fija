@@ -1,0 +1,25 @@
+{
+  "observedAt": "2026-10-21T06:11:53.474114+00:00",
+  "localDate": "2026-10-21",
+  "result": "PASS_API_COMPONENTS_BUILDS_PRESERVATION",
+  "lotStatus": "EN_CURSO",
+  "backendCases": 72,
+  "crmCases": 14,
+  "flutterCases": 49,
+  "schemaVersion": "44",
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 4
+  },
+  "acceptanceCount": 2,
+  "connectedCase": "AUTHORIZED_NOT_EXECUTED",
+  "pilotEnabled": false,
+  "L07Started": false,
+  "limitations": [
+    "No connected proof yet",
+    "No real external push or SMTP",
+    "No physical Android",
+    "No global cleanup"
+  ]
+}

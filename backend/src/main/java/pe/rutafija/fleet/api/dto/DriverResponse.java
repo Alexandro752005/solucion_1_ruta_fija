@@ -20,7 +20,9 @@ public record DriverResponse(
         boolean locationConsent,
         boolean active,
         Instant createdAt,
-        Instant updatedAt
+        Instant updatedAt,
+        DriverAvailabilityStatus declaredAvailabilityStatus,
+        Instant declaredAvailabilityAt
 ) {
     public static DriverResponse from(Driver driver) {
         return new DriverResponse(
@@ -28,16 +30,18 @@ public record DriverResponse(
                 driver.getUser() == null ? null : driver.getUser().getId(),
                 driver.getGroup().getId(),
                 driver.getGroup().getName(),
-                driver.getFullName(),
-                driver.getPhone(),
-                driver.getDocumentType(),
-                driver.getDocumentNumber(),
-                driver.getLicenseNumber(),
+                pe.rutafija.shared.security.PersonalDataView.driver(driver.getId()),
+                null,
+                null,
+                null,
+                null,
                 driver.getAvailabilityStatus(),
                 driver.isLocationConsent(),
                 driver.isActive(),
                 driver.getCreatedAt(),
-                driver.getUpdatedAt()
+                driver.getUpdatedAt(),
+                driver.getDeclaredAvailabilityStatus(),
+                driver.getDeclaredAvailabilityAt()
         );
     }
 }

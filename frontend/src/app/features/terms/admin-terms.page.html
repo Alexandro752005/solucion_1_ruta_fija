@@ -1,0 +1,115 @@
+<section class="terms-page" aria-labelledby="terms-title">
+  <header class="terms-heading">
+    <p class="eyebrow">Validación inicial ADMIN</p>
+    <h1 id="terms-title">Términos de la plataforma</h1>
+    <p>
+      Revisa la versión aprobada publicada. La aceptación queda registrada para
+      tu cuenta y organización.
+    </p>
+  </header>
+
+  @if (loading()) {
+    <p class="terms-notice" role="status">Consultando la versión vigente…</p>
+  }
+
+  @if (noPublishedVersion()) {
+    <section class="terms-notice terms-notice--warning" role="status">
+      <h2>No hay una versión aprobada publicada</h2>
+      <p>
+        El acceso administrativo no puede continuar hasta que se publique una
+        versión aprobada de los términos.
+      </p>
+      <button class="secondary-button" type="button" (click)="loadCurrentTerms()">
+        Volver a consultar
+      </button>
+    </section>
+  }
+
+  @if (loadError(); as error) {
+    <section class="terms-notice terms-notice--error" role="alert">
+      <p>{{ error.message }}</p>
+      @if (error.correlationId) {
+        <p>Referencia: {{ error.correlationId }}</p>
+      }
+      <button class="secondary-button" type="button" (click)="loadCurrentTerms()">
+        Reintentar consulta
+      </button>
+    </section>
+  }
+
+  @if (terms(); as document) {
+    <article class="terms-document" aria-labelledby="terms-document-title">
+      <header class="document-heading">
+        <h2 id="terms-document-title">Documento vigente</h2>
+        <dl class="document-metadata">
+          <div>
+            <dt>Versión</dt>
+            <dd><code>{{ document.version }}</code></dd>
+          </div>
+          <div class="hash-row">
+            <dt>Huella SHA-256</dt>
+            <dd><code>{{ document.contentSha256 }}</code></dd>
+          </div>
+        </dl>
+        @if (document.synthetic) {
+          <p class="synthetic-label" role="note">
+            Documento sintético disponible únicamente para pruebas.
+          </p>
+        }
+      </header>
+
+      <div class="document-content">{{ document.content }}</div>
+
+      @if (document.accepted) {
+        <section class="accepted-state" role="status">
+          <h3>Esta versión ya fue aceptada</h3>
+          <p>
+            Registro del servidor:
+            <time [attr.datetime]="document.acceptedAt">{{ document.acceptedAt }}</time>
+          </p>
+          <button class="primary-button" type="button" (click)="continueToCrm()">
+            Continuar al CRM
+          </button>
+        </section>
+      } @else {
+        @if (confirmationError(); as message) {
+          <section class="terms-notice terms-notice--warning" role="alert">
+            <p>{{ message }}</p>
+            <button class="secondary-button" type="button" (click)="loadCurrentTerms()">
+              Cargar la versión vigente
+            </button>
+          </section>
+        }
+
+        <form
+          class="acceptance-form"
+          [formGroup]="acceptanceForm"
+          (ngSubmit)="acceptCurrentTerms()"
+          novalidate
+        >
+          <label class="acceptance-control">
+            <input type="checkbox" formControlName="accepted" />
+            <span>
+              He leído y acepto expresamente la versión
+              <strong>{{ document.version }}</strong> con la huella SHA-256
+              <code>{{ document.contentSha256 }}</code>.
+            </span>
+          </label>
+          @if (explicitAcceptance.touched && explicitAcceptance.invalid) {
+            <p class="field-error" role="alert">
+              Marca la casilla para registrar tu aceptación expresa.
+            </p>
+          }
+          <button
+            class="primary-button"
+            type="submit"
+            [disabled]="submitting() || explicitAcceptance.invalid"
+            [attr.aria-busy]="submitting()"
+          >
+            {{ submitting() ? 'Registrando…' : 'Aceptar esta versión' }}
+          </button>
+        </form>
+      }
+    </article>
+  }
+</section>

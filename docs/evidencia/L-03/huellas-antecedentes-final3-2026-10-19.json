@@ -1,0 +1,39 @@
+{
+  "observedAt": "2026-10-19T16:39:01.562537+00:00",
+  "action": "READ_HASH_ONLY_NO_SNAPSHOT_REGENERATION",
+  "files": [
+    {
+      "path": "backups/L-00-2026-10-13-final3/source-snapshot.zip",
+      "expected": "3806510606A1565F23B8C526A13CC1049BC79141BABDB8E1316F042488B3D11B",
+      "actual": "3806510606A1565F23B8C526A13CC1049BC79141BABDB8E1316F042488B3D11B",
+      "pass": true
+    },
+    {
+      "path": "docs/evidencia/L-00/source-manifest.sha256",
+      "expected": "E78D7002D5C85B24200BE21B8FD88CE770D36333CA49CAA5351248CFD0E28BAD",
+      "actual": "E78D7002D5C85B24200BE21B8FD88CE770D36333CA49CAA5351248CFD0E28BAD",
+      "pass": true
+    },
+    {
+      "path": "docs/legal/publicado/terminos-admin-v1.0.0.md",
+      "expected": "20FFD9525CB19EC51387BF11859CF34100A5117B00DE8F428BFEB8B9A4DC6417",
+      "actual": "20FFD9525CB19EC51387BF11859CF34100A5117B00DE8F428BFEB8B9A4DC6417",
+      "pass": true
+    },
+    {
+      "path": "artifacts/L-01-superadmin-titular-2026-10-17/ruta-fija-recovery-cli.jar",
+      "expected": "91913FF7C11CABFAA01881FCBFB24BBF5ED347564C0140D73A757BC96D38E24A",
+      "actual": "91913FF7C11CABFAA01881FCBFB24BBF5ED347564C0140D73A757BC96D38E24A",
+      "pass": true
+    },
+    {
+      "path": "docs/actas/L-01-cierre-funcional-local-2026-10-17.md",
+      "sha256": "c9bf0fe7ea79c5dbfd77b9883bf21673e29ea3b6fe5d22a6ecb6119bebeff227"
+    },
+    {
+      "path": "docs/actas/L-02-cierre-funcional-local-2026-10-19.md",
+      "sha256": "7fdc07dadeab1d82c366664a725aab05c15d8a207473a6fbe9fedf7870b487e7"
+    }
+  ],
+  "allSnapshotAndTermsUnchanged": true
+}

@@ -1,0 +1,2081 @@
+{
+  "purpose": "Current product source fingerprints; no production code changed for this complement",
+  "files": [
+    {
+      "path": "backend/src/main/java/pe/rutafija/adminlifecycle/api/AdminLifecycleContract.java",
+      "sha256": "7CD2E3896D8706D55C6AE5C23A4BCFAF7E998D1570FEFE1BE9B4337BF03D173F"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/adminlifecycle/api/AdminLifecycleController.java",
+      "sha256": "E86A51D5DA30162548F5C7874EB1E3F56EEDF4EEE59F93C003F6BE85F2006219"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/adminlifecycle/application/AdminLifecycleService.java",
+      "sha256": "405ADFA553DF08C9F55181BC2B3A2D2C396DD803FDFAAF8A78480E29BF45E63D"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/adminlifecycle/infrastructure/AdminActivationRepository.java",
+      "sha256": "1A61B21C4207EC95FE982BF2FE9625422DBEE80B4F0AA505F580E5C36586B8B6"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/audit/api/AuditEventController.java",
+      "sha256": "EB4A3BC84F0821D66A8BBF5E64D1D4FD30395C9E6862A4B977CC4FAE81568E43"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/audit/api/dto/AuditEventResponse.java",
+      "sha256": "93281E2A948A4B86580021CEFB7979B1CF3D8848E6DC548CDC69EBF560A32B15"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/audit/application/AuditQueryService.java",
+      "sha256": "EEC40CE03BFE891DD115621BA6DC4ED1AF8D50B801D2A047E9A7E8F4B7504B63"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/audit/application/AuditService.java",
+      "sha256": "C1618FA006FC59D019E28F74056B9D70A8DB5A201944D477E6828DDFE4B803E4"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/audit/domain/AuditEvent.java",
+      "sha256": "0FF1E3DC29BD514070ED97760F6F49D454EA17F4FB36E0E3D4B5BCB7522C362B"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/audit/infrastructure/AuditEventRepository.java",
+      "sha256": "E264513A957FCC689047F6E1403439441C0F817D70621B3C1013B4F9A0E7F43B"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/audit/infrastructure/AuditEventSpecifications.java",
+      "sha256": "1FBC45D0B28E5608DD671F813A801B23DAB811539131BD5E4B9A9AC2CA1F4955"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/audit/package-info.java",
+      "sha256": "7EA24826B5B5337689229AC639F47BE6E6B7CEB11E05D25C82C4E1B097ECA02F"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/api/DriverController.java",
+      "sha256": "D15EF9007584929AF7E2AEBA07884878995018EEBB2DA08C36B9D575C1065406"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/api/dto/DriverCreateRequest.java",
+      "sha256": "C5EE96A9E3F29DF7F4D443B1742FD0FDC2127A3B80CB94C5F28323195F064AD3"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/api/dto/DriverDetailResponse.java",
+      "sha256": "76A068CC745A255B354530FCFD3DD4D712DB8CFF3ADFC7044B66D5F36DB1EB26"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/api/dto/DriverResponse.java",
+      "sha256": "ECD3AB5BD0713DADE05DF760AFD409EF1607C9C49D09C3953F085D8972097E8B"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/api/dto/DriverUpdateRequest.java",
+      "sha256": "2CADB2CDA0E6DD6917B9B639BC4322450A5887146FBAFF6896E414588EA65026"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/api/dto/DriverVehicleResponse.java",
+      "sha256": "AC458399F3B8DEC4A4EF4EFC59E337E6F9011FF4A202F5027A5BD2EC3ECD33AD"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/api/dto/TransportGroupCreateRequest.java",
+      "sha256": "18541E2CECA3F0ABEBE6805C2A2470E3CBF928BEEFF57DB46EAED1809ECF33DB"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/api/dto/TransportGroupResponse.java",
+      "sha256": "4D1DA3E320D8DEA46454C51D6D0067AF67B462E9E06D1C013B0E5A580322B7FE"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/api/dto/TransportGroupUpdateRequest.java",
+      "sha256": "9D55C9CFDACB62E0A6558BEC22DCB73074A5E682FD2C57BC185C48F96C7B00E5"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/api/dto/VehicleCreateRequest.java",
+      "sha256": "6132585EA7CC0AE919C997ABE4B62383ACEB8E41D5DD53FF8E990B53F479F218"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/api/dto/VehicleResponse.java",
+      "sha256": "4F0E14F36D472142E1E1560E4F18278E7371FDF888C3878A30809838BAD94DE4"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/api/dto/VehicleStatusRequest.java",
+      "sha256": "F9470A06CE8320C96A588A92C19E07860413878583744E22449C55F52CF5439A"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/api/dto/VehicleUpdateRequest.java",
+      "sha256": "173537328AC74392892F13787F4D2BF362D79223A6024BE8256CE9A0E53F129E"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/api/package-info.java",
+      "sha256": "E64AF5A485EBBDE79C7B5EEB2460AB43D6C5000CF022130F4BD52C5535E48488"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/api/TransportGroupController.java",
+      "sha256": "5C043C0E6924DD672C77CCA38D0366B0C642CBA6FA84930B74114B6A84DA6BFA"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/api/VehicleController.java",
+      "sha256": "81ECAA74680F8FA79CCBEB946FA38F66210D662B45B83D1364822AEEC5E60EFB"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/application/FleetManagementService.java",
+      "sha256": "2081C35D380A929919F80C8092074EF041DEB2AED5E9E9971492647004B1D63C"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/domain/Driver.java",
+      "sha256": "00DABDF75FC41FD43BFB0DB0F1BF8B870CD951DE526E208FB6A122FEEF9F0D03"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/domain/DriverAvailabilityStatus.java",
+      "sha256": "78D40E51EE39489D43DC5F5A02B4E43A21E498E5A16AF1501E6E5478D6A8FC1D"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/domain/DriverVehicleLink.java",
+      "sha256": "65CF8C2BC19D571D340E6C2A82E5D94DC22EFF15B98DCEC260C1F1DA9DB87E18"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/domain/DriverVehicleLinkId.java",
+      "sha256": "FBEAAE2C39DFAAC362C8142738958C8FD85D7D4E54ED8968E6C5DE6EA1B46F97"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/domain/GroupCoordinator.java",
+      "sha256": "77456AD7377654E9563434EB0AA5A96A9CC81D8312CF7007250328650D3ABC7E"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/domain/GroupCoordinatorId.java",
+      "sha256": "959C5D93A00FE5E2305A50510F9BD85F7D5DC3A7BC3A56467E18E52544BC335C"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/domain/TransportGroup.java",
+      "sha256": "2F437B421E7EF6E7F49CFD2403B93456643D2A4650AB90CAD64055E7DC5FB4FE"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/domain/Vehicle.java",
+      "sha256": "226469902D7AC403C2EF80EB45CCB828752048737A4981BDACE0A59C2E6E221F"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/domain/VehicleStatus.java",
+      "sha256": "5C3D7DC756F4750091707EBB451AAEC39E2F7F73722676AAB5830B113102A02C"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/infrastructure/DriverRepository.java",
+      "sha256": "B6D54970244143E491B978DFEC73B45A38085E7F209ADCCCD84E9386B99A3993"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/infrastructure/DriverVehicleLinkRepository.java",
+      "sha256": "AA423169E15920FA2519F9491DCFE0E827365B5C3FBEB537FCE50677C60E7F52"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/infrastructure/GroupCoordinatorHistoryRepository.java",
+      "sha256": "30EAE81530A8EF1C7C56C206A22A2CE049F14079FF2134D965140478FC57BEEC"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/infrastructure/package-info.java",
+      "sha256": "E1CAB1496A0730B7279E03E3EF6269D1C16E36EF14489139F8761D14CA3A9D91"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/infrastructure/TransportGroupRepository.java",
+      "sha256": "23A421D538D07DD229AE7A16A178CF1007E9E020E4DEBDD5BB7E50401962D5DC"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/infrastructure/VehicleRepository.java",
+      "sha256": "CD1919ED21BE45245B4D7A2F1153CA1F9891EB3698BC8A522170803777FA9623"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/fleet/package-info.java",
+      "sha256": "BBD201142CC3A686410C05AEF1923D736B08599B9A74ECBB886403424780024A"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/AuthController.java",
+      "sha256": "37B7C510F9479F95C6B8083610F61B391C16B51C2607E194B4D45E0F71284797"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/ConductorRecoveryAuthController.java",
+      "sha256": "32E4746700762DCC47DD7F35DA6F37A9C2895724E51133541989811375DE1CCE"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/ConductorRecoveryController.java",
+      "sha256": "109F8AA3767E87551CE886B44BC43F81F86EB23E4CF327AEA8B8811C9F46F94A"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/ConductorRecoveryOtpResendRequest.java",
+      "sha256": "5C92DBE19103554BB0E02D1B739499E9700200E91C2600680DEA9D6339E31DE3"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/AuthenticatedUserResponse.java",
+      "sha256": "55255E282D4220A04C7560A2C328591254B98481D7B9AFC56DDC09D8CE966C59"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/AuthTokenResponse.java",
+      "sha256": "20CFBD5FD063D9199782BD258E1E647ED9CF047499EEBF25EDD54E545AFC8D27"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/CompleteConductorPasswordResetRequest.java",
+      "sha256": "3C26B035DD33F7B61EF59DB200044FDFE15DDDFB15D9BE5CAAF4ADD32BDFA3F3"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/ConductorPasswordResetCompletedResponse.java",
+      "sha256": "780BB1AB8F8A32680B71A1CDA79B39DDB78EC9C4429672CA8A7884AFC4EA8169"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/ConductorRecoveryOtpResponse.java",
+      "sha256": "E39C9544B00C3572F8D90B36CD20BF584C5D26974DCD6E97E45B29C5B6B5B7D5"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/ConductorRecoveryStartedResponse.java",
+      "sha256": "BE64E9A2BFA06BA44CDD46E393EEDED2E13839836F6FD625FA251C721715A73D"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/ConductorRecoveryStatusResponse.java",
+      "sha256": "C3D23AF0461D63C579FBFF3637D7E8176FB30CE7B98C61A902229B02D856C6FA"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/EmailOtpChallengeResponse.java",
+      "sha256": "F6406359AA3F9573421B30CB75158B512F94A2D857EE5D506DC2076D253018B8"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/EmailOtpResendRequest.java",
+      "sha256": "C533C35A2500192BACC3142D508FFC57DADA56A6746DA05CF06089E6E7D4200C"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/EmailOtpVerificationRequest.java",
+      "sha256": "4C3B96FD79772726168A964FBFEA0A93027A8BD60F4E2F5DAE626292E4E1A807"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/LoginRequest.java",
+      "sha256": "07B9AAFF2AC6D868F157BBE06D93CCF60885DC2F3DA739197761C07869FA76F6"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/MobileAuthenticatedUserResponse.java",
+      "sha256": "090030169889B916A649050A8B9CD951437E8DB4787C4A47D9D10C2F855E1DD6"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/MobileAuthTokenResponse.java",
+      "sha256": "28F03674CF9520F85931CD1AE4DD0D27575AF58DF12A868214DE8989408BBA34"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/MobileLoginResponse.java",
+      "sha256": "3845A8FCCC22DBCB39018FD9259B62354BC1A847B1E3966F02AD8A15F75482D5"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/MobileRefreshTokenRequest.java",
+      "sha256": "AA19410623137B8751B766C716E794FDE20662BF20D3A7E2BB8DA954B9D87AD9"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/StartConductorRecoveryRequest.java",
+      "sha256": "B225553A35A8A30CC207BBED91C2C1618B0AA3F16BB6E234C73EFE3EDC705CB3"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/SuperAdminRecoveryChallengeResponse.java",
+      "sha256": "AA68AD63FBE76372AE7B12B959251EC36271222CF0D96B449A16BE8E8ED87697"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/SuperAdminRecoveryCompletionRequest.java",
+      "sha256": "A1F1F26FA9EDB5EBBF092826E3ADD004FD9CBA59106A4094E16104E736E75502"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/SuperAdminRecoveryCompletionResponse.java",
+      "sha256": "FE54F577C5883C4B7BC369A98203ACD477EF5B72B4E02646EC73EB97A1FDE002"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/SuperAdminRecoveryEnrollmentRequest.java",
+      "sha256": "3E180EF77679796B471D6F37F61FAD6D9EA3D977EDEFDE556E078DB535F19147"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/SuperAdminRecoveryEnrollmentResponse.java",
+      "sha256": "4BB5F79F46348A0803D779DFE82324BA9701EEAFFE5FB4D680B968CF5222D06F"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/SuperAdminRecoveryProofRequest.java",
+      "sha256": "5B2A4B06E2BCF4CD9906992AEC5D7682034ED84064CEE3CC1A1C1F5241C3B128"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/SuperAdminRecoveryProofResponse.java",
+      "sha256": "25AB1A8DF32206C7550E97BC690685C53ED1F8F6EE02CFF3385FF5B378EF94B1"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/SuperAdminRecoveryStartRequest.java",
+      "sha256": "EE0DC9028C8100F351D360264B7895B2DE630D468828787A3B43042FC7B9305C"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/UserCreateRequest.java",
+      "sha256": "3B8B028D31AB691E209005CDBD5B2F6BD6E3F0512DBAB2F6DBC48831BA1DC83E"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/UserResponse.java",
+      "sha256": "101E9BB87DAABAED01095750AF208A6B1A3E3518F4FF56E99C36926194649B12"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/UserUpdateRequest.java",
+      "sha256": "D9C30727C99C84D55BDC727C3CBF5538F896749A617898ABE863E37524A117EB"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/VerifyConductorRecoveryOtpRequest.java",
+      "sha256": "EFEE294539C2074C5B30D2CA4E01A8009E6DBCA08F05E6ADB48ECBB73EEBFA65"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/dto/WebLoginResponse.java",
+      "sha256": "1593D782CF9A7B6B817B57716EBEDB7716B7235FF5D7AC8DD8D60D5F9DA14807"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/MobileAuthController.java",
+      "sha256": "42C137123FE79B5AC9B98DB8D6C1017746DAC9AEB94049B0C92CCD57B27E3351"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/RefreshCookieService.java",
+      "sha256": "066601B9B433FC7E67964A6D329F0C5BB1EE058E68E16995B13FB2729D0B0BD9"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/SuperAdminRecoveryController.java",
+      "sha256": "A780155CCDD1FEB535081E3062A1CA8526E6A8B6D2E06D1E0F5D0CB4A0E44A5C"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/api/UserController.java",
+      "sha256": "FE1D03159927CA483B0C86B5F4C0B6FEFDD8644A59F115CE964CCCDE6F9981E2"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/AuthService.java",
+      "sha256": "D5C6484441385F89A3ECC660B916CA648F991A9F8C68E0B1A03FA9DF6B13C993"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/ConductorRecoveryService.java",
+      "sha256": "8BC201C009FAE1E0A7871F5AB56D127A223CD460C045E3DEA583644E3554EEB6"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/EmailOtpCodeRejectedException.java",
+      "sha256": "3A89194C40439F8657B5581DF86673CB0D922452FAC02C1CCBE8F885B12F0B9F"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/EmailOtpService.java",
+      "sha256": "2E21E37613D2A8A6225A033FBF22DB278EAA20C6AAA1BB0B90174A9ED4395AD3"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/EmailOtpTicket.java",
+      "sha256": "BD254B02C9C6D3CC3CEAD618E46B2537057708C8A51E3E77F489EFD418F762C3"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/IssuedSession.java",
+      "sha256": "D5F81C859A723777EBB3E2AEF9C918FC68EC862DB7F14EF13B5B4B0E51ECD08A"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/JwtService.java",
+      "sha256": "02F2F1EED78B7E1399DEABAED9195EEBB4DD1FE8795449475811BF9FBD326AAB"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/LoginRateLimiter.java",
+      "sha256": "C9F663B9B57A41AF07978E7AA95F0172B530C4C68512963FDEE50FED340467BD"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/MobileIssuedSession.java",
+      "sha256": "FD218FEDFDF2950278340C70DB37D17B27F0CB7C52C830595B9903E476FBEB9B"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/MobileLoginResult.java",
+      "sha256": "D576821E8FACDD6F15FAE0D535EB14B8DCB3F14E89CFF4B9AB451130EA8A413F"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/OpaqueTokenService.java",
+      "sha256": "7B306F94EF4C0859210369F4E6BDEED5D675CC564CEC5EE64BF76FC34E780564"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/OtpCodeGenerator.java",
+      "sha256": "51D24952A6487E27A35AACCE717A4D1BCE83D48DD616262DF438534D7A2ADCDF"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/OtpCodeHasher.java",
+      "sha256": "3968819583E58C853EB15C13390F80AABFFC0880576DF05AD990FC116332F036"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/OtpEmailSender.java",
+      "sha256": "941807B584BF5DB51B1C4193FBFED37B93BE189D9A086D926F1151C95F4698FF"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/RecoveryProofRejectedException.java",
+      "sha256": "C0CF023FCF84F74BCE18B963F5A4B3FD685E0E1BC561A7725FC8173B6A246571"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/SuperAdminRecoveryService.java",
+      "sha256": "393ADC4C71777B67996A1A53D4753FF74E9F0229A90638F8111DC8DF94B73AD5"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/UserManagementService.java",
+      "sha256": "6240B5DBD46289E9D0670BE2B7C2B118169CB40775C4EB7CE89A54F1E0BF8905"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/application/WebLoginResult.java",
+      "sha256": "7F46D085DECE315FF0B9ABEACD2A9A1FA34CBBF2522B8B0757AC687C1E6DCF88"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/domain/AppUser.java",
+      "sha256": "88DCF35525EB1A18F7580677DB1C470ACE170BD1B814DC6C1B25F1E5E2A55912"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/domain/ConductorRecoveryRequest.java",
+      "sha256": "50839238F437ACEE8850D6DCFE7E38AE16C0C02A5F3E5164166692F9BD4411C7"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/domain/ConductorRecoveryStatus.java",
+      "sha256": "13161C952CF0EEFAC8086E5E24A87F062C10652406F6A588A4F1E69D1E3D8714"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/domain/EmailOtpChallenge.java",
+      "sha256": "139B2FAF000F4E739027935B1F05BC99C55AC618E750BF577032F83B31152B97"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/domain/EmailOtpPurpose.java",
+      "sha256": "4502FAED8D1ADD33A576602C33C619F8D245BAA149236ED1E8E3D3AC8E857DBD"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/domain/RecoveryEvidenceMethod.java",
+      "sha256": "028DD7DC541EE5B7660C509AA0EB484CC0202AFB2F87E61038972DEB61EEFB3D"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/domain/RefreshToken.java",
+      "sha256": "AC2CFFD12303B7F21F38BC1C395F9CE74AC69DE0B609433DA7C1C1EDB447CE4F"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/domain/SuperAdminRecoveryChallenge.java",
+      "sha256": "A8404269656DFE3AAEA719AB5FA28B3BA2D8FE359CAE01045FAC0CF1976B69EC"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/domain/SuperAdminRecoveryCredential.java",
+      "sha256": "8DD7013C5F407A6859E552A030F23EB14C2867981A7981A60081A48798FB1BED"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/domain/UserRole.java",
+      "sha256": "D20C6812F4F5CC9225AE51A6526B9B48C0F3FB8A1DABAC3604D3CAD448AB0C00"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/infrastructure/AppUserRepository.java",
+      "sha256": "2C842D0F794B8880981A61D506E94D375C89603A1DF2954C7CDD85AB83426A94"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/infrastructure/ConductorRecoveryRequestRepository.java",
+      "sha256": "B6F70152089DE0854A68825A94901A88CDAF82BA50540C86D0DC4E9F297B0D5E"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/infrastructure/DevDataSeeder.java",
+      "sha256": "810BB56FB771E0138777B5D6A8E61C01C45C8829DE597AC91F72CF6331B999F1"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/infrastructure/DevSeedProperties.java",
+      "sha256": "211765D86812AAEBF45A019ED0BE56BA5BEDCB43FBAF15F3F7BF2D9C41B078CB"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/infrastructure/EmailOtpChallengeRepository.java",
+      "sha256": "77F87DA8E2277628FCCAB64985C978CF1655D9E1ECF063400569F47ECBD5CCB8"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/infrastructure/RefreshTokenRepository.java",
+      "sha256": "5B5776329086F4C61BA5242B243F726C9FE4FCA9D70A9954B594445345E7DB27"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/infrastructure/SmtpOtpEmailSender.java",
+      "sha256": "FBB1FD67A5CFBC95624A94B0AA4F2AD9DC14997AA1AD045B35D38907D8554548"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/infrastructure/SuperAdminRecoveryChallengeRepository.java",
+      "sha256": "642F97235C147CC231673BC789570C9DB1F2FC577A07BB5546385AF223C35429"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/infrastructure/SuperAdminRecoveryCredentialRepository.java",
+      "sha256": "48108D1551C49D8F110AEE1553EEB6AE9FF80A4B9A58D9F8DC9509FDD746FEF4"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/package-info.java",
+      "sha256": "2A423B4DBF35ACDD0407157E70B2A266375BFC5CAD0D80CA4B86A48DBB5A1587"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/identity/recoverycli/SuperAdminRecoveryCli.java",
+      "sha256": "02D090D6DFFA108CD6191BFFE537D7352F47BD04F492033BAD2095F7CD1F60FC"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/invitation/api/dto/CreatedInvitationResponse.java",
+      "sha256": "E99AA0447D2CE4C9E4CD3A0D43E77CEEB069E3DEB42C3E5CDD493D695045BA78"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/invitation/api/dto/CreateInvitationRequest.java",
+      "sha256": "7A7213FEB2960827290F7C21FEC5F1A46E4A104322AF9BDF263480E725D516C4"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/invitation/api/dto/InvitationSummaryResponse.java",
+      "sha256": "1E3326CBDCB6DF7668D5CB8DBE9D467D80A5F5971B5695CFD0737656FCC8F4C2"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/invitation/api/dto/InvitationValidationRequest.java",
+      "sha256": "FBE6ED43252629784BC77D790384EA67A751BEBAA7EFBF8A8DD806BDCCA71C2A"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/invitation/api/dto/InvitationValidationResponse.java",
+      "sha256": "E8345449DEA5BB762EF7094728B76E593F143F7CD8B6EBAB8DD600D7AFBD4FC8"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/invitation/api/InvitationController.java",
+      "sha256": "DA8B84E7D406C3752C39693B52721DC7CD7CBC62D4E8293D6F948EC7A2F8A6FE"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/invitation/application/InvitationCodeGenerator.java",
+      "sha256": "F0BC1CDDD7D8AD59152502FEEBCF53BFD7674DC130C9C8A65CC79406A7BFDD69"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/invitation/application/InvitationCodeHasher.java",
+      "sha256": "1D67B96BE455AA5A2231E60553AE432C8942F02D406147252255AA7CFF4FDF9E"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/invitation/application/InvitationService.java",
+      "sha256": "407370F75BF06C203E87E24B09C848B245B44324DA84105DAF657BB9BD20466B"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/invitation/application/InvitationValidationResult.java",
+      "sha256": "E69138037C3AAE43B7ECE301289D6927BCCA92E5F14587DD4FDB95CE42F4F070"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/invitation/infrastructure/InvitationJdbcRepository.java",
+      "sha256": "A436DDA2FF604072FB82BB0F968C098902489E9F7DE71D1588FB3C6D0DC32E25"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/api/ConductorDocumentaryController.java",
+      "sha256": "6042C3F367906A60DE6D02EED65EB300F001FFB66208ACB0FBD23AC36258E7D2"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/api/ConductorOnboardingAccessController.java",
+      "sha256": "93D0D7E7BE40CC803BC7343A4266625C12C73DC744D5AD82A18259088199B83B"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/api/ConductorOnboardingController.java",
+      "sha256": "D1777DBC0A4E78A9B16110AB8580B39F1C614F961D0C550D836D26360C9884CA"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/api/dto/ConductorDocumentaryContract.java",
+      "sha256": "03B8261EA7399D6EF38E7FDE67B4DDB4EED5FF1350126B30ACAD45C4A3C741F0"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/api/dto/ConductorOnboardingAcceptedResponse.java",
+      "sha256": "A42CC95A7B42ED900969F29769F08AE61BD28CCF3E76304B749461124F53FBE2"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/api/dto/ConductorOnboardingExpedienteResponse.java",
+      "sha256": "C73985F3B1D71D2054189743D57235CD3F6A8F4D61DB43CEB74C2DC0C1E21DF2"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/api/dto/ConductorOnboardingOtpResponse.java",
+      "sha256": "339F411B901F5800CF719DB6A8B6E160B03B15EBF6C2D4C2535376ACA323EFB3"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/api/dto/ConductorOnboardingRequestSummaryResponse.java",
+      "sha256": "09E7D20A51A518B1C539B883E803F454F8A18C4B7D80D3132241513198321CBB"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/api/dto/ResendConductorOnboardingOtpRequest.java",
+      "sha256": "E6CC1DCDADFE263B4C37D0B88B7B45493476189B3A1270838F6C6A222EDF8FBF"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/api/dto/StartConductorOnboardingRequest.java",
+      "sha256": "59D498B271AB8B0426804C0EA566D72DA13F7794A2657311434F22811EB615E7"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/api/dto/VerifyConductorOnboardingOtpRequest.java",
+      "sha256": "B451CCA1A1B5BB265F64D1530AFA12D807E6245EAB3746ACBB3A507A29CDC808"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/application/ConductorDocumentaryCatalog.java",
+      "sha256": "509E310EE64469E50E704AEA106CFCCE0B5F632035684AECD2EBA7EB7F6BB62D"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/application/ConductorDocumentaryService.java",
+      "sha256": "A7B32FFFDDD4B0AA964CECF9C5B47201B25809B0135C9F71EB63957ED5B32AE0"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/application/ConductorOnboardingAccessService.java",
+      "sha256": "735AA103A54D4518B6C5A66574E8E9019A4FCA409353952118BA11AB696AA82C"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/application/ConductorOnboardingReviewService.java",
+      "sha256": "0712C1B398574FCA68CEF0E0F31E3D0FE469D6D301312BE9D68C64254D715E48"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/application/ConductorOnboardingService.java",
+      "sha256": "86E9999F406B558AFFE7C13AC1F6B77A52C9E92A975A9AB843AE161902A8ABAA"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/application/OnboardingInvitationRejectedException.java",
+      "sha256": "1E2DA76AB5B4CA35307EE626845605496EFE5AD6E009D02A2474BFF0027AB80A"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/application/OnboardingOtpRejectedException.java",
+      "sha256": "0119D7709A8AFE45A5772823023304D061F0FC8D9615CB8F46736E58A528D5C0"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/infrastructure/ConductorDocumentaryRepository.java",
+      "sha256": "44AF68BA44F8406A0E9FDCE78946F6BFBC90212518DC38C9439369B8749A05B4"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/infrastructure/ConductorOnboardingAccessRepository.java",
+      "sha256": "FF23E2E1BC3009923F1E3E2CE0B294C57E8D142E3F848196EBFF2A584A4E4926"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/onboarding/infrastructure/ConductorOnboardingRepository.java",
+      "sha256": "DB5ECC6665FC66C34DD8ADAACF73C945130224B83A138C621C7366FA724D58A1"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/AnnouncementController.java",
+      "sha256": "BA098C7539B4A8701F258C25011672671FAE4A99EB2A5648BC5906CADB7DD83D"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/AssignmentController.java",
+      "sha256": "9CC304A7C287722C20709563EB36800304158750AF6039D13BAC96A4AFE4EC6F"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/AnnouncementCreateRequest.java",
+      "sha256": "266F1DCF15633B1E42F8830575552A045369B5BBF0E47FD3C9DC88AA309BA566"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/AnnouncementResponse.java",
+      "sha256": "D984BA057CE625BC909247C92037A799E7D6075658CF88E0D8C61705FED939D3"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/AssignmentCancelRequest.java",
+      "sha256": "43EC52D17F012D48EAF0A60C4ED8342019198B2D770AFA05BE950D6CBFC69BD5"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/AssignmentCreateRequest.java",
+      "sha256": "BA009E4B20F1270412C7D2E0294C5AB45F96560D311BEA3A3F8C590C769B4FD3"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/AssignmentReportResponse.java",
+      "sha256": "34065160654F927165BF8E740A6B5F6F61E2C6D84F5A86D645B7FAE4BD570385"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/AssignmentResponse.java",
+      "sha256": "ABF272EFD89E76733EBA618AB2A6E42134494C7271FF7C683A68037029AB1DCF"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/AssignmentUpdateRequest.java",
+      "sha256": "C6FE25C718577D899B2591EE0FC196B06AA6F6E1B2D7129ACB8416CF78219E7A"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/AssignmentVersionRequest.java",
+      "sha256": "590E4DCCEE1E2D5D76F825B3A9C39E4E3DF4D536ADF42C5146454613FE3F42B7"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/AvailabilityReportResponse.java",
+      "sha256": "4C896990E3D6338A072751B9A04258FCD30EA7FC068AB9E37C5E41D3AA14EF9E"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/DriverAvailabilityRequest.java",
+      "sha256": "EA2B2B7111C8248DB7C36CD5B16B71196FC12580CD063661A0D060D5A80D86FB"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/IncidentCreateRequest.java",
+      "sha256": "359445B1DFEBA20C6035B2633D786D9A6054D48C87E36EAE779D55FED9DE57C8"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/IncidentFollowUpRequest.java",
+      "sha256": "D7898C40517F34ABC7AF8C0E0F5B794C9D3A3FBBD01A6C27B53C62F2EF781D1B"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/IncidentReportResponse.java",
+      "sha256": "A1626B67912D344216B90164516622418BF3B92F69E3DDCCAB00518B6766DBF8"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/IncidentResponse.java",
+      "sha256": "DF4EE6CFE4288C61C7AC47AD2160AEC56E5D4D202713FE05333FB5FE0EF37C13"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileAnnouncementReadResponse.java",
+      "sha256": "5880594153E205531DF2DCFD01DD33792035783465FC13E3B1A7273949928350"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileAnnouncementResponse.java",
+      "sha256": "7460098A4E62629AD32F45D28022CC8772CF8D9868C99CBF29EA727D97CECEE9"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileAssignmentCommandRequest.java",
+      "sha256": "17E80A0EBFFFEACDFF752B5F0344EADE42ED95162DBF0512C31AFFF7CE64A210"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileAssignmentRejectRequest.java",
+      "sha256": "C75359A91AA444AE656655BE4E204045B21461217EFA9F72CEADC0BFBBCEAA5E"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileAvailabilityRequest.java",
+      "sha256": "0AEBB445A86F0A34ED12029063E1FEE5322D7DCF7AB0B68F34449EC49A5484DD"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileAvailabilityResponse.java",
+      "sha256": "FB5B69FCA55FE55521D117472E3DB54CA008472F08A8FD4704BF03C776CB3EA3"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileDriverProfileResponse.java",
+      "sha256": "C3638EF78A060BFB7B8ADE7EC5AD62439B91C3202A2C77976C26E5029DF4D0FD"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileIncidentCloseRequest.java",
+      "sha256": "E5CD3A7A9011E5515EB223E743CA1AA53B66B8728E65F96A7C761135AFA84A45"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileIncidentCreateRequest.java",
+      "sha256": "1B5BD043289C99FA813F044F8D541618365BF43AF706FF317CBD6E17A864D817"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileLocationConsentRequest.java",
+      "sha256": "54ED03010755857D99262067403F6FE648EFD6335A9AB1B070BB4032825F2280"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileLocationUpdateRequest.java",
+      "sha256": "8E7E992446983AD9BB230F514CBB7CB2BBEF0B0B636FE9C6BBA15E9720B68B11"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileSyncEventRequest.java",
+      "sha256": "E09A043A227268E9B4A4EE36EE31D9022988E15BFC28873D15C312B8200241CC"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileSyncEventResult.java",
+      "sha256": "BA69FAC413407DC5CF50E0844774C24780B3343F6D43B6D4F0518BCA75103DEA"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileSyncEventsRequest.java",
+      "sha256": "1B20E00AB3D698C61D653A3E08AA32C53B9C326F6A3F8693C3EF4EB91CDA0ACD"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileSyncEventsResponse.java",
+      "sha256": "A428D2570FA9B231AE79918628A68901B44E3941C4269D2872585A8014D26F8B"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileSyncEventStatus.java",
+      "sha256": "2A8A23D91F4E378F98E7E54EA92CDFB252988B9C86E9F335C2C5201E639D46CE"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileSyncEventType.java",
+      "sha256": "23F2BE2340BF5F14AF4E04C1733EC718DF7AA8AF9CDCC42546955CD256668AB1"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/mobile/MobileVehicleResponse.java",
+      "sha256": "F24D79E3D78AE5B9B2DD0F52C4143780E4211E83DC290D1E2AFBEB58CF3B2A69"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/OperationStreamTicketResponse.java",
+      "sha256": "C176904F22E78303CA96A8EBBFF12ECCB4A7AA2DABF5F6FA692459EE972F2AE5"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/package-info.java",
+      "sha256": "5A9152F22705C9D66D87071DD9858943B6D70CF7E48912C98206ABCA865C20FB"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/dto/StatusCountResponse.java",
+      "sha256": "DD9ACFD17061169BA6037370F3B51AD5F99FB09C0A1ABCA4960D666A1CA87EDB"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/IncidentController.java",
+      "sha256": "6CEB44F96D6A253AFDA7F25AD70A105FDA5FB1EA12FB647A9B027BC052616439"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/MobileAnnouncementController.java",
+      "sha256": "D34C890BF5210FCEAF428D99C2A9E57EF7282A1CC172E3E740D2B166C6350726"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/MobileAssignmentController.java",
+      "sha256": "887C5B3663FBA2803DED8D89F0F8264875504490FBCCA1B2DD7783D5EE5772AB"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/MobileDriverController.java",
+      "sha256": "CBEC76B7E22EC33724BF76A8DE188AB82EA9EA6A008F08E2BB17CA6C3FE9FCDA"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/MobileIncidentController.java",
+      "sha256": "86671A641646113ADBC99793FE3FA9F4A65C5A7A4E82F6CCD47A43DB93874F8E"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/MobileOfflineSyncController.java",
+      "sha256": "BF504D310D764024E8BC6909742E06EC214F7725A9E38C2633B814329AB93F5F"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/OperationStreamController.java",
+      "sha256": "7EAF4D667CFED591FAE23DE48B4881CB11B7CE3F3F9C9646A1F17967A9239F7A"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/api/ReportController.java",
+      "sha256": "41448302A81DB71A548830993CA5B92669F25D17006A76768E9C01A74B90991F"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/AnnouncementService.java",
+      "sha256": "20ACE3283CC5132DC502AC1DFAED3387E6CA73A622F76A415ED57DC45FFE6471"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/AssignmentCreationResult.java",
+      "sha256": "57895B870044114346C9372EF6467A55DA44580F4A98C33792E6257342BF6C02"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/IncidentService.java",
+      "sha256": "FCD16FE3C500DF36F362EE822A0CDE702079C49FFC1398C3F4D6929536A39FCC"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/MobileAnnouncementService.java",
+      "sha256": "0FE2082B343AB28ED297C96074209F7D44B1BE1429869F908AE1045B0CD144FF"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/MobileAssignmentService.java",
+      "sha256": "CCA03DD6A8650FB19037A1600D26453DC49865B2B17E7CD20933FE5D0630FB26"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/MobileCommandExecution.java",
+      "sha256": "3449AAE8A0D9EDABF336955FC4C8BC7D53AD3C67A040B17BB1210DE5F3FC4462"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/MobileCommandProcessor.java",
+      "sha256": "90B45551692D742FF3D089E8F67D204DFCBCD9B0A1407DB645F28E7F443F7CA4"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/MobileDriverService.java",
+      "sha256": "88B2094C42371410403A2A3F6FC1437708CBE0D3BDA0A02CAF8CDEEDA349ED48"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/MobileIncidentService.java",
+      "sha256": "2D8D33C04E10CD9542A8F8063A3B2149B43601B9C141E080E64939A0B228CEBD"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/MobileOfflineSyncService.java",
+      "sha256": "95D9EBC3FE900ABDFC0F3BED7751E02A936AB09148028F05278D7875272A8375"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/MobileOperationMaintenanceService.java",
+      "sha256": "1CC44FC48ADB0A7634AD16578B297FF533F80C55AB4EBAF22B1DB1AB16AA1AAC"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/OperationChangedEvent.java",
+      "sha256": "1D42D43A4F02C46225910006CE0BC0D3FB28A23932C28573230F93157A8A773F"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/OperationEventPublisher.java",
+      "sha256": "C9B992523325419BE0AF2FD58484CB4708EBFCD20FFC3FBB758335555105A835"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/OperationService.java",
+      "sha256": "0D3A9F93D4DAD5907B20C64D110EB47259C4D8A41ED8CBE95AB7ECBF2FC75451"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/package-info.java",
+      "sha256": "22DA445E66F2DB0FBA001227DBCB65F83001E39A497F738E263D0834FF7A67F5"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/ReportExport.java",
+      "sha256": "0D3FDFD535F04B56B4CB2820F78E71D50338BAB44B2ABE30C1326370241E5A69"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/ReportExportFormat.java",
+      "sha256": "94830B608DA8947C16EF3A4771198E8BF42F603C003C2F4B6CEBA969FDD99622"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/ReportExportService.java",
+      "sha256": "DC4974748D51FD5B322AE8EB087D80A1EF74F13927E7B88F956849C42EB2D602"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/application/ReportService.java",
+      "sha256": "DAE3FEEC8693F97FF2B2E91A50A0078A2FAB0BD35ED78218BD1118EA2CF86272"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/config/MobileOperationProperties.java",
+      "sha256": "B63C24C1863057EF3BAB14E57411973A905F2E53DCD76F70848A4DD015CDBD19"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/config/OperationProperties.java",
+      "sha256": "1449D277249D549B2858B0184D42F17885AFEE84EA59A8ABEF154B7AE2B89B52"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/domain/Announcement.java",
+      "sha256": "ACE68358C7A62BC118A63AA0F90520A5AD3D62114EBB6361FCC7E5ED79812C97"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/domain/AnnouncementAudienceType.java",
+      "sha256": "CD3F7E4777976BEDF310F7DF3A86DAEF056ADE08CA75A4206385ED4E69B46648"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/domain/Assignment.java",
+      "sha256": "A41164035442305B3A93CBD78B3A8F12B747D0F55EC5C7E56DA51C365C688758"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/domain/AssignmentResponseMode.java",
+      "sha256": "C59350A2501078DAFC43E737E4632ED4E2EBAC78C11C3EB6EC932882877E4DB4"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/domain/AssignmentStatus.java",
+      "sha256": "6A30806881E9ACEBF97D279C4A0FC8CE52F97F5CD0061ADE2F22C825EEA5DDE9"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/domain/Incident.java",
+      "sha256": "9EBEFB27C39B531386C88F4B4F9D1C3EBBAE54BDDDD402C37433AD86B8F1765A"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/domain/IncidentCategory.java",
+      "sha256": "9B2ECEAC751FCBDCA05538DCC229DD5E8BBB7B75CECC935407B8CB9461B234D4"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/domain/IncidentSource.java",
+      "sha256": "23680E55F5D6C3F4A21E2DAF00E4BFD52A43B7D0C5D833F560642D05057FBEB1"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/domain/IncidentStatus.java",
+      "sha256": "BCC82F18DB0B2DBA56BCBAA83D9A4966CC8E469768D9B70824F9C89A62029EE3"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/domain/MobileCommandReceipt.java",
+      "sha256": "B268FFFB5A58CFC93FD3F180B8B3B5322CE89E456C14CECD8633517849C3CDE6"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/domain/MobileCommandResultStatus.java",
+      "sha256": "670BF85066447B90A9ED4B4D1DA0979E851A1797DE0720A17092B60AFA5ADCA3"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/domain/MobileCommandType.java",
+      "sha256": "9FEC8725C0521289BC113ADD4F41270A0AB678DE425082AC8192C7684B3B7981"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/domain/package-info.java",
+      "sha256": "5A88E0D7F93E39D207FE132D1F494D6537160BA9E8AA1430650CE7C9C635937C"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/infrastructure/AnnouncementReceiptStore.java",
+      "sha256": "22AEB208711EA3FECABC702E02F0D952386D2CD13E94286D806FC05F365DED3B"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/infrastructure/AnnouncementRepository.java",
+      "sha256": "3B8B402752EADEA73B440FC676ED4BA2838AAFAB5596B662464FDA201D05F269"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/infrastructure/AssignmentRepository.java",
+      "sha256": "2DAB15D64F781976E40B63243EFDEC103384C4DB07469DBAE4FC53824A5182BC"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/infrastructure/AssignmentSpecifications.java",
+      "sha256": "9931839B7BE69155D68B2C14650509A9D598CD83FD9025E6CE59322E45BB5AB2"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/infrastructure/DriverCurrentLocationStore.java",
+      "sha256": "5DA8CB623D1222C484EA346745443684093D46EB86516D92F957F98E267344C4"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/infrastructure/IncidentRepository.java",
+      "sha256": "9205AB88BB9DBAEA4D699D80DE3B6BEDA53364EF06B5DF72AA1B7CAF367830DC"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/infrastructure/IncidentSpecifications.java",
+      "sha256": "54D7A6E6244DF2180E680D1E45C09B054BE5F71733EC67F5836D7BC52F35A0EC"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/infrastructure/MobileCommandReceiptRepository.java",
+      "sha256": "1A8D8C9A1CB474F15F1B45B885D1178A29E6511C00C1F18D26BD90A2217D8CCA"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/infrastructure/OperationReportRepository.java",
+      "sha256": "FA01B2DD9A6DBBA4215B7D4CE4278BB67A0C16DB1977CD35CFA68243D968D9E3"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/infrastructure/package-info.java",
+      "sha256": "4AF348C9264BECD2C107136A03C92EB7B65235A923B9B362E9B7981B9292791B"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/infrastructure/PostgresMobileEventLock.java",
+      "sha256": "4F56C95B4D55D4C3362B09E4DE69CABA51F5B00616CC42B8553E91E09C65453D"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/infrastructure/StatusTotal.java",
+      "sha256": "88F48C5055F4C3BF0EDD16B1B922AE7B90B6626148D5256C7A167DC9022BE789"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/realtime/OperationStreamBroadcaster.java",
+      "sha256": "4A1B6F209110082BDD9E3E5049FAD4B9713F64551C4A7C9FE1394E3628031842"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/realtime/OperationStreamHandshakeInterceptor.java",
+      "sha256": "E895B1156C75AF851921CFDDE216703D1318F94FAD886C39297698614C473709"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/realtime/OperationStreamTicket.java",
+      "sha256": "04F3AB8C17ED12020C4E79E43F62F102A239810CF8373D6477F61F2527613BC6"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/realtime/OperationStreamTicketService.java",
+      "sha256": "90D0ABF1119C393E1732E6B6134D703AAC4753F97CCE39DB89C86552462ECD8F"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/realtime/OperationWebSocketConfig.java",
+      "sha256": "29F5654DA0D19E7274D3050E97C8E1D67BC304ACEB41F34C129DEEFAB50E6D90"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/operation/realtime/OperationWebSocketHandler.java",
+      "sha256": "968750034A1D3E61403CE52A0C0AFD42764927A501E76078D5C72EDDA968D2D6"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/organization/api/dto/OrganizationCreateRequest.java",
+      "sha256": "F4446D5FD5533DCE0985273C6CF3EBFDFEC2C390B88387021AE1D35CE3FA2222"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/organization/api/dto/OrganizationResponse.java",
+      "sha256": "1B5244EC2A207E700BFF2F9E2C75A64953BB22EB431995C46675A925CB485438"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/organization/api/dto/OrganizationUpdateRequest.java",
+      "sha256": "775F10E0AB228946CBB7D1AB067C049155EC8D45EB580E6BF65E81EBCE45A645"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/organization/api/OrganizationController.java",
+      "sha256": "867567E1C5E6DBB561F5D80AAFD6D1B15AA50E98E097CE6F3A060EEF44FA7E2B"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/organization/api/package-info.java",
+      "sha256": "3389AB685DFE4FAAE23D4D9BA385D563881C3A857384332BFF7BD4F3B05DC3CB"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/organization/application/OrganizationManagementService.java",
+      "sha256": "EA48E893E281A8C81F6891DF20008E4AB0D51850467E27E393C5B92395760253"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/organization/application/package-info.java",
+      "sha256": "7284CA4904D51424670DA67A48255261EDD9A67DB654343B1E54CEF7F38B4973"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/organization/domain/Organization.java",
+      "sha256": "64536ED0635DE560211240B12B33D371D3389674559DC70D1C8FBB1563AF675A"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/organization/domain/OrganizationStatus.java",
+      "sha256": "4316CE97A64F266A5AB4A6DFE7A9CB1A18038F8663E43DE2D54B6189FB784E99"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/organization/infrastructure/OrganizationRepository.java",
+      "sha256": "F1AE7B7610DA88BBF31E0E0578F2C533C0A392989F7F9B7D5D2D6C9B7F76A25A"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/organization/package-info.java",
+      "sha256": "7DDFEE8D5926DC6D5801A7FB06AB6B931E64A9530CE96CDA0928A8A889F5765F"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/personidentity/api/PersonIdentityContract.java",
+      "sha256": "91BC989473419A456C29AB1128C6F3A9CB5296EB98BB766C057241F2E5D9F79F"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/personidentity/api/PersonIdentityController.java",
+      "sha256": "2754EA003B4A13B829A7C69804EF7559BA69D1D5AAA53D8AF140F9AC0C955A67"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/personidentity/application/PersonIdentityGateAuthorizationManager.java",
+      "sha256": "F7CD11688731A2D53CBDDABEFB88C2517332F8F278D4F9819E05A67AE7EF807E"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/personidentity/application/PersonIdentityService.java",
+      "sha256": "B5137615E937BB5C64E8EACD1DD2A097B6A01DDEF5DFA6FF737F652F5CC4C8ED"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/personidentity/infrastructure/PersonIdentityRepository.java",
+      "sha256": "41BB27774E8900BBFCF3A6250636EDB1D3527DE1D6C81551E3D675FC9178EC73"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/pilotquota/application/ConductorProvisioningPolicy.java",
+      "sha256": "6998B8FB60CA47578E1C54C9A6B0164BFC9B1A6C40772172B7E08E928E46E0AF"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/pilotquota/application/PilotCreationQuotaService.java",
+      "sha256": "6B64FFF31F2E69D7E6396AC7D7C3931BB384897D26BDBCDDB7B96203127DD707"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/RutaFijaApplication.java",
+      "sha256": "C443BA86E91933B183BA09A50422928078C8D9289047D1790D9E6B7F15C782EC"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/api/PageableFactory.java",
+      "sha256": "82ECB1D2C3C5CC73EE5CA12B94FAB1FF4A3115C43C62DD55182D2A6105EBBF9F"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/api/PageResponse.java",
+      "sha256": "C1A19F65A920B0677CBFEC4E58A30370AB9BB92BF86804F60896C1407A278691"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/config/OpenApiConfig.java",
+      "sha256": "E370054B642E80BD83E97C277137323FAB25EA25668B33730E95C0BF0E04EE28"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/config/SecurityConfig.java",
+      "sha256": "6BB64AB9CE90BC8ECC6BD34ADE9BE1654280B62E5A0DFE8813E8AF0292CDC363"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/config/SecurityProperties.java",
+      "sha256": "E815037C78AE8E66FCC8B7DA6CE5D4604D11DC6907383B91D36C16E7FF4D6150"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/config/TimeConfig.java",
+      "sha256": "AB0263D8303D191E2E4049E4C2A96E4DBE95239559964EB9E9C21F439EAAB46A"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/exception/ApiErrorResponse.java",
+      "sha256": "77154757C6773631B8D8764EFF3EA395021CAD0E5B5FB9FAECDC0866BD3440E7"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/exception/ApplicationException.java",
+      "sha256": "7B21CF6EF725730B64F1E3B02B98A4B388FD3A7CE84A1DE4277BDA2187FD9E39"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/exception/ErrorCode.java",
+      "sha256": "84E6DB5A29ABD05EE798725A8AFEAA67BD501F22A1D8F5A6FBDE85800E6770FA"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/exception/ExternalServiceUnavailableException.java",
+      "sha256": "687F8E348C8DC25037E42A0E4A1EC8B64A8DC1727440CFC2B7CA983C7B5C3647"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/exception/FieldErrorDetail.java",
+      "sha256": "35600372DEEF688EB840DC91ED1E3352CABC476B167EE7DCA89540C444A9252C"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/exception/GlobalExceptionHandler.java",
+      "sha256": "6AA2E25328FF156CE9CB87A84D2557DA8C3AB3CFD32180F0D7EFD4B3FB143D33"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/exception/InvalidCredentialsException.java",
+      "sha256": "5C6451058B3078FB770BB6C2F5813667087DFA91122CAC0F9CE393D8EEF87448"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/exception/InvalidRefreshTokenException.java",
+      "sha256": "9B6233B232E8312BDB9D7B1935DCA4C51AB0757D0462E209BFCBF58D5CF27807"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/exception/RateLimitExceededException.java",
+      "sha256": "C894DC6E993FFC60F2DBAFC7712328124185691A0054D799D91DD91D99DD02EB"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/exception/RefreshTokenReuseException.java",
+      "sha256": "A79389E97271EED3AF2BD29FE12DDEC749F27DCA030C68FED467F68E8338E0ED"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/observability/CorrelationIdFilter.java",
+      "sha256": "6315D2293D27EA8ABEF8AAFC51DCE23AE2B22E17D13D57D9AC5AA725282396DD"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/package-info.java",
+      "sha256": "FA1783E2629CE507BF709E114709A2C4584D8DB91D9293D8A1325C88719B0C46"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/security/ApiOriginValidationFilter.java",
+      "sha256": "13144842EB2D53782F7548C3A2AD426CB62356FE389C941087E3B2F135C78EBD"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/security/AuthenticatedUser.java",
+      "sha256": "2F40270006B03B0A4CDC889377193B62335106482B4B9EF23287B2DBC6D40D21"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/security/CurrentUserProvider.java",
+      "sha256": "74392ECD15482D5BCBB93B4CD6746453FF0D2BCA3FB9DCB550AFC5A5ECA211A4"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/security/CurrentUserService.java",
+      "sha256": "48E923FB95A522F00A03D6C5B368C5F7A32CC94A12C1C51FE4B44FA2E7E874E2"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/security/JsonAccessDeniedHandler.java",
+      "sha256": "CC2A811C074E7E138C6A51A5A8CD5C2DCC84C136D744570170E787FE1E421088"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/security/JsonAuthenticationEntryPoint.java",
+      "sha256": "57E6CF109FDE380973F0B5CBF805BF3898AC6572C0E29A02FBB5A5522E8A42AB"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/security/MobileDriverActor.java",
+      "sha256": "1B8223511284176DFDA68A03D160C24718E7E2E4A95086CC46FCE9E1A1E2D62E"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/security/MobileDriverContextService.java",
+      "sha256": "6C222412857CDBCAE6F25BE1EE9B11C8A848CA0BF8049B27A58F169992C024B6"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/security/PersonalDataView.java",
+      "sha256": "5F508801D8B5A93FD44B648D1658DC5FCA1F5A7898AAA9C76E8956306C2C0BD0"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/shared/security/TrustedOriginValidator.java",
+      "sha256": "0C631B3DAA6819DE615CEDF8A8ED9BFAE8AECE31029C71ED8D5534230A96D5A7"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/terms/api/AdminTermsController.java",
+      "sha256": "3E8090F782272FD89E23FBBB229BE4732DE944C7AF0195249A2268B9923030C9"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/terms/api/dto/AcceptAdminTermsRequest.java",
+      "sha256": "C7FB03A47E91629914730683D831E41F0E9BD9E164181D5EFB2B8BF961682262"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/terms/api/dto/AdminTermsAcceptanceResponse.java",
+      "sha256": "ADEDF30760B3B3CF5AB69D0BF58F431F4CA45FD242F8ACAA2F42C5EB1EC41D8C"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/terms/api/dto/AdminTermsCurrentResponse.java",
+      "sha256": "DF544FDFDE4C9EAC3B0871F17141276CAB6CB4D7ECB80A6B59D844588C5E4467"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/terms/application/AdminTermsGateAuthorizationManager.java",
+      "sha256": "944710AD5D4C0ABBF0F4866C05B41B6659D2AD23A309A6C8DBA91F8DDE56F84B"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/terms/application/AdminTermsService.java",
+      "sha256": "2096B081BF54A9FBA25C19CAD0212A28ED5DB14F274D88918D73960F3F6AA683"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/terms/domain/AdminTermsAcceptance.java",
+      "sha256": "AA910F1FB3CFF8F0352C559459FBF38D4B4C9D54A07C0E1D7E6F561748A8CF2D"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/terms/domain/AdminTermsContentHash.java",
+      "sha256": "E0CE42C7AC772EC5DDACF0CA9400C232831E8294046F1B05379C50E7201A6B92"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/terms/domain/AdminTermsDocument.java",
+      "sha256": "D1B94C6001348CD54E9CD9183573BEE4A41F3D2B0C6AA6EAB012DF983D0D8185"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/terms/infrastructure/AdminTermsAcceptanceRepository.java",
+      "sha256": "DEEB297335FD05B5F1E2F0A710E13A1068D21116D85913741B3D958FF280F9DD"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/terms/infrastructure/AdminTermsDocumentRepository.java",
+      "sha256": "120ED89C9F1448AF504EBD061572964DCCDFF804AB12B429719CD93C02478C53"
+    },
+    {
+      "path": "backend/src/main/resources/application-dev.yml",
+      "sha256": "7757EC3DCD7DBAD524E5FC8712033B43020A7BCB38D1B35CDC9BF1F3281816A7"
+    },
+    {
+      "path": "backend/src/main/resources/application-docker.yml",
+      "sha256": "D71D265A4A92B931755F23836ABEA1DCBA2D5F0C9E6C567E8FCC747ED89D1104"
+    },
+    {
+      "path": "backend/src/main/resources/application-local.properties",
+      "sha256": "8E0926A88CCAD164D9D5E4F3A5A0B9CA8C9214467B9692FE2B7B8163CFB90F71"
+    },
+    {
+      "path": "backend/src/main/resources/application-prod.yml",
+      "sha256": "807643CEF8F49842A6C3E710846547710716922BABD513FF47DB9037201453F2"
+    },
+    {
+      "path": "backend/src/main/resources/application-test.yml",
+      "sha256": "06C794E2CF08A4A7CCEDFA88866C585B44DE4BC5D1A295854A41661D07C99B2B"
+    },
+    {
+      "path": "backend/src/main/resources/application.yml",
+      "sha256": "F487DA97E6A1845CEA4B8E9B40EF4A612075F313FB5FD0BEF3EF2EE9900B41DD"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V10__mobile_command_receipts.sql",
+      "sha256": "C86F224C1623B7F19BF73BF20482449933DA9015CF0072C7DAB8889DA1F94BE2"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V11__driver_closed_mobile_incidents.sql",
+      "sha256": "D7003C519B27ADA672AA587475CC8217D2D9C238D4B2185D416AC101AD9BF005"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V12__mobile_offline_availability_receipts.sql",
+      "sha256": "C0DB4C94BE12E132AB352351C0518C322C41C349C606BA9C85C200846A80344F"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V13__email_verification_otp.sql",
+      "sha256": "381C0D9198B22B00AA4ACB9CC29CE57BB8CC48FD3049F34DCBA41B36FE9D7655"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V14__super_admin_recovery.sql",
+      "sha256": "750FC7F2A2DD925B472AE43FBB203F8134B9617648E010D94D9B26A1CCB9D992"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V15__admin_terms_versions_and_acceptances.sql",
+      "sha256": "C2D68F7CA9DC08F2A1E58C75CA9694985849AC01A4933E6C19C59F560BB342BA"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V16__organization_invitations_and_validation_limits.sql",
+      "sha256": "B5B5912331AFE9DC2B5737563160A39B327070DD41C4CD659C2417EAC95922BB"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V17__assisted_conductor_recovery.sql",
+      "sha256": "2D558EF584CE0C4B484A5B8FEDDE29A304314B6ED91DE26E5FE2E13078918DD3"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V18__conductor_onboarding_requests.sql",
+      "sha256": "4581E7A7193B6946804E944FBA936474CD35B484DA542334E55DFFFBF3816383"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V19__onboarding_acceptance_constraints.sql",
+      "sha256": "E6D3A1428996DC0615BEA07A5DB1269035A70DA2D6B3B5C681C95A2C25C53613"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V1__identity_organization_audit.sql",
+      "sha256": "E0EC7FF4067D36B9DDE47133787B0B7E6FA4E47D629941FC56894539B98967A9"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V20__onboarding_applicant_access.sql",
+      "sha256": "09DE2F221B68F550F4CAF830879497950561D73BB7C328BAAF22611A64A5F2B6"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V21__onboarding_documentary_review.sql",
+      "sha256": "F4324C12EE36A6C63A5EFF9AA4CDFFB6F56584D0EF70F1E2B6D55F8B16EFD8A8"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V22__pilot_historical_creation_limits.sql",
+      "sha256": "8D6F983FA6759DD177FC1C8E1F2F039323370770606B372FEA03448581277D95"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V23__record_only_inserted_pilot_accounts.sql",
+      "sha256": "A8EA30D50E0D5FF7F0644D75FECC38F4EB4EDDA06B6F56E5A0E14EE9929A2986"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V24__admin_lifecycle.sql",
+      "sha256": "9B821EFF361100B5E251D89B58AEE11F669DFA7D44C18688A0263D8D3E30B820"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V25__onboarding_account_continuity.sql",
+      "sha256": "A94B58B5AA354F2DE42BB57D89B0DCAD115F6E1AF6C90BDC08CA79EACC17347C"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V26__common_person_identity.sql",
+      "sha256": "74C73FAAB92E56639A6DDE3ECC3F892706FFE2FB7B9ACB326EFD0EAAF550C9EC"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V2__fleet_administration.sql",
+      "sha256": "A237B4D7891E8627388579F75EC4A4A67B43313F4014D0AE15C6B2537E662E6C"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V3__operation_assignments_incidents_announcements.sql",
+      "sha256": "7346F4EFFCA78E3F7A73A283F936EEEA8D240B71F08F38CF5081B3C86EFDCC17"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V4__remove_mobile_only_driver_status.sql",
+      "sha256": "2F32281BD2A5C5F4B77F9DE7AD66A8348AFA42A4F26529FDA919EC6B0B1F07CD"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V5__assignment_overlap_exclusion_constraints.sql",
+      "sha256": "AF77001F33C7379B8E9510614DAA1F35C503997B269A3D41530ED31D02F6B00E"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V6__unify_administrative_roles_to_admin.sql",
+      "sha256": "9BE06C6D0267E055E4DB75C16AA15774F6DAD7CBDFC0C69D0282F1AAC6F8B622"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V7__mobile_assignment_workflow.sql",
+      "sha256": "2AC09AE19D515E4E35E0DF9D8CB06F7FE9A4D955B824908A269FD2EA012ED357"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V8__mobile_current_location.sql",
+      "sha256": "C1D969DECD45CC9C6EC441A79F8B516A65A5D512BD38F9174D32F04A79750AA1"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V9__mobile_incidents_and_announcement_receipts.sql",
+      "sha256": "EB71BC34C37BAD6F84BA896DF1A02BA8959040F61D55DC7830C2066D88240405"
+    },
+    {
+      "path": "backend/src/main/resources/db/test-migration/R__native_test_role_privileges.sql",
+      "sha256": "62B878820BCEFE8F4F56BCD00E9AB3E0813575CEFCFAE22CA356103B46BB282D"
+    },
+    {
+      "path": "frontend/src/app/app.component.ts",
+      "sha256": "07D1D18D365F83E0C6CD19915E91D05AB436BF413B7A41CBA1440013427F6073"
+    },
+    {
+      "path": "frontend/src/app/app.config.ts",
+      "sha256": "1D732610CEF5829DE429078B915B056C7788B9D4002024EFD6533D3103EB4E54"
+    },
+    {
+      "path": "frontend/src/app/app.routes.spec.ts",
+      "sha256": "0D28E9A90DF42B1414C33DD2A429194437C86899C1758A88337EC6E09981791E"
+    },
+    {
+      "path": "frontend/src/app/app.routes.ts",
+      "sha256": "3A3129F194210A20AAB511E3DB958AFCB97A358FFDDB9A53D3FC752C53EC91AF"
+    },
+    {
+      "path": "frontend/src/app/core/admin-activation/admin-activation-api.service.ts",
+      "sha256": "F466DA8A438C3FC9E278ACE6B9948F49C3F8AA378EBB13CE6AE84B15524601B9"
+    },
+    {
+      "path": "frontend/src/app/core/admin-activation/admin-activation.models.ts",
+      "sha256": "04B1A13D1EB4D3ADB7673275A7E4AA26580AE335945EAA23E933786E9584B0EC"
+    },
+    {
+      "path": "frontend/src/app/core/api/api-error.model.ts",
+      "sha256": "1E22467B99780480ADB5E5152A8F5434475A37489E87AA13744F5850B5A8ADA1"
+    },
+    {
+      "path": "frontend/src/app/core/api/api-error.service.spec.ts",
+      "sha256": "1DC1F547C81A792FD76F19D4728DCEF2B49C0A47F254D0AC4D24E9399E4CF7F0"
+    },
+    {
+      "path": "frontend/src/app/core/api/api-error.service.ts",
+      "sha256": "A6DEED852EBD3132FE3365CB073DD197DF9C2496073D5D30DB071A5D641E0703"
+    },
+    {
+      "path": "frontend/src/app/core/audit/audit-api.service.spec.ts",
+      "sha256": "4D6E27BF45BFDEE99916F15EB8641FD5CAD5A7B42D106706642D260390B3F7D5"
+    },
+    {
+      "path": "frontend/src/app/core/audit/audit-api.service.ts",
+      "sha256": "99ECF18646BA6C135D85F87B3D95F51067CA342F20E87ED55C096177ABEE4210"
+    },
+    {
+      "path": "frontend/src/app/core/audit/audit.models.ts",
+      "sha256": "D6A99EF7BB21A188E26D663C1979662881BE9096B1BEB1671DC748F8C3120B5A"
+    },
+    {
+      "path": "frontend/src/app/core/auth/admin-terms.guard.spec.ts",
+      "sha256": "A8991C702F9AC83DD7B11AEBED76120421C804D25283F6CC998ACC35961515E0"
+    },
+    {
+      "path": "frontend/src/app/core/auth/admin-terms.guard.ts",
+      "sha256": "AD47082193CF2AD87375B7943D8C2C1BA1F2D06F76E6E6B8844734C4FE8AD73A"
+    },
+    {
+      "path": "frontend/src/app/core/auth/auth-http-context.ts",
+      "sha256": "D77DAEE5E7E49C04329964D927E962A3E30A6A9A8E83F0AD5115A6B6EDDAD545"
+    },
+    {
+      "path": "frontend/src/app/core/auth/auth-session.service.spec.ts",
+      "sha256": "59B555C719ACC997D6C279811D6492EEDBBD3425A064A672140BC1BF6226A584"
+    },
+    {
+      "path": "frontend/src/app/core/auth/auth-session.service.ts",
+      "sha256": "DCF8130C83CC44D4638CE0D9510A8E0CE21ECAEEB0E954B8C7A8097B44FA1DE2"
+    },
+    {
+      "path": "frontend/src/app/core/auth/auth.guard.spec.ts",
+      "sha256": "486F06A821EDAD72BB9F60847739E5E0758586A7658B8D5158C3564B5DFDD20C"
+    },
+    {
+      "path": "frontend/src/app/core/auth/auth.guard.ts",
+      "sha256": "31C591836A68F8D012924E7234029D2F9E60C458B0D14AD88E048F29267C183A"
+    },
+    {
+      "path": "frontend/src/app/core/auth/auth.interceptor.spec.ts",
+      "sha256": "74807D448E3D04FD325EEDDA1C96956B6231FABFDBB96D7554AEAFE7FF41B9F9"
+    },
+    {
+      "path": "frontend/src/app/core/auth/auth.interceptor.ts",
+      "sha256": "3FD7EC2950B84D6C985B621E1B3E309307E7B70771FF187BCDD20D14E08EE5B2"
+    },
+    {
+      "path": "frontend/src/app/core/auth/auth.models.ts",
+      "sha256": "9D57C03515D1FECC55B6DBF8D50D2304A25AF2713689401E01D7A8078A1775F0"
+    },
+    {
+      "path": "frontend/src/app/core/auth/cross-tab-lock.service.spec.ts",
+      "sha256": "5387B38218D108BE29BF96D08AF05DF618E4DA660BA5490389E0AD0A0AA40335"
+    },
+    {
+      "path": "frontend/src/app/core/auth/cross-tab-lock.service.ts",
+      "sha256": "76EEFCBA46560F57554D7726A59171F5FB12684D000B262A1DB2A2CCAC6C7BF7"
+    },
+    {
+      "path": "frontend/src/app/core/auth/role.guard.spec.ts",
+      "sha256": "3CFAFFA76BF381BA730552AD453FD147D04D13A5CA81B41B451403A7D74ABEA7"
+    },
+    {
+      "path": "frontend/src/app/core/auth/role.guard.ts",
+      "sha256": "B00B0A32420CB754B69BC73999A7F94CADB3FF9FCD3074F76D44A03E81DD7A40"
+    },
+    {
+      "path": "frontend/src/app/core/config/runtime-config.model.ts",
+      "sha256": "5C3A41167FA4E6ECE125EB8A406C3612FE18ED4CAFF819391FD76E88087DC4A1"
+    },
+    {
+      "path": "frontend/src/app/core/config/runtime-config.service.spec.ts",
+      "sha256": "0943658ECA709ABC7925C6977F25DC56AB2B8CE84FC7E42A6FBA91D970A0B878"
+    },
+    {
+      "path": "frontend/src/app/core/config/runtime-config.service.ts",
+      "sha256": "AA3D22B7A42FEA32813A6D44D24CB25A2621C65A7D487532A06A52BB466B1A3C"
+    },
+    {
+      "path": "frontend/src/app/core/invitations/invitations-api.service.spec.ts",
+      "sha256": "7BA3D52FC7953224E84DDEF39CD63160DF8302118F12DF8B0F9C55597462BFA9"
+    },
+    {
+      "path": "frontend/src/app/core/invitations/invitations-api.service.ts",
+      "sha256": "21FEF73AC2E3ABFA967130F3366C18EA53101620DC7738DD255FFC5679B57AC0"
+    },
+    {
+      "path": "frontend/src/app/core/invitations/invitations.models.ts",
+      "sha256": "51333103E5628F422AF128EB295BD7E1890B5687295BF4EC99C5FA3C3DFA3B27"
+    },
+    {
+      "path": "frontend/src/app/core/management/management-api.service.spec.ts",
+      "sha256": "EE0BC48EBE3385BF1C2E917F85C5A8FD1B89B12D72C80B2E692132CB8042532E"
+    },
+    {
+      "path": "frontend/src/app/core/management/management-api.service.ts",
+      "sha256": "10C07D59664DD93AF1164D334299F5B457B82E260572EFDFFE362CFD08AD2FE5"
+    },
+    {
+      "path": "frontend/src/app/core/management/management.models.ts",
+      "sha256": "1428D767578FA9AFC8061FC6072DCA85FB1E4914C3F4AAC4262F2A00C4874ABA"
+    },
+    {
+      "path": "frontend/src/app/core/onboarding/onboarding-api.service.ts",
+      "sha256": "08A32614304E1A9B7C57CAA33A2A75AED8E229885F6188AE9C398E0EC46A897F"
+    },
+    {
+      "path": "frontend/src/app/core/onboarding/onboarding.models.ts",
+      "sha256": "9086060AD0F978BB5788C39B04B060DCE2DE1CEF02643DD6C1E4E16B41B89787"
+    },
+    {
+      "path": "frontend/src/app/core/operations/operation-realtime.service.spec.ts",
+      "sha256": "78382CF524C425604182E7A7B0136BEB940C5AC355E9E5E108398BFA99E01A61"
+    },
+    {
+      "path": "frontend/src/app/core/operations/operation-realtime.service.ts",
+      "sha256": "1B050F3FD12362414E6447BFF7F0E197F1C1260379EC2E0485FCD3A5E81FD7A0"
+    },
+    {
+      "path": "frontend/src/app/core/operations/operations-api.service.spec.ts",
+      "sha256": "27E4BFAC4BD73134F5B3CADF33D5FD808A3DA0FA2F798061CBB23D2E9053BAE7"
+    },
+    {
+      "path": "frontend/src/app/core/operations/operations-api.service.ts",
+      "sha256": "79AD5B0FB53FD9AFE31D53D72AE94B7D46C38FCB5511607A1F4448EAD7AC1665"
+    },
+    {
+      "path": "frontend/src/app/core/operations/operations.models.spec.ts",
+      "sha256": "D86A88C4897D43E29CB261DB6EDD04689AABCE4CA4BEAE19619D4FFAFF4BCFF0"
+    },
+    {
+      "path": "frontend/src/app/core/operations/operations.models.ts",
+      "sha256": "A07A2081B60B90B0DFFACAC066A2C1741AF3BA74FD8EFE55491F7B1E9382C20C"
+    },
+    {
+      "path": "frontend/src/app/core/platform-admins/platform-admins-api.service.ts",
+      "sha256": "995A63CB9CD602C7F1BA42288F1D91978EC20C4F3AD9E25AE377DBFD568FE89A"
+    },
+    {
+      "path": "frontend/src/app/core/terms/admin-terms-api.service.spec.ts",
+      "sha256": "81641593EBCD25E84B5DB77AFDBE79613EBF7DF33C5ED41D78E5948CA9F04684"
+    },
+    {
+      "path": "frontend/src/app/core/terms/admin-terms-api.service.ts",
+      "sha256": "5FE82F1C76F13C8A3867480228D06A9C5440C95823819605DD26F6DEB5B76C5C"
+    },
+    {
+      "path": "frontend/src/app/core/terms/admin-terms.models.ts",
+      "sha256": "326C30362194CAB6161A84FB2686B41A999F7BF666A9E25F4649B67945765A27"
+    },
+    {
+      "path": "frontend/src/app/features/admin-activation/admin-activation.page.html",
+      "sha256": "A369338E7B02DF93B81002FB967C2CE36ADDEE94FFDC792441113F96D8C4B35E"
+    },
+    {
+      "path": "frontend/src/app/features/admin-activation/admin-activation.page.scss",
+      "sha256": "01AC3AEC36237290F0268C8038575A7D8EFC8FFEB11F8D627180A2A243455F86"
+    },
+    {
+      "path": "frontend/src/app/features/admin-activation/admin-activation.page.spec.ts",
+      "sha256": "D75DB8D61FB0C4264FB4D005DAFD763A81D508B6B4D56888EEE906CFB85D4B50"
+    },
+    {
+      "path": "frontend/src/app/features/admin-activation/admin-activation.page.ts",
+      "sha256": "DDD8CC737109064C4BF30A29A74A89E302CD11EE4B39A7C2086D7C218E67FA11"
+    },
+    {
+      "path": "frontend/src/app/features/announcements/announcements.page.html",
+      "sha256": "F7EAC3F9033311104420AFE9E94B8A0B8AEAAE02BFCDBBB44535990F7363CE89"
+    },
+    {
+      "path": "frontend/src/app/features/announcements/announcements.page.ts",
+      "sha256": "2945F20D3AC352C1CEA9B218C45CCBC61C90C06830C7ADBE313402DA1315D224"
+    },
+    {
+      "path": "frontend/src/app/features/assignments/assignments.page.html",
+      "sha256": "C214465822EBA6681688A8CAE88ED674784BF32B1005C316FE2ABD9D1C74C9E0"
+    },
+    {
+      "path": "frontend/src/app/features/assignments/assignments.page.ts",
+      "sha256": "E19CA70FBE435F1B882AB87DE3DDB031069DAD65765BCB69D3BC41243B23BE84"
+    },
+    {
+      "path": "frontend/src/app/features/audit/audit.page.html",
+      "sha256": "317065978C85D5EE04EBE6F7C6279C4F3EA834A8869241921373C1D3FB76C029"
+    },
+    {
+      "path": "frontend/src/app/features/audit/audit.page.ts",
+      "sha256": "C410D55662058B939D10A90AEBCBF64E1C17CCB8308770835E3583E124CDCB96"
+    },
+    {
+      "path": "frontend/src/app/features/auth/login.page.html",
+      "sha256": "C7DDAFB497FF2F6904F14A4625811824380BC481E38E07EE9688C02DF61D25DD"
+    },
+    {
+      "path": "frontend/src/app/features/auth/login.page.scss",
+      "sha256": "B4B506F977EBF3E35F9A62EC3212E4EE76E3771AD83B89EA62C763AEC70928F3"
+    },
+    {
+      "path": "frontend/src/app/features/auth/login.page.spec.ts",
+      "sha256": "E848220262E78030EF8FAC97A87BD01C925CD54BC4F69BFEC795D0020E93C54B"
+    },
+    {
+      "path": "frontend/src/app/features/auth/login.page.ts",
+      "sha256": "6B861FCCE21F533A8E2CC0445F9B0995581D547873F22EC711D79A2D51D7CFCF"
+    },
+    {
+      "path": "frontend/src/app/features/dashboard/dashboard.page.html",
+      "sha256": "9B7A954CBF85A22D004DA1D4738B113F721F02C9FC7D7FCC8B5A5D778BF86B69"
+    },
+    {
+      "path": "frontend/src/app/features/dashboard/dashboard.page.scss",
+      "sha256": "BD7CFF1E89CC64E15FBBBC1BBDDFBF48CC30FFAA6B55FF04BF502AF73EC66DA2"
+    },
+    {
+      "path": "frontend/src/app/features/dashboard/dashboard.page.ts",
+      "sha256": "226E325520A7DE5AF4AD6407DC62DE66C00BED3A89D48CE74FABA252ABFA0BF2"
+    },
+    {
+      "path": "frontend/src/app/features/drivers/drivers.page.html",
+      "sha256": "4B5245FDD1729DDF28003C10C697C241B9BF1FAFFB0F7469C0339990D0E52B4E"
+    },
+    {
+      "path": "frontend/src/app/features/drivers/drivers.page.spec.ts",
+      "sha256": "511A9AF6C54E3B2ECE5646AB88DE5FB62680CD8D01654148AAF2E40C899E832E"
+    },
+    {
+      "path": "frontend/src/app/features/drivers/drivers.page.ts",
+      "sha256": "1826DA742E6FF13A0068E24E33CD65E07CC88E077D69FB5D935CA72B8A08C66F"
+    },
+    {
+      "path": "frontend/src/app/features/errors/forbidden.page.ts",
+      "sha256": "149550565B2ED85BE331700AC356F0138D10DD27950E8D791519CAF7BE6A822F"
+    },
+    {
+      "path": "frontend/src/app/features/errors/not-found.page.ts",
+      "sha256": "281427013768334BDFC60B79DDD43EE154E008D22C45C4B4AEFC5074252E4BAE"
+    },
+    {
+      "path": "frontend/src/app/features/groups/groups.page.html",
+      "sha256": "65C1624B89A2B8194EC1C0BE76E5F1F1C16692FB1D45BA51035F582B6236C2E0"
+    },
+    {
+      "path": "frontend/src/app/features/groups/groups.page.ts",
+      "sha256": "F729077F4FC915EF5F78EC464A22D796B7E88EC21FBA1544AD34C3AC08B3783D"
+    },
+    {
+      "path": "frontend/src/app/features/incidents/incidents.page.html",
+      "sha256": "C3FCF9D5605270734B867D0B26739CFBC67B9A63DF95B37B4D6EF7AC7A5A9935"
+    },
+    {
+      "path": "frontend/src/app/features/incidents/incidents.page.ts",
+      "sha256": "D0D55FBEEE59879FB3071060CA7BEEA513B43FFB7891576FD2A1D662C61163DD"
+    },
+    {
+      "path": "frontend/src/app/features/invitations/invitations.page.html",
+      "sha256": "3F878B4DE9EA6456963D5A3A445A67F3E6205AD169EBF83881C910B1B0E5B349"
+    },
+    {
+      "path": "frontend/src/app/features/invitations/invitations.page.scss",
+      "sha256": "2EC2AD9C42EA27CA6FED1A98698E1CFCD8662A42D8EBB05ECD90DDAAA260B8D5"
+    },
+    {
+      "path": "frontend/src/app/features/invitations/invitations.page.spec.ts",
+      "sha256": "055E8F2BC2743390CC7C6B813C7F9699224D0664B34380C6D360857A9862A960"
+    },
+    {
+      "path": "frontend/src/app/features/invitations/invitations.page.ts",
+      "sha256": "DC8BEAD33DCD2A2268183D1FEF588C4FC18A0F78D58C9550975DC2A96178EA7A"
+    },
+    {
+      "path": "frontend/src/app/features/onboarding/onboarding-requests.page.html",
+      "sha256": "B2EF1383577525E24978C2BFD169788C8240136CC76F965855B65542BBBCB914"
+    },
+    {
+      "path": "frontend/src/app/features/onboarding/onboarding-requests.page.scss",
+      "sha256": "9E8C77B96F2B28CF1369799709290C60DBAC4AF641CFEC0D95103F7EA5299BC9"
+    },
+    {
+      "path": "frontend/src/app/features/onboarding/onboarding-requests.page.spec.ts",
+      "sha256": "DFAA40FFBC56448C60BEBDAC0C5CF30AB1A1B122695BA3851F91A7284BED70C5"
+    },
+    {
+      "path": "frontend/src/app/features/onboarding/onboarding-requests.page.ts",
+      "sha256": "FCD19719D840FF89E1FF9A542F9360421D9519DB0FCD0FFF5FD33C498E20A761"
+    },
+    {
+      "path": "frontend/src/app/features/organization/organization.page.html",
+      "sha256": "E732DA70DA46FC3D474A99BCF3A9415BBFE81A3C9100C901E878160E49E29B36"
+    },
+    {
+      "path": "frontend/src/app/features/organization/organization.page.ts",
+      "sha256": "69491CEC8B66E51A197150BF8A924CF64B064695A7013D13E0B629D72A7ACCF8"
+    },
+    {
+      "path": "frontend/src/app/features/organizations/organizations.page.html",
+      "sha256": "4F53C1EDEC7B79A76CBEFBD1FAA0B9FAE378DFF28082E4BEFFB19F762C4F896B"
+    },
+    {
+      "path": "frontend/src/app/features/organizations/organizations.page.ts",
+      "sha256": "C90A89EBB27D1891CC49834F11E8D338F30C1826CEA6AED3D236C5707686DEAC"
+    },
+    {
+      "path": "frontend/src/app/features/platform-admins/platform-admins.page.html",
+      "sha256": "AB391523A02FD8FDCE2E955B4DE3E936CC2C121FEF23BDAE44837EE8376950A3"
+    },
+    {
+      "path": "frontend/src/app/features/platform-admins/platform-admins.page.spec.ts",
+      "sha256": "F0E49532B8E317373C2FBB2FD13D98B16658DAD80301DB5E2464B3D734768A85"
+    },
+    {
+      "path": "frontend/src/app/features/platform-admins/platform-admins.page.ts",
+      "sha256": "57BBF093126333F75E20CFDEB98F9EE3CB3B084DED8A77D903A61BC89333441F"
+    },
+    {
+      "path": "frontend/src/app/features/reports/reports.page.html",
+      "sha256": "FFE153AD2AE4CADBD8E6D8422EDD9183515A5D4B115DFB53AB98863E1D9429FE"
+    },
+    {
+      "path": "frontend/src/app/features/reports/reports.page.spec.ts",
+      "sha256": "EB69E9E9DCB4BF0602E0DC140BCCD3A19250CCB7FB6A706B4BAF958774C51FFB"
+    },
+    {
+      "path": "frontend/src/app/features/reports/reports.page.ts",
+      "sha256": "379F1182BBB24990AB8F5511B4E61A4ECDC7780C7D22E2477995E9F280541A87"
+    },
+    {
+      "path": "frontend/src/app/features/terms/admin-terms.page.html",
+      "sha256": "7CE7663EB2AEEA7816EFA915CAC2156D320EA9FE9BF04C2FEC450C743186ED62"
+    },
+    {
+      "path": "frontend/src/app/features/terms/admin-terms.page.scss",
+      "sha256": "77852973175B797795CAFEE99AF50947C3B81649C296FB38C022961837ACBA75"
+    },
+    {
+      "path": "frontend/src/app/features/terms/admin-terms.page.spec.ts",
+      "sha256": "174FF355DB47FA12B633EA36FB59E158EE565C3D97A7A09621D0C4C6D542EDFF"
+    },
+    {
+      "path": "frontend/src/app/features/terms/admin-terms.page.ts",
+      "sha256": "5246EB5E241EBDA8A236C30C58124FD49D5972C7C6CEF5F5EF0BE576AE5EBA9C"
+    },
+    {
+      "path": "frontend/src/app/features/users/users.page.html",
+      "sha256": "0784CD931EBBE34A6C0833297A0EBF33A36F78C462B073F719A714BFFF596347"
+    },
+    {
+      "path": "frontend/src/app/features/users/users.page.spec.ts",
+      "sha256": "F000107A99A5321B71D159B1EC553AC7CBAA077D342E146C7B5618BDF70E5F44"
+    },
+    {
+      "path": "frontend/src/app/features/users/users.page.ts",
+      "sha256": "7686BA4EA08BD3511B963141D12756289FB15D99C3E54870DA09A2032C4C349F"
+    },
+    {
+      "path": "frontend/src/app/features/vehicles/vehicles.page.html",
+      "sha256": "29753A46DAFD8A8C0E3E97415C9C072B10B7EFB7844C25D953E9E6F418424A26"
+    },
+    {
+      "path": "frontend/src/app/features/vehicles/vehicles.page.ts",
+      "sha256": "70A530B98D5FDD9E68511BC850F03E78FD7982C52AD365A6C12959A6E13E59CB"
+    },
+    {
+      "path": "frontend/src/app/layout/app-shell.component.html",
+      "sha256": "8BD759EF307AB7A0923C605797C016807B6766052C9587821713CA6A4BB89949"
+    },
+    {
+      "path": "frontend/src/app/layout/app-shell.component.scss",
+      "sha256": "5AC75D4B001BFB7A78DD112BB62B8ED58D66D9F71BF96EC8D867F056BE8CC05F"
+    },
+    {
+      "path": "frontend/src/app/layout/app-shell.component.spec.ts",
+      "sha256": "DDCFFA3875A5E7C3A6EE75BEAEE429A0E566E5B4AB5507902145B2A437275693"
+    },
+    {
+      "path": "frontend/src/app/layout/app-shell.component.ts",
+      "sha256": "5D2D3785513E8EA797A733FA73422AFEAB8451F3E58E70A9005B1D0A95F86B31"
+    },
+    {
+      "path": "frontend/src/app/shared/ui/confirm-dialog.component.ts",
+      "sha256": "AB140D7E68A0C191DBB85C91FA8C56A5F550E4DF9058D9DF3BA082F04AEC8DFC"
+    },
+    {
+      "path": "frontend/src/app/shared/ui/modal.component.html",
+      "sha256": "3C5269C79FD592F7D114F7A0E0DA1E5AF54C6857AB34DDA1DB4C27F24849807E"
+    },
+    {
+      "path": "frontend/src/app/shared/ui/modal.component.scss",
+      "sha256": "4C2B831198362D6A62E71E8F2C34840FE17A12A598418EA1A4EE34EBF66474EF"
+    },
+    {
+      "path": "frontend/src/app/shared/ui/modal.component.spec.ts",
+      "sha256": "76FCF604DFFC20F6193C8D5353CD2FD75250017EE50B875DBE073B8224817970"
+    },
+    {
+      "path": "frontend/src/app/shared/ui/modal.component.ts",
+      "sha256": "0269C943D8B57CA5F61C5D2D89438E8D4511861E1689698F89E965199C5F17D2"
+    },
+    {
+      "path": "frontend/src/app/shared/ui/page-header.component.html",
+      "sha256": "602F072E7381DED204C069EB63538119A1137E4BD689A32C82A68317AF35C0C6"
+    },
+    {
+      "path": "frontend/src/app/shared/ui/page-header.component.scss",
+      "sha256": "58624B2AF7A11DAD6064A7D5ADF66D413B536943BFCF6066C5959C7018892F70"
+    },
+    {
+      "path": "frontend/src/app/shared/ui/page-header.component.ts",
+      "sha256": "B32FB3297C74712C402476686DCC94030E6850209291BC12385B79FBA95D2C98"
+    },
+    {
+      "path": "frontend/src/app/shared/ui/pagination.component.ts",
+      "sha256": "7FEC60EE99A41F75DBF8402656C8B84A21CCEDA70991BD869CA191031802DB83"
+    },
+    {
+      "path": "frontend/src/app/shared/ui/status-indicator.component.ts",
+      "sha256": "878FE8E5F6F278C6692F651C47F065E402AEBF1156E814295ADFECE18DE38BDC"
+    },
+    {
+      "path": "frontend/src/index.html",
+      "sha256": "4F5C119A328DC2376FF2CFF08D2D90DF960BDB80E462F1650DCC47284C663770"
+    },
+    {
+      "path": "frontend/src/main.ts",
+      "sha256": "FF8389105BAE314304597E76209C102F58820D71A8902F2BDA31BF3D4D33601C"
+    },
+    {
+      "path": "frontend/src/styles.scss",
+      "sha256": "588E9153440C5CF079C250DF5D33B7C9F330822C00A1F8B2488053B3995FED88"
+    },
+    {
+      "path": "mobile/lib/app/ruta_fija_app.dart",
+      "sha256": "A30CEC5DDE087F21B5D290B64C8AD1CC8EFAF072790AAC7C4BA847AB6255C439"
+    },
+    {
+      "path": "mobile/lib/app/ruta_fija_dependencies.dart",
+      "sha256": "EA498E58BE79F418F9AC99408AC47B54DE1E47222A2593076A081751679DD316"
+    },
+    {
+      "path": "mobile/lib/app/ruta_fija_environment.dart",
+      "sha256": "4DD51F2FD4064061A8695FEA1F3BBF3A5AE24133A212D06A2373C4267763115A"
+    },
+    {
+      "path": "mobile/lib/app/ruta_fija_router.dart",
+      "sha256": "BE8FDB1BF3D017E0E2F48257DEC49CAC36128CC7CF4FA755E2162D83CF7B9367"
+    },
+    {
+      "path": "mobile/lib/app/ruta_fija_theme.dart",
+      "sha256": "817F70FADA0A54CB0C64E59A395748C37350172306023C53A8B1D3D667C67CDC"
+    },
+    {
+      "path": "mobile/lib/core/navigation/conductor_destination.dart",
+      "sha256": "04F00654492EA85E890BEB65090004EFE322E926DDB24AE4343BEABF1928EA1D"
+    },
+    {
+      "path": "mobile/lib/core/network/correlation_id.dart",
+      "sha256": "D2CC6B7EB5A68801200EB06B6140E4E484F99D337814BAE6E61BC4CEAC55EC72"
+    },
+    {
+      "path": "mobile/lib/core/network/mobile_access_token_provider.dart",
+      "sha256": "F8236F7A5F8BD82799ECB649F4167A588B67F71978443334EF506D8F33C83F31"
+    },
+    {
+      "path": "mobile/lib/core/network/mobile_api_client.dart",
+      "sha256": "FF471BD6F04F0CEDA6E7E66A5A2EE15859873A800F4C9C5CCE0FC38E6DBD81BF"
+    },
+    {
+      "path": "mobile/lib/core/network/mobile_api_exception.dart",
+      "sha256": "0C2F15DA4375E013F1401B74D94B3D16A62887049FF5D10DAA5D9961FE31EC8F"
+    },
+    {
+      "path": "mobile/lib/core/offline/mobile_offline.dart",
+      "sha256": "2CB92436690A3AABB2CBC77C04D13FE681C771E84B597073A4DA2F91FFEA4913"
+    },
+    {
+      "path": "mobile/lib/core/offline/mobile_offline_event.dart",
+      "sha256": "B0766DD1585B89F7E783688D8BE7D899265EDCF5BBEE8883DD1CDE49B0ECE043"
+    },
+    {
+      "path": "mobile/lib/core/offline/mobile_offline_outbox.dart",
+      "sha256": "C3DA5CD877088153330459524F45E62A709A591A33DA0048FC5DC7FCE2FE5500"
+    },
+    {
+      "path": "mobile/lib/core/offline/mobile_offline_queue_store.dart",
+      "sha256": "FDE766D619F20B6DB969A97B5FE3B5B4E467327DCCB62954D6635128AA43F004"
+    },
+    {
+      "path": "mobile/lib/core/offline/mobile_offline_sync_controller.dart",
+      "sha256": "C516A15195BD4C352891EFE76D69201DC61F39D1AEF0C7E3023C95C37C611FEC"
+    },
+    {
+      "path": "mobile/lib/core/presentation/mobile_date_time.dart",
+      "sha256": "EC06046C1055D7F1C766FC1563A165B38F6A983BF043F9F696B4651CA295B1BB"
+    },
+    {
+      "path": "mobile/lib/core/presentation/mobile_error_message.dart",
+      "sha256": "FDCA7E1475BBFE102202EC160DC06DE7E7A499D982D12F95EFAECD30C8D9589B"
+    },
+    {
+      "path": "mobile/lib/core/session/mobile_secure_token_store.dart",
+      "sha256": "A79D2F24710570BA9CCD53AFE5271BDFB72B8AC64405F0699E4EB03319013F92"
+    },
+    {
+      "path": "mobile/lib/core/session/mobile_session_controller.dart",
+      "sha256": "06532CA3B25F300ADBA5728ADB40037C88585FC3A14BC537E60AC016CDB9863A"
+    },
+    {
+      "path": "mobile/lib/features/announcements/data/mobile_announcement_repository.dart",
+      "sha256": "D54C3B4B65C60D0056C2CE6140B94F17DB67F2589E3F7A3575DE798A193CD148"
+    },
+    {
+      "path": "mobile/lib/features/announcements/domain/mobile_announcement_models.dart",
+      "sha256": "211719EDEC4C0C1D68AC7BBE72D143DF4D6ECC4E679F8F6EA33C213FC0129756"
+    },
+    {
+      "path": "mobile/lib/features/announcements/presentation/announcement_detail_page.dart",
+      "sha256": "94B267B0F1F658C9A52E3A68EE7586136BFD20A891D0C6665181879A5F125816"
+    },
+    {
+      "path": "mobile/lib/features/announcements/presentation/announcements_page.dart",
+      "sha256": "DA18E607A737D92494A06E00047888B9659528AEFB5C148E50CEF76A7E164995"
+    },
+    {
+      "path": "mobile/lib/features/announcements/presentation/mobile_announcement_presentation.dart",
+      "sha256": "214A2E3E71D3F54193C92C30762C072B83F8165BF13C4D900237391DEA11AB65"
+    },
+    {
+      "path": "mobile/lib/features/assignments/data/mobile_assignment_command_store.dart",
+      "sha256": "EE99EA3B5EEA4DC3970FCF37766234F5FFC41EBF29F8D7B845909180A02AD611"
+    },
+    {
+      "path": "mobile/lib/features/assignments/data/mobile_assignment_repository.dart",
+      "sha256": "3CD1E85564A414C39FA968DAD49982747E4CF6C34F3FF5E96CD20AE3A424D6B0"
+    },
+    {
+      "path": "mobile/lib/features/assignments/domain/mobile_assignment_models.dart",
+      "sha256": "6769EC5607AE40ED1781C400AA15542F9947CA821F106DC5C3ADE1C18429781F"
+    },
+    {
+      "path": "mobile/lib/features/assignments/presentation/assignment_detail_page.dart",
+      "sha256": "13130D62AA04211947550811AC3AD81C80CA10584EB9AB31F45C6AF66D0BE57A"
+    },
+    {
+      "path": "mobile/lib/features/assignments/presentation/assignments_page.dart",
+      "sha256": "D230D8C35045F24E7C85786D9EBB57AC4B8D31E68AC8D3B71ECDB99C7F8117F8"
+    },
+    {
+      "path": "mobile/lib/features/assignments/presentation/mobile_assignment_presentation.dart",
+      "sha256": "3E9DBA2309DDA1C9F05FD0CAD4207F3181CBBCB2D4B590A6BE26045DBCA1F1DF"
+    },
+    {
+      "path": "mobile/lib/features/auth/data/mobile_applicant_access_repository.dart",
+      "sha256": "1205D26D0B95C8FD707CA709B3497C324C6F0E60AE6C4ECFBB07D2934715F24B"
+    },
+    {
+      "path": "mobile/lib/features/auth/data/mobile_applicant_documentary_repository.dart",
+      "sha256": "239267278FE85A9306367DFD9DA34AA465578716184957236F5676FB8C09D536"
+    },
+    {
+      "path": "mobile/lib/features/auth/data/mobile_auth_repository.dart",
+      "sha256": "3BC7EC6F96287829B82C7D0DEA93B1E6393EABC134B8E3E6B0D0C959682453E5"
+    },
+    {
+      "path": "mobile/lib/features/auth/data/mobile_conductor_onboarding_repository.dart",
+      "sha256": "FA804F4F22B6BE4CCC012D626ED22773D2775F98AA7BED8A20FF2B1C05FB99FE"
+    },
+    {
+      "path": "mobile/lib/features/auth/data/mobile_conductor_recovery_repository.dart",
+      "sha256": "627AB8B5A2DA90FBB8BC28FE40B4C570537B210DCF685FF77F7BA5668BC04173"
+    },
+    {
+      "path": "mobile/lib/features/auth/domain/mobile_applicant_access_models.dart",
+      "sha256": "8A649AB919C58DBE721A32F48D245E52E4792D6F8178CDE1BFBE857824AD97A8"
+    },
+    {
+      "path": "mobile/lib/features/auth/domain/mobile_applicant_documentary_models.dart",
+      "sha256": "8E1E4BE3441C5F84036DF8F74B481A438B9BC83A0575EC38681BFF53901F10AC"
+    },
+    {
+      "path": "mobile/lib/features/auth/domain/mobile_auth_models.dart",
+      "sha256": "BFF479B8A8E28EAC01E713451323E741A5FDE05A6DE81AB91C8E7B046DB330A5"
+    },
+    {
+      "path": "mobile/lib/features/auth/domain/mobile_conductor_onboarding_models.dart",
+      "sha256": "5C2900A9BB8F8548EF3683177FF10D30EEBA0FFF33588A751A79F565F177EDD8"
+    },
+    {
+      "path": "mobile/lib/features/auth/presentation/mobile_applicant_dossier.dart",
+      "sha256": "596C2B28C461530582E393F5A83D754DBA7E2B5B8E7D95927135B806F85FCBEF"
+    },
+    {
+      "path": "mobile/lib/features/auth/presentation/mobile_applicant_requests_page.dart",
+      "sha256": "BA134A0EE8A86A14D0F23C89F765895CDED085517AF86C0AB66A6310B7DC9DFE"
+    },
+    {
+      "path": "mobile/lib/features/auth/presentation/mobile_conductor_onboarding_page.dart",
+      "sha256": "29276390C725CACE8D8D0BEFEBD9C2955271CD10ABB130BBF9C0E1F2A3F9F65C"
+    },
+    {
+      "path": "mobile/lib/features/auth/presentation/mobile_login_page.dart",
+      "sha256": "98CE0AF10584C33F2871F61225691E8EC43CC0DF7B21A9804D5C6A894E7A05C0"
+    },
+    {
+      "path": "mobile/lib/features/bootstrap/presentation/conductor_navigation_shell.dart",
+      "sha256": "7478AC306E890F486B565E3D923E14DB84F815AC002C670106C5D04031A56159"
+    },
+    {
+      "path": "mobile/lib/features/incidents/data/mobile_incident_repository.dart",
+      "sha256": "125F83F6F67DFDE1FE88A062EFF82D4426EF11046FFDBB048EE04824271DD490"
+    },
+    {
+      "path": "mobile/lib/features/incidents/domain/mobile_incident_models.dart",
+      "sha256": "4F9DFB5D5E4EC0FDAAE3586F2171A5B5185685B3D82B72E00A10415240CB36A2"
+    },
+    {
+      "path": "mobile/lib/features/incidents/presentation/incident_detail_page.dart",
+      "sha256": "D13E7464574D4B2A30EC67498F56941DAC45309B6E71029094A3B6B72AF93F12"
+    },
+    {
+      "path": "mobile/lib/features/incidents/presentation/incident_report_page.dart",
+      "sha256": "C95C0BB577E1FCD6D6CC77F01E75D00BD96E34192515685B888B2AD7898F06DC"
+    },
+    {
+      "path": "mobile/lib/features/incidents/presentation/incidents_page.dart",
+      "sha256": "AD7BCCE41308CCCE2AF384E692562B2EDE0069BB095F50C50F6FC5BA2AB4F795"
+    },
+    {
+      "path": "mobile/lib/features/incidents/presentation/mobile_incident_presentation.dart",
+      "sha256": "389703F98A801E25465B2D59044BAFC3AB82461A80CBB9B690891496490EA448"
+    },
+    {
+      "path": "mobile/lib/features/location/data/geolocator_device_location_gateway.dart",
+      "sha256": "64A6F10810F83CAE243F807FE8A957E1B5FAD7B92D617E5124CEAA688D9B41E0"
+    },
+    {
+      "path": "mobile/lib/features/location/domain/mobile_foreground_location.dart",
+      "sha256": "84824281A515091F4D45587110E88E8CB007A134984DF0F850FD3C62140D6088"
+    },
+    {
+      "path": "mobile/lib/features/location/presentation/foreground_location_page.dart",
+      "sha256": "8919DE3220BF853274F0F524246F070E51F67FB11E43859B9D39AE500056F745"
+    },
+    {
+      "path": "mobile/lib/features/profile/data/mobile_driver_repository.dart",
+      "sha256": "5E0E56094272C14C53BA18C9EA34B85C0DB4102D80DC24934E73E0AF7B8A92C4"
+    },
+    {
+      "path": "mobile/lib/features/profile/domain/mobile_driver_models.dart",
+      "sha256": "39242BC478E95AC515BC4E39D0306708646971B5415C18C71E4DBD4BE7549C2D"
+    },
+    {
+      "path": "mobile/lib/features/profile/presentation/availability_page.dart",
+      "sha256": "6E38AA7395253CBBF0400301C79BB4B41715D0F12A50B71E66D2B8AA8BBBE54E"
+    },
+    {
+      "path": "mobile/lib/features/profile/presentation/conductor_home_page.dart",
+      "sha256": "6F93C0CBC48E6112C3CA0290151244731C08FC58D168DBDCAF52868EE7B68859"
+    },
+    {
+      "path": "mobile/lib/features/profile/presentation/driver_profile_details.dart",
+      "sha256": "871E6DA257744C775047986489044DFF4235F0F132D40C83E7940BC779A3F8F0"
+    },
+    {
+      "path": "mobile/lib/features/profile/presentation/profile_page.dart",
+      "sha256": "EB8B2406D087AA8476BB37A4ABC0ACF052D8E968DDC33554946195DFFC9C3CCD"
+    },
+    {
+      "path": "mobile/lib/features/sync/presentation/pending_sync_page.dart",
+      "sha256": "5082BEFCD26A5CB040C3D35DE0C84BF88B0CC66A66EEEEEEFE3330DFF2AB21B8"
+    },
+    {
+      "path": "mobile/lib/main.dart",
+      "sha256": "F3813EC6D51631A2056433474D3BFE66F7DABA4892858CACC35BD709E293A341"
+    }
+  ]
+}

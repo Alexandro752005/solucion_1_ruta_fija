@@ -1,0 +1,43 @@
+﻿{
+    "recordedAt":  "2026-10-23T16:12:54.2776792+00:00",
+    "javacErrors":  0,
+    "javacWarnings":  0,
+    "option":  "-Xlint:all showWarnings=true showDeprecation=true",
+    "freshMainSources":  406,
+    "freshTestSources":  185,
+    "compilerWarningsSuppressed":  false,
+    "runtimeMessages":  [
+                            {
+                                "kind":  "BYTEBUDDY_MOCKITO_JAVA21_DYNAMIC_AGENT",
+                                "scope":  "Testing instrumentation agent attaches dynamically; future JVM default warning preserved; no hiding flag set",
+                                "productError":  false
+                            },
+                            {
+                                "kind":  "JVM_CDS_BOOTSTRAP_CLASS_PATH",
+                                "scope":  "Mockito testing instrumentation appends bootstrap classes; sharing warning preserved",
+                                "productError":  false
+                            },
+                            {
+                                "kind":  "SPRING_JCL_COMMONS_LOGGING_DISCOVERY",
+                                "scope":  "Existing transitive commons-logging coexists with spring-jcl; dependency versions/exclusions untouched",
+                                "productError":  false,
+                                "maintenanceObservation":  true
+                            },
+                            {
+                                "kind":  "GLOBAL_EXCEPTION_HANDLER_DEPENDENCY_UNAVAILABLE",
+                                "scope":  "Expected negative tests use CannotCreateTransactionException and DataAccessResourceFailureException doubles; no real database accessed",
+                                "productError":  false
+                            }
+                        ],
+    "rawRuntimeWarningLines":  [
+                                   "Java HotSpot(TM) 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap ",
+                                   "WARNING: A Java agent has been loaded dynamically ",
+                                   "WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning",
+                                   "WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information",
+                                   "WARNING: Dynamic loading of agents will be disallowed by default in a future release",
+                                   "Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts",
+                                   "11:12:15.458 [main] WARN pe.rutafija.shared.exception.GlobalExceptionHandler -- Request dependency unavailable type=CannotCreateTransactionException",
+                                   "11:12:15.506 [main] WARN pe.rutafija.shared.exception.GlobalExceptionHandler -- Request dependency unavailable type=DataAccessResourceFailureException"
+                               ],
+    "originalJavacInventory":  "../run-e5619078-de50-419f-94a3-e51291f4c535/javac-warning-inventory-v2.json"
+}

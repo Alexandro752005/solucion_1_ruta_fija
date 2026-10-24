@@ -1,0 +1,16 @@
+{
+  "runId" : "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+  "observedAt" : "2026-10-23T02:09:14.168456900Z",
+  "historicalLedger" : {
+    "ADMIN" : 3,
+    "CONDUCTOR" : 8,
+    "SUPER_ADMIN" : 1
+  },
+  "currentLocationConsent" : false,
+  "termsAcceptancesPreserved" : 2,
+  "markerMatches" : true,
+  "cleanupLockHeldByCase" : true,
+  "rollbackGuard" : "PASS_REFUSED_BEFORE_FIXTURE",
+  "TEST_CLEANUP_RELEASED" : false,
+  "result" : "PASS_PROTECTION_AND_ONE_NORMAL_SYNTHETIC_CREATION_ONLY"
+}

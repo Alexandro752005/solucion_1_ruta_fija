@@ -1,0 +1,13 @@
+{
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "artifact":  "ruta-fija-l08-fis02-debug.apk",
+    "actualPackage":  "pe.rutafija.conductor.l08",
+    "packageVerifiedBeforeAnyInstallation":  true,
+    "sha256":  "e74dd49725499e3514c1fd853d81a1479f0614a6c5bfd07ddfa1a9b1c764609b",
+    "buildType":  "debug",
+    "gradleIsolationArgument":  "--android-project-arg=rutaFijaL08Isolated=true",
+    "apiTarget":  "EXACT_AUTHORIZED_PRIVATE_PC_INTERFACE_4311",
+    "buildExitCode":  0,
+    "installedByBuilder":  false,
+    "pilotEnabled":  false
+}

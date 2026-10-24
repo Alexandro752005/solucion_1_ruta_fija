@@ -1,0 +1,37 @@
+{
+  "observedAt": "2026-10-19T16:35:39.725962200Z",
+  "runId": "2e734706-f7ef-4947-b940-1f64fd13f86a",
+  "database": "ruta_fija_test",
+  "role": "rf_test",
+  "readOnly": true,
+  "unit": {
+    "id": "95d84927-72b5-48ad-ab0f-b8191c0664f6",
+    "status": "INACTIVO",
+    "active": false
+  },
+  "route": {
+    "id": "f8f3925a-6979-49f7-8fe9-f15dbfb82576",
+    "active": false,
+    "version": 2,
+    "revisions": 1
+  },
+  "maintenance": [
+    {
+      "id": "0bca782b-9933-4713-8563-b367df1c1c54",
+      "status": "CANCELLED",
+      "starts_at": "2026-10-20T05:00:00.000+00:00",
+      "planned_ends_at": "2026-10-21T05:00:00.000+00:00",
+      "blocking_ends_at": null
+    }
+  ],
+  "refreshFamiliesSinceCaseCreation": [
+    {
+      "family_id": "0da54dd3-d5ba-492f-9d4f-6487590617eb",
+      "token_rows": 3,
+      "all_revoked": true
+    }
+  ],
+  "activeMarker": false,
+  "protectionLockFree": true,
+  "result": "PASS_EXACT_SELECTIVE_CLOSE"
+}

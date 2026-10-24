@@ -1,0 +1,12 @@
+{
+  "runId": "9f2be6c1-77be-4d2b-8d72-f83dbd6f5247",
+  "observedAt": "2026-10-21T22:52:32.678Z",
+  "state": "READY_NO_INTERACTION_YET",
+  "scope": "PUBLIC_PHYSICAL_PREAUTH_ONLY_NO_OPERATIONAL_ACCOUNT",
+  "events": [],
+  "databaseConnected": false,
+  "mailAdapterPresent": false,
+  "credentialsOrRequestBodiesRecorded": false,
+  "manualOutcome": "PENDING_USER_REPORT",
+  "pilotEnabled": false
+}

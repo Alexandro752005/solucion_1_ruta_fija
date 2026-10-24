@@ -17,6 +17,7 @@ import pe.rutafija.identity.domain.RefreshToken;
 import pe.rutafija.identity.domain.UserRole;
 import pe.rutafija.identity.infrastructure.AppUserRepository;
 import pe.rutafija.identity.infrastructure.RefreshTokenRepository;
+import pe.rutafija.pilotquota.application.ConductorProvisioningPolicy;
 import pe.rutafija.shared.config.SecurityProperties;
 import pe.rutafija.shared.exception.ApplicationException;
 import pe.rutafija.shared.exception.ErrorCode;
@@ -41,11 +42,13 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final OpaqueTokenService opaqueTokenService;
+    private final EmailOtpService emailOtpService;
     private final AuditService auditService;
     private final CurrentUserProvider currentUserProvider;
     private final SecurityProperties securityProperties;
     private final Clock clock;
     private final String dummyPasswordHash;
+    private final ConductorProvisioningPolicy conductorProvisioningPolicy;
 
     public AuthService(
             AppUserRepository userRepository,
@@ -54,10 +57,12 @@ public class AuthService {
             PasswordEncoder passwordEncoder,
             JwtService jwtService,
             OpaqueTokenService opaqueTokenService,
+            EmailOtpService emailOtpService,
             AuditService auditService,
             CurrentUserProvider currentUserProvider,
             SecurityProperties securityProperties,
-            Clock clock
+            Clock clock,
+            ConductorProvisioningPolicy conductorProvisioningPolicy
     ) {
         this.userRepository = userRepository;
         this.driverRepository = driverRepository;
@@ -65,27 +70,27 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.opaqueTokenService = opaqueTokenService;
+        this.emailOtpService = emailOtpService;
         this.auditService = auditService;
         this.currentUserProvider = currentUserProvider;
         this.securityProperties = securityProperties;
         this.clock = clock;
+        this.conductorProvisioningPolicy = conductorProvisioningPolicy;
         // Generated once at startup so an unknown user still incurs a real bcrypt check.
         this.dummyPasswordHash = passwordEncoder.encode("ruta-fija-dummy-credential");
     }
 
     @Transactional(noRollbackFor = InvalidCredentialsException.class)
-    public IssuedSession login(LoginRequest request) {
+    public WebLoginResult login(LoginRequest request) {
         AppUser user = authenticate(request, "LOGIN_FAILED");
-        Instant now = Instant.now(clock);
-        user.recordSuccessfulLogin(now);
-        String rawRefreshToken = opaqueTokenService.generate();
-        refreshTokenRepository.save(RefreshToken.firstInFamily(
-                user,
-                opaqueTokenService.hash(rawRefreshToken),
-                now.plus(securityProperties.jwt().refreshTtl())
-        ));
-        auditService.record(user, "LOGIN_SUCCESS", Map.of());
-        return issuedSession(user, rawRefreshToken);
+        requireWebRole(user);
+        if (!user.isEmailVerified()) {
+            EmailOtpTicket ticket = emailOtpService.beginForLogin(user);
+            if (!user.isEmailVerified()) {
+                return new WebLoginResult(null, ticket);
+            }
+        }
+        return new WebLoginResult(issueWebSession(user), null);
     }
 
     /**
@@ -94,7 +99,7 @@ public class AuthService {
      * of this flow.
      */
     @Transactional(noRollbackFor = ApplicationException.class)
-    public MobileIssuedSession mobileLogin(LoginRequest request) {
+    public MobileLoginResult mobileLogin(LoginRequest request) {
         AppUser user = authenticate(request, "MOBILE_LOGIN_FAILED");
         Driver driver;
         try {
@@ -104,16 +109,33 @@ public class AuthService {
             throw exception;
         }
 
-        Instant now = Instant.now(clock);
-        user.recordSuccessfulLogin(now);
-        String rawRefreshToken = opaqueTokenService.generateMobile();
-        refreshTokenRepository.save(RefreshToken.firstInFamily(
-                user,
-                opaqueTokenService.hash(rawRefreshToken),
-                now.plus(securityProperties.jwt().refreshTtl())
-        ));
-        auditService.record(user, "MOBILE_LOGIN_SUCCESS", Map.of());
-        return mobileIssuedSession(user, driver, rawRefreshToken);
+        if (!user.isEmailVerified()) {
+            EmailOtpTicket ticket = emailOtpService.beginForLogin(user);
+            if (!user.isEmailVerified()) {
+                return new MobileLoginResult(null, ticket);
+            }
+        }
+
+        return new MobileLoginResult(issueMobileSession(user, driver), null);
+    }
+
+    @Transactional(noRollbackFor = EmailOtpCodeRejectedException.class)
+    public IssuedSession verifyWebEmailOtp(String verificationToken, String code) {
+        AppUser user = emailOtpService.verify(verificationToken, code);
+        requireWebRole(user);
+        return issueWebSession(user);
+    }
+
+    @Transactional(noRollbackFor = {EmailOtpCodeRejectedException.class, ApplicationException.class})
+    public MobileIssuedSession verifyMobileEmailOtp(String verificationToken, String code) {
+        AppUser user = emailOtpService.verify(verificationToken, code);
+        Driver driver = requireMobileDriver(user);
+        return issueMobileSession(user, driver);
+    }
+
+    @Transactional
+    public EmailOtpTicket resendEmailOtp(String verificationToken) {
+        return emailOtpService.resend(verificationToken);
     }
 
     @Transactional(noRollbackFor = {InvalidRefreshTokenException.class, RefreshTokenReuseException.class})
@@ -142,6 +164,7 @@ public class AuthService {
     public AuthenticatedUserResponse me() {
         AuthenticatedUser authenticated = currentUserProvider.requireCurrentUser();
         AppUser user = findActiveAuthenticatedUser(authenticated);
+        requireWebRole(user);
         return AuthenticatedUserResponse.from(user);
     }
 
@@ -193,7 +216,8 @@ public class AuthService {
 
         AppUser user = current.getUser();
         boolean organizationIsActive = user.getOrganization() == null || user.getOrganization().isActive();
-        if (!user.isActive() || !organizationIsActive) {
+        if (!user.isActive() || !organizationIsActive || !user.isEmailVerified()
+                || (channel == RefreshChannel.WEB && user.getRole() == UserRole.CONDUCTOR)) {
             refreshTokenRepository.revokeFamily(current.getFamilyId(), now);
             throw invalidRefreshToken();
         }
@@ -255,7 +279,8 @@ public class AuthService {
                         authenticated.userId(),
                         authenticated.organizationId()
                 ).orElseThrow(this::invalidAccessToken);
-        if (!user.isActive() || (user.getOrganization() != null && !user.getOrganization().isActive())) {
+        if (!user.isActive() || !user.isEmailVerified()
+                || (user.getOrganization() != null && !user.getOrganization().isActive())) {
             throw invalidAccessToken();
         }
         return user;
@@ -273,17 +298,44 @@ public class AuthService {
         );
     }
 
+    private IssuedSession issueWebSession(AppUser user) {
+        Instant now = Instant.now(clock);
+        user.recordSuccessfulLogin(now);
+        String rawRefreshToken = opaqueTokenService.generate();
+        refreshTokenRepository.save(RefreshToken.firstInFamily(
+                user,
+                opaqueTokenService.hash(rawRefreshToken),
+                now.plus(securityProperties.jwt().refreshTtl())
+        ));
+        auditService.record(user, "LOGIN_SUCCESS", Map.of());
+        return issuedSession(user, rawRefreshToken);
+    }
+
     private MobileIssuedSession mobileIssuedSession(AppUser user, Driver driver, String rawRefreshToken) {
         return new MobileIssuedSession(
                 new MobileAuthTokenResponse(
-                        jwtService.issueMobileAccessToken(user, driver.getId()),
+                        jwtService.issueMobileAccessToken(user, driver.getId(),conductorProvisioningPolicy.operational(driver.getId(),user.getOrganizationId())?"OPERATIONS":"INCORPORATION"),
                         rawRefreshToken,
                         "Bearer",
                         jwtService.accessTokenExpiresInSeconds(),
                         jwtService.refreshTokenExpiresInSeconds(),
-                        MobileAuthenticatedUserResponse.from(user, driver)
+                        MobileAuthenticatedUserResponse.from(user, driver),
+                        conductorProvisioningPolicy.operational(driver.getId(),user.getOrganizationId())?"OPERATIONS":"INCORPORATION"
                 )
         );
+    }
+
+    private MobileIssuedSession issueMobileSession(AppUser user, Driver driver) {
+        Instant now = Instant.now(clock);
+        user.recordSuccessfulLogin(now);
+        String rawRefreshToken = opaqueTokenService.generateMobile();
+        refreshTokenRepository.save(RefreshToken.firstInFamily(
+                user,
+                opaqueTokenService.hash(rawRefreshToken),
+                now.plus(securityProperties.jwt().refreshTtl())
+        ));
+        auditService.record(user, "MOBILE_LOGIN_SUCCESS", Map.of());
+        return mobileIssuedSession(user, driver, rawRefreshToken);
     }
 
     private Driver requireMobileDriver(AppUser user) {
@@ -306,14 +358,15 @@ public class AuthService {
                     "La cuenta no está habilitada para la aplicación móvil"
             );
         }
-        if (!driver.isActive()) {
-            throw new ApplicationException(
-                    HttpStatus.FORBIDDEN,
-                    ErrorCode.DRIVER_INACTIVE,
-                    "El conductor no está habilitado para operar desde la aplicación móvil"
-            );
-        }
+        conductorProvisioningPolicy.requireApproved(user.getId(), user.getOrganizationId(), driver.getId());
         return driver;
+    }
+
+    private void requireWebRole(AppUser user) {
+        if (user.getRole() == UserRole.CONDUCTOR) {
+            throw new ApplicationException(HttpStatus.FORBIDDEN, ErrorCode.FORBIDDEN_ROLE,
+                    "La cuenta CONDUCTOR utiliza exclusivamente la aplicación móvil");
+        }
     }
 
     private boolean matchesRefreshChannel(String rawRefreshToken, RefreshChannel channel) {

@@ -1,0 +1,2398 @@
+{
+  "observedAt": "2026-10-23T01:41:52.367Z",
+  "scope": "EXISTING_SYNTHETIC_PRINCIPALS_READ_ONLY_BUSINESS_API",
+  "results": [
+    {
+      "browser": "Edge",
+      "role": "ADMIN",
+      "requestedNativeZoom": 1,
+      "checks": [
+        {
+          "id": "BROWSER_PRESENT",
+          "result": "PASS"
+        },
+        {
+          "id": "BROWSER_STARTED",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_DASHBOARD",
+          "result": "PASS",
+          "width": 1280,
+          "height": 720,
+          "factor": 1
+        },
+        {
+          "id": "PAGE_REFLOW_DASHBOARD",
+          "result": "PASS",
+          "width": 1280,
+          "documentWidth": 1265
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_DASHBOARD",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_DASHBOARD",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_USERS",
+          "result": "PASS",
+          "width": 1280,
+          "height": 720,
+          "factor": 1
+        },
+        {
+          "id": "PAGE_REFLOW_USERS",
+          "result": "PASS",
+          "width": 1280,
+          "documentWidth": 1265
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_USERS",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_USERS",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_GROUPS",
+          "result": "PASS",
+          "width": 1280,
+          "height": 720,
+          "factor": 1
+        },
+        {
+          "id": "PAGE_REFLOW_GROUPS",
+          "result": "PASS",
+          "width": 1280,
+          "documentWidth": 1265
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_GROUPS",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_GROUPS",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_GROUPS",
+          "result": "PASS"
+        }
+      ],
+      "pages": [
+        {
+          "path": "/dashboard",
+          "dpr": 1,
+          "width": 1280,
+          "height": 720,
+          "outerWidth": 1304,
+          "outerHeight": 812,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 1265,
+          "title": "Resumen",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 6,
+              "headers": 4,
+              "parentWidth": 1144,
+              "scrollWidth": 1144,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        },
+        {
+          "path": "/users",
+          "dpr": 1,
+          "width": 1280,
+          "height": 720,
+          "outerWidth": 1304,
+          "outerHeight": 812,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 1265,
+          "title": "Usuarios",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 7,
+              "headers": 4,
+              "parentWidth": 1144,
+              "scrollWidth": 1144,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        },
+        {
+          "path": "/groups",
+          "dpr": 1,
+          "width": 1280,
+          "height": 720,
+          "outerWidth": 1304,
+          "outerHeight": 812,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 1265,
+          "title": "Grupos",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 9,
+              "headers": 4,
+              "parentWidth": 1144,
+              "scrollWidth": 1144,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        }
+      ],
+      "version": "Edg/155.0.4283.62",
+      "screenshot": {
+        "file": "Edge-ADMIN-100-users.png",
+        "sha256": "b0ccbfc6eec57403e2ee3a8ed6fb092447ba0fdb9480d24fb5d9821f32df11f7"
+      },
+      "result": "FAIL_KEEP_OBSERVATION",
+      "phase": "groups",
+      "reason": "UI_WAIT",
+      "failureScreenshot": {
+        "file": "Edge-ADMIN-100-failure.png",
+        "sha256": "10704c57c5ebaad0ea38c19482d6fed66546c49f218775c671f3bb45daa487c2"
+      }
+    },
+    {
+      "browser": "Edge",
+      "role": "ADMIN",
+      "requestedNativeZoom": 2,
+      "checks": [
+        {
+          "id": "BROWSER_PRESENT",
+          "result": "PASS"
+        },
+        {
+          "id": "BROWSER_STARTED",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_DASHBOARD",
+          "result": "PASS",
+          "width": 640,
+          "height": 360,
+          "factor": 2
+        },
+        {
+          "id": "PAGE_REFLOW_DASHBOARD",
+          "result": "PASS",
+          "width": 640,
+          "documentWidth": 632
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_DASHBOARD",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_DASHBOARD",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_USERS",
+          "result": "PASS",
+          "width": 640,
+          "height": 360,
+          "factor": 2
+        },
+        {
+          "id": "PAGE_REFLOW_USERS",
+          "result": "PASS",
+          "width": 640,
+          "documentWidth": 632
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_USERS",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_USERS",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_GROUPS",
+          "result": "PASS",
+          "width": 640,
+          "height": 360,
+          "factor": 2
+        },
+        {
+          "id": "PAGE_REFLOW_GROUPS",
+          "result": "PASS",
+          "width": 640,
+          "documentWidth": 632
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_GROUPS",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_GROUPS",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_GROUPS",
+          "result": "PASS"
+        }
+      ],
+      "pages": [
+        {
+          "path": "/dashboard",
+          "dpr": 2,
+          "width": 640,
+          "height": 360,
+          "outerWidth": 1304,
+          "outerHeight": 813,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 632,
+          "title": "Resumen",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 6,
+              "headers": 4,
+              "parentWidth": 549,
+              "scrollWidth": 704,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        },
+        {
+          "path": "/users",
+          "dpr": 2,
+          "width": 640,
+          "height": 360,
+          "outerWidth": 1304,
+          "outerHeight": 813,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 632,
+          "title": "Usuarios",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 7,
+              "headers": 4,
+              "parentWidth": 549,
+              "scrollWidth": 672,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        },
+        {
+          "path": "/groups",
+          "dpr": 2,
+          "width": 640,
+          "height": 360,
+          "outerWidth": 1304,
+          "outerHeight": 813,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 632,
+          "title": "Grupos",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 9,
+              "headers": 4,
+              "parentWidth": 549,
+              "scrollWidth": 672,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        }
+      ],
+      "version": "Edg/155.0.4283.62",
+      "screenshot": {
+        "file": "Edge-ADMIN-200-users.png",
+        "sha256": "e096400bcbb439df169e0f0463cff89b91e67eb879fc528abc94163839538e49"
+      },
+      "result": "FAIL_KEEP_OBSERVATION",
+      "phase": "groups",
+      "reason": "UI_WAIT",
+      "failureScreenshot": {
+        "file": "Edge-ADMIN-200-failure.png",
+        "sha256": "803ae67036627bf4d282368336bf0c7e7f680a47bc00354df6e04a1a9ebdeba6"
+      }
+    },
+    {
+      "browser": "Edge",
+      "role": "ADMIN",
+      "requestedNativeZoom": 3,
+      "checks": [
+        {
+          "id": "BROWSER_PRESENT",
+          "result": "PASS"
+        },
+        {
+          "id": "BROWSER_STARTED",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_DASHBOARD",
+          "result": "PASS",
+          "width": 426,
+          "height": 240,
+          "factor": 3
+        },
+        {
+          "id": "PAGE_REFLOW_DASHBOARD",
+          "result": "PASS",
+          "width": 426,
+          "documentWidth": 421
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_DASHBOARD",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_DASHBOARD",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_USERS",
+          "result": "PASS",
+          "width": 426,
+          "height": 240,
+          "factor": 3
+        },
+        {
+          "id": "PAGE_REFLOW_USERS",
+          "result": "PASS",
+          "width": 426,
+          "documentWidth": 421
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_USERS",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_USERS",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_GROUPS",
+          "result": "PASS",
+          "width": 426,
+          "height": 240,
+          "factor": 3
+        },
+        {
+          "id": "PAGE_REFLOW_GROUPS",
+          "result": "PASS",
+          "width": 426,
+          "documentWidth": 421
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_GROUPS",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_GROUPS",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_GROUPS",
+          "result": "PASS"
+        }
+      ],
+      "pages": [
+        {
+          "path": "/dashboard",
+          "dpr": 3,
+          "width": 426,
+          "height": 240,
+          "outerWidth": 1304,
+          "outerHeight": 812,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 421,
+          "title": "Resumen",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 6,
+              "headers": 4,
+              "parentWidth": 338,
+              "scrollWidth": 704,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        },
+        {
+          "path": "/users",
+          "dpr": 3,
+          "width": 426,
+          "height": 240,
+          "outerWidth": 1304,
+          "outerHeight": 812,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 421,
+          "title": "Usuarios",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 7,
+              "headers": 4,
+              "parentWidth": 338,
+              "scrollWidth": 672,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        },
+        {
+          "path": "/groups",
+          "dpr": 3,
+          "width": 426,
+          "height": 240,
+          "outerWidth": 1304,
+          "outerHeight": 812,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 421,
+          "title": "Grupos",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 9,
+              "headers": 4,
+              "parentWidth": 338,
+              "scrollWidth": 672,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        }
+      ],
+      "version": "Edg/155.0.4283.62",
+      "screenshot": {
+        "file": "Edge-ADMIN-300-users.png",
+        "sha256": "8ae8eb720e9a8708912ad13e0808147e3f49f49deea169406c81e3149c596ac6"
+      },
+      "result": "FAIL_KEEP_OBSERVATION",
+      "phase": "groups",
+      "reason": "UI_WAIT",
+      "failureScreenshot": {
+        "file": "Edge-ADMIN-300-failure.png",
+        "sha256": "6c785d0239a52ffbed3dab0b5bab73beb9eaf43dd49bd2ff9a77ccdbd2edef21"
+      }
+    },
+    {
+      "browser": "Chrome",
+      "role": "ADMIN",
+      "requestedNativeZoom": 1,
+      "checks": [
+        {
+          "id": "BROWSER_PRESENT",
+          "result": "PASS"
+        },
+        {
+          "id": "BROWSER_STARTED",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_DASHBOARD",
+          "result": "PASS",
+          "width": 1280,
+          "height": 720,
+          "factor": 1
+        },
+        {
+          "id": "PAGE_REFLOW_DASHBOARD",
+          "result": "PASS",
+          "width": 1280,
+          "documentWidth": 1265
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_DASHBOARD",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_DASHBOARD",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_USERS",
+          "result": "PASS",
+          "width": 1280,
+          "height": 720,
+          "factor": 1
+        },
+        {
+          "id": "PAGE_REFLOW_USERS",
+          "result": "PASS",
+          "width": 1280,
+          "documentWidth": 1265
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_USERS",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_USERS",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_GROUPS",
+          "result": "PASS",
+          "width": 1280,
+          "height": 720,
+          "factor": 1
+        },
+        {
+          "id": "PAGE_REFLOW_GROUPS",
+          "result": "PASS",
+          "width": 1280,
+          "documentWidth": 1265
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_GROUPS",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_GROUPS",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_GROUPS",
+          "result": "PASS"
+        }
+      ],
+      "pages": [
+        {
+          "path": "/dashboard",
+          "dpr": 1,
+          "width": 1280,
+          "height": 720,
+          "outerWidth": 1296,
+          "outerHeight": 815,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 1265,
+          "title": "Resumen",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 6,
+              "headers": 4,
+              "parentWidth": 1144,
+              "scrollWidth": 1144,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        },
+        {
+          "path": "/users",
+          "dpr": 1,
+          "width": 1280,
+          "height": 720,
+          "outerWidth": 1296,
+          "outerHeight": 815,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 1265,
+          "title": "Usuarios",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 7,
+              "headers": 4,
+              "parentWidth": 1144,
+              "scrollWidth": 1144,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        },
+        {
+          "path": "/groups",
+          "dpr": 1,
+          "width": 1280,
+          "height": 720,
+          "outerWidth": 1296,
+          "outerHeight": 815,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 1265,
+          "title": "Grupos",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 9,
+              "headers": 4,
+              "parentWidth": 1144,
+              "scrollWidth": 1144,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        }
+      ],
+      "version": "Chrome/155.0.8059.86",
+      "screenshot": {
+        "file": "Chrome-ADMIN-100-users.png",
+        "sha256": "9f7059fc9e15198acdb89aff26d89713fa5eb67c60f4435307c8ed365595998d"
+      },
+      "result": "FAIL_KEEP_OBSERVATION",
+      "phase": "groups",
+      "reason": "UI_WAIT",
+      "failureScreenshot": {
+        "file": "Chrome-ADMIN-100-failure.png",
+        "sha256": "197d98ebfaff6c0b27605cf9423ba53e41aa922279c27dfaedf1a5930ecebefb"
+      }
+    },
+    {
+      "browser": "Chrome",
+      "role": "ADMIN",
+      "requestedNativeZoom": 2,
+      "checks": [
+        {
+          "id": "BROWSER_PRESENT",
+          "result": "PASS"
+        },
+        {
+          "id": "BROWSER_STARTED",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_DASHBOARD",
+          "result": "PASS",
+          "width": 640,
+          "height": 360,
+          "factor": 2
+        },
+        {
+          "id": "PAGE_REFLOW_DASHBOARD",
+          "result": "PASS",
+          "width": 640,
+          "documentWidth": 632
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_DASHBOARD",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_DASHBOARD",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_USERS",
+          "result": "PASS",
+          "width": 640,
+          "height": 360,
+          "factor": 2
+        },
+        {
+          "id": "PAGE_REFLOW_USERS",
+          "result": "PASS",
+          "width": 640,
+          "documentWidth": 632
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_USERS",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_USERS",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_GROUPS",
+          "result": "PASS",
+          "width": 640,
+          "height": 360,
+          "factor": 2
+        },
+        {
+          "id": "PAGE_REFLOW_GROUPS",
+          "result": "PASS",
+          "width": 640,
+          "documentWidth": 632
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_GROUPS",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_GROUPS",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_GROUPS",
+          "result": "PASS"
+        }
+      ],
+      "pages": [
+        {
+          "path": "/dashboard",
+          "dpr": 2,
+          "width": 640,
+          "height": 360,
+          "outerWidth": 1296,
+          "outerHeight": 815,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 632,
+          "title": "Resumen",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 6,
+              "headers": 4,
+              "parentWidth": 549,
+              "scrollWidth": 704,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        },
+        {
+          "path": "/users",
+          "dpr": 2,
+          "width": 640,
+          "height": 360,
+          "outerWidth": 1296,
+          "outerHeight": 815,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 632,
+          "title": "Usuarios",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 7,
+              "headers": 4,
+              "parentWidth": 549,
+              "scrollWidth": 672,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        },
+        {
+          "path": "/groups",
+          "dpr": 2,
+          "width": 640,
+          "height": 360,
+          "outerWidth": 1296,
+          "outerHeight": 815,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 632,
+          "title": "Grupos",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 9,
+              "headers": 4,
+              "parentWidth": 549,
+              "scrollWidth": 672,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        }
+      ],
+      "version": "Chrome/155.0.8059.86",
+      "screenshot": {
+        "file": "Chrome-ADMIN-200-users.png",
+        "sha256": "5575ca2d8b1e37edef9de1cc049f439468c79a8a86dae9182a160c0363f007ca"
+      },
+      "result": "FAIL_KEEP_OBSERVATION",
+      "phase": "groups",
+      "reason": "UI_WAIT",
+      "failureScreenshot": {
+        "file": "Chrome-ADMIN-200-failure.png",
+        "sha256": "75630d4db59f30847364335882161fda16509aeb060f688de74bdb21a57111f1"
+      }
+    },
+    {
+      "browser": "Chrome",
+      "role": "ADMIN",
+      "requestedNativeZoom": 3,
+      "checks": [
+        {
+          "id": "BROWSER_PRESENT",
+          "result": "PASS"
+        },
+        {
+          "id": "BROWSER_STARTED",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_DASHBOARD",
+          "result": "PASS",
+          "width": 426,
+          "height": 240,
+          "factor": 3
+        },
+        {
+          "id": "PAGE_REFLOW_DASHBOARD",
+          "result": "PASS",
+          "width": 426,
+          "documentWidth": 421
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_DASHBOARD",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_DASHBOARD",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_DASHBOARD",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_USERS",
+          "result": "PASS",
+          "width": 426,
+          "height": 240,
+          "factor": 3
+        },
+        {
+          "id": "PAGE_REFLOW_USERS",
+          "result": "PASS",
+          "width": 426,
+          "documentWidth": 421
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_USERS",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_USERS",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_USERS",
+          "result": "PASS"
+        },
+        {
+          "id": "ROUTE_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "NATIVE_ZOOM_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "PHYSICAL_CLIENT_1280_720_GROUPS",
+          "result": "PASS",
+          "width": 426,
+          "height": 240,
+          "factor": 3
+        },
+        {
+          "id": "PAGE_REFLOW_GROUPS",
+          "result": "PASS",
+          "width": 426,
+          "documentWidth": 421
+        },
+        {
+          "id": "NO_OPERATIONAL_ALERT_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "NO_EMAIL_IN_ORDINARY_VIEW_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "CONTROLS_LABELLED_GROUPS",
+          "result": "PASS",
+          "unlabelled": []
+        },
+        {
+          "id": "TABLES_BOUNDED_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "AX_NAMED_CONTROLS_GROUPS",
+          "result": "PASS",
+          "tables": 1,
+          "unnamedControls": []
+        },
+        {
+          "id": "REAL_API_READ_GROUPS",
+          "result": "PASS"
+        },
+        {
+          "id": "SUCCESSFUL_READS_GROUPS",
+          "result": "PASS"
+        }
+      ],
+      "pages": [
+        {
+          "path": "/dashboard",
+          "dpr": 3,
+          "width": 426,
+          "height": 240,
+          "outerWidth": 1296,
+          "outerHeight": 815,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 421,
+          "title": "Resumen",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 6,
+              "headers": 4,
+              "parentWidth": 338,
+              "scrollWidth": 704,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        },
+        {
+          "path": "/users",
+          "dpr": 3,
+          "width": 426,
+          "height": 240,
+          "outerWidth": 1296,
+          "outerHeight": 815,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 421,
+          "title": "Usuarios",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 7,
+              "headers": 4,
+              "parentWidth": 338,
+              "scrollWidth": 672,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        },
+        {
+          "path": "/groups",
+          "dpr": 3,
+          "width": 426,
+          "height": 240,
+          "outerWidth": 1296,
+          "outerHeight": 815,
+          "cssZoom": "1",
+          "pageScale": 1,
+          "documentWidth": 421,
+          "title": "Grupos",
+          "alerts": 0,
+          "tables": [
+            {
+              "rows": 9,
+              "headers": 4,
+              "parentWidth": 338,
+              "scrollWidth": 672,
+              "overflow": "auto"
+            }
+          ],
+          "unlabelled": [],
+          "piiEmailVisible": false,
+          "accessibility": {
+            "tables": 1,
+            "unnamedControls": []
+          }
+        }
+      ],
+      "version": "Chrome/155.0.8059.86",
+      "screenshot": {
+        "file": "Chrome-ADMIN-300-users.png",
+        "sha256": "7598e5b085444b89d97463d8989c5e62eb8c4e0f4aec94c12017d49470c4d0ca"
+      },
+      "result": "FAIL_KEEP_OBSERVATION",
+      "phase": "groups",
+      "reason": "UI_WAIT",
+      "failureScreenshot": {
+        "file": "Chrome-ADMIN-300-failure.png",
+        "sha256": "480f568f2503ed5c2e1f03b40956e3a39ea544c6269d0de12dc6f97a90e60055"
+      }
+    }
+  ],
+  "bootstrap": [
+    {
+      "at": "2026-10-23T01:39:51.405Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:39:52.320Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:39:53.373Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:40:12.348Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:40:13.381Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:40:14.290Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:40:33.831Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:40:34.711Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:40:35.502Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:40:54.667Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:40:55.436Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:40:56.168Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:41:14.258Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:41:14.887Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:41:15.530Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:41:33.608Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:41:34.292Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    },
+    {
+      "at": "2026-10-23T01:41:34.926Z",
+      "role": "ADMIN",
+      "source": "EXPLICIT_SYNTHETIC_JWT_BOOTSTRAP_NOT_REAL_REFRESH",
+      "realMeHttpStatus": 200
+    }
+  ],
+  "requests": [
+    {
+      "at": "2026-10-23T01:39:51.433Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 22.091,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:39:51.484Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 43.918,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:39:51.625Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/dashboard/admin",
+      "status": 200,
+      "durationMs": 110.76,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:39:51.763Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/audit-events",
+      "status": 200,
+      "durationMs": 236.701,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:39:51.779Z",
+      "role": "ADMIN",
+      "method": "POST",
+      "path": "/api/v1/operations/stream-ticket",
+      "status": 200,
+      "durationMs": 245.733,
+      "source": "REAL_BACKEND",
+      "transientTicketNoDatabaseWrite": true
+    },
+    {
+      "at": "2026-10-23T01:39:51.822Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/reports/availability",
+      "status": 200,
+      "durationMs": 306.342,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:39:52.334Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 11.136,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:39:52.352Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 13.262,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:39:52.629Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/users",
+      "status": 200,
+      "durationMs": 72.357,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:39:53.392Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 15.159,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:39:53.413Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 17.207,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:39:53.599Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/groups",
+      "status": 200,
+      "durationMs": 44.778,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:12.388Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 23.411,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:12.446Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 28.949,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:12.536Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/dashboard/admin",
+      "status": 200,
+      "durationMs": 45.639,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:12.583Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/reports/availability",
+      "status": 200,
+      "durationMs": 91.809,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:12.585Z",
+      "role": "ADMIN",
+      "method": "POST",
+      "path": "/api/v1/operations/stream-ticket",
+      "status": 200,
+      "durationMs": 93.604,
+      "source": "REAL_BACKEND",
+      "transientTicketNoDatabaseWrite": true
+    },
+    {
+      "at": "2026-10-23T01:40:12.616Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/audit-events",
+      "status": 200,
+      "durationMs": 94.671,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:13.401Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 16.049,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:13.427Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 19.673,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:13.649Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/users",
+      "status": 200,
+      "durationMs": 32.988,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:14.307Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 13.803,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:14.337Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 22.279,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:14.419Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/groups",
+      "status": 200,
+      "durationMs": 30.247,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:33.849Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 13.373,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:33.867Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 13.283,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:33.934Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/reports/availability",
+      "status": 200,
+      "durationMs": 33.857,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:33.972Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/audit-events",
+      "status": 200,
+      "durationMs": 67.345,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:33.976Z",
+      "role": "ADMIN",
+      "method": "POST",
+      "path": "/api/v1/operations/stream-ticket",
+      "status": 200,
+      "durationMs": 67.746,
+      "source": "REAL_BACKEND",
+      "transientTicketNoDatabaseWrite": true
+    },
+    {
+      "at": "2026-10-23T01:40:33.978Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/dashboard/admin",
+      "status": 200,
+      "durationMs": 78.572,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:34.726Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 11.167,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:34.743Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 13.347,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:34.811Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/users",
+      "status": 200,
+      "durationMs": 33.058,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:35.517Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 10.29,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:35.532Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 11.34,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:35.610Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/groups",
+      "status": 200,
+      "durationMs": 32.307,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:54.698Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 17.382,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:54.726Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 22.138,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:54.807Z",
+      "role": "ADMIN",
+      "method": "POST",
+      "path": "/api/v1/operations/stream-ticket",
+      "status": 200,
+      "durationMs": 35.166,
+      "source": "REAL_BACKEND",
+      "transientTicketNoDatabaseWrite": true
+    },
+    {
+      "at": "2026-10-23T01:40:54.817Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/dashboard/admin",
+      "status": 200,
+      "durationMs": 47.686,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:54.886Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/audit-events",
+      "status": 200,
+      "durationMs": 43.148,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:54.918Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/reports/availability",
+      "status": 200,
+      "durationMs": 148.113,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:55.460Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 12.876,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:55.483Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 15.889,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:55.561Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/users",
+      "status": 200,
+      "durationMs": 31.512,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:56.180Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 7.742,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:56.194Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 10.499,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:40:56.243Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/groups",
+      "status": 200,
+      "durationMs": 24.652,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:14.278Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 14.728,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:14.310Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 15.19,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:14.378Z",
+      "role": "ADMIN",
+      "method": "POST",
+      "path": "/api/v1/operations/stream-ticket",
+      "status": 200,
+      "durationMs": 27.603,
+      "source": "REAL_BACKEND",
+      "transientTicketNoDatabaseWrite": true
+    },
+    {
+      "at": "2026-10-23T01:41:14.395Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/reports/availability",
+      "status": 200,
+      "durationMs": 36.639,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:14.407Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/audit-events",
+      "status": 200,
+      "durationMs": 47.799,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:14.416Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/dashboard/admin",
+      "status": 200,
+      "durationMs": 58.586,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:14.901Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 9.875,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:14.918Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 11.402,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:14.976Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/users",
+      "status": 200,
+      "durationMs": 29.417,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:15.543Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 9.139,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:15.558Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 10.667,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:15.605Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/groups",
+      "status": 200,
+      "durationMs": 21.497,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:33.634Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 19.939,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:33.656Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 16.812,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:33.744Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/dashboard/admin",
+      "status": 200,
+      "durationMs": 39.056,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:33.757Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/audit-events",
+      "status": 200,
+      "durationMs": 46.933,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:33.762Z",
+      "role": "ADMIN",
+      "method": "POST",
+      "path": "/api/v1/operations/stream-ticket",
+      "status": 200,
+      "durationMs": 50.931,
+      "source": "REAL_BACKEND",
+      "transientTicketNoDatabaseWrite": true
+    },
+    {
+      "at": "2026-10-23T01:41:33.773Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/reports/availability",
+      "status": 200,
+      "durationMs": 63.054,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:34.306Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 10.497,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:34.324Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 12.511,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:34.376Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/users",
+      "status": 200,
+      "durationMs": 25.462,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:34.939Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "durationMs": 9.421,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:34.951Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "durationMs": 8.323,
+      "source": "REAL_BACKEND"
+    },
+    {
+      "at": "2026-10-23T01:41:34.994Z",
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/groups",
+      "status": 200,
+      "durationMs": 18.773,
+      "source": "REAL_BACKEND"
+    }
+  ],
+  "sources": {
+    "frontend/e2e/l08-operational-accessibility.mjs": "d39afca67b63b935444066ebd1906c7d0d7615ecd532446081528af066d5b6e8",
+    "frontend/dist/ruta-fija-crm/browser/index.html": "500b6838d4b4ffc20f00f2a8142bbaa9f1039c303329f7034a5a7fa51d7c34b3",
+    "frontend/package-lock.json": "6818f9b06051abab64081e8cc853049b54c2632d35b0807033c7582f26f0d85e",
+    "frontend/src/styles.scss": "588e9153440c5cf079c250df5d33b7c9f330822c00a1f8b2488053b3995fed88"
+  },
+  "realLoginOrRefreshAccredited": false,
+  "screenReaderHumanExecuted": false,
+  "databaseWritesAllowed": false,
+  "accountsCreated": 0,
+  "mailSent": 0,
+  "pilotEnabled": false
+}

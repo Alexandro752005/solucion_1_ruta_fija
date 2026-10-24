@@ -1,0 +1,35 @@
+{
+  "observedAt": "2026-10-21T22:22:26.500301+00:00",
+  "lot": "L-08",
+  "status": "EN_CURSO",
+  "literalAuthorization": "OK VERDE",
+  "authorizationScope": "L08 local acceptance work; not pilot/deployment/real identities/keys/external sends",
+  "previousLot": "L-07",
+  "previousClosure": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "previousManifestSha256": "9ba71c3071583695991fb22ecf1eb261de5b9b83f9db76f73ff7da1e2cebcf13",
+  "verifiedCountsBeforeCoordinationChanges": {
+    "closedFiles": 148,
+    "sources": 915,
+    "artifacts": 51
+  },
+  "mutableCoordinationFilesBackedUp": [
+    "docs/backlog-producto-ruta-fija-v3.1.md",
+    "docs/seguimiento/tareas.json",
+    "memory/current.md",
+    "memory/target.md"
+  ],
+  "frozenClosedFilesAfterExclusions": 144,
+  "database": "ruta_fija_test",
+  "role": "rf_test",
+  "schemaVersion": "48",
+  "historicalLedger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 6
+  },
+  "termsAcceptances": 2,
+  "newPersistentAccounts": 0,
+  "migrationsExecuted": false,
+  "pilotEnabled": false,
+  "final3Regenerated": false
+}

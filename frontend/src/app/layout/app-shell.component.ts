@@ -30,16 +30,22 @@ export class AppShellComponent {
   readonly navigation: readonly NavigationItem[] = [
     { label: 'Resumen', route: '/dashboard', roles: CRM_ROLES },
     { label: 'Usuarios', route: '/users', roles: ['ADMIN'] },
+    { label: 'Invitaciones', route: '/invitations', roles: ['ADMIN'] },
+    { label: 'Solicitudes', route: '/onboarding-requests', roles: ['ADMIN'] },
     { label: 'Organización', route: '/organization', roles: ['ADMIN'] },
     { label: 'Grupos', route: '/groups', roles: ['ADMIN'] },
     { label: 'Conductores', route: '/drivers', roles: ['ADMIN'] },
     { label: 'Vehículos', route: '/vehicles', roles: ['ADMIN'] },
     { label: 'Asignaciones', route: '/assignments', roles: ['ADMIN'] },
+    { label: 'Rutas', route: '/routes', roles: ['ADMIN'] },
     { label: 'Incidencias', route: '/incidents', roles: ['ADMIN'] },
     { label: 'Comunicados', route: '/announcements', roles: ['ADMIN'] },
+    { label: 'Bandeja', route: '/notices', roles: ['ADMIN'] },
     { label: 'Reportes', route: '/reports', roles: ['ADMIN'] },
     { label: 'Auditoría', route: '/audit', roles: ['ADMIN'] },
     { label: 'Organizaciones', route: '/organizations', roles: ['SUPER_ADMIN'] },
+    { label: 'Cuentas ADMIN', route: '/platform-admins', roles: ['SUPER_ADMIN'] },
+    { label: 'Auditoría de plataforma', route: '/platform-audit', roles: ['SUPER_ADMIN'] },
   ];
   readonly visibleNavigation = computed(() => {
     const role = this.session.user()?.role;
@@ -47,13 +53,7 @@ export class AppShellComponent {
       ? []
       : this.navigation.filter((item) => item.roles.includes(role));
   });
-  readonly initials = computed(() => {
-    const parts = this.session.user()?.fullName.trim().split(/\s+/) ?? [];
-    return parts
-      .slice(0, 2)
-      .map((part) => part.charAt(0).toUpperCase())
-      .join('') || 'RF';
-  });
+  readonly initials = () => 'RF';
   readonly organizationLabel = computed(() => {
     const user = this.session.user();
     if (user?.organizationName?.trim()) {

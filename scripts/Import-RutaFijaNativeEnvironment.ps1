@@ -41,7 +41,12 @@ $f14Keys = @(
     'RF_TEST_MIGRATOR_USERNAME',
     'RF_TEST_MIGRATOR_PASSWORD'
 )
-$allowedKeys = @($f11aKeys + $f12Keys + $f14Keys)
+$mailKeys = @(
+    'SPRING_MAIL_USERNAME',
+    'SPRING_MAIL_PASSWORD'
+)
+$mailRoutingKeys = @('APP_OTP_EMAIL_ALLOWED_RECIPIENTS')
+$allowedKeys = @($f11aKeys + $f12Keys + $f14Keys + $mailKeys + $mailRoutingKeys)
 $settings = [ordered]@{}
 $lineNumber = 0
 
@@ -87,9 +92,30 @@ if ($presentF14Keys.Count -gt 0 -and $presentF14Keys.Count -ne $f14Keys.Count) {
     throw 'La configuracion F1.4 esta incompleta: las variables del migrador de pruebas deben declararse juntas.'
 }
 
+$presentMailKeys = @($mailKeys | Where-Object { $settings.Contains($_) })
+if ($presentMailKeys.Count -gt 0 -and $presentMailKeys.Count -ne $mailKeys.Count) {
+    throw 'La configuracion SMTP requiere SPRING_MAIL_USERNAME y SPRING_MAIL_PASSWORD juntas.'
+}
+if ($settings.Contains('APP_OTP_EMAIL_ALLOWED_RECIPIENTS')) {
+    $recipients = @($settings['APP_OTP_EMAIL_ALLOWED_RECIPIENTS'].Split(','))
+    foreach ($recipient in $recipients) {
+        if ($recipient -cne $recipient.Trim() -or [string]::IsNullOrWhiteSpace($recipient)) {
+            throw 'OTP_RECIPIENTS_REQUIRE_NONEMPTY_EXACT_ADDRESSES'
+        }
+        try { $address = [Net.Mail.MailAddress]::new($recipient) }
+        catch { throw 'OTP_RECIPIENT_ADDRESS_INVALID' }
+        if ($address.Address -cne $recipient -or $recipient -notmatch '^[^\s@]+@[^\s@]+\.[^\s@]+$') {
+            throw 'OTP_RECIPIENT_ADDRESS_INVALID'
+        }
+    }
+    if (@($recipients | ForEach-Object { $_.ToLowerInvariant() } | Select-Object -Unique).Count -ne $recipients.Count) {
+        throw 'OTP_RECIPIENTS_MUST_BE_DISTINCT'
+    }
+}
+
 if ($Scope -eq 'Runtime') {
     $runtimeSettings = [ordered]@{}
-    foreach ($key in @($f11aKeys + @('SPRING_FLYWAY_URL', 'SPRING_FLYWAY_USERNAME', 'SPRING_FLYWAY_PASSWORD'))) {
+    foreach ($key in @($f11aKeys + @('SPRING_FLYWAY_URL', 'SPRING_FLYWAY_USERNAME', 'SPRING_FLYWAY_PASSWORD') + $mailKeys + $mailRoutingKeys)) {
         if ($settings.Contains($key)) {
             $runtimeSettings[$key] = $settings[$key]
         }

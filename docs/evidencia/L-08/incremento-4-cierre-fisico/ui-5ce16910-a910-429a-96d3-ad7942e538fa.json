@@ -1,0 +1,172 @@
+{
+    "observedAt":  "2026-10-23T05:29:03.4795565+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "action":  "back",
+    "label":  "",
+    "automatedUiInstrumentation":  true,
+    "humanAccessibilityConfirmation":  false,
+    "nodes":  [
+                  {
+                      "text":  "",
+                      "description":  "Ruta Fija Conductor",
+                      "bounds":  "[48,141][516,210]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Bandeja de avisos",
+                      "bounds":  "[648,103][792,247]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Mi incorporación",
+                      "bounds":  "[792,103][936,247]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Cerrar sesión",
+                      "bounds":  "[936,103][1080,247]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Su compromiso principal\nNo hay un servicio aceptado o en curso. Una oferta pendiente no es un compromiso aceptado.",
+                      "bounds":  "[120,379][960,712]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Oferta pendiente · requiere respuesta\nNo hay ofertas pendientes de respuesta.",
+                      "bounds":  "[120,712][960,937]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Sesión móvil activa",
+                      "bounds":  "[120,937][960,994]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "CONDUCTOR-dcc6990f-44b3-4d63-8d02-2fed514d2f26\nGrupo: SYNTHETIC L08 FIS02 3f0ba758",
+                      "bounds":  "[120,1042][960,1936]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Disponibilidad actual",
+                      "bounds":  "[120,1324][571,1660]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Disponible",
+                      "bounds":  "[180,1456][493,1600]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Vehículo principal\nNo tiene un vehículo principal vinculado.",
+                      "bounds":  "[120,1696][878,1936]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Gestionar disponibilidad",
+                      "bounds":  "[120,1996][960,2052]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Inicio\nTab 1 of 6",
+                      "bounds":  "[0,2112][180,2261]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Disponibilidad\nTab 2 of 6",
+                      "bounds":  "[180,2112][360,2261]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Asignaciones\nTab 3 of 6",
+                      "bounds":  "[360,2112][540,2261]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Incidencias\nTab 4 of 6",
+                      "bounds":  "[540,2112][720,2261]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Comunicados\nTab 5 of 6",
+                      "bounds":  "[720,2112][900,2261]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Perfil\nTab 6 of 6",
+                      "bounds":  "[900,2112][1080,2261]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  }
+              ]
+}

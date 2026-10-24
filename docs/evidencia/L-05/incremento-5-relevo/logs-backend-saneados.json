@@ -1,0 +1,95 @@
+{
+  "sources": [
+    {
+      "path": "backend/target/l05-handover-compile.log",
+      "sourceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-handover-crm-build.log",
+      "sourceSha256": "6282d06ef2dd19ccc3e75f5ec643158319fb8b7bb932087af55c825fc48b857d",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-handover-crm-typecheck-tests.log",
+      "sourceSha256": "2fd543afadb9ac1fab6d03d6fb51c229772b38de1dee9132a4133e1f9c6e5983",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-handover-crm-typecheck.log",
+      "sourceSha256": "2fd543afadb9ac1fab6d03d6fb51c229772b38de1dee9132a4133e1f9c6e5983",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-handover-dart-format-tests.log",
+      "sourceSha256": "874bace553ac7fa0454a95663a1de0130359c250713faac3431660b99cdbdeaf",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-handover-dart-format.log",
+      "sourceSha256": "45ccbd43107fbfbacdb6ef2964d8d055e568788d737185366390acfd2a31f2f5",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-handover-final-regression-batch1.log",
+      "sourceSha256": "d6506ac4c5fae472a5fdf9d2709b57eeafe3a66ed9f79c529bb01d971516e24c",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-handover-final-regression-batch2.log",
+      "sourceSha256": "fc4e07d3d33ac8fdfd08c66ce8d03d488c9e0ca1948311a0cc56b140bafc0ed8",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-handover-native-final.log",
+      "sourceSha256": "bb50661130f06db829c76f1395e9dc5bd4b7f3a5edd18462c9e6ebd8a2cfb0a2",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-handover-native-first.log",
+      "sourceSha256": "645c04f5052a9319f021b18ac285fed69eb4296d4589669295a49fe92072bb48",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-handover-native-second.log",
+      "sourceSha256": "6d8810675bbb1a7417598ab88116d583b635077906e24963fd2032f00dab002f",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-handover-native-third.log",
+      "sourceSha256": "85804980fc460055bcffe84e2ee2558ad4db484c970488ea89dc5d694edaa706",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-handover-preflight-compile.log",
+      "sourceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-handover-v42-compile.log",
+      "sourceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    }
+  ],
+  "diagnosticHistory": [
+    "PRIVATE_PARENT_FIXTURE_COUNT_HELPER_NOT_INHERITED_COMPILE_FIXED",
+    "V41_PLPGSQL_ROW_VARIABLE_TABLE_ALIAS_AMBIGUITY_REPRODUCED",
+    "V42_ADDITIVE_ALIAS_ONLY_CORRECTION_ALL_GUARDS_RETAINED",
+    "DART_CURLY_BRACES_STYLE_FIXED"
+  ],
+  "noProductGateWeakened": true
+}

@@ -1,0 +1,45 @@
+﻿>   public void close() throws java.io.IOException;
+      Code:
+         0: aload_0
+         1: getfield      #10                 // Field _xFromSxHash:Ljava/util/Map;
+         4: invokeinterface #43,  1           // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+         9: invokeinterface #44,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+        14: astore_1
+        15: aload_1
+        16: invokeinterface #23,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        21: ifeq          79
+        24: aload_1
+        25: invokeinterface #24,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        30: checkcast     #37                 // class org/apache/poi/xssf/streaming/SXSSFSheet
+        33: astore_2
+        34: aload_2
+        35: invokevirtual #40                 // Method org/apache/poi/xssf/streaming/SXSSFSheet.getSheetDataWriter:()Lorg/apache/poi/xssf/streaming/SheetDataWriter;
+        38: astore_3
+        39: aload_3
+        40: ifnull        47
+        43: aload_3
+        44: invokevirtual #141                // Method org/apache/poi/xssf/streaming/SheetDataWriter.close:()V
+        47: goto          76
+        50: astore_3
+        51: getstatic     #128                // Field LOG:Lorg/apache/logging/log4j/Logger;
+        54: invokeinterface #129,  1          // InterfaceMethod org/apache/logging/log4j/Logger.atWarn:()Lorg/apache/logging/log4j/LogBuilder;
+        59: aload_3
+        60: invokeinterface #130,  2          // InterfaceMethod org/apache/logging/log4j/LogBuilder.withThrowable:(Ljava/lang/Throwable;)Lorg/apache/logging/log4j/LogBuilder;
+        65: ldc           #142                // String An exception occurred while closing sheet data writer for sheet {}.
+        67: aload_2
+        68: invokevirtual #143                // Method org/apache/poi/xssf/streaming/SXSSFSheet.getSheetName:()Ljava/lang/String;
+        71: invokeinterface #144,  3          // InterfaceMethod org/apache/logging/log4j/LogBuilder.log:(Ljava/lang/String;Ljava/lang/Object;)V
+        76: goto          15
+        79: aload_0
+        80: invokevirtual #145                // Method dispose:()Z
+        83: pop
+        84: aload_0
+        85: getfield      #19                 // Field _wb:Lorg/apache/poi/xssf/usermodel/XSSFWorkbook;
+        88: invokevirtual #146                // Method org/apache/poi/xssf/usermodel/XSSFWorkbook.close:()V
+        91: return
+      Exception table:
+         from    to  target type
+            34    47    50   Class java/io/IOException
+  
+    public void write(java.io.OutputStream) throws java.io.IOException;
+      Code:

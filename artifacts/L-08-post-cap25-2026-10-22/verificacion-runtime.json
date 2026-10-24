@@ -1,0 +1,8 @@
+{
+  "result": "PASS_PACKAGED_V50_API_READ_ONLY_SHARED_TEST_NOT_RELEASE_OR_BUSINESS_RTO",
+  "evidence": "docs/evidencia/L-08/incremento-2-mision-y-controles/candidato-v50-solo-lectura.json",
+  "sha256": "2c11e59d3250155cceb9c02e48b07096d0fad9a96191dea1ea682f59c8974685",
+  "archiveManifestPreserved": true,
+  "releaseOrDeployment": false,
+  "runtimeChecksOnlyReadOnlyHealthNotBusinessRecovery": true
+}

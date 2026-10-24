@@ -1,0 +1,9 @@
+﻿{
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "backgroundedAt":  "2026-10-23T05:00:06.9481707+00:00",
+    "baselineAt":  "2026-10-23T05:00:07.633747900Z",
+    "baselineGpsPointCount":  41,
+    "lastGpsAt":  "2026-10-23T04:59:38.654505Z",
+    "serverAndDatabaseGuardActive":  true,
+    "appBackgroundedThroughRealAndroidHome":  true
+}

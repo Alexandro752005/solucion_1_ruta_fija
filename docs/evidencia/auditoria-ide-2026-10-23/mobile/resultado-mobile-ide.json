@@ -1,0 +1,162 @@
+{
+  "observedAtUtc": "2026-10-23T16:01:36.157254+00:00",
+  "result": "PASS_MOBILE_IDE_ANALYSIS_AND_COMPLETE_LOCAL_FLUTTER_SUITE",
+  "initialFindings": {
+    "workspaceRootIssues": 1716,
+    "severityCounts": {
+      "error": 1633,
+      "warning": 83
+    },
+    "archiveAreaCounts": {
+      "backend/target": 360,
+      "docs/evidencia": 649,
+      "memory/backup": 707
+    },
+    "liveMobileIssues": 0,
+    "archivedOrGeneratedDartCopies": 34,
+    "detachedCopiesWithDiagnostics": 29,
+    "staleTestContractFailures": 1
+  },
+  "changes": [
+    {
+      "path": "analysis_options.yaml",
+      "type": "New workspace-level exclusions only; live mobile lint rules remain unchanged",
+      "sha256": "09e3dac794c9a7eb226312c9004cfb1f73474bfd5cb3d7174bd751dd7c38a4da"
+    },
+    {
+      "path": "mobile/test/features/profile/mobile_driver_repository_test.dart",
+      "type": "Exact expected HTTP request map adds the two required context flags",
+      "beforeSha256": "fff40e38ebdf60c014b7b9602d030ec0c39d49a435eec56706354274550493ec",
+      "afterSha256": "328c5c27dd5735c340aae690031626ea6d2baff39aa50ee05cb06f87325b5d33",
+      "backup": "before/mobile_driver_repository_test.dart.before",
+      "supersession": "source-supersession.json"
+    },
+    {
+      "path": ".vscode/settings.json",
+      "author": "parent coordinator",
+      "type": "dart.analysisExcludedFolders set to matching seven concrete paths",
+      "sha256AtObservation": "b129b68e3807e4304b3033456fb1e37a7a2e31165c5fedb7006eadcf49d7a593"
+    }
+  ],
+  "unchangedMobileAnalysisOptionsSha256": "fe994f27e5b83c122bab0c2ef62317cc0f590c8df1028f367578ff7f3fd6e195",
+  "checks": [
+    {
+      "command": "flutter analyze --no-pub",
+      "cwd": ".",
+      "stage": "before",
+      "exitCode": 1,
+      "issues": 1716,
+      "errors": 1633,
+      "warnings": 83,
+      "liveMobileIssues": 0,
+      "log": "flutter-analyze-workspace-root-before.log"
+    },
+    {
+      "command": "flutter analyze --no-pub",
+      "cwd": "mobile",
+      "stage": "before",
+      "exitCode": 0,
+      "issues": 0,
+      "reportedSeconds": 3.6,
+      "log": "flutter-analyze-mobile.log"
+    },
+    {
+      "command": "flutter test --no-pub --reporter expanded",
+      "cwd": "mobile",
+      "stage": "before",
+      "exitCode": 1,
+      "passed": 232,
+      "skippedConnected": 7,
+      "failed": 1,
+      "failure": "Obsolete exact request expectation omitted existing required foreground/provider flags",
+      "log": "flutter-test-complete-before.log"
+    },
+    {
+      "command": "flutter analyze --no-pub",
+      "cwd": ".",
+      "stage": "after",
+      "exitCode": 0,
+      "issues": 0,
+      "reportedSeconds": 6.0,
+      "log": "flutter-analyze-workspace-root-after.log"
+    },
+    {
+      "command": "flutter analyze --no-pub",
+      "cwd": "mobile",
+      "stage": "after",
+      "exitCode": 0,
+      "issues": 0,
+      "reportedSeconds": 6.3,
+      "log": "flutter-analyze-mobile-after.log"
+    },
+    {
+      "command": "flutter test --no-pub --reporter expanded test/features/profile/mobile_driver_repository_test.dart",
+      "cwd": "mobile",
+      "stage": "after",
+      "exitCode": 0,
+      "passed": 3,
+      "failed": 0,
+      "log": "flutter-test-driver-repository-after.log"
+    },
+    {
+      "command": "flutter test --no-pub --reporter expanded",
+      "cwd": "mobile",
+      "stage": "after",
+      "exitCode": 0,
+      "passed": 233,
+      "skippedConnected": 7,
+      "failed": 0,
+      "log": "flutter-test-complete-after.log"
+    }
+  ],
+  "connectedFlags": {
+    "processScopeOnly": true,
+    "names": [
+      "RF_L01_CONNECTED_CLIENTS",
+      "RF_L02_CONNECTED_CLIENTS",
+      "RF_L03_CONNECTED_CLIENTS",
+      "RF_L04_CONNECTED_CLIENTS",
+      "RF_L05_CONNECTED_CLIENTS",
+      "RF_L06_CONNECTED_CLIENTS",
+      "RF_L07_CONNECTED_CLIENTS"
+    ],
+    "value": "false",
+    "skippedTestsNotCountedAsPass": true
+  },
+  "androidReview": {
+    "files": [
+      "mobile/android/app/build.gradle.kts",
+      "mobile/android/settings.gradle.kts",
+      "mobile/android/app/src/main/AndroidManifest.xml",
+      "mobile/android/gradle.properties"
+    ],
+    "method": "read-only configuration review; no new native build or device action",
+    "currentNativeSourceModified": false,
+    "explicitCandidateSigningAndForegroundPermissionsPreserved": true
+  },
+  "preservation": {
+    "frozenManifestEntriesCheckedReadOnly": 427,
+    "frozenManifestSha256": "2708399adc572cacf8a3d3f09ba31e507604717e6817ed66e7c871c4a148ac5a",
+    "frozenManifestMismatches": [],
+    "historicalSourceInventoryManifestsUnchanged": 15,
+    "oldEvidenceRewritten": false,
+    "productionCodeChanged": false,
+    "databaseOrPhoneTouched": false
+  },
+  "toolingIncidents": [
+    {
+      "purpose": "Rename root-analysis log to identify its directory context",
+      "firstAttempt": "Relative source path resolved under mobile/ and did not exist; Move-Item reported an error but no file moved",
+      "correction": "Reissued from workspace root; existing log moved to the intended new-audit name",
+      "productFailure": false
+    }
+  ],
+  "remainingLimits": [
+    "IDE visible diagnostics need coordinator live refresh confirmation; this record proves clean CLI root and package analysis",
+    "Seven connected backend/PostgreSQL tests intentionally not executed; no claim of new integrated validation",
+    "No new Gradle build, APK installation, DB mutation or physical GPS validation",
+    "Historical source inventories remain immutable records of older versions; current test expectation has explicit later supersession",
+    "Release reserved API and real-pilot prerequisites retain prior L08 limitations"
+  ],
+  "evidenceDirectory": "docs/evidencia/auditoria-ide-2026-10-23/mobile"
+}

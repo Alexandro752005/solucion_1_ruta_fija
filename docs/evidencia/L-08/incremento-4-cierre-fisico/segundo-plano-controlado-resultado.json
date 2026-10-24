@@ -1,0 +1,10 @@
+﻿{
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "observedAt":  "2026-10-23T05:01:42.848189Z",
+    "secondsObserved":  95.2144411,
+    "baselineGpsPoints":  41,
+    "finalGpsPoints":  41,
+    "realServerKeptRunning":  true,
+    "noNewGpsPoints":  true,
+    "result":  "PASS_REAL_ANDROID_BACKGROUND_NO_GPS_UPLOAD"
+}

@@ -51,6 +51,12 @@ final class RutaFijaTheme {
           textStyle: const TextStyle(fontWeight: FontWeight.w700),
         ),
       ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(foregroundColor: _ink),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(foregroundColor: _ink),
+      ),
     );
   }
 }

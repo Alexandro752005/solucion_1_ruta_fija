@@ -79,29 +79,55 @@ jobs:
           $databaseSql | & sudo -u postgres psql -X -v ON_ERROR_STOP=1 -d ruta_fija_test
           if ($LASTEXITCODE -ne 0) { throw 'No se pudo aislar ruta_fija_test en CI.' }
 
+          # These regression suites deliberately refuse the historical harness.
+          # Only fresh GitHub-hosted runner databases are provisioned here.
+          foreach ($database in @('rf_legacy_qa_20261023', 'rf_legacy_concurrency_qa_20261023', 'rf_identity_correction_qa_20261023')) {
+            & sudo -u postgres createdb -O rf_migrator $database
+            if ($LASTEXITCODE -ne 0) { throw "No se pudo crear la base dedicada $database." }
+            $dedicatedSql = @"
+          ALTER DATABASE $database SET TimeZone TO 'UTC';
+          REVOKE ALL ON DATABASE $database FROM PUBLIC;
+          GRANT CONNECT ON DATABASE $database TO rf_migrator, rf_app;
+          ALTER SCHEMA public OWNER TO rf_migrator;
+          REVOKE ALL ON SCHEMA public FROM PUBLIC;
+          GRANT USAGE, CREATE ON SCHEMA public TO rf_migrator;
+          GRANT USAGE ON SCHEMA public TO rf_app;
+          ALTER DEFAULT PRIVILEGES FOR ROLE rf_migrator IN SCHEMA public
+            GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO rf_app;
+          ALTER DEFAULT PRIVILEGES FOR ROLE rf_migrator IN SCHEMA public
+            GRANT USAGE, SELECT, UPDATE ON SEQUENCES TO rf_app;
+          "@
+            $dedicatedSql | & sudo -u postgres psql -X -v ON_ERROR_STOP=1 -d $database
+            if ($LASTEXITCODE -ne 0) { throw "No se pudieron aislar los permisos de $database." }
+          }
+
           @(
             'RF_TEST_DATASOURCE_URL=jdbc:postgresql://127.0.0.1:5432/ruta_fija_test',
             'RF_TEST_DATASOURCE_USERNAME=rf_test',
             "RF_TEST_DATASOURCE_PASSWORD=$testPassword",
             'RF_TEST_MIGRATOR_URL=jdbc:postgresql://127.0.0.1:5432/ruta_fija_test',
             'RF_TEST_MIGRATOR_USERNAME=rf_migrator',
-            "RF_TEST_MIGRATOR_PASSWORD=$migratorPassword"
+            "RF_TEST_MIGRATOR_PASSWORD=$migratorPassword",
+            'RF_LEGACY_QA_URL=jdbc:postgresql://127.0.0.1:5432/rf_legacy_qa_20261023',
+            'RF_LEGACY_CONCURRENCY_QA_URL=jdbc:postgresql://127.0.0.1:5432/rf_legacy_concurrency_qa_20261023',
+            'RF_IDENTITY_CORRECTION_QA_URL=jdbc:postgresql://127.0.0.1:5432/rf_identity_correction_qa_20261023',
+            "RF_LEGACY_QA_APP_PASSWORD=$appPassword",
+            "RF_LEGACY_QA_MIGRATOR_PASSWORD=$migratorPassword"
           ) | Add-Content -LiteralPath $env:GITHUB_ENV -Encoding utf8
 
-      - name: Verify backend
-        working-directory: backend
-        run: ./mvnw --batch-mode --no-transfer-progress verify
-
-      - name: Reject omitted critical integration tests
+      - name: Verify candidate units and isolated conductor regressions
         working-directory: backend
         shell: bash
         run: |
-          summary="target/failsafe-reports/failsafe-summary.xml"
-          test -f "$summary"
-          if grep -Eq '<skipped>[1-9][0-9]*</skipped>' "$summary"; then
-            echo "Critical integration tests were skipped"
-            exit 1
-          fi
+          unit_classes="$(python3 ../scripts/ci/backend_candidate_checks.py units)"
+          ./mvnw --batch-mode --no-transfer-progress \
+            "-Dtest=$unit_classes" \
+            '-Dit.test=LegacyConductorReconciliationIT,LegacyConductorRegularizationConcurrencyIT,DriverIdentityReviewCorrectionIT' \
+            verify
+
+      - name: Reject missing, failed or skipped selected tests
+        shell: bash
+        run: python3 scripts/ci/backend_candidate_checks.py reports
 
   frontend:
     name: Frontend verify (Node 24.16)

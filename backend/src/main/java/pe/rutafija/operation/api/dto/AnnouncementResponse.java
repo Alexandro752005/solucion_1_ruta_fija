@@ -26,7 +26,7 @@ public record AnnouncementResponse(
                 announcement.getAudienceId(),
                 announcement.isRequireReadAck(),
                 announcement.getCreatedBy().getId(),
-                announcement.getCreatedBy().getFullName(),
+                pe.rutafija.shared.security.PersonalDataView.account(announcement.getCreatedBy().getId()),
                 announcement.getCreatedAt()
         );
     }

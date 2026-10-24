@@ -1,0 +1,14 @@
+{
+  "runId" : "8aa821e6-fbbb-4e2f-8b1a-53ab5ff73c30",
+  "database" : "ruta_fija_test",
+  "role" : "rf_test",
+  "technicalAccountlessFixture" : true,
+  "technicalLegacyRowMode" : true,
+  "typeId" : "11c09bf7-a59b-41d3-a26d-ac28ed125a25",
+  "typeVersionId" : "ef144c5e-2e40-40d6-bac4-e4b394261c3c",
+  "resource" : "DRIVER",
+  "result" : "PASS_PG_BUFFER_EXCLUSION_AND_BOUNDARY",
+  "cleanup" : "EXACT_RESOURCES_REMOVED_TYPE_RETIRED_VERSION_AND_RECEIPT_RETAINED",
+  "accountCreations" : 0,
+  "ledgerPreserved" : true
+}

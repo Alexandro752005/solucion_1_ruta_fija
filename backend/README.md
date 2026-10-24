@@ -1,3 +1,33 @@
+# Estado nativo actualizado — 23/10/2026
+
+`solucion_ruta_fija_1` ya contiene **V1–V50**, sin fallos ni repetibles. La migración V13–V50 fue respaldada, ensayada y aplicada expresamente; el inicio normal aprobó con API8080/CRM4300. Los permisos de `rf_app` permiten operar las tablas de aplicación y conservan los REVOKE de auditoría/retención. No se modificó `ruta_fija_test` ni la compuerta de arranque.
+
+[Operación y evidencias](../docs/operacion/migracion-local-v12-v50-2026-10-23.md). Usar los BAT normales de inicio/cierre; no repetir la migración. El estado V12 descrito debajo corresponde al corte anterior conservado.
+
+---
+
+# Backend — instrucciones vigentes 2026-10-23
+
+Este corte sustituye las secciones históricas de ejecución y pruebas conservadas debajo. Java21/Spring Boot3.5.16 y PostgreSQL16 se mantienen. La base normal `solucion_ruta_fija_1` sigue en V12 y el código actual exige V50: el launcher bloquea antes de arrancar Java, sin migraciones automáticas. La fixture `ruta_fija_test` contiene V1 a V50 más una repetible: 51 éxitos, no V0.
+
+Pruebas unitarias seguras desde la raíz:
+
+```powershell
+./scripts/Test-RutaFijaBackendUnitSafe.ps1
+./verificar_ruta_fija.bat
+```
+
+El primer comando es Plan; el BAT ejecuta el runner con `-Execute`. El runner limita las clases a una allowlist inspeccionada, compila fuentes reales y tests en salidas aisladas, conserva JaCoCo y evita SpringBootTest/JPA/DriverManager/infraestructura real. Resultado observado del runner: 50 clases y 257 pruebas, sin fallos/errores/omitidas. No presenta ese resultado como integración completa. Los comandos Maven generales del antecedente no son la entrada segura: Surefire puede incluir clases de integración y tocar la fixture.
+
+`Invoke-RutaFijaNativeTest.ps1 -Action Clean` está bloqueado y Verify delega al runner seguro antes de importar secretos. Las pruebas con PostgreSQL requieren un arnés aislado expresamente autorizado, fuera de esta auditoría. No ejecutar limpieza global ni migrar las bases desde el IDE.
+
+El smoke explícito `iniciar_ruta_fija.bat --smoke-read-only --test-database` conserva la configuración persistente y limita la conexión a lectura con tareas de mantenimiento desactivadas solo durante esa sesión. No permite operaciones de usuarios; el uso normal mantiene las reglas del producto. El cierre conserva PostgreSQL si no posee una lease válida o hay otros clientes/observabilidad incompleta.
+
+[Manual vigente](<../docs/Uso del Sistema.md>) y [evidencia nueva](../docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md). Los archivos/actas/manifiestos de los lotes previos no se reescriben; copia exacta de este README previo en la auditoría nueva.
+
+<details>
+<summary>README anterior conservado como antecedente técnico; comandos y conteos antiguos no vigentes.</summary>
+
 # Ruta Fija — backend
 
 API del CRM Web Administrativo y Reportes, construida como monolito modular con
@@ -43,7 +73,7 @@ Variables de ejecución:
 | SPRING_FLYWAY_URL / USERNAME | Desarrollo con rf_migrator |
 | JWT_SECRET_BASE64 | Secreto local de al menos 32 bytes |
 | APP_SEED_ENABLED | false para el runtime normal |
-| APP_CORS_ALLOWED_ORIGINS | http://localhost:4200 |
+| APP_CORS_ALLOWED_ORIGINS | http://localhost:4300,http://127.0.0.1:4300 |
 | REFRESH_COOKIE_SECURE | false solo para HTTP local |
 
 ## Esquema y roles
@@ -73,7 +103,9 @@ Desde la raíz del repositorio se usa:
 .\iniciar_ruta_fija.bat
 ~~~
 
-El iniciador empaqueta el JAR, levanta la API en 127.0.0.1:8080 y comprueba:
+El iniciador activa PostgreSQL 16 con inicio manual, empaqueta el JAR solo si
+las fuentes cambiaron, levanta la API con memoria limitada en 127.0.0.1:8080 y
+comprueba:
 
 - Salud: http://127.0.0.1:8080/actuator/health
 - OpenAPI: http://127.0.0.1:8080/v3/api-docs
@@ -84,6 +116,8 @@ Para detener procesos administrados:
 ~~~powershell
 .\finalizar_ruta_fija.bat
 ~~~
+
+El cierre también detiene PostgreSQL 16 sin eliminar la base ni sus datos.
 
 ## Pruebas
 
@@ -123,3 +157,6 @@ puede suministrar X-Correlation-ID seguro; de lo contrario se genera uno.
 - [Consolidación backend ADMIN F2.2](../docs/ejecucion-nativa-f2-2.md)
 - [Auditoría backend F2.2](../docs/auditoria-f2-2-backend-admin.md)
 - [Contrato API ADMIN F2.3](../docs/contrato-api-f2-3-admin.md)
+
+
+</details>

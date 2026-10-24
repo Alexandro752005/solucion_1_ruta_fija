@@ -1,0 +1,11 @@
+019C1FEF157244814A65B0A9280F8FD27E715910A9AB464EDED95E66EA190218  docs/evidencia/L-01/preparacion-ensayos-humanos-CI03-CI07-2026-10-17.md
+0F5C9583EEFCADF0A4CE2D70E1B3760C249E4F20C672C7B2A3F8EB59D166D044  docs/evidencia/L-01/ensayos-humanos-preparacion-2026-10-17/inspeccion-solo-lectura.log
+453B44105D7E0548808CE86F2B0FAA5B18E31152A69469907E813A9958365F57  docs/evidencia/L-01/ensayos-humanos-preparacion-2026-10-17/fuentes/docs/contratos/L-01-propuesta-validacion-funcional-local.md
+68AACE35BFD19DB63210EE7FF2331C25D701DC08F0CB1F88CD0B045E7DCD0506  docs/evidencia/L-01/ensayos-humanos-preparacion-2026-10-17/fuentes/backend/src/test/java/pe/rutafija/support/ManualL01HumanTrialTest.java
+77640E28C0985E1452B40846AB34F9F754C258E595B963D2159C9D68B016D140  docs/evidencia/L-01/ensayos-humanos-preparacion-2026-10-17/fuentes/docs/operacion/L-01-ensayos-humanos-sinteticos.md
+798FB6BB960A3EB9F0FB03A06DB6AE88F2E6B76531ACDCFD32FC5F788D0CDB02  docs/evidencia/L-01/ensayos-humanos-preparacion-2026-10-17/fuentes/backend/src/test/java/pe/rutafija/support/NativePostgresTestDatabase.java
+A6BA94FCE69367777980C797C79900867F40E9D53FB736AA14F5D5E131877113  docs/evidencia/L-01/ensayos-humanos-preparacion-2026-10-17/fuentes/backend/src/test/java/pe/rutafija/support/ManualL01HumanTrialServer.java
+B18106A544F6D985A14D4936C277A6138E71EF3B9714ADEEFE6F5153AFF30188  docs/evidencia/L-01/ensayos-humanos-preparacion-2026-10-17/arranque-real.log
+D975DBA6D93F4E4F2CEB49C5190F5A15671AA9FCA33551CC5FF0FDC6575466FE  docs/evidencia/L-01/ensayos-humanos-preparacion-2026-10-17/fuentes/backend/src/test/java/pe/rutafija/support/ManualL01HumanTrial.java
+D9AF40E5E597B970989FE48B34F6060F2D91BF524E962C1840ADBC57985FEF8F  docs/evidencia/L-01/ensayos-humanos-preparacion-2026-10-17/fuentes/scripts/Invoke-RutaFijaL01HumanTrial.ps1
+E84D31B26A3FE6739063FBA991365F22DAAAD4D0DBA85865CE92840511700B24  docs/evidencia/L-01/ensayos-humanos-preparacion-2026-10-17/unitarias.log

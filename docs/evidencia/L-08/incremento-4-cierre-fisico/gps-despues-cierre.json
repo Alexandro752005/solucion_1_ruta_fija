@@ -1,0 +1,12 @@
+﻿{
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "observedAt":  "2026-10-23T05:30:51.601915600Z",
+    "secondsAfterCompletionBaseline":  113.16589019999999,
+    "gpsPointsAtCompletion":  85,
+    "gpsPointsAfterObservation":  85,
+    "gpsRequestsAfterCompletionBaseline":  0,
+    "serviceStatus":  "COMPLETED",
+    "openSegments":  0,
+    "logoutHttp204Observed":  true,
+    "result":  "PASS_REAL_CLOSE_LOGOUT_NO_MORE_GPS"
+}

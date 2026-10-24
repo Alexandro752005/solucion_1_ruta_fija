@@ -1,0 +1,21 @@
+{
+    "observedAt":  "2026-10-22T21:51:37.8462692Z",
+    "artifact":  "artifacts/L-08-gps-correccion-2026-10-22/ruta-fija-l08-gps-debug.apk",
+    "sha256":  "378bedcf4ee12a1a801ed07c9479b1acc5903246dd78c6f9b40212af9a73a588",
+    "package":  "package: name=\u0027pe.rutafija.conductor.l08\u0027 versionCode=\u00272\u0027 versionName=\u00270.1.0\u0027 platformBuildVersionName=\u002716\u0027 platformBuildVersionCode=\u002736\u0027 compileSdkVersion=\u002736\u0027 compileSdkVersionCodename=\u002716\u0027",
+    "label":  "application-label:\u0027Ruta Fija Pruebas\u0027",
+    "minimum":  "sdkVersion:\u002729\u0027",
+    "target":  "targetSdkVersion:\u002736\u0027",
+    "permissions":  [
+                        "uses-permission: name=\u0027android.permission.INTERNET\u0027",
+                        "uses-permission: name=\u0027android.permission.ACCESS_COARSE_LOCATION\u0027",
+                        "uses-permission: name=\u0027android.permission.ACCESS_FINE_LOCATION\u0027",
+                        "uses-permission: name=\u0027pe.rutafija.conductor.l08.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION\u0027"
+                    ],
+    "signerSha256":  "7ad9b72e98103572c0d83e04271c4cbbba9d9cf71cef6f314bb58f2a58855d20",
+    "sameSignerAsPriorTestApk":  true,
+    "externalDelivery":  false,
+    "productionPackageModified":  false,
+    "installationExecuted":  false,
+    "gpsPhysicallyVerified":  false
+}

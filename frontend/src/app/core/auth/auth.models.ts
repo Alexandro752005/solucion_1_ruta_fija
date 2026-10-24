@@ -26,9 +26,19 @@ export interface SessionUser {
 }
 
 export interface LoginResponse {
-  readonly accessToken: string;
-  readonly expiresIn: number;
-  readonly user: SessionUser;
+  readonly accessToken?: string | null;
+  readonly tokenType?: string | null;
+  readonly expiresIn?: number | null;
+  readonly user?: SessionUser | null;
+  readonly emailVerificationRequired?: boolean;
+  readonly verification?: EmailOtpChallenge;
+}
+
+export interface EmailOtpChallenge {
+  readonly verificationToken: string;
+  readonly otpExpiresAt: string;
+  readonly challengeExpiresAt: string;
+  readonly emailSent: boolean;
 }
 
 export type SessionStatus = 'unknown' | 'authenticated' | 'anonymous';

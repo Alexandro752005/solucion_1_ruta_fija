@@ -1,7 +1,7 @@
 name: ruta_fija_conductor
 description: "Cliente Android del conductor para Ruta Fija."
 publish_to: 'none'
-version: 0.1.0+1
+version: 0.1.0+2
 
 environment:
   sdk: ^3.13.4
@@ -10,7 +10,15 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_secure_storage: ^10.3.4
+  geolocator: ^14.0.3
+  # Local Android codec repair: preserve measured-field presence without
+  # weakening the app's accuracy validation. See third_party/.../RUTA_FIJA_PATCH.md.
+  geolocator_android: 5.0.3+rutafija.1
   http: ^1.6.0
+
+dependency_overrides:
+  geolocator_android:
+    path: third_party/geolocator_android
 
 dev_dependencies:
   flutter_test:

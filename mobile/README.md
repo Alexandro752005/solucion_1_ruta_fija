@@ -4,15 +4,27 @@ Cliente Flutter Android exclusivo del rol `CONDUCTOR`. Se comunica con Spring
 Boot por `/api/v1/mobile`; nunca accede a PostgreSQL, no contiene credenciales
 de base de datos y no reutiliza la cookie de sesión del CRM.
 
-## Estado actual: F4.3
+> **Vigencia V3.1:** este checkout aún contiene la cola offline añadida en M8,
+> además de pruebas y pantallas asociadas. La especificación vigente excluye el
+> funcionamiento y las colas offline. Los detalles M8 de este README describen
+> el código heredado, no un comportamiento objetivo; su retiro y el tratamiento
+> de datos ya almacenados deben coordinarse con backend en el lote L-05.
+
+## Estado del código heredado
 
 M1, M2, M3 y M4 están implementados: base, navegación, sesión JSON de
 conductor, refresh rotativo protegido, perfil, disponibilidad y asignaciones
-propias idempotentes. El avance verificable es **46/80 puntos**.
+propias idempotentes. F4.4 completa M5 y M6: incidencias propias y comunicados
+visibles para su audiencia con lectura explícita. M7 aprobado añade consentimiento y
+ubicación manual en primer plano: un único punto voluntario, sin historial ni
+seguimiento continuo. La iteración anterior agregó una cola persistente para
+disponibilidad, inicio y cierre de servicio. Esa implementación M8 está fuera
+del objetivo v3.1. Las puntuaciones M8/M9 y el estado VERDE de evidencias
+anteriores son cortes históricos; la baseline actual está en
+`../docs/ejecucion/L-00.md`.
 
-La aplicación no implementa todavía incidencias, comunicados, GPS, permisos de
-ubicación, fotos, FCM ni una cola offline automática. Las rutas de esos módulos
-siguen señalando honestamente que están pendientes.
+La aplicación no implementa ubicación continua, fotos, FCM, notificaciones
+push ni sincronización en segundo plano.
 
 ## Seguridad de sesión
 
@@ -26,6 +38,20 @@ siguen señalando honestamente que están pendientes.
 - Antes de mutar una asignación, el cliente guarda un único `clientEventId`,
   versión e instante en almacenamiento protegido. Ante un resultado desconocido
   conserva ese evento y pide un reintento explícito; no crea otro comando.
+- Una incidencia se atribuye en el servidor al conductor de la sesión. Si la
+  red deja su resultado desconocido, la app pide revisar la lista y no crea una
+  cola ni reenvío automático que pueda duplicarla.
+- Abrir un comunicado no registra lectura. Cuando el servidor exige acuse, el
+  conductor lo confirma mediante una acción humana y una ruta idempotente.
+- La ubicación se solicita solo desde **Perfil → Gestionar ubicación**, después
+   de consentimiento explícito y mientras la aplicación está abierta. No se
+   guardan coordenadas en el dispositivo ni se inicia un rastreo continuo.
+- M8 solo conserva disponibilidad, inicio y cierre de servicio. Cada evento
+  conserva su UUID, fecha y carga exactos; un conflicto o rechazo bloquea la
+  secuencia hasta que el conductor la concilie y descarte conscientemente.
+- La cola es privada para la combinación usuario/conductor, se limpia al cerrar
+  sesión y nunca usa temporizadores, detección de conectividad ni trabajo en
+  segundo plano.
 
 ## Comandos de validación
 
@@ -47,14 +73,44 @@ $env:Path = 'D:\dev\flutter\bin;' + $env:Path
 flutter --version
 ~~~
 
-Desde la raíz del repositorio, la auditoría completa de F4.3 es:
+Desde la raíz del repositorio, la auditoría completa de F4.4 es:
 
 ~~~powershell
-.\scripts\Test-RutaFijaF43MobileAssignments.ps1
+.\scripts\Test-RutaFijaF44MobileIncidentsAnnouncements.ps1
 ~~~
 
 La salida aprobada empieza con
-`F4_3_MOBILE_ASSIGNMENTS=PASS` y declara `total=46/80`.
+`F4_4_MOBILE_INCIDENTS_ANNOUNCEMENTS=PASS` y declara `total=58/80`.
+
+Para M7, la auditoría específica es:
+
+~~~powershell
+.\scripts\Test-RutaFijaM7ForegroundLocation.ps1
+~~~
+
+Su resultado aprobado comienza con `M7_FOREGROUND_LOCATION_AUDIT=PASS` y
+declara `total=66/80`.
+
+Para M8, después de que PostgreSQL esté en V12, ejecute:
+
+~~~powershell
+.\scripts\Test-RutaFijaM8OfflineMinimum.ps1
+~~~
+
+El resultado técnico esperado es
+`M8_OFFLINE_MINIMUM_AUDIT=PASS` y declara `total=71/80`. M8 ya fue aprobada
+después de su prueba física. Su guía conserva el procedimiento reproducible en
+[Ejecución M8](../docs/ejecucion-m8-offline-minimo.md).
+
+Para M9, ejecute desde la raíz:
+
+~~~powershell
+.\scripts\Test-RutaFijaM9QualityEvidence.ps1
+~~~
+
+El resultado técnico esperado inicia con `M9_QUALITY_EVIDENCE_AUDIT=PASS` y
+declara `total=80/80`. Aún requiere la validación física de interfaz indicada
+en [Ejecución M9](../docs/ejecucion-m9-calidad-evidencia.md).
 
 ## Ejecutar en desarrollo
 
@@ -80,7 +136,19 @@ exactamente en `/api/v1`.
 Para probar M4, el ADMIN crea una asignación `MOBILE_CONFIRMATION` para el
 conductor vinculado. La app solo muestra las asignaciones propias y permite
 aceptar/rechazar, iniciar o completar cuando el backend autoriza el estado. No
-existe un botón CRM que suplante la respuesta del conductor.
+existe un botón CRM que suplante la respuesta del conductor. Para M5, el
+conductor reporta una incidencia propia; el backend fija su origen y estado.
+Para M6, el ADMIN publica un comunicado dirigido a la audiencia del conductor:
+abrirlo no confirma nada y el acuse se realiza solo mediante el botón explícito.
+Para M7, el conductor abre **Perfil → Gestionar ubicación** y confirma el
+envío de un único punto actual. Puede eliminar el punto vigente o retirar el
+consentimiento desde la misma pantalla.
+El siguiente recorrido describe el comportamiento heredado M8, excluido de
+v3.1: al fallar temporalmente una disponibilidad, inicio o cierre, aparece un
+contador en el icono de sincronización superior. El conductor abre
+**Pendientes de sincronización** y pulsa **Sincronizar pendientes**; ante un
+conflicto revisa el estado actual y descarta únicamente la primera acción
+bloqueada antes de continuar.
 
 ## Android y recursos limitados
 

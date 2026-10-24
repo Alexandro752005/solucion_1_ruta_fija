@@ -1,0 +1,23 @@
+{
+  "runId": "a999ef52-d87f-498d-9251-1581cbb72562",
+  "archivedAt": "2026-10-22T20:38:00.841463+00:00",
+  "humanReport": "Cuando modifiqué a disponible, salió un aviso en la parte inferior indicando que se había cambiado la disponibilidad correctamente.",
+  "humanAvailabilitySuccessNoticeConfirmed": true,
+  "httpEvidence": [
+    {
+      "startedAt": "2026-10-22T20:27:33.296799300Z",
+      "channel": "PHONE_PROXY_REAL_BACKEND",
+      "method": "PUT",
+      "finishedAt": "2026-10-22T20:27:33.366405400Z",
+      "path": "/api/v1/mobile/availability",
+      "status": 200
+    }
+  ],
+  "sourceEvidence": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/resultado.json",
+  "sourceEvidenceSha256": "8f5c28b7ae2b105a617c6f0883a5a5fe2bb6f62dbef342e2985976d67de377f1",
+  "repeatAvailabilityRequired": false,
+  "gpsOrServiceAccredited": false,
+  "manualPhoneResult": "PENDING",
+  "TEST_CLEANUP_RELEASED": false,
+  "pilotEnabled": false
+}

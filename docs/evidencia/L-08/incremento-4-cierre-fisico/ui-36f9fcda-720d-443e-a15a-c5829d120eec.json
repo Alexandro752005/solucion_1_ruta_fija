@@ -1,0 +1,90 @@
+{
+    "observedAt":  "2026-10-23T04:44:14.6604933+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "action":  "down",
+    "label":  "",
+    "automatedUiInstrumentation":  true,
+    "humanAccessibilityConfirmation":  false,
+    "nodes":  [
+                  {
+                      "text":  "",
+                      "description":  "Volver",
+                      "bounds":  "[12,434][156,578]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Detalle de asignación",
+                      "bounds":  "[216,472][724,541]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Interrupción y atención segura\nUna interrupción no declara cumplimiento. Se conserva lo realizado, se detiene GPS y ambos recursos requieren revisión ADMIN por separado.\nSi aún no puedes confirmar la detención, el riesgo queda registrado y la atención permanece pendiente. Retraso y falta de corroboración GPS no son causas automáticas.",
+                      "bounds":  "[60,590][1020,2020]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Consultar atención del servicio",
+                      "bounds":  "[120,844][670,988]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Causa de interrupción",
+                      "bounds":  "[120,988][960,1147]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "300 characters remaining",
+                      "bounds":  "[876,1417][960,1456]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Ya pude detenerme de forma segura",
+                      "bounds":  "[120,1456][960,1624]",
+                      "class":  "android.widget.Switch",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Registrar interrupción propia",
+                      "bounds":  "[120,1816][703,1960]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "false",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Tiempos de mi participación\nLas correcciones conservan las horas originales y no cambian los puntos GPS. Solo ADMIN puede registrar la corrección.\nTramo 1\nOriginal: 22/10/2026 21:34 → Sin cierre\nVigente para revisión: 22/10/2026 21:34 → Sin cierre",
+                      "bounds":  "[60,2020][1020,2261]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Consultar tiempos y solicitudes",
+                      "bounds":  "[0,0][0,0]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  }
+              ]
+}

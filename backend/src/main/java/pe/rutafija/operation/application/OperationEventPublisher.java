@@ -21,8 +21,8 @@ public class OperationEventPublisher {
     }
 
     /**
-     * Publica un cambio visible para administradores y, si corresponde, solo para coordinadores
-     * del grupo indicado. Un grupo nulo representa un comunicado visible para toda la organización.
+     * Publica metadatos para ADMIN de la organización autorizada.
+     * No debe incluir coordenadas, secretos ni datos personales.
      */
     public void publish(UUID organizationId, UUID visibleGroupId, String event, Map<String, Object> data) {
         applicationEventPublisher.publishEvent(new OperationChangedEvent(

@@ -1,0 +1,48 @@
+﻿{
+    "recordedAt":  "2026-10-23T06:47:23.0293837+00:00",
+    "result":  "PASS_REAL_SUBPROCESS_EXIT_ZERO_AND_INVALID_INVOCATION_NONZERO",
+    "incident":  "Public cryptographic verification and one-byte rejection passed, but expected Java exit3 leaked through PowerShell process status",
+    "previousIndependentProof":  "independent-verification-ad4100af-3917-424a-bbd7-4da464e59865.json",
+    "fix":  "Explicit exit0 only after every successful verification assertion and proof write",
+    "positiveCommand":  "powershell.exe -NoProfile -File scripts/Sign-RutaFijaL08Closure.ps1 -Execute -VerifyOnly -SignatureDirectory CLOSURE_ABSOLUTE_PATH",
+    "positiveActualProcessExit":  0,
+    "positiveLog":  "verify-only-exit-zero.log",
+    "negativeCommand":  "powershell.exe -NoProfile -File scripts/Sign-RutaFijaL08Closure.ps1 -Execute -VerifyOnly",
+    "negativeActualProcessExit":  1,
+    "negativeExpectedGuard":  "VERIFY_ONLY_REQUIRES_EXISTING_SIGNATURE_DIRECTORY",
+    "negativeLog":  "verify-only-missing-dir-negative.log",
+    "preservedFiles":  [
+                           {
+                               "path":  "docs/actas/L-08-cierre-funcional-global.md",
+                               "sha256":  "b47807659aa898192e7c1eedd8b658cdf3f3dd0830afc0108bb0eaefa069c0ea",
+                               "unchanged":  true
+                           },
+                           {
+                               "path":  "scripts/support/L08ClosureSigner.java",
+                               "sha256":  "1bfb7a90ff43c3b9a260a71a840e9b416ddcee5bee80898582d7585c5a8e47eb",
+                               "unchanged":  true
+                           },
+                           {
+                               "path":  "docs/evidencia/L-08/incremento-5-candidato-final/release/closure-signature-81ec2af7-f709-483a-905a-26379620cc56/acta.sig",
+                               "sha256":  "0ac39febc649ec3abc515941e0173151b73fa7298d810e042dd988caf74b1b14",
+                               "unchanged":  true
+                           },
+                           {
+                               "path":  "docs/evidencia/L-08/incremento-5-candidato-final/release/closure-signature-81ec2af7-f709-483a-905a-26379620cc56/candidate-public-cert.der",
+                               "sha256":  "181da8d8cf0c18d56a424d0ed22fb9424a2bdf904c8e0dff7395a512c658bb45",
+                               "unchanged":  true
+                           },
+                           {
+                               "path":  "docs/evidencia/L-08/incremento-5-candidato-final/release/source-snapshots.json",
+                               "sha256":  "e56472765a1c59bdc6d7d5c4e23d324112c3938575692900f9948e5c74a46da7",
+                               "unchanged":  true
+                           },
+                           {
+                               "path":  "docs/evidencia/L-08/incremento-5-candidato-final/release/sources/Sign-RutaFijaL08Closure.ps1",
+                               "sha256":  "fd7d678f486828823c3e85b1f9756e365c54ca52673d9a399ef94c03e23f6f93",
+                               "unchanged":  true
+                           }
+                       ],
+    "reviewerRole":  "AUTHOR_SELF_CHECK_NOT_INDEPENDENT_QA",
+    "toolingIncident":  "Initial test orchestrator rejected at parse time due to stray space before .ToString; no commands executed in that rejected cell; corrected before both tests"
+}

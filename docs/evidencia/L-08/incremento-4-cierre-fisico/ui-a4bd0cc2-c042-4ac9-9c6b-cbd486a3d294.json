@@ -1,0 +1,66 @@
+{
+    "observedAt":  "2026-10-23T04:44:36.0092050+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "action":  "down",
+    "label":  "",
+    "automatedUiInstrumentation":  true,
+    "humanAccessibilityConfirmation":  false,
+    "nodes":  [
+                  {
+                      "text":  "",
+                      "description":  "Volver",
+                      "bounds":  "[12,566][156,710]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Detalle de asignación",
+                      "bounds":  "[216,583][1032,694]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Interrupción y atención segura\nUna interrupción no declara cumplimiento. Se conserva lo realizado, se detiene GPS y ambos recursos requieren revisión ADMIN por separado.\nSi aún no puedes confirmar la detención, el riesgo queda registrado y la atención permanece pendiente. Retraso y falta de corroboración GPS no son causas automáticas.",
+                      "bounds":  "[60,722][1020,2261]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Consultar atención del servicio",
+                      "bounds":  "[120,1378][960,1582]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Causa de interrupción",
+                      "bounds":  "[120,1582][960,1810]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "300 characters remaining",
+                      "bounds":  "[0,0][0,0]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Ya pude detenerme de forma segura",
+                      "bounds":  "[0,0][0,0]",
+                      "class":  "android.widget.Switch",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  }
+              ]
+}

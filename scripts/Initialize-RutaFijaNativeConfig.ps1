@@ -63,7 +63,7 @@ try {
         "SPRING_DATASOURCE_PASSWORD=$plainPassword",
         "JWT_SECRET_BASE64=$jwtSecret",
         'APP_SEED_ENABLED=false',
-        'APP_CORS_ALLOWED_ORIGINS=http://localhost:4200',
+        'APP_CORS_ALLOWED_ORIGINS=http://localhost:4300,http://127.0.0.1:4300',
         'REFRESH_COOKIE_SECURE=false'
     )
     [IO.File]::WriteAllLines($ConfigPath, $content, [Text.UTF8Encoding]::new($false))

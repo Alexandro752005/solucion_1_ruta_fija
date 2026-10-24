@@ -1,0 +1,170 @@
+﻿[
+    {
+        "binaryClass":  "pe.rutafija.shared.exception.ApplicationException",
+        "before":  "-4608782410356792063",
+        "after":  "-4608782410356792063",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.shared.exception.RateLimitExceededException",
+        "before":  "6890055844677160843",
+        "after":  "6890055844677160843",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.availability.monitor.HttpAvailabilityProbe$BodyLimitExceeded",
+        "before":  "3922946286742532050",
+        "after":  "3922946286742532050",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.fleet.domain.DriverVehicleLinkId",
+        "before":  "7586697093904843752",
+        "after":  "7586697093904843752",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.fleet.domain.DriverGroupMembership$Key",
+        "before":  "4920960030694723187",
+        "after":  "4920960030694723187",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.fleet.domain.GroupCoordinatorId",
+        "before":  "7135091185848990364",
+        "after":  "7135091185848990364",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.shared.exception.InvalidCredentialsException",
+        "before":  "-6073554907892776511",
+        "after":  "-6073554907892776511",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.shared.exception.InvalidRefreshTokenException",
+        "before":  "-5081090206533403630",
+        "after":  "-5081090206533403630",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.identity.application.EmailOtpCodeRejectedException",
+        "before":  "5163125322101744604",
+        "after":  "5163125322101744604",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.identity.application.RecoveryProofRejectedException",
+        "before":  "-6822411992764496672",
+        "after":  "-6822411992764496672",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.shared.exception.ExternalServiceUnavailableException",
+        "before":  "-3410457561322729441",
+        "after":  "-3410457561322729441",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.identity.recoverycli.SuperAdminRecoveryCli$HttpFailure",
+        "before":  "-3629730560888174975",
+        "after":  "-3629730560888174975",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.onboarding.application.OnboardingInvitationRejectedException",
+        "before":  "-9063495426057973732",
+        "after":  "-9063495426057973732",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.onboarding.application.OnboardingOtpRejectedException",
+        "before":  "-7138057043148676152",
+        "after":  "-7138057043148676152",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.shared.exception.RefreshTokenReuseException",
+        "before":  "-8429902800360181922",
+        "after":  "-8429902800360181922",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.support.L02DatabasePreflight$Refused",
+        "before":  "-3949782042426549004",
+        "after":  "-3949782042426549004",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.support.L03DatabasePreflight$Refused",
+        "before":  "2514079800972365134",
+        "after":  "2514079800972365134",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.support.L04DatabasePreflight$Refused",
+        "before":  "403311422032263157",
+        "after":  "403311422032263157",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.support.L05DatabasePreflight$Refused",
+        "before":  "8208895206480771177",
+        "after":  "8208895206480771177",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.support.L06DatabasePreflight$Refused",
+        "before":  "4411792199725561630",
+        "after":  "4411792199725561630",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.support.L07DatabasePreflight$Refused",
+        "before":  "-4371044921209346866",
+        "after":  "-4371044921209346866",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.support.L08DatabasePreflight$Refused",
+        "before":  "-3280672175156310262",
+        "after":  "-3280672175156310262",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.support.L08V50Preflight$Refused",
+        "before":  "8573144875016366970",
+        "after":  "8573144875016366970",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.support.ManualL01RecoveryFixtureKeyReplacementTest$RecordingTransactions",
+        "before":  "-7780495166934619831",
+        "after":  "-7780495166934619831",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.support.ManualL01RecoveryFixtureRepairTest$RecordingTransactions",
+        "before":  "-4416494166643477692",
+        "after":  "-4416494166643477692",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.support.ManualOtpCaseRecovery$Refused",
+        "before":  "5536447013754832083",
+        "after":  "5536447013754832083",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.support.ManualOtpDeliveryValidation$ValidationFailure",
+        "before":  "5298662823711848232",
+        "after":  "5298662823711848232",
+        "matched":  true
+    },
+    {
+        "binaryClass":  "pe.rutafija.support.ManualOtpEvidenceVerification$VerificationFailure",
+        "before":  "-5929456894808456629",
+        "after":  "-5929456894808456629",
+        "matched":  true
+    }
+]

@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import pe.rutafija.fleet.domain.Vehicle;
@@ -38,5 +39,13 @@ public interface VehicleRepository extends JpaRepository<Vehicle, UUID> {
     @EntityGraph(attributePaths = "organization")
     Optional<Vehicle> findByIdAndOrganization_Id(UUID id, UUID organizationId);
 
+    @Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
+    @Query("select vehicle from Vehicle vehicle where vehicle.id=:vehicleId and vehicle.organization.id=:organizationId")
+    Optional<Vehicle> lockByIdAndOrganizationId(@Param("vehicleId") UUID vehicleId,
+                                               @Param("organizationId") UUID organizationId);
+
     boolean existsByOrganization_IdAndPlateIgnoreCase(UUID organizationId, String plate);
+
+    @Query(value="select exists(select 1 from vehicle where regexp_replace(upper(plate),'[^A-Z0-9]','','g')=regexp_replace(upper(:plate),'[^A-Z0-9]','','g'))",nativeQuery=true)
+    boolean existsByCanonicalPlate(@Param("plate") String plate);
 }

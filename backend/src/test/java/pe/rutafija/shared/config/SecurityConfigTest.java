@@ -32,6 +32,7 @@ class SecurityConfigTest {
                 "Administrador actual",
                 UserRole.ADMIN
         );
+        user.verifyEmail(Instant.now());
         when(userRepository.findOneById(user.getId())).thenReturn(Optional.of(user));
 
         AbstractAuthenticationToken authentication = converter.convert(jwt(user, "ADMIN"));
@@ -52,9 +53,28 @@ class SecurityConfigTest {
                 "Admin actual",
                 UserRole.ADMIN
         );
+        user.verifyEmail(Instant.now());
         when(userRepository.findOneById(user.getId())).thenReturn(Optional.of(user));
 
         AbstractAuthenticationToken authentication = converter.convert(jwt(user, "ADMINISTRADOR"));
+
+        assertThat(authentication).isNotNull();
+        assertThat(authentication.getAuthorities()).isEmpty();
+    }
+
+    @Test
+    void doesNotGrantAnAuthorityBeforeEmailVerification() {
+        Organization organization = Organization.active("Operación", "Operación", "America/Lima");
+        AppUser user = AppUser.organizationUser(
+                organization,
+                "unverified@rutafija.test",
+                "hash",
+                "Usuario sin verificar",
+                UserRole.ADMIN
+        );
+        when(userRepository.findOneById(user.getId())).thenReturn(Optional.of(user));
+
+        AbstractAuthenticationToken authentication = converter.convert(jwt(user, "ADMIN"));
 
         assertThat(authentication).isNotNull();
         assertThat(authentication.getAuthorities()).isEmpty();

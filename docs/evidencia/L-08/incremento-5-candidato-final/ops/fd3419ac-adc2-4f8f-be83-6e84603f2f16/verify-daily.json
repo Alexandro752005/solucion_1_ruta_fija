@@ -1,0 +1,20 @@
+{
+    "result":  "PASS_GCM_VERIFIED",
+    "action":  "Verify",
+    "sourcePort":  "55441",
+    "sourceDatabase":  "l08_ops_source",
+    "startedAt":  "2026-10-23T06:31:44.9353909+00:00",
+    "finishedAt":  "2026-10-23T06:31:46.1043806+00:00",
+    "elapsedSeconds":  1.1689897,
+    "sourceSnapshotUpperBoundAt":  "2026-10-23T06:31:44.9353909+00:00",
+    "archiveFile":  "ruta-fija-20261023T063032783Z-c16e85b7cd264d6ca686ad08c6303bce.rfdb",
+    "sha256":  "749358943862f3223f3a716d1597797f0c270182f16c173be7ad4cba777fff77",
+    "bytes":  3759,
+    "algorithm":  "AES-256/GCM",
+    "plaintextDumpWritten":  false,
+    "destination":  null,
+    "readOnlySource":  true,
+    "hourlyTaskInstalled":  false,
+    "dailyTaskInstalled":  false,
+    "independentCustodyAccredited":  false
+}

@@ -34,8 +34,11 @@ import pe.rutafija.operation.application.MobileOperationMaintenanceService;
 import pe.rutafija.organization.domain.Organization;
 import pe.rutafija.organization.infrastructure.OrganizationRepository;
 import pe.rutafija.support.NativePostgresIntegrationTest;
+import pe.rutafija.support.ApprovedConductorFixture;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
@@ -43,6 +46,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
@@ -97,6 +101,9 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
     @Autowired
     org.springframework.jdbc.core.JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    org.springframework.context.ApplicationContext applicationContext;
+
     private Organization organization;
     private AppUser admin;
     private AppUser conductor;
@@ -120,6 +127,18 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
         driver = driverRepository.save(driver);
         vehicle = vehicleRepository.save(Vehicle.register(organization, "MOV" + suffix.substring(0, 5), "Toyota", "Hiace", null, null));
         driverVehicleLinkRepository.save(DriverVehicleLink.active(driver, vehicle, true, Instant.now()));
+        // Explicit historical synthetic approval; active fixture represents a prior eligible driver.
+        ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, admin, conductor, driver);
+    }
+
+    @Test
+    void legacyOfflineEndpointIsAbsentFromTheRunningDefaultApplication() throws Exception {
+        assertThat(applicationContext.getBeansOfType(MobileOfflineSyncController.class)).isEmpty();
+        mockMvc.perform(post("/api/v1/mobile/sync/events")
+                        .with(mobileToken(conductor, driver))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"events\":[]}"))
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -236,6 +255,30 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
                 "select status from vehicle where id = ?", String.class, vehicle.getId()
         )).isEqualTo("DISPONIBLE");
 
+        LocalDate reportFrom = LocalDate.now(ZoneId.of("America/Lima")).minusDays(1);
+        LocalDate reportTo = reportFrom.plusDays(2);
+        mockMvc.perform(get("/api/v1/assignments/{id}", assignmentId).with(webToken(admin)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("COMPLETED"));
+        mockMvc.perform(get("/api/v1/reports/assignments")
+                        .with(webToken(admin))
+                        .param("from", reportFrom.toString())
+                        .param("to", reportTo.toString()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.items.length()").value(1))
+                .andExpect(jsonPath("$.items[0].id").value(assignmentId))
+                .andExpect(jsonPath("$.items[0].status").value("COMPLETED"));
+        mockMvc.perform(get("/api/v1/reports/availability").with(webToken(admin)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.assignmentsInService").value(0));
+        mockMvc.perform(get("/api/v1/audit-events")
+                        .with(webToken(admin))
+                        .param("action", "ASSIGNMENT_MOBILE_COMPLETED")
+                        .param("entityType", "ASSIGNMENT"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.items.length()").value(1))
+                .andExpect(jsonPath("$.items[0].entityId").value(assignmentId));
+
         String pendingRejectionPayload = """
                 {
                   "driverId":"%s",
@@ -284,6 +327,12 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
 
     @Test
     void mobileScopeUsesServerIdentityAndCurrentLocationNeverBecomesHistory() throws Exception {
+        mockMvc.perform(post("/api/v1/mobile/sync/events")
+                        .with(mobileToken(conductor, driver))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"events\":[]}"))
+                .andExpect(status().isNotFound());
+
         mockMvc.perform(get("/api/v1/mobile/me").with(webToken(conductor)))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.code").value("MOBILE_SESSION_REQUIRED"));
@@ -373,7 +422,7 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
                         .with(mobileToken(conductor, driver))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {"category":"RETRASO","description":"Retraso informado desde la app","occurredAt":"%s"}
+                                {"category":"RETRASO","severity":"LOW","operationKey":"a1815722-561c-46fa-bba9-cbd075ea5581","description":"Retraso informado desde la app","occurredAt":"%s"}
                                 """.formatted(Instant.now().minusSeconds(1))))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.source").value("MOBILE_APP"))
@@ -382,6 +431,24 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
         mockMvc.perform(get("/api/v1/mobile/incidents/{id}", incidentId).with(mobileToken(conductor, driver)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(incidentId));
+
+        LocalDate reportFrom = LocalDate.now(ZoneId.of("America/Lima")).minusDays(1);
+        LocalDate reportTo = reportFrom.plusDays(2);
+        mockMvc.perform(get("/api/v1/reports/incidents")
+                        .with(webToken(admin))
+                        .param("from", reportFrom.toString())
+                        .param("to", reportTo.toString()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.items.length()").value(1))
+                .andExpect(jsonPath("$.items[0].id").value(incidentId))
+                .andExpect(jsonPath("$.items[0].source").value("MOBILE_APP"));
+        mockMvc.perform(get("/api/v1/audit-events")
+                        .with(webToken(admin))
+                        .param("action", "INCIDENT_REPORTED_FROM_MOBILE")
+                        .param("entityType", "INCIDENT"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.items.length()").value(1))
+                .andExpect(jsonPath("$.items[0].entityId").value(incidentId));
 
         Organization otherOrganization = organizationRepository.save(Organization.active(
                 "Otra org", "Otra", "America/Lima"
@@ -394,6 +461,7 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
         Vehicle otherVehicle = vehicleRepository.save(Vehicle.register(otherOrganization, "OTH-001", null, null, null, null));
         driverVehicleLinkRepository.save(DriverVehicleLink.active(otherDriver, otherVehicle, true, Instant.now()));
         AppUser otherAdmin = userRepository.save(user(otherOrganization, "admin.other." + UUID.randomUUID(), UserRole.ADMIN));
+        ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, otherAdmin, otherConductor, otherDriver);
         pe.rutafija.operation.domain.Assignment otherAssignment = pe.rutafija.operation.domain.Assignment.schedule(
                 otherOrganization, otherDriver, otherVehicle, otherAdmin,
                 "Origen", "Destino", Instant.now().plus(2, ChronoUnit.HOURS), Instant.now().plus(3, ChronoUnit.HOURS), null, null
@@ -405,6 +473,97 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
                 "Origen", "Destino", java.sql.Timestamp.from(otherAssignment.getScheduledAt()), java.sql.Timestamp.from(otherAssignment.getScheduledEndAt())
         );
         mockMvc.perform(get("/api/v1/mobile/assignments/{id}", foreignAssignmentId).with(mobileToken(conductor, driver)))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.code").value("RESOURCE_NOT_FOUND"));
+    }
+
+    @Test
+    void mobileReporterClosesOwnIncidentOnceAndAdminCannotReopenItThroughFollowUp() throws Exception {
+        MvcResult created = mockMvc.perform(post("/api/v1/mobile/incidents")
+                        .with(mobileToken(conductor, driver))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"category":"AVERIA","severity":"LOW","operationKey":"fd268f56-32ac-4442-87ae-d4fc2089a1f9","description":"Cierre solicitado por el conductor","occurredAt":"%s"}
+                                """.formatted(Instant.now().minusSeconds(1))))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.source").value("MOBILE_APP"))
+                .andExpect(jsonPath("$.status").value("OPEN"))
+                .andExpect(jsonPath("$.reportedById").value(conductor.getId().toString()))
+                .andReturn();
+        String incidentId = json(created).path("id").asText();
+        long createdVersion = json(created).path("version").asLong();
+
+        MvcResult closed = mockMvc.perform(post("/api/v1/mobile/incidents/{id}/close", incidentId)
+                        .with(mobileToken(conductor, driver))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"version\":%d}".formatted(createdVersion)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(incidentId))
+                .andExpect(jsonPath("$.status").value("CLOSED_BY_DRIVER"))
+                .andExpect(jsonPath("$.driverClosedById").value(conductor.getId().toString()))
+                .andExpect(jsonPath("$.driverClosedByName").value("CUENTA-" + conductor.getId()))
+                .andExpect(jsonPath("$.driverClosedAt").isNotEmpty())
+                .andExpect(jsonPath("$.resolvedAt").doesNotExist())
+                .andReturn();
+        long closedVersion = json(closed).path("version").asLong();
+        assertThat(count("select count(*) from incident where id = '" + incidentId + "'"))
+                .isEqualTo(1);
+        assertThat(count("select count(*) from audit_event where action = 'INCIDENT_CLOSED_BY_MOBILE_REPORTER'"))
+                .isEqualTo(1);
+        mockMvc.perform(get("/api/v1/reports/availability").with(webToken(admin)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.openIncidents").value(0));
+
+        mockMvc.perform(post("/api/v1/mobile/incidents/{id}/close", incidentId)
+                        .with(mobileToken(conductor, driver))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"version\":%d}".formatted(createdVersion)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("CLOSED_BY_DRIVER"))
+                .andExpect(jsonPath("$.version").value(closedVersion));
+        assertThat(count("select count(*) from incident where id = '" + incidentId + "'"))
+                .isEqualTo(1);
+        assertThat(count("select count(*) from audit_event where action = 'INCIDENT_CLOSED_BY_MOBILE_REPORTER'"))
+                .isEqualTo(1);
+
+        mockMvc.perform(patch("/api/v1/incidents/{id}/follow-up", incidentId)
+                        .with(webToken(admin))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"version":%d,"operationKey":"5254cd5a-4fe3-4318-b56d-0eaad5ae6519","note":"ADMIN inicia la atención","resolve":false}
+                                """.formatted(closedVersion)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("INCIDENT_INVALID_STATE"));
+        mockMvc.perform(get("/api/v1/incidents/{id}",incidentId).with(webToken(admin)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("CLOSED_BY_DRIVER"))
+                .andExpect(jsonPath("$.driverClosedById").value(conductor.getId().toString()))
+                .andExpect(jsonPath("$.driverClosedAt").isNotEmpty())
+                .andExpect(jsonPath("$.version").value(closedVersion));
+        mockMvc.perform(get("/api/v1/reports/availability").with(webToken(admin)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.openIncidents").value(0));
+
+        mockMvc.perform(post("/api/v1/mobile/incidents/{id}/close", incidentId)
+                        .with(mobileToken(conductor, driver))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"version\":%d}".formatted(closedVersion)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("CLOSED_BY_DRIVER"));
+
+        MvcResult crmIncident = mockMvc.perform(post("/api/v1/incidents")
+                        .with(webToken(admin))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"driverId":"%s","category":"OTRO","severity":"LOW","operationKey":"a3c07ca3-ab98-4cef-a4b7-91c9969d0f22","description":"Registro originado desde el CRM"}
+                                """.formatted(driver.getId())))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.source").value("CRM_WEB"))
+                .andReturn();
+        mockMvc.perform(post("/api/v1/mobile/incidents/{id}/close", json(crmIncident).path("id").asText())
+                        .with(mobileToken(conductor, driver))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"version\":0}"))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code").value("RESOURCE_NOT_FOUND"));
     }
@@ -442,13 +601,15 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
     }
 
     private AppUser user(Organization targetOrganization, String localPart, UserRole role) {
-        return AppUser.organizationUser(
+        AppUser user = AppUser.organizationUser(
                 targetOrganization,
                 localPart + "@rutafija.test",
                 passwordEncoder.encode("Integration-Password-2026"),
                 role.name() + " de prueba",
                 role
         );
+        user.verifyEmail(Instant.now());
+        return user;
     }
 
     private RequestPostProcessor webToken(AppUser user) {
@@ -458,7 +619,8 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
                         .subject(user.getId().toString())
                         .claim("organizationId", user.getOrganizationId().toString())
                         .claim("email", user.getEmail())
-                        .claim("role", user.getRole().name()));
+                        .claim("role", user.getRole().name())
+                        .claim("sessionVersion", user.getSessionVersion()));
     }
 
     private RequestPostProcessor mobileToken(AppUser user, Driver targetDriver) {
@@ -469,6 +631,7 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
                         .claim("organizationId", user.getOrganizationId().toString())
                         .claim("email", user.getEmail())
                         .claim("role", UserRole.CONDUCTOR.name())
+                        .claim("sessionVersion", user.getSessionVersion())
                         .claim("sessionChannel", "MOBILE")
                         .claim("driverId", targetDriver.getId().toString()));
     }

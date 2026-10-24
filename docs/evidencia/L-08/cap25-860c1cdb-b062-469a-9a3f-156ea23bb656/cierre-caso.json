@@ -1,0 +1,64 @@
+{
+  "caseId": "860c1cdb-b062-469a-9a3f-156ea23bb656",
+  "closedAt": "2026-10-23T01:05:02.290115+00:00",
+  "result": "PASS_CAP25_LOCAL_SYNTHETIC_MEASUREMENT_AND_SELECTIVE_RETIREMENT",
+  "maximumAndCreatedAccounts": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 4,
+    "CONDUCTOR": 20
+  },
+  "sharedTestHistoricalLedgerUnchangedByThisCase": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 7
+  },
+  "isolatedDatasetHistoricalLedger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 4,
+    "CONDUCTOR": 20
+  },
+  "operatingOrganizations": 4,
+  "measurement": {
+    "concurrentActors": 25,
+    "maxObservedHttpInflight": 25,
+    "createSamples": 100,
+    "acceptSamples": 100,
+    "p95CreateDurableMs": 343.0684,
+    "p95AcceptDurableMs": 461.8702,
+    "errors": 0,
+    "samePcLoopback": true,
+    "serverOnlyLatencyMeasured": false,
+    "networkOnlyLatencyMeasured": false,
+    "independentConnectionCommitVisibilityVerified": true
+  },
+  "retirementRaceScope": "RECOVERY_CASE_MINIMUM_SYNTHETIC_CONSUMED_CHALLENGE_ONLY",
+  "inventoryNowait55P03Verified": true,
+  "secondTransactionWaitAndReplayVerified": true,
+  "oneExecutionAuditAndTombstone": true,
+  "allChildWritePurposeRacesAccredited": false,
+  "retiredAccounts": 25,
+  "retiredDriversVehiclesGroupsEach": 20,
+  "termsAcceptancesPreserved": 4,
+  "servicesAndOffersPreservedEach": 100,
+  "allMeasuredServicesCancelledThroughNormalApi": true,
+  "allRefreshTokensRevoked": true,
+  "TEST_CLEANUP_RELEASED": true,
+  "markerAbsent": true,
+  "caseLockFreeVerifiedByIndependentPostflight": true,
+  "backend4314Closed": true,
+  "ownedCluster55439Stopped": true,
+  "clusterDataAndPrivateCasePreserved": true,
+  "evidenceSha256": {
+    "preparacion.json": "a482e1f13fde240fd19e4d5edfdfa82af1069a788b72fc815764beee00e559d3",
+    "medicion.json": "6df1c7bd679c2684b827cca7d10710de4f396ad748272313f6ee11c5e7672ec3",
+    "retiro-concurrencia.json": "4d31df0d94923ba6f79641c18e41e9f5b5ffe354c54d5c65bea6d15fa1c34694",
+    "retiro-selectivo.json": "f134c9d285bd1609c55a8d8b3825b6a9834da85dae3ec348df508e2fb5abb526",
+    "postflight-solo-lectura.json": "9bb71805781a3883c0bb0a4e3d1a57e49081fa5b2e4f5f40fd53a6b54239819b"
+  },
+  "externalMailOrPhysicalGpsUsed": false,
+  "realParticipantsAccredited": false,
+  "independentCustodyOrMonitoringAccredited": false,
+  "L08Status": "EN_CURSO",
+  "pilotEnabled": false,
+  "databaseGlobalCleanupsExecuted": 0
+}

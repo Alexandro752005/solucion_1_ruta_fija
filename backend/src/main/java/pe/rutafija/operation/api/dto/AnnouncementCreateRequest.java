@@ -12,6 +12,7 @@ public record AnnouncementCreateRequest(
         @NotBlank @Size(max = 5000) String body,
         @NotNull AnnouncementAudienceType audienceType,
         UUID audienceId,
-        Boolean requireReadAck
+        Boolean requireReadAck,
+        @NotNull UUID operationKey
 ) {
 }

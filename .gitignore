@@ -20,6 +20,15 @@ frontend/dist/
 frontend/.angular/
 frontend/.npm-cache/
 frontend/coverage/
+
+# Generated cache at the repository root and known manual exports
+/.angular/
+/archivos de texto/codigo_backend.txt
+/archivos de texto/codigo_front.txt
+/archivos de texto/codigo_persistencia_postgresql.txt
+/archivos de texto/código_extra.txt
+/estructura.txt
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -32,12 +41,24 @@ test-results/
 
 # Runtime data
 .runtime/
+.tools/
 backups/
 logs/
 *.log
+*.tmp
+*.rfdb
 uploads/
 tmp/
 .docker-cli-config/
+
+# Generated/private folders at any depth; archived tracked evidence is preserved.
+**/.local/
+**/node_modules/
+**/target/
+**/.dart_tool/
+**/build/
+**/.gradle/
+**/.pub-cache/
 
 # IDE and operating system
 .idea/
@@ -55,3 +76,52 @@ desktop.ini
 *.p12
 *.pfx
 backend/.maven-user/
+
+# Release preparation: local credentials, recovery material and private stores
+*.env
+*.env.local
+*.env.production
+*.env.development
+*.env.test
+ruta-fija-native.env
+ruta-fija-bootstrap.env
+*.jks
+*.keystore
+key.properties
+*.dpapi
+*.pk8
+*.pkcs8
+*.p8
+*.private
+*.private.*
+id_ed25519
+id_ed25519.*
+id_rsa
+id_rsa.*
+
+# Local database exports and encrypted/raw operational snapshots
+*.dump
+*.backup
+*.pgdump
+*.pgpass
+pgpass.conf
+*.gcm
+*.enc
+
+# Distribution archives remain in the local SHA-256 delivery archive
+*.apk
+*.aab
+*.zip
+*.7z
+*.vsix
+
+# Historical working copies and generated QA/IDE caches
+/memory/backup/
+**/__pycache__/
+*.pyc
+*.exit
+
+# Mutable observer working files; named acceptance snapshots stay versioned
+/docs/evidencia/auditoria-ide-2026-10-23/ide/diagnostics.current.json
+/docs/evidencia/auditoria-ide-2026-10-23/ide/bridge-request.json
+/docs/evidencia/auditoria-ide-2026-10-23/ide/bridge-response.json

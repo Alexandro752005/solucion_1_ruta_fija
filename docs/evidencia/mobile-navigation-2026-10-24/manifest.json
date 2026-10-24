@@ -1,0 +1,87 @@
+{
+  "recordedAtUtc": "2026-10-24T06:16:23.065845+00:00",
+  "result": "PASS_REAL_POCO_BOTTOM_NAVIGATION_PRESERVED",
+  "unitAndWidgetTests": {
+    "passed": 241,
+    "failed": 0
+  },
+  "navigationRegressionTests": {
+    "passed": 8,
+    "failed": 0
+  },
+  "flutterAnalyze": "No issues found",
+  "physicalScreensVerified": 8,
+  "installedVersionCode": 5,
+  "files": [
+    {
+      "path": "docs/evidencia/mobile-navigation-2026-10-24/apk-build.txt",
+      "bytes": 10334,
+      "sha256": "7d3d76502e7c60822924adf954f64f8def48f2109d2d4f06a6cd6bf523be9b64"
+    },
+    {
+      "path": "docs/evidencia/mobile-navigation-2026-10-24/apk-install.txt",
+      "bytes": 78,
+      "sha256": "4dbdc95cc34f134cec3335a1cb220862b88ecce0d65412b9bd88908c08194dc9"
+    },
+    {
+      "path": "docs/evidencia/mobile-navigation-2026-10-24/final-validation.json",
+      "bytes": 3513,
+      "sha256": "b0f0fcab5c6661cefe7803f2bcde447b56bae4f031eb59699d55518e7632d214"
+    },
+    {
+      "path": "docs/evidencia/mobile-navigation-2026-10-24/flutter-analyze.txt",
+      "bytes": 200,
+      "sha256": "1559e7609d3dcb3f52bca94436f96858617c74cc03ffd15810097c7331b4b4c5"
+    },
+    {
+      "path": "docs/evidencia/mobile-navigation-2026-10-24/mobile-suite.txt",
+      "bytes": 100082,
+      "sha256": "2a9a9af444a5cb05f4274dc05b4068d5ed7e00fea9d68f9f4d1bca18e9fb42f9"
+    },
+    {
+      "path": "docs/evidencia/mobile-navigation-2026-10-24/navigation-after.txt",
+      "bytes": 1716,
+      "sha256": "44524036388ba59283018394f2d9180609299d0b622b7b12ef6bf2a2f7205bf1"
+    },
+    {
+      "path": "docs/evidencia/mobile-navigation-2026-10-24/navigation-before.txt",
+      "bytes": 25294,
+      "sha256": "045d6626e744c40f0325339c920709a201453168820a48a38a59fb880af9b05a"
+    },
+    {
+      "path": "docs/evidencia/mobile-navigation-2026-10-24/poco-after.json",
+      "bytes": 3551,
+      "sha256": "a3eac179c2f9c63f2ee77dbf9c8c4ce2efaf4b84f2f52378737b1997624e2988"
+    },
+    {
+      "path": "docs/evidencia/mobile-navigation-2026-10-24/poco-before.json",
+      "bytes": 1466,
+      "sha256": "9c7c1e5ba57c4cfdd5b2ea0a33f3d6fd5410cefa5823f2599f66b474f73891a4"
+    },
+    {
+      "path": "docs/operacion/correccion-navegacion-inferior-mobile-2026-10-24.md",
+      "bytes": 5179,
+      "sha256": "efad50114325e9a0f496e6fcd34a4cb224d83d7aea710d3a7e03331135f5828d"
+    },
+    {
+      "path": "mobile/lib/app/ruta_fija_router.dart",
+      "bytes": 7449,
+      "sha256": "e3afecb2765f77cc7275c65e7073ea1f6b5d149162bf11e400491f6078b5bfc7"
+    },
+    {
+      "path": "mobile/test/app/conductor_navigation_persistence_test.dart",
+      "bytes": 6452,
+      "sha256": "fd1620b171d0089fcffe2acace4773e35bf2d64861202a2d575e6dc84bf67868"
+    },
+    {
+      "path": "artifacts/mobile-navigation-2026-10-24/manifest.json",
+      "bytes": 1240,
+      "sha256": "165fecaa037b539c231821ae5be278f28efaebceaa21b24920b6e944ab239aee"
+    },
+    {
+      "path": "artifacts/mobile-navigation-2026-10-24/ruta-fija-conductor-debug-v5-navegacion.apk",
+      "bytes": 96553574,
+      "sha256": "a800ced26ab28413b218b8dffc927580001e51a380aeca2c9fa6175a6ae3031d"
+    }
+  ]
+}

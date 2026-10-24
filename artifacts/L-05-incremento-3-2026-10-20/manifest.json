@@ -1,0 +1,20 @@
+{
+  "lot": "L-05",
+  "increment": "L05.2_TIME_CORRECTIONS",
+  "status": "INCREMENTAL_NOT_LOT_CLOSURE",
+  "files": [
+    {
+      "path": "ruta-fija-backend-0.1.0-SNAPSHOT.jar",
+      "sha256": "a567255bf6422923bde00d7a9abf3044bd2e03492404b8bb0440a4423f70abf4",
+      "bytes": 91022204
+    },
+    {
+      "path": "app-debug.apk",
+      "sha256": "21beb38e293dd1dd150f4e86899c7ffc2a26dad39fa7948fcb5e3c62d0780b33",
+      "bytes": 185194084
+    }
+  ],
+  "crmBuild": "DEVELOPMENT_LOCAL_ONLY",
+  "installed": false,
+  "deployed": false
+}

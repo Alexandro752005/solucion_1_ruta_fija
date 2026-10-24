@@ -16,7 +16,7 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
-/** Durable scalar result for one mobile assignment command event. */
+/** Durable scalar result for one permitted mobile command event. */
 @Entity
 @Table(name = "mobile_command_receipt")
 public class MobileCommandReceipt {
@@ -127,6 +127,26 @@ public class MobileCommandReceipt {
         return new MobileCommandReceipt(
                 eventId, organization, driver, commandType, assignment, requestHash,
                 MobileCommandResultStatus.REJECTED, httpStatus, serverState, Objects.requireNonNull(errorCode),
+                occurredAt, processedAt
+        );
+    }
+
+    public static MobileCommandReceipt conflict(
+            UUID eventId,
+            Organization organization,
+            Driver driver,
+            MobileCommandType commandType,
+            Assignment assignment,
+            String requestHash,
+            short httpStatus,
+            String serverState,
+            String errorCode,
+            Instant occurredAt,
+            Instant processedAt
+    ) {
+        return new MobileCommandReceipt(
+                eventId, organization, driver, commandType, assignment, requestHash,
+                MobileCommandResultStatus.CONFLICT, httpStatus, serverState, Objects.requireNonNull(errorCode),
                 occurredAt, processedAt
         );
     }

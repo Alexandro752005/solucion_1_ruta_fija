@@ -1,0 +1,74 @@
+{
+  "reviewedAtUtc": "2026-10-23T06:38:52.696321+00:00",
+  "reviewer": "A-OPS independent of parent author",
+  "scope": "Read-only review, AST parse and in-memory counterexample; seal/prepare-sources/real verify NOT executed",
+  "script": "scripts\\seal_l08_candidate.py",
+  "scriptSha256": "7e822d5439a02de418db0c556be9622acd8d02894a4d00c8ab5fdf3eeb451896",
+  "result": "CHANGES_REQUIRED_BEFORE_SEAL",
+  "parseErrors": 0,
+  "blockingFindings": 4,
+  "emptyManifestAcceptedInMemory": true,
+  "findings": [
+    {
+      "id": "SEAL-QA-01",
+      "severity": "HIGH",
+      "blocking": true,
+      "finding": "verify accepts an empty/truncated manifest and returns GO with zero verified files; no comparison against prior archived digest or expected inventory",
+      "evidence": "Executed verify only against an in-memory empty manifest; no real manifest touched",
+      "counterexampleObserved": {
+        "verifiedAtUtc": "2026-10-23T06:38:52.695925+00:00",
+        "result": "PASS_FROZEN_LOCAL_CANDIDATE_ARCHIVE",
+        "filesVerified": 0,
+        "manifestSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "mismatches": [],
+        "localDecision": "GO PARA CANDIDATO LOCAL DE ENTREGA",
+        "operationalDecision": "NO_GO_PILOTO_REAL",
+        "pilotEnabled": false,
+        "signatureClassification": "TECHNICAL_AUTOMATED_NOT_HUMAN",
+        "privateKeysIncluded": false
+      },
+      "requestedCorrection": "Require strict SHA/path format, nonempty unique canonical entries and exact inventory; compare digest to prior closure proof where present; fail on omissions without repair/regeneration"
+    },
+    {
+      "id": "SEAL-QA-02",
+      "severity": "HIGH",
+      "blocking": true,
+      "finding": "Signature guard trusts JSON digests without hashing current acta.sig/public DER; independent proof checked only by filename existence",
+      "requestedCorrection": "Require exact verification result/classification; SHA256 of actual signature+DER; parse independent proof and bind result, document, signature and certificate hashes to same current acta and candidate signer"
+    },
+    {
+      "id": "SEAL-QA-03",
+      "severity": "MEDIUM",
+      "blocking": true,
+      "finding": "Only hygiene manifest is sealed; archived residual files it references are neither included nor recursively verified",
+      "referencedBackupFiles": 260,
+      "requestedCorrection": "Include hygiene backup files or verify nested manifest during seal and every verify; preserve original manifest bytes"
+    },
+    {
+      "id": "SEAL-QA-04",
+      "severity": "MEDIUM",
+      "blocking": true,
+      "finding": "Nine lots and 12local/6field criteria checked by counts; duplicated/wrong IDs satisfy those checks",
+      "requestedCorrection": "Require exact unique L00..08 IDs, local CI01..12, field CI04/05/06/07/10/11; validate top-level pilot false and NO_GO_PILOTO_REAL"
+    },
+    {
+      "id": "SEAL-QA-05",
+      "severity": "LOW",
+      "blocking": false,
+      "finding": "Private exclusion checks lexical .local path parts and .private suffix; no explicit private directories, keystore/DPAPI or reparse/symlink escape guard",
+      "requestedCorrection": "Fail closed on resolved outsideROOT, reparse/symlink ancestors and secret extensions; explicitly permit public certificate/signature files",
+      "actualKeyExposureObserved": false
+    }
+  ],
+  "positiveChecks": {
+    "fiveOpsSourcesIncluded": true,
+    "bothFrozenOpsDocsIncluded": true,
+    "sealRefusesExistingManifest": true,
+    "historicalFinal3OrTermsWrittenByReviewedScript": false
+  },
+  "reviewerToolingIncident": {
+    "firstPythonInvocation": "PowerShell python -c stripped an embedded doublequote; Python SyntaxError before any mutation",
+    "correction": "Pass script through stdin, no shell interpolation of Python quotes"
+  },
+  "onlyReviewOutputWritten": "docs/evidencia/L-08/incremento-5-candidato-final/qa-seal-script.json"
+}

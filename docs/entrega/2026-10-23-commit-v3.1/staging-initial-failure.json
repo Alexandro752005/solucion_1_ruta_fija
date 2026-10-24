@@ -1,0 +1,12 @@
+﻿{
+    "recordedAt":  "2026-10-23T20:58:21.4202739+00:00",
+    "action":  "git add .",
+    "exitCode":  128,
+    "cause":  "Windows Git filename too long in archived source path",
+    "stagedChangesAfterFailure":  0,
+    "previousLocalCoreLongpaths":  {
+
+                                   },
+    "recovery":  "Enable core.longpaths locally; preserve all working files and rerun staging",
+    "globalConfigChanged":  false
+}

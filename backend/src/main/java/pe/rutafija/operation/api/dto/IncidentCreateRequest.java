@@ -11,6 +11,10 @@ public record IncidentCreateRequest(
         @NotNull UUID driverId,
         UUID assignmentId,
         @NotNull IncidentCategory category,
-        @NotBlank @Size(max = 1000) String description
+        @NotBlank @Size(max = 1000) String description,
+        @NotNull pe.rutafija.operation.domain.IncidentSeverity severity,
+        @NotNull UUID operationKey,
+        UUID previousIncidentId,
+        @Size(max=20) String relationReason
 ) {
 }

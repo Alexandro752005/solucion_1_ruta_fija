@@ -1,0 +1,110 @@
+{
+  "observedAt": "2026-10-21T17:19:56.540281200Z",
+  "runId": "6b496135-b86b-4c5b-938f-a60ddcfe32db",
+  "database": "ruta_fija_test",
+  "role": "rf_test",
+  "readOnly": true,
+  "schemaVersion": "48",
+  "result": "PASS_EXACT_CONNECTED_RETIREMENT",
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 6
+  },
+  "remainingHistoricalCreations": {
+    "CONDUCTOR": 14,
+    "ADMIN": 1,
+    "SUPER_ADMIN": 0
+  },
+  "termsAcceptances": 2,
+  "accountsResourcesRetired": true,
+  "sessionsPeriodsRevokedNoLiveCommitments": true,
+  "reportVersionsAndOriginalExecutionPreserved": true,
+  "antecedentRowsPreserved": true,
+  "privateFixtureSecretsRemoved": true,
+  "TEST_CLEANUP_RELEASED": true,
+  "cleanupLockFree": true,
+  "globalCleanup": false,
+  "pilotEnabled": false,
+  "L08Started": false,
+  "recordedAuditEventsChecked": [
+    {
+      "action": "CONDUCTOR_PERSONAL_APPROVED",
+      "entityId": "4d0d41de-a1c1-4450-b4e2-232b392d3325",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "CONDUCTOR_ACCOUNT_PROVISIONED",
+      "entityId": "4d0d41de-a1c1-4450-b4e2-232b392d3325",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "DRIVER_QUALIFICATION_CHANGED",
+      "entityId": "0cfd4e80-bf27-45f7-996f-e38bba330c2c",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 5
+    },
+    {
+      "action": "ASSIGNMENT_MOBILE_CONFIRMATION_REQUESTED",
+      "entityId": "b9059ea7-5e74-4bc0-9cfd-3e246d7c8038",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "ASSIGNMENT_MOBILE_ACCEPTED",
+      "entityId": "b9059ea7-5e74-4bc0-9cfd-3e246d7c8038",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "ASSIGNMENT_MOBILE_STARTED",
+      "entityId": "b9059ea7-5e74-4bc0-9cfd-3e246d7c8038",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "ASSIGNMENT_MOBILE_COMPLETED",
+      "entityId": "b9059ea7-5e74-4bc0-9cfd-3e246d7c8038",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "SERVICE_TIMES_CORRECTED",
+      "entityId": "0ca7cff4-d53a-4c95-924f-bf4f6a805957",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "MOBILE_PREFERENCES_CHANGED",
+      "entityId": "45bfdde2-192d-4e97-9696-f14c92d910de",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "REPORT_EMITTED",
+      "entityId": "06d0d751-f5fb-4278-80e7-34bc9e57d10f",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "REPORT_EMITTED",
+      "entityId": "6824dc11-b2a2-4e5a-902e-db165fe2f320",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "REPORT_EMITTED",
+      "entityId": "2af79d30-86b6-4e94-8a9f-6954275d94e9",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    },
+    {
+      "action": "L07_SYNTHETIC_FIXTURE_DISABLED",
+      "entityId": "45bfdde2-192d-4e97-9696-f14c92d910de",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "persistedSuccessfulCount": 1
+    }
+  ]
+}

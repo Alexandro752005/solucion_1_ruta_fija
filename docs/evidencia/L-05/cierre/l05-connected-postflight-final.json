@@ -1,0 +1,39 @@
+{
+  "observedAt": "2026-10-20T13:38:07.390925500Z",
+  "runId": "844b3bf6-f2fa-4666-bd0e-b1f7a1188696",
+  "database": "ruta_fija_test",
+  "role": "rf_test",
+  "schemaVersion": "42",
+  "readOnly": true,
+  "result": "PASS_EXACT_CONNECTED_RETIREMENT",
+  "newAccounts": [
+    "47d19ed8-de66-4742-a638-4a4a219bbb1f",
+    "111131ee-1700-4095-b626-30377703ba9d"
+  ],
+  "accountsAndResourcesDisabled": true,
+  "noOpenSegmentsOrLiveReservations": true,
+  "allConductorRefreshRevoked": true,
+  "adminTestRefreshFamiliesRevoked": [
+    "be8486f8-6901-413e-bd03-3867ffca4a6e",
+    "c0a937f8-8187-4934-82c7-bc3d05a62c7c",
+    "caddc078-e5fd-45e6-9530-233c783c4912",
+    "039c8069-038f-49f9-a945-caa1becc9c7c",
+    "6466217a-76fa-48db-a4a2-58b6ab04e6a2"
+  ],
+  "antecedentRowsPreserved": true,
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 4
+  },
+  "remainingHistoricalCreations": {
+    "CONDUCTOR": 16,
+    "SUPER_ADMIN": 0,
+    "ADMIN": 1
+  },
+  "termsAcceptances": 2,
+  "TEST_CLEANUP_RELEASED": true,
+  "privateFixtureSecretsRemoved": true,
+  "historyAndCountersRetained": true,
+  "globalCleanup": false
+}

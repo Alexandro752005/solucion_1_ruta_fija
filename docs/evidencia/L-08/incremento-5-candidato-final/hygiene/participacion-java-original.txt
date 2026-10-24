@@ -1,0 +1,13 @@
+﻿
+
+JavaFiles               : 406
+JavaNonBlankLines       : 25110
+TypeScriptFiles         : 87
+TypeScriptNonBlankLines : 8529
+DartFiles               : 167
+DartNonBlankLines       : 28361
+TotalNonBlankLines      : 62000
+JavaPercentage          : 40.5
+
+
+

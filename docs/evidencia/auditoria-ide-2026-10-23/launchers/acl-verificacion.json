@@ -1,0 +1,18 @@
+[
+    {
+        "file":  "ruta-fija-native.env",
+        "authenticatedUsersAllowRules":  1,
+        "rights":  [
+                       "Modify, Synchronize"
+                   ],
+        "contentReadOrCopied":  false
+    },
+    {
+        "file":  "ruta-fija-bootstrap.env",
+        "authenticatedUsersAllowRules":  1,
+        "rights":  [
+                       "Modify, Synchronize"
+                   ],
+        "contentReadOrCopied":  false
+    }
+]

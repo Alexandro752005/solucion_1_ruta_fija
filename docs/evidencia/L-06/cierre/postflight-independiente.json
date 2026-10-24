@@ -1,0 +1,42 @@
+{
+  "observedAt": "2026-10-21T06:35:28.416730400Z",
+  "runId": "51e69ee6-e4a0-4c3f-9a35-f19de0072422",
+  "database": "ruta_fija_test",
+  "role": "rf_test",
+  "readOnly": true,
+  "schemaVersion": "44",
+  "result": "PASS_EXACT_CONNECTED_RETIREMENT",
+  "newAccount": "5c692f75-092e-4efb-9c0a-185722a8ebdb",
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 5
+  },
+  "remainingHistoricalCreations": {
+    "SUPER_ADMIN": 0,
+    "ADMIN": 1,
+    "CONDUCTOR": 15
+  },
+  "termsAcceptances": 2,
+  "accountsAndResourcesDisabled": true,
+  "periodsRevokedNoLiveCommitments": true,
+  "allConductorRefreshRevoked": true,
+  "adminTestRefreshFamiliesRevoked": [
+    "80f65a57-b53c-4f65-a331-4a9ee3819771",
+    "0bb31c7c-0494-4bac-bda0-42b229812285",
+    "1ed46061-6190-41ff-a77b-ad9e0a7c9128",
+    "26a42555-aec6-4447-934e-f41fefd44b86",
+    "5cc072eb-f3ff-46b7-8535-9afa4c074e79",
+    "68d0a5fc-80ce-4556-b955-0542f0878bce",
+    "7b045a69-4ba7-43ef-9f6a-9cba9eaafa91"
+  ],
+  "incidentsAndReadWithdrawalHistoryPreserved": true,
+  "durableNotConfiguredNotices": 4,
+  "antecedentRowsPreserved": true,
+  "privateFixtureSecretsRemoved": true,
+  "TEST_CLEANUP_RELEASED": true,
+  "cleanupLockFree": true,
+  "globalCleanup": false,
+  "pilotEnabled": false,
+  "L07Started": false
+}

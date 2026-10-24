@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="pe.rutafija.qualification.DeclaredAvailabilityIntegrationTest" time="19.613" tests="8" errors="0" skipped="0" failures="0" flakes="0">
+  <testcase name="declarationDoesNotClearItselfWhenDriverIsDeactivated" classname="pe.rutafija.qualification.DeclaredAvailabilityIntegrationTest" time="1.914">
+    </testcase>
+  <testcase name="declarationCannotBeImpersonatedByAdminAndRetainsTenantScope" classname="pe.rutafija.qualification.DeclaredAvailabilityIntegrationTest" time="0.876">
+    </testcase>
+  <testcase name="declarationSurvivesAnActualMobileLoginAndLogout" classname="pe.rutafija.qualification.DeclaredAvailabilityIntegrationTest" time="1.458">
+    </testcase>
+  <testcase name="declarationStartsUnknownAndOnlyExplicitConductorIntentionWritesIt" classname="pe.rutafija.qualification.DeclaredAvailabilityIntegrationTest" time="0.83">
+    </testcase>
+  <testcase name="declarationCannotInvalidateAnAcceptedFutureServiceOrCancelIt" classname="pe.rutafija.qualification.DeclaredAvailabilityIntegrationTest" time="0.94">
+    </testcase>
+  <testcase name="declarationPersistsAcrossReadsNewSessionsAndComputedOccupation" classname="pe.rutafija.qualification.DeclaredAvailabilityIntegrationTest" time="1.082">
+    </testcase>
+  <testcase name="declarationDoesNotGrantEligibilityOrManufactureAssignedStates" classname="pe.rutafija.qualification.DeclaredAvailabilityIntegrationTest" time="1.208">
+    </testcase>
+  <testcase name="declarationReloadsAnOccupiedDriverCachedBeforeTheSchedulingLock" classname="pe.rutafija.qualification.DeclaredAvailabilityIntegrationTest" time="1.149">
+    </testcase>
+</testsuite>

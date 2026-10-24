@@ -1,0 +1,14 @@
+{
+  "runId": "0dcdd52e-c57a-4a5d-b04a-5c9c3fd0657c",
+  "observedAt": "2026-10-22T16:51:48.494Z",
+  "state": "READY_NO_INTERACTION_YET",
+  "scope": "PUBLIC_PHYSICAL_PREAUTH_ONLY_NO_OPERATIONAL_ACCOUNT",
+  "errorEnvelope": "ApiErrorResponse-v1",
+  "deliberateUnavailableDouble": true,
+  "events": [],
+  "databaseConnected": false,
+  "mailAdapterPresent": false,
+  "credentialsOrRequestBodiesRecorded": false,
+  "manualOutcome": "PENDING_USER_REPORT",
+  "pilotEnabled": false
+}

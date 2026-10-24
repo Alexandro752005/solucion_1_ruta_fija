@@ -1,0 +1,83 @@
+{
+  "observedAt": "2026-10-19T20:52:07.608577+00:00",
+  "lot": "L-04",
+  "lotStatus": "EN_CURSO",
+  "increment": "L04.1",
+  "result": "PASS_INCREMENT_ONLY_NOT_LOT_CLOSURE",
+  "database": "ruta_fija_test",
+  "runtimeRole": "rf_test",
+  "schemaVersion": "33",
+  "backendDistinctPassed": 81,
+  "backendBreakdown": {
+    "offerHttpPg": 14,
+    "maintenanceAndQualificationHttpPgRegression": 54,
+    "routeAssignmentHttpPgRegression": 9,
+    "responseWindowUnit": 4
+  },
+  "suites": [
+    {
+      "path": "docs/evidencia/L-04/incremento-1/final/TEST-pe.rutafija.operation.domain.OfferResponseWindowTest.xml",
+      "class": "pe.rutafija.operation.domain.OfferResponseWindowTest",
+      "tests": 4
+    },
+    {
+      "path": "docs/evidencia/L-04/incremento-1/final/TEST-pe.rutafija.qualification.MaintenanceIntegrationTest.xml",
+      "class": "pe.rutafija.qualification.MaintenanceIntegrationTest",
+      "tests": 54
+    },
+    {
+      "path": "docs/evidencia/L-04/incremento-1/final/TEST-pe.rutafija.qualification.OfferAcceptanceIntegrationTest.xml",
+      "class": "pe.rutafija.qualification.OfferAcceptanceIntegrationTest",
+      "tests": 12
+    },
+    {
+      "path": "docs/evidencia/L-04/incremento-1/final/TEST-pe.rutafija.qualification.RouteAssignmentIntegrationTest.xml",
+      "class": "pe.rutafija.qualification.RouteAssignmentIntegrationTest",
+      "tests": 9
+    },
+    {
+      "path": "docs/evidencia/L-04/incremento-1/permisos-adicionales/TEST-pe.rutafija.qualification.OfferAcceptanceIntegrationTest.xml",
+      "class": "pe.rutafija.qualification.OfferAcceptanceIntegrationTest",
+      "tests": 2
+    }
+  ],
+  "crmComponentTestsPassed": 11,
+  "crmTypecheck": "PASS",
+  "crmDevelopmentBuild": "PASS",
+  "backendPackage": "PASS",
+  "newFlutterTestsExecuted": false,
+  "newConnectedBrowserExecuted": false,
+  "newConcurrencyRacesExecuted": false,
+  "physicalDeviceTested": false,
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 1
+  },
+  "acceptances": 2,
+  "committedAccountCreations": 0,
+  "smtpExternalAttempts": 0,
+  "globalCleanupExecuted": false,
+  "pilotEnabled": false,
+  "L05Started": false,
+  "verifiedLocalCriteria": [
+    "CI-L04-01",
+    "CI-L04-02"
+  ],
+  "pendingMandatoryLocalCriteria": [
+    "CI-L04-03",
+    "CI-L04-04",
+    "CI-L04-05",
+    "CI-L04-06",
+    "CI-L04-07",
+    "CI-L04-08",
+    "CI-L04-09",
+    "CI-L04-10"
+  ],
+  "limitations": [
+    "Spring/MockMvc plus real PostgreSQL, rollback synthetic fixtures; not independent TCP clients.",
+    "No new races, mobile suite, real browser, physical device, human acceptance or SMTP in this increment.",
+    "Service/offer separation, per-type margins, complete replacement/reassignment and uncertainty flow remain pending.",
+    "Two extra permission cases ran separately after the 79-case regression; distinct union is 81."
+  ]
+}

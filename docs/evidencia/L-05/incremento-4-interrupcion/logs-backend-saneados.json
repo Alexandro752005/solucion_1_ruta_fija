@@ -1,0 +1,93 @@
+{
+  "sources": [
+    {
+      "path": "backend/target/l05-safety-compile-second.log",
+      "sourceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-safety-compile.log",
+      "sourceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-safety-dart-format-final.log",
+      "sourceSha256": "b676c12f4263b2d61a0756b94f372371effd4acb8abb170f1ac72f3c1085993d",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-safety-dart-format-panel.log",
+      "sourceSha256": "98db52152173c7aa715210d92baecaa43f5bb71f0a3eec21215ece960899b23b",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-safety-dart-format.log",
+      "sourceSha256": "78c2f85120af1cf00344970be395cd8f8d03ba709c923d999980aac5d30400ed",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-safety-directed-final.log",
+      "sourceSha256": "0b46a43f5c6bc1beed74136b3922026e8960445ed2ea9b3353789e42f6c369dc",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-safety-final-regression-batch1.log",
+      "sourceSha256": "2ce66fb440cd01849594e5a861cfbee3a3ebd8219f978e7e008bf5df2379dc34",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-safety-final-regression-batch2.log",
+      "sourceSha256": "3b7ff346bd78c5c6f3a464ace9d20a46c889d72427994733f349aa672fe13ddd",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-safety-final-regression.log",
+      "sourceSha256": "e90e201bd64b027e39e7dc196ff86c4ed9a82931008dd11b0a9f488b6e1c0b28",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-safety-first-tests.log",
+      "sourceSha256": "38113c553955bc2ce5ff4344f70eca6c6414f81e09a7dc5f36e689b6755e5f81",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-safety-native-final.log",
+      "sourceSha256": "08fcab512c157b579aa79273c98194c78836770fce388149316115b2c9056537",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-safety-native-regression.log",
+      "sourceSha256": "1e8be15f5a9b40842fd65fa6346c5ad622a21dc6cb7af4eb46e8ad8013720309",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    },
+    {
+      "path": "backend/target/l05-safety-second-tests.log",
+      "sourceSha256": "3468576475eb75f99e14e0bcf5ea58d176a2f21852a2a7ff6f1f417d985919a4",
+      "published": false,
+      "reason": "Exclude configuration, authentication streams and potential JDBC parameter logs"
+    }
+  ],
+  "finalNativeTests": "16 attention plus preceding declared regression selection, all PASS in sanitized JUnit",
+  "diagnosticHistory": [
+    "WINDOWS_ARGUMENT_LENGTH_SELECTION_FAILED_BEFORE_MAVEN",
+    "INITIAL_EXTRA_PARENTHESIS_TEST_COMPILE_FIXED",
+    "JSON_OMITTED_NULL_ASSERTION_FIXED_WITH_DATABASE_CHECK",
+    "ROLLBACK_FIXTURE_FLUSH_BEFORE_JDBC_ASSERTION",
+    "DART_SYNTHETIC_RESPONSE_MISSING_REQUIRED_LABELS",
+    "WIDGET_FRAME_AFTER_TEXT_EDIT",
+    "DART_CURLY_BRACES_STYLE_FIXED"
+  ],
+  "noProductGateWeakened": true
+}

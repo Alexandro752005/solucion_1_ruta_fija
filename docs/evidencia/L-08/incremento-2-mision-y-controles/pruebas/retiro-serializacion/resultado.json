@@ -1,0 +1,60 @@
+{
+  "result": "PASS_DIRECTED_RETENTION_SERIALIZATION_AND_ROLLBACK_REGRESSION",
+  "observedAt": "2026-10-22T22:21:43.582765+00:00",
+  "totalTests": 92,
+  "suites": [
+    {
+      "name": "pe.rutafija.retention.RetentionProcedureSecurityTest",
+      "tests": "9",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.908"
+    },
+    {
+      "name": "pe.rutafija.support.L08RetentionAdvisoryLockTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "1.681"
+    },
+    {
+      "name": "pe.rutafija.retention.PersonalRetirementIntegrationTest",
+      "tests": "17",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "9.197"
+    },
+    {
+      "name": "pe.rutafija.qualification.RetentionIntegrationTest",
+      "tests": "64",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "67.061"
+    }
+  ],
+  "unitTests": 9,
+  "realPostgresReadOnlyLockTests": 2,
+  "realPostgresRollbackRetirementRegressions": 81,
+  "database": "ruta_fija_test@127.0.0.1:5432",
+  "runtimeRole": "rf_test",
+  "schemaVersion": "50",
+  "newPersistentAccounts": 0,
+  "globalCleanup": false,
+  "newMigrations": false,
+  "samePlanWaitVerifiedWithPgBlockingPids": true,
+  "rollbackReleaseVerified": true,
+  "differentPlanIsolationVerified": true,
+  "negativeLockNamespaceAvoidsCleanupGuard": true,
+  "allTableAndSchemaHashesEqualBeforeAfterReadOnlyLockTests": true,
+  "fullRetirementCommitRaceVerified": false,
+  "limits": [
+    "Unit ordering uses a JDBC double; two native PostgreSQL tests execute actual advisory locks with no plan or retirement.",
+    "81 retirement regressions use real PostgreSQL rollback transactions and do not accredit commit races.",
+    "Direct SQL callers retain SQL function locking; the new advisory lock serializes Java procedure callers.",
+    "Candidate V50 JAR predates this source change and is not a final rebuilt delivery."
+  ]
+}

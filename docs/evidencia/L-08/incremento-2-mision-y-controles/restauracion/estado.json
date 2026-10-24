@@ -1,0 +1,104 @@
+{
+  "caseId": "c748e5ab-c20a-43d6-9c17-af5d0a703dab",
+  "backupResult": "PASS_ENCRYPTED_READABLE_LOCAL_COPY_ONLY_NOT_RESTORE",
+  "archiveSha256": "6e914b7a79bf5c705d52aebc8e1c2b768f0d61f695265738e330bad2ef727dee",
+  "sourceSchemaVersion": "48",
+  "sourceAndDestinationSamePc": true,
+  "sqlRestoreAccredited": true,
+  "inspectedRelations": 98,
+  "originalWrapperInterruption": {
+    "observedAt": "2026-10-22T16:52:31.1147185+00:00",
+    "action": "STOP_ONLY_PROVEN_HUNG_POWERSHELL_WRAPPER",
+    "launcherPid": 10552,
+    "launcherExactCommandValidated": true,
+    "clusterPid": 9228,
+    "clusterPort": 55438,
+    "clusterNotStopped": true,
+    "mainServiceNotTouched": true,
+    "reason": "PG_CTL_EXITED_BUT_INHERITED_PIPE_KEPT_WRAPPER_WAITING",
+    "bootstrapFilePreservedForVerifiedResume": true
+  },
+  "normalizedInspection": {
+    "existingPublicRelations": 98,
+    "result": "INSPECTED_EXISTING_ISOLATED_TARGET_READ_ONLY_NO_RESTORE",
+    "sourceSnapshotMismatchKeys": [
+      "schema:acl",
+      "schema:constraints",
+      "schema:indexes"
+    ],
+    "integrityMatches": false,
+    "startedAt": "2026-10-22T19:58:17.162814700Z",
+    "finishedAt": "2026-10-22T19:58:18.579335400Z"
+  },
+  "localeProbe": {
+    "source": {
+      "role": "rf_migrator",
+      "ctype": "Spanish_Peru.1252",
+      "database": "ruta_fija_test",
+      "collation": "Spanish_Peru.1252",
+      "provider": "c",
+      "port": "5432",
+      "encoding": "UTF8"
+    },
+    "isolatedTarget": {
+      "role": "rf_migrator",
+      "ctype": "C",
+      "database": "ruta_fija_test",
+      "collation": "C",
+      "provider": "c",
+      "port": "55438",
+      "encoding": "UTF8"
+    },
+    "databaseWrites": 0
+  },
+  "newDestinationProposal": "docs/operacion/L-08-REST-02-continuacion-regional-propuesta.md",
+  "newDestinationAuthorized": true,
+  "originalCaseAndDestinationPreserved": true,
+  "rtoFullServiceAccredited": false,
+  "hourlyRpoOrIndependentBackupAccredited": false,
+  "newDestination": "ruta_fija_test_l08_locale@127.0.0.1:55438",
+  "newDestinationExecutionResult": "STOPPED_AT_SCHEMA_COMPARISON_BOTH_DATABASES_PRESERVED",
+  "localeMatchedInspection": {
+    "existingPublicRelations": 98,
+    "result": "INSPECTED_EXISTING_ISOLATED_TARGET_READ_ONLY_NO_RESTORE",
+    "sourceSnapshotMismatchKeys": [
+      "schema:acl",
+      "schema:constraints",
+      "schema:indexes"
+    ],
+    "integrityMatches": false,
+    "startedAt": "2026-10-22T20:08:22.903772400Z",
+    "finishedAt": "2026-10-22T20:08:23.854765200Z"
+  },
+  "remainingMismatchCategories": [],
+  "sqlRestoreAccreditationScope": "ORIGINAL_V48_SNAPSHOT_DATA_SCHEMA_AND_EFFECTIVE_PERMISSIONS_READ_ONLY_RECONCILED",
+  "rawMismatchCategoriesPreserved": [
+    "schema:acl",
+    "schema:constraints",
+    "schema:indexes"
+  ],
+  "latestReconciliation": {
+    "evidence": "docs/evidencia/L-08/incremento-2-mision-y-controles/restauracion/reconciliacion-snapshot-collation.json",
+    "evidenceSha256": "ee57c693b21a6b145d70e6236c2ac7937fcb38d7df1b8fd138a80c9e038134a5",
+    "result": "PASS_READ_ONLY_RECONCILED_SQL_SNAPSHOT_INTEGRITY_NOT_SERVICE_RTO",
+    "observedAt": "2026-10-22T22:11:16.599176100Z",
+    "databaseWrites": 0,
+    "restoreRepeated": false,
+    "source5432Accessed": false,
+    "originalSnapshotManifestUnchanged": true
+  },
+  "restoredApiReadOnlyCheck": {
+    "result": "PASS_PRESERVED_V48_API_READ_ONLY_ON_RESTORED_SNAPSHOT_NOT_BUSINESS_RTO",
+    "evidence": "docs/evidencia/L-08/incremento-2-mision-y-controles/restauracion/arranque-v48-solo-lectura.json",
+    "sha256": "f0e4a81df61e564917ed8ef225e6500965633b0aac7fc7001647e05a22a7e1b9",
+    "sourceBinaryVersion": "48",
+    "currentCandidateVersion": "50",
+    "allTableAndSchemaCountsAndHashesUnchanged": true,
+    "businessRecoveryAccredited": false,
+    "serviceRtoAccredited": false
+  },
+  "ownedClusterStoppedAfterReadOnlyChecks": true,
+  "bothDatabasesAndArchivePreserved": true,
+  "stopCommand": "Invoke-RutaFijaL08DatabaseRehearsal.ps1 -Action StopIsolated -Execute",
+  "stopResult": "STOPPED_OWNED_DATA_PRESERVED"
+}

@@ -56,6 +56,13 @@ public class OperationService {
     private final AuditService auditService;
     private final OperationEventPublisher eventPublisher;
     private final Clock clock;
+    private final pe.rutafija.qualification.application.OperationalQualificationPolicy qualification;
+    private final OrganizationSchedulingLock scheduling;
+    private final OfferExpiryService offerExpiry;
+    private final ServiceTypeService serviceTypes;
+    private final OfferSchedulingPolicy marginPolicy;
+    private final pe.rutafija.routing.application.RouteCatalogService routes;
+    private final ScheduledServiceStore services;
 
     public OperationService(
             AssignmentRepository assignmentRepository,
@@ -66,9 +73,17 @@ public class OperationService {
             CurrentUserService currentUserService,
             AuditService auditService,
             OperationEventPublisher eventPublisher,
-            Clock clock
+            Clock clock,
+            pe.rutafija.qualification.application.OperationalQualificationPolicy qualification,
+            OrganizationSchedulingLock scheduling,
+            OfferExpiryService offerExpiry,
+            ServiceTypeService serviceTypes,
+            OfferSchedulingPolicy marginPolicy,
+            pe.rutafija.routing.application.RouteCatalogService routes,
+            ScheduledServiceStore services
     ) {
         this.assignmentRepository = assignmentRepository;
+        this.services = services;
         this.currentLocationStore = currentLocationStore;
         this.driverRepository = driverRepository;
         this.vehicleRepository = vehicleRepository;
@@ -77,6 +92,12 @@ public class OperationService {
         this.auditService = auditService;
         this.eventPublisher = eventPublisher;
         this.clock = clock;
+        this.qualification = qualification;
+        this.scheduling = scheduling;
+        this.offerExpiry = offerExpiry;
+        this.serviceTypes = serviceTypes;
+        this.marginPolicy = marginPolicy;
+        this.routes = routes;
     }
 
     @Transactional(readOnly = true)
@@ -105,48 +126,84 @@ public class OperationService {
         return AssignmentResponse.from(assignment);
     }
 
+    @Transactional(readOnly=true)
+    public AssignmentResponse creationOperation(String key){
+        var actor=requireOperationalActor();
+        return AssignmentResponse.from(assignmentRepository.findByOrganization_IdAndIdempotencyKey(actor.getOrganizationId(),normalizeIdempotencyKey(key))
+            .orElseThrow(()->new ApplicationException(HttpStatus.NOT_FOUND,ErrorCode.RESOURCE_NOT_FOUND,"Emisión no registrada; conserva la solicitud sin repetir automáticamente.")));
+    }
+
     @Transactional
     public AssignmentCreationResult createAssignment(AssignmentCreateRequest request, String idempotencyKey) {
+        return createOffer(request,idempotencyKey,null);
+    }
+
+    /** Called by the transactional dispatch coordinator after an explicit service command. */
+    @Transactional
+    public AssignmentCreationResult createOffer(AssignmentCreateRequest request, String idempotencyKey, UUID serviceId) {
+        return createOffer(request,idempotencyKey,serviceId,null);
+    }
+    /** Package-internal: the prepared immutable intent and SQL guard constrain this captured continuation. */
+    AssignmentCreationResult createReliefOffer(AssignmentCreateRequest request,String key,UUID service,UUID handover){
+        return createOffer(request,key,service,java.util.Objects.requireNonNull(handover));
+    }
+    private AssignmentCreationResult createOffer(AssignmentCreateRequest request, String idempotencyKey, UUID serviceId,UUID handoverId) {
         AppUser actor = requireOperationalActor();
+        offerExpiry.expireForOrganization(actor.getOrganizationId());
         AssignmentResponseMode responseMode = request.responseMode() == null
-                ? AssignmentResponseMode.ADMIN_DIRECT
+                ? AssignmentResponseMode.MOBILE_CONFIRMATION
                 : request.responseMode();
+        if (responseMode != AssignmentResponseMode.MOBILE_CONFIRMATION) {
+            throw acceptanceRequired("Toda oferta nueva requiere aceptación expresa de CONDUCTOR; ADMIN_DIRECT solo se conserva como historia.");
+        }
         String normalizedKey = normalizeIdempotencyKey(idempotencyKey);
         if (normalizedKey != null) {
             Assignment existing = assignmentRepository
                     .findByOrganization_IdAndIdempotencyKey(actor.getOrganizationId(), normalizedKey)
                     .orElse(null);
             if (existing != null) {
+                if(!java.util.Objects.equals(existing.getCreationPayloadSha256(),creationHash(request))
+                        || (serviceId!=null&&!serviceId.equals(existing.getServiceId())))
+                    throw new ApplicationException(HttpStatus.CONFLICT,ErrorCode.RESOURCE_CONFLICT,"La clave ya corresponde a otra solicitud o a un registro histórico; consulta su estado sin repetir el alta.");
                 return new AssignmentCreationResult(AssignmentResponse.from(existing), false);
             }
         }
 
         Driver driver = findTenantDriver(request.driverId(), actor.getOrganizationId());
         Vehicle vehicle = findTenantVehicle(request.vehicleId(), actor.getOrganizationId());
-        validateSchedulingEligibility(driver, vehicle, request.scheduledAt(), request.scheduledEndAt());
+        var route=handoverId==null?routes.usable(request.routeVersionId(),actor.getOrganizationId()):routes.version(request.routeVersionId(),actor.getOrganizationId());
+        if(!route.stops().getFirst().name().equals(request.originText())||!route.stops().getLast().name().equals(request.destinationText()))
+            throw invalidTransition("El origen y el terminal deben corresponder a la versión elegida.");
+        var serviceType=handoverId==null?serviceTypes.usable(request.serviceTypeVersionId(),actor.getOrganizationId()):serviceTypes.revision(request.serviceTypeVersionId(),actor.getOrganizationId());
+        var window=marginPolicy.window(request.scheduledAt(),request.scheduledEndAt(),serviceType.beforeMinutes(),serviceType.afterMinutes());
+        validateSchedulingEligibility(driver, vehicle, window.startsAt(), window.endsAt());
         Instant now = Instant.now(clock);
-        validateResponseMode(driver, responseMode, request.responseDeadlineAt(), request.scheduledAt(), now);
-        assertNoSchedulingConflict(
-                actor.getOrganizationId(),
-                driver.getId(),
-                vehicle.getId(),
-                request.scheduledAt(),
-                request.scheduledEndAt(),
-                null
-        );
+        Instant serverDeadline;
+        try {
+            serverDeadline = pe.rutafija.operation.domain.OfferResponseWindow.deadline(now, request.scheduledAt());
+        } catch (IllegalArgumentException exception) {
+            throw invalidTransition(exception.getMessage());
+        }
+        validateResponseMode(driver, responseMode, serverDeadline, request.scheduledAt(), now);
+        marginPolicy.requireCompatible(actor.getOrganizationId(),driver.getId(),vehicle.getId(),window,null);
 
         Assignment assignment = responseMode == AssignmentResponseMode.MOBILE_CONFIRMATION
                 ? Assignment.requestMobileConfirmation(
                         actor.getOrganization(), driver, vehicle, actor,
                         request.originText(), request.destinationText(), request.scheduledAt(), request.scheduledEndAt(),
-                        request.notes(), normalizedKey, request.responseDeadlineAt()
+                        request.notes(), normalizedKey, serverDeadline
                 )
                 : Assignment.schedule(
                         actor.getOrganization(), driver, vehicle, actor,
                         request.originText(), request.destinationText(), request.scheduledAt(), request.scheduledEndAt(),
                         request.notes(), normalizedKey
                 );
+        assignment.captureRoute(route.id(),creationHash(request));
+        assignment.captureServiceType(serviceType.id(),serviceType.beforeMinutes(),serviceType.afterMinutes());
+        assignment.captureService(serviceId==null?services.create(actor,request,now):handoverId==null?services.requirePending(serviceId,actor.getOrganizationId()):serviceId);
+        if(handoverId!=null)assignment.captureHandover(handoverId);
         assignment = assignmentRepository.saveAndFlush(assignment);
+        routes.recordCapture(assignment.getId(),route.id(),actor,now);
         auditService.record(actor,
                 responseMode == AssignmentResponseMode.MOBILE_CONFIRMATION
                         ? "ASSIGNMENT_MOBILE_CONFIRMATION_REQUESTED"
@@ -172,6 +229,8 @@ public class OperationService {
         AppUser actor = requireOperationalActor();
         Assignment assignment = findTenantAssignment(assignmentId, actor.getOrganizationId());
         assertVersion(assignment, request.version());
+        if(assignment.getRouteVersionId()!=null&&(!assignment.getOriginText().equals(request.originText())||!assignment.getDestinationText().equals(request.destinationText())))
+            throw invalidTransition("No sobrescribas la ruta capturada: usa el cambio expreso con nueva aceptación.");
         Driver driver = findTenantDriver(request.driverId(), actor.getOrganizationId());
         Vehicle vehicle = findTenantVehicle(request.vehicleId(), actor.getOrganizationId());
         validateSchedulingEligibility(driver, vehicle, request.scheduledAt(), request.scheduledEndAt());
@@ -206,60 +265,22 @@ public class OperationService {
     @Transactional
     public AssignmentResponse reserveAssignment(UUID assignmentId, AssignmentVersionRequest request) {
         AppUser actor = requireOperationalActor();
-        Assignment assignment = findTenantAssignment(assignmentId, actor.getOrganizationId());
-        assertVersion(assignment, request.version());
-        ensureVehicleOperationalForReservation(assignment.getVehicle());
-        try {
-            assignment.getDriver().reserveForAssignment();
-            assignment.reserve(Instant.now(clock));
-        } catch (IllegalStateException exception) {
-            throw invalidTransition(exception.getMessage());
-        }
-        assignment = assignmentRepository.saveAndFlush(assignment);
-        auditService.record(actor, "ASSIGNMENT_RESERVED", "ASSIGNMENT", assignment.getId(), Map.of());
-        eventPublisher.publish(actor.getOrganizationId(), assignment.getDriver().getGroup().getId(), "assignment.reserved", assignmentEventData(assignment));
-        eventPublisher.publish(actor.getOrganizationId(), assignment.getDriver().getGroup().getId(), "driver.status.changed", driverEventData(assignment.getDriver()));
-        return AssignmentResponse.from(assignment);
+        findTenantAssignment(assignmentId, actor.getOrganizationId());
+        throw acceptanceRequired("La reserva se confirma únicamente con la aceptación expresa de CONDUCTOR; ADMIN no puede hacerlo en su nombre.");
     }
 
     @Transactional
     public AssignmentResponse startAssignment(UUID assignmentId, AssignmentVersionRequest request) {
         AppUser actor = requireOperationalActor();
-        Assignment assignment = findTenantAssignment(assignmentId, actor.getOrganizationId());
-        assertVersion(assignment, request.version());
-        try {
-            assignment.getDriver().beginService();
-            assignment.getVehicle().beginService();
-            assignment.start(Instant.now(clock));
-        } catch (IllegalStateException exception) {
-            throw invalidTransition(exception.getMessage());
-        }
-        assignment = assignmentRepository.saveAndFlush(assignment);
-        auditService.record(actor, "ASSIGNMENT_STARTED", "ASSIGNMENT", assignment.getId(), Map.of());
-        eventPublisher.publish(actor.getOrganizationId(), assignment.getDriver().getGroup().getId(), "assignment.started", assignmentEventData(assignment));
-        eventPublisher.publish(actor.getOrganizationId(), assignment.getDriver().getGroup().getId(), "driver.status.changed", driverEventData(assignment.getDriver()));
-        eventPublisher.publish(actor.getOrganizationId(), assignment.getDriver().getGroup().getId(), "vehicle.status.changed", vehicleEventData(assignment.getVehicle()));
-        return AssignmentResponse.from(assignment);
+        findTenantAssignment(assignmentId, actor.getOrganizationId());
+        throw acceptanceRequired("El inicio corresponde a CONDUCTOR después de aceptar; ADMIN no puede iniciar en su nombre.");
     }
 
     @Transactional
     public AssignmentResponse completeAssignment(UUID assignmentId, AssignmentVersionRequest request) {
         AppUser actor = requireOperationalActor();
-        Assignment assignment = findTenantAssignment(assignmentId, actor.getOrganizationId());
-        assertVersion(assignment, request.version());
-        try {
-            assignment.getDriver().completeService();
-            assignment.getVehicle().finishService();
-            assignment.complete(Instant.now(clock));
-        } catch (IllegalStateException exception) {
-            throw invalidTransition(exception.getMessage());
-        }
-        assignment = assignmentRepository.saveAndFlush(assignment);
-        auditService.record(actor, "ASSIGNMENT_COMPLETED", "ASSIGNMENT", assignment.getId(), Map.of());
-        eventPublisher.publish(actor.getOrganizationId(), assignment.getDriver().getGroup().getId(), "assignment.completed", assignmentEventData(assignment));
-        eventPublisher.publish(actor.getOrganizationId(), assignment.getDriver().getGroup().getId(), "driver.status.changed", driverEventData(assignment.getDriver()));
-        eventPublisher.publish(actor.getOrganizationId(), assignment.getDriver().getGroup().getId(), "vehicle.status.changed", vehicleEventData(assignment.getVehicle()));
-        return AssignmentResponse.from(assignment);
+        findTenantAssignment(assignmentId, actor.getOrganizationId());
+        throw acceptanceRequired("Ruta finalizada corresponde al CONDUCTOR responsable del tramo; ADMIN no declara cumplimiento en su nombre.");
     }
 
     @Transactional
@@ -268,12 +289,17 @@ public class OperationService {
         Assignment assignment = findTenantAssignment(assignmentId, actor.getOrganizationId());
         assertVersion(assignment, request.version());
         AssignmentStatus previousStatus = assignment.getStatus();
+        if(assignment.getServiceId()!=null&&previousStatus==AssignmentStatus.EN_SERVICIO)
+            throw invalidTransition("Una prestación iniciada requiere atención segura; no se libera mediante cancelación de oferta.");
         boolean driverChanged = false;
         boolean vehicleChanged = false;
         try {
             if (previousStatus == AssignmentStatus.SCHEDULED && assignment.getReservedAt() != null) {
-                assignment.getDriver().releaseReservation();
-                driverChanged = true;
+                if(assignment.getDriver().getAvailabilityStatus()==DriverAvailabilityStatus.RESERVADO
+                        && !marginPolicy.hasOtherConfirmed(actor.getOrganizationId(),assignment.getDriver().getId(),assignment.getId())) {
+                    assignment.getDriver().releaseReservation();
+                    driverChanged = true;
+                }
             } else if (previousStatus == AssignmentStatus.EN_SERVICIO) {
                 assignment.getDriver().completeService();
                 assignment.getVehicle().finishService();
@@ -286,7 +312,7 @@ public class OperationService {
         }
         assignment = assignmentRepository.saveAndFlush(assignment);
         auditService.record(actor, "ASSIGNMENT_CANCELLED", "ASSIGNMENT", assignment.getId(), Map.of(
-                "reason", request.reason().strip()
+                "reasonReferenceId",assignment.getId(),"changes",pe.rutafija.audit.application.AuditChanges.fields("status",previousStatus,assignment.getStatus())
         ));
         eventPublisher.publish(actor.getOrganizationId(), assignment.getDriver().getGroup().getId(), "assignment.cancelled", assignmentEventData(assignment));
         if (driverChanged) {
@@ -301,21 +327,18 @@ public class OperationService {
     @Transactional
     public DriverResponse changeDriverAvailability(UUID driverId, DriverAvailabilityRequest request) {
         AppUser actor = requireOperationalActor();
-        Driver driver = findTenantDriver(driverId, actor.getOrganizationId());
-        try {
-            driver.changeAdministrativeAvailability(request.status());
-        } catch (IllegalStateException exception) {
-            throw invalidTransition(exception.getMessage());
-        }
-        if (driver.getAvailabilityStatus() != DriverAvailabilityStatus.DISPONIBLE
-                && driver.getAvailabilityStatus() != DriverAvailabilityStatus.EN_SERVICIO) {
-            currentLocationStore.deleteByDriverId(driver.getId());
-        }
-        auditService.record(actor, "DRIVER_AVAILABILITY_CHANGED", "DRIVER", driver.getId(), Map.of(
-                "status", driver.getAvailabilityStatus().name()
-        ));
-        eventPublisher.publish(actor.getOrganizationId(), driver.getGroup().getId(), "driver.status.changed", driverEventData(driver));
-        return DriverResponse.from(driver);
+        findTenantDriver(driverId, actor.getOrganizationId());
+        throw new ApplicationException(HttpStatus.CONFLICT,ErrorCode.AVAILABILITY_INVALID_TRANSITION,
+                "La disponibilidad la declara CONDUCTOR desde la app. ADMIN gestiona impedimentos mediante suspensión motivada y auditada.");
+    }
+
+    private ApplicationException acceptanceRequired(String message) {
+        return new ApplicationException(HttpStatus.CONFLICT, ErrorCode.ASSIGNMENT_INVALID_TRANSITION, message);
+    }
+
+    private String creationHash(AssignmentCreateRequest request) {
+        try{return java.util.HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(request.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8)));}
+        catch(java.security.NoSuchAlgorithmException ex){throw new IllegalStateException("ASSIGNMENT_HASH_UNAVAILABLE");}
     }
 
     private AppUser requireOperationalActor() {
@@ -327,6 +350,7 @@ public class OperationService {
                     "La operación web requiere el rol ADMIN"
             );
         }
+        if (!org.springframework.transaction.support.TransactionSynchronizationManager.isCurrentTransactionReadOnly()) scheduling.acquire(actor.getOrganizationId());
         return actor;
     }
 
@@ -343,6 +367,8 @@ public class OperationService {
                     "El conductor no está activo"
             );
         }
+        if (driver.getDeclaredAvailabilityStatus()!=DriverAvailabilityStatus.DISPONIBLE)
+            throw new ApplicationException(HttpStatus.CONFLICT,ErrorCode.DRIVER_NOT_ELIGIBLE,"CONDUCTOR debe declarar su disponibilidad; ADMIN no puede hacerlo en su nombre.");
         if (!vehicle.isActive() || vehicle.getStatus() != VehicleStatus.DISPONIBLE) {
             throw new ApplicationException(
                     HttpStatus.BAD_REQUEST,
@@ -350,13 +376,7 @@ public class OperationService {
                     "El vehículo debe estar activo y DISPONIBLE para programarlo"
             );
         }
-        if (!driverVehicleLinkRepository.existsByDriver_IdAndVehicle_IdAndActiveTrue(driver.getId(), vehicle.getId())) {
-            throw new ApplicationException(
-                    HttpStatus.BAD_REQUEST,
-                    ErrorCode.VEHICLE_NOT_ELIGIBLE,
-                    "El vehículo debe estar vinculado al conductor seleccionado"
-            );
-        }
+        qualification.require(driver.getId(),driver.getOrganizationId(),vehicle.getId(),scheduledAt,scheduledEndAt);
         if (scheduledAt == null || scheduledEndAt == null || !scheduledEndAt.isAfter(scheduledAt)) {
             throw new ApplicationException(
                     HttpStatus.BAD_REQUEST,
@@ -394,7 +414,7 @@ public class OperationService {
         }
         if (responseDeadlineAt == null
                 || !responseDeadlineAt.isAfter(now)
-                || !responseDeadlineAt.isBefore(scheduledAt)) {
+                || responseDeadlineAt.isAfter(scheduledAt)) {
             throw new ApplicationException(
                     HttpStatus.BAD_REQUEST,
                     ErrorCode.VALIDATION_ERROR,

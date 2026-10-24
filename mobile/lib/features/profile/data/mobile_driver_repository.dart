@@ -1,4 +1,5 @@
 import '../../../core/network/mobile_api_client.dart';
+import '../../location/domain/mobile_foreground_location.dart';
 import '../domain/mobile_driver_models.dart';
 
 abstract interface class MobileDriverGateway {
@@ -9,6 +10,12 @@ abstract interface class MobileDriverGateway {
   Future<MobileAvailability> changeAvailability(
     MobileAvailabilityStatus status,
   );
+
+  Future<MobileDriverProfile> changeLocationConsent(bool consent);
+
+  Future<void> upsertCurrentLocation(MobileCurrentLocation location);
+
+  Future<void> clearCurrentLocation();
 }
 
 final class MobileDriverRepository implements MobileDriverGateway {
@@ -43,5 +50,27 @@ final class MobileDriverRepository implements MobileDriverGateway {
       'status': status.apiValue,
     });
     return MobileAvailability.fromJson(response);
+  }
+
+  @override
+  Future<MobileDriverProfile> changeLocationConsent(bool consent) async {
+    final response = await _apiClient.putObject('mobile/location/consent', {
+      'consent': consent,
+    });
+    return MobileDriverProfile.fromJson(response);
+  }
+
+  @override
+  Future<void> upsertCurrentLocation(MobileCurrentLocation location) {
+    return _apiClient.putNoContent(
+      'mobile/location/current',
+      location.toRequestBody(),
+      allowSessionRefresh: false,
+    );
+  }
+
+  @override
+  Future<void> clearCurrentLocation() {
+    return _apiClient.deleteNoContent('mobile/location/current');
   }
 }

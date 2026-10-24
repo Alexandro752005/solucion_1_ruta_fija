@@ -1,0 +1,850 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-10-23T20:56:14.077061+00:00",
+  "reviewer": "A-OPS/A-QA release_candidate",
+  "decision": "PASS_FOR_ROOT_STAGING_WITH_DOCUMENTED_LIMITS",
+  "scope": "Read-only Git/index/candidate review before root-controlled staging. Current task explicitly authorizes Git; no network/GitHub.",
+  "mutations": {
+    "gitStaging": false,
+    "gitCommit": false,
+    "gitConfig": false,
+    "gitignore": false,
+    "gitattributes": false,
+    "sealedEvidence": false,
+    "database": false,
+    "privateFilesRead": false,
+    "onlyNewEvidenceFile": "docs/entrega/2026-10-23-commit-v3.1/qa-git-scope.json"
+  },
+  "index": {
+    "stagedCountBeforeRootStaging": 0,
+    "stagedPaths": [],
+    "sha256Before": "84de218c4cc820f670d39fda4eb08aab6d01aad0bfd3099cab0a37f29d71a500",
+    "sha256After": "84de218c4cc820f670d39fda4eb08aab6d01aad0bfd3099cab0a37f29d71a500",
+    "unchangedDuringReviewerCommands": true,
+    "existingTrackedPrivateOrCacheNamePaths": [],
+    "cachedContentPatternScan": {
+      "recordedAt": "2026-10-23T20:48:07.3014265+00:00",
+      "mode": "INDEX_CONTENT_PATHS_ONLY_GIT_GREP_CACHED_I_L",
+      "exitCode": 1,
+      "highConfidencePatternPaths": [],
+      "valuesPrinted": false
+    }
+  },
+  "candidateScope": {
+    "snapshotAtUtc": "2026-10-23T20:54:13.648546+00:00",
+    "trackedTreeCount": 619,
+    "untrackedNonignoredCount": 3675,
+    "trackedPlusUntrackedTreeCount": 4294,
+    "trackedPlusUntrackedTreeBytes": 152436992,
+    "deltaExcludesUnmodifiedTracked": {
+      "changedTracked": 207,
+      "untrackedNonignored": 3675,
+      "currentDeltaFiles": 3881,
+      "currentDeltaBytes": 151121790,
+      "largestDeltaFiles": [
+        {
+          "path": "docs/evidencia/L-03/aceptacion-V32/final-97/TEST-pe.rutafija.qualification.MaintenanceIntegrationTest.xml",
+          "bytes": 7445928
+        },
+        {
+          "path": "docs/evidencia/L-03/aceptacion-V32/final-97/TEST-pe.rutafija.qualification.RouteAssignmentIntegrationTest.xml",
+          "bytes": 2554822
+        },
+        {
+          "path": "docs/evidencia/L-08/incremento-5-candidato-final/hygiene/inventario-compilacion-previo.json",
+          "bytes": 2173102
+        },
+        {
+          "path": "docs/evidencia/L-08/cap25-860c1cdb-b062-469a-9a3f-156ea23bb656/preparacion.json",
+          "bytes": 1134878
+        },
+        {
+          "path": "specs/registro.json",
+          "bytes": 908338
+        },
+        {
+          "path": "docs/evidencia/auditoria-ide-2026-10-23/ide/diagnostics.initial.json",
+          "bytes": 849430
+        },
+        {
+          "path": "docs/evidencia/L-08/cap25-860c1cdb-b062-469a-9a3f-156ea23bb656/medicion.json",
+          "bytes": 789667
+        },
+        {
+          "path": "docs/evidencia/L-00/source-manifest.sha256",
+          "bytes": 716069
+        },
+        {
+          "path": "docs/evidencia/auditoria-ide-2026-10-23/mobile/workspace-root-diagnostics.json",
+          "bytes": 706923
+        },
+        {
+          "path": "docs/evidencia/L-08/cap25-860c1cdb-b062-469a-9a3f-156ea23bb656/medicion-http.jsonl",
+          "bytes": 622092
+        },
+        {
+          "path": "docs/evidencia/L-03/aceptacion-V32/final-97/TEST-pe.rutafija.fleet.GroupMembershipIntegrationTest.xml",
+          "bytes": 389526
+        },
+        {
+          "path": "docs/evidencia/L-03/aceptacion-V32/TEST-pe.rutafija.fleet.GroupMembershipIntegrationTest.xml",
+          "bytes": 387388
+        },
+        {
+          "path": "docs/evidencia/L-03/incremento-1/backend__target__surefire-reports__TEST-pe.rutafija.fleet.GroupMembershipIntegrationTest.xml",
+          "bytes": 387317
+        },
+        {
+          "path": "docs/evidencia/L-03/aceptacion-V32/final-97/TEST-pe.rutafija.routing.RouteCatalogIntegrationTest.xml",
+          "bytes": 350700
+        },
+        {
+          "path": "docs/evidencia/L-03/aceptacion-V32/TEST-pe.rutafija.routing.RouteCatalogIntegrationTest.xml",
+          "bytes": 350079
+        },
+        {
+          "path": "docs/ejecucion/L-00-trazabilidad.csv",
+          "bytes": 300106
+        },
+        {
+          "path": "docs/evidencia/L-08/incremento-4-cierre-fisico/gps-apagado.png",
+          "bytes": 265536
+        },
+        {
+          "path": "docs/evidencia/L-08/incremento-4-cierre-fisico/principal-v4-gps.png",
+          "bytes": 251543
+        },
+        {
+          "path": "frontend/package-lock.json",
+          "bytes": 246277
+        },
+        {
+          "path": "docs/evidencia/L-08/incremento-4-cierre-fisico/red-perdida-real.png",
+          "bytes": 218079
+        },
+        {
+          "path": "docs/evidencia/L-08/incremento-3-escritorio/observacion-5303599d-1e1d-4b49-92d7-8babb7f11753/navegadores.json",
+          "bytes": 211199
+        },
+        {
+          "path": "docs/evidencia/L-08/incremento-4-cierre-fisico/permiso-denegado.png",
+          "bytes": 197386
+        },
+        {
+          "path": "artifacts/L-06-incremento-1-2026-10-21/crm/chunk-BjVygk4N.js",
+          "bytes": 179470
+        },
+        {
+          "path": "artifacts/L-07-cierre-2026-10-21/crm/browser/chunk-BjVygk4N.js",
+          "bytes": 179470
+        },
+        {
+          "path": "artifacts/L-07-incremento-1-2026-10-21/crm/browser/chunk-BjVygk4N.js",
+          "bytes": 179470
+        }
+      ],
+      "roots": {
+        ".gitattributes": 1,
+        ".gitignore": 1,
+        "AUDITORIA_INTEGRAL_IDE_Y_EJECUTABLES_2026-10-23.md": 1,
+        "INFORME_FINAL_SUSTENTACION_RUTA_FIJA_V3_1_L08.md": 1,
+        "agents": 7,
+        "analysis_options.yaml": 1,
+        "artifacts": 216,
+        "backend": 502,
+        "docs": 2762,
+        "finalizar_demo_temporal.bat": 1,
+        "finalizar_ruta_fija.bat": 1,
+        "frontend": 147,
+        "iniciar_demo_temporal.bat": 1,
+        "iniciar_ruta_fija.bat": 1,
+        "memory": 3,
+        "mobile": 175,
+        "scripts": 49,
+        "specs": 10,
+        "verificar_ruta_fija.bat": 1
+      }
+    },
+    "binaryAndOtherExtensionsCount": 202,
+    "binaryAndOtherExtensionsBytes": 6351463,
+    "initialLargeBinaryCount": 27,
+    "initialLargeBinaryBytes": 3348384702,
+    "initialScopeRemediatedByRootIgnore": true,
+    "note": "Uncompressed filesystem bytes. Delta includes public historical evidence and source. Four files exceed 1 MiB; none exceeds 10 MiB. This new evidence file is excluded from preceding snapshot."
+  },
+  "ignorePolicy": {
+    "explicitProbes": {
+      "recordedAt": "2026-10-23T20:51:21.2064955+00:00",
+      "method": "git check-ignore --no-index -- EXPLICIT_PATH_ARGUMENTS",
+      "checks": [
+        {
+          "path": "release/candidate.jks",
+          "ignored": true,
+          "expectedIgnored": true
+        },
+        {
+          "path": "release/candidate.keystore",
+          "ignored": true,
+          "expectedIgnored": true
+        },
+        {
+          "path": "config/ruta-fija-native.env",
+          "ignored": true,
+          "expectedIgnored": true
+        },
+        {
+          "path": "config/ruta-fija-native.env.example",
+          "ignored": false,
+          "expectedIgnored": false
+        },
+        {
+          "path": "release/case.private.json",
+          "ignored": true,
+          "expectedIgnored": true
+        },
+        {
+          "path": "release/case.private",
+          "ignored": true,
+          "expectedIgnored": true
+        },
+        {
+          "path": "release/real.dump",
+          "ignored": true,
+          "expectedIgnored": true
+        },
+        {
+          "path": "release/real.pgdump",
+          "ignored": true,
+          "expectedIgnored": true
+        },
+        {
+          "path": "release/real.backup",
+          "ignored": true,
+          "expectedIgnored": true
+        },
+        {
+          "path": "artifacts/candidate.apk",
+          "ignored": true,
+          "expectedIgnored": true
+        },
+        {
+          "path": "docs/evidencia/public-cert.der",
+          "ignored": false,
+          "expectedIgnored": false
+        },
+        {
+          "path": "docs/evidencia/acta.sig",
+          "ignored": false,
+          "expectedIgnored": false
+        },
+        {
+          "path": "backend/.local/private.json",
+          "ignored": true,
+          "expectedIgnored": true
+        },
+        {
+          "path": "backend/.maven-user-home/cache.zip",
+          "ignored": true,
+          "expectedIgnored": true
+        },
+        {
+          "path": "frontend/node_modules/cache",
+          "ignored": true,
+          "expectedIgnored": true
+        },
+        {
+          "path": "mobile/build/cache",
+          "ignored": true,
+          "expectedIgnored": true
+        },
+        {
+          "path": "mobile/android/key.properties",
+          "ignored": true,
+          "expectedIgnored": true
+        }
+      ],
+      "allExpected": true,
+      "rootIgnoreSha256": "d7b8aaa59e1a865854d683d9e7e6916fbb7351d7c4ef6133eaccc5018536d0cb",
+      "rootIgnoreChangedByThisAgent": false
+    },
+    "actualIgnoreSha256AtReport": "d7b8aaa59e1a865854d683d9e7e6916fbb7351d7c4ef6133eaccc5018536d0cb",
+    "rootIsSoleWriter": true,
+    "negativeExceptionAddedByReviewer": false,
+    "publicCertAndSignatureRetained": true,
+    "currentBuildArchivesKeptLocalByRootPolicy": true
+  },
+  "secretContentScan": {
+    "scope": "Tracked + nonignored untracked decoded text; ignored private/cache folders excluded; values never emitted.",
+    "textFilesScanned": 4091,
+    "encodings": {
+      "utf-8": 4052,
+      "utf-16": 39
+    },
+    "decodeFailures": [],
+    "highConfidenceRules": [
+      "private-key PEM header",
+      "JWT eyJ three segments",
+      "AWS access key id",
+      "GitHub token",
+      "Slack token",
+      "Google API key",
+      "Stripe live secret",
+      "OpenAI API key"
+    ],
+    "highConfidenceFindings": [],
+    "jsonFilesParsed": 1994,
+    "jsonSensitiveFields": [
+      {
+        "path": "docs/evidencia/L-08/incremento-2-mision-y-controles/disponibilidad/result.json",
+        "pointer": "/before/publicTableRowsSha256/refresh_token",
+        "field": "refresh_token",
+        "classification": "TABLE_FINGERPRINT_NOT_TOKEN",
+        "length": 64
+      }
+    ],
+    "sensitiveLiteralAssignments": [
+      {
+        "path": "backend/src/test/java/pe/rutafija/identity/api/MobileAuthFlowIT.java",
+        "line": 412,
+        "field": "refreshToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 2,
+        "finalClassification": "FORMAT_PLACEHOLDER_IN_TEST_SOURCE",
+        "contextReview": "Two-character format placeholder in test request construction."
+      },
+      {
+        "path": "backend/src/test/java/pe/rutafija/identity/api/SuperAdminRecoveryFlowIT.java",
+        "line": 125,
+        "field": "emergencyCode",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 2,
+        "finalClassification": "FORMAT_PLACEHOLDER_IN_TEST_SOURCE",
+        "contextReview": "Two-character format placeholder in test request construction."
+      },
+      {
+        "path": "backend/src/test/java/pe/rutafija/identity/api/SuperAdminRecoveryFlowIT.java",
+        "line": 181,
+        "field": "emergencyCode",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 2,
+        "finalClassification": "FORMAT_PLACEHOLDER_IN_TEST_SOURCE",
+        "contextReview": "Two-character format placeholder in test request construction."
+      },
+      {
+        "path": "backend/src/test/java/pe/rutafija/identity/api/SuperAdminRecoveryFlowIT.java",
+        "line": 218,
+        "field": "emergencyCode",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 2,
+        "finalClassification": "FORMAT_PLACEHOLDER_IN_TEST_SOURCE",
+        "contextReview": "Two-character format placeholder in test request construction."
+      },
+      {
+        "path": "backend/src/test/java/pe/rutafija/identity/api/SuperAdminRecoveryFlowIT.java",
+        "line": 243,
+        "field": "emergencyCode",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 2,
+        "finalClassification": "FORMAT_PLACEHOLDER_IN_TEST_SOURCE",
+        "contextReview": "Two-character format placeholder in test request construction."
+      },
+      {
+        "path": "backend/src/test/java/pe/rutafija/identity/api/SuperAdminRecoveryFlowIT.java",
+        "line": 271,
+        "field": "emergencyCode",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 2,
+        "finalClassification": "FORMAT_PLACEHOLDER_IN_TEST_SOURCE",
+        "contextReview": "Two-character format placeholder in test request construction."
+      },
+      {
+        "path": "backend/src/test/java/pe/rutafija/identity/recoverycli/SuperAdminRecoveryCliTest.java",
+        "line": 240,
+        "field": "emergencyCode",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 1,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Repeated one-character fixture in unit test and historical source snapshot."
+      },
+      {
+        "path": "backend/src/test/java/pe/rutafija/support/L08CapacityTrial.java",
+        "line": 173,
+        "field": "otp",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 29,
+        "finalClassification": "SOURCE_EXPRESSION_NOT_SECRET",
+        "contextReview": "OTP map-key construction/in-memory captured test code; no literal runtime OTP value."
+      },
+      {
+        "path": "backend/src/test/java/pe/rutafija/support/L08CapacityTrial.java",
+        "line": 464,
+        "field": "otp",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 8,
+        "finalClassification": "SOURCE_EXPRESSION_NOT_SECRET",
+        "contextReview": "OTP map-key construction/in-memory captured test code; no literal runtime OTP value."
+      },
+      {
+        "path": "docs/evidencia/L-01/ci07-codigo-no-visible-140c10a1-2026-10-17/SuperAdminRecoveryCliTest-source.java",
+        "line": 240,
+        "field": "emergencyCode",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 1,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Historical exact source snapshot of the repeated one-character unit-test fixture; masked source expression reviewed."
+      },
+      {
+        "path": "docs/evidencia/L-08/incremento-2-mision-y-controles/disponibilidad/result.json",
+        "line": 95,
+        "field": "refresh_token",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 64,
+        "finalClassification": "TABLE_SHA256_FINGERPRINT_NOT_TOKEN",
+        "contextReview": "64-character hexadecimal table-row digest inside publicTableRowsSha256."
+      },
+      {
+        "path": "docs/evidencia/auditoria-ide-2026-10-23/backend/correcciones-9cd90f87-411f-4492-bc84-1e087bb670d0/backup/backend/src/test/java/pe/rutafija/support/L08CapacityTrial.java",
+        "line": 173,
+        "field": "otp",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 29,
+        "finalClassification": "SOURCE_EXPRESSION_NOT_SECRET",
+        "contextReview": "OTP map-key construction/in-memory captured test code; no literal runtime OTP value."
+      },
+      {
+        "path": "docs/evidencia/auditoria-ide-2026-10-23/backend/correcciones-9cd90f87-411f-4492-bc84-1e087bb670d0/backup/backend/src/test/java/pe/rutafija/support/L08CapacityTrial.java",
+        "line": 464,
+        "field": "otp",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 8,
+        "finalClassification": "SOURCE_EXPRESSION_NOT_SECRET",
+        "contextReview": "OTP map-key construction/in-memory captured test code; no literal runtime OTP value."
+      },
+      {
+        "path": "frontend/src/app/core/auth/auth-session.service.spec.ts",
+        "line": 56,
+        "field": "accessToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 8,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "frontend/src/app/core/auth/auth-session.service.spec.ts",
+        "line": 118,
+        "field": "accessToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 16,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "frontend/src/app/core/auth/auth-session.service.spec.ts",
+        "line": 149,
+        "field": "accessToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 14,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "frontend/src/app/core/auth/auth-session.service.spec.ts",
+        "line": 180,
+        "field": "accessToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 16,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "frontend/src/app/features/admin-activation/admin-activation.page.spec.ts",
+        "line": 51,
+        "field": "activationToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 13,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "frontend/src/app/features/admin-activation/admin-activation.page.spec.ts",
+        "line": 211,
+        "field": "activationToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 13,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/network/l08_http_session_generation_test.dart",
+        "line": 12,
+        "field": "accessToken",
+        "classification": "EXPLICIT_SYNTHETIC_MARKER",
+        "length": 25,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/network/l08_http_session_generation_test.dart",
+        "line": 17,
+        "field": "accessToken",
+        "classification": "EXPLICIT_SYNTHETIC_MARKER",
+        "length": 20,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/network/l08_http_session_generation_test.dart",
+        "line": 22,
+        "field": "accessToken",
+        "classification": "EXPLICIT_SYNTHETIC_MARKER",
+        "length": 24,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/session/l08_session_race_test.dart",
+        "line": 113,
+        "field": "accessToken",
+        "classification": "EXPLICIT_SYNTHETIC_MARKER",
+        "length": 24,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/session/l08_session_race_test.dart",
+        "line": 114,
+        "field": "refreshToken",
+        "classification": "EXPLICIT_SYNTHETIC_MARKER",
+        "length": 25,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/session/l08_session_race_test.dart",
+        "line": 140,
+        "field": "accessToken",
+        "classification": "EXPLICIT_SYNTHETIC_MARKER",
+        "length": 24,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/session/l08_session_race_test.dart",
+        "line": 141,
+        "field": "refreshToken",
+        "classification": "EXPLICIT_SYNTHETIC_MARKER",
+        "length": 25,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/session/l08_session_race_test.dart",
+        "line": 154,
+        "field": "accessToken",
+        "classification": "EXPLICIT_SYNTHETIC_MARKER",
+        "length": 20,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/session/l08_session_race_test.dart",
+        "line": 155,
+        "field": "refreshToken",
+        "classification": "EXPLICIT_SYNTHETIC_MARKER",
+        "length": 21,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/session/l08_session_race_test.dart",
+        "line": 227,
+        "field": "accessToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 10,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/session/l08_session_race_test.dart",
+        "line": 227,
+        "field": "refreshToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 11,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/session/l08_session_race_test.dart",
+        "line": 232,
+        "field": "accessToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 10,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/session/l08_session_race_test.dart",
+        "line": 232,
+        "field": "refreshToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 11,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/session/mobile_session_controller_test.dart",
+        "line": 12,
+        "field": "accessToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 2,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/session/mobile_session_controller_test.dart",
+        "line": 12,
+        "field": "refreshToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 2,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/session/mobile_session_controller_test.dart",
+        "line": 31,
+        "field": "accessToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 15,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/session/mobile_session_controller_test.dart",
+        "line": 32,
+        "field": "refreshToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 16,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/session/mobile_session_controller_test.dart",
+        "line": 67,
+        "field": "accessToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 2,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/core/session/mobile_session_controller_test.dart",
+        "line": 67,
+        "field": "refreshToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 2,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/features/auth/mobile_applicant_access_repository_test.dart",
+        "line": 123,
+        "field": "accessToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 11,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/features/qualification/mobile_qualification_test.dart",
+        "line": 73,
+        "field": "accessToken",
+        "classification": "EXPLICIT_SYNTHETIC_MARKER",
+        "length": 17,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/features/qualification/mobile_qualification_test.dart",
+        "line": 74,
+        "field": "refreshToken",
+        "classification": "EXPLICIT_SYNTHETIC_MARKER",
+        "length": 17,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/support/mobile_fakes.dart",
+        "line": 24,
+        "field": "accessToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 12,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      },
+      {
+        "path": "mobile/test/support/mobile_fakes.dart",
+        "line": 25,
+        "field": "refreshToken",
+        "classification": "SOURCE_CONTEXT_REVIEW_REQUIRED",
+        "length": 13,
+        "finalClassification": "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE",
+        "contextReview": "Fixed fake token in isolated test fixture; no signed JWT/runtime session value."
+      }
+    ],
+    "assignmentReviewCounts": {
+      "FORMAT_PLACEHOLDER_IN_TEST_SOURCE": 6,
+      "DETERMINISTIC_SYNTHETIC_TEST_FIXTURE": 32,
+      "SOURCE_EXPRESSION_NOT_SECRET": 4,
+      "TABLE_SHA256_FINGERPRINT_NOT_TOKEN": 1
+    },
+    "historicalJsonParseLimitations": [
+      {
+        "path": "docs/evidencia/L-02/aceptacion-final-V28/backend__target__l02-closed-case-V28-final.json",
+        "error": "JSONDecodeError"
+      },
+      {
+        "path": "docs/evidencia/L-02/aceptacion-final-V28/backend__target__l02-technical-resources-V28-final.json",
+        "error": "JSONDecodeError"
+      },
+      {
+        "path": "docs/evidencia/L-02/incremento-1/backend__target__l02-technical-fixture-recovery-1.json",
+        "error": "JSONDecodeError"
+      },
+      {
+        "path": "docs/evidencia/L-02/incremento-1/backend__target__l02-technical-fixture-recovery-2.json",
+        "error": "JSONDecodeError"
+      },
+      {
+        "path": "docs/evidencia/L-02/incremento-1/backend__target__l02-technical-fixtures-inspect.json",
+        "error": "JSONDecodeError"
+      },
+      {
+        "path": "docs/evidencia/L-02/verificacion-final/backend__target__l02-closed-case-verification.json",
+        "error": "JSONDecodeError"
+      },
+      {
+        "path": "docs/evidencia/L-02/verificacion-final/backend__target__l02-technical-fixtures-final.json",
+        "error": "JSONDecodeError"
+      },
+      {
+        "path": "docs/evidencia/L-03/incremento-3-mantenimiento/intento-1__backend__target__l03-migration-v31.json",
+        "error": "JSONDecodeError"
+      },
+      {
+        "path": "docs/evidencia/L-08/incremento-3-escritorio/rest03-8ba8e8bc-ea46-40bd-9848-11a11a79b9fd/inicio-ensayo.json",
+        "error": "JSONDecodeError"
+      }
+    ],
+    "malformedJsonStillCoveredByDecodedTextPatterns": true,
+    "unresolvedContextFindings": [],
+    "envTemplateReview": {
+      "recordedAt": "2026-10-23T20:49:47.0467183+00:00",
+      "path": "backend/ruta-fija-native.env.example",
+      "checks": [
+        {
+          "variable": "SPRING_DATASOURCE_PASSWORD",
+          "classification": "UPPERCASE_TEMPLATE_MARKER_REVIEW_REQUIRED",
+          "containsPlaceholderSyntax": false,
+          "valueDisclosed": false
+        },
+        {
+          "variable": "SPRING_FLYWAY_PASSWORD",
+          "classification": "UPPERCASE_TEMPLATE_MARKER_REVIEW_REQUIRED",
+          "containsPlaceholderSyntax": false,
+          "valueDisclosed": false
+        },
+        {
+          "variable": "RF_TEST_DATASOURCE_PASSWORD",
+          "classification": "UPPERCASE_TEMPLATE_MARKER_REVIEW_REQUIRED",
+          "containsPlaceholderSyntax": false,
+          "valueDisclosed": false
+        },
+        {
+          "variable": "RF_TEST_MIGRATOR_PASSWORD",
+          "classification": "UPPERCASE_TEMPLATE_MARKER_REVIEW_REQUIRED",
+          "containsPlaceholderSyntax": false,
+          "valueDisclosed": false
+        },
+        {
+          "variable": "JWT_SECRET_BASE64",
+          "classification": "UPPERCASE_TEMPLATE_MARKER_REVIEW_REQUIRED",
+          "containsPlaceholderSyntax": false,
+          "valueDisclosed": false
+        },
+        {
+          "variable": "SPRING_MAIL_PASSWORD",
+          "classification": "UPPERCASE_TEMPLATE_MARKER_REVIEW_REQUIRED",
+          "containsPlaceholderSyntax": false,
+          "valueDisclosed": false
+        }
+      ],
+      "valuesDisclosed": false,
+      "correctsInitialHeuristic": "Expanded multilingual template-marker recognition; private configuration files were not read"
+    },
+    "valuesDisclosed": false
+  },
+  "lineEndingPolicy": {
+    "observedCoreAutocrlf": "true",
+    "gitattributesSha256": "47d33d7b41437e9becfad361ce3e70b0d4290afbf3572e53c43214fcc54d3892",
+    "note": "Reviewer changed no Git setting. Root must verify staged hashed evidence bytes. No claim every future clone preserves bytes outside explicit attributes.",
+    "rootPlannedCommand": "git add .",
+    "rootDecision": "Existing core.autocrlf=true retained. Root measured 14 CRLF-only files; normal add avoids irrelevant index churn. Explicit .gitattributes protects hashed actas/evidence/delivery. Final staged required sources checked separately by root."
+  },
+  "commands": [
+    {
+      "command": "git -c safe.directory=<workspace> -c core.quotepath=false ls-files -z",
+      "result": "619 tracked paths; zero private/cache filename matches."
+    },
+    {
+      "command": "git -c safe.directory=<workspace> -c core.quotepath=false ls-files --others --exclude-standard -z",
+      "result": "Nonignored candidates inventoried; filesystem sizes computed."
+    },
+    {
+      "command": "git -c safe.directory=<workspace> -c core.quotepath=false diff --name-only -z",
+      "result": "207 modified/deleted tracked paths."
+    },
+    {
+      "command": "git -c safe.directory=<workspace> -c core.quotepath=false diff --cached --name-only -z",
+      "result": "0 staged before root-controlled staging."
+    },
+    {
+      "command": "git -c safe.directory=<workspace> -c core.quotepath=false grep --cached -I -l -E -e <high-confidence patterns>",
+      "result": "Exit1 normal no-match; filenames only."
+    },
+    {
+      "command": "git -c safe.directory=<workspace> check-ignore -- <17 explicit probe arguments>",
+      "result": "17 expected ignore/preserve outcomes PASS."
+    },
+    {
+      "command": "Python3.14 read-only scanner: utf-8-sig/utf-16, known-token patterns, JSON fields, source assignment contexts",
+      "result": "4091 text files; 0 high-confidence matches; 43 contextual findings resolved; values not printed."
+    },
+    {
+      "command": "SHA-256 .git/index before/after read-only commands",
+      "result": "Identical; reviewer did not stage."
+    }
+  ],
+  "reviewIncidents": [
+    {
+      "event": "PowerShell semantic scan interrupted for performance",
+      "result": "Replaced by completed Python scan; incomplete run not counted."
+    },
+    {
+      "event": "Initial stdin check-ignore probe unreliable",
+      "result": "Replaced by explicit argument probes; 17/17 confirmed."
+    },
+    {
+      "event": "Initial name heuristic matched public backup test namespace",
+      "result": "Corrected to private file suffix/path rules; zero private tracked paths."
+    }
+  ],
+  "limits": [
+    "Pattern/context review does not prove arbitrary opaque strings or screenshots contain no sensitive information.",
+    "Ignored private runtime files, keystores, dumps/encrypted archives deliberately not read or compared.",
+    "Public screenshots/certificates/signatures remain binary candidates; OCR/manual image review outside text scan.",
+    "Nine historical JSON artifacts are not standalone parseable JSON; decoded text scans completed; frozen bytes untouched.",
+    "Six uppercase markers in backend/ruta-fija-native.env.example are template placeholders, not configured runtime credentials; no private comparison.",
+    "Root must verify final staged paths/size/attributes after adding this evidence.",
+    "Current uncompressed delta is approximately144.1MiB, mainly public historical evidence; APK/JAR/ZIP/private runtime excluded by root policy."
+  ]
+}

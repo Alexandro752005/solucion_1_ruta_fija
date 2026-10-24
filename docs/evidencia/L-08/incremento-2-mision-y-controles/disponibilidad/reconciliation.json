@@ -1,0 +1,73 @@
+{
+  "runId" : "7a84a97e-79b8-4b3a-b316-545e6b954d55",
+  "observedAt" : "2026-10-22T16:51:26.882138600Z",
+  "originalResultSha256" : "361c34c071fa44272760c770a3ae39d41e9c4290ec7a80af6af89f2403d5f049",
+  "originalResultPreserved" : true,
+  "originalMonitorStop" : "FAILED_DURING_INTERRUPTED_JOURNAL_WRITE_NOT_RETROACTIVELY_PASSED",
+  "monitorJournalSha256" : "3cc93ebb7e8d1189330d41823fe148edb09ec69c8f5cf67eed47a91d7d6d10c8",
+  "httpSamples" : [ {
+    "formatVersion" : 1,
+    "runId" : "1a6750b8-6f57-4900-978a-9ba8928ec719",
+    "journalSequence" : 6,
+    "type" : "HTTP_SAMPLE",
+    "at" : "2026-10-22T16:45:41.168884500Z",
+    "details" : {
+      "probes" : [ {
+        "probeId" : "api-readiness",
+        "outcome" : "TRANSPORT_ERROR",
+        "httpStatus" : null,
+        "elapsedMillis" : 2
+      }, {
+        "probeId" : "api-liveness",
+        "outcome" : "TRANSPORT_ERROR",
+        "httpStatus" : null,
+        "elapsedMillis" : 1
+      }, {
+        "probeId" : "crm-application",
+        "outcome" : "HEALTHY",
+        "httpStatus" : 200,
+        "elapsedMillis" : 5
+      } ],
+      "startedAt" : "2026-10-22T16:45:41.158864400Z",
+      "sampleSequence" : 5,
+      "allRequiredProbesHealthy" : false
+    }
+  }, {
+    "formatVersion" : 1,
+    "runId" : "1a6750b8-6f57-4900-978a-9ba8928ec719",
+    "journalSequence" : 21,
+    "type" : "HTTP_SAMPLE",
+    "at" : "2026-10-22T16:45:54.193685800Z",
+    "details" : {
+      "probes" : [ {
+        "probeId" : "api-readiness",
+        "outcome" : "HEALTHY",
+        "httpStatus" : 200,
+        "elapsedMillis" : 21
+      }, {
+        "probeId" : "api-liveness",
+        "outcome" : "HEALTHY",
+        "httpStatus" : 200,
+        "elapsedMillis" : 8
+      }, {
+        "probeId" : "crm-application",
+        "outcome" : "HEALTHY",
+        "httpStatus" : 200,
+        "elapsedMillis" : 4
+      } ],
+      "startedAt" : "2026-10-22T16:45:54.159689100Z",
+      "sampleSequence" : 18,
+      "allRequiredProbesHealthy" : true
+    }
+  } ],
+  "stopCommandToConfirmedDetectionMillis" : 2804,
+  "confirmedDetectionToVerifiedHealthRecoveryMillis" : 13024,
+  "databaseTablesCompared" : 98,
+  "databaseRowsLedgerAndAcceptancesPreserved" : true,
+  "ownedApiAndMonitorAbsent" : true,
+  "cleanupProtectionReleased" : true,
+  "smtpAttempts" : 0,
+  "databaseWrites" : 0,
+  "result" : "PASS_OBSERVED_OUTAGE_RETURN_AND_RESOURCE_RECONCILIATION_ONLY",
+  "limits" : [ "The original monitor stop failure remains historical", "Cooperative stop correction requires its separately executed regression", "Same PC and accelerated one-second cadence", "Health endpoints only, not business restoration", "No independent monitoring, external alerts,24x7 coverage,backup,restore or RPO credit" ]
+}

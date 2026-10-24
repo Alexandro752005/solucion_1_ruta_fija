@@ -1,0 +1,20 @@
+{
+  "crm": {
+    "passingCases": 14,
+    "files": 4,
+    "boundary": "Angular components with API doubles"
+  },
+  "flutter": {
+    "passingCases": 49,
+    "skippedConnectedOptIn": 1,
+    "boundary": "Repositories/widgets with HTTP doubles. Opt-in skip is compilation only, not connected evidence."
+  },
+  "typecheck": "PASS",
+  "analyze": "PASS_NO_ISSUES",
+  "builds": {
+    "backend": "PASS_PACKAGE_SKIP_TESTS",
+    "crm": "PASS_PRODUCTION",
+    "android": "PASS_DEBUG_APK"
+  },
+  "warning": "Android SDK XML version warning observed; build succeeded. No SDK/toolchain was changed automatically."
+}

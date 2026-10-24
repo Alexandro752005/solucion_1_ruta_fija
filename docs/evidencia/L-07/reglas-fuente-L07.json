@@ -1,0 +1,1034 @@
+{
+  "source": "specs/registro.json",
+  "sourceSha256": "ca2794a41907d8081e0b77bd7ee02c3960024798d48442a7d26f053cb730ac50",
+  "questions": [
+    {
+      "id": "Q-080",
+      "moduleId": "MOD-REP",
+      "dimension": "ALCANCE",
+      "question": "¿Qué indicador principal debe mostrar el CRM para evaluar la operación diaria: cumplimiento, puntualidad, disponibilidad u otro?",
+      "decisionTopic": "Indicador prioritario",
+      "reason": "Definir indicador prioritario y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "El indicador principal es el porcentaje de servicios completados respecto a los programados del periodo. Cancelados, interrumpidos y pendientes se muestran separados; se distingue cierre declarado de corroboración de terminal. No se elimina del denominador un servicio para mejorar el resultado.",
+      "decisionRefs": [
+        "D-V3-Q-080"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-080",
+        "sourceAnswerPointer": "/questions/35",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-080-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Cumplimiento de servicios",
+        "answeredAtClientReported": "2026-10-11T17:08:02.188Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-082",
+      "moduleId": "MOD-REP",
+      "dimension": "ACTORES_PERMISOS",
+      "question": "¿Qué campos personales puede exportar ADMIN de su empresa y debe permitirse algún tipo de exportación propia al CONDUCTOR?",
+      "decisionTopic": "Exportación de datos personales",
+      "reason": "Definir exportación de datos personales y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "ADMIN exporta identificador interno, nombre, estado, grupo y datos de servicios necesarios de su empresa. Se excluyen DNI completo, contactos, imágenes de documentos y puntos GPS por defecto. CONDUCTOR puede descargar sus propios servicios y resultados; los datos adicionales se atienden mediante acceso verificado.",
+      "decisionRefs": [
+        "D-V3-Q-082"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-082",
+        "sourceAnswerPointer": "/questions/36",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-082-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Exportación operativa mínima",
+        "answeredAtClientReported": "2026-10-11T17:08:10.516Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-083",
+      "moduleId": "MOD-REP",
+      "dimension": "DEPENDENCIAS",
+      "question": "Si ADMIN corrige un servicio de un periodo ya reportado, ¿se recalcula el reporte o se emite una versión corregida conservando el original?",
+      "decisionTopic": "Revisión de indicadores históricos",
+      "reason": "Definir revisión de indicadores históricos y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "La vista del periodo se recalcula con la corrección. Un reporte previamente emitido conserva su versión original y la siguiente emisión crea una versión corregida con fecha y referencia al cambio, sin sobrescribir el archivo anterior.",
+      "decisionRefs": [
+        "D-V3-Q-083"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-083",
+        "sourceAnswerPointer": "/questions/37",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-083-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Versionar los reportes emitidos",
+        "answeredAtClientReported": "2026-10-11T17:09:28.956Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-086",
+      "moduleId": "MOD-AUD",
+      "dimension": "DATOS",
+      "question": "¿Durante cuánto tiempo debe conservarse la auditoría y qué parte puede archivarse o anonimizarse después?",
+      "decisionTopic": "Retención de auditoría",
+      "reason": "Definir retención de auditoría y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Se conserva auditoría operativa 6 meses, con la misma revisión de eliminación, anonimización y evidencia de casos abiertos. Reduce almacenamiento y el periodo disponible para reconstruir decisiones.",
+      "decisionRefs": [
+        "D-V3-Q-086"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-086",
+        "sourceAnswerPointer": "/questions/40",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-086-B",
+        "selectedOptionRank": 2,
+        "selectedOptionLabel": "6 meses de auditoría operativa",
+        "answeredAtClientReported": "2026-10-11T17:13:03.330Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "PENDIENTE_VERIFICACION"
+    },
+    {
+      "id": "Q-088",
+      "moduleId": "MOD-UX",
+      "dimension": "FRONTEND",
+      "question": "¿Qué decisión operativa debe facilitar primero el dashboard del ADMIN: resolver incidencias, gestionar ofertas pendientes, reasignar servicios o revisar incorporación?",
+      "decisionTopic": "Objetivo del dashboard",
+      "reason": "Definir objetivo del dashboard y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Tras las alertas críticas, la prioridad es resolver servicios próximos sin aceptación confirmada o que necesitan reasignación. Luego se muestran ofertas por vencer, incidencias e incorporación pendiente.",
+      "decisionRefs": [
+        "D-V3-Q-088"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-088",
+        "sourceAnswerPointer": "/questions/42",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-088-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Servicios próximos sin asignación válida",
+        "answeredAtClientReported": "2026-10-11T17:14:58.250Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-089",
+      "moduleId": "MOD-UX",
+      "dimension": "FRONTEND",
+      "question": "En el inicio móvil, ¿qué tiene prioridad cuando conviven una oferta pendiente de aceptación y un servicio ya aceptado próximo a comenzar?",
+      "decisionTopic": "Prioridad de inicio móvil",
+      "reason": "Definir prioridad de inicio móvil y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "El servicio aceptado próximo a iniciar ocupa la tarjeta principal con su acción de inicio. La oferta pendiente aparece claramente con vencimiento y acciones de aceptar o rechazar, sin ocultar el compromiso existente.",
+      "decisionRefs": [
+        "D-V3-Q-089"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-089",
+        "sourceAnswerPointer": "/questions/43",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-089-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Servicio aceptado próximo, oferta destacada",
+        "answeredAtClientReported": "2026-10-11T17:16:38.298Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-090",
+      "moduleId": "MOD-UX",
+      "dimension": "ACTORES_PERMISOS",
+      "question": "¿Qué campos del perfil puede cambiar CONDUCTOR directamente, separándolos de identidad, correo de recuperación y documentos que requieren revisión?",
+      "decisionTopic": "Edición de perfil",
+      "reason": "Definir edición de perfil y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "CONDUCTOR puede cambiar preferencias de avisos, tamaño de texto y una foto de perfil opcional. Identidad, contacto verificado, correo y documentos usan solicitudes o flujos específicos con revisión o verificación; una foto nunca sustituye un documento.",
+      "decisionRefs": [
+        "D-V3-Q-090"
+      ],
+      "repeatPolicy": "Preguntar solo por el detalle pendiente de esta redacción; contrastar primero respuestas vigentes y propuestas consolidadas.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-090",
+        "sourceAnswerPointer": "/questions/44",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-090-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Preferencias y foto opcional",
+        "answeredAtClientReported": "2026-10-11T17:16:53.425Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "requiresUserConfirmation": false,
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-084",
+      "moduleId": "MOD-AUD",
+      "dimension": "ALCANCE",
+      "question": "¿Qué decisiones del proceso deben quedar registradas de manera obligatoria en auditoría?",
+      "decisionTopic": "Eventos auditables",
+      "reason": "Definir eventos auditables y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Se auditan todos los eventos del núcleo definido y los intentos denegados relevantes de seguridad, con actor, empresa, resultado y hora. No se registran secretos ni cada refresco de pantalla; acceso y retención se deciden por separado.",
+      "decisionRefs": [
+        "D-V3-Q-084"
+      ],
+      "repeatPolicy": "Omitir si una respuesta vigente ya resuelve esta decisión. Contrastar la base antes de preguntar.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "removedFromActiveInterview": false,
+      "archiveReason": "CONSOLIDADA_EN_REGLAS_DE_AUDITORIA",
+      "resolvedByQuestionIds": [
+        "Q-005",
+        "Q-008",
+        "Q-018",
+        "Q-024",
+        "Q-035",
+        "Q-052",
+        "Q-056",
+        "Q-064",
+        "Q-065"
+      ],
+      "requiresUserConfirmation": false,
+      "reinstatedAsAnsweredInVersion": "3.0",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-084",
+        "sourceAnswerPointer": "/questions/38",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-084-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Núcleo de cambios y decisiones",
+        "answeredAtClientReported": "2026-10-11T17:11:12.883Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-085",
+      "moduleId": "MOD-AUD",
+      "dimension": "ACTORES_PERMISOS",
+      "question": "¿Qué rol debe poder consultar quién aprobó, rechazó o reasignó un recurso?",
+      "decisionTopic": "Acceso a auditoría",
+      "reason": "Definir acceso a auditoría y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "ADMIN consulta la auditoría operativa de su empresa. SUPER_ADMIN consulta los eventos de administración de plataforma; no tiene detalle operativo personal irrestricto. CONDUCTOR ve resultados e historial de sus propias solicitudes y servicios, sin el registro administrativo completo.",
+      "decisionRefs": [
+        "D-V3-Q-085"
+      ],
+      "repeatPolicy": "Omitir si una respuesta vigente ya resuelve esta decisión. Contrastar la base antes de preguntar.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "removedFromActiveInterview": false,
+      "archiveReason": "DERIVADA_DE_ROLES_Y_AISLAMIENTO",
+      "resolvedByQuestionIds": [
+        "Q-002",
+        "Q-003",
+        "Q-006",
+        "Q-064"
+      ],
+      "requiresUserConfirmation": false,
+      "reinstatedAsAnsweredInVersion": "3.0",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-085",
+        "sourceAnswerPointer": "/questions/39",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-085-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "ADMIN de empresa y SUPER_ADMIN de plataforma",
+        "answeredAtClientReported": "2026-10-11T17:11:36.531Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    },
+    {
+      "id": "Q-087",
+      "moduleId": "MOD-AUD",
+      "dimension": "DATOS",
+      "question": "Si se corrige un dato sensible, ¿qué información del cambio debe conservar el registro?",
+      "decisionTopic": "Contenido de cambio auditado",
+      "reason": "Definir contenido de cambio auditado y derivar condiciones de servidor y comportamiento por rol/estado en las superficies afectadas.",
+      "status": "RESPONDIDA",
+      "answer": "Se registra entidad, empresa, campo, valor anterior y nuevo, actor, hora, motivo y referencia de evidencia cuando corresponda. Los valores personales se muestran enmascarados salvo permiso específico y tienen retención definida; nunca se registran secretos.",
+      "decisionRefs": [
+        "D-V3-Q-087"
+      ],
+      "repeatPolicy": "Omitir si una respuesta vigente ya resuelve esta decisión. Contrastar la base antes de preguntar.",
+      "answerCertainty": "CONFIRMADA_USUARIO",
+      "removedFromActiveInterview": false,
+      "archiveReason": "CONSOLIDADA_EN_CORRECCIONES_AUDITABLES",
+      "resolvedByQuestionIds": [
+        "Q-024",
+        "Q-035",
+        "Q-064",
+        "Q-065"
+      ],
+      "requiresUserConfirmation": false,
+      "reinstatedAsAnsweredInVersion": "3.0",
+      "answerSource": {
+        "fileName": "ruta_fija_respuestas_2026-10-11-17-26-37.json",
+        "sourceImportId": "IMPORT-V3-20261011",
+        "submittedQuestionId": "Q-087",
+        "sourceAnswerPointer": "/questions/41",
+        "answerOrigin": "OPCION_SELECCIONADA",
+        "selectedOptionId": "Q-087-A",
+        "selectedOptionRank": 1,
+        "selectedOptionLabel": "Cambios por campo con valores protegidos",
+        "answeredAtClientReported": "2026-10-11T17:13:12.658Z",
+        "consolidatedAt": "2026-10-11T17:48:57.710827+00:00"
+      },
+      "userNotes": "",
+      "verificationStatus": "IMPLEMENTACION_NO_REVISADA"
+    }
+  ],
+  "rules": [
+    {
+      "id": "BR-V3-Q-080",
+      "statement": "El indicador principal es el porcentaje de servicios completados respecto a los programados del periodo. Cancelados, interrumpidos y pendientes se muestran separados; se distingue cierre declarado de corroboración de terminal. No se elimina del denominador un servicio para mejorar el resultado.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-REP",
+      "moduleRefs": [
+        "MOD-REP",
+        "MOD-SRV"
+      ],
+      "questionRefs": [
+        "Q-080"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-080"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-080-01",
+        "AC-V3-Q-080-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-080"
+      ],
+      "backend": "Calcular porcentaje de completados respecto a programados del periodo con denominador identificable y resultados separados. Usar cierre válido de servicio iniciado; distinguir declarado y corroborado y no excluir cancelados para mejorar KPI.",
+      "crm": "Priorizar cumplimiento y mostrar cancelados/interrumpidos/pendientes con periodo y denominador.",
+      "app": "Consultar resultados propios sin métricas de otros conductores no autorizadas.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-082",
+      "statement": "ADMIN exporta identificador interno, nombre, estado, grupo y datos de servicios necesarios de su empresa. Se excluyen DNI completo, contactos, imágenes de documentos y puntos GPS por defecto. CONDUCTOR puede descargar sus propios servicios y resultados; los datos adicionales se atienden mediante acceso verificado.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-REP",
+      "moduleRefs": [
+        "MOD-REP",
+        "MOD-GPS",
+        "MOD-AUD"
+      ],
+      "questionRefs": [
+        "Q-082"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-082"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-082-01",
+        "AC-V3-Q-082-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-082"
+      ],
+      "backend": "Autorizar exportación operativa por empresa: ID interno, nombre, estado, grupo y servicio necesario; excluir DNI completo, contactos, documentos y puntos GPS por defecto. Permitir servicios/resultados propios al conductor; datos extra vía acceso verificado. Auditar descarga y excluir secretos.",
+      "crm": "Exportar CSV/listado operativo mínimo y explicar alcance; no añadir expediente o GPS completo por defecto.",
+      "app": "Descargar servicios y resultados propios, sin acceso directo general a puntos GPS de Q-078.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-083",
+      "statement": "La vista del periodo se recalcula con la corrección. Un reporte previamente emitido conserva su versión original y la siguiente emisión crea una versión corregida con fecha y referencia al cambio, sin sobrescribir el archivo anterior.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-REP",
+      "moduleRefs": [
+        "MOD-REP",
+        "MOD-SRV",
+        "MOD-AUD"
+      ],
+      "questionRefs": [
+        "Q-083"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-083"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-083-01",
+        "AC-V3-Q-083-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-083"
+      ],
+      "backend": "Recalcular vista vigente al corregir y versionar emisiones de reporte con fecha, referencia a corrección y snapshot consistente. Conservar la versión original; no modificar archivos previamente descargados.",
+      "crm": "Distinguir reporte vigente de emitido y ofrecer versión corregida con causa.",
+      "app": "Mostrar el dato vigente propio y preservar referencia al histórico cuando corresponda.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-084",
+      "statement": "Se auditan todos los eventos del núcleo definido y los intentos denegados relevantes de seguridad, con actor, empresa, resultado y hora. No se registran secretos ni cada refresco de pantalla; acceso y retención se deciden por separado.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-AUD",
+      "moduleRefs": [
+        "MOD-AUD",
+        "MOD-AUTH",
+        "MOD-ASG",
+        "MOD-SRV"
+      ],
+      "questionRefs": [
+        "Q-084"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-084"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-084-01",
+        "AC-V3-Q-084-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-084"
+      ],
+      "backend": "Auditar núcleo de decisiones y cambios críticos y denegaciones relevantes, con empresa, actor, resultado y hora; no guardar secretos ni cada refresco. Aplicar retención y permisos propios, con resultados originales preservados.",
+      "crm": "Consultar eventos obligatorios según empresa y permiso; no simular evidencia de implementación.",
+      "app": "Mostrar resultado e historial propios relevantes; no el log administrativo completo.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-085",
+      "statement": "ADMIN consulta la auditoría operativa de su empresa. SUPER_ADMIN consulta los eventos de administración de plataforma; no tiene detalle operativo personal irrestricto. CONDUCTOR ve resultados e historial de sus propias solicitudes y servicios, sin el registro administrativo completo.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-AUD",
+      "moduleRefs": [
+        "MOD-AUD",
+        "MOD-ORG"
+      ],
+      "questionRefs": [
+        "Q-085"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-085"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-085-01",
+        "AC-V3-Q-085-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-085"
+      ],
+      "backend": "Autorizar lectura de auditoría por objeto y empresa: ADMIN operativo propio, SUPER_ADMIN administración de plataforma, CONDUCTOR resultados propios. No conceder lectura personal transversal a SUPER_ADMIN por su nombre de rol.",
+      "crm": "Separar vistas operativas y de plataforma según rol.",
+      "app": "Mostrar historial propio de solicitudes y servicios sin log administrativo completo.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-086",
+      "statement": "Se conserva auditoría operativa 6 meses, con la misma revisión de eliminación, anonimización y evidencia de casos abiertos. Reduce almacenamiento y el periodo disponible para reconstruir decisiones.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-AUD",
+      "moduleRefs": [
+        "MOD-AUD",
+        "MOD-NFR",
+        "MOD-GPS"
+      ],
+      "questionRefs": [
+        "Q-086"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-086"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-086-01",
+        "AC-V3-Q-086-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-086"
+      ],
+      "backend": "Retener auditoría operativa 6 meses; aplicar eliminación/anonimización por finalidad y excepciones justificadas de casos abiertos. No trasladar ese plazo automáticamente a términos, recuperación, documentos o GPS. Definir calendario y copias antes de activar purga.",
+      "crm": "Mostrar registros operativos dentro de retención y excepciones acotadas con acceso restringido.",
+      "app": "El historial propio visible no debe confundirse con retención universal de todos los datos de cuenta.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-087",
+      "statement": "Se registra entidad, empresa, campo, valor anterior y nuevo, actor, hora, motivo y referencia de evidencia cuando corresponda. Los valores personales se muestran enmascarados salvo permiso específico y tienen retención definida; nunca se registran secretos.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-AUD",
+      "moduleRefs": [
+        "MOD-AUD",
+        "MOD-DRV",
+        "MOD-VEH",
+        "MOD-SRV"
+      ],
+      "questionRefs": [
+        "Q-087"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-087"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-087-01",
+        "AC-V3-Q-087-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-087"
+      ],
+      "backend": "Guardar diferencias por campo con entidad, empresa, anterior/nuevo, autor, hora, motivo y evidencia pertinente; proteger/enmascarar valores personales y limitar revelado por permiso. No registrar contraseñas, OTP ni tokens.",
+      "crm": "Revisar cambios enmascarados y revelar datos personales solo con autorización pertinente.",
+      "app": "Solicitar corrección y consultar resultado propio; no editar evidencia ni acceder a cambios ajenos.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-088",
+      "statement": "Tras las alertas críticas, la prioridad es resolver servicios próximos sin aceptación confirmada o que necesitan reasignación. Luego se muestran ofertas por vencer, incidencias e incorporación pendiente.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-UX",
+      "moduleRefs": [
+        "MOD-UX",
+        "MOD-ASG",
+        "MOD-INC"
+      ],
+      "questionRefs": [
+        "Q-088"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-088"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-088-01",
+        "AC-V3-Q-088-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-088"
+      ],
+      "backend": "Entregar al dashboard colas por criticidad, proximidad de inicio y asignación válida; mantener alertas de seguridad por encima de la prioridad ordinaria. No usar disponibilidad declarada como aceptación.",
+      "crm": "Tras alertas críticas, priorizar próximos servicios sin asignación válida/reasignación, luego ofertas por vencer, incidencias e incorporación.",
+      "app": "No altera el inicio móvil; mantiene correspondencia con estados del servidor.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-089",
+      "statement": "El servicio aceptado próximo a iniciar ocupa la tarjeta principal con su acción de inicio. La oferta pendiente aparece claramente con vencimiento y acciones de aceptar o rechazar, sin ocultar el compromiso existente.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-UX",
+      "moduleRefs": [
+        "MOD-UX",
+        "MOD-ASG",
+        "MOD-SRV"
+      ],
+      "questionRefs": [
+        "Q-089"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-089"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-089-01",
+        "AC-V3-Q-089-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-089"
+      ],
+      "backend": "Exponer servicio aceptado próximo y oferta pendiente con sus estados y deadlines independientes; volver a comprobar conflictos al aceptar.",
+      "crm": "Conservar la misma información operativa que utiliza la app sin fusionar oferta y servicio.",
+      "app": "Fijar servicio aceptado próximo en tarjeta principal con Iniciar; destacar oferta y vencimiento separados con aceptar/rechazar.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    },
+    {
+      "id": "BR-V3-Q-090",
+      "statement": "CONDUCTOR puede cambiar preferencias de avisos, tamaño de texto y una foto de perfil opcional. Identidad, contacto verificado, correo y documentos usan solicitudes o flujos específicos con revisión o verificación; una foto nunca sustituye un documento.",
+      "status": "CONFIRMADA_USUARIO",
+      "ownerModuleId": "MOD-UX",
+      "moduleRefs": [
+        "MOD-UX",
+        "MOD-AUTH",
+        "MOD-DRV"
+      ],
+      "questionRefs": [
+        "Q-090"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-090"
+      ],
+      "acceptanceRefs": [
+        "AC-V3-Q-090-01",
+        "AC-V3-Q-090-02"
+      ],
+      "requirementRefs": [
+        "RF-V3-Q-090"
+      ],
+      "backend": "Permitir edición directa de preferencias de avisos/texto y foto de perfil opcional. Identidad, contacto verificado, correo y documentos usan sus procesos específicos; una foto no verifica documentos ni se convierte en foto de placa.",
+      "crm": "Gestionar solicitudes de cambios que requieren revisión; no tratar preferencias como nueva revisión documental.",
+      "app": "Editar preferencias y foto opcional; guiar cambios de identidad/correo/documentos al flujo correspondiente.",
+      "implementationStatus": "NO_REVISADA",
+      "derivationStatus": "ESPECIFICACION_DERIVADA_DE_RESPUESTA",
+      "scopeNotice": "La respuesta es explícita; backend, interfaces y criterios son derivaciones de especificación, no pruebas de implementación."
+    }
+  ],
+  "acceptanceCriteria": [
+    {
+      "id": "AC-V3-Q-080-01",
+      "criterion": "El KPI identifica periodo, completados y total programado, con estado de corroboración separado.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-080"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-080"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-080"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-080-02",
+      "criterion": "Una oferta aceptada, cancelación o interrupción no se cuenta como servicio completado.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-080"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-080"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-080"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-082-01",
+      "criterion": "El archivo de ADMIN solo contiene datos operativos permitidos de su empresa.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-082"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-082"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-082"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-082-02",
+      "criterion": "La exportación propia no revela otros conductores ni equivale a descargar puntos GPS detallados.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-082"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-082"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-082"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-083-01",
+      "criterion": "Una corrección genera nueva emisión distinguible y conserva la emisión anterior.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-083"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-083"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-083"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-083-02",
+      "criterion": "No se sobrescribe el reporte original ni se oculta el cambio de tiempos.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-083"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-083"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-083"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-084-01",
+      "criterion": "Una aceptación, rechazo, vencimiento, cambio crítico o denegación relevante genera evento auditable diseñado.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-084"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-084"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-084"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-084-02",
+      "criterion": "Un refresco corriente no crea automáticamente un evento obligatorio ni se guardan OTP o contraseñas.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-084"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-084"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-084"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-085-01",
+      "criterion": "ADMIN consulta eventos de aprobación/reasignación de su empresa.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-085"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-085"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-085"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-085-02",
+      "criterion": "SUPER_ADMIN no obtiene detalle operativo personal de todas las empresas por defecto.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-085"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-085"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-085"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-086-01",
+      "criterion": "Se aplica objetivo de seis meses a auditoría operativa, con excepción justificada de caso abierto.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-086"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-086"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-086"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-086-02",
+      "criterion": "No se conserva todo dato personal indefinidamente ni se prolongan puntos GPS a seis meses por estar referenciados en auditoría.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-086"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-086"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-086"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-087-01",
+      "criterion": "Una corrección conserva valor original y nuevo con autor y motivo, bajo permiso de consulta.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-087"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-087"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-087"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-087-02",
+      "criterion": "Un token o contraseña no aparece en valores históricos; auditar no elude retención GPS.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-087"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-087"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-087"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-088-01",
+      "criterion": "Un servicio próximo sin aceptación aparece antes que incorporación ordinaria, después de alertas críticas.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-088"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-088"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-088"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-088-02",
+      "criterion": "Un contador de ofertas pendientes no se presenta como servicios ya cubiertos.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-088"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-088"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-088"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-089-01",
+      "criterion": "La oferta visible no oculta el servicio aceptado próximo ni su acceso a inicio.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-089"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-089"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-089"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-089-02",
+      "criterion": "Aceptar una oferta no inicia servicio ni permite solapamiento con uno ya confirmado.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-089"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-089"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-089"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-090-01",
+      "criterion": "Cambiar tamaño de texto o foto opcional no cambia estado principal del conductor.",
+      "scenarioType": "POSITIVO",
+      "questionRefs": [
+        "Q-090"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-090"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-090"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    },
+    {
+      "id": "AC-V3-Q-090-02",
+      "criterion": "Editar perfil no cambia libremente correo verificado, identidad o documentación aprobada.",
+      "scenarioType": "NEGATIVO_O_LIMITE",
+      "questionRefs": [
+        "Q-090"
+      ],
+      "ruleRefs": [
+        "BR-V3-Q-090"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-090"
+      ],
+      "status": "ESPECIFICADO_NO_EJECUTADO",
+      "evidence": null
+    }
+  ],
+  "verificationTasks": [
+    {
+      "id": "VT-V3-Q-079-01",
+      "statement": "Contrastar finalidad, obligaciones de la modalidad y gestión de respaldos antes de fijar la política definitiva.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-079"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-079"
+      ],
+      "moduleRefs": [
+        "MOD-GPS",
+        "MOD-INC",
+        "MOD-AUD",
+        "MOD-NFR"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-Q-086-01",
+      "statement": "Definir retención específica de términos, seguridad, documentos y evidencia según finalidad y obligaciones aplicables; probar volumen y expiración de respaldos.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-086"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-086"
+      ],
+      "moduleRefs": [
+        "MOD-AUD",
+        "MOD-NFR",
+        "MOD-GPS"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-Q-099-01",
+      "statement": "Probar los flujos críticos con teclado, escalado y lector de pantalla; verificar los criterios del alcance elegido.",
+      "status": "PENDIENTE_VERIFICACION",
+      "questionRefs": [
+        "Q-099"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-099"
+      ],
+      "moduleRefs": [
+        "MOD-NFR",
+        "MOD-UX"
+      ],
+      "evidence": null
+    },
+    {
+      "id": "VT-V3-AUDIT-RETENTION",
+      "statement": "Definir cómputo de seis meses calendario, eventos sujetos al plazo, excepciones justificadas y gestión de copias; no aplicar a toda prueba contractual o documento automáticamente.",
+      "status": "PENDIENTE_DETALLE_DE_PROCESO",
+      "questionRefs": [
+        "Q-086",
+        "Q-087"
+      ],
+      "decisionRefs": [
+        "D-V3-Q-086",
+        "D-V3-Q-087"
+      ],
+      "moduleRefs": [
+        "MOD-AUD",
+        "MOD-NFR"
+      ],
+      "evidence": null
+    }
+  ],
+  "notice": "Approved later supplements on global PII masking, retention RET02/T04/T05/T06 and local-only closures remain in force. Q081 is resolved in archived context; no new rule is inferred."
+}

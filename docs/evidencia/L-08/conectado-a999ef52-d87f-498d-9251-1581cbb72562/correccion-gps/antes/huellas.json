@@ -1,0 +1,8 @@
+{
+  "mobile/pubspec.yaml": "db36adc08f65fdb42c4427cc1f22837eaa4e536ea6bee0fba2c1ed29f87bbbbf",
+  "mobile/pubspec.lock": "edace2386061238d251ac005be77db34fe882f1d7d0f8151704d43c949103639",
+  "mobile/lib/features/location/data/geolocator_device_location_gateway.dart": "fdd0334c4e9af97c2b848aaeeec402b29b4de97c8622e1ac798f3ef94729172d",
+  "mobile/lib/features/location/domain/mobile_foreground_location.dart": "51f766eb82593bdb7a59f259556dc8770e040106ea124c800bdc9c1e6ffd10e3",
+  "mobile/lib/features/location/domain/mobile_service_location_controller.dart": "f6c3e19ab1bda1f08805974d6714c23a6453f60930336f31c4f9a99e370e558e",
+  "mobile/lib/features/location/presentation/service_location_status.dart": "03bef753b00017cf4ccb976c650a68222245ee7d240754733e9a2b7241492dd0"
+}

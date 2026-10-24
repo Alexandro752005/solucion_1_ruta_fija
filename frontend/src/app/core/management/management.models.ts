@@ -44,6 +44,50 @@ export interface UserUpdatePayload {
   readonly role: Exclude<UserRole, 'SUPER_ADMIN'>;
 }
 
+export type RecoveryEvidenceMethod = 'PRIOR_SECURE_CONTACT' | 'IN_PERSON';
+
+export interface ConductorRecoveryStartPayload {
+  readonly newEmail: string;
+  readonly evidenceMethod: RecoveryEvidenceMethod;
+  readonly evidenceReference: string;
+  readonly reason: string;
+  readonly expedienteReviewed: boolean;
+  readonly independentEvidenceConfirmed: boolean;
+  readonly passwordResetRequired: true;
+}
+
+export interface ConductorRecoveryStarted {
+  readonly recoveryId: string;
+  readonly status: string;
+  readonly verificationToken: string;
+  readonly otpExpiresAt: string;
+  readonly challengeExpiresAt: string;
+  readonly emailSent: boolean;
+  readonly passwordResetRequired: boolean;
+}
+
+export interface ConductorRecoveryStatus {
+  readonly recoveryId: string;
+  readonly organizationId: string;
+  readonly conductorUserId: string;
+  readonly authorizedByAdminId: string;
+  readonly previousEmail: string | null;
+  readonly requestedEmail: string | null;
+  readonly evidenceMethod: RecoveryEvidenceMethod;
+  readonly evidenceReference: string | null;
+  readonly reason: string | null;
+  readonly expedienteReviewed: boolean;
+  readonly independentEvidenceConfirmed: boolean;
+  readonly passwordResetRequired: boolean;
+  readonly status: string;
+  readonly emailVerifiedAt?: string | null;
+  readonly passwordResetExpiresAt?: string | null;
+  readonly passwordResetConsumedAt?: string | null;
+  readonly completedAt?: string | null;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
+
 export interface TransportGroup {
   readonly id: string;
   readonly name: string;
@@ -51,6 +95,7 @@ export interface TransportGroup {
   readonly active: boolean;
   readonly createdAt: string;
   readonly updatedAt: string;
+  readonly version?: number;
 }
 
 export interface GroupPayload {
@@ -61,12 +106,54 @@ export interface GroupPayload {
 
 export interface GroupUpdatePayload extends GroupPayload {
   readonly active: boolean;
+  readonly expectedVersion: number;
+}
+
+export interface GroupResources {
+  readonly groupId: string;
+  readonly version: number;
+  readonly active: boolean;
+  readonly memberships: readonly {
+    readonly resourceId: string;
+    readonly kind: 'DRIVER' | 'VEHICLE';
+    readonly active: boolean;
+    readonly source: string;
+    readonly recordedAt: string;
+  }[];
+  readonly commitments: readonly {
+    readonly assignmentId: string;
+    readonly status: string;
+    readonly attentionKind?: string | null;
+    readonly scheduledAt: string;
+    readonly scheduledEndAt: string;
+    readonly groupReferenceSource: string;
+  }[];
+  readonly history: readonly {
+    readonly id: string;
+    readonly actorId: string;
+    readonly resourceKind: string;
+    readonly resourceId: string;
+    readonly active: boolean;
+    readonly resultingVersion: number;
+    readonly occurredAt: string;
+  }[];
+  readonly observedAt: string;
+}
+
+export interface GroupMembershipPayload {
+  readonly expectedVersion: number;
+  readonly operationKey: string;
+  readonly reason: string;
+  readonly resourceKind: 'DRIVER' | 'VEHICLE';
+  readonly resourceId: string;
+  readonly active: boolean;
 }
 
 export const DRIVER_STATUSES = [
   'DISPONIBLE',
   'RESERVADO',
   'EN_SERVICIO',
+  'ATENCION',
   'DESCANSO',
   'NO_DISPONIBLE',
 ] as const;
@@ -80,8 +167,8 @@ export interface Driver {
   readonly groupName: string;
   readonly fullName: string;
   readonly phone?: string | null;
-  readonly documentType: string;
-  readonly documentNumber: string;
+  readonly documentType: string | null;
+  readonly documentNumber: string | null;
   readonly licenseNumber?: string | null;
   readonly availabilityStatus: DriverStatus;
   readonly locationConsent: boolean;
@@ -105,6 +192,25 @@ export interface DriverDetail {
   readonly vehicles: readonly LinkedVehicle[];
 }
 
+export interface DriverIncorporationStatus {
+  readonly driverId: string;
+  readonly accountId: string | null;
+  readonly requestId: string | null;
+  readonly incorporationStatus: string;
+  readonly personalApproved: boolean;
+  readonly accountProvisioned: boolean;
+  readonly accountEnabled: boolean;
+  readonly identityReviewed: boolean;
+  readonly groupActive: boolean;
+  readonly driverEnabled: boolean;
+  readonly personalDocumentsStatus: 'CURRENT' | 'EXPIRED' | 'UNKNOWN' | 'REVIEW_REQUIRED';
+  readonly activeVehicleLinks: number;
+  readonly unitCardinalitySatisfied: boolean;
+  readonly operationalEnabled: boolean;
+  readonly blockers: readonly string[];
+  readonly observedAt: string;
+}
+
 export interface DriverPayload {
   readonly userId?: string | null;
   readonly groupId: string;
@@ -115,9 +221,34 @@ export interface DriverPayload {
   readonly licenseNumber?: string;
 }
 
+export interface DriverIdentityReviewPayload {
+  readonly identityReview: {
+    readonly documentType: 'DNI';
+    readonly documentNumber: string;
+    readonly method: 'IN_PERSON' | 'PRIOR_SECURE_CONTACT';
+    readonly reference: string;
+    readonly originalReviewed: true;
+    readonly identityConfirmed: true;
+  };
+  readonly reason: string;
+}
+
+export interface DriverIdentityReviewStatus {
+  readonly userId: string;
+  readonly identityVerified: boolean;
+}
+
+export interface DriverIdentityCorrectionPayload extends DriverIdentityReviewPayload {
+  readonly currentPassword: string;
+  readonly operationKey: string;
+  readonly dataEntryErrorConfirmed: true;
+  readonly samePersonConfirmed: true;
+}
+
 export const VEHICLE_STATUSES = [
   'DISPONIBLE',
   'EN_SERVICIO',
+  'ATENCION',
   'MANTENIMIENTO',
   'INACTIVO',
 ] as const;

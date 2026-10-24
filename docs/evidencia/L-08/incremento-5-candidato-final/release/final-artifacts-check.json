@@ -1,0 +1,26 @@
+﻿{
+    "recordedAt":  "2026-10-23T06:37:21.7587871+00:00",
+    "result":  "PASS_FINAL_TWO_BINARIES_AND_BYTE_IDENTICAL_RELEASE_REBUILD",
+    "binaries":  [
+                     {
+                         "artifact":  "Ruta-Fija-Conductor-candidato-local-release.apk",
+                         "sha256":  "a4685115e712cfe0c5e24ad84efc4abaf1f4f679a6f95fd1ca0b0354d7b1d776",
+                         "bytes":  55667319,
+                         "manifestMatches":  true
+                     },
+                     {
+                         "artifact":  "ruta-fija-backend-candidato-local.jar",
+                         "sha256":  "eded50c4bf3706f0f92ca1cb1700e07946db5eca8405189a08ec6d437303aa4f",
+                         "bytes":  91347396,
+                         "manifestMatches":  true
+                     }
+                 ],
+    "sha256SumsLineCount":  2,
+    "rebuildProof":  "rebuild-b0b30721-351a-4611-a192-ae7f2f69f8b0.json",
+    "byteIdenticalApk":  true,
+    "sameCertificate":  true,
+    "sourceSnapshots":  "source-snapshots.json",
+    "installed":  false,
+    "pilotEnabled":  false,
+    "productionRelease":  false
+}

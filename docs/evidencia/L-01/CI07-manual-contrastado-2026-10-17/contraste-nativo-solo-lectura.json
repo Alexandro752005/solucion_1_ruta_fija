@@ -1,0 +1,143 @@
+{
+  "inspectionAtUtc": "2026-10-18T01:40:55.056433400Z",
+  "runId": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "environment": {
+    "database": "ruta_fija_test",
+    "role": "rf_test",
+    "schema": "V26",
+    "historicalCreations": {
+      "SUPER_ADMIN": 1,
+      "ADMIN": 2,
+      "CONDUCTOR": 0
+    },
+    "remainingSlots": {
+      "SUPER_ADMIN": 0,
+      "CONDUCTOR": 20,
+      "ADMIN": 2
+    },
+    "superAdminAccounts": 1,
+    "personIdentityBindings": 2,
+    "personIdentityKeyRecorded": true,
+    "recoveryCredentialPresent": true,
+    "eligibleSyntheticPendingAdmins": 0,
+    "termsAcceptanceCount": 1,
+    "currentTerms": {
+      "id": "f590e228-5d2e-47e4-b144-b0df1198bd49",
+      "version": "1.0.0",
+      "content_sha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+      "synthetic": false
+    },
+    "publishedFileHashMatches": true,
+    "cleanupLockHeld": true
+  },
+  "readOnlyEffective": true,
+  "archiveSha256": "e0a986d10e09f8fbb289061753b3e36759b0cae24e53731ede4bba8640d5fffb",
+  "archiveRecoveryPredicatePass": true,
+  "recoveredAccount": {
+    "id": "088518c1-821c-4316-9f87-090f51ac44e0",
+    "role": "SUPER_ADMIN",
+    "active": true,
+    "email_verified": true,
+    "platform_account": true,
+    "recovered_email_matches": true,
+    "session_version": 1
+  },
+  "completedChallenge": {
+    "id": "fa9aa2ae-8e4b-4eab-bbb5-55d86f016036",
+    "user_id": "088518c1-821c-4316-9f87-090f51ac44e0",
+    "installation_id": "f0cd888b-57df-4def-9d08-7882ffadebae",
+    "recipient_matches": true,
+    "created_at": "2026-10-18T01:28:10.757+00:00",
+    "expires_at": "2026-10-18T01:33:10.757+00:00",
+    "proof_verified_at": "2026-10-18T01:29:05.078+00:00",
+    "consumed_at": "2026-10-18T01:30:47.240+00:00",
+    "failed_proof_attempts": 0
+  },
+  "consumedOtpWithoutSecrets": {
+    "id": "97fe4c7d-cdac-4bb8-9344-9aac6a0f4b04",
+    "purpose": "SUPER_ADMIN_RECOVERY",
+    "purpose_reference_id": "fa9aa2ae-8e4b-4eab-bbb5-55d86f016036",
+    "recipient_matches": true,
+    "consumed_at": "2026-10-18T01:30:47.233+00:00",
+    "otp_cleared": true,
+    "capability_cleared": true,
+    "failed_attempts": 0,
+    "send_at_1": "2026-10-18T01:29:05.342+00:00",
+    "send_at_2": "2026-10-18T01:29:26.792+00:00",
+    "send_at_3": null
+  },
+  "recoveryAudits": [
+    {
+      "id": "88fa64c4-73b9-4094-8972-577748afa3a8",
+      "action": "SUPER_ADMIN_RECOVERY_ENROLLED",
+      "occurred_at": "2026-10-17T09:40:48.051+00:00",
+      "refresh_tokens_revoked": null
+    },
+    {
+      "id": "a5b14b40-d169-4f19-98ed-c2a67a5ab4b3",
+      "action": "SUPER_ADMIN_RECOVERY_OTP_SENT",
+      "occurred_at": "2026-10-18T01:29:05.416+00:00",
+      "refresh_tokens_revoked": null
+    },
+    {
+      "id": "26c44c62-8ef8-4ff9-b970-b03b29daad07",
+      "action": "SUPER_ADMIN_RECOVERY_PROOF_ACCEPTED",
+      "occurred_at": "2026-10-18T01:29:05.418+00:00",
+      "refresh_tokens_revoked": null
+    },
+    {
+      "id": "3a5b659b-7d63-4df8-8b07-7a35ba659671",
+      "action": "SUPER_ADMIN_RECOVERY_OTP_SENT",
+      "occurred_at": "2026-10-18T01:29:26.796+00:00",
+      "refresh_tokens_revoked": null
+    },
+    {
+      "id": "9e33c511-51a6-4753-ad5a-ece584e28843",
+      "action": "SUPER_ADMIN_RECOVERY_EMAIL_VERIFIED",
+      "occurred_at": "2026-10-18T01:30:47.233+00:00",
+      "refresh_tokens_revoked": null
+    },
+    {
+      "id": "5c2ffbde-3572-44a2-b4f0-9d23e380c8bb",
+      "action": "SUPER_ADMIN_RECOVERY_COMPLETED",
+      "occurred_at": "2026-10-18T01:30:47.733+00:00",
+      "refresh_tokens_revoked": "5"
+    }
+  ],
+  "nativeConsumedAtFullPrecision": "2026-10-18T01:30:47.240995Z",
+  "archivedConsumedAtPublishedPrecision": "2026-10-18T01:30:47.240Z",
+  "nativeMinusArchiveNanos": 995000,
+  "challengeTimestampsMatchAtArchiveMillisecondPrecision": true,
+  "oldRefreshTokensWithoutValues": {
+    "total_before_recovery": 14,
+    "revoked_before_recovery": 14,
+    "unrevoked_before_recovery": 0
+  },
+  "auditRefreshTokensRevoked": 5,
+  "observedSimulatedOtpEmissions": 2,
+  "observedSimulatedResends": 1,
+  "retainedOtpSendSlots": 2,
+  "otpWithinApprovedThreePerHourLimit": true,
+  "deviationFromNoResendRehearsalInstruction": true,
+  "credentialPublicFieldsOnly": {
+    "installation_id": "f0cd888b-57df-4def-9d08-7882ffadebae",
+    "user_id": "088518c1-821c-4316-9f87-090f51ac44e0",
+    "enrolled_at": "2026-10-17T09:40:47.738+00:00",
+    "updated_at": "2026-10-18T01:30:47.240+00:00",
+    "publicKeySha256": "5569d8c89e2118dede5ca39253a03735f1eb13b88a070beab45b245ce5914433"
+  },
+  "approvedKeyAuditCorrespondenceVerified": true,
+  "recoveredLoginAuditPresent": true,
+  "adminAcceptancePreserved": true,
+  "emergencyHashComparisonSource": "ALREADY_ARCHIVED_IN_PROCESS_OBSERVER_FLAGS_NOT_REPEATED",
+  "manualRecoveryResult": "PASS_LOCAL_TEMPORARY_COPY_ONLY",
+  "manualAdminResult": "PENDING",
+  "independentCustodyVerified": false,
+  "scopeChangeApplied": false,
+  "testCleanupReleased": false,
+  "applicationWrites": 0,
+  "httpCalls": 0,
+  "smtpAttempts": 0,
+  "privateFilesRead": false,
+  "transactionRolledBack": true
+}

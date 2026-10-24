@@ -1,0 +1,73 @@
+{
+  "inspectionAtUtc" : "2026-10-17T08:46:39.783406400Z",
+  "runId" : "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "environment" : {
+    "database" : "ruta_fija_test",
+    "role" : "rf_test",
+    "schema" : "V26",
+    "historicalCreations" : {
+      "SUPER_ADMIN" : 1,
+      "ADMIN" : 2,
+      "CONDUCTOR" : 0
+    },
+    "remainingSlots" : {
+      "ADMIN" : 2,
+      "CONDUCTOR" : 20,
+      "SUPER_ADMIN" : 0
+    },
+    "superAdminAccounts" : 1,
+    "personIdentityBindings" : 2,
+    "personIdentityKeyRecorded" : true,
+    "recoveryCredentialPresent" : false,
+    "eligibleSyntheticPendingAdmins" : 0,
+    "termsAcceptanceCount" : 1,
+    "currentTerms" : {
+      "id" : "f590e228-5d2e-47e4-b144-b0df1198bd49",
+      "version" : "1.0.0",
+      "content_sha256" : "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+      "synthetic" : false
+    },
+    "publishedFileHashMatches" : true,
+    "cleanupLockHeld" : true
+  },
+  "exactSyntheticAdmin" : [ {
+    "account_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "organization_id" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+    "active" : true,
+    "status" : "COMPLETED",
+    "password_set_at" : "2026-10-17T08:36:45.327+00:00",
+    "email_verified_at" : "2026-10-17T08:38:55.179+00:00",
+    "completed_at" : "2026-10-17T08:39:15.743+00:00",
+    "credential_consumed_at" : "2026-10-17T08:36:45.327+00:00",
+    "activation_token_revoked_at" : "2026-10-17T08:39:15.743+00:00",
+    "identity_reviewed" : true
+  } ],
+  "acceptances" : [ {
+    "acceptance_id" : "c496b63c-735f-48cc-be56-90f7ec1464e1",
+    "account_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "organization_id" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+    "document_id" : "f590e228-5d2e-47e4-b144-b0df1198bd49",
+    "document_version" : "1.0.0",
+    "content_sha256" : "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+    "accepted_at" : "2026-10-17T08:39:10.296+00:00",
+    "approved_document_matches" : true,
+    "ordering_valid" : true,
+    "acceptance_audited" : true
+  } ],
+  "observedFlags" : {
+    "explicitAcceptanceHttpObserved" : true,
+    "humanAdminConfirmationRecorded" : false,
+    "preAcceptanceGateRecorded" : false,
+    "activatedAdminLoginObserved" : true,
+    "adminCreatedInactiveObserved" : true
+  },
+  "reportedFailedCommand" : "gate",
+  "gatePrecondition" : "REFUSED_ACCEPTANCE_ALREADY_PRESENT",
+  "preAcceptanceGateResult" : "NOT_OBSERVED_CANNOT_RECONSTRUCT_RETROACTIVELY",
+  "markerMatches" : true,
+  "readOnly" : true,
+  "databaseWrites" : 0,
+  "smtpAttempts" : 0,
+  "cleanupExecuted" : false,
+  "manualSyntheticAdminResult" : "PENDING"
+}

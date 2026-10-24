@@ -35,4 +35,15 @@ describe('AuditApiService', () => {
 
     await expect(result).resolves.toMatchObject({ items: [], totalItems: 0 });
   });
+
+  it('consulta plataforma por ruta separada sin seleccionar organización', async () => {
+    const result=firstValueFrom(service.platformList({page:0,size:20,action:'ADMIN_CREATED'}));
+    const req=http.expectOne('/api/v1/platform/audit-events?page=0&size=20&action=ADMIN_CREATED');
+    expect(req.request.method).toBe('GET');expect(req.request.params.has('organizationId')).toBe(false);
+    req.flush({items:[],page:0,size:20,totalItems:0,totalPages:0});await expect(result).resolves.toMatchObject({totalItems:0});
+  });
+  it('consulta detalle de plataforma sin usar la ruta operativa', async () => {
+    const result=firstValueFrom(service.platformGet('synthetic-event'));const req=http.expectOne('/api/v1/platform/audit-events/synthetic-event');
+    expect(req.request.method).toBe('GET');req.flush({id:'synthetic-event',scope:'PLATFORM',metadata:{}});await expect(result).resolves.toMatchObject({scope:'PLATFORM'});
+  });
 });

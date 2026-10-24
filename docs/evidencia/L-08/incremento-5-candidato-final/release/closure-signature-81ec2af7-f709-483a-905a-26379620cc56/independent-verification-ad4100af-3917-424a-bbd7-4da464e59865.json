@@ -1,0 +1,21 @@
+﻿{
+    "recordedAt":  "2026-10-23T06:45:43.0955326+00:00",
+    "result":  "PASS_PUBLIC_CERTIFICATE_VERIFICATION_AND_ONE_BYTE_REJECTION",
+    "classification":  "FIRMA_TECNICA_AUTOMATIZADA_CANDIDATO_LOCAL",
+    "algorithm":  "SHA256withRSA",
+    "document":  "docs/actas/L-08-cierre-funcional-global.md",
+    "documentSha256":  "b47807659aa898192e7c1eedd8b658cdf3f3dd0830afc0108bb0eaefa069c0ea",
+    "signatureSha256":  "0ac39febc649ec3abc515941e0173151b73fa7298d810e042dd988caf74b1b14",
+    "certificateSha256":  "181da8d8cf0c18d56a424d0ed22fb9424a2bdf904c8e0dff7395a512c658bb45",
+    "sameAsCandidateApkSigner":  true,
+    "verifiedWithPublicCertificateOnly":  true,
+    "modifiedOneByteRejected":  true,
+    "modifiedOneByteExitCode":  3,
+    "legalTitleholderSignature":  false,
+    "productionCustodyCeremony":  false,
+    "privateKeyPubliclyIncluded":  false,
+    "command":  "powershell.exe -NoProfile -File scripts/Sign-RutaFijaL08Closure.ps1 -Execute",
+    "helperSourceSha256":  "1bfb7a90ff43c3b9a260a71a840e9b416ddcee5bee80898582d7585c5a8e47eb",
+    "runtimeDirectory":  "backend/target/l08-closure-signature-f87f0366-fc8b-4175-a217-a41792314b87",
+    "compiledHelperSha256":  "e1dae1bf086503dbcff18e21c17529fe4f361595b151b274b1e700dffcc6a5b9"
+}

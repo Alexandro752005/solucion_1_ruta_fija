@@ -1,0 +1,130 @@
+{
+  "mode": "after",
+  "records": [
+    {
+      "screen": "after-home",
+      "navigation": {
+        "Inicio": true,
+        "Disponibilidad": true,
+        "Asignaciones": true,
+        "Incidencias": true,
+        "Comunicados": true,
+        "Perfil": true
+      },
+      "allSixVisible": true,
+      "incidentsContentVisible": true,
+      "announcementsContentVisible": true,
+      "privateXml": "after-home.xml"
+    },
+    {
+      "screen": "after-incidents",
+      "navigation": {
+        "Inicio": true,
+        "Disponibilidad": true,
+        "Asignaciones": true,
+        "Incidencias": true,
+        "Comunicados": true,
+        "Perfil": true
+      },
+      "allSixVisible": true,
+      "incidentsContentVisible": true,
+      "announcementsContentVisible": true,
+      "privateXml": "after-incidents.xml"
+    },
+    {
+      "screen": "after-announcements",
+      "navigation": {
+        "Inicio": true,
+        "Disponibilidad": true,
+        "Asignaciones": true,
+        "Incidencias": true,
+        "Comunicados": true,
+        "Perfil": true
+      },
+      "allSixVisible": true,
+      "incidentsContentVisible": true,
+      "announcementsContentVisible": true,
+      "privateXml": "after-announcements.xml"
+    },
+    {
+      "screen": "after-return-home",
+      "navigation": {
+        "Inicio": true,
+        "Disponibilidad": true,
+        "Asignaciones": true,
+        "Incidencias": true,
+        "Comunicados": true,
+        "Perfil": true
+      },
+      "allSixVisible": true,
+      "incidentsContentVisible": true,
+      "announcementsContentVisible": true,
+      "privateXml": "after-return-home.xml"
+    },
+    {
+      "screen": "after-announcements-repeat",
+      "navigation": {
+        "Inicio": true,
+        "Disponibilidad": true,
+        "Asignaciones": true,
+        "Incidencias": true,
+        "Comunicados": true,
+        "Perfil": true
+      },
+      "allSixVisible": true,
+      "incidentsContentVisible": true,
+      "announcementsContentVisible": true,
+      "privateXml": "after-announcements-repeat.xml"
+    },
+    {
+      "screen": "after-incidents-repeat",
+      "navigation": {
+        "Inicio": true,
+        "Disponibilidad": true,
+        "Asignaciones": true,
+        "Incidencias": true,
+        "Comunicados": true,
+        "Perfil": true
+      },
+      "allSixVisible": true,
+      "incidentsContentVisible": true,
+      "announcementsContentVisible": true,
+      "privateXml": "after-incidents-repeat.xml"
+    },
+    {
+      "screen": "after-profile",
+      "navigation": {
+        "Inicio": true,
+        "Disponibilidad": true,
+        "Asignaciones": true,
+        "Incidencias": true,
+        "Comunicados": true,
+        "Perfil": true
+      },
+      "allSixVisible": true,
+      "incidentsContentVisible": true,
+      "announcementsContentVisible": true,
+      "privateXml": "after-profile.xml"
+    },
+    {
+      "screen": "after-final-home",
+      "navigation": {
+        "Inicio": true,
+        "Disponibilidad": true,
+        "Asignaciones": true,
+        "Incidencias": true,
+        "Comunicados": true,
+        "Perfil": true
+      },
+      "allSixVisible": true,
+      "incidentsContentVisible": true,
+      "announcementsContentVisible": true,
+      "privateXml": "after-final-home.xml"
+    }
+  ],
+  "incidentCreated": false,
+  "announcementReadConfirmed": false,
+  "availabilityChanged": false,
+  "gpsStarted": false,
+  "credentialsEntered": false
+}

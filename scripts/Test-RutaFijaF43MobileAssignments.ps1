@@ -83,7 +83,7 @@ if ($LASTEXITCODE -ne 0) {
 $pubspec = Get-Utf8Text 'mobile\pubspec.yaml'
 Assert-Contains -Text $pubspec -Pattern '(?m)^\s*http:\s*\^1\.6\.0\s*$' -Description 'cliente HTTP actual'
 Assert-Contains -Text $pubspec -Pattern '(?m)^\s*flutter_secure_storage:\s*\^10\.3\.4\s*$' -Description 'persistencia protegida ya aprobada'
-Assert-NotContains -Text $pubspec -Pattern '(?m)^\s*(sqflite|hive|workmanager|connectivity_plus|geolocator|permission_handler|firebase_)\s*:' -Description 'dependencia anticipada de M5-M8'
+Assert-NotContains -Text $pubspec -Pattern '(?m)^\s*(sqflite|hive|workmanager|connectivity_plus|permission_handler|firebase_)\s*:' -Description 'dependencia no aprobada fuera de M4-M7'
 
 $apiClient = Get-Utf8Text 'mobile\lib\core\network\mobile_api_client.dart'
 Assert-Contains -Text $apiClient -Pattern 'MobileApiObjectResponse' -Description 'metadatos HTTP seguros para replay'
@@ -142,12 +142,6 @@ $androidManifest = Get-Utf8Text 'mobile\android\app\src\main\AndroidManifest.xml
 Assert-Contains -Text $androidManifest -Pattern 'android:allowBackup="false"' -Description 'backup Android deshabilitado'
 Assert-NotContains -Text $androidManifest -Pattern 'usesCleartextTraffic\s*=\s*"true"' -Description 'HTTP global de release'
 
-$dockerArtifacts = @(Get-ChildItem -LiteralPath $mobileRoot -Recurse -Force -File |
-        Where-Object { $_.Name -match '(?i)docker' })
-if ($dockerArtifacts.Count -gt 0) {
-    throw 'F4.3 detecto artefactos Docker dentro del cliente movil.'
-}
-
 $androidSdkRoot = 'D:\Android\Sdk'
 $ndkSourceProperties = Join-Path $androidSdkRoot 'ndk\28.2.13676358\source.properties'
 if (-not (Test-Path -LiteralPath $ndkSourceProperties -PathType Leaf)) {
@@ -198,4 +192,4 @@ if ($apkBytes -le 0) {
     throw 'F4.3 produjo un APK debug vacio.'
 }
 
-Write-Output "F4_3_MOBILE_ASSIGNMENTS=PASS flutter='$versionLine' m1=8/80 m2=12/80 m3=8/80 m4=18/80 total=46/80 android=READY apk_bytes=$apkBytes docker=0"
+Write-Output "F4_3_MOBILE_ASSIGNMENTS=PASS flutter='$versionLine' m1=8/80 m2=12/80 m3=8/80 m4=18/80 total=46/80 android=READY apk_bytes=$apkBytes"

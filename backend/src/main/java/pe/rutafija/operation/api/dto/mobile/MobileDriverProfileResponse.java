@@ -28,7 +28,7 @@ public record MobileDriverProfileResponse(
                 .orElse(null);
         return new MobileDriverProfileResponse(
                 driver.getId(),
-                driver.getFullName(),
+                pe.rutafija.shared.security.PersonalDataView.driver(driver.getId()),
                 driver.getGroup().getId(),
                 driver.getGroup().getName(),
                 driver.getAvailabilityStatus(),

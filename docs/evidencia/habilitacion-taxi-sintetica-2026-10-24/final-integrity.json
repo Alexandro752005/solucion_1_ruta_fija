@@ -1,0 +1,27 @@
+{
+  "result": "PASS_AFTER_REAL_POCO_REFRESH",
+  "recordedAtUtc": "2026-10-24T05:49:54.236846+00:00",
+  "criticalCredentialsAndPersonalIdentityPreserved": true,
+  "protectedHistoricalDatabaseUnchanged": true,
+  "protectedTables": 105,
+  "nativeChangedTables": [
+    "app_user",
+    "audit_event",
+    "driver",
+    "driver_qualification_control",
+    "driver_unit_period",
+    "driver_unit_request",
+    "qualification_operation",
+    "qualification_review",
+    "refresh_token"
+  ],
+  "personalDocumentReviewUnchanged": true,
+  "existingVehicleReviewUnchanged": true,
+  "ledgerTermsSchemaAndAssignmentHistoryUnchanged": true,
+  "runtime": {
+    "api": 200,
+    "crm": 200
+  },
+  "realPocoOperationalHomeObserved": true,
+  "businessOrAuthenticationRulesChanged": false
+}

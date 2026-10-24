@@ -1,0 +1,55 @@
+{
+  "observedAtUtc": "2026-10-23T06:48:16.869481+00:00",
+  "result": "PASS",
+  "classification": "PASS_LOCAL_CANDIDATE_POINTER_AND_CONSOLIDATION_ADDENDUM_NO_BLOCKERS",
+  "reviewer": "mobile_nofix independent of coordination addition author",
+  "reviewedFiles": [
+    {
+      "path": "artifacts/L-08-app-principal-vigente.json",
+      "sha256": "1875602bee4d91c12ec24df1b23ef114be0d5b4fecba6f7ab4315bb2c8505fac"
+    },
+    {
+      "path": "docs/evidencia/L-08/incremento-5-candidato-final/consolidacion.json",
+      "sha256": "9d6297009ec187caf4b5c94fe09e38acc7d72a1166004b05af8a05abf4507495"
+    },
+    {
+      "path": "docs/evidencia/L-08/incremento-5-candidato-final/hygiene/app-principal-puntero-antecedente.json",
+      "sha256": "8b2f31ee575cedaa17621c27f63403e997671a98897f58151cd2d174d8314acc"
+    },
+    {
+      "path": "docs/evidencia/L-08/incremento-5-candidato-final/hygiene/app-principal-puntero-actual.json",
+      "sha256": "1875602bee4d91c12ec24df1b23ef114be0d5b4fecba6f7ab4315bb2c8505fac"
+    },
+    {
+      "path": "docs/evidencia/L-08/incremento-5-candidato-final/hygiene/app-principal-concordancia.json",
+      "sha256": "b0af22c25e5e00d1cd60962b33e06ab438d67c3b9a28b41385934ce7b0a31b0f"
+    }
+  ],
+  "checks": {
+    "onlyExistingChangedPointerField": [
+      "L08Status"
+    ],
+    "addedCoordinationFields": [
+      "L08Scope",
+      "lastCoordinationAt",
+      "operationalDecision",
+      "separateUninstalledReleaseCandidate"
+    ],
+    "v4SelectionAndActualApkHashPreserved": true,
+    "antecedentAndCurrentCopiesHashExact": true,
+    "releaseV5SeparateAndNotInstalled": true,
+    "goLocalAndNoGoRealPilotPreserved": true,
+    "opsReferenceUsesDefinitiveAmendedSummary": true,
+    "consolidationReleaseHashesAndFieldCriteriaConcordant": true,
+    "previous14ReviewedFileHashesStillExact": true,
+    "qa14ModifiedByReviewer": false,
+    "globalDocumentsModifiedByReviewer": false
+  },
+  "scopeLimits": [
+    "Metadata and artifact hashes reviewed read-only; phone state was not re-inspected",
+    "This addendum does not perform or substitute signature verification or final archive sealing",
+    "The installed debugv4 selection remains distinct from the uninstalled releasev5 candidate"
+  ],
+  "pointerCurrentSha256": "1875602bee4d91c12ec24df1b23ef114be0d5b4fecba6f7ab4315bb2c8505fac",
+  "consolidationCurrentSha256": "9d6297009ec187caf4b5c94fe09e38acc7d72a1166004b05af8a05abf4507495"
+}

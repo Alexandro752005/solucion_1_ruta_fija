@@ -1,0 +1,15 @@
+﻿{
+    "recordedAt":  "2026-10-23T06:33:34.0969143+00:00",
+    "verification":  "OBSERVED_NEW_GRADLE_DAEMON_CONTEXT",
+    "jdkMajor":  21,
+    "heapMb":  1024,
+    "maxMetaspaceMb":  768,
+    "reservedCodeCacheMb":  192,
+    "singleWorkerFromUnchangedProjectProperties":  true,
+    "daemonPid":  17500,
+    "sharedPropertiesSha256":  "7bc41e62639f7a59a2afce28feec1f60efd33d7b1f753ccda2fa9a971732854f",
+    "sourceLog":  "C:/Users/Ale/.gradle/daemon/9.3.1/daemon-17500.out.log",
+    "environmentScope":  "BUILDER_PROCESS_ONLY",
+    "releaseLintDisabled":  false,
+    "observedContext":  "2026-10-23T01:33:02.183-0500 [INFO] [org.gradle.launcher.daemon.server.Daemon] start() called on daemon - DefaultDaemonContext[uid=e627235e-fee0-4072-b22d-463a0105edc3,javaHome=C:\\Program Files\\Java\\jdk-21.0.10,javaVersion=21,javaVendor=Oracle Corporation,daemonRegistryDir=C:\\Users\\Ale\\.gradle\\daemon,pid=17500,idleTimeout=120000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-XX:MaxMetaspaceSize=768m,-XX:ReservedCodeCacheSize=192m,-Xmx1024m,-Dfile.encoding=UTF-8,-Duser.country=PE,-Duser.language=es,-Duser.variant]"
+}

@@ -1,0 +1,71 @@
+{
+  "recordedAtUtc": "2026-10-24T03:06:59.089979+00:00",
+  "scope": "Existing conductor regularization CRM; no database mutations, authentication-gate changes, mobile changes or Git commands",
+  "previousValidation": {
+    "testsPassed": 40,
+    "testFilesPassed": 2,
+    "typecheckExitCode": 0,
+    "stdoutCapture": "Tool output only; superseded by final captured validation"
+  },
+  "finalValidation": {
+    "typecheck": {
+      "command": "npm.cmd run typecheck",
+      "exitCode": 0,
+      "log": "frontend-typecheck.log"
+    },
+    "tests": {
+      "command": "npm.cmd run test:ci -- --include=src/app/features/drivers/drivers.page.spec.ts --include=src/app/features/onboarding/onboarding-requests.page.spec.ts",
+      "exitCode": 0,
+      "passed": 42,
+      "testFilesPassed": 2,
+      "durationSeconds": 3.06,
+      "log": "frontend-tests.log"
+    },
+    "productionBuild": {
+      "command": "npm.cmd run build",
+      "exitCode": 0,
+      "durationSeconds": 11.193,
+      "initialRawSizeKb": 314.64,
+      "warningsObserved": 0,
+      "errorsObserved": 0,
+      "output": "frontend/dist/ruta-fija-crm",
+      "log": "frontend-build.log"
+    }
+  },
+  "uxChecks": [
+    "Pending dossier only; no automatic approval, OTP verification or mobile login",
+    "Background inert while regularization modal is open",
+    "Parallel driver mutation/detail/identity actions blocked during pending or uncertain regularization",
+    "Explicit requery uses unchanged operation key and payload",
+    "Close while server request is in flight blocked",
+    "Closing after uncertain response warns that server work is not cancelled",
+    "Legacy provision-existing omits arbitrary user, driver and group IDs",
+    "Reason and preservation confirmation required",
+    "No PII error echo, automatic restricted reads or attachment uploads",
+    "Existing-account correction review supports explicit resubmit-existing",
+    "Pending dossier recovered after repeated authorized detail reads shows existing request code and explicit Requests link; no new opening button or POST"
+  ],
+  "sourceSha256": {
+    "frontend/src/app/core/onboarding/onboarding.models.ts": "3999164869fa61bfb1207a67e8ef8a533a2eccb78dd1fff4bd96d3510f034019",
+    "frontend/src/app/core/onboarding/onboarding-api.service.ts": "4f9b3a8f5aa2482b79d6b69c5a6c247c09462938fad9dd2fcd4df08ecf24e4d0",
+    "frontend/src/app/features/drivers/drivers.page.ts": "8bba7ee9839919baf88ffa25114ccfd4705957c0bda5cf9324d098a73f289dad",
+    "frontend/src/app/features/drivers/drivers.page.html": "eb1599f22232d430f00fd6f493cac4d95a2cd54b96b58a2358c0a19d69c39ef3",
+    "frontend/src/app/features/drivers/drivers.page.spec.ts": "586fd8bf3c5fcf2366ba9be7fa3170885f0079f29957092da4009358dcdb3aca",
+    "frontend/src/app/features/onboarding/onboarding-requests.page.ts": "9fd50d3648e4467460bb2fcd169177504094a18acd4506dc6b0f6a7d51e766c5",
+    "frontend/src/app/features/onboarding/onboarding-requests.page.html": "ab78e99b2b2c7d06530c9e174e6c563bdcb6a13c54bd72d3e81338e8f1033ee8",
+    "frontend/src/app/features/onboarding/onboarding-requests.page.spec.ts": "28cc646ebcb23023d4fd14ad51797e3cae5de16b96d56ae46d874436f5b4920c"
+  },
+  "logSha256": {
+    "frontend-tests.log": "40411b77de90d8e925ff8d5ae63cb2aa9165cb9b6749ea5a2aebd132bc69f933",
+    "frontend-typecheck.log": "2fd543afadb9ac1fab6d03d6fb51c229772b38de1dee9132a4133e1f9c6e5983",
+    "frontend-build.log": "dfb479ac54eed766c27e662054aef90f958a9e2aaf42075733a17dc14ba933df"
+  },
+  "previousCapturedValidation": {
+    "testsPassed": 41,
+    "testFilesPassed": 2,
+    "typecheckExitCode": 0,
+    "productionBuildExitCode": 0,
+    "report": "frontend-validation.before-status.json",
+    "sha256": "85cf86421e972f819c7f5686a964e862567fbb9794fe7f80cb70fbe8a3a4751e"
+  }
+}

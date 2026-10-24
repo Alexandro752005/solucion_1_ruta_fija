@@ -1,0 +1,36 @@
+{
+  "observedAt": "2026-10-19T20:18:20.235501+00:00",
+  "localDate": "2026-10-19",
+  "lot": "L-03",
+  "status": "VERIFICADA",
+  "closureType": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "criteriaVerified": [
+    "CI-L03-01",
+    "CI-L03-02",
+    "CI-L03-03",
+    "CI-L03-04",
+    "CI-L03-05",
+    "CI-L03-06",
+    "CI-L03-07",
+    "CI-L03-08",
+    "CI-L03-09",
+    "CI-L03-10"
+  ],
+  "currentAndFinalMatricesIdentical": true,
+  "boardContractBacklogMemoryConcordant": true,
+  "missingDocumentLinks": [],
+  "sourceFilesHashed": 784,
+  "immutableFilesRechecked": 8,
+  "artifactsRechecked": 3,
+  "activeMarkers": {
+    "l01-human-trial.active": false,
+    "l02-connected.active": false,
+    "l03-connected.active": false
+  },
+  "TEST_CLEANUP_RELEASED": true,
+  "globalCleanupAuthorized": false,
+  "pilotEnabled": false,
+  "L04Started": false,
+  "L04Authorized": false,
+  "result": "PASS"
+}

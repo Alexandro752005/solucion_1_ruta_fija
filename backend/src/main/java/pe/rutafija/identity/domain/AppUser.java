@@ -51,6 +51,12 @@ public class AppUser {
     @Column(name = "last_login_at")
     private Instant lastLoginAt;
 
+    @Column(name = "email_verified_at")
+    private Instant emailVerifiedAt;
+
+    @Column(name = "session_version", nullable = false)
+    private long sessionVersion;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
@@ -106,12 +112,56 @@ public class AppUser {
         this.lastLoginAt = Objects.requireNonNull(occurredAt);
     }
 
+    public boolean isEmailVerified() {
+        return emailVerifiedAt != null;
+    }
+
+    public void verifyEmail(Instant verifiedAt) {
+        this.emailVerifiedAt = Objects.requireNonNull(verifiedAt);
+    }
+
+    public void completeSuperAdminRecovery(String newEmail, String newPasswordHash, Instant recoveredAt) {
+        if (role != UserRole.SUPER_ADMIN || !active) {
+            throw new IllegalStateException("Only an active SUPER_ADMIN can complete this recovery");
+        }
+        this.email = normalizeEmail(newEmail);
+        this.passwordHash = Objects.requireNonNull(newPasswordHash);
+        this.emailVerifiedAt = Objects.requireNonNull(recoveredAt);
+        this.sessionVersion = Math.addExact(this.sessionVersion, 1);
+    }
+
+    public void completeConductorEmailRecovery(String newEmail, Instant verifiedAt) {
+        if (role != UserRole.CONDUCTOR || !active || organization == null) {
+            throw new IllegalStateException("Only an active organization CONDUCTOR can recover an email");
+        }
+        this.email = normalizeEmail(newEmail);
+        this.emailVerifiedAt = Objects.requireNonNull(verifiedAt);
+        this.sessionVersion = Math.addExact(this.sessionVersion, 1);
+    }
+
+    public void completeConductorPasswordReset(String newEmail, String newPasswordHash, Instant resetAt) {
+        if (role != UserRole.CONDUCTOR || !active || organization == null) {
+            throw new IllegalStateException("Only an active organization CONDUCTOR can reset a password");
+        }
+        this.email = normalizeEmail(newEmail);
+        this.passwordHash = Objects.requireNonNull(newPasswordHash);
+        this.emailVerifiedAt = Objects.requireNonNull(resetAt);
+        this.sessionVersion = Math.addExact(this.sessionVersion, 1);
+    }
+
     public void updateDetails(String email, String fullName, String phone, UserRole role) {
         UserRole requestedRole = Objects.requireNonNull(role);
         if (requestedRole == UserRole.SUPER_ADMIN || organization == null) {
             throw new IllegalArgumentException("Un usuario de organización no puede convertirse en SUPER_ADMIN");
         }
-        this.email = normalizeEmail(email);
+        if (requestedRole != this.role) {
+            throw new IllegalArgumentException("El rol de una identidad creada es inmutable durante el piloto");
+        }
+        String normalizedEmail = normalizeEmail(email);
+        if (!this.email.equals(normalizedEmail)) {
+            this.emailVerifiedAt = null;
+        }
+        this.email = normalizedEmail;
         this.fullName = requiredText(fullName, "El nombre completo es obligatorio");
         this.phone = optionalText(phone);
         this.role = requestedRole;
@@ -171,6 +221,10 @@ public class AppUser {
 
     public Instant getUpdatedAt() {
         return updatedAt;
+    }
+
+    public long getSessionVersion() {
+        return sessionVersion;
     }
 
     private static String requiredText(String value, String message) {

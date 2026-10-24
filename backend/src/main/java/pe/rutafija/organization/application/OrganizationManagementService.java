@@ -78,6 +78,11 @@ public class OrganizationManagementService {
             throw conflict("Ya existe una organización con esa razón social");
         }
 
+        var changes=pe.rutafija.audit.application.AuditChanges.combine(
+            pe.rutafija.audit.application.AuditChanges.fields("status",organization.getStatus(),request.status()),
+            pe.rutafija.audit.application.AuditChanges.masked("legalName",organization.getLegalName(),request.legalName().strip()),
+            pe.rutafija.audit.application.AuditChanges.masked("tradeName",organization.getTradeName(),request.tradeName()),
+            pe.rutafija.audit.application.AuditChanges.masked("timezone",organization.getTimezone(),request.timezone()));
         organization.update(
                 request.legalName(),
                 request.tradeName(),
@@ -89,7 +94,7 @@ public class OrganizationManagementService {
                 "ORGANIZATION_UPDATED",
                 "ORGANIZATION",
                 organization.getId(),
-                Map.of("status", organization.getStatus().name())
+                Map.of("status", organization.getStatus().name(),"changes",changes,"reasonRequired",false)
         );
         return OrganizationResponse.from(organization);
     }

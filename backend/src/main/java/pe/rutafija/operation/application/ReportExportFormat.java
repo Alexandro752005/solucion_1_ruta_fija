@@ -8,7 +8,8 @@ import java.util.Locale;
 
 public enum ReportExportFormat {
     PDF,
-    XLSX;
+    XLSX,
+    CSV;
 
     public static ReportExportFormat from(String value) {
         try {
@@ -17,7 +18,7 @@ public enum ReportExportFormat {
             throw new ApplicationException(
                     HttpStatus.BAD_REQUEST,
                     ErrorCode.VALIDATION_ERROR,
-                    "El formato de exportación debe ser PDF o XLSX"
+                    "El formato de exportación debe ser CSV, PDF o XLSX"
             );
         }
     }

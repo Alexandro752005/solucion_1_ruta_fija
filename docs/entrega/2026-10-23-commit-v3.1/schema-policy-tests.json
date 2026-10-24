@@ -1,0 +1,71 @@
+{
+    "checkedAt":  "2026-10-23T20:48:00.6610276+00:00",
+    "result":  "PASS_PROFILE_AWARE_V50_SCHEMA_POLICY",
+    "checksPassed":  12,
+    "checks":  [
+                   {
+                       "name":  "Normal V50 accepts 50 runtime migrations without test grants",
+                       "passed":  true,
+                       "accepted":  true
+                   },
+                   {
+                       "name":  "Test V50 accepts its exact role-privilege repeatable",
+                       "passed":  true,
+                       "accepted":  true
+                   },
+                   {
+                       "name":  "Native V12 remains rejected",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Normal database refuses test-only repeatable",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Test database requires exact repeatable script identity",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Test database refuses missing role-privilege repeatable",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Failed migration refuses startup",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Database identity cannot be swapped",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Failed SELECT refuses startup even with plausible output",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Empty SELECT result refuses startup",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Extra output refuses partial certification",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Missing or unexpected version refuses startup",
+                       "passed":  true,
+                       "accepted":  false
+                   }
+               ],
+    "runtimeSha256":  "138e9585ab3de3a82d580872cd68805967b60d33e8407ee19254659e6fc01f92",
+    "databaseConnected":  false,
+    "serviceOrApplicationStarted":  false,
+    "sourceFunctionExtracted":  true
+}

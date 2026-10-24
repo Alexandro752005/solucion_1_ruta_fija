@@ -1,0 +1,15 @@
+{
+    "observedAt":  "2026-10-23T03:00:10.0079870+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "package":  "pe.rutafija.conductor.l08",
+    "installedSha256":  "e74dd49725499e3514c1fd853d81a1479f0614a6c5bfd07ddfa1a9b1c764609b",
+    "correctedArtifactMatchesInstalled":  true,
+    "privateInterfaceAndListenerMatch":  true,
+    "phonePrivatePeerMatches":  true,
+    "fineLocationPermissionGranted":  true,
+    "appIsResumedBeforeAction":  false,
+    "caseCleanupReleased":  false,
+    "principalOriginalBinaryRestored":  false,
+    "appLaunchedByThisCheck":  false,
+    "result":  "PASS_CORRECTED_TEST_PACKAGE_AND_PRIVATE_CASE_READY"
+}

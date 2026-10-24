@@ -39,13 +39,38 @@ public class Incident {
     @JoinColumn(name = "assignment_id")
     private Assignment assignment;
 
+    @Column(name="execution_segment_id",updatable=false)
+    private UUID executionSegmentId;
+    public UUID getExecutionSegmentId(){return executionSegmentId;}
+    public void linkExecutionSegment(UUID id){
+        if(assignment==null||executionSegmentId!=null)throw new IllegalStateException("La incidencia requiere una participación propia inequívoca.");
+        executionSegmentId=Objects.requireNonNull(id);
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reported_by", nullable = false, updatable = false)
+    @JoinColumn(name = "reported_by", updatable = false)
     private AppUser reportedBy;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)
     private IncidentCategory category;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private IncidentSeverity severity=IncidentSeverity.UNASSESSED;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "responsible_admin_id")
+    private AppUser responsibleAdmin;
+
+    @Column(name="previous_incident_id",updatable=false)
+    private UUID previousIncidentId;
+
+    @Column(name="relation_reason",updatable=false,length=20)
+    private String relationReason;
+
+    @Column(name="workflow_revision",nullable=false)
+    private long workflowRevision;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)
@@ -73,6 +98,13 @@ public class Incident {
 
     @Column(name = "resolved_at")
     private Instant resolvedAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "driver_closed_by")
+    private AppUser driverClosedBy;
+
+    @Column(name = "driver_closed_at")
+    private Instant driverClosedAt;
 
     @Version
     @Column(nullable = false)
@@ -140,9 +172,10 @@ public class Incident {
     }
 
     public void followUp(String note, boolean resolve, AppUser actor, Instant occurredAt) {
-        if (status == IncidentStatus.RESOLVED) {
-            throw new IllegalStateException("Una incidencia resuelta no admite nuevos seguimientos");
+        if (status == IncidentStatus.RESOLVED || status == IncidentStatus.CLOSED_BY_DRIVER) {
+            throw new IllegalStateException("Una incidencia cerrada no admite reapertura ni nuevos seguimientos");
         }
+        workflowRevision++;
         followUpNote = requiredText(note, "La nota de seguimiento es obligatoria");
         followedUpBy = Objects.requireNonNull(actor);
         followedUpAt = Objects.requireNonNull(occurredAt);
@@ -152,6 +185,32 @@ public class Incident {
         } else {
             status = IncidentStatus.FOLLOW_UP;
         }
+    }
+
+    /**
+     * The MOBILE reporter may close their own report exactly once. The event is
+     * retained as a terminal state; an ADMIN cannot reopen it through follow-up.
+     */
+    public boolean closeByMobileReporter(AppUser actor, Instant occurredAt) {
+        AppUser requiredActor = Objects.requireNonNull(actor);
+        Instant requiredOccurredAt = Objects.requireNonNull(occurredAt);
+        if (source != IncidentSource.MOBILE_APP || !reportedBy.getId().equals(requiredActor.getId())) {
+            throw new IllegalStateException("Solo el conductor que reportó desde móvil puede cerrar esta incidencia");
+        }
+        if (status == IncidentStatus.CLOSED_BY_DRIVER && driverClosedBy != null
+                && driverClosedBy.getId().equals(requiredActor.getId())) {
+            return false;
+        }
+        if (driverClosedAt != null || driverClosedBy != null) {
+            throw new IllegalStateException("El conductor ya cerró esta incidencia y no puede modificarla nuevamente");
+        }
+        if (status != IncidentStatus.OPEN && status != IncidentStatus.FOLLOW_UP) {
+            throw new IllegalStateException("Esta incidencia ya no admite cierre por el conductor");
+        }
+        status = IncidentStatus.CLOSED_BY_DRIVER;
+        driverClosedBy = requiredActor;
+        driverClosedAt = requiredOccurredAt;
+        return true;
     }
 
     public UUID getId() {
@@ -180,6 +239,28 @@ public class Incident {
 
     public IncidentCategory getCategory() {
         return category;
+    }
+
+    public IncidentSeverity getSeverity(){return severity;}
+    public AppUser getResponsibleAdmin(){return responsibleAdmin;}
+    public UUID getPreviousIncidentId(){return previousIncidentId;}
+    public String getRelationReason(){return relationReason;}
+    public void assess(IncidentSeverity value){
+        requireOpenForAttention();
+        if(value==null||value==IncidentSeverity.UNASSESSED)throw new IllegalArgumentException("Selecciona una gravedad explícita");
+        severity=value;workflowRevision++;
+    }
+    public void assignResponsible(AppUser value){
+        requireOpenForAttention();responsibleAdmin=Objects.requireNonNull(value);workflowRevision++;
+    }
+    public void recordAdditionalInformation(){requireOpenForAttention();workflowRevision++;}
+    /** Called during new report preparation only; the database also protects the link. */
+    public void relatePrevious(UUID previous,String reason){
+        if(createdAt!=null||previousIncidentId!=null)throw new IllegalStateException("El vínculo original no se modifica");
+        previousIncidentId=Objects.requireNonNull(previous);relationReason=Objects.requireNonNull(reason);
+    }
+    private void requireOpenForAttention(){
+        if(status==IncidentStatus.RESOLVED||status==IncidentStatus.CLOSED_BY_DRIVER)throw new IllegalStateException("La incidencia está cerrada");
     }
 
     public IncidentStatus getStatus() {
@@ -212,6 +293,14 @@ public class Incident {
 
     public Instant getResolvedAt() {
         return resolvedAt;
+    }
+
+    public AppUser getDriverClosedBy() {
+        return driverClosedBy;
+    }
+
+    public Instant getDriverClosedAt() {
+        return driverClosedAt;
     }
 
     public long getVersion() {

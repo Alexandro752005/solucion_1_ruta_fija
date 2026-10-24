@@ -1,0 +1,16 @@
+﻿[
+    {
+        "database":  "rf_legacy_qa_20261023",
+        "guard":  "rf_legacy_qa_20261023|0|0|0|0",
+        "syntheticOnlyVerified":  true,
+        "dropped":  true,
+        "forced":  false
+    },
+    {
+        "database":  "rf_legacy_concurrency_qa_20261023",
+        "guard":  "rf_legacy_concurrency_qa_20261023|4|4|2|0",
+        "syntheticOnlyVerified":  true,
+        "dropped":  true,
+        "forced":  false
+    }
+]

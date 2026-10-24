@@ -4,20 +4,31 @@ import '../../../app/ruta_fija_environment.dart';
 import '../../../core/navigation/conductor_destination.dart';
 import '../../../core/presentation/mobile_error_message.dart';
 import '../../../core/session/mobile_session_controller.dart';
+import '../../announcements/data/mobile_announcement_repository.dart';
+import '../../announcements/data/mobile_notice_repository.dart';
+import '../../announcements/presentation/announcements_page.dart';
 import '../../assignments/data/mobile_assignment_repository.dart';
 import '../../assignments/presentation/assignments_page.dart';
+import '../../incidents/data/mobile_incident_repository.dart';
+import '../../incidents/presentation/incidents_page.dart';
 import '../../profile/data/mobile_driver_repository.dart';
 import '../../profile/presentation/availability_page.dart';
 import '../../profile/presentation/conductor_home_page.dart';
 import '../../profile/presentation/profile_page.dart';
+import '../../preferences/domain/mobile_preferences.dart';
 
-class ConductorNavigationShell extends StatelessWidget {
+class ConductorNavigationShell extends StatefulWidget {
   const ConductorNavigationShell({
     required this.destination,
     required this.environment,
     required this.sessionController,
     required this.driverGateway,
     required this.assignmentGateway,
+    required this.incidentGateway,
+    required this.announcementGateway,
+    this.noticeGateway,
+    this.preferences,
+    this.reportsAvailable=false,
     super.key,
   });
 
@@ -26,10 +37,21 @@ class ConductorNavigationShell extends StatelessWidget {
   final MobileSessionController sessionController;
   final MobileDriverGateway driverGateway;
   final MobileAssignmentGateway assignmentGateway;
+  final MobileIncidentGateway incidentGateway;
+  final MobileAnnouncementGateway announcementGateway;
+  final MobileNoticeGateway? noticeGateway;
+  final MobilePreferencesController? preferences;
+  final bool reportsAvailable;
 
+  @override
+  State<ConductorNavigationShell> createState() =>
+      _ConductorNavigationShellState();
+}
+
+class _ConductorNavigationShellState extends State<ConductorNavigationShell> {
   Future<void> _logout(BuildContext context) async {
     try {
-      await sessionController.logout();
+      await widget.sessionController.logout();
     } catch (error) {
       if (context.mounted) {
         ScaffoldMessenger.of(context)
@@ -40,10 +62,27 @@ class ConductorNavigationShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = widget.sessionController.state.user;
+    if (user == null) {
+      return const SizedBox.shrink();
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Ruta Fija Conductor'),
         actions: [
+          if (widget.noticeGateway != null)
+            IconButton(
+              key: const Key('notices-open'),
+              tooltip: 'Bandeja de avisos',
+              onPressed: () => Navigator.of(context).pushNamed('/notices'),
+              icon: const Icon(Icons.notifications_outlined),
+            ),
+          IconButton(
+            key: const Key('qualification-open'),
+            tooltip: 'Mi incorporación',
+            onPressed: () => Navigator.of(context).pushNamed('/qualification'),
+            icon: const Icon(Icons.fact_check_outlined),
+          ),
           IconButton(
             tooltip: 'Cerrar sesión',
             onPressed: () => _logout(context),
@@ -54,29 +93,39 @@ class ConductorNavigationShell extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20),
-          child: switch (destination) {
+          child: switch (widget.destination) {
             ConductorDestination.home => ConductorHomePage(
-              driverGateway: driverGateway,
+              driverGateway: widget.driverGateway,
+              assignmentGateway: widget.assignmentGateway,
+              preferences: widget.preferences,
             ),
             ConductorDestination.availability => AvailabilityPage(
-              driverGateway: driverGateway,
+              driverGateway: widget.driverGateway,
             ),
             ConductorDestination.assignments => AssignmentsPage(
-              driverGateway: assignmentGateway,
-              driverId: sessionController.state.user!.driverId,
+              driverGateway: widget.assignmentGateway,
+              driverId: user.driverId,
+            ),
+            ConductorDestination.incidents => IncidentsPage(
+              incidentGateway: widget.incidentGateway,
+              userId: user.id,
+            ),
+            ConductorDestination.announcements => AnnouncementsPage(
+              announcementGateway: widget.announcementGateway,
             ),
             ConductorDestination.profile => ProfilePage(
-              driverGateway: driverGateway,
+              driverGateway: widget.driverGateway,
+              preferences:widget.preferences,
+              reportsAvailable:widget.reportsAvailable,
             ),
-            _ => _PendingModule(destination: destination),
           },
         ),
       ),
       bottomNavigationBar: NavigationBar(
-        selectedIndex: destination.index,
+        selectedIndex: widget.destination.index,
         onDestinationSelected: (index) {
           final next = ConductorDestination.values[index];
-          if (next != destination) {
+          if (next != widget.destination) {
             Navigator.of(context).pushReplacementNamed(next.path);
           }
         },
@@ -88,48 +137,6 @@ class ConductorNavigationShell extends StatelessWidget {
               label: item.label,
             ),
         ],
-      ),
-    );
-  }
-}
-
-class _PendingModule extends StatelessWidget {
-  const _PendingModule({required this.destination});
-
-  final ConductorDestination destination;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Center(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 560),
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(destination.icon, size: 36),
-                const SizedBox(height: 16),
-                Text(
-                  '${destination.milestone} — ${destination.label}',
-                  style: theme.textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                const Text('Pendiente de construcción'),
-                const SizedBox(height: 12),
-                const Text(
-                  'Esta ruta existe para validar la navegación M1. No expone acciones, '
-                  'datos locales ni respuestas simuladas antes de su fase funcional.',
-                ),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }

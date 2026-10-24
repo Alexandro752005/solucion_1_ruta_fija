@@ -1,0 +1,222 @@
+{
+  "recordedLocalDate": "2026-10-17",
+  "timezone": "America/Lima",
+  "runId": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "inspectionAtUtc": "2026-10-18T00:19:28.559885400Z",
+  "operatorReply": {
+    "runIdConfirmed": true,
+    "previousCleanupConsoleOutputReported": false,
+    "commandListingReported": false,
+    "browserRenderingReported": false
+  },
+  "databaseInspection": {
+    "database": "ruta_fija_test",
+    "role": "rf_test",
+    "schema": "V26",
+    "historicalCreations": {
+      "SUPER_ADMIN": 1,
+      "ADMIN": 2,
+      "CONDUCTOR": 0
+    },
+    "remainingSlots": {
+      "CONDUCTOR": 20,
+      "ADMIN": 2,
+      "SUPER_ADMIN": 0
+    },
+    "superAdminAccounts": 1,
+    "personIdentityBindings": 2,
+    "personIdentityKeyRecorded": true,
+    "recoveryCredentialPresent": true,
+    "eligibleSyntheticPendingAdmins": 0,
+    "termsAcceptanceCount": 1,
+    "currentTerms": {
+      "id": "f590e228-5d2e-47e4-b144-b0df1198bd49",
+      "version": "1.0.0",
+      "content_sha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+      "synthetic": false
+    },
+    "publishedFileHashMatches": true,
+    "cleanupLockHeld": true,
+    "runId": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+    "caseInventory": {
+      "superAdminAccounts": 1,
+      "superAdminHistoricalCreations": 1,
+      "adminHistoricalCreations": 2,
+      "caseAccounts": 2,
+      "caseOrganizations": 1,
+      "identityBindings": 2,
+      "identityKeyRecords": 1,
+      "recoveryCredentials": 1
+    },
+    "markerPresentAndMatches": true,
+    "stateFilePresent": true,
+    "privateRuntimeKeyFilePresent": true,
+    "syntheticRecoveryFixtureRepairReadOnlyFacts": {
+      "authorizationAndOutputCheck": true,
+      "exactCaseAndMarker": true,
+      "environmentApproved": true,
+      "harnessOwnsCleanupLock": false,
+      "identitiesMatch": true,
+      "identityReviewed": true,
+      "credentialMatches": true,
+      "termsAndAcceptancePreserved": true,
+      "historicalLedgerPreserved": true,
+      "noCompletedRecovery": true,
+      "noLiveChallenge": true,
+      "noPriorRepair": false,
+      "enrollmentObservedOnce": true,
+      "observationHealthy": true
+    },
+    "syntheticRecoveryFixtureRepairRequiresServingLock": true,
+    "syntheticRecoveryFixtureKeyPreparationReadOnlyFacts": {
+      "exactCaseAndMarker": true,
+      "environmentApproved": true,
+      "harnessOwnsCleanupLock": false,
+      "identitiesMatch": true,
+      "identityReviewed": true,
+      "credentialMatches": true,
+      "termsAndAcceptancePreserved": true,
+      "historicalLedgerPreserved": true,
+      "noCompletedRecovery": true,
+      "noLiveChallenge": true,
+      "enrollmentObservedOnce": true,
+      "observationHealthy": true,
+      "authorization": true,
+      "codeRepairAuthorization": true,
+      "codeRepairPreservedOnce": true,
+      "segmentMatches": true,
+      "noPriorKeyReplacement": true
+    },
+    "syntheticRecoveryFixtureKeyPreparationRequiresServingLock": true,
+    "syntheticRecoveryFixtureKeyPreparationPublicAudits": [],
+    "currentRecoveryPublicKeyFingerprintSha256": "5b727e9aa6252667a1cbdc30f7575fb5007f9d8bb159d0e4dd2b5dcb27fbe00c",
+    "passwordRecaptureEligibility": "PREPARED_CREDENTIALS_REQUIRE_REVIEW_NO_PASSWORD_OVERWRITE",
+    "legacyExactFirstRejectionCause": "NOT_RECORDED_CANNOT_RECONSTRUCT",
+    "latestRecordedBootstrapReason": "PASSWORD_HASH_STORED_BY_NORMAL_ENCODER_LEDGER_PRESERVED",
+    "standardCleanupRefusedByMarker": true,
+    "inspectionAtUtc": "2026-10-18T00:19:28.559885400Z",
+    "readOnly": true,
+    "smtpAttempts": 0,
+    "writes": 0
+  },
+  "publicRuntimeStateAndListeners": {
+    "runId": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+    "database": "ruta_fija_test",
+    "ownerId": "088518c1-821c-4316-9f87-090f51ac44e0",
+    "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+    "adminId": "92ebc07c-1319-4850-a734-f792cb299979",
+    "enrollmentResponseCount": 1,
+    "originalEnrollmentResponseCount": 1,
+    "originalEnrolledPublicKeyFingerprintSha256": "5b727e9aa6252667a1cbdc30f7575fb5007f9d8bb159d0e4dd2b5dcb27fbe00c",
+    "currentRecoveryKeyFingerprintSha256": "5b727e9aa6252667a1cbdc30f7575fb5007f9d8bb159d0e4dd2b5dcb27fbe00c",
+    "recoveryObservationSegmentId": "e140a035-8211-4037-82e6-388329f1cfc8",
+    "recoverySegmentStartedAtUtc": "2026-10-18T00:18:19.105184Z",
+    "syntheticFixtureCodeRepairCount": 1,
+    "fixtureRepairAuditId": "d791653a-6379-4f02-ac1d-1db020dde403",
+    "syntheticFixtureKeyReplacementCount": null,
+    "manualSyntheticAdminResult": "PENDING",
+    "manualTemporaryRecoveryResult": "PENDING",
+    "observationIncomplete": null,
+    "markerRunId": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+    "listeners": [
+      {
+        "LocalAddress": "127.0.0.1",
+        "LocalPort": 8091,
+        "OwningProcess": 22648
+      },
+      {
+        "LocalAddress": "127.0.0.1",
+        "LocalPort": 4311,
+        "OwningProcess": 22648
+      }
+    ],
+    "latestPublicArchives": [
+      {
+        "Name": "observacion-1792282590975.json",
+        "LastWriteTimeUtc": "/Date(1792282590988)/"
+      },
+      {
+        "Name": "observacion-1792282430564.json",
+        "LastWriteTimeUtc": "/Date(1792282430587)/"
+      },
+      {
+        "Name": "observacion-1792227077200.json",
+        "LastWriteTimeUtc": "/Date(1792227077214)/"
+      }
+    ]
+  },
+  "priorArchivesAndMarkerMetadata": {
+    "archivedBeforeReload": [
+      {
+        "file": "observacion-1792282430564.json",
+        "sha256": "4EA0EC0289E9CFEAF17A593941E59E415E11724BD0B012697EDCA4CCB9A171A9",
+        "sidecarMatches": true,
+        "observedAtUtc": "2026-10-18T00:13:50.020920100Z",
+        "recoveryObservationSegmentId": "82bffcf1-6fab-41fd-a57b-3cbbbf18b123",
+        "manualAdminResult": "PENDING",
+        "manualRecoveryResult": "PENDING",
+        "historicalCreations": {
+          "SUPER_ADMIN": 1,
+          "ADMIN": 2,
+          "CONDUCTOR": 0
+        },
+        "termsAcceptanceCount": 1,
+        "keyReplacementCount": null
+      },
+      {
+        "file": "observacion-1792282590975.json",
+        "sha256": "AADC94952D0851494316C0B2446697C60150DC2A6286C683E12337B3A5016FF0",
+        "sidecarMatches": true,
+        "observedAtUtc": "2026-10-18T00:16:30.971140800Z",
+        "recoveryObservationSegmentId": "82bffcf1-6fab-41fd-a57b-3cbbbf18b123",
+        "manualAdminResult": "PENDING",
+        "manualRecoveryResult": "PENDING",
+        "historicalCreations": {
+          "SUPER_ADMIN": 1,
+          "ADMIN": 2,
+          "CONDUCTOR": 0
+        },
+        "termsAcceptanceCount": 1,
+        "keyReplacementCount": null
+      }
+    ],
+    "loginHttpStatus": 200,
+    "loginHtmlHasAppRoot": false,
+    "authenticationSubmitted": false,
+    "operatorBrowserRenderingReported": false,
+    "markerSha256": "83A91866767A8EFC56CBF7ED553191D53610F5A264E0E9A6C0D86CBBE79FF205",
+    "markerLastWriteTimeUtc": "2026-10-17T07:15:25.2350423Z"
+  },
+  "correctedLoginHtmlProbe": {
+    "loginHttpStatus": 200,
+    "expectedRootSelector": "rf-root",
+    "expectedRootPresent": true,
+    "loginPageTitlePresent": true,
+    "authenticationSubmitted": false,
+    "externalMailAttempts": 0,
+    "visualBrowserRenderingReportedByOperator": false,
+    "inspectionAtUtc": "2026-10-18T00:21:08.6020532Z"
+  },
+  "previousAppRootProbeWasNotApplicableBecauseActualSelectorIsRfRoot": true,
+  "localUnauthenticatedLoginGetCount": 2,
+  "newDestinationMetadataOnly": {
+    "proposedNewDirectoryExists": false,
+    "privateKeyFilesOpened": false,
+    "canonicalClientSha256": "91913FF7C11CABFAA01881FCBFB24BBF5ED347564C0140D73A757BC96D38E24A",
+    "inspectionAtUtc": "2026-10-18T00:20:21.9634740Z"
+  },
+  "cleanupProtectionVerified": true,
+  "testCleanupReleased": false,
+  "actualKeyPreparationExecuted": false,
+  "newKeyGeneratedByAgent": false,
+  "nextHumanAction": "PREPARE_NEW_OUTSIDE_PROJECT_DIRECTORY_AND_GENERATE_TEMPORARY_KEY_PERSONALLY_NO_ENROLL_OR_RECOVER",
+  "limits": {
+    "htmlServedDoesNotAccreditVisualBrowserRendering": true,
+    "detachedInspectorOwnLockFalseExpectedBecausePidZero": true,
+    "privateKeyFileContentsRead": false,
+    "passwordsKnownByAgent": false,
+    "externalMailAttempts": 0,
+    "newTestsRun": 0
+  }
+}
+

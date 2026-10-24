@@ -1,0 +1,23 @@
+[
+  {
+    "database": "solucion_ruta_fija_1",
+    "user": "soporte",
+    "applicationName": "pgAdmin 4 - DB:solucion_ruta_fija_1",
+    "state": null,
+    "backendType": null
+  },
+  {
+    "database": "solucion_ruta_fija_1",
+    "user": "rf_app",
+    "applicationName": "PostgreSQL JDBC Driver",
+    "state": null,
+    "backendType": null
+  },
+  {
+    "database": "solucion_ruta_fija_1",
+    "user": "rf_app",
+    "applicationName": "PostgreSQL JDBC Driver",
+    "state": null,
+    "backendType": null
+  }
+]

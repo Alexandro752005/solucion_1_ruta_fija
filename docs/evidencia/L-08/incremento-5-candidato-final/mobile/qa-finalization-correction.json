@@ -1,0 +1,13 @@
+{
+  "observedAtUtc": "2026-10-23T06:42:44.666718+00:00",
+  "result": "PASS_READ_ONLY_CORRECTION_REVIEW",
+  "reviewedFiles": [
+    {
+      "path": "scripts/finalize_l08_candidate.py",
+      "sha256": "79a9d2abaae873e7bee0edd99f5c608cc95ad1d0a10f2f4cefd91dc5bb93b7f8"
+    }
+  ],
+  "supersedesSourceDigestOnlyOf": "mobile/qa-finalization.json",
+  "correction": "Finalizer now copies current contract, local/field criteria, note/evidence/date/schema fields from final L08 lot into specs; keeps exact08 backup reference; no main rerun by reviewer",
+  "priorFindingsPreservedIn": "mobile/qa-finalization.json"
+}

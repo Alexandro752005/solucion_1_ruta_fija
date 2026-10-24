@@ -6,7 +6,7 @@ import { finalize } from 'rxjs';
 import { AuditApiService } from '../../core/audit/audit-api.service';
 import { AuditEvent } from '../../core/audit/audit.models';
 import { AuthSessionService } from '../../core/auth/auth-session.service';
-import { ManagementApiService } from '../../core/management/management-api.service';
+import { AdminDashboard, DashboardApiService, PlatformDashboard } from '../../core/dashboard/dashboard-api.service';
 import { OperationRealtimeService } from '../../core/operations/operation-realtime.service';
 import { AvailabilityReport } from '../../core/operations/operations.models';
 import { OperationsApiService } from '../../core/operations/operations-api.service';
@@ -23,7 +23,7 @@ import { StatusIndicatorComponent } from '../../shared/ui/status-indicator.compo
 export class DashboardPage {
   readonly session = inject(AuthSessionService);
   private readonly operationsApi = inject(OperationsApiService);
-  private readonly managementApi = inject(ManagementApiService);
+  private readonly dashboardApi = inject(DashboardApiService);
   private readonly auditApi = inject(AuditApiService);
   private readonly realtime = inject(OperationRealtimeService);
   private readonly destroyRef = inject(DestroyRef);
@@ -53,13 +53,19 @@ export class DashboardPage {
   readonly organizationTotal = signal<number | null>(null);
   readonly loadingOrganizations = signal(false);
   readonly organizationsError = signal(false);
+  readonly priorities = signal<AdminDashboard | null>(null);
+  readonly loadingPriorities = signal(false);
+  readonly prioritiesError = signal(false);
+  readonly platform = signal<PlatformDashboard | null>(null);
 
   constructor() {
     if (this.isAdmin()) {
+      this.loadPriorities();
       this.loadAvailability();
       this.loadRecentActivity();
       this.realtime.connect();
       this.realtime.events.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+        this.loadPriorities();
         this.loadAvailability();
         this.loadRecentActivity();
       });
@@ -75,6 +81,20 @@ export class DashboardPage {
 
   dateLabel(value: string): string {
     return new Date(value).toLocaleString('es-PE', { dateStyle: 'short', timeStyle: 'short' });
+  }
+
+  priorityLabel(code: string): string {
+    return ({ CRITICAL_INCIDENTS: 'Incidencias críticas abiertas', SAFETY_ATTENTION: 'Recursos con atención segura pendiente',
+      UPCOMING_UNACCEPTED: 'Servicios próximos sin aceptación o atrasados', PENDING_REASSIGNMENT: 'Servicios por reasignar',
+      EXPIRED_PENDING_OFFERS: 'Ofertas vencidas por regularizar', EXPIRING_OFFERS: 'Ofertas por vencer',
+      OPEN_INCIDENTS: 'Incidencias abiertas', ONBOARDING_REVIEW: 'Solicitudes por revisar' } as Record<string, string>)[code] ?? code;
+  }
+
+  private loadPriorities(): void {
+    this.loadingPriorities.set(true); this.prioritiesError.set(false);
+    this.dashboardApi.admin().pipe(finalize(() => this.loadingPriorities.set(false))).subscribe({
+      next: report => this.priorities.set(report), error: () => { this.priorities.set(null); this.prioritiesError.set(true); },
+    });
   }
 
   actionLabel(action: string): string {
@@ -144,11 +164,11 @@ export class DashboardPage {
   private loadOrganizationTotal(): void {
     this.loadingOrganizations.set(true);
     this.organizationsError.set(false);
-    this.managementApi.listOrganizations({ page: 0, size: 1, sort: 'legalName,asc' })
+    this.dashboardApi.platform()
       .pipe(finalize(() => this.loadingOrganizations.set(false)))
       .subscribe({
-        next: (response) => this.organizationTotal.set(response.totalItems),
-        error: () => this.organizationsError.set(true),
+        next: (response) => { this.organizationTotal.set(response.organizations); this.platform.set(response); },
+        error: () => { this.platform.set(null); this.organizationsError.set(true); },
       });
   }
 }

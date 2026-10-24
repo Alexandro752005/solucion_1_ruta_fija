@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="20.319" tests="20" errors="0" skipped="0" failures="0" flakes="0">
+  <testcase name="gpsIncidentCannotAdoptAnotherServicesPointEvenForTheSameConductorAndOrganization" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="1.1" />
+  <testcase name="gpsDuplicateCaptureDoesNotExtendRetentionAndDifferentCoordinatesCannotRewriteIt" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="0.788" />
+  <testcase name="gpsMissingIdentityUsesTheActualGate" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="0.557" />
+  <testcase name="gpsPurgeIsBoundedToTheRequestedTenantEvenWhenAnotherTenantsPointsHaveExpired" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="0.762" />
+  <testcase name="gpsHistorySurvivesCompletionWithoutAVisibleCurrentSnapshotAndHasFixedSevenDayExpiry" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="0.827" />
+  <testcase name="gpsQualificationLossPreservesOwnConsultationCaptureAndSafeCloseWithoutPermittingNewStart" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="0.892" />
+  <testcase name="gpsAnotherConductorAndForeignAdminCannotReadTheRequestOrDeliverItsPoints" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="1.868" />
+  <testcase name="gpsIncidentEvidenceUsesTheSameExpiryAndIsUnlinkedWhenOriginalPointIsPurged" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="1.06" />
+  <testcase name="gpsMissingTermsUsesTheActualGate" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="0.564" />
+  <testcase name="gpsTerminalCorroborationUsesItsOwnStoredPointAndRetainsTheOriginalDeclaration" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="0.784" />
+  <testcase name="gpsReviewDeadlineIsVisibleButNeverExtendsPointRetentionOrInventsADecision" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="0.756" />
+  <testcase name="gpsSuperAdminDoesNotGainGlobalCoordinatesOrRequestReviewByItsPlatformRole" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="0.553" />
+  <testcase name="gpsDeclarationCannotBeDetachedBeforeDeletionOrRewrittenAfterExpiry" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="0.799" />
+  <testcase name="gpsServerDefaultIntervalAndOwnListRemainStableWhenTheRequestIsConsultedAgain" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="0.9" />
+  <testcase name="gpsOwnRequestIsIdempotentButCannotRequestAnotherService" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="0.874" />
+  <testcase name="gpsReviewRequiresIdentityConfirmationAndCannotBeReusedToExtendTheGrant" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="1.495" />
+  <testcase name="gpsOnlyApprovedReauthenticatedOwnerReceivesPointsAndGrantExpiresExactlyAtFifteenMinutes" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="2.122" />
+  <testcase name="gpsTerminalDiscrepancyCreatesAnObservationWithoutInferringFraudOrCopyingCoordinates" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="0.804" />
+  <testcase name="gpsExpiryDuringReviewCannotBeExtendedAndPurgeRemovesCoordinatesButPreservesSummary" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="1.543" />
+  <testcase name="gpsNoDataReviewDoesNotReconstructOrFabricatePoints" classname="pe.rutafija.qualification.ServiceGpsIntegrationTest" time="1.241" />
+</testsuite>

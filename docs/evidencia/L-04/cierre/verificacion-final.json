@@ -1,0 +1,21 @@
+{
+  "observedAt": "2026-10-20T02:17:43.595354+00:00",
+  "result": "PASS_L04_CLOSURE_CONSISTENCY_AND_HASHES",
+  "lotStatus": "VERIFICADA",
+  "closureType": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "localCriteriaVerified": 10,
+  "closureManifestFiles": 165,
+  "increment3ManifestFiles": 43,
+  "currentSourceFiles": 158,
+  "artifactFiles": 3,
+  "localDocumentLinksVerified": 83,
+  "immutableFiles": 12,
+  "closureManifestSha256": "22a394123ac382cb21a861ae44d3d8247fcbf60a30baa65903ac69d6cd65387d",
+  "sourceManifestSha256": "258427947c6c0f6a88b57f13bd0b266fbb2056b28148010b03e500731828a101",
+  "boardMemoryContractMatrixAgree": true,
+  "L05ObjectUnchanged": true,
+  "L05Started": false,
+  "pilotEnabled": false,
+  "globalCleanupExecuted": false,
+  "note": "This validation report is excluded from the manifest to avoid a self-referential checksum."
+}

@@ -1,0 +1,10 @@
+﻿[
+    {
+        "Name":  "backend.stderr.log",
+        "Length":  0
+    },
+    {
+        "Name":  "frontend.stderr.log",
+        "Length":  0
+    }
+]

@@ -1,0 +1,22 @@
+{
+  "result": "PASS",
+  "lot": "L-07",
+  "status": "VERIFICADA",
+  "contractVersion": "0.4.0",
+  "completionType": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "criteriaVerified": 10,
+  "pendingLocalCriteria": [],
+  "checkedPaths": [
+    "docs/contratos/L-07.md",
+    "docs/evidencia/L-07/matriz-L07.md",
+    "docs/ejecucion/L-07.md",
+    "docs/backlog-producto-ruta-fija-v3.1.md",
+    "docs/seguimiento/tareas.json",
+    "memory/current.md",
+    "memory/target.md",
+    "specs/decisiones-L07-2026-10-21.json"
+  ],
+  "pilotEnabled": false,
+  "L08Started": false,
+  "L08Authorized": false
+}

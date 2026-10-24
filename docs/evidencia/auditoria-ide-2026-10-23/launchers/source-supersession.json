@@ -1,0 +1,510 @@
+{
+  "recordedAtUtc": "2026-10-23T16:15:18.528250+00:00",
+  "classification": "LIVE_OPERATIONAL_FILES_SUPERSEDED_WITH_EXACT_HISTORICAL_BACKUPS",
+  "authorization": "Parent explicit instruction to evolve live files after exact backup; no historical acta/evidence/manifest rewrite",
+  "files": [
+    {
+      "path": "iniciar_ruta_fija.bat",
+      "originalBackup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/iniciar_ruta_fija.bat",
+      "originalSha256": "bd0eefe92d133a7e72d677bb2b52c91ae6fa4a8530a317e254b4f7085d0cdaed",
+      "currentSha256": "cee079a2c653a25b83319142589d4cb8fe34692b876fb1fc213ec365c8810276",
+      "changed": true,
+      "historicalReferences": [
+        {
+          "manifest": "docs/evidencia/L-00/source-manifest.sha256",
+          "line": 4331,
+          "sha256": "bd0eefe92d133a7e72d677bb2b52c91ae6fa4a8530a317e254b4f7085d0cdaed"
+        }
+      ],
+      "historicalReferencesMatchingExactBackup": 1,
+      "originalBackupVerified": true
+    },
+    {
+      "path": "finalizar_ruta_fija.bat",
+      "originalBackup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/finalizar_ruta_fija.bat",
+      "originalSha256": "a73f9f95c5867516470d20e5b8880cf80e4e434810af4ab0eb1b4928a41329c5",
+      "currentSha256": "bb70b6651bc4ae365ff85d2b0c7ffa4460e43fb3214d67b08293712ec8cab1aa",
+      "changed": true,
+      "historicalReferences": [
+        {
+          "manifest": "docs/evidencia/L-00/source-manifest.sha256",
+          "line": 4231,
+          "sha256": "a73f9f95c5867516470d20e5b8880cf80e4e434810af4ab0eb1b4928a41329c5"
+        }
+      ],
+      "historicalReferencesMatchingExactBackup": 1,
+      "originalBackupVerified": true
+    },
+    {
+      "path": "verificar_ruta_fija.bat",
+      "originalBackup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/verificar_ruta_fija.bat",
+      "originalSha256": "b36190199c9deb2cf0e5da8a04aae4e3d8f3701424afc5e1deea46971a4161f6",
+      "currentSha256": "b01990c9c9e2619a2200dd6f9f83f420fad1deaefd643146654c0726065efffe",
+      "changed": true,
+      "historicalReferences": [
+        {
+          "manifest": "docs/evidencia/L-00/source-manifest.sha256",
+          "line": 4501,
+          "sha256": "b36190199c9deb2cf0e5da8a04aae4e3d8f3701424afc5e1deea46971a4161f6"
+        }
+      ],
+      "historicalReferencesMatchingExactBackup": 1,
+      "originalBackupVerified": true
+    },
+    {
+      "path": "iniciar_demo_temporal.bat",
+      "originalBackup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/iniciar_demo_temporal.bat",
+      "originalSha256": "00029cc54ef86ad96dc2694fa68b4f5c6663650684b56b7fdf7d985226363162",
+      "currentSha256": "5f45dcdc72e760baa67c0383c80e21467f3046946940823b4d7465b8021a6581",
+      "changed": true,
+      "historicalReferences": [
+        {
+          "manifest": "docs/evidencia/L-00/source-manifest.sha256",
+          "line": 4330,
+          "sha256": "00029cc54ef86ad96dc2694fa68b4f5c6663650684b56b7fdf7d985226363162"
+        }
+      ],
+      "historicalReferencesMatchingExactBackup": 1,
+      "originalBackupVerified": true
+    },
+    {
+      "path": "finalizar_demo_temporal.bat",
+      "originalBackup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/finalizar_demo_temporal.bat",
+      "originalSha256": "6ddcaff2fe891ae123a74c26b2362f998511530eac42432013ffa6134ff786d8",
+      "currentSha256": "b16ebfc43e7acbbef0f8dd7978c004dfa2f174a2e86f7e89ac0ae9be01905b34",
+      "changed": true,
+      "historicalReferences": [
+        {
+          "manifest": "docs/evidencia/L-00/source-manifest.sha256",
+          "line": 4230,
+          "sha256": "6ddcaff2fe891ae123a74c26b2362f998511530eac42432013ffa6134ff786d8"
+        }
+      ],
+      "historicalReferencesMatchingExactBackup": 1,
+      "originalBackupVerified": true
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+      "originalBackup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Invoke-RutaFijaNativeRuntime.ps1",
+      "originalSha256": "d0a2dec4272b000bcc2e5997258a28938d58f02ad2b9f304311bf112bb8a7b60",
+      "currentSha256": "298d7cb7975aeb32787c7e05bc9065acb04b8657edf35589a7050cab3ffeb167",
+      "changed": true,
+      "historicalReferences": [
+        {
+          "manifest": "docs/evidencia/L-00/source-manifest.sha256",
+          "line": 4448,
+          "sha256": "d0a2dec4272b000bcc2e5997258a28938d58f02ad2b9f304311bf112bb8a7b60"
+        },
+        {
+          "manifest": "docs/evidencia/L-03/fuentes-cierre.sha256",
+          "line": 731,
+          "sha256": "d0a2dec4272b000bcc2e5997258a28938d58f02ad2b9f304311bf112bb8a7b60"
+        },
+        {
+          "manifest": "docs/evidencia/L-05/cierre/fuentes.sha256",
+          "line": 818,
+          "sha256": "d0a2dec4272b000bcc2e5997258a28938d58f02ad2b9f304311bf112bb8a7b60"
+        },
+        {
+          "manifest": "docs/evidencia/L-08/incremento-2-mision-y-controles/fuentes.sha256",
+          "line": 1033,
+          "sha256": "d0a2dec4272b000bcc2e5997258a28938d58f02ad2b9f304311bf112bb8a7b60"
+        }
+      ],
+      "historicalReferencesMatchingExactBackup": 4,
+      "originalBackupVerified": true
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaNativeTest.ps1",
+      "originalBackup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Invoke-RutaFijaNativeTest.ps1",
+      "originalSha256": "ebc1a5c6ba70c808b4f262b4886424ea3c99452a747891010d55dd35e745c954",
+      "currentSha256": "3b318571892f5828799f6b007fde861e2a498f1d13e21ef1c8a30265b8379fb2",
+      "changed": true,
+      "historicalReferences": [
+        {
+          "manifest": "docs/evidencia/L-00/source-manifest.sha256",
+          "line": 4449,
+          "sha256": "d0825f3f4cafddbaf8b2476069c2758e37c9d48aa25f8e295cae4be46877ec14"
+        },
+        {
+          "manifest": "docs/evidencia/L-03/fuentes-cierre.sha256",
+          "line": 732,
+          "sha256": "ebc1a5c6ba70c808b4f262b4886424ea3c99452a747891010d55dd35e745c954"
+        },
+        {
+          "manifest": "docs/evidencia/L-05/cierre/fuentes.sha256",
+          "line": 819,
+          "sha256": "ebc1a5c6ba70c808b4f262b4886424ea3c99452a747891010d55dd35e745c954"
+        },
+        {
+          "manifest": "docs/evidencia/L-08/incremento-2-mision-y-controles/fuentes.sha256",
+          "line": 1034,
+          "sha256": "ebc1a5c6ba70c808b4f262b4886424ea3c99452a747891010d55dd35e745c954"
+        }
+      ],
+      "historicalReferencesMatchingExactBackup": 3,
+      "originalBackupVerified": true
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaQuickDemo.ps1",
+      "originalBackup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Invoke-RutaFijaQuickDemo.ps1",
+      "originalSha256": "7b4eee4ce175de62aaae856fd03854cdbbd32f65eacf803a0f2e49337a2489c9",
+      "currentSha256": "e24de70cfc6e610a600d27058b163812151afd624ff3bcf12f40f3ffc497ffa7",
+      "changed": true,
+      "historicalReferences": [
+        {
+          "manifest": "docs/evidencia/L-00/source-manifest.sha256",
+          "line": 4450,
+          "sha256": "7b4eee4ce175de62aaae856fd03854cdbbd32f65eacf803a0f2e49337a2489c9"
+        },
+        {
+          "manifest": "docs/evidencia/L-03/fuentes-cierre.sha256",
+          "line": 733,
+          "sha256": "7b4eee4ce175de62aaae856fd03854cdbbd32f65eacf803a0f2e49337a2489c9"
+        },
+        {
+          "manifest": "docs/evidencia/L-05/cierre/fuentes.sha256",
+          "line": 820,
+          "sha256": "7b4eee4ce175de62aaae856fd03854cdbbd32f65eacf803a0f2e49337a2489c9"
+        },
+        {
+          "manifest": "docs/evidencia/L-08/incremento-2-mision-y-controles/fuentes.sha256",
+          "line": 1035,
+          "sha256": "7b4eee4ce175de62aaae856fd03854cdbbd32f65eacf803a0f2e49337a2489c9"
+        }
+      ],
+      "historicalReferencesMatchingExactBackup": 4,
+      "originalBackupVerified": true
+    },
+    {
+      "path": "scripts/Test-RutaFijaNativePreflight.ps1",
+      "originalBackup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Test-RutaFijaNativePreflight.ps1",
+      "originalSha256": "2a7bc9e041b4b366fa2a08d1cdcbeadf7f301bf95c98302db0caff2d404b3343",
+      "currentSha256": "fedf6ede15abf21cc568a6ec10ce356cc7da7902e5e43e560cdeca769b47c010",
+      "changed": true,
+      "historicalReferences": [
+        {
+          "manifest": "docs/evidencia/L-00/source-manifest.sha256",
+          "line": 4495,
+          "sha256": "2a7bc9e041b4b366fa2a08d1cdcbeadf7f301bf95c98302db0caff2d404b3343"
+        },
+        {
+          "manifest": "docs/evidencia/L-03/fuentes-cierre.sha256",
+          "line": 781,
+          "sha256": "2a7bc9e041b4b366fa2a08d1cdcbeadf7f301bf95c98302db0caff2d404b3343"
+        },
+        {
+          "manifest": "docs/evidencia/L-05/cierre/fuentes.sha256",
+          "line": 868,
+          "sha256": "2a7bc9e041b4b366fa2a08d1cdcbeadf7f301bf95c98302db0caff2d404b3343"
+        },
+        {
+          "manifest": "docs/evidencia/L-08/incremento-2-mision-y-controles/fuentes.sha256",
+          "line": 1083,
+          "sha256": "2a7bc9e041b4b366fa2a08d1cdcbeadf7f301bf95c98302db0caff2d404b3343"
+        }
+      ],
+      "historicalReferencesMatchingExactBackup": 4,
+      "originalBackupVerified": true
+    },
+    {
+      "path": "scripts/Set-RutaFijaPostgresqlService.ps1",
+      "originalBackup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Set-RutaFijaPostgresqlService.ps1",
+      "originalSha256": "e6fb23a7902deef097c1740269cbc33973d529d8f46385221a9bac3e956e297f",
+      "currentSha256": "e6fb23a7902deef097c1740269cbc33973d529d8f46385221a9bac3e956e297f",
+      "changed": false,
+      "historicalReferences": [
+        {
+          "manifest": "docs/evidencia/L-00/source-manifest.sha256",
+          "line": 4465,
+          "sha256": "e6fb23a7902deef097c1740269cbc33973d529d8f46385221a9bac3e956e297f"
+        },
+        {
+          "manifest": "docs/evidencia/L-03/fuentes-cierre.sha256",
+          "line": 749,
+          "sha256": "e6fb23a7902deef097c1740269cbc33973d529d8f46385221a9bac3e956e297f"
+        },
+        {
+          "manifest": "docs/evidencia/L-05/cierre/fuentes.sha256",
+          "line": 836,
+          "sha256": "e6fb23a7902deef097c1740269cbc33973d529d8f46385221a9bac3e956e297f"
+        },
+        {
+          "manifest": "docs/evidencia/L-08/incremento-2-mision-y-controles/fuentes.sha256",
+          "line": 1051,
+          "sha256": "e6fb23a7902deef097c1740269cbc33973d529d8f46385221a9bac3e956e297f"
+        }
+      ],
+      "historicalReferencesMatchingExactBackup": 4,
+      "originalBackupVerified": true
+    },
+    {
+      "path": "scripts/Import-RutaFijaNativeEnvironment.ps1",
+      "originalBackup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Import-RutaFijaNativeEnvironment.ps1",
+      "originalSha256": "28043b663143f7c3b9ac144f2998e463d60fb2598da0e8773bea89b966b435a1",
+      "currentSha256": "28043b663143f7c3b9ac144f2998e463d60fb2598da0e8773bea89b966b435a1",
+      "changed": false,
+      "historicalReferences": [
+        {
+          "manifest": "docs/evidencia/L-00/source-manifest.sha256",
+          "line": 4434,
+          "sha256": "3547443171a951bcfcb8733e807555e8a0ae3d3b00e84288611b17df59835a54"
+        },
+        {
+          "manifest": "docs/evidencia/L-03/fuentes-cierre.sha256",
+          "line": 714,
+          "sha256": "28043b663143f7c3b9ac144f2998e463d60fb2598da0e8773bea89b966b435a1"
+        },
+        {
+          "manifest": "docs/evidencia/L-05/cierre/fuentes.sha256",
+          "line": 801,
+          "sha256": "28043b663143f7c3b9ac144f2998e463d60fb2598da0e8773bea89b966b435a1"
+        },
+        {
+          "manifest": "docs/evidencia/L-08/incremento-2-mision-y-controles/fuentes.sha256",
+          "line": 1009,
+          "sha256": "28043b663143f7c3b9ac144f2998e463d60fb2598da0e8773bea89b966b435a1"
+        }
+      ],
+      "historicalReferencesMatchingExactBackup": 3,
+      "originalBackupVerified": true
+    },
+    {
+      "path": "scripts/Install-RutaFijaCloudflared.ps1",
+      "originalBackup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Install-RutaFijaCloudflared.ps1",
+      "originalSha256": "24aad5b2cc7ce581820728bbd00275f4c44f5ec8d7f3e632b0648e611f128900",
+      "currentSha256": "24aad5b2cc7ce581820728bbd00275f4c44f5ec8d7f3e632b0648e611f128900",
+      "changed": false,
+      "historicalReferences": [
+        {
+          "manifest": "docs/evidencia/L-00/source-manifest.sha256",
+          "line": 4438,
+          "sha256": "24aad5b2cc7ce581820728bbd00275f4c44f5ec8d7f3e632b0648e611f128900"
+        },
+        {
+          "manifest": "docs/evidencia/L-03/fuentes-cierre.sha256",
+          "line": 718,
+          "sha256": "24aad5b2cc7ce581820728bbd00275f4c44f5ec8d7f3e632b0648e611f128900"
+        },
+        {
+          "manifest": "docs/evidencia/L-05/cierre/fuentes.sha256",
+          "line": 805,
+          "sha256": "24aad5b2cc7ce581820728bbd00275f4c44f5ec8d7f3e632b0648e611f128900"
+        },
+        {
+          "manifest": "docs/evidencia/L-08/incremento-2-mision-y-controles/fuentes.sha256",
+          "line": 1013,
+          "sha256": "24aad5b2cc7ce581820728bbd00275f4c44f5ec8d7f3e632b0648e611f128900"
+        }
+      ],
+      "historicalReferencesMatchingExactBackup": 4,
+      "originalBackupVerified": true
+    },
+    {
+      "path": "scripts/Test-RutaFijaF52QuickDemo.ps1",
+      "originalBackup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Test-RutaFijaF52QuickDemo.ps1",
+      "originalSha256": "6e1725851b6e0d1f5c66155cd6f80715ff5cec22f469eda6b00baa53d44250b2",
+      "currentSha256": "6e1725851b6e0d1f5c66155cd6f80715ff5cec22f469eda6b00baa53d44250b2",
+      "changed": false,
+      "historicalReferences": [
+        {
+          "manifest": "docs/evidencia/L-00/source-manifest.sha256",
+          "line": 4489,
+          "sha256": "6e1725851b6e0d1f5c66155cd6f80715ff5cec22f469eda6b00baa53d44250b2"
+        },
+        {
+          "manifest": "docs/evidencia/L-03/fuentes-cierre.sha256",
+          "line": 773,
+          "sha256": "6e1725851b6e0d1f5c66155cd6f80715ff5cec22f469eda6b00baa53d44250b2"
+        },
+        {
+          "manifest": "docs/evidencia/L-05/cierre/fuentes.sha256",
+          "line": 860,
+          "sha256": "6e1725851b6e0d1f5c66155cd6f80715ff5cec22f469eda6b00baa53d44250b2"
+        },
+        {
+          "manifest": "docs/evidencia/L-08/incremento-2-mision-y-controles/fuentes.sha256",
+          "line": 1075,
+          "sha256": "6e1725851b6e0d1f5c66155cd6f80715ff5cec22f469eda6b00baa53d44250b2"
+        }
+      ],
+      "historicalReferencesMatchingExactBackup": 4,
+      "originalBackupVerified": true
+    },
+    {
+      "path": "docs/Uso del Sistema.md",
+      "originalBackup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/docs/Uso del Sistema.md",
+      "originalSha256": "13667a4d46f851dfd1f6f3db3840a2e054e508a5024794e85867a717dd88484a",
+      "currentSha256": "b126e157e3082df61a805e1f373a8c1f1e941c75f1fe8e29c634eb04b618b9e0",
+      "changed": true,
+      "historicalReferences": [
+        {
+          "manifest": "docs/evidencia/L-00/source-manifest.sha256",
+          "line": 4229,
+          "sha256": "13667a4d46f851dfd1f6f3db3840a2e054e508a5024794e85867a717dd88484a"
+        }
+      ],
+      "historicalReferencesMatchingExactBackup": 1,
+      "originalBackupVerified": true
+    },
+    {
+      "path": "backend/README.md",
+      "originalBackup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/backend/README.md",
+      "originalSha256": "b93518bdd67ebfb42488f3e9c61accbe168367772846a1bf1d2fb1d107bb090b",
+      "currentSha256": "0ab18d635b542c4c9e61c569bbf413cc7d3bba9224eeb1979a7b2bb40522555a",
+      "changed": true,
+      "historicalReferences": [
+        {
+          "manifest": "docs/evidencia/L-00/source-manifest.sha256",
+          "line": 3882,
+          "sha256": "b93518bdd67ebfb42488f3e9c61accbe168367772846a1bf1d2fb1d107bb090b"
+        }
+      ],
+      "historicalReferencesMatchingExactBackup": 1,
+      "originalBackupVerified": true
+    },
+    {
+      "path": "docs/ejecucion-nativa-f1-1b.md",
+      "originalBackup": "docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/docs/ejecucion-nativa-f1-1b.md",
+      "originalSha256": "5ffee7d8c97adaa3de2cd4f7e1c2b4175d05cc2db4719481dae3642ee3d9c483",
+      "currentSha256": "5ffee7d8c97adaa3de2cd4f7e1c2b4175d05cc2db4719481dae3642ee3d9c483",
+      "changed": false,
+      "historicalReferences": [
+        {
+          "manifest": "docs/evidencia/L-00/source-manifest.sha256",
+          "line": 4173,
+          "sha256": "5ffee7d8c97adaa3de2cd4f7e1c2b4175d05cc2db4719481dae3642ee3d9c483"
+        }
+      ],
+      "historicalReferencesMatchingExactBackup": 1,
+      "originalBackupVerified": true
+    }
+  ],
+  "newSources": [
+    {
+      "path": "scripts/Invoke-RutaFijaPostgresqlLease.ps1",
+      "sha256": "295a2626b0fc61a05bbabd57c0e1ed8c25ea7a71e4c4a7102c9221944eb3ac18"
+    },
+    {
+      "path": "scripts/Test-RutaFijaLocalSecretPolicy.ps1",
+      "sha256": "edeee8f8b94217eb10dabf92e71a0ebc06782fef4c23d2e5d1a983285ec538c0"
+    },
+    {
+      "path": "scripts/Test-RutaFijaLauncherSafety.ps1",
+      "sha256": "0454ebf8b25abd83fef5635b434d3a473ef5f7409b1949290f26fa9631be3908"
+    },
+    {
+      "path": "scripts/Get-RutaFijaReadOnlyFingerprint.ps1",
+      "sha256": "4a50c810731eea8f2730f0f033cd4d92041f12261ed9cc6517d6fc958b2bac5f"
+    }
+  ],
+  "historicalDocuments": [
+    {
+      "file": "docs/Uso del Sistema.md",
+      "antecedentExactBytesEmbedded": true,
+      "originalSha256": "13667a4d46f851dfd1f6f3db3840a2e054e508a5024794e85867a717dd88484a"
+    },
+    {
+      "file": "backend/README.md",
+      "antecedentExactBytesEmbedded": true,
+      "originalSha256": "b93518bdd67ebfb42488f3e9c61accbe168367772846a1bf1d2fb1d107bb090b"
+    }
+  ],
+  "currentManualLinks": [
+    {
+      "file": "docs/Uso del Sistema.md",
+      "target": "evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "exists": true
+    },
+    {
+      "file": "backend/README.md",
+      "target": "../docs/Uso del Sistema.md",
+      "exists": true
+    },
+    {
+      "file": "backend/README.md",
+      "target": "../docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "exists": true
+    },
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "target": "respaldo-originales.json",
+      "exists": true
+    },
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "target": "source-supersession.json",
+      "exists": true
+    },
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "target": "../../../Uso del Sistema.md",
+      "exists": true
+    },
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "target": "../../../../backend/README.md",
+      "exists": true
+    },
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "target": "acl-descriptores/",
+      "exists": true
+    },
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "target": "acl-verificacion.json",
+      "exists": true
+    },
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "target": "lease-observabilidad-readonly.json",
+      "exists": true
+    },
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "target": "esquemas-readonly.json",
+      "exists": true
+    },
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "target": "migraciones-versionadas-y-repetibles.json",
+      "exists": true
+    },
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "target": "parser-todos-ps1-final.json",
+      "exists": true
+    },
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "target": "qa-mocks-lease-demo-final.json",
+      "exists": true
+    },
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "target": "guardas-ejecutadas.json",
+      "exists": true
+    },
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "target": "fingerprint-antes-smoke.json",
+      "exists": true
+    },
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "target": "../backend/",
+      "exists": true
+    }
+  ],
+  "localLinksChecked": 17,
+  "missingLinks": 0,
+  "originalsVerified": 16,
+  "historicalManifestFilesWritten": false,
+  "historicalActasOrSignaturesChanged": false,
+  "privateContentsCopied": false,
+  "encodingIncident": "First document-prefix Python stdin used Windows default ASCII and replaced accents. Only new prefix was reconstructed using UTF8; original byte backups and embedded antecedents preserved throughout.",
+  "runtimeActualSchemaClarification": "V1..V50=50 versioned plus one repeatable=51 successful; no V0. Development database remainsV12.",
+  "testCountCurrent": "50 explicit classes /257 tests, includes subsequent backend-agent additions; earlier47/242 remain historical observations",
+  "reviewToolingIncident": "First link validation ran before creating this self-linked proof and correctly rejected the missing path; rerun builds the proof and then verifies physical existence."
+}

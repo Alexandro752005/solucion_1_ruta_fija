@@ -1,0 +1,10 @@
+{
+  "recordedAt": "2026-10-23T01:19:51.818260+00:00",
+  "scope": "L08_INCREMENT_2_POST_CAP25_POINT_IN_TIME_EVIDENCE_NOT_LOT_CLOSURE",
+  "sourceFileCount": 1086,
+  "sourceManifestIncludesCurrentTestHarnesses": true,
+  "excludesPrivateConfigurationBuildCachesAndKeys": true,
+  "L08Status": "EN_CURSO",
+  "pilotEnabled": false,
+  "futureWorkUsesNewIncrementPreservingTheseResults": true
+}

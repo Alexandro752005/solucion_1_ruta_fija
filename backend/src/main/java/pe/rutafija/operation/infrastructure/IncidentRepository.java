@@ -18,7 +18,7 @@ import java.util.UUID;
 
 public interface IncidentRepository extends JpaRepository<Incident, UUID>, JpaSpecificationExecutor<Incident> {
 
-    @EntityGraph(attributePaths = {"organization", "driver", "driver.group", "assignment", "reportedBy", "followedUpBy"})
+    @EntityGraph(attributePaths = {"organization", "driver", "driver.group", "assignment", "reportedBy", "followedUpBy", "driverClosedBy"})
     @Override
     Page<Incident> findAll(Specification<Incident> specification, Pageable pageable);
 
@@ -34,10 +34,10 @@ public interface IncidentRepository extends JpaRepository<Incident, UUID>, JpaSp
         return findAll(IncidentSpecifications.filter(organizationId, driverId, status, category, from, to), pageable);
     }
 
-    @EntityGraph(attributePaths = {"organization", "driver", "driver.group", "assignment", "reportedBy", "followedUpBy"})
+    @EntityGraph(attributePaths = {"organization", "driver", "driver.group", "assignment", "reportedBy", "followedUpBy", "driverClosedBy"})
     Optional<Incident> findByIdAndOrganization_Id(UUID id, UUID organizationId);
 
-    @EntityGraph(attributePaths = {"organization", "driver", "driver.group", "assignment", "reportedBy", "followedUpBy"})
+    @EntityGraph(attributePaths = {"organization", "driver", "driver.group", "assignment", "reportedBy", "followedUpBy", "driverClosedBy"})
     @Query("""
             select incident from Incident incident
              where incident.organization.id = :organizationId
@@ -49,6 +49,6 @@ public interface IncidentRepository extends JpaRepository<Incident, UUID>, JpaSp
             Pageable pageable
     );
 
-    @EntityGraph(attributePaths = {"organization", "driver", "driver.group", "assignment", "reportedBy", "followedUpBy"})
+    @EntityGraph(attributePaths = {"organization", "driver", "driver.group", "assignment", "reportedBy", "followedUpBy", "driverClosedBy"})
     Optional<Incident> findByIdAndOrganization_IdAndDriver_Id(UUID id, UUID organizationId, UUID driverId);
 }

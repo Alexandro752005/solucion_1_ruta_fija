@@ -7,3 +7,9 @@ abstract interface class MobileAccessTokenProvider {
   /// Removes local session state after the server rejects the mobile identity.
   Future<void> invalidateSession();
 }
+
+/// Optional identity boundary for production sessions. Rotating an access token
+/// keeps this generation; login, logout and local invalidation change it.
+abstract interface class MobileSessionGenerationProvider {
+  int get sessionGeneration;
+}

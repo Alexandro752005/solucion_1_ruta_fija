@@ -19,10 +19,12 @@ public class AuditService {
 
     private final AuditEventRepository repository;
     private final Clock clock;
+    private final AuditMetadataPolicy metadataPolicy;
 
-    public AuditService(AuditEventRepository repository, Clock clock) {
+    public AuditService(AuditEventRepository repository, Clock clock, AuditMetadataPolicy metadataPolicy) {
         this.repository = repository;
         this.clock = clock;
+        this.metadataPolicy = metadataPolicy;
     }
 
     @Transactional
@@ -33,8 +35,8 @@ public class AuditService {
                 action,
                 user == null ? null : "APP_USER",
                 user == null ? null : user.getId(),
-                MDC.get(CorrelationIdFilter.MDC_KEY),
-                metadata,
+                AuditCorrelationId.safe(MDC.get(CorrelationIdFilter.MDC_KEY)),
+                safeMetadata(action, metadata),
                 Instant.now(clock)
         ));
     }
@@ -53,8 +55,8 @@ public class AuditService {
                 action,
                 entityType,
                 entityId,
-                MDC.get(CorrelationIdFilter.MDC_KEY),
-                metadata,
+                AuditCorrelationId.safe(MDC.get(CorrelationIdFilter.MDC_KEY)),
+                safeMetadata(action, metadata),
                 Instant.now(clock)
         ));
     }
@@ -74,9 +76,14 @@ public class AuditService {
                 action,
                 entityType,
                 entityId,
-                MDC.get(CorrelationIdFilter.MDC_KEY),
-                metadata,
+                AuditCorrelationId.safe(MDC.get(CorrelationIdFilter.MDC_KEY)),
+                safeMetadata(action, metadata),
                 Instant.now(clock)
         ));
+    }
+    private Map<String,Object> safeMetadata(String action,Map<String,Object> metadata){
+        var safe=new java.util.LinkedHashMap<>(metadataPolicy.sanitize(metadata));
+        String outcome=action.contains("DENIED")||action.contains("LOGIN_FAILURE")||action.equals("REAUTH_FAILED")||action.endsWith("REFRESH_REUSE_DETECTED")||action.startsWith("SUPER_ADMIN_RECOVERY_")&&action.endsWith("REJECTED")?"DENIED":action.endsWith("FAILED")?"FAILED":"SUCCEEDED";
+        safe.put("auditOutcome",outcome);return Map.copyOf(safe);
     }
 }

@@ -1,0 +1,38 @@
+[
+  {
+    "stage": "01-company-review",
+    "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/qualification/reviews",
+    "operationKey": "5178cb9e-07a1-4d3a-9a26-85472d7ece60",
+    "expectedVersion": 2,
+    "resultingVersion": 3,
+    "status": 200,
+    "payloadSha256": "c0e684ff58bc966f410eb3e36eb4e4305527505ba0b4891260a3735ecef4238e"
+  },
+  {
+    "stage": "02-unit-request-approved",
+    "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/qualification/unit-requests/3ad7f3aa-4ef6-4f7a-8f09-65bb5d8625d6/decision",
+    "operationKey": "52b86039-74ac-48de-9251-8603b5ccabb0",
+    "expectedVersion": 3,
+    "resultingVersion": 4,
+    "status": 200,
+    "payloadSha256": "5389d92adefc010aa15fd5546a3e2348b9c2795b832bb67a6caec2cac09ad6d6"
+  },
+  {
+    "stage": "03-period-authorized",
+    "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/qualification/periods",
+    "operationKey": "e63ba167-db9f-41ee-9710-25f5ecddb285",
+    "expectedVersion": 4,
+    "resultingVersion": 5,
+    "status": 200,
+    "payloadSha256": "5e9373c4ddba8845784c3f90cc0513b58b665be909ca458d1d0362f034b6b215"
+  },
+  {
+    "stage": "04-driver-activated",
+    "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/qualification/activate",
+    "operationKey": "1364f3a9-7342-45dc-b19f-74efcd7be343",
+    "expectedVersion": 5,
+    "resultingVersion": 6,
+    "status": 200,
+    "payloadSha256": "d7d29dee58df3ddf878b606fce92cac2eb2fafed14ff65d8c29971bce482fd5e"
+  }
+]

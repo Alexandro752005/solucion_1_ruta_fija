@@ -1,0 +1,13 @@
+{
+  "scope": "L-04 only; synthetic connected trial in ruta_fija_test",
+  "source": "Direct user reply: Autorizar un CONDUCTOR sintetico para L-04",
+  "authorized": true,
+  "maxNewConductorAccounts": 1,
+  "existingAdminId": "92ebc07c-1319-4850-a734-f792cb299979",
+  "preserveHistoricalLedger": true,
+  "simulatedMailOnly": true,
+  "reopenPreviousCases": false,
+  "disableNewAccountAtEnd": true,
+  "pilotEnabled": false,
+  "L05Authorized": false
+}

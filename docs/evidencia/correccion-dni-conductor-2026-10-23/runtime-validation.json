@@ -1,0 +1,102 @@
+{
+  "result": "PASS_DEPLOYED_CONTROLLED_CORRECTION_AWAITING_PERSONAL_REVIEW",
+  "recordedAtUtc": "2026-10-24T03:41:57.724095+00:00",
+  "nativeSchema": "V1..V51;51successful;0failed;0repeatable",
+  "nativeChangedExistingTables": [
+    "app_user",
+    "audit_event",
+    "flyway_schema_history",
+    "refresh_token"
+  ],
+  "nativeNewEmptyTable": "person_identity_review_correction",
+  "historicalV1ThroughV50RowsUnchanged": true,
+  "protectedHistoricalDatabaseUnchanged": true,
+  "protectedTables": 105,
+  "immutableTermsAndBaseUnchanged": true,
+  "personalReviewAndDriverRowsUnchanged": true,
+  "personalCorrectionExecuted": false,
+  "documentaryApprovalGranted": false,
+  "emailVerificationGranted": false,
+  "httpChecks": [
+    {
+      "method": "GET",
+      "path": "/actuator/health",
+      "status": 200,
+      "origin": "http://127.0.0.1:8080"
+    },
+    {
+      "method": "GET",
+      "path": "/drivers",
+      "status": 200,
+      "origin": "http://127.0.0.1:4300"
+    },
+    {
+      "method": "GET",
+      "path": "/v3/api-docs",
+      "status": 200,
+      "origin": "http://127.0.0.1:8080"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "origin": "http://127.0.0.1:4300"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/terms/current",
+      "status": 200,
+      "origin": "http://127.0.0.1:4300"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/incorporation-status",
+      "status": 200,
+      "origin": "http://127.0.0.1:4300"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/identity-review/corrections",
+      "status": 400,
+      "origin": "http://127.0.0.1:4300"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 204,
+      "origin": "http://127.0.0.1:4300"
+    }
+  ],
+  "realPhoneChecks": [
+    {
+      "path": "/actuator/health",
+      "status": 200,
+      "source": "REAL_POCO"
+    },
+    {
+      "path": "/api/v1/mobile/me",
+      "status": 401,
+      "source": "REAL_POCO"
+    },
+    {
+      "path": "/api/v1/users",
+      "status": 404,
+      "source": "REAL_POCO"
+    }
+  ],
+  "databaseGuards": {
+    "corrections": 0,
+    "requests": 0,
+    "driverInactive": true,
+    "appHistoryInsertDenied": true,
+    "appHistoryUpdateDenied": true,
+    "appHistoryDeleteDenied": true,
+    "appHistoryTruncateDenied": true,
+    "appFunctionAllowed": true,
+    "testFunctionDenied": true
+  },
+  "jarSha256": "84fc6f244bb95f9bc3a8fdacf674f4264534d26f44da580af3cb1d28d8cc91e0",
+  "jarEntriesMatchQaClassesAndMigration": 6,
+  "backupBytes": 660191,
+  "backupSha256": "AAFEA2909EADEE7ED9D199593177176A4C536FEADDF1C095A9ADD2C96E1DC9F9"
+}

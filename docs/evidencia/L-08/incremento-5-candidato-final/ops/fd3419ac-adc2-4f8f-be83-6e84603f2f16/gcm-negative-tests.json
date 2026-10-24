@@ -1,0 +1,6 @@
+{
+    "alteredTagRejected":  true,
+    "wrong256BitKeyRejected":  true,
+    "plaintextPassedToRestore":  false,
+    "originalArchiveSha256":  "749358943862f3223f3a716d1597797f0c270182f16c173be7ad4cba777fff77"
+}

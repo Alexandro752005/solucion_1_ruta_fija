@@ -1,0 +1,14 @@
+﻿{
+    "recordedAt":  "2026-10-23T16:02:50.2684284+00:00",
+    "command":  "javac.exe --release21 -Xlint:all -cp MAVEN_TEST_CLASSPATH -d AUDIT_OUTPUT scripts/L08ContinuityTools.java scripts/support/L08ClosureSigner.java",
+    "exitCode":  0,
+    "manifest":  "docs/evidencia/L-08/incremento-5-candidato-final/manifest-cierre.sha256",
+    "sourceHashes":  {
+                         "scripts/support/L08ClosureSigner.java":  "1bfb7a90ff43c3b9a260a71a840e9b416ddcee5bee80898582d7585c5a8e47eb",
+                         "scripts/L08ContinuityTools.java":  "7d95512668ade1bb7d6d3ecb98699f0f5f120fcad6ece0421d0924b266fd138a"
+                     },
+    "sourceMatchesManifest":  true,
+    "helpersExecuted":  false,
+    "databaseAccessed":  false,
+    "historicalMigrationHelpersCompiled":  false
+}

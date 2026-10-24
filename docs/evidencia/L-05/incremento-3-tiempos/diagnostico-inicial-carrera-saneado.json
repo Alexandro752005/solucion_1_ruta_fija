@@ -1,0 +1,7 @@
+{
+  "sourceSha256": "b75eacecb2adf3da4ca6616d8bc26daa8101b475d8a69725422b553a7da0f477",
+  "sourcePublished": false,
+  "result": "RACE_LATCH_TIMEOUT",
+  "reason": "Initial test authentication context was not authenticated. Corrected before reproducing the product lock upgrade deadlock.",
+  "streamsAndConfigurationExcluded": true
+}

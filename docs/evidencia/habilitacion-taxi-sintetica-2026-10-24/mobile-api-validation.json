@@ -1,0 +1,14 @@
+{
+  "driverLogin": 200,
+  "emailVerificationRequired": false,
+  "accessScope": "OPERATIONS",
+  "qualification": 200,
+  "operationalEnabled": true,
+  "blockers": [],
+  "profile": 200,
+  "refresh": 200,
+  "refreshScope": "OPERATIONS",
+  "tokensPersisted": false,
+  "realOtpSent": false,
+  "client": "isolated API session; existing POCO family preserved"
+}

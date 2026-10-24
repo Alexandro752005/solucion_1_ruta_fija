@@ -1,0 +1,40 @@
+{
+  "project": "Ruta Fija V3.1",
+  "lot": "L-01",
+  "decisionId": "SC-L01-LOCAL-01",
+  "decisionIds": ["SC-03", "SC-07"],
+  "registeredLocalDate": "2026-10-17",
+  "source": "Mensaje directo del titular en esta conversación: aprobación expresa tras acreditar ambos ensayos humanos; no repetir la solicitud dentro del mismo alcance.",
+  "proposalPath": "docs/contratos/L-01-propuesta-validacion-funcional-local.md",
+  "proposalSha256AtApprovalRegistration": "453B44105D7E0548808CE86F2B0FAA5B18E31152A69469907E813A9958365F57",
+  "approvalReceived": true,
+  "status": "APROBADO_CONDICIONADO_PENDIENTE_ACREDITACION_Y_APLICACION",
+  "closureTypeAuthorizedIfConditionsSatisfied": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "SC-03": "Para el cierre funcional local de L-01, admitir el ensayo manual satisfactorio del ADMIN sintético operado por el titular, conservando el alta parametrizada, activación, contraseña, OTP simulado, gate, aceptación expresa y registro persistido.",
+  "SC-07": "Para ese mismo cierre, admitir el ensayo manual satisfactorio con SUPER_ADMIN y clave temporales, copia cifrada comprobada y utilizada en la misma PC, protocolo vigente y comprobaciones de recuperación, rotación y revocación.",
+  "applicationConditions": [
+    "Contrastar PASS_MANUAL_SYNTHETIC_ONLY y PASS_LOCAL_TEMPORARY_COPY_ONLY archivados con sus identificadores y evidencias locales.",
+    "Si falta alguno, mantener L-01 EN_CURSO y conservar el caso para diagnóstico antes de repetir o crear otro.",
+    "Antes del cierre revisar todos los criterios vigentes; SC-03 y SC-07 no reducen ni trasladan los restantes.",
+    "Archivar evidencia humana antes de cualquier limpieza y comprobar liberación de protección y conservación del ledger."
+  ],
+  "applied": false,
+  "bothHumanTrialsVerifiedAtRegistration": false,
+  "versionedAddendumIssued": false,
+  "closureActIssued": false,
+  "repeatApprovalRequiredWithinThisExactScope": false,
+  "originalRequirementsMustRemainPendingBeforePilot": [
+    "Aceptación propia y expresa de ADMIN legítimo.",
+    "Custodia independiente, preparación, inscripción y ensayo del titular SUPER_ADMIN real."
+  ],
+  "unchanged": ["Términos ADMIN 1.0.0 publicados", "Controles de seguridad", "Cupos históricos", "ID-01", "Demás criterios L-01"],
+  "pilotBlocked": true,
+  "privacyInfrastructureAndPreparationGatesRemain": true,
+  "deploymentAuthorized": false,
+  "realAccountsAuthorized": false,
+  "definitiveKeysAuthorized": false,
+  "additionalExternalMailAuthorized": false,
+  "developmentOrPilotMigrationAuthorized": false,
+  "L02Authorized": false,
+  "L02OkVerdeSeparate": true
+}

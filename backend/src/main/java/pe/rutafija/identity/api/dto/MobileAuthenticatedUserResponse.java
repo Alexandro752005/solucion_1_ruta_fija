@@ -19,7 +19,7 @@ public record MobileAuthenticatedUserResponse(
                 user.getId(),
                 driver.getId(),
                 user.getOrganizationId(),
-                user.getFullName(),
+                pe.rutafija.shared.security.PersonalDataView.driver(driver.getId()),
                 user.getRole().name()
         );
     }

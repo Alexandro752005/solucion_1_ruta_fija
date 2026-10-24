@@ -1,0 +1,1218 @@
+{
+  "reviewedAtUtc": "2026-10-23T16:21:09.767571+00:00",
+  "result": "PASS_INDEPENDENT_READONLY_SMOKE_DATA_PRESERVATION_AND_SHUTDOWN",
+  "reviewer": "A-OPS independent of root who executed live smoke",
+  "scope": "Existing evidence and SHA comparison plus OS read-only process/listener query. No new DB connection, test run, service action or browser launched by reviewer.",
+  "checksPassed": 207,
+  "checksTotal": 207,
+  "tableComparisons": 121,
+  "tableDifferences": [],
+  "databases": [
+    {
+      "database": "ruta_fija_test",
+      "tablesCompared": 105,
+      "rowsBefore": 1424,
+      "rowsAfter": 1424,
+      "allTablesEqual": true,
+      "ledger": [
+        "ADMIN|3",
+        "CONDUCTOR|8",
+        "SUPER_ADMIN|1"
+      ],
+      "termsAcceptances": [
+        "2"
+      ],
+      "versionedMigrations": 50,
+      "repeatableMigrations": 1,
+      "flywayEntries": 51
+    },
+    {
+      "database": "solucion_ruta_fija_1",
+      "tablesCompared": 16,
+      "rowsBefore": 154,
+      "rowsAfter": 154,
+      "allTablesEqual": true,
+      "ledger": null,
+      "termsAcceptances": null,
+      "versionedMigrations": 12,
+      "repeatableMigrations": 0,
+      "flywayEntries": 12
+    }
+  ],
+  "checks": [
+    {
+      "name": "Both fingerprints successful and readonly",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Exact two database identities",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test exact unique table inventory",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.admin_activation count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.admin_activation_event count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.admin_security_revocation count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.admin_terms_acceptance count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.admin_terms_document count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.announcement count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.announcement_receipt count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.announcement_recipient count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.app_user count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.assignment count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.assignment_group_snapshot count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.assignment_route_declaration count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.assignment_route_history count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.assignment_route_replacement count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.audit_event count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.conductor_common_person_bridge count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.conductor_document_revision count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.conductor_onboarding_access_token count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.conductor_onboarding_email_challenge count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.conductor_onboarding_identity count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.conductor_onboarding_invitation_failure count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.conductor_onboarding_invitation_guard count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.conductor_onboarding_request count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.conductor_onboarding_review_event count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.conductor_person_binding count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.conductor_recovery_request count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.driver count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.driver_current_location count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.driver_qualification_control count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.driver_unit_period count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.driver_unit_request count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.driver_vehicle_link count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.email_otp_challenge count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.flyway_schema_history count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.gps_access_request count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.gps_incident_evidence count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.group_coordinator count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.group_driver_membership count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.group_membership_operation count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.group_vehicle_membership count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.incident count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.incident_action count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.invitation_validation_account_guard count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.invitation_validation_failure count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.invitation_validation_origin_guard count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.mobile_command_receipt count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.mobile_preferences count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.operation_notice count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.organization count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.organization_invitation count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.person_identity count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.person_identity_hash_key count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.pilot_account_creation count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.pilot_lifecycle count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.qualification_operation count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.qualification_review count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.qualification_service_attention count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.refresh_token count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.report_emission count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.report_emission_content count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.report_emission_request count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.report_emission_retirement count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.report_emission_series count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.retention_audit_hold_approval count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.retention_audit_hold_request count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.retention_controlled_copy count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.retention_copy_evidence count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.retention_execution count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.retention_execution_authority count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.retention_personal_capability count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.retention_personal_delegation count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.retention_personal_hold_approval count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.retention_personal_hold_request count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.retention_personal_plan_delegation count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.retention_personal_retirement count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.retention_personal_row_authority count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.retention_plan count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.retention_plan_item count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.retention_policy_catalog count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.route_definition count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.route_operation count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.route_version count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.scheduled_service count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.scheduled_service_operation count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.service_attention count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.service_attention_release count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.service_closure_notice count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.service_execution_segment count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.service_gps_point count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.service_handover count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.service_handover_resolution count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.service_time_correction count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.service_time_correction_segment count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.service_time_request count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.service_type count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.service_type_operation count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.service_type_version count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.super_admin_recovery_challenge count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.super_admin_recovery_credential count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.transport_group count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.vehicle count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.vehicle_maintenance count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.vehicle_maintenance_control count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.vehicle_maintenance_operation count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test.vehicle_plate_revision count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test pilotLedger exact sequence unchanged",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test adminTermsAcceptances exact sequence unchanged",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ruta_fija_test flyway exact sequence unchanged",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Ledger remains1/3/8",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Two ADMIN terms acceptances remain",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Test Flyway V1..V50 plus one repeatable, notV0",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1 exact unique table inventory",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1.announcement count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1.announcement_receipt count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1.app_user count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1.assignment count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1.audit_event count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1.driver count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1.driver_current_location count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1.driver_vehicle_link count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1.flyway_schema_history count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1.group_coordinator count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1.incident count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1.mobile_command_receipt count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1.organization count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1.refresh_token count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1.transport_group count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1.vehicle count and content SHA256 identical",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1 pilotLedger exact sequence unchanged",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1 adminTermsAcceptances exact sequence unchanged",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "solucion_ruta_fija_1 flyway exact sequence unchanged",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Development remainsV1..V12",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Real BAT start and stop both exit0",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Runtime explicit SMOKE_READ_ONLY schema2",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "backend owned PID now absent",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "frontend owned PID now absent",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Only5432 listening among scoped ports",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Runtime/demo/lease states absent",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "http://127.0.0.1:8080/actuator/health health200UP",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "http://127.0.0.1:8080/actuator/health/readiness health200UP",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "CRM config uses same-origin API",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Edge login rendered with no exceptions or console/network errors",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Email and password fields rendered",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Only expected anonymous refresh401, all other responses200",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "backend.stdout.log no ERROR/WARN/failure marker",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "backend.stderr.log no ERROR/WARN/failure marker",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "backend.stderr.log empty",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "frontend.stdout.log no ERROR/WARN/failure marker",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "frontend.stderr.log no ERROR/WARN/failure marker",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "frontend.stderr.log empty",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Source or runtime binary unchanged: Invoke-RutaFijaNativeRuntime.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Source or runtime binary unchanged: Invoke-RutaFijaPostgresqlLease.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Source or runtime binary unchanged: ruta-fija-backend-0.1.0-SNAPSHOT.jar",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: backend/README.md",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/ejecucion-nativa-f1-1b.md",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/acl-descriptores/ruta-fija-bootstrap.env-04129296-1b40-401f-bbee-36491bb95cff.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/acl-descriptores/ruta-fija-native.env-20310b42-79e2-4ab2-a982-3affa04ff621.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/acl-verificacion.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/esquemas-readonly.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/fingerprint-antes-smoke.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/guardas-ejecutadas.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/lease-observabilidad-readonly.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/migraciones-versionadas-y-repetibles.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/backend/README.md",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/docs/ejecucion-nativa-f1-1b.md",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/docs/Uso del Sistema.md",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/finalizar_demo_temporal.bat",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/finalizar_ruta_fija.bat",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/iniciar_demo_temporal.bat",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/iniciar_ruta_fija.bat",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Import-RutaFijaNativeEnvironment.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Install-RutaFijaCloudflared.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Invoke-RutaFijaNativeRuntime.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Invoke-RutaFijaNativeTest.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Invoke-RutaFijaQuickDemo.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Set-RutaFijaPostgresqlService.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Test-RutaFijaF52QuickDemo.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/scripts/Test-RutaFijaNativePreflight.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/originales/verificar_ruta_fija.bat",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/parser-todos-ps1-final.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/qa-independent-backend-mocks.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/qa-mocks-lease-demo-final.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/README.md",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/respaldo-originales.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/launchers/source-supersession.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/evidencia/auditoria-ide-2026-10-23/mobile/qa-launcher-observability-final.json",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: docs/Uso del Sistema.md",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: finalizar_demo_temporal.bat",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: finalizar_ruta_fija.bat",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: iniciar_demo_temporal.bat",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: iniciar_ruta_fija.bat",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: scripts/Get-RutaFijaReadOnlyFingerprint.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: scripts/Import-RutaFijaNativeEnvironment.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: scripts/Install-RutaFijaCloudflared.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: scripts/Invoke-RutaFijaNativeRuntime.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: scripts/Invoke-RutaFijaNativeTest.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: scripts/Invoke-RutaFijaPostgresqlLease.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: scripts/Invoke-RutaFijaQuickDemo.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: scripts/Set-RutaFijaPostgresqlService.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: scripts/Test-RutaFijaF52QuickDemo.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: scripts/Test-RutaFijaLauncherSafety.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: scripts/Test-RutaFijaLocalSecretPolicy.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: scripts/Test-RutaFijaNativePreflight.ps1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Frozen live launcher/manual: verificar_ruta_fija.bat",
+      "passed": true,
+      "details": null
+    }
+  ],
+  "logs": [
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/runtime/backend.stdout.log",
+      "sha256": "1b6a7d8166a8acc85ca9cf13d26834896f941275a7f20f62813c4d24052edbb4",
+      "bytes": 171717,
+      "errorSeverityCount": 0,
+      "warningSeverityCount": 0,
+      "failureMarkers": [],
+      "exceptionWordReferences": [
+        {
+          "line": 466,
+          "configurationReferences": [
+            "PersistenceExceptionTranslationAutoConfiguration"
+          ],
+          "stackTrace": false
+        },
+        {
+          "line": 467,
+          "configurationReferences": [
+            "org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"
+          ],
+          "stackTrace": false
+        },
+        {
+          "line": 469,
+          "configurationReferences": [
+            "PersistenceExceptionTranslationAutoConfiguration",
+            "persistenceExceptionTranslationPostProcessor"
+          ],
+          "stackTrace": false
+        },
+        {
+          "line": 471,
+          "configurationReferences": [
+            "org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"
+          ],
+          "stackTrace": false
+        }
+      ],
+      "exceptionReferencesAreConfigurationNotFailures": true
+    },
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/runtime/backend.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "errorSeverityCount": 0,
+      "warningSeverityCount": 0,
+      "failureMarkers": [],
+      "exceptionWordReferences": [],
+      "exceptionReferencesAreConfigurationNotFailures": true
+    },
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/runtime/frontend.stdout.log",
+      "sha256": "7fab06552eea403d817fd74191c741349ba8e6a35b878a32bd051136444a9aee",
+      "bytes": 2061,
+      "errorSeverityCount": 0,
+      "warningSeverityCount": 0,
+      "failureMarkers": [],
+      "exceptionWordReferences": [],
+      "exceptionReferencesAreConfigurationNotFailures": true
+    },
+    {
+      "file": "docs/evidencia/auditoria-ide-2026-10-23/runtime/frontend.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "errorSeverityCount": 0,
+      "warningSeverityCount": 0,
+      "failureMarkers": [],
+      "exceptionWordReferences": [],
+      "exceptionReferencesAreConfigurationNotFailures": true
+    }
+  ],
+  "healthChecks": [
+    {
+      "url": "http://127.0.0.1:8080/actuator/health",
+      "httpStatus": 200,
+      "status": "UP"
+    },
+    {
+      "url": "http://127.0.0.1:8080/actuator/health/readiness",
+      "httpStatus": 200,
+      "status": "UP"
+    }
+  ],
+  "anonymousRefresh401Expected": true,
+  "currentOwnProcessesAbsent": true,
+  "postgresPreservedRunning": true,
+  "frozenLauncherAndManualFilesVerified": 51,
+  "schemaClarification": "51 successes in ruta_fija_test =50 versioned V1..V50 +1 repeatable; noV0. Development remainsV12.",
+  "startOutputHandleObservation": "BAT printed readiness before capture completed; exit0 was captured after child processes were stopped. This does not prove immediate CLI return on launch.",
+  "limits": "Local readonly startup, anonymous UI rendering and controlled shutdown only; no authenticated business-write operation or pilot deployment tested.",
+  "manualFrozenUnmodified": true,
+  "reviewToolingIncidents": [
+    "Initial browser proof lookup assumed runtime subfolder; actual proof found at audit root without changes.",
+    "Long inline review command was blocked before execution; same review moved to explicit inspectable Python evidence script."
+  ],
+  "inputs": [
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/launchers/fingerprint-antes-smoke.json",
+      "sha256": "fbc0c8045e61b13c63ea83e0be8ee291d0310a43a96105b564e238465a98a1a9"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/runtime/fingerprint-after-smoke.json",
+      "sha256": "420c5cdc7c843db37fd1c07484adb825b717a60e0fa3c7f0fceeb55e926b3cda"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/runtime/state-during-smoke.json",
+      "sha256": "5ad95a439a5ee0c737a62cd459a06aea5e0cbbc3bf03c48a3fc78102345b1533"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/runtime/start-bat.json",
+      "sha256": "f5fe7014f96223bba6e0e765c81bc542180db701ed35bdd4960dc2c807e4da80"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/runtime/stop-bat.json",
+      "sha256": "2e7952b40693ba0e80a895a23411979a6fa7b3ae5fa80185115aa6080ddb72f0"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/runtime/http-checks.json",
+      "sha256": "4cc51eecd7e4fc6ebac47ddbee2f65d6f9bd989b2de3cc287208244557c7020b"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/browser-smoke.json",
+      "sha256": "32befeafc394cfd36f582403647865b7e528a502711588c677c65eb50538be9f"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/runtime/sources-before.json",
+      "sha256": "371dee1728900bac7f02a78281b6bfbb9c54c269cca800ac34085c933d67d00c"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/runtime/qa-independent-ops-processes.json",
+      "sha256": "c99ac79529d431e1efc6f99c1d699aa89538a86ff18691ac90d52ddcc056e8aa"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/launchers/manifest-lanzadores-vigentes.sha256",
+      "sha256": "3427763f99a393ac2450f17e88f57b169a71dfc4296a88031f4c64aa2a09ead1"
+    }
+  ],
+  "reviewScriptSha256": "f9e55574c6e6734a0b4445c5558871b551dcd79dc015d9f0f051614f7c1acc98"
+}

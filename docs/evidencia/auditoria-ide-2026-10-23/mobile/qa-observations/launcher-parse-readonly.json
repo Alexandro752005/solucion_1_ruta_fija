@@ -1,0 +1,42 @@
+﻿[
+    {
+        "path":  "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+        "parseErrors":  0,
+        "sha256":  "298d7cb7975aeb32787c7e05bc9065acb04b8657edf35589a7050cab3ffeb167"
+    },
+    {
+        "path":  "scripts/Invoke-RutaFijaQuickDemo.ps1",
+        "parseErrors":  0,
+        "sha256":  "000e877a13490e8bd93b29a2adbd777245a8b4165eeea385a8468763501e0faf"
+    },
+    {
+        "path":  "scripts/Invoke-RutaFijaNativeTest.ps1",
+        "parseErrors":  0,
+        "sha256":  "3b318571892f5828799f6b007fde861e2a498f1d13e21ef1c8a30265b8379fb2"
+    },
+    {
+        "path":  "scripts/Test-RutaFijaNativePreflight.ps1",
+        "parseErrors":  0,
+        "sha256":  "fedf6ede15abf21cc568a6ec10ce356cc7da7902e5e43e560cdeca769b47c010"
+    },
+    {
+        "path":  "scripts/Invoke-RutaFijaPostgresqlLease.ps1",
+        "parseErrors":  0,
+        "sha256":  "a51b878ae4394debeeb43baf8ebd544a95ec4eab2b8938bb4885a7cce605e9bc"
+    },
+    {
+        "path":  "scripts/Test-RutaFijaLocalSecretPolicy.ps1",
+        "parseErrors":  0,
+        "sha256":  "edeee8f8b94217eb10dabf92e71a0ebc06782fef4c23d2e5d1a983285ec538c0"
+    },
+    {
+        "path":  "scripts/Test-RutaFijaLauncherSafety.ps1",
+        "parseErrors":  0,
+        "sha256":  "e7613eaa77dd20415d2582af5d19c8c6ef441a152425b458d30118afb61d2568"
+    },
+    {
+        "path":  "scripts/Set-RutaFijaPostgresqlService.ps1",
+        "parseErrors":  0,
+        "sha256":  "e6fb23a7902deef097c1740269cbc33973d529d8f46385221a9bac3e956e297f"
+    }
+]

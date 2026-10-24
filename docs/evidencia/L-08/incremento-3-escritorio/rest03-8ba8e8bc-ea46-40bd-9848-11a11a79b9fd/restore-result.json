@@ -1,0 +1,23 @@
+{
+    "existingPublicRelations":  0,
+    "pgRestoreExit":  0,
+    "rawMismatchCategories":  [
+                                  "schema:acl",
+                                  "schema:constraints",
+                                  "schema:indexes"
+                              ],
+    "tableContentAndSchemaIntegrity":  "RAW_ROWS_PRESERVED_SCHEMA_EQUIVALENCE_PROOF_REQUIRED",
+    "tablesCompared":  105,
+    "restoredSchemaVersion":  "50",
+    "restoredPublicTables":  105,
+    "result":  "PASS_ISOLATED_SQL_RESTORE_ONLY_INTEGRITY_AND_APP_CHECKS_STILL_REQUIRED",
+    "targetPort":  55440,
+    "database":  "ruta_fija_test",
+    "archiveSha256":  "f75d041e44dc5dd09a8553a42de63476bce165d52624049e15a126a602edc951",
+    "sharedTestModified":  false,
+    "developmentOrPilotAccessed":  false,
+    "independentMediaAccredited":  false,
+    "rtoServiceRestorationAccredited":  false,
+    "startedAt":  "2026-10-23T01:48:32.932913700Z",
+    "finishedAt":  "2026-10-23T01:48:45.436102600Z"
+}

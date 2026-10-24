@@ -1,0 +1,13 @@
+{
+    "checkedAtUtc":  "2026-10-23T16:12:47.4137876+00:00",
+    "result":  "PASS_FAIL_CLOSED_CLIENT_OBSERVABILITY_INCOMPLETE",
+    "otherClientsCount":  null,
+    "fullObservabilityRejected":  true,
+    "automaticStopWouldBeRefused":  true,
+    "serviceState":  "Running",
+    "processStartTimeObservable":  false,
+    "leasePresent":  false,
+    "serviceStartOrStopExecuted":  false,
+    "databaseChanged":  false,
+    "comment":  "rf_migrator cannot classify every server background session. No zero-client claim, no GRANT; service preserved. Only session identity booleans/types read."
+}

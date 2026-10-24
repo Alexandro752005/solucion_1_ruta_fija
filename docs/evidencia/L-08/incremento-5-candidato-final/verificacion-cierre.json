@@ -1,0 +1,13 @@
+{
+  "verifiedAtUtc": "2026-10-23T06:48:40.662549+00:00",
+  "result": "PASS_FROZEN_LOCAL_CANDIDATE_ARCHIVE",
+  "filesVerified": 427,
+  "manifestSha256": "2708399adc572cacf8a3d3f09ba31e507604717e6817ed66e7c871c4a148ac5a",
+  "mismatches": [],
+  "localDecision": "GO PARA CANDIDATO LOCAL DE ENTREGA",
+  "operationalDecision": "NO_GO_PILOTO_REAL",
+  "pilotEnabled": false,
+  "signatureClassification": "TECHNICAL_AUTOMATED_NOT_HUMAN",
+  "privateKeysIncluded": false,
+  "localMarkdownLinksChecked": 114
+}

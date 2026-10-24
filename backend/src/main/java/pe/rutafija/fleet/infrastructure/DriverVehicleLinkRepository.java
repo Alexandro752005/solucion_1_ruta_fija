@@ -22,6 +22,10 @@ public interface DriverVehicleLinkRepository extends JpaRepository<DriverVehicle
 
     boolean existsByDriver_IdAndVehicle_IdAndActiveTrue(UUID driverId, UUID vehicleId);
 
+    boolean existsByDriver_IdAndActiveTrueAndVehicle_IdNot(UUID driverId, UUID vehicleId);
+
+    boolean existsByVehicle_IdAndActiveTrueAndDriver_IdNot(UUID vehicleId, UUID driverId);
+
     @Modifying(flushAutomatically = true, clearAutomatically = true)
     @Query("""
             update DriverVehicleLink link

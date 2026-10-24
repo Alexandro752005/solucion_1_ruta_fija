@@ -21,7 +21,12 @@ import pe.rutafija.identity.infrastructure.AppUserRepository;
 import pe.rutafija.organization.domain.Organization;
 import pe.rutafija.organization.infrastructure.OrganizationRepository;
 import pe.rutafija.support.NativePostgresIntegrationTest;
+import pe.rutafija.support.ApprovedConductorFixture;
+import pe.rutafija.fleet.domain.Driver;
+import pe.rutafija.fleet.infrastructure.DriverRepository;
+import pe.rutafija.fleet.infrastructure.TransportGroupRepository;
 
+import java.time.Instant;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -59,6 +64,9 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+
+    @Autowired DriverRepository drivers;
+    @Autowired TransportGroupRepository groups;
 
     private Organization organizationA;
     private Organization organizationB;
@@ -117,7 +125,8 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
                                 """.formatted(secondAdminA.getId())))
                 .andExpect(status().isNotFound());
 
-        String conductorUserId = json(mockMvc.perform(post("/api/v1/users")
+        // Legacy creation must no longer bypass the documentary workflow.
+        mockMvc.perform(post("/api/v1/users")
                         .with(authenticatedAs(adminA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
@@ -129,11 +138,13 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
                                   "role":"CONDUCTOR"
                                 }
                                 """))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.role").value("CONDUCTOR"))
-                .andReturn()).path("id").asText();
+                .andExpect(status().isConflict());
 
-        String driverId = json(mockMvc.perform(post("/api/v1/drivers")
+        AppUser conductorUser = userRepository.save(organizationUser(organizationA,
+                "conductor.integration@rutafija.test", UserRole.CONDUCTOR));
+        String conductorUserId = conductorUser.getId().toString();
+
+        mockMvc.perform(post("/api/v1/drivers")
                         .with(authenticatedAs(adminA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
@@ -147,9 +158,14 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
                                   "licenseNumber":"LIC-INTEGRACION-001"
                                 }
                                 """.formatted(conductorUserId, groupId)))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.groupId").value(groupId))
-                .andReturn()).path("id").asText();
+                .andExpect(status().isConflict());
+
+        // Explicit historical synthetic approval for the fleet regression.
+        Driver approvedDriver = drivers.save(Driver.register(organizationA, conductorUser,
+                groups.findById(UUID.fromString(groupId)).orElseThrow(), "Conductor de Integración",
+                "999111222", "DNI", "DOC-INTEGRACION-001", "LIC-INTEGRACION-001"));
+        ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, adminA, conductorUser, approvedDriver);
+        String driverId = approvedDriver.getId().toString();
 
         String vehicleId = json(mockMvc.perform(post("/api/v1/vehicles")
                         .with(authenticatedAs(adminA))
@@ -207,6 +223,63 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
     }
 
     @Test
+    void organizationAdminCannotCreateOrManageAdminAccounts() throws Exception {
+        mockMvc.perform(post("/api/v1/users")
+                        .with(authenticatedAs(adminA))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "email":"unauthorized.admin@rutafija.test",
+                                  "password":"Initial-Password-2026",
+                                  "fullName":"Admin no autorizado",
+                                  "role":"ADMIN"
+                                }
+                                """))
+                .andExpect(status().isForbidden())
+                .andExpect(jsonPath("$.code").value("FORBIDDEN_ROLE"));
+
+        mockMvc.perform(get("/api/v1/users")
+                        .with(authenticatedAs(adminA))
+                        .param("role", "ADMIN"))
+                .andExpect(status().isForbidden());
+
+        mockMvc.perform(get("/api/v1/users/{userId}", secondAdminA.getId())
+                        .with(authenticatedAs(adminA)))
+                .andExpect(status().isNotFound());
+
+        mockMvc.perform(post("/api/v1/users/{userId}/deactivate", secondAdminA.getId())
+                        .with(authenticatedAs(adminA)))
+                .andExpect(status().isForbidden());
+
+        mockMvc.perform(patch("/api/v1/users/{userId}", secondAdminA.getId())
+                        .with(authenticatedAs(adminA))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"email":"admin.operations.a@rutafija.test","fullName":"Cambio no autorizado","phone":"","role":"CONDUCTOR"}
+                                """))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void adminCannotChangeConductorEmailOutsideAssistedRecovery() throws Exception {
+        String oldEmail = "conductor.recovery.guard@rutafija.test";
+        AppUser conductor = userRepository.save(organizationUser(organizationA, oldEmail, UserRole.CONDUCTOR));
+
+        mockMvc.perform(patch("/api/v1/users/{userId}", conductor.getId())
+                        .with(authenticatedAs(adminA))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"email":"conductor.recovery.new@rutafija.test","fullName":"Conductor protegido","phone":"","role":"CONDUCTOR"}
+                                """))
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.code").value("RESOURCE_CONFLICT"));
+
+        AppUser unchanged = userRepository.findById(conductor.getId()).orElseThrow();
+        assertThat(unchanged.getEmail()).isEqualTo(oldEmail);
+        assertThat(unchanged.isEmailVerified()).isTrue();
+    }
+
+    @Test
     void resourceConflictsAndOperationalVehicleStateAreRejected() throws Exception {
         String groupId = json(mockMvc.perform(post("/api/v1/groups")
                         .with(authenticatedAs(adminA))
@@ -226,11 +299,19 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
                 }
                 """.formatted(groupId);
 
+        // Keep the original group-conflict regression with an explicit historical fixture.
+        AppUser historicalUser = userRepository.save(organizationUser(organizationA,
+                "historical.conflict@rutafija.test", UserRole.CONDUCTOR));
+        Driver historicalDriver = drivers.save(Driver.register(organizationA, historicalUser,
+                groups.findById(UUID.fromString(groupId)).orElseThrow(), "Conductor Duplicado",
+                null, "DNI", "DUPLICADO-2026", null));
+        ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, adminA, historicalUser, historicalDriver);
+
         mockMvc.perform(post("/api/v1/drivers")
                         .with(authenticatedAs(adminA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(driverPayload))
-                .andExpect(status().isCreated());
+                .andExpect(status().isConflict());
 
         mockMvc.perform(post("/api/v1/drivers")
                         .with(authenticatedAs(adminA))
@@ -272,13 +353,15 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
     }
 
     private AppUser organizationUser(Organization organization, String email, UserRole role) {
-        return AppUser.organizationUser(
+        AppUser user = AppUser.organizationUser(
                 organization,
                 email,
                 passwordEncoder.encode("Integration-Password-2026"),
                 role.name() + " de integración",
                 role
         );
+        user.verifyEmail(Instant.now());
+        return user;
     }
 
     private RequestPostProcessor authenticatedAs(AppUser user) {

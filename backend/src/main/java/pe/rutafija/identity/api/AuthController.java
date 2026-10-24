@@ -18,10 +18,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pe.rutafija.identity.api.dto.AuthTokenResponse;
 import pe.rutafija.identity.api.dto.AuthenticatedUserResponse;
+import pe.rutafija.identity.api.dto.EmailOtpChallengeResponse;
+import pe.rutafija.identity.api.dto.EmailOtpResendRequest;
+import pe.rutafija.identity.api.dto.EmailOtpVerificationRequest;
 import pe.rutafija.identity.api.dto.LoginRequest;
+import pe.rutafija.identity.api.dto.WebLoginResponse;
 import pe.rutafija.identity.application.AuthService;
+import pe.rutafija.identity.application.EmailOtpTicket;
 import pe.rutafija.identity.application.IssuedSession;
 import pe.rutafija.identity.application.LoginRateLimiter;
+import pe.rutafija.identity.application.WebLoginResult;
 import pe.rutafija.shared.config.OpenApiConfig;
 import pe.rutafija.shared.exception.ApplicationException;
 import pe.rutafija.shared.exception.ErrorCode;
@@ -53,15 +59,46 @@ public class AuthController {
     @PostMapping("/login")
     @SecurityRequirements
     @Operation(summary = "Iniciar sesión")
-    public ResponseEntity<AuthTokenResponse> login(
+    public ResponseEntity<?> login(
             @Valid @RequestBody LoginRequest request,
             HttpServletRequest servletRequest
     ) {
         trustedOriginValidator.validate(servletRequest);
         loginRateLimiter.checkAndRecordAttempt(request.email());
-        IssuedSession session = authService.login(request);
+        WebLoginResult result = authService.login(request);
         loginRateLimiter.recordSuccess(request.email());
-        return withRefreshCookie(session);
+        if (result.requiresEmailVerification()) {
+            return ResponseEntity.accepted()
+                    .cacheControl(CacheControl.noStore())
+                    .header(HttpHeaders.SET_COOKIE, cookieService.clear())
+                    .body(WebLoginResponse.verificationRequired(result.verification()));
+        }
+        return withLoginCookie(result.session());
+    }
+
+    @PostMapping("/otp/verify")
+    @SecurityRequirements
+    @Operation(summary = "Verificar el correo y completar el primer acceso")
+    public ResponseEntity<AuthTokenResponse> verifyEmailOtp(
+            @Valid @RequestBody EmailOtpVerificationRequest request,
+            HttpServletRequest servletRequest
+    ) {
+        trustedOriginValidator.validate(servletRequest);
+        return withRefreshCookie(authService.verifyWebEmailOtp(request.verificationToken(), request.code()));
+    }
+
+    @PostMapping("/otp/resend")
+    @SecurityRequirements
+    @Operation(summary = "Reenviar el código OTP vigente para la verificación de correo")
+    public ResponseEntity<EmailOtpChallengeResponse> resendEmailOtp(
+            @Valid @RequestBody EmailOtpResendRequest request,
+            HttpServletRequest servletRequest
+    ) {
+        trustedOriginValidator.validate(servletRequest);
+        EmailOtpTicket ticket = authService.resendEmailOtp(request.verificationToken());
+        return ResponseEntity.ok()
+                .cacheControl(CacheControl.noStore())
+                .body(EmailOtpChallengeResponse.from(ticket));
     }
 
     @PostMapping("/refresh")
@@ -99,6 +136,13 @@ public class AuthController {
                 .cacheControl(CacheControl.noStore())
                 .header(HttpHeaders.SET_COOKIE, cookieService.create(session.rawRefreshToken()))
                 .body(session.response());
+    }
+
+    private ResponseEntity<WebLoginResponse> withLoginCookie(IssuedSession session) {
+        return ResponseEntity.ok()
+                .cacheControl(CacheControl.noStore())
+                .header(HttpHeaders.SET_COOKIE, cookieService.create(session.rawRefreshToken()))
+                .body(WebLoginResponse.authenticated(session));
     }
 
     private String readRefreshToken(HttpServletRequest request) {

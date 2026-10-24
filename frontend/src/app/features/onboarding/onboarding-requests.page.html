@@ -1,0 +1,175 @@
+﻿<section class="management-page">
+  <rf-page-header
+    title="Solicitudes de incorporación"
+    description="Consulta las solicitudes de tu organización y abre cada expediente de forma expresa."
+  />
+
+  <section class="management-panel" aria-labelledby="onboarding-list-title">
+    <header>
+      <div>
+        <h2 id="onboarding-list-title">Solicitudes recibidas</h2>
+        <p>Las altas nuevas y las regularizaciones de cuentas existentes requieren revisión y aprobación personal.</p>
+      </div>
+      <button class="management-button compact" type="button" [disabled]="loading()" (click)="load()">Actualizar</button>
+    </header>
+
+    @if (listError(); as error) {
+      <div class="management-alert error" role="alert">{{ error }}</div>
+    } @else if (loading()) {
+      <p class="management-empty" role="status">Cargando solicitudes&hellip;</p>
+    } @else if (requests().length === 0) {
+      <p class="management-empty">Todavía no hay solicitudes para mostrar.</p>
+    } @else {
+      <div class="management-table-wrap">
+        <table class="management-table">
+          <thead>
+            <tr><th>Código de solicitud</th><th>Estado</th><th>Rondas de revisión</th><th>Enviada</th><th>Acciones</th></tr>
+          </thead>
+          <tbody>
+            @for (request of requests(); track request.requestId) {
+              <tr>
+                <td class="request-code">{{ request.requestId }}</td>
+                <td>{{ statusLabel(request.status) }}</td>
+                <td>{{ request.reviewRounds }}</td>
+                <td><time [attr.datetime]="request.submittedAt">{{ request.submittedAt | date: 'medium' }}</time></td>
+                <td><button class="management-button compact open-expediente" type="button" (click)="openExpediente(request.requestId)" [attr.aria-label]="'Abrir expediente restringido de solicitud ' + request.requestId">Abrir expediente restringido</button></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </section>
+</section>
+
+<rf-modal [open]="selectedRequestId() !== null" title="Expediente restringido" size="large" (closed)="closeExpediente()">
+  @if (selectedRequestId(); as requestId) {
+    <p class="request-code">Solicitud {{ requestId }}</p>
+    <p>Acceso reservado al ADMIN de la organización para revisar esta solicitud. Cierra la vista al finalizar.</p>
+    @if (expedienteLoading()) {
+      <p role="status">Cargando expediente&hellip;</p>
+    } @else if (expedienteError(); as error) {
+      <div class="management-alert error" role="alert">{{ error }}</div>
+    } @else if (expediente(); as detail) {
+      <dl class="expediente-fields">
+        <dt>Estado</dt><dd>{{ statusLabel(detail.status) }}</dd>
+        <dt>Nombre declarado</dt><dd>{{ detail.fullName }}</dd>
+        <dt>Correo declarado o de la cuenta</dt><dd>{{ detail.email }}</dd>
+        <dt>Teléfono declarado</dt><dd>{{ detail.phone || 'Sin dato declarado' }}</dd>
+      </dl>
+      <button class="management-button" type="button" (click)="loadDocumentary()" [disabled]="documentaryLoading() || saving()">
+        {{ documentary() ? 'Actualizar revisión documental' : 'Revisar documentación' }}
+      </button>
+      @if (documentaryLoading()) { <p role="status">Consultando revisión documental&hellip;</p> }
+      @if (reviewError(); as error) { <div role="alert" class="management-alert error">{{ error }}</div> }
+      @if (reviewNotice(); as notice) { <p role="status">{{ notice }}</p> }
+      @if (saving()) { <p role="status">Esperando confirmación del servidor&hellip;</p> }
+      @if (documentary(); as dossier) {
+        <section class="documentary-review" aria-labelledby="documentary-title">
+          <h3 id="documentary-title">Revisión personal · catálogo {{ dossier.catalogVersion }}</h3>
+          <p>{{ statusLabel(dossier.status) }} · Rondas: {{ dossier.reviewRounds }}</p>
+          <p>No se conservan fotos ni PDF. Registra solo datos necesarios y el cotejo visual. Empresa y vehículo se revisan por separado.</p>
+          @if (dossier.existingAccountRegularization) {
+            <p>Regularización de cuenta existente: CUENTA-{{ dossier.existingUserId }} · CONDUCTOR-{{ dossier.existingDriverId }}. Se conservan la cuenta, ficha, grupo e historial. La vinculación no verifica el correo ni habilita la conducción; el titular completa la verificación de correo al entrar en la app.</p>
+          }
+          @if (dossier.correctionDeadline) {
+            <p>Subsanación hasta {{ dossier.correctionDeadline | date: 'medium' }}. {{ dossier.overdue ? 'Fuera de plazo; sin rechazo automático.' : '' }}</p>
+          }
+          @if (dossier.personalApproved) {
+            <p>Aprobación personal registrada. No acredita unidad vinculada ni habilitación para conducir.</p>
+          }
+          <fieldset [disabled]="saving() || documentaryLoading() || mustRefresh() || dossier.status !== 'PENDING_REVIEW'">
+            <legend>Cotejo de requisitos personales</legend>
+            <label for="documentary-modality">Modalidad</label>
+            <select id="documentary-modality" [(ngModel)]="modality"><option value="TAXI">Taxi</option><option value="COLECTIVO">Colectivo</option></select>
+            @for (requirement of dossier.catalog; track requirement.requirementId; let i = $index) {
+              <section class="requirement-card">
+                <h4>{{ requirement.requirementId }} · {{ requirement.title }}</h4>
+                <p>{{ requirement.mandatory ? 'Obligatorio' : 'Aplicabilidad condicionada: justificar o mantener por contrastar' }}</p>
+                <div class="documentary-grid">
+                  @for (key of requirement.fieldKeys; track key) {
+                    <label [for]="'document-' + i + '-' + key">{{ fieldLabel(key) }}
+                      @if (key === 'documentType') {
+                        <select [id]="'document-' + i + '-' + key" [(ngModel)]="draftDocuments[i].fields[key]"><option value="">Sin comprobar</option><option value="DNI">DNI</option></select>
+                      } @else if (key === 'licenseCategory') {
+                        <select [id]="'document-' + i + '-' + key" [(ngModel)]="draftDocuments[i].fields[key]"><option value="">Sin comprobar</option>@for (category of licenseCategories; track category) { <option [value]="category">{{ category }}</option> }</select>
+                      } @else if (key === 'licenseClass') {
+                        <select [id]="'document-' + i + '-' + key" [(ngModel)]="draftDocuments[i].fields[key]"><option value="">Sin comprobar</option><option value="A">A</option></select>
+                      } @else if (key === 'eligibilityResult') {
+                        <select [id]="'document-' + i + '-' + key" [(ngModel)]="draftDocuments[i].fields[key]"><option value="">Sin comprobar</option><option value="ELIGIBLE">Elegibilidad comprobada</option></select>
+                      } @else {
+                        <input [id]="'document-' + i + '-' + key" [type]="key === 'reviewDate' ? 'date' : 'text'" [(ngModel)]="draftDocuments[i].fields[key]" maxlength="200" autocomplete="off" />
+                      }
+                    </label>
+                  }
+                  <label [for]="'expiry-mode-' + i">Vigencia
+                    <select [id]="'expiry-mode-' + i" [(ngModel)]="draftDocuments[i].expiryMode">
+                      <option value="UNKNOWN">Desconocida</option><option value="DATED">Con vencimiento</option><option value="NO_EXPIRY">Sin vencimiento acreditado</option>
+                    </select>
+                  </label>
+                  @if (draftDocuments[i].expiryMode === 'DATED') {
+                    <label [for]="'valid-until-' + i">Válido hasta<input type="date" [id]="'valid-until-' + i" [(ngModel)]="draftDocuments[i].validUntil" /></label>
+                  }
+                  <label [for]="'applicability-' + i">Aplicabilidad
+                    <select [id]="'applicability-' + i" [(ngModel)]="draftDocuments[i].applicability"><option value="POR_CONTRASTAR">Por contrastar</option><option value="CONFIRMED">Comprobada</option></select>
+                  </label>
+                  <label [for]="'condition-' + i">Condición y justificación<input [id]="'condition-' + i" [(ngModel)]="draftDocuments[i].condition" maxlength="500" /></label>
+                  <label [for]="'source-' + i">Fuente aplicable<input [id]="'source-' + i" [(ngModel)]="draftDocuments[i].sourceReference" maxlength="500" /></label>
+                  <label [for]="'result-' + i">Resultado
+                    <select [id]="'result-' + i" [(ngModel)]="draftDocuments[i].result">@for (option of resultOptions; track option.value) { <option [value]="option.value">{{ option.label }}</option> }</select>
+                  </label>
+                  <label [for]="'review-reference-' + i">Referencia del cotejo visual<input [id]="'review-reference-' + i" [(ngModel)]="draftDocuments[i].reviewReference" maxlength="500" /></label>
+                  <label [for]="'observation-' + i">Observación para subsanar, sin datos personales<textarea [id]="'observation-' + i" [(ngModel)]="draftDocuments[i].observation" maxlength="500"></textarea></label>
+                </div>
+              </section>
+            }
+            <button class="management-button primary" type="button" (click)="saveDocumentary()">Guardar cotejo</button>
+          </fieldset>
+          <fieldset [disabled]="saving() || documentaryLoading() || mustRefresh()">
+            <legend>Decisión del ADMIN</legend>
+            <p>Guarda el cotejo antes de decidir. Un requisito pendiente, desconocido o por contrastar impide la aprobación.</p>
+            <label for="review-reason">Motivo sin datos personales<textarea id="review-reason" [(ngModel)]="reason" maxlength="500"></textarea></label>
+            @if (dossier.status === 'PENDING_REVIEW') {
+              <div class="management-actions">
+                <button class="management-button" type="button" (click)="act('return')">Devolver para subsanación</button>
+                <button class="management-button primary" type="button" (click)="act('approve')">Aprobar personalmente</button>
+                <button class="management-button" type="button" (click)="act('reject')">Rechazar con motivo</button>
+              </div>
+              <label><input type="checkbox" [(ngModel)]="reiteration" /> Rechazo por reiteración (desde cuatro rondas)</label>
+            }
+            @if (dossier.status === 'RETURNED') {
+              @if (dossier.existingAccountRegularization) {
+                <p>Tras recibir la subsanación, registra el motivo y reabre expresamente la revisión. Esto no modifica documentos ni aprueba el expediente.</p>
+                <button class="management-button" type="button" (click)="act('resubmit-existing')">Reabrir revisión tras subsanación</button>
+              }
+              <label for="review-deadline">Nuevo plazo de subsanación<input id="review-deadline" type="datetime-local" [(ngModel)]="deadline" /></label>
+              <button class="management-button" type="button" (click)="act('extend')">Ampliar plazo con motivo</button>
+              <label><input type="checkbox" [(ngModel)]="reiteration" /> Rechazo por reiteración (desde cuatro rondas)</label>
+              <button class="management-button" type="button" (click)="act('reject')">Rechazar con motivo</button>
+            }
+            @if (dossier.status === 'APPROVED' && !dossier.provisionedUserId) {
+              @if (dossier.existingAccountRegularization) {
+                <p>Vincula el expediente aprobado con la cuenta y ficha indicadas. Se conserva el grupo existente y el cupo histórico.</p>
+                <label><input type="checkbox" [(ngModel)]="existingBindingConfirmed" /> Confirmo la vinculación con esta cuenta y conductor existentes, conservando sus identificadores e historial.</label>
+                <button class="management-button primary" type="button" (click)="act('provision-existing')" [disabled]="!existingBindingConfirmed || !dossier.existingUserId || !dossier.existingDriverId">Vincular expediente a cuenta existente</button>
+              } @else {
+                <p>Crear cuenta/conductor requiere un grupo activo y cupo histórico disponible. No activa la conducción sin unidad revisada.</p>
+                <button class="management-button" type="button" (click)="loadGroups()">Consultar grupos activos</button>
+                <label for="provision-group">Grupo activo<select id="provision-group" [(ngModel)]="groupId"><option value="">Selecciona un grupo</option>@for (group of activeGroups(); track group.id) { <option [value]="group.id">Grupo {{ group.id }}</option> }</select></label>
+                <button class="management-button primary" type="button" (click)="act('provision')">Crear cuenta y conductor</button>
+              }
+            }
+            @if (dossier.provisionedUserId) { <p>Cuenta vinculada: {{ dossier.provisionedUserId }}. No se crea otra cuenta.</p> }
+          </fieldset>
+          <h4>Historial de revisión</h4>
+          @if (dossier.history.length === 0) { <p>Aún no hay decisiones registradas.</p> }
+          <ol>@for (entry of dossier.history; track $index) { <li>{{ entry.occurredAt | date: 'medium' }} · {{ actionLabel(entry.action) }} · Ronda {{ entry.round }} @if (entry.reason) { <span>· {{ entry.reason }}</span> }</li> }</ol>
+        </section>
+      }
+    }
+  }
+  <div modal-actions>
+    <button class="management-button" type="button" (click)="closeExpediente()">Cerrar expediente</button>
+  </div>
+</rf-modal>
+

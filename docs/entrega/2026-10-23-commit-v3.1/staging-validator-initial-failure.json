@@ -1,0 +1,8 @@
+{
+  "phase": "Post-staging byte comparison",
+  "result": "DETECTED_EOL_NORMALIZATION",
+  "path": "scripts/Invoke-RutaFijaQuickDemo.ps1",
+  "productDefect": false,
+  "resolution": "Explicit -text attributes preserve the exact reviewed PowerShell launcher bytes; restage and reverify",
+  "sourceRewritten": false
+}

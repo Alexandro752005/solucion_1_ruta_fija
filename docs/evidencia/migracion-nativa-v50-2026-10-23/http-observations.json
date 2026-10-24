@@ -1,0 +1,74 @@
+[
+  {
+    "url": "http://127.0.0.1:8080/actuator/health",
+    "source": "PC",
+    "httpStatus": 200,
+    "health": "UP",
+    "authenticationTest": "NO_CREDENTIALS_SENT",
+    "observedAtUtc": "2026-10-23T22:26:15.328880+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:4300/",
+    "source": "PC",
+    "httpStatus": 200,
+    "health": null,
+    "authenticationTest": "NO_CREDENTIALS_SENT",
+    "observedAtUtc": "2026-10-23T22:26:15.345787+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:4300/api/v1/mobile/profile",
+    "source": "PC",
+    "httpStatus": 401,
+    "health": null,
+    "authenticationTest": "NO_CREDENTIALS_SENT",
+    "observedAtUtc": "2026-10-23T22:26:15.401899+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:8080/actuator/health",
+    "source": "REAL_POCO_ADB_SHELL",
+    "httpStatus": 200,
+    "health": "UP",
+    "authenticationTest": "NO_CREDENTIALS_SENT",
+    "observedAtUtc": "2026-10-23T22:26:15.810971+00:00"
+  },
+  {
+    "url": "http://127.0.0.1:8080/api/v1/mobile/profile",
+    "source": "REAL_POCO_ADB_SHELL",
+    "httpStatus": 401,
+    "health": null,
+    "authenticationTest": "NO_CREDENTIALS_SENT",
+    "observedAtUtc": "2026-10-23T22:26:15.918584+00:00"
+  },
+  {
+    "url": "http://192.168.18.4:4311/actuator/health",
+    "source": "REAL_POCO_ADB_SHELL",
+    "httpStatus": 200,
+    "health": "UP",
+    "authenticationTest": "NO_CREDENTIALS_SENT",
+    "observedAtUtc": "2026-10-23T22:26:16.216699+00:00"
+  },
+  {
+    "url": "http://192.168.18.4:4311/api/v1/mobile/profile",
+    "source": "REAL_POCO_ADB_SHELL",
+    "httpStatus": 401,
+    "health": null,
+    "authenticationTest": "NO_CREDENTIALS_SENT",
+    "observedAtUtc": "2026-10-23T22:26:16.319477+00:00"
+  },
+  {
+    "url": "http://192.168.18.4:4311/api/v1/users",
+    "source": "REAL_POCO_ADB_SHELL",
+    "httpStatus": 404,
+    "health": null,
+    "authenticationTest": "NO_CREDENTIALS_SENT",
+    "observedAtUtc": "2026-10-23T22:26:16.431248+00:00"
+  },
+  {
+    "url": "http://192.168.18.4:4311/actuator/health",
+    "source": "PC",
+    "httpStatus": 403,
+    "health": null,
+    "authenticationTest": "NO_CREDENTIALS_SENT",
+    "observedAtUtc": "2026-10-23T22:26:16.432821+00:00"
+  }
+]

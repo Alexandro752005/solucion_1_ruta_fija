@@ -1,0 +1,20 @@
+﻿{
+    "schemaVersion":  2,
+    "mode":  "NORMAL_LOCAL",
+    "projectRoot":  "D:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3",
+    "startedAtUtc":  "2026-10-23T22:25:31.0368573Z",
+    "backend":  {
+                    "processId":  8068,
+                    "port":  8080,
+                    "commandMarker":  "D:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3\\backend\\target\\ruta-fija-backend-0.1.0-SNAPSHOT.jar",
+                    "executable":  "C:\\Program Files\\Java\\jdk-21.0.10\\bin\\java.exe",
+                    "processStartedAtUtc":  "2026-10-23T22:24:55.7574885Z"
+                },
+    "frontend":  {
+                     "processId":  14536,
+                     "port":  4300,
+                     "commandMarker":  "D:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3\\frontend\\node_modules\\@angular\\cli\\bin\\ng.js",
+                     "executable":  "C:\\Program Files\\nodejs\\node.exe",
+                     "processStartedAtUtc":  "2026-10-23T22:25:12.0476776Z"
+                 }
+}

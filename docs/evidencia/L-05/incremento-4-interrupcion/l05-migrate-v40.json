@@ -1,0 +1,78 @@
+{
+  "observedAt": "2026-10-20T08:05:12.651415300Z",
+  "mode": "EXPLICIT_MIGRATE_TEST_ONLY",
+  "database": "ruta_fija_test",
+  "role": "rf_test",
+  "caseRunId": "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "before": {
+    "schemaVersion": "39",
+    "scheduledServiceCount": 2,
+    "serviceOperationCount": 3,
+    "serviceOfferCount": 3,
+    "scheduledServicesSha256": "39cb4602554319d9f8452f57ce373e97ddca959df0902724fe7942a3699c54b0",
+    "offersSha256": "06063b6df92afd6fcc5d77ccacd238a735d4f00fe315c4fcb4a84374f894f9c5",
+    "executionSegments": 0,
+    "gpsPoints": 0,
+    "gpsAccessRequests": 0,
+    "timeCorrections": 0,
+    "timeCorrectionRequests": 0,
+    "ledger": {
+      "SUPER_ADMIN": 1,
+      "ADMIN": 3,
+      "CONDUCTOR": 2
+    },
+    "acceptanceCount": 2,
+    "ledgerSha256": "72645cef67100af501b7a6bd20072ac9594d76ec764ba41aa0456ec7e6ca4198",
+    "acceptancesSha256": "120a3a856057c51796053a20046dd9aa628953105ace67caf4bbff2d29674d28",
+    "humanFixturesSha256": "6fe63b280060af868fea97a860eb9e2bbcb05e4d65538f6a7b64c74993ec7580",
+    "publishedTermsSha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+    "L02ClosedCaseSha256": "899b2f8be6231c5af331535016fdab120f90a4ec55f0d029f04ebd169581ba54",
+    "vehicleCanonicalCollisions": 0
+  },
+  "targetVersion": "40",
+  "flywayValidationBeforeMigrate": {
+    "successful": false,
+    "validatedCount": 0,
+    "code": "VALIDATE_ERROR",
+    "invalidMigrations": [
+      {
+        "version": "40",
+        "description": "safe service interruption",
+        "code": "RESOLVED_VERSIONED_MIGRATION_NOT_APPLIED"
+      }
+    ]
+  },
+  "onlyExpectedPendingV40": true,
+  "migrationsExecuted": 1,
+  "after": {
+    "schemaVersion": "40",
+    "scheduledServiceCount": 2,
+    "serviceOperationCount": 3,
+    "serviceOfferCount": 3,
+    "scheduledServicesSha256": "39cb4602554319d9f8452f57ce373e97ddca959df0902724fe7942a3699c54b0",
+    "offersSha256": "06063b6df92afd6fcc5d77ccacd238a735d4f00fe315c4fcb4a84374f894f9c5",
+    "executionSegments": 0,
+    "gpsPoints": 0,
+    "gpsAccessRequests": 0,
+    "timeCorrections": 0,
+    "timeCorrectionRequests": 0,
+    "serviceAttentions": 0,
+    "serviceAttentionResolutions": 0,
+    "ledger": {
+      "SUPER_ADMIN": 1,
+      "ADMIN": 3,
+      "CONDUCTOR": 2
+    },
+    "acceptanceCount": 2,
+    "ledgerSha256": "72645cef67100af501b7a6bd20072ac9594d76ec764ba41aa0456ec7e6ca4198",
+    "acceptancesSha256": "120a3a856057c51796053a20046dd9aa628953105ace67caf4bbff2d29674d28",
+    "humanFixturesSha256": "6fe63b280060af868fea97a860eb9e2bbcb05e4d65538f6a7b64c74993ec7580",
+    "publishedTermsSha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+    "L02ClosedCaseSha256": "899b2f8be6231c5af331535016fdab120f90a4ec55f0d029f04ebd169581ba54",
+    "vehicleCanonicalCollisions": 0
+  },
+  "preservation": "PASS",
+  "globalCleanupExecuted": false,
+  "developmentOrPilotAccessed": false,
+  "result": "PASS"
+}

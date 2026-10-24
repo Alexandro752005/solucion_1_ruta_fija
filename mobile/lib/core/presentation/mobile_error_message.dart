@@ -5,7 +5,17 @@ String mobileErrorMessage(Object error) {
     return error.message;
   }
   if (error is MobileApiException) {
+    // A temporary service outage is neither invalid credentials nor permission
+    // denial. Never echo infrastructure diagnostics from a 5xx response.
+    if (error.status == 503) {
+      return 'Ruta Fija no está disponible temporalmente. No se confirmó la operación. Intente nuevamente más tarde.';
+    }
+    if (error.status >= 500) {
+      return 'Ruta Fija no pudo confirmar la operación. Consulte su estado antes de volver a intentarlo.';
+    }
     switch (error.code) {
+      case 'MOBILE_SESSION_CHANGED':
+        return 'La sesión cambió. Vuelva a consultar desde su sesión actual.';
       case 'AUTH_INVALID_CREDENTIALS':
         return 'El correo o la contraseña no son correctos.';
       case 'MOBILE_USER_NOT_DRIVER':
@@ -22,12 +32,14 @@ String mobileErrorMessage(Object error) {
         return 'El plazo de respuesta de esta asignación ya venció.';
       case 'RESOURCE_VERSION_CONFLICT':
         return 'La asignación fue modificada. Actualice los datos e intente de nuevo.';
+      case 'INCIDENT_INVALID_STATE':
+        return 'La incidencia ya no admite este cierre. Actualice la pantalla para ver su estado vigente.';
       case 'MOBILE_EVENT_CONFLICT':
         return 'Ese evento ya no puede reutilizarse. Actualice la asignación.';
       case 'VEHICLE_NOT_ELIGIBLE':
         return 'El vehículo ya no está disponible para esta operación.';
       case 'RESOURCE_NOT_FOUND':
-        return 'La asignación ya no está disponible para su sesión.';
+        return 'El recurso ya no está disponible para su sesión.';
       default:
         return error.message;
     }

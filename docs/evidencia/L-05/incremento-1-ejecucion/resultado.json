@@ -1,0 +1,40 @@
+{
+  "observedAt": "2026-10-20T02:46:20.814530+00:00",
+  "localDate": "2026-10-19",
+  "result": "PASS_L05_FIRST_INCREMENT_ONLY",
+  "lotStatus": "EN_CURSO",
+  "database": "ruta_fija_test",
+  "role": "rf_test",
+  "migrator": "rf_migrator",
+  "schemaVersion": "36",
+  "backendDistinctPassed": 57,
+  "backendExecutionPassed": 10,
+  "backendTerminalPolicyPassed": 4,
+  "crmComponentPassed": 11,
+  "flutterDistinctPassed": 18,
+  "flutterAnalyze": "NO_ISSUES",
+  "crmTypecheck": "PASS",
+  "crmDevelopmentBuild": "PASS",
+  "backendPackage": "PASS",
+  "artifactManifest": "artifacts/L-05-incremento-1-2026-10-19/manifest.json",
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 2
+  },
+  "acceptances": 2,
+  "accountsCreatedPersistently": 0,
+  "globalCleanupExecuted": false,
+  "externalMailSent": false,
+  "humanTrial": false,
+  "physicalDevice": false,
+  "L06Started": false,
+  "pilotEnabled": false,
+  "limits": [
+    "Only first execution increment; handover, interruption, time corrections and GPS30s/history/access/purge remain incomplete.",
+    "Spring MockMvc with native PG is not a new TCP/browser/device trial.",
+    "OS permission is client-reported, not hardware attestation.",
+    "Failed first runs retained; do not count repeated executions as distinct coverage.",
+    "Published terms and all final3 bytes unchanged."
+  ]
+}

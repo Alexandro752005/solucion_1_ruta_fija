@@ -1,0 +1,22 @@
+{
+  "recordedAt": "2026-10-23T02:21:57.630758+00:00",
+  "runId": "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+  "result": "OPEN_PACKAGE_INSTALLATION_INCIDENT",
+  "rejectedApkSha256": "dc26a0d0c907818fb0d4ca96e08ada01afdbb8e9c9afb09b087c1999aa36fdd7",
+  "expectedPackage": "pe.rutafija.conductor.l08",
+  "actualBuiltPackage": "pe.rutafija.conductor",
+  "principalPackageLastUpdateReportedByAndroid": "2026-10-22 21:06:24",
+  "installedL08PackageStillHasSha256": "378bedcf4ee12a1a801ed07c9479b1acc5903246dd78c6f9b40212af9a73a588",
+  "principalDataClearOrUninstallPerformed": false,
+  "principalWasForceStoppedAfterDetection": true,
+  "priorPrincipalApkExportedBeforeInstallation": false,
+  "priorPrincipalApkExactHashAvailable": false,
+  "principalPreviousBinaryRestored": false,
+  "accountCreatedForRetry": false,
+  "firstPhoneLoginReachedRealCaseBackend": false,
+  "phonePeerAndPrivateListenerStillMatch": true,
+  "hardwareGpsOrBatteryPassAccredited": false,
+  "pilotEnabled": false,
+  "correctiveBuildRequiresActualPackageMetadataValidationBeforeInstall": true,
+  "userClarification": "User identified installed app name Ruta Fija Conductor; no previous APK file path supplied."
+}

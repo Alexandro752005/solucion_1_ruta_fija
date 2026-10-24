@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 public record IncidentFollowUpRequest(
         @NotNull @Min(0) Long version,
         @NotBlank @Size(max = 1000) String note,
-        boolean resolve
+        boolean resolve,
+        @NotNull java.util.UUID operationKey
 ) {
 }

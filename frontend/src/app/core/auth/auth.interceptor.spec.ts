@@ -126,7 +126,7 @@ describe('authInterceptor', () => {
         email: 'admin@ruta-fija.pe',
         password: 'credencial-de-prueba',
       }),
-    );
+    ).then(() => undefined);
   }
 
   function loginResponse(accessToken: string) {

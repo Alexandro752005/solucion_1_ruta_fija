@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="42.495" tests="17" errors="0" skipped="0" failures="0" flakes="0">
+  <testcase name="handoverRequiresPersonalAcceptancePermissionAndCurrentEligibilityBeforeAnyWrites" classname="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="3.894">
+    </testcase>
+  <testcase name="handoverPreparationRejectsSelfMissingSafetyAndDuplicatePendingIntent" classname="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="1.838">
+    </testcase>
+  <testcase name="handoverPreparationAndAcceptanceDoNotStartOrReplaceTheCurrentExecution" classname="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="2.096">
+    </testcase>
+  <testcase name="handoverGroupCannotBeRetiredWhileInterruptedContinuityOrSafetyAttentionIsPending" classname="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="1.975">
+    </testcase>
+  <testcase name="handoverAssumptionAtomicallyTransfersAndOpensOriginalSegmentsWithoutRestartingService" classname="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="1.81">
+    </testcase>
+  <testcase name="handoverExpiredOrRejectedStandbyDoesNotCancelExecutionAndAllowsAnotherExplicitPreparation" classname="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="1.611">
+    </testcase>
+  <testcase name="handoverVersionReplayAndChangedPayloadConserveOneEffectiveTransfer" classname="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="1.887">
+    </testcase>
+  <testcase name="handoverMultipleSegmentsCanBeReviewedWithoutRewritingOriginalTimesAndOnlyOwnRequestsAreVisible" classname="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="1.919">
+    </testcase>
+  <testcase name="handoverOwnCompletionClosesAnAcceptedStandbyWithoutImpersonatingAdmin" classname="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="1.578">
+    </testcase>
+  <testcase name="handoverExplicitWithdrawalReleasesOnlyTheUnstartedStandbyAndKeepsOutgoingExecution" classname="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="2.108">
+    </testcase>
+  <testcase name="handoverMissedStartIsAnExplicitAlertWithoutStartingOrCancellingTheConfirmedService" classname="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="1.208">
+    </testcase>
+  <testcase name="handoverCancellingInterruptedContinuityWithdrawsStandbyButPreservesSafetyHolds" classname="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="1.802">
+    </testcase>
+  <testcase name="handoverFromInterruptionRetainsItsPauseOriginalStatusAndSeparateResourceAttention" classname="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="2.098">
+    </testcase>
+  <testcase name="handoverCandidatesAreTenantBoundQualifiedPairsAndDoNotOfferTheExecutingParticipant" classname="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="1.726">
+    </testcase>
+  <testcase name="handoverRolesAndForeignTenantCannotReadOrAssumeTheSameCase" classname="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="2.866">
+    </testcase>
+  <testcase name="handoverDatabaseRejectsForgedTransferAndRewritingPreparedIntent" classname="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="2.855">
+    </testcase>
+  <testcase name="handoverClearsSnapshotsSeparatesNewGpsAndRetainsImmutableTransferEvidence" classname="pe.rutafija.qualification.ServiceHandoverIntegrationTest" time="2.268">
+    </testcase>
+</testsuite>

@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="pe.rutafija.qualification.ServiceAttentionIntegrationTest" time="36.369" tests="16" errors="0" skipped="0" failures="0" flakes="0">
+  <testcase name="safetyAttentionBlocksNewOperationAndPointsButKeepsOwnConsultation" classname="pe.rutafija.qualification.ServiceAttentionIntegrationTest" time="2.575">
+    </testcase>
+  <testcase name="safetyCancellationPreservesInterruptedParticipationAndHoldsAndAllowsSeparateTimeReview" classname="pe.rutafija.qualification.ServiceAttentionIntegrationTest" time="1.437" />
+  <testcase name="safetyOwnInterruptionRetainsServerOriginalsIncidentAndGpsWithoutCompletion" classname="pe.rutafija.qualification.ServiceAttentionIntegrationTest" time="1.091" />
+  <testcase name="safetyRolesAndObjectScopeDoNotLetAnotherSurfaceImpersonateTheReporter" classname="pe.rutafija.qualification.ServiceAttentionIntegrationTest" time="1.19" />
+  <testcase name="safetyResolutionNeedsFreshStateSafetyConfirmationAndAdmin" classname="pe.rutafija.qualification.ServiceAttentionIntegrationTest" time="1.158" />
+  <testcase name="safetyLateOwnIncidentRetainsTheOccurrenceSegmentWithoutNewOperationalEligibility" classname="pe.rutafija.qualification.ServiceAttentionIntegrationTest" time="1.022" />
+  <testcase name="safetyIndependentDriverReleaseAndWithdrawalKeepTheUnitBlockedUntilExplicitReadyReview" classname="pe.rutafija.qualification.ServiceAttentionIntegrationTest" time="1.095" />
+  <testcase name="safetyPermissionLossAndInactiveDriverDoNotPreventRecordingTheSafeStop" classname="pe.rutafija.qualification.ServiceAttentionIntegrationTest" time="0.959" />
+  <testcase name="safetyReadyReleaseRestoresOnlyEligibilityAndTheExistingAvailabilityDeclaration" classname="pe.rutafija.qualification.ServiceAttentionIntegrationTest" time="1.16" />
+  <testcase name="safetyMaintenanceReturnRecordsItsOwnCheckWithoutReactivatingAWithdrawnUnitOrRemovingAttention" classname="pe.rutafija.qualification.ServiceAttentionIntegrationTest" time="1.516" />
+  <testcase name="safetyChangedReplayAndStaleVersionNeverCreateAnotherInterruption" classname="pe.rutafija.qualification.ServiceAttentionIntegrationTest" time="1.238" />
+  <testcase name="safetyRejectsCoordinatesOrPersonalDataInPermanentSafetyNotes" classname="pe.rutafija.qualification.ServiceAttentionIntegrationTest" time="1.063" />
+  <testcase name="safetyAdminRecordsOnlyAConfirmedCommunicatedStopWithActualAuthorship" classname="pe.rutafija.qualification.ServiceAttentionIntegrationTest" time="0.971" />
+  <testcase name="safetyDatabaseRejectsRewritingAttentionOrReleasingItsResourcesThroughOrdinaryState" classname="pe.rutafija.qualification.ServiceAttentionIntegrationTest" time="1.15" />
+  <testcase name="safetyNoStartNoInterruptionAndDelayIsNotACause" classname="pe.rutafija.qualification.ServiceAttentionIntegrationTest" time="1.0" />
+  <testcase name="safetyForeignAdminCannotReadInterruptOrResolveTheSameOtherOrganizationCase" classname="pe.rutafija.qualification.ServiceAttentionIntegrationTest" time="1.092" />
+</testsuite>

@@ -1,0 +1,24 @@
+{
+  "runId" : "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+  "observedAt" : "2026-10-23T05:31:46.225574100Z",
+  "historicalLedger" : {
+    "ADMIN" : 3,
+    "CONDUCTOR" : 8,
+    "SUPER_ADMIN" : 1
+  },
+  "termsAcceptances" : 2,
+  "gpsHistoryPointCount" : 85,
+  "accountDriverVehicleGroupDisabled" : true,
+  "allCaseRefreshTokensRevoked" : true,
+  "noAuthorizedCaseUnitPeriods" : true,
+  "noOpenCaseCommitmentsOrSegments" : true,
+  "currentLocationRows" : 0,
+  "caseAdvisoryLockFree" : true,
+  "markerAndPrivateFixtureAbsent" : true,
+  "originalBaselineRowsPreserved" : true,
+  "databaseWrites" : 0,
+  "coordinatesOrSecretsRecorded" : false,
+  "TEST_CLEANUP_RELEASED" : true,
+  "pilotEnabled" : false,
+  "result" : "PASS_EXACT_FIS02_SELECTIVE_RETIREMENT_AND_PRIOR_ROWS_PRESERVED"
+}

@@ -1,0 +1,17 @@
+{
+  "observedAt": "2026-10-19T15:59:30.745264+00:00",
+  "appliesTo": "incremento-1/resultado.json accountsCreated=0",
+  "interpretation": "No committed additional accounts; group tests and lock fixtures create no account. The 44 QualificationIntegrationTest regressions do create synthetic accounts and quota rows inside rollback-only transactions, within limits, and roll them back.",
+  "persistentLedgerBefore": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 1
+  },
+  "persistentLedgerAfter": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 1
+  },
+  "committedCreationsResetOrRecovered": false,
+  "productionValidationExceptionIntroduced": false
+}

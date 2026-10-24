@@ -28,7 +28,7 @@
         <div class="user-area">
           <span class="avatar" aria-hidden="true">{{ initials() }}</span>
           <div class="user-copy">
-            <strong>{{ session.user()?.fullName }}</strong>
+            <strong>CUENTA-{{ session.user()?.id }}</strong>
             <span>{{ roleLabel(session.user()?.role) }}</span>
           </div>
           <button

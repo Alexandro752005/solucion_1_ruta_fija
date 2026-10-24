@@ -39,6 +39,13 @@ public class MobileAssignmentService {
     private final AuditService auditService;
     private final OperationEventPublisher eventPublisher;
     private final Clock clock;
+    private final pe.rutafija.qualification.application.OperationalQualificationPolicy qualification;
+    private final OrganizationSchedulingLock scheduling;
+    private final pe.rutafija.routing.application.RouteDeclarationService declarations;
+    private final jakarta.persistence.EntityManager entityManager;
+    private final OfferSchedulingPolicy marginPolicy;
+    private final ServiceExecution execution;
+    private final ServiceHandover handovers;
 
     public MobileAssignmentService(
             MobileDriverContextService mobileDriverContextService,
@@ -47,7 +54,14 @@ public class MobileAssignmentService {
             MobileCommandProcessor commandProcessor,
             AuditService auditService,
             OperationEventPublisher eventPublisher,
-            Clock clock
+            Clock clock,
+            pe.rutafija.qualification.application.OperationalQualificationPolicy qualification,
+            OrganizationSchedulingLock scheduling,
+            pe.rutafija.routing.application.RouteDeclarationService declarations,
+            jakarta.persistence.EntityManager entityManager,
+            OfferSchedulingPolicy marginPolicy,
+            ServiceExecution execution,
+            ServiceHandover handovers
     ) {
         this.mobileDriverContextService = mobileDriverContextService;
         this.assignmentRepository = assignmentRepository;
@@ -56,11 +70,18 @@ public class MobileAssignmentService {
         this.auditService = auditService;
         this.eventPublisher = eventPublisher;
         this.clock = clock;
+        this.qualification = qualification;
+        this.scheduling = scheduling;
+        this.declarations = declarations;
+        this.entityManager = entityManager;
+        this.marginPolicy = marginPolicy;
+        this.execution = execution;
+        this.handovers = handovers;
     }
 
     @Transactional(readOnly = true)
     public PageResponse<AssignmentResponse> list(AssignmentStatus status, Pageable pageable) {
-        MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
+        MobileDriverActor actor = mobileDriverContextService.requireMobileConsultation();
         Page<Assignment> assignments = assignmentRepository.findMobileAssignments(
                 actor.user().getOrganizationId(), actor.driver().getId(), status, pageable
         );
@@ -69,7 +90,7 @@ public class MobileAssignmentService {
 
     @Transactional(readOnly = true)
     public AssignmentResponse get(UUID assignmentId) {
-        MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
+        MobileDriverActor actor = mobileDriverContextService.requireMobileConsultation();
         return AssignmentResponse.from(findOwnAssignment(actor, assignmentId));
     }
 
@@ -91,6 +112,10 @@ public class MobileAssignmentService {
                 (assignment, now) -> {
                     normalizeExpiredIfDue(assignment, now);
                     assertVersion(assignment, request.version());
+                    marginPolicy.requireCaptured(assignment);
+                    if(assignment.getDriver().getDeclaredAvailabilityStatus()!=DriverAvailabilityStatus.DISPONIBLE)
+                        throw mobileTransition("La aceptación requiere disponibilidad declarada vigente.");
+                    qualification.require(assignment.getDriver().getId(),assignment.getOrganizationId(),assignment.getVehicle().getId(),assignment.getScheduledAt(),assignment.getScheduledEndAt());
                     if (!assignment.getVehicle().isActive()
                             || assignment.getVehicle().getStatus() != VehicleStatus.DISPONIBLE) {
                         throw new ApplicationException(
@@ -101,12 +126,16 @@ public class MobileAssignmentService {
                     }
                     try {
                         assignment.requirePendingMobileResponse(now);
-                        assignment.getDriver().reserveForAssignment();
+                        if(assignment.getDriver().getAvailabilityStatus()==DriverAvailabilityStatus.RESERVADO
+                            &&!marginPolicy.hasOtherConfirmed(assignment.getOrganizationId(),assignment.getDriver().getId(),assignment.getId()))
+                            throw mobileTransition("El estado reservado no tiene un compromiso compatible acreditado; consulta la ocupación vigente.");
+                        if(assignment.getDriver().getAvailabilityStatus()!=DriverAvailabilityStatus.RESERVADO)
+                            assignment.getDriver().reserveForAssignment();
                         assignment.acceptMobileResponse(now);
                     } catch (IllegalStateException exception) {
                         throw mobileTransition(exception.getMessage());
                     }
-                    return persistAndPublish(assignment, "ASSIGNMENT_MOBILE_ACCEPTED", "assignment.accepted");
+                    return persistAndPublish(assignment,AssignmentStatus.PENDING_RESPONSE,"ASSIGNMENT_MOBILE_ACCEPTED", "assignment.accepted");
                 }
         );
     }
@@ -131,7 +160,7 @@ public class MobileAssignmentService {
                     } catch (IllegalStateException exception) {
                         throw mobileTransition(exception.getMessage());
                     }
-                    return persistAndPublish(assignment, "ASSIGNMENT_MOBILE_REJECTED", "assignment.rejected");
+                    return persistAndPublish(assignment,AssignmentStatus.PENDING_RESPONSE,"ASSIGNMENT_MOBILE_REJECTED", "assignment.rejected");
                 }
         );
     }
@@ -148,10 +177,17 @@ public class MobileAssignmentService {
                 request.occurredAt(),
                 null,
                 MobileCommandType.ASSIGNMENT_START,
+                request.gps()==null?null:request.gps().canonical(),
                 (assignment, now) -> {
                     normalizeExpiredIfDue(assignment, now);
                     assertVersion(assignment, request.version());
+                    marginPolicy.requireCaptured(assignment);
+                    qualification.requireStart(assignment.getDriver().getId(),assignment.getOrganizationId(),assignment.getVehicle().getId(),assignment.getScheduledAt(),assignment.getScheduledEndAt());
+                    if(assignment.getHandoverId()!=null)throw mobileTransition("La oferta de relevo requiere Asumir relevo; no inicia por la acción ordinaria.");
+                    if (assignment.getAcceptedAt() == null || assignment.getResponseMode() != pe.rutafija.operation.domain.AssignmentResponseMode.MOBILE_CONFIRMATION)
+                        throw mobileTransition("El inicio requiere aceptación auténtica de la oferta por CONDUCTOR.");
                     assertCanStart(assignment);
+                    execution.requireStart(assignment,request.gps());
                     try {
                         assignment.getDriver().beginService();
                         assignment.getVehicle().beginService();
@@ -159,7 +195,10 @@ public class MobileAssignmentService {
                     } catch (IllegalStateException exception) {
                         throw mobileTransition(exception.getMessage());
                     }
-                    return persistAndPublish(assignment, "ASSIGNMENT_MOBILE_STARTED", "assignment.started");
+                    assignmentRepository.flush();
+                    execution.recordStart(assignment,mobileDriverContextService.requireMobileConsultation(),request.clientEventId(),now);
+                    currentLocationStore.deleteByDriverId(assignment.getDriver().getId());
+                    return persistAndPublish(assignment,AssignmentStatus.SCHEDULED,"ASSIGNMENT_MOBILE_STARTED", "assignment.started");
                 }
         );
     }
@@ -180,6 +219,9 @@ public class MobileAssignmentService {
                     normalizeExpiredIfDue(assignment, now);
                     assertVersion(assignment, request.version());
                     assertCanComplete(assignment);
+                    if(assignment.getAcceptedAt()==null||assignment.getStartedAt()==null)throw mobileTransition("Ruta finalizada requiere aceptación auténtica e inicio del propio servicio.");
+                    execution.requireCompletion(assignment);
+                    if(assignment.getServiceId()!=null)handovers.closePendingOnCompletion(assignment,mobileDriverContextService.requireMobileConsultation(),now);
                     try {
                         assignment.getDriver().completeService();
                         assignment.getVehicle().finishService();
@@ -187,7 +229,15 @@ public class MobileAssignmentService {
                     } catch (IllegalStateException exception) {
                         throw mobileTransition(exception.getMessage());
                     }
-                    return persistAndPublish(assignment, "ASSIGNMENT_MOBILE_COMPLETED", "assignment.completed");
+                    assignmentRepository.flush();
+                    declarations.record(assignment,mobileDriverContextService.requireMobileConsultation(),now);
+                    execution.recordCompletion(assignment,mobileDriverContextService.requireMobileConsultation(),request.clientEventId(),now);
+                    currentLocationStore.deleteByDriverId(assignment.getDriver().getId());
+                    if(!qualification.eligible(assignment.getDriver().getId(),assignment.getOrganizationId(),true))
+                        assignment.getDriver().changeAdministrativeAvailability(DriverAvailabilityStatus.NO_DISPONIBLE);
+                    else if(marginPolicy.hasOtherConfirmed(assignment.getOrganizationId(),assignment.getDriver().getId(),assignment.getId()))
+                        assignment.getDriver().reserveForAssignment();
+                    return persistAndPublish(assignment,AssignmentStatus.EN_SERVICIO,"ASSIGNMENT_MOBILE_COMPLETED", "assignment.completed");
                 }
         );
     }
@@ -201,11 +251,21 @@ public class MobileAssignmentService {
             MobileCommandType commandType,
             AssignmentMutation mutation
     ) {
-        MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
+        return executeCommand(assignmentId,eventId,version,occurredAt,rejectionReason,commandType,null,mutation);
+    }
+
+    private MobileCommandExecution<AssignmentResponse> executeCommand(
+            UUID assignmentId, UUID eventId, Long version, Instant occurredAt, String rejectionReason,
+            MobileCommandType commandType, String executionProof, AssignmentMutation mutation
+    ) {
+        MobileDriverActor actor = commandType==MobileCommandType.ASSIGNMENT_COMPLETE
+                ?mobileDriverContextService.requireMobileConsultation():mobileDriverContextService.requireMobileDriver();
+        scheduling.acquire(actor.user().getOrganizationId());
+        entityManager.refresh(actor.driver(),jakarta.persistence.LockModeType.PESSIMISTIC_WRITE);
         Assignment receiptAssignment = findOwnAssignment(actor, assignmentId);
         String requestHash = commandProcessor.hash(canonical(
                 commandType, assignmentId, version, occurredAt, rejectionReason
-        ));
+        )+(executionProof==null?"":"|GPS|"+executionProof));
         return commandProcessor.execute(
                 actor,
                 eventId,
@@ -214,21 +274,22 @@ public class MobileAssignmentService {
                 receiptAssignment,
                 requestHash,
                 receipt -> AssignmentResponse.from(findOwnAssignment(actor, receipt.getAssignment().getId())),
+                () -> receiptAssignment.getStatus().name(),
                 () -> mutation.apply(lockOwnAssignment(actor, assignmentId), Instant.now(clock)),
                 response -> response.status().name()
         );
     }
 
-    private AssignmentResponse persistAndPublish(Assignment assignment, String auditAction, String eventName) {
+    private AssignmentResponse persistAndPublish(Assignment assignment,AssignmentStatus previousStatus,String auditAction,String eventName) {
         Assignment persisted = assignmentRepository.saveAndFlush(assignment);
         if (persisted.getDriver().getAvailabilityStatus() != DriverAvailabilityStatus.DISPONIBLE
                 && persisted.getDriver().getAvailabilityStatus() != DriverAvailabilityStatus.EN_SERVICIO) {
             currentLocationStore.deleteByDriverId(persisted.getDriver().getId());
         }
-        MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
+        MobileDriverActor actor = mobileDriverContextService.requireMobileConsultation();
         auditService.record(actor.user(), auditAction, "ASSIGNMENT", persisted.getId(), Map.of(
                 "status", persisted.getStatus().name(),
-                "responseMode", persisted.getResponseMode().name()
+                "mode", persisted.getResponseMode().name(),"changes",pe.rutafija.audit.application.AuditChanges.fields("status",previousStatus,persisted.getStatus())
         ));
         eventPublisher.publish(
                 persisted.getOrganizationId(),

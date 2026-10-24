@@ -38,8 +38,9 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
       }
       setState(() {
         _availability = availability;
-        _selectedStatus = availability.status.canBeChosenByDriver
-            ? availability.status
+        _selectedStatus =
+            availability.declaredStatus?.canBeChosenByDriver == true
+            ? availability.declaredStatus
             : null;
       });
     } catch (error) {
@@ -59,7 +60,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
     if (_saving ||
         selected == null ||
         current == null ||
-        selected == current.status) {
+        (selected == current.declaredStatus && current.status == selected)) {
       return;
     }
 
@@ -71,9 +72,7 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
       }
       setState(() {
         _availability = updated;
-        _selectedStatus = updated.status.canBeChosenByDriver
-            ? updated.status
-            : null;
+        _selectedStatus = updated.status;
       });
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -125,7 +124,8 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
     }
 
     final current = _availability!;
-    final canChange = current.status.canBeChosenByDriver;
+    final canChange =
+        current.canChangeDeclaration ?? current.status.canBeChosenByDriver;
     final selectableStatuses = MobileAvailabilityStatus.values
         .where((status) => status.canBeChosenByDriver)
         .toList(growable: false);
@@ -139,7 +139,13 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
         ),
         const SizedBox(height: 8),
         const Text(
-          'El estado se consulta y actualiza directamente en Ruta Fija.',
+          'El cambio se confirma con Ruta Fija antes de actualizar la pantalla.',
+        ),
+        Text(
+          'Declaración propia: ${current.declaredStatus?.label ?? 'Sin declarar'}',
+        ),
+        const Text(
+          'La declaración se conserva al desconectar o cerrar sesión. No sustituye documentos, unidad ni ausencia de compromisos.',
         ),
         const SizedBox(height: 20),
         Card(
@@ -183,16 +189,26 @@ class _AvailabilityPageState extends State<AvailabilityPage> {
                   label: Text(status.label),
                 ),
             ],
-            selected: {_selectedStatus ?? current.status},
+            emptySelectionAllowed: true,
+            selected: _selectedStatus == null
+                ? <MobileAvailabilityStatus>{}
+                : {_selectedStatus!},
             onSelectionChanged: _saving
                 ? null
-                : (selection) =>
-                      setState(() => _selectedStatus = selection.single),
+                : (selection) => setState(
+                    () => _selectedStatus = selection.isEmpty
+                        ? null
+                        : selection.single,
+                  ),
           ),
           const SizedBox(height: 20),
           FilledButton.icon(
             key: const Key('availability-save'),
-            onPressed: _saving || _selectedStatus == current.status
+            onPressed:
+                _saving ||
+                    _selectedStatus == null ||
+                    (_selectedStatus == current.declaredStatus &&
+                        _selectedStatus == current.status)
                 ? null
                 : _save,
             icon: _saving

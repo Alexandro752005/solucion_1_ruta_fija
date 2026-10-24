@@ -1,0 +1,14 @@
+﻿{
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "archivedAt":  "2026-10-23T05:30:50.9624498+00:00",
+    "result":  "PASS_IMMUTABLE_RESULT_COPIED_BEFORE_SELECTIVE_RETIREMENT",
+    "archive":  "archivo-previo-retiro/resultado-fisico.json",
+    "sha256":  "889793cdc7f29b5f789a6664989141b4ba01ec382d680b3cf5fad625252c7a26",
+    "manualPhoneResult":  "PASS_PHYSICAL_FOREGROUND_CASE_ONLY",
+    "batteryResult":  "PASS_LIMITED_POCO_15_MINUTES_NO_USB_CHARGING",
+    "humanOperationalReaderAndScale":  true,
+    "gpsPointCount":  85,
+    "TEST_CLEANUP_RELEASED":  false,
+    "completionAndLogoutOperator":  "AUTHORIZED_AGENT_USING_NORMAL_REAL_ANDROID_UI",
+    "priorHumanInteractionReportsPreserved":  true
+}

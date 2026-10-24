@@ -1,0 +1,16 @@
+﻿{
+    "original":  "backend/pom.xml",
+    "originalSha256":  "55ec13d4ec18cbdfc94c61b220461e9d9b285b35f766eea51f0851ff838b7f55",
+    "auditPom":  "audit-pom.xml",
+    "auditPomSha256":  "a285f160661f55fed26b456c0287b3a38b60e792834a36337642917d1cc10c61",
+    "changes":  [
+                    "Absolute original source/test/resource paths",
+                    "New isolated build and report directories",
+                    "Original backend working directory for tests",
+                    "Show all javac warnings/deprecations without suppression",
+                    "Bounded test JVM preserving JaCoCo agent"
+                ],
+    "dependenciesOrVersionsChanged":  false,
+    "springBootResourceFilteringPreserved":  true,
+    "output":  "backend/target/auditoria-ide-1f27fece-6d9d-407f-ae60-8164681b0af5"
+}

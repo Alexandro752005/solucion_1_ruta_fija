@@ -1,0 +1,178 @@
+{
+  "observedAt": "2026-10-21T23:00:02.227445+00:00",
+  "result": "PASS",
+  "suites": [
+    {
+      "name": "pe.rutafija.availability.AvailabilityPolicyTest",
+      "tests": "14",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.067",
+      "cases": [
+        {
+          "name": "repeatedFailuresEmitOneConfirmationForTheSameOpenIncident",
+          "classname": "pe.rutafija.availability.AvailabilityPolicyTest",
+          "time": "0.036"
+        },
+        {
+          "name": "threeFailuresAtSixtySecondsConfirmWithinFiveMinutes",
+          "classname": "pe.rutafija.availability.AvailabilityPolicyTest",
+          "time": "0.005"
+        },
+        {
+          "name": "delayedObservationsDoNotFalselyMeetDetectionObjective",
+          "classname": "pe.rutafija.availability.AvailabilityPolicyTest",
+          "time": "0.001"
+        },
+        {
+          "name": "detectionOneNanosecondBeyondFiveMinutesIsNotRoundedIntoSuccess",
+          "classname": "pe.rutafija.availability.AvailabilityPolicyTest",
+          "time": "0.001"
+        },
+        {
+          "name": "exactThirtyMinuteRecoveryBoundaryIsIncluded",
+          "classname": "pe.rutafija.availability.AvailabilityPolicyTest",
+          "time": "0.001"
+        },
+        {
+          "name": "clockRegressionOrDuplicateObservationIsRejectedWithoutResettingIncident",
+          "classname": "pe.rutafija.availability.AvailabilityPolicyTest",
+          "time": "0.004"
+        },
+        {
+          "name": "invalidThresholdsCannotMakeOneResponseAConfirmedIncidentOrRecovery",
+          "classname": "pe.rutafija.availability.AvailabilityPolicyTest",
+          "time": "0.002"
+        },
+        {
+          "name": "recoveryOneNanosecondBeyondThirtyMinutesIsNotRoundedIntoSuccess",
+          "classname": "pe.rutafija.availability.AvailabilityPolicyTest",
+          "time": "0.0"
+        },
+        {
+          "name": "aSingleHealthyResponseDoesNotDeclareRecovery",
+          "classname": "pe.rutafija.availability.AvailabilityPolicyTest",
+          "time": "0.003"
+        },
+        {
+          "name": "failureResetsRecoveryVerificationWithoutCreatingAnotherIncident",
+          "classname": "pe.rutafija.availability.AvailabilityPolicyTest",
+          "time": "0.001"
+        },
+        {
+          "name": "laterRecoveryIsRecordedWithoutTurningItIntoSuccessAgainstTheObjective",
+          "classname": "pe.rutafija.availability.AvailabilityPolicyTest",
+          "time": "0.0"
+        },
+        {
+          "name": "recoveryIsMeasuredFromConfirmedDetectionNotPreventiveReview",
+          "classname": "pe.rutafija.availability.AvailabilityPolicyTest",
+          "time": "0.001"
+        },
+        {
+          "name": "transientFailureNeedsConsecutiveSustainedEvidence",
+          "classname": "pe.rutafija.availability.AvailabilityPolicyTest",
+          "time": "0.001"
+        },
+        {
+          "name": "successfulSamplesDoNotInventAnIncidentOrAlert",
+          "classname": "pe.rutafija.availability.AvailabilityPolicyTest",
+          "time": "0.0"
+        }
+      ]
+    },
+    {
+      "name": "pe.rutafija.availability.AvailabilityHealthIntegrationTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "20.095",
+      "cases": [
+        {
+          "name": "readyRequiresActualDatabaseAndRevealsOnlyStatus",
+          "classname": "pe.rutafija.availability.AvailabilityHealthIntegrationTest",
+          "time": "0.492"
+        },
+        {
+          "name": "healthDoesNotExposeOrProbeMailAndDoesNotOpenBusinessEndpoints",
+          "classname": "pe.rutafija.availability.AvailabilityHealthIntegrationTest",
+          "time": "0.269"
+        },
+        {
+          "name": "refusingTrafficIs503WhileLivenessStillAllowsProcessDiagnosis",
+          "classname": "pe.rutafija.availability.AvailabilityHealthIntegrationTest",
+          "time": "0.063"
+        },
+        {
+          "name": "databaseDownContributorMakesReadiness503WithoutLeakingHostOrRestartingLiveness",
+          "classname": "pe.rutafija.availability.AvailabilityHealthIntegrationTest",
+          "time": "0.063"
+        }
+      ]
+    },
+    {
+      "name": "pe.rutafija.shared.config.SecurityConfigTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.496",
+      "cases": [
+        {
+          "name": "doesNotGrantAnAuthorityWhenTheTokenCarriesARetiredRole",
+          "classname": "pe.rutafija.shared.config.SecurityConfigTest",
+          "time": "0.103"
+        },
+        {
+          "name": "doesNotGrantAnAuthorityWhenTheSubjectNoLongerExists",
+          "classname": "pe.rutafija.shared.config.SecurityConfigTest",
+          "time": "0.002"
+        },
+        {
+          "name": "doesNotGrantAnAuthorityBeforeEmailVerification",
+          "classname": "pe.rutafija.shared.config.SecurityConfigTest",
+          "time": "0.002"
+        },
+        {
+          "name": "mapsTheCurrentDatabaseRoleToSpringAuthorities",
+          "classname": "pe.rutafija.shared.config.SecurityConfigTest",
+          "time": "0.016"
+        }
+      ]
+    },
+    {
+      "name": "pe.rutafija.operation.api.MobileOfflineRegistrationTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "2.39",
+      "cases": [
+        {
+          "name": "testProfileDoesNotRegisterOfflineByDefault",
+          "classname": "pe.rutafija.operation.api.MobileOfflineRegistrationTest",
+          "time": "2.176"
+        },
+        {
+          "name": "onlyExplicitLegacyRegressionConfigurationRegistersIt",
+          "classname": "pe.rutafija.operation.api.MobileOfflineRegistrationTest",
+          "time": "0.114"
+        },
+        {
+          "name": "ordinaryRuntimeCannotRegisterOfflineEvenWhenPropertyIsAccidentallyEnabled",
+          "classname": "pe.rutafija.operation.api.MobileOfflineRegistrationTest",
+          "time": "0.011"
+        }
+      ]
+    }
+  ],
+  "tests": 25,
+  "systemOutPropertiesAndEnvironmentExcluded": true,
+  "limits": [
+    "4 health cases use real Spring/MockMvc and PostgreSQL; DB-DOWN branch uses an explicit indicator double.",
+    "14 policy cases use synthetic clocks; not actual monitoring, delivered alerts or 24/7 coverage.",
+    "Offline registration checks use isolated contexts; do not enable the deployed application endpoint."
+  ]
+}

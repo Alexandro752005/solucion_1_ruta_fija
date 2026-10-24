@@ -11,7 +11,8 @@ public record TransportGroupResponse(
         String description,
         boolean active,
         Instant createdAt,
-        Instant updatedAt
+        Instant updatedAt,
+        long version
 ) {
     public static TransportGroupResponse from(TransportGroup group) {
         return new TransportGroupResponse(
@@ -20,7 +21,8 @@ public record TransportGroupResponse(
                 group.getDescription(),
                 group.isActive(),
                 group.getCreatedAt(),
-                group.getUpdatedAt()
+                group.getUpdatedAt(),
+                group.getVersion()
         );
     }
 }

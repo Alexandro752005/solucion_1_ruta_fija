@@ -1,0 +1,427 @@
+{
+  "constraints": {
+    "commonTargetDifferences": [
+      {
+        "schemaObject": "admin_activation.ck_admin_activation_replacement",
+        "restored": "CHECK (replaced_admin_user_id IS NULL AND verification_method IS NULL AND verification_reference IS NULL OR replaced_admin_user_id IS NOT NULL AND replaced_admin_user_id <> admin_user_id AND (verification_method::text = ANY (ARRAY['PRIOR_SECURE_CONTACT'::character varying::text, 'IN_PERSON'::character varying::text])) AND length(TRIM(BOTH FROM verification_reference)) > 0)",
+        "source": "CHECK (replaced_admin_user_id IS NULL AND verification_method IS NULL AND verification_reference IS NULL OR replaced_admin_user_id IS NOT NULL AND replaced_admin_user_id <> admin_user_id AND (verification_method::text = ANY (ARRAY['PRIOR_SECURE_CONTACT'::character varying, 'IN_PERSON'::character varying]::text[])) AND length(TRIM(BOTH FROM verification_reference)) > 0)"
+      },
+      {
+        "schemaObject": "admin_activation.ck_admin_activation_status",
+        "restored": "CHECK (status::text = ANY (ARRAY['PENDING_CLAIM'::character varying::text, 'IN_PROGRESS'::character varying::text, 'COMPLETED'::character varying::text]))",
+        "source": "CHECK (status::text = ANY (ARRAY['PENDING_CLAIM'::character varying, 'IN_PROGRESS'::character varying, 'COMPLETED'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "announcement_recipient.announcement_recipient_provenance_check",
+        "restored": "CHECK (provenance::text = ANY (ARRAY['PUBLISH_SNAPSHOT'::character varying::text, 'LEGACY_RECEIPT'::character varying::text]))",
+        "source": "CHECK (provenance::text = ANY (ARRAY['PUBLISH_SNAPSHOT'::character varying, 'LEGACY_RECEIPT'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "app_user.ck_app_user_role",
+        "restored": "CHECK (role::text = ANY (ARRAY['SUPER_ADMIN'::character varying::text, 'ADMIN'::character varying::text, 'CONDUCTOR'::character varying::text]))",
+        "source": "CHECK (role::text = ANY (ARRAY['SUPER_ADMIN'::character varying, 'ADMIN'::character varying, 'CONDUCTOR'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "assignment.ck_assignment_interruption",
+        "restored": "CHECK (status::text = 'INTERRUPTED'::text AND interrupted_at IS NOT NULL AND interruption_reason IS NOT NULL AND started_at IS NOT NULL AND interrupted_at >= started_at AND (interruption_reason::text = ANY (ARRAY['ACCIDENT_RISK'::character varying::text, 'UNSAFE_BREAKDOWN'::character varying::text, 'IMPOSSIBLE_SERVICE'::character varying::text])) OR status::text <> 'INTERRUPTED'::text AND interrupted_at IS NULL AND interruption_reason IS NULL)",
+        "source": "CHECK (status::text = 'INTERRUPTED'::text AND interrupted_at IS NOT NULL AND interruption_reason IS NOT NULL AND started_at IS NOT NULL AND interrupted_at >= started_at AND (interruption_reason::text = ANY (ARRAY['ACCIDENT_RISK'::character varying, 'UNSAFE_BREAKDOWN'::character varying, 'IMPOSSIBLE_SERVICE'::character varying]::text[])) OR status::text <> 'INTERRUPTED'::text AND interrupted_at IS NULL AND interruption_reason IS NULL)"
+      },
+      {
+        "schemaObject": "assignment.ck_assignment_response_lifecycle",
+        "restored": "CHECK (response_mode::text = 'ADMIN_DIRECT'::text AND (status::text = ANY (ARRAY['SCHEDULED'::character varying::text, 'EN_SERVICIO'::character varying::text, 'COMPLETED'::character varying::text, 'CANCELLED'::character varying::text])) AND response_deadline_at IS NULL AND accepted_at IS NULL AND rejected_at IS NULL AND rejection_reason IS NULL AND expired_at IS NULL OR response_mode::text = 'MOBILE_CONFIRMATION'::text AND response_deadline_at IS NOT NULL AND response_deadline_at <= scheduled_at AND (accepted_at IS NULL OR accepted_at <= response_deadline_at) AND (rejected_at IS NULL OR rejected_at <= response_deadline_at) AND (status::text = 'PENDING_RESPONSE'::text AND accepted_at IS NULL AND rejected_at IS NULL AND rejection_reason IS NULL AND expired_at IS NULL AND reserved_at IS NULL OR (status::text = ANY (ARRAY['SCHEDULED'::character varying::text, 'EN_SERVICIO'::character varying::text, 'COMPLETED'::character varying::text, 'INTERRUPTED'::character varying::text, 'TRANSFERRED'::character varying::text])) AND accepted_at IS NOT NULL AND rejected_at IS NULL AND rejection_reason IS NULL AND expired_at IS NULL AND reserved_at IS NOT NULL OR status::text = 'REJECTED'::text AND accepted_at IS NULL AND rejected_at IS NOT NULL AND expired_at IS NULL AND reserved_at IS NULL OR status::text = 'EXPIRED'::text AND accepted_at IS NULL AND rejected_at IS NULL AND rejection_reason IS NULL AND expired_at IS NOT NULL AND expired_at >= response_deadline_at AND reserved_at IS NULL OR status::text = 'CANCELLED'::text AND rejected_at IS NULL AND rejection_reason IS NULL AND expired_at IS NULL AND (accepted_at IS NULL AND reserved_at IS NULL OR accepted_at IS NOT NULL AND reserved_at IS NOT NULL)))",
+        "source": "CHECK (response_mode::text = 'ADMIN_DIRECT'::text AND (status::text = ANY (ARRAY['SCHEDULED'::character varying, 'EN_SERVICIO'::character varying, 'COMPLETED'::character varying, 'CANCELLED'::character varying]::text[])) AND response_deadline_at IS NULL AND accepted_at IS NULL AND rejected_at IS NULL AND rejection_reason IS NULL AND expired_at IS NULL OR response_mode::text = 'MOBILE_CONFIRMATION'::text AND response_deadline_at IS NOT NULL AND response_deadline_at <= scheduled_at AND (accepted_at IS NULL OR accepted_at <= response_deadline_at) AND (rejected_at IS NULL OR rejected_at <= response_deadline_at) AND (status::text = 'PENDING_RESPONSE'::text AND accepted_at IS NULL AND rejected_at IS NULL AND rejection_reason IS NULL AND expired_at IS NULL AND reserved_at IS NULL OR (status::text = ANY (ARRAY['SCHEDULED'::character varying, 'EN_SERVICIO'::character varying, 'COMPLETED'::character varying, 'INTERRUPTED'::character varying, 'TRANSFERRED'::character varying]::text[])) AND accepted_at IS NOT NULL AND rejected_at IS NULL AND rejection_reason IS NULL AND expired_at IS NULL AND reserved_at IS NOT NULL OR status::text = 'REJECTED'::text AND accepted_at IS NULL AND rejected_at IS NOT NULL AND expired_at IS NULL AND reserved_at IS NULL OR status::text = 'EXPIRED'::text AND accepted_at IS NULL AND rejected_at IS NULL AND rejection_reason IS NULL AND expired_at IS NOT NULL AND expired_at >= response_deadline_at AND reserved_at IS NULL OR status::text = 'CANCELLED'::text AND rejected_at IS NULL AND rejection_reason IS NULL AND expired_at IS NULL AND (accepted_at IS NULL AND reserved_at IS NULL OR accepted_at IS NOT NULL AND reserved_at IS NOT NULL)))"
+      },
+      {
+        "schemaObject": "assignment.ck_assignment_status",
+        "restored": "CHECK (status::text = ANY (ARRAY['PENDING_RESPONSE'::character varying::text, 'SCHEDULED'::character varying::text, 'EN_SERVICIO'::character varying::text, 'COMPLETED'::character varying::text, 'REJECTED'::character varying::text, 'CANCELLED'::character varying::text, 'EXPIRED'::character varying::text, 'INTERRUPTED'::character varying::text, 'TRANSFERRED'::character varying::text]))",
+        "source": "CHECK (status::text = ANY (ARRAY['PENDING_RESPONSE'::character varying, 'SCHEDULED'::character varying, 'EN_SERVICIO'::character varying, 'COMPLETED'::character varying, 'REJECTED'::character varying, 'CANCELLED'::character varying, 'EXPIRED'::character varying, 'INTERRUPTED'::character varying, 'TRANSFERRED'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "assignment.ck_assignment_terminal_times",
+        "restored": "CHECK ((status::text = ANY (ARRAY['PENDING_RESPONSE'::character varying::text, 'SCHEDULED'::character varying::text, 'EN_SERVICIO'::character varying::text, 'REJECTED'::character varying::text, 'EXPIRED'::character varying::text, 'INTERRUPTED'::character varying::text, 'TRANSFERRED'::character varying::text])) AND completed_at IS NULL AND cancelled_at IS NULL OR status::text = 'COMPLETED'::text AND completed_at IS NOT NULL AND cancelled_at IS NULL OR status::text = 'CANCELLED'::text AND cancelled_at IS NOT NULL AND completed_at IS NULL)",
+        "source": "CHECK ((status::text = ANY (ARRAY['PENDING_RESPONSE'::character varying, 'SCHEDULED'::character varying, 'EN_SERVICIO'::character varying, 'REJECTED'::character varying, 'EXPIRED'::character varying, 'INTERRUPTED'::character varying, 'TRANSFERRED'::character varying]::text[])) AND completed_at IS NULL AND cancelled_at IS NULL OR status::text = 'COMPLETED'::text AND completed_at IS NOT NULL AND cancelled_at IS NULL OR status::text = 'CANCELLED'::text AND cancelled_at IS NOT NULL AND completed_at IS NULL)"
+      },
+      {
+        "schemaObject": "assignment.ex_assignment_driver_schedule_no_overlap",
+        "restored": "EXCLUDE USING gist (driver_id WITH =, tstzrange(reservation_starts_at, reservation_ends_at, '[)'::text) WITH &&) WHERE (status::text = ANY (ARRAY['PENDING_RESPONSE'::character varying::text, 'SCHEDULED'::character varying::text, 'EN_SERVICIO'::character varying::text]))",
+        "source": "EXCLUDE USING gist (driver_id WITH =, tstzrange(reservation_starts_at, reservation_ends_at, '[)'::text) WITH &&) WHERE (status::text = ANY (ARRAY['PENDING_RESPONSE'::character varying, 'SCHEDULED'::character varying, 'EN_SERVICIO'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "assignment.ex_assignment_vehicle_schedule_no_overlap",
+        "restored": "EXCLUDE USING gist (vehicle_id WITH =, tstzrange(reservation_starts_at, reservation_ends_at, '[)'::text) WITH &&) WHERE (status::text = ANY (ARRAY['PENDING_RESPONSE'::character varying::text, 'SCHEDULED'::character varying::text, 'EN_SERVICIO'::character varying::text]))",
+        "source": "EXCLUDE USING gist (vehicle_id WITH =, tstzrange(reservation_starts_at, reservation_ends_at, '[)'::text) WITH &&) WHERE (status::text = ANY (ARRAY['PENDING_RESPONSE'::character varying, 'SCHEDULED'::character varying, 'EN_SERVICIO'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "assignment_group_snapshot.assignment_group_snapshot_source_check",
+        "restored": "CHECK (source::text = ANY (ARRAY['CREATION_SNAPSHOT'::character varying::text, 'LEGACY_CURRENT_REFERENCE'::character varying::text]))",
+        "source": "CHECK (source::text = ANY (ARRAY['CREATION_SNAPSHOT'::character varying, 'LEGACY_CURRENT_REFERENCE'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "assignment_route_declaration.assignment_route_declaration_terminal_result_check",
+        "restored": "CHECK (terminal_result::text = ANY (ARRAY['CORROBORATED'::character varying::text, 'DISCREPANCY'::character varying::text, 'NOT_CORROBORATED_NO_POINT'::character varying::text, 'NOT_CORROBORATED_STALE_OR_IMPRECISE'::character varying::text, 'NOT_CORROBORATED_TERMINAL_UNCONFIGURED'::character varying::text]))",
+        "source": "CHECK (terminal_result::text = ANY (ARRAY['CORROBORATED'::character varying, 'DISCREPANCY'::character varying, 'NOT_CORROBORATED_NO_POINT'::character varying, 'NOT_CORROBORATED_STALE_OR_IMPRECISE'::character varying, 'NOT_CORROBORATED_TERMINAL_UNCONFIGURED'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "conductor_document_revision.ck_document_actor",
+        "restored": "CHECK ((actor_kind::text = ANY (ARRAY['ADMIN'::character varying::text, 'APPLICANT'::character varying::text])) AND (actor_kind::text <> 'APPLICANT'::text OR reviewer_id IS NULL AND (result::text = ANY (ARRAY['PENDING'::character varying::text, 'POR_CONTRASTAR'::character varying::text]))))",
+        "source": "CHECK ((actor_kind::text = ANY (ARRAY['ADMIN'::character varying, 'APPLICANT'::character varying]::text[])) AND (actor_kind::text <> 'APPLICANT'::text OR reviewer_id IS NULL AND (result::text = ANY (ARRAY['PENDING'::character varying, 'POR_CONTRASTAR'::character varying]::text[]))))"
+      },
+      {
+        "schemaObject": "conductor_document_revision.ck_document_applicability",
+        "restored": "CHECK (applicability::text = ANY (ARRAY['CONFIRMED'::character varying::text, 'POR_CONTRASTAR'::character varying::text]))",
+        "source": "CHECK (applicability::text = ANY (ARRAY['CONFIRMED'::character varying, 'POR_CONTRASTAR'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "conductor_document_revision.ck_document_expiry",
+        "restored": "CHECK ((expiry_mode::text = ANY (ARRAY['DATED'::character varying::text, 'NO_EXPIRY'::character varying::text, 'UNKNOWN'::character varying::text])) AND (expiry_mode::text = 'DATED'::text AND valid_until IS NOT NULL OR expiry_mode::text <> 'DATED'::text AND valid_until IS NULL))",
+        "source": "CHECK ((expiry_mode::text = ANY (ARRAY['DATED'::character varying, 'NO_EXPIRY'::character varying, 'UNKNOWN'::character varying]::text[])) AND (expiry_mode::text = 'DATED'::text AND valid_until IS NOT NULL OR expiry_mode::text <> 'DATED'::text AND valid_until IS NULL))"
+      },
+      {
+        "schemaObject": "conductor_document_revision.ck_document_requirement",
+        "restored": "CHECK (requirement_id::text = ANY (ARRAY['CON-01'::character varying::text, 'CON-02'::character varying::text, 'CON-03'::character varying::text, 'CON-04'::character varying::text, 'CON-05'::character varying::text]))",
+        "source": "CHECK (requirement_id::text = ANY (ARRAY['CON-01'::character varying, 'CON-02'::character varying, 'CON-03'::character varying, 'CON-04'::character varying, 'CON-05'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "conductor_document_revision.ck_document_result",
+        "restored": "CHECK (result::text = ANY (ARRAY['PENDING'::character varying::text, 'CONFORME'::character varying::text, 'OBSERVADO'::character varying::text, 'NO_APLICA_JUSTIFICADO'::character varying::text, 'POR_CONTRASTAR'::character varying::text]))",
+        "source": "CHECK (result::text = ANY (ARRAY['PENDING'::character varying, 'CONFORME'::character varying, 'OBSERVADO'::character varying, 'NO_APLICA_JUSTIFICADO'::character varying, 'POR_CONTRASTAR'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "conductor_onboarding_invitation_guard.ck_onboarding_invitation_guard_type",
+        "restored": "CHECK (guard_type::text = ANY (ARRAY['EMAIL'::character varying::text, 'ORIGIN'::character varying::text]))",
+        "source": "CHECK (guard_type::text = ANY (ARRAY['EMAIL'::character varying, 'ORIGIN'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "conductor_onboarding_request.ck_onboarding_modality",
+        "restored": "CHECK (modality IS NULL OR (modality::text = ANY (ARRAY['TAXI'::character varying::text, 'COLECTIVO'::character varying::text])))",
+        "source": "CHECK (modality IS NULL OR (modality::text = ANY (ARRAY['TAXI'::character varying, 'COLECTIVO'::character varying]::text[])))"
+      },
+      {
+        "schemaObject": "conductor_onboarding_request.ck_onboarding_rejection_kind",
+        "restored": "CHECK (rejection_kind IS NULL OR (rejection_kind::text = ANY (ARRAY['GENERAL'::character varying::text, 'REITERATION'::character varying::text])))",
+        "source": "CHECK (rejection_kind IS NULL OR (rejection_kind::text = ANY (ARRAY['GENERAL'::character varying, 'REITERATION'::character varying]::text[])))"
+      },
+      {
+        "schemaObject": "conductor_onboarding_request.ck_onboarding_request_status",
+        "restored": "CHECK (status::text = ANY (ARRAY['PENDING_REVIEW'::character varying::text, 'RETURNED'::character varying::text, 'APPROVED'::character varying::text, 'REJECTED'::character varying::text]))",
+        "source": "CHECK (status::text = ANY (ARRAY['PENDING_REVIEW'::character varying, 'RETURNED'::character varying, 'APPROVED'::character varying, 'REJECTED'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "conductor_onboarding_review_event.ck_onboarding_event_actor",
+        "restored": "CHECK (actor_kind::text = ANY (ARRAY['ADMIN'::character varying::text, 'APPLICANT'::character varying::text]))",
+        "source": "CHECK (actor_kind::text = ANY (ARRAY['ADMIN'::character varying, 'APPLICANT'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "conductor_recovery_request.ck_conductor_recovery_evidence_method",
+        "restored": "CHECK (evidence_method::text = ANY (ARRAY['PRIOR_SECURE_CONTACT'::character varying::text, 'IN_PERSON'::character varying::text]))",
+        "source": "CHECK (evidence_method::text = ANY (ARRAY['PRIOR_SECURE_CONTACT'::character varying, 'IN_PERSON'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "conductor_recovery_request.ck_conductor_recovery_status",
+        "restored": "CHECK (status::text = ANY (ARRAY['OTP_PENDING'::character varying::text, 'PASSWORD_RESET_PENDING'::character varying::text, 'COMPLETED'::character varying::text, 'CANCELLED'::character varying::text]))",
+        "source": "CHECK (status::text = ANY (ARRAY['OTP_PENDING'::character varying, 'PASSWORD_RESET_PENDING'::character varying, 'COMPLETED'::character varying, 'CANCELLED'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "driver.ck_driver_availability_status",
+        "restored": "CHECK (availability_status::text = ANY (ARRAY['DISPONIBLE'::character varying::text, 'RESERVADO'::character varying::text, 'EN_SERVICIO'::character varying::text, 'DESCANSO'::character varying::text, 'NO_DISPONIBLE'::character varying::text, 'ATENCION'::character varying::text]))",
+        "source": "CHECK (availability_status::text = ANY (ARRAY['DISPONIBLE'::character varying, 'RESERVADO'::character varying, 'EN_SERVICIO'::character varying, 'DESCANSO'::character varying, 'NO_DISPONIBLE'::character varying, 'ATENCION'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "driver.ck_driver_declared_availability",
+        "restored": "CHECK (declared_availability_status IS NULL AND declared_availability_at IS NULL OR declared_availability_status IS NOT NULL AND (declared_availability_status::text = ANY (ARRAY['DISPONIBLE'::character varying::text, 'DESCANSO'::character varying::text, 'NO_DISPONIBLE'::character varying::text])) AND declared_availability_at IS NOT NULL)",
+        "source": "CHECK (declared_availability_status IS NULL AND declared_availability_at IS NULL OR declared_availability_status IS NOT NULL AND (declared_availability_status::text = ANY (ARRAY['DISPONIBLE'::character varying, 'DESCANSO'::character varying, 'NO_DISPONIBLE'::character varying]::text[])) AND declared_availability_at IS NOT NULL)"
+      },
+      {
+        "schemaObject": "driver_unit_period.driver_unit_period_kind_check",
+        "restored": "CHECK (kind::text = ANY (ARRAY['OWN'::character varying::text, 'COMPANY'::character varying::text]))",
+        "source": "CHECK (kind::text = ANY (ARRAY['OWN'::character varying, 'COMPANY'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "driver_unit_period.driver_unit_period_status_check",
+        "restored": "CHECK (status::text = ANY (ARRAY['AUTHORIZED'::character varying::text, 'REVOKED'::character varying::text]))",
+        "source": "CHECK (status::text = ANY (ARRAY['AUTHORIZED'::character varying, 'REVOKED'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "driver_unit_request.driver_unit_request_kind_check",
+        "restored": "CHECK (kind::text = ANY (ARRAY['OWN'::character varying::text, 'COMPANY'::character varying::text]))",
+        "source": "CHECK (kind::text = ANY (ARRAY['OWN'::character varying, 'COMPANY'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "driver_unit_request.driver_unit_request_status_check",
+        "restored": "CHECK (status::text = ANY (ARRAY['PENDING_REVIEW'::character varying::text, 'APPROVED'::character varying::text, 'REJECTED'::character varying::text]))",
+        "source": "CHECK (status::text = ANY (ARRAY['PENDING_REVIEW'::character varying, 'APPROVED'::character varying, 'REJECTED'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "email_otp_challenge.ck_email_otp_purpose_reference",
+        "restored": "CHECK (purpose::text = 'LOGIN'::text AND purpose_reference_id IS NULL OR (purpose::text = ANY (ARRAY['SUPER_ADMIN_RECOVERY'::character varying::text, 'CONDUCTOR_RECOVERY'::character varying::text, 'ADMIN_ACTIVATION'::character varying::text])) AND purpose_reference_id IS NOT NULL)",
+        "source": "CHECK (purpose::text = 'LOGIN'::text AND purpose_reference_id IS NULL OR (purpose::text = ANY (ARRAY['SUPER_ADMIN_RECOVERY'::character varying, 'CONDUCTOR_RECOVERY'::character varying, 'ADMIN_ACTIVATION'::character varying]::text[])) AND purpose_reference_id IS NOT NULL)"
+      },
+      {
+        "schemaObject": "gps_access_request.gps_access_request_status_check",
+        "restored": "CHECK (status::text = ANY (ARRAY['PENDING'::character varying::text, 'APPROVED'::character varying::text, 'NO_DATA'::character varying::text, 'DENIED'::character varying::text]))",
+        "source": "CHECK (status::text = ANY (ARRAY['PENDING'::character varying, 'APPROVED'::character varying, 'NO_DATA'::character varying, 'DENIED'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "gps_incident_evidence.gps_incident_evidence_justification_check",
+        "restored": "CHECK (justification::text = ANY (ARRAY['SAFETY_REVIEW'::character varying::text, 'SERVICE_DISCREPANCY'::character varying::text]))",
+        "source": "CHECK (justification::text = ANY (ARRAY['SAFETY_REVIEW'::character varying, 'SERVICE_DISCREPANCY'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "group_driver_membership.group_driver_membership_source_check",
+        "restored": "CHECK (source::text = ANY (ARRAY['LEGACY_PRIMARY'::character varying::text, 'PRIMARY_COMPATIBILITY'::character varying::text, 'ADMIN'::character varying::text]))",
+        "source": "CHECK (source::text = ANY (ARRAY['LEGACY_PRIMARY'::character varying, 'PRIMARY_COMPATIBILITY'::character varying, 'ADMIN'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "group_membership_operation.group_membership_operation_resource_kind_check",
+        "restored": "CHECK (resource_kind::text = ANY (ARRAY['DRIVER'::character varying::text, 'VEHICLE'::character varying::text]))",
+        "source": "CHECK (resource_kind::text = ANY (ARRAY['DRIVER'::character varying, 'VEHICLE'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "incident.ck_incident_category",
+        "restored": "CHECK (category::text = ANY (ARRAY['AVERIA'::character varying::text, 'ACCIDENTE'::character varying::text, 'RETRASO'::character varying::text, 'LICENCIA_VENCIDA'::character varying::text, 'IMPOSIBILIDAD_SERVICIO'::character varying::text, 'UBICACION_NO_CORROBORADA'::character varying::text, 'RIESGO_SEGURIDAD'::character varying::text, 'ACCESO_PARADA'::character varying::text, 'FALLO_PLATAFORMA'::character varying::text, 'OTRO'::character varying::text]))",
+        "source": "CHECK (category::text = ANY (ARRAY['AVERIA'::character varying, 'ACCIDENTE'::character varying, 'RETRASO'::character varying, 'LICENCIA_VENCIDA'::character varying, 'IMPOSIBILIDAD_SERVICIO'::character varying, 'UBICACION_NO_CORROBORADA'::character varying, 'RIESGO_SEGURIDAD'::character varying, 'ACCESO_PARADA'::character varying, 'FALLO_PLATAFORMA'::character varying, 'OTRO'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "incident.ck_incident_previous_pair",
+        "restored": "CHECK (previous_incident_id IS NULL AND relation_reason IS NULL OR previous_incident_id IS NOT NULL AND previous_incident_id <> id AND (relation_reason::text = ANY (ARRAY['RECURRENCE'::character varying::text, 'CLOSURE_ERROR'::character varying::text])))",
+        "source": "CHECK (previous_incident_id IS NULL AND relation_reason IS NULL OR previous_incident_id IS NOT NULL AND previous_incident_id <> id AND (relation_reason::text = ANY (ARRAY['RECURRENCE'::character varying, 'CLOSURE_ERROR'::character varying]::text[])))"
+      },
+      {
+        "schemaObject": "incident.ck_incident_reporter_origin",
+        "restored": "CHECK (source::text = 'SYSTEM'::text AND reported_by IS NULL OR (source::text = ANY (ARRAY['CRM_WEB'::character varying::text, 'MOBILE_APP'::character varying::text])) AND reported_by IS NOT NULL)",
+        "source": "CHECK (source::text = 'SYSTEM'::text AND reported_by IS NULL OR (source::text = ANY (ARRAY['CRM_WEB'::character varying, 'MOBILE_APP'::character varying]::text[])) AND reported_by IS NOT NULL)"
+      },
+      {
+        "schemaObject": "incident.ck_incident_severity",
+        "restored": "CHECK (severity::text = ANY (ARRAY['UNASSESSED'::character varying::text, 'LOW'::character varying::text, 'MEDIUM'::character varying::text, 'HIGH'::character varying::text, 'CRITICAL'::character varying::text]))",
+        "source": "CHECK (severity::text = ANY (ARRAY['UNASSESSED'::character varying, 'LOW'::character varying, 'MEDIUM'::character varying, 'HIGH'::character varying, 'CRITICAL'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "incident.ck_incident_source",
+        "restored": "CHECK (source::text = ANY (ARRAY['CRM_WEB'::character varying::text, 'MOBILE_APP'::character varying::text, 'SYSTEM'::character varying::text]))",
+        "source": "CHECK (source::text = ANY (ARRAY['CRM_WEB'::character varying, 'MOBILE_APP'::character varying, 'SYSTEM'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "incident.ck_incident_status",
+        "restored": "CHECK (status::text = ANY (ARRAY['OPEN'::character varying::text, 'FOLLOW_UP'::character varying::text, 'RESOLVED'::character varying::text, 'CLOSED_BY_DRIVER'::character varying::text]))",
+        "source": "CHECK (status::text = ANY (ARRAY['OPEN'::character varying, 'FOLLOW_UP'::character varying, 'RESOLVED'::character varying, 'CLOSED_BY_DRIVER'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "incident_action.incident_action_kind_check",
+        "restored": "CHECK (kind::text = ANY (ARRAY['REPORT'::character varying::text, 'RESPONSIBILITY'::character varying::text, 'ASSESSMENT'::character varying::text, 'FOLLOW_UP'::character varying::text, 'INFORMATION'::character varying::text, 'RESOLUTION'::character varying::text, 'DRIVER_CLOSE'::character varying::text]))",
+        "source": "CHECK (kind::text = ANY (ARRAY['REPORT'::character varying, 'RESPONSIBILITY'::character varying, 'ASSESSMENT'::character varying, 'FOLLOW_UP'::character varying, 'INFORMATION'::character varying, 'RESOLUTION'::character varying, 'DRIVER_CLOSE'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "mobile_command_receipt.ck_mobile_command_receipt_outcome",
+        "restored": "CHECK (result_status::text = 'APPLIED'::text AND error_code IS NULL OR (result_status::text = ANY (ARRAY['REJECTED'::character varying::text, 'CONFLICT'::character varying::text])) AND error_code IS NOT NULL)",
+        "source": "CHECK (result_status::text = 'APPLIED'::text AND error_code IS NULL OR (result_status::text = ANY (ARRAY['REJECTED'::character varying, 'CONFLICT'::character varying]::text[])) AND error_code IS NOT NULL)"
+      },
+      {
+        "schemaObject": "mobile_command_receipt.ck_mobile_command_receipt_result",
+        "restored": "CHECK (result_status::text = ANY (ARRAY['APPLIED'::character varying::text, 'REJECTED'::character varying::text, 'CONFLICT'::character varying::text]))",
+        "source": "CHECK (result_status::text = ANY (ARRAY['APPLIED'::character varying, 'REJECTED'::character varying, 'CONFLICT'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "mobile_command_receipt.ck_mobile_command_receipt_type",
+        "restored": "CHECK (command_type::text = ANY (ARRAY['AVAILABILITY_CHANGE'::character varying::text, 'ASSIGNMENT_ACCEPT'::character varying::text, 'ASSIGNMENT_REJECT'::character varying::text, 'ASSIGNMENT_START'::character varying::text, 'ASSIGNMENT_COMPLETE'::character varying::text, 'ASSIGNMENT_INTERRUPT'::character varying::text, 'ASSIGNMENT_ASSUME_HANDOVER'::character varying::text]))",
+        "source": "CHECK (command_type::text = ANY (ARRAY['AVAILABILITY_CHANGE'::character varying, 'ASSIGNMENT_ACCEPT'::character varying, 'ASSIGNMENT_REJECT'::character varying, 'ASSIGNMENT_START'::character varying, 'ASSIGNMENT_COMPLETE'::character varying, 'ASSIGNMENT_INTERRUPT'::character varying, 'ASSIGNMENT_ASSUME_HANDOVER'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "mobile_preferences.mobile_preferences_text_size_check",
+        "restored": "CHECK (text_size::text = ANY (ARRAY['NORMAL'::character varying::text, 'LARGE'::character varying::text, 'EXTRA_LARGE'::character varying::text]))",
+        "source": "CHECK (text_size::text = ANY (ARRAY['NORMAL'::character varying, 'LARGE'::character varying, 'EXTRA_LARGE'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "operation_notice.operation_notice_external_status_check",
+        "restored": "CHECK (external_status::text = ANY (ARRAY['NOT_REQUIRED'::character varying::text, 'NOT_CONFIGURED'::character varying::text, 'PROVIDER_ACCEPTED'::character varying::text, 'FAILED'::character varying::text]))",
+        "source": "CHECK (external_status::text = ANY (ARRAY['NOT_REQUIRED'::character varying, 'NOT_CONFIGURED'::character varying, 'PROVIDER_ACCEPTED'::character varying, 'FAILED'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "organization.ck_organization_status",
+        "restored": "CHECK (status::text = ANY (ARRAY['ACTIVE'::character varying::text, 'SUSPENDED'::character varying::text, 'INACTIVE'::character varying::text]))",
+        "source": "CHECK (status::text = ANY (ARRAY['ACTIVE'::character varying, 'SUSPENDED'::character varying, 'INACTIVE'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "person_identity.person_identity_review_method_check",
+        "restored": "CHECK (review_method::text = ANY (ARRAY['OWNER_SELF_REVIEW'::character varying::text, 'IN_PERSON'::character varying::text, 'PRIOR_SECURE_CONTACT'::character varying::text, 'CONDUCTOR_DOSSIER'::character varying::text]))",
+        "source": "CHECK (review_method::text = ANY (ARRAY['OWNER_SELF_REVIEW'::character varying, 'IN_PERSON'::character varying, 'PRIOR_SECURE_CONTACT'::character varying, 'CONDUCTOR_DOSSIER'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "pilot_account_creation.pilot_account_creation_role_check",
+        "restored": "CHECK (role::text = ANY (ARRAY['SUPER_ADMIN'::character varying::text, 'ADMIN'::character varying::text, 'CONDUCTOR'::character varying::text]))",
+        "source": "CHECK (role::text = ANY (ARRAY['SUPER_ADMIN'::character varying, 'ADMIN'::character varying, 'CONDUCTOR'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "qualification_review.qualification_review_applicability_check",
+        "restored": "CHECK (applicability::text = ANY (ARRAY['CONFIRMED'::character varying::text, 'POR_CONTRASTAR'::character varying::text]))",
+        "source": "CHECK (applicability::text = ANY (ARRAY['CONFIRMED'::character varying, 'POR_CONTRASTAR'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "qualification_review.qualification_review_expiry_mode_check",
+        "restored": "CHECK (expiry_mode::text = ANY (ARRAY['DATED'::character varying::text, 'NO_EXPIRY'::character varying::text, 'UNKNOWN'::character varying::text]))",
+        "source": "CHECK (expiry_mode::text = ANY (ARRAY['DATED'::character varying, 'NO_EXPIRY'::character varying, 'UNKNOWN'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "qualification_review.qualification_review_result_check",
+        "restored": "CHECK (result::text = ANY (ARRAY['CONFORME'::character varying::text, 'OBSERVADO'::character varying::text, 'NO_APLICA_JUSTIFICADO'::character varying::text, 'POR_CONTRASTAR'::character varying::text]))",
+        "source": "CHECK (result::text = ANY (ARRAY['CONFORME'::character varying, 'OBSERVADO'::character varying, 'NO_APLICA_JUSTIFICADO'::character varying, 'POR_CONTRASTAR'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "qualification_review.qualification_review_scope_check",
+        "restored": "CHECK (scope::text = ANY (ARRAY['VEHICLE'::character varying::text, 'COMPANY'::character varying::text]))",
+        "source": "CHECK (scope::text = ANY (ARRAY['VEHICLE'::character varying, 'COMPANY'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "qualification_service_attention.qualification_service_attention_kind_check",
+        "restored": "CHECK (kind::text = ANY (ARRAY['PENDING_REASSIGNMENT'::character varying::text, 'SAFE_HANDOVER_REQUIRED'::character varying::text]))",
+        "source": "CHECK (kind::text = ANY (ARRAY['PENDING_REASSIGNMENT'::character varying, 'SAFE_HANDOVER_REQUIRED'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "qualification_service_attention.qualification_service_attention_status_check",
+        "restored": "CHECK (status::text = ANY (ARRAY['OPEN'::character varying::text, 'RESOLVED'::character varying::text]))",
+        "source": "CHECK (status::text = ANY (ARRAY['OPEN'::character varying, 'RESOLVED'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "report_emission_series.report_emission_series_scope_check",
+        "restored": "CHECK (scope::text = ANY (ARRAY['ORGANIZATION'::character varying::text, 'OWN_PARTICIPATION'::character varying::text]))",
+        "source": "CHECK (scope::text = ANY (ARRAY['ORGANIZATION'::character varying, 'OWN_PARTICIPATION'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "retention_controlled_copy.retention_controlled_copy_source_category_check",
+        "restored": "CHECK (source_category::text = ANY (ARRAY['OPERATIONAL_AUDIT'::character varying::text, 'REPORT_EMISSION'::character varying::text]))",
+        "source": "CHECK (source_category::text = ANY (ARRAY['OPERATIONAL_AUDIT'::character varying, 'REPORT_EMISSION'::character varying, 'DOCUMENTARY_CASE'::character varying, 'ADMIN_CONDUCTOR_PII'::character varying, 'PERSON_HMAC_LINKS'::character varying, 'TERMS_ACCEPTANCE'::character varying, 'RECOVERY_CASE_MINIMUM'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "retention_copy_evidence.retention_copy_evidence_action_check",
+        "restored": "CHECK (action::text = ANY (ARRAY['RETIRED'::character varying::text, 'REAPPLIED_BEFORE_ACCESS'::character varying::text]))",
+        "source": "CHECK (action::text = ANY (ARRAY['RETIRED'::character varying, 'REAPPLIED_BEFORE_ACCESS'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "retention_plan.retention_plan_category_check",
+        "restored": "CHECK (category::text = ANY (ARRAY['OPERATIONAL_AUDIT'::character varying::text, 'REPORT_EMISSION'::character varying::text]))",
+        "source": "CHECK (category::text = ANY (ARRAY['OPERATIONAL_AUDIT'::character varying, 'REPORT_EMISSION'::character varying, 'DOCUMENTARY_CASE'::character varying, 'ADMIN_CONDUCTOR_PII'::character varying, 'PERSON_HMAC_LINKS'::character varying, 'TERMS_ACCEPTANCE'::character varying, 'RECOVERY_CASE_MINIMUM'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "retention_policy_catalog.retention_policy_catalog_execution_capability_check",
+        "restored": "CHECK (execution_capability::text = ANY (ARRAY['EXACT_PLAN'::character varying::text, 'EXISTING_GPS_PURGE'::character varying::text, 'INVENTORIED_NOT_IMPLEMENTED'::character varying::text, 'EXCLUDED'::character varying::text]))",
+        "source": "CHECK (execution_capability::text = ANY (ARRAY['EXACT_PLAN'::character varying, 'EXISTING_GPS_PURGE'::character varying, 'INVENTORIED_NOT_IMPLEMENTED'::character varying, 'EXCLUDED'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "route_operation.route_operation_action_check",
+        "restored": "CHECK (action::text = ANY (ARRAY['CREATE'::character varying::text, 'REVISE'::character varying::text, 'STATUS'::character varying::text, 'ASSIGNMENT_CHANGE'::character varying::text]))",
+        "source": "CHECK (action::text = ANY (ARRAY['CREATE'::character varying, 'REVISE'::character varying, 'STATUS'::character varying, 'ASSIGNMENT_CHANGE'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "scheduled_service.scheduled_service_status_check",
+        "restored": "CHECK (status::text = ANY (ARRAY['PENDING_REASSIGNMENT'::character varying::text, 'PENDING_RESPONSE'::character varying::text, 'CONFIRMED'::character varying::text, 'IN_SERVICE'::character varying::text, 'COMPLETED'::character varying::text, 'CANCELLED'::character varying::text, 'INTERRUPTED'::character varying::text]))",
+        "source": "CHECK (status::text = ANY (ARRAY['PENDING_REASSIGNMENT'::character varying, 'PENDING_RESPONSE'::character varying, 'CONFIRMED'::character varying, 'IN_SERVICE'::character varying, 'COMPLETED'::character varying, 'CANCELLED'::character varying, 'INTERRUPTED'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "scheduled_service_operation.scheduled_service_operation_action_check",
+        "restored": "CHECK (action::text = ANY (ARRAY['REOFFER'::character varying::text, 'CANCEL_SERVICE'::character varying::text]))",
+        "source": "CHECK (action::text = ANY (ARRAY['REOFFER'::character varying, 'CANCEL_SERVICE'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "service_attention.service_attention_reason_check",
+        "restored": "CHECK (reason::text = ANY (ARRAY['ACCIDENT_RISK'::character varying::text, 'UNSAFE_BREAKDOWN'::character varying::text, 'IMPOSSIBLE_SERVICE'::character varying::text]))",
+        "source": "CHECK (reason::text = ANY (ARRAY['ACCIDENT_RISK'::character varying, 'UNSAFE_BREAKDOWN'::character varying, 'IMPOSSIBLE_SERVICE'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "service_attention.service_attention_source_check",
+        "restored": "CHECK (source::text = ANY (ARRAY['CONDUCTOR'::character varying::text, 'ADMIN_VERIFIED_REPORT'::character varying::text]))",
+        "source": "CHECK (source::text = ANY (ARRAY['CONDUCTOR'::character varying, 'ADMIN_VERIFIED_REPORT'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "service_attention_release.service_attention_release_disposition_check",
+        "restored": "CHECK (disposition::text = ANY (ARRAY['ELIGIBILITY_RECHECKED'::character varying::text, 'READY'::character varying::text, 'WITHDRAWN'::character varying::text]))",
+        "source": "CHECK (disposition::text = ANY (ARRAY['ELIGIBILITY_RECHECKED'::character varying, 'READY'::character varying, 'WITHDRAWN'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "service_attention_release.service_attention_release_resource_kind_check",
+        "restored": "CHECK (resource_kind::text = ANY (ARRAY['DRIVER'::character varying::text, 'VEHICLE'::character varying::text]))",
+        "source": "CHECK (resource_kind::text = ANY (ARRAY['DRIVER'::character varying, 'VEHICLE'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "service_execution_segment.service_execution_segment_end_kind_check",
+        "restored": "CHECK (end_kind::text = ANY (ARRAY['COMPLETED'::character varying::text, 'INTERRUPTED'::character varying::text, 'TRANSFERRED'::character varying::text]))",
+        "source": "CHECK (end_kind::text = ANY (ARRAY['COMPLETED'::character varying, 'INTERRUPTED'::character varying, 'TRANSFERRED'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "service_handover_resolution.service_handover_resolution_kind_check",
+        "restored": "CHECK (kind::text = ANY (ARRAY['ASSUMED'::character varying::text, 'WITHDRAWN'::character varying::text, 'SERVICE_ENDED'::character varying::text]))",
+        "source": "CHECK (kind::text = ANY (ARRAY['ASSUMED'::character varying, 'WITHDRAWN'::character varying, 'SERVICE_ENDED'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "vehicle.ck_vehicle_status",
+        "restored": "CHECK (status::text = ANY (ARRAY['DISPONIBLE'::character varying::text, 'EN_SERVICIO'::character varying::text, 'MANTENIMIENTO'::character varying::text, 'INACTIVO'::character varying::text, 'ATENCION'::character varying::text]))",
+        "source": "CHECK (status::text = ANY (ARRAY['DISPONIBLE'::character varying, 'EN_SERVICIO'::character varying, 'MANTENIMIENTO'::character varying, 'INACTIVO'::character varying, 'ATENCION'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "vehicle_maintenance.vehicle_maintenance_kind_check",
+        "restored": "CHECK (kind::text = ANY (ARRAY['PREVENTIVE'::character varying::text, 'URGENT'::character varying::text]))",
+        "source": "CHECK (kind::text = ANY (ARRAY['PREVENTIVE'::character varying, 'URGENT'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "vehicle_maintenance.vehicle_maintenance_status_check",
+        "restored": "CHECK (status::text = ANY (ARRAY['OPEN'::character varying::text, 'WORK_COMPLETED'::character varying::text, 'RETURNED'::character varying::text, 'CANCELLED'::character varying::text]))",
+        "source": "CHECK (status::text = ANY (ARRAY['OPEN'::character varying, 'WORK_COMPLETED'::character varying, 'RETURNED'::character varying, 'CANCELLED'::character varying]::text[]))"
+      },
+      {
+        "schemaObject": "vehicle_maintenance_operation.vehicle_maintenance_operation_action_check",
+        "restored": "CHECK (action::text = ANY (ARRAY['CREATE_PREVENTIVE'::character varying::text, 'CREATE_URGENT'::character varying::text, 'WORK_COMPLETED'::character varying::text, 'RETURN_AUTHORIZED'::character varying::text, 'CANCELLED'::character varying::text]))",
+        "source": "CHECK (action::text = ANY (ARRAY['CREATE_PREVENTIVE'::character varying, 'CREATE_URGENT'::character varying, 'WORK_COMPLETED'::character varying, 'RETURN_AUTHORIZED'::character varying, 'CANCELLED'::character varying]::text[]))"
+      }
+    ],
+    "targetObjectCount": 659,
+    "sourceObjectCount": 686
+  },
+  "indexes": {
+    "commonTargetDifferences": [
+      {
+        "schemaObject": "ex_assignment_driver_schedule_no_overlap",
+        "restored": "CREATE INDEX ex_assignment_driver_schedule_no_overlap ON public.assignment USING gist (driver_id, tstzrange(reservation_starts_at, reservation_ends_at, '[)'::text)) WHERE ((status)::text = ANY (ARRAY[('PENDING_RESPONSE'::character varying)::text, ('SCHEDULED'::character varying)::text, ('EN_SERVICIO'::character varying)::text]))",
+        "source": "CREATE INDEX ex_assignment_driver_schedule_no_overlap ON public.assignment USING gist (driver_id, tstzrange(reservation_starts_at, reservation_ends_at, '[)'::text)) WHERE ((status)::text = ANY ((ARRAY['PENDING_RESPONSE'::character varying, 'SCHEDULED'::character varying, 'EN_SERVICIO'::character varying])::text[]))"
+      },
+      {
+        "schemaObject": "ex_assignment_vehicle_schedule_no_overlap",
+        "restored": "CREATE INDEX ex_assignment_vehicle_schedule_no_overlap ON public.assignment USING gist (vehicle_id, tstzrange(reservation_starts_at, reservation_ends_at, '[)'::text)) WHERE ((status)::text = ANY (ARRAY[('PENDING_RESPONSE'::character varying)::text, ('SCHEDULED'::character varying)::text, ('EN_SERVICIO'::character varying)::text]))",
+        "source": "CREATE INDEX ex_assignment_vehicle_schedule_no_overlap ON public.assignment USING gist (vehicle_id, tstzrange(reservation_starts_at, reservation_ends_at, '[)'::text)) WHERE ((status)::text = ANY ((ARRAY['PENDING_RESPONSE'::character varying, 'SCHEDULED'::character varying, 'EN_SERVICIO'::character varying])::text[]))"
+      },
+      {
+        "schemaObject": "uq_admin_pending_replacement",
+        "restored": "CREATE UNIQUE INDEX uq_admin_pending_replacement ON public.admin_activation USING btree (replaced_admin_user_id) WHERE ((replaced_admin_user_id IS NOT NULL) AND ((status)::text = ANY (ARRAY[('PENDING_CLAIM'::character varying)::text, ('IN_PROGRESS'::character varying)::text])))",
+        "source": "CREATE UNIQUE INDEX uq_admin_pending_replacement ON public.admin_activation USING btree (replaced_admin_user_id) WHERE ((replaced_admin_user_id IS NOT NULL) AND ((status)::text = ANY ((ARRAY['PENDING_CLAIM'::character varying, 'IN_PROGRESS'::character varying])::text[])))"
+      },
+      {
+        "schemaObject": "uq_conductor_recovery_active_request",
+        "restored": "CREATE UNIQUE INDEX uq_conductor_recovery_active_request ON public.conductor_recovery_request USING btree (conductor_user_id) WHERE ((status)::text = ANY (ARRAY[('OTP_PENDING'::character varying)::text, ('PASSWORD_RESET_PENDING'::character varying)::text]))",
+        "source": "CREATE UNIQUE INDEX uq_conductor_recovery_active_request ON public.conductor_recovery_request USING btree (conductor_user_id) WHERE ((status)::text = ANY ((ARRAY['OTP_PENDING'::character varying, 'PASSWORD_RESET_PENDING'::character varying])::text[]))"
+      },
+      {
+        "schemaObject": "uq_onboarding_identity_pending_organization",
+        "restored": "CREATE UNIQUE INDEX uq_onboarding_identity_pending_organization ON public.conductor_onboarding_request USING btree (identity_id, organization_id) WHERE ((status)::text = ANY (ARRAY[('PENDING_REVIEW'::character varying)::text, ('RETURNED'::character varying)::text]))",
+        "source": "CREATE UNIQUE INDEX uq_onboarding_identity_pending_organization ON public.conductor_onboarding_request USING btree (identity_id, organization_id) WHERE ((status)::text = ANY ((ARRAY['PENDING_REVIEW'::character varying, 'RETURNED'::character varying])::text[]))"
+      },
+      {
+        "schemaObject": "uq_service_live_offer",
+        "restored": "CREATE UNIQUE INDEX uq_service_live_offer ON public.assignment USING btree (service_id) WHERE ((service_id IS NOT NULL) AND (handover_id IS NULL) AND ((status)::text = ANY (ARRAY[('PENDING_RESPONSE'::character varying)::text, ('SCHEDULED'::character varying)::text, ('EN_SERVICIO'::character varying)::text])))",
+        "source": "CREATE UNIQUE INDEX uq_service_live_offer ON public.assignment USING btree (service_id) WHERE ((service_id IS NOT NULL) AND (handover_id IS NULL) AND ((status)::text = ANY ((ARRAY['PENDING_RESPONSE'::character varying, 'SCHEDULED'::character varying, 'EN_SERVICIO'::character varying])::text[])))"
+      },
+      {
+        "schemaObject": "uq_service_standby_offer",
+        "restored": "CREATE UNIQUE INDEX uq_service_standby_offer ON public.assignment USING btree (service_id) WHERE ((service_id IS NOT NULL) AND (handover_id IS NOT NULL) AND ((status)::text = ANY (ARRAY[('PENDING_RESPONSE'::character varying)::text, ('SCHEDULED'::character varying)::text])))",
+        "source": "CREATE UNIQUE INDEX uq_service_standby_offer ON public.assignment USING btree (service_id) WHERE ((service_id IS NOT NULL) AND (handover_id IS NOT NULL) AND ((status)::text = ANY ((ARRAY['PENDING_RESPONSE'::character varying, 'SCHEDULED'::character varying])::text[])))"
+      }
+    ],
+    "targetObjectCount": 280,
+    "sourceObjectCount": 288
+  },
+  "acl": {
+    "commonTargetDifferences": [],
+    "targetObjectCount": 1067,
+    "sourceObjectCount": 1164
+  },
+  "sourceVersion": "50",
+  "restoredVersion": "48",
+  "limits": "Only static schema; V49/V50 differences expected and named separately. Never compare current source table contents against the earlier snapshot."
+}

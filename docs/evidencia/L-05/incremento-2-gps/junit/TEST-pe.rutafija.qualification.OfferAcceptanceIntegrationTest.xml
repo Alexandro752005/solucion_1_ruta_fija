@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="pe.rutafija.qualification.OfferAcceptanceIntegrationTest" time="34.884" tests="14" errors="0" skipped="0" failures="0" flakes="0">
+  <testcase name="offerIdempotentCreationPreservesOriginalDeadlineAsServerTimeAdvances" classname="pe.rutafija.qualification.OfferAcceptanceIntegrationTest" time="2.593">
+    </testcase>
+  <testcase name="offerForeignDriverOrVehicleAreHiddenAndCannotCreateATenantCrossingHold" classname="pe.rutafija.qualification.OfferAcceptanceIntegrationTest" time="1.003" />
+  <testcase name="offerAdminCannotReserveOrStartInPlaceOfConductor" classname="pe.rutafija.qualification.OfferAcceptanceIntegrationTest" time="1.071" />
+  <testcase name="offerDeadlineEqualsEarlierServiceStartWithoutInventedMicrosecondGap" classname="pe.rutafija.qualification.OfferAcceptanceIntegrationTest" time="0.932" />
+  <testcase name="offerConductorCannotEmitAndAdminCannotCallTheConductorAcceptanceRoute" classname="pe.rutafija.qualification.OfferAcceptanceIntegrationTest" time="0.966" />
+  <testcase name="offerLegacyDirectRecordCannotBeStartedThroughMobileEndpoint" classname="pe.rutafija.qualification.OfferAcceptanceIntegrationTest" time="0.798" />
+  <testcase name="offerNewHoldExpiresTheOldReservationWithoutDependingOnTheSweep" classname="pe.rutafija.qualification.OfferAcceptanceIntegrationTest" time="0.886" />
+  <testcase name="offerExplicitAdminDirectCannotCreateAnyAssignment" classname="pe.rutafija.qualification.OfferAcceptanceIntegrationTest" time="0.872" />
+  <testcase name="offerOmissionAlwaysCreatesPendingWithoutManufacturingAcceptance" classname="pe.rutafija.qualification.OfferAcceptanceIntegrationTest" time="0.84" />
+  <testcase name="offerFirstPendingReservationPreventsAnotherIncompatibleHold" classname="pe.rutafija.qualification.OfferAcceptanceIntegrationTest" time="0.846" />
+  <testcase name="offerAuthenticAcceptanceJustBeforeDeadlineDoesNotStartTheService" classname="pe.rutafija.qualification.OfferAcceptanceIntegrationTest" time="0.852" />
+  <testcase name="offerDeadlineComesFromServerDespiteClientAttemptToExtendIt" classname="pe.rutafija.qualification.OfferAcceptanceIntegrationTest" time="0.781" />
+  <testcase name="offerIdempotentReplayAfterExpiryReturnsTheExpiredRecordWithoutRenewingIt" classname="pe.rutafija.qualification.OfferAcceptanceIntegrationTest" time="0.811" />
+  <testcase name="offerAcceptanceAtTheExactTenMinuteDeadlineExpiresWithoutAScheduler" classname="pe.rutafija.qualification.OfferAcceptanceIntegrationTest" time="0.834" />
+</testsuite>

@@ -1,0 +1,27 @@
+{
+  "crm": {
+    "tests": 241,
+    "files": 47,
+    "exit": 0,
+    "logSha256": "68a85800759ddc9bd982e146406d9ee623641be0679ddd9733d2f9e64aa67a6b",
+    "scope": "Current complete Vitest regression, not physical or PostgreSQL"
+  },
+  "flutter": {
+    "tests": 59,
+    "exit": 0,
+    "analyzeExit": 0,
+    "logSha256": "134a103b45e10a87d39e40b140b2148df283390337e5bf5a125efcb571caf2fa",
+    "scope": "Doubles and loopback HTTP, not Android GPS"
+  },
+  "humanReportedFieldSequence": {
+    "tests": 2,
+    "exit": 0,
+    "logSha256": "03d792b8b028c583183c028a4ece7e5fc78a17e13fc9df0228e4566376b811cf",
+    "scope": "Empty submit then valid503 response; reported red required fields after503 not reproduced"
+  },
+  "rest02GuardRecheck": {
+    "tests": 14,
+    "exit": 0,
+    "scope": "Crypto, numeric integrity comparator, argument refusal; no new target database executed"
+  }
+}

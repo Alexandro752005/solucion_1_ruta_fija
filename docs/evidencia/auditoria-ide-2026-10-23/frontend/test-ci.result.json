@@ -1,0 +1,12 @@
+{
+  "command": [
+    "npm.cmd",
+    "run",
+    "test:ci"
+  ],
+  "cwd": "D:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3\\frontend",
+  "startedAt": "2026-10-23T16:00:20.315061+00:00",
+  "durationSeconds": 14.115311200002907,
+  "exitCode": 0,
+  "log": "test-ci.native.log"
+}

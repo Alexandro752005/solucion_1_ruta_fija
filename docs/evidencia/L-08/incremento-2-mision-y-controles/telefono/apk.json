@@ -1,0 +1,18 @@
+{
+  "observedAt": "2026-10-22T16:32:34.4911143+00:00",
+  "sha256": "577fd76904d9e6109a396dd72a859c362d074f62ed6b870b0538e225fff0b28c",
+  "artifact": "artifacts/L-08-validacion-2026-10-22/ruta-fija-l08-debug.apk",
+  "package": "package: name='pe.rutafija.conductor.l08' versionCode='2' versionName='0.1.0' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+  "label": "application-label:'Ruta Fija Pruebas'",
+  "minimum": "sdkVersion:'29'",
+  "target": "targetSdkVersion:'36'",
+  "permissions": [
+    "uses-permission: name='android.permission.INTERNET'",
+    "uses-permission: name='android.permission.ACCESS_COARSE_LOCATION'",
+    "uses-permission: name='android.permission.ACCESS_FINE_LOCATION'",
+    "uses-permission: name='pe.rutafija.conductor.l08.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'"
+  ],
+  "installationExecuted": false,
+  "previousArtifactPreserved": true,
+  "previousOriginalApplicationPackage": "pe.rutafija.conductor"
+}

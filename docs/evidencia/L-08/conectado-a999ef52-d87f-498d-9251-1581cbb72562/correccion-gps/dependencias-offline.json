@@ -1,0 +1,12 @@
+{
+  "changedPackages": [
+    "geolocator_android"
+  ],
+  "otherPackageBlocksByteEquivalentAfterNewlineNormalization": true,
+  "externalDependencyUpdates": 0,
+  "offlinePubGet": true,
+  "originalLockSha256": "edace2386061238d251ac005be77db34fe882f1d7d0f8151704d43c949103639",
+  "newLockSha256": "f96c9ec8643009233c1799752bd7672bd6c630c1aa8a9dd57ba38b06a164e396",
+  "androidPluginOverride": "third_party/geolocator_android",
+  "localAndroidPluginVersion": "5.0.3+rutafija.1"
+}

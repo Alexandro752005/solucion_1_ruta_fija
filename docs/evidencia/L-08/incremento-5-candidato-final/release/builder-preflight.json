@@ -1,0 +1,37 @@
+﻿{
+    "recordedAt":  "2026-10-23T06:22:50.4976868+00:00",
+    "command":  "powershell.exe -NoProfile -File scripts/Build-RutaFijaL08ReleaseCandidate.ps1 [-ApiBaseUrl CASE]",
+    "cases":  [
+                  {
+                      "case":  "plan_reserved_https",
+                      "expectedExit":  0,
+                      "actualExit":  0,
+                      "passed":  true,
+                      "outputSanitized":  "PLAN_NO_BUILD_NO_KEY_NO_INSTALL"
+                  },
+                  {
+                      "case":  "reject_lab_http",
+                      "expectedExit":  1,
+                      "actualExit":  1,
+                      "passed":  true,
+                      "outputSanitized":  "ENDPOINT_REJECTED_BEFORE_SIDE_EFFECTS"
+                  },
+                  {
+                      "case":  "reject_literal_https_ip",
+                      "expectedExit":  1,
+                      "actualExit":  1,
+                      "passed":  true,
+                      "outputSanitized":  "ENDPOINT_REJECTED_BEFORE_SIDE_EFFECTS"
+                  },
+                  {
+                      "case":  "reject_embedded_credentials",
+                      "expectedExit":  1,
+                      "actualExit":  1,
+                      "passed":  true,
+                      "outputSanitized":  "ENDPOINT_REJECTED_BEFORE_SIDE_EFFECTS"
+                  }
+              ],
+    "privateKeyGeneratedByPlan":  false,
+    "productionNetworkRequests":  0,
+    "allPassed":  true
+}

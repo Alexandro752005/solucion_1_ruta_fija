@@ -51,6 +51,9 @@ input[aria-invalid='true'] { border-color: var(--rf-danger, #b42318); }
 .submit-button { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; margin-top: 0.35rem; padding: 0 1.25rem; border: 1px solid var(--rf-black, #111); border-radius: var(--rf-radius, 2px); color: var(--rf-black, #111); background: var(--rf-yellow, #f5c400); font-weight: 800; gap: 0.55rem; }
 .submit-button:hover:not(:disabled) { background: var(--rf-yellow-dark, #ddb100); }
 .submit-button:disabled { cursor: wait; opacity: 0.7; }
+.secondary-button, .text-button { min-height: 2.75rem; border: 1px solid var(--rf-border-strong, #aaa9a1); border-radius: var(--rf-radius, 2px); background: #fff; font-weight: 700; }
+.secondary-button:hover:not(:disabled), .text-button:hover:not(:disabled) { background: var(--rf-yellow-soft, #fff7d1); }
+.text-button { border-color: transparent; color: var(--rf-text-muted, #65655f); }
 .spinner { width: 1rem; height: 1rem; border: 2px solid rgb(17 17 17 / 28%); border-top-color: var(--rf-black, #111); border-radius: 50%; animation: spin 700ms linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 

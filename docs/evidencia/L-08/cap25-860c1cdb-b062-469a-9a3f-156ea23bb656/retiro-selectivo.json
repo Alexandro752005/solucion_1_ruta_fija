@@ -1,0 +1,11 @@
+{
+  "result" : "PASS_DATASET_DISABLED_SESSIONS_PERIODS_REVOKED_HISTORY_LEDGER_PRESERVED",
+  "runId" : "860c1cdb-b062-469a-9a3f-156ea23bb656",
+  "at" : "2026-10-23T01:01:06.208989Z",
+  "termsAcceptances" : 4,
+  "ledger" : {
+    "SUPER_ADMIN" : 1,
+    "ADMIN" : 4,
+    "CONDUCTOR" : 20
+  }
+}

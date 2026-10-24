@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "browser": "Edg/155.0.4283.62",
+  "dom": {
+    "title": "Iniciar sesión | Ruta Fija",
+    "url": "http://127.0.0.1:4300/login?returnUrl=%2Fdashboard",
+    "hasEmail": true,
+    "hasPassword": true,
+    "hasLoginText": true
+  },
+  "javascriptExceptions": [],
+  "resourceLoadingErrors": [],
+  "credentialsEntered": false,
+  "formSubmitted": false,
+  "checkedAtUtc": "2026-10-23T22:26:14.580Z"
+}

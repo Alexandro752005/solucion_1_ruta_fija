@@ -46,4 +46,22 @@ public final class AuditEventSpecifications {
                 criteriaBuilder.equal(root.get("organization").get("id"), organizationId)
         );
     }
+
+    /** Expiry is enforced on reads even when the restricted purge has not run. */
+    public static Specification<AuditEvent> visibleAt(Instant now){
+        return (root,q,cb)->cb.isTrue(cb.function("retention_audit_visible",Boolean.class,
+            root.get("id"),root.get("occurredAt"),cb.literal(now)));
+    }
+
+    /** Platform scope never includes an organization-owned event. */
+    public static Specification<AuditEvent> platform(String action,String entityType,Instant from,Instant to){
+        return (root,query,cb)->{
+            var p=new ArrayList<Predicate>();p.add(cb.isNull(root.get("organization")));
+            if(action!=null&&!action.isBlank())p.add(cb.equal(root.get("action"),action.strip()));
+            if(entityType!=null&&!entityType.isBlank())p.add(cb.equal(root.get("entityType"),entityType.strip()));
+            if(from!=null)p.add(cb.greaterThanOrEqualTo(root.get("occurredAt"),from));
+            if(to!=null)p.add(cb.lessThanOrEqualTo(root.get("occurredAt"),to));
+            return cb.and(p.toArray(Predicate[]::new));
+        };
+    }
 }

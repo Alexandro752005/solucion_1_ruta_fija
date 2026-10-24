@@ -1,0 +1,9 @@
+﻿{
+    "recordedAt":  "2026-10-23T16:15:23.0274195+00:00",
+    "command":  "powershell.exe -NoProfile -File scripts/Invoke-RutaFijaNativeTest.ps1 -Action Verify",
+    "exitCode":  0,
+    "log":  "verify.log",
+    "databaseOrBackendStartExpected":  false,
+    "safeUnitRunnerSourceSha256":  "848b5d30002a4108de1f7c5232b6f48a7ebabc2672d6dd55ab734315834cafcc",
+    "wrapperSourceSha256":  "3b318571892f5828799f6b007fde861e2a498f1d13e21ef1c8a30265b8379fb2"
+}

@@ -2,6 +2,9 @@ import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, signa
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
+import {HttpErrorResponse} from '@angular/common/http';
+import {CommunicationApiService} from '../../core/operations/communication-api.service';
+import {AnnouncementAttentionPanel} from './announcement-attention-panel';
 
 import { ApiErrorService } from '../../core/api/api-error.service';
 import { UiError } from '../../core/api/api-error.model';
@@ -21,12 +24,13 @@ import { PaginationComponent } from '../../shared/ui/pagination.component';
 
 @Component({
   selector: 'rf-announcements-page',
-  imports: [ReactiveFormsModule, PageHeaderComponent, ModalComponent, PaginationComponent],
+  imports: [ReactiveFormsModule, PageHeaderComponent, ModalComponent, PaginationComponent,AnnouncementAttentionPanel],
   templateUrl: './announcements.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnnouncementsPage {
   private readonly api = inject(OperationsApiService);
+  private readonly communications=inject(CommunicationApiService);
   private readonly managementApi = inject(ManagementApiService);
   private readonly apiErrors = inject(ApiErrorService);
   private readonly session = inject(AuthSessionService);
@@ -41,6 +45,7 @@ export class AnnouncementsPage {
   readonly groups = signal<readonly TransportGroup[]>([]);
   readonly loading = signal(true);
   readonly saving = signal(false);
+  readonly uncertain=signal(false);readonly withdrawalBlocked=signal(false);private publicationKey:string|null=null;
   readonly page = signal(0);
   readonly totalPages = signal(0);
   readonly totalItems = signal(0);
@@ -68,6 +73,7 @@ export class AnnouncementsPage {
       validators: [Validators.required],
     }),
     audienceId: new FormControl('', { nonNullable: true }),
+    requireReadAck:new FormControl(false,{nonNullable:true}),
   });
 
   constructor() {
@@ -115,6 +121,8 @@ export class AnnouncementsPage {
   }
 
   startCreate(): void {
+    if(this.saving()||this.uncertain())return;
+    this.publicationKey=null;
     this.error.set(null);
     this.notice.set(null);
     this.form.reset({
@@ -122,22 +130,25 @@ export class AnnouncementsPage {
       body: '',
       audienceType: this.canPublishOrganization() ? 'ORGANIZATION' : 'GROUP',
       audienceId: '',
+      requireReadAck:false,
     });
     this.formOpen.set(true);
   }
 
   closeForm(): void {
-    if (!this.saving()) {
+    if (!this.saving()&&!this.uncertain()) {
       this.formOpen.set(false);
     }
   }
 
   viewDetails(announcement: Announcement): void {
+    if(this.withdrawalBlocked())return;
     this.selectedAnnouncement.set(announcement);
     this.detailOpen.set(true);
   }
 
   closeDetails(): void {
+    if(this.withdrawalBlocked())return;
     this.detailOpen.set(false);
     this.selectedAnnouncement.set(null);
   }
@@ -155,6 +166,7 @@ export class AnnouncementsPage {
   }
 
   submit(): void {
+    if(this.saving()||this.uncertain())return;
     this.error.set(null);
     this.notice.set(null);
     if (this.form.invalid) {
@@ -167,13 +179,15 @@ export class AnnouncementsPage {
       return;
     }
     this.saving.set(true);
+    this.publicationKey=crypto.randomUUID();
     this.api
       .createAnnouncement({
         title: value.title.trim(),
         body: value.body.trim(),
         audienceType: value.audienceType,
         audienceId: value.audienceType === 'GROUP' ? value.audienceId : undefined,
-        requireReadAck: false,
+        requireReadAck: value.requireReadAck,
+        operationKey:this.publicationKey,
       })
       .pipe(finalize(() => this.saving.set(false)))
       .subscribe({
@@ -188,14 +202,18 @@ export class AnnouncementsPage {
           this.formOpen.set(false);
           this.load(0);
         },
-        error: (error: unknown) =>
-          this.error.set(this.apiErrors.toUiError(error, 'No se pudo publicar el comunicado.')),
+        error: (error: unknown) => {
+          this.error.set(this.apiErrors.toUiError(error, 'No se pudo publicar el comunicado.'));
+          this.uncertain.set(!(error instanceof HttpErrorResponse)||![400,401,403,404,409,422,429].includes(error.status));
+          if(!this.uncertain())this.publicationKey=null;
+        },
       });
   }
 
   audienceLabel(audience: AnnouncementAudience): string {
     return audience === 'ORGANIZATION' ? 'Toda la organización' : 'Grupo específico';
   }
+  queryPublication(){if(!this.uncertain()||!this.publicationKey||this.saving())return;this.communications.publication(this.publicationKey).subscribe({next:r=>{if(r.operationKey!==this.publicationKey)return;this.uncertain.set(false);this.publicationKey=null;this.formOpen.set(false);this.notice.set('Publicación confirmada por el servidor; no se repitió el envío.');this.load(0);},error:e=>this.error.set(this.apiErrors.toUiError(e,'Publicación todavía sin confirmar; conserva el formulario.'))});}
 
   audienceTargetLabel(announcement: Announcement): string {
     if (announcement.audienceType === 'ORGANIZATION') {

@@ -1,0 +1,27 @@
+﻿[
+    {
+        "path":  "scripts/Build-RutaFijaL08ReleaseCandidate.ps1",
+        "sha256":  "1ed71c57dfb44b8a44e95df96d882b016299ee9cc4c8410213608b4bcfca20e6",
+        "snapshot":  "sources/Build-RutaFijaL08ReleaseCandidate.ps1"
+    },
+    {
+        "path":  "scripts/Sign-RutaFijaL08Closure.ps1",
+        "sha256":  "fd7d678f486828823c3e85b1f9756e365c54ca52673d9a399ef94c03e23f6f93",
+        "snapshot":  "sources/Sign-RutaFijaL08Closure.ps1"
+    },
+    {
+        "path":  "scripts/support/L08ClosureSigner.java",
+        "sha256":  "1bfb7a90ff43c3b9a260a71a840e9b416ddcee5bee80898582d7585c5a8e47eb",
+        "snapshot":  "sources/L08ClosureSigner.java"
+    },
+    {
+        "path":  "mobile/android/app/build.gradle.kts",
+        "sha256":  "be36542181039a357b4166d3c46922aafb7c921d951901c18146e33097a01359",
+        "snapshot":  "sources/build.gradle.kts"
+    },
+    {
+        "path":  "mobile/lib/app/ruta_fija_environment.dart",
+        "sha256":  "4dd51f2fd4064061a8695fea1f3bbf3a5ae24133a212d06a2373c4267763115a",
+        "snapshot":  "sources/ruta_fija_environment.dart"
+    }
+]

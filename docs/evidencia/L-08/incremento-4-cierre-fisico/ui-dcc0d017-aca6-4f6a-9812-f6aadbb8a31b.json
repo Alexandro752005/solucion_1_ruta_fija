@@ -1,0 +1,146 @@
+{
+    "observedAt":  "2026-10-23T04:47:24.4544757+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "action":  "back",
+    "label":  "",
+    "automatedUiInstrumentation":  true,
+    "humanAccessibilityConfirmation":  false,
+    "nodes":  [
+                  {
+                      "text":  "",
+                      "description":  "Ruta Fija Conductor",
+                      "bounds":  "[48,472][516,541]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Bandeja de avisos",
+                      "bounds":  "[648,434][792,578]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Mi incorporación",
+                      "bounds":  "[792,434][936,578]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Cerrar sesión",
+                      "bounds":  "[936,434][1080,578]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Su compromiso principal\nServicio en curso\nServicio 714cbc0c-8d6c-4bc7-9ed4-d6523cb19e09\nProgramación: 22/10/2026 21:57\nGrupo: SYNTHETIC L08 FIS02 3f0ba758",
+                      "bounds":  "[120,710][960,1283]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Continuar servicio",
+                      "bounds":  "[180,1079][603,1223]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Oferta pendiente · requiere respuesta\nNo hay ofertas pendientes de respuesta.",
+                      "bounds":  "[120,1283][960,1508]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Sesión móvil activa",
+                      "bounds":  "[120,1508][960,1565]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "CONDUCTOR-dcc6990f-44b3-4d63-8d02-2fed514d2f26\nGrupo: SYNTHETIC L08 FIS02 3f0ba758",
+                      "bounds":  "[120,1613][960,2052]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Disponibilidad actual",
+                      "bounds":  "[120,1895][571,2052]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "En servicio",
+                      "bounds":  "[180,2027][499,2052]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Inicio\nTab 1 of 6",
+                      "bounds":  "[0,2112][180,2261]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Disponibilidad\nTab 2 of 6",
+                      "bounds":  "[180,2112][360,2261]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Asignaciones\nTab 3 of 6",
+                      "bounds":  "[360,2112][540,2261]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Incidencias\nTab 4 of 6",
+                      "bounds":  "[540,2112][720,2261]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Comunicados\nTab 5 of 6",
+                      "bounds":  "[720,2112][900,2261]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Perfil\nTab 6 of 6",
+                      "bounds":  "[900,2112][1080,2261]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  }
+              ]
+}

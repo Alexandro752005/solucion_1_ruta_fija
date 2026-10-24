@@ -1,0 +1,93 @@
+{
+  "runId" : "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "inspectionAtUtc" : "2026-10-17T15:53:27.859519500Z",
+  "guardFacts" : {
+    "authorizationAndOutputCheck" : true,
+    "exactCaseAndMarker" : true,
+    "environmentApproved" : true,
+    "harnessOwnsCleanupLock" : true,
+    "identitiesMatch" : true,
+    "identityReviewed" : true,
+    "credentialMatches" : true,
+    "termsAndAcceptancePreserved" : true,
+    "historicalLedgerPreserved" : true,
+    "noCompletedRecovery" : true,
+    "noLiveChallenge" : true,
+    "noPriorRepair" : true,
+    "enrollmentObservedOnce" : true,
+    "observationHealthy" : true
+  },
+  "environmentDuringPreflight" : {
+    "database" : "ruta_fija_test",
+    "role" : "rf_test",
+    "schema" : "V26",
+    "historicalCreations" : {
+      "SUPER_ADMIN" : 1,
+      "ADMIN" : 2,
+      "CONDUCTOR" : 0
+    },
+    "remainingSlots" : {
+      "SUPER_ADMIN" : 0,
+      "ADMIN" : 2,
+      "CONDUCTOR" : 20
+    },
+    "superAdminAccounts" : 1,
+    "personIdentityBindings" : 2,
+    "personIdentityKeyRecorded" : true,
+    "recoveryCredentialPresent" : true,
+    "eligibleSyntheticPendingAdmins" : 0,
+    "termsAcceptanceCount" : 1,
+    "currentTerms" : {
+      "id" : "f590e228-5d2e-47e4-b144-b0df1198bd49",
+      "version" : "1.0.0",
+      "content_sha256" : "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+      "synthetic" : false
+    },
+    "publishedFileHashMatches" : true,
+    "cleanupLockHeld" : true
+  },
+  "rowAndTableLocksTested" : true,
+  "updateAndAuditExplainWithoutAnalyzePassed" : true,
+  "applicationDmlExecuted" : false,
+  "schemaDdlExecuted" : false,
+  "commitCalled" : false,
+  "emergencyCodeGeneratedOrPrinted" : false,
+  "actualCasePrivateKeysRead" : false,
+  "httpOrSmtpRequests" : 0,
+  "afterPreflight" : {
+    "database" : "ruta_fija_test",
+    "role" : "rf_test",
+    "schema" : "V26",
+    "historicalCreations" : {
+      "SUPER_ADMIN" : 1,
+      "ADMIN" : 2,
+      "CONDUCTOR" : 0
+    },
+    "remainingSlots" : {
+      "SUPER_ADMIN" : 0,
+      "ADMIN" : 2,
+      "CONDUCTOR" : 20
+    },
+    "superAdminAccounts" : 1,
+    "personIdentityBindings" : 2,
+    "personIdentityKeyRecorded" : true,
+    "recoveryCredentialPresent" : true,
+    "eligibleSyntheticPendingAdmins" : 0,
+    "termsAcceptanceCount" : 1,
+    "currentTerms" : {
+      "id" : "f590e228-5d2e-47e4-b144-b0df1198bd49",
+      "version" : "1.0.0",
+      "content_sha256" : "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+      "synthetic" : false
+    },
+    "publishedFileHashMatches" : true,
+    "cleanupLockHeld" : false,
+    "inspectionAtUtc" : "2026-10-17T15:53:27.942528500Z",
+    "readOnly" : true,
+    "smtpAttempts" : 0,
+    "springStarted" : false,
+    "migrationsExecuted" : false
+  },
+  "originalMarkerPreserved" : true,
+  "TEST_CLEANUP_RELEASED" : false
+}

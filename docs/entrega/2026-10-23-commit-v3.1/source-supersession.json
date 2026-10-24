@@ -1,0 +1,64 @@
+{
+  "classification": "NEW_LIVE_SOURCE_REVISION_PRESERVING_OLDER_LOCAL_CUTS",
+  "changedExisting": [
+    {
+      "path": ".gitignore",
+      "beforeSha256": "44da811748703da3cb48b15ecee55dbbe3e3f8ffd63bf32494c35ddc13cf96ac",
+      "currentSha256": "d7b8aaa59e1a865854d683d9e7e6916fbb7351d7c4ef6133eaccc5018536d0cb",
+      "exactBackup": "docs/entrega/2026-10-23-commit-v3.1/gitignore.before"
+    },
+    {
+      "path": ".gitattributes",
+      "beforeSha256": "e0b8ddf49ee3da6b919ef850bab1ad44e1c29c877f09f362cae216d0dbdab6ac",
+      "currentSha256": "273d5221f85c244955803bff7933a57363c0dd8126941185b991e3f937f4b364",
+      "exactBackup": "docs/entrega/2026-10-23-commit-v3.1/gitattributes.before"
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+      "beforeSha256": "298d7cb7975aeb32787c7e05bc9065acb04b8657edf35589a7050cab3ffeb167",
+      "currentSha256": "043a841813e1aacf62d985f283c71a9925fdb76462d7dbdc1af01d58bc2aa34c",
+      "exactBackup": "docs/entrega/2026-10-23-commit-v3.1/Invoke-RutaFijaNativeRuntime.ps1.before"
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaQuickDemo.ps1",
+      "beforeSha256": "e24de70cfc6e610a600d27058b163812151afd624ff3bcf12f40f3ffc497ffa7",
+      "currentSha256": "055738564796a516d76c5f7a924cc3df5b35e6f7b34d8814ea1c5ba12e77223e",
+      "exactBackup": "docs/entrega/2026-10-23-commit-v3.1/Invoke-RutaFijaQuickDemo.ps1.before"
+    },
+    {
+      "path": "docs/Uso del Sistema.md",
+      "beforeSha256": "b126e157e3082df61a805e1f373a8c1f1e941c75f1fe8e29c634eb04b618b9e0",
+      "currentSha256": "5a97f24344ad5e7101c56afaa3b3cb16b360d4833ee331f613626c40c3251ca7",
+      "exactBackup": "docs/entrega/2026-10-23-commit-v3.1/Uso-del-Sistema.md.before"
+    }
+  ],
+  "previousManifestEntriesReviewed": 778,
+  "historicalReferencesResolvedByExactBackup": [
+    {
+      "manifest": "docs/evidencia/auditoria-ide-2026-10-23/manifest-auditoria.sha256",
+      "path": "docs/Uso del Sistema.md",
+      "expectedSha256": "b126e157e3082df61a805e1f373a8c1f1e941c75f1fe8e29c634eb04b618b9e0",
+      "backup": "docs/entrega/2026-10-23-commit-v3.1/Uso-del-Sistema.md.before"
+    },
+    {
+      "manifest": "docs/evidencia/auditoria-ide-2026-10-23/manifest-auditoria.sha256",
+      "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+      "expectedSha256": "298d7cb7975aeb32787c7e05bc9065acb04b8657edf35589a7050cab3ffeb167",
+      "backup": "docs/entrega/2026-10-23-commit-v3.1/Invoke-RutaFijaNativeRuntime.ps1.before"
+    },
+    {
+      "manifest": "docs/evidencia/auditoria-ide-2026-10-23/manifest-auditoria.sha256",
+      "path": "scripts/Invoke-RutaFijaQuickDemo.ps1",
+      "expectedSha256": "e24de70cfc6e610a600d27058b163812151afd624ff3bcf12f40f3ffc497ffa7",
+      "backup": "docs/entrega/2026-10-23-commit-v3.1/Invoke-RutaFijaQuickDemo.ps1.before"
+    }
+  ],
+  "unresolvedHistoricalDifferences": [],
+  "oldManifestFilesWritten": false,
+  "signedActChanged": false,
+  "newSources": [
+    "scripts/RutaFijaRuntimeSchemaPolicy.ps1",
+    "scripts/Test-RutaFijaRuntimeSchemaPolicy.ps1"
+  ],
+  "why": "Profile-aware runtime schema policy:50 versioned production migrations versus50plus1test repeatable; update runtime manual and Git exclusions."
+}

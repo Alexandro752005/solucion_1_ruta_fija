@@ -1,0 +1,10 @@
+package pe.rutafija.identity.api.dto;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public record CompleteConductorPasswordResetRequest(
+        @NotBlank @Size(max = 128) String passwordResetToken,
+        @NotBlank @Size(min = 12, max = 128) String newPassword
+) {
+}

@@ -1,0 +1,402 @@
+﻿[
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.audit.application.AuditChangesTest.xml",
+        "sha256":  "dbfa3c8908fc25f18934d9baa1f7c6013ac3eeb1cf4cb68dc30a264ce223aeca",
+        "tests":  3,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.audit.application.AuditMetadataPolicyTest.xml",
+        "sha256":  "271db061f0e4551d294e52d0a568678c129e61359f8d7e5dd1d763367782e9e5",
+        "tests":  8,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.audit.application.AuditOutcomeTest.xml",
+        "sha256":  "7a2c671bfca056054d7fa2539652afbba39d5b01f278334f30a1649bee012f45",
+        "tests":  11,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.availability.AvailabilityPolicyTest.xml",
+        "sha256":  "c88e1405f2b8dae9c3b906bc012b2daa1074c3231fab7990281c777ef2ad0e1e",
+        "tests":  14,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.availability.monitor.AvailabilityMonitorCliTest.xml",
+        "sha256":  "5d3809d8b2392d6d05425c0e1a4b30c1c9161fcab63f3b69635139f443a30839",
+        "tests":  5,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.availability.monitor.AvailabilityMonitorHttpTest.xml",
+        "sha256":  "145a61a11e8987d007e9910b7ee83993d6d511f051e5aa21f05be8985306afe1",
+        "tests":  5,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.availability.monitor.HttpAvailabilityProbeTest.xml",
+        "sha256":  "ba4ad64ffb668a5cd67f159c87685df8c061c924ce045ced211d102393393bca",
+        "tests":  17,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.availability.monitor.MonitorConfigurationTest.xml",
+        "sha256":  "f32cd19dcf7d27486f426c98f12508357340311a1cb34b0d7017a27c62cdeb77",
+        "tests":  13,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.backup.AuthenticatedBackupArchiveTest.xml",
+        "sha256":  "718609e4c0bd78f869b60d510521c28496d90f384729611c22348f43762da881",
+        "tests":  10,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.backup.BackupCliGuardTest.xml",
+        "sha256":  "36408722a0572b459812178b2be2ef514654ec3a887d3bfd6f2e7246ac557b1d",
+        "tests":  2,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.backup.RestoreIntegrityComparisonTest.xml",
+        "sha256":  "c9c302e9cca69956c3d441ebe5e6de2a674fcdba42830100848ad93019ccf9fb",
+        "tests":  2,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.backup.SqlLiteralArrayCastTest.xml",
+        "sha256":  "3aa73b7a4dc5a396d463c95b9feb464c1776425fa7efdcbdb4a92d933629aea5",
+        "tests":  4,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.identity.application.LoginRateLimiterTest.xml",
+        "sha256":  "b718bccd969fd4022a5318fe396c98196fe1c3551033b19e5817009fdca7e52a",
+        "tests":  4,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.identity.application.OpaqueTokenServiceTest.xml",
+        "sha256":  "914ce8ccb542d67337fdbb24b02fc77e980806b79b99e9d7ba230ac3f73d0b3d",
+        "tests":  3,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.identity.domain.ConductorRecoveryRequestTest.xml",
+        "sha256":  "9cae00d38674a2ec4413524fb2e7fb9acf2a2c113e6cecd4f144e5831bb2a2af",
+        "tests":  1,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.identity.domain.EmailOtpChallengeTest.xml",
+        "sha256":  "6ae742cc7bbcd6ccf4e0771cf5bf855cb0f3d0f4d78a3e54d892f0a5630d6c29",
+        "tests":  3,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.identity.domain.RefreshTokenTest.xml",
+        "sha256":  "d36d24ea85fc2cf95204c5f75e955c8a7049ac5f5e864a6337b5c319ad8beee8",
+        "tests":  1,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.identity.infrastructure.SmtpOtpEmailSenderTest.xml",
+        "sha256":  "e95f713c7a4b6a9dfdaa858d67c257e77bf7878318701485b43adf9938c70b55",
+        "tests":  4,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.identity.recoverycli.SuperAdminRecoveryCliTest.xml",
+        "sha256":  "e4a43198ceec9c08706c5d1efa9582a067730044f6702b282ed8a99a00b608de",
+        "tests":  8,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.invitation.application.InvitationCodeHasherTest.xml",
+        "sha256":  "ad2408e8f6323c970d432ea59a4a2b5f0c6080595bc81c2b61643100449af914",
+        "tests":  2,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.invitation.application.InvitationServiceBoundaryTest.xml",
+        "sha256":  "6530a28fa4b6149ab2a88dd70788ba42a9edb219ffce78e2156c5714285bbbba",
+        "tests":  1,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.operation.api.MobileOfflineRegistrationTest.xml",
+        "sha256":  "65602032dc6013f6a272778ecc2ca7b2a310494ffcda006b3ef1081124cc4582",
+        "tests":  3,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.operation.application.ReportExportResourceTest.xml",
+        "sha256":  "ed9321f8b5ab7090bbbafab4d5ecb92b577803b0afd2651d845579e6dc147016",
+        "tests":  1,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.operation.domain.IncidentClosureContractTest.xml",
+        "sha256":  "e679ed5af97378bf5dcad09df0d1dca5c5acaad1df87fff5c9bcd97e8a111efe",
+        "tests":  14,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.operation.domain.OfferResponseWindowTest.xml",
+        "sha256":  "ef4c2c207ddd50feacd7e0a9de82e445fc91a214337ffd56ef2adf9367ddbacf",
+        "tests":  4,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.operation.realtime.OperationStreamBroadcasterTest.xml",
+        "sha256":  "7dd4776b83314c33586a441b758193c05ec3afe26dab826b8a973d310fac8dec",
+        "tests":  1,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.personidentity.PersonIdentityGateAuthorizationManagerTest.xml",
+        "sha256":  "e6359ab078ff49998c16e9e5cde4934c1d2423be4189b3e4ed81c6091a36c25f",
+        "tests":  5,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.preferences.MobilePreferencesContractTest.xml",
+        "sha256":  "36c82e74579d0e6656c9237aa1841367423a93ae2d15d2d00c4efc985a5048b8",
+        "tests":  4,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.retention.RetentionCalendarTest.xml",
+        "sha256":  "f573967521f438a3b5de37451e195499f01f6e293e7f4e64ac5a18b95cbb55b6",
+        "tests":  4,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.retention.RetentionProcedureSecurityTest.xml",
+        "sha256":  "6ef20af6638927785ded9abf784e87fe7f53e409f27e20eebf925301ce85e2cf",
+        "tests":  9,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.routing.TerminalCorroborationPolicyTest.xml",
+        "sha256":  "2d886f6e091c9796c87a2d9486f36c3b8a5b50e6dee685d9236a12158a0a9f99",
+        "tests":  4,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.shared.config.SecurityConfigTest.xml",
+        "sha256":  "5380710c0a9145d62b9a6de805b8c2b9385b996ae0f4f9d56aa7d905e2a8f6fb",
+        "tests":  4,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.shared.exception.AvailabilityErrorHttpTest.xml",
+        "sha256":  "b0ee2c0eea081e563c379aec2a775fb3d47c5e2d6d7d9d4f248ead4374493992",
+        "tests":  6,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.shared.exception.GlobalExceptionHandlerTest.xml",
+        "sha256":  "c1c7b29de76faf1c87364696017d8e0c6d3873ac4355da7b61a69d915355fb0a",
+        "tests":  2,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.shared.exception.SafeLoggingDefaultsTest.xml",
+        "sha256":  "83ee1017ec644be744b94ea1d59f5cd9a6b954d825bacbfae439a3f6bbdd76b8",
+        "tests":  1,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.shared.observability.CorrelationIdFilterTest.xml",
+        "sha256":  "3afaf2ed352c2ca6e66375d077976d5a87e3c21b9c5c0499c2301327a3c7161f",
+        "tests":  2,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.shared.security.ApiOriginValidationFilterTest.xml",
+        "sha256":  "f7bc5a9032d29ddfd185512bcd458d44b554f59b268bd68dd5e6f7fdc3572b05",
+        "tests":  2,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.shared.security.CurrentUserProviderTest.xml",
+        "sha256":  "c3aa36fc28d255a13d83503807b224e28a9b11387d1c6ea213606b2aaa867db5",
+        "tests":  5,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.shared.security.PersonalDataProjectionTest.xml",
+        "sha256":  "b85978dff12190fa2fda9b6922ef72e56963c2fea9f7d9a3b7ba9ceaf8f10d24",
+        "tests":  1,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.shared.security.TrustedOriginValidatorTest.xml",
+        "sha256":  "e3c87c7fe90fa0faa3bcdeb2ffad5b4e690c10eb0597a29cee18fcfe935e98e0",
+        "tests":  3,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.support.ApprovedAdminTermsPublicationTest.xml",
+        "sha256":  "e00b4de3888217797c2ee92c183b8b0eacb8f46c994b25110fac30a9d7bd877f",
+        "tests":  6,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.support.FixtureJsonTest.xml",
+        "sha256":  "f514512569a269350ddea024bf989ee1f43aafab217b096a56d6bcc1070bc6ce",
+        "tests":  6,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.support.L08CapacityMeasurementTest.xml",
+        "sha256":  "8063f76d7a622b998d3b1cb687952468a74282e39dd8b101aeddf965a92ef3e5",
+        "tests":  11,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.support.L08ConnectedServicePreparationTest.xml",
+        "sha256":  "743395f05af0e6b4cb2cfb7fde8cc099c5dd24c9f01994c339c4427f3cf3516c",
+        "tests":  14,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.support.L08PhysicalComplementPolicyTest.xml",
+        "sha256":  "2fb4ef1e0afa5ce9640b661de21d4fb41dc5313d6b08aa14b889d83b81c7ab55",
+        "tests":  7,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.support.L08Rest03TargetGuardTest.xml",
+        "sha256":  "d70c328a0d265609ac5b886dbec50a7ce1bdad6f3905cb1780a3418b310e82cf",
+        "tests":  3,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.terms.application.AdminTermsGateAuthorizationManagerTest.xml",
+        "sha256":  "7fed2278bbe7ca15e8b743c11458e9abf76de60a3b3495a2708f66c3af4ea65d",
+        "tests":  7,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.terms.application.AdminTermsServiceTest.xml",
+        "sha256":  "06a915c39085077cff8d64001680654e7e3893fce8ab033fc2b2eab38b87224e",
+        "tests":  2,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.terms.domain.AdminTermsContentHashTest.xml",
+        "sha256":  "ef6d5a705e2985dd0b7e8228e804cd08729b589d85478ba6a3c4844bde9656f4",
+        "tests":  1,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    },
+    {
+        "file":  "surefire-reports-preserved/TEST-pe.rutafija.terms.domain.AdminTermsDocumentTest.xml",
+        "sha256":  "1ff838d94526be690e1e713014fa18f4743fb35cd04dc8cce2992766871d3c5b",
+        "tests":  4,
+        "failures":  0,
+        "errors":  0,
+        "skipped":  0
+    }
+]

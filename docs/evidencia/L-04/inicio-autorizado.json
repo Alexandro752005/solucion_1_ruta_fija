@@ -1,0 +1,28 @@
+{
+  "localDate": "2026-10-19",
+  "registeredAt": "2026-10-19T20:37:18.879314+00:00",
+  "authorization": "OK VERDE",
+  "scope": "L-04 ONLY",
+  "pilotEnabled": false,
+  "L05Authorized": false,
+  "priorClosureReferences": [
+    {
+      "path": "docs/actas/L-03-cierre-funcional-local-2026-10-19.md",
+      "sha256": "a2c082de5d4930d635988f60a61b15293555967e3eccd677122233162a415797"
+    },
+    {
+      "path": "docs/evidencia/L-03/matriz-final-funcional-local-2026-10-19.md",
+      "sha256": "e35c9d0b8f13d968278b8b32ede6c440395c0a86464a897fe79c1187bbf8ec23"
+    },
+    {
+      "path": "docs/evidencia/L-03/manifest-cierre.sha256",
+      "sha256": "9336e09b4238235c20cd8e4e90fc2adbaaaa1863891149e21dee339b21a27e02"
+    },
+    {
+      "path": "docs/evidencia/L-03/fuentes-cierre.sha256",
+      "sha256": "cb1d0657f83d7f7727670fc1750436f35f885fd115660e53cc6aa144c033ec03"
+    }
+  ],
+  "gitExecuted": false,
+  "snapshotRegenerated": false
+}

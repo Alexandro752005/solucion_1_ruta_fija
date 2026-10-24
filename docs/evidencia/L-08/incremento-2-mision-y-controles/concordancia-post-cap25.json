@@ -1,0 +1,15 @@
+{
+  "result": "PASS_CURRENT_CONTRACT_MATRIX_BOARD_MEMORY_STATE_CONCORDANCE",
+  "observedAt": "2026-10-23T01:19:04.613378+00:00",
+  "contractVersion": "0.6.2",
+  "L08Status": "EN_CURSO",
+  "pilotEnabled": false,
+  "verifiedLocalCriteria": [
+    "CI-L08-03"
+  ],
+  "cap25SelectiveRetirementAndCleanupReleased": true,
+  "physicalCaseRemainsClosed": true,
+  "localMarkdownLinksVerified": 88,
+  "missingLinks": 0,
+  "coverageLimitsDoNotCreateNewAcceptanceCriteria": true
+}

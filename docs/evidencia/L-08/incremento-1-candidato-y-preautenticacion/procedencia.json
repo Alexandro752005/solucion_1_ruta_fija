@@ -1,0 +1,135 @@
+{
+  "archivedAt": "2026-10-21T23:00:02.227445+00:00",
+  "files": [
+    {
+      "source": "backend/target/l08-android-device-inventory.json",
+      "archived": "l08-android-device-inventory.json",
+      "sha256": "1c7c2c421e97e1748087c0ee944c535d4508425a4d9ba2958779f61bc1b04191"
+    },
+    {
+      "source": "backend/target/l08-verified-isolated-apk-inspection.json",
+      "archived": "l08-verified-isolated-apk-inspection.json",
+      "sha256": "3f41a7fb5a05b72d8d57ae2bfdde62aa9a17bde4cc794d16bade90c48f32d073"
+    },
+    {
+      "source": "backend/target/l08-phone-preauth-install.json",
+      "archived": "l08-phone-preauth-install.json",
+      "sha256": "ccfb2b40ce3e49476c41a510873dd8a786f203a95adb53729484f40b4464eb82"
+    },
+    {
+      "source": "backend/target/l08-phone-preauth-launch.json",
+      "archived": "l08-phone-preauth-launch.json",
+      "sha256": "be7f47614c13413a2bf98a5228306270027764a9f7cc894ca4876ce24a60f55a"
+    },
+    {
+      "source": "backend/target/l08-npm-security-audit-final.json",
+      "archived": "l08-npm-security-audit-final.json",
+      "sha256": "4c4daf9e4c32e678bf27223e3cb21d92eb63bc9e215fb6883428ece5f15ba2f4"
+    },
+    {
+      "source": "backend/target/l08-phone-preauth-9f2be6c1-77be-4d2b-8d72-f83dbd6f5247/cierre-publico.json",
+      "archived": "telefono/cierre-publico.json",
+      "sha256": "af577440ef5683a9cb6a62f8f9d3ae94e27bcc5b5a46c53b9b45b615be652bbb"
+    },
+    {
+      "source": "backend/target/l08-phone-preauth-9f2be6c1-77be-4d2b-8d72-f83dbd6f5247/manual-empty-form.json",
+      "archived": "telefono/manual-empty-form.json",
+      "sha256": "336aa3dbb9a5249ed81292d45d9d1f1357ed4b0a48b58a35099b9ada7896a898"
+    },
+    {
+      "source": "backend/target/l08-phone-preauth-9f2be6c1-77be-4d2b-8d72-f83dbd6f5247/manual-http-refusal.json",
+      "archived": "telefono/manual-http-refusal.json",
+      "sha256": "db0431512988ef3eadded1e360dc619a9031115e6a17838142294d3c565c3939"
+    },
+    {
+      "source": "backend/target/l08-phone-preauth-9f2be6c1-77be-4d2b-8d72-f83dbd6f5247/observacion-1792623152678.json",
+      "archived": "telefono/observacion-1792623152678.json",
+      "sha256": "7d1438694f50d532d7f6096d1d378b7ccd421b3c8de4d10e50da01394c7768fc"
+    },
+    {
+      "source": "backend/target/l08-phone-preauth-9f2be6c1-77be-4d2b-8d72-f83dbd6f5247/observacion-1792623418369.json",
+      "archived": "telefono/observacion-1792623418369.json",
+      "sha256": "5fe090a9ea958b66a38aa909c125e0217194c47e8b7807c07c9244a540620cb6"
+    },
+    {
+      "source": "backend/target/l08-phone-preauth-9f2be6c1-77be-4d2b-8d72-f83dbd6f5247/observacion-1792623498690.json",
+      "archived": "telefono/observacion-1792623498690.json",
+      "sha256": "f43e71faddf862521c5ecf2a071a88540eb9b9cdb574e258a3f594d0e9daf81f"
+    },
+    {
+      "source": "backend/target/l08-public-browser-1792621622385/resultado.json",
+      "archived": "navegadores/1792621622385/resultado.json",
+      "sha256": "39e4c56d646e9794142a25cc424dc67acf28af8a6337675a6c850e2f0276569b"
+    },
+    {
+      "source": "backend/target/l08-public-browser-1792621808294/Chrome-css-zoom-200.png",
+      "archived": "navegadores/1792621808294/Chrome-css-zoom-200.png",
+      "sha256": "e693b8b139d609d57be2753ce3a9aa359866312352b9a23a7ff7e0bd90c5f918"
+    },
+    {
+      "source": "backend/target/l08-public-browser-1792621808294/Chrome-login-errors.png",
+      "archived": "navegadores/1792621808294/Chrome-login-errors.png",
+      "sha256": "bd268a8cf13412bb28a9707a1692df484b43a207bc7990cde1955a2aeef604de"
+    },
+    {
+      "source": "backend/target/l08-public-browser-1792621808294/Edge-css-zoom-200.png",
+      "archived": "navegadores/1792621808294/Edge-css-zoom-200.png",
+      "sha256": "66a5bdb637513983a43b6ae6af7a101c847c8f46c9d5f5f6f6a2fbfc21c58480"
+    },
+    {
+      "source": "backend/target/l08-public-browser-1792621808294/Edge-login-errors.png",
+      "archived": "navegadores/1792621808294/Edge-login-errors.png",
+      "sha256": "c7276739e7130b121eb0743c2e0d7d63d7c12dff49bfe013e94170a75978d637"
+    },
+    {
+      "source": "backend/target/l08-public-browser-1792621808294/resultado.json",
+      "archived": "navegadores/1792621808294/resultado.json",
+      "sha256": "a06ddd997c9150428cf8ce4d1a9705ae9e8f95a162657707735e036193e12a5e"
+    },
+    {
+      "source": "backend/target/l08-public-browser-1792623208288/Chrome-failure.png",
+      "archived": "navegadores/1792623208288/Chrome-failure.png",
+      "sha256": "da8681f8f6b8a79b8cd2eea94f74f2beb61597ba22a074cc4791afdba13207aa"
+    },
+    {
+      "source": "backend/target/l08-public-browser-1792623208288/Edge-css-zoom-200.png",
+      "archived": "navegadores/1792623208288/Edge-css-zoom-200.png",
+      "sha256": "66a5bdb637513983a43b6ae6af7a101c847c8f46c9d5f5f6f6a2fbfc21c58480"
+    },
+    {
+      "source": "backend/target/l08-public-browser-1792623208288/Edge-login-errors.png",
+      "archived": "navegadores/1792623208288/Edge-login-errors.png",
+      "sha256": "c7276739e7130b121eb0743c2e0d7d63d7c12dff49bfe013e94170a75978d637"
+    },
+    {
+      "source": "backend/target/l08-public-browser-1792623208288/resultado.json",
+      "archived": "navegadores/1792623208288/resultado.json",
+      "sha256": "2889eb07c8e793ff949f267b63785bb4bc0e40b041b25f00bfbda53dd21cd070"
+    },
+    {
+      "source": "backend/target/l08-public-browser-1792623493315/Chrome-css-zoom-200.png",
+      "archived": "navegadores/1792623493315/Chrome-css-zoom-200.png",
+      "sha256": "e693b8b139d609d57be2753ce3a9aa359866312352b9a23a7ff7e0bd90c5f918"
+    },
+    {
+      "source": "backend/target/l08-public-browser-1792623493315/Chrome-login-errors.png",
+      "archived": "navegadores/1792623493315/Chrome-login-errors.png",
+      "sha256": "bd268a8cf13412bb28a9707a1692df484b43a207bc7990cde1955a2aeef604de"
+    },
+    {
+      "source": "backend/target/l08-public-browser-1792623493315/Edge-css-zoom-200.png",
+      "archived": "navegadores/1792623493315/Edge-css-zoom-200.png",
+      "sha256": "66a5bdb637513983a43b6ae6af7a101c847c8f46c9d5f5f6f6a2fbfc21c58480"
+    },
+    {
+      "source": "backend/target/l08-public-browser-1792623493315/Edge-login-errors.png",
+      "archived": "navegadores/1792623493315/Edge-login-errors.png",
+      "sha256": "c7276739e7130b121eb0743c2e0d7d63d7c12dff49bfe013e94170a75978d637"
+    },
+    {
+      "source": "backend/target/l08-public-browser-1792623493315/resultado.json",
+      "archived": "navegadores/1792623493315/resultado.json",
+      "sha256": "bd20c967cbeb8c56b2f55e823fc78fa6dc8f8f3ced7e26ae6992bd02ad35b7a5"
+    }
+  ]
+}

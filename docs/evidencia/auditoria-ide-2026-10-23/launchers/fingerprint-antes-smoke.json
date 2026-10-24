@@ -1,0 +1,706 @@
+{
+    "startedAtUtc":  "2026-10-23T16:03:22.2013176+00:00",
+    "finishedAtUtc":  "2026-10-23T16:03:23.9012824+00:00",
+    "result":  "PASS_TWO_DATABASE_READONLY_CONTENT_FINGERPRINTS",
+    "databases":  [
+                      {
+                          "database":  "solucion_ruta_fija_1",
+                          "tableCount":  16,
+                          "tables":  [
+                                         {
+                                             "table":  "announcement",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "announcement_receipt",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "app_user",
+                                             "rows":  3,
+                                             "contentSha256":  "a820452e4702635bfaf459fd20a1151f21e8e6c900229ea843e14761fd2da318"
+                                         },
+                                         {
+                                             "table":  "assignment",
+                                             "rows":  2,
+                                             "contentSha256":  "0d40c664465d8d18fe861cf8e0f5026d80bad643d1189927940e6c0d6759c9c5"
+                                         },
+                                         {
+                                             "table":  "audit_event",
+                                             "rows":  91,
+                                             "contentSha256":  "2b81c39ade1c9d219fcbafac2d8ef2b12847aa35627ea83703e4c81140bb445f"
+                                         },
+                                         {
+                                             "table":  "driver",
+                                             "rows":  2,
+                                             "contentSha256":  "d1fca3936690a779bb06ed268fd41c2966ed8ba1ca761b4cc04a2484b0f4afcd"
+                                         },
+                                         {
+                                             "table":  "driver_current_location",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "driver_vehicle_link",
+                                             "rows":  3,
+                                             "contentSha256":  "8e4bd004ecf31b605d584d5e4b7db634e0c234fa41fac235f7173ce0b602a73d"
+                                         },
+                                         {
+                                             "table":  "flyway_schema_history",
+                                             "rows":  12,
+                                             "contentSha256":  "ff6e5660766306c54e8aa6f3bb99d62352e9d345bfc941b9415f02c1e8c881cd"
+                                         },
+                                         {
+                                             "table":  "group_coordinator",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "incident",
+                                             "rows":  3,
+                                             "contentSha256":  "f7987e7d0daa65f16f29c429d36a6b280b60a89aec646dddecade94bfddb5439"
+                                         },
+                                         {
+                                             "table":  "mobile_command_receipt",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "organization",
+                                             "rows":  1,
+                                             "contentSha256":  "1f80fd3dc07eced9a7606986cf248476f2afd4d174cd885682f6493681f6e063"
+                                         },
+                                         {
+                                             "table":  "refresh_token",
+                                             "rows":  34,
+                                             "contentSha256":  "b5f655b24453c7965c93d4cb22e0f83129d08b7ffa1a58674bf77f58c92f6708"
+                                         },
+                                         {
+                                             "table":  "transport_group",
+                                             "rows":  1,
+                                             "contentSha256":  "0da225e7f5a4693a1797c9819321647427c20fa4b650ff13b5549916ab4390ea"
+                                         },
+                                         {
+                                             "table":  "vehicle",
+                                             "rows":  2,
+                                             "contentSha256":  "295ed249a082faea3ee9764143844c9858b4a361723705cb1706d336023831bc"
+                                         }
+                                     ],
+                          "pilotLedger":  null,
+                          "adminTermsAcceptances":  null,
+                          "flyway":  [
+                                         "1|SQL|true",
+                                         "2|SQL|true",
+                                         "3|SQL|true",
+                                         "4|SQL|true",
+                                         "5|SQL|true",
+                                         "6|SQL|true",
+                                         "7|SQL|true",
+                                         "8|SQL|true",
+                                         "9|SQL|true",
+                                         "10|SQL|true",
+                                         "11|SQL|true",
+                                         "12|SQL|true"
+                                     ],
+                          "readOnlyRepeatableReadSnapshot":  true
+                      },
+                      {
+                          "database":  "ruta_fija_test",
+                          "tableCount":  105,
+                          "tables":  [
+                                         {
+                                             "table":  "admin_activation",
+                                             "rows":  2,
+                                             "contentSha256":  "3cd70a2d66ec99735b11c38f62af53598f905dab5973887d819b8d0a64d79484"
+                                         },
+                                         {
+                                             "table":  "admin_activation_event",
+                                             "rows":  11,
+                                             "contentSha256":  "13c6c3e0651e87fc456a28e7d0f0d4e32aefc4f1621e1371415ef755005de247"
+                                         },
+                                         {
+                                             "table":  "admin_security_revocation",
+                                             "rows":  1,
+                                             "contentSha256":  "14a05fc790ad43e2c8630202b22706471243787f71b2e303c0669335d2260417"
+                                         },
+                                         {
+                                             "table":  "admin_terms_acceptance",
+                                             "rows":  2,
+                                             "contentSha256":  "afb99b7e2fd7ff57e7f57ceae83728642be22c535692eef081eba51f570bfc7b"
+                                         },
+                                         {
+                                             "table":  "admin_terms_document",
+                                             "rows":  1,
+                                             "contentSha256":  "d4c731ebc5fd6f87ae5c6cdce1f3bd9817f89746ae2c4c54adc110c67838756e"
+                                         },
+                                         {
+                                             "table":  "announcement",
+                                             "rows":  3,
+                                             "contentSha256":  "b8cc00b95c806f5c318f44ddd09f54a337e85fcf43df054e0d86f0e2bdd5dde1"
+                                         },
+                                         {
+                                             "table":  "announcement_receipt",
+                                             "rows":  2,
+                                             "contentSha256":  "a1c64237cb3e25797f3d61e719e2840b6648339e20a54c2a940fce3abc5f35aa"
+                                         },
+                                         {
+                                             "table":  "announcement_recipient",
+                                             "rows":  2,
+                                             "contentSha256":  "0868c0d1fffb6bfc721629e5a230ac706390752a4eb3d0794166a3e274eeee12"
+                                         },
+                                         {
+                                             "table":  "app_user",
+                                             "rows":  12,
+                                             "contentSha256":  "d5ef0f1eee1ef326c74969bca760f3d71801efd8910fb4c29a2067e3679e0715"
+                                         },
+                                         {
+                                             "table":  "assignment",
+                                             "rows":  13,
+                                             "contentSha256":  "b55dbe61fe6087a8046feaeb93d07d6cb6063972fdc538a0a4871278d17e395f"
+                                         },
+                                         {
+                                             "table":  "assignment_group_snapshot",
+                                             "rows":  13,
+                                             "contentSha256":  "467c0744bc635f034aa25a72b68f3006fd44a5d1bd7110aad458b8052c478749"
+                                         },
+                                         {
+                                             "table":  "assignment_route_declaration",
+                                             "rows":  5,
+                                             "contentSha256":  "5c8204e9d547f7306a643feb6fafee346eb2eb3c341654d7c7f8631f3b51d14b"
+                                         },
+                                         {
+                                             "table":  "assignment_route_history",
+                                             "rows":  12,
+                                             "contentSha256":  "ba90d305e0f5f1a3b0e65fa772cb113514a54b75d1bb452ed3cafa8a6440eed6"
+                                         },
+                                         {
+                                             "table":  "assignment_route_replacement",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "audit_event",
+                                             "rows":  508,
+                                             "contentSha256":  "dd94256697d83202fac479852704e6286423e6a5a513719a79714dd49725c4f8"
+                                         },
+                                         {
+                                             "table":  "conductor_common_person_bridge",
+                                             "rows":  8,
+                                             "contentSha256":  "2f1e7351911ca75b790c25062a6313f30ebd87d0a16ac57484b3b1fc74f83384"
+                                         },
+                                         {
+                                             "table":  "conductor_document_revision",
+                                             "rows":  40,
+                                             "contentSha256":  "c4ffb952563abe2b829fe88967aaeb3560eafc374812120c2b2fde8879383781"
+                                         },
+                                         {
+                                             "table":  "conductor_onboarding_access_token",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "conductor_onboarding_email_challenge",
+                                             "rows":  9,
+                                             "contentSha256":  "addc1763be12db6811506246075d77b35a52f8460bc8c3ed84aa87941d071a12"
+                                         },
+                                         {
+                                             "table":  "conductor_onboarding_identity",
+                                             "rows":  9,
+                                             "contentSha256":  "c144ab61b2df0a49ae2ef39430c18ddbaabd4d8dd0940ab4f7677e6ee4e17ce3"
+                                         },
+                                         {
+                                             "table":  "conductor_onboarding_invitation_failure",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "conductor_onboarding_invitation_guard",
+                                             "rows":  13,
+                                             "contentSha256":  "6698f67034e2f5dd22c8658d53c42d0959f086901f4d7c2f3d67398dde402538"
+                                         },
+                                         {
+                                             "table":  "conductor_onboarding_request",
+                                             "rows":  9,
+                                             "contentSha256":  "cfa3d677e430a6a5a5eb6d4f26913984f2b1eed3ae150688429947bb64b440b8"
+                                         },
+                                         {
+                                             "table":  "conductor_onboarding_review_event",
+                                             "rows":  24,
+                                             "contentSha256":  "88bf76338b8fc98564e360d71d1b3db46128607e8d3af9e406d3924f1af90192"
+                                         },
+                                         {
+                                             "table":  "conductor_person_binding",
+                                             "rows":  8,
+                                             "contentSha256":  "22f6a40373207ab3fe57e90053e8204e67cd3ec2a432795e7a99cd7d3343b42f"
+                                         },
+                                         {
+                                             "table":  "conductor_recovery_request",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "driver",
+                                             "rows":  10,
+                                             "contentSha256":  "6df60255304543ad6b0b7611fb5d7c986e83ab0938e6f162a87760c9ae4f3002"
+                                         },
+                                         {
+                                             "table":  "driver_current_location",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "driver_qualification_control",
+                                             "rows":  8,
+                                             "contentSha256":  "bdb4e194e3a43bb2673ea97fa2037d47aebb5af03d0fd9ff2e7b5a95525c5b16"
+                                         },
+                                         {
+                                             "table":  "driver_unit_period",
+                                             "rows":  8,
+                                             "contentSha256":  "9e341e61cdbe34c4f3e2e99c7270e8de33d152443631dfb78c5aa9864f3b2c1d"
+                                         },
+                                         {
+                                             "table":  "driver_unit_request",
+                                             "rows":  1,
+                                             "contentSha256":  "86f54a75c95ccc6cd7d5b2fde3c28db8fe3d5e9bc0081933ae13c9086ab29d2b"
+                                         },
+                                         {
+                                             "table":  "driver_vehicle_link",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "email_otp_challenge",
+                                             "rows":  11,
+                                             "contentSha256":  "4e4af42c86e833c832f748609d1d4689a789f300c980084d17c951687a665a47"
+                                         },
+                                         {
+                                             "table":  "flyway_schema_history",
+                                             "rows":  51,
+                                             "contentSha256":  "35a4115e12f5d0743b4d62eb4891df1776e4cd7f0f8a90aafcae19fd68a5d35d"
+                                         },
+                                         {
+                                             "table":  "gps_access_request",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "gps_incident_evidence",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "group_coordinator",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "group_driver_membership",
+                                             "rows":  11,
+                                             "contentSha256":  "1b6ddf810d520682530551351e450805e30f66796d119c25b61bf9d3ca2b2e3c"
+                                         },
+                                         {
+                                             "table":  "group_membership_operation",
+                                             "rows":  2,
+                                             "contentSha256":  "c84fb2e00dc9757fdca50a692adad9c76abfd93531a50f8cb3f04d19feb1cd3f"
+                                         },
+                                         {
+                                             "table":  "group_vehicle_membership",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "incident",
+                                             "rows":  4,
+                                             "contentSha256":  "98363b6b107dfc7cf934fbcf1799e57ff070fc72c1d0b6e336b743682dcd9ad2"
+                                         },
+                                         {
+                                             "table":  "incident_action",
+                                             "rows":  10,
+                                             "contentSha256":  "bcac202f7d7fb71dc6501c3c17bc30d1854d5bc1454be1007e08f83a95b5a5a8"
+                                         },
+                                         {
+                                             "table":  "invitation_validation_account_guard",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "invitation_validation_failure",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "invitation_validation_origin_guard",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "mobile_command_receipt",
+                                             "rows":  27,
+                                             "contentSha256":  "e85acc5ca73585b216f051d6135455c3ba6fd223dcfc9c341419f456744e3261"
+                                         },
+                                         {
+                                             "table":  "mobile_preferences",
+                                             "rows":  1,
+                                             "contentSha256":  "b43f0a733add1b1f4759185bad4a701a367fe89db712113ae5af1cdcb42f71a2"
+                                         },
+                                         {
+                                             "table":  "operation_notice",
+                                             "rows":  85,
+                                             "contentSha256":  "6af791281d4ccfb9947d68492cc48c422e553b76c7c0df96687e86f14fd66739"
+                                         },
+                                         {
+                                             "table":  "organization",
+                                             "rows":  2,
+                                             "contentSha256":  "615f578d39862252b385bcd55394d546ba97a2e1665c06cdbc17c7d7021df57c"
+                                         },
+                                         {
+                                             "table":  "organization_invitation",
+                                             "rows":  10,
+                                             "contentSha256":  "bc6520adf6a11847323cef1347777221c74d070e4b5ce776a7a4b90e012a569a"
+                                         },
+                                         {
+                                             "table":  "person_identity",
+                                             "rows":  11,
+                                             "contentSha256":  "d344a9b945fd6b2ca420a010205a2169da86c3e4bb4b612b683e0dcf467f3a30"
+                                         },
+                                         {
+                                             "table":  "person_identity_hash_key",
+                                             "rows":  1,
+                                             "contentSha256":  "971f8c111c53c3e68194659918325ed3ef05e50d8d9765a97959768eff05fe74"
+                                         },
+                                         {
+                                             "table":  "pilot_account_creation",
+                                             "rows":  12,
+                                             "contentSha256":  "c6a3634d385fc2382f533a8ca7ea6ab72e5e005c3e6f56a9546136a38a7c4281"
+                                         },
+                                         {
+                                             "table":  "pilot_lifecycle",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "qualification_operation",
+                                             "rows":  45,
+                                             "contentSha256":  "51ae5bbc45ee2de17cd5e841a62bcec747255bcf7dc5fccd5c6c3d4a33e3cbbf"
+                                         },
+                                         {
+                                             "table":  "qualification_review",
+                                             "rows":  68,
+                                             "contentSha256":  "7e6ce29816374be4797a1dd981be4e93b5c04fa2e667c783afe2a386f6ce12df"
+                                         },
+                                         {
+                                             "table":  "qualification_service_attention",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "refresh_token",
+                                             "rows":  99,
+                                             "contentSha256":  "4f20c948bd7f7b1f72b9128676dc99ccfc0dbefe2fa0878d592e80d7adf283ba"
+                                         },
+                                         {
+                                             "table":  "report_emission",
+                                             "rows":  4,
+                                             "contentSha256":  "93837dc53465dbea3720acce730b886ff506cc5a81b0ccad15c38c1c6b5ac806"
+                                         },
+                                         {
+                                             "table":  "report_emission_content",
+                                             "rows":  4,
+                                             "contentSha256":  "530df0de4ffc6614f6b41623528bbd52ff839869eeaf277113c4195c917c926b"
+                                         },
+                                         {
+                                             "table":  "report_emission_request",
+                                             "rows":  4,
+                                             "contentSha256":  "b0c0aa595afb9a1bc5e58a9829f32c521f637b812e9fb474f01be0a3b8ad2810"
+                                         },
+                                         {
+                                             "table":  "report_emission_retirement",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "report_emission_series",
+                                             "rows":  2,
+                                             "contentSha256":  "43ef49fd3b4b8a7d04484319e4be16bce2b368bbe2ba94371d024f6d93223981"
+                                         },
+                                         {
+                                             "table":  "retention_audit_hold_approval",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "retention_audit_hold_request",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "retention_controlled_copy",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "retention_copy_evidence",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "retention_execution",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "retention_execution_authority",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "retention_personal_capability",
+                                             "rows":  5,
+                                             "contentSha256":  "8ea0a97fadc648b07de86820dd0c65468f620d014c82a0d638f1403e95a37473"
+                                         },
+                                         {
+                                             "table":  "retention_personal_delegation",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "retention_personal_hold_approval",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "retention_personal_hold_request",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "retention_personal_plan_delegation",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "retention_personal_retirement",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "retention_personal_row_authority",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "retention_plan",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "retention_plan_item",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "retention_policy_catalog",
+                                             "rows":  9,
+                                             "contentSha256":  "4ed1a5d67696495afde1b3b572874ae0e024bd9b4d8a7c4d702c52c8ec18ac6b"
+                                         },
+                                         {
+                                             "table":  "route_definition",
+                                             "rows":  6,
+                                             "contentSha256":  "42571e64d1b42297e2b5d7face3188985cea002d306e80862879bde2853f3335"
+                                         },
+                                         {
+                                             "table":  "route_operation",
+                                             "rows":  10,
+                                             "contentSha256":  "86e5b6abd96af278cb02c2977d02da4d618e0b3afa9cf19f23373054c0f40db5"
+                                         },
+                                         {
+                                             "table":  "route_version",
+                                             "rows":  6,
+                                             "contentSha256":  "fa5aa2d377e64847753d9ee9f9d3bb26e78ead80b120090ba02b52d4772edd4a"
+                                         },
+                                         {
+                                             "table":  "scheduled_service",
+                                             "rows":  10,
+                                             "contentSha256":  "f5e4da5b23f1c8f3b45afb177dc1514b9680e500f554f4d8ab3ef7a68e8ea4e3"
+                                         },
+                                         {
+                                             "table":  "scheduled_service_operation",
+                                             "rows":  6,
+                                             "contentSha256":  "7d4d411297c9a48cd3d787fc69e57fc6791b4e3742b412103e812b064624294c"
+                                         },
+                                         {
+                                             "table":  "service_attention",
+                                             "rows":  2,
+                                             "contentSha256":  "c35d9df968d5343ac28655a4f17fb96888114163b700d558cf91ac7f77ea11f8"
+                                         },
+                                         {
+                                             "table":  "service_attention_release",
+                                             "rows":  4,
+                                             "contentSha256":  "f0e41ef1006c4da4371048273918cbfc02b845833b1925c037a97bfe5062aa5a"
+                                         },
+                                         {
+                                             "table":  "service_closure_notice",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "service_execution_segment",
+                                             "rows":  9,
+                                             "contentSha256":  "f56aa3231cbf0cf809cf57a24495390a28bd67638b7c77be92a1c966c696f450"
+                                         },
+                                         {
+                                             "table":  "service_gps_point",
+                                             "rows":  101,
+                                             "contentSha256":  "42dff99bc24b45bc4ee1df6cbb4f524265a276ee60cec3db1fbd7344d5316aac"
+                                         },
+                                         {
+                                             "table":  "service_handover",
+                                             "rows":  2,
+                                             "contentSha256":  "a503dfd737c7575f90adf118a3717c4ed8795541db08f437ea7a355d2ffbe8a8"
+                                         },
+                                         {
+                                             "table":  "service_handover_resolution",
+                                             "rows":  2,
+                                             "contentSha256":  "8622e82b90969454a09ea46549f03079d91e7cd170ad82835f62c29822118fba"
+                                         },
+                                         {
+                                             "table":  "service_time_correction",
+                                             "rows":  1,
+                                             "contentSha256":  "4d014e0b14fc80155c06a221321f5df9bd2fe4bcf9d9f266c30e6d0da37f4209"
+                                         },
+                                         {
+                                             "table":  "service_time_correction_segment",
+                                             "rows":  1,
+                                             "contentSha256":  "ec2a0233ce0ff3f99610b6e1e019c0f354d8cefb82ec6e761fc0d71669de3b40"
+                                         },
+                                         {
+                                             "table":  "service_time_request",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         },
+                                         {
+                                             "table":  "service_type",
+                                             "rows":  7,
+                                             "contentSha256":  "d4fc67bfc1d6143e0e81b9f5e9441c4a69b6d53beb12603b470c52223ecff69a"
+                                         },
+                                         {
+                                             "table":  "service_type_operation",
+                                             "rows":  10,
+                                             "contentSha256":  "4cbc5fe13c64060603f209eecb304a89932eb1df2cd537f9f1751a74d16ddc89"
+                                         },
+                                         {
+                                             "table":  "service_type_version",
+                                             "rows":  7,
+                                             "contentSha256":  "3a4a7b1d1dc675464678d9eff295ef8df4e8948c0f935b436ea8ae82e384b29c"
+                                         },
+                                         {
+                                             "table":  "super_admin_recovery_challenge",
+                                             "rows":  2,
+                                             "contentSha256":  "315f7abf92b7899f54d613cd0113e27950582e485543790d2c64ee27110c93bc"
+                                         },
+                                         {
+                                             "table":  "super_admin_recovery_credential",
+                                             "rows":  1,
+                                             "contentSha256":  "db58ad24727e791c0ace0cfbb72e18b29ed0d58a04e0488a6c693d97c65ee9d8"
+                                         },
+                                         {
+                                             "table":  "transport_group",
+                                             "rows":  10,
+                                             "contentSha256":  "f6e6774d16e7915201380ee1ef60f414b3f791d44b5a7452fabecbca5127099f"
+                                         },
+                                         {
+                                             "table":  "vehicle",
+                                             "rows":  11,
+                                             "contentSha256":  "3b3ef9d64af0d8ee3bbb260410e8e2d27d183a478f965c0bec56e8606bc5ab92"
+                                         },
+                                         {
+                                             "table":  "vehicle_maintenance",
+                                             "rows":  1,
+                                             "contentSha256":  "eadf6647e4ba8a3b085e7e4d5b0ffd997243a9534b6e39f11a5f63ce9ed87ebe"
+                                         },
+                                         {
+                                             "table":  "vehicle_maintenance_control",
+                                             "rows":  1,
+                                             "contentSha256":  "21be68c15de219dcd3f8e8574ac96019c5eb4b8cf721dca242ec310e6d51d1d0"
+                                         },
+                                         {
+                                             "table":  "vehicle_maintenance_operation",
+                                             "rows":  2,
+                                             "contentSha256":  "f03be23a3eac7f28e4d0a144518ea0abe2358b5e7fc37eb954f290927f2a121e"
+                                         },
+                                         {
+                                             "table":  "vehicle_plate_revision",
+                                             "rows":  0,
+                                             "contentSha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                                         }
+                                     ],
+                          "pilotLedger":  [
+                                              "ADMIN|3",
+                                              "CONDUCTOR|8",
+                                              "SUPER_ADMIN|1"
+                                          ],
+                          "adminTermsAcceptances":  [
+                                                        "2"
+                                                    ],
+                          "flyway":  [
+                                         "1|SQL|true",
+                                         "2|SQL|true",
+                                         "3|SQL|true",
+                                         "4|SQL|true",
+                                         "5|SQL|true",
+                                         "6|SQL|true",
+                                         "7|SQL|true",
+                                         "8|SQL|true",
+                                         "9|SQL|true",
+                                         "10|SQL|true",
+                                         "REPEATABLE|SQL|true",
+                                         "11|SQL|true",
+                                         "12|SQL|true",
+                                         "13|SQL|true",
+                                         "14|SQL|true",
+                                         "15|SQL|true",
+                                         "16|SQL|true",
+                                         "17|SQL|true",
+                                         "18|SQL|true",
+                                         "19|SQL|true",
+                                         "20|SQL|true",
+                                         "21|SQL|true",
+                                         "22|SQL|true",
+                                         "23|SQL|true",
+                                         "24|SQL|true",
+                                         "25|SQL|true",
+                                         "26|SQL|true",
+                                         "27|SQL|true",
+                                         "28|SQL|true",
+                                         "29|SQL|true",
+                                         "30|SQL|true",
+                                         "31|SQL|true",
+                                         "32|SQL|true",
+                                         "33|SQL|true",
+                                         "34|SQL|true",
+                                         "35|SQL|true",
+                                         "36|SQL|true",
+                                         "37|SQL|true",
+                                         "38|SQL|true",
+                                         "39|SQL|true",
+                                         "40|SQL|true",
+                                         "41|SQL|true",
+                                         "42|SQL|true",
+                                         "43|SQL|true",
+                                         "44|SQL|true",
+                                         "45|SQL|true",
+                                         "46|SQL|true",
+                                         "47|SQL|true",
+                                         "48|SQL|true",
+                                         "49|SQL|true",
+                                         "50|SQL|true"
+                                     ],
+                          "readOnlyRepeatableReadSnapshot":  true
+                      }
+                  ],
+    "rowContentsExported":  false,
+    "dataChanged":  false,
+    "purpose":  "Before/after smoke preservation, table SHA256 from canonical JSONB row hashes ordered, UTC, read-only consistent snapshot per database"
+}

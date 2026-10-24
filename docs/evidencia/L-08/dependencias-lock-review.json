@@ -1,0 +1,1094 @@
+{
+  "result": "PASS_METADATA_ONLY_NOT_TESTS",
+  "changed": [
+    {
+      "path": "node_modules/@acemir/cssom",
+      "before": "0.9.31",
+      "after": "0.9.32"
+    },
+    {
+      "path": "node_modules/@angular-devkit/architect",
+      "before": "0.2201.6",
+      "after": "0.2202.3"
+    },
+    {
+      "path": "node_modules/@angular-devkit/core",
+      "before": "22.1.6",
+      "after": "22.2.3"
+    },
+    {
+      "path": "node_modules/@angular-devkit/schematics",
+      "before": "22.1.6",
+      "after": "22.2.3"
+    },
+    {
+      "path": "node_modules/@angular/build",
+      "before": "22.1.6",
+      "after": "22.2.3"
+    },
+    {
+      "path": "node_modules/@angular/cli",
+      "before": "22.1.6",
+      "after": "22.2.3"
+    },
+    {
+      "path": "node_modules/@angular/common",
+      "before": "22.1.4",
+      "after": "22.2.3"
+    },
+    {
+      "path": "node_modules/@angular/compiler",
+      "before": "22.1.4",
+      "after": "22.2.3"
+    },
+    {
+      "path": "node_modules/@angular/compiler-cli",
+      "before": "22.1.4",
+      "after": "22.2.3"
+    },
+    {
+      "path": "node_modules/@angular/compiler-cli/node_modules/@babel/core",
+      "before": null,
+      "after": "8.0.1"
+    },
+    {
+      "path": "node_modules/@angular/compiler-cli/node_modules/@babel/core/node_modules/convert-source-map",
+      "before": null,
+      "after": "2.0.0"
+    },
+    {
+      "path": "node_modules/@angular/core",
+      "before": "22.1.4",
+      "after": "22.2.3"
+    },
+    {
+      "path": "node_modules/@angular/forms",
+      "before": "22.1.4",
+      "after": "22.2.3"
+    },
+    {
+      "path": "node_modules/@angular/platform-browser",
+      "before": "22.1.4",
+      "after": "22.2.3"
+    },
+    {
+      "path": "node_modules/@angular/router",
+      "before": "22.1.4",
+      "after": "22.2.3"
+    },
+    {
+      "path": "node_modules/@babel/code-frame",
+      "before": "8.0.0",
+      "after": "8.0.6"
+    },
+    {
+      "path": "node_modules/@babel/compat-data",
+      "before": "8.0.0",
+      "after": "8.0.5"
+    },
+    {
+      "path": "node_modules/@babel/core",
+      "before": "8.0.1",
+      "after": "8.0.5"
+    },
+    {
+      "path": "node_modules/@babel/generator",
+      "before": "8.0.0",
+      "after": "8.0.6"
+    },
+    {
+      "path": "node_modules/@babel/generator/node_modules/@jridgewell/gen-mapping",
+      "before": null,
+      "after": "0.4.0-beta.0"
+    },
+    {
+      "path": "node_modules/@babel/helper-compilation-targets",
+      "before": "8.0.0",
+      "after": "8.0.7"
+    },
+    {
+      "path": "node_modules/@babel/helper-compilation-targets/node_modules/verkit",
+      "before": null,
+      "after": "0.5.0"
+    },
+    {
+      "path": "node_modules/@babel/helper-globals",
+      "before": "8.0.0",
+      "after": "8.0.6"
+    },
+    {
+      "path": "node_modules/@babel/helper-string-parser",
+      "before": "8.0.0",
+      "after": "8.0.6"
+    },
+    {
+      "path": "node_modules/@babel/helper-validator-identifier",
+      "before": "8.0.4",
+      "after": "8.0.6"
+    },
+    {
+      "path": "node_modules/@babel/helpers",
+      "before": "8.0.0",
+      "after": "8.0.7"
+    },
+    {
+      "path": "node_modules/@babel/parser",
+      "before": "8.0.4",
+      "after": "8.0.7"
+    },
+    {
+      "path": "node_modules/@babel/traverse",
+      "before": "8.0.4",
+      "after": "8.0.7"
+    },
+    {
+      "path": "node_modules/@babel/traverse/node_modules/obug",
+      "before": null,
+      "after": "3.0.0"
+    },
+    {
+      "path": "node_modules/@babel/types",
+      "before": "8.0.4",
+      "after": "8.0.6"
+    },
+    {
+      "path": "node_modules/@bufbuild/protobuf",
+      "before": null,
+      "after": "2.16.0"
+    },
+    {
+      "path": "node_modules/@csstools/color-helpers",
+      "before": "6.1.1",
+      "after": "6.1.2"
+    },
+    {
+      "path": "node_modules/@csstools/css-calc",
+      "before": "3.3.0",
+      "after": "3.4.3"
+    },
+    {
+      "path": "node_modules/@csstools/css-color-parser",
+      "before": "4.2.1",
+      "after": "4.2.6"
+    },
+    {
+      "path": "node_modules/@csstools/css-parser-algorithms",
+      "before": "4.0.0",
+      "after": "4.0.2"
+    },
+    {
+      "path": "node_modules/@csstools/css-syntax-patches-for-csstree",
+      "before": "1.1.9",
+      "after": "1.1.15"
+    },
+    {
+      "path": "node_modules/@csstools/css-tokenizer",
+      "before": "4.0.0",
+      "after": "4.0.2"
+    },
+    {
+      "path": "node_modules/@harperfast/extended-iterable",
+      "before": "1.0.3",
+      "after": "1.0.5"
+    },
+    {
+      "path": "node_modules/@inquirer/ansi",
+      "before": "2.0.7",
+      "after": "2.0.9"
+    },
+    {
+      "path": "node_modules/@inquirer/checkbox",
+      "before": "5.2.3",
+      "after": "5.2.7"
+    },
+    {
+      "path": "node_modules/@inquirer/checkbox/node_modules/@inquirer/type",
+      "before": null,
+      "after": "4.2.0"
+    },
+    {
+      "path": "node_modules/@inquirer/confirm",
+      "before": "6.1.1",
+      "after": "6.3.2"
+    },
+    {
+      "path": "node_modules/@inquirer/core",
+      "before": "11.2.1",
+      "after": "12.0.5"
+    },
+    {
+      "path": "node_modules/@inquirer/core/node_modules/@inquirer/type",
+      "before": null,
+      "after": "4.2.0"
+    },
+    {
+      "path": "node_modules/@inquirer/editor",
+      "before": "5.3.1",
+      "after": "5.3.5"
+    },
+    {
+      "path": "node_modules/@inquirer/editor/node_modules/@inquirer/type",
+      "before": null,
+      "after": "4.2.0"
+    },
+    {
+      "path": "node_modules/@inquirer/expand",
+      "before": "5.1.3",
+      "after": "5.1.7"
+    },
+    {
+      "path": "node_modules/@inquirer/expand/node_modules/@inquirer/type",
+      "before": null,
+      "after": "4.2.0"
+    },
+    {
+      "path": "node_modules/@inquirer/external-editor",
+      "before": "3.0.4",
+      "after": "3.0.6"
+    },
+    {
+      "path": "node_modules/@inquirer/figures",
+      "before": "2.0.8",
+      "after": "2.0.9"
+    },
+    {
+      "path": "node_modules/@inquirer/input",
+      "before": "5.1.4",
+      "after": "5.1.8"
+    },
+    {
+      "path": "node_modules/@inquirer/input/node_modules/@inquirer/type",
+      "before": null,
+      "after": "4.2.0"
+    },
+    {
+      "path": "node_modules/@inquirer/number",
+      "before": "4.2.1",
+      "after": "4.2.5"
+    },
+    {
+      "path": "node_modules/@inquirer/number/node_modules/@inquirer/type",
+      "before": null,
+      "after": "4.2.0"
+    },
+    {
+      "path": "node_modules/@inquirer/password",
+      "before": "5.2.0",
+      "after": "5.2.4"
+    },
+    {
+      "path": "node_modules/@inquirer/password/node_modules/@inquirer/type",
+      "before": null,
+      "after": "4.2.0"
+    },
+    {
+      "path": "node_modules/@inquirer/prompts",
+      "before": "8.5.2",
+      "after": "8.7.2"
+    },
+    {
+      "path": "node_modules/@inquirer/rawlist",
+      "before": "5.3.3",
+      "after": "5.3.7"
+    },
+    {
+      "path": "node_modules/@inquirer/rawlist/node_modules/@inquirer/type",
+      "before": null,
+      "after": "4.2.0"
+    },
+    {
+      "path": "node_modules/@inquirer/search",
+      "before": "4.3.1",
+      "after": "4.3.5"
+    },
+    {
+      "path": "node_modules/@inquirer/search/node_modules/@inquirer/type",
+      "before": null,
+      "after": "4.2.0"
+    },
+    {
+      "path": "node_modules/@inquirer/select",
+      "before": "5.2.3",
+      "after": "5.2.7"
+    },
+    {
+      "path": "node_modules/@inquirer/select/node_modules/@inquirer/type",
+      "before": null,
+      "after": "4.2.0"
+    },
+    {
+      "path": "node_modules/@inquirer/type",
+      "before": "4.1.0",
+      "after": "4.1.1"
+    },
+    {
+      "path": "node_modules/@listr2/prompt-adapter-inquirer",
+      "before": "4.2.5",
+      "after": "4.2.7"
+    },
+    {
+      "path": "node_modules/@modelcontextprotocol/core",
+      "before": null,
+      "after": "2.3.1"
+    },
+    {
+      "path": "node_modules/@modelcontextprotocol/server",
+      "before": null,
+      "after": "2.3.1"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-android-arm-eabi",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-android-arm64",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-darwin-arm64",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-darwin-x64",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-freebsd-x64",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-linux-arm-gnueabihf",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-linux-arm-musleabihf",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-linux-arm64-gnu",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-linux-arm64-musl",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-linux-ppc64-gnu",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-linux-riscv64-gnu",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-linux-riscv64-musl",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-linux-s390x-gnu",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-linux-x64-gnu",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-linux-x64-musl",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-openharmony-arm64",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-win32-arm64-msvc",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-win32-ia32-msvc",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-parser/binding-win32-x64-msvc",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@oxc-project/types",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/@rolldown/binding-android-arm-eabi",
+      "before": null,
+      "after": "1.2.8"
+    },
+    {
+      "path": "node_modules/@rolldown/binding-android-arm64",
+      "before": "1.2.0",
+      "after": "1.2.8"
+    },
+    {
+      "path": "node_modules/@rolldown/binding-darwin-arm64",
+      "before": "1.2.0",
+      "after": "1.2.8"
+    },
+    {
+      "path": "node_modules/@rolldown/binding-darwin-x64",
+      "before": "1.2.0",
+      "after": "1.2.8"
+    },
+    {
+      "path": "node_modules/@rolldown/binding-freebsd-x64",
+      "before": "1.2.0",
+      "after": "1.2.8"
+    },
+    {
+      "path": "node_modules/@rolldown/binding-linux-arm-gnueabihf",
+      "before": "1.2.0",
+      "after": "1.2.8"
+    },
+    {
+      "path": "node_modules/@rolldown/binding-linux-arm64-gnu",
+      "before": "1.2.0",
+      "after": "1.2.8"
+    },
+    {
+      "path": "node_modules/@rolldown/binding-linux-arm64-musl",
+      "before": "1.2.0",
+      "after": "1.2.8"
+    },
+    {
+      "path": "node_modules/@rolldown/binding-linux-ppc64-gnu",
+      "before": "1.2.0",
+      "after": "1.2.8"
+    },
+    {
+      "path": "node_modules/@rolldown/binding-linux-s390x-gnu",
+      "before": "1.2.0",
+      "after": "1.2.8"
+    },
+    {
+      "path": "node_modules/@rolldown/binding-linux-x64-gnu",
+      "before": "1.2.0",
+      "after": "1.2.8"
+    },
+    {
+      "path": "node_modules/@rolldown/binding-linux-x64-musl",
+      "before": "1.2.0",
+      "after": "1.2.8"
+    },
+    {
+      "path": "node_modules/@rolldown/binding-openharmony-arm64",
+      "before": "1.2.0",
+      "after": "1.2.8"
+    },
+    {
+      "path": "node_modules/@rolldown/binding-win32-arm64-msvc",
+      "before": "1.2.0",
+      "after": "1.2.8"
+    },
+    {
+      "path": "node_modules/@rolldown/binding-win32-x64-msvc",
+      "before": "1.2.0",
+      "after": "1.2.8"
+    },
+    {
+      "path": "node_modules/@schematics/angular",
+      "before": "22.1.6",
+      "after": "22.2.3"
+    },
+    {
+      "path": "node_modules/@vitest/expect",
+      "before": "4.1.11",
+      "after": "4.1.12"
+    },
+    {
+      "path": "node_modules/@vitest/mocker",
+      "before": "4.1.11",
+      "after": "4.1.12"
+    },
+    {
+      "path": "node_modules/@vitest/pretty-format",
+      "before": "4.1.11",
+      "after": "4.1.12"
+    },
+    {
+      "path": "node_modules/@vitest/runner",
+      "before": "4.1.11",
+      "after": "4.1.12"
+    },
+    {
+      "path": "node_modules/@vitest/snapshot",
+      "before": "4.1.11",
+      "after": "4.1.12"
+    },
+    {
+      "path": "node_modules/@vitest/spy",
+      "before": "4.1.11",
+      "after": "4.1.12"
+    },
+    {
+      "path": "node_modules/@vitest/utils",
+      "before": "4.1.11",
+      "after": "4.1.12"
+    },
+    {
+      "path": "node_modules/ansi-regex",
+      "before": "6.3.0",
+      "after": "6.4.0"
+    },
+    {
+      "path": "node_modules/baseline-browser-mapping",
+      "before": "2.11.20",
+      "after": "2.11.30"
+    },
+    {
+      "path": "node_modules/beasties",
+      "before": "0.4.3",
+      "after": "0.5.4"
+    },
+    {
+      "path": "node_modules/bidi-js",
+      "before": "1.0.3",
+      "after": "1.1.0"
+    },
+    {
+      "path": "node_modules/boolbase",
+      "before": "1.0.0",
+      "after": "2.0.0"
+    },
+    {
+      "path": "node_modules/browserslist",
+      "before": "4.28.8",
+      "after": "4.29.4"
+    },
+    {
+      "path": "node_modules/caniuse-lite",
+      "before": "1.0.30001810",
+      "after": "1.0.30001818"
+    },
+    {
+      "path": "node_modules/chai",
+      "before": "6.2.2",
+      "after": "6.3.0"
+    },
+    {
+      "path": "node_modules/colorjs.io",
+      "before": null,
+      "after": "0.7.1"
+    },
+    {
+      "path": "node_modules/css-select",
+      "before": "6.0.0",
+      "after": "7.0.0"
+    },
+    {
+      "path": "node_modules/css-what",
+      "before": "7.0.0",
+      "after": "8.0.0"
+    },
+    {
+      "path": "node_modules/dom-serializer",
+      "before": "2.0.0",
+      "after": "3.1.1"
+    },
+    {
+      "path": "node_modules/domelementtype",
+      "before": "2.3.0",
+      "after": "3.0.0"
+    },
+    {
+      "path": "node_modules/domhandler",
+      "before": "5.0.3",
+      "after": "6.0.1"
+    },
+    {
+      "path": "node_modules/domutils",
+      "before": "3.2.2",
+      "after": "4.0.2"
+    },
+    {
+      "path": "node_modules/electron-to-chromium",
+      "before": "1.5.416",
+      "after": "1.5.463"
+    },
+    {
+      "path": "node_modules/empathic",
+      "before": "2.0.1",
+      "after": "2.1.0"
+    },
+    {
+      "path": "node_modules/entities",
+      "before": "4.5.0",
+      "after": "8.1.0"
+    },
+    {
+      "path": "node_modules/fast-uri",
+      "before": "3.1.6",
+      "after": "3.1.9"
+    },
+    {
+      "path": "node_modules/flru",
+      "before": null,
+      "after": "1.0.2"
+    },
+    {
+      "path": "node_modules/get-east-asian-width",
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": "node_modules/has-flag",
+      "before": null,
+      "after": "4.0.0"
+    },
+    {
+      "path": "node_modules/htmlparser2",
+      "before": "10.1.0",
+      "after": "12.0.0"
+    },
+    {
+      "path": "node_modules/listr2",
+      "before": "11.0.0",
+      "after": "11.1.0"
+    },
+    {
+      "path": "node_modules/lmdb/node_modules/node-addon-api",
+      "before": null,
+      "after": "6.1.0"
+    },
+    {
+      "path": "node_modules/lru-cache",
+      "before": "11.5.2",
+      "after": "11.5.3"
+    },
+    {
+      "path": "node_modules/magic-string",
+      "before": "1.0.0",
+      "after": "1.4.1"
+    },
+    {
+      "path": "node_modules/nanoid",
+      "before": "3.3.18",
+      "after": "3.3.20"
+    },
+    {
+      "path": "node_modules/node-addon-api",
+      "before": "6.1.0",
+      "after": "7.1.1"
+    },
+    {
+      "path": "node_modules/node-releases",
+      "before": "2.0.54",
+      "after": "2.0.59"
+    },
+    {
+      "path": "node_modules/nth-check",
+      "before": "2.1.1",
+      "after": "3.0.1"
+    },
+    {
+      "path": "node_modules/obug",
+      "before": "2.1.4",
+      "after": "2.2.1"
+    },
+    {
+      "path": "node_modules/ordered-binary",
+      "before": "1.6.1",
+      "after": "1.6.3"
+    },
+    {
+      "path": "node_modules/oxc-parser",
+      "before": "0.142.0",
+      "after": "0.150.0"
+    },
+    {
+      "path": "node_modules/picomatch",
+      "before": "4.0.5",
+      "after": "4.0.7"
+    },
+    {
+      "path": "node_modules/piscina",
+      "before": "5.2.0",
+      "after": "5.3.2"
+    },
+    {
+      "path": "node_modules/postcss",
+      "before": "8.5.26",
+      "after": "8.5.31"
+    },
+    {
+      "path": "node_modules/postcss-safe-parser",
+      "before": "7.0.1",
+      "after": "7.1.0"
+    },
+    {
+      "path": "node_modules/rolldown",
+      "before": "1.2.0",
+      "after": "1.2.8"
+    },
+    {
+      "path": "node_modules/rolldown/node_modules/@oxc-project/types",
+      "before": "0.140.0",
+      "after": "0.149.0"
+    },
+    {
+      "path": "node_modules/sass",
+      "before": "1.101.0",
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-all-unknown",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-android-arm",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-android-arm64",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-android-riscv64",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-android-x64",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-darwin-arm64",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-darwin-x64",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-linux-arm",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-linux-arm64",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-linux-musl-arm",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-linux-musl-arm64",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-linux-musl-riscv64",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-linux-musl-x64",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-linux-riscv64",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-linux-x64",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-unknown-all",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-win32-arm64",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/sass-embedded-win32-x64",
+      "before": null,
+      "after": "1.104.1"
+    },
+    {
+      "path": "node_modules/slice-ansi",
+      "before": "9.0.0",
+      "after": "9.0.1"
+    },
+    {
+      "path": "node_modules/source-map",
+      "before": "0.7.6",
+      "after": "0.8.0"
+    },
+    {
+      "path": "node_modules/source-map-js",
+      "before": "1.2.1",
+      "after": "1.2.2"
+    },
+    {
+      "path": "node_modules/std-env",
+      "before": "4.2.0",
+      "after": "4.3.0"
+    },
+    {
+      "path": "node_modules/string-width",
+      "before": "8.2.2",
+      "after": "8.3.0"
+    },
+    {
+      "path": "node_modules/supports-color",
+      "before": null,
+      "after": "8.1.1"
+    },
+    {
+      "path": "node_modules/sync-child-process",
+      "before": null,
+      "after": "1.1.0"
+    },
+    {
+      "path": "node_modules/sync-message-port",
+      "before": null,
+      "after": "1.2.0"
+    },
+    {
+      "path": "node_modules/tinyexec",
+      "before": "1.3.0",
+      "after": "1.3.1"
+    },
+    {
+      "path": "node_modules/tinyrainbow",
+      "before": "3.1.1",
+      "after": "3.2.0"
+    },
+    {
+      "path": "node_modules/tldts",
+      "before": "7.4.11",
+      "after": "7.4.19"
+    },
+    {
+      "path": "node_modules/tldts-core",
+      "before": "7.4.11",
+      "after": "7.4.19"
+    },
+    {
+      "path": "node_modules/update-browserslist-db",
+      "before": "1.3.2",
+      "after": "1.3.4"
+    },
+    {
+      "path": "node_modules/varint",
+      "before": null,
+      "after": "6.0.0"
+    },
+    {
+      "path": "node_modules/verkit",
+      "before": null,
+      "after": "0.3.2"
+    },
+    {
+      "path": "node_modules/vite",
+      "before": "8.1.5",
+      "after": "8.3.0"
+    },
+    {
+      "path": "node_modules/vitest",
+      "before": "4.1.11",
+      "after": "4.1.12"
+    },
+    {
+      "path": "node_modules/wrap-ansi",
+      "before": "10.0.1",
+      "after": "10.0.2"
+    },
+    {
+      "path": "node_modules/ws",
+      "before": "8.21.3",
+      "after": "8.22.0"
+    },
+    {
+      "path": "node_modules/xxhash-wasm",
+      "before": null,
+      "after": "1.1.0"
+    },
+    {
+      "path": "node_modules/zod",
+      "before": "4.4.3",
+      "after": "4.6.6"
+    }
+  ],
+  "removed": [
+    "node_modules/@babel/helper-annotate-as-pure",
+    "node_modules/@babel/helper-split-export-declaration",
+    "node_modules/@babel/helper-split-export-declaration/node_modules/@babel/helper-string-parser",
+    "node_modules/@babel/helper-split-export-declaration/node_modules/@babel/helper-validator-identifier",
+    "node_modules/@babel/helper-split-export-declaration/node_modules/@babel/types",
+    "node_modules/@emnapi/core",
+    "node_modules/@emnapi/runtime",
+    "node_modules/@emnapi/wasi-threads",
+    "node_modules/@hono/node-server",
+    "node_modules/@inquirer/checkbox/node_modules/@inquirer/core",
+    "node_modules/@inquirer/editor/node_modules/@inquirer/core",
+    "node_modules/@inquirer/expand/node_modules/@inquirer/core",
+    "node_modules/@inquirer/input/node_modules/@inquirer/core",
+    "node_modules/@inquirer/number/node_modules/@inquirer/core",
+    "node_modules/@inquirer/password/node_modules/@inquirer/core",
+    "node_modules/@inquirer/rawlist/node_modules/@inquirer/core",
+    "node_modules/@inquirer/search/node_modules/@inquirer/core",
+    "node_modules/@inquirer/select/node_modules/@inquirer/core",
+    "node_modules/@modelcontextprotocol/sdk",
+    "node_modules/@napi-rs/wasm-runtime",
+    "node_modules/@oxc-parser/binding-wasm32-wasi",
+    "node_modules/@parcel/watcher/node_modules/node-addon-api",
+    "node_modules/@rolldown/binding-wasm32-wasi",
+    "node_modules/@tybys/wasm-util",
+    "node_modules/accepts",
+    "node_modules/body-parser",
+    "node_modules/body-parser/node_modules/content-type",
+    "node_modules/bytes",
+    "node_modules/call-bind-apply-helpers",
+    "node_modules/call-bound",
+    "node_modules/content-disposition",
+    "node_modules/content-type",
+    "node_modules/cookie",
+    "node_modules/cookie-signature",
+    "node_modules/cors",
+    "node_modules/cross-spawn",
+    "node_modules/depd",
+    "node_modules/dunder-proto",
+    "node_modules/ee-first",
+    "node_modules/encodeurl",
+    "node_modules/es-define-property",
+    "node_modules/es-errors",
+    "node_modules/es-object-atoms",
+    "node_modules/escape-html",
+    "node_modules/etag",
+    "node_modules/eventsource",
+    "node_modules/eventsource-parser",
+    "node_modules/express",
+    "node_modules/express-rate-limit",
+    "node_modules/finalhandler",
+    "node_modules/forwarded",
+    "node_modules/fresh",
+    "node_modules/function-bind",
+    "node_modules/get-intrinsic",
+    "node_modules/get-proto",
+    "node_modules/gopd",
+    "node_modules/graceful-fs",
+    "node_modules/has-symbols",
+    "node_modules/hasown",
+    "node_modules/hono",
+    "node_modules/htmlparser2/node_modules/entities",
+    "node_modules/http-errors",
+    "node_modules/inherits",
+    "node_modules/ip-address",
+    "node_modules/ipaddr.js",
+    "node_modules/is-promise",
+    "node_modules/isexe",
+    "node_modules/jose",
+    "node_modules/json-schema-typed",
+    "node_modules/math-intrinsics",
+    "node_modules/media-typer",
+    "node_modules/merge-descriptors",
+    "node_modules/mime-db",
+    "node_modules/mime-types",
+    "node_modules/negotiator",
+    "node_modules/negotiator/node_modules/content-type",
+    "node_modules/object-assign",
+    "node_modules/object-inspect",
+    "node_modules/on-finished",
+    "node_modules/once",
+    "node_modules/parse5-html-rewriting-stream/node_modules/entities",
+    "node_modules/parse5/node_modules/entities",
+    "node_modules/parseurl",
+    "node_modules/path-key",
+    "node_modules/path-to-regexp",
+    "node_modules/pkce-challenge",
+    "node_modules/proxy-addr",
+    "node_modules/qs",
+    "node_modules/range-parser",
+    "node_modules/raw-body",
+    "node_modules/router",
+    "node_modules/send",
+    "node_modules/serve-static",
+    "node_modules/setprototypeof",
+    "node_modules/shebang-command",
+    "node_modules/shebang-regex",
+    "node_modules/side-channel",
+    "node_modules/side-channel-list",
+    "node_modules/side-channel-map",
+    "node_modules/side-channel-weakmap",
+    "node_modules/statuses",
+    "node_modules/toidentifier",
+    "node_modules/type-is",
+    "node_modules/type-is/node_modules/content-type",
+    "node_modules/unpipe",
+    "node_modules/vary",
+    "node_modules/vite/node_modules/@emnapi/core",
+    "node_modules/vite/node_modules/@emnapi/runtime",
+    "node_modules/vite/node_modules/@oxc-project/types",
+    "node_modules/vite/node_modules/@rolldown/binding-android-arm64",
+    "node_modules/vite/node_modules/@rolldown/binding-darwin-arm64",
+    "node_modules/vite/node_modules/@rolldown/binding-darwin-x64",
+    "node_modules/vite/node_modules/@rolldown/binding-freebsd-x64",
+    "node_modules/vite/node_modules/@rolldown/binding-linux-arm-gnueabihf",
+    "node_modules/vite/node_modules/@rolldown/binding-linux-arm64-gnu",
+    "node_modules/vite/node_modules/@rolldown/binding-linux-arm64-musl",
+    "node_modules/vite/node_modules/@rolldown/binding-linux-ppc64-gnu",
+    "node_modules/vite/node_modules/@rolldown/binding-linux-s390x-gnu",
+    "node_modules/vite/node_modules/@rolldown/binding-linux-x64-gnu",
+    "node_modules/vite/node_modules/@rolldown/binding-linux-x64-musl",
+    "node_modules/vite/node_modules/@rolldown/binding-openharmony-arm64",
+    "node_modules/vite/node_modules/@rolldown/binding-wasm32-wasi",
+    "node_modules/vite/node_modules/@rolldown/binding-win32-arm64-msvc",
+    "node_modules/vite/node_modules/@rolldown/binding-win32-x64-msvc",
+    "node_modules/vite/node_modules/rolldown",
+    "node_modules/watchpack",
+    "node_modules/which",
+    "node_modules/wrappy",
+    "node_modules/zod-to-json-schema"
+  ],
+  "oldLockSha256": "ef8acd0b962310f52982cd9cc03b1084e2d842339ce98a4e1e5027cd5c82dc94",
+  "candidateLockSha256": "065e20d3eba8fc59bf1f9e9f573a3d5c00b7a70c260d9ed810d449c435483a0e",
+  "history": "Initial resolution against the installed22.1 tree refused ERESOLVE. A separate metadata-only directory resolves the coherent22.2.3 tree; no force/legacy-peer-deps."
+}

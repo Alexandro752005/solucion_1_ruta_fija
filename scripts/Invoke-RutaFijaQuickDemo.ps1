@@ -1,0 +1,421 @@
+[CmdletBinding()]
+param(
+    [ValidateSet('Start', 'Stop', 'Test')]
+    [string]$Action = 'Test',
+
+    [string]$CloudflaredPath,
+
+    [ValidateRange(30, 180)]
+    [int]$StartupTimeoutSeconds = 120
+)
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'RutaFijaRuntimeSchemaPolicy.ps1')
+
+$repoRoot = Split-Path -Parent $PSScriptRoot
+$runtimeDirectory = Join-Path $repoRoot '.runtime'
+$demoStatePath = Join-Path $runtimeDirectory 'ruta-fija-quick-demo.json'
+$demoUrlPath = Join-Path $runtimeDirectory 'ruta-fija-demo-url.txt'
+$nativeStatePath = Join-Path $runtimeDirectory 'ruta-fija-native-runtime.json'
+$nativeRuntimeScript = Join-Path $PSScriptRoot 'Invoke-RutaFijaNativeRuntime.ps1'
+$postgresqlScript = Join-Path $PSScriptRoot 'Invoke-RutaFijaPostgresqlLease.ps1'
+$installerScript = Join-Path $PSScriptRoot 'Install-RutaFijaCloudflared.ps1'
+$defaultCloudflaredPath = Join-Path $repoRoot '.tools\cloudflared.exe'
+$localCrmOrigin = 'http://127.0.0.1:4300'
+
+function Get-ProcessByIdSafely {
+    param([int]$ProcessId)
+
+    try {
+        return Get-Process -Id $ProcessId -ErrorAction Stop
+    } catch {
+        return $null
+    }
+}
+
+function Get-ProcessCommandLine {
+    param([int]$ProcessId)
+
+    $record = Get-CimInstance -ClassName Win32_Process -Filter ('ProcessId = {0}' -f $ProcessId) -ErrorAction SilentlyContinue
+    if ($null -eq $record -or $null -eq $record.CommandLine) {
+        return ''
+    }
+    return [string]$record.CommandLine
+}
+
+function Get-CloudflaredExecutable {
+    if (-not [string]::IsNullOrWhiteSpace($CloudflaredPath)) {
+        $candidate = [IO.Path]::GetFullPath($CloudflaredPath)
+    } elseif (Test-Path -LiteralPath $defaultCloudflaredPath -PathType Leaf) {
+        $candidate = $defaultCloudflaredPath
+    } else {
+        $command = Get-Command cloudflared.exe -ErrorAction SilentlyContinue
+        if ($null -ne $command) {
+            $candidate = $command.Source
+        } else {
+            throw 'CLOUDFLARED_MISSING_NO_AUTOMATIC_DOWNLOAD; tool installation requires a separate reviewed decision'
+        }
+    }
+
+    if (-not (Test-Path -LiteralPath $candidate -PathType Leaf)) {
+        throw 'No se encontró cloudflared. Ejecute Install-RutaFijaCloudflared.ps1.'
+    }
+    return [IO.Path]::GetFullPath($candidate)
+}
+
+function Assert-DemoPortsFree {
+    foreach($port in @(8080,4300)){
+        if(@(Get-NetTCPConnection -State Listen -LocalPort $port -ErrorAction SilentlyContinue).Count){
+            throw 'DEMO_REQUIRES_FREE_NATIVE_PORTS_BEFORE_ANY_PUBLIC_TUNNEL'
+        }
+    }
+}
+
+function Assert-DemoSchemaReady {
+    & (Join-Path $PSScriptRoot 'Test-RutaFijaLocalSecretPolicy.ps1') -Action Check -Execute | Out-Null
+    $settings=& (Join-Path $PSScriptRoot 'Import-RutaFijaNativeEnvironment.ps1') -Scope Runtime -PassThru
+    if($settings['SPRING_DATASOURCE_URL']-ne'jdbc:postgresql://127.0.0.1:5432/solucion_ruta_fija_1'-or$settings['SPRING_FLYWAY_USERNAME']-ne'rf_migrator'){
+        throw 'DEMO_LOCAL_DATABASE_IDENTITY_REFUSED'
+    }
+    $oldPassword=$env:PGPASSWORD;$oldOptions=$env:PGOPTIONS
+    try{
+        $env:PGPASSWORD=$settings['SPRING_FLYWAY_PASSWORD'];$env:PGOPTIONS='-c default_transaction_read_only=on -c statement_timeout=5000'
+        $query=Get-RuntimeSchemaObservationQuery
+        $rows=@(& 'C:/Program Files/PostgreSQL/16/bin/psql.exe' -X -w -v ON_ERROR_STOP=1 -h 127.0.0.1 -p 5432 -U rf_migrator -d solucion_ruta_fija_1 -At -c $query 2>&1)
+        Assert-RuntimeSchemaObservation -Database 'solucion_ruta_fija_1' -Rows $rows -ExitCode $LASTEXITCODE -TestDatabase $false
+    }finally{$env:PGPASSWORD=$oldPassword;$env:PGOPTIONS=$oldOptions}
+}
+
+function Assert-QuickTunnelConfiguration {
+    $cloudflaredDirectory = Join-Path ([Environment]::GetFolderPath('UserProfile')) '.cloudflared'
+    foreach ($name in @('config.yml', 'config.yaml')) {
+        $path = Join-Path $cloudflaredDirectory $name
+        if (Test-Path -LiteralPath $path -PathType Leaf) {
+            throw (
+                'Cloudflare Quick Tunnel no admite la configuración predeterminada detectada en {0}. ' +
+                'No se modificó ese archivo; muévalo temporalmente bajo su propio control.'
+            ) -f $path
+        }
+    }
+}
+
+function Get-DemoState {
+    if (-not (Test-Path -LiteralPath $demoStatePath -PathType Leaf)) {
+        return $null
+    }
+
+    try {
+        $state = Get-Content -LiteralPath $demoStatePath -Raw -Encoding UTF8 | ConvertFrom-Json -ErrorAction Stop
+    } catch {
+        throw 'El estado F5.2 no es JSON válido y no se administrarán procesos sin verificar.'
+    }
+
+    if ([int]$state.schemaVersion -ne 2 -or
+        [string]$state.projectRoot -ne [IO.Path]::GetFullPath($repoRoot) -or
+        [string]$state.publicOrigin -notmatch '^https://[a-z0-9-]+\.trycloudflare\.com$') {
+        throw 'El estado F5.2 no pertenece a este proyecto o contiene una URL inválida.'
+    }
+    foreach ($property in @('processId', 'executable', 'commandMarker', 'processStartedAtUtc')) {
+        if ($null -eq $state.cloudflared.PSObject.Properties[$property] -or
+            [string]::IsNullOrWhiteSpace([string]$state.cloudflared.$property)) {
+            throw 'El estado F5.2 no identifica completamente el proceso cloudflared.'
+        }
+    }
+    return $state
+}
+
+function Write-DemoState {
+    param([Parameter(Mandatory)]$State)
+
+    [IO.Directory]::CreateDirectory($runtimeDirectory) | Out-Null
+    $State | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath $demoStatePath -Encoding UTF8 -NoNewline
+    [string]$State.publicOrigin | Set-Content -LiteralPath $demoUrlPath -Encoding UTF8 -NoNewline
+}
+
+function Remove-DemoState {
+    Remove-Item -LiteralPath $demoStatePath -Force -ErrorAction SilentlyContinue
+    Remove-Item -LiteralPath $demoUrlPath -Force -ErrorAction SilentlyContinue
+}
+
+function Get-CloudflaredManagedState {
+    param([Parameter(Mandatory)]$State)
+
+    $processId = [int]$State.cloudflared.processId
+    $process = Get-ProcessByIdSafely -ProcessId $processId
+    $commandLine = if ($null -ne $process) { Get-ProcessCommandLine -ProcessId $processId } else { '' }
+    $expectedExecutable = [IO.Path]::GetFullPath([string]$State.cloudflared.executable)
+    $actualExecutable = if ($null -ne $process) {
+        try { [IO.Path]::GetFullPath($process.Path) } catch { '' }
+    } else {
+        ''
+    }
+    $isManaged = $null -ne $process -and
+        $process.ProcessName -ieq 'cloudflared' -and
+        $actualExecutable -ieq $expectedExecutable -and
+        $process.StartTime.ToUniversalTime().ToString('o') -eq [string]$State.cloudflared.processStartedAtUtc -and
+        $commandLine -match '\btunnel\b' -and
+        $commandLine.IndexOf([string]$State.cloudflared.commandMarker, [StringComparison]::OrdinalIgnoreCase) -ge 0
+
+    return [pscustomobject]@{
+        Process = $process
+        ProcessId = $processId
+        IsManaged = $isManaged
+        CommandLine = $commandLine
+    }
+}
+
+function Stop-ManagedCloudflared {
+    param([Parameter(Mandatory)]$State)
+
+    $managed = Get-CloudflaredManagedState -State $State
+    if ($null -eq $managed.Process) {
+        return
+    }
+    if (-not $managed.IsManaged) {
+        throw 'El PID registrado para cloudflared no coincide con la demo F5.2; no se detendrá.'
+    }
+
+    Stop-Process -Id $managed.ProcessId -ErrorAction Stop
+    $deadline = [DateTime]::UtcNow.AddSeconds(15)
+    while ([DateTime]::UtcNow -lt $deadline) {
+        if ($null -eq (Get-ProcessByIdSafely -ProcessId $managed.ProcessId)) {
+            return
+        }
+        Start-Sleep -Milliseconds 250
+    }
+    Stop-Process -Id $managed.ProcessId -Force -ErrorAction Stop
+}
+
+function Assert-LoopbackListener {
+    param(
+        [ValidateRange(1, 65535)][int]$Port,
+        [Parameter(Mandatory)][string]$Label
+    )
+
+    $listeners = @(Get-NetTCPConnection -State Listen -LocalPort $Port -ErrorAction SilentlyContinue)
+    if ($listeners.Count -eq 0) {
+        throw ('{0} no escucha en el puerto {1}.' -f $Label, $Port)
+    }
+    $publicListeners = @($listeners | Where-Object { $_.LocalAddress -notin @('127.0.0.1', '::1') })
+    if ($publicListeners.Count -gt 0) {
+        throw ('{0} expone el puerto {1} fuera de loopback.' -f $Label, $Port)
+    }
+}
+
+function Wait-QuickTunnelUrl {
+    param(
+        [Parameter(Mandatory)][string[]]$LogPaths,
+        [ValidateRange(10, 180)][int]$TimeoutSeconds
+    )
+
+    $deadline = [DateTime]::UtcNow.AddSeconds($TimeoutSeconds)
+    do {
+        foreach ($path in $LogPaths) {
+            if (Test-Path -LiteralPath $path -PathType Leaf) {
+                $content = Get-Content -LiteralPath $path -Raw -Encoding UTF8 -ErrorAction SilentlyContinue
+                if ([string]$content -match 'https://[a-z0-9-]+\.trycloudflare\.com') {
+                    return $Matches[0]
+                }
+            }
+        }
+        Start-Sleep -Milliseconds 500
+    } while ([DateTime]::UtcNow -lt $deadline)
+
+    throw 'cloudflared no entregó una URL trycloudflare.com dentro del tiempo permitido.'
+}
+
+function Wait-PublicCrm {
+    param(
+        [Parameter(Mandatory)][string]$PublicOrigin,
+        [ValidateRange(10, 180)][int]$TimeoutSeconds
+    )
+
+    $deadline = [DateTime]::UtcNow.AddSeconds($TimeoutSeconds)
+    $lastFailure = 'sin respuesta'
+    do {
+        try {
+            $response = Invoke-WebRequest -Uri ($PublicOrigin + '/') -UseBasicParsing -TimeoutSec 10 -ErrorAction Stop
+            $content = if ($response.Content -is [byte[]]) {
+                [Text.Encoding]::UTF8.GetString([byte[]]$response.Content)
+            } else {
+                [string]$response.Content
+            }
+            if ($response.StatusCode -eq 200 -and $content -match '<rf-root') {
+                return
+            }
+            $lastFailure = 'respuesta HTTP sin el CRM esperado'
+        } catch {
+            $lastFailure = $_.Exception.Message
+        }
+        Start-Sleep -Seconds 1
+    } while ([DateTime]::UtcNow -lt $deadline)
+
+    throw ('El CRM público no respondió correctamente: {0}' -f $lastFailure)
+}
+
+function Test-PublicApiRoute {
+    param([Parameter(Mandatory)][string]$PublicOrigin)
+
+    $statusCode = 0
+    try {
+        $requestParameters = @{
+            Uri = $PublicOrigin + '/api/v1/auth/me'
+            Headers = @{ Origin = $PublicOrigin }
+            UseBasicParsing = $true
+            TimeoutSec = 15
+            ErrorAction = 'Stop'
+        }
+        $response = Invoke-WebRequest @requestParameters
+        $statusCode = [int]$response.StatusCode
+    } catch {
+        if ($null -ne $_.Exception.Response) {
+            $statusCode = [int]$_.Exception.Response.StatusCode
+        } else {
+            throw
+        }
+    }
+    if ($statusCode -ne 401) {
+        throw ('La API pública debía responder 401 sin sesión y devolvió HTTP {0}.' -f $statusCode)
+    }
+}
+
+function Test-QuickDemo {
+    param($State = (Get-DemoState))
+
+    if ($null -eq $State) {
+        throw 'No existe una demo F5.2 activa.'
+    }
+    $managed = Get-CloudflaredManagedState -State $State
+    if (-not $managed.IsManaged) {
+        throw 'El proceso cloudflared de F5.2 no está activo o no es verificable.'
+    }
+    if ($managed.CommandLine -match '5432|postgres') {
+        throw 'La configuración del túnel contiene una referencia prohibida a PostgreSQL.'
+    }
+
+    $null = & $nativeRuntimeScript -Action Test
+    Assert-LoopbackListener -Port 5432 -Label 'PostgreSQL'
+    Assert-LoopbackListener -Port 8080 -Label 'Backend'
+    Assert-LoopbackListener -Port 4300 -Label 'CRM'
+    Wait-PublicCrm -PublicOrigin ([string]$State.publicOrigin) -TimeoutSeconds $StartupTimeoutSeconds
+    Test-PublicApiRoute -PublicOrigin ([string]$State.publicOrigin)
+
+    Write-Output (
+        'F5_2_QUICK_DEMO=PASS exposure=CRM_API_ONLY postgresql=PRIVATE ' +
+        'backend=LOOPBACK frontend=LOOPBACK tunnel=TEMPORARY'
+    )
+    Write-Output ('DEMO_URL={0}' -f [string]$State.publicOrigin)
+    Write-Output ('MOBILE_API={0}/api/v1' -f [string]$State.publicOrigin)
+}
+
+function Start-QuickDemo {
+    $existingState = Get-DemoState
+    if ($null -ne $existingState) {
+        Test-QuickDemo -State $existingState
+        Write-Output 'F5_2_QUICK_DEMO_ALREADY_RUNNING=PASS'
+        return
+    }
+    if (Test-Path -LiteralPath $nativeStatePath -PathType Leaf) {
+        throw 'El runtime local ya está activo. Ejecute finalizar_ruta_fija.bat antes de iniciar la demo F5.2.'
+    }
+
+    Assert-DemoPortsFree
+    Assert-QuickTunnelConfiguration
+    $cloudflared = Get-CloudflaredExecutable
+    [IO.Directory]::CreateDirectory($runtimeDirectory) | Out-Null
+    $stdoutPath = Join-Path $runtimeDirectory 'cloudflared.stdout.log'
+    $stderrPath = Join-Path $runtimeDirectory 'cloudflared.stderr.log'
+    Set-Content -LiteralPath $stdoutPath -Value $null -Encoding UTF8
+    Set-Content -LiteralPath $stderrPath -Value $null -Encoding UTF8
+
+    $postgresqlStarted = $false
+    $nativeStarted = $false
+    $cloudflaredProcess = $null
+    $state = $null
+    try {
+        & $postgresqlScript -Action Start -Execute
+        $postgresqlStarted = $true
+        Assert-DemoSchemaReady
+
+        $processParameters = @{
+            FilePath = $cloudflared
+            ArgumentList = @(
+                'tunnel',
+                '--no-autoupdate',
+                '--url', $localCrmOrigin,
+                '--http-host-header', '127.0.0.1:4300',
+                '--loglevel', 'info'
+            )
+            WorkingDirectory = $repoRoot
+            RedirectStandardOutput = $stdoutPath
+            RedirectStandardError = $stderrPath
+            WindowStyle = 'Hidden'
+            PassThru = $true
+        }
+        $cloudflaredProcess = Start-Process @processParameters
+
+        $publicOrigin = Wait-QuickTunnelUrl -LogPaths @($stdoutPath, $stderrPath) -TimeoutSeconds $StartupTimeoutSeconds
+        & $nativeRuntimeScript -Action Start -StartupTimeoutSeconds $StartupTimeoutSeconds -PublicDemoOrigin $publicOrigin
+        $nativeStarted = $true
+
+        $state = [ordered]@{
+            schemaVersion = 2
+            projectRoot = [IO.Path]::GetFullPath($repoRoot)
+            startedAtUtc = [DateTime]::UtcNow.ToString('o')
+            publicOrigin = $publicOrigin
+            cloudflared = [ordered]@{
+                processId = $cloudflaredProcess.Id
+                executable = $cloudflared
+                commandMarker = $localCrmOrigin
+                processStartedAtUtc = $cloudflaredProcess.StartTime.ToUniversalTime().ToString('o')
+            }
+        }
+        Write-DemoState -State $state
+        Test-QuickDemo -State ($state | ConvertTo-Json -Depth 4 | ConvertFrom-Json)
+        Write-Output (
+            'MOBILE_COMMAND=flutter run --debug --dart-define=RF_API_BASE_URL={0}/api/v1' -f
+            $publicOrigin
+        )
+        Write-Warning 'La URL es pública, aleatoria y temporal. Use solo datos de demostración y cierre al terminar.'
+    } catch {
+        $startupFailure = $_
+        if ($null -ne $state) {
+            try { Stop-ManagedCloudflared -State ($state | ConvertTo-Json -Depth 4 | ConvertFrom-Json) } catch {}
+        } elseif ($null -ne $cloudflaredProcess -and
+            $null -ne (Get-ProcessByIdSafely -ProcessId $cloudflaredProcess.Id)) {
+            Stop-Process -Id $cloudflaredProcess.Id -Force -ErrorAction SilentlyContinue
+        }
+        if ($nativeStarted) {
+            try { & $nativeRuntimeScript -Action Stop } catch {}
+        }
+        if ($postgresqlStarted) {
+            try { & $postgresqlScript -Action StopOwned -Execute } catch {}
+        }
+        Remove-DemoState
+        throw $startupFailure
+    }
+}
+
+function Stop-QuickDemo {
+    $state = Get-DemoState
+    if ($null -eq $state) {
+        if (Test-Path -LiteralPath $nativeStatePath -PathType Leaf) {
+            throw 'Existe un runtime local sin estado de demo; use finalizar_ruta_fija.bat.'
+        }
+        Write-Output 'F5_2_QUICK_DEMO_STOP=PASS state=absent'
+        return
+    }
+
+    Stop-ManagedCloudflared -State $state
+    & $nativeRuntimeScript -Action Stop
+    & $postgresqlScript -Action StopOwned -Execute
+    Remove-DemoState
+    Write-Output 'F5_2_QUICK_DEMO_STOP=PASS tunnel=stopped backend=stopped frontend=stopped postgresql=LEASE_POLICY_RESULT_REPORTED_ABOVE'
+}
+
+switch ($Action) {
+    'Start' { Start-QuickDemo }
+    'Stop' { Stop-QuickDemo }
+    'Test' { Test-QuickDemo }
+}

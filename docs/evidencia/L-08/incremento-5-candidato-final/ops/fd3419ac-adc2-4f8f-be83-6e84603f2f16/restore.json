@@ -1,0 +1,23 @@
+{
+    "result":  "PASS_SYNTHETIC_SQL_INTEGRITY",
+    "startedAt":  "2026-10-23T06:23:40.6340650+00:00",
+    "recoveredAt":  "2026-10-23T06:30:35.6597790+00:00",
+    "rtoSecondsNoClockReset":  415.025714,
+    "rtoLimitSeconds":  14400,
+    "rtoPass":  true,
+    "tablesCompared":  2,
+    "rowsRestored":  101,
+    "fingerprintsEqual":  true,
+    "sourceFingerprint":  "1|100|14fb31ebf26a623a6b48e07befbf6e67",
+    "restoredFingerprint":  "1|100|14fb31ebf26a623a6b48e07befbf6e67",
+    "constraints":  3,
+    "indexes":  3,
+    "sourceRowsAddedAfterSnapshot":  2,
+    "observedSnapshotAgeSeconds":  4.2161154,
+    "rpoObservedLocalAgeWithinHour":  true,
+    "designScheduleIntervalSeconds":  1800,
+    "designJobCeilingSeconds":  900,
+    "designMaximumSnapshotAgeSeconds":  2700,
+    "hourlyExecutionAccredited":  false,
+    "clientsAndWholeServerRecoveryAccredited":  false
+}

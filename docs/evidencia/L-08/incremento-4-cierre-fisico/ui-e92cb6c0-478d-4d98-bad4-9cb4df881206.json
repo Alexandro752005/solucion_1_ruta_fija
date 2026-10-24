@@ -1,0 +1,50 @@
+{
+    "observedAt":  "2026-10-23T04:45:55.9408450+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "action":  "click",
+    "label":  "Completar servicio",
+    "automatedUiInstrumentation":  true,
+    "humanAccessibilityConfirmation":  false,
+    "nodes":  [
+                  {
+                      "text":  "",
+                      "description":  "Ruta finalizada",
+                      "bounds":  "[168,850][912,994]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Declaras Ruta finalizada para tu servicio aceptado e iniciado. El servidor comprueba la evidencia de terminal disponible; declararlo no acredita todo el recorrido GPS.",
+                      "bounds":  "[168,1042][912,1672]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Cancelar",
+                      "bounds":  "[577,1744][888,1888]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Confirmar",
+                      "bounds":  "[495,1888][888,2032]",
+                      "class":  "android.widget.Button",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Dismiss",
+                      "bounds":  "[0,463][1080,2261]",
+                      "class":  "android.view.View",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  }
+              ]
+}

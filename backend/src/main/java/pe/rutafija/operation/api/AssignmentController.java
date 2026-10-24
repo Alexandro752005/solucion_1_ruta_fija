@@ -85,8 +85,8 @@ public class AssignmentController {
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(
-            summary = "Crear una asignación ADMIN_DIRECT o una solicitud MOBILE_CONFIRMATION",
-            description = "Si responseMode se omite se crea ADMIN_DIRECT en SCHEDULED. MOBILE_CONFIRMATION nace PENDING_RESPONSE "
+            summary = "Emitir una oferta que requiere aceptación de CONDUCTOR",
+            description = "También por omisión, MOBILE_CONFIRMATION nace PENDING_RESPONSE; el servidor fija el vencimiento "
                     + "y solo puede recibir respuesta desde /api/v1/mobile/assignments del conductor vinculado."
     )
     public ResponseEntity<AssignmentResponse> create(
@@ -97,6 +97,12 @@ public class AssignmentController {
         return ResponseEntity.status(result.created() ? HttpStatus.CREATED : HttpStatus.OK)
                 .cacheControl(CacheControl.noStore())
                 .body(result.assignment());
+    }
+
+    @GetMapping("/creation-operations/{key}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<AssignmentResponse> creationOperation(@PathVariable String key){
+        return ResponseEntity.ok().cacheControl(CacheControl.noStore()).body(operationService.creationOperation(key));
     }
 
     @GetMapping("/{assignmentId}")
@@ -146,7 +152,7 @@ public class AssignmentController {
 
     @PostMapping("/{assignmentId}/complete")
     @PreAuthorize("hasRole('ADMIN')")
-    @Operation(summary = "Completar una asignación en servicio")
+    @Operation(summary = "Alias administrativo bloqueado: solo CONDUCTOR declara Ruta finalizada")
     public ResponseEntity<AssignmentResponse> complete(
             @PathVariable UUID assignmentId,
             @Valid @RequestBody AssignmentVersionRequest request

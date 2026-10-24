@@ -1,0 +1,29 @@
+{
+  "classification": "LIVE_CONFIG_EVOLUTION_EXACT_OLD_BYTES_PRESERVED",
+  "files": [
+    {
+      "originalPath": ".vscode/settings.json",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/ide/settings.before.json",
+      "originalSha256": "8067c43c2d4b51dc2a450ac27a896fab7f18e8008f4e4dac3d2e99ff7f98d4c9",
+      "currentPath": ".vscode/settings.json",
+      "currentSha256": "b129b68e3807e4304b3033456fb1e37a7a2e31165c5fedb7006eadcf49d7a593"
+    },
+    {
+      "originalPath": "frontend/angular.json",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/frontend/angular.json.before",
+      "originalSha256": "0ef4062224b286134f7b7eba974ce4ba16d11ee64edbf0c3db188ac688bab39f",
+      "currentPath": "frontend/angular.json",
+      "currentSha256": "d3333389b35e47d16fdb07ed441904c38bab99e3d697a1cd392beaecfcc2a189"
+    },
+    {
+      "originalPath": "frontend/vitest-base.config.ts",
+      "backup": "docs/evidencia/auditoria-ide-2026-10-23/frontend/vitest-base.config.ts.before",
+      "originalSha256": "84b956b2b8a226756bbda842cf20e155ea6693253033358a9be12edf6f1e1396",
+      "currentPath": "frontend/vitest-base.config.mts",
+      "currentSha256": "84b956b2b8a226756bbda842cf20e155ea6693253033358a9be12edf6f1e1396"
+    }
+  ],
+  "oldManifestsRewritten": false,
+  "lintRulesChanged": false,
+  "dependenciesChanged": false
+}

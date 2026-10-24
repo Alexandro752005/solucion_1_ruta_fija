@@ -1,0 +1,12 @@
+{
+  "command": [
+    "npm.cmd",
+    "run",
+    "typecheck"
+  ],
+  "cwd": "D:\\UTP\\CICLO X UTP\\INTEGRADOR I\\APF3\\solucion_1_ruta_fija_3\\frontend",
+  "startedAt": "2026-10-23T16:13:15.871956+00:00",
+  "durationSeconds": 11.285376199986786,
+  "exitCode": 0,
+  "log": "typecheck.native.log"
+}

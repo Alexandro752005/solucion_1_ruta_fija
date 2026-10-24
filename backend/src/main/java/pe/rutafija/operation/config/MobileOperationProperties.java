@@ -15,4 +15,9 @@ public record MobileOperationProperties(
         @NotNull @DurationMin(seconds = 30) Duration locationCaptureMaxAge,
         @NotNull @DurationMin(seconds = 15) Duration pendingExpirySweep
 ) {
+    public MobileOperationProperties {
+        if((locationTtl!=null&&locationTtl.compareTo(Duration.ofDays(7))>0)
+                ||(locationCaptureMaxAge!=null&&locationCaptureMaxAge.compareTo(Duration.ofDays(7))>=0))
+            throw new IllegalArgumentException("GPS current TTL and capture tolerance must remain within the seven-day maximum.");
+    }
 }

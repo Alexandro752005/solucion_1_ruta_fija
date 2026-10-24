@@ -1,0 +1,153 @@
+{
+  "runId" : "860c1cdb-b062-469a-9a3f-156ea23bb656",
+  "createdAt" : "2026-10-23T00:58:38.129488800Z",
+  "scheduleOrigin" : "2026-10-24T00:58:38Z",
+  "participants" : [ {
+    "role" : "SUPER_ADMIN",
+    "accountId" : "6b7d8b2b-8121-4dc2-a253-67da57d957d7"
+  }, {
+    "role" : "ADMIN",
+    "accountId" : "47f695a1-67cd-4e0c-9345-db49ff7918a7",
+    "organizationId" : "a00b27e7-4950-4401-9dfd-14ba807889e0"
+  }, {
+    "role" : "ADMIN",
+    "accountId" : "b4be583d-1bdd-4b94-bbc9-47e829955495",
+    "organizationId" : "022eb255-81d9-4c54-ae98-f426d3f57126"
+  }, {
+    "role" : "ADMIN",
+    "accountId" : "968e1f8c-6b13-4cac-b413-df1db62bd5dd",
+    "organizationId" : "2c46fe32-4ad0-4851-87f3-5c78d43765bc"
+  }, {
+    "role" : "ADMIN",
+    "accountId" : "9fb98f08-adc7-45e6-9698-ee4f1e82fa9f",
+    "organizationId" : "c15cb9b0-4fef-4883-8f96-753d5ffb25a2"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "2879fdde-b7f7-4ecb-b5b8-7dd8c0daf2c8",
+    "organizationId" : "a00b27e7-4950-4401-9dfd-14ba807889e0",
+    "driverId" : "d4c15592-7e46-478b-9857-d590b2d3793d",
+    "vehicleId" : "6d626ac5-d672-4c3c-bb0b-c9fd1907e0f5"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "10be3225-e45e-443a-868c-eb2a7d8890fa",
+    "organizationId" : "a00b27e7-4950-4401-9dfd-14ba807889e0",
+    "driverId" : "3a40d0ca-7356-4a23-a5b7-d384d7efd90e",
+    "vehicleId" : "63a5cc27-316b-485a-9c28-91fa0b50e44e"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "9d55297f-7c45-4ec1-91cd-e32a72307379",
+    "organizationId" : "a00b27e7-4950-4401-9dfd-14ba807889e0",
+    "driverId" : "650d488a-946a-4d1a-8ff8-6b458552ccff",
+    "vehicleId" : "88a9fcfb-f10f-48e5-aeed-493d05ddec7f"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "05b236da-e02e-4532-9214-9ff326cf2305",
+    "organizationId" : "a00b27e7-4950-4401-9dfd-14ba807889e0",
+    "driverId" : "54d9d033-fc99-49a8-b108-861cef1b8832",
+    "vehicleId" : "8bcb1b6f-64b8-44d9-8bf5-3f6deb97888c"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "46892913-70fe-4a6f-874d-2450015f61c5",
+    "organizationId" : "a00b27e7-4950-4401-9dfd-14ba807889e0",
+    "driverId" : "0a9dac1b-e249-4445-b19a-c96e1e00f6f8",
+    "vehicleId" : "f288bfe3-0298-4a95-a7ce-e14055161d16"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "f58e00d5-70b1-4d4f-9adc-6a8e466da224",
+    "organizationId" : "022eb255-81d9-4c54-ae98-f426d3f57126",
+    "driverId" : "d957f165-fbe7-4d24-a2a0-f542c83947c4",
+    "vehicleId" : "c0f73f4b-2eee-4d90-b59f-da3d8e5957fa"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "d9b0a8e5-f705-4507-a839-3807b0e21801",
+    "organizationId" : "022eb255-81d9-4c54-ae98-f426d3f57126",
+    "driverId" : "5f7132e3-ebf0-4938-8b48-12f9d96a811c",
+    "vehicleId" : "94b467ed-d80b-46df-9a70-a6aeaf538b87"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "2309c565-14ac-4e3d-aacd-2d52250e5c10",
+    "organizationId" : "022eb255-81d9-4c54-ae98-f426d3f57126",
+    "driverId" : "8b99234c-541d-4f75-9bb5-2432620836f7",
+    "vehicleId" : "02099582-712c-40be-80a5-4e79ebe28b37"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "6cdd27a9-8f3e-4818-a627-860f93ab0cbb",
+    "organizationId" : "022eb255-81d9-4c54-ae98-f426d3f57126",
+    "driverId" : "7ce0f105-99cb-4648-b3c3-3cf6e0de12cf",
+    "vehicleId" : "36ba81f6-412b-4f12-b8db-a4b22576ddd4"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "082a5074-2bfe-492d-bba3-0731942e3588",
+    "organizationId" : "022eb255-81d9-4c54-ae98-f426d3f57126",
+    "driverId" : "0c183768-3fd0-403b-bc89-8e46c0da063c",
+    "vehicleId" : "9985133a-95d5-4565-9330-d9cccd61fb6b"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "765c27b3-2f56-4f1e-851b-df528a76c409",
+    "organizationId" : "2c46fe32-4ad0-4851-87f3-5c78d43765bc",
+    "driverId" : "4526afcb-bb69-4312-9b7b-5d9923cae55d",
+    "vehicleId" : "e9b1bd52-f9b7-4364-b719-aba11c8ae664"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "4286a5fa-32f2-4107-80ab-b984393eee96",
+    "organizationId" : "2c46fe32-4ad0-4851-87f3-5c78d43765bc",
+    "driverId" : "0e62c159-bdf6-46e4-bdc1-e79ebe5edc1b",
+    "vehicleId" : "d11dc02c-bf9d-404f-aa40-de6d497ae820"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "a5deb2a6-7ed0-4a1a-810c-bbc1aba36203",
+    "organizationId" : "2c46fe32-4ad0-4851-87f3-5c78d43765bc",
+    "driverId" : "84679fed-0a46-4752-b28e-caa89a438daf",
+    "vehicleId" : "c3d06dae-7201-43c9-b142-a285e335d6be"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "44fe698b-50b2-4633-bcf9-095c545737f0",
+    "organizationId" : "2c46fe32-4ad0-4851-87f3-5c78d43765bc",
+    "driverId" : "6376c7b7-838d-4216-8e94-6a167d56bfd0",
+    "vehicleId" : "07cb04f6-b757-45ce-ada8-07c0bde8fa7a"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "6dd7edb5-12ab-4c00-996d-d0b079c2cd1e",
+    "organizationId" : "2c46fe32-4ad0-4851-87f3-5c78d43765bc",
+    "driverId" : "3bc39caf-b07c-4568-ab5f-b0eea4095741",
+    "vehicleId" : "cb53069a-bc08-4322-9515-cb1b7dfb55b0"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "bd331553-e509-40f8-8216-68ba9fc44c8b",
+    "organizationId" : "c15cb9b0-4fef-4883-8f96-753d5ffb25a2",
+    "driverId" : "549cb40c-f7b4-4219-813c-9d1107327d3d",
+    "vehicleId" : "ce5e7a5f-b036-4394-8def-4cc1dd04c305"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "d878f212-8419-44e7-9283-f3eed663c104",
+    "organizationId" : "c15cb9b0-4fef-4883-8f96-753d5ffb25a2",
+    "driverId" : "da1eaf73-02db-4daf-9d0c-14c3659421d3",
+    "vehicleId" : "dd5b25ce-32c4-411d-a122-799ea8f0bf60"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "ea37e7eb-224c-4fed-b440-ba72207784fc",
+    "organizationId" : "c15cb9b0-4fef-4883-8f96-753d5ffb25a2",
+    "driverId" : "82c91a43-4642-492c-923e-e47e02fd4d04",
+    "vehicleId" : "8ab9fd39-619a-4a8f-87ef-9c44cdda78e4"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "82d1aa99-e1ea-4dcc-9dcd-050bcc524750",
+    "organizationId" : "c15cb9b0-4fef-4883-8f96-753d5ffb25a2",
+    "driverId" : "72102cc9-5938-450d-9b8d-a1070abc070e",
+    "vehicleId" : "dfb4d517-e239-4b51-a3a9-913a3d4d699a"
+  }, {
+    "role" : "CONDUCTOR",
+    "accountId" : "8e208634-39bf-4a72-8e35-ac385a46bbf1",
+    "organizationId" : "c15cb9b0-4fef-4883-8f96-753d5ffb25a2",
+    "driverId" : "a4cf11cb-10fc-4532-9d41-5ca8c81074b0",
+    "vehicleId" : "e17c9594-e139-49d7-ab17-4b9423735ee8"
+  } ],
+  "result" : "EN_CURSO_NOT_MEASURED",
+  "configuredActors" : 25,
+  "resumeCount" : 0,
+  "operations" : { },
+  "sampleCount" : 0,
+  "waves" : [ ],
+  "maxObservedHttpInflight" : 0,
+  "updatedAt" : "2026-10-23T00:58:38.129488800Z"
+}

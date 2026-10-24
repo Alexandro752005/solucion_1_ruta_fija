@@ -1,0 +1,32 @@
+{
+  "observedAt": "2026-10-21T17:24:50.131462+00:00",
+  "lot": "L-07",
+  "status": "VERIFICADA",
+  "completionType": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "contractVersion": "0.4.0",
+  "criteriaVerified": [
+    "CI-L07-01",
+    "CI-L07-02",
+    "CI-L07-03",
+    "CI-L07-04",
+    "CI-L07-05",
+    "CI-L07-06",
+    "CI-L07-07",
+    "CI-L07-08",
+    "CI-L07-09",
+    "CI-L07-10"
+  ],
+  "pendingLocalCriteria": [],
+  "runId": "6b496135-b86b-4c5b-938f-a60ddcfe32db",
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 6
+  },
+  "termsAcceptances": 2,
+  "TEST_CLEANUP_RELEASED": true,
+  "final3Intact": true,
+  "pilotEnabled": false,
+  "L08Started": false,
+  "L08Authorized": false
+}

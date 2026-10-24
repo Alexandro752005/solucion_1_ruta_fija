@@ -67,8 +67,8 @@ if (-not (Test-Path -LiteralPath $mobileRoot -PathType Container)) {
 $pubspec = Get-Utf8Text 'mobile\pubspec.yaml'
 Assert-Contains -Text $pubspec -Pattern '(?m)^name:\s*ruta_fija_conductor\r?$' -Description 'nombre de paquete Flutter estable'
 Assert-Contains -Text $pubspec -Pattern '(?m)^publish_to:\s*''none''\r?$' -Description 'paquete no publicable'
-if ($pubspec -match '(?m)^\s*(dio|geolocator|permission_handler|firebase_)\s*:') {
-    throw 'La base Flutter incorpora una dependencia posterior a F4.2.'
+if ($pubspec -match '(?m)^\s*(dio|permission_handler|firebase_)\s*:') {
+    throw 'La base Flutter incorpora una dependencia no aprobada.'
 }
 
 $environment = Get-Utf8Text 'mobile\lib\app\ruta_fija_environment.dart'
@@ -126,4 +126,4 @@ finally {
     Pop-Location
 }
 
-Write-Output "F4_1_FLUTTER_FOUNDATION=PASS flutter='$versionLine' m1=8/80 android=$androidToolchain manifest=PASS docker=0"
+Write-Output "F4_1_FLUTTER_FOUNDATION=PASS flutter='$versionLine' m1=8/80 android=$androidToolchain manifest=PASS"

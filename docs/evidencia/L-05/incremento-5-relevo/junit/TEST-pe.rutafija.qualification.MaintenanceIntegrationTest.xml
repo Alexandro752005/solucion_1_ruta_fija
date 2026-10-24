@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="pe.rutafija.qualification.MaintenanceIntegrationTest" time="9.394" tests="10" errors="0" skipped="0" failures="0" flakes="0">
+  <testcase name="canonicalPlateCannotBeRecreatedAcrossOrganizations" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="0.777">
+    </testcase>
+  <testcase name="documentsMustCoverTheReleaseDayAndOngoingServiceBlocksReturn" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="1.475">
+    </testcase>
+  <testcase name="aSecondUnfinishedJobAndMissingDocumentsPreventReturn" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="1.089">
+    </testcase>
+  <testcase name="materialUnitCorrectionCannotInvalidateCommittedServicesThroughTheOrdinaryForm" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="1.239">
+    </testcase>
+  <testcase name="cancelOnlyBeforeStartAndKeepOriginalRecords" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="0.952">
+    </testcase>
+  <testcase name="urgentPreservesOngoingServiceAndMarksFutureForReassignment" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="1.102">
+    </testcase>
+  <testcase name="idempotencyVersionsTenantAndRoleAreEnforced" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="0.764">
+    </testcase>
+  <testcase name="earlyReturnRequiresWorkAndDocumentsThenReleasesOnlyNextLimaDay" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="0.731">
+    </testcase>
+  <testcase name="preventiveUsesFullLimaDaysAndRemainsBlockedAfterEstimate" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="0.6">
+    </testcase>
+  <testcase name="previewIncludesEveryFutureCommitmentBeyondTheEstimatedEnd" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="0.64">
+    </testcase>
+</testsuite>

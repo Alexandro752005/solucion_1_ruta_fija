@@ -1,0 +1,566 @@
+{
+    "recordedAtUtc":  "2026-10-23T16:05:05.8256235+00:00",
+    "engine":  "5.1.19041.6456",
+    "command":  "Windows PowerShell Parser.ParseFile on every live scripts/**/*.ps1; read only",
+    "scriptsParsed":  79,
+    "scriptsWithErrors":  0,
+    "errors":  [
+
+               ],
+    "files":  [
+                  {
+                      "file":  "scripts/Build-RutaFijaL08PhysicalApk.ps1",
+                      "sha256":  "2d5501cbb6cf43023f47923cd2c6b52f1292500c087fbac3afb41a5ab4d223a6",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Build-RutaFijaL08ReleaseCandidate.ps1",
+                      "sha256":  "1ed71c57dfb44b8a44e95df96d882b016299ee9cc4c8410213608b4bcfca20e6",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Build-RutaFijaL08SingleApp.ps1",
+                      "sha256":  "1fc14292b1ef549c20e8f1c094010b8a02cff87ad09d25ff8de04adef1b33520",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Get-RutaFijaReadOnlyFingerprint.ps1",
+                      "sha256":  "4a50c810731eea8f2730f0f033cd4d92041f12261ed9cc6517d6fc958b2bac5f",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Grant-RutaFijaApplicationPrivilegesF13.ps1",
+                      "sha256":  "ff8735f3dc295d517efd1e0daecc0e2e8437c11ab5d8910a3f4748c2196417b9",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Grant-RutaFijaF31bApplicationPrivileges.ps1",
+                      "sha256":  "134c54197f6c4e6632237927278052878c791e111927cfe786a2460298c12c2c",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Import-RutaFijaBootstrapEnvironment.ps1",
+                      "sha256":  "8e0759cc63756b33fa538ada3dd76e4126891fc82e01eb1b31c2c671d20a3605",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Import-RutaFijaNativeEnvironment.ps1",
+                      "sha256":  "28043b663143f7c3b9ac144f2998e463d60fb2598da0e8773bea89b966b435a1",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Initialize-RutaFijaAndroidSdkF41.ps1",
+                      "sha256":  "a8a053b65ea49d9d49bf98259bf81a9824090a69e779ccf91534ba54985a2498",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Initialize-RutaFijaNativeConfig.ps1",
+                      "sha256":  "d3bfb758368693dee2c64f29b65eb4044c67ca6649ed5145c9207afacecadc4c",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Initialize-RutaFijaPostgresqlRoles.ps1",
+                      "sha256":  "1fb626adcc698aa8b1effb56ec8d99c37cf388610200989ca719de27115d793e",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Install-RutaFijaCloudflared.ps1",
+                      "sha256":  "24aad5b2cc7ce581820728bbd00275f4c44f5ec8d7f3e632b0648e611f128900",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaAvailabilityMonitor.ps1",
+                      "sha256":  "733ce70efec02dc5a7f492529e2397a97d995c7bd09ae57f82902b3772f59b3c",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaF21aBaseline.ps1",
+                      "sha256":  "40b8d7aaf75b8a30941260c773279e6af1b5a9c4361bfb1071661ff40932a13a",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaF21bV6Rehearsal.ps1",
+                      "sha256":  "45493c5da57a6fcbd59d2681fb4559d3b8d5b070e009529e8b18f80a35e03d40",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaF22AdminMigration.ps1",
+                      "sha256":  "29a28f600d20f18760e8342ba72796295b8aa8ac38543be5935a053a405354a8",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaF31bV7V8Migration.ps1",
+                      "sha256":  "57c18b13cc19e761ab9608e499ca86af404e946b8a553c8034e68a0975b6250b",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaF31bV7V8Rehearsal.ps1",
+                      "sha256":  "efa6992df0f7d99306ef9b2d759065741bff80c1fdd3a348c457dcef19fa18d8",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaF33V9V10Migration.ps1",
+                      "sha256":  "2a1e932eb9fdd9c865ced500d3736c4909f5ed0211559290aad34a06af0e7f54",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaF44DriverIncidentClosureMigration.ps1",
+                      "sha256":  "38f1b88985e2e268b0b3cfafc6120c30e28a5dbf0bef2102bee4d05e0187023b",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaFlywayF13.ps1",
+                      "sha256":  "b84b0d13c0350b11fc2802ab8b4d36f01783842af49810f7b420f6478856064f",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaL01HumanTrial.ps1",
+                      "sha256":  "ef31dfb0e7a8fdea9ee2f24498445ea02f8a9b4e5c84f03e2915301252dccb8a",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaL01HumanTrialConsoleExit.ps1",
+                      "sha256":  "fea433d2e4cc28d5fb0398607e8e87fdb71b72815694e9d7e27adf2ed1b2ee65",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaL01OtpManual.ps1",
+                      "sha256":  "af6961340da6259382eb1540debf7c7d18bf03ade05889c8901fc5049a52b1c0",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaL08CandidateApiCheck.ps1",
+                      "sha256":  "1bf16c817792c5ca8c9107d2847a12102283e42488e03e2b36b2ce9bce7edb31",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaL08CapacityTrial.ps1",
+                      "sha256":  "89845ca11792486939a9f3f08d651e8940064e28720aec0ba03ccca21131f5a3",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaL08ConnectedTrial.ps1",
+                      "sha256":  "b9d916f3ab0ec13735f6738f79066d35ea105168acd685fdff523c0b8aacae2b",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaL08DatabaseRehearsal.ps1",
+                      "sha256":  "8a4c14794241c190ecebb59f7e14e197004a5bcd1bf93bbc975630e0229da9af",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaL08DesktopReadOnly.ps1",
+                      "sha256":  "4376fdc9973982be27973640f55d419011d461aad5fa29f7aaeb8fe2b741be19",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaL08IndependentBackup.ps1",
+                      "sha256":  "8f3b8a4d63a050806fac17d3872288640b8a14a384c2c5c02ff851f5e7d41969",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaL08LocaleRestore.ps1",
+                      "sha256":  "73891dc99f4b36a3cad7e48d25fe14cb633952b5034bb705b3b7402e603f4e65",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaL08PhysicalComplement.ps1",
+                      "sha256":  "236ecd113d74def956c72707581fb8676acd76423028d4f553b7fdc9f56b40ec",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaL08Rest03Business.ps1",
+                      "sha256":  "122c25100a91a29d29c8ae575d2b55355bf32aa2fe00870f6e4335440fce66b5",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaL08Rest03Database.ps1",
+                      "sha256":  "4b131470caa22c33588c5911bddd72a9d2d2274d5ef6260924314b677bda9c09",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaL08RestoredApiCheck.ps1",
+                      "sha256":  "635fc9ab10575718783e2a9ea437a3116583f84c39449588bf285b39840eaf56",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaM8V12Migration.ps1",
+                      "sha256":  "f8a3171fd5f165715c79460427e22452859d167a066d115d3f0bdb8d969a6124",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+                      "sha256":  "a4d06768c2454da2afb4e25e178d99200be54d2fe6eada18e1bd71645374a198",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaNativeTest.ps1",
+                      "sha256":  "3b318571892f5828799f6b007fde861e2a498f1d13e21ef1c8a30265b8379fb2",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaPostgresqlLease.ps1",
+                      "sha256":  "a51b878ae4394debeeb43baf8ebd544a95ec4eab2b8938bb4885a7cce605e9bc",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaQuickDemo.ps1",
+                      "sha256":  "000e877a13490e8bd93b29a2adbd777245a8b4165eeea385a8468763501e0faf",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaRealtimeProxySmoke.ps1",
+                      "sha256":  "fc65cc0b0505ffad51c0d26b9b3ca794a7a651de04f041ece6192e5326d7b03b",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Invoke-RutaFijaRecoveryEvidenceF17.ps1",
+                      "sha256":  "fd12a8746f046f87157edaf34e50585dbee5bb1d7dacde14487caf2a1ad963d2",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Measure-RutaFijaL08PhoneBattery.ps1",
+                      "sha256":  "96749e38415df5f273e9e58f90bba9af72c9d62888f86263b426892a6f840b98",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/medir-cumplimiento-java.ps1",
+                      "sha256":  "3cebd1779a35af6d09a41da7a32a6f99419aee779a91961eb777bf730cef9017",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/New-RutaFijaL00Snapshot.ps1",
+                      "sha256":  "7954a1d3964b769ceadb0117e9caf704fcf0b1f83ba1ac206ca6d96435fb5720",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Publish-RutaFijaAdminTermsTest.ps1",
+                      "sha256":  "db424802be317450f9c1b3025611c49832c9dc0e3fb11d4df1aa74b6072f4051",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/RutaFijaL08ApkIdentity.ps1",
+                      "sha256":  "4ecc4719f6b8a279f2962392ce04e71b664f550536028436a7f8c1eb057704a9",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Set-RutaFijaPostgresqlLoopbackF16.ps1",
+                      "sha256":  "2717fdd64c4b704d17dbbfd016e6af47f3faab571be982cdbbf400905e50ddf5",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Set-RutaFijaPostgresqlService.ps1",
+                      "sha256":  "e6fb23a7902deef097c1740269cbc33973d529d8f46385221a9bac3e956e297f",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Sign-RutaFijaL08Closure.ps1",
+                      "sha256":  "6390bdd178e745a2ba408e98af5618d7fbbab8f452b664e5459247520a3dc339",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaBackendUnitSafe.ps1",
+                      "sha256":  "bb5d4c79e090f7fcfccb1b43a0cf6eb3665c28f622b5a04e0f05d212de2aa57f",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaF23AdminUi.ps1",
+                      "sha256":  "f7d26f59d06ccdb8eaf3e745c6fb21180c5ae5907ae57f2ec9d7e212a046ab39",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaF31aMobileContract.ps1",
+                      "sha256":  "ec0082973b24e2824704b366bfdd4fbd155d71fdcd0af03f54657090c3a241e7",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaF31bMobileSchema.ps1",
+                      "sha256":  "90da5988357713a4349f20fa46c7e6ef0836402580d17ba22be55d3569f00c87",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaF32MobileSession.ps1",
+                      "sha256":  "1caaa6e257ae36108e5b6b87e3dfe905be3f82c783722a399841df42003a8598",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaF33MobileOperations.ps1",
+                      "sha256":  "2ad6412be099aad4226ce00c6cd062013ec9a8435666d7bfb36cc19e7477f049",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaF34ContractReports.ps1",
+                      "sha256":  "2515a8bc27cde15224d0c7c7cca5397e441661104bd20cd8ce203df299733955",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaF41FlutterFoundation.ps1",
+                      "sha256":  "0944343bd6251d9c35ca4d261ea3c8d60914c3e486c08ac78eb906f231b899eb",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaF42MobileSessionProfileAvailability.ps1",
+                      "sha256":  "da05c199602173f2dbdf26131f2b9013736352dea00b23fc6a601488a4c2f27d",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaF43MobileAssignments.ps1",
+                      "sha256":  "f6b1079ee1c4d1b572d997341246360c7c556d44249f6889c0f7f72660c18238",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaF44MobileIncidentsAnnouncements.ps1",
+                      "sha256":  "f631be2a0e4f77e1b816883de72cd6502327598e620992bde38f2d37fde8deaf",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaF51IntegralRegression.ps1",
+                      "sha256":  "3910a58de895364c7d0ed007aba54482edd0c5b5ab5d48cdc08b1e601329591a",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaF52QuickDemo.ps1",
+                      "sha256":  "6e1725851b6e0d1f5c66155cd6f80715ff5cec22f469eda6b00baa53d44250b2",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaG2AdminClosure.ps1",
+                      "sha256":  "f8f354f3baf6f223fc71037c9045040316f98bd35a74d46ef23103a680e04088",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaL01ConnectedClients.ps1",
+                      "sha256":  "2a78df0fcf69690ec142821bdabadb824d67fe0a6d0e02599aa6916f7c9ae30a",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaL01OtpEvidence.ps1",
+                      "sha256":  "93751255a6ab9cacde73fc1c5a30219c557d0be3cbee97093e4c6b23242139cd",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaL08ApkIsolation.ps1",
+                      "sha256":  "64b6f6f932aac3ac0a53d727dcd837d52ebe85ae8405ebefa23c6be0e4e5b5ab",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaL08BackupAge.ps1",
+                      "sha256":  "6a133a96ddc3d43541c82ef8b7f5e3f42f19ebe1522b0cd351df51cc2ff6d50e",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaL08Continuity.ps1",
+                      "sha256":  "e7e8d39c2ecd6681f73f74b1611785c3580dda57fbb18bf0de05aa3398c881ef",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaLauncherSafety.ps1",
+                      "sha256":  "e7613eaa77dd20415d2582af5d19c8c6ef441a152425b458d30118afb61d2568",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaLocalSecretPolicy.ps1",
+                      "sha256":  "edeee8f8b94217eb10dabf92e71a0ebc06782fef4c23d2e5d1a983285ec538c0",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaM7ForegroundLocation.ps1",
+                      "sha256":  "fb159db622a60fb01fc8059da6ec3fe4a383cb23f5d6be4ed1f9fcfd0e9189e8",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaM8OfflineMinimum.ps1",
+                      "sha256":  "8b5157503def32d188796afe064c0913da227517722c0acde82e4f3f0574dd9f",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaM9QualityEvidence.ps1",
+                      "sha256":  "92bc39492dae5f80e6ef8433335c30d974881cc918b05f05289dd03b2934d853",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaMigratedSchemaF13.ps1",
+                      "sha256":  "1184ed673bdff51aaa173f39c7b86c0449a6d22e95cebc0860c3efd877d0d302",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaNativePreflight.ps1",
+                      "sha256":  "fedf6ede15abf21cc568a6ec10ce356cc7da7902e5e43e560cdeca769b47c010",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaNativeSecurityF16.ps1",
+                      "sha256":  "3a4d8b422d1e4bdec39f794ac3aad187677a209f44e6b69825caf94e5fb6f619",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Test-RutaFijaRoleIsolation.ps1",
+                      "sha256":  "9cb2e2224b89f839343cfec7e700b25f60757a1939a79d868f7f4ca5076d0743",
+                      "parseErrors":  [
+
+                                      ]
+                  },
+                  {
+                      "file":  "scripts/Watch-RutaFijaL08Health.ps1",
+                      "sha256":  "04efdaff650bd2e2ef4155dac5fc7d02b4d40328486eb5504767144d588677dc",
+                      "parseErrors":  [
+
+                                      ]
+                  }
+              ],
+    "actionsOrDatabaseOperationsExecuted":  false
+}

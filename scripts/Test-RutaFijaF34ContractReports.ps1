@@ -43,8 +43,9 @@ if (-not (Test-Path -LiteralPath $f33AuditScript -PathType Leaf) -or
     throw 'F3.4 no encontro los artefactos base de contrato y auditoria.'
 }
 
-# Conserva las comprobaciones PostgreSQL nativas de V1-V10, permisos y privacidad
-# de F3.3 antes de validar el contrato y los reportes que se apoyan en ellas.
+# Conserva las comprobaciones PostgreSQL nativas de V1-V10, con las extensiones
+# aprobadas V11 y V12, permisos y privacidad antes del contrato y los reportes.
+# Las migraciones aditivas de OTP y recuperacion L-01 son V13 y V14.
 & $f33AuditScript -ConfigPath $ConfigPath
 if ($LASTEXITCODE -ne 0) {
     throw 'La auditoria base F3.3 no fue aprobada; F3.4 no puede continuar.'
@@ -103,8 +104,8 @@ $migrations = @(Get-ChildItem -LiteralPath (Join-Path $repoRoot 'backend\src\mai
         ForEach-Object {
             if ($_.Name -match '^V(\d+)__') { [int]$Matches[1] } else { -1 }
         } | Sort-Object -Unique)
-if (($migrations -join ',') -ne '1,2,3,4,5,6,7,8,9,10') {
-    throw 'F3.4 requiere conservar exactamente Flyway V1-V10; no debe introducir una migracion innecesaria.'
+if (($migrations -join ',') -ne '1,2,3,4,5,6,7,8,9,10,11,12,13,14') {
+    throw 'La auditoria requiere conservar V1-V12 y las migraciones aditivas aprobadas V13-V14 de L-01.'
 }
 
-Write-Output 'F3_4_CONTRACT_REPORTS_AUDIT=PASS flyway=V1-V10 contract=openapi_crm_mobile reports=persisted privacy=current_only docker=0'
+Write-Output 'F3_4_CONTRACT_REPORTS_AUDIT=PASS flyway=V1-V14 contract=openapi_crm_mobile reports=persisted privacy=current_only'

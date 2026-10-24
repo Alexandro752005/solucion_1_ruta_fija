@@ -122,7 +122,7 @@ function Stop-VerificationRuntime {
 
 function Start-VerificationRuntime {
     Assert-PortAvailable -Port 8080
-    Assert-PortAvailable -Port 4200
+    Assert-PortAvailable -Port 4300
     New-Item -ItemType Directory -Path $runtimeDirectory -Force | Out-Null
 
     $mavenWrapper = Join-Path $backendRoot 'mvnw.cmd'
@@ -166,7 +166,7 @@ function Start-VerificationRuntime {
     $env:APP_SEED_ENABLED = 'true'
     $env:DEMO_USER_PASSWORD = ('Rf!' + [Guid]::NewGuid().ToString('N') + '9a')
     $env:SERVER_PORT = '8080'
-    $env:APP_CORS_ALLOWED_ORIGINS = 'http://localhost:4200'
+    $env:APP_CORS_ALLOWED_ORIGINS = 'http://localhost:4300,http://127.0.0.1:4300'
     $env:REFRESH_COOKIE_SECURE = 'false'
 
     $frontend = $null
@@ -183,11 +183,11 @@ function Start-VerificationRuntime {
         $frontend = Start-Process -FilePath $nodePath -ArgumentList @(
             ('"{0}"' -f $angularCli),
             'serve',
-            '--host', 'localhost',
-            '--port', '4200',
+            '--host', '127.0.0.1',
+            '--port', '4300',
             '--configuration', 'development'
         ) -WorkingDirectory $frontendRoot -RedirectStandardOutput $frontendOut -RedirectStandardError $frontendErr -WindowStyle Hidden -PassThru
-        $page = Wait-ForHttp -Uri 'http://localhost:4200/' -TimeoutSeconds $StartupTimeoutSeconds
+        $page = Wait-ForHttp -Uri 'http://127.0.0.1:4300/' -TimeoutSeconds $StartupTimeoutSeconds
         if ($page.Content -notmatch '<rf-root') {
             throw 'F1.5 no recibió la aplicación Angular esperada.'
         }
@@ -219,8 +219,8 @@ function Receive-StreamReady {
     $timeout = [System.Threading.CancellationTokenSource]::new()
     $timeout.CancelAfter([TimeSpan]::FromSeconds(12))
     try {
-        $socket.Options.SetRequestHeader('Origin', 'http://localhost:4200')
-        $uri = [Uri]('ws://localhost:4200/ws/operations?ticket=' + [Uri]::EscapeDataString($Ticket))
+        $socket.Options.SetRequestHeader('Origin', 'http://127.0.0.1:4300')
+        $uri = [Uri]('ws://127.0.0.1:4300/ws/operations?ticket=' + [Uri]::EscapeDataString($Ticket))
         $null = $socket.ConnectAsync($uri, $timeout.Token).GetAwaiter().GetResult()
         $buffer = [byte[]]::new(4096)
         $segment = [System.ArraySegment[byte]]::new($buffer)
@@ -249,8 +249,8 @@ function Assert-ReplayedTicketRejected {
     $timeout.CancelAfter([TimeSpan]::FromSeconds(8))
     $rejected = $false
     try {
-        $socket.Options.SetRequestHeader('Origin', 'http://localhost:4200')
-        $uri = [Uri]('ws://localhost:4200/ws/operations?ticket=' + [Uri]::EscapeDataString($Ticket))
+        $socket.Options.SetRequestHeader('Origin', 'http://127.0.0.1:4300')
+        $uri = [Uri]('ws://127.0.0.1:4300/ws/operations?ticket=' + [Uri]::EscapeDataString($Ticket))
         $null = $socket.ConnectAsync($uri, $timeout.Token).GetAwaiter().GetResult()
     }
     catch {
@@ -280,9 +280,9 @@ if ($LASTEXITCODE -ne 0) {
 try {
     $runtime = Start-VerificationRuntime
     $session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
-    $headers = @{ Origin = 'http://localhost:4200' }
+    $headers = @{ Origin = 'http://127.0.0.1:4300' }
     $loginParameters = @{
-        Uri = 'http://localhost:4200/api/v1/auth/login'
+        Uri = 'http://127.0.0.1:4300/api/v1/auth/login'
         Method = 'Post'
         WebSession = $session
         Headers = $headers
@@ -294,14 +294,14 @@ try {
         throw 'F1.5 no recibió access token a través del proxy REST.'
     }
 
-    $authorization = @{ Authorization = ('Bearer ' + $login.accessToken); Origin = 'http://localhost:4200' }
-    $me = Invoke-RestMethod -Uri 'http://localhost:4200/api/v1/auth/me' -Method Get -Headers $authorization
+    $authorization = @{ Authorization = ('Bearer ' + $login.accessToken); Origin = 'http://127.0.0.1:4300' }
+    $me = Invoke-RestMethod -Uri 'http://127.0.0.1:4300/api/v1/auth/me' -Method Get -Headers $authorization
     if ($me.role -ne 'ADMIN') {
         throw 'F1.5 no confirmó el usuario administrativo de prueba.'
     }
 
     $refreshParameters = @{
-        Uri = 'http://localhost:4200/api/v1/auth/refresh'
+        Uri = 'http://127.0.0.1:4300/api/v1/auth/refresh'
         Method = 'Post'
         WebSession = $session
         Headers = $headers
@@ -312,9 +312,9 @@ try {
     }
 
     $ticketParameters = @{
-        Uri = 'http://localhost:4200/api/v1/operations/stream-ticket'
+        Uri = 'http://127.0.0.1:4300/api/v1/operations/stream-ticket'
         Method = 'Post'
-        Headers = @{ Authorization = ('Bearer ' + $refresh.accessToken); Origin = 'http://localhost:4200' }
+        Headers = @{ Authorization = ('Bearer ' + $refresh.accessToken); Origin = 'http://127.0.0.1:4300' }
         ContentType = 'application/json'
         Body = '{}'
     }

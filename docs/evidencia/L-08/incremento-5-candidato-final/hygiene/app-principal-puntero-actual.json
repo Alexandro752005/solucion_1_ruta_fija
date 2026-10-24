@@ -1,0 +1,20 @@
+{
+  "selectedAt": "2026-10-23T05:34:26.956612+00:00",
+  "package": "pe.rutafija.conductor",
+  "versionCode": 4,
+  "artifact": "artifacts/L-08-app-unica-local-2026-10-22-v4/Ruta-Fija-Conductor.apk",
+  "sha256": "3b5533d3bb70fdd7bd043ed9fa62b002fadcc86c4ceee2554a4dc9cc02a6ae3c",
+  "onlyOneRutaFijaAppInstalled": true,
+  "physicalValidationEvidence": "docs/evidencia/L-08/incremento-4-cierre-fisico/README.md",
+  "buildType": "debug",
+  "apiScope": "PRIVATE_LOCAL_TEST_REQUIRES_SERVER_AND_ELIGIBLE_ACCOUNT",
+  "apiBaseUrl": "http://192.168.18.4:4311/api/v1",
+  "temporaryCaseServerStopped": true,
+  "productionRelease": false,
+  "pilotEnabled": false,
+  "L08Status": "VERIFICADA",
+  "L08Scope": "FUNCIONAL_LOCAL_APROBADA_CANDIDATO_FINAL",
+  "operationalDecision": "NO_GO_PILOTO_REAL",
+  "lastCoordinationAt": "2026-10-23T06:47:22.433018+00:00",
+  "separateUninstalledReleaseCandidate": "artifacts/L-08-entrega-final/manifest.json"
+}

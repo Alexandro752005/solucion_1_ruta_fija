@@ -1,0 +1,91 @@
+{
+    "observedAt":  "2026-10-23T04:49:50.9162396+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "action":  "click",
+    "label":  "Gestionar ubicación",
+    "automatedUiInstrumentation":  true,
+    "humanAccessibilityConfirmation":  false,
+    "nodes":  [
+                  {
+                      "text":  "",
+                      "description":  "Back",
+                      "bounds":  "[12,482][156,626]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Ubicación actual",
+                      "bounds":  "[216,520][611,589]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Ubicación en primer plano",
+                      "bounds":  "[60,698][1020,776]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "La ubicación se comparte solo durante un servicio iniciado y con la aplicación en primer plano. El consentimiento puede otorgarse antes de iniciar, sin obtener ni enviar ubicación.",
+                      "bounds":  "[60,800][1020,944]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Privacidad y estado\nDisponibilidad actual: En servicio",
+                      "bounds":  "[60,1004][1020,1412]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Consentimiento activo",
+                      "bounds":  "[120,1136][617,1280]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Actualizar ubicación actual",
+                      "bounds":  "[60,1496][1020,1640]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Eliminar ubicación vigente",
+                      "bounds":  "[60,1676][1020,1820]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Desactivar ubicación",
+                      "bounds":  "[60,1844][1020,1988]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  }
+              ]
+}

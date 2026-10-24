@@ -1,0 +1,27 @@
+{
+  "backendJar": {
+    "path": "artifacts/L-08-validacion-2026-10-22/ruta-fija-l08-v50-local.jar",
+    "sha256": "94b548b3388bec683eafb9851385cae1b80ac83698c4ef37ebda93ba21a8afd9",
+    "bytes": 91344307,
+    "packageExit": 0,
+    "testsExecutedDuringPackage": false,
+    "privateConfigurationEntries": 0,
+    "deployed": false
+  },
+  "android": {
+    "path": "artifacts/L-08-validacion-2026-10-22/ruta-fija-l08-debug.apk",
+    "sha256": "577fd76904d9e6109a396dd72a859c362d074f62ed6b870b0538e225fff0b28c",
+    "package": "pe.rutafija.conductor.l08",
+    "releaseSigned": false,
+    "installedAndHashChecked": true
+  },
+  "verifiedVersions": {
+    "java": "21.0.10",
+    "springBoot": "3.5.16",
+    "angularCore": "22.2.3",
+    "mobile": "0.1.0+2",
+    "minimumAndroidApi": 29,
+    "observedPhysicalAndroidApi": 33
+  },
+  "scope": "Incremental local candidate, not final release or deployment"
+}

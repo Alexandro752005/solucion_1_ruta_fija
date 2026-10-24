@@ -1,0 +1,838 @@
+{
+  "observedAt": "2026-10-22T16:53:22.169606300Z",
+  "mode": "--rehearse-v49",
+  "database": "ruta_fija_test",
+  "observerRole": "rf_test",
+  "sourceV49Sha256": "78a082e97a79fc7b4adfd554cabf01519b59250319562b8f52d82797dcaa5ce2",
+  "before": {
+    "schemaVersion": "48",
+    "ledger": {
+      "SUPER_ADMIN": 1,
+      "ADMIN": 3,
+      "CONDUCTOR": 6
+    },
+    "acceptanceCount": 2,
+    "publishedTermsSha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+    "tables": {
+      "admin_activation": {
+        "count": 2,
+        "sha256": "2b387b36d5dbf0e376d4e8c59da4d0c9fb368f0bf0649bb46fea126246abe8e6"
+      },
+      "admin_activation_event": {
+        "count": 11,
+        "sha256": "a61b1b77806900ca4945c1152a25800a0a7d937aa32c743fd85a088d06bc767f"
+      },
+      "admin_security_revocation": {
+        "count": 1,
+        "sha256": "d305f3de34bf0ce9a69bfd79891fb221fad7b936641fb526cb8d9b4c37d2d5a8"
+      },
+      "admin_terms_acceptance": {
+        "count": 2,
+        "sha256": "1ea7d6efde639f55395cfd3b68b2f5e6e5f4189ce9ba4d2c54c2f179ea482304"
+      },
+      "admin_terms_document": {
+        "count": 1,
+        "sha256": "3c0ebf01b874b1e815a3dc8f6daf4d30c9c662530a22020685154999b22d8251"
+      },
+      "announcement": {
+        "count": 3,
+        "sha256": "83e5d207daf227547189e37b2594a1c91bb4c4dd225090027824a0d4c2d5acbb"
+      },
+      "announcement_receipt": {
+        "count": 2,
+        "sha256": "eb9b5ebd124abfb23b415ab2bd43ebaf6f74a27d99af462bea232a2ea9ae0e9b"
+      },
+      "announcement_recipient": {
+        "count": 2,
+        "sha256": "61fbe0a7f045ef509ab9f662913d9c183e8e0dc76f457a7803566f66a22ece39"
+      },
+      "app_user": {
+        "count": 10,
+        "sha256": "3427e1aef00eb66b9d0b46f5f331f6cb171477a122cda4fb8dd73177d82d6a23"
+      },
+      "assignment": {
+        "count": 11,
+        "sha256": "6eadc3829957958095a6cc56e680c19dfc0baa28fd44ae878ed200e5809e8f3d"
+      },
+      "assignment_group_snapshot": {
+        "count": 11,
+        "sha256": "afc379351b8941dbacd470e745227b3d6bc403a134e2e62ee47c40df8fc5c861"
+      },
+      "assignment_route_declaration": {
+        "count": 3,
+        "sha256": "01463de291f3c90c9e7a2fb7cb600ec3ca454749b682c89160b27e9cafdd73fd"
+      },
+      "assignment_route_history": {
+        "count": 10,
+        "sha256": "606d056cc99588f238a0d11ecf31c588396fff4e9dbcf1ab8040dbc3bf253af4"
+      },
+      "assignment_route_replacement": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "audit_event": {
+        "count": 333,
+        "sha256": "04a4a086f4ea3f46f9b6c9203487ad9f66336e5b0f4a7ce25c180c75d9f4650f"
+      },
+      "conductor_common_person_bridge": {
+        "count": 6,
+        "sha256": "f237c9dd343773b0780f4949fa3d09244cb14a5f9dbe3e9e92272d4fdd1550a4"
+      },
+      "conductor_document_revision": {
+        "count": 30,
+        "sha256": "aa983bee380196cc80da4df2c0bd59fde689c0649d3a6419c175f51081cb3dcc"
+      },
+      "conductor_onboarding_access_token": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conductor_onboarding_email_challenge": {
+        "count": 7,
+        "sha256": "70b10fb1bc64b9943f59096b2226d1fd17a2448acb87b2c35cb4fe311856c4d0"
+      },
+      "conductor_onboarding_identity": {
+        "count": 7,
+        "sha256": "96c9eaa8063cebc5f28b774e9a576112933d11f4e31975a78e18065690b61f12"
+      },
+      "conductor_onboarding_invitation_failure": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conductor_onboarding_invitation_guard": {
+        "count": 11,
+        "sha256": "91cd723959afcd12e1bdace06da542f8a9909fe05a3233c0466986dfe4886267"
+      },
+      "conductor_onboarding_request": {
+        "count": 7,
+        "sha256": "0c14cd8b6ae31ffa15e065a29dc04ecf78ddf5f09e21472d7eb15351f28ba5d7"
+      },
+      "conductor_onboarding_review_event": {
+        "count": 18,
+        "sha256": "b5d8ee8f5add60a01302e6d6094d54a4c326434e66a7fd3de3d1a465fbf396b3"
+      },
+      "conductor_person_binding": {
+        "count": 6,
+        "sha256": "3e8d15d1a59abe660f40506972a40ec523d280fcd424307875f9b71668178e96"
+      },
+      "conductor_recovery_request": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "driver": {
+        "count": 8,
+        "sha256": "33212e8a3af118b489ce11ea25ac728323cb3462f3d96107ad44689c2d9b0807"
+      },
+      "driver_current_location": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "driver_qualification_control": {
+        "count": 6,
+        "sha256": "2592ed782d13166973558cdbac3020d64cda62090dbee4fb42c0f4e76b484f5c"
+      },
+      "driver_unit_period": {
+        "count": 6,
+        "sha256": "103b68fc24ace35f2203eb0c4ccc6986d6332f54a53008b8bd09fa211664358c"
+      },
+      "driver_unit_request": {
+        "count": 1,
+        "sha256": "f3d5f55e48774cc2a815ca08af580dcb99d26fbaf693b9f7b7b5806f70966dbb"
+      },
+      "driver_vehicle_link": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "email_otp_challenge": {
+        "count": 9,
+        "sha256": "c192320ad53db9d14146b1833c53c663d84f308559f561f6b26d8fc6dc737703"
+      },
+      "gps_access_request": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "gps_incident_evidence": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "group_coordinator": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "group_driver_membership": {
+        "count": 9,
+        "sha256": "11a2f1e3c2840d930a5d5606356adb4b6c17090882cbe21ce8fcbe2454f39648"
+      },
+      "group_membership_operation": {
+        "count": 2,
+        "sha256": "8addd8136e56412e5c97543768c15c09a12bfe8446415a8173277d03ac2500bf"
+      },
+      "group_vehicle_membership": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "incident": {
+        "count": 4,
+        "sha256": "452007e319c34f6c46ee9a8b66099004128f0ebeaeed16129c62d4cd9bd163e9"
+      },
+      "incident_action": {
+        "count": 10,
+        "sha256": "183599f428d764561576916520775e6a9ad18210972e736aa56ae60f5e1abcd5"
+      },
+      "invitation_validation_account_guard": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "invitation_validation_failure": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "invitation_validation_origin_guard": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "mobile_command_receipt": {
+        "count": 21,
+        "sha256": "ef536dd0b1e687846177ccce803355df68e613c771413d95a2ded36beb40e84d"
+      },
+      "mobile_preferences": {
+        "count": 1,
+        "sha256": "7edafc7648bce427f0eeafcfa68149d0b2888844950ecd9ed2126f6594a2c03e"
+      },
+      "operation_notice": {
+        "count": 53,
+        "sha256": "5c806c561ae9089e24d4bb36858026834064e6cb82764986efbee6b5a4f5d6be"
+      },
+      "organization": {
+        "count": 2,
+        "sha256": "7b906c3c4bce338e073913cac91969789088362cbe3cace83c2ad2779c3f32b8"
+      },
+      "organization_invitation": {
+        "count": 8,
+        "sha256": "1149b58d316f2d1acb2f5a09f25953ea9a947ec2dd5f5526e16a949714383b4a"
+      },
+      "person_identity": {
+        "count": 9,
+        "sha256": "0da8f1698e27a559a15943405b76a2c24e4d667a9cde123fc99ffa1eb0c2b2d9"
+      },
+      "person_identity_hash_key": {
+        "count": 1,
+        "sha256": "0d157f01a2fc2b673a3f1d738bab4e00726e3a43d8bfcb5ed8619f6445ff5ebd"
+      },
+      "pilot_account_creation": {
+        "count": 10,
+        "sha256": "824c54244b8608dad65188efd7ed24a21095dd7512f24da73f21dbac2b3ed2d5"
+      },
+      "pilot_lifecycle": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "qualification_operation": {
+        "count": 35,
+        "sha256": "fb282a3e3482628c949ca76a46b4f636e24afe4feac50f193f654cc56d222538"
+      },
+      "qualification_review": {
+        "count": 54,
+        "sha256": "4b146c664a645425477581b0a58d96eb640d9044ac5341250185c39af7374ae7"
+      },
+      "qualification_service_attention": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "refresh_token": {
+        "count": 86,
+        "sha256": "5f5835ce1fbe2c8777b8d0da10bc7d90d8992b87f7f4838a760709025a27065c"
+      },
+      "report_emission": {
+        "count": 4,
+        "sha256": "d7bac91df35a306f730572d6a88ab83f7ee46ceb2024acd04c0363c69e9b2347"
+      },
+      "report_emission_content": {
+        "count": 4,
+        "sha256": "7c0392f3e9c31f45865528b4d320c67236384352712b1362d394cca40da936c9"
+      },
+      "report_emission_request": {
+        "count": 4,
+        "sha256": "8e5fccdd6d52fdd0e52200867d130a434bb4450b8f3214aaccca5648f606063f"
+      },
+      "report_emission_retirement": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "report_emission_series": {
+        "count": 2,
+        "sha256": "b310d7867f2f51c9dd8ebd4e24330ee1ad3c9e422b5a299f3995983e164b2b64"
+      },
+      "retention_audit_hold_approval": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "retention_audit_hold_request": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "retention_controlled_copy": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "retention_copy_evidence": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "retention_execution": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "retention_plan": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "retention_plan_item": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "retention_policy_catalog": {
+        "count": 9,
+        "sha256": "cdeef22add607d4bd7be6ec5c2211e20fe23aac12a0d42fb5c70af5b737b7b29"
+      },
+      "route_definition": {
+        "count": 4,
+        "sha256": "efc5dcda8b89b674b2f0036842a056919d8c89621282ad7096dc341df00a0559"
+      },
+      "route_operation": {
+        "count": 8,
+        "sha256": "c0514a60aebb08ba7455699bd706560b28870378f8ce114da82e2feca7b17481"
+      },
+      "route_version": {
+        "count": 4,
+        "sha256": "977b7971472802778229a733e38e8a1f2be56675628b5a640e2f9edf5d770ca8"
+      },
+      "scheduled_service": {
+        "count": 8,
+        "sha256": "1e8aa2b6a2b4f29aa8dff254e2d29f1aa97d4e7baf62d9ff91b3085823b0d4c6"
+      },
+      "scheduled_service_operation": {
+        "count": 6,
+        "sha256": "0fdf8bf4001d2f548bd6625b37d015b880ee83dc3838f968abfdb460d0cfb7c8"
+      },
+      "service_attention": {
+        "count": 2,
+        "sha256": "08f4eee008cac45f155c893e55c36d14514a131784126e04b6cba9cf69279080"
+      },
+      "service_attention_release": {
+        "count": 4,
+        "sha256": "655aef9dc5315ecb6d4c074c7d1a74bef96a401f745c717478e8916bbb297519"
+      },
+      "service_closure_notice": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "service_execution_segment": {
+        "count": 7,
+        "sha256": "701b7c286488f13bba3c90bf417151e1bd61e5b73a041d994224bba0f7338c9c"
+      },
+      "service_gps_point": {
+        "count": 2,
+        "sha256": "8ccfdf97b7236280e176c9675336c4366b2724ed8a722dce2b9be8dce94ce2d2"
+      },
+      "service_handover": {
+        "count": 2,
+        "sha256": "c5d0c45bb99bd92d5f8bf7b496534d89cd426a1c439b392366eacb55d3f046e3"
+      },
+      "service_handover_resolution": {
+        "count": 2,
+        "sha256": "4cea2d1a1dc50bc46f62e210bd4067abce76edbcb8d0fc6c801410127b875111"
+      },
+      "service_time_correction": {
+        "count": 1,
+        "sha256": "1a8763b49ccfa53c15e779b7c86f945d8eccba0ac59e1d2268dd9e599d25b99f"
+      },
+      "service_time_correction_segment": {
+        "count": 1,
+        "sha256": "75dc62993975ca1d30037ec536241c8ec5dff161a570ec6240b51d53970d0e27"
+      },
+      "service_time_request": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "service_type": {
+        "count": 5,
+        "sha256": "1e4940114d9f323609cb117237b9dae8eeab11ab5fdd1e93bc7fb58cd54a7034"
+      },
+      "service_type_operation": {
+        "count": 8,
+        "sha256": "b90b71b263cdd0463542e029ae8667cf6abfcb03b8978f4d8c2762e00dc1c73a"
+      },
+      "service_type_version": {
+        "count": 5,
+        "sha256": "2a7510a368046eef7fc4a949e41e034b96e502f4d1beac6028af39ceba99b6b7"
+      },
+      "super_admin_recovery_challenge": {
+        "count": 2,
+        "sha256": "5ab7e7c2744a6e060e014313de717299397c27b6cf4baed2e6b79cafa7bb3f02"
+      },
+      "super_admin_recovery_credential": {
+        "count": 1,
+        "sha256": "344a8b2cfd30a26adbc6278e4d42bb000a2123f0c321641fb058c31b8f620cca"
+      },
+      "transport_group": {
+        "count": 8,
+        "sha256": "cffbd79d480b3e04ba3c14de13c2c4f1779b1760d32992c4f6cf12f3227d5eaf"
+      },
+      "vehicle": {
+        "count": 9,
+        "sha256": "dc310f1446c7ef49ce5fdff298f6c51c96167dd7b78604ffe9cb2e3f0412cb62"
+      },
+      "vehicle_maintenance": {
+        "count": 1,
+        "sha256": "46265921317b05eaa5553658877cb5326bc3080be2b687e0bb223fff0eb29c02"
+      },
+      "vehicle_maintenance_control": {
+        "count": 1,
+        "sha256": "c652b84f8b11992318e8be750e24d634a2dd6cf39c2d249bd27e92843db3d2a9"
+      },
+      "vehicle_maintenance_operation": {
+        "count": 2,
+        "sha256": "22adeda8cab2689120f28314d5db6e2c674d3c29a3b6fde3c628e3fa79d8bbb7"
+      },
+      "vehicle_plate_revision": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "privateAuthorityTablesExcludedFromObserverRead": [
+      "retention_execution_authority"
+    ],
+    "historyRows": 49,
+    "successfulVersionedHistoryRows": 48,
+    "successfulRepeatableHistoryRows": 1,
+    "historySha256": "d7b4d2242a3d8b2101a6d533caeeee2806e632fa07e198f961d37dba2976fc66",
+    "schemaSha256": "7296c1dabb4f75a3f88f353a4ee8f9719f2ee764c5bd3993067cf94ba47caf28"
+  },
+  "historicalFilesBefore": {
+    "fileCount": 1355,
+    "sha256": "c1bd7c3435838d75f372833e38e9f73384e7027beece0d6b0720c09cad27ed21"
+  },
+  "flywayValidationBefore": {
+    "successful": false,
+    "validatedCount": 0,
+    "code": "VALIDATE_ERROR",
+    "invalidMigrations": [
+      {
+        "version": "49",
+        "code": "RESOLVED_VERSIONED_MIGRATION_NOT_APPLIED"
+      }
+    ]
+  },
+  "stagedPersonalMetadata": "SEVEN_TABLES_FIVE_CAPABILITIES_ZERO_EXECUTIONS_OR_AUTHORITIES",
+  "after": {
+    "schemaVersion": "48",
+    "ledger": {
+      "SUPER_ADMIN": 1,
+      "ADMIN": 3,
+      "CONDUCTOR": 6
+    },
+    "acceptanceCount": 2,
+    "publishedTermsSha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+    "tables": {
+      "admin_activation": {
+        "count": 2,
+        "sha256": "2b387b36d5dbf0e376d4e8c59da4d0c9fb368f0bf0649bb46fea126246abe8e6"
+      },
+      "admin_activation_event": {
+        "count": 11,
+        "sha256": "a61b1b77806900ca4945c1152a25800a0a7d937aa32c743fd85a088d06bc767f"
+      },
+      "admin_security_revocation": {
+        "count": 1,
+        "sha256": "d305f3de34bf0ce9a69bfd79891fb221fad7b936641fb526cb8d9b4c37d2d5a8"
+      },
+      "admin_terms_acceptance": {
+        "count": 2,
+        "sha256": "1ea7d6efde639f55395cfd3b68b2f5e6e5f4189ce9ba4d2c54c2f179ea482304"
+      },
+      "admin_terms_document": {
+        "count": 1,
+        "sha256": "3c0ebf01b874b1e815a3dc8f6daf4d30c9c662530a22020685154999b22d8251"
+      },
+      "announcement": {
+        "count": 3,
+        "sha256": "83e5d207daf227547189e37b2594a1c91bb4c4dd225090027824a0d4c2d5acbb"
+      },
+      "announcement_receipt": {
+        "count": 2,
+        "sha256": "eb9b5ebd124abfb23b415ab2bd43ebaf6f74a27d99af462bea232a2ea9ae0e9b"
+      },
+      "announcement_recipient": {
+        "count": 2,
+        "sha256": "61fbe0a7f045ef509ab9f662913d9c183e8e0dc76f457a7803566f66a22ece39"
+      },
+      "app_user": {
+        "count": 10,
+        "sha256": "3427e1aef00eb66b9d0b46f5f331f6cb171477a122cda4fb8dd73177d82d6a23"
+      },
+      "assignment": {
+        "count": 11,
+        "sha256": "6eadc3829957958095a6cc56e680c19dfc0baa28fd44ae878ed200e5809e8f3d"
+      },
+      "assignment_group_snapshot": {
+        "count": 11,
+        "sha256": "afc379351b8941dbacd470e745227b3d6bc403a134e2e62ee47c40df8fc5c861"
+      },
+      "assignment_route_declaration": {
+        "count": 3,
+        "sha256": "01463de291f3c90c9e7a2fb7cb600ec3ca454749b682c89160b27e9cafdd73fd"
+      },
+      "assignment_route_history": {
+        "count": 10,
+        "sha256": "606d056cc99588f238a0d11ecf31c588396fff4e9dbcf1ab8040dbc3bf253af4"
+      },
+      "assignment_route_replacement": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "audit_event": {
+        "count": 333,
+        "sha256": "04a4a086f4ea3f46f9b6c9203487ad9f66336e5b0f4a7ce25c180c75d9f4650f"
+      },
+      "conductor_common_person_bridge": {
+        "count": 6,
+        "sha256": "f237c9dd343773b0780f4949fa3d09244cb14a5f9dbe3e9e92272d4fdd1550a4"
+      },
+      "conductor_document_revision": {
+        "count": 30,
+        "sha256": "aa983bee380196cc80da4df2c0bd59fde689c0649d3a6419c175f51081cb3dcc"
+      },
+      "conductor_onboarding_access_token": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conductor_onboarding_email_challenge": {
+        "count": 7,
+        "sha256": "70b10fb1bc64b9943f59096b2226d1fd17a2448acb87b2c35cb4fe311856c4d0"
+      },
+      "conductor_onboarding_identity": {
+        "count": 7,
+        "sha256": "96c9eaa8063cebc5f28b774e9a576112933d11f4e31975a78e18065690b61f12"
+      },
+      "conductor_onboarding_invitation_failure": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conductor_onboarding_invitation_guard": {
+        "count": 11,
+        "sha256": "91cd723959afcd12e1bdace06da542f8a9909fe05a3233c0466986dfe4886267"
+      },
+      "conductor_onboarding_request": {
+        "count": 7,
+        "sha256": "0c14cd8b6ae31ffa15e065a29dc04ecf78ddf5f09e21472d7eb15351f28ba5d7"
+      },
+      "conductor_onboarding_review_event": {
+        "count": 18,
+        "sha256": "b5d8ee8f5add60a01302e6d6094d54a4c326434e66a7fd3de3d1a465fbf396b3"
+      },
+      "conductor_person_binding": {
+        "count": 6,
+        "sha256": "3e8d15d1a59abe660f40506972a40ec523d280fcd424307875f9b71668178e96"
+      },
+      "conductor_recovery_request": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "driver": {
+        "count": 8,
+        "sha256": "33212e8a3af118b489ce11ea25ac728323cb3462f3d96107ad44689c2d9b0807"
+      },
+      "driver_current_location": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "driver_qualification_control": {
+        "count": 6,
+        "sha256": "2592ed782d13166973558cdbac3020d64cda62090dbee4fb42c0f4e76b484f5c"
+      },
+      "driver_unit_period": {
+        "count": 6,
+        "sha256": "103b68fc24ace35f2203eb0c4ccc6986d6332f54a53008b8bd09fa211664358c"
+      },
+      "driver_unit_request": {
+        "count": 1,
+        "sha256": "f3d5f55e48774cc2a815ca08af580dcb99d26fbaf693b9f7b7b5806f70966dbb"
+      },
+      "driver_vehicle_link": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "email_otp_challenge": {
+        "count": 9,
+        "sha256": "c192320ad53db9d14146b1833c53c663d84f308559f561f6b26d8fc6dc737703"
+      },
+      "gps_access_request": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "gps_incident_evidence": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "group_coordinator": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "group_driver_membership": {
+        "count": 9,
+        "sha256": "11a2f1e3c2840d930a5d5606356adb4b6c17090882cbe21ce8fcbe2454f39648"
+      },
+      "group_membership_operation": {
+        "count": 2,
+        "sha256": "8addd8136e56412e5c97543768c15c09a12bfe8446415a8173277d03ac2500bf"
+      },
+      "group_vehicle_membership": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "incident": {
+        "count": 4,
+        "sha256": "452007e319c34f6c46ee9a8b66099004128f0ebeaeed16129c62d4cd9bd163e9"
+      },
+      "incident_action": {
+        "count": 10,
+        "sha256": "183599f428d764561576916520775e6a9ad18210972e736aa56ae60f5e1abcd5"
+      },
+      "invitation_validation_account_guard": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "invitation_validation_failure": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "invitation_validation_origin_guard": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "mobile_command_receipt": {
+        "count": 21,
+        "sha256": "ef536dd0b1e687846177ccce803355df68e613c771413d95a2ded36beb40e84d"
+      },
+      "mobile_preferences": {
+        "count": 1,
+        "sha256": "7edafc7648bce427f0eeafcfa68149d0b2888844950ecd9ed2126f6594a2c03e"
+      },
+      "operation_notice": {
+        "count": 53,
+        "sha256": "5c806c561ae9089e24d4bb36858026834064e6cb82764986efbee6b5a4f5d6be"
+      },
+      "organization": {
+        "count": 2,
+        "sha256": "7b906c3c4bce338e073913cac91969789088362cbe3cace83c2ad2779c3f32b8"
+      },
+      "organization_invitation": {
+        "count": 8,
+        "sha256": "1149b58d316f2d1acb2f5a09f25953ea9a947ec2dd5f5526e16a949714383b4a"
+      },
+      "person_identity": {
+        "count": 9,
+        "sha256": "0da8f1698e27a559a15943405b76a2c24e4d667a9cde123fc99ffa1eb0c2b2d9"
+      },
+      "person_identity_hash_key": {
+        "count": 1,
+        "sha256": "0d157f01a2fc2b673a3f1d738bab4e00726e3a43d8bfcb5ed8619f6445ff5ebd"
+      },
+      "pilot_account_creation": {
+        "count": 10,
+        "sha256": "824c54244b8608dad65188efd7ed24a21095dd7512f24da73f21dbac2b3ed2d5"
+      },
+      "pilot_lifecycle": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "qualification_operation": {
+        "count": 35,
+        "sha256": "fb282a3e3482628c949ca76a46b4f636e24afe4feac50f193f654cc56d222538"
+      },
+      "qualification_review": {
+        "count": 54,
+        "sha256": "4b146c664a645425477581b0a58d96eb640d9044ac5341250185c39af7374ae7"
+      },
+      "qualification_service_attention": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "refresh_token": {
+        "count": 86,
+        "sha256": "5f5835ce1fbe2c8777b8d0da10bc7d90d8992b87f7f4838a760709025a27065c"
+      },
+      "report_emission": {
+        "count": 4,
+        "sha256": "d7bac91df35a306f730572d6a88ab83f7ee46ceb2024acd04c0363c69e9b2347"
+      },
+      "report_emission_content": {
+        "count": 4,
+        "sha256": "7c0392f3e9c31f45865528b4d320c67236384352712b1362d394cca40da936c9"
+      },
+      "report_emission_request": {
+        "count": 4,
+        "sha256": "8e5fccdd6d52fdd0e52200867d130a434bb4450b8f3214aaccca5648f606063f"
+      },
+      "report_emission_retirement": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "report_emission_series": {
+        "count": 2,
+        "sha256": "b310d7867f2f51c9dd8ebd4e24330ee1ad3c9e422b5a299f3995983e164b2b64"
+      },
+      "retention_audit_hold_approval": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "retention_audit_hold_request": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "retention_controlled_copy": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "retention_copy_evidence": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "retention_execution": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "retention_plan": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "retention_plan_item": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "retention_policy_catalog": {
+        "count": 9,
+        "sha256": "cdeef22add607d4bd7be6ec5c2211e20fe23aac12a0d42fb5c70af5b737b7b29"
+      },
+      "route_definition": {
+        "count": 4,
+        "sha256": "efc5dcda8b89b674b2f0036842a056919d8c89621282ad7096dc341df00a0559"
+      },
+      "route_operation": {
+        "count": 8,
+        "sha256": "c0514a60aebb08ba7455699bd706560b28870378f8ce114da82e2feca7b17481"
+      },
+      "route_version": {
+        "count": 4,
+        "sha256": "977b7971472802778229a733e38e8a1f2be56675628b5a640e2f9edf5d770ca8"
+      },
+      "scheduled_service": {
+        "count": 8,
+        "sha256": "1e8aa2b6a2b4f29aa8dff254e2d29f1aa97d4e7baf62d9ff91b3085823b0d4c6"
+      },
+      "scheduled_service_operation": {
+        "count": 6,
+        "sha256": "0fdf8bf4001d2f548bd6625b37d015b880ee83dc3838f968abfdb460d0cfb7c8"
+      },
+      "service_attention": {
+        "count": 2,
+        "sha256": "08f4eee008cac45f155c893e55c36d14514a131784126e04b6cba9cf69279080"
+      },
+      "service_attention_release": {
+        "count": 4,
+        "sha256": "655aef9dc5315ecb6d4c074c7d1a74bef96a401f745c717478e8916bbb297519"
+      },
+      "service_closure_notice": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "service_execution_segment": {
+        "count": 7,
+        "sha256": "701b7c286488f13bba3c90bf417151e1bd61e5b73a041d994224bba0f7338c9c"
+      },
+      "service_gps_point": {
+        "count": 2,
+        "sha256": "8ccfdf97b7236280e176c9675336c4366b2724ed8a722dce2b9be8dce94ce2d2"
+      },
+      "service_handover": {
+        "count": 2,
+        "sha256": "c5d0c45bb99bd92d5f8bf7b496534d89cd426a1c439b392366eacb55d3f046e3"
+      },
+      "service_handover_resolution": {
+        "count": 2,
+        "sha256": "4cea2d1a1dc50bc46f62e210bd4067abce76edbcb8d0fc6c801410127b875111"
+      },
+      "service_time_correction": {
+        "count": 1,
+        "sha256": "1a8763b49ccfa53c15e779b7c86f945d8eccba0ac59e1d2268dd9e599d25b99f"
+      },
+      "service_time_correction_segment": {
+        "count": 1,
+        "sha256": "75dc62993975ca1d30037ec536241c8ec5dff161a570ec6240b51d53970d0e27"
+      },
+      "service_time_request": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "service_type": {
+        "count": 5,
+        "sha256": "1e4940114d9f323609cb117237b9dae8eeab11ab5fdd1e93bc7fb58cd54a7034"
+      },
+      "service_type_operation": {
+        "count": 8,
+        "sha256": "b90b71b263cdd0463542e029ae8667cf6abfcb03b8978f4d8c2762e00dc1c73a"
+      },
+      "service_type_version": {
+        "count": 5,
+        "sha256": "2a7510a368046eef7fc4a949e41e034b96e502f4d1beac6028af39ceba99b6b7"
+      },
+      "super_admin_recovery_challenge": {
+        "count": 2,
+        "sha256": "5ab7e7c2744a6e060e014313de717299397c27b6cf4baed2e6b79cafa7bb3f02"
+      },
+      "super_admin_recovery_credential": {
+        "count": 1,
+        "sha256": "344a8b2cfd30a26adbc6278e4d42bb000a2123f0c321641fb058c31b8f620cca"
+      },
+      "transport_group": {
+        "count": 8,
+        "sha256": "cffbd79d480b3e04ba3c14de13c2c4f1779b1760d32992c4f6cf12f3227d5eaf"
+      },
+      "vehicle": {
+        "count": 9,
+        "sha256": "dc310f1446c7ef49ce5fdff298f6c51c96167dd7b78604ffe9cb2e3f0412cb62"
+      },
+      "vehicle_maintenance": {
+        "count": 1,
+        "sha256": "46265921317b05eaa5553658877cb5326bc3080be2b687e0bb223fff0eb29c02"
+      },
+      "vehicle_maintenance_control": {
+        "count": 1,
+        "sha256": "c652b84f8b11992318e8be750e24d634a2dd6cf39c2d249bd27e92843db3d2a9"
+      },
+      "vehicle_maintenance_operation": {
+        "count": 2,
+        "sha256": "22adeda8cab2689120f28314d5db6e2c674d3c29a3b6fde3c628e3fa79d8bbb7"
+      },
+      "vehicle_plate_revision": {
+        "count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "privateAuthorityTablesExcludedFromObserverRead": [
+      "retention_execution_authority"
+    ],
+    "historyRows": 49,
+    "successfulVersionedHistoryRows": 48,
+    "successfulRepeatableHistoryRows": 1,
+    "historySha256": "d7b4d2242a3d8b2101a6d533caeeee2806e632fa07e198f961d37dba2976fc66",
+    "schemaSha256": "7296c1dabb4f75a3f88f353a4ee8f9719f2ee764c5bd3993067cf94ba47caf28"
+  },
+  "rehearsalRollback": "PASS",
+  "sourceExecutedWithinRollbackOnly": true,
+  "migrationApplied": false,
+  "globalCleanupExecuted": false,
+  "personalRetirementExecuted": false,
+  "developmentOrPilotAccessed": false,
+  "result": "PASS"
+}

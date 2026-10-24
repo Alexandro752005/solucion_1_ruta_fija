@@ -1,0 +1,64 @@
+{
+    "observedAt":  "2026-10-23T04:50:33.0040240+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "action":  "click",
+    "label":  "Continuar",
+    "automatedUiInstrumentation":  true,
+    "humanAccessibilityConfirmation":  false,
+    "nodes":  [
+                  {
+                      "text":  "¿Permitir que Ruta Fija Pruebas acceda a la ubicación de este dispositivo?",
+                      "description":  "",
+                      "bounds":  "[147,628][933,808]",
+                      "class":  "android.widget.TextView",
+                      "package":  "com.google.android.permissioncontroller",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "Precisa",
+                      "description":  "",
+                      "bounds":  "[102,880][492,1340]",
+                      "class":  "android.widget.RadioButton",
+                      "package":  "com.google.android.permissioncontroller",
+                      "enabled":  "true",
+                      "checked":  "true"
+                  },
+                  {
+                      "text":  "Aproximada",
+                      "description":  "",
+                      "bounds":  "[588,880][978,1340]",
+                      "class":  "android.widget.RadioButton",
+                      "package":  "com.google.android.permissioncontroller",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "MIENTRAS LA APP ESTÁ EN USO",
+                      "description":  "",
+                      "bounds":  "[147,1418][933,1586]",
+                      "class":  "android.widget.Button",
+                      "package":  "com.google.android.permissioncontroller",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "SOLO ESTA VEZ",
+                      "description":  "",
+                      "bounds":  "[147,1598][933,1766]",
+                      "class":  "android.widget.Button",
+                      "package":  "com.google.android.permissioncontroller",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "NO PERMITIR",
+                      "description":  "",
+                      "bounds":  "[147,1778][933,1946]",
+                      "class":  "android.widget.Button",
+                      "package":  "com.google.android.permissioncontroller",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  }
+              ]
+}

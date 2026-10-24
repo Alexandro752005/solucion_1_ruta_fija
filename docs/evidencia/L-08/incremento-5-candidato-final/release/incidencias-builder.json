@@ -1,0 +1,40 @@
+{
+  "recordedDateLocal": "2026-10-23",
+  "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/Build-RutaFijaL08ReleaseCandidate.ps1 -Execute",
+  "incidents": [
+    {
+      "buildAttempt": 1,
+      "result": "ASSEMBLE_RELEASE_EXIT_1_AFTER_346_SECONDS_NO_FINAL_APK",
+      "log": "flutter-release-43475edb-5939-45f0-a2c2-2c4d190f3b3a.log",
+      "cause": "flutter_secure_storage lintVitalAnalyzeRelease exhausted MaxMetaspaceSize384m: OutOfMemoryError Metaspace",
+      "correction": "Process-only GRADLE_OPTS -Dorg.gradle.jvmargs with heap1024m, metaspace768m and code cache192m; existing worker1 and lint remain enabled; shared gradle.properties unchanged",
+      "dependencyVersionsChanged": false,
+      "lintSkipped": false
+    },
+    {
+      "attempt": 1,
+      "result": "EXIT_1_BEFORE_BUILD_NO_KEY_CREATED",
+      "cause": "Windows PowerShell ErrorAction Stop interpreted keytool informational stderr as NativeCommandError",
+      "originalLog": "key-generation.log",
+      "correction": "Capture native keytool output with ErrorAction Continue and check exact native exit code"
+    },
+    {
+      "attempts": [2, 3],
+      "result": "EXIT_1_BEFORE_BUILD_NO_KEY_CREATED",
+      "cause": "Set-Acl requested SeSecurityPrivilege while reapplying an already protected directory ACL",
+      "correction": "Read and validate existing exact user plus SYSTEM discretionary ACL; only apply DACL sections through Directory.SetAccessControl when needed; reread exact identities and FullControl rights",
+      "securityBoundaryRelaxed": false,
+      "elevationRequested": false
+    },
+    {
+      "optionalCheck": "Create an empty ACL probe directory, apply DACL sections only, read ACL, and remove the empty probe",
+      "result": "AUTOMATIC_APPROVAL_REVIEW_REJECTED_BEFORE_EXECUTION",
+      "reasonShown": "blocked by policy",
+      "retriedThroughAnotherMechanism": false,
+      "impact": "No optional probe was created or executed. Actual signing-key directory ACL was independently read as protected with exactly current user plus SYSTEM FullControl. New-directory DACL correction branch is not reported as runtime exercised."
+    }
+  ],
+  "secretsPrinted": false,
+  "deviceInstallations": 0,
+  "historicalArtifactsOverwritten": false
+}

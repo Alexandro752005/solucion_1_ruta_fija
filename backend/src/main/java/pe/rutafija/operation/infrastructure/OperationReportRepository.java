@@ -53,7 +53,7 @@ public class OperationReportRepository {
 
     public long openIncidents(UUID organizationId) {
         return count(
-                "select count(*) from incident where organization_id = :organizationId and status <> 'RESOLVED'",
+                "select count(*) from incident where organization_id = :organizationId and status in ('OPEN', 'FOLLOW_UP')",
                 organizationId,
                 null
         );

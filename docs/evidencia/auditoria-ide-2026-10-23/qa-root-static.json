@@ -1,0 +1,75 @@
+{
+  "checkedAt": "2026-10-23T16:12:12.290698+00:00",
+  "pythonScripts": [
+    {
+      "path": "scripts/audit_l08_local.py",
+      "sha256": "d175fbb1d38eb0e18a9d31ba9a29209c0b42f0518246039805794ee338e353cf"
+    },
+    {
+      "path": "scripts/finalize_l08_candidate.py",
+      "sha256": "79a9d2abaae873e7bee0edd99f5c608cc95ad1d0a10f2f4cefd91dc5bb93b7f8"
+    },
+    {
+      "path": "scripts/seal_l08_candidate.py",
+      "sha256": "710420d9158620da5be47ea9ba2c774d37e492dc8aade981085d9e355bb4884a"
+    }
+  ],
+  "jsonConfigs": [
+    {
+      "path": ".vscode/extensions.json",
+      "sha256": "fe21fc6ba5c92b375cb20ae4ccd7b90cef52cd3c42d0e5874903a4d2b7949b29"
+    },
+    {
+      "path": ".vscode/settings.json",
+      "sha256": "b129b68e3807e4304b3033456fb1e37a7a2e31165c5fedb7006eadcf49d7a593"
+    },
+    {
+      "path": ".vscode/tasks.json",
+      "sha256": "4cfc71c32f62bbe156cb2150239e000b2f81624af1f617be9ab9bbef7bda15eb"
+    },
+    {
+      "path": "frontend/angular.json",
+      "sha256": "d3333389b35e47d16fdb07ed441904c38bab99e3d697a1cd392beaecfcc2a189"
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "sha256": "6818f9b06051abab64081e8cc853049b54c2632d35b0807033c7582f26f0d85e"
+    },
+    {
+      "path": "frontend/package.json",
+      "sha256": "c4b8bdc21e68596f537fdb02ddf5192905ebbc3ba1e52fa723dfae8296c9e018"
+    },
+    {
+      "path": "frontend/proxy.conf.json",
+      "sha256": "b03c3a5b73d9e096cca285ae9d6ba2db8a14902847c7063fdf2f6ec1b426a3ff"
+    },
+    {
+      "path": "frontend/public/config/runtime-config.json",
+      "sha256": "0012466b1374f09758f3d4187d2743e65549a5648eb4ab58a9509e61e29ec543"
+    },
+    {
+      "path": "frontend/tsconfig.app.json",
+      "sha256": "5f4183f0947c9a412d936e7ae2a5967d5692a0c9952325f9e8050fccb135d82a"
+    },
+    {
+      "path": "frontend/tsconfig.json",
+      "sha256": "5d934b414550bee17d0b2d9f64bdad4a3e2849755e051da95a355d7d6b696480"
+    },
+    {
+      "path": "frontend/tsconfig.spec.json",
+      "sha256": "3f802355c57bb9b3edeb2acd285ee6f43467746a8560dd4f669a9c345868a73a"
+    }
+  ],
+  "syntaxFailures": [],
+  "L08FrozenEntries": 427,
+  "L08FrozenManifestSha256": "2708399adc572cacf8a3d3f09ba31e507604717e6817ed66e7c871c4a148ac5a",
+  "L08Mismatches": [],
+  "independentMobileTestReviewOnlyTwoRequiredFields": true,
+  "mobileLintRulesUnchanged": true,
+  "otherVSCodeSettingsUnchanged": true,
+  "immutableSnapshotAndPublishedTerms": {
+    "backups/L-00-2026-10-13-final3/source-snapshot.zip": true,
+    "docs/legal/publicado/terminos-admin-v1.0.0.md": true
+  },
+  "result": "PASS"
+}

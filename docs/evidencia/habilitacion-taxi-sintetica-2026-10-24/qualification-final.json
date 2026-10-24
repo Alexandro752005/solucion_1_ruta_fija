@@ -1,0 +1,239 @@
+{
+  "driverId": "83562d94-4705-4375-b0a2-201e85d06eaa",
+  "accountId": "c288f13d-8501-43ff-81be-dc14ffaa4332",
+  "requestId": "20507380-22fd-44c9-8025-84b3fe55baee",
+  "version": 6,
+  "suspended": false,
+  "operationalEnabled": true,
+  "personalDocumentsStatus": "CURRENT",
+  "personalValidUntil": "2028-01-01T04:59:59Z",
+  "blockers": [],
+  "periods": [
+    {
+      "id": "0fa9238e-300b-4dcb-9ecf-bb0a330f4ddf",
+      "vehicleId": "5d60bdfc-e857-476f-8497-db616e508d13",
+      "kind": "COMPANY",
+      "startsAt": "2026-10-24T05:00:00Z",
+      "endsAt": "2026-10-26T05:00:00Z",
+      "status": "AUTHORIZED",
+      "reason": "Autorizacion de periodo de unidad del escenario sintetico taxi por propietario; prueba funcional local.",
+      "version": 5
+    }
+  ],
+  "unitRequests": [
+    {
+      "id": "3ad7f3aa-4ef6-4f7a-8f09-65bb5d8625d6",
+      "vehicleId": "5d60bdfc-e857-476f-8497-db616e508d13",
+      "kind": "COMPANY",
+      "status": "APPROVED",
+      "reference": "SIM-SOLICITUD-UNIDAD-TAXI",
+      "createdAt": "2026-10-24T04:58:34.824841Z"
+    }
+  ],
+  "catalog": [
+    {
+      "scope": "VEHICLE",
+      "id": "VEH-01",
+      "title": "Identidad y categoría documentadas",
+      "mandatory": true,
+      "fieldKeys": [
+        "reference",
+        "plate",
+        "category",
+        "bodyType",
+        "brand",
+        "model",
+        "year"
+      ]
+    },
+    {
+      "scope": "VEHICLE",
+      "id": "VEH-02",
+      "title": "SOAT o CAT compatible",
+      "mandatory": true,
+      "fieldKeys": [
+        "insuranceType",
+        "issuer",
+        "reference",
+        "plate",
+        "serviceScope"
+      ]
+    },
+    {
+      "scope": "VEHICLE",
+      "id": "VEH-03",
+      "title": "Inspección técnica aplicable",
+      "mandatory": false,
+      "fieldKeys": [
+        "reference",
+        "center",
+        "plate",
+        "inspectionType",
+        "inspectionResult"
+      ]
+    },
+    {
+      "scope": "VEHICLE",
+      "id": "VEH-04",
+      "title": "Título de habilitación compatible",
+      "mandatory": false,
+      "fieldKeys": [
+        "titleName",
+        "titleNumber",
+        "authority",
+        "holderReference",
+        "plate",
+        "modality",
+        "serviceScope"
+      ]
+    },
+    {
+      "scope": "COMPANY",
+      "id": "EMP-01",
+      "title": "Identidad y título de la organización",
+      "mandatory": true,
+      "fieldKeys": [
+        "operatorReference",
+        "titleNumber",
+        "authority",
+        "modality",
+        "serviceScope"
+      ]
+    },
+    {
+      "scope": "COMPANY",
+      "id": "EMP-02",
+      "title": "Condiciones del servicio taxi",
+      "mandatory": false,
+      "fieldKeys": [
+        "variant",
+        "titleReference",
+        "fleetScope",
+        "serviceScope"
+      ]
+    },
+    {
+      "scope": "COMPANY",
+      "id": "EMP-03",
+      "title": "Título y ruta de colectivo",
+      "mandatory": false,
+      "fieldKeys": [
+        "titleReference",
+        "authority",
+        "routeReference",
+        "serviceScope",
+        "unitsScope"
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "scope": "COMPANY",
+      "requirementId": "EMP-01",
+      "fields": {},
+      "expiryMode": "DATED",
+      "validUntil": "2028-01-01T05:00:00Z",
+      "applicability": "CONFIRMED",
+      "result": "CONFORME",
+      "version": 3
+    },
+    {
+      "scope": "COMPANY",
+      "requirementId": "EMP-02",
+      "fields": {},
+      "expiryMode": "DATED",
+      "validUntil": "2028-01-01T05:00:00Z",
+      "applicability": "CONFIRMED",
+      "result": "CONFORME",
+      "version": 3
+    },
+    {
+      "scope": "COMPANY",
+      "requirementId": "EMP-03",
+      "fields": {},
+      "expiryMode": "UNKNOWN",
+      "applicability": "CONFIRMED",
+      "result": "NO_APLICA_JUSTIFICADO",
+      "version": 3
+    },
+    {
+      "scope": "VEHICLE",
+      "requirementId": "VEH-01",
+      "vehicleId": "5d60bdfc-e857-476f-8497-db616e508d13",
+      "fields": {},
+      "expiryMode": "DATED",
+      "validUntil": "2028-01-01T05:00:00Z",
+      "applicability": "CONFIRMED",
+      "result": "CONFORME",
+      "version": 2
+    },
+    {
+      "scope": "VEHICLE",
+      "requirementId": "VEH-02",
+      "vehicleId": "5d60bdfc-e857-476f-8497-db616e508d13",
+      "fields": {},
+      "expiryMode": "DATED",
+      "validUntil": "2028-01-01T05:00:00Z",
+      "applicability": "CONFIRMED",
+      "result": "CONFORME",
+      "version": 2
+    },
+    {
+      "scope": "VEHICLE",
+      "requirementId": "VEH-03",
+      "vehicleId": "5d60bdfc-e857-476f-8497-db616e508d13",
+      "fields": {},
+      "expiryMode": "DATED",
+      "validUntil": "2028-01-01T05:00:00Z",
+      "applicability": "CONFIRMED",
+      "result": "CONFORME",
+      "version": 2
+    },
+    {
+      "scope": "VEHICLE",
+      "requirementId": "VEH-04",
+      "vehicleId": "5d60bdfc-e857-476f-8497-db616e508d13",
+      "fields": {},
+      "expiryMode": "DATED",
+      "validUntil": "2028-01-01T05:00:00Z",
+      "applicability": "CONFIRMED",
+      "result": "CONFORME",
+      "version": 2
+    }
+  ],
+  "personalDocuments": [],
+  "observedAt": "2026-10-24T05:45:44.815520Z",
+  "serviceAttention": [],
+  "personalDocumentStates": [
+    {
+      "requirementId": "CON-01",
+      "result": "CONFORME",
+      "applicability": "CONFIRMED",
+      "observation": "SIMULACION LOCAL: datos sintéticos; sin validez documental real."
+    },
+    {
+      "requirementId": "CON-02",
+      "result": "CONFORME",
+      "applicability": "CONFIRMED",
+      "observation": "SIMULACION LOCAL: datos sinteticos; sin validez documental real."
+    },
+    {
+      "requirementId": "CON-03",
+      "result": "CONFORME",
+      "applicability": "CONFIRMED",
+      "observation": "SIMULACION LOCAL: datos sinteticos; sin validez documental real."
+    },
+    {
+      "requirementId": "CON-04",
+      "result": "CONFORME",
+      "applicability": "CONFIRMED",
+      "observation": "SIMULACION LOCAL: datos sinteticos; sin validez documental real."
+    },
+    {
+      "requirementId": "CON-05",
+      "result": "NO_APLICA_JUSTIFICADO",
+      "applicability": "CONFIRMED",
+      "observation": "No corresponde al escenario taxi; evaluacion exclusivamente sintetica de laboratorio."
+    }
+  ]
+}

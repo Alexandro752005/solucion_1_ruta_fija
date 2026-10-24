@@ -1,0 +1,15 @@
+{
+    "checkedAtUtc":  "2026-10-18T00:26:08.9524030Z",
+    "check":  "PARSE_ONLY_NO_BLOCK_EXECUTION",
+    "multilineErrorCount":  0,
+    "singleLineErrorCount":  0,
+    "unseparatedExampleErrorIds":  [
+                                       "UnexpectedToken"
+                                   ],
+    "apiCalls":  0,
+    "smtpAttempts":  0,
+    "databaseCalls":  0,
+    "keyGenerationCalls":  0,
+    "keyDirectoryWrites":  0,
+    "guideVersion":  "1.0.1"
+}

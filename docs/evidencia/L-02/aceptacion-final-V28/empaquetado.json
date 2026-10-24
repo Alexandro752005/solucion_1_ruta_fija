@@ -1,0 +1,7 @@
+{
+  "command": "mvn.cmd --offline -q -DskipTests package",
+  "exitCode": 0,
+  "testReexecution": false,
+  "forbiddenJarEntries": [],
+  "artifactManifest": "artifacts/L-02-2026-10-19/manifest.json"
+}

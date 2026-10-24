@@ -1,0 +1,59 @@
+{
+  "observedAt": "2026-10-21T06:48:27.499213+00:00",
+  "localDate": "2026-10-21",
+  "reviewStatus": "VERIFICADA",
+  "lot": "L-06",
+  "completionType": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "runId": "51e69ee6-e4a0-4c3f-9a35-f19de0072422",
+  "schemaVersion": "44",
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 5
+  },
+  "remainingHistoricalCreations": {
+    "SUPER_ADMIN": 0,
+    "ADMIN": 1,
+    "CONDUCTOR": 15
+  },
+  "termsAcceptances": 2,
+  "backendCases": 72,
+  "crmCases": 14,
+  "flutterCases": 49,
+  "crmConnectedStages": 6,
+  "flutterConnectedStages": 5,
+  "TEST_CLEANUP_RELEASED": true,
+  "pilotEnabled": false,
+  "L07Started": false,
+  "externalDeliveryVerified": false,
+  "lotStatus": "VERIFICADA",
+  "result": "PASS_FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "verifiedLocalCriteria": [
+    "CI-L06-01",
+    "CI-L06-02",
+    "CI-L06-03",
+    "CI-L06-04",
+    "CI-L06-05",
+    "CI-L06-06",
+    "CI-L06-07",
+    "CI-L06-08",
+    "CI-L06-09",
+    "CI-L06-10"
+  ],
+  "pendingLocalCriteria": [],
+  "actPath": "docs/actas/L-06-cierre-funcional-local-2026-10-21.md",
+  "matrixPath": "docs/evidencia/L-06/matriz-L06.md",
+  "manifestPath": "docs/evidencia/L-06/manifest-cierre.sha256",
+  "operationalVerificationPending": [
+    "VT-V3-Q-074-01"
+  ],
+  "pilotRequirementsStillPending": [
+    "Canal externo propio/cuota/credencial/dispositivo/entrega autorizada",
+    "Privacidad/identificación/protección y retiro efectivo",
+    "ADMIN legítimo/aceptación propia",
+    "Titular real/clave definitiva/custodia independiente y ensayo",
+    "Infraestructura/base piloto/HTTPS/copia cifrada/restauración",
+    "Participantes/unidades/títulos reales",
+    "Dispositivo físico/GPS/batería/calibración L08"
+  ]
+}

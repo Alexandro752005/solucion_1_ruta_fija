@@ -1,0 +1,10 @@
+﻿{
+    "apiStatus":  "UP",
+    "crmHttpStatus":  200,
+    "crmTitle":  "Ruta Fija | CRM administrativo",
+    "backendPid":  8068,
+    "frontendPid":  14536,
+    "mode":  "NORMAL_LOCAL",
+    "database":  "solucion_ruta_fija_1",
+    "checkedAtUtc":  "2026-10-23T22:25:51.6398967+00:00"
+}

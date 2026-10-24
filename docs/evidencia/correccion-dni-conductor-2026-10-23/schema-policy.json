@@ -1,0 +1,82 @@
+{
+    "checkedAt":  "2026-10-24T03:36:46.4779545+00:00",
+    "result":  "PASS_NATIVE_V51_AND_HISTORICAL_TEST_V50_SCHEMA_POLICY",
+    "checksPassed":  14,
+    "checks":  [
+                   {
+                       "name":  "Native V51 accepts 51 runtime migrations without test grants",
+                       "passed":  true,
+                       "accepted":  true
+                   },
+                   {
+                       "name":  "Native V50 requires controlled migration before startup",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Test V50 accepts its exact role-privilege repeatable",
+                       "passed":  true,
+                       "accepted":  true
+                   },
+                   {
+                       "name":  "Native V12 remains rejected",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Normal database refuses test-only repeatable",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Test database requires exact repeatable script identity",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Test database refuses missing role-privilege repeatable",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Failed migration refuses startup",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Database identity cannot be swapped",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Failed SELECT refuses startup even with plausible output",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Empty SELECT result refuses startup",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Extra output refuses partial certification",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Missing or unexpected version refuses startup",
+                       "passed":  true,
+                       "accepted":  false
+                   },
+                   {
+                       "name":  "Historical test database refuses native V51 history",
+                       "passed":  true,
+                       "accepted":  false
+                   }
+               ],
+    "policySha256":  "12a5706d8f3caf419f6a116818c810e56c9a4ae2fc61f5b3c4180d392b67f794",
+    "runtimeSha256":  "07a2f6e7b2aa56607386441779a32c6dcd19ae31ff7fcfb39f89e211a4edcd14",
+    "databaseConnected":  false,
+    "serviceOrApplicationStarted":  false,
+    "sourceFunctionExtracted":  true
+}

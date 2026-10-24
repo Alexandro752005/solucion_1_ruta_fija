@@ -1,0 +1,15 @@
+# Decisiones operativas pendientes — L-01
+
+Estado del lote: **EN_CURSO**. Estas propuestas no modifican v3.1 ni convierten reglas pendientes en aprobadas.
+
+| Tema | Propuesta para revisión | Avance que no depende de la decisión |
+|---|---|---|
+| Alta inicial ADMIN | Crear una cuenta `PENDING_ACTIVATION`; el SUPER_ADMIN registra correo y organización, la persona verifica su correo y establece su propia contraseña por un flujo de un solo uso. El SUPER_ADMIN nunca ve ni define esa contraseña. | Guardas negativas: ADMIN/CONDUCTOR no pueden crear o gestionar ADMIN; quedan vigentes. Contratos y DTO pueden prepararse sin activar cuentas reales. |
+| Reemplazo ADMIN (Q-007) | Verificar la solicitud por un contacto empresarial ya establecido o presencialmente; preparar el reemplazo sin privilegios, y en una operación auditada habilitarlo y revocar al saliente cuando se confirme la activación. No conservar dos ADMIN activos salvo autorización expresa. | Se pueden implementar bloqueo, estados, transacción, conservación de organización/historial y pruebas negativas. La verificación operativa y el punto exacto de revocación siguen pendientes. |
+| Recuperación CONDUCTOR (Q-015) | Aceptar una de las dos vías previstas por v3.1: contacto seguro previamente registrado o verificación presencial. Registrar solo método, ADMIN autenticado, fecha, motivo y referencia de caso; no copiar DNI/documentos a logs. | Se puede diseñar el caso, aislamiento por organización, OTP al correo nuevo y token de un uso para restablecer contraseña. La retención de la constancia y el catálogo mínimo de evidencia requieren confirmación antes de activar en piloto. |
+| Invitación / solicitud | Mantener el código textual de seis dígitos, sin QR ni enlace, compartido por canal sin costo. La aceptación verificada crea o enlaza una solicitud `PENDING_REVIEW` dentro de la misma transacción y no incorpora ni activa al conductor. | Persistencia, emisor ADMIN, hash del código, vencimiento y limitadores se pueden construir. Falta confirmar el formulario mínimo de solicitud y cómo una cuenta CONDUCTOR todavía no asociada a la empresa inicia sesión sin recibir un rol empresarial antes de la aprobación. |
+| Términos | Publicar solo una versión 1.0.0 tras completar datos factuales y aprobación expresa; conservar contenido y huella inmutables. | El motor se probará con un documento `SYNTHETIC` aislado en pruebas; v0.2.0 no se publicará ni tendrá aceptaciones reales. |
+
+Para el borrador de términos faltan, como mínimo, identidad y contacto del responsable, periodo/organizaciones del piloto, alcance de datos y proveedores, ubicación efectiva, retención/retiro y aprobador. No se completarán por inferencia.
+
+Las propuestas de alta/reemplazo ADMIN, la retención de evidencias de recuperación y el modelo mínimo de solicitud deben aprobarse antes de habilitar sus rutas para cuentas reales. Los límites de invitación y las dos modalidades de evidencia para Q-015 ya constan como reglas confirmadas en v3.1; estas propuestas no los cambian.

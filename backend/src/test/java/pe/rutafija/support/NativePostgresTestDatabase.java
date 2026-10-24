@@ -117,6 +117,7 @@ final class NativePostgresTestDatabase {
     }
 
     void cleanBusinessData() {
+        assertNoPendingHumanTrial();
         try (Connection connection = DriverManager.getConnection(
                 migratorUrl,
                 migratorUsername,
@@ -131,6 +132,9 @@ final class NativePostgresTestDatabase {
                 lock.execute();
             }
 
+            // Recheck after acquiring the same lock: a human case may have started while waiting.
+            assertNoPendingHumanTrial();
+
             String tables = businessTables(connection);
             if (tables != null) {
                 try (Statement statement = connection.createStatement()) {
@@ -144,6 +148,34 @@ final class NativePostgresTestDatabase {
                     exception
             );
         }
+    }
+
+    private static void assertNoPendingHumanTrial() {
+        for (Path config : localConfigurationCandidates()) {
+            assertNoL08ConnectedFixture(config.resolveSibling("l08-connected.active"));
+            if(Files.exists(config.resolveSibling("l07-connected.active")))throw new IllegalStateException("L07 connected case active: no global cleanup authorized.");
+            assertNoHumanTrialMarker(config.resolveSibling("l01-human-trial.active"));
+            if(Files.exists(config.resolveSibling("l06-connected.active")))throw new IllegalStateException("L06 connected case active: no global cleanup authorized.");
+            if(Files.exists(config.resolveSibling("l03-connected.active")))throw new IllegalStateException("L03 connected case active: no global cleanup authorized.");
+            if(Files.exists(config.resolveSibling("l02-connected.active")))throw new IllegalStateException(
+                    "L-02 connected fixture pending archival/selective closure: global cleanup refused.");
+            assertNoHistoricalL02Fixture(config.resolveSibling("l02-connected-state.json"));
+        }
+    }
+
+    static void assertNoL08ConnectedFixture(Path marker) {
+        if (Files.exists(marker)) throw new IllegalStateException(
+                "L08 connected case protected: archive and retire its exact fixture before database suites or cleanup.");
+    }
+
+    static void assertNoHistoricalL02Fixture(Path state) {
+        if(Files.exists(state))throw new IllegalStateException(
+                "Historical L-02 case and creation counters must be preserved. Use rollback tests or exact selective cleanup; global truncation is not authorized.");
+    }
+
+    static void assertNoHumanTrialMarker(Path marker) {
+        if (Files.exists(marker)) throw new IllegalStateException(
+                "Ensayo humano L-01 pendiente de archivo/liberación: limpieza de ruta_fija_test suspendida. No borrar el marcador para forzar una prueba.");
     }
 
     void assertTestRolePermissions() {

@@ -1,0 +1,33 @@
+{
+  "CREATE" : {
+    "samples" : 100,
+    "p95DurableCommitObservedMs" : 343.0684
+  },
+  "ACCEPT" : {
+    "samples" : 100,
+    "p95DurableCommitObservedMs" : 461.8702
+  },
+  "runId" : "860c1cdb-b062-469a-9a3f-156ea23bb656",
+  "observedAt" : "2026-10-23T01:02:59.400613600Z",
+  "result" : "PASS_READ_ONLY_CAP25_POSTFLIGHT_LEDGER_HISTORY_RETIREMENT_AND_MEASUREMENTS",
+  "ledger" : {
+    "SUPER_ADMIN" : 1,
+    "ADMIN" : 4,
+    "CONDUCTOR" : 20
+  },
+  "accountsDisabled" : 25,
+  "allRefreshTokensRevoked" : true,
+  "acceptancesPreserved" : 4,
+  "offersAndServicesPreserved" : 100,
+  "retirementExecutionAuditAndTombstone" : 1,
+  "advisoryGuardFree" : true,
+  "markerAbsent" : true,
+  "TEST_CLEANUP_RELEASED" : true,
+  "databaseWrites" : 0,
+  "source5432Accessed" : false,
+  "restore55438Accessed" : false,
+  "realParticipantsOrDevicesAccredited" : false,
+  "businessRtoOrRpoAccredited" : false,
+  "originalMeasurementSha256" : "6df1c7bd679c2684b827cca7d10710de4f396ad748272313f6ee11c5e7672ec3",
+  "originalRaceSha256" : "4d31df0d94923ba6f79641c18e41e9f5b5ffe354c54d5c65bea6d15fa1c34694"
+}

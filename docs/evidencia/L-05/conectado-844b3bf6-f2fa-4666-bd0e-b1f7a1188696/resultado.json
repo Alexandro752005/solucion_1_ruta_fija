@@ -1,0 +1,1753 @@
+{
+  "runId" : "844b3bf6-f2fa-4666-bd0e-b1f7a1188696",
+  "organizationId" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+  "adminId" : "92ebc07c-1319-4850-a734-f792cb299979",
+  "ledgerBefore" : {
+    "SUPER_ADMIN" : 1,
+    "ADMIN" : 3,
+    "CONDUCTOR" : 2
+  },
+  "termsAcceptancesBefore" : 2,
+  "antecedentRowHashes" : {
+    "pilot_account_creation" : {
+      "05f40f13-be6c-4166-91b7-ac7e400d7911" : "b096d1c3dddea4a58a25213e5ab2fd8136f464794692bb7aa751f38c15eba471",
+      "0794eb2a-bc9a-4334-b617-427bd7f28ef1" : "d7c18f662657055f656d2d62ac5b2d52ba65a38d6745d1415fd5d592b5fdd02d",
+      "088518c1-821c-4316-9f87-090f51ac44e0" : "8cba690a20116a7725e085e2f4d693d2bad945a1df8b2ade981d4f19516c9a5e",
+      "3d486a69-9637-48d4-82de-fc17cde83484" : "9e9db91bf9e5195eeb488b780e59e3ebfba730974b08ef9c71f2df0883c4325a",
+      "3fb1f499-81d2-45dd-8e60-b53f6eb7ff79" : "254aa95bed82a42ccb70f4c1fffd7ac2227c1576c5c1f44f6acc75991369f297",
+      "92ebc07c-1319-4850-a734-f792cb299979" : "3f703acebfb11a30630dbb5a3bac0f77bc790f7d2173a183585b22c185b7eab4"
+    },
+    "admin_terms_acceptance" : {
+      "7978c493-5501-4d09-a714-bd90dceda745" : "7cb7a10dc22c4724e105d742491a873fa502d89a79f10a9c7fd5173eeec939f1",
+      "c496b63c-735f-48cc-be56-90f7ec1464e1" : "1a7524e0f91935677f8d8d40db97e0e626cd90a05aab01a01bb4e6a7ee8fcbd2"
+    },
+    "scheduled_service" : {
+      "1dc4a0fd-4f28-412f-bb99-f3fceddbac58" : "42d4ae20b4d78c53681d0773584cec4e8474adb538da201e57d383ff77391c2f",
+      "7fd33a9e-8e13-49a9-86f6-0dd707e08264" : "5ffe6f297cd62d6de7ca53d59fb3b2307797c78c522296c2978c86ca19e43b44"
+    },
+    "assignment" : {
+      "149b817c-247c-4333-a1a4-135f7581ad77" : "c698dadf3683cbd39ecb2be47be3b40b064ef2ae32613c38f00016cb32c55e95",
+      "669d2a31-2442-4e9a-809d-0cd64eb85a17" : "67b90f9c45f9751edb71686a99bb1cb37a2e8759279165b2ca3a11f192b730fc",
+      "ff70acc6-1c6b-4b89-b0f8-73ce7f19c195" : "7b19f6bd5c9280ceaf42d7bef6a1c85e0d6d5c23fba86ab0b7a99e7319946c2c"
+    }
+  },
+  "participants" : [ {
+    "groupId" : "e456388e-d3d7-4f6f-8640-3cdb43407ccf",
+    "vehicleId" : "b0439799-87d9-4ab4-96a5-d48e8beb5793",
+    "invitationId" : "042604ae-a3e4-4a5b-bcd0-13609b310791",
+    "requestId" : "4bac1680-a4ba-4770-86e3-5dc79dd57aed",
+    "driverId" : "21ade5d9-0a99-45ae-be7b-4e37833577c4",
+    "accountId" : "47d19ed8-de66-4742-a638-4a4a219bbb1f",
+    "vehicleReviewed" : true,
+    "companyReviewed" : true,
+    "periodId" : "7969f25b-5227-4058-bc3b-0c358cbd02f3",
+    "qualifiedOnce" : true
+  }, {
+    "groupId" : "a76c532b-00d9-4aa2-aa97-b2f034526e35",
+    "vehicleId" : "03d4a99b-e465-4737-87c2-3a019b13432a",
+    "invitationId" : "d7f21028-40e9-41d4-bca6-d142de7be223",
+    "requestId" : "f21977a1-54b6-4dfa-8816-0cfc4e1cbb82",
+    "driverId" : "a9cd5310-d37d-4b60-9a0e-722b7866c413",
+    "accountId" : "111131ee-1700-4095-b626-30377703ba9d",
+    "vehicleReviewed" : true,
+    "companyReviewed" : true,
+    "periodId" : "912f0a63-0f74-49c0-b96d-4adb4fe92bc7",
+    "qualifiedOnce" : true
+  } ],
+  "participantIndex" : 1,
+  "result" : "PASS_REAL_CRM_FLUTTER_HTTP_POSTGRES_SIMULATED_GPS_MAIL",
+  "phase" : "SELECTIVE_FIXTURE_CLOSURE",
+  "observedAt" : "2026-10-20T13:35:09.956803700Z",
+  "httpEvents" : [ {
+    "startedAt" : "2026-10-20T13:26:17.309994500Z",
+    "finishedAt" : "2026-10-20T13:26:17.822574400Z",
+    "status" : 201,
+    "path" : "/groups",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:17.825541100Z",
+    "finishedAt" : "2026-10-20T13:26:17.931541500Z",
+    "status" : 201,
+    "path" : "/vehicles",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:17.940539500Z",
+    "finishedAt" : "2026-10-20T13:26:18.012541500Z",
+    "status" : 201,
+    "path" : "/invitations",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:18.027542200Z",
+    "finishedAt" : "2026-10-20T13:26:18.323217600Z",
+    "status" : 202,
+    "path" : "/onboarding/requests",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:18.325220100Z",
+    "finishedAt" : "2026-10-20T13:26:18.367582Z",
+    "status" : 202,
+    "path" : "/onboarding/otp/verify",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:18.368582400Z",
+    "finishedAt" : "2026-10-20T13:26:18.425584200Z",
+    "status" : 200,
+    "path" : "/onboarding/requests/4bac1680-a4ba-4770-86e3-5dc79dd57aed/documentary-expediente",
+    "method" : "GET"
+  }, {
+    "startedAt" : "2026-10-20T13:26:18.426582Z",
+    "finishedAt" : "2026-10-20T13:26:18.514096900Z",
+    "status" : 200,
+    "path" : "/onboarding/requests/4bac1680-a4ba-4770-86e3-5dc79dd57aed/documentary-expediente",
+    "method" : "PUT"
+  }, {
+    "startedAt" : "2026-10-20T13:26:18.514096900Z",
+    "finishedAt" : "2026-10-20T13:26:18.553097400Z",
+    "status" : 200,
+    "path" : "/onboarding/requests/4bac1680-a4ba-4770-86e3-5dc79dd57aed/approve",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:18.554096900Z",
+    "finishedAt" : "2026-10-20T13:26:18.723097100Z",
+    "status" : 200,
+    "path" : "/onboarding/requests/4bac1680-a4ba-4770-86e3-5dc79dd57aed/provision",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:18.726099400Z",
+    "finishedAt" : "2026-10-20T13:26:18.834861100Z",
+    "status" : 200,
+    "path" : "/drivers/21ade5d9-0a99-45ae-be7b-4e37833577c4/qualification",
+    "method" : "GET"
+  }, {
+    "startedAt" : "2026-10-20T13:26:18.834861100Z",
+    "finishedAt" : "2026-10-20T13:26:18.988135800Z",
+    "status" : 200,
+    "path" : "/drivers/21ade5d9-0a99-45ae-be7b-4e37833577c4/qualification/reviews",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:19.005138600Z",
+    "finishedAt" : "2026-10-20T13:26:19.080135Z",
+    "status" : 200,
+    "path" : "/drivers/21ade5d9-0a99-45ae-be7b-4e37833577c4/qualification/reviews",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:19.082134200Z",
+    "finishedAt" : "2026-10-20T13:26:19.171133700Z",
+    "status" : 200,
+    "path" : "/drivers/21ade5d9-0a99-45ae-be7b-4e37833577c4/qualification/periods",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:19.174135Z",
+    "finishedAt" : "2026-10-20T13:26:19.230136Z",
+    "status" : 200,
+    "path" : "/drivers/21ade5d9-0a99-45ae-be7b-4e37833577c4/qualification/activate",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:19.230136Z",
+    "finishedAt" : "2026-10-20T13:26:19.534135100Z",
+    "status" : 200,
+    "path" : "/mobile/auth/login",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:19.536135900Z",
+    "finishedAt" : "2026-10-20T13:26:19.576135700Z",
+    "status" : 200,
+    "path" : "/mobile/me",
+    "method" : "GET"
+  }, {
+    "startedAt" : "2026-10-20T13:26:19.576135700Z",
+    "finishedAt" : "2026-10-20T13:26:19.626135300Z",
+    "status" : 200,
+    "path" : "/mobile/availability",
+    "method" : "PUT"
+  }, {
+    "startedAt" : "2026-10-20T13:26:19.629134300Z",
+    "finishedAt" : "2026-10-20T13:26:19.658137100Z",
+    "status" : 201,
+    "path" : "/groups",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:19.660136900Z",
+    "finishedAt" : "2026-10-20T13:26:19.688134600Z",
+    "status" : 201,
+    "path" : "/vehicles",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:19.690134600Z",
+    "finishedAt" : "2026-10-20T13:26:19.711135100Z",
+    "status" : 201,
+    "path" : "/invitations",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:19.714134700Z",
+    "finishedAt" : "2026-10-20T13:26:19.972341800Z",
+    "status" : 202,
+    "path" : "/onboarding/requests",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:19.974342700Z",
+    "finishedAt" : "2026-10-20T13:26:19.987376Z",
+    "status" : 202,
+    "path" : "/onboarding/otp/verify",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:19.989341200Z",
+    "finishedAt" : "2026-10-20T13:26:20.009344400Z",
+    "status" : 200,
+    "path" : "/onboarding/requests/f21977a1-54b6-4dfa-8816-0cfc4e1cbb82/documentary-expediente",
+    "method" : "GET"
+  }, {
+    "startedAt" : "2026-10-20T13:26:20.009344400Z",
+    "finishedAt" : "2026-10-20T13:26:20.034584700Z",
+    "status" : 200,
+    "path" : "/onboarding/requests/f21977a1-54b6-4dfa-8816-0cfc4e1cbb82/documentary-expediente",
+    "method" : "PUT"
+  }, {
+    "startedAt" : "2026-10-20T13:26:20.035585100Z",
+    "finishedAt" : "2026-10-20T13:26:20.057329800Z",
+    "status" : 200,
+    "path" : "/onboarding/requests/f21977a1-54b6-4dfa-8816-0cfc4e1cbb82/approve",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:20.057329800Z",
+    "finishedAt" : "2026-10-20T13:26:20.097330500Z",
+    "status" : 200,
+    "path" : "/onboarding/requests/f21977a1-54b6-4dfa-8816-0cfc4e1cbb82/provision",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:20.099329900Z",
+    "finishedAt" : "2026-10-20T13:26:20.125331400Z",
+    "status" : 200,
+    "path" : "/drivers/a9cd5310-d37d-4b60-9a0e-722b7866c413/qualification",
+    "method" : "GET"
+  }, {
+    "startedAt" : "2026-10-20T13:26:20.125331400Z",
+    "finishedAt" : "2026-10-20T13:26:20.170330Z",
+    "status" : 200,
+    "path" : "/drivers/a9cd5310-d37d-4b60-9a0e-722b7866c413/qualification/reviews",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:20.197328300Z",
+    "finishedAt" : "2026-10-20T13:26:20.244329600Z",
+    "status" : 200,
+    "path" : "/drivers/a9cd5310-d37d-4b60-9a0e-722b7866c413/qualification/reviews",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:20.246330400Z",
+    "finishedAt" : "2026-10-20T13:26:20.291331600Z",
+    "status" : 200,
+    "path" : "/drivers/a9cd5310-d37d-4b60-9a0e-722b7866c413/qualification/periods",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:20.293333300Z",
+    "finishedAt" : "2026-10-20T13:26:20.328334Z",
+    "status" : 200,
+    "path" : "/drivers/a9cd5310-d37d-4b60-9a0e-722b7866c413/qualification/activate",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:20.328334Z",
+    "finishedAt" : "2026-10-20T13:26:20.595330400Z",
+    "status" : 200,
+    "path" : "/mobile/auth/login",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:20.596330Z",
+    "finishedAt" : "2026-10-20T13:26:20.614331300Z",
+    "status" : 200,
+    "path" : "/mobile/me",
+    "method" : "GET"
+  }, {
+    "startedAt" : "2026-10-20T13:26:20.614331300Z",
+    "finishedAt" : "2026-10-20T13:26:20.640329300Z",
+    "status" : 200,
+    "path" : "/mobile/availability",
+    "method" : "PUT"
+  }, {
+    "startedAt" : "2026-10-20T13:26:20.644330100Z",
+    "finishedAt" : "2026-10-20T13:26:20.736328400Z",
+    "status" : 200,
+    "path" : "/service-types",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:20.740328100Z",
+    "finishedAt" : "2026-10-20T13:26:20.845333400Z",
+    "status" : 200,
+    "path" : "/routes",
+    "method" : "POST"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:23.666316Z",
+    "status" : 200,
+    "path" : "/api/v1/auth/refresh",
+    "method" : "POST"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:23.686316700Z",
+    "status" : 200,
+    "path" : "/api/v1/auth/me",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:23.708317700Z",
+    "status" : 200,
+    "path" : "/api/v1/admin/terms/current",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:24.000319200Z",
+    "status" : 200,
+    "path" : "/api/v1/operations/stream-ticket",
+    "method" : "POST"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:24.053319500Z",
+    "status" : 200,
+    "path" : "/api/v1/drivers",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:24.070323Z",
+    "status" : 200,
+    "path" : "/api/v1/vehicles",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:24.077319300Z",
+    "status" : 200,
+    "path" : "/api/v1/assignments",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:24.197319100Z",
+    "status" : 200,
+    "path" : "/api/v1/service-types",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:24.207321Z",
+    "status" : 200,
+    "path" : "/api/v1/routes",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:24.404316100Z",
+    "status" : 200,
+    "path" : "/api/v1/routes/c6ddaf0f-351d-48ef-bc57-393be775a72c",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:24.643828900Z",
+    "status" : 200,
+    "path" : "/api/v1/assignment-candidates",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:24.860829800Z",
+    "status" : 201,
+    "path" : "/api/v1/assignments",
+    "method" : "POST"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:24.893831800Z",
+    "status" : 200,
+    "path" : "/api/v1/assignments",
+    "method" : "GET"
+  }, {
+    "startedAt" : "2026-10-20T13:26:25.573684Z",
+    "finishedAt" : "2026-10-20T13:26:25.596687Z",
+    "status" : 200,
+    "path" : "/assignments/3e23db54-d300-4950-905c-58cdef38750a",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:34.649409500Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/3e23db54-d300-4950-905c-58cdef38750a",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:34.778411Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/3e23db54-d300-4950-905c-58cdef38750a/accept",
+    "method" : "POST"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:34.818410200Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/location/consent",
+    "method" : "PUT"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:34.903410300Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/3e23db54-d300-4950-905c-58cdef38750a/start",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:35.354049100Z",
+    "finishedAt" : "2026-10-20T13:26:35.378048300Z",
+    "status" : 200,
+    "path" : "/assignments/3e23db54-d300-4950-905c-58cdef38750a",
+    "method" : "GET"
+  }, {
+    "startedAt" : "2026-10-20T13:26:35.380046200Z",
+    "finishedAt" : "2026-10-20T13:26:35.408050200Z",
+    "status" : 200,
+    "path" : "/scheduled-services/c585ae33-b925-4004-8fcc-96a83e08549a/handovers",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:36.872843300Z",
+    "status" : 200,
+    "path" : "/api/v1/auth/refresh",
+    "method" : "POST"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:36.893848200Z",
+    "status" : 200,
+    "path" : "/api/v1/auth/me",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:36.919846400Z",
+    "status" : 200,
+    "path" : "/api/v1/admin/terms/current",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:37.097846800Z",
+    "status" : 200,
+    "path" : "/api/v1/assignments",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:37.097846800Z",
+    "status" : 200,
+    "path" : "/api/v1/vehicles",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:37.108843500Z",
+    "status" : 200,
+    "path" : "/api/v1/operations/stream-ticket",
+    "method" : "POST"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:37.111844700Z",
+    "status" : 200,
+    "path" : "/api/v1/drivers",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:37.309847600Z",
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/c585ae33-b925-4004-8fcc-96a83e08549a/attention",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:37.333845500Z",
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/c585ae33-b925-4004-8fcc-96a83e08549a/execution",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:37.364847800Z",
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/c585ae33-b925-4004-8fcc-96a83e08549a",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:37.365844300Z",
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/c585ae33-b925-4004-8fcc-96a83e08549a/time-history",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:37.369847400Z",
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/c585ae33-b925-4004-8fcc-96a83e08549a/handovers",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:37.370844400Z",
+    "status" : 200,
+    "path" : "/api/v1/gps/access-requests",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:37.371845200Z",
+    "status" : 200,
+    "path" : "/api/v1/assignments/3e23db54-d300-4950-905c-58cdef38750a/route",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:37.660865200Z",
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/c585ae33-b925-4004-8fcc-96a83e08549a/handover-candidates",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:38.073675900Z",
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/c585ae33-b925-4004-8fcc-96a83e08549a/handovers",
+    "method" : "POST"
+  }, {
+    "clientStatus" : 504,
+    "at" : "2026-10-20T13:26:38.073675900Z",
+    "transportFault" : "SYNTHETIC_RESPONSE_LOSS_AFTER_SERVER_COMMIT",
+    "backendStatus" : 200,
+    "method" : "POST",
+    "path" : "/api/v1/scheduled-services/c585ae33-b925-4004-8fcc-96a83e08549a/handovers"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:38.135673100Z",
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/c585ae33-b925-4004-8fcc-96a83e08549a/handovers",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:38.166674Z",
+    "status" : 200,
+    "path" : "/api/v1/assignments",
+    "method" : "GET"
+  }, {
+    "startedAt" : "2026-10-20T13:26:38.827505500Z",
+    "finishedAt" : "2026-10-20T13:26:38.843506100Z",
+    "status" : 200,
+    "path" : "/scheduled-services/c585ae33-b925-4004-8fcc-96a83e08549a/handovers",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:44.373588500Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/1070b05b-356c-4f60-8200-f39397673b8d",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:44.510563100Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/1070b05b-356c-4f60-8200-f39397673b8d/accept",
+    "method" : "POST"
+  }, {
+    "startedAt" : "2026-10-20T13:26:44.981191600Z",
+    "finishedAt" : "2026-10-20T13:26:45.008887900Z",
+    "status" : 200,
+    "path" : "/assignments/1070b05b-356c-4f60-8200-f39397673b8d",
+    "method" : "GET"
+  }, {
+    "startedAt" : "2026-10-20T13:26:45.009886Z",
+    "finishedAt" : "2026-10-20T13:26:45.039882Z",
+    "status" : 200,
+    "path" : "/scheduled-services/c585ae33-b925-4004-8fcc-96a83e08549a",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:49.290002700Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/1070b05b-356c-4f60-8200-f39397673b8d",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:49.330038700Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/location/consent",
+    "method" : "PUT"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:49.764007800Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/1070b05b-356c-4f60-8200-f39397673b8d/handovers",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:50.172001900Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/1070b05b-356c-4f60-8200-f39397673b8d/assume-handover",
+    "method" : "POST"
+  }, {
+    "clientStatus" : 504,
+    "at" : "2026-10-20T13:26:50.172001900Z",
+    "transportFault" : "SYNTHETIC_RESPONSE_LOSS_AFTER_SERVER_COMMIT",
+    "backendStatus" : 200,
+    "method" : "POST",
+    "path" : "/api/v1/mobile/assignments/1070b05b-356c-4f60-8200-f39397673b8d/assume-handover"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:50.634004700Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/1070b05b-356c-4f60-8200-f39397673b8d/handovers",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:50.868543500Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/1070b05b-356c-4f60-8200-f39397673b8d",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:50.889512Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/1070b05b-356c-4f60-8200-f39397673b8d/handovers",
+    "method" : "GET"
+  }, {
+    "startedAt" : "2026-10-20T13:26:51.382941200Z",
+    "finishedAt" : "2026-10-20T13:26:51.417943100Z",
+    "status" : 200,
+    "path" : "/scheduled-services/c585ae33-b925-4004-8fcc-96a83e08549a",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:55.858823700Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/1070b05b-356c-4f60-8200-f39397673b8d",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:55.948823300Z",
+    "status" : 204,
+    "path" : "/api/v1/mobile/location/current",
+    "method" : "PUT"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:56.080802900Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/1070b05b-356c-4f60-8200-f39397673b8d/complete",
+    "method" : "POST"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:56.101837500Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/1070b05b-356c-4f60-8200-f39397673b8d/route",
+    "method" : "GET"
+  }, {
+    "startedAt" : "2026-10-20T13:26:56.604209700Z",
+    "finishedAt" : "2026-10-20T13:26:56.628209700Z",
+    "status" : 200,
+    "path" : "/scheduled-services/c585ae33-b925-4004-8fcc-96a83e08549a",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:57.865241500Z",
+    "status" : 200,
+    "path" : "/api/v1/auth/refresh",
+    "method" : "POST"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:57.889240300Z",
+    "status" : 200,
+    "path" : "/api/v1/auth/me",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:57.916242100Z",
+    "status" : 200,
+    "path" : "/api/v1/admin/terms/current",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:58.030245500Z",
+    "status" : 200,
+    "path" : "/api/v1/vehicles",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:58.033243Z",
+    "status" : 200,
+    "path" : "/api/v1/assignments",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:58.051243300Z",
+    "status" : 200,
+    "path" : "/api/v1/drivers",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:58.085240300Z",
+    "status" : 200,
+    "path" : "/api/v1/operations/stream-ticket",
+    "method" : "POST"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:58.205244Z",
+    "status" : 200,
+    "path" : "/api/v1/routes",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:58.205244Z",
+    "status" : 200,
+    "path" : "/api/v1/service-types",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:58.365240Z",
+    "status" : 200,
+    "path" : "/api/v1/routes/c6ddaf0f-351d-48ef-bc57-393be775a72c",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:58.486238900Z",
+    "status" : 200,
+    "path" : "/api/v1/assignment-candidates",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:58.614238100Z",
+    "status" : 201,
+    "path" : "/api/v1/assignments",
+    "method" : "POST"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:26:58.647239500Z",
+    "status" : 200,
+    "path" : "/api/v1/assignments",
+    "method" : "GET"
+  }, {
+    "startedAt" : "2026-10-20T13:26:59.291800900Z",
+    "finishedAt" : "2026-10-20T13:26:59.306798800Z",
+    "status" : 200,
+    "path" : "/assignments/21b0e16b-a052-40df-9762-d90231b7d95c",
+    "method" : "GET"
+  }, {
+    "startedAt" : "2026-10-20T13:26:59.312799400Z",
+    "finishedAt" : "2026-10-20T13:26:59.327797700Z",
+    "status" : 200,
+    "path" : "/assignments/21b0e16b-a052-40df-9762-d90231b7d95c",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:27:04.702233300Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/21b0e16b-a052-40df-9762-d90231b7d95c",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:27:04.768232800Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/21b0e16b-a052-40df-9762-d90231b7d95c/accept",
+    "method" : "POST"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:27:04.786232400Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/location/consent",
+    "method" : "PUT"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:27:04.853232700Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/21b0e16b-a052-40df-9762-d90231b7d95c/start",
+    "method" : "POST"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:27:09.264825100Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/21b0e16b-a052-40df-9762-d90231b7d95c",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:27:09.944827600Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/21b0e16b-a052-40df-9762-d90231b7d95c/attention",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:27:10.886797700Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/21b0e16b-a052-40df-9762-d90231b7d95c/interrupt",
+    "method" : "POST"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:27:11.046795200Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/21b0e16b-a052-40df-9762-d90231b7d95c",
+    "method" : "GET"
+  }, {
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:27:26.100461300Z",
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/21b0e16b-a052-40df-9762-d90231b7d95c/attention",
+    "method" : "GET"
+  }, {
+    "finishedAt" : "2026-10-20T13:29:28.333715Z",
+    "startedAt" : "2026-10-20T13:29:27.911715500Z",
+    "method" : "GET",
+    "path" : "/onboarding/requests/4bac1680-a4ba-4770-86e3-5dc79dd57aed/documentary-expediente",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:29:28.453717Z",
+    "startedAt" : "2026-10-20T13:29:28.336716100Z",
+    "method" : "GET",
+    "path" : "/drivers/21ade5d9-0a99-45ae-be7b-4e37833577c4/qualification",
+    "status" : 200
+  }, {
+    "status" : 200,
+    "path" : "/onboarding/requests/4bac1680-a4ba-4770-86e3-5dc79dd57aed/documentary-expediente",
+    "method" : "GET",
+    "startedAt" : "2026-10-20T13:30:51.392140900Z",
+    "finishedAt" : "2026-10-20T13:30:51.786172900Z"
+  }, {
+    "status" : 200,
+    "path" : "/drivers/21ade5d9-0a99-45ae-be7b-4e37833577c4/qualification",
+    "method" : "GET",
+    "startedAt" : "2026-10-20T13:30:51.803144200Z",
+    "finishedAt" : "2026-10-20T13:30:51.912142200Z"
+  }, {
+    "status" : 200,
+    "path" : "/mobile/auth/login",
+    "method" : "POST",
+    "startedAt" : "2026-10-20T13:30:51.913141800Z",
+    "finishedAt" : "2026-10-20T13:30:52.271449700Z"
+  }, {
+    "status" : 200,
+    "path" : "/mobile/me",
+    "method" : "GET",
+    "startedAt" : "2026-10-20T13:30:52.277459900Z",
+    "finishedAt" : "2026-10-20T13:30:52.321731900Z"
+  }, {
+    "status" : 200,
+    "path" : "/onboarding/requests/f21977a1-54b6-4dfa-8816-0cfc4e1cbb82/documentary-expediente",
+    "method" : "GET",
+    "startedAt" : "2026-10-20T13:30:52.332732300Z",
+    "finishedAt" : "2026-10-20T13:30:52.361732500Z"
+  }, {
+    "status" : 200,
+    "path" : "/drivers/a9cd5310-d37d-4b60-9a0e-722b7866c413/qualification",
+    "method" : "GET",
+    "startedAt" : "2026-10-20T13:30:52.364731700Z",
+    "finishedAt" : "2026-10-20T13:30:52.403734100Z"
+  }, {
+    "status" : 200,
+    "path" : "/mobile/auth/login",
+    "method" : "POST",
+    "startedAt" : "2026-10-20T13:30:52.404731900Z",
+    "finishedAt" : "2026-10-20T13:30:52.683731200Z"
+  }, {
+    "status" : 200,
+    "path" : "/mobile/me",
+    "method" : "GET",
+    "startedAt" : "2026-10-20T13:30:52.684731700Z",
+    "finishedAt" : "2026-10-20T13:30:52.704731600Z"
+  }, {
+    "status" : 200,
+    "path" : "/assignments/21b0e16b-a052-40df-9762-d90231b7d95c",
+    "method" : "GET",
+    "startedAt" : "2026-10-20T13:30:52.709733500Z",
+    "finishedAt" : "2026-10-20T13:30:52.758732Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/21b0e16b-a052-40df-9762-d90231b7d95c",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:30:57.229909700Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/21b0e16b-a052-40df-9762-d90231b7d95c/attention",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:30:57.705911800Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/21b0e16b-a052-40df-9762-d90231b7d95c",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:30:57.845847900Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/21b0e16b-a052-40df-9762-d90231b7d95c/attention",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:30:57.880878Z"
+  }, {
+    "status" : 200,
+    "path" : "/assignments/21b0e16b-a052-40df-9762-d90231b7d95c",
+    "method" : "GET",
+    "startedAt" : "2026-10-20T13:30:58.374739400Z",
+    "finishedAt" : "2026-10-20T13:30:58.401736900Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/auth/refresh",
+    "method" : "POST",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:30:59.998597600Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/auth/me",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:00.026599200Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/admin/terms/current",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:00.058595500Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/vehicles",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:00.299598700Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/drivers",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:00.299598700Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/operations/stream-ticket",
+    "method" : "POST",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:00.344599800Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/assignments",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:00.382597500Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/3d4066d3-8322-49a7-bcd6-6b4674f9628d",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:00.618598400Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/3d4066d3-8322-49a7-bcd6-6b4674f9628d/execution",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:00.637597600Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/3d4066d3-8322-49a7-bcd6-6b4674f9628d/time-history",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:00.722598500Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/assignments/21b0e16b-a052-40df-9762-d90231b7d95c/route",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:00.730597600Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/gps/access-requests",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:00.735597400Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/3d4066d3-8322-49a7-bcd6-6b4674f9628d/attention",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:00.747602Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/3d4066d3-8322-49a7-bcd6-6b4674f9628d/handovers",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:00.748600100Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/service-attention/0c4c5bb1-dafe-403a-b66b-b0272cbd6302/resolve",
+    "method" : "POST",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:01.385347600Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/assignments",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:01.440344400Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/3d4066d3-8322-49a7-bcd6-6b4674f9628d/attention",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:01.461345300Z"
+  }, {
+    "status" : 200,
+    "path" : "/scheduled-services/3d4066d3-8322-49a7-bcd6-6b4674f9628d/attention",
+    "method" : "GET",
+    "startedAt" : "2026-10-20T13:31:02.111327400Z",
+    "finishedAt" : "2026-10-20T13:31:02.132326700Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/auth/refresh",
+    "method" : "POST",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:03.119329900Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/auth/me",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:03.148329600Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/admin/terms/current",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:03.181328400Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/assignments",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:03.306329900Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/drivers",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:03.312329200Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/operations/stream-ticket",
+    "method" : "POST",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:03.313329700Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/vehicles",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:03.336328500Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/3d4066d3-8322-49a7-bcd6-6b4674f9628d",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:03.535333Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/assignments/21b0e16b-a052-40df-9762-d90231b7d95c/route",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:03.536332Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/3d4066d3-8322-49a7-bcd6-6b4674f9628d/time-history",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:03.563327500Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/gps/access-requests",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:03.574332700Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/3d4066d3-8322-49a7-bcd6-6b4674f9628d/attention",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:03.635329200Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/3d4066d3-8322-49a7-bcd6-6b4674f9628d/execution",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:03.667329700Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/3d4066d3-8322-49a7-bcd6-6b4674f9628d/handovers",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:03.680330800Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/scheduled-services/3d4066d3-8322-49a7-bcd6-6b4674f9628d/cancel",
+    "method" : "POST",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:04.021884900Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/assignments",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:04.053886400Z"
+  }, {
+    "status" : 200,
+    "path" : "/scheduled-services/3d4066d3-8322-49a7-bcd6-6b4674f9628d",
+    "method" : "GET",
+    "startedAt" : "2026-10-20T13:31:04.627936Z",
+    "finishedAt" : "2026-10-20T13:31:04.666935400Z"
+  }, {
+    "status" : 201,
+    "path" : "/assignments",
+    "method" : "POST",
+    "startedAt" : "2026-10-20T13:31:04.672936500Z",
+    "finishedAt" : "2026-10-20T13:31:04.770935400Z"
+  }, {
+    "status" : 200,
+    "path" : "/api/v1/mobile/assignments/d8dd3eb2-93f2-44ff-92da-a8a7fd2a08d6",
+    "method" : "GET",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:09.001854700Z"
+  }, {
+    "status" : 500,
+    "path" : "/api/v1/mobile/assignments/d8dd3eb2-93f2-44ff-92da-a8a7fd2a08d6/accept",
+    "method" : "POST",
+    "channel" : "client-real-http",
+    "observedAt" : "2026-10-20T13:31:09.060857Z"
+  }, {
+    "finishedAt" : "2026-10-20T13:33:55.809877700Z",
+    "startedAt" : "2026-10-20T13:33:55.390878100Z",
+    "method" : "GET",
+    "path" : "/onboarding/requests/4bac1680-a4ba-4770-86e3-5dc79dd57aed/documentary-expediente",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:33:55.940878400Z",
+    "startedAt" : "2026-10-20T13:33:55.830878Z",
+    "method" : "GET",
+    "path" : "/drivers/21ade5d9-0a99-45ae-be7b-4e37833577c4/qualification",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:33:56.292936200Z",
+    "startedAt" : "2026-10-20T13:33:55.941877200Z",
+    "method" : "POST",
+    "path" : "/mobile/auth/login",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:33:56.337508Z",
+    "startedAt" : "2026-10-20T13:33:56.297935700Z",
+    "method" : "GET",
+    "path" : "/mobile/me",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:33:56.396509200Z",
+    "startedAt" : "2026-10-20T13:33:56.367509Z",
+    "method" : "GET",
+    "path" : "/onboarding/requests/f21977a1-54b6-4dfa-8816-0cfc4e1cbb82/documentary-expediente",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:33:56.445508600Z",
+    "startedAt" : "2026-10-20T13:33:56.399510100Z",
+    "method" : "GET",
+    "path" : "/drivers/a9cd5310-d37d-4b60-9a0e-722b7866c413/qualification",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:33:56.724545500Z",
+    "startedAt" : "2026-10-20T13:33:56.446507500Z",
+    "method" : "POST",
+    "path" : "/mobile/auth/login",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:33:56.748507400Z",
+    "startedAt" : "2026-10-20T13:33:56.726509100Z",
+    "method" : "GET",
+    "path" : "/mobile/me",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:33:56.805506600Z",
+    "startedAt" : "2026-10-20T13:33:56.756507400Z",
+    "method" : "GET",
+    "path" : "/assignments/d8dd3eb2-93f2-44ff-92da-a8a7fd2a08d6",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:33:56.838506900Z",
+    "startedAt" : "2026-10-20T13:33:56.811510200Z",
+    "method" : "GET",
+    "path" : "/assignments/d8dd3eb2-93f2-44ff-92da-a8a7fd2a08d6",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:33:56.874508Z",
+    "startedAt" : "2026-10-20T13:33:56.838506900Z",
+    "method" : "POST",
+    "path" : "/mobile/assignments/d8dd3eb2-93f2-44ff-92da-a8a7fd2a08d6/accept",
+    "status" : 403
+  }, {
+    "finishedAt" : "2026-10-20T13:33:56.900507600Z",
+    "startedAt" : "2026-10-20T13:33:56.875508500Z",
+    "method" : "GET",
+    "path" : "/assignments/d8dd3eb2-93f2-44ff-92da-a8a7fd2a08d6",
+    "status" : 200
+  }, {
+    "observedAt" : "2026-10-20T13:34:00.891988100Z",
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/mobile/assignments/d8dd3eb2-93f2-44ff-92da-a8a7fd2a08d6",
+    "status" : 200
+  }, {
+    "observedAt" : "2026-10-20T13:34:01.100978900Z",
+    "channel" : "client-real-http",
+    "method" : "POST",
+    "path" : "/api/v1/mobile/assignments/d8dd3eb2-93f2-44ff-92da-a8a7fd2a08d6/accept",
+    "status" : 200
+  }, {
+    "observedAt" : "2026-10-20T13:34:01.134980600Z",
+    "channel" : "client-real-http",
+    "method" : "PUT",
+    "path" : "/api/v1/mobile/location/consent",
+    "status" : 200
+  }, {
+    "observedAt" : "2026-10-20T13:34:01.246978300Z",
+    "channel" : "client-real-http",
+    "method" : "POST",
+    "path" : "/api/v1/mobile/assignments/d8dd3eb2-93f2-44ff-92da-a8a7fd2a08d6/start",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:01.748130300Z",
+    "startedAt" : "2026-10-20T13:34:01.709129400Z",
+    "method" : "GET",
+    "path" : "/scheduled-services/b8498841-8744-45b4-b6a8-939e631ffb97",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:01.784129300Z",
+    "startedAt" : "2026-10-20T13:34:01.752128800Z",
+    "method" : "GET",
+    "path" : "/scheduled-services/b8498841-8744-45b4-b6a8-939e631ffb97/handovers",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:01.905129900Z",
+    "startedAt" : "2026-10-20T13:34:01.784129300Z",
+    "method" : "POST",
+    "path" : "/scheduled-services/b8498841-8744-45b4-b6a8-939e631ffb97/handovers",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:01.929131900Z",
+    "startedAt" : "2026-10-20T13:34:01.905129900Z",
+    "method" : "GET",
+    "path" : "/assignments/7f8a2de1-f2d0-4aab-9921-c5fb2e096e49",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:01.990129300Z",
+    "startedAt" : "2026-10-20T13:34:01.929131900Z",
+    "method" : "POST",
+    "path" : "/mobile/assignments/7f8a2de1-f2d0-4aab-9921-c5fb2e096e49/accept",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:02.011134900Z",
+    "startedAt" : "2026-10-20T13:34:01.990129300Z",
+    "method" : "PUT",
+    "path" : "/mobile/location/consent",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:02.036130600Z",
+    "startedAt" : "2026-10-20T13:34:02.016131Z",
+    "method" : "GET",
+    "path" : "/scheduled-services/b8498841-8744-45b4-b6a8-939e631ffb97/handovers",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:02.056129200Z",
+    "startedAt" : "2026-10-20T13:34:02.036130600Z",
+    "method" : "GET",
+    "path" : "/assignments/7f8a2de1-f2d0-4aab-9921-c5fb2e096e49",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:02.190130800Z",
+    "startedAt" : "2026-10-20T13:34:02.171131700Z",
+    "method" : "GET",
+    "path" : "/scheduled-services/b8498841-8744-45b4-b6a8-939e631ffb97/handovers",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:02.233131200Z",
+    "startedAt" : "2026-10-20T13:34:02.196130100Z",
+    "method" : "GET",
+    "path" : "/scheduled-services/b8498841-8744-45b4-b6a8-939e631ffb97",
+    "status" : 200
+  }, {
+    "observedAt" : "2026-10-20T13:34:06.329404300Z",
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/mobile/assignments/7f8a2de1-f2d0-4aab-9921-c5fb2e096e49",
+    "status" : 200
+  }, {
+    "observedAt" : "2026-10-20T13:34:07.020947200Z",
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/mobile/assignments/7f8a2de1-f2d0-4aab-9921-c5fb2e096e49/attention",
+    "status" : 200
+  }, {
+    "observedAt" : "2026-10-20T13:34:07.838963800Z",
+    "channel" : "client-real-http",
+    "method" : "POST",
+    "path" : "/api/v1/mobile/assignments/7f8a2de1-f2d0-4aab-9921-c5fb2e096e49/interrupt",
+    "status" : 200
+  }, {
+    "observedAt" : "2026-10-20T13:34:08.050947700Z",
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/mobile/assignments/7f8a2de1-f2d0-4aab-9921-c5fb2e096e49",
+    "status" : 200
+  }, {
+    "observedAt" : "2026-10-20T13:34:08.086950100Z",
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/mobile/assignments/7f8a2de1-f2d0-4aab-9921-c5fb2e096e49/attention",
+    "status" : 200
+  }, {
+    "observedAt" : "2026-10-20T13:34:08.117948200Z",
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/mobile/assignments/7f8a2de1-f2d0-4aab-9921-c5fb2e096e49/attention",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:08.594803500Z",
+    "startedAt" : "2026-10-20T13:34:08.572771800Z",
+    "method" : "GET",
+    "path" : "/scheduled-services/b8498841-8744-45b4-b6a8-939e631ffb97/attention",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:08.675775300Z",
+    "startedAt" : "2026-10-20T13:34:08.594803500Z",
+    "method" : "POST",
+    "path" : "/service-attention/90cbaddc-8248-497f-a55f-c8c54624fae6/resolve",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:08.704771400Z",
+    "startedAt" : "2026-10-20T13:34:08.675775300Z",
+    "method" : "GET",
+    "path" : "/scheduled-services/b8498841-8744-45b4-b6a8-939e631ffb97",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:08.754772400Z",
+    "startedAt" : "2026-10-20T13:34:08.704771400Z",
+    "method" : "POST",
+    "path" : "/scheduled-services/b8498841-8744-45b4-b6a8-939e631ffb97/cancel",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:08.823771800Z",
+    "startedAt" : "2026-10-20T13:34:08.764771200Z",
+    "method" : "POST",
+    "path" : "/assignments",
+    "status" : 201
+  }, {
+    "observedAt" : "2026-10-20T13:34:12.770774400Z",
+    "channel" : "client-real-http",
+    "method" : "GET",
+    "path" : "/api/v1/mobile/assignments/1d4e0c69-ab38-4b34-8840-7da65777d2ba",
+    "status" : 200
+  }, {
+    "observedAt" : "2026-10-20T13:34:12.844772600Z",
+    "channel" : "client-real-http",
+    "method" : "POST",
+    "path" : "/api/v1/mobile/assignments/1d4e0c69-ab38-4b34-8840-7da65777d2ba/accept",
+    "status" : 200
+  }, {
+    "observedAt" : "2026-10-20T13:34:12.866772800Z",
+    "channel" : "client-real-http",
+    "method" : "PUT",
+    "path" : "/api/v1/mobile/location/consent",
+    "status" : 200
+  }, {
+    "observedAt" : "2026-10-20T13:34:12.924772500Z",
+    "channel" : "client-real-http",
+    "method" : "POST",
+    "path" : "/api/v1/mobile/assignments/1d4e0c69-ab38-4b34-8840-7da65777d2ba/start",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:13.448422800Z",
+    "startedAt" : "2026-10-20T13:34:13.419422400Z",
+    "method" : "GET",
+    "path" : "/scheduled-services/0e91d0b4-31fb-46e3-835a-b80f957dcd64",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:15.890423500Z",
+    "startedAt" : "2026-10-20T13:34:15.780423400Z",
+    "method" : "GET",
+    "path" : "/drivers/a9cd5310-d37d-4b60-9a0e-722b7866c413/qualification",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:15.939422500Z",
+    "startedAt" : "2026-10-20T13:34:15.897454400Z",
+    "method" : "POST",
+    "path" : "/assignments",
+    "status" : 409
+  }, {
+    "finishedAt" : "2026-10-20T13:35:05.498830100Z",
+    "startedAt" : "2026-10-20T13:35:05.104589600Z",
+    "method" : "GET",
+    "path" : "/onboarding/requests/4bac1680-a4ba-4770-86e3-5dc79dd57aed/documentary-expediente",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:05.608830500Z",
+    "startedAt" : "2026-10-20T13:35:05.502831100Z",
+    "method" : "GET",
+    "path" : "/drivers/21ade5d9-0a99-45ae-be7b-4e37833577c4/qualification",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:05.963930800Z",
+    "startedAt" : "2026-10-20T13:35:05.609830400Z",
+    "method" : "POST",
+    "path" : "/mobile/auth/login",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:06.015147300Z",
+    "startedAt" : "2026-10-20T13:35:05.969932500Z",
+    "method" : "GET",
+    "path" : "/mobile/me",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:06.061150600Z",
+    "startedAt" : "2026-10-20T13:35:06.031146800Z",
+    "method" : "GET",
+    "path" : "/onboarding/requests/f21977a1-54b6-4dfa-8816-0cfc4e1cbb82/documentary-expediente",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:06.107146500Z",
+    "startedAt" : "2026-10-20T13:35:06.064145400Z",
+    "method" : "GET",
+    "path" : "/drivers/a9cd5310-d37d-4b60-9a0e-722b7866c413/qualification",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:06.427749200Z",
+    "startedAt" : "2026-10-20T13:35:06.108145800Z",
+    "method" : "POST",
+    "path" : "/mobile/auth/login",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:06.448748800Z",
+    "startedAt" : "2026-10-20T13:35:06.428750500Z",
+    "method" : "GET",
+    "path" : "/mobile/me",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:06.515267300Z",
+    "startedAt" : "2026-10-20T13:35:06.455747800Z",
+    "method" : "GET",
+    "path" : "/scheduled-services/0e91d0b4-31fb-46e3-835a-b80f957dcd64",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:09.087803900Z",
+    "startedAt" : "2026-10-20T13:35:08.973802400Z",
+    "method" : "GET",
+    "path" : "/drivers/a9cd5310-d37d-4b60-9a0e-722b7866c413/qualification",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:09.190806300Z",
+    "startedAt" : "2026-10-20T13:35:09.089803100Z",
+    "method" : "POST",
+    "path" : "/assignments",
+    "status" : 409
+  }, {
+    "finishedAt" : "2026-10-20T13:35:09.227807900Z",
+    "startedAt" : "2026-10-20T13:35:09.191805400Z",
+    "method" : "GET",
+    "path" : "/mobile/assignments/1d4e0c69-ab38-4b34-8840-7da65777d2ba",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:09.380804100Z",
+    "startedAt" : "2026-10-20T13:35:09.228809500Z",
+    "method" : "POST",
+    "path" : "/mobile/assignments/1d4e0c69-ab38-4b34-8840-7da65777d2ba/complete",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:09.417805700Z",
+    "startedAt" : "2026-10-20T13:35:09.381805600Z",
+    "method" : "GET",
+    "path" : "/scheduled-services/0e91d0b4-31fb-46e3-835a-b80f957dcd64",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:09.494807500Z",
+    "startedAt" : "2026-10-20T13:35:09.456804800Z",
+    "method" : "GET",
+    "path" : "/scheduled-services/c585ae33-b925-4004-8fcc-96a83e08549a",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:09.523805600Z",
+    "startedAt" : "2026-10-20T13:35:09.495804300Z",
+    "method" : "GET",
+    "path" : "/scheduled-services/3d4066d3-8322-49a7-bcd6-6b4674f9628d",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:09.561805Z",
+    "startedAt" : "2026-10-20T13:35:09.524804400Z",
+    "method" : "GET",
+    "path" : "/scheduled-services/b8498841-8744-45b4-b6a8-939e631ffb97",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:09.588804900Z",
+    "startedAt" : "2026-10-20T13:35:09.562804200Z",
+    "method" : "GET",
+    "path" : "/scheduled-services/0e91d0b4-31fb-46e3-835a-b80f957dcd64",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:09.626803100Z",
+    "startedAt" : "2026-10-20T13:35:09.594806100Z",
+    "method" : "GET",
+    "path" : "/drivers/21ade5d9-0a99-45ae-be7b-4e37833577c4/qualification",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:09.686836Z",
+    "startedAt" : "2026-10-20T13:35:09.627804700Z",
+    "method" : "POST",
+    "path" : "/drivers/21ade5d9-0a99-45ae-be7b-4e37833577c4/qualification/periods/7969f25b-5227-4058-bc3b-0c358cbd02f3/revoke",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:09.752804800Z",
+    "startedAt" : "2026-10-20T13:35:09.718804Z",
+    "method" : "GET",
+    "path" : "/drivers/a9cd5310-d37d-4b60-9a0e-722b7866c413/qualification",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:09.791805Z",
+    "startedAt" : "2026-10-20T13:35:09.753834700Z",
+    "method" : "POST",
+    "path" : "/drivers/a9cd5310-d37d-4b60-9a0e-722b7866c413/qualification/periods/912f0a63-0f74-49c0-b96d-4adb4fe92bc7/revoke",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:09.840803400Z",
+    "startedAt" : "2026-10-20T13:35:09.811806300Z",
+    "method" : "GET",
+    "path" : "/routes/c6ddaf0f-351d-48ef-bc57-393be775a72c",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:09.877810900Z",
+    "startedAt" : "2026-10-20T13:35:09.840803400Z",
+    "method" : "POST",
+    "path" : "/routes/c6ddaf0f-351d-48ef-bc57-393be775a72c/status",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:09.906805500Z",
+    "startedAt" : "2026-10-20T13:35:09.877810900Z",
+    "method" : "GET",
+    "path" : "/service-types/3f130995-d8cd-481c-a03a-99597d42d6f1",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:35:09.944808500Z",
+    "startedAt" : "2026-10-20T13:35:09.906805500Z",
+    "method" : "POST",
+    "path" : "/service-types/3f130995-d8cd-481c-a03a-99597d42d6f1/status",
+    "status" : 200
+  } ],
+  "rollbackFixtureGuard" : "PASS_REFUSED_BEFORE_FIXTURE",
+  "serviceTypeId" : "3f130995-d8cd-481c-a03a-99597d42d6f1",
+  "serviceTypeVersionId" : "e5b349f6-560e-4d57-8780-7881446e5bb3",
+  "routeId" : "c6ddaf0f-351d-48ef-bc57-393be775a72c",
+  "routeVersionId" : "7b6eef4b-d83e-4f44-8296-616aff0b6b62",
+  "clientStage" : "ACCEPT_START",
+  "browserRefreshFamilyId" : "039c8069-038f-49f9-a945-caa1becc9c7c",
+  "firstUiOfferId" : "3e23db54-d300-4950-905c-58cdef38750a",
+  "clientResults" : [ {
+    "channel" : "REAL_CRM_BROWSER_HTTP",
+    "markers" : [ "CONNECTED_L05_CRM_CREATE=PASS_REAL_UI_HTTP", "CONNECTED_L05_CRM_RESULT=PASS_REAL_BROWSER_HTTP_TEST_DB" ],
+    "stage" : "CREATE",
+    "at" : "2026-10-20T13:26:25.539687200Z"
+  }, {
+    "channel" : "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+    "markers" : [ "L05_CONNECTED_RESULT=PASS_PRODUCTION_CLIENT_HTTP_WITH_SYNTHETIC_SENSOR_STAGE_ACCEPT_START" ],
+    "stage" : "ACCEPT_START",
+    "at" : "2026-10-20T13:26:35.351046100Z"
+  }, {
+    "channel" : "REAL_CRM_BROWSER_HTTP",
+    "markers" : [ "CONNECTED_L05_CRM_PREPARE=PASS_UNKNOWN_RESPONSE_RECONCILED_NO_REPLAY", "CONNECTED_L05_CRM_RESULT=PASS_REAL_BROWSER_HTTP_TEST_DB" ],
+    "stage" : "PREPARE",
+    "at" : "2026-10-20T13:26:38.825507300Z"
+  }, {
+    "channel" : "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+    "markers" : [ "L05_CONNECTED_RESULT=PASS_PRODUCTION_CLIENT_HTTP_WITH_SYNTHETIC_SENSOR_STAGE_ACCEPT_ONLY" ],
+    "stage" : "ACCEPT_ONLY",
+    "at" : "2026-10-20T13:26:44.967169500Z"
+  }, {
+    "channel" : "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+    "markers" : [ "L05_CONNECTED_RESULT=PASS_PRODUCTION_CLIENT_HTTP_WITH_SYNTHETIC_SENSOR_STAGE_ASSUME" ],
+    "stage" : "ASSUME",
+    "at" : "2026-10-20T13:26:51.381431Z"
+  }, {
+    "channel" : "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+    "markers" : [ "L05_CONNECTED_RESULT=PASS_PRODUCTION_CLIENT_HTTP_WITH_SYNTHETIC_SENSOR_STAGE_POINT_COMPLETE" ],
+    "stage" : "POINT_COMPLETE",
+    "at" : "2026-10-20T13:26:56.601209Z"
+  }, {
+    "channel" : "REAL_CRM_BROWSER_HTTP",
+    "markers" : [ "CONNECTED_L05_CRM_CREATE=PASS_REAL_UI_HTTP", "CONNECTED_L05_CRM_RESULT=PASS_REAL_BROWSER_HTTP_TEST_DB" ],
+    "stage" : "CREATE",
+    "at" : "2026-10-20T13:26:59.286796300Z"
+  }, {
+    "channel" : "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+    "markers" : [ "L05_CONNECTED_RESULT=PASS_PRODUCTION_CLIENT_HTTP_WITH_SYNTHETIC_SENSOR_STAGE_ACCEPT_START" ],
+    "stage" : "ACCEPT_START",
+    "at" : "2026-10-20T13:27:05.307068600Z"
+  }, {
+    "stage" : "INTERRUPT",
+    "at" : "2026-10-20T13:30:58.371738300Z",
+    "channel" : "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+    "markers" : [ "L05_CONNECTED_INTERRUPTION_CHECK=STATUS", "L05_CONNECTED_INTERRUPTION_CHECK=OWN_ATTENTION", "L05_CONNECTED_RESULT=PASS_PRODUCTION_CLIENT_HTTP_WITH_SYNTHETIC_SENSOR_STAGE_INTERRUPT" ]
+  }, {
+    "stage" : "RESOLVE",
+    "at" : "2026-10-20T13:31:02.107324100Z",
+    "channel" : "REAL_CRM_BROWSER_HTTP",
+    "markers" : [ "CONNECTED_L05_CRM_SAFETY=PASS_EXPLICIT_RESOURCE_REVIEW", "CONNECTED_L05_CRM_RESULT=PASS_REAL_BROWSER_HTTP_TEST_DB" ]
+  }, {
+    "stage" : "CANCEL",
+    "at" : "2026-10-20T13:31:04.610934Z",
+    "channel" : "REAL_CRM_BROWSER_HTTP",
+    "markers" : [ "CONNECTED_L05_CRM_CANCEL=PASS_EXPLICIT_CONTINUITY_CANCELLATION", "CONNECTED_L05_CRM_RESULT=PASS_REAL_BROWSER_HTTP_TEST_DB" ]
+  }, {
+    "markers" : [ "L05_CONNECTED_RESULT=PASS_PRODUCTION_CLIENT_HTTP_WITH_SYNTHETIC_SENSOR_STAGE_ACCEPT_START" ],
+    "channel" : "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+    "at" : "2026-10-20T13:34:01.705128900Z",
+    "stage" : "ACCEPT_START"
+  }, {
+    "markers" : [ "L05_CONNECTED_INTERRUPTION_CHECK=STATUS", "L05_CONNECTED_INTERRUPTION_CHECK=OWN_ATTENTION", "L05_CONNECTED_RESULT=PASS_PRODUCTION_CLIENT_HTTP_WITH_SYNTHETIC_SENSOR_STAGE_INTERRUPT" ],
+    "channel" : "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+    "at" : "2026-10-20T13:34:08.569769400Z",
+    "stage" : "INTERRUPT"
+  }, {
+    "markers" : [ "L05_CONNECTED_RESULT=PASS_PRODUCTION_CLIENT_HTTP_WITH_SYNTHETIC_SENSOR_STAGE_ACCEPT_START" ],
+    "channel" : "REAL_FLUTTER_RENDERER_REPOSITORY_HTTP",
+    "at" : "2026-10-20T13:34:13.408422900Z",
+    "stage" : "ACCEPT_START"
+  } ],
+  "currentOfferId" : "1d4e0c69-ab38-4b34-8840-7da65777d2ba",
+  "serviceId" : "0e91d0b4-31fb-46e3-835a-b80f957dcd64",
+  "caseServices" : [ "c585ae33-b925-4004-8fcc-96a83e08549a", "3d4066d3-8322-49a7-bcd6-6b4674f9628d", "b8498841-8744-45b4-b6a8-939e631ffb97", "0e91d0b4-31fb-46e3-835a-b80f957dcd64" ],
+  "firstServiceId" : "c585ae33-b925-4004-8fcc-96a83e08549a",
+  "firstOutgoingOfferId" : "3e23db54-d300-4950-905c-58cdef38750a",
+  "CRM_INITIAL_OFFER" : true,
+  "FLUTTER_FIRST_ACCEPT_START" : true,
+  "losePrepareOnce" : false,
+  "prepareLostDelivered" : true,
+  "handoverId" : "f8be95f6-6d00-4df8-bfec-6f6954d2aa13",
+  "firstIncomingOfferId" : "1070b05b-356c-4f60-8200-f39397673b8d",
+  "CRM_HANDOVER_PREPARE_UNKNOWN" : true,
+  "FLUTTER_INCOMING_ACCEPT_ONLY" : true,
+  "loseAssumeOnce" : false,
+  "assumeLostDelivered" : true,
+  "FLUTTER_ASSUME_UNKNOWN" : true,
+  "firstExecution" : [ {
+    "id" : "1e2323e0-e479-4809-a686-36ce5eda70e4",
+    "assignment_id" : "3e23db54-d300-4950-905c-58cdef38750a",
+    "driver_id" : "21ade5d9-0a99-45ae-be7b-4e37833577c4",
+    "vehicle_id" : "b0439799-87d9-4ab4-96a5-d48e8beb5793",
+    "ordinal" : 1,
+    "started_at" : "2026-10-20T13:26:34.855+00:00",
+    "ended_at" : "2026-10-20T13:26:50.143+00:00",
+    "end_kind" : "TRANSFERRED",
+    "started_by" : "47d19ed8-de66-4742-a638-4a4a219bbb1f",
+    "ended_by" : "111131ee-1700-4095-b626-30377703ba9d"
+  }, {
+    "id" : "1bc9080a-be0f-43d3-970f-9a21c1899c6a",
+    "assignment_id" : "1070b05b-356c-4f60-8200-f39397673b8d",
+    "driver_id" : "a9cd5310-d37d-4b60-9a0e-722b7866c413",
+    "vehicle_id" : "03d4a99b-e465-4737-87c2-3a019b13432a",
+    "ordinal" : 2,
+    "started_at" : "2026-10-20T13:26:50.143+00:00",
+    "ended_at" : "2026-10-20T13:26:55.980+00:00",
+    "end_kind" : "COMPLETED",
+    "started_by" : "111131ee-1700-4095-b626-30377703ba9d",
+    "ended_by" : "111131ee-1700-4095-b626-30377703ba9d"
+  } ],
+  "FLUTTER_POINT_COMPLETE" : true,
+  "interruptionUiOfferId" : "21b0e16b-a052-40df-9762-d90231b7d95c",
+  "interruptionServiceId" : "3d4066d3-8322-49a7-bcd6-6b4674f9628d",
+  "interruptionOfferId" : "21b0e16b-a052-40df-9762-d90231b7d95c",
+  "CRM_INTERRUPTION_OFFER" : true,
+  "attemptHistory" : [ {
+    "phase" : "FLUTTER_INTERRUPT",
+    "at" : "2026-10-20T13:27:26.611817900Z"
+  }, {
+    "phase" : "NORMAL_QUALIFICATION_HTTP_P0",
+    "at" : "2026-10-20T13:29:28.455715900Z"
+  }, {
+    "phase" : "BUSINESS_RACE_PREPARE",
+    "at" : "2026-10-20T13:31:09.548724400Z"
+  }, {
+    "phase" : "RETURN_COMPATIBLE_DISABLED_OPERATIONS",
+    "at" : "2026-10-20T13:34:15.963453600Z"
+  } ],
+  "resumeQualificationObservedOnly" : true,
+  "FLUTTER_INTERRUPT" : true,
+  "CRM_SEPARATE_SAFETY_REVIEW" : true,
+  "CRM_CANCEL_INTERRUPTED_CONTINUITY" : true,
+  "creationKey" : "844b3bf6-f2fa-4666-bd0e-b1f7a1188696:return:offer",
+  "raceServiceId" : "b8498841-8744-45b4-b6a8-939e631ffb97",
+  "raceOutgoingOfferId" : "d8dd3eb2-93f2-44ff-92da-a8a7fd2a08d6",
+  "lastClientDiagnostic" : "CLIENT_FAILURE_DETAILS_REDACTED",
+  "lastClientStage" : "ACCEPT_START",
+  "restrictedSessionRejectionProved" : true,
+  "restrictedSessionRejection" : "PASS_HTTP403_DRIVER_INACTIVE_NO_OFFER_CHANGE_NORMAL_LOGIN_RENEWAL",
+  "racePrepareKey" : "09e62d30-1335-44d8-98f1-1a0e08ee0e14",
+  "raceHandoverId" : "92e2bba0-9a45-4217-9f87-cf92864a3a73",
+  "raceIncomingOfferId" : "7f8a2de1-f2d0-4aab-9921-c5fb2e096e49",
+  "BUSINESS_RACE_PREPARE" : true,
+  "raceAssumeEventId" : "3486985f-d512-439b-b934-0acc0f1e0fa9",
+  "raceWithdrawKey" : "bd2036ba-04f3-43b6-aced-987451cfcbb3",
+  "raceStartedAt" : "2026-10-20T13:34:02.058130400Z",
+  "raceHttpResults" : [ {
+    "finishedAt" : "2026-10-20T13:34:02.168129600Z",
+    "action" : "ASSUME",
+    "status" : 200
+  }, {
+    "finishedAt" : "2026-10-20T13:34:02.168129600Z",
+    "action" : "WITHDRAW",
+    "status" : 409
+  } ],
+  "raceLoserCode" : "RESOURCE_VERSION_CONFLICT",
+  "raceResult" : "PASS_TWO_REAL_CONCURRENT_HTTP_REQUESTS_ONE_RESOLUTION",
+  "raceWinner" : "ASSUMED",
+  "BUSINESS_RACE_ASSUME_WITHDRAW" : true,
+  "raceExecution" : [ {
+    "id" : "1c3f5ea1-2fc1-44e5-9e11-fc99498bf3fe",
+    "assignment_id" : "d8dd3eb2-93f2-44ff-92da-a8a7fd2a08d6",
+    "driver_id" : "21ade5d9-0a99-45ae-be7b-4e37833577c4",
+    "vehicle_id" : "b0439799-87d9-4ab4-96a5-d48e8beb5793",
+    "ordinal" : 1,
+    "started_at" : "2026-10-20T13:34:01.188+00:00",
+    "ended_at" : "2026-10-20T13:34:02.111+00:00",
+    "end_kind" : "TRANSFERRED",
+    "started_by" : "47d19ed8-de66-4742-a638-4a4a219bbb1f",
+    "ended_by" : "111131ee-1700-4095-b626-30377703ba9d"
+  }, {
+    "id" : "dd625ecd-9fa0-4c03-b0c8-5b5c5cac09ec",
+    "assignment_id" : "7f8a2de1-f2d0-4aab-9921-c5fb2e096e49",
+    "driver_id" : "a9cd5310-d37d-4b60-9a0e-722b7866c413",
+    "vehicle_id" : "03d4a99b-e465-4737-87c2-3a019b13432a",
+    "ordinal" : 2,
+    "started_at" : "2026-10-20T13:34:02.111+00:00",
+    "ended_at" : "2026-10-20T13:34:07.814+00:00",
+    "end_kind" : "INTERRUPTED",
+    "started_by" : "111131ee-1700-4095-b626-30377703ba9d",
+    "ended_by" : "111131ee-1700-4095-b626-30377703ba9d"
+  } ],
+  "BUSINESS_RACE_SAFE_TERMINATION" : true,
+  "returnServiceId" : "0e91d0b4-31fb-46e3-835a-b80f957dcd64",
+  "returnOutgoingOfferId" : "1d4e0c69-ab38-4b34-8840-7da65777d2ba",
+  "returnOfferId" : "1d4e0c69-ab38-4b34-8840-7da65777d2ba",
+  "RETURN_PREPARE_STARTED_SERVICE" : true,
+  "returnResult" : "PASS_SAME_BINARY_DISABLED_NEW_OPERATIONS_OWN_CONSULTATION_AND_SAFE_COMPLETION",
+  "returnExecution" : [ {
+    "id" : "861a151c-fc2d-4cf5-a7a4-d9c02f9b47d6",
+    "assignment_id" : "1d4e0c69-ab38-4b34-8840-7da65777d2ba",
+    "driver_id" : "21ade5d9-0a99-45ae-be7b-4e37833577c4",
+    "vehicle_id" : "b0439799-87d9-4ab4-96a5-d48e8beb5793",
+    "ordinal" : 1,
+    "started_at" : "2026-10-20T13:34:12.896+00:00",
+    "ended_at" : "2026-10-20T13:35:09.281+00:00",
+    "end_kind" : "COMPLETED",
+    "started_by" : "47d19ed8-de66-4742-a638-4a4a219bbb1f",
+    "ended_by" : "47d19ed8-de66-4742-a638-4a4a219bbb1f"
+  } ],
+  "RETURN_COMPATIBLE_DISABLED_OPERATIONS" : true,
+  "gpsSource" : "SYNTHETIC_SENSOR_AND_PERMISSION_DOUBLE_NOT_PHYSICAL",
+  "frontendBoundary" : "REAL_EDGE_CRM_UI_HTTP",
+  "mobileBoundary" : "PRODUCTION_FLUTTER_REPOSITORIES_AND_WIDGETS_REAL_HTTP_TEST_RENDERER",
+  "CONNECTED_POSTCONDITIONS" : true,
+  "cleanupStarted" : true,
+  "cleanupParticipant0" : true,
+  "groupId" : "a76c532b-00d9-4aa2-aa97-b2f034526e35",
+  "vehicleId" : "03d4a99b-e465-4737-87c2-3a019b13432a",
+  "invitationId" : "d7f21028-40e9-41d4-bca6-d142de7be223",
+  "requestId" : "f21977a1-54b6-4dfa-8816-0cfc4e1cbb82",
+  "driverId" : "a9cd5310-d37d-4b60-9a0e-722b7866c413",
+  "accountId" : "111131ee-1700-4095-b626-30377703ba9d",
+  "vehicleReviewed" : true,
+  "companyReviewed" : true,
+  "periodId" : "912f0a63-0f74-49c0-b96d-4adb4fe92bc7",
+  "qualifiedOnce" : true,
+  "cleanupParticipant1" : true,
+  "antecedentPreservation" : "PASS_ORIGINAL_LEDGER_ACCEPTANCES_SERVICES_OFFERS_UNCHANGED",
+  "ledgerAfter" : {
+    "SUPER_ADMIN" : 1,
+    "ADMIN" : 3,
+    "CONDUCTOR" : 4
+  },
+  "selectiveCleanup" : "PASS_TWO_ACCOUNTS_DISABLED_SESSIONS_REVOKED_LEDGER_HISTORY_PRESERVED",
+  "globalCleanup" : false,
+  "externalSmtpAttempts" : 0,
+  "privateFixtureSecretsRemoved" : true,
+  "TEST_CLEANUP_RELEASED" : true
+}

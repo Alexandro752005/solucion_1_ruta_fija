@@ -1,0 +1,19 @@
+{
+  "runId": "9f2be6c1-77be-4d2b-8d72-f83dbd6f5247",
+  "observedAt": "2026-10-21T22:58:18.690Z",
+  "state": "STOPPED_PUBLIC_ONLY_KEEP_MANUAL_RESULT_PENDING",
+  "scope": "PUBLIC_PHYSICAL_PREAUTH_ONLY_NO_OPERATIONAL_ACCOUNT",
+  "events": [
+    {
+      "at": "2026-10-21T22:56:58.367Z",
+      "method": "POST",
+      "path": "/api/v1/mobile/auth/login",
+      "status": 503
+    }
+  ],
+  "databaseConnected": false,
+  "mailAdapterPresent": false,
+  "credentialsOrRequestBodiesRecorded": false,
+  "manualOutcome": "PENDING_USER_REPORT",
+  "pilotEnabled": false
+}

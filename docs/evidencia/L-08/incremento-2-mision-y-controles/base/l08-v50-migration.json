@@ -1,0 +1,19 @@
+{
+  "result": "REFUSED",
+  "phase": "POST_MIGRATION_PRESERVATION",
+  "reason": "HISTORY_NOT_EXACTLY_EXTENDED_BY_V50",
+  "migrationExecutionStarted": true,
+  "causeType": "Refused",
+  "sqlState": "NONE",
+  "flywayValidation": {
+    "successful": false,
+    "validatedCount": 0,
+    "code": "VALIDATE_ERROR",
+    "invalidMigrations": [
+      {
+        "code": "RESOLVED_VERSIONED_MIGRATION_NOT_APPLIED",
+        "version": "50"
+      }
+    ]
+  }
+}

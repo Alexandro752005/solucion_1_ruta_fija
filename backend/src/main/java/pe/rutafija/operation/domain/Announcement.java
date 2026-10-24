@@ -52,6 +52,10 @@ public class Announcement {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
+    @Column(name="operation_key",updatable=false) private UUID operationKey;
+    @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.CHAR)
+    @Column(name="payload_sha256",updatable=false,length=64) private String payloadSha256;
+
     protected Announcement() {
     }
 
@@ -73,7 +77,7 @@ public class Announcement {
         this.audienceId = audienceType == AnnouncementAudienceType.ORGANIZATION
                 ? null
                 : Objects.requireNonNull(audienceId);
-        // No existe cliente móvil ni portal del conductor para confirmar lectura en este alcance.
+        // Reading is a separate explicit mobile action; publication never confirms it.
         this.requireReadAck = requireReadAck;
     }
 
@@ -92,6 +96,12 @@ public class Announcement {
     public UUID getId() {
         return id;
     }
+    public void identifyPublication(UUID key,String hash) {
+        if(operationKey!=null)throw new IllegalStateException("Publication key is immutable");
+        this.operationKey=Objects.requireNonNull(key);this.payloadSha256=Objects.requireNonNull(hash);
+    }
+    public UUID getOperationKey(){return operationKey;}
+    public String getPayloadSha256(){return payloadSha256;}
 
     public Organization getOrganization() {
         return organization;

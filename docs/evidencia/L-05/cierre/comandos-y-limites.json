@@ -1,0 +1,42 @@
+{
+  "testTarget": "ruta_fija_test/rf_test",
+  "migrationExecutedInFinalIncrement": false,
+  "commands": [
+    {
+      "command": "mvn.cmd --offline -q -DskipTests test-compile",
+      "purpose": "Compile guarded test-source runner; no DB mutation"
+    },
+    {
+      "command": "java -cp <private locally constructed test classpath> pe.rutafija.support.L05DatabasePreflight --validate-test",
+      "purpose": "Read-only target, counters and Flyway validation"
+    },
+    {
+      "command": "java -cp <private locally constructed test classpath> pe.rutafija.support.L05ConnectedTrial --run-connected",
+      "purpose": "Five processes continuing one authorized RUN, not five cases. Normal HTTP preparation, actual CRM/Flutter clients, race, compatible return and selective closure."
+    },
+    {
+      "command": "java -cp <private locally constructed test classpath> pe.rutafija.support.L05ConnectedPostflight",
+      "purpose": "Independent read-only closure, resources, sessions, prior row hashes and lock verification"
+    },
+    {
+      "command": "mvn.cmd --offline -q -Dtest=OfferAcceptanceIntegrationTest#offer*,ServiceExecutionIntegrationTest#execution*,ServiceAttentionIntegrationTest#safety*,ServiceHandoverIntegrationTest#handover*,ServiceGpsIntegrationTest#gps*,QualificationReturnGateIntegrationTest#return* test",
+      "purpose": "79 directed real Spring/PG rollback cases, no NativePostgresIntegrationTest/global cleanup"
+    },
+    {
+      "command": "mvn.cmd --offline -q -DskipTests package",
+      "purpose": "Current local backend JAR"
+    },
+    {
+      "command": "npm.cmd run typecheck; npm.cmd run test:ci -- --include <service-handover-panel.spec.ts> --include <assignments.page.spec.ts>; npm.cmd run build:development",
+      "purpose": "16 CRM cases and current local bundle; commands executed sequentially"
+    },
+    {
+      "command": "flutter analyze --no-pub; flutter test --no-pub --reporter expanded <handover/attention repository and panel tests>",
+      "purpose": "Analyze and16 directed Flutter cases; connected cases launched separately through opt-in child environment, no persistent queue"
+    }
+  ],
+  "secretHandling": "Classpath values, JWTs, passwords, OTPs and private configuration never published; simulated codes were in restricted ephemeral fixture state, removed after archive.",
+  "noGitCommands": true,
+  "noSmtp": true,
+  "noFinal3Regeneration": true
+}

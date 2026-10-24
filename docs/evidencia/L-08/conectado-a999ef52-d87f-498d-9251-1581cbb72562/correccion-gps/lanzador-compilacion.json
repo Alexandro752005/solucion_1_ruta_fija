@@ -1,0 +1,9 @@
+{
+  "firstLauncherResult": "POWERSHELL_NATIVE_STDERR_WARNING_INTERRUPTED_EXIT_CAPTURE",
+  "firstExitFileCreated": false,
+  "nativeBuildProcessAbsentBeforeControlledRerun": true,
+  "originalLogPreserved": true,
+  "secondBuildExitCode": 0,
+  "secondBuildResult": "BUILD_SUCCESSFUL",
+  "globalSdkOrGradleConfigurationChanged": false
+}

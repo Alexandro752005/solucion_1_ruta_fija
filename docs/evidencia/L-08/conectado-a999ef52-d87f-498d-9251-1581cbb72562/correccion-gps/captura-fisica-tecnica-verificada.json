@@ -1,0 +1,67 @@
+{
+  "runId": "a999ef52-d87f-498d-9251-1581cbb72562",
+  "archivedAt": "2026-10-22T21:54:50.403804+00:00",
+  "result": "PASS_TECHNICAL_REAL_PHONE_LOCATION_HTTP204_AND_CASE_POINT_PERSISTENCE_ONLY",
+  "apkSha256": "378bedcf4ee12a1a801ed07c9479b1acc5903246dd78c6f9b40212af9a73a588",
+  "package": "pe.rutafija.conductor.l08",
+  "sameDebugSignerAsPriorApk": true,
+  "applicationUpdatedWithoutClearingData": true,
+  "existingSessionRestoredByNormalApp": true,
+  "offerId": "6ad87efd-c9a5-4d06-943c-72c863f76772",
+  "serviceId": "961b62f8-1d30-469f-a88d-5db10884e663",
+  "serviceStatusAtRead": "IN_SERVICE",
+  "originalStartedAtServerPreserved": "2026-10-22T21:28:01.474477Z",
+  "caseGpsPointCountAtRead": 1,
+  "databaseEvidence": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/oferta-observacion-9cb976a9-3885-4b7e-a2f3-781dcede81e5.json",
+  "databaseEvidenceSha256": "23561b2fe736cbdecae1f9f5f111628b859f7871ca16c78aa91562a389053439",
+  "successfulPhoneLocationHttpEvents": [
+    {
+      "channel": "PHONE_PROXY_REAL_BACKEND",
+      "method": "PUT",
+      "finishedAt": "2026-10-22T21:53:16.580239800Z",
+      "path": "/api/v1/mobile/location/current",
+      "status": 204,
+      "startedAt": "2026-10-22T21:53:14.993955100Z"
+    },
+    {
+      "channel": "PHONE_PROXY_REAL_BACKEND",
+      "method": "PUT",
+      "finishedAt": "2026-10-22T21:53:44.613531800Z",
+      "path": "/api/v1/mobile/location/current",
+      "status": 204,
+      "startedAt": "2026-10-22T21:53:44.592564200Z"
+    },
+    {
+      "channel": "PHONE_PROXY_REAL_BACKEND",
+      "method": "PUT",
+      "finishedAt": "2026-10-22T21:54:14.590898200Z",
+      "path": "/api/v1/mobile/location/current",
+      "status": 204,
+      "startedAt": "2026-10-22T21:54:14.560056700Z"
+    },
+    {
+      "channel": "PHONE_PROXY_REAL_BACKEND",
+      "method": "PUT",
+      "finishedAt": "2026-10-22T21:54:45.022759500Z",
+      "path": "/api/v1/mobile/location/current",
+      "status": 204,
+      "startedAt": "2026-10-22T21:54:44.977728400Z"
+    }
+  ],
+  "actorSource": "REAL_PHONE_USING_EXISTING_SYNTHETIC_ACCOUNT",
+  "agentSubmittedLocationHttpCommands": 0,
+  "agentChangedSensorOrPermissionSettings": false,
+  "sensorCoordinatesRecordedInEvidence": false,
+  "newParticipantsCreated": 0,
+  "historicalLedger": {
+    "ADMIN": 3,
+    "CONDUCTOR": 7,
+    "SUPER_ADMIN": 1
+  },
+  "termsAcceptancesPreserved": 2,
+  "manualVisualGpsConfirmationPending": true,
+  "manualCompletionAndLogoutPending": true,
+  "physicalBatteryOrFullRouteVerified": false,
+  "TEST_CLEANUP_RELEASED": false,
+  "pilotEnabled": false
+}

@@ -1,0 +1,12 @@
+{
+    "result":  "PASS_LOCAL_ARCHIVE_AGE_GATE",
+    "checkedAt":  "2026-10-23T06:31:46.2083770+00:00",
+    "snapshotAgeSeconds":  74.764713399999991,
+    "authenticationAgeSeconds":  0.10399639999999999,
+    "reasons":  [
+
+                ],
+    "independentMediumAccredited":  false,
+    "schedulingAccredited":  false,
+    "operationalRpoAccredited":  false
+}

@@ -1,0 +1,55 @@
+{
+  "mode": "before",
+  "records": [
+    {
+      "screen": "before-incidents",
+      "navigation": {
+        "Inicio": false,
+        "Disponibilidad": false,
+        "Asignaciones": false,
+        "Incidencias": false,
+        "Comunicados": false,
+        "Perfil": false
+      },
+      "allSixVisible": false,
+      "incidentsContentVisible": true,
+      "announcementsContentVisible": false,
+      "privateXml": "before-incidents.xml"
+    },
+    {
+      "screen": "before-home",
+      "navigation": {
+        "Inicio": true,
+        "Disponibilidad": true,
+        "Asignaciones": true,
+        "Incidencias": true,
+        "Comunicados": true,
+        "Perfil": true
+      },
+      "allSixVisible": true,
+      "incidentsContentVisible": true,
+      "announcementsContentVisible": true,
+      "privateXml": "before-home.xml"
+    },
+    {
+      "screen": "before-announcements",
+      "navigation": {
+        "Inicio": false,
+        "Disponibilidad": false,
+        "Asignaciones": false,
+        "Incidencias": false,
+        "Comunicados": false,
+        "Perfil": false
+      },
+      "allSixVisible": false,
+      "incidentsContentVisible": false,
+      "announcementsContentVisible": true,
+      "privateXml": "before-announcements.xml"
+    }
+  ],
+  "incidentCreated": false,
+  "announcementReadConfirmed": false,
+  "availabilityChanged": false,
+  "gpsStarted": false,
+  "credentialsEntered": false
+}

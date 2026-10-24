@@ -1,0 +1,22 @@
+﻿{
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "checkedAt":  "2026-10-23T05:01:15.7665278+00:00",
+    "offlineStart":  "2026-10-23T04:51:58.1179873+00:00",
+    "offlineEndConservative":  "2026-10-23T04:53:25.7957533+00:00",
+    "channel":  "PHONE_PROXY_REAL_BACKEND",
+    "realPhoneHttpEventsDuringOffline":  0,
+    "preferencesRecoveryEvents":  [
+                                      {
+                                          "path":  "/api/v1/mobile/preferences",
+                                          "method":  "GET",
+                                          "status":  200,
+                                          "startedAt":  "2026-10-23T04:59:38.652502900Z"
+                                      }
+                                  ],
+    "wifiDisableUsed":  true,
+    "oldPeerRejectedAfterDhcpChange":  true,
+    "exactNewPeerRealTcpProof":  "network-preflight-peer-actual-2.json",
+    "successfulOfflineWriteClaimed":  false,
+    "automaticReplayOfPreferencesObserved":  false,
+    "result":  "PASS_PHYSICAL_NETWORK_LOSS_UNCERTAIN_WRITE_RECONCILED_BY_GET"
+}

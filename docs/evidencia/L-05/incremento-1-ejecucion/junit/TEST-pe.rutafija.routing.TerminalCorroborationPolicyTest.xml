@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="pe.rutafija.routing.TerminalCorroborationPolicyTest" time="0.011" tests="4" errors="0" skipped="0" failures="0" flakes="0">
+  <testcase name="staleFutureAndPoorAccuracyRemainUncorroborated" classname="pe.rutafija.routing.TerminalCorroborationPolicyTest" time="0.002" />
+  <testcase name="exactTimeAndAccuracyLimitsAreInclusive" classname="pe.rutafija.routing.TerminalCorroborationPolicyTest" time="0.002" />
+  <testcase name="pointsInsideAndOutsideRadiusAreDistinguished" classname="pe.rutafija.routing.TerminalCorroborationPolicyTest" time="0.001" />
+  <testcase name="missingPointOrTerminalNeverCorroborates" classname="pe.rutafija.routing.TerminalCorroborationPolicyTest" time="0.0" />
+</testsuite>

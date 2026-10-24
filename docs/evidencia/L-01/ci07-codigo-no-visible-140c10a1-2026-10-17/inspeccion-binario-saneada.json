@@ -1,0 +1,16 @@
+{
+    "inspectionAtUtc":  "2026-10-17T10:03:53.8797377Z",
+    "runId":  "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+    "clientSha256":  "91913FF7C11CABFAA01881FCBFB24BBF5ED347564C0140D73A757BC96D38E24A",
+    "emergencyCodeResponseFieldPresent":  true,
+    "emergencyCodeHeaderPresent":  true,
+    "printlnAndFlushInConsoleAdapterPresent":  true,
+    "clientProcessRecoverJarFoundAtInspection":  0,
+    "exactPreviouslyExecutedJarVerified":  false,
+    "cliRealConsoleOutputVerified":  false,
+    "userReportsCodeAbsentInAllVisibleLines":  true,
+    "cause":  "NOT_PROVEN",
+    "agentPrivateKeyFilesRead":  0,
+    "agentHttpRequests":  0,
+    "agentSmtpAttempts":  0
+}

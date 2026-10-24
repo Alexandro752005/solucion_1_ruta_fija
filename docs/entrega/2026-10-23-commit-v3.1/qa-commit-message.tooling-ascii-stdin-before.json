@@ -1,0 +1,365 @@
+{
+  "reviewedAtUtc": "2026-10-23T20:55:09.357243+00:00",
+  "result": "FAIL_FINAL_DOCUMENT_REVIEW",
+  "reviewer": "A-MOB/A-QA independent of coordinator document writer",
+  "scope": "Read-only narrative/code/evidence review, no test, database, device, service or Git operation. Only this new QA JSON is written.",
+  "checksPassed": 9,
+  "checksTotal": 20,
+  "checks": [
+    {
+      "name": "Combined commit message is exact subject, blank line and body file",
+      "passed": true
+    },
+    {
+      "name": "All three documents are valid UTF8 without replacement characters",
+      "passed": true
+    },
+    {
+      "name": "All local links in runtime document exist",
+      "passed": true,
+      "details": {
+        "links": 7,
+        "missing": []
+      }
+    },
+    {
+      "name": "All 12 prior mobile claims remain bound to unchanged current sources",
+      "passed": true,
+      "details": {
+        "uniqueSources": 39,
+        "mismatches": []
+      }
+    },
+    {
+      "name": "Versions are precise and no downgrade to draft Angular22.1.4 is claimed",
+      "passed": true
+    },
+    {
+      "name": "Assignment protocol enum corrected to EN_SERVICIO; driver availability distinguished",
+      "passed": false
+    },
+    {
+      "name": "Only refresh token persistence is claimed; access token kept in RAM; no token AES256 claim",
+      "passed": false
+    },
+    {
+      "name": "UIforeground only; single fixes; persistent service activation explicitly unclaimed",
+      "passed": false
+    },
+    {
+      "name": "Nominal30s and >120s freshness warning, delayed cycles not promised a fixed SLA",
+      "passed": false
+    },
+    {
+      "name": "No fabricated0,0, enabled offline delivery or proven physical nofix claimed",
+      "passed": false
+    },
+    {
+      "name": "Notices are open/manual refresh and no Android external push accredited",
+      "passed": true
+    },
+    {
+      "name": "Assignment idempotency body and response header are correctly separated",
+      "passed": false
+    },
+    {
+      "name": "Terms are explicit authenticated acknowledgement, not cryptographic human signature",
+      "passed": false
+    },
+    {
+      "name": "NativeV12 blocked; V50readonly smoke is historical; no new live test invented",
+      "passed": false
+    },
+    {
+      "name": "Independent schema tests12 and regression42 pass, all current source hashes match review",
+      "passed": true,
+      "details": {
+        "schemaChecks": 12,
+        "launcherChecks": 42,
+        "opsResult": "PASS_READONLY_RUNTIME_OBJECTIVES_REVIEW_WITH_EXPLICIT_OPERATIONAL_LIMITS"
+      }
+    },
+    {
+      "name": "Historical731 pass and7connected skips preserved, no new tests counted",
+      "passed": true
+    },
+    {
+      "name": "Scope keeps local candidate GO / real-pilot NO_GO and explicit operational debt",
+      "passed": false
+    },
+    {
+      "name": "Candidate .invalid release and physicaldebugv4 distinguished, no release installation invented",
+      "passed": false
+    },
+    {
+      "name": "Academic ratio, battery959s, restore415.026s have explicit limits and reviewed evidence",
+      "passed": true
+    },
+    {
+      "name": "Historical frozen cuts and later source supersession are separated",
+      "passed": false
+    }
+  ],
+  "mobileClaimsCoverage": [
+    {
+      "claimId": "VERSIONS",
+      "runtimeLines": [
+        13,
+        14,
+        15,
+        17
+      ],
+      "bodyLines": [
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "claimId": "CLIENT_ROLES",
+      "runtimeLines": [
+        39,
+        41,
+        43,
+        49
+      ],
+      "bodyLines": [
+        3,
+        4,
+        5,
+        14
+      ]
+    },
+    {
+      "claimId": "GPS_FOREGROUND",
+      "runtimeLines": [
+        55
+      ],
+      "bodyLines": [
+        16
+      ]
+    },
+    {
+      "claimId": "GPS_CADENCE",
+      "runtimeLines": [
+        55,
+        57
+      ],
+      "bodyLines": [
+        16
+      ]
+    },
+    {
+      "claimId": "GPS_NO_FIX",
+      "runtimeLines": [
+        57,
+        59,
+        72
+      ],
+      "bodyLines": [
+        16,
+        22
+      ]
+    },
+    {
+      "claimId": "SECURE_SESSION",
+      "runtimeLines": [
+        51
+      ],
+      "bodyLines": [
+        5
+      ]
+    },
+    {
+      "claimId": "ANDROID_STORAGE_CIPHER",
+      "runtimeLines": [
+        51
+      ],
+      "bodyLines": [
+        5,
+        24
+      ]
+    },
+    {
+      "claimId": "IDEMPOTENCY",
+      "runtimeLines": [
+        53
+      ],
+      "bodyLines": [
+        15
+      ]
+    },
+    {
+      "claimId": "ASSIGNMENT_STATES",
+      "runtimeLines": [
+        43,
+        45
+      ],
+      "bodyLines": [
+        14,
+        21
+      ]
+    },
+    {
+      "claimId": "NOTICES",
+      "runtimeLines": [
+        53
+      ],
+      "bodyLines": [
+        16
+      ]
+    },
+    {
+      "claimId": "ONLINE_COMPOSITION",
+      "runtimeLines": [
+        57
+      ],
+      "bodyLines": [
+        16,
+        36
+      ]
+    },
+    {
+      "claimId": "ADMIN_TERMS",
+      "runtimeLines": [
+        41
+      ],
+      "bodyLines": [
+        14
+      ]
+    }
+  ],
+  "resolvedObservations": [
+    {
+      "priority": "MEDIUM_DOCUMENTARY",
+      "initialFile": "docs/runtime-y-evaluacion-solucion-1-v3.1.md",
+      "initialSha256": "fd03457b64e1904f0c3e3210d2b03cee38af55f19e05d87e8093fdab6a8437d0",
+      "line": 45,
+      "observation": "Initial assignment example incorrectly used IN_SERVICE.",
+      "resolution": "Coordinator changed example to protocol EN_SERVICIO; final re-read confirmed."
+    },
+    {
+      "priority": "PRECISION",
+      "line": 51,
+      "observation": "Initial wording protected plural tokens without persistence distinction.",
+      "resolution": "Coordinator now states persisted refresh token, access token in memory."
+    },
+    {
+      "priority": "PRECISION",
+      "line": 57,
+      "observation": "Initial nofix tolerance wording could imply a hard30s refresh deadline.",
+      "resolution": "Coordinator now states nominal cadence and no guaranteed fixed delay when work is pending."
+    }
+  ],
+  "findings": [
+    {
+      "name": "Assignment protocol enum corrected to EN_SERVICIO; driver availability distinguished",
+      "passed": false
+    },
+    {
+      "name": "Only refresh token persistence is claimed; access token kept in RAM; no token AES256 claim",
+      "passed": false
+    },
+    {
+      "name": "UIforeground only; single fixes; persistent service activation explicitly unclaimed",
+      "passed": false
+    },
+    {
+      "name": "Nominal30s and >120s freshness warning, delayed cycles not promised a fixed SLA",
+      "passed": false
+    },
+    {
+      "name": "No fabricated0,0, enabled offline delivery or proven physical nofix claimed",
+      "passed": false
+    },
+    {
+      "name": "Assignment idempotency body and response header are correctly separated",
+      "passed": false
+    },
+    {
+      "name": "Terms are explicit authenticated acknowledgement, not cryptographic human signature",
+      "passed": false
+    },
+    {
+      "name": "NativeV12 blocked; V50readonly smoke is historical; no new live test invented",
+      "passed": false
+    },
+    {
+      "name": "Scope keeps local candidate GO / real-pilot NO_GO and explicit operational debt",
+      "passed": false
+    },
+    {
+      "name": "Candidate .invalid release and physicaldebugv4 distinguished, no release installation invented",
+      "passed": false
+    },
+    {
+      "name": "Historical frozen cuts and later source supersession are separated",
+      "passed": false
+    }
+  ],
+  "reviewedFiles": [
+    {
+      "path": "docs/entrega/2026-10-23-commit-v3.1/commit-body.txt",
+      "sha256": "9aec94309d8888ca0b064bbfa101f2208c80a2c561dceb025d9f69dece065f2e"
+    },
+    {
+      "path": "docs/entrega/2026-10-23-commit-v3.1/COMMIT_MESSAGE.txt",
+      "sha256": "88cc4b81fdf4b8b9b61797ada0703c2e5aa80cf135623d9ff53d0d3b5097a35f"
+    },
+    {
+      "path": "docs/entrega/2026-10-23-commit-v3.1/launcher-final-regression.json",
+      "sha256": "309cffd6c79cc9643d79bd3a48e9adfda2dfc8deb8c37d279bc449cf9e510eda"
+    },
+    {
+      "path": "docs/entrega/2026-10-23-commit-v3.1/qa-mobile-claims.json",
+      "sha256": "d44b43d825fb2bb8203811876b940be15be8f9710272d1e9db00301d7f0e46ae"
+    },
+    {
+      "path": "docs/entrega/2026-10-23-commit-v3.1/qa-runtime-objectives.json",
+      "sha256": "ff2a141f7e017ea9dbd26b3cb37a50980909d2f4bfe573cdaf0eb9e742c96ee0"
+    },
+    {
+      "path": "docs/entrega/2026-10-23-commit-v3.1/schema-policy-final-tests.json",
+      "sha256": "a7e7e3a719bb67f477174f57930f6db35e812b85809070852bbe0c79b2c31f8b"
+    },
+    {
+      "path": "docs/entrega/2026-10-23-commit-v3.1/schema-policy-verified.json",
+      "sha256": "d768f515cd905f7103382a5f0b852ed12af21bba8af828833d95dfb1eedf5e57"
+    },
+    {
+      "path": "docs/evidencia/auditoria-ide-2026-10-23/verificacion-final.json",
+      "sha256": "33aa35c3143fad933c70d71eec3edfe65cd01fa19bf535348de2dad79e70e663"
+    },
+    {
+      "path": "docs/runtime-y-evaluacion-solucion-1-v3.1.md",
+      "sha256": "fd03457b64e1904f0c3e3210d2b03cee38af55f19e05d87e8093fdab6a8437d0"
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+      "sha256": "043a841813e1aacf62d985f283c71a9925fdb76462d7dbdc1af01d58bc2aa34c"
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaPostgresqlLease.ps1",
+      "sha256": "295a2626b0fc61a05bbabd57c0e1ed8c25ea7a71e4c4a7102c9221944eb3ac18"
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaQuickDemo.ps1",
+      "sha256": "055738564796a516d76c5f7a924cc3df5b35e6f7b34d8814ea1c5ba12e77223e"
+    },
+    {
+      "path": "scripts/RutaFijaRuntimeSchemaPolicy.ps1",
+      "sha256": "a4bfc9b78b5db8c649a7798cf72931ea3650ead3b52c8bd72dd6398b89835a4d"
+    }
+  ],
+  "limits": [
+    "Review does not certify staged content or secrets; coordinator still owns staging scan and actual Git decision.",
+    "No new test results: 731 and physical/restoration observations are earlier dated evidence. New schema12 and launcher42 cases are synthetic/regression receipts, not new live DB/startup execution.",
+    "No APIproduction, authenticated business writes, physical nofix, total-server-loss recovery, human-key custody, legal effectiveness or 100percentacademic/debtfree claim is approved.",
+    "The committed source-only view intentionally omits local binaries/dumps/private evidence; old manifests are historical references with explicitly documented later supersessions."
+  ],
+  "toolingObservation": "First console rendering of Unicode runtime text stopped under cp1252 at an arrow; documents were reread with ASCII escaping, without changing their UTF8 bytes.",
+  "gitCommandsExecutedByReviewer": 0,
+  "testsExecutedByReviewer": 0,
+  "databaseConnectionsOpenedByReviewer": 0,
+  "sealedEvidenceChanged": false
+}

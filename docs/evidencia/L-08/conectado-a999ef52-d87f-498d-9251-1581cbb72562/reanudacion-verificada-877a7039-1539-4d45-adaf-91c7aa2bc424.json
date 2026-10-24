@@ -1,0 +1,24 @@
+{
+  "runId": "a999ef52-d87f-498d-9251-1581cbb72562",
+  "observedAt": "2026-10-22T21:02:58.586200+00:00",
+  "resumeCount": 1,
+  "prepared": true,
+  "markerPreserved": true,
+  "cleanupLockHeldByCase": true,
+  "historicalLedger": {
+    "ADMIN": 3,
+    "CONDUCTOR": 7,
+    "SUPER_ADMIN": 1
+  },
+  "termsAcceptancesPreserved": 2,
+  "protectionEvidence": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/proteccion-078bc76a-90c3-4444-947e-5d2704a339f1.json",
+  "protectionEvidenceSha256": "17581a19771d9c3c69d7e792c11c9c5fcc0e9c663374e112202653585f6b9f6f",
+  "usbReverse4311Restored": true,
+  "testPackageInstalled": true,
+  "locationPermissionChanged": false,
+  "offerPrepared": false,
+  "manualPhoneResult": "PENDING",
+  "TEST_CLEANUP_RELEASED": false,
+  "batteryBenchmarkAccredited": false,
+  "pilotEnabled": false
+}

@@ -1,0 +1,27 @@
+﻿{
+    "verifiedAt":  "2026-10-23T05:38:39.2130021+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "result":  "PASS_NEW_CLOSED_FIS02_ARCHIVE_AND_CHOSEN_APK_HASHES",
+    "filesVerified":  556,
+    "manifestSha256":  "c74aa55d4d3a7e4d43f26d653b48139b420c8346d669b1b3f3e21965bbffeb1d",
+    "mismatches":  [
+
+                   ],
+    "includes":  [
+                     "incremento-4-evidence-and-source-copies",
+                     "same-fis02-public-http-observations-and-result",
+                     "selected-v4-apk-and-its-manifest"
+                 ],
+    "excludes":  [
+                     "manifest-caso-cerrado.sha256",
+                     "verificacion-archivo-final.json",
+                     "private-fixture-and-principal-data-backup",
+                     "mutable-global-tracking-documents"
+                 ],
+    "priorFrozenEvidenceAlsoVerified":  728,
+    "priorProtectedArtifactsPreserved":  true,
+    "final3Regenerated":  false,
+    "TEST_CLEANUP_RELEASED":  true,
+    "L08Status":  "EN_CURSO",
+    "globalAcceptance":  "NO_GO"
+}

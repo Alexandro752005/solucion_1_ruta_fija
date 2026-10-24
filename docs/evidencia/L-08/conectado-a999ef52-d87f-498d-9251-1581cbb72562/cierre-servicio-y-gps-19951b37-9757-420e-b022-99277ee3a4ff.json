@@ -1,0 +1,43 @@
+{
+  "runId": "a999ef52-d87f-498d-9251-1581cbb72562",
+  "result": "PASS_PERSONAL_SYNTHETIC_COMPLETION_AND_OBSERVED_GPS_STOP_ONLY",
+  "humanReport": "Confirmé el diálogo Ruta finalizada y apareció Ruta finalizada confirmada.",
+  "dialogueExplainedNoFullRouteGpsAccreditation": true,
+  "databaseEvidence": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/oferta-observacion-023c4550-d527-43bf-96ec-63dcce7b4a70.json",
+  "databaseEvidenceSha256": "0a8e440407686f12b162e54c9d7d012e04fababe2323fd4f255f52af1a2b1147",
+  "offerId": "6ad87efd-c9a5-4d06-943c-72c863f76772",
+  "serviceId": "961b62f8-1d30-469f-a88d-5db10884e663",
+  "acceptedAtServer": "2026-10-22T21:22:43.446836Z",
+  "originalStartedAtServer": "2026-10-22T21:28:01.474477Z",
+  "completedAtServer": "2026-10-22T21:59:25.508493Z",
+  "completionHttpEvents": [
+    {
+      "channel": "PHONE_PROXY_REAL_BACKEND",
+      "method": "POST",
+      "finishedAt": "2026-10-22T21:59:25.744219600Z",
+      "path": "/api/v1/mobile/assignments/6ad87efd-c9a5-4d06-943c-72c863f76772/complete",
+      "status": 200,
+      "startedAt": "2026-10-22T21:59:25.458507200Z"
+    }
+  ],
+  "gpsPointCountAtRead": 14,
+  "openSegments": 0,
+  "currentLocationRows": 0,
+  "pointsReceivedAfterSegmentEnd": 0,
+  "positionPutRequestsAfterSuccessfulCompletion": 0,
+  "observedAfterCompletionSeconds": 62.693,
+  "observationCutAt": "2026-10-22T22:00:28.436774Z",
+  "coordinatesRecorded": false,
+  "fullPhysicalRouteOrArrivalAccredited": false,
+  "batteryAccredited": false,
+  "historicalLedger": {
+    "ADMIN": 3,
+    "CONDUCTOR": 7,
+    "SUPER_ADMIN": 1
+  },
+  "termsAcceptancesPreserved": 2,
+  "logoutPending": true,
+  "manualPhoneResult": "PENDING",
+  "TEST_CLEANUP_RELEASED": false,
+  "pilotEnabled": false
+}

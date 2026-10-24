@@ -1,0 +1,5 @@
+# L07 — Retorno compatible verificado localmente
+
+2026-10-21. [Resultado](../evidencia/L-07/conectado-6b496135-b86b-4c5b-938f-a60ddcfe32db/resultado.json), [postflight](../evidencia/L-07/cierre/postflight-conectado.json). Mismas clases del recorrido y esquema V48;app.reporting.enabled=false y app.qualification.operations-enabled=false. Nueva instancia local con SMTP/planificadores desactivados:perfil y preferencias propios200,calificación OPERATIONAL_FEATURE_DISABLED,ruta nueva de reportes404. Esquema,ledger,aceptaciones,emisiones/correcciones y originales conservados.
+
+No binario histórico,migración inversa,despliegue,restauración total o RTO/RPO. El parche posterior de auditoría de exportaciones se comprobó separadamente en MockMvc/PG y no se etiqueta como repetición de este retorno. No reabrir el fixture retirado para validar futuras ampliaciones;usar autorización y entorno que correspondan. El procedimiento de retención queda desactivado por defecto y requiere consola/autorización específica,selección exacta,reautenticación y estado sin ensayo protegido.

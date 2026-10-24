@@ -1,0 +1,643 @@
+{
+  "browser": "Edge",
+  "role": "ADMIN",
+  "requestedNativeZoom": 3,
+  "checks": [
+    {
+      "id": "BROWSER_PRESENT",
+      "result": "PASS"
+    },
+    {
+      "id": "BROWSER_STARTED",
+      "result": "PASS"
+    },
+    {
+      "id": "ROUTE_DASHBOARD",
+      "result": "PASS"
+    },
+    {
+      "id": "NATIVE_ZOOM_DASHBOARD",
+      "result": "PASS"
+    },
+    {
+      "id": "PHYSICAL_CLIENT_1280_720_DASHBOARD",
+      "result": "PASS",
+      "width": 426,
+      "height": 240,
+      "factor": 3
+    },
+    {
+      "id": "PAGE_REFLOW_DASHBOARD",
+      "result": "PASS",
+      "width": 426,
+      "documentWidth": 421
+    },
+    {
+      "id": "NO_OPERATIONAL_ALERT_DASHBOARD",
+      "result": "PASS"
+    },
+    {
+      "id": "NO_EMAIL_IN_ORDINARY_VIEW_DASHBOARD",
+      "result": "PASS"
+    },
+    {
+      "id": "CONTROLS_LABELLED_DASHBOARD",
+      "result": "PASS",
+      "unlabelled": []
+    },
+    {
+      "id": "TABLES_BOUNDED_DASHBOARD",
+      "result": "PASS"
+    },
+    {
+      "id": "AX_NAMED_CONTROLS_DASHBOARD",
+      "result": "PASS",
+      "tables": 1,
+      "unnamedControls": []
+    },
+    {
+      "id": "REAL_API_READ_DASHBOARD",
+      "result": "PASS"
+    },
+    {
+      "id": "SUCCESSFUL_READS_DASHBOARD",
+      "result": "PASS"
+    },
+    {
+      "id": "ROUTE_USERS",
+      "result": "PASS"
+    },
+    {
+      "id": "NATIVE_ZOOM_USERS",
+      "result": "PASS"
+    },
+    {
+      "id": "PHYSICAL_CLIENT_1280_720_USERS",
+      "result": "PASS",
+      "width": 426,
+      "height": 240,
+      "factor": 3
+    },
+    {
+      "id": "PAGE_REFLOW_USERS",
+      "result": "PASS",
+      "width": 426,
+      "documentWidth": 421
+    },
+    {
+      "id": "NO_OPERATIONAL_ALERT_USERS",
+      "result": "PASS"
+    },
+    {
+      "id": "NO_EMAIL_IN_ORDINARY_VIEW_USERS",
+      "result": "PASS"
+    },
+    {
+      "id": "CONTROLS_LABELLED_USERS",
+      "result": "PASS",
+      "unlabelled": []
+    },
+    {
+      "id": "TABLES_BOUNDED_USERS",
+      "result": "PASS"
+    },
+    {
+      "id": "AX_NAMED_CONTROLS_USERS",
+      "result": "PASS",
+      "tables": 1,
+      "unnamedControls": []
+    },
+    {
+      "id": "REAL_API_READ_USERS",
+      "result": "PASS"
+    },
+    {
+      "id": "SUCCESSFUL_READS_USERS",
+      "result": "PASS"
+    },
+    {
+      "id": "ROUTE_GROUPS",
+      "result": "PASS"
+    },
+    {
+      "id": "NATIVE_ZOOM_GROUPS",
+      "result": "PASS"
+    },
+    {
+      "id": "PHYSICAL_CLIENT_1280_720_GROUPS",
+      "result": "PASS",
+      "width": 426,
+      "height": 240,
+      "factor": 3
+    },
+    {
+      "id": "PAGE_REFLOW_GROUPS",
+      "result": "PASS",
+      "width": 426,
+      "documentWidth": 421
+    },
+    {
+      "id": "NO_OPERATIONAL_ALERT_GROUPS",
+      "result": "PASS"
+    },
+    {
+      "id": "NO_EMAIL_IN_ORDINARY_VIEW_GROUPS",
+      "result": "PASS"
+    },
+    {
+      "id": "CONTROLS_LABELLED_GROUPS",
+      "result": "PASS",
+      "unlabelled": []
+    },
+    {
+      "id": "TABLES_BOUNDED_GROUPS",
+      "result": "PASS"
+    },
+    {
+      "id": "AX_NAMED_CONTROLS_GROUPS",
+      "result": "PASS",
+      "tables": 1,
+      "unnamedControls": []
+    },
+    {
+      "id": "REAL_API_READ_GROUPS",
+      "result": "PASS"
+    },
+    {
+      "id": "SUCCESSFUL_READS_GROUPS",
+      "result": "PASS"
+    },
+    {
+      "id": "MODAL_INITIAL_FOCUS_AND_NAME",
+      "result": "PASS",
+      "labelled": true,
+      "focusInside": true,
+      "fieldCount": 2
+    },
+    {
+      "id": "MODAL_TAB_REMAINS_INSIDE_0",
+      "result": "PASS"
+    },
+    {
+      "id": "MODAL_TAB_REMAINS_INSIDE_1",
+      "result": "PASS"
+    },
+    {
+      "id": "MODAL_TAB_REMAINS_INSIDE_2",
+      "result": "PASS"
+    },
+    {
+      "id": "MODAL_TAB_REMAINS_INSIDE_3",
+      "result": "PASS"
+    },
+    {
+      "id": "MODAL_TAB_REMAINS_INSIDE_4",
+      "result": "PASS"
+    },
+    {
+      "id": "MODAL_TAB_REMAINS_INSIDE_5",
+      "result": "PASS"
+    },
+    {
+      "id": "MODAL_TAB_REMAINS_INSIDE_6",
+      "result": "PASS"
+    },
+    {
+      "id": "MODAL_ESCAPE_RETURNS_FOCUS",
+      "result": "PASS"
+    },
+    {
+      "id": "ROUTE_VEHICLES",
+      "result": "PASS"
+    },
+    {
+      "id": "NATIVE_ZOOM_VEHICLES",
+      "result": "PASS"
+    },
+    {
+      "id": "PHYSICAL_CLIENT_1280_720_VEHICLES",
+      "result": "PASS",
+      "width": 426,
+      "height": 240,
+      "factor": 3
+    },
+    {
+      "id": "PAGE_REFLOW_VEHICLES",
+      "result": "PASS",
+      "width": 426,
+      "documentWidth": 421
+    },
+    {
+      "id": "NO_OPERATIONAL_ALERT_VEHICLES",
+      "result": "PASS"
+    },
+    {
+      "id": "NO_EMAIL_IN_ORDINARY_VIEW_VEHICLES",
+      "result": "PASS"
+    },
+    {
+      "id": "CONTROLS_LABELLED_VEHICLES",
+      "result": "PASS",
+      "unlabelled": []
+    },
+    {
+      "id": "TABLES_BOUNDED_VEHICLES",
+      "result": "PASS"
+    },
+    {
+      "id": "AX_NAMED_CONTROLS_VEHICLES",
+      "result": "PASS",
+      "tables": 1,
+      "unnamedControls": []
+    },
+    {
+      "id": "REAL_API_READ_VEHICLES",
+      "result": "PASS"
+    },
+    {
+      "id": "SUCCESSFUL_READS_VEHICLES",
+      "result": "PASS"
+    },
+    {
+      "id": "ROUTE_ASSIGNMENTS",
+      "result": "PASS"
+    },
+    {
+      "id": "NATIVE_ZOOM_ASSIGNMENTS",
+      "result": "PASS"
+    },
+    {
+      "id": "PHYSICAL_CLIENT_1280_720_ASSIGNMENTS",
+      "result": "PASS",
+      "width": 426,
+      "height": 240,
+      "factor": 3
+    },
+    {
+      "id": "PAGE_REFLOW_ASSIGNMENTS",
+      "result": "PASS",
+      "width": 426,
+      "documentWidth": 421
+    },
+    {
+      "id": "NO_OPERATIONAL_ALERT_ASSIGNMENTS",
+      "result": "PASS"
+    },
+    {
+      "id": "NO_EMAIL_IN_ORDINARY_VIEW_ASSIGNMENTS",
+      "result": "PASS"
+    },
+    {
+      "id": "CONTROLS_LABELLED_ASSIGNMENTS",
+      "result": "PASS",
+      "unlabelled": []
+    },
+    {
+      "id": "TABLES_BOUNDED_ASSIGNMENTS",
+      "result": "PASS"
+    },
+    {
+      "id": "AX_NAMED_CONTROLS_ASSIGNMENTS",
+      "result": "PASS",
+      "tables": 1,
+      "unnamedControls": []
+    },
+    {
+      "id": "REAL_API_READ_ASSIGNMENTS",
+      "result": "PASS"
+    },
+    {
+      "id": "SUCCESSFUL_READS_ASSIGNMENTS",
+      "result": "PASS"
+    },
+    {
+      "id": "ROUTE_REPORTS",
+      "result": "PASS"
+    },
+    {
+      "id": "NATIVE_ZOOM_REPORTS",
+      "result": "PASS"
+    },
+    {
+      "id": "PHYSICAL_CLIENT_1280_720_REPORTS",
+      "result": "PASS",
+      "width": 426,
+      "height": 240,
+      "factor": 3
+    },
+    {
+      "id": "PAGE_REFLOW_REPORTS",
+      "result": "PASS",
+      "width": 426,
+      "documentWidth": 421
+    },
+    {
+      "id": "NO_OPERATIONAL_ALERT_REPORTS",
+      "result": "PASS"
+    },
+    {
+      "id": "NO_EMAIL_IN_ORDINARY_VIEW_REPORTS",
+      "result": "PASS"
+    },
+    {
+      "id": "CONTROLS_LABELLED_REPORTS",
+      "result": "PASS",
+      "unlabelled": []
+    },
+    {
+      "id": "TABLES_BOUNDED_REPORTS",
+      "result": "PASS"
+    },
+    {
+      "id": "AX_NAMED_CONTROLS_REPORTS",
+      "result": "PASS",
+      "tables": 4,
+      "unnamedControls": []
+    },
+    {
+      "id": "REAL_API_READ_REPORTS",
+      "result": "PASS"
+    },
+    {
+      "id": "SUCCESSFUL_READS_REPORTS",
+      "result": "PASS"
+    },
+    {
+      "id": "ROUTE_AUDIT",
+      "result": "PASS"
+    },
+    {
+      "id": "NATIVE_ZOOM_AUDIT",
+      "result": "PASS"
+    },
+    {
+      "id": "PHYSICAL_CLIENT_1280_720_AUDIT",
+      "result": "PASS",
+      "width": 426,
+      "height": 240,
+      "factor": 3
+    },
+    {
+      "id": "PAGE_REFLOW_AUDIT",
+      "result": "PASS",
+      "width": 426,
+      "documentWidth": 421
+    },
+    {
+      "id": "NO_OPERATIONAL_ALERT_AUDIT",
+      "result": "PASS"
+    },
+    {
+      "id": "NO_EMAIL_IN_ORDINARY_VIEW_AUDIT",
+      "result": "PASS"
+    },
+    {
+      "id": "CONTROLS_LABELLED_AUDIT",
+      "result": "PASS",
+      "unlabelled": []
+    },
+    {
+      "id": "TABLES_BOUNDED_AUDIT",
+      "result": "PASS"
+    },
+    {
+      "id": "AX_NAMED_CONTROLS_AUDIT",
+      "result": "PASS",
+      "tables": 1,
+      "unnamedControls": []
+    },
+    {
+      "id": "REAL_API_READ_AUDIT",
+      "result": "PASS"
+    },
+    {
+      "id": "SUCCESSFUL_READS_AUDIT",
+      "result": "PASS"
+    }
+  ],
+  "pages": [
+    {
+      "path": "/dashboard",
+      "dpr": 3,
+      "width": 426,
+      "height": 240,
+      "outerWidth": 1304,
+      "outerHeight": 812,
+      "cssZoom": "1",
+      "pageScale": 1,
+      "documentWidth": 421,
+      "title": "Resumen",
+      "alerts": 0,
+      "tables": [
+        {
+          "rows": 6,
+          "headers": 4,
+          "parentWidth": 338,
+          "scrollWidth": 704,
+          "overflow": "auto"
+        }
+      ],
+      "unlabelled": [],
+      "piiEmailVisible": false,
+      "accessibility": {
+        "tables": 1,
+        "unnamedControls": []
+      }
+    },
+    {
+      "path": "/users",
+      "dpr": 3,
+      "width": 426,
+      "height": 240,
+      "outerWidth": 1304,
+      "outerHeight": 812,
+      "cssZoom": "1",
+      "pageScale": 1,
+      "documentWidth": 421,
+      "title": "Usuarios",
+      "alerts": 0,
+      "tables": [
+        {
+          "rows": 7,
+          "headers": 4,
+          "parentWidth": 338,
+          "scrollWidth": 672,
+          "overflow": "auto"
+        }
+      ],
+      "unlabelled": [],
+      "piiEmailVisible": false,
+      "accessibility": {
+        "tables": 1,
+        "unnamedControls": []
+      }
+    },
+    {
+      "path": "/groups",
+      "dpr": 3,
+      "width": 426,
+      "height": 240,
+      "outerWidth": 1304,
+      "outerHeight": 812,
+      "cssZoom": "1",
+      "pageScale": 1,
+      "documentWidth": 421,
+      "title": "Grupos",
+      "alerts": 0,
+      "tables": [
+        {
+          "rows": 9,
+          "headers": 4,
+          "parentWidth": 338,
+          "scrollWidth": 672,
+          "overflow": "auto"
+        }
+      ],
+      "unlabelled": [],
+      "piiEmailVisible": false,
+      "accessibility": {
+        "tables": 1,
+        "unnamedControls": []
+      }
+    },
+    {
+      "path": "/vehicles",
+      "dpr": 3,
+      "width": 426,
+      "height": 240,
+      "outerWidth": 1304,
+      "outerHeight": 812,
+      "cssZoom": "1",
+      "pageScale": 1,
+      "documentWidth": 421,
+      "title": "Vehículos",
+      "alerts": 0,
+      "tables": [
+        {
+          "rows": 10,
+          "headers": 6,
+          "parentWidth": 338,
+          "scrollWidth": 672,
+          "overflow": "auto"
+        }
+      ],
+      "unlabelled": [],
+      "piiEmailVisible": false,
+      "accessibility": {
+        "tables": 1,
+        "unnamedControls": []
+      }
+    },
+    {
+      "path": "/assignments",
+      "dpr": 3,
+      "width": 426,
+      "height": 240,
+      "outerWidth": 1304,
+      "outerHeight": 812,
+      "cssZoom": "1",
+      "pageScale": 1,
+      "documentWidth": 421,
+      "title": "Asignaciones",
+      "alerts": 0,
+      "tables": [
+        {
+          "rows": 12,
+          "headers": 8,
+          "parentWidth": 338,
+          "scrollWidth": 1018,
+          "overflow": "auto"
+        }
+      ],
+      "unlabelled": [],
+      "piiEmailVisible": false,
+      "accessibility": {
+        "tables": 1,
+        "unnamedControls": []
+      }
+    },
+    {
+      "path": "/reports",
+      "dpr": 3,
+      "width": 426,
+      "height": 240,
+      "outerWidth": 1304,
+      "outerHeight": 812,
+      "cssZoom": "1",
+      "pageScale": 1,
+      "documentWidth": 421,
+      "title": "Reportes",
+      "alerts": 0,
+      "tables": [
+        {
+          "rows": 1,
+          "headers": 2,
+          "parentWidth": 338,
+          "scrollWidth": 338,
+          "overflow": "auto"
+        },
+        {
+          "rows": 2,
+          "headers": 2,
+          "parentWidth": 338,
+          "scrollWidth": 338,
+          "overflow": "auto"
+        },
+        {
+          "rows": 12,
+          "headers": 5,
+          "parentWidth": 338,
+          "scrollWidth": 841,
+          "overflow": "auto"
+        },
+        {
+          "rows": 4,
+          "headers": 5,
+          "parentWidth": 338,
+          "scrollWidth": 672,
+          "overflow": "auto"
+        }
+      ],
+      "unlabelled": [],
+      "piiEmailVisible": false,
+      "accessibility": {
+        "tables": 4,
+        "unnamedControls": []
+      }
+    },
+    {
+      "path": "/audit",
+      "dpr": 3,
+      "width": 426,
+      "height": 240,
+      "outerWidth": 1304,
+      "outerHeight": 812,
+      "cssZoom": "1",
+      "pageScale": 1,
+      "documentWidth": 421,
+      "title": "Auditoría de organización",
+      "alerts": 0,
+      "tables": [
+        {
+          "rows": 20,
+          "headers": 5,
+          "parentWidth": 338,
+          "scrollWidth": 733,
+          "overflow": "auto"
+        }
+      ],
+      "unlabelled": [],
+      "piiEmailVisible": false,
+      "accessibility": {
+        "tables": 1,
+        "unnamedControls": []
+      }
+    }
+  ],
+  "version": "Edg/155.0.4283.62",
+  "screenshot": {
+    "file": "Edge-ADMIN-300-users.png",
+    "sha256": "8ae8eb720e9a8708912ad13e0808147e3f49f49deea169406c81e3149c596ac6"
+  },
+  "result": "PASS_OPERATIONAL_READ_ONLY_NATIVE_BROWSER_ZOOM"
+}

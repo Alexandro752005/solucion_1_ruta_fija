@@ -1,0 +1,26 @@
+{
+  "observedAt": "2026-10-21T07:04:46.214858+00:00",
+  "localDate": "2026-10-21",
+  "lot": "L-07",
+  "status": "EN_CURSO",
+  "authorization": "OK VERDE",
+  "precedingLot": "L-06",
+  "precedingCompletionType": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "L06ManifestSha256": "c572a491ee981deef4a66ce44d0a728bf3642c609f349e1611d358cc8dfe3ee3",
+  "L06SealedFilesVerified": 191,
+  "L06CurrentSourcesVerified": 838,
+  "database": "ruta_fija_test",
+  "role": "rf_test",
+  "schemaVersion": "44",
+  "ledger": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 3,
+    "CONDUCTOR": 5
+  },
+  "acceptances": 2,
+  "databaseWritesOrMigrationsInStart": false,
+  "globalCleanup": false,
+  "persistentNewAccountsAuthorized": false,
+  "pilotEnabled": false,
+  "L08Started": false
+}

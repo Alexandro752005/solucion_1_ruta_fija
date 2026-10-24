@@ -1,0 +1,67 @@
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.local
+backend/.local/
+
+# Java / Maven
+backend/target/
+backend/.m2/
+*.class
+*.jar
+!backend/.mvn/wrapper/maven-wrapper.jar
+*.war
+.mvn/timing.properties
+
+# Node / Angular
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/.npm-cache/
+frontend/coverage/
+
+# Generated cache at the repository root and known manual exports
+/.angular/
+/archivos de texto/codigo_backend.txt
+/archivos de texto/codigo_front.txt
+/archivos de texto/codigo_persistencia_postgresql.txt
+/archivos de texto/código_extra.txt
+/estructura.txt
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test and quality reports
+coverage/
+test-results/
+/reports/
+*.exec
+
+# Runtime data
+.runtime/
+.tools/
+backups/
+logs/
+*.log
+uploads/
+tmp/
+.docker-cli-config/
+
+# IDE and operating system
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/tasks.json
+*.iml
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local certificates and credentials
+*.pem
+*.key
+*.p12
+*.pfx
+backend/.maven-user/

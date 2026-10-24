@@ -1,0 +1,9 @@
+{
+  "caseId": "860c1cdb-b062-469a-9a3f-156ea23bb656",
+  "measurementAndDatasetSourcesCompiledBeforeRun": true,
+  "postflightClassCompiledSeparatelyAfterRun": true,
+  "launcherInspectModeAddedAfterMeasurementBeforePostflight": true,
+  "productionRetirementCodeSameAsDirectedRegressionAndCapacityRuntime": true,
+  "sourceManifestIsCurrentCutNotRewriteOfEarlierRuns": true,
+  "measuredApplicationClassIdentityWithPackagedCandidate": "artifacts/L-08-post-cap25-2026-10-22/manifest.json"
+}

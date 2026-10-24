@@ -54,29 +54,37 @@ describe('AppShellComponent', () => {
     expect(fixture.nativeElement.querySelector('.primary-navigation')).not.toBeNull();
     expect(fixture.nativeElement.querySelector('.sidebar')).toBeNull();
     expect(content).toContain('Usuarios');
+    expect(content).toContain('Invitaciones');
     expect(content).toContain('Organización');
     expect(content).toContain('Reportes');
     expect(content).toContain('Auditoría');
     expect(content).toContain('Admin');
+    expect(content).toContain('CUENTA-admin-1');
+    expect(content).not.toContain('Admin Demo');
+    expect(content).not.toContain('admin@example.test');
     expect(content).not.toContain('Organizaciones');
     const links = Array.from(fixture.nativeElement.querySelectorAll('.primary-navigation a'))
       .map((element) => (element as HTMLElement).textContent?.trim());
     expect(links).toEqual([
       'Resumen',
       'Usuarios',
+      'Invitaciones',
+      'Solicitudes',
       'Organización',
       'Grupos',
       'Conductores',
       'Vehículos',
       'Asignaciones',
+      'Rutas',
       'Incidencias',
       'Comunicados',
+      'Bandeja',
       'Reportes',
       'Auditoría',
     ]);
   });
 
-  it('limita la navegación global a Resumen y Organizaciones', () => {
+  it('limita SUPER_ADMIN a resumen y administración/auditoría de plataforma', () => {
     user.set({
       id: 'super-1',
       fullName: 'Superadministrador Demo',
@@ -88,6 +96,8 @@ describe('AppShellComponent', () => {
 
     const links = Array.from(fixture.nativeElement.querySelectorAll('.primary-navigation a'))
       .map((element) => (element as HTMLElement).textContent?.trim());
-    expect(links).toEqual(['Resumen', 'Organizaciones']);
+    expect(links).toEqual(['Resumen', 'Organizaciones', 'Cuentas ADMIN', 'Auditoría de plataforma']);
+    expect(links).not.toContain('Conductores');
+    expect(links).not.toContain('Reportes');
   });
 });

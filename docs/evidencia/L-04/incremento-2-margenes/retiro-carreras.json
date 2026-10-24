@@ -1,0 +1,27 @@
+{
+  "result": "PASS_EXACT_TECHNICAL_RETIREMENT",
+  "database": "ruta_fija_test",
+  "observedAt": "2026-10-19T21:45:04.097119900Z",
+  "role": "rf_test",
+  "cleanupProtectionLockFree": true,
+  "activeMarkers": false,
+  "cases": [
+    {
+      "immutableRevisionsRetained": 1,
+      "runId": "7617c84d-4c4c-4b6f-9082-85de54eb9345",
+      "remainingAssignments": 0,
+      "typeRetired": true,
+      "technicalRetirementReceipts": 1,
+      "typeId": "3c2188e6-ca5c-4c93-8c74-99e74c09aeea"
+    },
+    {
+      "immutableRevisionsRetained": 1,
+      "runId": "8aa821e6-fbbb-4e2f-8b1a-53ab5ff73c30",
+      "remainingAssignments": 0,
+      "typeRetired": true,
+      "technicalRetirementReceipts": 1,
+      "typeId": "11c09bf7-a59b-41d3-a26d-ac28ed125a25"
+    }
+  ],
+  "readOnly": true
+}

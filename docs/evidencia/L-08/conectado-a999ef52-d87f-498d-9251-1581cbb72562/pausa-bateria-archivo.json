@@ -1,0 +1,53 @@
+{
+  "runId": "a999ef52-d87f-498d-9251-1581cbb72562",
+  "archivedAt": "2026-10-22T20:35:56.076005+00:00",
+  "result": "PARTIAL_PHONE_LOGIN_AVAILABILITY_PAUSED_FOR_CHARGE",
+  "humanReport": "S? apareci? disponibilidad, pero el celular est? por apagarse, tiene 1 porciento, debo desconectarlo.",
+  "humanReportBatteryPercent": 1,
+  "batteryBenchmarkAccredited": false,
+  "sourceEvidence": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/resultado.json",
+  "sourceEvidenceSha256": "8f5c28b7ae2b105a617c6f0883a5a5fe2bb6f62dbef342e2985976d67de377f1",
+  "sourceObservedAt": "2026-10-22T20:29:00.824175900Z",
+  "sourcePhase": "HUMAN_PHONE_INTERACTION",
+  "phoneLoginObserved": true,
+  "phoneAvailabilityObserved": true,
+  "relevantHttpEvents": [
+    {
+      "startedAt": "2026-10-22T20:27:33.296799300Z",
+      "channel": "PHONE_PROXY_REAL_BACKEND",
+      "method": "PUT",
+      "finishedAt": "2026-10-22T20:27:33.366405400Z",
+      "path": "/api/v1/mobile/availability",
+      "status": 200
+    },
+    {
+      "startedAt": "2026-10-22T20:21:27.811219Z",
+      "channel": "PHONE_PROXY_REAL_BACKEND",
+      "method": "POST",
+      "finishedAt": "2026-10-22T20:21:28.141902100Z",
+      "path": "/api/v1/mobile/auth/login",
+      "status": 200
+    }
+  ],
+  "pauseCommandExecutionConfirmed": false,
+  "port4311ListeningAtSeparateCheck": false,
+  "cleanupAdvisoryLockCurrentlyHeld": false,
+  "markerPreserved": true,
+  "TEST_CLEANUP_RELEASED": false,
+  "historicalLedger": {
+    "ADMIN": 3,
+    "CONDUCTOR": 7,
+    "SUPER_ADMIN": 1
+  },
+  "termsAcceptancesPreserved": 2,
+  "locationConsentAtReadOnlyCheck": false,
+  "offerCreated": false,
+  "serviceCreated": false,
+  "gpsAccredited": false,
+  "manualPhoneResult": "PENDING",
+  "databaseWritesByDiagnostic": 0,
+  "resumeExistingCaseOnly": true,
+  "pilotEnabled": false,
+  "diagnosticSourceSha256": "7d1602cb8e61d3ed74ca0a30968ac812f6a388355756da294b6b47244a49fcb5",
+  "diagnosticNote": "First source-launcher attempt failed on package access before database connection; javac into a separate diagnostic directory then completed read-only. No trial classes were rebuilt."
+}

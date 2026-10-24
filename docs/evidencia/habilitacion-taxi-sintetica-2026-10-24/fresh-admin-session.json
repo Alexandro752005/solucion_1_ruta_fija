@@ -1,0 +1,7 @@
+{
+  "authenticated": true,
+  "role": "ADMIN",
+  "organizationMatched": true,
+  "accessTtlSeconds": 900,
+  "tokensPersisted": false
+}

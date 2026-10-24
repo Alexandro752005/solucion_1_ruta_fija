@@ -1,0 +1,15 @@
+{
+  "clientLocalDate": "2026-10-22",
+  "timezone": "America/Lima",
+  "runId": "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+  "userLiteral": "Deja solo una APK OFICIAL FUNCIONAL, LA QUE SEA CORRECTAMENTE EFICAZ",
+  "singleCurrentPrincipalAppAuthorized": true,
+  "principalPackage": "pe.rutafija.conductor",
+  "implementationDecision": "Consolidar el codigo actual validado en el paquete principal, comprobarlo fisicamente y retirar la instalacion de pruebas tras archivar y cerrar el mismo caso.",
+  "supersedesProposedApf1Repair": true,
+  "exactPreviousPrincipalBinaryRestitutionClaimed": false,
+  "preservePreviousApkAndPrivateDataBackup": true,
+  "deleteHistoricalApkEvidence": false,
+  "productionSigningOrPublicDistributionAuthorized": false,
+  "pilotEnabled": false
+}

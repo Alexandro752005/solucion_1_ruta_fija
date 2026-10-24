@@ -1,0 +1,128 @@
+﻿<section class="management-page">
+  <rf-page-header
+    title="Conductores"
+    description="Consulta la disponibilidad, los datos administrativos y los veh&iacute;culos vinculados."
+    [context]="organizationName()"
+  >
+    @if (canManage()) { <a page-actions class="management-button primary" routerLink="/onboarding-requests">Solicitudes de incorporación</a> }
+  </rf-page-header>
+
+  @if (error(); as currentError) { <div class="management-alert error" role="alert"><strong>{{ currentError.message }}</strong>@if (currentError.correlationId) { <span>Referencia: {{ currentError.correlationId }}</span> }</div> }
+  @if (notice(); as currentNotice) { <div class="management-alert success" role="status">{{ currentNotice }}</div> }
+  @if (identityReviewSaving()) { <p role="status">Esperando la confirmación de la revisión de identidad…</p> }
+
+  <section class="management-panel" aria-labelledby="drivers-list-title">
+    <header><div><h2 id="drivers-list-title">Conductores visibles</h2><p>{{ totalItems() }} registros disponibles para tu perfil.</p></div><button class="management-button" type="button" (click)="load()" [disabled]="loading() || identityReviewSaving()">Consultar conductores</button></header>
+    <div class="management-filter">
+      <select #groupFilter [value]="selectedGroupId()" aria-label="Filtrar por grupo"><option value="">Todos los grupos</option>@for (group of groups(); track group.id) { <option [value]="group.id">{{ group.name }}</option> }</select>
+      <select #statusFilter [value]="selectedStatus()" aria-label="Filtrar por disponibilidad"><option value="">Toda disponibilidad</option>@for (status of statuses; track status) { <option [value]="status">{{ statusLabel(status) }}</option> }</select>
+      <button class="management-button" type="button" (click)="applyFilters('' , groupFilter.value, statusFilter.value)">Aplicar</button>
+      <button class="management-button" type="button" (click)="groupFilter.value = ''; statusFilter.value = ''; clearFilters()">Limpiar</button>
+    </div>
+
+    @if (loading()) { <p class="management-empty" role="status">Cargando conductores&hellip;</p> }
+    @else if (drivers().length === 0) { <p class="management-empty">No hay conductores para los filtros actuales.</p> }
+    @else {
+      <div class="management-table-wrap"><table class="management-table">
+        <thead><tr><th>Conductor</th><th>Grupo</th><th>Disponibilidad</th><th>Usuario</th><th>Acciones</th></tr></thead>
+        <tbody>@for (driver of drivers(); track driver.id) {
+          <tr>
+            <td><strong>CONDUCTOR-{{ driver.id }}</strong></td>
+            <td>{{ driver.groupName }}</td>
+            <td><span class="management-status" [class.success]="driver.availabilityStatus === 'DISPONIBLE'" [class.warning]="driver.availabilityStatus === 'RESERVADO' || driver.availabilityStatus === 'DESCANSO'" [class.muted]="driver.availabilityStatus === 'NO_DISPONIBLE'">{{ statusLabel(driver.availabilityStatus) }}</span></td>
+            <td>{{ driver.userId ? 'Asociado' : 'Sin asociar' }}</td>
+            <td><button class="management-button compact" type="button" (click)="viewDetails(driver)">Ver detalle</button>
+              @if (canManage() && driver.userId) {
+                <button class="management-button compact" type="button" (click)="startIdentityReview(driver)" [disabled]="identityReviewSaving() || identityReviewMustRefresh()">Revisar identidad restringida</button>
+              }
+            </td>
+          </tr>
+        }</tbody>
+      </table></div>
+    }
+    <rf-pagination [page]="page()" [totalPages]="totalPages()" [totalItems]="totalItems()" (previous)="previousPage()" (next)="nextPage()" />
+  </section>
+</section>
+
+<rf-modal [open]="identityReviewTarget() !== null" title="Expediente restringido · Comprobación de identidad CONDUCTOR" (closed)="closeIdentityReview()">
+  @if (identityReviewTarget(); as target) {
+    <form class="management-form" [formGroup]="identityReviewForm" (ngSubmit)="submitIdentityReview()">
+      <p>CONDUCTOR-{{ target.driverId }} · CUENTA-{{ target.userId }}</p>
+      <p>Solo ADMIN autorizado de esta organización. Comprueba el documento original sin cargar ni conservar copias. Esta vista no recupera ni rellena documentos guardados.</p>
+      <p>La primera inscripción puede desactivar al conductor y revocar sus sesiones. Comprobar la identidad no aprueba los demás documentos ni habilita la operación, el grupo o la unidad.</p>
+      <label for="driver-identity-document">DNI revisado<input id="driver-identity-document" formControlName="documentNumber" inputmode="numeric" pattern="[0-9]{8}" minlength="8" maxlength="8" autocomplete="off" aria-describedby="driver-identity-privacy" /></label>
+      <p id="driver-identity-privacy">Ocho dígitos. Se envía solo para comprobar la identidad; el registro conserva una huella protegida. Los campos se limpian al enviar o cerrar.</p>
+      <label for="driver-identity-method">Método de comprobación<select id="driver-identity-method" formControlName="method"><option value="IN_PERSON">Revisión presencial</option><option value="PRIOR_SECURE_CONTACT">Contacto previamente establecido</option></select></label>
+      <label for="driver-identity-reference">Referencia sin datos personales<input id="driver-identity-reference" formControlName="reference" maxlength="160" autocomplete="off" /></label>
+      <label><input type="checkbox" formControlName="originalReviewed" /> Revisé el documento original mediante el método indicado, sin conservar una copia.</label>
+      <label><input type="checkbox" formControlName="identityConfirmed" /> Confirmo que el documento corresponde a la persona titular de esta cuenta.</label>
+      <label for="driver-identity-reason">Motivo sin datos personales<textarea id="driver-identity-reason" formControlName="reason" maxlength="500"></textarea></label>
+      @if (identityReviewForm.invalid && identityReviewForm.touched) { <p role="alert">Completa el DNI de ocho dígitos, la referencia, el motivo y ambas confirmaciones expresas.</p> }
+      <div class="management-actions"><button class="management-button" type="button" (click)="closeIdentityReview()">Cancelar</button><button class="management-button primary" type="submit" [disabled]="identityReviewSaving() || identityReviewMustRefresh()">Confirmar revisión</button></div>
+    </form>
+  }
+</rf-modal>
+
+<rf-modal [open]="detailOpen()" [title]="'Conductor ' + (selectedDriver()?.driver?.id || '')" size="large" (closed)="closeDetails()">
+  @if (detailLoading()) { <p class="management-empty" role="status">Cargando detalle&hellip;</p> }
+  @else if (selectedDriver(); as detail) {
+    <dl class="rf-detail-grid">
+      <div><dt>Grupo</dt><dd>{{ detail.driver.groupName }}</dd></div>
+      <div><dt>Disponibilidad</dt><dd>{{ statusLabel(detail.driver.availabilityStatus) }}</dd></div>
+      <div><dt>Estado</dt><dd>{{ detail.driver.active ? 'Activo' : 'Inactivo' }}</dd></div>
+    </dl>
+
+    <section class="management-detail" aria-labelledby="driver-incorporation-title">
+      <h3 id="driver-incorporation-title">Incorporación y condiciones de operación</h3>
+      <p>La aprobación personal, la cuenta, el grupo y la unidad se comprueban por separado. Estar disponible no acredita habilitación.</p>
+      @if (incorporationLoading()) { <p role="status">Consultando el estado registrado…</p> }
+      @else if (incorporationError(); as message) { <p role="alert">{{ message }}</p> }
+      @else if (incorporationStatus(); as state) {
+        <dl class="rf-detail-grid">
+          <div><dt>Aprobación personal</dt><dd>{{ state.personalApproved ? 'Registrada' : 'Sin confirmar' }}</dd></div>
+          <div><dt>Cuenta y ficha</dt><dd>{{ state.accountProvisioned ? 'Vinculadas' : 'Pendientes de revisión' }}</dd></div>
+          <div><dt>Cuenta habilitada</dt><dd>{{ state.accountEnabled ? 'Sí' : 'No' }}</dd></div>
+          <div><dt>Identidad revisada</dt><dd>{{ state.identityReviewed ? 'Sí' : 'No' }}</dd></div>
+          <div><dt>Grupo activo</dt><dd>{{ state.groupActive ? 'Sí' : 'No' }}</dd></div>
+          <div><dt>Documentación personal</dt><dd>{{ personalDocumentsLabel(state.personalDocumentsStatus) }}</dd></div>
+          <div><dt>Unidades vinculadas activas</dt><dd>{{ state.activeVehicleLinks }}</dd></div>
+          <div><dt>Habilitación operativa</dt><dd>{{ state.operationalEnabled ? 'Confirmada por el servidor' : 'Bloqueada' }}</dd></div>
+        </dl>
+        @if (state.blockers.length > 0) {
+          <ul aria-label="Condiciones pendientes">@for (blocker of state.blockers; track blocker) { <li>{{ incorporationBlockerLabel(blocker) }}</li> }</ul>
+        }
+      }
+      <button class="management-button" type="button" (click)="loadIncorporationStatus()" [disabled]="incorporationLoading()">Consultar estado actualizado</button>
+    </section>
+
+    @if (canManage()) {
+      <div class="rf-toolbar">
+<a class="management-button" routerLink="/onboarding-requests">Revisión de incorporación</a>
+        @if (canChangeAvailability(detail.driver)) {
+          <select #availability class="management-button" aria-label="Cambiar disponibilidad" (change)="changeAvailability(detail.driver, availability.value)"><option value="">Cambiar disponibilidad&hellip;</option>@for (status of administrativeStatuses; track status) { <option [value]="status" [disabled]="status === detail.driver.availabilityStatus">{{ statusLabel(status) }}</option> }</select>
+        }
+        <button class="management-button" [class.danger]="detail.driver.active" type="button" (click)="toggleActive(detail.driver)">{{ detail.driver.active ? 'Desactivar' : 'Activar' }}</button>
+      </div>
+    }
+
+    <section class="management-detail" aria-labelledby="driver-vehicles-title">
+      <p>Una sola unidad vinculada vigente por conductor. La vinculación no sustituye la revisión de la unidad ni habilita por sí sola un servicio.</p>
+      <div class="panel-heading"><div><h3 id="driver-vehicles-title">Veh&iacute;culos vinculados</h3><p>La vinculaci&oacute;n y el veh&iacute;culo principal quedan registrados en auditor&iacute;a.</p></div></div>
+      @if (canManage()) { <div class="management-filter"><select [formControl]="vehicleControl" aria-label="Veh&iacute;culo para vincular"><option value="">Selecciona un veh&iacute;culo activo</option>@for (vehicle of linkableVehicles(); track vehicle.id) { <option [value]="vehicle.id">{{ vehicle.plate }} &middot; {{ vehicle.brand || 'Sin marca' }} {{ vehicle.model || '' }}</option> }</select><button class="management-button primary" type="button" (click)="linkVehicle()" [disabled]="linking() || linkableVehicles().length === 0">{{ linking() ? 'Vinculando&hellip;' : 'Vincular' }}</button></div> }
+      @if (detail.vehicles.length === 0) { <p class="management-empty">No hay veh&iacute;culos vinculados.</p> }
+      @else { <ul class="management-detail-list">@for (vehicle of detail.vehicles; track vehicle.vehicleId) { <li><span><strong>{{ vehicle.plate }}{{ vehicle.primary ? ' · Principal' : '' }}</strong><small>{{ vehicle.brand || 'Sin marca' }} {{ vehicle.model || '' }} &middot; {{ vehicleStatusLabel(vehicle.status) }}</small></span>@if (canManage()) { <span class="management-inline-actions">@if (!vehicle.primary) { <button class="management-button compact" type="button" (click)="markPrimary(vehicle.vehicleId)">Definir principal</button> }<button class="management-button compact danger" type="button" (click)="unlinkVehicle(vehicle.vehicleId, vehicle.plate)">Desvincular</button></span> }</li> }</ul> }
+    </section>
+  }
+  <div modal-actions><button class="management-button" type="button" (click)="closeDetails()">Cerrar</button></div>
+</rf-modal>
+
+<rf-confirm-dialog
+  [open]="pendingAction() !== null"
+  [title]="pendingActionTitle()"
+  [message]="pendingActionMessage()"
+  [confirmLabel]="pendingActionLabel()"
+  [danger]="pendingActionDanger()"
+  (confirmed)="confirmPendingAction()"
+  (cancelled)="cancelPendingAction()"
+/>
+

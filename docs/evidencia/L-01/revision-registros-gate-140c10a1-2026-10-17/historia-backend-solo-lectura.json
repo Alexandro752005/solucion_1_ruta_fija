@@ -1,0 +1,284 @@
+{
+  "inspectionAtUtc" : "2026-10-17T08:58:08.476540900Z",
+  "runId" : "140c10a1-be0f-4d08-a6d4-c796e2ed107a",
+  "environment" : {
+    "database" : "ruta_fija_test",
+    "role" : "rf_test",
+    "schema" : "V26",
+    "historicalCreations" : {
+      "SUPER_ADMIN" : 1,
+      "ADMIN" : 2,
+      "CONDUCTOR" : 0
+    },
+    "remainingSlots" : {
+      "ADMIN" : 2,
+      "SUPER_ADMIN" : 0,
+      "CONDUCTOR" : 20
+    },
+    "superAdminAccounts" : 1,
+    "personIdentityBindings" : 2,
+    "personIdentityKeyRecorded" : true,
+    "recoveryCredentialPresent" : false,
+    "eligibleSyntheticPendingAdmins" : 0,
+    "termsAcceptanceCount" : 1,
+    "currentTerms" : {
+      "id" : "f590e228-5d2e-47e4-b144-b0df1198bd49",
+      "version" : "1.0.0",
+      "content_sha256" : "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+      "synthetic" : false
+    },
+    "publishedFileHashMatches" : true,
+    "cleanupLockHeld" : true
+  },
+  "acceptanceAndActivation" : [ {
+    "acceptance_id" : "c496b63c-735f-48cc-be56-90f7ec1464e1",
+    "document_id" : "f590e228-5d2e-47e4-b144-b0df1198bd49",
+    "document_version" : "1.0.0",
+    "content_sha256" : "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+    "accepted_at" : "2026-10-17T08:39:10.296+00:00",
+    "activation_id" : "4a349200-c1bc-4872-9ed0-3d05357440f5",
+    "created_at" : "2026-10-17T08:15:45.168+00:00",
+    "password_set_at" : "2026-10-17T08:36:45.327+00:00",
+    "email_verified_at" : "2026-10-17T08:38:55.179+00:00",
+    "completed_at" : "2026-10-17T08:39:15.743+00:00",
+    "status" : "COMPLETED",
+    "active" : true
+  } ],
+  "caseAuditEvents" : [ {
+    "id" : "790574a1-18f2-4ecf-b480-554e71ec5c8b",
+    "user_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "organization_id" : null,
+    "action" : "LOGIN_SUCCESS",
+    "entity_type" : "APP_USER",
+    "entity_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "occurred_at" : "2026-10-17T07:47:49.306+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "5e18d7ac-06c1-494f-b330-cc427adb0303",
+    "user_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "organization_id" : null,
+    "action" : "TOKEN_REFRESHED",
+    "entity_type" : "APP_USER",
+    "entity_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "occurred_at" : "2026-10-17T08:05:20.363+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "eb6407e3-f25c-4acd-a295-396d2e0b8742",
+    "user_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "organization_id" : null,
+    "action" : "PERSON_IDENTITY_REVIEWED",
+    "entity_type" : "APP_USER",
+    "entity_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "occurred_at" : "2026-10-17T08:06:16.144+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "d33dcf4b-dfea-4418-851d-c446b9c8e086",
+    "user_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "organization_id" : null,
+    "action" : "PERSON_IDENTITY_REVIEWED",
+    "entity_type" : "APP_USER",
+    "entity_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "occurred_at" : "2026-10-17T08:15:45.165+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "023ab42e-0dba-43df-81dc-5021bb02f767",
+    "user_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "organization_id" : null,
+    "action" : "ADMIN_CREATED",
+    "entity_type" : "APP_USER",
+    "entity_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "occurred_at" : "2026-10-17T08:15:45.185+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "5e0c6db8-2062-4255-b750-a486fcdaf853",
+    "user_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "organization_id" : null,
+    "action" : "TOKEN_REFRESHED",
+    "entity_type" : "APP_USER",
+    "entity_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "occurred_at" : "2026-10-17T08:19:09.040+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "fbf9083e-f90f-4560-8d88-737f68b3d328",
+    "user_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "organization_id" : null,
+    "action" : "LOGOUT",
+    "entity_type" : "APP_USER",
+    "entity_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "occurred_at" : "2026-10-17T08:19:54.903+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "c167d190-4d4b-4cf0-a498-8545a55f76d0",
+    "user_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "organization_id" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+    "action" : "LOGIN_FAILED",
+    "entity_type" : "APP_USER",
+    "entity_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "occurred_at" : "2026-10-17T08:20:11.878+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "8687b80a-d24b-49d5-a53b-681643f321cd",
+    "user_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "organization_id" : null,
+    "action" : "LOGIN_SUCCESS",
+    "entity_type" : "APP_USER",
+    "entity_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "occurred_at" : "2026-10-17T08:20:18.183+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "a3fce1ec-7dbd-461a-8cf9-c26c9b5b9d5a",
+    "user_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "organization_id" : null,
+    "action" : "ORGANIZATION_UPDATED",
+    "entity_type" : "ORGANIZATION",
+    "entity_id" : "c6eb2479-700c-470d-a88c-a23db4a5865d",
+    "occurred_at" : "2026-10-17T08:23:06.542+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "733b365b-6bdf-40dc-8dd6-91a974d54132",
+    "user_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "organization_id" : null,
+    "action" : "LOGOUT",
+    "entity_type" : "APP_USER",
+    "entity_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "occurred_at" : "2026-10-17T08:30:17.427+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "ab5526ba-2bb0-439f-9ab1-9b6e45da61ea",
+    "user_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "organization_id" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+    "action" : "LOGIN_FAILED",
+    "entity_type" : "APP_USER",
+    "entity_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "occurred_at" : "2026-10-17T08:34:52.873+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "0fb3630a-c71a-44a3-8adf-7968b82200a7",
+    "user_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "organization_id" : null,
+    "action" : "LOGIN_SUCCESS",
+    "entity_type" : "APP_USER",
+    "entity_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "occurred_at" : "2026-10-17T08:34:57.143+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "ebcf34a6-5a2e-4d58-9c86-25e4238508f4",
+    "user_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "organization_id" : null,
+    "action" : "ADMIN_ACTIVATION_CREDENTIAL_ROTATED",
+    "entity_type" : "APP_USER",
+    "entity_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "occurred_at" : "2026-10-17T08:35:48.370+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "8570d75b-8e5b-4bc8-8a3e-55808dd2024d",
+    "user_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "organization_id" : null,
+    "action" : "LOGOUT",
+    "entity_type" : "APP_USER",
+    "entity_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "occurred_at" : "2026-10-17T08:36:25.899+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "d66e01d6-7d46-4a1f-b411-7233bc9c6364",
+    "user_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "organization_id" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+    "action" : "ADMIN_ACTIVATION_OTP_SENT",
+    "entity_type" : "APP_USER",
+    "entity_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "occurred_at" : "2026-10-17T08:38:03.634+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "7935da65-8a71-4bdc-88c2-23614ca40cbb",
+    "user_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "organization_id" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+    "action" : "ADMIN_ACTIVATION_EMAIL_VERIFIED",
+    "entity_type" : "APP_USER",
+    "entity_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "occurred_at" : "2026-10-17T08:38:55.178+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "9caad3ad-eea8-41ee-b906-6e542c5d1f4b",
+    "user_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "organization_id" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+    "action" : "ADMIN_ACTIVATION_TERMS_ACCEPTED",
+    "entity_type" : "ADMIN_TERMS_DOCUMENT",
+    "entity_id" : "f590e228-5d2e-47e4-b144-b0df1198bd49",
+    "occurred_at" : "2026-10-17T08:39:10.300+00:00",
+    "before_acceptance" : false
+  }, {
+    "id" : "d657eeea-3ae2-44c0-a09f-73096f376415",
+    "user_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "organization_id" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+    "action" : "ADMIN_ACTIVATED",
+    "entity_type" : "APP_USER",
+    "entity_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "occurred_at" : "2026-10-17T08:39:15.748+00:00",
+    "before_acceptance" : false
+  }, {
+    "id" : "e71a7916-4a32-4a9b-91e4-e6a493b0c754",
+    "user_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "organization_id" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+    "action" : "LOGIN_SUCCESS",
+    "entity_type" : "APP_USER",
+    "entity_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "occurred_at" : "2026-10-17T08:39:54.982+00:00",
+    "before_acceptance" : false
+  }, {
+    "id" : "6ac9bc64-6a00-4b42-82c7-32b47da39539",
+    "user_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "organization_id" : "1a759298-7831-4aaf-9299-c3920a9cc28a",
+    "action" : "LOGOUT",
+    "entity_type" : "APP_USER",
+    "entity_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "occurred_at" : "2026-10-17T08:54:18.788+00:00",
+    "before_acceptance" : false
+  } ],
+  "caseActivationEvents" : [ {
+    "id" : "b96af54e-f796-4fe3-a240-99888cf04a3f",
+    "action" : "ADMIN_CREATED",
+    "actor_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "occurred_at" : "2026-10-17T08:15:45.168+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "8b4cd20a-730f-4686-b1a8-d33654f6e30f",
+    "action" : "ACTIVATION_CREDENTIAL_ROTATED",
+    "actor_id" : "088518c1-821c-4316-9f87-090f51ac44e0",
+    "occurred_at" : "2026-10-17T08:35:48.354+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "f6424e73-40d5-409e-9ae4-f82f1bf423cc",
+    "action" : "ACTIVATION_CREDENTIAL_CLAIMED",
+    "actor_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "occurred_at" : "2026-10-17T08:36:45.327+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "eacc0a45-2798-4a92-982b-f0312b37970d",
+    "action" : "EMAIL_VERIFIED",
+    "actor_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "occurred_at" : "2026-10-17T08:38:55.182+00:00",
+    "before_acceptance" : true
+  }, {
+    "id" : "6d022288-8325-4cc9-8ff3-63bede31596d",
+    "action" : "TERMS_ACCEPTED",
+    "actor_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "occurred_at" : "2026-10-17T08:39:10.301+00:00",
+    "before_acceptance" : false
+  }, {
+    "id" : "251bd2d6-559f-4f8f-a804-72971a75fc1d",
+    "action" : "ACTIVATION_COMPLETED",
+    "actor_id" : "92ebc07c-1319-4850-a734-f792cb299979",
+    "occurred_at" : "2026-10-17T08:39:15.743+00:00",
+    "before_acceptance" : false
+  } ],
+  "possibleEvidenceTableNames" : [ "admin_activation_event", "audit_event", "conductor_onboarding_access_token", "conductor_onboarding_request", "conductor_onboarding_review_event", "conductor_recovery_request" ],
+  "existingManualAdminResult" : "PENDING",
+  "preAcceptanceGateRecorded" : false,
+  "activatedAdminLoginObserved" : true,
+  "readOnly" : true,
+  "databaseWrites" : 0,
+  "httpRequests" : 0,
+  "smtpAttempts" : 0,
+  "additionalAccountsCreated" : 0,
+  "acceptanceReset" : false
+}

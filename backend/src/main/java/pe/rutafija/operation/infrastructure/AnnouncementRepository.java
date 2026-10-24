@@ -29,17 +29,12 @@ public interface AnnouncementRepository extends JpaRepository<Announcement, UUID
     @Query("""
             select announcement from Announcement announcement
              where announcement.organization.id = :organizationId
-               and (
-                    announcement.audienceType = pe.rutafija.operation.domain.AnnouncementAudienceType.ORGANIZATION
-                    or (
-                        announcement.audienceType = pe.rutafija.operation.domain.AnnouncementAudienceType.GROUP
-                        and announcement.audienceId = :groupId
-                    )
-               )
+               and exists(select r from AnnouncementRecipient r where r.announcementId=announcement.id
+                 and r.userId=:userId and r.organizationId=:organizationId and r.withdrawnAt is null)
             """)
     Page<Announcement> findVisibleToDriver(
             @Param("organizationId") UUID organizationId,
-            @Param("groupId") UUID groupId,
+            @Param("userId") UUID userId,
             Pageable pageable
     );
 
@@ -48,18 +43,15 @@ public interface AnnouncementRepository extends JpaRepository<Announcement, UUID
             select announcement from Announcement announcement
              where announcement.id = :announcementId
                and announcement.organization.id = :organizationId
-               and (
-                    announcement.audienceType = pe.rutafija.operation.domain.AnnouncementAudienceType.ORGANIZATION
-                    or (
-                        announcement.audienceType = pe.rutafija.operation.domain.AnnouncementAudienceType.GROUP
-                        and announcement.audienceId = :groupId
-                    )
-               )
+               and exists(select r from AnnouncementRecipient r where r.announcementId=announcement.id
+                 and r.userId=:userId and r.organizationId=:organizationId and r.withdrawnAt is null)
             """)
     java.util.Optional<Announcement> findVisibleById(
             @Param("announcementId") UUID announcementId,
             @Param("organizationId") UUID organizationId,
-            @Param("groupId") UUID groupId
+            @Param("userId") UUID userId
     );
 
+    java.util.Optional<Announcement> findByIdAndOrganization_Id(UUID id,UUID organizationId);
+    java.util.Optional<Announcement> findByOrganization_IdAndOperationKey(UUID organizationId,UUID operationKey);
 }

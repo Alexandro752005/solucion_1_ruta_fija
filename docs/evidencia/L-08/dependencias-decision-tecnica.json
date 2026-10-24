@@ -1,0 +1,50 @@
+{
+  "id": "SEC-L08-04",
+  "status": "EN_CURSO_DECISION_TECNICA_A_COORD",
+  "scope": "Targeted local dependency maintenance for L08 security acceptance, no new features/SSR/dependencies",
+  "before": [
+    {
+      "path": "frontend/package.json",
+      "sha256": "b2a99db739e82810e248cc4900b633a0b197b39374804e3db56c4b656f4f9069"
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "sha256": "ef8acd0b962310f52982cd9cc03b1084e2d842339ce98a4e1e5027cd5c82dc94"
+    }
+  ],
+  "reportedBy": "npm audit registry response,2026-10-21",
+  "reportedAffectedPackages": 14,
+  "reportedSeverity": {
+    "critical": 3,
+    "high": 6,
+    "moderate": 5
+  },
+  "targetDirect": {
+    "angular": "22.2.3",
+    "vitest": "4.1.12"
+  },
+  "compatibilityChecked": "npm view metadata:Node24.16 andTypeScript6.0.3 satisfy target peer/engine ranges",
+  "noForcedOverrides": false,
+  "noAuditFix": true,
+  "noGit": true,
+  "noPublication": true,
+  "rollback": "Restore both backed-up package files and materialize their locked dependencies locally; no database rollback required.",
+  "validationPending": [
+    "lock review",
+    "install",
+    "npm audit",
+    "typecheck",
+    "CRM regression",
+    "production build",
+    "browser inspection"
+  ],
+  "targetedPatchOverride": {
+    "parent": "@angular/build@22.2.3",
+    "dependency": "vite",
+    "vendorPinned": "8.3.0",
+    "selectedPatch": "8.3.5",
+    "reason": "Remaining registry advisories affect8.3.0?8.3.2;latest stable Angular build still pins8.3.0. Same Vite minor patch, isolated override; validate full CRM tests/build before credit.",
+    "engineCompatibility": "Node24.16 satisfies^20.19||>=22.12"
+  },
+  "noForceOrLegacyPeerFlags": true
+}

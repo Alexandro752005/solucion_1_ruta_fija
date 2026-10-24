@@ -1,0 +1,11 @@
+{
+  "reportPath": "docs/evidencia/L-01/CI07-manual-PASS-2026-10-17.md",
+  "reportSha256": "0AD6F47437607647004B5F3F9201002739BAFC7922271A0FE3CFF31FC1A80E3C",
+  "registryVersion": "0.8.28",
+  "registrySha256AtCut": "9ECC795164DEFFCB3A7BA712101874114B51F63274FAEC4E006FF1D535BD9F72",
+  "boardSha256AtCut": "182B5E8CA6C7742D931815EE96DDD67B15BC8437B5CA026DD691425BCDC47D90",
+  "humanArchivePreserved": true,
+  "bothHumanTrialsVerified": false,
+  "cleanupReleased": false,
+  "L02Started": false
+}

@@ -1,0 +1,107 @@
+﻿[
+    {
+        "ProcessName":  "adb",
+        "Id":  3260,
+        "Path":  "D:\\Android\\Sdk\\platform-tools\\adb.exe"
+    },
+    {
+        "ProcessName":  "dart",
+        "Id":  7468,
+        "Path":  "D:\\dev\\flutter\\bin\\cache\\dart-sdk\\bin\\dart.exe"
+    },
+    {
+        "ProcessName":  "dart",
+        "Id":  10632,
+        "Path":  "D:\\dev\\flutter\\bin\\cache\\dart-sdk\\bin\\dart.exe"
+    },
+    {
+        "ProcessName":  "dart",
+        "Id":  11476,
+        "Path":  "D:\\dev\\flutter\\bin\\cache\\dart-sdk\\bin\\dart.exe"
+    },
+    {
+        "ProcessName":  "dart",
+        "Id":  16616,
+        "Path":  "D:\\dev\\flutter\\bin\\cache\\dart-sdk\\bin\\dart.exe"
+    },
+    {
+        "ProcessName":  "dart",
+        "Id":  16728,
+        "Path":  "D:\\dev\\flutter\\bin\\cache\\dart-sdk\\bin\\dart.exe"
+    },
+    {
+        "ProcessName":  "dartaotruntime",
+        "Id":  7304,
+        "Path":  "D:\\dev\\flutter\\bin\\cache\\dart-sdk\\bin\\dartaotruntime.exe"
+    },
+    {
+        "ProcessName":  "dartvm",
+        "Id":  7520,
+        "Path":  "D:\\dev\\flutter\\bin\\cache\\dart-sdk\\bin\\dartvm.exe"
+    },
+    {
+        "ProcessName":  "dartvm",
+        "Id":  17860,
+        "Path":  "D:\\dev\\flutter\\bin\\cache\\dart-sdk\\bin\\dartvm.exe"
+    },
+    {
+        "ProcessName":  "java",
+        "Id":  18232,
+        "Path":  "c:\\Users\\Ale\\.vscode\\extensions\\redhat.java-1.59.2026102108-win32-x64\\jre\\25.0.4.1-win32-x86_64\\bin\\java.exe"
+    },
+    {
+        "ProcessName":  "node",
+        "Id":  2492,
+        "Path":  "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+        "ProcessName":  "node",
+        "Id":  10752,
+        "Path":  "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+        "ProcessName":  "node",
+        "Id":  14660,
+        "Path":  "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+        "ProcessName":  "node",
+        "Id":  17056,
+        "Path":  "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+        "ProcessName":  "postgres",
+        "Id":  944,
+        "Path":  null
+    },
+    {
+        "ProcessName":  "postgres",
+        "Id":  3888,
+        "Path":  null
+    },
+    {
+        "ProcessName":  "postgres",
+        "Id":  6664,
+        "Path":  null
+    },
+    {
+        "ProcessName":  "postgres",
+        "Id":  7112,
+        "Path":  null
+    },
+    {
+        "ProcessName":  "postgres",
+        "Id":  8688,
+        "Path":  null
+    },
+    {
+        "ProcessName":  "postgres",
+        "Id":  11432,
+        "Path":  null
+    },
+    {
+        "ProcessName":  "postgres",
+        "Id":  11776,
+        "Path":  null
+    }
+]

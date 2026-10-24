@@ -1,3 +1,125 @@
+# Estado vigente de uso local — 24/10/2026
+
+Esta actualización prevalece sobre los cortes históricos conservados debajo. La base normal `solucion_ruta_fija_1` tiene **V1 a V51**, 51 migraciones versionadas aprobadas y ninguna repetible de pruebas. La base histórica protegida `ruta_fija_test` conserva **V1 a V50 más su repetible específica**. El launcher comprueba cada esquema y no ejecuta migraciones ni semillas.
+
+1. Desde la raíz del proyecto, ejecutar `iniciar_ruta_fija.bat` en una consola normal. El CRM usa `http://127.0.0.1:4300` y la salud de la API `http://127.0.0.1:8080/actuator/health`. El puente móvil privado se inicia únicamente si su configuración local está habilitada y es válida para el teléfono autorizado.
+2. Usar las cuentas y contraseñas del archivo privado `backend/.local/accesos/CREDENCIALES_ACTIVAS.md`. La verificación por correo se realiza personalmente mediante el OTP recibido; las credenciales y los códigos no se incorporan al repositorio.
+3. El ADMIN debe aceptar personalmente los términos publicados. Una cuenta CONDUCTOR heredada requiere revisión de identidad coincidente, expediente aprobado, vinculación a su cuenta existente y habilitación vigente. La rectificación de un DNI introducido por error conserva su historial; no crea otra cuenta ni sustituye la aprobación personal.
+4. El escenario Taxi sintético quedó incorporado y habilitado para la prueba local; su evidencia no acredita documentación ni permisos para conducir en un piloto real. Los periodos son temporales: comprobar su vigencia en el servidor antes de operar. Activar al conductor no lo vuelve automáticamente disponible ni inicia un servicio.
+5. El POCO tiene la APK local de depuración **versionCode 5**, actualizada conservando sesión y datos. Incidencias y Comunicados mantienen los seis botones inferiores para las sesiones operativas. Las cuentas con alcance limitado conservan sus consultas propias y los destinos operativos siguen sujetos a habilitación.
+6. Al terminar la prueba, ejecutar `finalizar_ruta_fija.bat`: cierra los procesos propios y el puente identificado, preservando PostgreSQL si era un servicio compartido previamente activo.
+
+Referencias: [regularización de cuenta existente](operacion/regularizacion-conductor-heredado.md), [rectificación de identidad](operacion/rectificar-dni-revision-conductor.md), [cierre del escenario Taxi sintético](operacion/cierre-habilitacion-taxi-sintetica-2026-10-24.md) y [corrección de navegación Android](operacion/correccion-navegacion-inferior-mobile-2026-10-24.md). Continúa la frontera **GO para candidato local / NO_GO para piloto real** definida por el protocolo de transición.
+
+---
+
+# Actualización operativa: correos OTP y móvil integrado — 23/10/2026
+
+El runtime normal mantiene desarrollo en V50 y ahora integra el puente privado del teléfono en `iniciar_ruta_fija.bat`. Ya no requiere ejecutar el auxiliar Python por separado. Se activa únicamente con `backend/.local/ruta-fija-mobile-bridge.json` habilitado, en red privada y para un único teléfono. `finalizar_ruta_fija.bat` comprueba también su cierre. El modo smoke no inicia el puente.
+
+Las tres cuentas conservan sus contraseñas y ahora utilizan los Gmail indicados por el propietario. Los usuarios y contraseñas vigentes están en el archivo privado `backend/.local/accesos/CREDENCIALES_ACTIVAS.md`. La conexión SMTP con TLS se comprobó, pero cada titular debe solicitar e introducir su OTP en la interfaz. Para el conductor heredado sigue pendiente conciliar su expediente de incorporación aprobado antes del login.
+
+Usar una consola normal para iniciar y finalizar. [Procedimiento completo de correo y puente móvil](operacion/correo-otp-y-puente-movil-local.md). Las indicaciones siguientes sobre el auxiliar temporal describen cortes anteriores; prevalece esta actualización.
+
+---
+
+# Actualización operativa — migración nativa aprobada el 23/10/2026
+
+La base **`solucion_ruta_fija_1` ya está en V50**: 38 migraciones nuevas, 50 versionadas en total, sin fallos ni repetibles de pruebas. Se generó un respaldo de 81 446 bytes, se restauró y ensayó en una base aislada y se conservaron los datos originales. La compuerta se mantiene intacta y el inicio normal ya aprobó. El texto V12 conservado debajo describe el corte anterior.
+
+```powershell
+.\iniciar_ruta_fija.bat
+.\scripts\Invoke-RutaFijaNativeRuntime.ps1 -Action Test
+# Después de la prueba manual:
+.\finalizar_ruta_fija.bat
+```
+
+- CRM: **http://127.0.0.1:4300**, formulario comprobado en un navegador real.
+- API: **http://127.0.0.1:8080/actuator/health**, `UP`.
+- El modo normal permite la operación de desarrollo y conserva los trabajos de mantenimiento. El modo smoke de solo lectura continúa siendo una opción separada; no hace falta para el inicio normal.
+- El POCO v4 usa `http://192.168.18.4:4311/api/v1`. Para esta sesión se dejó un puente privado a8080, exclusivo para `192.168.18.9`; se apaga al finalizar el backend. Si se reinicia la sesión con las mismas IP y4311 libre: `python .runtime/migracion-nativa-v50-20261023_1714/start_mobile_bridge.py`. El BAT normal no inicia ese puente temporal automáticamente.
+- Se verificó conectividad móvil por USB y LAN. No se ingresaron credenciales ni se certifica un flujo autenticado completo. Utilizar cuentas de desarrollo, sin trasladar la fixture FIS02.
+- El cierre conserva PostgreSQL porque ya estaba activo antes de iniciar el proyecto. El launcher sigue sin ejecutar migraciones ni semillas al abrirse.
+
+[Informe, comandos, respaldo y límites de esta operación](operacion/migracion-local-v12-v50-2026-10-23.md). Las instrucciones siguientes quedan como antecedente de sus respectivos cortes; prevalece esta actualización para el estado de la base.
+
+---
+
+# Uso vigente de los ejecutables — corte 2026-10-23
+
+Esta sección reemplaza las instrucciones de arranque, cierre y pruebas del manual histórico conservado al final. Corresponde a Ruta Fija V3.1 en este workspace; no cambia el acta firmada ni los archivos de L-00 a L-08. La aplicación confirma acciones con el servidor y no incorpora una cola offline.
+
+## Comandos y alcance
+
+Desde la raíz del proyecto, en Windows PowerShell:
+
+| Entrada | Acción vigente | Límite comprobado |
+|---|---|---|
+| `iniciar_ruta_fija.bat` | Configuración privada, PostgreSQL con lease, gate SELECT V50 y arranque controlado API/CRM | Actualmente la base normal `solucion_ruta_fija_1` está en V12: rechaza el inicio antes de Java/Angular; no migra automáticamente |
+| `iniciar_ruta_fija.bat --smoke-read-only --test-database` | Smoke explícito sobre `ruta_fija_test` con credenciales de prueba, conexiones de solo lectura y tareas de mantenimiento desactivadas solo durante esa sesión | Comprueba salud/UI e inicio/cierre; no habilita operaciones que escriben. No autenticar ni confirmar servicios durante este smoke |
+| `finalizar_ruta_fija.bat` | Cierra procesos registrados de API/CRM; si existe demo, retira primero su túnel | Conserva PostgreSQL cuando ya estaba activo, hay otros clientes, falta lease o no puede demostrar observabilidad completa |
+| `verificar_ruta_fija.bat` | Runner unitario backend con allowlist inspeccionada y salidas aisladas | No usa PostgreSQL, no ejecuta integración ni limpieza; 50 clases/257 pruebas aprobadas en la auditoría del runner |
+| `iniciar_demo_temporal.bat` | Demo pública temporal CRM/API mediante herramienta ya disponible | No se ejecutó demo pública en esta auditoría. La base normal V12 impide un arranque del backend V50; no autoriza exposición de datos |
+| `finalizar_demo_temporal.bat` | Retira túnel identificado y runtime propio; aplica lease PostgreSQL | No detiene procesos ajenos por nombre ni un servicio PostgreSQL compartido sin comprobaciones |
+
+Los BAT de demo tenían bytes de control y separadores de ruta rotos; quedaron corregidos. Los cinco BAT usan la ruta absoluta de Windows PowerShell y rutas de scripts basadas en su propia carpeta. Conservan un código distinto de cero al fallar; `verificar_ruta_fija.bat` propaga el código del runner.
+
+## Estado real de las bases y gate de arranque
+
+La inspección SELECT con `default_transaction_read_only=on` confirmó:
+
+| Base | Estado observado | Uso permitido en este corte |
+|---|---|---|
+| `solucion_ruta_fija_1` | 12 migraciones versionadas V1 a V12, sin fallos | Destino normal conservado. Se bloquea el backend V50 hasta una migración planificada y autorizada fuera de esta auditoría |
+| `ruta_fija_test` | 50 migraciones versionadas V1 a V50 + 1 migración repetible, 51 éxitos totales, sin fallos | Fixture histórica protegida. Solo smoke explícito con todas las conexiones de aplicación en modo lectura; no limpiar ni migrar |
+
+El número 51 incluye la migración repetible: **no existe V0 en el historial consultado**. Esta es una aclaración factual nueva; el documento firmado anterior se preserva byte por byte.
+
+`Start` valida el historial completo V1 a V50 antes de lanzar la API. La política compartida con la demo exige **50 éxitos y ninguna repetible en la base normal**, o **51 éxitos en la base de pruebas**, incluyendo exclusivamente `R__native_test_role_privileges.sql`. Esa repetible vive en `db/test-migration`, solo se carga con el perfil de pruebas y rechaza cualquier base distinta de `ruta_fija_test`; no se aplica a desarrollo. Se corrigió la antigua exigencia indiscriminada de 51 entradas mediante doce casos sintéticos y regresión de los lanzadores. Desactiva Flyway para el runtime normal: las migraciones corresponden a herramientas expresas, nunca a abrir un BAT. Mantiene las semillas desactivadas. El modo normal conserva las tareas de mantenimiento del producto. El modo smoke desactiva únicamente en su proceso las tareas móvil y de cualificación y configura JDBC/Hikari en lectura. El archivo privado no se modifica para seleccionar el modo smoke; `--test-database` se rechaza si falta `--smoke-read-only`.
+
+API y Angular usan procesos separados. Con un inicio aprobado, CRM escucha en `http://127.0.0.1:4300`, API en `http://127.0.0.1:8080/api/v1` y salud en `http://127.0.0.1:8080/actuator/health`. Angular reenvía `/api` y `/ws` al backend8080 mediante `frontend/proxy.conf.json`; sus configuraciones development/production referencian ese proxy. Abrir la raíz Angular no demuestra por sí solo operación autenticada.
+
+## Seguridad de cierre y PostgreSQL
+
+El estado de runtime v2 conserva PID, ruta completa de ejecutable, instante de creación UTC, puerto esperado y marcador de comando absoluto. El cierre exige esa identidad; un estado antiguo/no verificable o un PID reutilizado se rechaza. No terminar procesos Java/Node manualmente por nombre.
+
+PostgreSQL es un servicio compartido de Windows. El launcher adquiere lease solamente cuando encontró el servicio detenido y lo inició. Si ya estaba ejecutándose, no adquiere propiedad. Para detener automáticamente exige la misma instancia del servicio y una inspección SELECT de todas las sesiones ajenas. Una sesión con `backend_type` oculto/NULL se cuenta por sus columnas de identidad visibles; observabilidad incompleta conserva el servicio. La inspección es puntual y no una reserva exclusiva del servidor.
+
+La parada global existe como opción separada, nunca invocada por los BAT:
+
+```powershell
+./scripts/Invoke-RutaFijaPostgresqlLease.ps1 -Action StopGlobal -Execute -AuthorizeGlobalServiceStop
+```
+
+Solo corresponde al operador que autoriza interrumpir todo el servicio y sus clientes. Cerrar el proyecto normalmente utiliza `StopOwned` y puede dejar PostgreSQL activo; no se presenta ese estado como un cierre de todos los servicios del equipo.
+
+## Secretos y comprobaciones sin arranque
+
+Los archivos `backend/.local/ruta-fija-native.env` y `ruta-fija-bootstrap.env` permanecen en su ruta privada. Se corrigieron sus ACL: solo el usuario actual y SYSTEM tienen acceso; el respaldo contiene únicamente sus descriptores ACL, jamás el contenido. El preflight comprueba exclusión local declarada y permisos antes de importar variables, sin invocar Git ni inspeccionar su índice.
+
+```powershell
+./scripts/Invoke-RutaFijaNativeRuntime.ps1
+./scripts/Invoke-RutaFijaNativeTest.ps1
+./scripts/Invoke-RutaFijaPostgresqlLease.ps1
+./scripts/Test-RutaFijaBackendUnitSafe.ps1
+./scripts/Test-RutaFijaLauncherSafety.ps1
+```
+
+Las fuentes vigentes de esas cinco entradas definen Plan como modo por defecto: no arrancan procesos de aplicación, abren conexiones ni compilan. El modo Test del runtime requiere `-Action Test` explícito. Para revisar un runtime ya abierto: `Invoke-RutaFijaNativeRuntime.ps1 -Action Test`; consulta identidad de procesos y endpoints. `Invoke-RutaFijaNativeTest.ps1 -Action Preflight` realiza únicamente SELECT en la base de prueba; no equivale a ejecutar pruebas.
+
+`Invoke-RutaFijaNativeTest.ps1 -Action Clean` está bloqueado antes de importar secretos o conectar. La versión histórica ejecutaba TRUNCATE masivo al finalizar Verify y exigía V14: esa entrada fue sustituida, no debe recuperarse ni ejecutarse contra la fixture protegida. Tampoco ejecutar `mvnw.cmd test` o `verify` sin delimitar las clases: existen integraciones capaces de acceder a PostgreSQL.
+
+## Evidencia y diagnóstico
+
+La actualización para el commit de entrega está descrita en [Runtime y evaluación de la Solución 1](runtime-y-evaluacion-solucion-1-v3.1.md), con la versión real de Angular, el alcance de la telemetría, la separación entre 50 migraciones de runtime y una repetible de pruebas, y los requisitos pendientes del piloto. El respaldo exacto de la versión previa de este manual y de los dos launchers modificados se conserva en `docs/entrega/2026-10-23-commit-v3.1/`; los manifiestos de los cortes anteriores permanecen históricos.
+
+[Auditoría de launchers](evidencia/auditoria-ide-2026-10-23/launchers/README.md): respaldo exacto de los 16 archivos originales, hashes, ACL, esquemas, parsers de todos los scripts y mocks de propiedad. El arranque normal rechazado en V12 y los negativos de Clean/smoke tienen evidencia ejecutada. Los resultados de smoke real se incorporan en la auditoría raíz cuando se ejecuten; esta guía no los da por aprobados por anticipado.
+
+Si falla el inicio, conservar `.runtime/backend.stderr.log` y `.runtime/frontend.stderr.log` y el estado registrado. La falta de esquema V50, permisos privados, JDK21, dependencias Angular o identidad verificable se resuelve por su causa; no ejecutar migraciones, borrar estados ni matar procesos para ocultar el error. QuickDemo exige cloudflared ya disponible y rechaza su ausencia sin instalación ni descarga automática. Antes de abrir cualquier túnel comprueba los puertos locales y el esquema; la base V12 bloquea esa vía. La instalación revisada de una herramienta y cualquier exposición pública requieren una decisión independiente; no se ejecutaron en esta auditoría.
+
+<details>
+<summary>Manual anterior conservado como antecedente; sus comandos de bootstrap, migración, Git, limpieza y offline no son instrucciones vigentes de este corte.</summary>
+
 # Uso del Sistema
 
 Guía de instalación y operación del CRM Web Administrativo y Reportes de
@@ -11,10 +133,15 @@ vehículos, asignaciones, incidencias, comunicados, reportes y auditoría.
 
 La solución vigente incluye API móvil real y Flutter Android del conductor:
 tema, navegación, sesión JSON separada, refresh protegido, perfil propio y
-disponibilidad real, además de asignaciones propias idempotentes (M1–M4,
-46/80). Aún no incluye GPS de fondo, mapas, notificaciones push, correo, fotos
-ni una cola offline automática. El CRM nunca simula una respuesta del
-conductor.
+disponibilidad real, asignaciones propias idempotentes, incidencias propias,
+comunicados con lectura explícita y ubicación puntual voluntaria en primer
+plano. M1–M8 están aprobados con 71/80: M8 conserva de forma visible y FIFO un
+máximo de 10 cambios de disponibilidad, inicio o cierre ante una falla temporal
+de red. M9 aprobó su auditoría automática con 80/80 para pruebas críticas,
+accesibilidad básica, APK debug y evidencia reproducible; queda pendiente la
+validación física. No incluye GPS de fondo, mapas,
+notificaciones push, correo, fotos ni sincronización en segundo plano. El CRM
+nunca simula una respuesta del conductor.
 
 ## 2. Requisitos
 
@@ -72,7 +199,7 @@ Estos pasos se ejecutan una sola vez sobre una base de desarrollo vacía.
    .\scripts\Initialize-RutaFijaPostgresqlRoles.ps1
    ~~~
 
-3. Para una base nueva, aplique el bootstrap actual V1-V10, otorgue el DML
+3. Para una base nueva, aplique el bootstrap actual V1-V12, otorgue el DML
    mínimo de aplicación y compruebe estructura, auditoría, constraints, UTC,
    privacidad e idempotencia móvil.
 
@@ -101,11 +228,16 @@ Ejecute:
 .\iniciar_ruta_fija.bat
 ~~~
 
+Acepte la solicitud de administrador de Windows: se usa solamente para iniciar
+PostgreSQL 16 y configurarlo con inicio manual. El backend y el CRM se ejecutan
+con el usuario normal y con límites de memoria. El JAR se recompila solo cuando
+las fuentes del backend son más recientes que el artefacto existente.
+
 Cuando termine correctamente, abra:
 
 | Recurso | Dirección |
 | --- | --- |
-| CRM | http://localhost:4200 |
+| CRM | http://127.0.0.1:4300 |
 | API | http://127.0.0.1:8080/api/v1 |
 | Estado de API | http://127.0.0.1:8080/actuator/health |
 | Contrato OpenAPI | http://127.0.0.1:8080/v3/api-docs |
@@ -116,9 +248,24 @@ Para detener solamente procesos administrados por Ruta Fija:
 .\finalizar_ruta_fija.bat
 ~~~
 
-PostgreSQL se conserva como servicio local y la base de datos no se elimina.
+El cierre detiene backend, CRM y PostgreSQL 16; puede solicitar nuevamente la
+autorización de Windows. La base de datos y sus datos no se eliminan.
 El inicio normal mantiene las semillas desactivadas, por lo que no se publican
 usuarios ni contraseñas de demostración.
+
+### Actualización para una instalación existente
+
+Si la base ya se encuentra exactamente en Flyway V1–V10, detenga API y CRM,
+aplique primero V11 y después V12. Si ya se encuentra en V1–V11, aplique solo
+V12. Ambos procesos generan un backup comprobable:
+
+~~~powershell
+.\scripts\Invoke-RutaFijaF44DriverIncidentClosureMigration.ps1
+.\scripts\Invoke-RutaFijaM8V12Migration.ps1
+~~~
+
+Después consulte [Ajuste F4.4.1: cierre de incidencias por conductor](ajuste-f4-4-cierre-incidencias-conductor.md)
+y [Ejecución M8: offline mínimo, limitado y visible](ejecucion-m8-offline-minimo.md).
 
 ## 6. Acceso y navegación
 
@@ -203,7 +350,7 @@ Auditoría específica de las operaciones móviles:
 
 Su resultado esperado empieza con `F3_3_MOBILE_OPERATIONS_AUDIT=PASS`.
 Verifica canal móvil separado, conductor activo y vinculado, rutas propias,
-V1-V10, recibos idempotentes, ubicación vigente sin historial, ausencia de
+V1-V12, recibos idempotentes, ubicación vigente sin historial, ausencia de
 coordenadas en auditoría y privilegios DML sin DDL.
 
 Auditoría de contrato y reportes reales F3.4:
@@ -259,6 +406,93 @@ usa las rutas propias del conductor, respeta `X-Idempotent-Replay` y no habilita
 aceptación ficticia desde el CRM. La salida esperada empieza con
 `F4_3_MOBILE_ASSIGNMENTS=PASS` y declara `total=46/80`.
 
+Auditoría de incidencias y comunicados móviles F4.4:
+
+~~~powershell
+.\scripts\Test-RutaFijaF44MobileIncidentsAnnouncements.ps1
+~~~
+
+Primero conserva las comprobaciones nativas de F4.3/F3.4. Después verifica que
+la incidencia nace solo para el conductor de sesión, que no se envían tenant ni
+identidades en el body, que un resultado de red no origina una cola automática,
+y que un comunicado solo se marca leído mediante confirmación humana e
+idempotente. También ejecuta análisis, pruebas Flutter, APK debug y firma v2.
+La salida esperada empieza con
+`F4_4_MOBILE_INCIDENTS_ANNOUNCEMENTS=PASS` y declara `total=58/80`.
+
+Auditoría de ubicación puntual M7:
+
+~~~powershell
+.\scripts\Test-RutaFijaM7ForegroundLocation.ps1
+~~~
+
+Su resultado esperado empieza con `M7_FOREGROUND_LOCATION_AUDIT=PASS` y
+declara `total=66/80`. Comprueba el consentimiento, una captura voluntaria en
+primer plano, un único punto vigente y la ausencia de seguimiento continuo.
+
+Auditoría de sincronización offline mínima M8:
+
+~~~powershell
+.\scripts\Test-RutaFijaM8OfflineMinimum.ps1
+~~~
+
+El resultado técnico esperado es
+`M8_OFFLINE_MINIMUM_AUDIT=PASS m8=5/80 total=71/80`. Encadena las regresiones
+M1–M7, comprueba Flyway V1–V12, recibos durables, FIFO, límite de 10,
+idempotencia, privacidad y ausencia de ejecución fuera del primer plano. M8 ya
+fue aprobado tras la prueba física documentada en
+[Ejecución M8](ejecucion-m8-offline-minimo.md).
+
+Auditoría final de calidad, APK y evidencia M9:
+
+~~~powershell
+.\scripts\Test-RutaFijaM9QualityEvidence.ps1
+~~~
+
+La salida técnica esperada empieza con
+`M9_QUALITY_EVIDENCE_AUDIT=PASS m9=9/80 total=80/80`. Conserva las regresiones
+M1–M8, comprueba etiquetas y regiones vivas de accesibilidad, análisis y
+pruebas Flutter, APK debug, firma v2, hash SHA-256 y procedencia Git. M9 fue
+aprobado con `VERDE` después de la ejecución en un dispositivo Android real;
+la lista de [Ejecución M9](ejecucion-m9-calidad-evidencia.md) se conserva para
+futuras regresiones físicas.
+
+Regresión integral web–móvil–base de datos F5.1:
+
+~~~powershell
+.\scripts\Test-RutaFijaF51IntegralRegression.ps1
+~~~
+
+La salida aprobada empieza con `F5_1_INTEGRAL_REGRESSION=PASS`. La auditoría
+comprueba en secuencia PostgreSQL/Flyway, backend, Angular y Flutter, junto con
+el flujo ADMIN → CONDUCTOR → base de datos → CRM, reportes, auditoría y
+aislamiento multiempresa. Si PostgreSQL estaba detenido, el script lo inicia
+solo durante la prueba y vuelve a detenerlo al finalizar. Consulte la
+[ejecución F5.1](ejecucion-f5-1-regresion-integral.md) y su
+[evidencia](evidencia-f5-1-regresion-integral-2026-09-30.md).
+
+Demo pública temporal F5.2:
+
+~~~powershell
+.\iniciar_demo_temporal.bat
+~~~
+
+El comando crea una URL HTTPS aleatoria para CRM, API y WebSocket. PostgreSQL
+permanece privado en 127.0.0.1:5432. Para validar la sesión activa:
+
+~~~powershell
+.\scripts\Test-RutaFijaF52QuickDemo.ps1 -RequireLive
+~~~
+
+Para revocar la URL y liberar todos los recursos:
+
+~~~powershell
+.\finalizar_demo_temporal.bat
+~~~
+
+Consulte [F5.2 — Demo gratuita temporal](ejecucion-f5-2-demo-temporal.md) para
+el comando Flutter y el guion ADMIN → CONDUCTOR → CRM → reporte/auditoría.
+
 Validación del CRM unificado en ADMIN:
 
 ~~~powershell
@@ -276,7 +510,7 @@ Para cerrar la consolidacion de roles antes de iniciar la API movil:
 .\scripts\Test-RutaFijaG2AdminClosure.ps1
 ~~~
 
-Mantenga libres 8080 y 4200. La salida esperada empieza con
+Mantenga libres 8080 y 4300. La salida esperada empieza con
 G2_ADMIN_CONSOLIDATION=PASS. La guia de controles esta en
 [F2.4 / G2](ejecucion-nativa-f2-4-g2.md) y la
 [evidencia G2](evidencia-g2-consolidacion-admin-2026-09-22.md).
@@ -287,7 +521,7 @@ Para revisar REST, login, refresh y WebSocket desde el proxy Angular:
 .\scripts\Invoke-RutaFijaRealtimeProxySmoke.ps1 -Action Verify
 ~~~
 
-Antes del smoke, cierre el runtime normal para liberar 8080 y 4200.
+Antes del smoke, cierre el runtime normal para liberar 8080 y 4300.
 
 ## 9. Seguridad y backup
 
@@ -336,3 +570,6 @@ datos son importantes.
 
 Consulte también el [README principal](../README.md), las guías de
 [F1.4](ejecucion-nativa-f1-4.md) y [F1.5](ejecucion-nativa-f1-5.md).
+
+
+</details>

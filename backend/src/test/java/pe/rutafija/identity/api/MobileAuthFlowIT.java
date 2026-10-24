@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -27,9 +28,11 @@ import pe.rutafija.identity.infrastructure.AppUserRepository;
 import pe.rutafija.organization.domain.Organization;
 import pe.rutafija.organization.infrastructure.OrganizationRepository;
 import pe.rutafija.support.NativePostgresIntegrationTest;
+import pe.rutafija.support.ApprovedConductorFixture;
 
 import java.util.List;
 import java.util.UUID;
+import java.time.Instant;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -38,6 +41,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -82,6 +86,9 @@ class MobileAuthFlowIT extends NativePostgresIntegrationTest {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
     private Organization organization;
     private AppUser driverUser;
     private AppUser adminUser;
@@ -101,27 +108,27 @@ class MobileAuthFlowIT extends NativePostgresIntegrationTest {
                 "Grupo móvil " + suffix,
                 "Grupo de integración móvil"
         ));
-        driverUser = userRepository.save(AppUser.organizationUser(
+        driverUser = userRepository.save(verifiedUser(AppUser.organizationUser(
                 organization,
                 "driver." + suffix + "@rutafija.test",
                 passwordEncoder.encode(DRIVER_PASSWORD),
                 "Conductora móvil",
                 UserRole.CONDUCTOR
-        ));
-        adminUser = userRepository.save(AppUser.organizationUser(
+        )));
+        adminUser = userRepository.save(verifiedUser(AppUser.organizationUser(
                 organization,
                 "admin." + suffix + "@rutafija.test",
                 passwordEncoder.encode(ADMIN_PASSWORD),
                 "Administradora móvil",
                 UserRole.ADMIN
-        ));
-        unlinkedDriverUser = userRepository.save(AppUser.organizationUser(
+        )));
+        unlinkedDriverUser = userRepository.save(verifiedUser(AppUser.organizationUser(
                 organization,
                 "unlinked." + suffix + "@rutafija.test",
                 passwordEncoder.encode(DRIVER_PASSWORD),
                 "Conductor sin vínculo",
                 UserRole.CONDUCTOR
-        ));
+        )));
         driver = driverRepository.saveAndFlush(Driver.register(
                 organization,
                 driverUser,
@@ -132,6 +139,48 @@ class MobileAuthFlowIT extends NativePostgresIntegrationTest {
                 "MOBILE-" + suffix,
                 "LIC-" + suffix
         ));
+        // Historical synthetic approval for session regressions; lifecycle is tested separately.
+        ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, adminUser, driverUser, driver);
+    }
+
+    @Test
+    void conductorCannotCreateABrowserSessionEvenWithValidCredentials() throws Exception {
+        mockMvc.perform(post("/api/v1/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(java.util.Map.of(
+                                "email", driverUser.getEmail(), "password", DRIVER_PASSWORD))))
+                .andExpect(status().isForbidden())
+                .andExpect(jsonPath("$.code").value("FORBIDDEN_ROLE"));
+        assertThat(jdbcTemplate.queryForObject("select count(*) from refresh_token where user_id = ?", Long.class,
+                driverUser.getId())).isZero();
+    }
+
+    @Test
+    void activeLegacyConductorWithoutApprovedExpedienteCannotLogin() throws Exception {
+        jdbcTemplate.update("delete from conductor_onboarding_request where linked_user_id = ?", driverUser.getId());
+        mockMvc.perform(post("/api/v1/mobile/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(java.util.Map.of(
+                                "email", driverUser.getEmail(), "password", DRIVER_PASSWORD))))
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.code").value("RESOURCE_CONFLICT"));
+        assertThat(jdbcTemplate.queryForObject("select count(*) from refresh_token where user_id = ?", Long.class,
+                driverUser.getId())).isZero();
+    }
+
+    @Test
+    void previouslyIssuedMobileSessionLosesAuthorityWhenApprovalNoLongerExists() throws Exception {
+        JsonNode session = json(mobileLogin("synthetic-before-approval-removal"));
+        jdbcTemplate.update("delete from conductor_onboarding_request where linked_user_id = ?", driverUser.getId());
+        mockMvc.perform(get("/api/v1/mobile/me")
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + session.path("accessToken").asText()))
+                .andExpect(status().isConflict());
+        mockMvc.perform(post("/api/v1/mobile/auth/refresh")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(refreshBody(session.path("refreshToken").asText())))
+                .andExpect(status().isConflict());
+        assertThat(jdbcTemplate.queryForObject("select count(*) from refresh_token where user_id = ? and revoked_at is null",
+                Long.class, driverUser.getId())).isZero();
     }
 
     @Test
@@ -362,6 +411,11 @@ class MobileAuthFlowIT extends NativePostgresIntegrationTest {
         return """
                 {"refreshToken":"%s"}
                 """.formatted(refreshToken);
+    }
+
+    private static AppUser verifiedUser(AppUser user) {
+        user.verifyEmail(Instant.now());
+        return user;
     }
 
     private JsonNode json(MvcResult result) throws Exception {

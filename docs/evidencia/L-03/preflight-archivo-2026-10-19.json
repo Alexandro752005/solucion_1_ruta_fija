@@ -1,0 +1,37 @@
+{
+  "observedAt": "2026-10-19T15:05:09.555460+00:00",
+  "mode": "READ_ONLY_FILES_NO_DATABASE",
+  "L02ActSha256Expected": "7fdc07dadeab1d82c366664a725aab05c15d8a207473a6fbe9fedf7870b487e7",
+  "L02ActSha256Matches": true,
+  "preservedFiles": [
+    {
+      "path": "docs/actas/L-02-cierre-funcional-local-2026-10-19.md",
+      "sha256": "7fdc07dadeab1d82c366664a725aab05c15d8a207473a6fbe9fedf7870b487e7"
+    },
+    {
+      "path": "docs/contratos/L-02-v0.2.0.md",
+      "sha256": "ea898a79ff96bb5208d92be7e4d8d88ca785e7b484e7eea98bd130d112a5abe5"
+    },
+    {
+      "path": "docs/contratos/antecedentes/L-02-v0.1.0.md",
+      "sha256": "1b370f5b98f6ea290920459f8f5bcb8ff63de00217ce363f36bdc4a2eed00144"
+    },
+    {
+      "path": "docs/evidencia/L-02/matriz-final-funcional-local-2026-10-19.md",
+      "sha256": "47b352877c9eaf0528f6502ecba9338411d7ea5f658b8510fffbb217a8f11dd1"
+    },
+    {
+      "path": "docs/evidencia/L-02/manifest-cierre.sha256",
+      "sha256": "06aad2ff4cc10154e641d2cb0e8afd6406914e17a5d1ec66116ccade35bd7ac8"
+    },
+    {
+      "path": "docs/evidencia/L-02/fuentes-cierre.sha256",
+      "sha256": "bfcb7afa572d2d7e2eb146d56e97284126c64b4ad72fc7b2fd5c7a12f4f08ae5"
+    },
+    {
+      "path": "artifacts/L-02-2026-10-19/manifest.json",
+      "sha256": "dc4513dc6972979ba66381ccdf3742fce625444105d2451ab478135ffaf4f3b9"
+    }
+  ],
+  "databaseAccessed": false
+}

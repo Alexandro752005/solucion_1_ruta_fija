@@ -1,0 +1,197 @@
+<section class="management-page">
+  <rf-page-header title="Habilitación del conductor" description="Revisión personal, unidad, vigencias y habilitación se verifican por separado.">
+    <a page-actions class="management-button" routerLink="/drivers">Volver a conductores</a>
+  </rf-page-header>
+  <p>CONDUCTOR-{{ driverId }}</p>
+  @if (error(); as message) { <div class="management-alert error" role="alert">{{ message }}</div> }
+  @if (notice(); as message) { <div class="management-alert success" role="status">{{ message }}</div> }
+  @if (lastOperationKey(); as key) { <p class="operation-reference">Referencia de la última operación: {{ key }}</p> }
+  @if (uncertain()) { <p role="alert">El resultado de la operación requiere contraste. No repitas la mutación. Conserva su referencia y consulta el estado; los controles de modificación permanecen bloqueados.</p> }
+  <div class="management-actions">
+    <button class="management-button" type="button" (click)="load()" [disabled]="loading() || saving()">Reconsultar estado</button>
+    @if (!restricted()) {
+      <button class="management-button" type="button" (click)="load(true)" [disabled]="loading() || saving()">Abrir expediente restringido ADMIN</button>
+    } @else {
+      <button class="management-button" type="button" (click)="closeRestricted()">Cerrar expediente y limpiar datos</button>
+    }
+  </div>
+  @if (loading()) { <p role="status">Consultando estado confirmado por el servidor…</p> }
+  @if (saving()) { <p role="status">Esperando confirmación del servidor. No repitas la acción.</p> }
+  @if (state(); as current) {
+    <section class="management-panel" aria-labelledby="qualification-unit-references-title">
+      <h2 id="qualification-unit-references-title">Referencias de unidades de tu organización</h2>
+      <p>Selecciona una referencia para el período o la revisión. Estar en esta lista no acredita revisión ni habilitación.</p>
+      <button class="management-button" type="button" (click)="loadVehicleReferences()" [disabled]="vehiclesLoading() || saving()">Consultar unidades</button>
+      @if (vehiclesLoading()) { <p role="status">Consultando referencias de unidades…</p> }
+      @if (vehicleReferences().length) {
+        <ul>@for (vehicle of vehicleReferences(); track vehicle.id) { <li>UNIDAD-{{ vehicle.id }} · {{ vehicle.status }} <button class="management-button compact" type="button" (click)="vehicleId = vehicle.id; reviewVehicleId = vehicle.id; selectReviewScope()" [disabled]="saving()">Seleccionar referencia</button></li> }</ul>
+        <div class="management-actions">
+          <button class="management-button" type="button" (click)="loadVehicleReferences(vehiclePage() - 1)" [disabled]="vehiclePage() === 0 || vehiclesLoading()">Anterior</button>
+          <span>Página {{ vehiclePage() + 1 }} de {{ vehicleTotalPages() }}</span>
+          <button class="management-button" type="button" (click)="loadVehicleReferences(vehiclePage() + 1)" [disabled]="vehiclePage() + 1 >= vehicleTotalPages() || vehiclesLoading()">Siguiente</button>
+        </div>
+      }
+    </section>
+    <section class="management-panel" aria-labelledby="qualification-status-title">
+      <h2 id="qualification-status-title">Estado registrado</h2>
+      <dl class="qualification-grid">
+        <div><dt>Cuenta</dt><dd>{{ current.accountId ? 'CUENTA-' + current.accountId : 'Sin cuenta vinculada' }}</dd></div>
+        <div><dt>Solicitud</dt><dd>{{ current.requestId || 'Sin solicitud vinculada acreditada' }}</dd></div>
+        <div><dt>Documentación personal</dt><dd>{{ current.personalDocumentsStatus }}</dd></div>
+        <div><dt>Vigencia personal</dt><dd>{{ current.personalValidUntil ? (current.personalValidUntil | date:'dd/MM/yyyy HH:mm':'-0500') : 'Consultar revisión; sin fecha confirmada' }}</dd></div>
+        <div><dt>Suspensión</dt><dd>{{ current.suspended ? 'Suspendido' : 'Sin suspensión registrada' }}</dd></div>
+        <div><dt>Habilitación operativa</dt><dd>{{ current.operationalEnabled ? 'Confirmada por el servidor' : 'Bloqueada' }}</dd></div>
+        <div><dt>Versión</dt><dd>{{ current.version }}</dd></div>
+        <div><dt>Consulta del servidor</dt><dd>{{ current.observedAt | date:'dd/MM/yyyy HH:mm:ss':'-0500' }} · Lima</dd></div>
+      </dl>
+      @if (current.blockers.length) { <h3>Condiciones pendientes</h3><ul>@for (blocker of current.blockers; track blocker) { <li>{{ blocker }}</li> }</ul> }
+      <h3>Catálogo de revisión</h3>
+      <p>El catálogo lo proporciona el servidor. Un requisito por contrastar no se interpreta como cumplido.</p>
+      @if (!current.catalog.length) { <p>No hay un catálogo habilitado para este expediente.</p> }
+      <ul>@for (requirement of current.catalog; track requirement.scope + requirement.id) { <li>{{ requirement.scope === 'VEHICLE' ? 'Unidad' : 'Empresa' }} · {{ requirement.id }} · {{ requirement.title }} · {{ requirement.mandatory ? 'Obligatorio según aplicabilidad' : 'Según aplicabilidad' }}</li> }</ul>
+      @if (!restricted() && current.reviews.length) {
+        <h3>Resultados de revisión, sin documentos personales</h3>
+        <ul>@for (review of current.reviews; track review.scope + review.requirementId + review.vehicleId) { <li>{{ review.scope }} · {{ review.requirementId }} · {{ review.result }} · {{ review.expiryMode }} @if (review.validUntil) { · {{ review.validUntil | date:'dd/MM/yyyy':'-0500' }} }</li> }</ul>
+      }
+    </section>
+
+    <fieldset class="management-panel" [disabled]="saving() || loading() || mustRefresh() || uncertain()">
+      <legend>Motivo de la siguiente modificación</legend>
+      <label for="qualification-reason">Motivo, sin datos personales ni secretos<textarea id="qualification-reason" [(ngModel)]="reason" maxlength="500" rows="2"></textarea></label>
+      <p>Las decisiones usan la versión consultada y una clave de operación. Solo el servidor confirma la transición.</p>
+    </fieldset>
+
+    <fieldset class="management-panel" [disabled]="saving() || loading() || mustRefresh() || uncertain()">
+      <legend>Habilitación y suspensión</legend>
+      <p>Activar no cambia la disponibilidad ni acepta servicios. Suspender conserva cuenta, aprobación personal e historial; el servidor trata asignaciones pendientes y servicios en curso.</p>
+      <label for="suspend-evidence">Referencia de comprobación para suspensión<input id="suspend-evidence" [(ngModel)]="evidenceReference" maxlength="160" autocomplete="off" /></label>
+      <div class="management-actions">
+        <button class="management-button primary" type="button" (click)="act('activate')">Solicitar habilitación operativa</button>
+        <button class="management-button danger" type="button" (click)="act('suspend')" [disabled]="current.suspended">Suspender</button>
+        <button class="management-button" type="button" (click)="act('resume')" [disabled]="!current.suspended">Levantar suspensión tras revisión</button>
+      </div>
+    </fieldset>
+
+    @if (current.serviceAttention?.length) {
+      <section class="management-panel" aria-labelledby="qualification-service-attention-title">
+        <h2 id="qualification-service-attention-title">Servicios conservados que requieren atención</h2>
+        <p>El historial del servicio se conserva. No se asigna otra unidad ni se libera la ocupación de un servicio en curso automáticamente.</p>
+        <ul>@for (attention of current.serviceAttention; track attention.id) {
+          <li>SERVICIO-{{ attention.assignmentId }} · {{ attention.kind === 'SAFE_HANDOVER_REQUIRED' ? 'Requiere detención y relevo seguro' : 'Pendiente de reasignación' }} · {{ attention.status }}
+            <p>{{ attention.scheduledAt | date:'dd/MM/yyyy HH:mm':'-0500' }}@if (attention.scheduledEndAt) { hasta {{ attention.scheduledEndAt | date:'dd/MM/yyyy HH:mm':'-0500' }} } · Lima</p>
+            <a class="management-button" routerLink="/assignments" [queryParams]="{ assignmentId: attention.assignmentId }">Consultar asignación conservada</a>
+          </li>
+        }</ul>
+      </section>
+    }
+
+    <section class="management-panel" aria-labelledby="qualification-period-title">
+      <h2 id="qualification-period-title">Períodos de unidad</h2>
+      <p>Una sola unidad vigente por conductor y un solo conductor por unidad en períodos superpuestos. No se adoptan vínculos heredados como revisados.</p>
+      @if (!current.periods.length) { <p>No hay períodos autorizados registrados.</p> }
+      @for (period of current.periods; track period.id) {
+        <article class="qualification-entry">
+          <p>PERÍODO-{{ period.id }} · UNIDAD-{{ period.vehicleId }} · {{ period.kind === 'OWN' ? 'Propia' : 'De empresa' }} · {{ period.status }}</p>
+          <p>{{ period.startsAt | date:'dd/MM/yyyy HH:mm':'-0500' }} hasta {{ period.endsAt ? (period.endsAt | date:'dd/MM/yyyy HH:mm':'-0500') : 'sin fin registrado' }} · Lima</p>
+          @if (period.status === 'AUTHORIZED') { <button type="button" class="management-button danger" (click)="revoke(period.id)" [disabled]="saving() || mustRefresh() || uncertain()">Revocar período conservando historial</button> }
+        </article>
+      }
+      <fieldset [disabled]="saving() || loading() || mustRefresh() || uncertain()">
+        <legend>Autorizar un período revisado</legend>
+        <label for="qualification-vehicle">Referencia de unidad existente<input id="qualification-vehicle" [(ngModel)]="vehicleId" autocomplete="off" placeholder="UUID de la unidad" /></label>
+        <p>Consulta las referencias de unidad en esta página. La unidad debe estar revisada y pertenecer a esta organización.</p>
+        <label for="qualification-kind">Titularidad del vínculo<select id="qualification-kind" [(ngModel)]="kind"><option value="OWN">Unidad propia</option><option value="COMPANY">Unidad de empresa</option></select></label>
+        <label for="qualification-time-mode">Forma de indicar las fechas<select id="qualification-time-mode" [(ngModel)]="timeMode" (ngModelChange)="start = ''; end = ''"><option value="DATE">Fechas completas, Lima</option><option value="INSTANT">Instantes con zona explícita</option></select></label>
+        @if (timeMode === 'DATE') {
+          <label for="qualification-start-date">Fecha inicial<input id="qualification-start-date" type="date" [(ngModel)]="start" /></label>
+          <label for="qualification-end-date">Último día incluido, obligatorio para empresa<input id="qualification-end-date" type="date" [(ngModel)]="end" /></label>
+          <p>El fin por fecha incluye todo ese día en Lima. El servidor calcula los límites del período.</p>
+        } @else {
+          <label for="qualification-start-at">Instante inicial<input id="qualification-start-at" [(ngModel)]="start" placeholder="2026-10-18T08:00:00-05:00" /></label>
+          <label for="qualification-end-at">Instante final, excluido<input id="qualification-end-at" [(ngModel)]="end" placeholder="2026-10-18T20:00:00-05:00" /></label>
+          <p>Indica Z o un desplazamiento UTC. El límite final por instante no se incluye.</p>
+        }
+        <button class="management-button primary" type="button" (click)="createPeriod()">Autorizar período</button>
+      </fieldset>
+    </section>
+
+    <section class="management-panel" aria-labelledby="qualification-unit-request-title">
+      <h2 id="qualification-unit-request-title">Solicitudes de unidad</h2>
+      <p>Decidir una solicitud no autoriza un período ni habilita la operación.</p>
+      @if (!current.unitRequests.length) { <p>No hay solicitudes de unidad.</p> }
+      @for (request of current.unitRequests; track request.id) {
+        <article class="qualification-entry">
+          <p>SOLICITUD-{{ request.id }} · {{ request.kind }} · {{ request.status }}</p>
+          <p>Referencia: {{ request.reference }} · {{ request.createdAt | date:'dd/MM/yyyy HH:mm':'-0500' }}</p>
+          @if (request.status === 'PENDING_REVIEW') {
+            <label [for]="'request-vehicle-' + request.id">Referencia de unidad revisada<input [id]="'request-vehicle-' + request.id" [(ngModel)]="decisionVehicles[request.id]" [placeholder]="request.vehicleId || 'UUID de la unidad'" autocomplete="off" /></label>
+            <div class="management-actions">
+              <button class="management-button" type="button" (click)="decide(request.id, true)" [disabled]="saving() || mustRefresh() || uncertain()">Aprobar solicitud</button>
+              <button class="management-button danger" type="button" (click)="decide(request.id, false)" [disabled]="saving() || mustRefresh() || uncertain()">Rechazar solicitud</button>
+            </div>
+          }
+        </article>
+      }
+    </section>
+
+    @if (restricted()) {
+      <section class="management-panel restricted-panel" aria-labelledby="qualification-restricted-title">
+        <h2 id="qualification-restricted-title">Expediente restringido · ADMIN autorizado</h2>
+        <p>Solo cotejo de originales y datos estructurados. No cargues fotos, PDF ni copias. Los datos de esta vista se limpian al cerrarla o salir.</p>
+        <fieldset [disabled]="saving() || loading() || mustRefresh() || uncertain()">
+          <legend>Corrección material de placa de la misma unidad</legend>
+          <p>Se conserva la unidad y su historial; los servicios ya registrados conservan su referencia anterior. La corrección exige volver a confirmar la revisión de la unidad antes de operar.</p>
+          <label for="correction-unit">Referencia de unidad del expediente<input id="correction-unit" [(ngModel)]="correctionVehicleId" autocomplete="off" /></label>
+          <label for="correction-plate">Placa cotejada con el original<input id="correction-plate" [(ngModel)]="correctionPlate" minlength="3" maxlength="15" pattern="[A-Za-z0-9-]{3,15}" autocomplete="off" /></label>
+          <label for="correction-review-reference">Referencia sin datos personales<input id="correction-review-reference" [(ngModel)]="correctionReviewReference" maxlength="500" autocomplete="off" /></label>
+          <label class="checkbox-label"><input type="checkbox" [(ngModel)]="correctionOriginalReviewed" /> Revisé el documento original de la misma unidad, sin conservar copias.</label>
+          <button class="management-button" type="button" (click)="correctVehicle()">Registrar corrección material de placa</button>
+        </fieldset>
+        <fieldset [disabled]="saving() || loading() || mustRefresh() || uncertain()">
+          <legend>Revisión de unidad o empresa</legend>
+          <label for="qualification-review-scope">Catálogo<select id="qualification-review-scope" [(ngModel)]="scope" (ngModelChange)="selectReviewScope()"><option value="VEHICLE">Unidad</option><option value="COMPANY">Empresa</option></select></label>
+          @if (scope === 'VEHICLE') { <label for="qualification-review-vehicle">Referencia de unidad<input id="qualification-review-vehicle" [(ngModel)]="reviewVehicleId" autocomplete="off" /></label> }
+          <button class="management-button" type="button" (click)="selectReviewScope()">Preparar revisión del catálogo seleccionado</button>
+          @if (!reviewDrafts.length) { <p>No hay requisitos de este catálogo disponibles. No se inferirá su cumplimiento.</p> }
+          @for (review of reviewDrafts; track review.requirementId; let index = $index) {
+            <fieldset class="qualification-entry">
+              <legend>{{ review.requirementId }} · {{ reviewTitle(review.requirementId) }}</legend>
+              @for (key of fields(review); track key) { <label [for]="'review-field-' + index + '-' + key">{{ key }}<input [id]="'review-field-' + index + '-' + key" [(ngModel)]="review.fields[key]" maxlength="200" autocomplete="off" /></label> }
+              <label [for]="'review-expiry-' + index">Vigencia<select [id]="'review-expiry-' + index" [(ngModel)]="review.expiryMode">@for (mode of expiryModes; track mode) { <option [value]="mode">{{ mode }}</option> }</select></label>
+              @if (review.expiryMode === 'DATED') { <label [for]="'review-date-' + index">Último día de vigencia, Lima<input [id]="'review-date-' + index" type="date" [(ngModel)]="review.validUntil" /></label> }
+              <label [for]="'review-applicability-' + index">Aplicabilidad<select [id]="'review-applicability-' + index" [(ngModel)]="review.applicability"><option value="POR_CONTRASTAR">Por contrastar</option><option value="CONFIRMED">Confirmada mediante fuente aplicable</option></select></label>
+              <label [for]="'review-condition-' + index">Condición o excepción justificada<input [id]="'review-condition-' + index" [(ngModel)]="review.condition" maxlength="500" autocomplete="off" /></label>
+              <label [for]="'review-source-' + index">Referencia de fuente aplicable<input [id]="'review-source-' + index" [(ngModel)]="review.sourceReference" maxlength="500" autocomplete="off" /></label>
+              <label [for]="'review-result-' + index">Resultado<select [id]="'review-result-' + index" [(ngModel)]="review.result">@for (result of reviewResults; track result) { <option [value]="result">{{ result }}</option> }</select></label>
+              <label [for]="'review-reference-' + index">Referencia del cotejo<input [id]="'review-reference-' + index" [(ngModel)]="review.reviewReference" maxlength="500" autocomplete="off" /></label>
+            </fieldset>
+          }
+          <button class="management-button primary" type="button" (click)="saveReviews()" [disabled]="!reviewDrafts.length">Guardar revisión estructurada</button>
+        </fieldset>
+        <fieldset [disabled]="saving() || loading() || mustRefresh() || uncertain()">
+          <legend>Renovación o corrección personal de la misma persona</legend>
+          <p>No sustituye la identidad raíz, no crea otra persona y conserva el historial. Un cambio de persona será rechazado por el servidor.</p>
+          @if (!personalDrafts.length) { <p>No hay documentos personales disponibles para renovar. No se crean requisitos desconocidos.</p> }
+          @for (document of personalDrafts; track document.requirementId; let index = $index) {
+            <fieldset class="qualification-entry">
+              <legend>{{ document.requirementId }}</legend>
+              @for (key of fields(document); track key) { <label [for]="'personal-field-' + index + '-' + key">{{ key }}<input [id]="'personal-field-' + index + '-' + key" [(ngModel)]="document.fields[key]" maxlength="200" autocomplete="off" /></label> }
+              <label [for]="'personal-expiry-' + index">Vigencia<select [id]="'personal-expiry-' + index" [(ngModel)]="document.expiryMode">@for (mode of expiryModes; track mode) { <option [value]="mode">{{ mode }}</option> }</select></label>
+              @if (document.expiryMode === 'DATED') { <label [for]="'personal-date-' + index">Último día de vigencia, Lima<input [id]="'personal-date-' + index" type="date" [(ngModel)]="document.validUntil" /></label> }
+              <label [for]="'personal-applicability-' + index">Aplicabilidad<select [id]="'personal-applicability-' + index" [(ngModel)]="document.applicability"><option value="POR_CONTRASTAR">Por contrastar</option><option value="CONFIRMED">Confirmada</option></select></label>
+              <label [for]="'personal-result-' + index">Resultado<select [id]="'personal-result-' + index" [(ngModel)]="document.result"><option value="PENDING">Pendiente</option>@for (result of reviewResults; track result) { <option [value]="result">{{ result }}</option> }</select></label>
+              <label [for]="'personal-condition-' + index">Condición o excepción<input [id]="'personal-condition-' + index" [(ngModel)]="document.condition" maxlength="500" autocomplete="off" /></label>
+              <label [for]="'personal-source-' + index">Fuente<input [id]="'personal-source-' + index" [(ngModel)]="document.sourceReference" maxlength="500" autocomplete="off" /></label>
+              <label [for]="'personal-reference-' + index">Referencia de revisión<input [id]="'personal-reference-' + index" [(ngModel)]="document.reviewReference" maxlength="500" autocomplete="off" /></label>
+              <label [for]="'personal-observation-' + index">Observación<input [id]="'personal-observation-' + index" [(ngModel)]="document.observation" maxlength="500" autocomplete="off" /></label>
+            </fieldset>
+          }
+          <label for="personal-overall-reference">Referencia de la comprobación material<input id="personal-overall-reference" [(ngModel)]="personalReviewReference" maxlength="500" autocomplete="off" /></label>
+          <label class="checkbox-label"><input type="checkbox" [(ngModel)]="originalReviewed" /> Revisé los originales sin guardar copias.</label>
+          <label class="checkbox-label"><input type="checkbox" [(ngModel)]="samePersonConfirmed" /> Confirmo que sigue siendo la misma persona titular de esta cuenta.</label>
+          <button class="management-button primary" type="button" (click)="savePersonal()" [disabled]="!personalDrafts.length">Registrar renovación o corrección revisada</button>
+        </fieldset>
+      </section>
+    }
+  }
+</section>

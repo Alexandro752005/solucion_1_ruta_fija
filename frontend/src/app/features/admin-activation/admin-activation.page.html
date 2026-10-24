@@ -1,0 +1,59 @@
+<main class="activation-page">
+  <section class="activation-card" aria-labelledby="activation-title">
+    <p class="eyebrow">Ruta Fija · Acceso ADMIN</p>
+    <h1 id="activation-title">Activar cuenta</h1>
+    <p>Establece tu contraseña, verifica tu correo y acepta los términos vigentes. La cuenta permanece inactiva hasta completar las validaciones.</p>
+    @if (error(); as message) { <div class="error-summary" role="alert">{{ message }}</div> }
+    @if (notice(); as message) { <div class="notice" role="status">{{ message }}</div> }
+
+    @if (expired()) {
+      <p>Solicita a SUPER_ADMIN una credencial vigente y vuelve a abrir este recorrido.</p>
+    } @else if (!claimed()) {
+      <form [formGroup]="claimForm" (ngSubmit)="claim()" [attr.aria-busy]="busy()" novalidate>
+        <label for="activation-credential">Credencial temporal</label>
+        <input id="activation-credential" type="password" formControlName="credential" autocomplete="off" [readOnly]="busy()" />
+        <label for="activation-password">Contraseña nueva (12 a 128 caracteres)</label>
+        <input id="activation-password" type="password" formControlName="password" autocomplete="new-password" maxlength="128" [readOnly]="busy()" />
+        <label for="activation-confirmation">Confirmar contraseña</label>
+        <input id="activation-confirmation" type="password" formControlName="confirmation" autocomplete="new-password" maxlength="128" [readOnly]="busy()" />
+        <button type="submit" [disabled]="busy()">Registrar contraseña</button>
+      </form>
+    } @else if (!completed()) {
+      @if (!verified()) {
+        <h2>Verifica tu correo</h2>
+        <p>Máximo tres envíos por sesenta minutos. Dos intentos fallidos bloquean temporalmente la verificación durante treinta minutos.</p>
+        @if (!otp()) {
+          <button type="button" (click)="beginOtp()" [disabled]="busy()">Enviar código de verificación</button>
+        } @else {
+          <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()" [attr.aria-busy]="busy()" novalidate>
+            <label for="activation-otp">Código de seis dígitos</label>
+            <input id="activation-otp" type="text" inputmode="numeric" autocomplete="one-time-code" formControlName="code" maxlength="6" [readOnly]="busy()" />
+            <button type="submit" [disabled]="busy()">Verificar correo</button>
+          </form>
+          <button class="secondary" type="button" (click)="resendOtp()" [disabled]="busy()">Reenviar código</button>
+        }
+      } @else {
+        <h2>Términos ADMIN</h2>
+        <button class="secondary" type="button" (click)="loadTerms()" [disabled]="busy()">Consultar documento vigente</button>
+        @if (terms(); as document) {
+          @if (document.synthetic) {
+            <div class="notice" role="status">DOCUMENTO SINTÉTICO DE PRUEBA. No representa los términos aprobados del piloto.</div>
+          }
+          <p>Versión: <strong>{{ document.version }}</strong></p>
+          <pre class="terms-content" tabindex="0" aria-label="Texto de los términos ADMIN">{{ document.content }}</pre>
+          @if (!accepted()) {
+            <form [formGroup]="termsForm" (ngSubmit)="acceptTerms()" [attr.aria-busy]="busy()">
+              <label class="acceptance"><input type="checkbox" formControlName="accepted" />He leído y acepto expresamente este documento y su versión.</label>
+              <button type="submit" [disabled]="busy() || termsForm.invalid">Registrar aceptación</button>
+            </form>
+          } @else {
+            <p role="status">Aceptación registrada.</p>
+            @if (replacesAdmin()) { <p>Completar la activación habilitará esta cuenta y revocará el acceso de la cuenta ADMIN sustituida.</p> }
+            <button type="button" (click)="complete()" [disabled]="busy()">Completar activación</button>
+          }
+        }
+      }
+    }
+    <a routerLink="/login">Volver al inicio de sesión</a>
+  </section>
+</main>

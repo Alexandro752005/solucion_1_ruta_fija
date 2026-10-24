@@ -1,0 +1,55 @@
+.invitation-form {
+  align-items: end;
+  grid-template-columns: minmax(16rem, 1fr) auto;
+}
+
+.invitation-code-receipt {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid var(--rf-border, #b7d5ce);
+  border-radius: 0.85rem;
+  background: var(--rf-surface-raised, #f1f8f6);
+}
+
+.invitation-code-receipt h3,
+.invitation-code-receipt p {
+  margin: 0;
+}
+
+.invitation-code-receipt h3 {
+  font-size: 1rem;
+}
+
+.invitation-code-receipt p + p {
+  margin-top: 0.7rem;
+}
+
+.invitation-code {
+  display: inline-block;
+  margin-top: 0.65rem !important;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.5rem;
+  background: var(--rf-surface, #fff);
+  color: var(--rf-text-primary, #173c37);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 1.6rem;
+  font-weight: 750;
+  letter-spacing: 0.2em;
+}
+
+.invitation-code-receipt > button {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 640px) {
+  .invitation-form,
+  .invitation-code-receipt {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

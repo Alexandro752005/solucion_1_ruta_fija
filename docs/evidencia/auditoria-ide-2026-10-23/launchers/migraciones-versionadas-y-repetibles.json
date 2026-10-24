@@ -1,0 +1,9 @@
+{
+    "recordedAtUtc":  "2026-10-23T16:01:06.9419748+00:00",
+    "database":  "ruta_fija_test",
+    "query":  "SELECT successful totals and null-version types",
+    "result":  "51|50|1|REPEATABLE:SQL",
+    "dataChanged":  false,
+    "clarification":  "Versioned migrations must not be confused with repeatable migrations",
+    "toolingIncident":  "Initial SELECT omitted FROM and was rejected without mutation; corrected SELECT kept read-only connection"
+}

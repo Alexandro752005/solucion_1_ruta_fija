@@ -1,0 +1,18 @@
+{
+  "result": "PASS_NO_REPORTED_NPM_VULNERABILITIES_AT_THIS_CUT",
+  "observedAt": "2026-10-23T01:13:23.148616+00:00",
+  "command": "npm.cmd audit --json",
+  "exit": 0,
+  "vulnerabilities": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "packageLockUnchanged": true,
+  "packageLockSha256": "6818f9b06051abab64081e8cc853049b54c2632d35b0807033c7582f26f0d85e",
+  "automaticFixOrDependencyUpdate": false,
+  "scope": "npm advisory audit only, not a full security certification"
+}

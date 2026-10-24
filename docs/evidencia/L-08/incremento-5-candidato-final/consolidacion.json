@@ -1,0 +1,22 @@
+{
+  "recordedAtUtc": "2026-10-23T06:37:07.302051+00:00",
+  "status": "VERIFICADA",
+  "classification": "FUNCIONAL_LOCAL_APROBADA_CANDIDATO_FINAL",
+  "localDecision": "GO PARA CANDIDATO LOCAL DE ENTREGA",
+  "operationalDecision": "NO_GO_PILOTO_REAL",
+  "pilotEnabled": false,
+  "criteriaLocalVerified": 12,
+  "pendingFieldCriteria": [
+    "CI-L08-04",
+    "CI-L08-05",
+    "CI-L08-06",
+    "CI-L08-07",
+    "CI-L08-10",
+    "CI-L08-11"
+  ],
+  "opsEvidence": "docs/evidencia/L-08/incremento-5-candidato-final/ops/ops-summary-final.json",
+  "androidSha256": "a4685115e712cfe0c5e24ad84efc4abaf1f4f679a6f95fd1ca0b0354d7b1d776",
+  "backendSha256": "eded50c4bf3706f0f92ca1cb1700e07946db5eca8405189a08ec6d437303aa4f",
+  "javaProductPercentage": 51.83,
+  "historicalEntriesReconciled": 1288
+}

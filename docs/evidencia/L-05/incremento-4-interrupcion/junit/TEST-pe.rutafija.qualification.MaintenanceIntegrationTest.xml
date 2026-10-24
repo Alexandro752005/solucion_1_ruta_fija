@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="pe.rutafija.qualification.MaintenanceIntegrationTest" time="31.475" tests="10" errors="0" skipped="0" failures="0" flakes="0">
+  <testcase name="canonicalPlateCannotBeRecreatedAcrossOrganizations" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="1.583">
+    </testcase>
+  <testcase name="documentsMustCoverTheReleaseDayAndOngoingServiceBlocksReturn" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="1.577" />
+  <testcase name="aSecondUnfinishedJobAndMissingDocumentsPreventReturn" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="0.849" />
+  <testcase name="materialUnitCorrectionCannotInvalidateCommittedServicesThroughTheOrdinaryForm" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="0.846" />
+  <testcase name="cancelOnlyBeforeStartAndKeepOriginalRecords" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="0.712" />
+  <testcase name="urgentPreservesOngoingServiceAndMarksFutureForReassignment" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="0.807" />
+  <testcase name="idempotencyVersionsTenantAndRoleAreEnforced" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="0.681" />
+  <testcase name="earlyReturnRequiresWorkAndDocumentsThenReleasesOnlyNextLimaDay" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="0.739" />
+  <testcase name="preventiveUsesFullLimaDaysAndRemainsBlockedAfterEstimate" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="0.597" />
+  <testcase name="previewIncludesEveryFutureCommitmentBeyondTheEstimatedEnd" classname="pe.rutafija.qualification.MaintenanceIntegrationTest" time="0.613" />
+</testsuite>

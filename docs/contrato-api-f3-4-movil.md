@@ -49,6 +49,7 @@ Todas las respuestas de estas rutas usan Cache-Control: no-store.
 | Asignaciones | GET /mobile/assignments, GET /mobile/assignments/{id}, POST /{id}/accept, /reject, /start, /complete | Todas las mutaciones son propias, versionadas e idempotentes. |
 | Incidencias | GET/POST /mobile/incidents, GET /mobile/incidents/{id} | Solo hechos propios; la fuente es MOBILE_APP. |
 | Comunicados | GET /mobile/announcements, GET /mobile/announcements/{id}, POST /{id}/read | Solo audiencia visible de organización o grupo propio. |
+| Sincronización M8 | POST /mobile/sync/events | Lote FIFO de 1 a 10 eventos propios: disponibilidad, inicio o cierre. |
 
 El prefijo completo es /api/v1; por ejemplo, POST /api/v1/mobile/assignments/{assignmentId}/accept.
 
@@ -125,9 +126,25 @@ REJECTED, CANCELLED, EXPIRED
 
 Un valor 0 significa que SQL no encontró filas persistidas de ese estado en el período; no es una proyección. PDF/XLSX llaman al mismo servicio de reporte y anexan los mismos totales. El CRM etiqueta los tres estados móviles en filtros, detalle y reportes.
 
+## Extensión posterior M8: sincronización offline limitada
+
+M8 amplía el contrato sin modificar las garantías F3.4. `POST
+/api/v1/mobile/sync/events` acepta una lista ordenada de uno a diez eventos.
+Cada evento contiene un `eventId` UUID y `occurredAt`; disponibilidad añade
+`targetAvailability` y `expectedAvailabilityUpdatedAt`, mientras que inicio y
+cierre añaden `assignmentId` y `version`.
+
+La respuesta contiene un resultado por evento procesado. `APPLIED` y
+`ALREADY_APPLIED` permiten avanzar; `CONFLICT` y `REJECTED` detienen el lote.
+El servidor no recibe `driverId`, usuario, tenant, credenciales ni coordenadas
+en la carga. La especificación operacional completa está en
+[ADR-008](decisiones/ADR-008-offline-minimo-m8.md).
+
 ## Privacidad y exclusiones
 
 - No existe historial GPS, recorridos, mapas ni telemetría de fondo.
 - Latitud, longitud y precisión no se guardan en auditoría, WebSocket, reportes genéricos ni respuestas de error.
-- Flutter, FCM, push, fotos, GPS en segundo plano y offline avanzado no son parte de F3.4.
+- Flutter, FCM, push, fotos y GPS en segundo plano no son parte de F3.4. M8 es
+  una extensión posterior, acotada y manual; no es offline avanzado ni una
+  tarea automática.
 - El contrato vivo se consulta localmente en http://127.0.0.1:8080/v3/api-docs cuando el runtime está iniciado.

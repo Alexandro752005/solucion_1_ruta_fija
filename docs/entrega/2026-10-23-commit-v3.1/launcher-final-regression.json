@@ -1,0 +1,213 @@
+{
+    "recordedAtUtc":  "2026-10-23T20:49:16.5535788+00:00",
+    "result":  "PASS_LAUNCHER_STATIC_AND_OWNERSHIP_MOCKS",
+    "checks":  [
+                   {
+                       "name":  "No lease preserves existing service",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Already-running service acquires no ownership",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Previously stopped service creates own lease",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Any other client prevents automatic stop",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Matching instance and zero clients permit owned stop",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Reused PID or restarted instance prevents stop",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Different service executable prevents stop",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Hidden process start time prevents ownership-based stop",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Already-running unowned service does not require hidden start time",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Unavailable client inspection preserves service and lease",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Already-stopped owned instance releases lease without Stop",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Foreign session with hidden NULL backend_type is still counted",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Unknown hidden session prevents proof of zero clients",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Recognized internal checkpointer is not a client",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "PowerShell parse scripts/Invoke-RutaFijaNativeRuntime.ps1",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "PowerShell parse scripts/Invoke-RutaFijaQuickDemo.ps1",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "PowerShell parse scripts/Invoke-RutaFijaNativeTest.ps1",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "PowerShell parse scripts/Test-RutaFijaNativePreflight.ps1",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "PowerShell parse scripts/Invoke-RutaFijaPostgresqlLease.ps1",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "PowerShell parse scripts/Test-RutaFijaLocalSecretPolicy.ps1",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "PowerShell parse scripts/Test-RutaFijaLauncherSafety.ps1",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "PowerShell parse scripts/Set-RutaFijaPostgresqlService.ps1",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "BAT no invalid control bytes iniciar_ruta_fija.bat",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "BAT every CR belongs to CRLF iniciar_ruta_fija.bat",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "BAT absolute quoted PowerShell iniciar_ruta_fija.bat",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "BAT no invalid control bytes finalizar_ruta_fija.bat",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "BAT every CR belongs to CRLF finalizar_ruta_fija.bat",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "BAT absolute quoted PowerShell finalizar_ruta_fija.bat",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "BAT no invalid control bytes iniciar_demo_temporal.bat",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "BAT every CR belongs to CRLF iniciar_demo_temporal.bat",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "BAT absolute quoted PowerShell iniciar_demo_temporal.bat",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "BAT no invalid control bytes finalizar_demo_temporal.bat",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "BAT every CR belongs to CRLF finalizar_demo_temporal.bat",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "BAT absolute quoted PowerShell finalizar_demo_temporal.bat",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "BAT no invalid control bytes verificar_ruta_fija.bat",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "BAT every CR belongs to CRLF verificar_ruta_fija.bat",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "BAT absolute quoted PowerShell verificar_ruta_fija.bat",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Occupied native port refuses public tunnel before network exposure",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Free ports pass demo precondition without starting anything",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Matching exact demo process instance is managed",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Reused cloudflared PID is rejected without Stop",
+                       "passed":  true
+                   },
+                   {
+                       "name":  "Missing cloudflared cannot trigger automatic installer",
+                       "passed":  true
+                   }
+               ],
+    "checksPassed":  42,
+    "actualServiceStartedOrStopped":  false,
+    "actualDatabaseReadOrChanged":  false,
+    "mockScope":  "Service facts/client count/lease persistence/action are synthetic; no real Stop called",
+    "sources":  [
+                    {
+                        "path":  "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+                        "sha256":  "043a841813e1aacf62d985f283c71a9925fdb76462d7dbdc1af01d58bc2aa34c"
+                    },
+                    {
+                        "path":  "scripts/Invoke-RutaFijaQuickDemo.ps1",
+                        "sha256":  "055738564796a516d76c5f7a924cc3df5b35e6f7b34d8814ea1c5ba12e77223e"
+                    },
+                    {
+                        "path":  "scripts/Invoke-RutaFijaNativeTest.ps1",
+                        "sha256":  "3b318571892f5828799f6b007fde861e2a498f1d13e21ef1c8a30265b8379fb2"
+                    },
+                    {
+                        "path":  "scripts/Test-RutaFijaNativePreflight.ps1",
+                        "sha256":  "fedf6ede15abf21cc568a6ec10ce356cc7da7902e5e43e560cdeca769b47c010"
+                    },
+                    {
+                        "path":  "scripts/Invoke-RutaFijaPostgresqlLease.ps1",
+                        "sha256":  "295a2626b0fc61a05bbabd57c0e1ed8c25ea7a71e4c4a7102c9221944eb3ac18"
+                    },
+                    {
+                        "path":  "scripts/Test-RutaFijaLocalSecretPolicy.ps1",
+                        "sha256":  "edeee8f8b94217eb10dabf92e71a0ebc06782fef4c23d2e5d1a983285ec538c0"
+                    },
+                    {
+                        "path":  "scripts/Test-RutaFijaLauncherSafety.ps1",
+                        "sha256":  "0454ebf8b25abd83fef5635b434d3a473ef5f7409b1949290f26fa9631be3908"
+                    },
+                    {
+                        "path":  "scripts/Set-RutaFijaPostgresqlService.ps1",
+                        "sha256":  "e6fb23a7902deef097c1740269cbc33973d529d8f46385221a9bac3e956e297f"
+                    }
+                ],
+    "liveBackendFrontendStartProven":  false
+}

@@ -9,6 +9,7 @@ import pe.rutafija.operation.config.OperationProperties;
 import pe.rutafija.shared.exception.ApplicationException;
 import pe.rutafija.shared.exception.ErrorCode;
 import pe.rutafija.shared.security.CurrentUserService;
+import pe.rutafija.personidentity.application.PersonIdentityGateAuthorizationManager;
 
 import java.security.SecureRandom;
 import java.time.Clock;
@@ -28,22 +29,24 @@ public class OperationStreamTicketService {
     private final CurrentUserService currentUserService;
     private final OperationProperties properties;
     private final Clock clock;
+    private final PersonIdentityGateAuthorizationManager identityGate;
     private final SecureRandom secureRandom = new SecureRandom();
     private final ConcurrentMap<String, OperationStreamTicket> tickets = new ConcurrentHashMap<>();
 
     public OperationStreamTicketService(
             CurrentUserService currentUserService,
             OperationProperties properties,
-            Clock clock
+            Clock clock,PersonIdentityGateAuthorizationManager identityGate
     ) {
         this.currentUserService = currentUserService;
         this.properties = properties;
         this.clock = clock;
+        this.identityGate=identityGate;
     }
 
     public OperationStreamTicketResponse issue() {
         AppUser actor = currentUserService.requireTenantActor();
-        if (actor.getRole() != UserRole.ADMIN) {
+        if (actor.getRole() != UserRole.ADMIN || !identityGate.allowsUser(actor.getId())) {
             throw new ApplicationException(
                     HttpStatus.FORBIDDEN,
                     ErrorCode.FORBIDDEN_ROLE,
@@ -63,7 +66,7 @@ public class OperationStreamTicketService {
             return Optional.empty();
         }
         OperationStreamTicket streamTicket = tickets.remove(ticket);
-        if (streamTicket == null || streamTicket.isExpired(Instant.now(clock))) {
+        if (streamTicket == null || streamTicket.isExpired(Instant.now(clock)) || !identityGate.allowsUser(streamTicket.userId())) {
             return Optional.empty();
         }
         return Optional.of(streamTicket);

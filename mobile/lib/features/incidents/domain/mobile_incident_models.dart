@@ -1,0 +1,336 @@
+enum MobileIncidentCategory {
+  averia('AVERIA', 'Avería'),
+  accidente('ACCIDENTE', 'Accidente'),
+  retraso('RETRASO', 'Retraso'),
+  licenciaVencida('LICENCIA_VENCIDA', 'Vencimiento de licencia'),
+  imposibilidadServicio('IMPOSIBILIDAD_SERVICIO', 'Imposibilidad de servicio'),
+  ubicacionNoCorroborada(
+    'UBICACION_NO_CORROBORADA',
+    'Ubicación no corroborada',
+  ),
+  riesgoSeguridad('RIESGO_SEGURIDAD', 'Riesgo de seguridad'),
+  accesoParada('ACCESO_PARADA', 'Problema de acceso a la parada'),
+  falloPlataforma('FALLO_PLATAFORMA', 'Fallo técnico de la plataforma'),
+  otro('OTRO', 'Otro');
+
+  const MobileIncidentCategory(this.apiValue, this.label);
+
+  final String apiValue;
+  final String label;
+
+  static MobileIncidentCategory fromApi(Object? value) {
+    return MobileIncidentCategory.values.firstWhere(
+      (item) => item.apiValue == value,
+      orElse: () => throw FormatException('Categoría de incidencia inválida.'),
+    );
+  }
+}
+
+enum MobileIncidentSeverity {
+  unassessed('UNASSESSED', 'Sin evaluar'),
+  low('LOW', 'Baja'),
+  medium('MEDIUM', 'Media'),
+  high('HIGH', 'Alta'),
+  critical('CRITICAL', 'Crítica');
+
+  const MobileIncidentSeverity(this.apiValue, this.label);
+  final String apiValue, label;
+  static MobileIncidentSeverity fromApi(Object? value) => value == null
+      ? unassessed
+      : values.firstWhere(
+          (s) => s.apiValue == value,
+          orElse: () => throw const FormatException('Gravedad inválida.'),
+        );
+}
+
+enum MobileIncidentStatus {
+  open('OPEN', 'Abierta'),
+  followUp('FOLLOW_UP', 'En seguimiento'),
+  resolved('RESOLVED', 'Resuelta'),
+  driverClosed('CLOSED_BY_DRIVER', 'Cerrada por conductor');
+
+  const MobileIncidentStatus(this.apiValue, this.label);
+
+  final String apiValue;
+  final String label;
+
+  static MobileIncidentStatus fromApi(Object? value) {
+    return MobileIncidentStatus.values.firstWhere(
+      (item) => item.apiValue == value,
+      orElse: () => throw FormatException('Estado de incidencia inválido.'),
+    );
+  }
+}
+
+enum MobileIncidentSource {
+  mobileApp('MOBILE_APP', 'Aplicación móvil'),
+  crmWeb('CRM_WEB', 'CRM'),
+  system('SYSTEM', 'Sistema');
+
+  const MobileIncidentSource(this.apiValue, this.label);
+
+  final String apiValue;
+  final String label;
+
+  static MobileIncidentSource fromApi(Object? value) {
+    return MobileIncidentSource.values.firstWhere(
+      (item) => item.apiValue == value,
+      orElse: () => throw FormatException('Origen de incidencia inválido.'),
+    );
+  }
+}
+
+final class MobileIncident {
+  const MobileIncident({
+    required this.id,
+    required this.version,
+    required this.driverId,
+    required this.driverName,
+    required this.assignmentId,
+    required this.category,
+    required this.source,
+    required this.status,
+    required this.description,
+    required this.reportedById,
+    required this.reportedByName,
+    required this.reportedAt,
+    required this.followUpNote,
+    required this.followedUpByName,
+    required this.followedUpAt,
+    required this.resolvedAt,
+    required this.driverClosedById,
+    required this.driverClosedByName,
+    required this.driverClosedAt,
+    required this.createdAt,
+    required this.updatedAt,
+    this.severity = MobileIncidentSeverity.unassessed,
+    this.responsibleAdminId,
+    this.previousIncidentId,
+    this.relationReason,
+    this.operationalEffect = 'NO_INTERRUPTION_RECORDED',
+  });
+
+  final String id;
+  final int version;
+  final String driverId;
+  final String driverName;
+  final String? assignmentId;
+  final MobileIncidentCategory category;
+  final MobileIncidentSource source;
+  final MobileIncidentStatus status;
+  final String description;
+  final String? reportedById;
+  final String reportedByName;
+  final DateTime reportedAt;
+  final String? followUpNote;
+  final String? followedUpByName;
+  final DateTime? followedUpAt;
+  final DateTime? resolvedAt;
+  final String? driverClosedById;
+  final String? driverClosedByName;
+  final DateTime? driverClosedAt;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final MobileIncidentSeverity severity;
+  final String? responsibleAdminId, previousIncidentId, relationReason;
+  final String operationalEffect;
+  bool get isClosed =>
+      status == MobileIncidentStatus.resolved ||
+      status == MobileIncidentStatus.driverClosed;
+
+  bool get wasClosedByDriver => status == MobileIncidentStatus.driverClosed;
+
+  bool canBeClosedBy(String userId) {
+    final normalizedUserId = userId.trim();
+    return source == MobileIncidentSource.mobileApp &&
+        normalizedUserId.isNotEmpty &&
+        reportedById == normalizedUserId &&
+        driverClosedById == null &&
+        driverClosedAt == null &&
+        (status == MobileIncidentStatus.open ||
+            status == MobileIncidentStatus.followUp);
+  }
+
+  MobileIncident withDriverClosure({
+    required String actorId,
+    required String actorName,
+    required DateTime closedAt,
+  }) {
+    return MobileIncident(
+      id: id,
+      version: version + 1,
+      driverId: driverId,
+      driverName: driverName,
+      assignmentId: assignmentId,
+      category: category,
+      source: source,
+      status: MobileIncidentStatus.driverClosed,
+      description: description,
+      reportedById: reportedById,
+      reportedByName: reportedByName,
+      reportedAt: reportedAt,
+      followUpNote: followUpNote,
+      followedUpByName: followedUpByName,
+      followedUpAt: followedUpAt,
+      resolvedAt: resolvedAt,
+      driverClosedById: actorId,
+      driverClosedByName: actorName,
+      driverClosedAt: closedAt.toUtc(),
+      createdAt: createdAt,
+      updatedAt: closedAt.toUtc(),
+      severity: severity,
+      responsibleAdminId: responsibleAdminId,
+      previousIncidentId: previousIncidentId,
+      relationReason: relationReason,
+      operationalEffect: operationalEffect,
+    );
+  }
+
+  factory MobileIncident.fromJson(Map<String, dynamic> json) {
+    return MobileIncident(
+      id: _requiredText(json['id'], 'id'),
+      version: _requiredInt(json['version'], 'version'),
+      driverId: _requiredText(json['driverId'], 'driverId'),
+      driverName: _requiredText(json['driverName'], 'driverName'),
+      assignmentId: _optionalText(json['assignmentId']),
+      category: MobileIncidentCategory.fromApi(json['category']),
+      source: MobileIncidentSource.fromApi(json['source']),
+      status: MobileIncidentStatus.fromApi(json['status']),
+      description: _requiredText(json['description'], 'description'),
+      reportedById: json['source'] == 'SYSTEM'
+          ? _optionalText(json['reportedById'])
+          : _requiredText(json['reportedById'], 'reportedById'),
+      reportedByName: _requiredText(json['reportedByName'], 'reportedByName'),
+      reportedAt: _requiredDate(json['reportedAt'], 'reportedAt'),
+      followUpNote: _optionalText(json['followUpNote']),
+      followedUpByName: _optionalText(json['followedUpByName']),
+      followedUpAt: _optionalDate(json['followedUpAt']),
+      resolvedAt: _optionalDate(json['resolvedAt']),
+      driverClosedById: _optionalText(json['driverClosedById']),
+      driverClosedByName: _optionalText(json['driverClosedByName']),
+      driverClosedAt: _optionalDate(json['driverClosedAt']),
+      createdAt: _requiredDate(json['createdAt'], 'createdAt'),
+      updatedAt: _requiredDate(json['updatedAt'], 'updatedAt'),
+      severity: MobileIncidentSeverity.fromApi(json['severity']),
+      responsibleAdminId: _optionalText(json['responsibleAdminId']),
+      previousIncidentId: _optionalText(json['previousIncidentId']),
+      relationReason: _optionalText(json['relationReason']),
+      operationalEffect:
+          json['operationalEffect'] as String? ?? 'NO_INTERRUPTION_RECORDED',
+    );
+  }
+}
+
+final class MobileIncidentAction {
+  const MobileIncidentAction({
+    required this.operationKey,
+    required this.actorId,
+    required this.kind,
+    required this.detail,
+    required this.recordedAt,
+    required this.resultingVersion,
+  });
+  final String operationKey, actorId, kind;
+  final Map<String, dynamic> detail;
+  final DateTime recordedAt;
+  final int resultingVersion;
+  factory MobileIncidentAction.fromJson(Map<String, dynamic> j) =>
+      MobileIncidentAction(
+        operationKey: j['operationKey'] as String,
+        actorId: j['actorId'] as String,
+        kind: j['kind'] as String,
+        detail: Map<String, dynamic>.from(j['detail'] as Map),
+        recordedAt: DateTime.parse(j['recordedAt'] as String),
+        resultingVersion: (j['resultingVersion'] as num).toInt(),
+      );
+}
+
+final class MobileIncidentOperation {
+  const MobileIncidentOperation({
+    required this.operationKey,
+    required this.incidentId,
+    required this.kind,
+  });
+  final String operationKey, incidentId, kind;
+  factory MobileIncidentOperation.fromJson(Map<String, dynamic> j) =>
+      MobileIncidentOperation(
+        operationKey: j['operationKey'] as String,
+        incidentId: j['incidentId'] as String,
+        kind: j['kind'] as String,
+      );
+}
+
+final class MobileIncidentPage {
+  const MobileIncidentPage({
+    required this.items,
+    required this.page,
+    required this.size,
+    required this.totalItems,
+    required this.totalPages,
+  });
+
+  final List<MobileIncident> items;
+  final int page;
+  final int size;
+  final int totalItems;
+  final int totalPages;
+
+  factory MobileIncidentPage.fromJson(Map<String, dynamic> json) {
+    final rawItems = json['items'];
+    if (rawItems is! List) {
+      throw const FormatException('La lista de incidencias no es válida.');
+    }
+    return MobileIncidentPage(
+      items: rawItems
+          .map((item) {
+            if (item is! Map) {
+              throw const FormatException('Una incidencia no es válida.');
+            }
+            return MobileIncident.fromJson(Map<String, dynamic>.from(item));
+          })
+          .toList(growable: false),
+      page: _requiredInt(json['page'], 'page'),
+      size: _requiredInt(json['size'], 'size'),
+      totalItems: _requiredInt(json['totalItems'], 'totalItems'),
+      totalPages: _requiredInt(json['totalPages'], 'totalPages'),
+    );
+  }
+}
+
+String _requiredText(Object? value, String field) {
+  if (value is String && value.trim().isNotEmpty) {
+    return value.trim();
+  }
+  throw FormatException('$field es obligatorio.');
+}
+
+String? _optionalText(Object? value) {
+  if (value is String && value.trim().isNotEmpty) {
+    return value.trim();
+  }
+  return null;
+}
+
+int _requiredInt(Object? value, String field) {
+  if (value is int) {
+    return value;
+  }
+  throw FormatException('$field debe ser numérico.');
+}
+
+DateTime _requiredDate(Object? value, String field) {
+  if (value is String) {
+    final parsed = DateTime.tryParse(value);
+    if (parsed != null) {
+      return parsed.toUtc();
+    }
+  }
+  throw FormatException('$field debe ser una fecha UTC válida.');
+}
+
+DateTime? _optionalDate(Object? value) {
+  if (value == null) {
+    return null;
+  }
+  return _requiredDate(value, 'fecha opcional');
+}

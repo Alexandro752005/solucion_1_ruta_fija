@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="8.235" tests="10" errors="0" skipped="0" failures="0" flakes="0">
+  <testcase name="executionTrackingRejectsAvailabilityAndBackgroundAndOutOfSegmentTime" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="0.916" />
+  <testcase name="executionStartRequiresFunctionalConsentWithoutMutatingOccupation" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="0.771" />
+  <testcase name="executionSummaryIsCodedOwnScopedAndNeverExposesCoordinates" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="0.836" />
+  <testcase name="executionStartRequiresExplicitPermissionServiceAndForeground" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="0.835" />
+  <testcase name="executionCompletionClosesOwnSegmentAndStopsCurrentPoint" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="0.82" />
+  <testcase name="executionStartRecordsServerTimeOnceAndDoesNotAutostartFromAcceptance" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="0.784" />
+  <testcase name="executionAdminCannotDeclareCompletionOrCreateSegments" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="0.785" />
+  <testcase name="executionConsentWithdrawalStopsPointsButAllowsSafeCompletion" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="0.835" />
+  <testcase name="executionDatabaseRejectsRewritingOrDeletingOriginalAndClosedSegments" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="0.829" />
+  <testcase name="executionStaleVersionCannotStartOrCloseAndFreshCommandsPreserveTheSameSegment" classname="pe.rutafija.qualification.ServiceExecutionIntegrationTest" time="0.806" />
+</testsuite>

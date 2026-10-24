@@ -1,0 +1,16 @@
+{
+  "Java": {
+    "files": 406,
+    "nonblank": 25110
+  },
+  "TypeScript": {
+    "files": 87,
+    "nonblank": 8529
+  },
+  "Dart": {
+    "files": 87,
+    "nonblank": 14811
+  },
+  "JavaPercentage": 51.83,
+  "scope": "Product sources only Java main, Angular src excluding spec, Flutter lib; no tests or archived source copies"
+}

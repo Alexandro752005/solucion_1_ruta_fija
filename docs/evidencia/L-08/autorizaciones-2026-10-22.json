@@ -1,0 +1,62 @@
+{
+  "recordedLocalDate": "2026-10-22",
+  "lot": "L-08",
+  "status": "EN_CURSO",
+  "basis": "Explicit answers to call_13cd6f25f8af4607a7e794613f77d384",
+  "proposal": "docs/operacion/L-08-validacion-aislada-y-caso-fisico-propuesta.md",
+  "proposalSha256": "7605976211e2d536463e3e98f8d3129382f9c2453982a972da1d74eb5759aab9",
+  "decisions": [
+    {
+      "id": "L08-REST-01",
+      "answer": "Autorizar L08-REST-01",
+      "status": "AUTORIZADA_USUARIO",
+      "caseId": "c748e5ab-c20a-43d6-9c17-af5d0a703dab",
+      "source": "ruta_fija_test@127.0.0.1:5432",
+      "isolatedDestination": "ruta_fija_test@127.0.0.1:55438",
+      "privateRelativeDirectory": "backend/.local/l08-restore-c748e5ab-c20a-43d6-9c17-af5d0a703dab",
+      "developmentOrPilotAuthorized": false,
+      "independentBackupAccredited": false
+    },
+    {
+      "id": "L08-CON-01",
+      "answer": "Autorizar L08-CON-01",
+      "status": "AUTORIZADA_USUARIO",
+      "runId": "a999ef52-d87f-498d-9251-1581cbb72562",
+      "database": "ruta_fija_test@127.0.0.1:5432",
+      "maxNewConductorAccounts": 1,
+      "expectedHistoricalConductorBefore": 6,
+      "expectedHistoricalConductorAfter": 7,
+      "adminId": "92ebc07c-1319-4850-a734-f792cb299979",
+      "superAdminId": "088518c1-821c-4316-9f87-090f51ac44e0",
+      "organizationId": "1a759298-7831-4aaf-9299-c3920a9cc28a",
+      "emailTransport": "SIMULATED_ONLY",
+      "physicalLocationRequiresPersonalPhoneConsent": true,
+      "globalCleanupOrCounterResetAuthorized": false,
+      "previousCasesMayBeReopened": false
+    },
+    {
+      "id": "L08-REST-02",
+      "answer": "Autorizar L08-REST-02",
+      "status": "AUTORIZADA_USUARIO",
+      "caseId": "c748e5ab-c20a-43d6-9c17-af5d0a703dab",
+      "isolatedDestination": "ruta_fija_test_l08_locale@127.0.0.1:55438",
+      "locale": "Spanish_Peru.1252",
+      "encoding": "UTF8",
+      "proposal": "docs/operacion/L-08-REST-02-continuacion-regional-propuesta.md",
+      "proposalSha256": "ecaca0f13facfc2606fc989f637321f6b85d7b8a6755ca0c91e688b6f9901415",
+      "preserveBothDatabases": true,
+      "independentBackupAccredited": false
+    }
+  ],
+  "independentResources": {
+    "answer": "<<siguen pendientes>>",
+    "independentBackupMediumAvailable": false,
+    "independentMonitoringHostAvailable": false,
+    "human24x7CoverageAndEscalationAvailable": false,
+    "pcAndPhoneNotPresumedEquivalent": true
+  },
+  "pilotEnabled": false,
+  "externalMailAuthorizedByThisRecord": false,
+  "capacityDataset25AuthorizedByThisRecord": false,
+  "evidenceOfSuccessfulExecution": false
+}

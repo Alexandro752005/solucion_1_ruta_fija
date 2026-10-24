@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/presentation/mobile_date_time.dart';
 import '../domain/mobile_assignment_models.dart';
 
-String assignmentDateTimeLabel(DateTime value) {
-  final local = value.toLocal();
-  String two(int number) => number.toString().padLeft(2, '0');
-  return '${two(local.day)}/${two(local.month)}/${local.year} '
-      '${two(local.hour)}:${two(local.minute)}';
-}
+String assignmentDateTimeLabel(DateTime value) => mobileDateTimeLabel(value);
 
 Color assignmentStatusColor(
   BuildContext context,
@@ -19,7 +15,9 @@ Color assignmentStatusColor(
     MobileAssignmentStatus.scheduled => scheme.primary,
     MobileAssignmentStatus.enServicio => scheme.secondary,
     MobileAssignmentStatus.completed => Colors.green.shade700,
+    MobileAssignmentStatus.transferred => scheme.outline,
     MobileAssignmentStatus.rejected ||
+    MobileAssignmentStatus.interrupted ||
     MobileAssignmentStatus.cancelled ||
     MobileAssignmentStatus.expired => scheme.error,
   };

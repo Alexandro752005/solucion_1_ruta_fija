@@ -8,6 +8,7 @@ import 'package:ruta_fija_conductor/core/network/mobile_access_token_provider.da
 import 'package:ruta_fija_conductor/core/network/mobile_api_client.dart';
 import 'package:ruta_fija_conductor/features/profile/data/mobile_driver_repository.dart';
 import 'package:ruta_fija_conductor/features/profile/domain/mobile_driver_models.dart';
+import 'package:ruta_fija_conductor/features/location/domain/mobile_foreground_location.dart';
 
 void main() {
   test('loads profile and submits only permitted availability states to the mobile API', () async {
@@ -33,7 +34,11 @@ void main() {
         );
       }
       return http.Response(
-        jsonEncode({'driverId': 'driver-1', 'status': 'DESCANSO'}),
+        jsonEncode({
+          'driverId': 'driver-1',
+          'status': 'DESCANSO',
+          'updatedAt': '2026-09-25T12:00:00Z',
+        }),
         200,
       );
     });
@@ -83,6 +88,71 @@ void main() {
         repository.changeAvailability(MobileAvailabilityStatus.enServicio),
         throwsArgumentError,
       );
+    },
+  );
+
+  test(
+    'sends consent and one current point through own mobile endpoints only',
+    () async {
+      final requests = <http.Request>[];
+      final client = MockClient((request) async {
+        requests.add(request);
+        if (request.url.path == '/api/v1/mobile/location/consent') {
+          return http.Response(
+            jsonEncode({
+              'driverId': 'driver-1',
+              'fullName': 'Ana Conductor',
+              'groupId': 'group-1',
+              'groupName': 'Grupo Centro',
+              'availabilityStatus': 'DISPONIBLE',
+              'locationConsent': true,
+              'primaryVehicle': null,
+            }),
+            200,
+          );
+        }
+        return http.Response('', 204);
+      });
+      final repository = MobileDriverRepository(
+        MobileApiClient(
+          httpClient: client,
+          environment: RouteFijaEnvironment.fromApiBaseUrl(
+            'https://api.example.test/api/v1',
+          ),
+          accessTokenProvider: const _StaticTokenProvider(),
+        ),
+      );
+
+      final profile = await repository.changeLocationConsent(true);
+      await repository.upsertCurrentLocation(
+        MobileCurrentLocation(
+          latitude: -12.046374,
+          longitude: -77.042793,
+          accuracyMeters: 8.2,
+          capturedAt: DateTime.utc(2026, 9, 25, 12),
+        ),
+      );
+      await repository.clearCurrentLocation();
+
+      expect(profile.locationConsent, isTrue);
+      expect(requests, hasLength(3));
+      expect(requests[0].method, 'PUT');
+      expect(requests[0].url.path, '/api/v1/mobile/location/consent');
+      expect(jsonDecode(requests[0].body), {'consent': true});
+      expect(requests[1].method, 'PUT');
+      expect(requests[1].url.path, '/api/v1/mobile/location/current');
+      expect(jsonDecode(requests[1].body), {
+        'latitude': -12.046374,
+        'longitude': -77.042793,
+        'accuracyM': 8.2,
+        'capturedAt': '2026-09-25T12:00:00.000Z',
+        'permissionGranted': true,
+        'locationServiceEnabled': true,
+        'foreground': true,
+      });
+      expect(requests[1].body, isNot(contains('driverId')));
+      expect(requests[2].method, 'DELETE');
+      expect(requests[2].url.path, '/api/v1/mobile/location/current');
     },
   );
 }

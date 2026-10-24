@@ -65,7 +65,7 @@ function Assert-NotContains {
 $pubspec = Get-Utf8Text 'mobile\pubspec.yaml'
 Assert-Contains -Text $pubspec -Pattern '(?m)^\s*http:\s*\^1\.6\.0\s*$' -Description 'cliente HTTP versionado'
 Assert-Contains -Text $pubspec -Pattern '(?m)^\s*flutter_secure_storage:\s*\^10\.3\.4\s*$' -Description 'almacenamiento seguro Android compatible con API 36'
-Assert-NotContains -Text $pubspec -Pattern '(?m)^\s*(dio|shared_preferences|geolocator|permission_handler|firebase_)\s*:' -Description 'dependencia adelantada de M4-M8'
+Assert-NotContains -Text $pubspec -Pattern '(?m)^\s*(dio|shared_preferences|permission_handler|firebase_)\s*:' -Description 'dependencia no aprobada fuera de M2-M7'
 
 $tokenStore = Get-Utf8Text 'mobile\lib\core\session\mobile_secure_token_store.dart'
 Assert-Contains -Text $tokenStore -Pattern 'FlutterSecureStorage' -Description 'refresh token en almacenamiento seguro del SO'
@@ -92,7 +92,7 @@ $driverRepository = Get-Utf8Text 'mobile\lib\features\profile\data\mobile_driver
 Assert-Contains -Text $driverRepository -Pattern "'mobile/me'" -Description 'perfil propio del conductor'
 Assert-Contains -Text $driverRepository -Pattern "'mobile/availability'" -Description 'disponibilidad propia'
 Assert-Contains -Text $driverRepository -Pattern 'canBeChosenByDriver' -Description 'bloqueo cliente de RESERVADO y EN_SERVICIO'
-Assert-NotContains -Text $driverRepository -Pattern 'mobile/(assignments|incidents|announcements|location)' -Description 'operacion movil posterior a F4.2'
+Assert-NotContains -Text $driverRepository -Pattern 'mobile/(assignments|incidents|announcements)' -Description 'operacion movil posterior a F4.2'
 
 $environment = Get-Utf8Text 'mobile\lib\app\ruta_fija_environment.dart'
 Assert-Contains -Text $environment -Pattern 'dart\.vm\.product' -Description 'deteccion de compilacion release'
@@ -160,4 +160,4 @@ if ($apkBytes -le 0) {
     throw 'F4.2 produjo un APK debug vacio.'
 }
 
-Write-Output "F4_2_MOBILE_SESSION_PROFILE_AVAILABILITY=PASS flutter='$versionLine' m1=8/80 m2=12/80 m3=8/80 total=28/80 android=READY apk_bytes=$apkBytes docker=0"
+Write-Output "F4_2_MOBILE_SESSION_PROFILE_AVAILABILITY=PASS flutter='$versionLine' m1=8/80 m2=12/80 m3=8/80 total=28/80 android=READY apk_bytes=$apkBytes"

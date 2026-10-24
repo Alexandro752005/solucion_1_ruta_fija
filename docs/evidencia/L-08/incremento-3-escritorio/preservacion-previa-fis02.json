@@ -1,0 +1,74 @@
+{
+  "observedAt": "2026-10-23T02:10:49.240916+00:00",
+  "result": "PASS_FROZEN_EVIDENCE_PRESERVED",
+  "checks": [
+    {
+      "manifest": "docs/evidencia/L-07/manifest-cierre.sha256",
+      "manifestSha256": "9ba71c3071583695991fb22ecf1eb261de5b9b83f9db76f73ff7da1e2cebcf13",
+      "filesVerified": 144,
+      "mutableExcluded": [
+        "docs/backlog-producto-ruta-fija-v3.1.md",
+        "docs/seguimiento/tareas.json",
+        "memory/current.md",
+        "memory/target.md"
+      ],
+      "mismatches": []
+    },
+    {
+      "manifest": "docs/evidencia/L-08/incremento-1-candidato-y-preautenticacion/manifest.sha256",
+      "manifestSha256": "f5565a3491d9890d6a0adcc2d8b882b49d40993808f8926bb9fc6113dca861bf",
+      "filesVerified": 36,
+      "mutableExcluded": [],
+      "mismatches": []
+    },
+    {
+      "manifest": "docs/evidencia/L-08/conectado-a999ef52-d87f-498d-9251-1581cbb72562/manifest-caso-cerrado.sha256",
+      "manifestSha256": "62498733d6cb86cd884b8fc6e38b9bb367a7c7579811f9443b9303decb93635f",
+      "filesVerified": 451,
+      "mutableExcluded": [],
+      "mismatches": []
+    },
+    {
+      "manifest": "docs/evidencia/L-08/cap25-860c1cdb-b062-469a-9a3f-156ea23bb656/manifest-caso-cerrado.sha256",
+      "manifestSha256": "1a72d34aaeb94b67328dafbb92af57c0b5459808dbc2ebdbef0a08de6975fdcb",
+      "filesVerified": 22,
+      "mutableExcluded": [],
+      "mismatches": []
+    },
+    {
+      "manifest": "docs/evidencia/L-08/incremento-2-mision-y-controles/manifest-corte-post-cap25.sha256",
+      "manifestSha256": "7091e94d1d3f26416ca4e9831202a2f8488aa4566b1a2f648fe056d47fc1afe2",
+      "filesVerified": 75,
+      "mutableExcluded": [],
+      "mismatches": []
+    },
+    {
+      "file": "backups/L-00-2026-10-13-final3/source-snapshot.zip",
+      "sha256": "3806510606a1565f23b8c526a13cc1049bc79141babdb8e1316f042488b3d11b",
+      "matches": true
+    },
+    {
+      "file": "docs/evidencia/L-00/source-manifest.sha256",
+      "sha256": "e78d7002d5c85b24200be21b8fd88ce770d36333ca49caa5351248cfd0e28bad",
+      "matches": true
+    },
+    {
+      "file": "docs/legal/publicado/terminos-admin-v1.0.0.md",
+      "sha256": "20ffd9525cb19ec51387bf11859cf34100a5117b00de8f428bfeb8b9a4dc6417",
+      "matches": true
+    },
+    {
+      "file": "artifacts/L-01-superadmin-titular-2026-10-17/ruta-fija-recovery-cli.jar",
+      "sha256": "91913ff7c11cabfaa01881fcbfb24bbf5ed347564c0140d73a757bc96d38e24a",
+      "matches": true
+    },
+    {
+      "file": "artifacts/L-08-post-cap25-2026-10-22/ruta-fija-l08-local.jar",
+      "sha256": "eded50c4bf3706f0f92ca1cb1700e07946db5eca8405189a08ec6d437303aa4f",
+      "matches": true
+    }
+  ],
+  "final3Regenerated": false,
+  "humanFis02Active": true,
+  "fixtureTestsPermitted": false
+}

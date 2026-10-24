@@ -1,0 +1,14 @@
+{
+  "observedAt": "2026-10-22T22:08:30.807261+00:00",
+  "runId": "a999ef52-d87f-498d-9251-1581cbb72562",
+  "result": "PASS_PROTECTED_ARTIFACTS_AND_MANUAL_ARCHIVE_PRESERVED",
+  "frozenManifestFilesVerified": {
+    "L07Frozen": 144,
+    "L08Increment1": 36
+  },
+  "protectedFilesVerified": 12,
+  "final3Regenerated": false,
+  "gitOrGitHubExecuted": false,
+  "publishedTermsChanged": false,
+  "manualArchiveResultSha256": "13661ee0aa87196777bfe5e373dfdd7086c864a95db5c68b5ed449fd0af53e8b"
+}

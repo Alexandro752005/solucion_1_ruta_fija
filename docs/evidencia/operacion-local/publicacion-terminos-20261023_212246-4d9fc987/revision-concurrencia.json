@@ -1,0 +1,49 @@
+{
+  "result": "PASS_CONCURRENT_LOGINS_EXPLAINED",
+  "accountChangedColumns": {
+    "CONDUCTOR": [],
+    "SUPER_ADMIN": [
+      "last_login_at",
+      "updated_at"
+    ],
+    "ADMIN": [
+      "last_login_at",
+      "updated_at"
+    ]
+  },
+  "passwordsRolesEmailsAndIdentityPreserved": true,
+  "changedTables": [
+    "admin_terms_document",
+    "app_user",
+    "audit_event",
+    "refresh_token"
+  ],
+  "auditEvents": [
+    {
+      "action": "LOGIN_SUCCESS",
+      "role": "SUPER_ADMIN",
+      "occurred_at": "2026-10-24T02:21:09.021164+00:00"
+    },
+    {
+      "action": "OWNER_AUTHORIZED_LOCAL_ADMIN_TERMS_PUBLICATION",
+      "role": null,
+      "occurred_at": "2026-10-24T02:21:09.159221+00:00"
+    },
+    {
+      "action": "LOGOUT",
+      "role": "SUPER_ADMIN",
+      "occurred_at": "2026-10-24T02:21:12.558468+00:00"
+    },
+    {
+      "action": "LOGIN_SUCCESS",
+      "role": "ADMIN",
+      "occurred_at": "2026-10-24T02:21:16.563305+00:00"
+    },
+    {
+      "action": "LOGOUT",
+      "role": "ADMIN",
+      "occurred_at": "2026-10-24T02:21:22.541364+00:00"
+    }
+  ],
+  "protectedTestUnchanged": true
+}

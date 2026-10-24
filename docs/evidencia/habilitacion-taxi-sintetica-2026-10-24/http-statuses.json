@@ -1,0 +1,110 @@
+[
+  {
+    "atUtc": "2026-10-24T05:45:44.300752+00:00",
+    "method": "POST",
+    "path": "/api/v1/auth/login",
+    "status": 200
+  },
+  {
+    "atUtc": "2026-10-24T05:45:44.348816+00:00",
+    "method": "GET",
+    "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/qualification",
+    "status": 200
+  },
+  {
+    "atUtc": "2026-10-24T05:45:44.456345+00:00",
+    "method": "GET",
+    "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/qualification",
+    "status": 200
+  },
+  {
+    "atUtc": "2026-10-24T05:45:44.515299+00:00",
+    "method": "POST",
+    "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/qualification/reviews",
+    "status": 200
+  },
+  {
+    "atUtc": "2026-10-24T05:45:44.568019+00:00",
+    "method": "GET",
+    "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/qualification",
+    "status": 200
+  },
+  {
+    "atUtc": "2026-10-24T05:45:44.631241+00:00",
+    "method": "POST",
+    "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/qualification/unit-requests/3ad7f3aa-4ef6-4f7a-8f09-65bb5d8625d6/decision",
+    "status": 200
+  },
+  {
+    "atUtc": "2026-10-24T05:45:44.653073+00:00",
+    "method": "GET",
+    "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/qualification",
+    "status": 200
+  },
+  {
+    "atUtc": "2026-10-24T05:45:44.702270+00:00",
+    "method": "POST",
+    "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/qualification/periods",
+    "status": 200
+  },
+  {
+    "atUtc": "2026-10-24T05:45:44.724610+00:00",
+    "method": "GET",
+    "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/qualification",
+    "status": 200
+  },
+  {
+    "atUtc": "2026-10-24T05:45:44.778951+00:00",
+    "method": "POST",
+    "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/qualification/activate",
+    "status": 200
+  },
+  {
+    "atUtc": "2026-10-24T05:45:44.825117+00:00",
+    "method": "GET",
+    "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/qualification",
+    "status": 200
+  },
+  {
+    "atUtc": "2026-10-24T05:45:44.851762+00:00",
+    "method": "GET",
+    "path": "/api/v1/drivers/83562d94-4705-4375-b0a2-201e85d06eaa/incorporation-status",
+    "status": 200
+  },
+  {
+    "atUtc": "2026-10-24T05:45:45.137539+00:00",
+    "method": "POST",
+    "path": "/api/v1/mobile/auth/login",
+    "status": 200
+  },
+  {
+    "atUtc": "2026-10-24T05:45:45.168088+00:00",
+    "method": "GET",
+    "path": "/api/v1/mobile/qualification",
+    "status": 200
+  },
+  {
+    "atUtc": "2026-10-24T05:45:45.189377+00:00",
+    "method": "GET",
+    "path": "/api/v1/mobile/me",
+    "status": 200
+  },
+  {
+    "atUtc": "2026-10-24T05:45:45.245605+00:00",
+    "method": "POST",
+    "path": "/api/v1/mobile/auth/refresh",
+    "status": 200
+  },
+  {
+    "atUtc": "2026-10-24T05:45:45.273707+00:00",
+    "method": "POST",
+    "path": "/api/v1/mobile/auth/logout",
+    "status": 204
+  },
+  {
+    "atUtc": "2026-10-24T05:45:45.286068+00:00",
+    "method": "POST",
+    "path": "/api/v1/auth/logout",
+    "status": 204
+  }
+]

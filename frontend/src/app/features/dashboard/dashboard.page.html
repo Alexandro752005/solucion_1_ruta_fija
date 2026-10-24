@@ -1,4 +1,4 @@
-<section class="dashboard-page">
+﻿<section class="dashboard-page">
   <rf-page-header
     title="Resumen"
     [description]="description()"
@@ -9,6 +9,19 @@
   </rf-page-header>
 
   @if (isAdmin()) {
+    <section class="dashboard-section" aria-labelledby="priority-title">
+      <header class="section-heading"><div><h2 id="priority-title">Atención prioritaria</h2><p>Primero seguridad; después programación, vencimientos e incorporación. Las próximas24h son una ventana informativa.</p></div></header>
+      @if (loadingPriorities()) { <p class="dashboard-state" role="status">Consultando prioridades…</p> }
+      @else if (prioritiesError()) { <p class="dashboard-state error" role="alert">No fue posible consultar las prioridades. No se interpretan como cero.</p> }
+      @else if (priorities(); as summary) {
+        <ol class="priority-list">
+          @for (item of summary.priorities; track item.code) {
+            <li [class.critical]="item.order <= 2 && item.count > 0"><a [routerLink]="item.route"><strong>{{ priorityLabel(item.code) }}</strong><span>{{ item.count }}</span></a></li>
+          }
+        </ol>
+        <p class="management-muted">Corte {{ dateLabel(summary.generatedAt) }} · próximos servicios hasta {{ dateLabel(summary.upcomingUntil) }}. Las colas pueden coincidir; no sumarlas.</p>
+      }
+    </section>
     <section class="dashboard-section" aria-labelledby="operational-title">
       <header class="section-heading">
         <div>
@@ -62,7 +75,7 @@
                   <td>{{ dateLabel(event.occurredAt) }}</td>
                   <td>{{ entityLabel(event.entityType) }}</td>
                   <td>{{ actionLabel(event.action) }}</td>
-                  <td>{{ event.userFullName || 'Sistema' }}</td>
+                  <td>{{ event.userId ? 'CUENTA-' + event.userId : 'Sistema' }}</td>
                 </tr>
               }
             </tbody>
@@ -83,6 +96,11 @@
       } @else {
         <div class="metric-grid metric-grid--platform">
           <article class="metric"><span>Organizaciones registradas</span><strong [class.unavailable]="organizationsError()">{{ organizationsError() ? 'No disponible' : organizationTotal() }}</strong></article>
+          @if (platform(); as summary) {
+            <article class="metric"><span>Organizaciones activas</span><strong>{{ summary.activeOrganizations }}</strong></article>
+            <article class="metric"><span>ADMIN activos</span><strong>{{ summary.activeAdmins }}</strong></article>
+            <article class="metric"><span>Activaciones ADMIN pendientes</span><strong>{{ summary.pendingAdmins }}</strong></article>
+          }
         </div>
       }
     </section>
@@ -115,3 +133,4 @@
     </nav>
   </section>
 </section>
+

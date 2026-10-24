@@ -1,0 +1,84 @@
+﻿{
+    "observedAtUtc":  "2026-10-23T06:28:48.4700125+00:00",
+    "criterion":  "CI-L08-07",
+    "result":  "PASS_LOCAL_SIMULATION_ONLY",
+    "requestedLocalStatus":  "VERIFICADO_LOCAL_CANDIDATO_FINAL",
+    "physicalNoFixObserved":  false,
+    "productionOrPilotEnabled":  false,
+    "implementation":  {
+                           "flag":  "isSignalDegraded",
+                           "thresholdSeconds":  120,
+                           "comparison":  "strictly greater than",
+                           "automaticRefreshSeconds":  30,
+                           "foregroundOnly":  true,
+                           "lastConfirmedTimestampOnly":  true,
+                           "noBackgroundServiceAdded":  true,
+                           "noOfflineQueueAdded":  true,
+                           "noSyntheticCoordinatesAdded":  true
+                       },
+    "method":  {
+                   "controllerAndWidget":  "production classes",
+                   "clock":  "Flutter WidgetTester fake clock and periodic timer",
+                   "device":  "controlled punctual requests, timeout classification",
+                   "server":  "synthetic recording gateway",
+                   "postgresqlAccessed":  false,
+                   "phoneTouched":  false,
+                   "realSatelliteLossInduced":  false
+               },
+    "checks":  [
+                   {
+                       "command":  "flutter test --no-pub --reporter expanded test/features/location/l08_prolonged_no_fix_test.dart",
+                       "exitCode":  0,
+                       "passed":  6,
+                       "capture":  "Observed tool transcript; six cases are also included in the persisted complete location suite"
+                   },
+                   {
+                       "command":  "flutter test --no-pub --reporter expanded test/features/location",
+                       "exitCode":  0,
+                       "passed":  56,
+                       "includesNewSixCases":  true,
+                       "log":  "flutter-location-tests.log"
+                   },
+                   {
+                       "command":  "flutter analyze --no-pub",
+                       "exitCode":  0,
+                       "result":  "No issues found",
+                       "reportedSeconds":  98.7,
+                       "log":  "flutter-analyze.log"
+                   }
+               ],
+    "sources":  [
+                    {
+                        "path":  "mobile/lib/features/location/domain/mobile_service_location_controller.dart",
+                        "sha256":  "09a4b3e1e003fc965625cfbecfdda21fbdbb943c6ace78cf60519a4343fc86d3",
+                        "snapshot":  "sources/mobile_service_location_controller.dart"
+                    },
+                    {
+                        "path":  "mobile/lib/features/location/presentation/service_location_status.dart",
+                        "sha256":  "ff2a9ef44dc8103182599efda0bb83dc25e747406a6354ec7c72d54f75af7d4b",
+                        "snapshot":  "sources/service_location_status.dart"
+                    },
+                    {
+                        "path":  "mobile/test/features/location/l08_prolonged_no_fix_test.dart",
+                        "sha256":  "3beb9122ec8270807b01587e35976137309790456b720df13b4191c7b3724c5a",
+                        "snapshot":  "sources/l08_prolonged_no_fix_test.dart"
+                    }
+                ],
+    "limits":  [
+                   "Physical satellite no-fix remains unobserved; this verifies simulated local software response only",
+                   "No-fix timeout kind is supplied by the controlled provider; this is not a new physical 15-second timeout measurement",
+                   "Existing FIS02 evidence and protected history were not modified",
+                   "No independent infrastructure, human operational cover, or real participant acceptance is inferred"
+               ],
+    "toolingIncidents":  [
+                             {
+                                 "commandPurpose":  "Create source snapshot hashes",
+                                 "initialExitCode":  1,
+                                 "cause":  "PowerShell parse rejected a foreach statement piped directly to ConvertTo-Json",
+                                 "mutationBeforeFailure":  false,
+                                 "correction":  "Assigned foreach output to sourceHashes, then piped that variable",
+                                 "correctedExitCode":  0,
+                                 "productFailure":  false
+                             }
+                         ]
+}

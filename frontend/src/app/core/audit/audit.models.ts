@@ -10,6 +10,9 @@ export interface AuditEvent {
   readonly correlationId?: string | null;
   readonly metadata: Readonly<Record<string, unknown>>;
   readonly occurredAt: string;
+  readonly organizationId?: string | null;
+  readonly scope?: 'PLATFORM' | 'ORGANIZATION';
+  readonly outcome?: 'SUCCEEDED' | 'DENIED' | 'FAILED' | 'LEGACY_RECORDED';
 }
 
 export interface AuditEventQuery extends PageQuery {

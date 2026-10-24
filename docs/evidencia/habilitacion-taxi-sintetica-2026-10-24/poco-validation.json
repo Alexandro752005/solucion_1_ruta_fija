@@ -1,0 +1,40 @@
+{
+  "result": "PASS_REAL_POCO_OPERATIONAL_HOME",
+  "recordedAtUtc": "2026-10-24T05:49:54.096086+00:00",
+  "package": "pe.rutafija.conductor",
+  "actions": [
+    "Scroll to Consultar estado actual",
+    "Tap Consultar estado actual",
+    "Observe Requisitos operativos vigentes segun el servidor",
+    "Scroll to Comprobar acceso operativo",
+    "Tap Comprobar acceso operativo"
+  ],
+  "operationalNavigationObserved": [
+    "Inicio",
+    "Asignaciones",
+    "Perfil"
+  ],
+  "personalDocumentsResubmitted": false,
+  "newUnitRequestSubmittedByAgent": false,
+  "availabilityChangedByAgent": false,
+  "gpsStarted": false,
+  "privateUiEvidence": [
+    {
+      "file": "backend/.local/accesos/habilitacion-taxi-20261024/poco-before.xml",
+      "sha256": "5af92a2661a63043f3f69053655740951d2284dce353a7f5310aa8d0673ac732"
+    },
+    {
+      "file": "backend/.local/accesos/habilitacion-taxi-20261024/poco-refreshed.xml",
+      "sha256": "3b586e3b8a441b53f232efb0cc1b558f66e46b390ddd1a4ad247c06e086158fc"
+    },
+    {
+      "file": "backend/.local/accesos/habilitacion-taxi-20261024/poco-ready.xml",
+      "sha256": "61f2524452192d2cb4d1bd42c3324cc91fa3ec21f3bd7fa8fa5852fe5c2726d5"
+    },
+    {
+      "file": "backend/.local/accesos/habilitacion-taxi-20261024/poco-operational.xml",
+      "sha256": "a5bdb8ea83c1b6ec8d0404b3afa7b1fc7d0d55aa96a291356562a14c32f03413"
+    }
+  ],
+  "toolingNote": "MIUI theme_compatibility.xml warning from uiautomator; XML dump and device interaction succeeded."
+}

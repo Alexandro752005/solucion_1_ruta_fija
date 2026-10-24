@@ -1,0 +1,166 @@
+{
+  "recordedAtUtc": "2026-10-24T03:43:07.271461+00:00",
+  "algorithm": "SHA-256",
+  "files": [
+    {
+      "path": "backend/src/main/java/pe/rutafija/personidentity/api/PersonIdentityContract.java",
+      "bytes": 1728,
+      "sha256": "9beea181d6e7e6dd5ffa38d8f66c9d688227b8f93ba1f72aa8e71a41cebcbcc6"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/personidentity/api/PersonIdentityReviewCorrectionController.java",
+      "bytes": 1091,
+      "sha256": "8c27194459e3b85462748fb775af1eedeb1222a9ffd0803f44d16d109273a241"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/personidentity/application/PersonIdentityService.java",
+      "bytes": 14749,
+      "sha256": "0f6944718a6719d84b93c55862d106bf386394dc743dc0a5a068b9f496069ed1"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/personidentity/application/PersonIdentityReviewCorrectionService.java",
+      "bytes": 8602,
+      "sha256": "ef7cbab8164e44326bf5d169cc5ba19b1c3f735386c43a28f2a6299935fa201a"
+    },
+    {
+      "path": "backend/src/main/java/pe/rutafija/personidentity/infrastructure/PersonIdentityReviewCorrectionRepository.java",
+      "bytes": 3103,
+      "sha256": "6b928fe4a18e7601b08096b8b44bdd17d13d5aac79f61aca1abc24c6c79c57a0"
+    },
+    {
+      "path": "backend/src/main/resources/db/migration/V51__controlled_conductor_identity_review_correction.sql",
+      "bytes": 14764,
+      "sha256": "0a0c6e374704d73e9c54a5cb680c3d77144b0cb6f1b9fa0b398fc3bf9ae84e77"
+    },
+    {
+      "path": "backend/src/test/java/pe/rutafija/personidentity/DriverIdentityReviewCorrectionIT.java",
+      "bytes": 27683,
+      "sha256": "08897d4532ac1788c0024bcfc6e3630c096566ae255cba5bd364123ebae3c965"
+    },
+    {
+      "path": "frontend/src/app/core/management/management.models.ts",
+      "bytes": 8356,
+      "sha256": "884d0811a79982a968110519c9744eae60f6ddd69f307e567964edb1d89ee0cb"
+    },
+    {
+      "path": "frontend/src/app/core/management/management-api.service.ts",
+      "bytes": 7801,
+      "sha256": "aa0bf01fc14a1e98b340cf928a31b6c2154dae0274a93a0208b77318cb129384"
+    },
+    {
+      "path": "frontend/src/app/features/drivers/drivers.page.ts",
+      "bytes": 34091,
+      "sha256": "e7960d180b48965d0148a6d5f5aed6e21902ea6d17e15d47a90bce71e7f20642"
+    },
+    {
+      "path": "frontend/src/app/features/drivers/drivers.page.html",
+      "bytes": 18076,
+      "sha256": "3f2a47485afb926c549171070d7d6fd416f0c06bf8b4d2f910c0f18f04ca8ffb"
+    },
+    {
+      "path": "frontend/src/app/features/drivers/drivers.page.spec.ts",
+      "bytes": 30051,
+      "sha256": "e02ba7a2d0ed2ccbd7724f2e12439cdcec5d53cccccfa4099748af1c25e21fe4"
+    },
+    {
+      "path": "scripts/RutaFijaRuntimeSchemaPolicy.ps1",
+      "bytes": 1590,
+      "sha256": "12a5706d8f3caf419f6a116818c810e56c9a4ae2fc61f5b3c4180d392b67f794"
+    },
+    {
+      "path": "scripts/Test-RutaFijaRuntimeSchemaPolicy.ps1",
+      "bytes": 4682,
+      "sha256": "8fb565296d3ae157b2e047fdc85f0dd7871c846c3d9b66a5bdd007cd10afaa46"
+    },
+    {
+      "path": "scripts/Invoke-RutaFijaNativeRuntime.ps1",
+      "bytes": 27743,
+      "sha256": "6aac8a3978f9fa6951464ce4f5c9bd2149b5ad3f4c071e3c263719a3e72af27c"
+    },
+    {
+      "path": "scripts/publish_ruta_fija_admin_terms_local.py",
+      "bytes": 12474,
+      "sha256": "16d003725e38578f40389f7dbbb0f0c4c150c4e7de0b60123b209ead621a30a2"
+    },
+    {
+      "path": "docs/operacion/rectificar-dni-revision-conductor.md",
+      "bytes": 4905,
+      "sha256": "80c38fa9f18996830e5fdbb746da0f55cc9180f4462f1e0417eb696836d9f2f9"
+    },
+    {
+      "path": "docs/operacion/regularizacion-conductor-heredado.md",
+      "bytes": 7718,
+      "sha256": "c7a3bf4bd7f77a07fe3f89c0eee6af1daf7ce66abb2cb72348261be9728c00a4"
+    },
+    {
+      "path": "docs/operacion/cierre-rectificacion-dni-conductor-2026-10-23.md",
+      "bytes": 3954,
+      "sha256": "0cbd7ba29a18bd99906e787270ae02d152b26cd35a22d4af0ab326317cfffad0"
+    },
+    {
+      "path": "docs/evidencia/correccion-dni-conductor-2026-10-23/backend-package.log",
+      "bytes": 4742,
+      "sha256": "9443c74ebef79d4492fae4ea9b95c46bfc79d0550a4656a469a1b0ebe9078aa5"
+    },
+    {
+      "path": "docs/evidencia/correccion-dni-conductor-2026-10-23/backend-units-result.json",
+      "bytes": 954,
+      "sha256": "760d4c64a84163ea3970c8c16a2ca8592bd400ca248955fd6a7c226dd6311dcb"
+    },
+    {
+      "path": "docs/evidencia/correccion-dni-conductor-2026-10-23/frontend-build.log",
+      "bytes": 4354,
+      "sha256": "cec0a49061d5207a4d047ee7a93415c4cbe7225c65de0a157fe70873c9d31197"
+    },
+    {
+      "path": "docs/evidencia/correccion-dni-conductor-2026-10-23/frontend-validation.json",
+      "bytes": 3774,
+      "sha256": "c71ad87dd873fc245dcffc531e5806b85bd1e5787101a8216ef1bc5ac12fb7c8"
+    },
+    {
+      "path": "docs/evidencia/correccion-dni-conductor-2026-10-23/live-ports.json",
+      "bytes": 581,
+      "sha256": "f340988ec59506c3ee31df6851f078310fa634a2d35c5a249f9977cc3298cbbd"
+    },
+    {
+      "path": "docs/evidencia/correccion-dni-conductor-2026-10-23/live-schema-gates.json",
+      "bytes": 762,
+      "sha256": "1c3fe1ff5cf80d1d85671e4cbbf41bb7a44cce08b5709dd4787b8762fa62fc56"
+    },
+    {
+      "path": "docs/evidencia/correccion-dni-conductor-2026-10-23/native-v51-migration.log",
+      "bytes": 2526,
+      "sha256": "2748dc448c5d960f5440726525547adb4b8d1f5a63577003b9fa9eea89d26461"
+    },
+    {
+      "path": "docs/evidencia/correccion-dni-conductor-2026-10-23/runtime-start.log",
+      "bytes": 1294,
+      "sha256": "1a5dc14351ac94324288393c50ea8c21b9b144667571bdf579ef65799031faf8"
+    },
+    {
+      "path": "docs/evidencia/correccion-dni-conductor-2026-10-23/runtime-stderr-sizes.json",
+      "bytes": 163,
+      "sha256": "2a3f9717f528f18d73bb65eae8592fecf792dab3028fc60983c1d6cf026d275e"
+    },
+    {
+      "path": "docs/evidencia/correccion-dni-conductor-2026-10-23/runtime-stop.log",
+      "bytes": 668,
+      "sha256": "1947422da2a1efd8c716ee353976c001ef1b355ebbdc01356c2ef018a86df4b8"
+    },
+    {
+      "path": "docs/evidencia/correccion-dni-conductor-2026-10-23/runtime-validation.json",
+      "bytes": 2865,
+      "sha256": "05cf6412bae27b73adbb058eb60aa42e98dd338c87769e6f611b78fa50ff14a1"
+    },
+    {
+      "path": "docs/evidencia/correccion-dni-conductor-2026-10-23/schema-policy.json",
+      "bytes": 3458,
+      "sha256": "e2a9e371f646e9209bcf15249f46d8c97cb4215fecb1823476ebd048e715c53f"
+    },
+    {
+      "path": "docs/evidencia/correccion-dni-conductor-2026-10-23/validacion.json",
+      "bytes": 3854,
+      "sha256": "79e971deb5c3ee302d4d68547f97c3e34b61d7697173823db0efb56cc74a004b"
+    }
+  ]
+}

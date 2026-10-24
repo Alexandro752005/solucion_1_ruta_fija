@@ -1,0 +1,19 @@
+{
+  "status": "EN_CURSO",
+  "dateLima": "2026-10-19",
+  "database": "ruta_fija_test",
+  "runtimeRole": "rf_test",
+  "schema": "V27",
+  "nativeTestExit": 0,
+  "backendHttpRollbackTests": 30,
+  "nativeConcurrencyTests": 2,
+  "crmMockTests": 19,
+  "flutterDirectedTests": 30,
+  "flutterAnalyzeExit": 0,
+  "connectedFlutter": "PASS_REAL_HTTP_LIMITED_SCOPE_AND_UNIT_REQUEST",
+  "connectedCrm": "PENDING_SAME_CASE",
+  "smtpExternalAttempts": 0,
+  "globalCleanup": false,
+  "pilot": "BLOQUEADO",
+  "L03": "NO_INICIADO"
+}

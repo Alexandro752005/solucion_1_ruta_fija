@@ -1,0 +1,66 @@
+{
+  "observedAt": "2026-10-21T06:48:27.499213+00:00",
+  "result": "PASS",
+  "lot": "L-06",
+  "status": "VERIFICADA",
+  "completionType": "FUNCIONAL_LOCAL_PILOTO_BLOQUEADO",
+  "contractVersion": "0.3.0",
+  "verifiedLocalCriteria": [
+    "CI-L06-01",
+    "CI-L06-02",
+    "CI-L06-03",
+    "CI-L06-04",
+    "CI-L06-05",
+    "CI-L06-06",
+    "CI-L06-07",
+    "CI-L06-08",
+    "CI-L06-09",
+    "CI-L06-10"
+  ],
+  "pendingLocalCriteria": [],
+  "operationalVerificationPending": [
+    "VT-V3-Q-074-01"
+  ],
+  "L07Started": false,
+  "pilotEnabled": false,
+  "documents": [
+    {
+      "path": "docs/contratos/L-06.md",
+      "sha256": "f0f537adc99381e8d64713dc4e34a0e6192a01fa42e7b270bb66814685b1916a"
+    },
+    {
+      "path": "docs/evidencia/L-06/matriz-L06.md",
+      "sha256": "b721835e6d9efe6ea5e6effc6e1360e4a4c83766b7456b3c49fd3e4601133bd0"
+    },
+    {
+      "path": "docs/actas/L-06-cierre-funcional-local-2026-10-21.md",
+      "sha256": "d2b2ee881d24fcf2c091fb342e0e70781dda9cf7258b70ba70992c00f898084f"
+    },
+    {
+      "path": "docs/ejecucion/L-06.md",
+      "sha256": "5862b7a420282ec4bde50a59154651af1efbcba4d71ad7706d974d3fb9c6618f"
+    },
+    {
+      "path": "docs/seguimiento/tareas.json",
+      "sha256": "1ff3f21cdedf172d0c8b7d706b8d030ad3345691a83a037631cd48d69fc0c237"
+    },
+    {
+      "path": "docs/backlog-producto-ruta-fija-v3.1.md",
+      "sha256": "3ca911a7fff1139047f64f33ffb4482d46abb64bbaddf000aa804af8307e3285"
+    },
+    {
+      "path": "memory/current.md",
+      "sha256": "8038d4950a8914c4d5dfe63557edc9b707874413de38cdc0e8ffdb755a386da4"
+    },
+    {
+      "path": "memory/target.md",
+      "sha256": "a544f00768040d365d42e958c7bd36c5f4b6a683a925c8facfdd172815637078"
+    },
+    {
+      "path": "specs/cierre-L06-2026-10-21.json",
+      "sha256": "b2295458e2f03a40d440624505045c01e65fd263ab9f7a1127e0fb5bc1657cfd"
+    }
+  ],
+  "historicalLowerSectionsRetained": true,
+  "limits": "Phase-local completion does not certify pilot prerequisites or real external delivery."
+}

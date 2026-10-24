@@ -1,0 +1,67 @@
+{
+  "observedLocalDate": "2026-10-17",
+  "source": "CURRENT_FILE_HASH_COMPARISON_NO_SUITE_RERUN",
+  "allVerified": true,
+  "files": [
+    {
+      "path": "backups/L-00-2026-10-13-final3/source-snapshot.zip",
+      "sha256": "3806510606A1565F23B8C526A13CC1049BC79141BABDB8E1316F042488B3D11B",
+      "expectedSha256": "3806510606A1565F23B8C526A13CC1049BC79141BABDB8E1316F042488B3D11B",
+      "passVerified": true
+    },
+    {
+      "path": "docs/evidencia/L-00/source-manifest.sha256",
+      "sha256": "E78D7002D5C85B24200BE21B8FD88CE770D36333CA49CAA5351248CFD0E28BAD",
+      "expectedSha256": "E78D7002D5C85B24200BE21B8FD88CE770D36333CA49CAA5351248CFD0E28BAD",
+      "passVerified": true
+    },
+    {
+      "path": "docs/legal/publicado/terminos-admin-v1.0.0.md",
+      "sha256": "20FFD9525CB19EC51387BF11859CF34100A5117B00DE8F428BFEB8B9A4DC6417",
+      "expectedSha256": "20FFD9525CB19EC51387BF11859CF34100A5117B00DE8F428BFEB8B9A4DC6417",
+      "passVerified": true
+    },
+    {
+      "path": "artifacts/L-01-superadmin-titular-2026-10-17/ruta-fija-recovery-cli.jar",
+      "sha256": "91913FF7C11CABFAA01881FCBFB24BBF5ED347564C0140D73A757BC96D38E24A",
+      "expectedSha256": "91913FF7C11CABFAA01881FCBFB24BBF5ED347564C0140D73A757BC96D38E24A",
+      "passVerified": true
+    },
+    {
+      "path": "backend/target/l01-v26-final.log",
+      "sha256": "8B2C0455683D22DAC72E044295EE536C90A5F3EFCF4FEA5E902251027A4DADA2",
+      "expectedSha256": "8B2C0455683D22DAC72E044295EE536C90A5F3EFCF4FEA5E902251027A4DADA2",
+      "passVerified": true
+    },
+    {
+      "path": "backend/target/l01-document-privacy-final.log",
+      "sha256": "5138ADE0E144387EE04B4066E1584DB4B705A1459DFFF26799746EC9F3C784D9",
+      "expectedSha256": "5138ADE0E144387EE04B4066E1584DB4B705A1459DFFF26799746EC9F3C784D9",
+      "passVerified": true
+    },
+    {
+      "path": "backend/target/l01-connected-wrapper-final.log",
+      "sha256": "C9AED29D18338CC4333B9C9CFC73C0A2634B9D103B9A171893FDA18AE4B5FF60",
+      "expectedSha256": "C9AED29D18338CC4333B9C9CFC73C0A2634B9D103B9A171893FDA18AE4B5FF60",
+      "passVerified": true
+    },
+    {
+      "path": "frontend/.angular/l01-person-final-tests.log",
+      "sha256": "7B8D6694BBE83A3B19BB22DAC00A04F4A2F8D1BB3AE82DB94973D5B554D0B245",
+      "expectedSha256": "7B8D6694BBE83A3B19BB22DAC00A04F4A2F8D1BB3AE82DB94973D5B554D0B245",
+      "passVerified": true
+    },
+    {
+      "path": "mobile/.dart_tool/l01-analyze.log",
+      "sha256": "808BF5A0A8D5FB332D25AFD2D351928690E9F5217CBEC97D93EE89A9C6901867",
+      "expectedSha256": "808BF5A0A8D5FB332D25AFD2D351928690E9F5217CBEC97D93EE89A9C6901867",
+      "passVerified": true
+    },
+    {
+      "path": "mobile/.dart_tool/l01-tests.log",
+      "sha256": "84723B0C665E2458C29788B36BB704D713C9E481B111924A3E108F750AE5F8F7",
+      "expectedSha256": "84723B0C665E2458C29788B36BB704D713C9E481B111924A3E108F750AE5F8F7",
+      "passVerified": true
+    }
+  ]
+}

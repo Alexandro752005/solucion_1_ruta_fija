@@ -1,0 +1,21 @@
+﻿{
+    "inheritanceDisabled":  true,
+    "rules":  [
+                  {
+                      "IdentityReference":  {
+                                                "Value":  "NT AUTHORITY\\SYSTEM"
+                                            },
+                      "FileSystemRights":  2032127,
+                      "AccessControlType":  0,
+                      "IsInherited":  false
+                  },
+                  {
+                      "IdentityReference":  {
+                                                "Value":  "DESKTOP-QISBS6H\\Ale"
+                                            },
+                      "FileSystemRights":  2032127,
+                      "AccessControlType":  0,
+                      "IsInherited":  false
+                  }
+              ]
+}

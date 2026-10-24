@@ -1,0 +1,22 @@
+{
+  "result": "PASS_PREPARATION_AND_PURE_CHECKS_NOT_LOAD",
+  "initialTests": 34,
+  "observerCorrectionDirectedTests": 11,
+  "schemaVersion": "50",
+  "versionedMigrations": 50,
+  "repeatableMigrations": 0,
+  "environment": "ruta_fija_test@127.0.0.1:55439",
+  "shared5432MigrationOrDatasetWrites": false,
+  "restored55438MigrationOrDatasetWrites": false,
+  "preservedFailureChecks": [
+    "PrivilegeNotHeldException when unnecessarily resetting existing private ACL; fixed by strict owner/access verification",
+    "OBSERVER_EXACT_TARGET_REQUIRED when concatenating inet with mask; fixed by host(inet_server_addr) and exact named-column checks"
+  ],
+  "counterResets": 0,
+  "newDatasetAuthorizedMaximum": {
+    "SUPER_ADMIN": 1,
+    "ADMIN": 4,
+    "CONDUCTOR": 20
+  },
+  "loadAccreditedByThisFile": false
+}

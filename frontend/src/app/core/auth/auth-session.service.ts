@@ -22,6 +22,7 @@ import { CrossTabLockService } from './cross-tab-lock.service';
 import {
   LoginRequest,
   LoginResponse,
+  EmailOtpChallenge,
   SessionStatus,
   SessionUser,
   UserRole,
@@ -36,11 +37,13 @@ export class AuthSessionService {
   private readonly accessTokenState = signal<string | null>(null);
   private readonly userState = signal<SessionUser | null>(null);
   private readonly statusState = signal<SessionStatus>('unknown');
+  private readonly emailOtpChallengeState = signal<EmailOtpChallenge | null>(null);
   private refreshRequest$: Observable<string> | undefined;
 
   readonly accessToken = this.accessTokenState.asReadonly();
   readonly user = this.userState.asReadonly();
   readonly status = this.statusState.asReadonly();
+  readonly emailOtpChallenge = this.emailOtpChallengeState.asReadonly();
   readonly isAuthenticated = computed(
     () =>
       this.statusState() === 'authenticated' &&
@@ -48,7 +51,7 @@ export class AuthSessionService {
       this.userState() !== null,
   );
 
-  login(credentials: LoginRequest): Observable<void> {
+  login(credentials: LoginRequest): Observable<'authenticated' | 'verification-required'> {
     return this.http
       .post<LoginResponse>(
         this.runtimeConfig.apiUrl('/auth/login'),
@@ -56,14 +59,63 @@ export class AuthSessionService {
         { withCredentials: true },
       )
       .pipe(
-        tap((response) => this.applySession(response)),
-        switchMap(() => this.loadCurrentUser()),
-        map(() => undefined),
+        switchMap((response) => {
+          if (response.emailVerificationRequired === true && response.verification) {
+            this.accessTokenState.set(null);
+            this.userState.set(null);
+            this.statusState.set('anonymous');
+            this.emailOtpChallengeState.set(response.verification);
+            return of<'verification-required'>('verification-required');
+          }
+          this.emailOtpChallengeState.set(null);
+          this.applySession(response);
+          return this.loadCurrentUser().pipe(map(() => 'authenticated' as const));
+        }),
         catchError((error: unknown) => {
           this.clearSession();
           return throwError(() => error);
         }),
       );
+  }
+
+  verifyEmailOtp(code: string): Observable<void> {
+    const challenge = this.emailOtpChallengeState();
+    if (!challenge) {
+      return throwError(() => new Error('No hay una verificación de correo pendiente.'));
+    }
+    return this.http
+      .post<LoginResponse>(
+        this.runtimeConfig.apiUrl('/auth/otp/verify'),
+        { verificationToken: challenge.verificationToken, code },
+        { withCredentials: true, context: new HttpContext().set(SKIP_AUTH_REFRESH, true) },
+      )
+      .pipe(
+        tap((response) => {
+          this.emailOtpChallengeState.set(null);
+          this.applySession(response);
+        }),
+        switchMap(() => this.loadCurrentUser()),
+        map(() => undefined),
+      );
+  }
+
+  resendEmailOtp(): Observable<EmailOtpChallenge> {
+    const challenge = this.emailOtpChallengeState();
+    if (!challenge) {
+      return throwError(() => new Error('No hay una verificación de correo pendiente.'));
+    }
+    return this.http
+      .post<EmailOtpChallenge>(
+        this.runtimeConfig.apiUrl('/auth/otp/resend'),
+        { verificationToken: challenge.verificationToken },
+        { withCredentials: true, context: new HttpContext().set(SKIP_AUTH_REFRESH, true) },
+      )
+      .pipe(tap((updated) => this.emailOtpChallengeState.set(updated)));
+  }
+
+  cancelEmailOtp(): void {
+    this.emailOtpChallengeState.set(null);
+    this.clearSession();
   }
 
   ensureSession(): Observable<boolean> {
@@ -119,7 +171,12 @@ export class AuthSessionService {
     )
       .pipe(
         tap((response) => this.applySession(response)),
-        map((response) => response.accessToken),
+        map((response) => {
+          if (!response.accessToken) {
+            throw new Error('La respuesta de renovación no contiene un token de acceso.');
+          }
+          return response.accessToken;
+        }),
         catchError((error: unknown) => {
           this.clearSession();
           return throwError(() => error);
@@ -153,12 +210,16 @@ export class AuthSessionService {
   }
 
   clearSession(): void {
+    this.emailOtpChallengeState.set(null);
     this.accessTokenState.set(null);
     this.userState.set(null);
     this.statusState.set('anonymous');
   }
 
   private applySession(response: LoginResponse): void {
+    if (!response.accessToken || !response.user) {
+      throw new Error('La respuesta del servidor no contiene una sesión autenticada.');
+    }
     this.accessTokenState.set(response.accessToken);
     this.userState.set(response.user);
     this.statusState.set('authenticated');

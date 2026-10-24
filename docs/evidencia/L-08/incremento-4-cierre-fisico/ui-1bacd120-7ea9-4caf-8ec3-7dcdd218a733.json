@@ -1,0 +1,154 @@
+{
+    "observedAt":  "2026-10-23T04:54:08.7205856+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "action":  "click",
+    "label":  "Consultar estado de preferencias",
+    "automatedUiInstrumentation":  true,
+    "humanAccessibilityConfirmation":  false,
+    "nodes":  [
+                  {
+                      "text":  "",
+                      "description":  "Ruta Fija Conductor",
+                      "bounds":  "[48,520][516,589]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Bandeja de avisos",
+                      "bounds":  "[648,482][792,626]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Mi incorporación",
+                      "bounds":  "[792,482][936,626]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Cerrar sesión",
+                      "bounds":  "[936,482][1080,626]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Preferencias\nLa bandeja, las respuestas de servicio y los avisos de seguridad siempre permanecen disponibles.\nNo fue posible completar la operación. Inténtelo nuevamente.\nTamaño de texto\nNormal\nSe conserva también el tamaño accesible configurado en Android.",
+                      "bounds":  "[120,698][960,1608]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Consultar estado de preferencias",
+                      "bounds":  "[180,837][765,981]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Sugerencias visuales opcionales en Inicio",
+                      "bounds":  "[180,981][900,1149]",
+                      "class":  "android.widget.Switch",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "true"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Guardar preferencias",
+                      "bounds":  "[180,1404][646,1548]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "false",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Mis resultados y reportes",
+                      "bounds":  "[120,1608][960,1752]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Ubicación actual\nPuede compartir un único punto solo mientras usa la aplicación. ",
+                      "bounds":  "[120,1812][960,2052]",
+                      "class":  "android.view.View",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Inicio\nTab 1 of 6",
+                      "bounds":  "[0,2112][180,2261]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Disponibilidad\nTab 2 of 6",
+                      "bounds":  "[180,2112][360,2261]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Asignaciones\nTab 3 of 6",
+                      "bounds":  "[360,2112][540,2261]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Incidencias\nTab 4 of 6",
+                      "bounds":  "[540,2112][720,2261]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Comunicados\nTab 5 of 6",
+                      "bounds":  "[720,2112][900,2261]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  },
+                  {
+                      "text":  "",
+                      "description":  "Perfil\nTab 6 of 6",
+                      "bounds":  "[900,2112][1080,2261]",
+                      "class":  "android.widget.Button",
+                      "package":  "pe.rutafija.conductor.l08",
+                      "enabled":  "true",
+                      "checked":  "false"
+                  }
+              ]
+}

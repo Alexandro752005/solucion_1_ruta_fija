@@ -1,0 +1,15 @@
+{
+    "observedAt":  "2026-10-23T03:00:31.7528166+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "package":  "pe.rutafija.conductor.l08",
+    "launchRequestedByUser":  true,
+    "launchExitCode":  0,
+    "appResumedObserved":  false,
+    "reinstallationPerformed":  false,
+    "credentialsEnteredByAgent":  false,
+    "permissionChangedByAgent":  false,
+    "newServiceStartedByAgent":  false,
+    "originalPrincipalAppOpened":  false,
+    "principalPreviousBinaryRestored":  false,
+    "result":  "PENDING_FOREGROUND_CONFIRMATION_KEEP_CASE"
+}

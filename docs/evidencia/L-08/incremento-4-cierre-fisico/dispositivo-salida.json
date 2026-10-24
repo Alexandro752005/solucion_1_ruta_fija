@@ -1,0 +1,20 @@
+﻿{
+    "observedAt":  "2026-10-23T05:33:23.3435205+00:00",
+    "runId":  "3f0ba758-6eb9-4d2f-b948-dd1c7de3c430",
+    "onlyPrincipalPackageInstalled":  true,
+    "installedPackages":  [
+                              "pe.rutafija.conductor"
+                          ],
+    "principalVersionCode4Verified":  true,
+    "principalSha256":  "3b5533d3bb70fdd7bd043ed9fa62b002fadcc86c4ceee2554a4dc9cc02a6ae3c",
+    "trialPackageUninstalled":  true,
+    "principalUninstalledOrDataCleared":  false,
+    "principalSignedOut":  true,
+    "originalFontScaleObserved":  "0.81",
+    "temporaryPhoneFilesRemoved":  true,
+    "temporaryAdbTcpModeDisabled":  true,
+    "temporaryAdbTcpPortReachable":  false,
+    "androidUsbModeRestartAcknowledged":  true,
+    "userEnabledUsbSecuritySettingRetained":  true,
+    "result":  "PASS_ONE_CURRENT_PRINCIPAL_APP_AND_TEMPORARY_DEVICE_CHANNEL_RETIRED"
+}

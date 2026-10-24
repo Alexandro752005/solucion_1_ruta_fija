@@ -1,0 +1,42 @@
+--- upstream-5.0.3/lib/src/types/android_position.dart
++++ local-5.0.3+rutafija.1/lib/src/types/android_position.dart
+@@ -24,6 +24,13 @@
+     required speed,
+     required speedAccuracy,
+     super.floor,
++    super.hasAccuracy,
++    super.hasAltitude,
++    super.hasAltitudeAccuracy,
++    super.hasHeading,
++    super.hasHeadingAccuracy,
++    super.hasSpeed,
++    super.hasSpeedAccuracy,
+     isMocked = false,
+   }) : super(
+           longitude: longitude,
+@@ -82,6 +89,13 @@
+       speed: position.speed,
+       speedAccuracy: position.speedAccuracy,
+       floor: position.floor,
++      hasAccuracy: position.hasAccuracy,
++      hasAltitude: position.hasAltitude,
++      hasAltitudeAccuracy: position.hasAltitudeAccuracy,
++      hasHeading: position.hasHeading,
++      hasHeadingAccuracy: position.hasHeadingAccuracy,
++      hasSpeed: position.hasSpeed,
++      hasSpeedAccuracy: position.hasSpeedAccuracy,
+       isMocked: position.isMocked,
+     );
+   }
+--- upstream-5.0.3/pubspec.yaml
++++ local-5.0.3+rutafija.1/pubspec.yaml
+@@ -2,7 +2,8 @@
+ description: Geolocation plugin for Flutter. This plugin provides the Android implementation for the geolocator.
+ repository: https://github.com/baseflow/flutter-geolocator/tree/main/geolocator_android
+ issue_tracker: https://github.com/baseflow/flutter-geolocator/issues?q=is%3Aissue+is%3Aopen
+-version: 5.0.3
++version: 5.0.3+rutafija.1
++publish_to: 'none'
+ 
+ environment:
+   sdk: ^3.5.0

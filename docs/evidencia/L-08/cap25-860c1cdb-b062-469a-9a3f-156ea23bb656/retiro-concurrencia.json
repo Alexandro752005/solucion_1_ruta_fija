@@ -1,0 +1,41 @@
+{
+  "caseId" : "860c1cdb-b062-469a-9a3f-156ea23bb656",
+  "planId" : "28fc5d6b-ce31-3e87-8ad9-f11891cf9208",
+  "challengeId" : "ec7dbdbf-a11a-3619-9820-97306e8cc760",
+  "ownerId" : "6b7d8b2b-8121-4dc2-a253-67da57d957d7",
+  "startedAt" : "2026-10-23T01:00:55.102321200Z",
+  "fixtureKind" : "SYNTHETIC_CONSUMED_CHALLENGE_NOT_A_RECOVERY_RUN",
+  "ledgerBefore" : [ {
+    "role" : "ADMIN",
+    "creations" : 4
+  }, {
+    "role" : "CONDUCTOR",
+    "creations" : 20
+  }, {
+    "role" : "SUPER_ADMIN",
+    "creations" : 1
+  } ],
+  "ownerCredentialCountBefore" : 0,
+  "ownerCredentialRowSetSha256Before" : "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "ownerKeyEnrolledByThisTest" : false,
+  "syntheticPastAnchor" : "2026-09-22T01:00:55.105321300Z",
+  "selectionSha256" : "4ff83a7d5e5f92734a9671b5e9d0ec9cccf45ee82d98f64a25003decd4b5f8de",
+  "inventoryNowaitRejectedWithSqlState" : "55P03",
+  "secondConnectionBlockedByFirstVerified" : true,
+  "firstReplay" : false,
+  "secondReplay" : true,
+  "executedAt" : "2026-10-23T01:00:55.916828Z",
+  "ownerCredentialCountAfter" : 0,
+  "ownerCredentialClaimLimit" : "ABSENCE_OF_ENROLLED_CREDENTIAL_PRESERVED_NOT_A_KEY_CONSERVATION_TEST",
+  "oneCommittedExecution" : true,
+  "oneRetirementTombstone" : true,
+  "oneJavaExecutionAudit" : true,
+  "consumedFixtureRemoved" : true,
+  "ownerCredentialUnchanged" : true,
+  "ledgerUnchanged" : true,
+  "authenticationAndReauthentication" : "NORMAL_JWT_DECODER_AND_RETENTION_PROCEDURE_SYNTHETIC_ACCOUNT",
+  "humanRecoveryOrIndependentCustodyAccredited" : false,
+  "childWriteSerializationAllPurposesAccredited" : false,
+  "finishedAt" : "2026-10-23T01:00:56.189925300Z",
+  "result" : "PASS_ISOLATED_COMMITTED_RETIREMENT_RACE_SYNTHETIC_ONLY"
+}

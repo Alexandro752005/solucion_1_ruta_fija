@@ -1,0 +1,252 @@
+﻿[
+    {
+        "class":  "AdminTermsContentHashTest",
+        "source":  "backend/src/test/java/pe/rutafija/terms/domain/AdminTermsContentHashTest.java",
+        "sha256":  "84c2309731c38d9c8ad78848ea6454b647e0c74a7a4899bcbf8b1219c4031526"
+    },
+    {
+        "class":  "AdminTermsDocumentTest",
+        "source":  "backend/src/test/java/pe/rutafija/terms/domain/AdminTermsDocumentTest.java",
+        "sha256":  "dd4c3f9e8dceda03aa6937072176505b32893e35e352c8e9b169b671eb4df484"
+    },
+    {
+        "class":  "AdminTermsServiceTest",
+        "source":  "backend/src/test/java/pe/rutafija/terms/application/AdminTermsServiceTest.java",
+        "sha256":  "c92bf31dd65d35d7c7c14e6633dd8c5e1c1c3847f0aa674dc9a699038f540801"
+    },
+    {
+        "class":  "AdminTermsGateAuthorizationManagerTest",
+        "source":  "backend/src/test/java/pe/rutafija/terms/application/AdminTermsGateAuthorizationManagerTest.java",
+        "sha256":  "f1e62ead3f158abbc4ab9ec3f223406b8abd4b6a249f90ad1b8e9caaf642a962"
+    },
+    {
+        "class":  "ApiOriginValidationFilterTest",
+        "source":  "backend/src/test/java/pe/rutafija/shared/security/ApiOriginValidationFilterTest.java",
+        "sha256":  "ca1ae47b9c64f313b9ae9b5a93a92f9ee1ce2320306aeb8ef52e184a7eecd5f0"
+    },
+    {
+        "class":  "ApprovedAdminTermsPublicationTest",
+        "source":  "backend/src/test/java/pe/rutafija/support/ApprovedAdminTermsPublicationTest.java",
+        "sha256":  "6b33c7a88e20532592be0ea48321ea7235a40319aa23cc62633aa69902561cc0"
+    },
+    {
+        "class":  "AuditChangesTest",
+        "source":  "backend/src/test/java/pe/rutafija/audit/application/AuditChangesTest.java",
+        "sha256":  "8e6b9aec49b0eb5615e8fecf3b517e07e31b072a4e247466f67de9279585eb17"
+    },
+    {
+        "class":  "AuditMetadataPolicyTest",
+        "source":  "backend/src/test/java/pe/rutafija/audit/application/AuditMetadataPolicyTest.java",
+        "sha256":  "b1f911326776f63d5399e3f3b032e094e3f7ce0f71a970f2b7fa6df65c54bf0a"
+    },
+    {
+        "class":  "AuditOutcomeTest",
+        "source":  "backend/src/test/java/pe/rutafija/audit/application/AuditOutcomeTest.java",
+        "sha256":  "6b2ee42f4610cc185537ab5ab4d4209aaed87b76f2fbd553b4964d41162751c9"
+    },
+    {
+        "class":  "AuthenticatedBackupArchiveTest",
+        "source":  "backend/src/test/java/pe/rutafija/backup/AuthenticatedBackupArchiveTest.java",
+        "sha256":  "bf72d882f5f4ff22ef587c2b0df213dc62c7424a162917b2cf78c04d76d6c703"
+    },
+    {
+        "class":  "AvailabilityErrorHttpTest",
+        "source":  "backend/src/test/java/pe/rutafija/shared/exception/AvailabilityErrorHttpTest.java",
+        "sha256":  "8b689b410ad8c58220a6a72268d75e3467b4e9c689db92b9e75fde1c9a7447c7"
+    },
+    {
+        "class":  "AvailabilityMonitorCliTest",
+        "source":  "backend/src/test/java/pe/rutafija/availability/monitor/AvailabilityMonitorCliTest.java",
+        "sha256":  "4e4bf639e59bc50779f66b7776d6b76eaae0fff9fa11d59c726e34a45ad91788"
+    },
+    {
+        "class":  "AvailabilityMonitorHttpTest",
+        "source":  "backend/src/test/java/pe/rutafija/availability/monitor/AvailabilityMonitorHttpTest.java",
+        "sha256":  "5ab10bd43ed2118dc09567c33fef287be446a5ceeb3d0d4bab5fa71efff97356"
+    },
+    {
+        "class":  "AvailabilityPolicyTest",
+        "source":  "backend/src/test/java/pe/rutafija/availability/AvailabilityPolicyTest.java",
+        "sha256":  "41c0db43e70527d943ea232a54cc62cd035e02d77e101dd460a735e124c398fc"
+    },
+    {
+        "class":  "BackupCliGuardTest",
+        "source":  "backend/src/test/java/pe/rutafija/backup/BackupCliGuardTest.java",
+        "sha256":  "013fc7c9063c8f6fadf8e40181666e70e0d99498d1f12d71784d2daea20e23ec"
+    },
+    {
+        "class":  "ConductorRecoveryRequestTest",
+        "source":  "backend/src/test/java/pe/rutafija/identity/domain/ConductorRecoveryRequestTest.java",
+        "sha256":  "2b5e4e893d85d54182f1fba85540bdc7d2ab5ec3775da41903ce5aad1fb25637"
+    },
+    {
+        "class":  "CorrelationIdFilterTest",
+        "source":  "backend/src/test/java/pe/rutafija/shared/observability/CorrelationIdFilterTest.java",
+        "sha256":  "fcbe6a4142b8c737296fc40c202cedd5b687489c89746d6f460525fc83f8c5ea"
+    },
+    {
+        "class":  "CurrentUserProviderTest",
+        "source":  "backend/src/test/java/pe/rutafija/shared/security/CurrentUserProviderTest.java",
+        "sha256":  "a2d9cd102d9d7741853326762cfe40f20adf9aaa677d822d5b68f438ca46b2fd"
+    },
+    {
+        "class":  "EmailOtpChallengeTest",
+        "source":  "backend/src/test/java/pe/rutafija/identity/domain/EmailOtpChallengeTest.java",
+        "sha256":  "67b2892364c23508ded03155b5214b2c0b87ef3790180d8d02e947edec2a4936"
+    },
+    {
+        "class":  "FixtureJsonTest",
+        "source":  "backend/src/test/java/pe/rutafija/support/FixtureJsonTest.java",
+        "sha256":  "9ac9e60bab39f3133b5ffbb6902c96aa41da7063f683a0a9b90a4bbe7194b2f8"
+    },
+    {
+        "class":  "GlobalExceptionHandlerTest",
+        "source":  "backend/src/test/java/pe/rutafija/shared/exception/GlobalExceptionHandlerTest.java",
+        "sha256":  "eb2f78aa6da0b59bfde9fd45a4fe7182bcfb6a74a3a82ac5842514b8a4ddb12d"
+    },
+    {
+        "class":  "HttpAvailabilityProbeTest",
+        "source":  "backend/src/test/java/pe/rutafija/availability/monitor/HttpAvailabilityProbeTest.java",
+        "sha256":  "d844abfc0df1cc477ef0d8bd4e8e932c672d6fc0608e50c4233b7e24d7ef3dfb"
+    },
+    {
+        "class":  "IncidentClosureContractTest",
+        "source":  "backend/src/test/java/pe/rutafija/operation/domain/IncidentClosureContractTest.java",
+        "sha256":  "2672812b2466a2124dfd959944e67ef86e397bce2fbcf0c0bcdda6a7294c492a"
+    },
+    {
+        "class":  "InvitationCodeHasherTest",
+        "source":  "backend/src/test/java/pe/rutafija/invitation/application/InvitationCodeHasherTest.java",
+        "sha256":  "01c685f652e1d0d99e8d048ded052643adb3606c6820779be3c9c887b520a69d"
+    },
+    {
+        "class":  "InvitationServiceBoundaryTest",
+        "source":  "backend/src/test/java/pe/rutafija/invitation/application/InvitationServiceBoundaryTest.java",
+        "sha256":  "c60ae9fc58fb3980b1edcddbafc3f76d4f223a7ca67cd320a137601d65dda9fb"
+    },
+    {
+        "class":  "L08CapacityMeasurementTest",
+        "source":  "backend/src/test/java/pe/rutafija/support/L08CapacityMeasurementTest.java",
+        "sha256":  "685b37ee639979c56cfe9806d7ea3cb3b8f7f31908e84bc19fb98df49c3a1b8c"
+    },
+    {
+        "class":  "L08ConnectedServicePreparationTest",
+        "source":  "backend/src/test/java/pe/rutafija/support/L08ConnectedServicePreparationTest.java",
+        "sha256":  "9a24ff787cda929985cd78f45fd43f1192898d6bb7074751cef953c01a05f4cf"
+    },
+    {
+        "class":  "L08PhysicalComplementPolicyTest",
+        "source":  "backend/src/test/java/pe/rutafija/support/L08PhysicalComplementPolicyTest.java",
+        "sha256":  "a08cfe0df97ed1d78ea151d3f6a7deefe346ec2e872bf5b64602173c829d932c"
+    },
+    {
+        "class":  "L08Rest03TargetGuardTest",
+        "source":  "backend/src/test/java/pe/rutafija/support/L08Rest03TargetGuardTest.java",
+        "sha256":  "be838556e43d8ec7e68e9f30f59ad7b65cdc2ba2b62e7f8aab0c9d583d28dd0e"
+    },
+    {
+        "class":  "LoginRateLimiterTest",
+        "source":  "backend/src/test/java/pe/rutafija/identity/application/LoginRateLimiterTest.java",
+        "sha256":  "2f3cceeffa4b6a1da7e597c439bc3eadc387dfd036ee6dc27b2beeb39af76573"
+    },
+    {
+        "class":  "MobileOfflineRegistrationTest",
+        "source":  "backend/src/test/java/pe/rutafija/operation/api/MobileOfflineRegistrationTest.java",
+        "sha256":  "809a92a542a4c7ac80c1ab619ab70021cdb9887c3d6b3676d212092273255fc4"
+    },
+    {
+        "class":  "MobilePreferencesContractTest",
+        "source":  "backend/src/test/java/pe/rutafija/preferences/MobilePreferencesContractTest.java",
+        "sha256":  "5f557cc6ffcdc1b0ed1a823c95113274ef753fcbcbbe2017cc852a872d29de57"
+    },
+    {
+        "class":  "MonitorConfigurationTest",
+        "source":  "backend/src/test/java/pe/rutafija/availability/monitor/MonitorConfigurationTest.java",
+        "sha256":  "d8a67b8dc09ad2a10b0a6924a6f19968fb87a5f2de75f8bc7be14363fbc710db"
+    },
+    {
+        "class":  "OfferResponseWindowTest",
+        "source":  "backend/src/test/java/pe/rutafija/operation/domain/OfferResponseWindowTest.java",
+        "sha256":  "760a6747d9033580a75a0e2b43cd148e0914b44e8df5da2d3826b6fe86a3fa30"
+    },
+    {
+        "class":  "OpaqueTokenServiceTest",
+        "source":  "backend/src/test/java/pe/rutafija/identity/application/OpaqueTokenServiceTest.java",
+        "sha256":  "3d4d00d5442568b26409571c882e5bd81e3b77a7d66678114ea3abee307c0c18"
+    },
+    {
+        "class":  "OperationStreamBroadcasterTest",
+        "source":  "backend/src/test/java/pe/rutafija/operation/realtime/OperationStreamBroadcasterTest.java",
+        "sha256":  "3fc91e10bfe3267d74089bca9205542acb1b103040860c8835fd4bdf19715188"
+    },
+    {
+        "class":  "PersonalDataProjectionTest",
+        "source":  "backend/src/test/java/pe/rutafija/shared/security/PersonalDataProjectionTest.java",
+        "sha256":  "9566edbc1a277839842716105162407705b363fccc8f636cf0c61c1b28e0d965"
+    },
+    {
+        "class":  "PersonIdentityGateAuthorizationManagerTest",
+        "source":  "backend/src/test/java/pe/rutafija/personidentity/PersonIdentityGateAuthorizationManagerTest.java",
+        "sha256":  "d3acac98957098142ba1b2da07e536e03d751bb7d6df883a774cbf5c75082c6c"
+    },
+    {
+        "class":  "RefreshTokenTest",
+        "source":  "backend/src/test/java/pe/rutafija/identity/domain/RefreshTokenTest.java",
+        "sha256":  "1494ceb60251351b4974000c92ebc771fe2ead7b5b2c7f8307dc1721d04b5cfb"
+    },
+    {
+        "class":  "ReportExportResourceTest",
+        "source":  "backend/src/test/java/pe/rutafija/operation/application/ReportExportResourceTest.java",
+        "sha256":  "d492bd8cae5eb80de8c4c2900df0ccddbb4f9529c844d1b3d44ca03fa93bcb2c"
+    },
+    {
+        "class":  "RestoreIntegrityComparisonTest",
+        "source":  "backend/src/test/java/pe/rutafija/backup/RestoreIntegrityComparisonTest.java",
+        "sha256":  "bde17ce3a54766e9af3dede138da699c8160e9cbf8b6a097af9183eb90f2dda8"
+    },
+    {
+        "class":  "RetentionCalendarTest",
+        "source":  "backend/src/test/java/pe/rutafija/retention/RetentionCalendarTest.java",
+        "sha256":  "aeec09dd72061f3210f6eb1c998e49d07e8e958380247842d3a14255a032aa8b"
+    },
+    {
+        "class":  "RetentionProcedureSecurityTest",
+        "source":  "backend/src/test/java/pe/rutafija/retention/RetentionProcedureSecurityTest.java",
+        "sha256":  "b8f59b9711217eb653a02c65d7384a423023dd041594d41f77ee274917c62092"
+    },
+    {
+        "class":  "SafeLoggingDefaultsTest",
+        "source":  "backend/src/test/java/pe/rutafija/shared/exception/SafeLoggingDefaultsTest.java",
+        "sha256":  "56d1c97440174c98b17b7e8735c3cbbce88730cd23e5a17a58b8352240273cce"
+    },
+    {
+        "class":  "SecurityConfigTest",
+        "source":  "backend/src/test/java/pe/rutafija/shared/config/SecurityConfigTest.java",
+        "sha256":  "c586b323cb0fb6279f40e5a22614c9788986f865547be50dd00bff50f363f391"
+    },
+    {
+        "class":  "SmtpOtpEmailSenderTest",
+        "source":  "backend/src/test/java/pe/rutafija/identity/infrastructure/SmtpOtpEmailSenderTest.java",
+        "sha256":  "0c148af4cedb1b4f555d1e457341d1c2bc9c6db352eb37f31b120057e5b21be4"
+    },
+    {
+        "class":  "SqlLiteralArrayCastTest",
+        "source":  "backend/src/test/java/pe/rutafija/backup/SqlLiteralArrayCastTest.java",
+        "sha256":  "ed92fd635ef84dabe7c32e62d0e18078582438db41581f62b7cc9b943f9aa076"
+    },
+    {
+        "class":  "SuperAdminRecoveryCliTest",
+        "source":  "backend/src/test/java/pe/rutafija/identity/recoverycli/SuperAdminRecoveryCliTest.java",
+        "sha256":  "2933f83b8af49c664f151934f724fef10d37168825d4fa578582bee993b8b41d"
+    },
+    {
+        "class":  "TerminalCorroborationPolicyTest",
+        "source":  "backend/src/test/java/pe/rutafija/routing/TerminalCorroborationPolicyTest.java",
+        "sha256":  "04740ccbcfcfe4628bc3bd4c0f3d7263e1a93b0e72d209fc64c3e7dffcf3e465"
+    },
+    {
+        "class":  "TrustedOriginValidatorTest",
+        "source":  "backend/src/test/java/pe/rutafija/shared/security/TrustedOriginValidatorTest.java",
+        "sha256":  "8b86e3788e0e3ea7c6d97b57822770431c2512aa3474b527c0c3bd1fe1943543"
+    }
+]

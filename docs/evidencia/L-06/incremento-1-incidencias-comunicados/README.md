@@ -1,0 +1,11 @@
+# L-06 — Incremento1: incidencias, comunicados y bandeja
+
+2026-10-21. **VERIFICADO en API/PG y componentes locales; L-06 EN_CURSO**. [Contrato](../../../contratos/L-06.md), [matriz](../matriz-L06.md), [API](../../../contratos/L-06-API-v0.1.0.md).
+
+- INC-L06-01/02 aplicadas. Catálogo10, gravedad explícita/efecto real separados, responsable y reasignación, rondas inmutables, cierre estructurado y caso posterior sin reapertura. Los registros técnicos no evaluados necesitan evaluación antes del cierre ADMIN. Cerrar incidencia no libera la atención de una interrupción: probado con ambos recursos todavía bloqueados.
+- Destinatarios capturados en organización/grupos secundarios; consulta separada de Leído, pendientes ADMIN, conservación tras salida y retirada de seguridad sin borrar recibos. Bandeja transaccional propia y visibilidad de no envío/fallo de disponibilidad; sin éxito push ficticio. Avisos de cancelación/suspensión e incidencia automática por pérdida de habilitación también se conservan.
+- [72 casos backend](casos-backend.json):58 Spring/HTTP/PostgreSQL con rollback y14 de dominio. [14 CRM y49 Flutter](clientes-y-builds.json), typecheck/analyze y JAR/CRM/APK correctos. El caso conectado opt-in estuvo omitido intencionadamente: **todavía no es prueba conectada**. Sin NativePostgresIntegrationTest/global cleanup. [Diagnósticos resueltos](diagnosticos-historicos.json).
+- V43 yV44 aplicadas solo en ruta_fija_test con migrador explícito; Flyway validó45 migraciones. [Postflight](postflight-V44.json) conserva1/3/4, dos aceptaciones y huellas originales. Cero altas persistentes o envíos SMTP/push en este corte. El campo preservedHumanCaseRunId referencia el antecedente L01, no un ensayo repetido.
+- [Inmutables/final3](inmutables.json), [fuentes](fuentes.sha256) y [artefactos](artefactos.json) archivados. Advertencia SDK XML no impidió el APK; no se modificó el SDK.
+
+Faltan el recorrido real CRM/Flutter, carreras HTTP independientes del mismo caso, retorno compatible conectado y salida/postflight final. L06-CON-01 ya está autorizado para **máximo un CONDUCTOR**; aún no se ejecuta al sellar este corte. El proveedor/dispositivo push no están preparados: el cierre local no acreditará entrega externa. Piloto bloqueado y L-07 no iniciada.

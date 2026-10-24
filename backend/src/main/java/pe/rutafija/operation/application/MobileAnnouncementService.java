@@ -32,6 +32,7 @@ public class MobileAnnouncementService {
     private final AuditService auditService;
     private final OperationEventPublisher eventPublisher;
     private final Clock clock;
+    private final OrganizationSchedulingLock lock;
 
     public MobileAnnouncementService(
             MobileDriverContextService mobileDriverContextService,
@@ -39,7 +40,7 @@ public class MobileAnnouncementService {
             AnnouncementReceiptStore receiptStore,
             AuditService auditService,
             OperationEventPublisher eventPublisher,
-            Clock clock
+            Clock clock,OrganizationSchedulingLock lock
     ) {
         this.mobileDriverContextService = mobileDriverContextService;
         this.announcementRepository = announcementRepository;
@@ -47,13 +48,15 @@ public class MobileAnnouncementService {
         this.auditService = auditService;
         this.eventPublisher = eventPublisher;
         this.clock = clock;
+        this.lock=lock;
     }
 
     @Transactional
     public PageResponse<MobileAnnouncementResponse> list(Pageable pageable) {
-        MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
+        MobileDriverActor actor = mobileDriverContextService.requireMobileConsultation();
+        lock.acquire(actor.user().getOrganizationId());
         Page<Announcement> announcements = announcementRepository.findVisibleToDriver(
-                actor.user().getOrganizationId(), actor.driver().getGroup().getId(), pageable
+                actor.user().getOrganizationId(), actor.user().getId(), pageable
         );
         Instant now = Instant.now(clock);
         return PageResponse.from(announcements, announcement -> deliveredResponse(announcement, actor, now));
@@ -61,14 +64,16 @@ public class MobileAnnouncementService {
 
     @Transactional
     public MobileAnnouncementResponse get(UUID announcementId) {
-        MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
+        MobileDriverActor actor = mobileDriverContextService.requireMobileConsultation();
+        lock.acquire(actor.user().getOrganizationId());
         Announcement announcement = findVisible(actor, announcementId);
         return deliveredResponse(announcement, actor, Instant.now(clock));
     }
 
     @Transactional
     public MobileAnnouncementReadResponse markRead(UUID announcementId) {
-        MobileDriverActor actor = mobileDriverContextService.requireMobileDriver();
+        MobileDriverActor actor = mobileDriverContextService.requireMobileConsultation();
+        lock.acquire(actor.user().getOrganizationId());
         Announcement announcement = findVisible(actor, announcementId);
         Instant now = Instant.now(clock);
         AnnouncementReceiptStore.Receipt before = receiptStore.find(announcement.getId(), actor.user().getId())
@@ -106,7 +111,7 @@ public class MobileAnnouncementService {
         return announcementRepository.findVisibleById(
                         announcementId,
                         actor.user().getOrganizationId(),
-                        actor.driver().getGroup().getId()
+                        actor.user().getId()
                 )
                 .orElseThrow(this::notFound);
     }

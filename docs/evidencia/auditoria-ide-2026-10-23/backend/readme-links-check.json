@@ -1,0 +1,96 @@
+﻿{
+    "recordedAt":  "2026-10-23T16:17:52.2789546+00:00",
+    "readmeSha256":  "47c10512c2caabf725e43d0cb60af14d9c27d20f5411601f7a1760d92ff6ca08",
+    "linksChecked":  22,
+    "allExist":  true,
+    "checks":  [
+                   {
+                       "target":  "../mobile/qa-java-warning-patch.json",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "run-e5619078-de50-419f-94a3-e51291f4c535/result.json",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "run-ed21be06-39e5-4575-8126-d9bac34ff3f4/result.json",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "run-ed21be06-39e5-4575-8126-d9bac34ff3f4/commands.json",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "correcciones-9cd90f87-411f-4492-bc84-1e087bb670d0/serial-uids-before.json",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "correcciones-9cd90f87-411f-4492-bc84-1e087bb670d0/serial-uids-after.json",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "run-e5619078-de50-419f-94a3-e51291f4c535/standalone-manifested-helpers.json",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "run-ed21be06-39e5-4575-8126-d9bac34ff3f4/03-package-isolated.log",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "run-ed21be06-39e5-4575-8126-d9bac34ff3f4/runtime-jar-refresh/refresh.json",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "native-wrapper-final/verify-command.json",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "run-8cbb9b20-4419-461b-a961-2ee2f46dfde7/result.json",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "../launchers/qa-independent-backend.json",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "run-ed21be06-39e5-4575-8126-d9bac34ff3f4/pom-scope.json",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "correcciones-9cd90f87-411f-4492-bc84-1e087bb670d0/live-source-changes-final.json",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "correcciones-9cd90f87-411f-4492-bc84-1e087bb670d0/backup-before.json",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "run-e5619078-de50-419f-94a3-e51291f4c535/javac-warning-inventory-v2.json",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "run-e5619078-de50-419f-94a3-e51291f4c535/poi-5.5.1-bytecode.txt",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "run-ed21be06-39e5-4575-8126-d9bac34ff3f4/archive-check-final.json",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "run-ed21be06-39e5-4575-8126-d9bac34ff3f4/warnings-classified.json",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "run-2ef394c3-1cc1-4885-90bf-93e40035dbcc/02-safe-unit-tests.log",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "correcciones-9cd90f87-411f-4492-bc84-1e087bb670d0/Mockito-restub-failed-report-preserved.xml",
+                       "exists":  true
+                   },
+                   {
+                       "target":  "../launchers/qa-independent-backend-plans.json",
+                       "exists":  true
+                   }
+               ]
+}

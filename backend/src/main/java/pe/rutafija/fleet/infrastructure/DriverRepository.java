@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import pe.rutafija.fleet.domain.Driver;
@@ -18,7 +19,10 @@ public interface DriverRepository extends JpaRepository<Driver, UUID> {
     @Query("""
             select driver from Driver driver
              where driver.organization.id = :organizationId
-               and (:groupId is null or driver.group.id = :groupId)
+               and (:groupId is null or exists (
+                    select membership.driverId from DriverGroupMembership membership
+                     where membership.driverId = driver.id and membership.groupId = :groupId
+                       and membership.organizationId = :organizationId and membership.active = true))
                and (:status is null or driver.availabilityStatus = :status)
                and (:active is null or driver.active = :active)
                and (
@@ -38,6 +42,19 @@ public interface DriverRepository extends JpaRepository<Driver, UUID> {
 
     @EntityGraph(attributePaths = {"organization", "group", "user"})
     Optional<Driver> findByIdAndOrganization_Id(UUID id, UUID organizationId);
+
+    @Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
+    // Related rows have their own lifecycle locks. Fetching them here makes
+    // Hibernate elevate organization SHARE locks and can deadlock tenant writes.
+    @Query("""
+            select driver from Driver driver
+             where driver.id = :driverId
+               and driver.organization.id = :organizationId
+            """)
+    Optional<Driver> lockByIdAndOrganizationId(
+            @Param("driverId") UUID driverId,
+            @Param("organizationId") UUID organizationId
+    );
 
     @EntityGraph(attributePaths = {"organization", "group", "user"})
     Optional<Driver> findByUser_Id(UUID userId);

@@ -1,0 +1,21 @@
+{
+    "checkedAt":  "2026-10-23T06:31:47.1874814+00:00",
+    "ports":  [
+                  {
+                      "port":  55441,
+                      "listening":  false
+                  },
+                  {
+                      "port":  56441,
+                      "listening":  true
+                  },
+                  {
+                      "port":  56442,
+                      "listening":  true
+                  }
+              ],
+    "historicalClustersNotStarted":  true,
+    "shared5432Written":  false,
+    "reusedCasePostmasterPidAbsent":  true,
+    "evidence":  "Independent postflight after successful runner exit0; ports own only"
+}
