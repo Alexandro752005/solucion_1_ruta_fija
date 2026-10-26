@@ -10,10 +10,10 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_secure_storage: ^10.3.4
-  geolocator: ^14.0.3
+  geolocator: ^14.1.2
   # Local Android codec repair: preserve measured-field presence without
   # weakening the app's accuracy validation. See third_party/.../RUTA_FIJA_PATCH.md.
-  geolocator_android: 5.0.3+rutafija.1
+  geolocator_android: 5.2.1
   http: ^1.6.0
 
 dependency_overrides:
