@@ -1,0 +1,697 @@
+{
+  "id": "DA-01",
+  "version": "0.1.0",
+  "localDate": "2026-10-26",
+  "timezoneOfRecord": "America/Lima",
+  "phase": 1,
+  "status": "SPECIFIED_AND_STATICALLY_VALIDATED",
+  "implementationStatus": "NOT_IMPLEMENTED",
+  "authorization": "User OK VERDE for phase 1 only; no human visual approval claimed",
+  "scope": {
+    "role": "ADMIN",
+    "route": "/dashboard",
+    "region": "main-content",
+    "preserve": [
+      "shell",
+      "globalNavigation",
+      "SUPER_ADMIN",
+      "CONDUCTOR",
+      "mobile",
+      "authGuard",
+      "adminTermsGuard",
+      "roleGuard",
+      "tenantAuthorization",
+      "migrationsV1ThroughV51",
+      "legalPublishedDocuments",
+      "sealedEvidence"
+    ],
+    "productCodeChangesInPhase1": false,
+    "databaseAccessInPhase1": false,
+    "gitMutationsInPhase1": false,
+    "newDependencies": [],
+    "newMigrations": [],
+    "externalMapProviders": [],
+    "businessMutationsOnDashboardLoad": []
+  },
+  "visual": {
+    "reference": {
+      "width": 1106,
+      "height": 628,
+      "measurement": "VISUAL_APPROXIMATION_NOT_INSTRUMENTAL_SAMPLING"
+    },
+    "order": [
+      "header",
+      "priorities",
+      "kpis",
+      "panels",
+      "secondaryDetails",
+      "footer"
+    ],
+    "kpiCount": 5,
+    "panelCount": 6,
+    "donutCount": 3,
+    "colors": {
+      "background": "#f3f5f9",
+      "surface": "#ffffff",
+      "border": "#e5eaf2",
+      "text": "#111827",
+      "muted": "#52627a",
+      "link": "#1d4ed8",
+      "decorativeBlue": "#3b82f6",
+      "green": "#059669",
+      "amber": "#b45309",
+      "red": "#dc2626",
+      "violet": "#7c3aed",
+      "gray": "#64748b"
+    },
+    "spacing": {
+      "basePx": 4,
+      "containerPaddingPx": 12,
+      "kpiGapPx": 12,
+      "panelGapPx": 18,
+      "cardPaddingPx": 16
+    },
+    "cardRadiusPx": 14,
+    "kpiMinHeightPx": 104,
+    "panelMinHeightPx": 232,
+    "donut": {
+      "widthPx": 112,
+      "heightPx": 112,
+      "strokePx": 12,
+      "legend": "HTML_TEXT_COUNTS_AND_PERCENTAGES",
+      "zeroDenominator": "NEUTRAL_RING_NO_PERCENTAGE"
+    },
+    "textSizesPx": {
+      "greeting": 24,
+      "metric": 26,
+      "panelTitle": 14,
+      "legendMinimum": 12
+    },
+    "minimumLineHeight": 1.35,
+    "minimumHitAreaPx": 44,
+    "textContrastTarget": 4.5,
+    "actionIconContrastTarget": 3,
+    "containerBreakpoints": [
+      {
+        "minWidthPx": 1024,
+        "kpiColumns": 5,
+        "panelColumns": 3
+      },
+      {
+        "minWidthPx": 768,
+        "kpiColumns": 3,
+        "panelColumns": 2
+      },
+      {
+        "minWidthPx": 480,
+        "kpiColumns": 2,
+        "panelColumns": 1
+      },
+      {
+        "minWidthPx": 0,
+        "kpiColumns": 1,
+        "panelColumns": 1
+      }
+    ],
+    "fixedPageHeight": false,
+    "footerLinks": [
+      "/audit",
+      "/admin-terms"
+    ]
+  },
+  "context": {
+    "source": "S01",
+    "plannedAdditiveFields": [
+      {
+        "name": "zoneId",
+        "type": "IANA_TIMEZONE",
+        "derivation": "authenticatedActor.organization.timezone"
+      },
+      {
+        "name": "operationalDate",
+        "type": "ISO_LOCAL_DATE",
+        "derivation": "generatedAt in zoneId"
+      }
+    ],
+    "apiFieldsAlreadyImplemented": false,
+    "deploymentOrder": [
+      "backendAdditiveFields",
+      "frontendConsumer"
+    ],
+    "missingFields": "DISABLE_DATE_DEPENDENT_QUERIES_AND_EXPORT_ONLY",
+    "defaultDate": "operationalDate",
+    "futureDatesAllowed": false,
+    "selectedRange": "SINGLE_DAY",
+    "fromEqualsTo": true,
+    "dateAffectedPanels": [
+      "DA-P02",
+      "DA-P04"
+    ],
+    "currentOnly": [
+      "DA-K01",
+      "DA-K02",
+      "DA-K03",
+      "DA-K04",
+      "DA-K05",
+      "priorities",
+      "DA-P01",
+      "DA-P05",
+      "DA-P06"
+    ],
+    "historicalMeaning": "CURRENT_STATE_OF_SELECTED_DAY_COHORT_AT_QUERY_CUTOFF",
+    "browserTimezoneIsAuthoritative": false,
+    "globalSnapshotClaimed": false
+  },
+  "sources": [
+    {
+      "id": "S01",
+      "method": "GET",
+      "path": "/api/v1/dashboard/admin",
+      "status": "EXISTS_WITH_PLANNED_ADDITIVE_CONTEXT",
+      "clientFile": "frontend/src/app/core/dashboard/dashboard-api.service.ts",
+      "backendFile": "backend/src/main/java/pe/rutafija/dashboard/application/DashboardService.java",
+      "clockField": "generatedAt"
+    },
+    {
+      "id": "S02",
+      "method": "GET",
+      "path": "/api/v1/reports/availability",
+      "status": "EXISTS",
+      "clientFile": "frontend/src/app/core/operations/operations-api.service.ts",
+      "backendFile": "backend/src/main/java/pe/rutafija/operation/infrastructure/OperationReportRepository.java",
+      "clockField": "generatedAt"
+    },
+    {
+      "id": "S03",
+      "method": "GET",
+      "path": "/api/v1/reports/services",
+      "query": {
+        "from": "selectedDay",
+        "to": "selectedDay"
+      },
+      "status": "EXISTS",
+      "clientFile": "frontend/src/app/core/reports/service-reports-api.service.ts",
+      "backendFile": "backend/src/main/java/pe/rutafija/reporting/application/ServiceReportService.java",
+      "clockField": "cutoffAt",
+      "maxRows": 10000
+    },
+    {
+      "id": "S04",
+      "method": "GET",
+      "path": "/api/v1/reports/incidents",
+      "query": {
+        "from": "selectedDay",
+        "to": "selectedDay"
+      },
+      "status": "EXISTS",
+      "clientFile": "frontend/src/app/core/operations/operations-api.service.ts",
+      "backendFile": "backend/src/main/java/pe/rutafija/operation/application/ReportService.java",
+      "clockField": null,
+      "timeLabel": "Consultado",
+      "maxRows": 10000
+    },
+    {
+      "id": "S05",
+      "method": "GET",
+      "path": "/api/v1/drivers",
+      "query": {
+        "page": 0,
+        "size": 2,
+        "sort": "createdAt,desc"
+      },
+      "status": "EXISTS",
+      "clientFile": "frontend/src/app/core/management/management-api.service.ts",
+      "backendFile": "backend/src/main/java/pe/rutafija/fleet/api/DriverController.java",
+      "clockField": null,
+      "timeLabel": "Consultado"
+    },
+    {
+      "id": "S06",
+      "method": "GET",
+      "path": "/api/v1/notices",
+      "query": {
+        "failures": false,
+        "page": 0,
+        "size": 20
+      },
+      "status": "EXISTS",
+      "clientFile": "frontend/src/app/core/operations/communication-api.service.ts",
+      "backendFile": "backend/src/main/java/pe/rutafija/operation/application/OperationNoticeService.java",
+      "clockField": null,
+      "timeLabel": "Consultado"
+    },
+    {
+      "id": "S07",
+      "method": "GET",
+      "path": "/api/v1/routes",
+      "query": {
+        "limit": 100,
+        "offset": 0
+      },
+      "status": "EXISTS",
+      "clientFile": "frontend/src/app/core/routes/routes-api.service.ts",
+      "backendFile": "backend/src/main/java/pe/rutafija/routing/application/RouteCatalogService.java",
+      "clockField": null
+    },
+    {
+      "id": "S08",
+      "method": "GET",
+      "path": "/api/v1/routes/{id}",
+      "status": "EXISTS",
+      "clientFile": "frontend/src/app/core/routes/routes-api.service.ts",
+      "backendFile": "backend/src/main/java/pe/rutafija/routing/application/RouteCatalogService.java",
+      "clockField": "observedAt",
+      "timeLabel": "Consultado"
+    },
+    {
+      "id": "S09",
+      "method": "GET",
+      "path": "/api/v1/audit-events",
+      "query": {
+        "page": 0,
+        "size": 6,
+        "sort": "occurredAt,desc"
+      },
+      "status": "EXISTS_DEFERRED_SECONDARY",
+      "clientFile": "frontend/src/app/core/audit/audit-api.service.ts",
+      "backendFile": "backend/src/main/java/pe/rutafija/audit/api/AuditEventController.java",
+      "clockField": null
+    }
+  ],
+  "kpis": [
+    {
+      "id": "DA-K01",
+      "label": "Conductores disponibles",
+      "source": "S02",
+      "numerator": "sum(drivers.total where status=DISPONIBLE)",
+      "denominator": "sum(drivers.total)",
+      "activeFilter": false,
+      "timeScope": "CURRENT",
+      "link": "/drivers"
+    },
+    {
+      "id": "DA-K02",
+      "label": "Vehículos disponibles",
+      "source": "S02",
+      "numerator": "sum(vehicles.total where status=DISPONIBLE)",
+      "denominator": "sum(vehicles.total)",
+      "activeFilter": false,
+      "timeScope": "CURRENT",
+      "link": "/vehicles"
+    },
+    {
+      "id": "DA-K03",
+      "label": "Asignaciones futuras",
+      "source": "S02",
+      "valueField": "futureScheduledAssignments",
+      "unit": "ASSIGNMENT_OFFER",
+      "timeScope": "CURRENT_FUTURE",
+      "link": "/assignments"
+    },
+    {
+      "id": "DA-K04",
+      "label": "Servicios en curso",
+      "source": "S01",
+      "valueField": "servicesInProgress",
+      "unit": "CANONICAL_SERVICE",
+      "timeScope": "CURRENT",
+      "forbiddenLegacyValue": "S02.assignmentsInService",
+      "link": "/assignments"
+    },
+    {
+      "id": "DA-K05",
+      "label": "Incidencias abiertas",
+      "source": "S02",
+      "valueField": "openIncidents",
+      "states": [
+        "OPEN",
+        "FOLLOW_UP"
+      ],
+      "timeScope": "CURRENT_ALL_REPORT_DATES",
+      "link": "/incidents"
+    }
+  ],
+  "panels": [
+    {
+      "id": "DA-P01",
+      "label": "Estado de la flota",
+      "sources": [
+        "S02"
+      ],
+      "chart": "DONUT",
+      "center": "sum(vehicles.total)",
+      "states": [
+        "DISPONIBLE",
+        "EN_SERVICIO",
+        "ATENCION",
+        "MANTENIMIENTO",
+        "INACTIVO"
+      ],
+      "unknownState": "COUNT_AS_OTHER_WITH_REVIEW_NOTICE",
+      "timeScope": "CURRENT",
+      "link": "/vehicles"
+    },
+    {
+      "id": "DA-P02",
+      "label": "Resumen de operación",
+      "sources": [
+        "S03"
+      ],
+      "chart": "DONUT",
+      "center": "totals.completionPercent",
+      "segments": [
+        "totals.completed",
+        "totals.scheduled-totals.completed"
+      ],
+      "legend": [
+        "completed",
+        "pending",
+        "cancelled",
+        "interrupted",
+        "transferred"
+      ],
+      "denominator": "totals.scheduled",
+      "zeroDenominatorText": "Sin servicios programados",
+      "timeScope": "SELECTED_DAY_COHORT",
+      "link": "/reports"
+    },
+    {
+      "id": "DA-P03",
+      "label": "Esquema de ruta",
+      "sources": [
+        "S07",
+        "S08"
+      ],
+      "chart": "REGISTERED_ROUTE_SVG",
+      "version": "currentVersionId",
+      "personalGpsAllowed": false,
+      "vehicleTrackingAllowed": false,
+      "requireAdjacentCoordinatePairs": true,
+      "link": "/routes"
+    },
+    {
+      "id": "DA-P04",
+      "label": "Incidencias por estado",
+      "sources": [
+        "S04"
+      ],
+      "chart": "DONUT",
+      "states": [
+        "OPEN",
+        "FOLLOW_UP",
+        "RESOLVED",
+        "CLOSED_BY_DRIVER"
+      ],
+      "denominator": "sum(totalsByStatus.total)",
+      "timeScope": "SELECTED_REPORTED_DAY_CURRENT_STATUS",
+      "link": "/incidents"
+    },
+    {
+      "id": "DA-P05",
+      "label": "Conductores",
+      "sources": [
+        "S05"
+      ],
+      "chart": "NONE",
+      "visibleRows": 2,
+      "identity": "CONDUCTOR_UUID",
+      "mutatingActions": [],
+      "timeScope": "CURRENT",
+      "link": "/drivers"
+    },
+    {
+      "id": "DA-P06",
+      "label": "Alertas y avisos",
+      "sources": [
+        "S01",
+        "S06"
+      ],
+      "chart": "NONE",
+      "visibleNotices": 2,
+      "unreadScope": "LOADED_PAGE_ONLY",
+      "prioritiesAndNoticesSummable": false,
+      "automaticReadAcknowledgment": false,
+      "timeScope": "CURRENT",
+      "link": "/notices"
+    }
+  ],
+  "priorities": {
+    "source": "S01",
+    "beforeKpis": true,
+    "order": [
+      "CRITICAL_INCIDENTS",
+      "SAFETY_ATTENTION",
+      "UPCOMING_UNACCEPTED",
+      "PENDING_REASSIGNMENT",
+      "EXPIRED_PENDING_OFFERS",
+      "EXPIRING_OFFERS",
+      "OPEN_INCIDENTS",
+      "ONBOARDING_REVIEW"
+    ],
+    "allowedLinks": [
+      "/incidents",
+      "/assignments",
+      "/onboarding-requests"
+    ],
+    "countsSummable": false,
+    "compactOnlyWhenCompleteFreshAndAllZero": true,
+    "errorMayLookHealthy": false
+  },
+  "export": {
+    "button": "Exportar resumen",
+    "dialog": "Reporte de servicios del período",
+    "scope": "CANONICAL_SERVICE_REPORT_SELECTED_DAY",
+    "excluded": [
+      "fleet",
+      "driverList",
+      "incidents",
+      "notices",
+      "routeDiagram"
+    ],
+    "formats": [
+      "csv",
+      "xlsx",
+      "pdf"
+    ],
+    "issueMethod": "POST",
+    "issuePath": "/api/v1/reports/services/emissions",
+    "issueTrigger": "EXPLICIT_EMIT_BUTTON_ONLY",
+    "exportMethod": "GET",
+    "exportPath": "/api/v1/reports/services/emissions/{id}/export",
+    "samePersistedContentAcrossFormats": true,
+    "idempotency": "PRESERVE_OPERATION_KEY_AND_PERIOD_WHEN_OUTCOME_UNKNOWN",
+    "autoIssueOnLoadOrRefresh": false,
+    "globalDashboardSnapshotClaimed": false
+  },
+  "stateModel": {
+    "states": [
+      "loading",
+      "ready",
+      "empty",
+      "refreshing",
+      "stale",
+      "unavailable",
+      "forbidden",
+      "invalid"
+    ],
+    "zeroRequiresSuccessfulResponse": true,
+    "previousDataContext": [
+      "userId",
+      "organizationId",
+      "selectedDay"
+    ],
+    "memoryOnly": true,
+    "clearOnSessionChange": true,
+    "ignoreOutOfOrderResponses": true,
+    "partialFailureIsolation": true,
+    "missingCategoryInValidDistributionMeansZero": true,
+    "duplicateOrNegativeCounts": "INVALID",
+    "emptyUnreadSampleProvesGlobalHealth": false
+  },
+  "refresh": {
+    "groupWindowMs": 300,
+    "visiblePollIntervalMs": 60000,
+    "pausePollingWhenHidden": true,
+    "singleResumeRound": true,
+    "maxInFlightPerSource": 1,
+    "maxQueuedInvalidationsPerSource": 1,
+    "cancelOnDestroy": true,
+    "socketPerCard": false,
+    "plannedReadOnlyConnectionStates": [
+      "disconnected",
+      "connecting",
+      "connected",
+      "reconnecting"
+    ],
+    "connectionStateAlreadyExposed": false,
+    "initialGetBudgetWithSelectedRoute": 8,
+    "websocketTicketPostSeparate": true,
+    "selectedDayChangeGetBudget": 2,
+    "routeChangeGetBudget": 1,
+    "deferredAuditGetBudget": 1
+  },
+  "rounding": {
+    "percentageDecimals": 1,
+    "mode": "HALF_UP",
+    "canonicalPercentDecimals": 4,
+    "forceRoundedSumTo100": false,
+    "segmentGeometryUsesUnroundedRatios": true
+  },
+  "acceptanceIds": [
+    "DA-C01",
+    "DA-C02",
+    "DA-C03",
+    "DA-C04",
+    "DA-C05",
+    "DA-C06",
+    "DA-C07",
+    "DA-C08",
+    "DA-C09",
+    "DA-C10",
+    "DA-C11",
+    "DA-C12"
+  ],
+  "syntheticSpecificationScenarios": [
+    {
+      "id": "DA-S01",
+      "kind": "fleet",
+      "counts": {
+        "DISPONIBLE": 4,
+        "EN_SERVICIO": 2,
+        "ATENCION": 1,
+        "MANTENIMIENTO": 1,
+        "INACTIVO": 2
+      },
+      "expectedTotal": 10,
+      "expectedPercentages": {
+        "DISPONIBLE": "40.0",
+        "EN_SERVICIO": "20.0",
+        "ATENCION": "10.0",
+        "MANTENIMIENTO": "10.0",
+        "INACTIVO": "20.0"
+      }
+    },
+    {
+      "id": "DA-S02",
+      "kind": "operation",
+      "totals": {
+        "scheduled": 10,
+        "completed": 4,
+        "pending": 2,
+        "cancelled": 2,
+        "interrupted": 1,
+        "transferred": 1
+      },
+      "expectedPercent": "40.0",
+      "expectedNotCompleted": 6
+    },
+    {
+      "id": "DA-S03",
+      "kind": "operation",
+      "totals": {
+        "scheduled": 0,
+        "completed": 0,
+        "pending": 0,
+        "cancelled": 0,
+        "interrupted": 0,
+        "transferred": 0
+      },
+      "expectedPercent": null,
+      "expectedText": "Sin servicios programados",
+      "expectedNotCompleted": 0
+    },
+    {
+      "id": "DA-S04",
+      "kind": "cohortDifference",
+      "allOpenNow": 8,
+      "selectedDayStates": {
+        "OPEN": 1,
+        "FOLLOW_UP": 1,
+        "RESOLVED": 3,
+        "CLOSED_BY_DRIVER": 1
+      },
+      "expectedK05": 8,
+      "expectedP04Total": 6,
+      "expectedSelectedDayOpen": 2
+    },
+    {
+      "id": "DA-S05",
+      "kind": "fleet",
+      "counts": {
+        "DISPONIBLE": 1,
+        "EN_SERVICIO": 1,
+        "MANTENIMIENTO": 1
+      },
+      "expectedTotal": 3,
+      "expectedPercentages": {
+        "DISPONIBLE": "33.3",
+        "EN_SERVICIO": "33.3",
+        "MANTENIMIENTO": "33.3"
+      },
+      "expectedRoundedSum": "99.9"
+    },
+    {
+      "id": "DA-S06",
+      "kind": "canonicalService",
+      "servicesInProgress": 1,
+      "legacyOffersInService": 3,
+      "expectedK04": 1
+    },
+    {
+      "id": "DA-S07",
+      "kind": "noticeScope",
+      "allPrioritiesZeroAndValid": true,
+      "noticeTotalItems": 50,
+      "loadedNoticeCount": 20,
+      "loadedUnreadCount": 0,
+      "expectedFavorableEmptyState": false
+    },
+    {
+      "id": "DA-S08",
+      "kind": "noticeScope",
+      "allPrioritiesZeroAndValid": true,
+      "noticeTotalItems": 0,
+      "loadedNoticeCount": 0,
+      "loadedUnreadCount": 0,
+      "expectedFavorableEmptyState": true
+    },
+    {
+      "id": "DA-S09",
+      "kind": "failedSource",
+      "status": "unavailable",
+      "successfulResponse": false,
+      "expectedNumericValue": null,
+      "expectedFavorableEmptyState": false
+    },
+    {
+      "id": "DA-S10",
+      "kind": "serverDate",
+      "generatedAt": "2026-10-26T04:30:00Z",
+      "zoneId": "America/Lima",
+      "browserDate": "2026-10-26",
+      "expectedOperationalDate": "2026-10-25"
+    },
+    {
+      "id": "DA-S11",
+      "kind": "missingContext",
+      "zoneId": null,
+      "operationalDate": null,
+      "expectedDateDependentQueriesAllowed": false,
+      "expectedCurrentCountersAllowed": true
+    },
+    {
+      "id": "DA-S12",
+      "kind": "operation",
+      "totals": {
+        "scheduled": 3,
+        "completed": 0,
+        "pending": 1,
+        "cancelled": 1,
+        "interrupted": 1,
+        "transferred": 0
+      },
+      "expectedPercent": "0.0",
+      "expectedNotCompleted": 3
+    }
+  ]
+}

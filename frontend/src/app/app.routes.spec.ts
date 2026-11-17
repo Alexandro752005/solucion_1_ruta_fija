@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 import { describe, expect, it } from 'vitest';
 
 import { adminTermsGuard } from './core/auth/admin-terms.guard';
+import { authGuard } from './core/auth/auth.guard';
 import { roleGuard } from './core/auth/role.guard';
 import { routes } from './app.routes';
 
@@ -15,6 +16,15 @@ function childRoute(path: string): Route {
 }
 
 describe('rutas del CRM por rol', () => {
+  it('restringe el nuevo mapa a ADMIN y revalida sesión', () => {
+    expect(childRoute('live-map').data?.['roles']).toEqual(['ADMIN']);
+    expect(childRoute('live-map').canActivate).toEqual([authGuard, roleGuard]);
+  });
+  it('revalida sesión, rol y términos al cambiar la intención de Asignaciones', () => {
+    const route = childRoute('assignments');
+    expect(route.runGuardsAndResolvers).toBe('paramsOrQueryParamsChange');
+    expect(route.canActivate).toEqual([authGuard, roleGuard]);
+  });
   it('protege las solicitudes y el expediente con el guard de rol ADMIN', () => {
     const route = childRoute('onboarding-requests');
     expect(route.data?.['roles']).toEqual(['ADMIN']);

@@ -10,7 +10,6 @@ import pe.rutafija.operation.api.dto.mobile.MobileSyncEventResult;
 import pe.rutafija.operation.api.dto.mobile.MobileSyncEventsRequest;
 import pe.rutafija.operation.api.dto.mobile.MobileSyncEventsResponse;
 import pe.rutafija.operation.api.dto.mobile.MobileSyncEventStatus;
-import pe.rutafija.operation.api.dto.mobile.MobileSyncEventType;
 import pe.rutafija.shared.exception.ApplicationException;
 import pe.rutafija.shared.exception.ErrorCode;
 

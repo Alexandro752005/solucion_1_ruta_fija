@@ -57,7 +57,7 @@ public abstract class L02PostgresIntegrationTest {
                  where success and version is not null order by installed_rank desc limit 1
                 """, String.class);
         Integer failed = jdbc.queryForObject("select count(*) from flyway_schema_history where not success", Integer.class);
-        if (!java.util.Set.of("28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50").contains(version) || failed == null || failed != 0)
-            throw new IllegalStateException("Regression requires explicitly migrated successful V28 or additive authorized V29..V50.");
+        if (!java.util.Set.of("28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51").contains(version) || failed == null || failed != 0)
+            throw new IllegalStateException("Regression requires explicitly migrated successful V28 or additive authorized V29..V51.");
     }
 }

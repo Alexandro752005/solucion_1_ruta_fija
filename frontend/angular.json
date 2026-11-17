@@ -55,6 +55,17 @@
               ],
               "outputHashing": "all"
             },
+            "dashboard-preview": {
+              "browser": "src/dashboard-preview.main.ts",
+              "tsConfig": "tsconfig.dashboard-preview.json",
+              "outputPath": "../.runtime/dashboard-admin-fase-2-20261026/preview-dist",
+              "optimization": { "scripts": true, "styles": true, "fonts": false },
+              "sourceMap": false,
+              "budgets": [
+                { "type": "initial", "maximumWarning": "650kB", "maximumError": "1MB" },
+                { "type": "anyComponentStyle", "maximumWarning": "8kB", "maximumError": "12kB" }
+              ]
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,

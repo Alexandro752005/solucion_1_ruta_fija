@@ -277,15 +277,7 @@ public final class L07ConnectedTrial {
 
     @FunctionalInterface private interface Step{void run()throws Exception;}
     private void step(String id,Step action)throws Exception{phase=id;if(Boolean.TRUE.equals(state.get(id)))return;action.run();state.put(id,true);persist();}
-    private JsonNode incident(String field)throws Exception{return call("/incidents/"+text(field),"GET",null,adminToken,200);}
     private void stage(String stage,boolean crm)throws Exception{state.put("clientStage",stage);if(crm)prepareBrowserSession();savePrivate();persist();runClient(crm);}
-    private void membership(boolean active)throws Exception{
-        var r=call("/groups/"+text("secondaryGroupId")+"/resources","GET",null,adminToken,200);
-        boolean exists=false;for(var m:r.path("memberships"))if(m.path("resourceId").asText().equals(text("driverId"))&&m.path("active").asBoolean())exists=true;
-        if(exists==active)return;
-        call("/groups/"+text("secondaryGroupId")+"/memberships","POST",Map.of("expectedVersion",r.path("version").asLong(),"operationKey",fixtureKey("group-"+active),"resourceKind","DRIVER","resourceId",text("driverId"),"active",active,"reason","SYNTHETIC snapshot membership review"),adminToken,200);
-    }
-
     private void connectedWorkflow(Map<String,Object> config)throws Exception{
         step("CASE_SERVICES",this::prepareServices);
         step("FLUTTER_HOME",()->stage("HOME",false));

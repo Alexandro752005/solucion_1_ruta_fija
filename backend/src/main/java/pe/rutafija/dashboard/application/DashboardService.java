@@ -13,6 +13,7 @@ import pe.rutafija.shared.security.CurrentUserService;
 import java.sql.Timestamp;
 import java.time.Clock;
 import java.time.Duration;
+import java.time.ZoneId;
 import java.util.List;
 
 /** Read-only priority counts; operational details remain behind their normal tenant endpoints. */
@@ -29,6 +30,7 @@ public class DashboardService {
         var actor = current.requireTenantActor();
         if (actor.getRole() != UserRole.ADMIN) throw new ApplicationException(HttpStatus.FORBIDDEN, ErrorCode.FORBIDDEN_ROLE, "Se requiere ADMIN");
         var org = actor.getOrganizationId(); var now = clock.instant(); var until = now.plus(Duration.ofHours(24));
+        var zone = ZoneId.of(actor.getOrganization().getTimezone());
         long critical = count("select count(*) from incident where organization_id=? and severity='CRITICAL' and status in('OPEN','FOLLOW_UP')", org);
         long attention = count("""
             select count(*) from service_attention h where h.organization_id=? and
@@ -53,7 +55,8 @@ public class DashboardService {
             new DashboardContract.Priority(8,"ONBOARDING_REVIEW",onboarding,"/onboarding-requests")),
             count("select count(*) from scheduled_service where organization_id=? and status='IN_SERVICE'",org),
             count("select count(*) from driver where organization_id=? and active",org),
-            count("select count(*) from vehicle where organization_id=? and active",org));
+            count("select count(*) from vehicle where organization_id=? and active",org),
+            zone.getId(), now.atZone(zone).toLocalDate());
     }
     @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
     public DashboardContract.Platform platform() {

@@ -72,7 +72,7 @@ public class MobileDriverController {
     @PutMapping("/location/current")
     @Operation(
             summary = "Crear o reemplazar exclusivamente la ubicación vigente propia",
-            description = "No crea historial. El servidor calcula la retención y no emite coordenadas en auditoría ni WebSocket."
+            description = "Conserva el punto del tramo iniciado y su snapshot vigente con retención calculada por servidor; no emite coordenadas en auditoría ni WebSocket."
     )
     public ResponseEntity<Void> upsertCurrentLocation(@Valid @RequestBody MobileLocationUpdateRequest request) {
         mobileDriverService.upsertCurrentLocation(request);

@@ -12,7 +12,6 @@ import pe.rutafija.identity.infrastructure.AppUserRepository;
 import pe.rutafija.identity.infrastructure.EmailOtpChallengeRepository;
 import pe.rutafija.shared.exception.ApplicationException;
 import pe.rutafija.shared.exception.ErrorCode;
-import pe.rutafija.shared.exception.ExternalServiceUnavailableException;
 
 import java.time.Clock;
 import java.time.Duration;

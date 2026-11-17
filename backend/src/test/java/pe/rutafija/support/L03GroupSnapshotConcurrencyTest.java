@@ -19,7 +19,7 @@ class L03GroupSnapshotConcurrencyTest {
         boolean fixtureCommitted=false;String ledger;
         try(Connection guard=connection(db)){
             assertThat(scalar(guard,"select current_database()||'/'||current_user")).isEqualTo("ruta_fija_test/rf_test");
-            assertThat(scalar(guard,"select version from flyway_schema_history where success and version is not null order by installed_rank desc limit 1")).isIn("29","30","31","32");
+            assertThat(scalar(guard,"select version from flyway_schema_history where success and version is not null order by installed_rank desc limit 1")).isIn(IsolatedAuditSpecializedPostgres.enabled()?new String[]{"51"}:new String[]{"29","30","31","32"});
             for(String marker:List.of(".local/l01-human-trial.active",".local/l02-connected.active"))assertThat(Files.exists(Path.of(marker))).isFalse();
             assertThat(scalar(guard,"select pg_try_advisory_lock(7518440514)")).isEqualTo("true");
             ledger=scalar(guard,"select string_agg(role||':'||n,',' order by role) from(select role,count(*) n from pilot_account_creation group by role)s");

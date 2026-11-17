@@ -12,6 +12,8 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import pe.rutafija.operation.api.dto.AssignmentReportResponse;
@@ -31,6 +33,8 @@ import java.util.List;
 /** Genera artefactos descargables únicamente a partir de los reportes persistidos y autorizados. */
 @Service
 public class ReportExportService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ReportExportService.class);
 
     private static final MediaType XLSX_MEDIA_TYPE = MediaType.parseMediaType(
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -98,11 +102,28 @@ public class ReportExportService {
     }
 
     private ReportExport export(ReportExportFormat format, ReportDataset dataset, String basename) {
-        return switch (format) {
-            case PDF -> new ReportExport(asPdf(dataset), MediaType.APPLICATION_PDF, basename + ".pdf");
-            case XLSX -> new ReportExport(asXlsx(dataset), XLSX_MEDIA_TYPE, basename + ".xlsx");
-            case CSV -> new ReportExport(asCsv(dataset), MediaType.parseMediaType("text/csv;charset=UTF-8"), basename + ".csv");
-        };
+        long started = System.nanoTime();
+        try {
+            ReportExport file = switch (format) {
+                case PDF -> new ReportExport(asPdf(dataset), MediaType.APPLICATION_PDF, basename + ".pdf");
+                case XLSX -> new ReportExport(asXlsx(dataset), XLSX_MEDIA_TYPE, basename + ".xlsx");
+                case CSV -> new ReportExport(asCsv(dataset), MediaType.parseMediaType("text/csv;charset=UTF-8"), basename + ".csv");
+            };
+            logExport(format, started, true);
+            return file;
+        } catch (RuntimeException error) {
+            logExport(format, started, false);
+            throw error;
+        }
+    }
+
+    private void logExport(ReportExportFormat format, long started, boolean success) {
+        long elapsed = System.nanoTime() - started;
+        if (success) {
+            LOG.debug("report_export format={} result={} duration_nanos={}", format, "SUCCESS", elapsed);
+        } else {
+            LOG.warn("report_export format={} result={} duration_nanos={}", format, "FAILURE", elapsed);
+        }
     }
 
     /** Formats share a caller-provided authorized immutable dataset; never query here. */

@@ -22,6 +22,17 @@ enum ServiceLocationPhase {
 
 enum ServiceLocationStep { discovery, profile, permission, capture, upload }
 
+enum MapLocationPhase {
+  idle,
+  checking,
+  ready,
+  noPermission,
+  gpsDisabled,
+  noConnection,
+  unavailable,
+  paused,
+}
+
 enum ServiceLocationFailureKind {
   timeout,
   provider,
@@ -73,12 +84,37 @@ final class MobileServiceLocationController extends ChangeNotifier {
     required this.driver,
     required this.device,
     DateTime Function()? clock,
-  }) : clock = clock ?? _now;
+  }) : clock = clock ?? _now {
+    if (device case MobileDeviceLocationSignals signals) {
+      _deviceStatus = signals.locationServiceChanges.listen(
+        (enabled) {
+          if (_disposed) return;
+          if (!enabled) {
+            _epoch++;
+            _mapPoint = null;
+            _set(ServiceLocationPhase.noPermission);
+            _mapPhase = MapLocationPhase.gpsDisabled;
+            notifyListeners();
+          } else if (_foreground && _driverId != null) {
+            unawaited(tick());
+          }
+        },
+        onError: (Object _) {
+          if (_disposed) return;
+          _epoch++;
+          _mapPoint = null;
+          _mapPhase = MapLocationPhase.unavailable;
+          _set(ServiceLocationPhase.unavailable);
+        },
+      );
+    }
+  }
   final MobileAssignmentGateway assignments;
   final MobileDriverGateway driver;
   final MobileDeviceLocationGateway device;
   final DateTime Function() clock;
   Timer? _timer;
+  StreamSubscription<bool>? _deviceStatus;
   String? _driverId;
   bool _foreground = false;
   bool _disposed = false;
@@ -89,6 +125,15 @@ final class MobileServiceLocationController extends ChangeNotifier {
   ServiceLocationDiagnostic? _diagnostic;
   DateTime? _lastCaptureAt;
   DateTime? _signalWatchStartedAt;
+  // Only the visible map may retain a sensor point; never a queue or disk history.
+  MobileCurrentLocation? _mapPoint;
+  bool _mapVisible = false;
+  bool _consentBlocked = false;
+  MapLocationPhase _mapPhase = MapLocationPhase.idle;
+  MobileCurrentLocation? get mapPoint => _mapPoint;
+  MapLocationPhase get mapPhase => _mapPhase;
+  bool get isForeground => _foreground;
+  bool get mapVisible => _mapVisible;
   static const maximumCaptureAge = Duration(seconds: 120);
   ServiceLocationPhase get phase => _phase;
   ServiceLocationDiagnostic? get diagnostic => _diagnostic;
@@ -121,6 +166,8 @@ final class MobileServiceLocationController extends ChangeNotifier {
     if (_driverId == driverId) return;
     _epoch++;
     _driverId = driverId;
+    _mapPoint = null;
+    _consentBlocked = false;
     _active = null;
     _lastCaptureAt = null;
     _signalWatchStartedAt = null;
@@ -132,7 +179,67 @@ final class MobileServiceLocationController extends ChangeNotifier {
     if (_foreground == value) return;
     _epoch++;
     _foreground = value;
+    if (!value) {
+      _mapPoint = null;
+      _mapPhase = MapLocationPhase.paused;
+    }
     _restart();
+  }
+
+  void setMapVisible(bool visible) {
+    if (_disposed || _mapVisible == visible) return;
+    _mapVisible = visible;
+    if (!visible) {
+      _mapPoint = null;
+      _mapPhase = MapLocationPhase.idle;
+    } else if (_foreground && _driverId != null) {
+      unawaited(tick());
+    }
+    notifyListeners();
+  }
+
+  /// Called before a revocation request and after a confirmed explicit grant.
+  /// A failed revocation remains locally blocked; no optimistic re-enabling.
+  void consentChanged(bool consent) {
+    if (_disposed) return;
+    _epoch++;
+    _consentBlocked = !consent;
+    _mapPoint = null;
+    _mapPhase = MapLocationPhase.idle;
+    _set(
+      consent ? ServiceLocationPhase.checking : ServiceLocationPhase.noConsent,
+    );
+    if (consent && _foreground) unawaited(tick());
+  }
+
+  void clearMapPoint() {
+    if (_disposed) return;
+    _epoch++;
+    _mapPoint = null;
+    _mapPhase = MapLocationPhase.idle;
+    notifyListeners();
+  }
+
+  Future<void> requestMapPermission() async {
+    if (!_foreground || _driverId == null || _disposed) return;
+    if (!await device.isLocationServiceEnabled()) {
+      _mapPoint = null;
+      _mapPhase = MapLocationPhase.gpsDisabled;
+      notifyListeners();
+      return;
+    }
+    var permission = await device.checkPermission();
+    if (permission == MobileDeviceLocationPermission.denied) {
+      permission = await device.requestPermission();
+    }
+    if (_disposed) return;
+    if (!permission.grantsForeground) {
+      _mapPoint = null;
+      _mapPhase = MapLocationPhase.noPermission;
+      notifyListeners();
+      return;
+    }
+    await tick();
   }
 
   void _restart() {
@@ -156,7 +263,10 @@ final class MobileServiceLocationController extends ChangeNotifier {
       !_disposed && _foreground && _driverId != null && _epoch == epoch;
   Future<void> tick() {
     if (_pending != null) return _pending!;
-    final work = _cycle();
+    return _track(_cycle());
+  }
+
+  Future<void> _track(Future<void> work) {
     _pending = work;
     unawaited(
       work.whenComplete(() {
@@ -195,6 +305,7 @@ final class MobileServiceLocationController extends ChangeNotifier {
               ? ServiceLocationPhase.idle
               : ServiceLocationPhase.unavailable,
         );
+        if (ongoing.isEmpty && _mapVisible) await _capturePersonal(epoch);
         return;
       }
       final a = ongoing.single;
@@ -219,21 +330,12 @@ final class MobileServiceLocationController extends ChangeNotifier {
       _set(ServiceLocationPhase.idle);
       return;
     }
-    if (!profile.locationConsent) {
+    if (!profile.locationConsent || _consentBlocked) {
       _set(ServiceLocationPhase.noConsent);
+      if (_mapVisible) await _capturePersonal(epoch);
       return;
     }
-    if (!await _at(
-          ServiceLocationStep.permission,
-          device.isLocationServiceEnabled,
-        ) ||
-        !(await _at(
-          ServiceLocationStep.permission,
-          device.checkPermission,
-        )).grantsForeground) {
-      if (_valid(epoch)) _set(ServiceLocationPhase.noPermission);
-      return;
-    }
+    if (!await _serviceDeviceAllowed(epoch)) return;
     if (!_valid(epoch)) return;
     final point = await _at(
       ServiceLocationStep.capture,
@@ -241,25 +343,115 @@ final class MobileServiceLocationController extends ChangeNotifier {
     );
     if (!_valid(epoch) || _active?.id != a.id) return;
     // A permission change while obtaining a fix must not become an asserted permission in the request.
-    if (!(await _at(
-          ServiceLocationStep.permission,
-          device.checkPermission,
-        )).grantsForeground ||
-        !await _at(
-          ServiceLocationStep.permission,
-          device.isLocationServiceEnabled,
-        ) ||
-        !_valid(epoch)) {
-      if (_valid(epoch)) _set(ServiceLocationPhase.noPermission);
-      return;
-    }
+    if (!await _serviceDeviceAllowed(epoch)) return;
     await _at(
       ServiceLocationStep.upload,
       () => driver.upsertCurrentLocation(point),
     );
     if (!_valid(epoch)) return;
     _lastCaptureAt = point.capturedAt;
+    if (_mapVisible) {
+      _mapPoint = point;
+      _mapPhase = MapLocationPhase.ready;
+    }
     _set(ServiceLocationPhase.sharing);
+  }
+
+  Future<bool> _serviceDeviceAllowed(int epoch) async {
+    final enabled = await _at(
+      ServiceLocationStep.permission,
+      device.isLocationServiceEnabled,
+    );
+    if (!_valid(epoch)) return false;
+    if (!enabled) {
+      _deviceUnavailable(gpsDisabled: true);
+      return false;
+    }
+    final permission = await _at(
+      ServiceLocationStep.permission,
+      device.checkPermission,
+    );
+    if (!_valid(epoch)) return false;
+    if (!permission.grantsForeground) {
+      _deviceUnavailable(gpsDisabled: false);
+      return false;
+    }
+    final stillEnabled = await _at(
+      ServiceLocationStep.permission,
+      device.isLocationServiceEnabled,
+    );
+    if (!_valid(epoch)) return false;
+    if (!stillEnabled) {
+      _deviceUnavailable(gpsDisabled: true);
+      return false;
+    }
+    return true;
+  }
+
+  void _deviceUnavailable({required bool gpsDisabled}) {
+    _mapPoint = null;
+    _mapPhase = gpsDisabled
+        ? MapLocationPhase.gpsDisabled
+        : MapLocationPhase.noPermission;
+    _phase = ServiceLocationPhase.noPermission;
+    _diagnostic = null;
+    notifyListeners();
+  }
+
+  Future<void> _capturePersonal(int epoch) async {
+    if (!_valid(epoch) || !_mapVisible) return;
+    _mapPhase = MapLocationPhase.checking;
+    notifyListeners();
+    if (!await _at(
+      ServiceLocationStep.permission,
+      device.isLocationServiceEnabled,
+    )) {
+      if (_valid(epoch)) {
+        _mapPoint = null;
+        _mapPhase = MapLocationPhase.gpsDisabled;
+        notifyListeners();
+      }
+      return;
+    }
+    if (!(await _at(
+      ServiceLocationStep.permission,
+      device.checkPermission,
+    )).grantsForeground) {
+      if (_valid(epoch)) {
+        _mapPoint = null;
+        _mapPhase = MapLocationPhase.noPermission;
+        notifyListeners();
+      }
+      return;
+    }
+    if (!_valid(epoch) || !_mapVisible) return;
+    final point = await _at(
+      ServiceLocationStep.capture,
+      device.currentPosition,
+    );
+    if (!_valid(epoch) || !_mapVisible) return;
+    final permitted = (await device.checkPermission()).grantsForeground;
+    final enabled = await device.isLocationServiceEnabled();
+    if (!_valid(epoch) || !_mapVisible) return;
+    if (!permitted || !enabled) {
+      _mapPoint = null;
+      _mapPhase = enabled
+          ? MapLocationPhase.noPermission
+          : MapLocationPhase.gpsDisabled;
+    } else if (!point.latitude.isFinite ||
+        !point.longitude.isFinite ||
+        point.latitude.abs() > 90 ||
+        point.longitude.abs() > 180 ||
+        !point.accuracyMeters.isFinite ||
+        point.accuracyMeters < 0) {
+      _mapPoint = null;
+      _mapPhase = MapLocationPhase.unavailable;
+    } else {
+      _mapPoint = point;
+      _mapPhase = MapLocationPhase.ready;
+    }
+    notifyListeners();
+    // No repository upload is reachable from this branch.
   }
 
   void observe(MobileAssignment a) {
@@ -268,6 +460,8 @@ final class MobileServiceLocationController extends ChangeNotifier {
       if (_active?.id == a.id) {
         _epoch++;
         _active = null;
+        _mapPoint = null;
+        _mapPhase = MapLocationPhase.idle;
         _set(ServiceLocationPhase.idle);
       }
       return;
@@ -283,11 +477,20 @@ final class MobileServiceLocationController extends ChangeNotifier {
   }
 
   /// One automatic punctual attempt before the user's completion command; missing GPS never prevents safe completion.
-  Future<void> beforeComplete(MobileAssignment a) async {
-    if (!_foreground || _driverId != a.driverId || _disposed) return;
+  Future<void> beforeComplete(MobileAssignment a) {
+    if (!_foreground || _driverId != a.driverId || _disposed) {
+      return Future.value();
+    }
+    final pending = _pending;
+    if (pending != null) return pending.then((_) => beforeComplete(a));
+    // Own the same single-flight lock before the first awaited GET, so the
+    // periodic tick, map refresh and manual update can only join this attempt.
+    return _track(_completeCapture(a));
+  }
+
+  Future<void> _completeCapture(MobileAssignment a) async {
     final epoch = _epoch;
     try {
-      if (_pending != null) await _pending;
       if (!_valid(epoch)) return;
       final current = await _at(
         ServiceLocationStep.discovery,
@@ -364,6 +567,7 @@ final class MobileServiceLocationController extends ChangeNotifier {
 
   void _recordFailure(Object error, int epoch) {
     if (!_valid(epoch)) return;
+    _mapPoint = null;
     _diagnostic = error is _LocationAttemptFailure
         ? error.diagnostic
         : _classify(ServiceLocationStep.discovery, error);
@@ -372,11 +576,22 @@ final class MobileServiceLocationController extends ChangeNotifier {
           ? ServiceLocationPhase.noConnection
           : ServiceLocationPhase.unavailable,
     );
+    _mapPhase = _diagnostic?.kind == ServiceLocationFailureKind.network
+        ? MapLocationPhase.noConnection
+        : MapLocationPhase.unavailable;
+    notifyListeners();
   }
 
   void _set(ServiceLocationPhase phase) {
     if (_disposed) return;
     _phase = phase;
+    if (phase == ServiceLocationPhase.noPermission ||
+        phase == ServiceLocationPhase.paused) {
+      _mapPoint = null;
+      _mapPhase = phase == ServiceLocationPhase.paused
+          ? MapLocationPhase.paused
+          : MapLocationPhase.noPermission;
+    }
     if (phase == ServiceLocationPhase.idle ||
         phase == ServiceLocationPhase.sharing ||
         phase == ServiceLocationPhase.noConsent ||
@@ -393,6 +608,8 @@ final class MobileServiceLocationController extends ChangeNotifier {
     _epoch++;
     _timer?.cancel();
     _active = null;
+    unawaited(_deviceStatus?.cancel());
+    _mapPoint = null;
     _lastCaptureAt = null;
     _signalWatchStartedAt = null;
     _diagnostic = null;

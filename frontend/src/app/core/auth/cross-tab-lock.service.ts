@@ -17,6 +17,8 @@ const LEASE_RETRY_MS = 75;
  */
 @Injectable({ providedIn: 'root' })
 export class CrossTabLockService {
+  private readonly localTails = new Map<string, Promise<void>>();
+
   async runExclusive<T>(name: string, operation: () => Promise<T>): Promise<T> {
     const lockManager = globalThis.navigator?.locks;
     if (lockManager !== undefined) {
@@ -29,12 +31,26 @@ export class CrossTabLockService {
 
     const storage = this.availableStorage();
     if (storage === null) {
-      // La coordinación dentro de la pestaña sigue cubierta por shareReplay.
-      // Se evita persistir cualquier credencial como mecanismo alternativo.
-      return operation();
+      // shareReplay solo agrupa renovaciones, no login/logout/OTP. Sin las
+      // APIs compartidas conservamos exclusión en esta instancia; no podemos
+      // prometer coordinación entre pestañas en ese entorno restringido.
+      return this.runLocally(name, operation);
     }
 
     return this.runWithStorageLease(storage, name, operation);
+  }
+
+  private runLocally<T>(name: string, operation: () => Promise<T>): Promise<T> {
+    const previous = this.localTails.get(name) ?? Promise.resolve();
+    const current = previous.then(operation);
+    // Un fallo debe liberar el turno y permitir que continúe la siguiente
+    // operación, sin almacenar credenciales ni rechazos sin observador.
+    const tail = current.then(() => undefined, () => undefined);
+    this.localTails.set(name, tail);
+    void tail.then(() => {
+      if (this.localTails.get(name) === tail) this.localTails.delete(name);
+    });
+    return current;
   }
 
   private async runWithStorageLease<T>(

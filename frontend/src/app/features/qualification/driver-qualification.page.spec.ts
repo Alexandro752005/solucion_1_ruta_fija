@@ -63,6 +63,21 @@ describe('DriverQualificationPage', () => {
     fixture.detectChanges();
   }
 
+  function loadCurrent(current: Qualification): void {
+    page.load();
+    http.expectOne(endpoint).flush(current);
+    fixture.detectChanges();
+  }
+
+  function prepareCompanyPeriod(): void {
+    page.reason = 'Período sintético';
+    page.vehicleId = 'vehicle-synthetic';
+    page.kind = 'COMPANY';
+    page.start = '2026-11-10';
+    page.end = '2026-12-24';
+    page.preparePeriod();
+  }
+
   it('consulta estado ordinario sin cargar ni conservar los datos personales devueltos indebidamente', () => {
     expect(page.restricted()).toBe(false);
     expect(page.state()?.personalDocuments).toEqual([]);
@@ -90,18 +105,31 @@ describe('DriverQualificationPage', () => {
 
   it('limpia PII también al destruir la página', () => {
     openRestricted();
+    page.loadVehicleReferences();
+    http.expectOne((request) => request.url === '/api/v1/vehicles').flush({ items: [
+      { id: 'vehicle-synthetic', status: 'DISPONIBLE', active: true, plate: 'SYN-001' },
+    ], totalPages: 1 });
+    expect(page.restrictedVehicleLabels()['vehicle-synthetic']).toBe('SYN-001');
     page.ngOnDestroy();
     expect(page.personalDrafts).toEqual([]);
     expect(page.reviewDrafts).toEqual([]);
+    expect(page.restrictedVehicleLabels()).toEqual({});
+    expect(page.vehicleReferences()).toEqual([]);
     expect(page.state()).toBeNull();
   });
 
   it('no modifica sin motivo ni envía éxito local antes de la respuesta HTTP', () => {
+    loadCurrent({ ...state, blockers: [] });
     page.act('activate');
     http.expectNone(`${endpoint}/activate`);
     expect(page.error()).toContain('motivo');
     page.reason = 'Comprobación sintética';
     page.act('activate');
+    http.expectNone(`${endpoint}/activate`);
+    expect(page.pendingConfirmation()?.action).toBe('activate');
+    expect(page.state()?.operationalEnabled).toBe(false);
+    expect(page.notice()).toBeNull();
+    page.confirmPending();
     const request = http.expectOne(`${endpoint}/activate`);
     expect(page.saving()).toBe(true);
     expect(page.notice()).toBeNull();
@@ -114,8 +142,10 @@ describe('DriverQualificationPage', () => {
   });
 
   it('conserva clave ante pérdida de respuesta, bloquea hasta reconsulta y nunca reenvía automáticamente', () => {
+    loadCurrent({ ...state, blockers: [] });
     page.reason = 'Comprobación sintética';
     page.act('activate');
+    page.confirmPending();
     const request = http.expectOne(`${endpoint}/activate`);
     const key = request.request.body.operationKey;
     request.error(new ProgressEvent('error'));
@@ -133,8 +163,10 @@ describe('DriverQualificationPage', () => {
   });
 
   it('trata 409 como conflicto, sin asumir éxito ni reintentar', () => {
+    loadCurrent({ ...state, blockers: [] });
     page.reason = 'Comprobación sintética';
     page.act('activate');
+    page.confirmPending();
     http.expectOne(`${endpoint}/activate`).flush({}, { status: 409, statusText: 'Conflict' });
     expect(page.mustRefresh()).toBe(true);
     expect(page.error()).toContain('conflicto');
@@ -199,6 +231,9 @@ describe('DriverQualificationPage', () => {
     http.expectNone(`${endpoint}/periods`);
     page.end = '2026-10-19';
     page.createPeriod();
+    http.expectNone(`${endpoint}/periods`);
+    expect(page.pendingConfirmation()?.period).toMatchObject({ start: '2026-10-18', end: '2026-10-19', kind: 'COMPANY' });
+    page.confirmPending();
     const request = http.expectOne(`${endpoint}/periods`);
     expect(request.request.body).toMatchObject({ startDate: '2026-10-18', endDate: '2026-10-19',
       startAt: null, endAt: null, kind: 'COMPANY' });
@@ -215,6 +250,8 @@ describe('DriverQualificationPage', () => {
     expect(page.error()).toContain('desplazamiento');
     page.start = '2026-10-18T10:00:00-05:00';
     page.createPeriod();
+    http.expectNone(`${endpoint}/periods`);
+    page.confirmPending();
     const request = http.expectOne(`${endpoint}/periods`);
     expect(request.request.body).toMatchObject({ startAt: '2026-10-18T10:00:00-05:00', startDate: null, endAt: null });
     request.flush({ ...state, version: 5 });
@@ -274,9 +311,237 @@ describe('DriverQualificationPage', () => {
     request.flush({ items: [{ id: 'vehicle-synthetic', status: 'DISPONIBLE', active: true,
       plate: 'SYNTHETIC-PRIVATE-PLATE', brand: 'SYNTHETIC-PRIVATE-BRAND' }], totalPages: 2 });
     expect(page.vehicleReferences()).toEqual([{ id: 'vehicle-synthetic', status: 'DISPONIBLE' }]);
+    expect(page.restrictedVehicleLabels()).toEqual({});
+    expect(page.unitLabel('vehicle-synthetic')).not.toContain('SYNTHETIC-PRIVATE-PLATE');
     fixture.detectChanges();
     expect(fixture.nativeElement.textContent).not.toContain('SYNTHETIC-PRIVATE-PLATE');
     expect(fixture.nativeElement.textContent).not.toContain('SYNTHETIC-PRIVATE-BRAND');
+  });
+
+  it('explica el vínculo autorizado vencido y conserva un pendiente desconocido como bloqueante', async () => {
+    loadCurrent({ ...state, blockers: ['AUTHORIZED_UNIT_PERIOD_REQUIRED', 'FUTURE_PRIVATE-CONDITION'] });
+    expect(fixture.nativeElement.querySelectorAll('.blocker-card')).toHaveLength(2);
+    expect(fixture.nativeElement.textContent).toContain('Falta un vínculo de unidad vigente');
+    expect(fixture.nativeElement.textContent).toContain('Hay una condición que requiere revisión');
+    expect(fixture.nativeElement.textContent).not.toContain('FUTURE_PRIVATE-CONDITION');
+    expect(page.stepStatus('period')).toBe('Pendiente');
+    expect(page.stepStatus('activation')).toBe('Pendiente');
+    expect(page.canActivate()).toBe(false);
+    page.reason = 'Revisión sintética';
+    page.prepareActivation();
+    page.confirmPending();
+    expect(page.pendingConfirmation()).toBeNull();
+    http.expectNone(`${endpoint}/activate`);
+    const button = fixture.nativeElement.querySelector('.blocker-card button') as HTMLButtonElement;
+    button.click();
+    await fixture.whenStable();
+    expect(window.document.activeElement?.id).toBe('qualification-period-title');
+  });
+
+  it('continúa por el vínculo faltante sin detenerse en un paso que depende de elegir unidad', async () => {
+    loadCurrent({ ...state, blockers: ['AUTHORIZED_UNIT_PERIOD_REQUIRED'] });
+    expect(fixture.nativeElement.querySelectorAll('.qualification-steps button')).toHaveLength(4);
+    (fixture.nativeElement.querySelector('.overview-actions button') as HTMLButtonElement).click();
+    await fixture.whenStable();
+    expect(window.document.activeElement?.id).toBe('qualification-period-title');
+    http.expectNone((request) => request.method === 'POST');
+  });
+
+  it('enfoca la revisión personal después de abrir y renderizar el expediente restringido', async () => {
+    const button = fixture.nativeElement.querySelector('.qualification-steps button') as HTMLButtonElement;
+    button.click();
+    const request = http.expectOne(`${endpoint}/expediente`);
+    expect(page.personalDrafts).toEqual([]);
+    request.flush(state);
+    await fixture.whenStable();
+    expect(window.document.activeElement?.id).toBe('qualification-personal-title');
+    expect(page.personalDrafts[0]?.fields['fullName']).toBe('PERSONA SINTÉTICA');
+    http.expectNone((candidate) => candidate.method === 'POST');
+  });
+
+  it('permite elegir por placa solo tras abrir el expediente y pagina sin inventar un vínculo', async () => {
+    page.openUnitPicker();
+    http.expectNone('/api/v1/vehicles');
+    const file = http.expectOne(`${endpoint}/expediente`);
+    file.flush(state);
+    const first = http.expectOne((request) => request.url === '/api/v1/vehicles');
+    expect(first.request.params.get('page')).toBe('0');
+    first.flush({ items: [{ id: 'vehicle-synthetic', status: 'DISPONIBLE', active: true,
+      plate: 'SYN-001', brand: 'SYNTHETIC-PRIVATE-BRAND' }, { id: 'vehicle-inactive', status: 'INACTIVO',
+      active: false, plate: 'SYN-999' }], totalPages: 2 });
+    await fixture.whenStable();
+    expect(window.document.activeElement?.id).toBe('qualification-period-title');
+    const option = fixture.nativeElement.querySelector('.unit-option') as HTMLButtonElement;
+    expect(option.textContent).toContain('SYN-001');
+    expect(fixture.nativeElement.textContent).not.toContain('SYN-999');
+    expect(fixture.nativeElement.textContent).not.toContain('SYNTHETIC-PRIVATE-BRAND');
+    option.click();
+    await fixture.whenStable();
+    expect(page.vehicleId).toBe('vehicle-synthetic');
+    expect(page.reviewVehicleId).toBe('vehicle-synthetic');
+    expect(option.getAttribute('aria-pressed')).toBe('true');
+    page.loadVehicleReferences(1);
+    const second = http.expectOne((request) => request.url === '/api/v1/vehicles');
+    expect(second.request.params.get('page')).toBe('1');
+    second.flush({ items: [{ id: 'vehicle-second', status: 'ASIGNADO', active: true, plate: 'SYN-002' }], totalPages: 2 });
+    fixture.detectChanges();
+    expect(page.vehiclePage()).toBe(1);
+    expect(page.vehicleTotalPages()).toBe(2);
+    expect(fixture.nativeElement.querySelector('.unit-option')?.textContent).toContain('SYN-002');
+    expect(page.vehicleId).toBe('vehicle-synthetic');
+    http.expectNone((request) => request.method === 'POST');
+    page.closeRestricted();
+    expect(page.restrictedVehicleLabels()).toEqual({});
+    expect(page.vehicleReferences()).toEqual([]);
+    http.expectOne(endpoint).flush(state);
+    fixture.detectChanges();
+    expect(page.unitLabel('vehicle-synthetic')).not.toContain('SYN-001');
+    expect(fixture.nativeElement.textContent).not.toContain('SYN-001');
+    expect(fixture.nativeElement.textContent).not.toContain('SYN-002');
+  });
+
+  it('cancela la consulta de unidades al cerrar e impide que una respuesta tardía repueble las placas', () => {
+    openRestricted();
+    page.loadVehicleReferences();
+    const listing = http.expectOne((request) => request.url === '/api/v1/vehicles');
+    page.closeRestricted();
+    expect(listing.cancelled).toBe(true);
+    expect(() => listing.flush({ items: [{ id: 'vehicle-synthetic', active: true,
+      status: 'DISPONIBLE', plate: 'SYN-LATE' }], totalPages: 1 })).toThrow(/cancelled/);
+    http.expectOne(endpoint).flush(state);
+    fixture.detectChanges();
+    expect(page.restrictedVehicleLabels()).toEqual({});
+    expect(page.vehicleReferences()).toEqual([]);
+    expect(fixture.nativeElement.textContent).not.toContain('SYN-LATE');
+  });
+
+  it('cancela el expediente pendiente al cerrar y no admite documentos de una respuesta tardía', () => {
+    page.load(true);
+    const file = http.expectOne(`${endpoint}/expediente`);
+    page.closeRestricted();
+    expect(file.cancelled).toBe(true);
+    expect(() => file.flush(state)).toThrow(/cancelled/);
+    http.expectOne(endpoint).flush(state);
+    expect(page.restricted()).toBe(false);
+    expect(page.personalDrafts).toEqual([]);
+    expect(page.state()?.personalDocuments).toEqual([]);
+  });
+
+  it('borra las placas ya consultadas cuando falla la página siguiente del selector', () => {
+    openRestricted();
+    page.loadVehicleReferences();
+    http.expectOne((request) => request.url === '/api/v1/vehicles').flush({ items: [
+      { id: 'vehicle-synthetic', status: 'DISPONIBLE', active: true, plate: 'SYN-001' },
+    ], totalPages: 2 });
+    expect(page.restrictedVehicleLabels()['vehicle-synthetic']).toBe('SYN-001');
+    page.loadVehicleReferences(1);
+    http.expectOne((request) => request.url === '/api/v1/vehicles').flush({}, { status: 500, statusText: 'Server error' });
+    expect(page.restrictedVehicleLabels()).toEqual({});
+    expect(page.vehicleReferences()).toEqual([]);
+    expect(page.vehicleError()).toContain('No se pudieron consultar');
+    http.expectNone((request) => request.method === 'POST');
+  });
+
+  it('presenta resumen de empresa con fin obligatorio y espera confirmación separada', async () => {
+    prepareCompanyPeriod();
+    await fixture.whenStable();
+    expect(window.document.activeElement?.id).toBe('qualification-confirmation-title');
+    const summary = fixture.nativeElement.querySelector('.confirmation-panel') as HTMLElement;
+    expect(summary.textContent).toContain('Unidad de empresa');
+    expect(summary.textContent).toContain('2026-11-10');
+    expect(summary.textContent).toContain('2026-12-24');
+    expect(summary.textContent).toContain('último día incluido, Lima');
+    expect(page.notice()).toBeNull();
+    expect(page.state()?.operationalEnabled).toBe(false);
+    http.expectNone((request) => request.method === 'POST');
+    (fixture.nativeElement.querySelector('#qualification-confirm-pending') as HTMLButtonElement).click();
+    const request = http.expectOne(`${endpoint}/periods`);
+    expect(request.request.body).toMatchObject({ expectedVersion: 4, vehicleId: 'vehicle-synthetic', kind: 'COMPANY',
+      startDate: '2026-11-10', endDate: '2026-12-24', startAt: null, endAt: null });
+    expect(request.request.context.get(SKIP_AUTH_REFRESH)).toBe(true);
+    expect(request.request.body.operationKey).toMatch(/^[a-z0-9-]{36}$/);
+    request.flush({ ...state, version: 5, blockers: ['ACCOUNT_IDENTITY_GROUP_OR_DRIVER_REQUIRED'] });
+    expect(page.state()?.operationalEnabled).toBe(false);
+    expect(page.pendingConfirmation()).toBeNull();
+    http.expectNone(`${endpoint}/activate`);
+  });
+
+  it('devuelve el foco al editor al cancelar y no guarda el vínculo', async () => {
+    prepareCompanyPeriod();
+    await fixture.whenStable();
+    page.cancelConfirmation();
+    await fixture.whenStable();
+    expect(page.pendingConfirmation()).toBeNull();
+    expect(page.start).toBe('2026-11-10');
+    expect(page.end).toBe('2026-12-24');
+    expect(window.document.activeElement?.id).toBe('qualification-prepare-period');
+    page.confirmPending();
+    http.expectNone((request) => request.method === 'POST');
+  });
+
+  it.each(['vehicle', 'kind', 'timeMode', 'start', 'end', 'reason', 'version'] as const)(
+    'exige revisar de nuevo el resumen si cambia %s antes de confirmar', (changed) => {
+      prepareCompanyPeriod();
+      expect(page.pendingConfirmation()?.period?.end).toBe('2026-12-24');
+      switch (changed) {
+        case 'vehicle': page.vehicleId = 'vehicle-second'; break;
+        case 'kind': page.kind = 'OWN'; break;
+        case 'timeMode': page.timeMode = 'INSTANT'; break;
+        case 'start': page.start = '2026-11-11'; break;
+        case 'end': page.end = '2026-12-23'; break;
+        case 'reason': page.reason = 'Otro motivo sintético'; break;
+        case 'version': page.state.set({ ...state, version: 5 }); break;
+      }
+      page.confirmPending();
+      expect(page.pendingConfirmation()).toBeNull();
+      expect(page.error()).toContain('resumen cambió');
+      expect(page.lastOperationKey()).toBeNull();
+      http.expectNone((request) => request.method === 'POST');
+    },
+  );
+
+  it.each([0, 409, 403])('no encadena habilitación ni repite el vínculo ante resultado %s', (status) => {
+    prepareCompanyPeriod();
+    page.confirmPending();
+    const request = http.expectOne(`${endpoint}/periods`);
+    const operationKey = request.request.body.operationKey;
+    if (status === 0) request.error(new ProgressEvent('error'));
+    else request.flush({}, { status, statusText: status === 409 ? 'Conflict' : 'Forbidden' });
+    expect(page.mustRefresh()).toBe(true);
+    expect(page.uncertain()).toBe(status === 0);
+    expect(page.lastOperationKey()).toBe(operationKey);
+    expect(page.notice()).toBeNull();
+    expect(page.state()).toBeNull();
+    expect(page.pendingConfirmation()).toBeNull();
+    page.preparePeriod();
+    page.prepareActivation();
+    page.confirmPending();
+    http.expectNone((candidate) => candidate.method === 'POST');
+  });
+
+  it('conserva la incertidumbre al cerrar durante un envío y exige reconsulta explícita', () => {
+    openRestricted();
+    prepareCompanyPeriod();
+    page.confirmPending();
+    const request = http.expectOne(`${endpoint}/periods`);
+    const key = request.request.body.operationKey;
+    page.closeRestricted();
+    expect(request.cancelled).toBe(true);
+    expect(page.restricted()).toBe(false);
+    expect(page.personalDrafts).toEqual([]);
+    expect(page.restrictedVehicleLabels()).toEqual({});
+    expect(page.state()).toBeNull();
+    expect(page.uncertain()).toBe(true);
+    expect(page.mustRefresh()).toBe(true);
+    expect(page.lastOperationKey()).toBe(key);
+    http.expectNone((candidate) => candidate.method === 'GET');
+    http.expectNone((candidate) => candidate.method === 'POST');
+    page.load();
+    http.expectOne(endpoint).flush({ ...state, version: 5, operationalEnabled: true, blockers: [] });
+    expect(page.uncertain()).toBe(false);
+    expect(page.lastOperationKey()).toBe(key);
+    expect(page.notice()).toContain('no se ha reenviado');
+    http.expectNone((candidate) => candidate.method === 'POST');
   });
 
   it('muestra atención de servicios conservados con referencia y enlace de asignaciones', () => {

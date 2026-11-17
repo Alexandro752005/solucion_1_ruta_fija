@@ -42,6 +42,7 @@ final class NativePostgresTestDatabase {
     private final String migratorUrl;
     private final String migratorUsername;
     private final String migratorPassword;
+    private final IsolatedAuditPostgresTarget isolatedAuditTarget;
 
     private NativePostgresTestDatabase(
             String testUrl,
@@ -49,7 +50,8 @@ final class NativePostgresTestDatabase {
             String testPassword,
             String migratorUrl,
             String migratorUsername,
-            String migratorPassword
+            String migratorPassword,
+            IsolatedAuditPostgresTarget isolatedAuditTarget
     ) {
         this.testUrl = testUrl;
         this.testUsername = testUsername;
@@ -57,27 +59,37 @@ final class NativePostgresTestDatabase {
         this.migratorUrl = migratorUrl;
         this.migratorUsername = migratorUsername;
         this.migratorPassword = migratorPassword;
+        this.isolatedAuditTarget = isolatedAuditTarget;
     }
 
     static NativePostgresTestDatabase load() {
-        Map<String, String> localValues = readLocalConfiguration();
+        var isolated = IsolatedAuditPostgresTarget.fromEnvironment(System.getenv());
+        // An explicit disposable run never falls back to shared private credentials.
+        Map<String, String> localValues = isolated.isPresent() ? Map.of() : readLocalConfiguration();
         String testUrl = requiredValue("RF_TEST_DATASOURCE_URL", localValues);
         String testUsername = requiredValue("RF_TEST_DATASOURCE_USERNAME", localValues);
         String testPassword = requiredValue("RF_TEST_DATASOURCE_PASSWORD", localValues);
         String migratorUrl = optionalValue("RF_TEST_MIGRATOR_URL", localValues).orElse(testUrl);
-        String migratorUsername = optionalValue("RF_TEST_MIGRATOR_USERNAME", localValues)
+        String migratorUsername = isolated.isPresent() ? requiredValue("RF_TEST_MIGRATOR_USERNAME", localValues)
+                : optionalValue("RF_TEST_MIGRATOR_USERNAME", localValues)
                 .or(() -> optionalValue("SPRING_FLYWAY_USERNAME", localValues))
                 .orElseThrow(() -> missing("RF_TEST_MIGRATOR_USERNAME o SPRING_FLYWAY_USERNAME"));
-        String migratorPassword = optionalValue("RF_TEST_MIGRATOR_PASSWORD", localValues)
+        String migratorPassword = isolated.isPresent() ? requiredValue("RF_TEST_MIGRATOR_PASSWORD", localValues)
+                : optionalValue("RF_TEST_MIGRATOR_PASSWORD", localValues)
                 .or(() -> optionalValue("SPRING_FLYWAY_PASSWORD", localValues))
                 .orElseThrow(() -> missing("RF_TEST_MIGRATOR_PASSWORD o SPRING_FLYWAY_PASSWORD"));
 
-        DatabaseTarget testTarget = validateTarget(testUrl, "RF_TEST_DATASOURCE_URL");
-        DatabaseTarget migratorTarget = validateTarget(migratorUrl, "RF_TEST_MIGRATOR_URL");
-        if (!testTarget.equals(migratorTarget)) {
-            throw new IllegalStateException(
-                    "F1.4 rechaza un migrador que no apunte exactamente a ruta_fija_test."
-            );
+        if (isolated.isPresent()) {
+            isolated.orElseThrow().validateJdbcUrl(testUrl);
+            isolated.orElseThrow().validateJdbcUrl(migratorUrl);
+        } else {
+            DatabaseTarget testTarget = validateTarget(testUrl, "RF_TEST_DATASOURCE_URL");
+            DatabaseTarget migratorTarget = validateTarget(migratorUrl, "RF_TEST_MIGRATOR_URL");
+            if (!testTarget.equals(migratorTarget)) {
+                throw new IllegalStateException(
+                        "F1.4 rechaza un migrador que no apunte exactamente a ruta_fija_test."
+                );
+            }
         }
         if (!EXPECTED_TEST_USER.equals(testUsername)) {
             throw new IllegalStateException("F1.4 exige RF_TEST_DATASOURCE_USERNAME=rf_test.");
@@ -86,14 +98,17 @@ final class NativePostgresTestDatabase {
             throw new IllegalStateException("F1.4 exige el migrador local rf_migrator.");
         }
 
-        return new NativePostgresTestDatabase(
+        var database = new NativePostgresTestDatabase(
                 testUrl,
                 testUsername,
                 testPassword,
                 migratorUrl,
                 migratorUsername,
-                migratorPassword
+                migratorPassword,
+                isolated.orElse(null)
         );
+        database.assertIsolatedIdentityBeforeSpring();
+        return database;
     }
 
     void registerSpringProperties(DynamicPropertyRegistry registry) {
@@ -114,10 +129,38 @@ final class NativePostgresTestDatabase {
         registry.add("app.seed.enabled", () -> false);
         registry.add("app.security.jwt.secret-base64", () -> TEST_JWT_SECRET);
         registry.add("app.security.cors.allowed-origins", () -> "http://localhost:4200");
+        if (isolatedAuditTarget != null) {
+            registry.add("app.mobile.maintenance-enabled", () -> false);
+            registry.add("app.qualification.maintenance.enabled", () -> false);
+            registry.add("spring.test.mockmvc.print", () -> "NONE");
+            registry.add("spring.test.mockmvc.print-only-on-failure", () -> false);
+            for (String logger : List.of("org.springframework.web", "org.springframework.security",
+                    "org.springframework.jdbc.core", "org.hibernate.SQL", "org.hibernate.orm.jdbc.bind")) {
+                registry.add("logging.level." + logger, () -> "OFF");
+            }
+        }
+    }
+
+    private void assertIsolatedIdentityBeforeSpring() {
+        if (isolatedAuditTarget == null) return;
+        var settings = new java.util.Properties();
+        settings.setProperty("user", migratorUsername);
+        settings.setProperty("password", migratorPassword);
+        settings.setProperty("connectTimeout", "5");
+        settings.setProperty("socketTimeout", "10");
+        try (var connection = DriverManager.getConnection(migratorUrl, settings)) {
+            isolatedAuditTarget.verify(connection, migratorUsername);
+        } catch (SQLException exception) {
+            throw new IllegalStateException("EXCLUSIVE_AUDIT_IDENTITY_REQUIRED_BEFORE_SPRING");
+        }
     }
 
     void cleanBusinessData() {
         assertNoPendingHumanTrial();
+        if ("REBUILD_OWNED_DISPOSABLE_SCHEMA_55441".equals(System.getenv("RF_AUDIT_NATIVE_SCHEMA_RESET"))) {
+            rebuildExclusiveDisposableSchema();
+            return;
+        }
         try (Connection connection = DriverManager.getConnection(
                 migratorUrl,
                 migratorUsername,
@@ -148,6 +191,78 @@ final class NativePostgresTestDatabase {
                     exception
             );
         }
+    }
+
+    private void rebuildExclusiveDisposableSchema() {
+        if (isolatedAuditTarget == null)
+            throw new IllegalStateException("SCHEMA_REBUILD_REQUIRES_EXACT_EXCLUSIVE_AUDIT_IDENTITY");
+        // V51 deliberately rejects blanket TRUNCATE. A disposable test database
+        // can instead begin a fresh schema lifecycle. Never disable a history
+        // trigger or apply this reset to the historical shared 5432 branch.
+        try (Connection connection=DriverManager.getConnection(migratorUrl,migratorUsername,migratorPassword)) {
+            isolatedAuditTarget.verify(connection,migratorUsername);
+            try (Statement statement=connection.createStatement()) {
+                statement.execute("select pg_advisory_lock("+CLEANUP_LOCK_KEY+")");
+                try {
+                    assertNoPendingHumanTrial();
+                    isolatedAuditTarget.verify(connection,migratorUsername);
+                    awaitExclusiveQuiescence(statement);
+                    statement.execute("DROP SCHEMA public CASCADE");
+                    statement.execute("CREATE SCHEMA public AUTHORIZATION rf_migrator");
+                    statement.execute("REVOKE CREATE ON SCHEMA public FROM PUBLIC");
+                    statement.execute("GRANT USAGE ON SCHEMA public TO rf_app,rf_test");
+                    statement.execute("ALTER DEFAULT PRIVILEGES FOR ROLE rf_migrator IN SCHEMA public GRANT SELECT,INSERT,UPDATE,DELETE ON TABLES TO rf_app");
+                    statement.execute("ALTER DEFAULT PRIVILEGES FOR ROLE rf_migrator IN SCHEMA public GRANT USAGE,SELECT ON SEQUENCES TO rf_app");
+                    // Apply the unchanged migrations, including their guards,
+                    // to the new empty schema. No business history is edited.
+                    var flyway=org.flywaydb.core.Flyway.configure()
+                            .dataSource(migratorUrl,migratorUsername,migratorPassword)
+                            .locations("classpath:db/migration","classpath:db/test-migration")
+                            .target("51").group(true).cleanDisabled(true).load();
+                    flyway.migrate();
+                    if(!flyway.validateWithResult().validationSuccessful)
+                        throw new IllegalStateException("EXCLUSIVE_REBUILT_SCHEMA_VALIDATION_REQUIRED");
+                } finally {
+                    statement.execute("select pg_advisory_unlock("+CLEANUP_LOCK_KEY+")");
+                }
+            }
+        } catch(SQLException exception) {
+            throw new IllegalStateException("EXCLUSIVE_DISPOSABLE_SCHEMA_REBUILD_FAILED",exception);
+        }
+    }
+
+    void finishBusinessDataCase() {
+        if ("REBUILD_OWNED_DISPOSABLE_SCHEMA_55441".equals(System.getenv("RF_AUDIT_NATIVE_SCHEMA_RESET"))) {
+            if(isolatedAuditTarget==null)
+                throw new IllegalStateException("SCHEMA_REBUILD_REQUIRES_EXACT_EXCLUSIVE_AUDIT_IDENTITY");
+            // The next @BeforeEach recreates the entire disposable schema.
+            // A second recreation here adds no isolation and can race with
+            // normal connection-pool housekeeping immediately after a request.
+            assertNoPendingHumanTrial();
+            assertIsolatedIdentityBeforeSpring();
+            return;
+        }
+        cleanBusinessData();
+    }
+
+    private static void awaitExclusiveQuiescence(Statement statement) throws SQLException {
+        int stableIdleObservations=0;
+        for(int attempt=0;attempt<100;attempt++) {
+            try(ResultSet rows=statement.executeQuery("""
+                    select count(*) from pg_stat_activity where datname=current_database()
+                      and pid<>pg_backend_pid() and state is distinct from 'idle'
+                    """)) {
+                if(rows.next()&&rows.getInt(1)==0)stableIdleObservations++;
+                else stableIdleObservations=0;
+                if(stableIdleObservations>=3)return;
+            }
+            try { Thread.sleep(50); }
+            catch(InterruptedException interrupted) {
+                Thread.currentThread().interrupt();
+                throw new IllegalStateException("EXCLUSIVE_SCHEMA_REBUILD_INTERRUPTED",interrupted);
+            }
+        }
+        throw new IllegalStateException("EXCLUSIVE_SCHEMA_REBUILD_REFUSES_OTHER_ACTIVE_CONNECTIONS");
     }
 
     private static void assertNoPendingHumanTrial() {
@@ -183,8 +298,9 @@ final class NativePostgresTestDatabase {
                 testUrl,
                 testUsername,
                 testPassword
-        );
-             PreparedStatement statement = connection.prepareStatement("""
+        )) {
+            assertCurrentDatabase(connection, testUsername);
+            try (PreparedStatement statement = connection.prepareStatement("""
                      select
                          has_schema_privilege(current_user, 'public', 'CREATE') as can_create,
                          has_table_privilege(current_user, 'public.organization', 'SELECT') as can_select,
@@ -203,6 +319,7 @@ final class NativePostgresTestDatabase {
                         "F1.4 requiere rf_test con DML y sin CREATE sobre el esquema public."
                 );
             }
+            }
         } catch (SQLException exception) {
             throw new IllegalStateException(
                     "F1.4 no pudo validar los privilegios de rf_test.",
@@ -212,6 +329,14 @@ final class NativePostgresTestDatabase {
     }
 
     private void assertCurrentDatabase(Connection connection) throws SQLException {
+        assertCurrentDatabase(connection, migratorUsername);
+    }
+
+    private void assertCurrentDatabase(Connection connection, String expectedRole) throws SQLException {
+        if (isolatedAuditTarget != null) {
+            isolatedAuditTarget.verify(connection, expectedRole);
+            return;
+        }
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("select current_database()")) {
             if (!resultSet.next() || !EXPECTED_DATABASE.equals(resultSet.getString(1))) {
@@ -290,6 +415,17 @@ final class NativePostgresTestDatabase {
     }
 
     private static String createTestJwtSecret() {
+        if (IsolatedAuditPostgresTarget.MODE.equals(System.getenv("RF_AUDIT_ISOLATED_MODE"))) {
+            String supplied = System.getenv("RF_AUDIT_JWT_SECRET_BASE64");
+            try {
+                if (supplied == null || Base64.getDecoder().decode(supplied).length < 32) {
+                    throw new IllegalStateException("EXCLUSIVE_AUDIT_STABLE_TEST_KEY_REQUIRED");
+                }
+                return supplied;
+            } catch (IllegalArgumentException exception) {
+                throw new IllegalStateException("EXCLUSIVE_AUDIT_STABLE_TEST_KEY_REQUIRED");
+            }
+        }
         byte[] bytes = new byte[32];
         new SecureRandom().nextBytes(bytes);
         return Base64.getEncoder().encodeToString(bytes);

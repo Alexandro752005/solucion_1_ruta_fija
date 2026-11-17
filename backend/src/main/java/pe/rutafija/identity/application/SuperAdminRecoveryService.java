@@ -43,8 +43,6 @@ import java.util.regex.Pattern;
 public class SuperAdminRecoveryService {
 
     static final Duration PROOF_TTL = Duration.ofMinutes(5);
-    private static final short MAX_PROOF_ATTEMPTS = 3;
-    private static final short CREDENTIAL_SINGLETON_ID = 1;
     private static final Pattern EMERGENCY_CODE = Pattern.compile("[A-Za-z0-9_-]{43}");
     private static final Pattern SIGNATURE = Pattern.compile("[A-Za-z0-9_-]{86}");
     private static final SecureRandom RANDOM = new SecureRandom();
@@ -54,7 +52,6 @@ public class SuperAdminRecoveryService {
     private final SuperAdminRecoveryChallengeRepository challengeRepository;
     private final RefreshTokenRepository refreshTokenRepository;
     private final EmailOtpService emailOtpService;
-    private final OtpCodeHasher codeHasher;
     private final PasswordEncoder passwordEncoder;
     private final AuditService auditService;
     private final CurrentUserProvider currentUserProvider;
@@ -77,7 +74,6 @@ public class SuperAdminRecoveryService {
         this.challengeRepository = challengeRepository;
         this.refreshTokenRepository = refreshTokenRepository;
         this.emailOtpService = emailOtpService;
-        this.codeHasher = codeHasher;
         this.passwordEncoder = passwordEncoder;
         this.auditService = auditService;
         this.currentUserProvider = currentUserProvider;

@@ -67,6 +67,9 @@ info:
     phase: 4
 
 springdoc:
+  # Nested contracts such as RouteContract.Create and MaintenanceContract.Create
+  # must retain different schema identities in generated OpenAPI documentation.
+  use-fqn: true
   api-docs:
     path: /v3/api-docs
   swagger-ui:

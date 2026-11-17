@@ -25,6 +25,9 @@ import pe.rutafija.support.ApprovedConductorFixture;
 import pe.rutafija.fleet.domain.Driver;
 import pe.rutafija.fleet.infrastructure.DriverRepository;
 import pe.rutafija.fleet.infrastructure.TransportGroupRepository;
+import pe.rutafija.fleet.infrastructure.VehicleRepository;
+import pe.rutafija.operation.domain.Assignment;
+import pe.rutafija.operation.infrastructure.AssignmentRepository;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -67,6 +70,8 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
 
     @Autowired DriverRepository drivers;
     @Autowired TransportGroupRepository groups;
+    @Autowired VehicleRepository vehicles;
+    @Autowired AssignmentRepository assignments;
 
     private Organization organizationA;
     private Organization organizationB;
@@ -185,13 +190,16 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
 
         mockMvc.perform(post("/api/v1/drivers/{driverId}/vehicles/{vehicleId}", driverId, vehicleId)
                         .with(authenticatedAs(adminA)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.vehicles[0].vehicleId").value(vehicleId));
+                .andExpect(status().isConflict());
 
         mockMvc.perform(post("/api/v1/drivers/{driverId}/vehicles/{vehicleId}/primary", driverId, vehicleId)
                         .with(authenticatedAs(adminA)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.vehicles[0].primary").value(true));
+                .andExpect(status().isConflict());
+        // Legacy linking is retired for every ADMIN. Current authorized periods
+        // are exercised by QualificationIntegrationTest; these calls must not
+        // bypass that workflow or create a link/audit success.
+        assertThat(jdbcTemplate.queryForObject("select count(*) from driver_vehicle_link where driver_id=?",Long.class,
+                UUID.fromString(driverId))).isZero();
 
         mockMvc.perform(get("/api/v1/groups")
                         .with(authenticatedAs(secondAdminA)))
@@ -219,7 +227,7 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
                 .andExpect(jsonPath("$.code").value("RESOURCE_NOT_FOUND"));
 
         assertThat(countAuditEvents("GROUP_CREATED")).isGreaterThanOrEqualTo(1);
-        assertThat(countAuditEvents("DRIVER_VEHICLE_LINKED")).isGreaterThanOrEqualTo(1);
+        assertThat(countAuditEvents("DRIVER_VEHICLE_LINKED")).isZero();
     }
 
     @Test
@@ -338,6 +346,19 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value("VEHICLE_NOT_ELIGIBLE"));
 
+        // Current group retirement is blocked by commitments, not by mere
+        // resource membership. Preserve the conflict regression by preparing
+        // an actual synthetic pending offer, as the membership suite requires.
+        Instant start = Instant.now().plusSeconds(3600);
+        Assignment commitment = assignments.saveAndFlush(Assignment.requestMobileConfirmation(
+                organizationA, historicalDriver, vehicles.findById(UUID.fromString(vehicleId)).orElseThrow(),
+                adminA, "Synthetic fleet origin", "Synthetic fleet destination", start,
+                start.plusSeconds(3600), null, UUID.randomUUID().toString(), start.minusSeconds(1800)));
+        mockMvc.perform(get("/api/v1/groups/{groupId}/resources", groupId)
+                        .with(authenticatedAs(adminA)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.commitments[0].assignmentId").value(commitment.getId().toString()));
+
         mockMvc.perform(patch("/api/v1/groups/{groupId}", groupId)
                         .with(authenticatedAs(adminA))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -345,11 +366,16 @@ class FleetManagementIT extends NativePostgresIntegrationTest {
                                 {
                                   "name":"Grupo Duplicados",
                                   "description":"Control de unicidad",
-                                  "active":false
+                                  "active":false,
+                                  "expectedVersion":0
                                 }
                                 """))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.code").value("RESOURCE_CONFLICT"));
+        assertThat(jdbcTemplate.queryForObject("select active from transport_group where id=?",
+                Boolean.class, UUID.fromString(groupId))).isTrue();
+        assertThat(jdbcTemplate.queryForObject("select status from assignment where id=?",
+                String.class, commitment.getId())).isEqualTo("PENDING_RESPONSE");
     }
 
     private AppUser organizationUser(Organization organization, String email, UserRole role) {

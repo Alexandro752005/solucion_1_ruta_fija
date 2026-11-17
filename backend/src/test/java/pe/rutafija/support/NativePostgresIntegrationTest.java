@@ -30,6 +30,6 @@ public abstract class NativePostgresIntegrationTest {
 
     @AfterEach
     void cleanNativeDatabaseAfterEachTest() {
-        DATABASE.cleanBusinessData();
+        DATABASE.finishBusinessDataCase();
     }
 }

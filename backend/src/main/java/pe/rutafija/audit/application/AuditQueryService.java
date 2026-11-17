@@ -17,9 +17,6 @@ import pe.rutafija.shared.exception.ErrorCode;
 import pe.rutafija.shared.security.CurrentUserService;
 
 import java.time.Instant;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 /** Consulta inmutable, aislada por organización, para el registro de auditoría. */

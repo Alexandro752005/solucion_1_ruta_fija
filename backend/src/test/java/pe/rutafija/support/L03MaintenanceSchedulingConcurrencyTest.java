@@ -20,7 +20,7 @@ class L03MaintenanceSchedulingConcurrencyTest {
         UUID group=UUID.randomUUID(),driver=UUID.randomUUID(),vehicle=UUID.randomUUID(),assignment=UUID.randomUUID(),record=UUID.randomUUID();String tag=UUID.randomUUID().toString();boolean prepared=false;
         try(Connection guard=connection(db)) {
             assertThat(scalar(guard,"select current_database()||'/'||current_user")).isEqualTo("ruta_fija_test/rf_test");
-            assertThat(scalar(guard,"select version from flyway_schema_history where success order by installed_rank desc limit 1")).isEqualTo("32");
+            assertThat(scalar(guard,"select version from flyway_schema_history where success and version is not null order by installed_rank desc limit 1")).isEqualTo(IsolatedAuditSpecializedPostgres.enabled()?"51":"32");
             for(String marker:List.of(".local/l01-human-trial.active",".local/l02-connected.active",".local/l03-connected.active"))assertThat(Files.exists(Path.of(marker))).isFalse();
             assertThat(scalar(guard,"select pg_try_advisory_lock(7518440514)")).isEqualTo("true");
             String ledger=scalar(guard,"select string_agg(user_id::text,',' order by user_id) from pilot_account_creation");

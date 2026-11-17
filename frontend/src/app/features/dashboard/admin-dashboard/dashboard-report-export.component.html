@@ -1,0 +1,22 @@
+<div class="scope"><p>Reporte de servicios del <strong>{{ report.day() || 'día sin confirmar' }}</strong>, zona {{ report.zone() || 'sin confirmar' }}.</p><p>Incluye servicios y sus resultados; no incluye flota, conductores, incidencias, avisos ni el esquema de ruta.</p></div>
+<p class="muted">Cada emisión conserva versión, corte y SHA-256. Su corte puede ser posterior al panel. Abrir este diálogo no emite reportes.</p>
+@if (report.error(); as problem) { <p class="error" role="alert">{{ problem.message }} @if (problem.correlationId) { <span>Referencia {{ problem.correlationId }}</span> }</p> }
+@if (report.notice(); as message) { <p role="status">{{ message }}</p> }
+@if (report.pending(); as pending) {
+  <div class="pending" role="status"><p>Operación pendiente de confirmación para {{ pending.from }}. Se conserva la misma referencia incluso si cierras este diálogo.</p><p class="reference">{{ pending.operationKey }}</p><button type="button" data-action="recover-report" (click)="report.recover()" [disabled]="report.issuing()">Consultar o recuperar con la misma operación</button></div>
+}
+@if (report.loading()) { <p role="status">Consultando período y emisiones…</p> }
+@if (report.current(); as current) { <p>Vista consultada: {{ current.totals.scheduled }} programados · {{ current.totals.completed }} completados · corte {{ report.date(current.cutoffAt) }}.</p> }
+<div class="actions"><button type="button" (click)="report.open(report.day(), report.zone())" [disabled]="report.loading() || report.issuing() || report.pending() !== null">Volver a consultar emisiones</button><button type="button" data-action="issue-report" (click)="report.issue()" [disabled]="!report.current() || report.loading() || report.selecting() || report.downloading() || report.issuing() || report.pending() !== null">{{ report.issuing() ? 'Confirmando emisión…' : 'Emitir reporte' }}</button></div>
+<h3>Elegir emisión confirmada</h3>
+@if (!report.loading() && !report.error() && report.emissions().length === 0) { <p>No hay emisiones en esta consulta.</p> }
+<div class="actions">@for (emission of report.emissions(); track emission.id) {
+  <button type="button" [attr.data-emission-id]="emission.id" [attr.aria-pressed]="report.selected()?.id === emission.id" [disabled]="report.issuing() || report.pending() !== null || report.downloading()" (click)="report.select(emission.id)">Versión {{ emission.revision }} · {{ report.date(emission.issuedAt) }}</button>
+}</div>
+@if (report.selecting()) { <p role="status">Leyendo emisión confirmada…</p> }
+@if (report.selected(); as emission) {
+  <section class="emission" aria-label="Emisión seleccionada" [attr.data-selected-emission-id]="emission.id" [attr.data-selected-emission-revision]="emission.revision" [attr.data-selected-emission-sha256]="emission.contentSha256">
+    <h3>Versión {{ emission.revision }}</h3><p class="reference">Referencia {{ emission.id }}</p><p>Corte {{ report.date(emission.report.cutoffAt) }} · regla {{ emission.report.ruleVersion }} · {{ emission.report.zoneId }}</p><p>{{ emission.report.totals.scheduled }} programados · {{ emission.report.totals.completed }} completados.</p><p class="hash">SHA-256 del contenido: {{ emission.contentSha256 }}</p><p class="muted">Los tres archivos usan esta emisión persistida. El SHA-256 identifica su contenido canónico; los archivos de distinto formato tienen bytes distintos.</p>
+    <div class="actions">@for (format of formats; track format) { <button type="button" [attr.data-download]="format" [disabled]="report.downloading() || report.selecting() || report.issuing() || report.pending() !== null" (click)="report.download(format)">{{ format === 'xlsx' ? 'Excel' : format.toUpperCase() }}</button> }</div>
+  </section>
+}

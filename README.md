@@ -318,3 +318,8 @@ Documentos principales:
 
 Los archivos de Compose y Dockerfile permanecen como compatibilidad histórica
 y no forman parte del camino operativo aprobado.
+
+
+### Dashboard ADMIN — entrega local del 26/10/2026
+
+La evolución del main **Resumen** del ADMIN está cerrada en sus fases 0–6. Consulte el [manual](docs/manual-dashboard-admin.md), el [acta con evidencia y límites](docs/actas/dashboard-admin-evolucion-cierre-local-2026-10-26.md) y el [procedimiento de reversión](docs/operacion/dashboard-admin-reversion.md). El paquete local con hashes está en `artifacts/dashboard-admin-entrega-final-2026-10-26/`. Se conserva el alcance del piloto real documentado previamente.

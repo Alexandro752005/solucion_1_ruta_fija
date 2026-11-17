@@ -1,6 +1,22 @@
 <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
 
+@if (context.canRender()) {
 <div class="app-frame">
+  @if (newTopbarEnabled() && topbarModel(); as model) {
+    <rf-crm-topbar
+      [model]="model"
+      [contextLabel]="contextLabel()"
+      [sessionContextKey]="sessionContextKey()"
+      [accountReference]="'CUENTA-' + (session.user()?.id ?? '')"
+      [loggingOut]="loggingOut()"
+      (logoutRequested)="logout()"
+    />
+    @if (logoutError()) {
+      <p class="logout-warning" role="alert">
+        La sesión local se cerró, pero no fue posible confirmar el cierre en el servidor.
+      </p>
+    }
+  } @else {
   <header class="app-header">
     <div class="identity-bar">
       <a class="brand" routerLink="/dashboard" aria-label="Ruta Fija, resumen">
@@ -71,8 +87,12 @@
       </p>
     }
   </header>
+  }
 
   <main id="main-content" tabindex="-1">
     <router-outlet />
   </main>
 </div>
+} @else {
+  <main id="main-content" tabindex="-1" class="app-boot-message" role="status">Actualizando sesión…</main>
+}

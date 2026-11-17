@@ -16,6 +16,7 @@ import '../../profile/presentation/availability_page.dart';
 import '../../profile/presentation/conductor_home_page.dart';
 import '../../profile/presentation/profile_page.dart';
 import '../../preferences/domain/mobile_preferences.dart';
+import '../../location/presentation/mobile_map_page.dart';
 
 class ConductorNavigationShell extends StatefulWidget {
   const ConductorNavigationShell({
@@ -28,7 +29,7 @@ class ConductorNavigationShell extends StatefulWidget {
     required this.announcementGateway,
     this.noticeGateway,
     this.preferences,
-    this.reportsAvailable=false,
+    this.reportsAvailable = false,
     super.key,
   });
 
@@ -115,22 +116,24 @@ class _ConductorNavigationShellState extends State<ConductorNavigationShell> {
             ),
             ConductorDestination.profile => ProfilePage(
               driverGateway: widget.driverGateway,
-              preferences:widget.preferences,
-              reportsAvailable:widget.reportsAvailable,
+              preferences: widget.preferences,
+              reportsAvailable: widget.reportsAvailable,
             ),
+            ConductorDestination.map => const MobileMapPage(),
+            ConductorDestination.more => _MoreDestinations(),
           },
         ),
       ),
       bottomNavigationBar: NavigationBar(
-        selectedIndex: widget.destination.index,
+        selectedIndex: widget.destination.primaryIndex,
         onDestinationSelected: (index) {
-          final next = ConductorDestination.values[index];
+          final next = ConductorDestination.primary[index];
           if (next != widget.destination) {
             Navigator.of(context).pushReplacementNamed(next.path);
           }
         },
         destinations: [
-          for (final item in ConductorDestination.values)
+          for (final item in ConductorDestination.primary)
             NavigationDestination(
               key: Key('nav-${item.name}'),
               icon: Icon(item.icon),
@@ -140,4 +143,24 @@ class _ConductorNavigationShellState extends State<ConductorNavigationShell> {
       ),
     );
   }
+}
+
+class _MoreDestinations extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => ListView(
+    children: [
+      Text('Más opciones', style: Theme.of(context).textTheme.headlineSmall),
+      const SizedBox(height: 12),
+      for (final item in ConductorDestination.additional)
+        Card(
+          child: ListTile(
+            key: Key('more-${item.name}'),
+            leading: Icon(item.icon),
+            title: Text(item.label),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.of(context).pushReplacementNamed(item.path),
+          ),
+        ),
+    ],
+  );
 }

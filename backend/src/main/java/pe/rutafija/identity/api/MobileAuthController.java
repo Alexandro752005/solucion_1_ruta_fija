@@ -19,7 +19,6 @@ import pe.rutafija.identity.api.dto.MobileAuthTokenResponse;
 import pe.rutafija.identity.api.dto.MobileRefreshTokenRequest;
 import pe.rutafija.identity.application.AuthService;
 import pe.rutafija.identity.application.LoginRateLimiter;
-import pe.rutafija.identity.application.MobileIssuedSession;
 import pe.rutafija.identity.application.MobileLoginResult;
 import pe.rutafija.identity.application.EmailOtpTicket;
 

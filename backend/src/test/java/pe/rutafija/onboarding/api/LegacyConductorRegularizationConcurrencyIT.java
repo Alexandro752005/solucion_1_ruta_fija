@@ -1,5 +1,7 @@
 package pe.rutafija.onboarding.api;
 
+import pe.rutafija.support.IsolatedAuditSpecializedPostgres;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -71,6 +73,7 @@ class LegacyConductorRegularizationConcurrencyIT {
 
     @DynamicPropertySource
     static void isolatedDatabase(DynamicPropertyRegistry registry) {
+        if(IsolatedAuditSpecializedPostgres.enabled()) {IsolatedAuditSpecializedPostgres.register(registry);return;}
         if (!URL.equals(required("RF_LEGACY_CONCURRENCY_QA_URL"))) {
             throw new IllegalStateException("EXACT_DEDICATED_LEGACY_CONCURRENCY_DATABASE_REQUIRED");
         }
@@ -126,9 +129,10 @@ class LegacyConductorRegularizationConcurrencyIT {
 
     @Test
     void simultaneousOpeningPreservesExactlyOneDossierForTheSameAndDifferentOperationKeys() throws Exception {
-        assertThat(jdbc.queryForObject("select current_database()", String.class)).isEqualTo(DATABASE);
-        assertThat(count("select count(*) from flyway_schema_history where success")).isEqualTo(50);
-        assertThat(count("select count(*) from flyway_schema_history where version is null or not success")).isZero();
+        assertThat(jdbc.queryForObject("select current_database()", String.class)).isEqualTo(IsolatedAuditSpecializedPostgres.databaseName(DATABASE));
+        assertThat(count("select count(*) from flyway_schema_history where success and version is not null")).isEqualTo(IsolatedAuditSpecializedPostgres.enabled()?51:50);
+        assertThat(count("select count(*) from flyway_schema_history where not success")).isZero();
+        assertThat(count("select count(*) from flyway_schema_history where version is null")).isEqualTo(IsolatedAuditSpecializedPostgres.enabled()?1:0);
         // The fixture commits. Refuse re-runs against an already populated target rather than erase its evidence.
         assertThat(count("select count(*) from app_user")).isZero();
         assertThat(count("select count(*) from pilot_account_creation")).isZero();

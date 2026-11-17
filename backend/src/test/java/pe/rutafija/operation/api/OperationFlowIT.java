@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,15 +24,21 @@ import pe.rutafija.organization.domain.Organization;
 import pe.rutafija.organization.infrastructure.OrganizationRepository;
 import pe.rutafija.support.NativePostgresIntegrationTest;
 import pe.rutafija.support.ApprovedConductorFixture;
+import pe.rutafija.support.CurrentNativeOperationFixture;
 import pe.rutafija.fleet.domain.Driver;
 import pe.rutafija.fleet.infrastructure.DriverRepository;
 import pe.rutafija.fleet.infrastructure.TransportGroupRepository;
+import pe.rutafija.fleet.infrastructure.VehicleRepository;
 
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.sql.Timestamp;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
@@ -40,6 +47,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -73,6 +81,12 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
 
     @Autowired DriverRepository drivers;
     @Autowired TransportGroupRepository groups;
+    @Autowired VehicleRepository vehicles;
+    @Autowired ApplicationContext applicationContext;
+
+    private CurrentNativeOperationFixture current;
+    private final Map<String, Driver> fixtureDrivers = new HashMap<>();
+    private final Map<String, AppUser> fixtureAccounts = new HashMap<>();
 
     private Organization organizationA;
     private AppUser administratorA;
@@ -95,6 +109,9 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
         administratorA = userRepository.save(organizationUser(organizationA, "admin.a." + suffix, UserRole.ADMIN));
         coordinatorA = userRepository.save(organizationUser(organizationA, "admin.operations.a." + suffix, UserRole.ADMIN));
         administratorB = userRepository.save(organizationUser(organizationB, "admin.b." + suffix, UserRole.ADMIN));
+        current = new CurrentNativeOperationFixture(mockMvc, objectMapper, jdbcTemplate, applicationContext);
+        fixtureDrivers.clear();
+        fixtureAccounts.clear();
     }
 
     @Test
@@ -121,28 +138,21 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
 
         mockMvc.perform(post("/api/v1/drivers/{driverId}/vehicles/{vehicleId}", driverId, vehicleId)
                         .with(authenticatedAs(administratorA)))
-                .andExpect(status().isOk());
+                .andExpect(status().isConflict());
+        qualify(driverId, vehicleId);
 
         mockMvc.perform(post("/api/v1/drivers/{driverId}/availability", driverId)
                         .with(authenticatedAs(administratorA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{" + "\"status\":\"DISPONIBLE\"" + "}"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.availabilityStatus").value("DISPONIBLE"));
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.code").value("AVAILABILITY_INVALID_TRANSITION"));
+        declareAvailable(driverId);
 
         Instant scheduledAt = Instant.now().plus(30, ChronoUnit.MINUTES).truncatedTo(ChronoUnit.SECONDS);
         Instant scheduledEndAt = scheduledAt.plus(90, ChronoUnit.MINUTES);
-        String assignmentPayload = """
-                {
-                  "driverId":"%s",
-                  "vehicleId":"%s",
-                  "originText":"Terminal Norte",
-                  "destinationText":"Terminal Sur",
-                  "scheduledAt":"%s",
-                  "scheduledEndAt":"%s",
-                  "notes":"Programación de coordinación"
-                }
-                """.formatted(driverId, vehicleId, scheduledAt, scheduledEndAt);
+        String assignmentPayload = assignmentPayload(driverId, vehicleId, scheduledAt, scheduledEndAt,
+                "Programación de coordinación");
 
         MvcResult created = mockMvc.perform(post("/api/v1/assignments")
                         .with(authenticatedAs(coordinatorA))
@@ -150,7 +160,7 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(assignmentPayload))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.status").value("SCHEDULED"))
+                .andExpect(jsonPath("$.status").value("PENDING_RESPONSE"))
                 .andExpect(jsonPath("$.reservedAt").doesNotExist())
                 .andReturn();
         String assignmentId = json(created).path("id").asText();
@@ -167,10 +177,12 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
         mockMvc.perform(post("/api/v1/assignments")
                         .with(authenticatedAs(coordinatorA))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(assignmentPayload.replace("Terminal Sur", "Otro destino")))
+                        .content(assignmentPayload.replace("Programación de coordinación", "Otra solicitud del mismo intervalo")))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.code").value("ASSIGNMENT_SCHEDULE_CONFLICT"));
 
+        // The same database exclusion must reject a parallel historical row.
+        // Assert SQLSTATE, so an unrelated NOT NULL/CHECK failure cannot satisfy this test.
         assertThatThrownBy(() -> jdbcTemplate.update("""
                         insert into assignment (
                             id, organization_id, driver_id, vehicle_id, created_by, status,
@@ -187,16 +199,21 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                 "Terminal paralelo destino",
                 Timestamp.from(scheduledAt.plus(5, ChronoUnit.MINUTES)),
                 Timestamp.from(scheduledEndAt.plus(5, ChronoUnit.MINUTES))
-        )).isInstanceOf(DataIntegrityViolationException.class);
+        )).isInstanceOf(DataIntegrityViolationException.class).satisfies(failure -> {
+            var cause = ((DataIntegrityViolationException) failure).getMostSpecificCause();
+            assertThat(cause).isInstanceOf(SQLException.class);
+            assertThat(((SQLException) cause).getSQLState()).isEqualTo("23P01");
+        });
 
-        MvcResult reserved = mockMvc.perform(post("/api/v1/assignments/{assignmentId}/reserve", assignmentId)
+        mockMvc.perform(post("/api/v1/assignments/{assignmentId}/reserve", assignmentId)
                         .with(authenticatedAs(coordinatorA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{" + "\"version\":" + version + "}"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value("SCHEDULED"))
-                .andExpect(jsonPath("$.reservedAt").isNotEmpty())
-                .andReturn();
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.code").value("ASSIGNMENT_INVALID_TRANSITION"));
+        MvcResult reserved = conductorCommand(driverId, assignmentId, "accept", version, false);
+        assertThat(json(reserved).path("status").asText()).isEqualTo("SCHEDULED");
+        assertThat(json(reserved).path("reservedAt").asText()).isNotBlank();
         version = json(reserved).path("version").asLong();
 
         mockMvc.perform(get("/api/v1/drivers/{driverId}", driverId).with(authenticatedAs(coordinatorA)))
@@ -206,26 +223,31 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("DISPONIBLE"));
 
-        MvcResult started = mockMvc.perform(post("/api/v1/assignments/{assignmentId}/start", assignmentId)
+        mockMvc.perform(post("/api/v1/assignments/{assignmentId}/start", assignmentId)
                         .with(authenticatedAs(coordinatorA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{" + "\"version\":" + version + "}"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value("EN_SERVICIO"))
-                .andReturn();
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.code").value("ASSIGNMENT_INVALID_TRANSITION"));
+        mockMvc.perform(put("/api/v1/mobile/location/consent").with(mobile(driverId))
+                        .contentType(MediaType.APPLICATION_JSON).content("{\"consent\":true}"))
+                .andExpect(status().isOk());
+        MvcResult started = conductorCommand(driverId, assignmentId, "start", version, true);
+        assertThat(json(started).path("status").asText()).isEqualTo("EN_SERVICIO");
         version = json(started).path("version").asLong();
 
         mockMvc.perform(get("/api/v1/vehicles/{vehicleId}", vehicleId).with(authenticatedAs(coordinatorA)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("EN_SERVICIO"));
 
-        MvcResult completed = mockMvc.perform(post("/api/v1/assignments/{assignmentId}/complete", assignmentId)
+        mockMvc.perform(post("/api/v1/assignments/{assignmentId}/complete", assignmentId)
                         .with(authenticatedAs(coordinatorA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{" + "\"version\":" + version + "}"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value("COMPLETED"))
-                .andReturn();
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.code").value("ASSIGNMENT_INVALID_TRANSITION"));
+        MvcResult completed = conductorCommand(driverId, assignmentId, "complete", version, false);
+        assertThat(json(completed).path("status").asText()).isEqualTo("COMPLETED");
 
         mockMvc.perform(get("/api/v1/drivers/{driverId}", driverId).with(authenticatedAs(coordinatorA)))
                 .andExpect(status().isOk())
@@ -242,9 +264,11 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                                   "driverId":"%s",
                                   "assignmentId":"%s",
                                   "category":"RETRASO",
-                                  "description":"Retraso informado por coordinación"
+                                  "description":"Retraso informado por coordinación",
+                                  "severity":"LOW",
+                                  "operationKey":"%s"
                                 }
-                                """.formatted(driverId, assignmentId)))
+                                """.formatted(driverId, assignmentId, UUID.randomUUID())))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.status").value("OPEN"))
                 .andReturn();
@@ -306,14 +330,23 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                         .with(authenticatedAs(administratorB)))
                 .andExpect(status().isNotFound());
 
+        var responsibility = current.post(coordinatorA, "/api/v1/incidents/" + incidentId + "/responsibility",
+                Map.of("operationKey", UUID.randomUUID(), "expectedVersion", incidentVersion,
+                        "adminId", coordinatorA.getId(), "reason", "Atención sintética de coordinación"), 200);
+        incidentVersion = responsibility.path("version").asLong();
         mockMvc.perform(patch("/api/v1/incidents/{incidentId}/follow-up", incidentId)
                         .with(authenticatedAs(coordinatorA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {"version":%d,"note":"Caso cerrado por coordinación","resolve":true}
-                                """.formatted(incidentVersion)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value("RESOLVED"));
+                                {"version":%d,"note":"Caso cerrado por coordinación","resolve":true,"operationKey":"%s"}
+                                """.formatted(incidentVersion, UUID.randomUUID())))
+                .andExpect(status().isBadRequest());
+        var closedIncident = current.post(coordinatorA, "/api/v1/incidents/" + incidentId + "/closure",
+                Map.of("operationKey", UUID.randomUUID(), "expectedVersion", incidentVersion,
+                        "diagnosis", "Retraso sintético revisado", "actions", "Coordinación revisó la programación",
+                        "result", "Caso cerrado por coordinación", "evidenceRequired", false,
+                        "evidenceMode", "NOT_REQUIRED", "evidenceExplanation", "Ensayo sintético sin evidencia externa"), 200);
+        assertThat(closedIncident.path("status").asText()).isEqualTo("RESOLVED");
 
         String announcementId = json(mockMvc.perform(post("/api/v1/announcements")
                         .with(authenticatedAs(coordinatorA))
@@ -324,9 +357,10 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                                   "body":"Revise la programación actualizada.",
                                   "audienceType":"GROUP",
                                   "audienceId":"%s",
-                                  "requireReadAck":false
+                                  "requireReadAck":false,
+                                  "operationKey":"%s"
                                 }
-                                """.formatted(groupId)))
+                                """.formatted(groupId, UUID.randomUUID())))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.requireReadAck").value(false))
                 .andReturn()).path("id").asText();
@@ -345,8 +379,7 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code").value("RESOURCE_NOT_FOUND"));
 
-        // El resultado se usa para asegurar que la transición completada conservó su versión en la respuesta.
-        json(completed).path("version").asLong();
+        assertThat(json(completed).path("version").asLong()).isGreaterThan(json(started).path("version").asLong());
     }
 
     @Test
@@ -368,27 +401,33 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                 .andReturn()).path("id").asText();
         mockMvc.perform(post("/api/v1/drivers/{driverId}/vehicles/{vehicleId}", driverId, vehicleId)
                         .with(authenticatedAs(administratorA)))
-                .andExpect(status().isOk());
+                .andExpect(status().isConflict());
+        qualify(driverId, vehicleId);
         mockMvc.perform(post("/api/v1/drivers/{driverId}/availability", driverId)
                         .with(authenticatedAs(coordinatorA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"status\":\"DISPONIBLE\"}"))
-                .andExpect(status().isOk());
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.code").value("AVAILABILITY_INVALID_TRANSITION"));
+        declareAvailable(driverId);
 
         Instant firstStart = Instant.now().plus(4, ChronoUnit.HOURS).truncatedTo(ChronoUnit.SECONDS);
         Instant firstEnd = firstStart.plus(60, ChronoUnit.MINUTES);
-        String firstAssignmentId = json(mockMvc.perform(post("/api/v1/assignments")
+        MvcResult firstCreated = mockMvc.perform(post("/api/v1/assignments")
                         .with(authenticatedAs(coordinatorA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(assignmentPayload(driverId, vehicleId, firstStart, firstEnd, "Reserva A")))
                 .andExpect(status().isCreated())
-                .andReturn()).path("id").asText();
-        MvcResult firstReserved = mockMvc.perform(post("/api/v1/assignments/{assignmentId}/reserve", firstAssignmentId)
+                .andReturn();
+        String firstAssignmentId = json(firstCreated).path("id").asText();
+        mockMvc.perform(post("/api/v1/assignments/{assignmentId}/reserve", firstAssignmentId)
                         .with(authenticatedAs(coordinatorA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"version\":0}"))
-                .andExpect(status().isOk())
-                .andReturn();
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.code").value("ASSIGNMENT_INVALID_TRANSITION"));
+        MvcResult firstReserved = conductorCommand(driverId, firstAssignmentId, "accept",
+                json(firstCreated).path("version").asLong(), false);
 
         Instant secondStart = firstEnd.plus(30, ChronoUnit.MINUTES);
         Instant secondEnd = secondStart.plus(60, ChronoUnit.MINUTES);
@@ -464,14 +503,18 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
                 .andReturn()).path("id").asText();
         mockMvc.perform(post("/api/v1/drivers/{driverId}/vehicles/{vehicleId}", driverId, vehicleId)
                         .with(authenticatedAs(administratorA)))
-                .andExpect(status().isOk());
+                .andExpect(status().isConflict());
+        qualify(driverId, vehicleId);
+        declareAvailable(driverId);
 
         Instant scheduledAt = Instant.now().plus(8, ChronoUnit.HOURS).truncatedTo(ChronoUnit.SECONDS);
-        mockMvc.perform(post("/api/v1/assignments")
+        MvcResult protectedOffer = mockMvc.perform(post("/api/v1/assignments")
                         .with(authenticatedAs(coordinatorA))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(assignmentPayload(driverId, vehicleId, scheduledAt, scheduledAt.plus(60, ChronoUnit.MINUTES), "Servicio protegido")))
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated()).andReturn();
+        conductorCommand(driverId, json(protectedOffer).path("id").asText(), "accept",
+                json(protectedOffer).path("version").asLong(), false);
 
         mockMvc.perform(post("/api/v1/users/{userId}/deactivate", conductorUser.getId())
                         .with(authenticatedAs(administratorA)))
@@ -486,17 +529,50 @@ class OperationFlowIT extends NativePostgresIntegrationTest {
         Driver driver = drivers.save(Driver.register(organizationA, conductor,
                 groups.findById(UUID.fromString(groupId)).orElseThrow(), name, null, "DNI", document, null));
         ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, administratorA, conductor, driver);
+        fixtureDrivers.put(driver.getId().toString(), driver);
+        fixtureAccounts.put(driver.getId().toString(), conductor);
         return driver.getId().toString();
     }
 
-    private String assignmentPayload(UUID driverId, UUID vehicleId, Instant start, Instant end, String notes) {
-        return assignmentPayload(driverId.toString(), vehicleId.toString(), start, end, notes);
+    private String assignmentPayload(String driverId, String vehicleId, Instant start, Instant end, String notes) throws Exception {
+        var body = current.offerFields(coordinatorA);
+        body.put("driverId", driverId);
+        body.put("vehicleId", vehicleId);
+        body.put("originText", "Terminal Norte");
+        body.put("destinationText", "Terminal Sur");
+        body.put("scheduledAt", start);
+        body.put("scheduledEndAt", end);
+        body.put("notes", notes);
+        return objectMapper.writeValueAsString(body);
     }
 
-    private String assignmentPayload(String driverId, String vehicleId, Instant start, Instant end, String notes) {
-        return """
-                {"driverId":"%s","vehicleId":"%s","originText":"Terminal Norte","destinationText":"Terminal Sur","scheduledAt":"%s","scheduledEndAt":"%s","notes":"%s"}
-                """.formatted(driverId, vehicleId, start, end, notes);
+    private void qualify(String driverId, String vehicleId) throws Exception {
+        current.qualify(administratorA, fixtureAccounts.get(driverId), fixtureDrivers.get(driverId),
+                vehicles.findById(UUID.fromString(vehicleId)).orElseThrow());
+    }
+
+    private RequestPostProcessor mobile(String driverId) {
+        return current.mobile(fixtureAccounts.get(driverId), fixtureDrivers.get(driverId));
+    }
+
+    private void declareAvailable(String driverId) throws Exception {
+        mockMvc.perform(put("/api/v1/mobile/availability").with(mobile(driverId))
+                        .contentType(MediaType.APPLICATION_JSON).content("{\"status\":\"DISPONIBLE\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("DISPONIBLE"));
+    }
+
+    private MvcResult conductorCommand(String driverId, String assignmentId, String action,
+            long version, boolean gps) throws Exception {
+        var body = new LinkedHashMap<String, Object>();
+        body.put("clientEventId", UUID.randomUUID());
+        body.put("version", version);
+        body.put("occurredAt", Instant.now().minusSeconds(1));
+        if (gps) body.put("gps", Map.of("permissionGranted", true, "locationServiceEnabled", true, "foreground", true));
+        return mockMvc.perform(post("/api/v1/mobile/assignments/{id}/{action}", assignmentId, action)
+                        .with(mobile(driverId)).contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(body)))
+                .andExpect(status().isOk()).andReturn();
     }
 
     private AppUser organizationUser(Organization organization, String localPart, UserRole role) {

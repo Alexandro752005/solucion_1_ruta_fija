@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import java.nio.charset.StandardCharsets;
-import java.sql.Timestamp;
 import java.time.*;
 import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;

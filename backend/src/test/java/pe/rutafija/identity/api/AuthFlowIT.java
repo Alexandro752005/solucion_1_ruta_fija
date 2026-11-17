@@ -237,7 +237,7 @@ class AuthFlowIT extends NativePostgresIntegrationTest {
                 .andExpect(status().isOk())
                 .andReturn());
 
-        assertThat(document.at("/components/schemas/UserUpdateRequest/properties/role/enum").toString())
+        assertThat(document.at("/components/schemas/pe.rutafija.identity.api.dto.UserUpdateRequest/properties/role/enum").toString())
                 .isEqualTo("[\"SUPER_ADMIN\",\"ADMIN\",\"CONDUCTOR\"]");
         assertThat(document.at("/paths/~1api~1v1~1groups~1{groupId}~1coordinators").isMissingNode())
                 .isTrue();

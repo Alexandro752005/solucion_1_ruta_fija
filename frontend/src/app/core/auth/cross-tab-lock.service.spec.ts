@@ -68,4 +68,44 @@ describe('CrossTabLockService', () => {
       ).some((key) => key?.startsWith('rf:cross-tab-lock:')),
     ).toBe(false);
   });
+
+  it('serializa escritores de cookies en esta instancia si no hay Web Locks ni Storage', async () => {
+    Object.defineProperty(globalThis.navigator, 'locks', { configurable: true, value: undefined });
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('Storage denied'); });
+    let release!: () => void;
+    const held = new Promise<void>((resolve) => { release = resolve; });
+    const order: string[] = [];
+    const first = service.runExclusive('auth-local-only', async () => {
+      order.push('first:start');
+      await held;
+      order.push('first:end');
+    });
+    const second = service.runExclusive('auth-local-only', async () => { order.push('second'); });
+    await Promise.resolve();
+    expect(order).toEqual(['first:start']);
+    release();
+    await Promise.all([first, second]);
+    expect(order).toEqual(['first:start', 'first:end', 'second']);
+  });
+
+  it('libera el turno local tras un rechazo y permite otra operación con el mismo nombre', async () => {
+    Object.defineProperty(globalThis.navigator, 'locks', { configurable: true, value: undefined });
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('Storage denied'); });
+    const failed = service.runExclusive('auth-after-failure', async () => { throw new Error('Synthetic failure'); });
+    const successful = service.runExclusive('auth-after-failure', async () => 'next');
+    await expect(failed).rejects.toThrow('Synthetic failure');
+    await expect(successful).resolves.toBe('next');
+  });
+
+  it('no bloquea un nombre independiente mientras otra operación local espera', async () => {
+    Object.defineProperty(globalThis.navigator, 'locks', { configurable: true, value: undefined });
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('Storage denied'); });
+    let release!: () => void;
+    const held = new Promise<void>((resolve) => { release = resolve; });
+    const first = service.runExclusive('auth-one-name', async () => held);
+    try {
+      await expect(service.runExclusive('independent-name', async () => 'independent')).resolves.toBe('independent');
+    } finally { release(); }
+    await first;
+  });
 });

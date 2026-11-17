@@ -198,4 +198,133 @@ describe('AuthSessionService', () => {
     expect(service.accessToken()).toBeNull();
     expect(service.user()).toBeNull();
   });
+
+  it('no restaura una sesión limpiada cuando llega una renovación anterior', async () => {
+    const renewal = outcome(firstValueFrom(service.refreshAccessToken()));
+    const request = http.expectOne('/api/v1/auth/refresh');
+    service.clearSession();
+    request.flush(sessionResponse('previous-user', 'previous-access'));
+    const result = await renewal;
+
+    expect(service.status()).toBe('anonymous');
+    expect(service.accessToken()).toBeNull();
+    expect(service.user()).toBeNull();
+    expect(result.ok).toBe(false);
+  });
+
+  it('mantiene el cierre local mientras una renovación anterior termina antes del logout remoto', async () => {
+    await signIn('previous-user', 'initial-access');
+    const renewal = outcome(firstValueFrom(service.refreshAccessToken()));
+    const refresh = http.expectOne('/api/v1/auth/refresh');
+    const closing = firstValueFrom(service.logout());
+    const logout = http.expectOne('/api/v1/auth/logout');
+    refresh.flush(sessionResponse('previous-user', 'late-access'));
+    await renewal;
+    const authenticatedWhileClosing = service.isAuthenticated();
+    logout.flush(null);
+    await closing;
+
+    expect(authenticatedWhileClosing).toBe(false);
+    expect(service.status()).toBe('anonymous');
+    expect(service.accessToken()).toBeNull();
+  });
+
+  it('un error de renovación anterior no elimina un nuevo inicio de sesión', async () => {
+    const previous = outcome(firstValueFrom(service.refreshAccessToken()));
+    const refresh = http.expectOne('/api/v1/auth/refresh');
+    await signIn('new-user', 'new-access');
+    refresh.flush({}, { status: 401, statusText: 'Unauthorized' });
+    await previous;
+
+    expect(service.isAuthenticated()).toBe(true);
+    expect(service.user()?.id).toBe('new-user');
+    expect(service.accessToken()).toBe('new-access');
+  });
+
+  it('una renovación anterior exitosa no sustituye la identidad del nuevo inicio de sesión', async () => {
+    const previous = outcome(firstValueFrom(service.refreshAccessToken()));
+    const refresh = http.expectOne('/api/v1/auth/refresh');
+    await signIn('new-user', 'new-access');
+    refresh.flush(sessionResponse('previous-user', 'previous-access'));
+    const result = await previous;
+
+    expect(service.user()?.id).toBe('new-user');
+    expect(service.accessToken()).toBe('new-access');
+    expect(result.ok).toBe(false);
+  });
+
+  it('ensureSession anterior no limpia la sesión nueva al recibir su error tardío', async () => {
+    const previous = firstValueFrom(service.ensureSession());
+    const refresh = http.expectOne('/api/v1/auth/refresh');
+    await signIn('new-user', 'new-access');
+    refresh.flush({}, { status: 401, statusText: 'Unauthorized' });
+
+    await expect(previous).resolves.toBe(false);
+    expect(service.isAuthenticated()).toBe(true);
+    expect(service.user()?.id).toBe('new-user');
+    expect(service.accessToken()).toBe('new-access');
+  });
+
+  it('descarta una identidad /auth/me solicitada antes del nuevo inicio de sesión', async () => {
+    await signIn('previous-user', 'previous-access');
+    const previous = outcome(firstValueFrom(service.loadCurrentUser()));
+    const me = http.expectOne('/api/v1/auth/me');
+    await signIn('new-user', 'new-access');
+    me.flush(sessionResponse('previous-user', 'previous-access').user);
+    const result = await previous;
+
+    expect(service.user()?.id).toBe('new-user');
+    expect(service.accessToken()).toBe('new-access');
+    expect(result.ok).toBe(false);
+  });
+
+  it('no inicia una renovación obtenida antes de limpiar la sesión pero suscrita después', async () => {
+    const previous = service.refreshAccessToken();
+    service.clearSession();
+    const result = outcome(firstValueFrom(previous));
+    const unexpected = http.match('/api/v1/auth/refresh');
+    unexpected.forEach(request => request.flush(sessionResponse('previous-user', 'previous-access')));
+    const settled = await result;
+
+    expect(unexpected).toHaveLength(0);
+    expect(settled.ok).toBe(false);
+    expect(service.status()).toBe('anonymous');
+  });
+
+  it('comparte la renovación nueva sin que el fin de una anterior permita duplicarla', async () => {
+    const previous = outcome(firstValueFrom(service.refreshAccessToken()));
+    const oldRequest = http.expectOne('/api/v1/auth/refresh');
+    service.clearSession();
+    const current = outcome(firstValueFrom(service.refreshAccessToken()));
+    const newRequests = http.match('/api/v1/auth/refresh');
+    oldRequest.flush(sessionResponse('previous-user', 'previous-access'));
+    await previous;
+    const concurrent = outcome(firstValueFrom(service.refreshAccessToken()));
+    const unexpectedDuplicates = http.match('/api/v1/auth/refresh');
+    newRequests.forEach(request => request.flush(sessionResponse('new-user', 'new-access')));
+    unexpectedDuplicates.forEach(request => request.flush(sessionResponse('new-user', 'new-access')));
+    await current;
+    await concurrent;
+
+    expect(newRequests).toHaveLength(1);
+    expect(unexpectedDuplicates).toHaveLength(0);
+    expect(service.user()?.id).toBe('new-user');
+    expect(service.accessToken()).toBe('new-access');
+  });
+
+  async function signIn(id: string, accessToken: string): Promise<void> {
+    const result = firstValueFrom(service.login({ email: 'synthetic@example.test', password: 'synthetic-test-only' }));
+    const response = sessionResponse(id, accessToken);
+    http.expectOne('/api/v1/auth/login').flush(response);
+    http.expectOne('/api/v1/auth/me').flush(response.user);
+    await result;
+  }
+
+  function sessionResponse(id: string, accessToken: string) {
+    return { accessToken, expiresIn: 900, user: { id, fullName: 'Synthetic test user', role: 'ADMIN', organizationId: 'synthetic-organization' } } as const;
+  }
+
+  function outcome<T>(promise: Promise<T>): Promise<{ ok: boolean }> {
+    return promise.then(() => ({ ok: true }), () => ({ ok: false }));
+  }
 });

@@ -1,6 +1,7 @@
 package pe.rutafija.personidentity;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import pe.rutafija.support.IsolatedAuditSpecializedPostgres;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -89,6 +90,7 @@ class DriverIdentityReviewCorrectionIT {
 
     @DynamicPropertySource
     static void isolatedDatabase(DynamicPropertyRegistry registry) {
+        if(IsolatedAuditSpecializedPostgres.enabled()) {IsolatedAuditSpecializedPostgres.register(registry);return;}
         if (!URL.equals(required("RF_IDENTITY_CORRECTION_QA_URL")))
             throw new IllegalStateException("EXACT_DEDICATED_IDENTITY_CORRECTION_QA_DATABASE_REQUIRED");
         String applicationPassword = required("RF_LEGACY_QA_APP_PASSWORD");
@@ -149,10 +151,11 @@ class DriverIdentityReviewCorrectionIT {
 
     @BeforeEach
     void syntheticIncorrectReviewFixture() throws Exception {
-        assertThat(jdbc.queryForObject("select current_database()", String.class)).isEqualTo("rf_identity_correction_qa_20261023");
+        assertThat(jdbc.queryForObject("select current_database()", String.class)).isEqualTo(IsolatedAuditSpecializedPostgres.databaseName("rf_identity_correction_qa_20261023"));
         assertThat(jdbc.queryForObject("select current_user", String.class)).isEqualTo("rf_app");
-        assertThat(jdbc.queryForObject("select count(*) from flyway_schema_history where success", Integer.class)).isEqualTo(51);
-        assertThat(jdbc.queryForObject("select count(*) from flyway_schema_history where version is null or not success", Integer.class)).isZero();
+        assertThat(jdbc.queryForObject("select count(*) from flyway_schema_history where success and version is not null", Integer.class)).isEqualTo(51);
+        assertThat(jdbc.queryForObject("select count(*) from flyway_schema_history where not success", Integer.class)).isZero();
+        assertThat(jdbc.queryForObject("select count(*) from flyway_schema_history where version is null", Integer.class)).isEqualTo(IsolatedAuditSpecializedPostgres.enabled()?1:0);
         assertThat(environment.getProperty("app.security.person-identity-gate.enabled", Boolean.class)).isTrue();
         assertThat(environment.getProperty("app.security.admin-terms-gate.enabled", Boolean.class)).isTrue();
         clock.set(Instant.now().truncatedTo(ChronoUnit.MICROS));

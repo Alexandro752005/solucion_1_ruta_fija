@@ -563,7 +563,9 @@ void main() {
     await tester.tap(find.byKey(const Key('mobile-login-submit')));
     await tester.pumpAndSettle();
 
-    await tester.tap(find.byKey(const Key('nav-incidents')));
+    await tester.tap(find.byKey(const Key('nav-more')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('more-incidents')));
     await tester.pumpAndSettle();
     expect(find.text('Incidencias'), findsWidgets);
     await tester.tap(find.byKey(const Key('incident-report-open')));
@@ -612,7 +614,9 @@ void main() {
     await tester.tap(find.byKey(const Key('mobile-login-submit')));
     await tester.pumpAndSettle();
 
-    await tester.tap(find.byKey(const Key('nav-incidents')));
+    await tester.tap(find.byKey(const Key('nav-more')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('more-incidents')));
     await tester.pumpAndSettle();
     await tester.tap(
       find.byKey(const Key('incident-44444444-4444-4444-8444-444444444444')),
@@ -662,7 +666,9 @@ void main() {
       await tester.tap(find.byKey(const Key('mobile-login-submit')));
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const Key('nav-announcements')));
+      await tester.tap(find.byKey(const Key('nav-more')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('more-announcements')));
       await tester.pumpAndSettle();
       await tester.tap(
         find.byKey(

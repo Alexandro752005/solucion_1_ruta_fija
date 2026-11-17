@@ -6,6 +6,7 @@ import '../core/session/mobile_session_controller.dart';
 import '../features/auth/presentation/mobile_login_page.dart';
 import '../features/assignments/presentation/assignment_detail_page.dart';
 import '../features/location/presentation/service_location_status.dart';
+import '../features/location/presentation/mobile_location_scope.dart';
 import 'ruta_fija_environment.dart';
 import 'ruta_fija_dependencies.dart';
 import 'ruta_fija_router.dart';
@@ -59,7 +60,13 @@ class _RutaFijaAppState extends State<RutaFijaApp> with WidgetsBindingObserver {
           ? state.user?.driverId
           : null,
     );
-    unawaited(widget.dependencies.preferences?.setUser(state.status==MobileSessionStatus.authenticated?state.user?.id:null));
+    unawaited(
+      widget.dependencies.preferences?.setUser(
+        state.status == MobileSessionStatus.authenticated
+            ? state.user?.id
+            : null,
+      ),
+    );
   }
 
   void _openTrackedService() {
@@ -87,7 +94,11 @@ class _RutaFijaAppState extends State<RutaFijaApp> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: Listenable.merge([widget.dependencies.sessionController,if(widget.dependencies.preferences!=null)widget.dependencies.preferences!]),
+      animation: Listenable.merge([
+        widget.dependencies.sessionController,
+        if (widget.dependencies.preferences != null)
+          widget.dependencies.preferences!,
+      ]),
       builder: (context, _) {
         final session = widget.dependencies.sessionController;
         final state = session.state;
@@ -98,22 +109,32 @@ class _RutaFijaAppState extends State<RutaFijaApp> with WidgetsBindingObserver {
           debugShowCheckedModeBanner: false,
           theme: RutaFijaTheme.light(),
           builder: (context, child) {
-            final media=MediaQuery.of(context);
-            final factor=widget.dependencies.preferences?.value?.textSize.factor??1.0;
-            final scaled=MediaQuery(data:media.copyWith(textScaler:_PreferenceTextScaler(media.textScaler,factor)),child:child!);
-            return widget.dependencies.serviceLocation == null
-              ? scaled
-              : ServiceLocationStatus(
-                  controller: widget.dependencies.serviceLocation!,
-                  onOpenService: _openTrackedService,
-                  child: scaled,
-                );
+            final media = MediaQuery.of(context);
+            final factor =
+                widget.dependencies.preferences?.value?.textSize.factor ?? 1.0;
+            final scaled = MediaQuery(
+              data: media.copyWith(
+                textScaler: _PreferenceTextScaler(media.textScaler, factor),
+              ),
+              child: child!,
+            );
+            return MobileLocationScope(
+              controller: widget.dependencies.serviceLocation,
+              device: widget.dependencies.deviceLocationGateway,
+              child: widget.dependencies.serviceLocation == null
+                  ? scaled
+                  : ServiceLocationStatus(
+                      controller: widget.dependencies.serviceLocation!,
+                      onOpenService: _openTrackedService,
+                      child: scaled,
+                    ),
+            );
           },
           onGenerateRoute: (settings) => RutaFijaRouter.onGenerateRoute(
             settings,
-            preferences:widget.dependencies.preferences,
-            reportGateway:widget.dependencies.reportGateway,
-            reportFiles:widget.dependencies.reportFiles,
+            preferences: widget.dependencies.preferences,
+            reportGateway: widget.dependencies.reportGateway,
+            reportFiles: widget.dependencies.reportFiles,
             environment: widget.environment,
             sessionController: session,
             driverGateway: widget.dependencies.driverGateway,
@@ -145,9 +166,9 @@ class _RutaFijaAppState extends State<RutaFijaApp> with WidgetsBindingObserver {
                   widget.dependencies.applicantAccessGateway,
             ),
             MobileSessionStatus.authenticated => RutaFijaRouter.home(
-              preferences:widget.dependencies.preferences,
-              reportGateway:widget.dependencies.reportGateway,
-              reportFiles:widget.dependencies.reportFiles,
+              preferences: widget.dependencies.preferences,
+              reportGateway: widget.dependencies.reportGateway,
+              reportFiles: widget.dependencies.reportFiles,
               environment: widget.environment,
               sessionController: session,
               driverGateway: widget.dependencies.driverGateway,
@@ -167,11 +188,13 @@ class _RutaFijaAppState extends State<RutaFijaApp> with WidgetsBindingObserver {
 /// Applies a presentation preference after the system's accessible (possibly
 /// nonlinear) scaling, never replacing or capping that system setting.
 final class _PreferenceTextScaler extends TextScaler {
-  const _PreferenceTextScaler(this.system,this.factor);
+  const _PreferenceTextScaler(this.system, this.factor);
   final TextScaler system;
   final double factor;
-  @override double scale(double fontSize)=>system.scale(fontSize)*factor;
-  @override double get textScaleFactor=>scale(1);
+  @override
+  double scale(double fontSize) => system.scale(fontSize) * factor;
+  @override
+  double get textScaleFactor => scale(1);
 }
 
 class _SessionRestorePage extends StatelessWidget {

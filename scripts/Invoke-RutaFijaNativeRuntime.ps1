@@ -196,6 +196,7 @@ function Get-ManagedServiceState {
         Port = $port
         ProcessExists = $null -ne $process
         PortOwner = $portOwner
+        IdentityVerified = $processNameMatches -and $commandLineMatches -and $instanceMatches
         IsManaged = $processNameMatches -and $commandLineMatches -and $portMatches -and $instanceMatches
         Reason = if ($null -eq $process) {
             'el proceso ya no existe'
@@ -218,12 +219,19 @@ function Invoke-Endpoint {
         [Parameter(Mandatory)][string]$Uri,
         [Parameter(Mandatory)][string]$Label,
         [ValidateRange(1, 180)][int]$TimeoutSeconds,
-        [Parameter(Mandatory)][scriptblock]$Validator
+        [Parameter(Mandatory)][scriptblock]$Validator,
+        [Diagnostics.Process]$ExpectedProcess
     )
 
     $deadline = [DateTime]::UtcNow.AddSeconds($TimeoutSeconds)
     $lastFailure = 'sin respuesta'
     do {
+        if ($null -ne $ExpectedProcess) {
+            $ExpectedProcess.Refresh()
+            if ($ExpectedProcess.HasExited) {
+                throw "$Label termino antes de responder (codigo $($ExpectedProcess.ExitCode)); revise sus logs en .runtime."
+            }
+        }
         try {
             $response = Invoke-WebRequest -Uri $Uri -UseBasicParsing -TimeoutSec 5 -ErrorAction Stop
             if (& $Validator $response) {
@@ -249,7 +257,7 @@ function Get-HttpResponseText {
 }
 
 function Test-BackendHealth {
-    param([ValidateRange(1, 180)][int]$TimeoutSeconds = 10)
+    param([ValidateRange(1, 180)][int]$TimeoutSeconds = 10, [Diagnostics.Process]$ExpectedProcess)
 
     $validator = {
         param($response)
@@ -260,17 +268,17 @@ function Test-BackendHealth {
             return $false
         }
     }
-    return Invoke-Endpoint -Uri $backendHealthUri -Label 'El backend' -TimeoutSeconds $TimeoutSeconds -Validator $validator
+    return Invoke-Endpoint -Uri $backendHealthUri -Label 'El backend' -TimeoutSeconds $TimeoutSeconds -Validator $validator -ExpectedProcess $ExpectedProcess
 }
 
 function Test-FrontendPage {
-    param([ValidateRange(1, 180)][int]$TimeoutSeconds = 10)
+    param([ValidateRange(1, 180)][int]$TimeoutSeconds = 10, [Diagnostics.Process]$ExpectedProcess)
 
     $validator = {
         param($response)
         return $response.StatusCode -eq 200 -and (Get-HttpResponseText -Response $response) -match '<rf-root'
     }
-    return Invoke-Endpoint -Uri $frontendUri -Label 'El CRM Angular' -TimeoutSeconds $TimeoutSeconds -Validator $validator
+    return Invoke-Endpoint -Uri $frontendUri -Label 'El CRM Angular' -TimeoutSeconds $TimeoutSeconds -Validator $validator -ExpectedProcess $ExpectedProcess
 }
 
 function Test-RutaFijaRuntime {
@@ -467,12 +475,27 @@ function Assert-PortIsFree {
 }
 
 function Get-BackendJar {
-    return @(
-        Get-ChildItem -LiteralPath (Join-Path $backendRoot 'target') -Filter '*.jar' -File -ErrorAction SilentlyContinue |
-            Where-Object { $_.Name -notlike '*.original' } |
-            Sort-Object LastWriteTimeUtc -Descending |
-            Select-Object -First 1
-    )
+    [xml]$pom = [IO.File]::ReadAllText((Join-Path $backendRoot 'pom.xml'))
+    $namespaces = [Xml.XmlNamespaceManager]::new($pom.NameTable)
+    $namespaces.AddNamespace('m', 'http://maven.apache.org/POM/4.0.0')
+    $finalName = $pom.SelectSingleNode('/m:project/m:build/m:finalName', $namespaces)
+    if ($null -ne $finalName) {
+        $artifactName = $finalName.InnerText.Trim()
+    } else {
+        $artifact = $pom.SelectSingleNode('/m:project/m:artifactId', $namespaces)
+        $version = $pom.SelectSingleNode('/m:project/m:version', $namespaces)
+        if ($null -eq $artifact -or $null -eq $version) {
+            throw 'No se pudo identificar el artefacto principal del backend en pom.xml.'
+        }
+        $artifactName = $artifact.InnerText.Trim() + '-' + $version.InnerText.Trim()
+    }
+    if ($artifactName -notmatch '^[A-Za-z0-9][A-Za-z0-9._-]*$') {
+        throw 'El nombre del artefacto backend debe estar resuelto y no contener rutas.'
+    }
+    $jarPath = Join-Path (Join-Path $backendRoot 'target') ($artifactName + '.jar')
+    if (Test-Path -LiteralPath $jarPath -PathType Leaf) {
+        return Get-Item -LiteralPath $jarPath
+    }
 }
 
 function Test-BackendBuildRequired {
@@ -522,9 +545,20 @@ function Get-OrBuildBackendJar {
         )
         Push-Location $backendRoot
         try {
-            & .\mvnw.cmd --batch-mode --no-transfer-progress '-Dmaven.test.skip=true' package
-            if ($LASTEXITCODE -ne 0) {
-                throw 'No se pudo empaquetar el backend para el arranque nativo.'
+            [IO.Directory]::CreateDirectory($runtimeDirectory) | Out-Null
+            $buildLog = Join-Path $runtimeDirectory 'backend-build.log'
+            $previousErrorPreference = $ErrorActionPreference
+            try {
+                $ErrorActionPreference = 'Continue'
+                # Native stdout must not become part of the function's FileInfo result.
+                & .\mvnw.cmd --batch-mode --no-transfer-progress '-Dmaven.test.skip=true' package 2>&1 |
+                    Tee-Object -FilePath $buildLog | Out-Host
+                $buildExitCode = $LASTEXITCODE
+            } finally {
+                $ErrorActionPreference = $previousErrorPreference
+            }
+            if ($buildExitCode -ne 0) {
+                throw ('No se pudo empaquetar el backend. Revise ' + $buildLog)
             }
         } finally {
             Pop-Location
@@ -569,7 +603,10 @@ function Invoke-NativeStart {
         }
         [IO.Directory]::CreateDirectory($runtimeDirectory) | Out-Null
 
-        $backendJar = Get-OrBuildBackendJar
+        $backendJar = @(Get-OrBuildBackendJar)
+        if ($backendJar.Count -ne 1 -or $backendJar[0] -isnot [IO.FileInfo]) {
+            throw 'El empaquetado no devolvio un unico archivo JAR del backend.'
+        }
 
         $javaPath = Get-JavaExecutable
         $backendOutput = Join-Path $runtimeDirectory 'backend.stdout.log'
@@ -581,7 +618,7 @@ function Invoke-NativeStart {
         $backendProcess = Start-Process -FilePath $javaPath -ArgumentList $backendArguments -WorkingDirectory $backendRoot -RedirectStandardOutput $backendOutput -RedirectStandardError $backendError -WindowStyle Hidden -PassThru
         $startedProcesses.Add($backendProcess)
 
-        $null = Test-BackendHealth -TimeoutSeconds $StartupTimeoutSeconds
+        $null = Test-BackendHealth -TimeoutSeconds $StartupTimeoutSeconds -ExpectedProcess $backendProcess
         if ((Get-ListeningProcessId -Port $backendPort) -ne $backendProcess.Id) {
             throw 'El backend saludable no coincide con el PID iniciado por F1.1B.'
         }
@@ -600,7 +637,7 @@ function Invoke-NativeStart {
         $frontendProcess = Start-Process -FilePath $node.Source -ArgumentList @('--max-old-space-size=512', ('"{0}"' -f $angularCli), 'serve', '--host', '127.0.0.1', '--port', '4300', '--configuration', $frontendConfiguration, '--hmr=false') -WorkingDirectory $frontendRoot -RedirectStandardOutput $frontendOutput -RedirectStandardError $frontendError -WindowStyle Hidden -PassThru
         $startedProcesses.Add($frontendProcess)
 
-        $null = Test-FrontendPage -TimeoutSeconds $StartupTimeoutSeconds
+        $null = Test-FrontendPage -TimeoutSeconds $StartupTimeoutSeconds -ExpectedProcess $frontendProcess
         if ((Get-ListeningProcessId -Port $frontendPort) -ne $frontendProcess.Id) {
             throw 'El CRM saludable no coincide con el PID iniciado por F1.1B.'
         }
@@ -671,16 +708,19 @@ function Invoke-NativeStop {
 
     foreach ($service in $services) {
         if ($service.ProcessExists -or $null -ne $service.PortOwner) {
-            if (-not $service.IsManaged) {
+            # A verified instance may still be alive after losing its listener.
+            # A foreign listener, reused PID or changed executable remains refused.
+            if (-not $service.IdentityVerified -or
+                ($null -ne $service.PortOwner -and $service.PortOwner -ne $service.ProcessId)) {
                 throw "No se puede detener $($service.ServiceName): $($service.Reason)."
             }
         }
     }
 
-    if ($frontend.IsManaged) {
+    if ($frontend.ProcessExists -and $frontend.IdentityVerified) {
         Stop-ProcessAndWait -ProcessId $frontend.ProcessId -TimeoutSeconds 20
     }
-    if ($backend.IsManaged) {
+    if ($backend.ProcessExists -and $backend.IdentityVerified) {
         Stop-BackendControlled -ProcessId $backend.ProcessId
     }
 

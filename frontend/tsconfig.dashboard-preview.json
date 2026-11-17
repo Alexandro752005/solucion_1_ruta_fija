@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": { "outDir": "./out-tsc/dashboard-preview" },
+  "files": ["src/dashboard-preview.main.ts"],
+  "include": ["src/**/*.d.ts"]
+}

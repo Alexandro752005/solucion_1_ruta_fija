@@ -14,6 +14,8 @@ import 'service_attention_panel.dart';
 import 'service_handover_panel.dart';
 import '../../location/data/mobile_service_gps_repository.dart';
 import '../../location/presentation/service_gps_access_panel.dart';
+import '../../location/presentation/mobile_location_scope.dart';
+import '../../location/presentation/mobile_map_page.dart';
 
 class AssignmentDetailPage extends StatefulWidget {
   const AssignmentDetailPage({
@@ -162,6 +164,45 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
     } finally {
       if (mounted) {
         setState(() => _submitting = false);
+      }
+    }
+  }
+
+  Future<void> _openMap() async {
+    final assignment = _assignment;
+    if (assignment == null ||
+        !assignment.canComplete ||
+        _submitting ||
+        _pendingCommand != null ||
+        _safetyBlocked ||
+        _handoverBlocked) {
+      return;
+    }
+    // The map receives a callback to this existing command flow, not a second
+    // POST implementation. A fresh GET re-evaluates all detail safety panels.
+    final changed = await Navigator.of(context).push<bool>(
+      MaterialPageRoute(
+        builder: (_) => MobileMapPage(
+          assignmentId: assignment.id,
+          onComplete: () async {
+            await _load();
+            if (!mounted ||
+                _assignment?.canComplete != true ||
+                _safetyBlocked ||
+                _handoverBlocked ||
+                _pendingCommand != null) {
+              return false;
+            }
+            await _submit(MobileAssignmentCommandType.complete);
+            return _assignment?.status == MobileAssignmentStatus.completed;
+          },
+        ),
+      ),
+    );
+    if (mounted) {
+      await _load();
+      if (changed == true && mounted) {
+        Navigator.of(context).pop(true);
       }
     }
   }
@@ -351,6 +392,20 @@ class _AssignmentDetailPageState extends State<AssignmentDetailPage> {
           ),
           const SizedBox(height: 20),
           _DetailsCard(assignment: assignment),
+          if (assignment.canComplete &&
+              MobileLocationScope.maybeOf(context)?.controller != null)
+            OutlinedButton.icon(
+              key: const Key('assignment-open-map'),
+              onPressed:
+                  _submitting ||
+                      _pendingCommand != null ||
+                      _safetyBlocked ||
+                      _handoverBlocked
+                  ? null
+                  : _openMap,
+              icon: const Icon(Icons.map_outlined),
+              label: const Text('Ver mapa'),
+            ),
           if (assignment.serviceId != null &&
               widget.driverGateway is MobileServiceHandoverGateway)
             ServiceHandoverPanel(

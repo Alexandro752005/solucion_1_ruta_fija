@@ -21,6 +21,7 @@ Esta carpeta es la fuente local de perfiles y reglas de colaboración para Ruta 
 | A-COORD | [A-COORD.md](A-COORD.md) | Coordinación, registro, contratos e integración local |
 | A-BACK | [A-BACK.md](A-BACK.md) | Spring Boot, PostgreSQL, JPA y Flyway |
 | A-WEB | [A-WEB.md](A-WEB.md) | CRM Angular para `SUPER_ADMIN` y `ADMIN` |
+| A-VIS | [A-VIS.md](A-VIS.md) | Arquitectura visual y experiencia reutilizable para CRM y Flutter |
 | A-MOB | [A-MOB.md](A-MOB.md) | Android Flutter para `CONDUCTOR` |
 | A-QA | [A-QA.md](A-QA.md) | Revisión independiente, seguridad y evidencia |
 | A-OPS | [A-OPS.md](A-OPS.md) | Entorno, S/0, recuperación y entrega local |

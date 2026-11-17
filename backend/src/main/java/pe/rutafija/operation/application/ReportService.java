@@ -52,7 +52,9 @@ public class ReportService {
             AssignmentStatus.COMPLETED,
             AssignmentStatus.REJECTED,
             AssignmentStatus.CANCELLED,
-            AssignmentStatus.EXPIRED
+            AssignmentStatus.EXPIRED,
+            AssignmentStatus.INTERRUPTED,
+            AssignmentStatus.TRANSFERRED
     );
 
     private final CurrentUserService currentUserService;

@@ -46,8 +46,12 @@ async function go(path) { await send('Page.navigate',{url:base+path});await wait
 async function login(email,password) {
   const context=step;
   step=context+'_login_form';await go('/login');
-  await wait('!!document.querySelector("#email") || [...document.querySelectorAll("button")].some(e=>e.textContent.trim()==="Cerrar sesión")');
-  if(!(await evaluate('!!document.querySelector("#email")')))await click('Cerrar sesión');
+  await wait('!!document.querySelector("#email") || !!document.querySelector("#topbar-account-trigger") || !!document.querySelector("[data-logout]")');
+  if(!(await evaluate('!!document.querySelector("#email")'))){
+    if(!(await evaluate('!!document.querySelector("[data-logout]")')))
+      await evaluate('document.querySelector("#topbar-account-trigger").click()');
+    await click('Cerrar sesión');
+  }
   await fill('#email',email);await fill('#password',password);await click('Ingresar al sistema');
   step=context+'_login_response';
   await wait('!!document.querySelector("rf-app-shell") || !!document.querySelector(".app-shell") || !location.pathname.startsWith("/login")');
@@ -103,10 +107,10 @@ async function reviewDocuments() {
 }
 
 try {
-  const executable=['C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe','C:/Program Files/Google/Chrome/Application/chrome.exe'].find(existsSync);
+  const executable=['C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe','C:/Program Files (x86)/BraveSoftware/Brave-Browser/Application/brave.exe'].find(existsSync);
   assert(executable,'browser_missing');
-  profile=await mkdtemp(join(tmpdir(),'rf-l01-browser-'));
-  browser=spawn(executable,['--headless=new','--no-first-run','--no-default-browser-check','--disable-background-networking','--disable-sync','--disable-extensions','--remote-debugging-address=127.0.0.1','--remote-debugging-port=0',`--user-data-dir=${profile}`,'about:blank'],{windowsHide:true,stdio:'ignore'});
+  profile=await mkdtemp(join(process.env.RF_L01_CONNECTED_ARTIFACT_ROOT||tmpdir(),'rf-l01-browser-'));
+  browser=spawn(executable,['--headless=new','--window-size=1440,1000','--no-first-run','--no-default-browser-check','--disable-background-networking','--disable-sync','--disable-extensions','--remote-debugging-address=127.0.0.1','--remote-debugging-port=0',`--user-data-dir=${profile}`,'about:blank'],{windowsHide:true,stdio:'ignore'});
   let port;
   for(let i=0;i<100;i++){try{port=(await readFile(join(profile,'DevToolsActivePort'),'utf8')).split('\n')[0];break;}catch{await pause(100);}}
   assert(port,'browser_start');

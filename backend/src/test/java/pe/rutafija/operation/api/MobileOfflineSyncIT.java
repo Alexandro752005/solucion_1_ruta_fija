@@ -26,6 +26,7 @@ import pe.rutafija.organization.domain.Organization;
 import pe.rutafija.organization.infrastructure.OrganizationRepository;
 import pe.rutafija.support.NativePostgresIntegrationTest;
 import pe.rutafija.support.ApprovedConductorFixture;
+import pe.rutafija.support.CurrentNativeOperationFixture;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -78,12 +79,16 @@ class MobileOfflineSyncIT extends NativePostgresIntegrationTest {
     @Autowired
     org.springframework.jdbc.core.JdbcTemplate jdbcTemplate;
 
+    @Autowired org.springframework.context.ApplicationContext applicationContext;
+    @Autowired pe.rutafija.fleet.infrastructure.VehicleRepository vehicleRepository;
+
     private Organization organization;
     private AppUser conductor;
     private Driver driver;
+    private int preparationAvailabilityAudits;
 
     @BeforeEach
-    void prepareData() {
+    void prepareData() throws Exception {
         String suffix = UUID.randomUUID().toString().substring(0, 8);
         organization = organizationRepository.save(Organization.active(
                 "Ruta Fija M8 " + suffix, "M8 " + suffix, "America/Lima"
@@ -114,6 +119,11 @@ class MobileOfflineSyncIT extends NativePostgresIntegrationTest {
         fixtureAdmin.verifyEmail(Instant.now());
         fixtureAdmin = userRepository.save(fixtureAdmin);
         ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, fixtureAdmin, conductor, driver);
+        var vehicle=vehicleRepository.saveAndFlush(pe.rutafija.fleet.domain.Vehicle.register(
+                organization,"M8-"+suffix,null,null,null,null));
+        new CurrentNativeOperationFixture(mockMvc,objectMapper,jdbcTemplate,applicationContext)
+                .qualify(fixtureAdmin,conductor,driver,vehicle);
+        preparationAvailabilityAudits=count("select count(*) from audit_event where action = 'MOBILE_DRIVER_AVAILABILITY_CHANGED'");
     }
 
     @Test
@@ -145,7 +155,7 @@ class MobileOfflineSyncIT extends NativePostgresIntegrationTest {
 
         assertThat(driverAvailability()).isEqualTo("DESCANSO");
         assertThat(count("select count(*) from mobile_command_receipt where event_id = ?", eventId)).isEqualTo(1);
-        assertThat(count("select count(*) from audit_event where action = 'MOBILE_DRIVER_AVAILABILITY_CHANGED'"))
+        assertThat(count("select count(*) from audit_event where action = 'MOBILE_DRIVER_AVAILABILITY_CHANGED'")-preparationAvailabilityAudits)
                 .isEqualTo(1);
     }
 
@@ -224,7 +234,7 @@ class MobileOfflineSyncIT extends NativePostgresIntegrationTest {
         assertThat(jdbcTemplate.queryForObject(
                 "select server_state from mobile_command_receipt where event_id = ?", String.class, eventId
         )).isEqualTo("DESCANSO");
-        assertThat(count("select count(*) from audit_event where action = 'MOBILE_DRIVER_AVAILABILITY_CHANGED'"))
+        assertThat(count("select count(*) from audit_event where action = 'MOBILE_DRIVER_AVAILABILITY_CHANGED'")-preparationAvailabilityAudits)
                 .isEqualTo(1);
     }
 
@@ -275,6 +285,7 @@ class MobileOfflineSyncIT extends NativePostgresIntegrationTest {
                         .claim("role", UserRole.CONDUCTOR.name())
                         .claim("sessionVersion", conductor.getSessionVersion())
                         .claim("sessionChannel", "MOBILE")
+                        .claim("accessScope", "OPERATIONS")
                         .claim("driverId", driver.getId().toString()));
     }
 }

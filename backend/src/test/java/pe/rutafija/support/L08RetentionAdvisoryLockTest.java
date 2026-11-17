@@ -109,7 +109,7 @@ class L08RetentionAdvisoryLockTest {
         static void assertTarget(Connection c, String role) throws SQLException {
             try (var s = c.createStatement(); var r = s.executeQuery("select current_database(),current_user,inet_server_port(),current_setting('transaction_read_only'),(select version from flyway_schema_history where success and version is not null order by installed_rank desc limit 1)")) {
                 r.next(); assertThat(r.getString(1)).isEqualTo("ruta_fija_test"); assertThat(r.getString(2)).isEqualTo(role);
-                assertThat(r.getInt(3)).isEqualTo(5432); assertThat(r.getString(4)).isEqualTo("on"); assertThat(r.getString(5)).isEqualTo("50");
+                assertThat(r.getInt(3)).isEqualTo(IsolatedAuditSpecializedPostgres.enabled()?55441:5432); assertThat(r.getString(4)).isEqualTo("on"); assertThat(r.getString(5)).isEqualTo(IsolatedAuditSpecializedPostgres.enabled()?"51":"50");
             }
         }
         void assertPreserved() throws SQLException { assertThat(DatabaseIntegrity.capture(observer)).isEqualTo(before); }

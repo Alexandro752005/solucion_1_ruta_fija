@@ -57,6 +57,7 @@ class OperationStreamBroadcasterTest {
                 "Conductor del tenant",
                 UserRole.CONDUCTOR
         );
+        tenantAdmin.verifyEmail(Instant.parse("2026-09-22T10:00:00Z"));
         AppUser otherTenantAdmin = AppUser.organizationUser(
                 otherOrganization,
                 "admin.b@rutafija.test",
@@ -64,6 +65,7 @@ class OperationStreamBroadcasterTest {
                 "Admin de otro tenant",
                 UserRole.ADMIN
         );
+        otherTenantAdmin.verifyEmail(Instant.parse("2026-09-22T10:00:00Z"));
 
         when(tenantAdminSession.getId()).thenReturn("tenant-admin-session");
         when(tenantAdminSession.isOpen()).thenReturn(true);
@@ -73,14 +75,16 @@ class OperationStreamBroadcasterTest {
                 .thenReturn(Optional.of(tenantAdmin));
         when(userRepository.findByIdAndOrganization_Id(conductor.getId(), organizationId))
                 .thenReturn(Optional.of(conductor));
+        when(userRepository.findByIdAndOrganization_Id(otherTenantAdmin.getId(), otherOrganization.getId()))
+                .thenReturn(Optional.of(otherTenantAdmin));
 
         OperationStreamBroadcaster broadcaster = new OperationStreamBroadcaster(
                 new ObjectMapper().findAndRegisterModules(),
-                userRepository
+                RealtimeAuthorizationFixture.authorization(userRepository)
         );
-        broadcaster.register(organizationId, tenantAdmin.getId(), tenantAdminSession);
-        broadcaster.register(organizationId, conductor.getId(), conductorSession);
-        broadcaster.register(otherOrganization.getId(), otherTenantAdmin.getId(), otherTenantAdminSession);
+        broadcaster.register(OperationStreamIdentity.from(tenantAdmin), tenantAdminSession);
+        broadcaster.register(OperationStreamIdentity.from(conductor), conductorSession);
+        broadcaster.register(OperationStreamIdentity.from(otherTenantAdmin), otherTenantAdminSession);
         broadcaster.broadcast(new OperationChangedEvent(
                 organizationId,
                 Set.of(UUID.randomUUID()),

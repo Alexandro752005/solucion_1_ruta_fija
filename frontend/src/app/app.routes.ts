@@ -57,6 +57,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'live-map',
+        title: 'Mapa en vivo | Ruta Fija',
+        canActivate: [authGuard, roleGuard],
+        data: { roles: ['ADMIN'] },
+        loadComponent: () => import('./features/live-map/live-map.page').then(module => module.LiveMapPage),
+      },
+      {
         path: 'users',
         title: 'Usuarios | Ruta Fija',
         canActivate: [roleGuard],
@@ -137,7 +144,8 @@ export const routes: Routes = [
       {
         path: 'assignments',
         title: 'Asignaciones | Ruta Fija',
-        canActivate: [roleGuard],
+        canActivate: [authGuard, roleGuard],
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         data: { roles: ['ADMIN'] },
         loadComponent: () =>
           import('./features/assignments/assignments.page').then(

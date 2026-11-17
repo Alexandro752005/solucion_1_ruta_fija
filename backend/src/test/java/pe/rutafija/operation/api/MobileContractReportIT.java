@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,19 +28,27 @@ import pe.rutafija.identity.domain.AppUser;
 import pe.rutafija.identity.domain.UserRole;
 import pe.rutafija.identity.infrastructure.AppUserRepository;
 import pe.rutafija.operation.application.MobileOperationMaintenanceService;
+import pe.rutafija.operation.application.OfferExpiryService;
+import pe.rutafija.operation.application.OperationEventPublisher;
+import pe.rutafija.operation.application.ServiceGpsRetention;
+import pe.rutafija.operation.infrastructure.DriverCurrentLocationStore;
+import pe.rutafija.audit.application.AuditService;
 import pe.rutafija.operation.domain.AssignmentStatus;
 import pe.rutafija.operation.infrastructure.AssignmentRepository;
 import pe.rutafija.organization.domain.Organization;
 import pe.rutafija.organization.infrastructure.OrganizationRepository;
 import pe.rutafija.support.NativePostgresIntegrationTest;
 import pe.rutafija.support.ApprovedConductorFixture;
+import pe.rutafija.support.CurrentNativeOperationFixture;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.Clock;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
@@ -93,7 +102,10 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
     AssignmentRepository assignmentRepository;
 
     @Autowired
-    MobileOperationMaintenanceService mobileOperationMaintenanceService;
+    ApplicationContext context;
+
+    private MobileOperationMaintenanceService mobileOperationMaintenanceService;
+    private CurrentNativeOperationFixture current;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -109,7 +121,15 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
     private Vehicle vehicle;
 
     @BeforeEach
-    void prepareData() {
+    void prepareData() throws Exception {
+        current = new CurrentNativeOperationFixture(mockMvc, objectMapper, jdbcTemplate, context);
+        // Background sweeps stay disabled for isolated schema resets. Exercise
+        // the actual maintenance algorithm explicitly, with its real services.
+        mobileOperationMaintenanceService = new MobileOperationMaintenanceService(
+                assignmentRepository, context.getBean(DriverCurrentLocationStore.class),
+                context.getBean(AuditService.class), context.getBean(OperationEventPublisher.class),
+                context.getBean(Clock.class), context.getBean(OfferExpiryService.class),
+                context.getBean(ServiceGpsRetention.class));
         String suffix = UUID.randomUUID().toString().substring(0, 8);
         organization = organizationRepository.save(Organization.active(
                 "Ruta Fija F3.4 " + suffix, "F34 " + suffix, "America/Lima"
@@ -121,6 +141,7 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
         // Historical synthetic eligibility for operation regressions, not a real approval.
         ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, admin, conductor, driver);
         vehicle = linkedVehicle(driver, organization, "F34" + suffix.substring(0, 5));
+        current.qualify(admin, conductor, driver, vehicle);
     }
 
     @Test
@@ -139,15 +160,15 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
         assertThat(document.path("security").toString()).contains("bearerAuth");
 
         JsonNode schemas = document.path("components").path("schemas");
-        assertThat(schemas.path("AssignmentCreateRequest").path("properties").has("responseMode")).isTrue();
-        assertThat(schemas.path("AssignmentCreateRequest").path("properties").has("responseDeadlineAt")).isTrue();
-        assertThat(schemas.path("AssignmentResponse").path("properties").has("acceptedAt")).isTrue();
-        assertThat(schemas.path("AssignmentResponse").path("properties").has("rejectedAt")).isTrue();
-        assertThat(schemas.path("AssignmentResponse").path("properties").has("expiredAt")).isTrue();
-        assertThat(schemas.path("MobileAssignmentCommandRequest").path("properties").has("clientEventId")).isTrue();
-        assertThat(schemas.path("MobileAssignmentCommandRequest").path("properties").has("version")).isTrue();
-        assertThat(schemas.path("MobileAssignmentCommandRequest").path("properties").has("occurredAt")).isTrue();
-        assertThat(schemas.path("MobileLocationUpdateRequest").path("properties").has("permissionGranted")).isTrue();
+        assertThat(schemas.path("pe.rutafija.operation.api.dto.AssignmentCreateRequest").path("properties").has("responseMode")).isTrue();
+        assertThat(schemas.path("pe.rutafija.operation.api.dto.AssignmentCreateRequest").path("properties").has("responseDeadlineAt")).isTrue();
+        assertThat(schemas.path("pe.rutafija.operation.api.dto.AssignmentResponse").path("properties").has("acceptedAt")).isTrue();
+        assertThat(schemas.path("pe.rutafija.operation.api.dto.AssignmentResponse").path("properties").has("rejectedAt")).isTrue();
+        assertThat(schemas.path("pe.rutafija.operation.api.dto.AssignmentResponse").path("properties").has("expiredAt")).isTrue();
+        assertThat(schemas.path("pe.rutafija.operation.api.dto.mobile.MobileAssignmentCommandRequest").path("properties").has("clientEventId")).isTrue();
+        assertThat(schemas.path("pe.rutafija.operation.api.dto.mobile.MobileAssignmentCommandRequest").path("properties").has("version")).isTrue();
+        assertThat(schemas.path("pe.rutafija.operation.api.dto.mobile.MobileAssignmentCommandRequest").path("properties").has("occurredAt")).isTrue();
+        assertThat(schemas.path("pe.rutafija.operation.api.dto.mobile.MobileLocationUpdateRequest").path("properties").has("permissionGranted")).isTrue();
     }
 
     @Test
@@ -188,6 +209,7 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
         Driver otherDriver = availableDriver(otherOrganization, otherConductor, otherGroup, "Conductor externo", "EXT-001");
         ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, otherAdmin, otherConductor, otherDriver);
         Vehicle otherVehicle = linkedVehicle(otherDriver, otherOrganization, "EXT-401");
+        current.qualify(otherAdmin, otherConductor, otherDriver, otherVehicle);
         createMobileConfirmation(
                 otherAdmin,
                 otherDriver,
@@ -205,7 +227,9 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
                         .param("to", to.toString()))
                 .andExpect(status().isOk())
                 .andReturn());
-        assertThat(tenantReport.path("totalsByStatus").size()).isEqualTo(7);
+        assertThat(tenantReport.path("totalsByStatus").size()).isEqualTo(9);
+        assertThat(total(tenantReport.path("totalsByStatus"), "INTERRUPTED")).isZero();
+        assertThat(total(tenantReport.path("totalsByStatus"), "TRANSFERRED")).isZero();
         assertThat(total(tenantReport.path("totalsByStatus"), "PENDING_RESPONSE")).isEqualTo(1L);
         assertThat(total(tenantReport.path("totalsByStatus"), "REJECTED")).isEqualTo(1L);
         assertThat(total(tenantReport.path("totalsByStatus"), "EXPIRED")).isEqualTo(1L);
@@ -277,6 +301,7 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
         Driver otherDriver = availableDriver(organization, otherConductor, group, "Otro conductor", "F34-OTHER");
         ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, admin, otherConductor, otherDriver);
         Vehicle otherVehicle = linkedVehicle(otherDriver, organization, "F34-OTH");
+        current.qualify(admin, otherConductor, otherDriver, otherVehicle);
         AssignmentCreated sameTenantForeign = createMobileConfirmation(
                 admin,
                 otherDriver,
@@ -299,6 +324,7 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
         Driver crossDriver = availableDriver(otherOrganization, crossConductor, crossGroup, "Conductor cruzado", "CROSS-001");
         ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, crossAdmin, crossConductor, crossDriver);
         Vehicle crossVehicle = linkedVehicle(crossDriver, otherOrganization, "CRS-401");
+        current.qualify(crossAdmin, crossConductor, crossDriver, crossVehicle);
         AssignmentCreated crossTenantForeign = createMobileConfirmation(
                 crossAdmin,
                 crossDriver,
@@ -312,30 +338,48 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code").value("RESOURCE_NOT_FOUND"));
 
-        AssignmentCreated direct = createAdminDirect(
+        // ADMIN_DIRECT is historical only. Verify rejection without creating a
+        // retired kind of offer, then retain the invalid-command receipt case
+        // against a real current offer that has already been cancelled.
+        Map<String, Object> directBody = assignmentBody(admin, driver, vehicle,
+                now.plus(15, ChronoUnit.HOURS), now.plus(16, ChronoUnit.HOURS), "ADMIN_DIRECT", null);
+        long countBeforeDirect = count("select count(*) from assignment");
+        mockMvc.perform(post("/api/v1/assignments")
+                        .with(webToken(admin)).contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(directBody)))
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.code").value("ASSIGNMENT_INVALID_TRANSITION"));
+        assertThat(count("select count(*) from assignment")).isEqualTo((int) countBeforeDirect);
+
+        AssignmentCreated cancelled = createMobileConfirmation(
                 admin,
                 driver,
                 vehicle,
                 now.plus(15, ChronoUnit.HOURS),
-                now.plus(16, ChronoUnit.HOURS)
+                now.plus(16, ChronoUnit.HOURS),
+                now.plus(30, ChronoUnit.MINUTES)
         );
+        JsonNode cancellation = json(mockMvc.perform(post("/api/v1/assignments/{assignmentId}/cancel", cancelled.id())
+                        .with(webToken(admin)).contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(Map.of("version", cancelled.version(), "reason", "SYNTHETIC cancelled fixture"))))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.status").value("CANCELLED")).andReturn());
         UUID invalidEvent = UUID.randomUUID();
-        String invalidPayload = commandPayload(invalidEvent, direct.version(), now);
-        mockMvc.perform(post("/api/v1/mobile/assignments/{assignmentId}/accept", direct.id())
+        String invalidPayload = commandPayload(invalidEvent, cancellation.path("version").asLong(), now);
+        mockMvc.perform(post("/api/v1/mobile/assignments/{assignmentId}/accept", cancelled.id())
                         .with(mobileToken(conductor, driver))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(invalidPayload))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.code").value("ASSIGNMENT_INVALID_TRANSITION"));
-        mockMvc.perform(post("/api/v1/mobile/assignments/{assignmentId}/accept", direct.id())
+        mockMvc.perform(post("/api/v1/mobile/assignments/{assignmentId}/accept", cancelled.id())
                         .with(mobileToken(conductor, driver))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(invalidPayload))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.code").value("ASSIGNMENT_INVALID_TRANSITION"));
         assertThat(count("select count(*) from mobile_command_receipt where event_id = ?", invalidEvent)).isEqualTo(1);
-        assertThat(assignmentRepository.findById(direct.id()).orElseThrow().getStatus())
-                .isEqualTo(AssignmentStatus.SCHEDULED);
+        assertThat(assignmentRepository.findById(cancelled.id()).orElseThrow().getStatus())
+                .isEqualTo(AssignmentStatus.CANCELLED);
     }
 
     @Test
@@ -364,6 +408,28 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.locationConsent").value(true));
         mockMvc.perform(put("/api/v1/mobile/location/current")
+                        .with(mobileToken(conductor, driver)).contentType(MediaType.APPLICATION_JSON)
+                        .content(locationPayload(capturedAt, true, "-12.046374")))
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.code").value("LOCATION_STATE_NOT_ALLOWED"));
+
+        Instant startWindow = Instant.now().plus(6, ChronoUnit.HOURS);
+        AssignmentCreated offered = createMobileConfirmation(admin, driver, vehicle, startWindow,
+                startWindow.plus(1, ChronoUnit.HOURS), Instant.now().plus(10, ChronoUnit.MINUTES));
+        JsonNode accepted = json(mockMvc.perform(post("/api/v1/mobile/assignments/{id}/accept", offered.id())
+                        .with(mobileToken(conductor, driver)).contentType(MediaType.APPLICATION_JSON)
+                        .content(commandPayload(UUID.randomUUID(), offered.version(), Instant.now())))
+                .andExpect(status().isOk()).andReturn());
+        mockMvc.perform(post("/api/v1/mobile/assignments/{id}/start", offered.id())
+                        .with(mobileToken(conductor, driver)).contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(Map.of(
+                                "clientEventId", UUID.randomUUID(), "version", accepted.path("version").asLong(),
+                                "occurredAt", Instant.now(), "gps", Map.of("permissionGranted", true,
+                                        "locationServiceEnabled", true, "foreground", true)))))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.status").value("EN_SERVICIO"));
+        // Capture after the real server-recorded execution start, never before it.
+        capturedAt = Instant.now();
+        mockMvc.perform(put("/api/v1/mobile/location/current")
                         .with(mobileToken(conductor, driver))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(locationPayload(capturedAt, false, "-12.046374")))
@@ -378,8 +444,15 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
                         .with(mobileToken(conductor, driver))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(locationPayload(capturedAt, true, "-12.046375")))
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.code").value("LOCATION_INVALID_COORDINATES"));
+        mockMvc.perform(put("/api/v1/mobile/location/current")
+                        .with(mobileToken(conductor, driver)).contentType(MediaType.APPLICATION_JSON)
+                        .content(locationPayload(Instant.now(), true, "-12.046375")))
                 .andExpect(status().isNoContent());
         assertThat(count("select count(*) from driver_current_location where driver_id = ?", driver.getId())).isEqualTo(1);
+        assertThat(count("select count(*) from service_gps_point where driver_id = ?", driver.getId())).isEqualTo(2);
+        assertThat(count("select count(*) from service_gps_point where driver_id = ? and expires_at = captured_at + interval '7 days'", driver.getId())).isEqualTo(2);
         String auditMetadata = jdbcTemplate.queryForObject(
                 "select coalesce(string_agg(metadata_json::text, ''), '') from audit_event where action = 'MOBILE_CURRENT_LOCATION_UPSERTED'",
                 String.class
@@ -395,6 +468,9 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.locationConsent").value(false));
         assertThat(count("select count(*) from driver_current_location where driver_id = ?", driver.getId())).isZero();
+        // Withdrawal clears the live snapshot; already captured bounded segment
+        // evidence follows its existing retention policy rather than being erased.
+        assertThat(count("select count(*) from service_gps_point where driver_id = ?", driver.getId())).isEqualTo(2);
     }
 
     private AssignmentCreated createMobileConfirmation(
@@ -416,16 +492,6 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
         );
     }
 
-    private AssignmentCreated createAdminDirect(
-            AppUser actor,
-            Driver targetDriver,
-            Vehicle targetVehicle,
-            Instant scheduledAt,
-            Instant scheduledEndAt
-    ) throws Exception {
-        return createAssignment(actor, targetDriver, targetVehicle, scheduledAt, scheduledEndAt, "ADMIN_DIRECT", null);
-    }
-
     private AssignmentCreated createAssignment(
             AppUser actor,
             Driver targetDriver,
@@ -435,34 +501,29 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
             String responseMode,
             Instant responseDeadlineAt
     ) throws Exception {
-        String deadlinePart = responseDeadlineAt == null
-                ? ""
-                : ",\n\"responseDeadlineAt\":\"%s\"".formatted(responseDeadlineAt);
         MvcResult result = mockMvc.perform(post("/api/v1/assignments")
                         .with(webToken(actor))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {
-                                  "driverId":"%s",
-                                  "vehicleId":"%s",
-                                  "originText":"Terminal Norte",
-                                  "destinationText":"Terminal Sur",
-                                  "scheduledAt":"%s",
-                                  "scheduledEndAt":"%s",
-                                  "responseMode":"%s"%s
-                                }
-                                """.formatted(
-                                targetDriver.getId(),
-                                targetVehicle.getId(),
-                                scheduledAt,
-                                scheduledEndAt,
-                                responseMode,
-                                deadlinePart
-                        )))
+                        .content(objectMapper.writeValueAsBytes(assignmentBody(actor, targetDriver, targetVehicle,
+                                scheduledAt, scheduledEndAt, responseMode, responseDeadlineAt))))
                 .andExpect(status().isCreated())
                 .andReturn();
         JsonNode body = json(result);
         return new AssignmentCreated(UUID.fromString(body.path("id").asText()), body.path("version").asLong());
+    }
+
+    private Map<String, Object> assignmentBody(AppUser actor, Driver targetDriver, Vehicle targetVehicle,
+            Instant scheduledAt, Instant scheduledEndAt, String responseMode, Instant responseDeadlineAt) throws Exception {
+        Map<String, Object> body = current.offerFields(actor);
+        body.put("driverId", targetDriver.getId());
+        body.put("vehicleId", targetVehicle.getId());
+        body.put("originText", "Terminal Norte");
+        body.put("destinationText", "Terminal Sur");
+        body.put("scheduledAt", scheduledAt);
+        body.put("scheduledEndAt", scheduledEndAt);
+        body.put("responseMode", responseMode);
+        if (responseDeadlineAt != null) body.put("responseDeadlineAt", responseDeadlineAt);
+        return body;
     }
 
     private Driver availableDriver(
@@ -516,16 +577,7 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
     }
 
     private RequestPostProcessor mobileToken(AppUser user, Driver targetDriver) {
-        return jwt()
-                .authorities(new SimpleGrantedAuthority("ROLE_CONDUCTOR"))
-                .jwt(token -> token
-                        .subject(user.getId().toString())
-                        .claim("organizationId", user.getOrganizationId().toString())
-                        .claim("email", user.getEmail())
-                        .claim("role", UserRole.CONDUCTOR.name())
-                        .claim("sessionVersion", user.getSessionVersion())
-                        .claim("sessionChannel", "MOBILE")
-                        .claim("driverId", targetDriver.getId().toString()));
+        return current.mobile(user, targetDriver);
     }
 
     private String commandPayload(UUID eventId, long version, Instant occurredAt) {
@@ -542,7 +594,7 @@ class MobileContractReportIT extends NativePostgresIntegrationTest {
 
     private String locationPayload(Instant capturedAt, boolean permissionGranted, String latitude) {
         return """
-                {"latitude":%s,"longitude":-77.042793,"accuracyM":8.2,"capturedAt":"%s","permissionGranted":%s}
+                {"latitude":%s,"longitude":-77.042793,"accuracyM":8.2,"capturedAt":"%s","permissionGranted":%s,"locationServiceEnabled":true,"foreground":true}
                 """.formatted(latitude, capturedAt, permissionGranted);
     }
 

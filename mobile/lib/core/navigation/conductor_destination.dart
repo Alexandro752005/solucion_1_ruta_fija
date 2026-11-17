@@ -9,6 +9,8 @@ enum ConductorDestination {
     'M3',
   ),
   assignments('/assignments', 'Asignaciones', Icons.route_outlined, 'M4'),
+  map('/map', 'Mapa', Icons.map_outlined, 'M7'),
+  more('/more', 'Más', Icons.more_horiz, 'M8'),
   incidents('/incidents', 'Incidencias', Icons.report_problem_outlined, 'M5'),
   announcements('/announcements', 'Comunicados', Icons.campaign_outlined, 'M6'),
   profile('/profile', 'Perfil', Icons.person_outline, 'M2');
@@ -19,6 +21,10 @@ enum ConductorDestination {
   final String label;
   final IconData icon;
   final String milestone;
+
+  static const primary = [home, availability, assignments, map, more];
+  static const additional = [incidents, announcements, profile];
+  int get primaryIndex => primary.contains(this) ? primary.indexOf(this) : 4;
 
   static ConductorDestination fromPath(String? path) {
     return ConductorDestination.values.firstWhere(

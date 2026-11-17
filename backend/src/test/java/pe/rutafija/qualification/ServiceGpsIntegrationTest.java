@@ -119,7 +119,7 @@ class ServiceGpsIntegrationTest extends ServiceExecutionIntegrationTest {
     }
     @Test void gpsIncidentCannotAdoptAnotherServicesPointEvenForTheSameConductorAndOrganization()throws Exception {
         prepared();var first=started();point(initial,true).andExpect(status().isNoContent());UUID point=pointId();command(first,"complete",command(first,false)).andExpect(status().isOk());
-        var second=offer();var incident=json(mobilePost("/api/v1/mobile/incidents",Map.of("assignmentId",second.path("id").asText(),"category","OTRO","description","SYNTHETIC separate service case","occurredAt",initial)).andExpect(status().isCreated()));
+        var second=offer();var incident=json(mobilePost("/api/v1/mobile/incidents",Map.of("assignmentId",second.path("id").asText(),"category","OTRO","description","SYNTHETIC separate service case","occurredAt",initial,"severity","LOW","operationKey",UUID.randomUUID())).andExpect(status().isCreated()));
         adminPost("/api/v1/incidents/"+incident.path("id").asText()+"/gps-evidence",Map.of("pointId",point,"justification","SERVICE_DISCREPANCY","currentPassword",SYNTHETIC_PASSWORD)).andExpect(status().isNotFound());
         assertThat(jdbc.queryForObject("select count(*) from gps_incident_evidence where organization_id=?",Integer.class,organization.getId())).isZero();
     }
@@ -171,7 +171,7 @@ class ServiceGpsIntegrationTest extends ServiceExecutionIntegrationTest {
     }
     @Test void gpsIncidentEvidenceUsesTheSameExpiryAndIsUnlinkedWhenOriginalPointIsPurged()throws Exception {
         prepared();var a=started();point(initial,true).andExpect(status().isNoContent());UUID point=pointId();
-        var incident=json(mobilePost("/api/v1/mobile/incidents",Map.of("assignmentId",a.path("id").asText(),"category","OTRO","description","SYNTHETIC GPS incident review","occurredAt",initial)).andExpect(status().isCreated()));
+        var incident=json(mobilePost("/api/v1/mobile/incidents",Map.of("assignmentId",a.path("id").asText(),"category","OTRO","description","SYNTHETIC GPS incident review","occurredAt",initial,"severity","LOW","operationKey",UUID.randomUUID())).andExpect(status().isCreated()));
         var evidence=json(adminPost("/api/v1/incidents/"+incident.path("id").asText()+"/gps-evidence",Map.of("pointId",point,"justification","SERVICE_DISCREPANCY","currentPassword",SYNTHETIC_PASSWORD)).andExpect(status().isOk()).andExpect(jsonPath("$.pointAvailable").value(true)));
         clock.set(initial.plus(Duration.ofDays(7)));assertThat(retention.purgeExpired(organization.getId())).isEqualTo(1);
         mvc.perform(get("/api/v1/gps/incident-evidence/"+evidence.path("id").asText()).header("Authorization","Bearer "+adminToken)).andExpect(status().isOk()).andExpect(jsonPath("$.pointAvailable").value(false));

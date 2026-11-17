@@ -112,6 +112,11 @@ void main() {
     await tester.ensureVisible(find.byKey(const Key('location-clear')));
     await tester.tap(find.byKey(const Key('location-clear')));
     await tester.pumpAndSettle();
+    expect(
+      find.textContaining('intentos periódicos podrán publicar un punto nuevo'),
+      findsOneWidget,
+    );
+    expect(driverGateway.clearLocationCalls, 0);
     await tester.tap(find.byKey(const Key('location-clear-confirm')));
     await tester.pumpAndSettle();
     expect(driverGateway.clearLocationCalls, 1);

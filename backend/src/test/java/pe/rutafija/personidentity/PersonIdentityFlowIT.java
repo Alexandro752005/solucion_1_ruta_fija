@@ -197,10 +197,17 @@ class PersonIdentityFlowIT extends NativePostgresIntegrationTest {
         assertThat(count("select count(*) from driver where id=? and user_id=?",legacy.getId(),conductor.getId())).isEqualTo(1);
         assertThat(jdbc.queryForObject("select session_version from app_user where id=?",Long.class,conductor.getId())).isEqualTo(1L);
         mvc.perform(get("/api/v1/identity/status").with(auth(conductor))).andExpect(status().isUnauthorized());
+        // Identity review does not supply the separately approved/provisioned
+        // dossier. The current provisioning policy reports that gap as 409.
         mvc.perform(post("/api/v1/mobile/auth/login").contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsBytes(Map.of("email",conductor.getEmail(),"password",PASSWORD))))
-                .andExpect(status().isForbidden());
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.code").value("RESOURCE_CONFLICT"))
+                .andExpect(jsonPath("$.accessToken").doesNotExist())
+                .andExpect(jsonPath("$.refreshToken").doesNotExist());
         assertThat(count("select count(*) from conductor_onboarding_request")).isZero();
+        assertThat(count("select count(*) from refresh_token where user_id=?",conductor.getId())).isZero();
+        assertThat(count("select count(*) from audit_event where user_id=? and action='MOBILE_LOGIN_SUCCESS'",conductor.getId())).isZero();
         verifyNoInteractions(mail);
     }
 

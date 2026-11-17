@@ -151,6 +151,9 @@ public class MobileDriverService {
         }
         if (!request.consent()) {
             currentLocationStore.deleteByDriverId(driver.getId());
+            eventPublisher.publish(actor.user().getOrganizationId(), driver.getGroup().getId(), "driver.location.cleared", Map.of(
+                    "driverId", driver.getId().toString()
+            ));
         }
         auditService.record(actor.user(), "MOBILE_LOCATION_CONSENT_CHANGED", "DRIVER", driver.getId(), Map.of(
                 "granted", request.consent()

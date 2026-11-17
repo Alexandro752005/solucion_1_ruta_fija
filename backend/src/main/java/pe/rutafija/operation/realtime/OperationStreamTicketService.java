@@ -9,14 +9,12 @@ import pe.rutafija.operation.config.OperationProperties;
 import pe.rutafija.shared.exception.ApplicationException;
 import pe.rutafija.shared.exception.ErrorCode;
 import pe.rutafija.shared.security.CurrentUserService;
-import pe.rutafija.personidentity.application.PersonIdentityGateAuthorizationManager;
 
 import java.security.SecureRandom;
 import java.time.Clock;
 import java.time.Instant;
 import java.util.Base64;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -29,24 +27,25 @@ public class OperationStreamTicketService {
     private final CurrentUserService currentUserService;
     private final OperationProperties properties;
     private final Clock clock;
-    private final PersonIdentityGateAuthorizationManager identityGate;
+    private final OperationStreamAuthorization authorization;
     private final SecureRandom secureRandom = new SecureRandom();
     private final ConcurrentMap<String, OperationStreamTicket> tickets = new ConcurrentHashMap<>();
 
     public OperationStreamTicketService(
             CurrentUserService currentUserService,
             OperationProperties properties,
-            Clock clock,PersonIdentityGateAuthorizationManager identityGate
+            Clock clock, OperationStreamAuthorization authorization
     ) {
         this.currentUserService = currentUserService;
         this.properties = properties;
         this.clock = clock;
-        this.identityGate=identityGate;
+        this.authorization = authorization;
     }
 
     public OperationStreamTicketResponse issue() {
         AppUser actor = currentUserService.requireTenantActor();
-        if (actor.getRole() != UserRole.ADMIN || !identityGate.allowsUser(actor.getId())) {
+        OperationStreamIdentity identity = OperationStreamIdentity.from(actor);
+        if (actor.getRole() != UserRole.ADMIN || !authorization.allows(identity)) {
             throw new ApplicationException(
                     HttpStatus.FORBIDDEN,
                     ErrorCode.FORBIDDEN_ROLE,
@@ -57,7 +56,7 @@ public class OperationStreamTicketService {
         removeExpired(now);
         Instant expiresAt = now.plus(properties.streamTicketTtl());
         String ticket = nextTicket();
-        tickets.put(ticket, new OperationStreamTicket(actor.getOrganizationId(), actor.getId(), expiresAt));
+        tickets.put(ticket, new OperationStreamTicket(identity, expiresAt));
         return new OperationStreamTicketResponse(ticket, expiresAt);
     }
 
@@ -66,7 +65,7 @@ public class OperationStreamTicketService {
             return Optional.empty();
         }
         OperationStreamTicket streamTicket = tickets.remove(ticket);
-        if (streamTicket == null || streamTicket.isExpired(Instant.now(clock)) || !identityGate.allowsUser(streamTicket.userId())) {
+        if (streamTicket == null || streamTicket.isExpired(Instant.now(clock)) || !authorization.allows(streamTicket.identity())) {
             return Optional.empty();
         }
         return Optional.of(streamTicket);

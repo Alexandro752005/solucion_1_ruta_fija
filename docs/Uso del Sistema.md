@@ -573,3 +573,16 @@ Consulte también el [README principal](../README.md), las guías de
 
 
 </details>
+
+
+## Evolución del Dashboard ADMIN — 26/10/2026
+
+El contenido principal de **Resumen** del ADMIN incorpora cinco indicadores, seis paneles y tres donas con datos reales de la organización. La fecha solo afecta las cohortes diarias de servicios e incidencias. Se conservan el shell, las guardas y el resumen de SUPER_ADMIN.
+
+- [Manual actualizado del Dashboard ADMIN](manual-dashboard-admin.md): lectura de indicadores, rutas, cortes, conexión, reportes y resolución de fallos.
+- [Acta de cierre de fases 0–6](actas/dashboard-admin-evolucion-cierre-local-2026-10-26.md).
+- [Procedimiento de reversión](operacion/dashboard-admin-reversion.md) y paquete local con SHA-256 en `artifacts/dashboard-admin-entrega-final-2026-10-26/`.
+
+Los ejecutables vigentes siguen siendo `iniciar_ruta_fija.bat`, `verificar_ruta_fija.bat` y `finalizar_ruta_fija.bat`; no se modificaron por el Dashboard. Para una comprobación ligera del entorno ya iniciado: `./scripts/Invoke-RutaFijaNativeRuntime.ps1 -Action Test`. El arranque no aplica migraciones. El entorno nativo de esta entrega conserva V1–V51; no retroceder su esquema para seguir referencias históricas V50.
+
+La entrega es local y acotada al main ADMIN. Las capturas anteriores se identifican como reconstruidas; la observación preexistente del encabezado CRM a 320 px y las condiciones del piloto real siguen documentadas en el acta. Esta sección actualiza solo el uso del Dashboard y conserva íntegramente el contenido previo del documento.

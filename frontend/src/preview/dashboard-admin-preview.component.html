@@ -1,0 +1,13 @@
+<aside class="review-toolbar" aria-label="Controles de revisión de maqueta"><div><strong>MAQUETA · FASE 2</strong><span>Datos sintéticos. Sin conexión a cuentas ni operación real.</span></div><label>Escenario<select aria-label="Escenario de revisión" [value]="scenario()" (change)="changeScenario($event)"><option value="normal">Sin movimiento</option><option value="activity">Operación mixta</option><option value="critical">Atención prioritaria</option><option value="unavailable">Datos no disponibles</option><option value="loading">Cargando</option></select></label></aside>
+<main id="main-content"><rf-admin-dashboard-view [model]="model()" (navigate)="open('navigation', $event)" (selectDate)="selectedDate.set($event)" (requestExport)="open('export')" (requestRoute)="open('route')"/></main>
+<dialog #previewDialog aria-labelledby="preview-dialog-title" class="preview-dialog">
+  <header><h2 id="preview-dialog-title">{{ dialogMode() === 'export' ? 'Reporte de servicios del período' : dialogMode() === 'route' ? 'Esquema de ruta · versión 3' : 'Acceso del Dashboard' }}</h2><button type="button" aria-label="Cerrar vista de revisión" (click)="close()"><rf-dashboard-icon name="close"/></button></header>
+  @if (dialogMode() === 'export') {
+    <p>Período de ejemplo: {{ selectedDate() }} · America/Lima.</p><p>La exportación prevista incluye servicios y sus resultados. No incluye flota, conductores, incidencias, avisos ni el esquema de ruta.</p><p class="review-note">Esta maqueta no emite reportes ni descarga archivos. La conexión a las emisiones canónicas corresponde a las fases siguientes.</p><div class="format-list"><span>CSV</span><span>Excel</span><span>PDF</span></div>
+  } @else if (dialogMode() === 'route') {
+    <p>Ruta de ejemplo · paradas registradas del escenario sintético.</p><rf-dashboard-route-viewer [route]="model().route"/><p class="review-note">Esquema ilustrativo. No muestra posiciones ni desplazamientos de vehículos.</p>
+  } @else {
+    <p>En la integración, este control abrirá el módulo correspondiente dentro del CRM.</p><p>Destino previsto: <code>{{ destination() }}</code></p><p class="review-note">La vista de revisión permanece aislada y no inicia una sesión en la plataforma.</p>
+  }
+  <footer><button type="button" (click)="close()">Volver a la maqueta</button></footer>
+</dialog>

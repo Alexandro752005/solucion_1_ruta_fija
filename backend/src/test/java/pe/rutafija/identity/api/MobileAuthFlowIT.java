@@ -185,7 +185,8 @@ class MobileAuthFlowIT extends NativePostgresIntegrationTest {
 
     @Test
     void linkedDriverGetsNativeSessionWithoutBrowserCookieAndWithBoundClaims() throws Exception {
-        MvcResult login = mobileLogin("mobile-login-correlation");
+        String correlationId=UUID.randomUUID().toString();
+        MvcResult login = mobileLogin(correlationId);
         JsonNode body = json(login);
         String accessToken = body.path("accessToken").asText();
 
@@ -210,7 +211,7 @@ class MobileAuthFlowIT extends NativePostgresIntegrationTest {
                 .filter(event -> "MOBILE_LOGIN_SUCCESS".equals(event.getAction()))
                 .findFirst()
                 .orElseThrow();
-        assertThat(auditEvent.getCorrelationId()).isEqualTo("mobile-login-correlation");
+        assertThat(auditEvent.getCorrelationId()).isEqualTo(correlationId);
         assertThat(auditEvent.getMetadata().toString()).doesNotContain(body.path("refreshToken").asText());
     }
 
@@ -286,15 +287,27 @@ class MobileAuthFlowIT extends NativePostgresIntegrationTest {
     }
 
     @Test
-    void inactiveDriverCannotRefreshAndItsMobileFamilyIsRevoked() throws Exception {
+    void inactiveAccountCannotRefreshAndItsMobileFamilyIsRevoked() throws Exception {
         String refresh = json(mobileLogin("mobile-before-driver-deactivate")).path("refreshToken").asText();
-        driver.deactivate();
-        driverRepository.saveAndFlush(driver);
+        driverUser.deactivate();
+        userRepository.saveAndFlush(driverUser);
 
-        mobileRefreshForbidden(refresh, "DRIVER_INACTIVE", "mobile-driver-inactive");
-        driver.activate();
-        driverRepository.saveAndFlush(driver);
+        mobileRefreshFailure(refresh, "AUTH_TOKEN_INVALID", "mobile-account-inactive");
+        driverUser.activate();
+        userRepository.saveAndFlush(driverUser);
         mobileRefreshFailure(refresh, "AUTH_TOKEN_INVALID", "mobile-family-after-driver-inactive");
+    }
+
+    @Test
+    void inactiveDriverKeepsALimitedSessionWithoutRegainingOperationalAuthority() throws Exception {
+        String refresh=json(mobileLogin("mobile-before-operational-suspension")).path("refreshToken").asText();
+        driver.deactivate();driverRepository.saveAndFlush(driver);
+        JsonNode renewed=json(mobileRefresh(refresh,"mobile-limited-after-suspension"));
+        assertThat(renewed.path("accessScope").asText()).isEqualTo("INCORPORATION");
+        mockMvc.perform(get("/api/v1/mobile/me").header(HttpHeaders.AUTHORIZATION,"Bearer "+renewed.path("accessToken").asText()))
+                .andExpect(status().isOk());
+        mockMvc.perform(get("/api/v1/mobile/availability").header(HttpHeaders.AUTHORIZATION,"Bearer "+renewed.path("accessToken").asText()))
+                .andExpect(status().isForbidden()).andExpect(jsonPath("$.code").value("DRIVER_INACTIVE"));
     }
 
     @Test

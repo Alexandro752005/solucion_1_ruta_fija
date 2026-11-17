@@ -17,6 +17,7 @@ public class OperationStreamHandshakeInterceptor implements HandshakeInterceptor
 
     static final String ORGANIZATION_ID_ATTRIBUTE = "operation.organizationId";
     static final String USER_ID_ATTRIBUTE = "operation.userId";
+    static final String IDENTITY_ATTRIBUTE = "operation.identity";
 
     private final TrustedOriginValidator trustedOriginValidator;
     private final OperationStreamTicketService ticketService;
@@ -45,8 +46,9 @@ public class OperationStreamHandshakeInterceptor implements HandshakeInterceptor
                 .getFirst("ticket");
         return ticketService.consume(ticket)
                 .map(streamTicket -> {
-                    attributes.put(ORGANIZATION_ID_ATTRIBUTE, streamTicket.organizationId());
-                    attributes.put(USER_ID_ATTRIBUTE, streamTicket.userId());
+                    attributes.put(ORGANIZATION_ID_ATTRIBUTE, streamTicket.identity().organizationId());
+                    attributes.put(USER_ID_ATTRIBUTE, streamTicket.identity().userId());
+                    attributes.put(IDENTITY_ATTRIBUTE, streamTicket.identity());
                     return true;
                 })
                 .orElse(false);
@@ -70,5 +72,10 @@ public class OperationStreamHandshakeInterceptor implements HandshakeInterceptor
     static UUID userId(Map<String, Object> attributes) {
         Object value = attributes.get(USER_ID_ATTRIBUTE);
         return value instanceof UUID userId ? userId : null;
+    }
+
+    static OperationStreamIdentity identity(Map<String, Object> attributes) {
+        Object value = attributes.get(IDENTITY_ATTRIBUTE);
+        return value instanceof OperationStreamIdentity identity ? identity : null;
     }
 }

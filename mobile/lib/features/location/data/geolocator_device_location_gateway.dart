@@ -7,8 +7,12 @@ import '../domain/mobile_foreground_location.dart';
 /// One foreground fix per request, preserving the sensor's own capture timestamp.
 /// The service controller schedules requests; no background location service or stream is created.
 final class GeolocatorDeviceLocationGateway
-    implements MobileDeviceLocationGateway {
+    implements MobileDeviceLocationGateway, MobileDeviceLocationSignals {
   static const _captureTimeout = Duration(seconds: 15);
+
+  @override
+  Stream<bool> get locationServiceChanges => Geolocator.getServiceStatusStream()
+      .map((status) => status == ServiceStatus.enabled);
 
   @override
   Future<bool> isLocationServiceEnabled() {

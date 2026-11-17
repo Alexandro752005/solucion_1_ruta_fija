@@ -9,9 +9,7 @@ import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
-import pe.rutafija.identity.domain.AppUser;
-import pe.rutafija.identity.domain.UserRole;
-import pe.rutafija.identity.infrastructure.AppUserRepository;
+import org.springframework.web.socket.CloseStatus;
 import pe.rutafija.operation.application.OperationChangedEvent;
 
 import java.time.Instant;
@@ -29,21 +27,25 @@ public class OperationStreamBroadcaster {
     private static final Logger log = LoggerFactory.getLogger(OperationStreamBroadcaster.class);
 
     private final ObjectMapper objectMapper;
-    private final AppUserRepository userRepository;
+    private final OperationStreamAuthorization authorization;
     private final Map<UUID, ConcurrentMap<String, StreamSession>> sessionsByOrganization = new ConcurrentHashMap<>();
 
     public OperationStreamBroadcaster(
             ObjectMapper objectMapper,
-            AppUserRepository userRepository
+            OperationStreamAuthorization authorization
     ) {
         this.objectMapper = objectMapper;
-        this.userRepository = userRepository;
+        this.authorization = authorization;
     }
 
-    public void register(UUID organizationId, UUID userId, WebSocketSession session) {
+    void register(OperationStreamIdentity identity, WebSocketSession session) {
+        if (!authorization.allows(identity)) {
+            reject(identity.organizationId(), session);
+            return;
+        }
         sessionsByOrganization
-                .computeIfAbsent(organizationId, ignored -> new ConcurrentHashMap<>())
-                .put(session.getId(), new StreamSession(userId, session));
+                .computeIfAbsent(identity.organizationId(), ignored -> new ConcurrentHashMap<>())
+                .put(session.getId(), new StreamSession(identity, session));
     }
 
     public void unregister(UUID organizationId, WebSocketSession session) {
@@ -72,32 +74,34 @@ public class OperationStreamBroadcaster {
         }
         TextMessage message = new TextMessage(payload);
         for (StreamSession recipient : sessions.values()) {
-            if (canReceive(event, recipient.userId())) {
-                send(event.organizationId(), recipient.session(), message);
-            }
+            send(event.organizationId(), recipient, message);
         }
     }
 
     public void sendReady(UUID organizationId, WebSocketSession session) {
+        ConcurrentMap<String, StreamSession> sessions = sessionsByOrganization.get(organizationId);
+        StreamSession recipient = sessions == null ? null : sessions.get(session.getId());
+        if (recipient == null || recipient.session() != session) {
+            // Registration may already have rejected and closed the socket.
+            return;
+        }
         try {
             String payload = objectMapper.writeValueAsString(new StreamEvent("stream.ready", Instant.now(), Map.of()));
-            send(organizationId, session, new TextMessage(payload));
+            send(organizationId, recipient, new TextMessage(payload));
         } catch (JsonProcessingException exception) {
             log.warn("Unable to serialize operational WebSocket readiness event");
         }
     }
 
-    private boolean canReceive(OperationChangedEvent event, UUID userId) {
-        AppUser user = userRepository.findByIdAndOrganization_Id(userId, event.organizationId()).orElse(null);
-        if (user == null || !user.isActive() || !user.getOrganization().isActive()) {
-            return false;
-        }
-        return user.getRole() == UserRole.ADMIN;
-    }
-
-    private void send(UUID organizationId, WebSocketSession session, TextMessage message) {
+    private void send(UUID organizationId, StreamSession recipient, TextMessage message) {
+        WebSocketSession session = recipient.session();
         try {
             synchronized (session) {
+                // Revalidate readiness and every event; never adopt a newer login's version.
+                if (!authorization.allows(recipient.identity())) {
+                    reject(organizationId, session);
+                    return;
+                }
                 if (session.isOpen()) {
                     session.sendMessage(message);
                 }
@@ -112,7 +116,16 @@ public class OperationStreamBroadcaster {
         }
     }
 
-    private record StreamSession(UUID userId, WebSocketSession session) {
+    private void reject(UUID organizationId, WebSocketSession session) {
+        unregister(organizationId, session);
+        try {
+            session.close(CloseStatus.POLICY_VIOLATION);
+        } catch (Exception ignored) {
+            // A rejected authorization must never leak an event or a technical failure.
+        }
+    }
+
+    private record StreamSession(OperationStreamIdentity identity, WebSocketSession session) {
     }
 
     private record StreamEvent(String event, Instant occurredAt, Map<String, Object> data) {

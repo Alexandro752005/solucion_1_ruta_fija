@@ -8,9 +8,9 @@ import {
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { authInterceptor } from './auth.interceptor';
 import { AuthSessionService } from './auth-session.service';
@@ -46,6 +46,7 @@ describe('authInterceptor', () => {
       http?.verify();
     } finally {
       TestBed.resetTestingModule();
+      vi.restoreAllMocks();
     }
   });
 
@@ -111,6 +112,57 @@ describe('authInterceptor', () => {
     await expect(result).rejects.toBeTruthy();
     http.expectNone('/api/v1/auth/refresh');
     expect(session.status()).toBe('anonymous');
+  });
+
+  it.each(['GET', 'POST'] as const)('does not replay a previous %s under a different refreshed actor', async method => {
+    await completeAuthentication('access-expired');
+    const received: unknown[] = [];
+    const failed: unknown[] = [];
+    client.request(method, '/api/v1/context-protected', method === 'POST' ? { body: { synthetic: true } } : {})
+      .subscribe({ next: result => received.push(result), error: error => failed.push(error) });
+    http.expectOne('/api/v1/context-protected').flush({}, { status: 401, statusText: 'Unauthorized' });
+    http.expectOne('/api/v1/auth/refresh').flush({ ...loginResponse('new-context-token'), user: { ...currentUser(), id: 'another-actor' } });
+    await new Promise(resolve => globalThis.setTimeout(resolve, 0));
+    const retries = http.match('/api/v1/context-protected');
+    // Flush unexpected retries so a red run reports a behavioral assertion,
+    // without leaving the HTTP controller pending or creating any real command.
+    retries.forEach(request => request.flush({ syntheticUnexpectedReplay: true }));
+    expect(retries).toHaveLength(0);
+    expect(received).toEqual([]); expect(failed).toHaveLength(1);
+    expect(session.user()?.id).toBe('another-actor');
+  });
+
+  it('discards a late successful response issued for the previous organization', async () => {
+    await completeAuthentication('initial-token');
+    const received: unknown[] = []; const failed: unknown[] = [];
+    client.get('/api/v1/old-context-slow').subscribe({ next: result => received.push(result), error: error => failed.push(error) });
+    const slow = http.expectOne('/api/v1/old-context-slow');
+    const renewal = firstValueFrom(session.refreshAccessToken());
+    http.expectOne('/api/v1/auth/refresh').flush({ ...loginResponse('another-org-token'), user: { ...currentUser(), organizationId: 'another-organization' } });
+    await renewal;
+    slow.flush({ privateOldOrganization: true });
+    expect(received).toEqual([]); expect(failed).toHaveLength(1);
+  });
+
+  it.each(['same-actor', 'different-actor'] as const)('does not expire a new %s login when the previous request refresh fails', async actor => {
+    await completeAuthentication('previous-access');
+    const navigate = vi.spyOn(TestBed.inject(Router), 'navigate').mockResolvedValue(true);
+    const request = firstValueFrom(client.get('/api/v1/old-session-resource')).then(() => true, () => false);
+    http.expectOne('/api/v1/old-session-resource').flush({}, { status: 401, statusText: 'Unauthorized' });
+    const oldRefresh = http.expectOne('/api/v1/auth/refresh');
+    const nextUser = actor === 'same-actor' ? currentUser() : { ...currentUser(), id: 'new-user', organizationId: 'new-organization' };
+    const login = firstValueFrom(session.login({ email: 'synthetic@example.test', password: 'synthetic-test-only' }));
+    http.expectOne('/api/v1/auth/login').flush({ ...loginResponse('new-access'), user: nextUser });
+    http.expectOne('/api/v1/auth/me').flush(nextUser);
+    await login;
+    oldRefresh.flush({}, { status: 401, statusText: 'Unauthorized' });
+
+    await expect(request).resolves.toBe(false);
+    expect(session.isAuthenticated()).toBe(true);
+    expect(session.accessToken()).toBe('new-access');
+    expect(session.user()?.id).toBe(nextUser.id);
+    expect(navigate).not.toHaveBeenCalled();
+    navigate.mockRestore();
   });
 
   async function completeAuthentication(accessToken: string): Promise<void> {

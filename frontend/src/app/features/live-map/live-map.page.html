@@ -1,0 +1,54 @@
+<section class="live-map-page" aria-labelledby="live-map-title">
+  <header class="live-map-heading">
+    <div><div class="live-map-title-row"><h1 id="live-map-title">Mapa en vivo</h1><span class="connection" [class.connection--live]="data.connection() === 'connected' && data.state() === 'ready'"><span aria-hidden="true">●</span> {{ data.statusText() }}</span></div><p>Vehículos en servicio</p></div>
+    <div class="heading-actions"><span class="organization">▦ <span>Organización activa: <strong>{{ data.organization() }}</strong></span></span><a routerLink="/organization" class="organization-link">Organización</a><button type="button" (click)="data.refresh()" [disabled]="data.busy() || data.suspended()" [attr.aria-busy]="data.busy()"><span aria-hidden="true">↻</span> Refrescar</button></div>
+  </header>
+
+  @if (data.state() !== 'forbidden') {
+    <form class="filters" aria-label="Filtros del mapa en vivo" (submit)="$event.preventDefault(); data.refresh()">
+      <label class="group-filter"><span>Grupo operativo</span><select id="live-map-group" name="group" [ngModel]="data.groupId()" (ngModelChange)="data.setGroup($event)" [disabled]="data.suspended()"><option value="">Todos los grupos</option>@for (group of data.groups(); track group.id) { <option [value]="group.id">{{ group.name }}</option> }</select></label>
+      <label class="driver-filter"><span>Buscar conductor</span><input id="live-map-driver" name="driver" type="search" maxlength="100" placeholder="Buscar por nombre del conductor…" autocomplete="off" [ngModel]="data.driverName()" (ngModelChange)="data.setName($event)" [disabled]="data.suspended()" /></label>
+      <fieldset class="limit-filter"><legend>Vehículos visibles</legend><div class="limit-options">@for (limit of data.limits; track limit) { <button type="button" [attr.aria-pressed]="data.limit() === limit" [class.selected]="data.limit() === limit" (click)="data.setLimit(limit)" [disabled]="data.suspended()">{{ limit }}</button> }</div></fieldset>
+      <button class="clear-filter" type="button" (click)="data.clearFilters()" [disabled]="data.suspended()"><span aria-hidden="true">⌁</span> Limpiar filtros</button>
+      <p class="criteria"><span aria-hidden="true">ⓘ</span> <strong>Criterios de visualización:</strong> límite de {{ data.limit() }} unidades. Solo servicios iniciados y autorizados.</p>
+    </form>
+  }
+
+  <p class="cartography-notice">El mapa utiliza cartografía externa: el proveedor puede conocer tu IP y la zona visible. No recibe nombres, placas ni credenciales de Ruta Fija. <a href="https://operations.osmfoundation.org/policies/tiles/" target="_blank" rel="noopener noreferrer">Condiciones de las teselas</a>.</p>
+
+  @if (data.notice()) { <p class="state-banner" role="alert">{{ data.notice() }}</p> }
+  @if (data.state() === 'loading') { <p class="state-banner" role="status">Consultando las unidades autorizadas…</p> }
+  @if (data.state() === 'paused') { <p class="state-banner" role="status">La vista está en pausa. Las ubicaciones se retiraron y se volverán a consultar al regresar.</p> }
+  @if (data.state() === 'forbidden') { <section class="restricted"><h2>Consulta de ubicación restringida</h2><p>Se requiere una sesión ADMIN autorizada para esta organización.</p><a routerLink="/login">Revisar sesión</a></section> }
+
+  @if (data.state() !== 'forbidden' && !data.suspended()) {
+    <div class="workspace">
+      <section class="map-panel" aria-label="Vista cartográfica">
+        <div class="map-toolbar"><span><span aria-hidden="true">⛶</span> Vista de las unidades consultadas</span><button type="button" (click)="center()" [disabled]="!data.units().length"><span aria-hidden="true">◎</span> Centrar vista</button></div>
+        @if (cartography.tileUrl(); as tileUrl) {
+          <rf-live-map-canvas [units]="data.units()" [selectedId]="data.selectedId()" [centerRequest]="centerRequest()" [tileUrl]="tileUrl" (selectUnit)="select($event)" />
+        } @else { <div class="map-placeholder" role="status">{{ cartography.unavailable() ? 'La configuración cartográfica no está disponible. Puedes consultar la lista.' : 'Preparando cartografía…' }}</div> }
+        <div class="map-legend"><span><span class="legend-dot" aria-hidden="true"></span> Vigente: menos de 2 minutos</span><span><span class="legend-dot legend-dot--stale" aria-hidden="true"></span> Desactualizada: desde 2 minutos</span><span>{{ data.units().length }} unidades visibles</span></div>
+        <p class="map-footnote">Los puntos caducados se retiran. La ubicación no acredita todo el recorrido ni la llegada al terminal.</p>
+      </section>
+
+      <section class="unit-panel" aria-labelledby="live-map-unit-title" [attr.aria-busy]="data.busy()">
+        <header><div><h2 id="live-map-unit-title">Unidades visibles</h2><p>Selecciona un vehículo para ver su ubicación.</p></div><span class="unit-count"><strong>{{ data.units().length }}</strong> visibles</span></header>
+        <p class="sr-only" role="status" aria-live="polite">{{ data.units().length }} unidades autorizadas visibles.</p>
+        <ul class="unit-list">
+          @for (unit of data.units(); track unit.driverId) {
+            <li class="unit-card" [class.unit-card--selected]="data.selectedId() === unit.driverId" [class.unit-card--stale]="unit.freshness === 'STALE'">
+              <button type="button" class="unit-select" [attr.aria-pressed]="data.selectedId() === unit.driverId" (click)="select(unit.driverId)" [attr.aria-label]="'Seleccionar ' + unit.plate + ', ' + unit.driverName"><svg class="vehicle-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m5 10 1.5-5h11l1.5 5M4 10h16v8H4zM6 18v2m12-2v2M7 14h2m6 0h2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="unit-identity"><strong>{{ unit.plate }}</strong><span>{{ unit.driverName }}</span></span><span class="freshness" [class.freshness--stale]="unit.freshness === 'STALE'">{{ unit.freshness === 'CURRENT' ? 'Vigente' : 'Desactualizada' }}</span></button>
+              <dl><dt>Capturada:</dt><dd><time [attr.datetime]="unit.capturedAt">{{ unit.capturedAt | date:'dd/MM, HH:mm:ss':'-0500' }}</time></dd></dl>
+              <div class="unit-actions"><button type="button" (click)="center(unit.driverId)" [attr.aria-label]="'Centrar unidad ' + unit.plate"><span aria-hidden="true">◎</span> Centrar unidad</button><a routerLink="/vehicles" [attr.aria-label]="'Ver ficha de vehículo ' + unit.plate" [queryParams]="{search: unit.plate, vehicleId: unit.vehicleId}"><span aria-hidden="true">↗</span> Ver ficha</a></div>
+            </li>
+          } @empty {
+            <li class="empty-state"><span aria-hidden="true">◎</span><h3>{{ data.state() === 'ready' ? 'Sin unidades para mostrar' : 'Ubicaciones no disponibles' }}</h3><p>{{ data.state() === 'ready' ? 'No hay posiciones vigentes autorizadas con estos filtros. Una unidad sin ubicación no aparece en el mapa.' : 'Vuelve a consultar cuando la conexión y los permisos estén confirmados.' }}</p></li>
+          }
+        </ul>
+        <p class="list-help">Puedes recorrer las tarjetas con Tab y seleccionarlas con Enter. Horas de Lima (UTC−5).</p>
+      </section>
+    </div>
+  }
+  <footer class="live-map-footer">Ruta Fija CRM Operativo · Ubicación visible únicamente para tu organización durante servicios autorizados.</footer>
+</section>

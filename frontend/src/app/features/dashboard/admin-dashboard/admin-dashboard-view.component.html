@@ -1,0 +1,100 @@
+<section class="admin-dashboard" aria-label="Dashboard operativo del ADMIN" data-testid="admin-dashboard">
+  <header class="dashboard-header">
+    <div class="welcome"><p class="eyebrow">{{ fullDate() }}</p><h1>Hola, Administrador</h1><p class="subtitle">Estado operativo actual de <strong>{{ model().organization }}</strong>.</p></div>
+    <div class="header-controls">
+      <span class="session-badge"><span aria-hidden="true"></span>{{ model().sessionLabel }}</span>
+      <button class="toolbar-button" type="button" (click)="requestExport.emit()"><rf-dashboard-icon name="export"/>Exportar resumen</button>
+      <label class="date-control"><rf-dashboard-icon name="calendar"/><input type="date" aria-label="Fecha del resumen de operación e incidencias" [disabled]="model().dateContextAvailable === false" [value]="model().selectedDate" [max]="model().operationalDate" (change)="changeDate($event)"/></label>
+    </div>
+  </header>
+  @if (model().dateContextAvailable === false) { <p class="fine-print" role="status">Fecha de la organización no disponible. Los indicadores actuales conservan su propio corte.</p> }
+
+  <details class="priorities" [class.priorities--attention]="pending().length > 0 && prioritiesAvailable()" [class.priorities--unavailable]="!prioritiesCurrent()" [open]="pending().length > 0 || !prioritiesCurrent()">
+    <summary><rf-dashboard-icon name="shield"/><strong>Atención prioritaria</strong><span>{{ !prioritiesAvailable() ? 'Información no disponible' : !prioritiesCurrent() ? 'Datos del corte anterior' : pending().length ? pending().length + ' colas con pendientes' : 'Sin prioridades operativas pendientes' }}</span><span class="priority-detail">Ver detalle</span></summary>
+    @if (prioritiesAvailable()) {
+      <ol class="priority-list">@for (priority of model().priorities; track priority.code) { <li><button type="button" (click)="navigate.emit(priority.destination)"><span>{{ priority.label }}</span><strong>{{ priority.count }}</strong><rf-dashboard-icon name="arrow"/></button></li> }</ol>
+      <p class="fine-print">Las colas pueden coincidir. Sus cantidades no se suman.</p>
+      @if (!prioritiesCurrent()) { <p class="priority-warning">Datos del corte anterior. Las prioridades actuales no están confirmadas.</p> }
+    } @else { <p class="priority-warning">No es posible confirmar las prioridades. No se interpretan como cero.</p> }
+  </details>
+
+  <section class="metric-grid" aria-label="Estado operativo actual">
+    @for (metric of model().metrics; track metric.id) {
+      <rf-dashboard-metric [metric]="metric" (navigate)="navigate.emit($event)"/>
+    }
+  </section>
+
+  <div class="panel-grid">
+    <section class="dashboard-panel" aria-labelledby="fleet-heading" data-panel="DA-P01">
+      <header class="panel-heading"><div><h2 id="fleet-heading"><rf-dashboard-icon name="fleet"/>Estado de la flota</h2><p>Disponibilidad registrada · {{ model().timestamps?.availability ?? 'Ahora' }}</p></div><button class="panel-link" type="button" (click)="navigate.emit('/vehicles')">Ver flota <span aria-hidden="true">→</span></button></header>
+      <rf-dashboard-donut [model]="model().fleet"/>
+    </section>
+
+    <section class="dashboard-panel" aria-labelledby="operation-heading" data-panel="DA-P02">
+      <header class="panel-heading"><div><h2 id="operation-heading"><rf-dashboard-icon name="calendar"/>Resumen de operación</h2><p>Servicios del grupo · {{ selectedDateLabel() }}</p></div><button class="panel-link" type="button" (click)="navigate.emit('/reports')">Ver reportes <span aria-hidden="true">→</span></button></header>
+      <rf-dashboard-donut [model]="model().operation"/>
+      @if (model().timestamps?.operation) { <p class="fine-print">{{ model().timestamps?.operation }}</p> }
+      @if (model().coverageNotice) { <p class="fine-print">{{ model().coverageNotice }}</p> }
+    </section>
+
+    <section class="dashboard-panel route-panel" aria-labelledby="route-heading" data-panel="DA-P03">
+      <header class="panel-heading"><div><h2 id="route-heading"><rf-dashboard-icon name="map"/>Esquema de ruta</h2><p>Trazado registrado, sin seguimiento personal</p></div><button class="panel-link" type="button" (click)="navigate.emit('/routes')">Ver rutas <span aria-hidden="true">→</span></button></header>
+      @if (model().routeCatalog; as catalog) { <rf-dashboard-route-picker [catalog]="catalog" (select)="selectRoute.emit($event)" (page)="routePage.emit($event)" (open)="requestRoute.emit()" (retry)="retryRoutes.emit()"/> }
+      @if (model().route.state === 'loading') { <p class="panel-state" role="status">Consultando ruta…</p> }
+      @else if (!dataVisible(model().route.state)) { <p class="panel-state panel-state--error" role="status">Ruta no disponible.</p> }
+      @else if (routeSegments().length === 0) { <p class="panel-state">{{ model().route.notice || 'La ruta no tiene coordenadas suficientes.' }}</p> }
+      @else {
+        <button class="route-preview" type="button" (click)="requestRoute.emit()" [attr.aria-label]="'Ampliar esquema de ' + model().route.name">
+          <svg viewBox="0 0 340 150" role="img" [attr.aria-label]="model().route.name + ', versión ' + model().route.revision + '. Esquema de paradas, sin ubicación de vehículos.'">
+            <defs><pattern id="dashboard-route-grid" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" fill="#c9d6e6"/></pattern></defs>
+            <rect width="340" height="150" fill="url(#dashboard-route-grid)"/>
+            @for (segment of routeSegments(); track $index) { <polyline [attr.points]="segment" fill="none" stroke="#3b82f6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/> }
+            @for (point of model().route.points; track point.key; let first = $first; let last = $last) {
+              <circle [attr.cx]="point.x" [attr.cy]="point.y" [attr.fill]="first ? '#b45309' : last ? '#059669' : '#2563eb'" r="5.5" stroke="white" stroke-width="2"/>
+              <text [attr.x]="point.x" [attr.y]="point.y > 75 ? point.y - 14 : point.y + 23" [attr.text-anchor]="first ? 'start' : last ? 'end' : 'middle'">{{ point.label }}</text>
+            }
+          </svg>
+          <span class="expand-map" aria-hidden="true">↗</span>
+        </button>
+        <div class="route-caption"><span><i aria-hidden="true"></i>{{ model().route.name }} · v{{ model().route.revision }}</span><span>Ruta registrada</span></div>
+        @if (model().timestamps?.route) { <p class="fine-print">{{ model().timestamps?.route }}</p> }
+        @if (model().route.state !== 'ready') { <p class="fine-print">Trazado del corte anterior.</p> }
+      }
+    </section>
+
+    <section class="dashboard-panel" aria-labelledby="incidents-heading" data-panel="DA-P04">
+      <header class="panel-heading"><div><h2 id="incidents-heading"><rf-dashboard-icon name="alert"/>Incidencias por estado</h2><p>Reportadas el {{ selectedDateLabel() }} · Estado consultado</p></div><button class="panel-link" type="button" (click)="navigate.emit('/incidents')">Ver incidencias <span aria-hidden="true">→</span></button></header>
+      <rf-dashboard-donut [model]="model().incidents"/>
+      @if (model().timestamps?.incidents) { <p class="fine-print">{{ model().timestamps?.incidents }}</p> }
+    </section>
+
+    <section class="dashboard-panel" aria-labelledby="drivers-heading" data-panel="DA-P05">
+      <header class="panel-heading"><div><h2 id="drivers-heading"><rf-dashboard-icon name="driver"/>Conductores</h2><p>Últimos registrados · Ahora</p></div><button class="panel-link" type="button" (click)="navigate.emit('/drivers')">Ver conductores <span aria-hidden="true">→</span></button></header>
+      @if (model().driversState === 'loading') { <p class="panel-state" role="status">Consultando conductores…</p> }
+      @else if (!dataVisible(model().driversState)) { <p class="panel-state panel-state--error" role="status">Conductores no disponibles.</p> }
+      @else {
+        <ul class="driver-list">@for (driver of model().drivers; track driver.code) {
+          <li><span [class]="'driver-dot status-' + (driver.tone ?? 'green')" aria-hidden="true"></span><div><strong [title]="driver.code" [attr.aria-label]="driver.code">{{ driverLabel(driver.code) }}</strong><span>{{ driver.active ? 'Activo' : 'Inactivo' }} · referencia de cuenta</span></div><span [class]="'driver-status status-' + (driver.tone ?? 'green')">{{ driver.status }}</span><button class="row-action" type="button" [attr.aria-label]="'Ver conductores. Referencia ' + driver.code" (click)="navigate.emit('/drivers')"><rf-dashboard-icon name="arrow"/></button></li>
+        } @empty { <li class="list-empty">No hay conductores registrados.</li> }</ul>
+        <p class="fine-print">La disponibilidad no sustituye la habilitación vigente.</p>
+        @if (model().driverTotal != null) { <p class="fine-print">Mostrando {{ model().drivers.length }} de {{ model().driverTotal }} registrados.</p> }
+        @if (model().driversState !== 'ready') { <p class="fine-print">Datos del corte anterior.</p> }
+      }
+    </section>
+
+    <section class="dashboard-panel" aria-labelledby="notices-heading" data-panel="DA-P06">
+      <header class="panel-heading"><div><h2 id="notices-heading"><rf-dashboard-icon name="bell"/>Alertas y avisos</h2><p>Bandeja personal y prioridades operativas</p></div><button class="panel-link" type="button" (click)="navigate.emit('/notices')">Ver bandeja <span aria-hidden="true">→</span></button></header>
+      @if (model().noticesState === 'loading') { <p class="panel-state" role="status">Consultando avisos…</p> }
+      @else if (!dataVisible(model().noticesState)) { <p class="panel-state panel-state--error" role="status">No es posible confirmar los pendientes.</p> }
+      @else if (showEmptyNotice()) {
+        <div class="notice-empty"><span class="notice-check"><rf-dashboard-icon name="check"/></span><strong>Sin prioridades ni avisos</strong><p>En esta consulta de tu organización.</p></div>
+      } @else {
+        <ul class="notice-list">@for (notice of model().notices; track notice.id) { <li><span class="notice-dot" aria-hidden="true"></span><div><strong>{{ notice.title }}</strong><p>{{ notice.reference }}</p><span>{{ notice.time }} · {{ notice.read ? 'Lectura confirmada' : 'Sin lectura confirmada' }}</span></div></li> } @empty { <li class="list-empty">{{ prioritiesCurrent() ? 'Revisa la atención prioritaria al inicio del panel.' : 'Sin avisos en esta consulta. Las prioridades actuales no están confirmadas.' }}</li> }</ul>
+        <p class="fine-print">Consultar no confirma la lectura de los avisos.</p>
+        @if (model().noticesState !== 'ready') { <p class="fine-print">Avisos del corte anterior.</p> }
+      }
+    </section>
+  </div>
+
+  <rf-dashboard-secondary [model]="model()" (navigate)="navigate.emit($event)" (requestActivity)="requestActivity.emit()"/>
+</section>

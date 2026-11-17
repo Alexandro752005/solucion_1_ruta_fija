@@ -5,7 +5,7 @@ $ErrorActionPreference='Stop'
 $repoRoot=[IO.Path]::GetFullPath((Split-Path -Parent $PSScriptRoot))
 $backend=Join-Path $repoRoot 'backend'
 $names=@(
- 'AdminTermsContentHashTest','AdminTermsDocumentTest','AdminTermsServiceTest','AdminTermsGateAuthorizationManagerTest','ApiOriginValidationFilterTest',
+ 'AdminTermsContentHashTest','AdminTermsDocumentTest','AdminTermsServiceTest','AdminTermsGateAuthorizationManagerTest','ApiOriginValidationFilterTest','DashboardContextTest',
  'ApprovedAdminTermsPublicationTest','AuditChangesTest','AuditMetadataPolicyTest','AuditOutcomeTest',
  'AuthenticatedBackupArchiveTest','AvailabilityErrorHttpTest','AvailabilityMonitorCliTest','AvailabilityMonitorHttpTest',
  'AvailabilityPolicyTest','BackupCliGuardTest','ConductorRecoveryRequestTest','CorrelationIdFilterTest',

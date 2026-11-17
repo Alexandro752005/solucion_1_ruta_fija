@@ -27,7 +27,6 @@ import java.security.KeyPairGenerator;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.security.SecureRandom;
 import java.security.Signature;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
@@ -50,7 +49,6 @@ import java.util.UUID;
 public final class SuperAdminRecoveryCli {
 
     private static final String KEYSTORE_ALIAS = "super-admin-recovery-ed25519-pkcs8";
-    private static final SecureRandom RANDOM = new SecureRandom();
     private static final Set<AclEntryPermission> PRIVATE_FILE_ACL = EnumSet.allOf(AclEntryPermission.class);
 
     private SuperAdminRecoveryCli() {

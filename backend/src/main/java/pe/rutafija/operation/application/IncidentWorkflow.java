@@ -15,7 +15,6 @@ import pe.rutafija.operation.domain.*;
 import pe.rutafija.operation.infrastructure.IncidentRepository;
 import pe.rutafija.shared.exception.*;
 import pe.rutafija.shared.security.CurrentUserService;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.sql.Timestamp;
 import java.time.Clock;

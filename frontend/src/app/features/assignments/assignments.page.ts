@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectorRef, ElementRef, afterEveryRender, viewChild } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, ParamMap, Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { finalize, map } from 'rxjs';
+import { filter, finalize, map, withLatestFrom } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { ApiErrorService } from '../../core/api/api-error.service';
@@ -53,6 +54,12 @@ export class AssignmentsPage {
   private readonly session = inject(AuthSessionService);
   private readonly realtime = inject(OperationRealtimeService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly router = inject(Router);
+  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly changeDetector = inject(ChangeDetectorRef);
+  private readonly assignmentForm = viewChild<ElementRef<HTMLFormElement>>('assignmentForm');
+  private shortcutConsumed = false;
+  private shortcutFocusRequested = false;
   private readonly routesApi = inject(RoutesApiService);
   private readonly serviceTypesApi=inject(ServiceTypesApiService);
   private readonly servicesApi=inject(ScheduledServicesApiService);
@@ -97,6 +104,7 @@ export class AssignmentsPage {
   readonly loadingEligibleVehicles = signal(false);
   readonly error = signal<UiError | null>(null);
   readonly notice = signal<string | null>(null);
+  readonly shortcutNotice = signal<string | null>(null);
   readonly organizationName = computed(
     () => this.session.user()?.organizationName?.trim() || 'Organizaci\u00f3n asignada',
   );
@@ -138,6 +146,53 @@ export class AssignmentsPage {
       this.load();
     });
     this.destroyRef.onDestroy(() => this.realtime.disconnect());
+    // Parameter emissions alone are not authorization to open the form.
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      withLatestFrom(this.activatedRoute.queryParamMap),
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe(([, parameters]) => this.consumeAssignmentShortcut(parameters));
+    afterEveryRender(() => {
+      const form = this.assignmentForm()?.nativeElement;
+      if (!this.shortcutFocusRequested || !this.formOpen() || !form?.isConnected) return;
+      this.shortcutFocusRequested = false;
+      // Run after the shared modal's initial focus; preserve focus in a field
+      // when the shortcut targets an already open form.
+      if (!form.contains(document.activeElement)) {
+        const firstControl = form.querySelector<HTMLElement>(
+          'select:not([disabled]), input:not([disabled]):not([readonly]), textarea:not([disabled]), button:not([disabled])',
+        );
+        (firstControl ?? form).focus();
+      }
+    });
+  }
+
+  private consumeAssignmentShortcut(parameters: ParamMap): void {
+    if (parameters.get('action') !== 'new' || parameters.getAll('action').length !== 1) {
+      this.shortcutConsumed = false;
+      return;
+    }
+    if (this.shortcutConsumed) return;
+    this.shortcutConsumed = true;
+    this.shortcutNotice.set(null);
+    if (!this.formOpen()) this.startCreate();
+    if (this.formOpen()) {
+      this.shortcutFocusRequested = true;
+      this.changeDetector.markForCheck();
+    } else {
+      this.shortcutNotice.set('El formulario no se abrió porque hay una operación pendiente o un servicio bloqueado. Se conserva el estado actual; vuelve a solicitarlo cuando corresponda.');
+    }
+    // Removing the marker must not replay it, alter other query parameters,
+    // or send a business command, even when the form could not open.
+    void this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: { action: null },
+      queryParamsHandling: 'merge',
+      preserveFragment: true,
+      replaceUrl: true,
+    }).catch(() => {
+      this.shortcutNotice.set('No se pudo retirar el acceso rápido de la dirección. La intención ya fue atendida; no se repetirá automáticamente.');
+    });
   }
 
   load(page = this.page()): void {

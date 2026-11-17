@@ -10,7 +10,6 @@ import pe.rutafija.fleet.infrastructure.*;
 import pe.rutafija.identity.domain.*;
 import pe.rutafija.invitation.application.InvitationCodeHasher;
 import pe.rutafija.onboarding.application.*;
-import pe.rutafija.onboarding.api.dto.ConductorDocumentaryContract.*;
 import pe.rutafija.onboarding.infrastructure.ConductorDocumentaryRepository;
 import pe.rutafija.qualification.api.QualificationContract.*;
 import pe.rutafija.qualification.infrastructure.QualificationRepository;

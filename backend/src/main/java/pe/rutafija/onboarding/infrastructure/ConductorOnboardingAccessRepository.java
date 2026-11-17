@@ -127,6 +127,18 @@ public class ConductorOnboardingAccessRepository {
     }
 
     public void revokeToken(String tokenHash, Instant now) {
+        // V49's retention trigger also locks these parents. Acquire them before
+        // the token row, matching documentary mutations and provisioning.
+        jdbc.query("""
+                select identity.id from conductor_onboarding_identity identity
+                  join conductor_onboarding_access_token token on token.identity_id = identity.id
+                 where token.token_hash = ? for update of identity
+                """, (rs, row) -> rs.getObject("id", UUID.class), tokenHash);
+        jdbc.query("""
+                select account.id from app_user account
+                  join conductor_onboarding_access_token token on token.linked_user_id = account.id
+                 where token.token_hash = ? for update of account
+                """, (rs, row) -> rs.getObject("id", UUID.class), tokenHash);
         jdbc.update("""
                 update conductor_onboarding_access_token
                    set revoked_at = greatest(?, created_at)

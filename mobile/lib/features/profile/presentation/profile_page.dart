@@ -8,7 +8,12 @@ import '../../preferences/domain/mobile_preferences.dart';
 import '../../preferences/presentation/mobile_preferences_panel.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({required this.driverGateway, this.preferences, this.reportsAvailable=false, super.key});
+  const ProfilePage({
+    required this.driverGateway,
+    this.preferences,
+    this.reportsAvailable = false,
+    super.key,
+  });
 
   final MobileDriverGateway driverGateway;
   final MobilePreferencesController? preferences;
@@ -76,9 +81,18 @@ class _ProfilePageState extends State<ProfilePage> {
             padding: const EdgeInsets.all(20),
             children: [
               DriverProfileDetails(profile: snapshot.requireData),
-              const Text('La identidad, el correo y los documentos solo cambian por sus flujos de revisión. No se editan aquí.'),
-              if(widget.preferences case final preferences?)MobilePreferencesPanel(controller:preferences),
-              if(widget.reportsAvailable)OutlinedButton.icon(key:const Key('profile-reports'),onPressed:()=>Navigator.of(context).pushNamed('/reports'),icon:const Icon(Icons.summarize_outlined),label:const Text('Mis resultados y reportes')),
+              const Text(
+                'La identidad, el correo y los documentos solo cambian por sus flujos de revisión. No se editan aquí.',
+              ),
+              if (widget.preferences case final preferences?)
+                MobilePreferencesPanel(controller: preferences),
+              if (widget.reportsAvailable)
+                OutlinedButton.icon(
+                  key: const Key('profile-reports'),
+                  onPressed: () => Navigator.of(context).pushNamed('/reports'),
+                  icon: const Icon(Icons.summarize_outlined),
+                  label: const Text('Mis resultados y reportes'),
+                ),
               const SizedBox(height: 20),
               Card(
                 child: Padding(
@@ -89,7 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       const Text('Ubicación actual'),
                       const SizedBox(height: 8),
                       const Text(
-                        'Puede compartir un único punto solo mientras usa la aplicación. ',
+                        'La ubicación del servicio se comparte con su consentimiento y la aplicación en primer plano. ',
                       ),
                       const SizedBox(height: 12),
                       FilledButton.icon(

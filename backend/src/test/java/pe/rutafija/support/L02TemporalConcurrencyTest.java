@@ -134,7 +134,7 @@ class L02TemporalConcurrencyTest {
     private static void assertTarget(Connection c)throws SQLException {
         assertThat(scalar(c,"select current_database()")).isEqualTo("ruta_fija_test");
         assertThat(scalar(c,"select current_user")).isEqualTo("rf_test");
-        assertThat(scalar(c,"select version from flyway_schema_history where success and version is not null order by installed_rank desc limit 1")).isIn("28","29","30","31","32","32");
+        assertThat(scalar(c,"select version from flyway_schema_history where success and version is not null order by installed_rank desc limit 1")).isIn(IsolatedAuditSpecializedPostgres.enabled()?new String[]{"51"}:new String[]{"28","29","30","31","32","32"});
     }
     private static void assertNoHumanMarker() {
         Path cwd=Path.of(System.getProperty("user.dir")).toAbsolutePath().normalize();

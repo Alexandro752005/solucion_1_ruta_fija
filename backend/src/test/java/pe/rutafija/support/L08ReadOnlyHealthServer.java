@@ -1,6 +1,5 @@
 package pe.rutafija.support;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.Filter;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.boot.SpringApplication;
@@ -29,7 +28,6 @@ import java.util.Map;
 /** Test-only actual Spring API. Health reads only; no accounts, schedulers, mail or schema changes. */
 public final class L08ReadOnlyHealthServer {
     static final int PORT = 4312;
-    private static final ObjectMapper JSON = new ObjectMapper();
     private L08ReadOnlyHealthServer() { }
 
     public static void main(String[] args) {

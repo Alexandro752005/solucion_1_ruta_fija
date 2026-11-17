@@ -2,12 +2,10 @@ package pe.rutafija.support;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zaxxer.hikari.HikariDataSource;
 import jakarta.servlet.Filter;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.core.Ordered;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.StandardEnvironment;
@@ -16,7 +14,6 @@ import pe.rutafija.RutaFijaApplication;
 import pe.rutafija.backup.DatabaseIntegrity;
 import pe.rutafija.identity.application.OtpEmailSender;
 
-import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.URI;
@@ -32,14 +29,12 @@ import java.sql.DriverManager;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HexFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.zip.ZipFile;
 import java.util.UUID;
 import java.util.Set;
 import java.util.HashSet;
@@ -181,19 +176,6 @@ public final class L08Rest03BusinessTrial {
         try (var q = connection.createStatement(); var row = q.executeQuery("select bool_and(success),count(*) filter(where version is not null) from flyway_schema_history")) {
             require(row.next() && row.getBoolean(1) && row.getInt(2) == 50, "50_SUCCESSFUL_VERSIONED_MIGRATIONS_ONLY");
         }
-    }
-
-    private static Map<String, Object> health(HttpClient client, String group, List<String> components) throws Exception {
-        var response = client.send(HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + PORT + "/actuator/health/" + group))
-            .timeout(Duration.ofSeconds(8)).GET().build(), HttpResponse.BodyHandlers.ofInputStream());
-        byte[] bytes;
-        try (InputStream body = response.body()) { bytes = body.readNBytes(4097); }
-        require(response.statusCode() == 200 && bytes.length <= 4096, "BOUNDED_HTTP_HEALTH_200");
-        JsonNode json = JSON.readTree(bytes); require("UP".equals(json.path("status").asText()), "HEALTH_UP");
-        var actual = new ArrayList<String>(); json.path("components").fieldNames().forEachRemaining(actual::add);
-        require(actual.size() == components.size() && actual.containsAll(components), "EXACT_HEALTH_COMPOSITION");
-        for (String component : components) require("UP".equals(json.path("components").path(component).path("status").asText()), "HEALTH_COMPONENT_UP");
-        return Map.of("httpStatus", response.statusCode(), "status", "UP", "components", components, "observedAt", Instant.now().toString());
     }
 
     private static void assertPortFree() throws Exception {

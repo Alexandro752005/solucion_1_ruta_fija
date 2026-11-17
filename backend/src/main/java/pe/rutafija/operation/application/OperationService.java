@@ -48,10 +48,8 @@ public class OperationService {
     );
 
     private final AssignmentRepository assignmentRepository;
-    private final DriverCurrentLocationStore currentLocationStore;
     private final DriverRepository driverRepository;
     private final VehicleRepository vehicleRepository;
-    private final DriverVehicleLinkRepository driverVehicleLinkRepository;
     private final CurrentUserService currentUserService;
     private final AuditService auditService;
     private final OperationEventPublisher eventPublisher;
@@ -84,10 +82,8 @@ public class OperationService {
     ) {
         this.assignmentRepository = assignmentRepository;
         this.services = services;
-        this.currentLocationStore = currentLocationStore;
         this.driverRepository = driverRepository;
         this.vehicleRepository = vehicleRepository;
-        this.driverVehicleLinkRepository = driverVehicleLinkRepository;
         this.currentUserService = currentUserService;
         this.auditService = auditService;
         this.eventPublisher = eventPublisher;
@@ -419,16 +415,6 @@ public class OperationService {
                     HttpStatus.BAD_REQUEST,
                     ErrorCode.VALIDATION_ERROR,
                     "El plazo de respuesta debe ser posterior al reloj del servidor y anterior al inicio programado"
-            );
-        }
-    }
-
-    private void ensureVehicleOperationalForReservation(Vehicle vehicle) {
-        if (!vehicle.isActive() || vehicle.getStatus() != VehicleStatus.DISPONIBLE) {
-            throw new ApplicationException(
-                    HttpStatus.BAD_REQUEST,
-                    ErrorCode.VEHICLE_NOT_ELIGIBLE,
-                    "El vehículo debe estar activo y DISPONIBLE para reservar la asignación"
             );
         }
     }

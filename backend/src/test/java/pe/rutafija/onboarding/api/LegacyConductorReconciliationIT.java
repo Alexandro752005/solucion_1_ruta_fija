@@ -1,5 +1,7 @@
 package pe.rutafija.onboarding.api;
 
+import pe.rutafija.support.IsolatedAuditSpecializedPostgres;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
@@ -98,6 +100,7 @@ class LegacyConductorReconciliationIT {
 
     @DynamicPropertySource
     static void isolatedDatabase(DynamicPropertyRegistry registry) {
+        if(IsolatedAuditSpecializedPostgres.enabled()) {IsolatedAuditSpecializedPostgres.register(registry);return;}
         if (!URL.equals(required("RF_LEGACY_QA_URL"))) {
             throw new IllegalStateException("EXACT_DEDICATED_LEGACY_QA_DATABASE_REQUIRED");
         }
@@ -161,12 +164,13 @@ class LegacyConductorReconciliationIT {
 
     @BeforeEach
     void syntheticFixture() throws Exception {
-        assertThat(jdbc.queryForObject("select current_database()", String.class)).isEqualTo("rf_legacy_qa_20261023");
+        assertThat(jdbc.queryForObject("select current_database()", String.class)).isEqualTo(IsolatedAuditSpecializedPostgres.databaseName("rf_legacy_qa_20261023"));
         assertThat(jdbc.queryForObject("select current_user", String.class)).isEqualTo("rf_app");
         assertThat(environment.getProperty("app.security.person-identity-gate.enabled", Boolean.class)).isTrue();
         assertThat(environment.getProperty("app.security.admin-terms-gate.enabled", Boolean.class)).isTrue();
-        assertThat(jdbc.queryForObject("select count(*) from flyway_schema_history where success", Integer.class)).isEqualTo(50);
-        assertThat(jdbc.queryForObject("select count(*) from flyway_schema_history where version is null or not success", Integer.class)).isZero();
+        assertThat(jdbc.queryForObject("select count(*) from flyway_schema_history where success and version is not null", Integer.class)).isEqualTo(IsolatedAuditSpecializedPostgres.enabled()?51:50);
+        assertThat(jdbc.queryForObject("select count(*) from flyway_schema_history where not success", Integer.class)).isZero();
+        assertThat(jdbc.queryForObject("select count(*) from flyway_schema_history where version is null", Integer.class)).isEqualTo(IsolatedAuditSpecializedPostgres.enabled()?1:0);
         clock.set(Instant.now().truncatedTo(ChronoUnit.MICROS));
         String suffix = UUID.randomUUID().toString();
         organization = organizations.saveAndFlush(Organization.active("Synthetic Legacy Organization " + suffix, "Synthetic Legacy", "America/Lima"));

@@ -10,14 +10,7 @@ import 'package:ruta_fija_conductor/features/qualification/domain/mobile_qualifi
 
 import '../support/mobile_fakes.dart';
 
-const destinations = [
-  'home',
-  'availability',
-  'assignments',
-  'incidents',
-  'announcements',
-  'profile',
-];
+const destinations = ['home', 'availability', 'assignments', 'map', 'more'];
 
 Future<RutaFijaDependencies> startApp(
   WidgetTester tester, {
@@ -96,7 +89,7 @@ void main() {
   final histories = [
     (
       name: 'incidents',
-      index: 3,
+      index: 4,
       menu: 'Mis incidencias e historial',
       title: 'Mis incidencias',
     ),
@@ -112,13 +105,19 @@ void main() {
       '${history.name} preserves all bottom destinations and can leave through the bar',
       (tester) async {
         await startApp(tester);
-        await tester.tap(find.byKey(Key('nav-${history.name}')));
+        await tester.tap(find.byKey(const Key('nav-more')));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(Key('more-${history.name}')));
         await tester.pumpAndSettle();
         expectNavigation(tester, history.index);
-        await tester.tap(find.byKey(const Key('nav-profile')));
+        await tester.tap(find.byKey(const Key('nav-more')));
         await tester.pumpAndSettle();
-        expectNavigation(tester, 5);
-        await tester.tap(find.byKey(Key('nav-${history.name}')));
+        await tester.tap(find.byKey(const Key('more-profile')));
+        await tester.pumpAndSettle();
+        expectNavigation(tester, 4);
+        await tester.tap(find.byKey(const Key('nav-more')));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(Key('more-${history.name}')));
         await tester.pumpAndSettle();
         expectNavigation(tester, history.index);
         await tester.tap(find.byKey(const Key('nav-home')));

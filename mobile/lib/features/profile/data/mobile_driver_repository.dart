@@ -19,9 +19,15 @@ abstract interface class MobileDriverGateway {
 }
 
 final class MobileDriverRepository implements MobileDriverGateway {
-  MobileDriverRepository(this._apiClient);
+  MobileDriverRepository(
+    this._apiClient, {
+    this.onConsentChanged,
+    this.onLocationCleared,
+  });
 
   final MobileApiClient _apiClient;
+  final void Function(bool)? onConsentChanged;
+  final void Function()? onLocationCleared;
 
   @override
   Future<MobileDriverProfile> profile() async {
@@ -54,10 +60,13 @@ final class MobileDriverRepository implements MobileDriverGateway {
 
   @override
   Future<MobileDriverProfile> changeLocationConsent(bool consent) async {
+    if (!consent) onConsentChanged?.call(false);
     final response = await _apiClient.putObject('mobile/location/consent', {
       'consent': consent,
     });
-    return MobileDriverProfile.fromJson(response);
+    final profile = MobileDriverProfile.fromJson(response);
+    onConsentChanged?.call(profile.locationConsent);
+    return profile;
   }
 
   @override
@@ -71,6 +80,7 @@ final class MobileDriverRepository implements MobileDriverGateway {
 
   @override
   Future<void> clearCurrentLocation() {
+    onLocationCleared?.call();
     return _apiClient.deleteNoContent('mobile/location/current');
   }
 }

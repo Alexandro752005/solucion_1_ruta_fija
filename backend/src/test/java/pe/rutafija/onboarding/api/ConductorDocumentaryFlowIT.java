@@ -26,8 +26,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.support.TransactionTemplate;
 import pe.rutafija.fleet.domain.TransportGroup;
 import pe.rutafija.fleet.infrastructure.TransportGroupRepository;
 import pe.rutafija.identity.application.OtpEmailSender;
@@ -39,6 +37,7 @@ import pe.rutafija.identity.infrastructure.AppUserRepository;
 import pe.rutafija.invitation.application.InvitationCodeHasher;
 import pe.rutafija.onboarding.application.ConductorDocumentaryCatalog;
 import pe.rutafija.onboarding.infrastructure.ConductorDocumentaryRepository;
+import pe.rutafija.onboarding.infrastructure.ConductorOnboardingAccessRepository;
 import pe.rutafija.organization.domain.Organization;
 import pe.rutafija.organization.infrastructure.OrganizationRepository;
 import pe.rutafija.support.NativePostgresIntegrationTest;
@@ -50,6 +49,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.verifyNoInteractions;
@@ -78,8 +78,8 @@ class ConductorDocumentaryFlowIT extends NativePostgresIntegrationTest {
     @Autowired DocumentaryClock clock;
     @Autowired EmailOtpService otpService;
     @Autowired OpaqueTokenService opaqueTokens;
-    @Autowired PlatformTransactionManager transactionManager;
     @MockitoSpyBean ConductorDocumentaryRepository documentaryRepository;
+    @MockitoSpyBean ConductorOnboardingAccessRepository accessRepository;
     @MockitoBean OtpEmailSender email;
     private static final String PASSWORD="Synthetic-Documentary-Password-2026";
     private UUID identityId,requestId;
@@ -191,7 +191,7 @@ class ConductorDocumentaryFlowIT extends NativePostgresIntegrationTest {
 
     @ParameterizedTest
     @ValueSource(strings={"documents","resubmit","reapply"})
-    void applicantMutationWaitingForIdentityLockCannotWriteAfterConfirmedLogout(String action) throws Exception {
+    void applicantMutationPausedBeforeIdentityLockCannotWriteAfterConfirmedLogout(String action) throws Exception {
         long version=0;
         if("resubmit".equals(action)) {
             adminAction("return",decision(0,"SYNTHETIC correction required")).andExpect(status().isOk());version=1;
@@ -216,26 +216,87 @@ class ConductorDocumentaryFlowIT extends NativePostgresIntegrationTest {
         mutation.header("X-Onboarding-Token",token);
         int priorEvents=count("select count(*) from conductor_onboarding_review_event where request_id=?",requestId);
         CountDownLatch reachedLock=new CountDownLatch(1);
-        doAnswer(invocation->{reachedLock.countDown();return invocation.callRealMethod();})
+        CountDownLatch allowLock=new CountDownLatch(1);
+        doAnswer(invocation->{
+            reachedLock.countDown();
+            if(!allowLock.await(10,TimeUnit.SECONDS))throw new IllegalStateException("SYNTHETIC_LOCK_RELEASE_REQUIRED");
+            return invocation.callRealMethod();
+        })
                 .when(documentaryRepository).lock(eq(requestId),isNull(),eq(identityId));
-        AtomicReference<Future<Integer>> waitingMutation=new AtomicReference<>();
-        try(var executor=Executors.newFixedThreadPool(2)) {
-            new TransactionTemplate(transactionManager).executeWithoutResult(transaction->{
-                jdbc.queryForObject("select id from conductor_onboarding_identity where id=? for update",UUID.class,identityId);
-                waitingMutation.set(executor.submit(()->mvc.perform(mutation).andReturn().getResponse().getStatus()));
-                try {
-                    assertThat(reachedLock.await(10,TimeUnit.SECONDS)).isTrue();
-                    assertThat(executor.submit(()->mvc.perform(post("/api/v1/onboarding/access/logout")
-                            .header("X-Onboarding-Token",token)).andReturn().getResponse().getStatus()).get(10,TimeUnit.SECONDS)).isEqualTo(204);
-                    assertThat(waitingMutation.get().isDone()).isFalse();
-                } catch(Exception exception) {throw new IllegalStateException("Synthetic concurrent logout failed",exception);}
-            });
-            assertThat(waitingMutation.get().get(10,TimeUnit.SECONDS)).isEqualTo(401);
+        try(var executor=Executors.newSingleThreadExecutor()) {
+            Future<Integer> waitingMutation=executor.submit(()->mvc.perform(mutation).andReturn().getResponse().getStatus());
+            try {
+                assertThat(reachedLock.await(10,TimeUnit.SECONDS)).isTrue();
+                mvc.perform(post("/api/v1/onboarding/access/logout").header("X-Onboarding-Token",token))
+                        .andExpect(status().isNoContent());
+                assertThat(waitingMutation.isDone()).isFalse();
+            } finally {allowLock.countDown();}
+            assertThat(waitingMutation.get(10,TimeUnit.SECONDS)).isEqualTo(401);
         }
         assertThat(count("select count(*) from conductor_document_revision where request_id=?",requestId)).isZero();
         assertThat(count("select count(*) from conductor_onboarding_review_event where request_id=?",requestId)).isEqualTo(priorEvents);
         assertThat(jdbc.queryForObject("select version from conductor_onboarding_request where id=?",Long.class,requestId)).isEqualTo(version);
         assertThat(count("select count(*) from conductor_onboarding_request where identity_id=?",identityId)).isEqualTo(1);
+        verifyNoInteractions(email);
+    }
+
+    @Test
+    void applicantMutationAndLogoutSerializeWithoutTokenIdentityDeadlock() throws Exception {
+        var pending=document("CON-01",Map.of("documentType","DNI","documentNumber","12345678",
+                "fullName","Synthetic Applicant","issuer","SYNTHETIC"),"PENDING");
+        pending.put("reviewReference",null);pending.put("observation",null);
+        byte[] command=mapper.writeValueAsBytes(saveCommand(0,List.of(pending)));
+        CountDownLatch mutationHasIdentity=new CountDownLatch(1);
+        CountDownLatch releaseMutation=new CountDownLatch(1);
+        CountDownLatch logoutEntered=new CountDownLatch(1);
+        AtomicInteger mutationPid=new AtomicInteger();
+        AtomicInteger logoutPid=new AtomicInteger();
+        doAnswer(invocation->{
+            Object locked=invocation.callRealMethod();
+            mutationPid.set(jdbc.queryForObject("select pg_backend_pid()",Integer.class));
+            mutationHasIdentity.countDown();
+            if(!releaseMutation.await(10,TimeUnit.SECONDS))throw new IllegalStateException("SYNTHETIC_MUTATION_RELEASE_REQUIRED");
+            return locked;
+        }).when(documentaryRepository).lock(eq(requestId),isNull(),eq(identityId));
+        doAnswer(invocation->{
+            logoutPid.set(jdbc.queryForObject("select pg_backend_pid()",Integer.class));
+            logoutEntered.countDown();
+            return invocation.callRealMethod();
+        }).when(accessRepository).revokeToken(any(String.class),any(Instant.class));
+        try(var executor=Executors.newFixedThreadPool(2)) {
+            var mutation=executor.submit(()->mvc.perform(put(applicantPath("documents"))
+                    .header("X-Onboarding-Token",token).contentType(MediaType.APPLICATION_JSON).content(command))
+                    .andReturn().getResponse().getStatus());
+            Future<Integer> logout=null;
+            try {
+                assertThat(mutationHasIdentity.await(10,TimeUnit.SECONDS)).isTrue();
+                logout=executor.submit(()->mvc.perform(post("/api/v1/onboarding/access/logout")
+                        .header("X-Onboarding-Token",token)).andReturn().getResponse().getStatus());
+                assertThat(logoutEntered.await(10,TimeUnit.SECONDS)).isTrue();
+                boolean observedBlocking=false;
+                long deadline=System.nanoTime()+TimeUnit.SECONDS.toNanos(5);
+                while(System.nanoTime()<deadline) {
+                    if(Boolean.TRUE.equals(jdbc.queryForObject(
+                            "select ? = any(pg_blocking_pids(?))",Boolean.class,mutationPid.get(),logoutPid.get()))) {
+                        observedBlocking=true;break;
+                    }
+                    Thread.sleep(10);
+                }
+                assertThat(observedBlocking).as("Logout must reach the real identity-lock wait").isTrue();
+            } finally {releaseMutation.countDown();}
+            int mutationStatus=mutation.get(10,TimeUnit.SECONDS);
+            int logoutStatus=Objects.requireNonNull(logout).get(10,TimeUnit.SECONDS);
+            assertThat(mutationStatus).as("Mutation holding identity may finish before logout confirmation").isEqualTo(200);
+            assertThat(logoutStatus).as("Logout must then confirm revocation without deadlock").isEqualTo(204);
+        }
+        int revisions=count("select count(*) from conductor_document_revision where request_id=?",requestId);
+        int events=count("select count(*) from conductor_onboarding_review_event where request_id=?",requestId);
+        assertThat(revisions).isEqualTo(1);
+        mvc.perform(put(applicantPath("documents")).header("X-Onboarding-Token",token)
+                        .contentType(MediaType.APPLICATION_JSON).content(command))
+                .andExpect(status().isUnauthorized());
+        assertThat(count("select count(*) from conductor_document_revision where request_id=?",requestId)).isEqualTo(revisions);
+        assertThat(count("select count(*) from conductor_onboarding_review_event where request_id=?",requestId)).isEqualTo(events);
         verifyNoInteractions(email);
     }
 
@@ -392,8 +453,10 @@ class ConductorDocumentaryFlowIT extends NativePostgresIntegrationTest {
         adminAction("provision",command).andExpect(status().isOk())
                 .andExpect(jsonPath("$.provisionedUserId").value(userId.toString()));
         assertThat(count("select count(*) from app_user where email=?",applicantEmail)).isEqualTo(1);
-        mvc.perform(post("/api/v1/mobile/auth/login").contentType(MediaType.APPLICATION_JSON)
+        JsonNode limited=node(mvc.perform(post("/api/v1/mobile/auth/login").contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsBytes(Map.of("email",applicantEmail,"password",PASSWORD))))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.accessScope").value("INCORPORATION")).andReturn());
+        mvc.perform(get("/api/v1/mobile/availability").header("Authorization","Bearer "+limited.path("accessToken").asText()))
                 .andExpect(status().isForbidden()).andExpect(jsonPath("$.code").value("DRIVER_INACTIVE"));
         verifyNoInteractions(email);
     }

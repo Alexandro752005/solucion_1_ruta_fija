@@ -51,6 +51,11 @@ abstract interface class MobileDeviceLocationGateway {
   Future<bool> openAppSettings();
 }
 
+/// Device status invalidation only. This stream never contains GPS positions.
+abstract interface class MobileDeviceLocationSignals {
+  Stream<bool> get locationServiceChanges;
+}
+
 enum MobileDeviceLocationFailureKind {
   timeout,
   provider,

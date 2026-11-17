@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 
 import '../../features/auth/data/mobile_auth_repository.dart';
 import '../../features/auth/domain/mobile_auth_models.dart';
@@ -132,7 +133,7 @@ final class MobileSessionController extends ChangeNotifier
     } on MobileApiException catch (exception) {
       if (!_current(generation)) return;
       if (_invalidatesStoredSession(exception)) {
-        await _clearLocalSession();
+        await _clearRestoredSession(generation);
         return;
       }
       _setState(
@@ -149,8 +150,31 @@ final class MobileSessionController extends ChangeNotifier
         ),
       );
     } on FormatException {
-      if (_current(generation)) await _clearLocalSession();
+      if (_current(generation)) await _clearRestoredSession(generation);
+    } on PlatformException {
+      if (_current(generation)) _restoreStorageUnavailable();
     }
+  }
+
+  Future<void> _clearRestoredSession(int generation) async {
+    if (!_current(generation)) return;
+    // Local invalidation advances the generation before its protected clear.
+    // A late keystore failure belongs to that cleared session, never a new login.
+    final clearedGeneration = generation + 1;
+    try {
+      await _clearLocalSession();
+    } on PlatformException {
+      if (_current(clearedGeneration)) _restoreStorageUnavailable();
+    }
+  }
+
+  void _restoreStorageUnavailable() {
+    _accessToken = null;
+    _setState(
+      const MobileSessionState.unauthenticated(
+        notice: 'No se pudo acceder al almacenamiento protegido de la sesión. Intente iniciar sesión.',
+      ),
+    );
   }
 
   Future<void> login({required String email, required String password}) async {

@@ -1,0 +1,104 @@
+<header class="topbar" [attr.aria-label]="model().identity.headerLabel">
+  <div class="topbar-row">
+    <a class="brand" [routerLink]="model().dashboard.route" aria-label="Ruta Fija, Dashboard" (click)="close()">
+      <span class="brand-symbol" aria-hidden="true"><span class="brand-road"></span></span>
+      <span class="brand-copy"><strong>RUTA FIJA</strong><small>CRM OPERATIVO</small></span>
+    </a>
+
+    <nav class="desktop-navigation" aria-label="Navegación principal">
+      <a class="nav-control dashboard-control" [routerLink]="model().dashboard.route" routerLinkActive="is-current" [routerLinkActiveOptions]="{exact: true}" ariaCurrentWhenActive="page" (click)="close()"><rf-topbar-icon name="home" />Dashboard</a>
+      <button id="topbar-modules-trigger" class="nav-control modules-control" [class.is-open]="panel() === 'modules'" [class.contains-current]="activeGroupId() !== null" type="button" [attr.aria-expanded]="panel() === 'modules'" aria-controls="topbar-modules-panel" (click)="togglePanel('modules', $event)"><rf-topbar-icon name="grid" />Módulos<rf-topbar-icon class="chevron" [class.rotated]="panel() === 'modules'" name="chevron" /></button>
+      @if (model().quickActions.length > 0) {
+      <button id="topbar-actions-trigger" class="nav-control actions-control" type="button" [attr.aria-expanded]="panel() === 'actions'" aria-controls="topbar-actions-panel" (click)="togglePanel('actions', $event)"><rf-topbar-icon name="bolt" />Acciones rápidas<rf-topbar-icon class="chevron" [class.rotated]="panel() === 'actions'" name="chevron" /></button>
+      }
+    </nav>
+
+    <div class="account-actions">
+      @if (model().inbox; as inbox) {
+      <a class="icon-control inbox-control" data-inbox [routerLink]="inbox.route" routerLinkActive="is-current" ariaCurrentWhenActive="page" aria-label="Bandeja de notificaciones" title="Bandeja de notificaciones" (click)="close()"><rf-topbar-icon name="bell" /></a>
+      <span class="account-divider" aria-hidden="true"></span>
+      }
+      <button id="topbar-account-trigger" class="account-trigger" type="button" [attr.aria-expanded]="panel() === 'account'" aria-controls="topbar-account-panel" [attr.aria-label]="model().identity.accountLabel" (click)="togglePanel('account', $event)">
+        <span class="avatar" aria-hidden="true">{{ model().identity.avatarText }}</span><span class="account-copy"><strong>{{ model().identity.displayName }}</strong><small>{{ model().identity.roleLabel }}</small></span><rf-topbar-icon class="account-chevron" [class.rotated]="panel() === 'account'" name="chevron" />
+      </button>
+      <button id="topbar-compact-trigger" class="compact-trigger icon-control" type="button" [attr.aria-expanded]="panel() === 'compact'" aria-controls="topbar-compact-panel" (click)="togglePanel('compact', $event)"><rf-topbar-icon name="menu" /><span>Menú</span></button>
+    </div>
+  </div>
+
+  @if (panel() === 'modules' || panel() === 'compact') {
+    <nav class="surface modules-surface" [class.compact-surface]="panel() === 'compact'" [id]="panel() === 'compact' ? 'topbar-compact-panel' : 'topbar-modules-panel'" [attr.data-panel]="panel()" [style.--panel-left.px]="panelLeft()" [attr.aria-label]="model().identity.modulesLabel">
+      <div class="group-list">
+        @if (panel() === 'compact') {
+          <a class="surface-link compact-dashboard" [routerLink]="model().dashboard.route" routerLinkActive="is-current" [routerLinkActiveOptions]="{exact:true}" ariaCurrentWhenActive="page" (click)="close()"><rf-topbar-icon name="home" />Dashboard</a>
+          <p class="section-label">Módulos</p>
+        }
+        @for (group of model().groups; track group.id) {
+          <div class="group-row">
+            <button [id]="'topbar-group-' + group.id" class="group-trigger" type="button" data-group-trigger [attr.data-group-label]="group.label" [class.is-expanded]="expandedGroup() === group.id" [class.contains-current]="activeGroupId() === group.id" [attr.aria-expanded]="expandedGroup() === group.id" [attr.aria-controls]="'topbar-subpanel-' + group.id" (click)="toggleGroup(group)" (keydown)="groupKeydown($event, group)">
+              <span class="group-icon" [attr.data-tone]="group.id"><rf-topbar-icon [name]="group.icon" /></span><span class="group-copy"><strong>{{ group.label }}</strong><small>{{ group.description }}</small></span><rf-topbar-icon class="group-chevron" [class.rotated]="expandedGroup() === group.id" name="chevron" />
+            </button>
+            @if (panel() === 'compact' && expandedGroup() === group.id) {
+              <div class="subpanel compact-subpanel" data-subpanel [id]="'topbar-subpanel-' + group.id">
+                @for (item of group.items; track item.id) {
+                  @if (item.availability === 'available') {
+                    <a class="surface-link" [attr.data-item]="item.id" [routerLink]="item.route" routerLinkActive="is-current" ariaCurrentWhenActive="page" (click)="close()"><rf-topbar-icon [name]="item.icon" />{{ item.label }}</a>
+                  } @else {
+                    <button class="surface-link planned-item" [attr.data-item]="item.id" type="button" disabled><rf-topbar-icon [name]="item.icon" /><span>{{ item.label }}<small>Próximamente</small></span></button>
+                  }
+                }
+              </div>
+            }
+          </div>
+        }
+        @if (panel() === 'compact' && model().quickActions.length > 0) {
+          <p class="section-label">Acciones rápidas</p>
+          @for (item of model().quickActions; track item.id) {
+            @if (item.availability === 'available') {
+              <a class="surface-link" [attr.data-item]="item.id" [routerLink]="item.route" [queryParams]="item.queryParams" (click)="close()"><rf-topbar-icon [name]="item.icon" />{{ item.label }}</a>
+            } @else {
+              <button class="surface-link planned-item" [attr.data-item]="item.id" type="button" disabled><rf-topbar-icon [name]="item.icon" /><span>{{ item.label }}<small>Próximamente</small></span></button>
+            }
+          }
+        }
+      </div>
+      @if (panel() === 'modules') {
+        @for (group of model().groups; track group.id) {
+          @if (expandedGroup() === group.id) {
+            <div class="surface subpanel desktop-subpanel" data-subpanel [class.subpanel-flipped]="subpanelFlipped()" [id]="'topbar-subpanel-' + group.id">
+              <p class="subpanel-heading">{{ group.label }}</p>
+              @for (item of group.items; track item.id) {
+                @if (item.availability === 'available') {
+                  <a class="surface-link" [attr.data-item]="item.id" [routerLink]="item.route" routerLinkActive="is-current" ariaCurrentWhenActive="page" (click)="close()"><rf-topbar-icon [name]="item.icon" />{{ item.label }}</a>
+                } @else {
+                  <button class="surface-link planned-item" [attr.data-item]="item.id" type="button" disabled><rf-topbar-icon [name]="item.icon" /><span>{{ item.label }}<small>Próximamente</small></span></button>
+                }
+              }
+            </div>
+          }
+        }
+      }
+    </nav>
+  }
+
+  @if (panel() === 'actions' && model().quickActions.length > 0) {
+    <nav id="topbar-actions-panel" class="surface actions-surface" data-panel="actions" [style.--panel-left.px]="panelLeft()" aria-label="Acciones rápidas">
+      @for (item of model().quickActions; track item.id) {
+        @if (item.availability === 'available') {
+          <a class="surface-link" [attr.data-item]="item.id" [routerLink]="item.route" [queryParams]="item.queryParams" (click)="close()"><rf-topbar-icon [name]="item.icon" />{{ item.label }}</a>
+        } @else {
+          <button class="surface-link planned-item" [attr.data-item]="item.id" type="button" disabled><rf-topbar-icon [name]="item.icon" /><span>{{ item.label }}<small>Próximamente</small></span></button>
+        }
+      }
+    </nav>
+  }
+
+  @if (panel() === 'account') {
+    <nav id="topbar-account-panel" class="surface account-surface" data-panel="account" [attr.aria-label]="model().identity.accountPanelLabel">
+      <div class="account-context"><strong>{{ contextLabel() }}</strong><small>{{ accountReference() }}</small></div>
+      @for (item of model().accountLinks; track item.id) {
+        <a class="surface-link" [attr.data-item]="item.id" [routerLink]="item.route" routerLinkActive="is-current" ariaCurrentWhenActive="page" (click)="close()"><rf-topbar-icon [name]="item.icon" />{{ item.label }}</a>
+      }
+      <button class="surface-link logout-control" [class.logout-control--standalone]="model().accountLinks.length === 0" data-logout type="button" [disabled]="loggingOut()" [attr.aria-busy]="loggingOut()" (click)="logout()"><rf-topbar-icon name="logout" />{{ loggingOut() ? 'Cerrando…' : 'Cerrar sesión' }}</button>
+    </nav>
+  }
+</header>

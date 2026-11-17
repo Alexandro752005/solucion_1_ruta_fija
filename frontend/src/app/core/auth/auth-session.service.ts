@@ -28,6 +28,13 @@ import {
   UserRole,
 } from './auth.models';
 
+export class SupersededAuthOperationError extends Error {
+  constructor() {
+    super('La sesión cambió durante la operación de autenticación.');
+    this.name = 'SupersededAuthOperationError';
+  }
+}
+
 @Injectable({ providedIn: 'root' })
 export class AuthSessionService {
   private readonly http = inject(HttpClient);
@@ -38,12 +45,14 @@ export class AuthSessionService {
   private readonly userState = signal<SessionUser | null>(null);
   private readonly statusState = signal<SessionStatus>('unknown');
   private readonly emailOtpChallengeState = signal<EmailOtpChallenge | null>(null);
+  private readonly lifecycleVersionState = signal(0);
   private refreshRequest$: Observable<string> | undefined;
 
   readonly accessToken = this.accessTokenState.asReadonly();
   readonly user = this.userState.asReadonly();
   readonly status = this.statusState.asReadonly();
   readonly emailOtpChallenge = this.emailOtpChallengeState.asReadonly();
+  readonly lifecycleVersion = this.lifecycleVersionState.asReadonly();
   readonly isAuthenticated = computed(
     () =>
       this.statusState() === 'authenticated' &&
@@ -52,38 +61,40 @@ export class AuthSessionService {
   );
 
   login(credentials: LoginRequest): Observable<'authenticated' | 'verification-required'> {
-    return this.http
-      .post<LoginResponse>(
-        this.runtimeConfig.apiUrl('/auth/login'),
-        credentials,
-        { withCredentials: true },
-      )
-      .pipe(
-        switchMap((response) => {
-          if (response.emailVerificationRequired === true && response.verification) {
-            this.accessTokenState.set(null);
-            this.userState.set(null);
-            this.statusState.set('anonymous');
-            this.emailOtpChallengeState.set(response.verification);
-            return of<'verification-required'>('verification-required');
-          }
-          this.emailOtpChallengeState.set(null);
-          this.applySession(response);
-          return this.loadCurrentUser().pipe(map(() => 'authenticated' as const));
-        }),
-        catchError((error: unknown) => {
-          this.clearSession();
-          return throwError(() => error);
-        }),
-      );
+    return defer(() => {
+      this.clearSession();
+      const version = this.lifecycleVersionState();
+      return this.cookieOperation(version, () => this.http
+        .post<LoginResponse>(
+          this.runtimeConfig.apiUrl('/auth/login'),
+          credentials,
+          { withCredentials: true },
+        )
+        .pipe(
+          switchMap((response) => {
+            this.assertCurrentLifecycle(version);
+            if (response.emailVerificationRequired === true && response.verification) {
+              this.accessTokenState.set(null);
+              this.userState.set(null);
+              this.statusState.set('anonymous');
+              this.emailOtpChallengeState.set(response.verification);
+              return of<'verification-required'>('verification-required');
+            }
+            this.emailOtpChallengeState.set(null);
+            this.applySession(response);
+            return this.loadCurrentUser().pipe(map(() => 'authenticated' as const));
+          }),
+        )).pipe(catchError((error: unknown) => this.failCurrentSessionOperation(version, error)));
+    });
   }
 
   verifyEmailOtp(code: string): Observable<void> {
+    const version = this.lifecycleVersionState();
     const challenge = this.emailOtpChallengeState();
     if (!challenge) {
       return throwError(() => new Error('No hay una verificación de correo pendiente.'));
     }
-    return this.http
+    return this.cookieOperation(version, () => this.http
       .post<LoginResponse>(
         this.runtimeConfig.apiUrl('/auth/otp/verify'),
         { verificationToken: challenge.verificationToken, code },
@@ -91,15 +102,17 @@ export class AuthSessionService {
       )
       .pipe(
         tap((response) => {
+          this.assertCurrentLifecycle(version);
           this.emailOtpChallengeState.set(null);
           this.applySession(response);
         }),
         switchMap(() => this.loadCurrentUser()),
         map(() => undefined),
-      );
+      ));
   }
 
   resendEmailOtp(): Observable<EmailOtpChallenge> {
+    const version = this.lifecycleVersionState();
     const challenge = this.emailOtpChallengeState();
     if (!challenge) {
       return throwError(() => new Error('No hay una verificación de correo pendiente.'));
@@ -110,7 +123,10 @@ export class AuthSessionService {
         { verificationToken: challenge.verificationToken },
         { withCredentials: true, context: new HttpContext().set(SKIP_AUTH_REFRESH, true) },
       )
-      .pipe(tap((updated) => this.emailOtpChallengeState.set(updated)));
+      .pipe(tap((updated) => {
+        this.assertCurrentLifecycle(version);
+        this.emailOtpChallengeState.set(updated);
+      }));
   }
 
   cancelEmailOtp(): void {
@@ -119,6 +135,7 @@ export class AuthSessionService {
   }
 
   ensureSession(): Observable<boolean> {
+    const version = this.lifecycleVersionState();
     if (this.isAuthenticated()) {
       return of(true);
     }
@@ -131,19 +148,26 @@ export class AuthSessionService {
       switchMap(() => this.loadCurrentUser()),
       map(() => true),
       catchError(() => {
-        this.clearSession();
+        if (version === this.lifecycleVersionState()) this.clearSession();
         return of(false);
       }),
     );
   }
 
   loadCurrentUser(): Observable<SessionUser> {
-    return this.http
-      .get<SessionUser>(this.runtimeConfig.apiUrl('/auth/me'), {
-        withCredentials: true,
-        context: new HttpContext().set(SKIP_AUTH_REFRESH, true),
-      })
-      .pipe(tap((user) => this.userState.set(user)));
+    const version = this.lifecycleVersionState();
+    return defer(() => {
+      this.assertCurrentLifecycle(version);
+      return this.http
+        .get<SessionUser>(this.runtimeConfig.apiUrl('/auth/me'), {
+          withCredentials: true,
+          context: new HttpContext().set(SKIP_AUTH_REFRESH, true),
+        })
+        .pipe(tap((user) => {
+          this.assertCurrentLifecycle(version);
+          this.userState.set(user);
+        }));
+    });
   }
 
   refreshAccessToken(): Observable<string> {
@@ -151,10 +175,10 @@ export class AuthSessionService {
       return this.refreshRequest$;
     }
 
-    const request$ = defer(() =>
-      from(
-        this.crossTabLock.runExclusive('ruta-fija-auth-refresh', () =>
-          firstValueFrom(
+    const version = this.lifecycleVersionState();
+    const request$ = defer(() => {
+      this.assertCurrentLifecycle(version);
+      return this.cookieOperation(version, () =>
             this.http
               .post<LoginResponse>(
                 this.runtimeConfig.apiUrl('/auth/refresh'),
@@ -163,26 +187,23 @@ export class AuthSessionService {
                   withCredentials: true,
                   context: new HttpContext().set(SKIP_AUTH_REFRESH, true),
                 },
-              )
-              .pipe(timeout({ first: 15_000 })),
-          ),
-        ),
-      ),
-    )
+              ),
+      );
+    })
       .pipe(
-        tap((response) => this.applySession(response)),
+        tap((response) => {
+          this.assertCurrentLifecycle(version);
+          this.applySession(response);
+        }),
         map((response) => {
           if (!response.accessToken) {
             throw new Error('La respuesta de renovación no contiene un token de acceso.');
           }
           return response.accessToken;
         }),
-        catchError((error: unknown) => {
-          this.clearSession();
-          return throwError(() => error);
-        }),
+        catchError((error: unknown) => this.failCurrentSessionOperation(version, error)),
         finalize(() => {
-          this.refreshRequest$ = undefined;
+          if (this.refreshRequest$ === request$) this.refreshRequest$ = undefined;
         }),
         shareReplay({ bufferSize: 1, refCount: false }),
       );
@@ -192,16 +213,22 @@ export class AuthSessionService {
   }
 
   logout(): Observable<void> {
-    return this.http
-      .post<void>(
-        this.runtimeConfig.apiUrl('/auth/logout'),
-        {},
-        {
-          withCredentials: true,
-          context: new HttpContext().set(SKIP_AUTH_REFRESH, true),
-        },
-      )
-      .pipe(finalize(() => this.clearSession()));
+    return defer(() => {
+      this.clearSession();
+      const version = this.lifecycleVersionState();
+      return this.cookieOperation(version, () => this.http
+        .post<void>(
+          this.runtimeConfig.apiUrl('/auth/logout'),
+          {},
+          {
+            withCredentials: true,
+            context: new HttpContext().set(SKIP_AUTH_REFRESH, true),
+          },
+        )
+        .pipe(finalize(() => {
+          if (version === this.lifecycleVersionState()) this.clearSession();
+        })));
+    });
   }
 
   hasAnyRole(allowedRoles: readonly UserRole[]): boolean {
@@ -210,6 +237,9 @@ export class AuthSessionService {
   }
 
   clearSession(): void {
+    // A logout/login boundary also invalidates requests waiting on another tab's lock.
+    this.lifecycleVersionState.update((version) => version + 1);
+    this.refreshRequest$ = undefined;
     this.emailOtpChallengeState.set(null);
     this.accessTokenState.set(null);
     this.userState.set(null);
@@ -223,5 +253,27 @@ export class AuthSessionService {
     this.accessTokenState.set(response.accessToken);
     this.userState.set(response.user);
     this.statusState.set('authenticated');
+  }
+
+  private assertCurrentLifecycle(version: number): void {
+    if (version !== this.lifecycleVersionState()) throw new SupersededAuthOperationError();
+  }
+
+  private cookieOperation<T>(version: number, operation: () => Observable<T>): Observable<T> {
+    // HttpOnly cookies are applied by the transport before response handlers.
+    // Keep all cookie writers on the refresh lock, including an in-flight old
+    // response: ignoring its body alone cannot protect a newer login cookie.
+    return defer(() => from(this.crossTabLock.runExclusive('ruta-fija-auth-refresh', () => {
+      this.assertCurrentLifecycle(version);
+      return firstValueFrom(operation().pipe(timeout({ first: 15_000 })));
+    })));
+  }
+
+  private failCurrentSessionOperation(version: number, error: unknown): Observable<never> {
+    if (version !== this.lifecycleVersionState()) {
+      return throwError(() => new SupersededAuthOperationError());
+    }
+    this.clearSession();
+    return throwError(() => error);
   }
 }

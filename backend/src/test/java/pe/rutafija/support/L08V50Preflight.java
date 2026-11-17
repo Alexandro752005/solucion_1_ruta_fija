@@ -208,7 +208,7 @@ public final class L08V50Preflight {
             ) x order by kind,identity
             """);
     }
-    @SuppressWarnings("unchecked") private static void assertPreservedData(Snapshot before,Snapshot after){
+    private static void assertPreservedData(Snapshot before,Snapshot after){
         for(String key:List.of("ledger","acceptanceCount","publishedTermsSha256","tables"))
             if(!Objects.equals(before.summary.get(key),after.summary.get(key)))throw refused("PRESERVATION_MISMATCH_"+key.toUpperCase(Locale.ROOT));
     }

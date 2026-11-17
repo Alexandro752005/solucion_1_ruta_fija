@@ -10,6 +10,7 @@
 
   @if (error(); as currentError) { <div class="management-alert error" role="alert"><strong>{{ currentError.message }}</strong>@if (currentError.correlationId) { <span>Referencia: {{ currentError.correlationId }}</span> }</div> }
   @if (notice(); as currentNotice) { <div class="management-alert success" role="status">{{ currentNotice }}</div> }
+  @if (shortcutNotice()) { <p class="management-alert" role="status">{{ shortcutNotice() }}</p> }
 
   <section class="management-panel" aria-labelledby="assignments-list-title">
     <header><div><h2 id="assignments-list-title">Plan operativo</h2><p>{{ totalItems() }} asignaciones registradas.</p></div></header>
@@ -47,7 +48,7 @@
 </section>
 
 <rf-modal [open]="formOpen()" [title]="editing() ? 'Editar asignaci&oacute;n' : 'Nueva oferta'" size="large" (closed)="closeForm()">
-  <form class="management-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+  <form #assignmentForm data-assignment-form class="management-form" [formGroup]="form" (ngSubmit)="submit()" tabindex="-1" novalidate>
     @if(reofferTarget();as s){<p>Reasignar SERVICIO-{{s.id}}. La oferta anterior y su aceptación se conservan. La nueva oferta exige otra aceptación.</p>
       <label>Motivo sin datos personales <input [formControl]="reofferReason" maxlength="160" /></label>}
     @if(reofferUncertain()){<p role="alert">Resultado incierto; conserva esta solicitud sin emitir otra oferta.</p><button type="button" (click)="reconcileReoffer()" [disabled]="saving()">Consultar operación de reasignación</button>}

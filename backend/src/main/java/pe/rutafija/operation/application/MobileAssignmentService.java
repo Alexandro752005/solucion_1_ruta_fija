@@ -13,7 +13,6 @@ import pe.rutafija.operation.api.dto.mobile.MobileAssignmentCommandRequest;
 import pe.rutafija.operation.api.dto.mobile.MobileAssignmentRejectRequest;
 import pe.rutafija.operation.domain.Assignment;
 import pe.rutafija.operation.domain.AssignmentStatus;
-import pe.rutafija.operation.domain.MobileCommandReceipt;
 import pe.rutafija.operation.domain.MobileCommandType;
 import pe.rutafija.operation.infrastructure.AssignmentRepository;
 import pe.rutafija.operation.infrastructure.DriverCurrentLocationStore;

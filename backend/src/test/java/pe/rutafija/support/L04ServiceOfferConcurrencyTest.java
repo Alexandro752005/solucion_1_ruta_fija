@@ -20,7 +20,7 @@ class L04ServiceOfferConcurrencyTest {
         Instant start=Instant.now().plusSeconds(172800),end=start.plusSeconds(3600);boolean prepared=false,passed=false;String losingState="NOT_RUN";
         try(Connection guard=connection(db)){
             assertThat(scalar(guard,"select current_database()||'/'||current_user")).isEqualTo("ruta_fija_test/rf_test");
-            assertThat(scalar(guard,"select version from flyway_schema_history where success order by installed_rank desc limit 1")).isEqualTo("35");
+            assertThat(scalar(guard,"select version from flyway_schema_history where success and version is not null order by installed_rank desc limit 1")).isEqualTo(IsolatedAuditSpecializedPostgres.enabled()?"51":"35");
             for(String marker:List.of("l01-human-trial.active","l02-connected.active","l03-connected.active","l04-connected.active"))assertThat(Files.exists(Path.of(".local",marker))).isFalse();
             assertThat(scalar(guard,"select pg_try_advisory_lock(7518440514)")).isEqualTo("true");
             String ledger=scalar(guard,"select string_agg(user_id::text||role,',' order by user_id) from pilot_account_creation");

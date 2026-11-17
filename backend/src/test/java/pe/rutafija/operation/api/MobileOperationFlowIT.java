@@ -35,6 +35,7 @@ import pe.rutafija.organization.domain.Organization;
 import pe.rutafija.organization.infrastructure.OrganizationRepository;
 import pe.rutafija.support.NativePostgresIntegrationTest;
 import pe.rutafija.support.ApprovedConductorFixture;
+import pe.rutafija.support.CurrentNativeOperationFixture;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -44,7 +45,6 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -92,7 +92,6 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
     @Autowired
     AssignmentRepository assignmentRepository;
 
-    @Autowired
     MobileOperationMaintenanceService mobileOperationMaintenanceService;
 
     @Autowired
@@ -110,9 +109,10 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
     private TransportGroup group;
     private Driver driver;
     private Vehicle vehicle;
+    private CurrentNativeOperationFixture current;
 
     @BeforeEach
-    void prepareMobileData() {
+    void prepareMobileData() throws Exception {
         String suffix = UUID.randomUUID().toString().substring(0, 8);
         organization = organizationRepository.save(Organization.active(
                 "Ruta Fija Movil " + suffix, "Movil " + suffix, "America/Lima"
@@ -129,6 +129,16 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
         driverVehicleLinkRepository.save(DriverVehicleLink.active(driver, vehicle, true, Instant.now()));
         // Explicit historical synthetic approval; active fixture represents a prior eligible driver.
         ApprovedConductorFixture.recordHistoricalApproval(jdbcTemplate, admin, conductor, driver);
+        current=new CurrentNativeOperationFixture(mockMvc,objectMapper,jdbcTemplate,applicationContext);
+        current.qualify(admin,conductor,driver,vehicle);
+        // Exercise real expiry explicitly; no scheduled writer may run during schema resets.
+        mobileOperationMaintenanceService=new MobileOperationMaintenanceService(assignmentRepository,
+                applicationContext.getBean(pe.rutafija.operation.infrastructure.DriverCurrentLocationStore.class),
+                applicationContext.getBean(pe.rutafija.audit.application.AuditService.class),
+                applicationContext.getBean(pe.rutafija.operation.application.OperationEventPublisher.class),
+                applicationContext.getBean(java.time.Clock.class),
+                applicationContext.getBean(pe.rutafija.operation.application.OfferExpiryService.class),
+                applicationContext.getBean(pe.rutafija.operation.application.ServiceGpsRetention.class));
     }
 
     @Test
@@ -164,7 +174,7 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
         MvcResult created = mockMvc.perform(post("/api/v1/assignments")
                         .with(webToken(admin))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(payload))
+                        .content(withOfferCatalog(payload)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.status").value("PENDING_RESPONSE"))
                 .andExpect(jsonPath("$.responseMode").value("MOBILE_CONFIRMATION"))
@@ -213,11 +223,14 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
                 .andExpect(jsonPath("$.code").value("MOBILE_EVENT_CONFLICT"));
 
         UUID startEvent = UUID.randomUUID();
+        mockMvc.perform(put("/api/v1/mobile/location/consent").with(mobileToken(conductor,driver))
+                        .contentType(MediaType.APPLICATION_JSON).content("{\"consent\":true}"))
+                .andExpect(status().isOk());
         Instant startOccurredAt = Instant.now().minusSeconds(1).truncatedTo(ChronoUnit.MILLIS);
         MvcResult started = mockMvc.perform(post("/api/v1/mobile/assignments/{id}/start", assignmentId)
                         .with(mobileToken(conductor, driver))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(commandPayload(startEvent, acceptedVersion, startOccurredAt)))
+                        .content(startCommandPayload(startEvent, acceptedVersion, startOccurredAt)))
                 .andExpect(status().isOk())
                 .andExpect(header().string("X-Idempotent-Replay", "false"))
                 .andExpect(jsonPath("$.status").value("EN_SERVICIO"))
@@ -227,7 +240,7 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
         mockMvc.perform(post("/api/v1/mobile/assignments/{id}/start", assignmentId)
                         .with(mobileToken(conductor, driver))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(commandPayload(startEvent, acceptedVersion, startOccurredAt)))
+                        .content(startCommandPayload(startEvent, acceptedVersion, startOccurredAt)))
                 .andExpect(status().isOk())
                 .andExpect(header().string("X-Idempotent-Replay", "true"))
                 .andExpect(jsonPath("$.status").value("EN_SERVICIO"));
@@ -283,8 +296,8 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
                 {
                   "driverId":"%s",
                   "vehicleId":"%s",
-                  "originText":"Terminal Este",
-                  "destinationText":"Terminal Oeste",
+                  "originText":"Terminal Norte",
+                  "destinationText":"Terminal Sur",
                   "scheduledAt":"%s",
                   "scheduledEndAt":"%s",
                   "responseMode":"MOBILE_CONFIRMATION",
@@ -297,7 +310,7 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
         MvcResult rejectionCreated = mockMvc.perform(post("/api/v1/assignments")
                         .with(webToken(admin))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(pendingRejectionPayload))
+                        .content(withOfferCatalog(pendingRejectionPayload)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.status").value("PENDING_RESPONSE"))
                 .andReturn();
@@ -326,7 +339,7 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
     }
 
     @Test
-    void mobileScopeUsesServerIdentityAndCurrentLocationNeverBecomesHistory() throws Exception {
+    void mobileScopeUsesServerIdentityAndCurrentSnapshotIsSingleAndStopsWithService() throws Exception {
         mockMvc.perform(post("/api/v1/mobile/sync/events")
                         .with(mobileToken(conductor, driver))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -349,17 +362,19 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.locationConsent").value(true));
 
-        Instant capturedAt = Instant.now().minusSeconds(2).truncatedTo(ChronoUnit.MILLIS);
+        JsonNode ongoing=startLocationService();
+        Instant capturedAt = Instant.now().truncatedTo(ChronoUnit.MILLIS);
         String firstPoint = """
                 {"latitude":-12.046374,"longitude":-77.042793,"accuracyM":8.2,
-                 "capturedAt":"%s","permissionGranted":true}
+                 "capturedAt":"%s","permissionGranted":true,"locationServiceEnabled":true,"foreground":true}
                 """.formatted(capturedAt);
         mockMvc.perform(put("/api/v1/mobile/location/current")
                         .with(mobileToken(conductor, driver))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(firstPoint))
                 .andExpect(status().isNoContent());
-        String secondPoint = firstPoint.replace("-12.046374", "-12.046375");
+        String secondPoint = firstPoint.replace("-12.046374", "-12.046375")
+                .replace(capturedAt.toString(),Instant.now().truncatedTo(ChronoUnit.MILLIS).toString());
         mockMvc.perform(put("/api/v1/mobile/location/current")
                         .with(mobileToken(conductor, driver))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -372,6 +387,13 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
                 String.class
         );
         assertThat(auditMetadata).doesNotContain("latitude").doesNotContain("longitude").doesNotContain("accuracy");
+
+        mockMvc.perform(post("/api/v1/mobile/assignments/{id}/complete",ongoing.path("id").asText())
+                        .with(mobileToken(conductor,driver)).contentType(MediaType.APPLICATION_JSON)
+                        .content(commandPayload(UUID.randomUUID(),ongoing.path("version").asLong(),Instant.now().minusSeconds(1))))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.status").value("COMPLETED"));
+        assertThat(count("select count(*) from driver_current_location where driver_id = '" + driver.getId() + "'"))
+                .isZero();
 
         mockMvc.perform(put("/api/v1/mobile/availability")
                         .with(mobileToken(conductor, driver))
@@ -391,15 +413,13 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
 
     @Test
     void mobileIncidentsAndAnnouncementsRemainOwnAndAudienceScoped() throws Exception {
-        Announcement announcement = announcementRepository.save(Announcement.publish(
-                organization,
-                admin,
-                "Cambio de turno",
-                "Revise su programacion actualizada.",
-                AnnouncementAudienceType.GROUP,
-                group.getId(),
-                true
-        ));
+        // Publishing through the real service persists the current recipient
+        // snapshot. Saving only the legacy entity does not deliver a message.
+        JsonNode published=current.post(admin,"/api/v1/announcements",java.util.Map.of(
+                "title","Cambio de turno","body","Revise su programacion actualizada.",
+                "audienceType","GROUP","audienceId",group.getId(),"requireReadAck",true,
+                "operationKey",UUID.randomUUID()),201);
+        Announcement announcement=announcementRepository.findById(UUID.fromString(published.path("id").asText())).orElseThrow();
 
         mockMvc.perform(get("/api/v1/mobile/announcements").with(mobileToken(conductor, driver)))
                 .andExpect(status().isOk())
@@ -633,6 +653,7 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
                         .claim("role", UserRole.CONDUCTOR.name())
                         .claim("sessionVersion", user.getSessionVersion())
                         .claim("sessionChannel", "MOBILE")
+                        .claim("accessScope", "OPERATIONS")
                         .claim("driverId", targetDriver.getId().toString()));
     }
 
@@ -640,6 +661,35 @@ class MobileOperationFlowIT extends NativePostgresIntegrationTest {
         return """
                 {"clientEventId":"%s","version":%d,"occurredAt":"%s"}
                 """.formatted(eventId, version, occurredAt.truncatedTo(ChronoUnit.MILLIS));
+    }
+
+    private String withOfferCatalog(String payload) throws Exception {
+        var body=(com.fasterxml.jackson.databind.node.ObjectNode)objectMapper.readTree(payload);
+        for(var entry:current.offerFields(admin).entrySet())body.put(entry.getKey(),entry.getValue().toString());
+        return objectMapper.writeValueAsString(body);
+    }
+
+    private JsonNode startLocationService() throws Exception {
+        var body=current.offerFields(admin);
+        body.put("driverId",driver.getId());body.put("vehicleId",vehicle.getId());
+        body.put("originText","Terminal Norte");body.put("destinationText","Terminal Sur");
+        body.put("scheduledAt",Instant.now().plusSeconds(3600));body.put("scheduledEndAt",Instant.now().plusSeconds(7200));
+        JsonNode offered=current.post(admin,"/api/v1/assignments",body,201);
+        String id=offered.path("id").asText();
+        JsonNode accepted=json(mockMvc.perform(post("/api/v1/mobile/assignments/{id}/accept",id)
+                .with(mobileToken(conductor,driver)).contentType(MediaType.APPLICATION_JSON)
+                .content(commandPayload(UUID.randomUUID(),offered.path("version").asLong(),Instant.now().minusSeconds(1))))
+                .andExpect(status().isOk()).andReturn());
+        return json(mockMvc.perform(post("/api/v1/mobile/assignments/{id}/start",id)
+                .with(mobileToken(conductor,driver)).contentType(MediaType.APPLICATION_JSON)
+                .content(startCommandPayload(UUID.randomUUID(),accepted.path("version").asLong(),Instant.now().minusSeconds(1))))
+                .andExpect(status().isOk()).andReturn());
+    }
+
+    private String startCommandPayload(UUID eventId,long version,Instant occurredAt) throws Exception {
+        var body=(com.fasterxml.jackson.databind.node.ObjectNode)objectMapper.readTree(commandPayload(eventId,version,occurredAt));
+        body.putObject("gps").put("permissionGranted",true).put("locationServiceEnabled",true).put("foreground",true);
+        return objectMapper.writeValueAsString(body);
     }
 
     private String rejectCommandPayload(UUID eventId, long version, Instant occurredAt, String reason) {

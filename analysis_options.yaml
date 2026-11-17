@@ -4,6 +4,7 @@ analyzer:
   exclude:
     - backend/target/**
     - docs/evidencia/**
+    - docs/mapa-en-vivo/verificacion/baseline/fuentes/**
     - memory/backup/**
     - backups/**
     - artifacts/**

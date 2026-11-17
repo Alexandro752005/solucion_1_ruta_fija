@@ -65,6 +65,13 @@ body {
   line-height: 1.45;
 }
 
+// The ADMIN header reflows to the available layout width, including a classic
+// scrollbar at a 320px viewport. Preserve the legacy minimum for other surfaces.
+html:has(rf-crm-topbar),
+body:has(rf-crm-topbar) {
+  min-width: 0;
+}
+
 body.rf-modal-open {
   overflow: hidden;
 }

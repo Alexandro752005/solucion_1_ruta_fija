@@ -4,6 +4,8 @@ import '../../../core/presentation/mobile_error_message.dart';
 import '../../profile/data/mobile_driver_repository.dart';
 import '../../profile/domain/mobile_driver_models.dart';
 import '../domain/mobile_foreground_location.dart';
+import '../domain/mobile_service_location_controller.dart';
+import 'mobile_location_scope.dart';
 
 class ForegroundLocationPage extends StatefulWidget {
   const ForegroundLocationPage({
@@ -71,7 +73,7 @@ class _ForegroundLocationPageState extends State<ForegroundLocationPage> {
 
     final confirmed = await _confirm(
       title: 'Compartir ubicación actual',
-      message: 'Se solicitará el permiso del dispositivo solo para obtener un punto mientras esta pantalla está abierta. No se realizará seguimiento continuo.',
+      message: 'Se comprobará el permiso del dispositivo para actualizar el punto del servicio. El mismo controlador realiza los intentos periódicos mientras el servicio siga iniciado y la aplicación esté en primer plano.',
       confirmLabel: 'Continuar',
       key: const Key('location-consent-confirm'),
     );
@@ -93,11 +95,23 @@ class _ForegroundLocationPageState extends State<ForegroundLocationPage> {
       if (!updatedProfile.locationConsent) {
         updatedProfile = await widget.driverGateway.changeLocationConsent(true);
       }
-      final point = await widget.deviceLocationGateway.currentPosition();
-      if (WidgetsBinding.instance.lifecycleState != AppLifecycleState.resumed) {
-        return;
+      if (!mounted) return;
+      final coordinator = MobileLocationScope.maybeOf(context)?.controller;
+      if (coordinator != null) {
+        await coordinator.tick();
+        if (coordinator.phase != ServiceLocationPhase.sharing) {
+          throw StateError(
+            'No se confirmó una ubicación nueva del servicio. Revise el estado GPS.',
+          );
+        }
+      } else {
+        final point = await widget.deviceLocationGateway.currentPosition();
+        if (WidgetsBinding.instance.lifecycleState !=
+            AppLifecycleState.resumed) {
+          return;
+        }
+        await widget.driverGateway.upsertCurrentLocation(point);
       }
-      await widget.driverGateway.upsertCurrentLocation(point);
 
       if (!mounted) {
         return;
@@ -106,7 +120,7 @@ class _ForegroundLocationPageState extends State<ForegroundLocationPage> {
         _profile = updatedProfile;
         _sentInCurrentSession = true;
       });
-      _showMessage('Ubicación actualizada para esta sesión.');
+      _showMessage('El servidor confirmó la actualización de ubicación.');
     } catch (error) {
       if (mounted) {
         _showMessage(_messageFor(error));
@@ -176,7 +190,7 @@ class _ForegroundLocationPageState extends State<ForegroundLocationPage> {
     }
     final confirmed = await _confirm(
       title: 'Eliminar ubicación vigente',
-      message: 'Se eliminará el único punto vigente del servidor. El consentimiento permanecerá activo para una actualización manual posterior.',
+      message: 'Se eliminará el punto vigente del servidor en este momento. Si el servicio continúa y el consentimiento sigue activo, los intentos periódicos podrán publicar un punto nuevo. Para detener la compartición, use Desactivar ubicación y retire su consentimiento.',
       confirmLabel: 'Eliminar ubicación',
       key: const Key('location-clear-confirm'),
     );
@@ -189,7 +203,9 @@ class _ForegroundLocationPageState extends State<ForegroundLocationPage> {
       await widget.driverGateway.clearCurrentLocation();
       if (mounted) {
         setState(() => _sentInCurrentSession = false);
-        _showMessage('La ubicación vigente fue eliminada.');
+        _showMessage(
+          'Se eliminó el punto vigente. Durante el servicio puede aparecer uno nuevo mientras el consentimiento siga activo.',
+        );
       }
     } catch (error) {
       if (mounted) {
@@ -387,7 +403,7 @@ class _ForegroundLocationPageState extends State<ForegroundLocationPage> {
                   if (_sentInCurrentSession) ...[
                     const SizedBox(height: 8),
                     const Text(
-                      'Se actualizó un único punto durante esta sesión.',
+                      'Se confirmó una actualización solicitada desde esta pantalla. El servicio mantiene sus intentos periódicos autorizados.',
                     ),
                   ],
                 ],

@@ -73,7 +73,11 @@ final class RutaFijaDependencies {
           WidgetsBinding.instance.lifecycleState == AppLifecycleState.resumed,
     );
     MobileServiceLocationController? serviceLocation;
-    final driverGateway = MobileDriverRepository(authenticatedApi);
+    final driverGateway = MobileDriverRepository(
+      authenticatedApi,
+      onConsentChanged: (consent) => serviceLocation?.consentChanged(consent),
+      onLocationCleared: () => serviceLocation?.clearMapPoint(),
+    );
     final assignmentGateway = MobileAssignmentRepository(
       authenticatedApi,
       assignmentCommandStore,
@@ -106,9 +110,11 @@ final class RutaFijaDependencies {
       deviceLocationGateway: deviceLocationGateway,
       httpClient: httpClient,
       serviceLocation: serviceLocation,
-      preferences:MobilePreferencesController(MobilePreferencesRepository(authenticatedApi)),
-      reportGateway:MobileServiceReportRepository(authenticatedApi),
-      reportFiles:const AndroidReportFileGateway(),
+      preferences: MobilePreferencesController(
+        MobilePreferencesRepository(authenticatedApi),
+      ),
+      reportGateway: MobileServiceReportRepository(authenticatedApi),
+      reportFiles: const AndroidReportFileGateway(),
     );
   }
 

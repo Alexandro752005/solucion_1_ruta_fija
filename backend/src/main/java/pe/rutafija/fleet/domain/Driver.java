@@ -242,7 +242,7 @@ public class Driver {
     /**
      * Consent is a functional choice of the authenticated driver. A caller that
      * revokes it must remove the current point separately in the same service
-     * transaction; historical locations are never retained.
+     * transaction; existing service evidence retains its independently bounded expiry.
      */
     public void recordLocationConsent(boolean granted) {
         requireActive();

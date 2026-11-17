@@ -47,7 +47,7 @@ import static org.mockito.Mockito.doAnswer;
 class ConnectedL01ClientsIT {
     private static final NativePostgresTestDatabase DATABASE=NativePostgresTestDatabase.load();
     private static HttpServer frontend;
-    private static final Path ROOT=Path.of("..").toAbsolutePath().normalize();
+    private static final Path ROOT=IsolatedAuditSpecializedPostgres.repositoryRoot(Path.of("..").toAbsolutePath().normalize());
     private static final String CONTROL=UUID.randomUUID().toString();
     private final Map<String,Object> state=new ConcurrentHashMap<>();
     private final Map<String,String> otp=new ConcurrentHashMap<>();
@@ -61,7 +61,8 @@ class ConnectedL01ClientsIT {
     @MockitoBean OtpEmailSender mail;
 
     @DynamicPropertySource static void connectedOrigins(DynamicPropertyRegistry registry) throws Exception {
-        DATABASE.registerSpringProperties(registry);
+        if(IsolatedAuditSpecializedPostgres.enabled())IsolatedAuditSpecializedPostgres.register(registry);
+        else DATABASE.registerSpringProperties(registry);
         frontend=HttpServer.create(new InetSocketAddress("127.0.0.1",0),0);
         registry.add("app.security.cors.allowed-origins",()->"http://127.0.0.1:"+frontend.getAddress().getPort());
     }
@@ -132,6 +133,11 @@ class ConnectedL01ClientsIT {
         builder.environment().put("RF_L01_CONNECTED_BASE","http://127.0.0.1:"+frontend.getAddress().getPort());
         builder.environment().put("RF_L01_CONNECTED_CONTROL",CONTROL);
         builder.environment().put("RF_L01_CONNECTED_STAGE",stage);
+        if(IsolatedAuditSpecializedPostgres.enabled()) {
+            Path profiles=ROOT.resolve(".runtime/auditoria-integral-2026-11-13/connected-l01-"+CONTROL);
+            Files.createDirectories(profiles);
+            builder.environment().put("RF_L01_CONNECTED_ARTIFACT_ROOT",profiles.toString());
+        }
         Process process=builder.start();
         ExecutorService reader=Executors.newSingleThreadExecutor();
         Future<String> output=reader.submit(()->new String(process.getInputStream().readAllBytes(),StandardCharsets.UTF_8));
@@ -144,8 +150,11 @@ class ConnectedL01ClientsIT {
             if(!completed||process.exitValue()!=0){
                 // Store only bounded test diagnostics, excluding lines with any runtime input.
                 List<String> safe=captured.lines().filter(line->!containsSecret(line)).limit(140).toList();
-                Files.write(ROOT.resolve("backend/target/l01-connected-"+client+"-"+stage+"-diagnostic.log"),safe,StandardCharsets.UTF_8);
-                throw new AssertionError("Connected client failed: "+client+"/"+stage+"; sanitized diagnostic in target");
+                Path diagnostic=IsolatedAuditSpecializedPostgres.enabled()
+                        ?ROOT.resolve(".runtime/auditoria-integral-2026-11-13/l01-"+CONTROL+"-"+client+"-"+stage+".private.log")
+                        :ROOT.resolve("backend/target/l01-connected-"+client+"-"+stage+"-diagnostic.log");
+                Files.write(diagnostic,safe,StandardCharsets.UTF_8,StandardOpenOption.CREATE_NEW);
+                throw new AssertionError("Connected client failed: "+client+"/"+stage+"; sanitized diagnostic retained");
             }
         } finally { if(process.isAlive())process.destroyForcibly();reader.shutdownNow(); }
     }

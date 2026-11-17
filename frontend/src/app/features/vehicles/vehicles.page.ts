@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { ApiErrorService } from '../../core/api/api-error.service';
 import { UiError } from '../../core/api/api-error.model';
@@ -33,6 +33,8 @@ export class VehiclesPage {
   private readonly api = inject(ManagementApiService);
   private readonly apiErrors = inject(ApiErrorService);
   private readonly session = inject(AuthSessionService);
+  private readonly route = inject(ActivatedRoute, { optional: true });
+  private detailIntent = '';
 
   readonly canManage = computed(() =>
     this.session.hasAnyRole(['ADMIN']),
@@ -85,6 +87,11 @@ export class VehiclesPage {
   });
 
   constructor() {
+    const intent = this.route?.snapshot.queryParamMap.get('vehicleId') ?? '';
+    const search = this.route?.snapshot.queryParamMap.get('search') ?? '';
+    if (/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(intent) && search.trim().length > 0 && search.length <= 40) {
+      this.detailIntent = intent; this.search.set(search);
+    }
     this.load();
   }
 
@@ -106,6 +113,10 @@ export class VehiclesPage {
           this.page.set(response.page);
           this.totalPages.set(response.totalPages);
           this.totalItems.set(response.totalItems);
+          if (this.detailIntent) {
+            const target = response.items.find(vehicle => vehicle.id === this.detailIntent);
+            this.detailIntent = ''; if (target) this.viewDetails(target);
+          }
         },
         error: (error: unknown) =>
           this.error.set(this.apiErrors.toUiError(error, 'No se pudieron cargar los vehículos.')),

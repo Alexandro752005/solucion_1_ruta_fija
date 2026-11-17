@@ -160,30 +160,12 @@ public class IncidentService {
                 .orElseThrow(this::notFound);
     }
 
-    private void assertVersion(Incident incident, Long requestVersion) {
-        if (requestVersion == null || incident.getVersion() != requestVersion) {
-            throw new ApplicationException(
-                    HttpStatus.CONFLICT,
-                    ErrorCode.RESOURCE_VERSION_CONFLICT,
-                    "La incidencia fue modificada por otro usuario; actualice la información"
-            );
-        }
-    }
-
     private Map<String, Object> eventData(Incident incident) {
         return Map.of(
                 "incidentId", incident.getId().toString(),
                 "status", incident.getStatus().name(),
                 "category", incident.getCategory().name(),
                 "driverId", incident.getDriver().getId().toString()
-        );
-    }
-
-    private ApplicationException invalidState(String message) {
-        return new ApplicationException(
-                HttpStatus.BAD_REQUEST,
-                ErrorCode.INCIDENT_INVALID_STATE,
-                message == null || message.isBlank() ? "La transición de la incidencia no está permitida" : message
         );
     }
 

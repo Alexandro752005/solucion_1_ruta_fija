@@ -41,7 +41,6 @@ public final class L08ConnectedTrial {
     private final List<Map<String,Object>> httpEvents=new CopyOnWriteArrayList<>();
     private final HttpClient client=HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).build();
     private final Console console;
-    private final String base=BASE;
     private final Path evidence=ROOT.resolve("docs/evidencia/L-08/conectado-"+RUN+"/resultado.json");
     private ConfigurableApplicationContext app;
     private JdbcTemplate jdbc;

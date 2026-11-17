@@ -1,0 +1,26 @@
+@if (model().state === 'loading') {
+  <div class="chart-state" role="status">Consultando indicadores…</div>
+} @else if (['unavailable', 'forbidden', 'invalid'].includes(model().state) || invalid()) {
+  <div class="chart-state chart-state--error" role="status">{{ invalid() ? 'Información no verificable' : 'No disponible' }}<small>No se interpreta como cero.</small></div>
+} @else {
+  <div class="donut-layout" [class.is-stale]="model().state === 'stale'">
+    <figure class="donut" [attr.aria-label]="model().label + ': ' + model().center + ' ' + model().centerLabel" role="img">
+      <svg viewBox="0 0 112 112" aria-hidden="true" focusable="false">
+        <circle class="track" cx="56" cy="56" r="44" stroke-width="12" fill="none"/>
+        @for (arc of arcs(); track arc.label) {
+          <circle [class]="'arc tone-' + arc.tone" cx="56" cy="56" r="44" fill="none" stroke-width="12" pathLength="100"
+            [attr.stroke-dasharray]="arc.dash" [attr.stroke-dashoffset]="arc.offset" transform="rotate(-90 56 56)"/>
+        }
+        <text class="center-value" x="56" y="53" text-anchor="middle">{{ model().center }}</text>
+        <text class="center-label" x="56" y="72" text-anchor="middle">{{ model().centerLabel }}</text>
+      </svg>
+    </figure>
+    <ul class="legend" [attr.aria-label]="'Detalle de ' + model().label">
+      @for (slice of model().legend; track slice.label) {
+        <li><span [class]="'legend-dot tone-' + slice.tone" aria-hidden="true"></span><span class="legend-label">{{ slice.label }}</span><strong>{{ slice.value }}</strong><span class="legend-percent">{{ percent(slice.value) }}</span></li>
+      }
+    </ul>
+  </div>
+  @if (model().total === 0) { <p class="empty-caption">{{ model().emptyText }}</p> }
+  @if (model().state === 'stale' || model().state === 'refreshing') { <p class="empty-caption">Dato anterior · actualización pendiente.</p> }
+}
