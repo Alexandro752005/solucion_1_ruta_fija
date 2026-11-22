@@ -63,6 +63,35 @@ class ReportExportObservabilityTest {
             assertThat(sheet.getRow(4).getCell(0).getStringCellValue()).isEqualTo("=1+1");
             assertThat(sheet.getRow(4).getCell(1).getStringCellValue()).isEqualTo("a,\"b");
         }record(file);
+        assertThat(appender.list).hasSize(1);
+        check(appender.list.getFirst(), Level.DEBUG, "XLSX", "SUCCESS");
+    }
+    @Test
+    void xlsxNullAndWhitespaceValuesRemainUnchanged() throws Exception {
+        var file = service.tabular(
+            ReportExportFormat.XLSX,
+            "Prueba Commons",
+            "Valores opcionales",
+            List.of("Observación", "Estado"),
+            List.of(
+                Arrays.asList(null, "Activo"),
+                List.of("", "  "),
+                List.of("=1+1", "Texto con á")
+            ),
+            "prueba-commons"
+        );
+
+        try (var workbook = new XSSFWorkbook(
+                new ByteArrayInputStream(file.content()))) {
+            var sheet = workbook.getSheet("Reporte");
+            assertThat(sheet.getRow(4).getCell(0).getStringCellValue()).isEmpty();
+            assertThat(sheet.getRow(4).getCell(1).getStringCellValue()).isEqualTo("Activo");
+            assertThat(sheet.getRow(5).getCell(0).getStringCellValue()).isEmpty();
+            assertThat(sheet.getRow(5).getCell(1).getStringCellValue()).isEqualTo("  ");
+            assertThat(sheet.getRow(6).getCell(0).getCellType()).isEqualTo(CellType.STRING);
+            assertThat(sheet.getRow(6).getCell(0).getStringCellValue()).isEqualTo("=1+1");
+            assertThat(sheet.getRow(6).getCell(1).getStringCellValue()).isEqualTo("Texto con á");
+        }
     }
     @Test void pdfRetainsReadableDataset() throws Exception {
         var file=service.tabular(ReportExportFormat.PDF,"Synthetic title","Synthetic subtitle",

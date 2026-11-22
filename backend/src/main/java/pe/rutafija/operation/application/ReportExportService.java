@@ -1,5 +1,7 @@
 package pe.rutafija.operation.application;
 
+import com.google.common.base.Stopwatch;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -29,6 +31,7 @@ import java.io.UncheckedIOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /** Genera artefactos descargables únicamente a partir de los reportes persistidos y autorizados. */
 @Service
@@ -102,7 +105,7 @@ public class ReportExportService {
     }
 
     private ReportExport export(ReportExportFormat format, ReportDataset dataset, String basename) {
-        long started = System.nanoTime();
+        Stopwatch started = Stopwatch.createStarted();
         try {
             ReportExport file = switch (format) {
                 case PDF -> new ReportExport(asPdf(dataset), MediaType.APPLICATION_PDF, basename + ".pdf");
@@ -117,8 +120,8 @@ public class ReportExportService {
         }
     }
 
-    private void logExport(ReportExportFormat format, long started, boolean success) {
-        long elapsed = System.nanoTime() - started;
+    private void logExport(ReportExportFormat format, Stopwatch started, boolean success) {
+        long elapsed = started.elapsed(TimeUnit.NANOSECONDS);
         if (success) {
             LOG.debug("report_export format={} result={} duration_nanos={}", format, "SUCCESS", elapsed);
         } else {
@@ -136,9 +139,13 @@ public class ReportExportService {
         return lines.stream().map(row->row.stream().map(this::csvCell).collect(java.util.stream.Collectors.joining(",")))
             .collect(java.util.stream.Collectors.joining("\r\n","\uFEFF","\r\n")).getBytes(java.nio.charset.StandardCharsets.UTF_8);
     }
+    //impedir que un campo nulo provoque errores, manteniendo además la protección CSV que antepone una comilla simple a entradas con inicio potencialmente interpretable como fórmula
     private String csvCell(String value) {
-        String text=value==null?"":value;if(!text.isEmpty()&&"=+-@\t\r\n".indexOf(text.charAt(0))>=0)text="'"+text;
-        return "\""+text.replace("\"","\"\"")+"\"";
+        String text = StringUtils.defaultString(value);
+        if (!text.isEmpty() && "=+-@\t\r\n".indexOf(text.charAt(0)) >= 0) {
+            text = "'" + text;
+        }
+        return "\"" + text.replace("\"", "\"\"") + "\"";
     }
 
     private List<String> assignmentRow(AssignmentResponse item) {
@@ -188,7 +195,7 @@ public class ReportExportService {
             throw new UncheckedIOException("No fue posible generar el PDF del reporte", exception);
         }
     }
-
+//generación de archivos XLSX con Apache POI SXSSF.
     private byte[] asXlsx(ReportDataset dataset) {
         SXSSFWorkbook workbook = new SXSSFWorkbook(100);
         workbook.setCompressTempFiles(true);
@@ -220,12 +227,12 @@ public class ReportExportService {
             throw new UncheckedIOException("No fue posible generar el archivo XLSX del reporte", exception);
         }
     }
-
+//preparar textos seguros frente a null antes de escribir cada celda
     private void writeRow(Sheet sheet, int rowIndex, List<String> values, CellStyle style) {
         Row row = sheet.createRow(rowIndex);
         for (int index = 0; index < values.size(); index++) {
             Cell cell = row.createCell(index);
-            cell.setCellValue(values.get(index) == null ? "" : values.get(index));
+            cell.setCellValue(StringUtils.defaultString(values.get(index)));
             if (style != null) {
                 cell.setCellStyle(style);
             }

@@ -62,7 +62,7 @@ public class IncidentService {
         this.execution=execution;
         this.workflow=workflow;
     }
-
+//Operación de lectura de incidencias registradas en el CRM web. Solo puede ser invocada por un actor con rol ADMIN.
     @Transactional(readOnly = true)
     public PageResponse<IncidentResponse> listIncidents(
             UUID driverId,

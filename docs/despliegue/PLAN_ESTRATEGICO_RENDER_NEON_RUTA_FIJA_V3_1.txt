@@ -1,0 +1,209 @@
+RUTA FIJA V3.1 — PLAN ESTRATEGICO PARA CODEX
+Despliegue controlado: Render + Neon + Flutter, conservando una copia de PostgreSQL local
+Fecha de elaboracion: 2026-11-21
+ESTADO: PLANIFICACION — NO AUTORIZA CAMBIOS NI MIGRACION AUTOMATICA
+=======================================================================
+
+0. PROPOSITO Y REGLA DE TRABAJO
+--------------------------------
+Este archivo entrega a Codex contexto verificable y una secuencia segura para preparar el despliegue de Ruta Fija V3.1. La decision tomada es RESTAURAR UNA COPIA CONTROLADA de la base PostgreSQL local, porque ya hay cuentas aceptadas y flujos funcionales. No reconstruir las cuentas de demostracion si eso implica perder sus estados, autorizaciones o relaciones.
+
+PRIORIDADES (en ese orden):
+  1) No dañar la version local funcional ni los datos originales.
+  2) No exponer secretos, contraseñas, OTP, hashes, tokens ni datos personales.
+  3) Establecer una rama independiente y reproducible para el despliegue.
+  4) Conservar contratos de API, migraciones, autenticacion, permisos y multitenancy.
+  5) Probar cada componente antes de pasar a la siguiente fase.
+
+REGLA PARA CODEX: comenzar en MODO SOLO LECTURA. No realizar git add/commit/push, crear despliegues, modificar archivos, restablecer BD ni ejecutar migraciones de escritura sin instruccion posterior y explicita del usuario. Este documento es un mapa de trabajo, no una orden para ejecutarlo todo. Entregar siempre plan, evidencia, riesgos, comandos propuestos y criterios de detencion. Nunca imprimir credenciales o cadenas completas de conexion en salidas o informes.
+
+1. FUENTE Y ESTADO CONOCIDO
+---------------------------
+Repositorio: https://github.com/Alexandro752005/solucion_1_ruta_fija
+Rama base conocida: release/v3.1-candidato-entrega
+Commit remoto comprobado el 2026-11-21: a4d9932c68408b290abb2e3fe205066d407b0031
+Rama objetivo: deploy/render-neon-v3.1
+Estado remoto: rama objetivo NO EXISTIA en GitHub al redactar este archivo; verificar de nuevo antes de crear.
+ATENCION: la carpeta LOCAL puede contener cambios posteriores no subidos (p. ej. pruebas, bibliotecas, SOLID, observabilidad); no asumir que a4d9932 es la version local mas reciente. NO modificar la rama main por este despliegue.
+
+Versiones/referencias visibles en el commit de base:
+- Backend: Java 21, Spring Boot 3.5.16, arquitectura modular, Maven, Spring Security.
+- Frontend: Angular 22.2.3, Node >=24.15 <25, npm >=11 <12.
+- Mobile: Flutter, Android; verificar version del SDK instalado en local antes de compilar.
+- Base de datos: PostgreSQL local originalmente descrito como 16; 51 archivos Flyway V1..V51 identificados. NO asumir que el destino Neon usa PG16 sin verificar.
+- Persistencia: JPA con ddl-auto=validate, Flyway al inicio, Spring JDBC para proyecciones/reportes y consultas especializadas.
+- Invariantes: aislamiento multi-tenant por organization_id, autorizacion estricta, identidad de conductores, aceptacion genuina desde movil, trazabilidad y registros protegidos.
+
+2. DECISIONES ESTRATEGICAS TOMADAS / POR TOMAR
+----------------------------------------------
+TOMADAS:
+- Utilizar Render para backend Spring Boot y CRM Angular (con alternativa Nginx si el proxy estatico falla).
+- Utilizar Neon para PostgreSQL del despliegue.
+- Conservar cuentas y estados funcionales mediante restauracion de UNA COPIA SEGURA y validada, sin tocar la BD de origen.
+- Crear una rama de despliegue separada, partiendo de la candidata de entrega, e incluir este plan sin secretos.
+- Desactivar auto-deploy inicialmente y evitar mezclar cambios no probados con el despliegue.
+
+POR VERIFICAR (NO AFIRMAR COMO HECHOS):
+- Region real del proyecto Neon (se recomendo N. Virginia, pero no se verifico el valor final tras crear el proyecto).
+- Version mayor de PostgreSQL de Neon y disponibilidad efectiva de extensiones necesarias.
+- Tamano real de BD local, almacenamiento/quotas actuales y restricciones de restauracion en Neon.
+- Si Render permite las rewrites del Static Site para conexiones WebSocket de este caso (NO asumir que HTTP implica upgrade 101).
+- Si el SMTP elegido (p. ej. Brevo/2525) acepta salida desde la instancia Render y sus credenciales son validas.
+- Estado de cambios locales no confirmados, ramas remotas y pruebas actuales.
+
+3. ETAPA INMEDIATA: RAMA DE DESPLIEGUE
+--------------------------------------
+Antes de cualquier cambio, ejecutar manualmente en PowerShell y revisar:
+  git status -sb
+  git branch --show-current
+  git remote -v
+  git fetch origin
+  git rev-list --left-right --count HEAD...origin/release/v3.1-candidato-entrega
+  git branch --list deploy/render-neon-v3.1
+  git ls-remote --heads origin deploy/render-neon-v3.1
+
+CONDICION DE AVANCE: estar en 'release/v3.1-candidato-entrega', con comparacion 0 0 contra su rama remota, y verificar que la rama destino no exista ni local ni remotamente. Si diverge (valor distinto de 0 0), DETENERSE y evaluar como preservar commits/cambios, nunca ejecutar reset, clean, rebase o push --force para 'arreglarlo'.
+
+Si se cumplen las condiciones, crear la rama SIN eliminar modificaciones locales:
+  git switch -c deploy/render-neon-v3.1
+
+Revisar cambios rastreados y no rastreados. Incluir intencionalmente cambios productivos y de pruebas previamente revisados (si son parte del candidato); no subir evidencias masivas, caches, respaldos, instalaciones, contraseñas ni logs. No usar 'git add .' o 'git add -A' de forma indiscriminada. Colocar este documento en:
+  docs/despliegue/PLAN_ESTRATEGICO_RENDER_NEON_RUTA_FIJA_V3_1.txt
+
+Si TODOS los cambios sobre archivos ya rastreados fueron revisados y deben incluirse:
+  git add -u
+  git add -- docs/despliegue/PLAN_ESTRATEGICO_RENDER_NEON_RUTA_FIJA_V3_1.txt
+Los archivos nuevos de codigo que sean necesarios se agregan individualmente por su ruta exacta tras auditarlos. Inspeccionar staging antes de confirmar:
+  git diff --cached --name-status
+  git diff --cached --stat
+  git diff --cached --check
+  git status -sb
+Revisar manualmente el diff y los nombres de rutas que puedan contener secretos (el diff --check SOLO verifica espacio en blanco). Si hay credenciales, DATOS PERSONALES o respaldo en staging, detenerse, retirarlos del staging con 'git restore --staged -- <ruta>' y volver a inspeccionar. No pegar valores sensibles en chats.
+
+Luego, solo tras revision humana:
+  git commit -m "chore(deploy): preparar rama Render Neon y plan de migracion"
+  git push -u origin deploy/render-neon-v3.1
+  git status -sb
+  git rev-list --left-right --count HEAD...origin/deploy/render-neon-v3.1
+Resultado esperado: rama desplegable remota creada, HEAD sincronizado (0 0) y documento versionado. Este commit NO es aun un despliegue ni una restauracion de la BD.
+
+4. MAPA DE ARQUITECTURA ACTUAL
+-------------------------------
+CRM Angular (Render Static Site o Web Service Nginx)
+    -> /api/v1 (HTTP mismo origen desde navegador, a traves de proxy)
+    -> Spring Boot API (Render Web Service Java 21)
+    -> Flyway + JPA/JDBC -> PostgreSQL Neon (TLS)
+    -> /ws/operations (WebSocket seguro desde mismo origen del CRM; ticket efimero)
+Flutter Android -> API publica HTTPS de Render, con RF_API_BASE_URL terminada en '/api/v1'.
+
+Archivos clave y referencias VERIFICADAS en commit a4d9932:
+- backend/src/main/resources/application.yml L4-L19: datasource, Flyway y ddl-auto=validate.
+- backend/src/main/resources/application.yml L30-L31: SERVER_PORT default 8080.
+- backend/src/main/resources/application.yml L38-L58: health y readiness/liveness, mail health desactivado.
+- backend/src/main/resources/application.yml L93-L104: JWT, cookie SameSite=Strict /api/v1/auth, CORS.
+- backend/src/main/resources/application-prod.yml L1-L24: perfil prod, sin seed, origen CORS, logs estructurados.
+- backend/Dockerfile L3-L27: build Java21, runtime Java21, EXPOSE/HEALTHCHECK 8080, arranque JVM.
+- frontend/package.json L6-L17: Node/npm, scripts build y test.
+- frontend/angular.json L19-L56: build Angular produccion.
+- frontend/public/config/runtime-config.json L1-L6: apiBaseUrl relativo '/api/v1'.
+- frontend/src/app/core/config/runtime-config.service.ts L83-L103: obliga a API mismo origen.
+- frontend/src/app/core/operations/operation-realtime.service.ts L72-L77: WebSocket con mismo origen '/ws/operations'.
+- frontend/nginx/default.conf L31-L57: proxy HTTP y upgrade WebSocket; actualmente dirige a 'http://backend:8080', valido solo si ese host existe en la red de ejecucion.
+- frontend/Dockerfile L1-L20: multi-stage Node 24.16.0 + Nginx; build a dist/ruta-fija-crm/browser.
+- backend/src/main/java/pe/rutafija/identity/infrastructure/SmtpOtpEmailSender.java L55-L74: OTP SMTP, validacion de remitente/destinatarios.
+- backend/src/test/java/pe/rutafija/identity/infrastructure/SmtpOtpEmailSenderTest.java L90-L107: prueba del remitente autorizado.
+- backend/src/main/java/pe/rutafija/operation/realtime/OperationWebSocketConfig.java L27-L31: handler y origenes autorizados.
+- backend/src/main/java/pe/rutafija/identity/api/RefreshCookieService.java L36-L41: cookie HttpOnly, Secure, SameSite, Path.
+- mobile/lib/app/ruta_fija_environment.dart L20-L38: valida URL sin credenciales, terminada /api/v1; release requiere HTTPS.
+- backend/src/main/resources/db/migration/V51__controlled_conductor_identity_review_correction.sql: restricciones y permisos de identidad que exigen prueba de restauracion cuidadosa.
+
+5. ETAPA NEON: CLONAR UNA COPIA, NO ALTERAR EL ORIGEN
+-----------------------------------------------------
+Objetivo: conservar cuentas aceptadas, organizaciones, roles, relaciones y estados de negocio a traves de una COPIA controlada, NO de la base local viva. La copia puede contener informacion personal de conductores y usuarios: definir y justificar que datos son imprescindibles para la demo, obtener autorizacion y minimizar/anonimizar los demas. Nunca subir un dump a GitHub, adjuntarlo al informe ni copiar contraseñas a chats.
+
+SUBFASE DE SOLO LECTURA (antes de pg_dump/pg_restore):
+  A) Verificar la BD local correcta (nombre, host, version, schema public, extension btree_gist, tamaño, registros, roles usados, ultimo Flyway realmente aplicado).
+  B) Verificar en Neon: proyecto/region exactos, version PostgreSQL, BD/rol de destino, conexion DIRECTA (no -pooler) y sslmode=require; NO divulgar la URI con password.
+  C) Revisar 51 archivos de migracion, checksum, version y estado real en flyway_schema_history; nunca asumir que '51 archivos' significa exactamente '51 filas exitosas'.
+  D) Verificar objetos sensibles: funciones, triggers, privilegios, OWNERSHIP y extensiones, especialmente las migraciones de identidad, auditoria, exclusion GiST y migraciones V40–V51.
+  E) Elegir nombre de base/schema de DEMO y confirmar que el destino Neon este vacio (no restaurar sobre datos irreemplazables).
+  F) Tomar backup local y verificar la capacidad de restaurarlo EN UNA COPIA AISLADA, sin sobrescribir origen.
+
+SUBFASE DE ESCRITURA (REQUERIRA AUTORIZACION EXPLICITA):
+  1) Crear dump formato custom (pg_dump -Fc --no-owner --no-acl) con version de cliente compatible.
+  2) Usar pg_restore exclusivamente sobre la BD de destino revisada; preferir --single-transaction --exit-on-error --no-owner --no-acl si la topologia/objetos lo permiten. Validar requerimientos reales de extension/roles/permissions antes de ejecutarlo.
+  3) Elegir una sola estrategia de esquema: si el dump contiene flyway_schema_history y todas las tablas, no iniciar Flyway primero sobre una base vacia y luego restaurar encima. Si se opta por aplicar Flyway desde cero, NO restaurar de nuevo el mismo esquema completo sin un procedimiento especifico de datos.
+  4) Comparar tablas, indices, constraints, triggers, funciones, historico Flyway, checksums, entidades y cuentas en Neon vs copia de referencia; hacer lecturas autorizadas de muestra.
+  5) No ejecutar sentencias de INSERT/UPDATE/DELETE, seeders ni migraciones manuales improvisadas sobre BD origen.
+
+ALERTA DE PRIVILEGIOS: la BD actual utiliza mecanismos de proteccion (funciones y triggers, auditoria append-only, identidad controlada). Usar un solo propietario Neon para aplicacion y migracion puede permitir privilegios superiores a los de 'rf_app' en el entorno original. No presentarlo como minimo privilegio; revisar las consecuencias y proponer roles separados si Neon lo soporta dentro del plan.
+
+PUNTO DE DETENCION: si pg_restore falla, Flyway intenta repetir migraciones, Hibernate falla en validate, o se pierden constraints/triggers/cuentas, NO conectar Render a esa BD; reportar salida saneada y corregir en una nueva copia.
+
+6. ETAPA RENDER: BACKEND SPRING BOOT
+------------------------------------
+- Crear Web Service Docker con root directory 'backend' y la rama 'deploy/render-neon-v3.1'.
+- Seleccionar Virginia si Neon esta efectivamente en N. Virginia; confirmar region real de ambos. No asumir igual infraestructura privada solo por region.
+- Seleccionar plan compatible con presupuesto; revisar recursos/costos actuales. Auto-deploy desactivado inicialmente.
+- Puerto: backend/Dockerfile usa 8080 tanto EXPOSE como HEALTHCHECK; application.yml usa SERVER_PORT default 8080. Preferir PORT=8080 y SERVER_PORT=8080, o actualizar Dockerfile/health si se elige otro puerto, tras validar el comportamiento de Render.
+- Variables minimas secretas: SPRING_PROFILES_ACTIVE=prod, SPRING_DATASOURCE_URL con jdbc:postgresql://host-directo/db?sslmode=require, SPRING_DATASOURCE_USERNAME, SPRING_DATASOURCE_PASSWORD, JWT_SECRET_BASE64 (Base64 de bytes aleatorios >=32), REFRESH_COOKIE_SECURE=true, APP_CORS_ALLOWED_ORIGINS=origen HTTPS exacto CRM, DB_POOL_MAX_SIZE/DB_POOL_MIN_IDLE prudentes.
+- No meter variables/contraseñas en codigo o Git. Configurar TLS y validar certificado segun requisitos del entorno; no desactivar verificacion sin justificacion.
+- Health: comprobar /actuator/health/liveness y /actuator/health/readiness; el grupo readiness incluye BD. Evitar polling intensivo innecesario si el plan free de Neon pausa computo.
+- El Dockerfile usa mvnw -DskipTests package; esto NO equivale a pruebas aprobadas. Ejecutar la bateria segura predefinida por separado; pruebas de integracion deben usar BD aislada.
+- Validar Flyway, JPA ddl-auto validate, heap/memoria y comportamiento con contenedor inactivo/reactivado antes de dar el backend por terminado.
+- Perfil prod desactiva el seeder dev: NO usar dev para inventar SUPER_ADMIN ni alterar cuentas existentes.
+
+7. ETAPA RENDER: CRM ANGULAR Y SESION
+-------------------------------------
+- Primera alternativa: Render Static Site, root 'frontend', Node compatible con package.json (p. ej. 24.16.0), build 'npm ci && npm run build', publish 'dist/ruta-fija-crm/browser'.
+- La app exige API de MISMO ORIGEN; runtime-config.json contiene '/api/v1'. La cookie refresh esta limitada a '/api/v1/auth', SameSite=Strict y Secure en prod.
+- Configurar rewrite /api/* al backend (sin perder host/paths ni seguridad) y fallback /* a /index.html; comprobar metodos, cabeceras, cookies, refresh y logout desde navegador. NO dar por hecho que el proveedor realiza WebSocket upgrade en rewrite externa.
+- Probar /ws/operations con ticket efimero: verificar handshake HTTP 101, origen admitido, actualizaciones y reconexion. El servicio OperationRealtimeService construye URL de mismo origen; no sustituirlo por otro host sin entender seguridad/cookies.
+- Plan B solo si falla: Web Service frontend con Dockerfile y Nginx. El nginx/default.conf actual usa proxy_pass http://backend:8080, nombre que no resolveria en servicios aislados de Render por defecto. Adaptar a destino HTTPS accesible y revisar SNI, Host, forwarded headers, websocket upgrade y cookies; desplegar solo tras pruebas.
+- Verificar CSP, rutas de assets/Leaflet, /config/runtime-config.json, dashboard, login, refresh tras recarga y denegacion de acceso multi-tenant.
+
+8. SMTP/OTP: CORRECCION DE CONTRATO SEPARADA
+--------------------------------------------
+- Problema real en a4d9932: SmtpOtpEmailSender.java L61 compara el usuario SMTP con el remitente, L68 usa helper.setFrom(username). Algunos proveedores usan usuario SMTP distinto del correo From.
+- NO aplicar automaticamente la sustitucion '|| allowedSender.isBlank()' sin una politica de remitentes confiables y pruebas negativas: esa sustitucion cambia la restriccion del contrato original.
+- Verificar dominios/remitentes acreditados, lista permitida de destinatarios de piloto, credenciales SMTP, propiedades y timeout. Mantener manejo seguro de fallos sin registrar secretos ni codigos OTP.
+- Si se necesita editar: cambios pequenos en rama de despliegue, tests unitarios de casos positivos/negativos y regresion; documentar lo que se cambio. No forzar un ciclo TDD artificial para la rubrica.
+- Ningun test real de envio SMTP contra proveedor externo sin autorizacion y cuentas permitidas.
+
+9. MOBILE FLUTTER
+------------------
+- Esperar a tener una API estable; compilar APK debug solo para demostracion interna, no distribuir como release comercial.
+- mobile/lib/app/ruta_fija_environment.dart exige URL valida finalizada en '/api/v1'. Ejemplo de valor: https://API_EJEMPLO.onrender.com/api/v1 (no URL real inventada).
+- Desde mobile (cuando corresponda): flutter pub get --enforce-lockfile; flutter build apk --debug --dart-define=RF_API_BASE_URL=https://API_REAL.onrender.com/api/v1
+- Probar login, rol conductor, OTP si corresponde, asignaciones, aceptacion/rechazo genuino desde movil, incidencias, sincronizacion offline y ubicacion voluntaria en primer plano con permisos.
+- No imprimir, almacenar ni compartir tokens JWT, contraseñas o coordenadas reales en informes.
+
+10. MATRIZ DE ACEPTACION POR PUERTAS (NO PROSEGUIR SI FALLAN)
+-------------------------------------------------------------
+G0. Rama: origen correcto, commit inicial revisado, sin secretos ni dumps, remoto sincronizado 0 0.
+G1. Neon: region/PG verificados; backup privado y copia restaurada con integridad/constraints/Flyway comprobados; cero escritura en BD local original.
+G2. Backend: arranque y salud correctos, Flyway/JPA validos, cuenta existente autentica, errores sanitizados, memoria estable.
+G3. CRM: build correcto, ruta /config/runtime-config.json correcta, login/OTP (si habilitado), refresh persistente, logout y cookies no cruzadas; API mismo origen.
+G4. Mapa: socket /ws/operations responde 101 con ticket autorizado, actualizaciones y lectura por organizacion; si no, NO declarar tiempo real funcionando.
+G5. Mobile: APK interna compila, endpoint HTTPS correcto, comandos desde conductor autentico, ausencia de acceso cross-tenant.
+G6. Pruebas: casos operativos, incidencias, reportes POI/PDF, dashboard, auditoria, aislamiento tenant y revocaciones; conservar evidencias y plan de reversa.
+
+11. FORMATOS DE REPORTE PARA CODEX
+----------------------------------
+Por cada fase, entregar:
+- Estado: ACEPTADO / PARCIAL / BLOQUEADO.
+- Rama y SHA local/remoto analizados.
+- Archivos tocados y lineas verificadas (rutas completas relativas a la raiz).
+- Comandos ejecutados, resultados relevantes y limites de la prueba (sin credenciales).
+- Comprobacion de invariantes de seguridad, Flyway, multi-tenant, contratos, cookies y WS.
+- Riesgos y procedimiento de deshacer sin tocar origen.
+- Proxima accion MINIMA propuesta, no una lista de cambios simultaneos.
+
+12. LIMITES DE LA PRESENTE EVIDENCIA
+------------------------------------
+Este plan se basa en codigo del commit remoto a4d9932 y decisiones expresadas en la conversacion. NO se accedio a la BD local, no se autentico en Neon/Render, no se probó SMTP ni WebSocket desplegado, no se valido el workspace local ni las variables privadas. Las lineas pueden cambiar por modificaciones posteriores (Apache Commons, Guava, Logback, SOLID, etc.). Revalidar siempre antes de tocar.
+
+REFERENCIA PRIMARIA:
+  https://github.com/Alexandro752005/solucion_1_ruta_fija/tree/release/v3.1-candidato-entrega
+
+REGLA FINAL: no subir dump de PostgreSQL, APK, backups, datos personales, credenciales, tokens ni secretos a GitHub. No ejecutar migracion ni despliegue hasta que el usuario indique expresamente la siguiente fase.

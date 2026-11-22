@@ -1,125 +1,214 @@
-﻿<section class="management-page">
+﻿<!-- Contenedor principal de toda la página de gestión de asignaciones. -->
+<section class="management-page">
+  <!-- página de gestión de asignaciones, con listado, filtros, paginación y acciones de creación, edición y cancelación. -->
+  <!-- Componente reutilizable de encabezado: muestra título ("Asignaciones"), descripción operativa y la empresa activa desde la señal organizationName(). -->
   <rf-page-header
     title="Asignaciones"
     description="Emite ofertas para que CONDUCTOR acepte antes de su vencimiento."
     [context]="organizationName()"
   >
+    <!-- Creación del botón: proyectado en page-actions, al hacer clic llama a startCreate() para abrir el modal de nueva oferta. -->
     <button page-actions class="management-button primary" type="button" (click)="startCreate()">Nueva oferta</button>
+    <!-- Enlace de navegación interna de Angular hacia la vista de tipos de servicio y márgenes. -->
     <a page-actions class="management-button" routerLink="/service-types">Tipos de servicio y márgenes</a>
   </rf-page-header>
 
+  <!-- Si la señal error() contiene un error, muestra una alerta roja accesible con el mensaje y el correlationId si existe. -->
   @if (error(); as currentError) { <div class="management-alert error" role="alert"><strong>{{ currentError.message }}</strong>@if (currentError.correlationId) { <span>Referencia: {{ currentError.correlationId }}</span> }</div> }
+  <!-- Si la señal notice() tiene un aviso de éxito, muestra una notificación verde de estado. -->
   @if (notice(); as currentNotice) { <div class="management-alert success" role="status">{{ currentNotice }}</div> }
+  <!-- Si shortcutNotice() tiene texto, muestra un mensaje informativo contextual (por ejemplo al llegar desde un acceso directo). -->
   @if (shortcutNotice()) { <p class="management-alert" role="status">{{ shortcutNotice() }}</p> }
 
+  <!-- Panel principal que agrupa los filtros, la tabla operativa y la paginación. -->
   <section class="management-panel" aria-labelledby="assignments-list-title">
+    <!-- Cabecera del panel: muestra el título "Plan operativo" y el total reactivo de asignaciones registradas. -->
     <header><div><h2 id="assignments-list-title">Plan operativo</h2><p>{{ totalItems() }} asignaciones registradas.</p></div></header>
+    <!-- Contenedor de la barra de los 5 filtros de búsqueda y sus botones de acción. -->
     <div class="management-filter">
+      <!-- Filtro por estado (#statusFilter): inicializa con selectedStatus() y genera una opción por cada estado disponible. -->
       <select #statusFilter [value]="selectedStatus()" aria-label="Filtrar por estado"><option value="">Todos los estados</option>@for (status of statuses; track status) { <option [value]="status">{{ statusLabel(status) }}</option> }</select>
+      <!-- Filtro por conductor (#driverFilter): recorre la señal drivers() mostrando cada conductor con su identificador seudonimizado. -->
       <select #driverFilter [value]="selectedDriverId()" aria-label="Filtrar por conductor"><option value="">Todos los conductores</option>@for (driver of drivers(); track driver.id) { <option [value]="driver.id">CONDUCTOR-{{ driver.id }}</option> }</select>
+      <!-- Filtro por vehículo (#vehicleFilter): recorre la señal vehicles() mostrando la placa de cada unidad. -->
       <select #vehicleFilter [value]="selectedVehicleId()" aria-label="Filtrar por veh&iacute;culo"><option value="">Todos los veh&iacute;culos</option>@for (vehicle of vehicles(); track vehicle.id) { <option [value]="vehicle.id">{{ vehicle.plate }}</option> }</select>
+      <!-- Filtro por fecha inicial (#fromInput) enlazado al valor de la señal fromFilter(). -->
       <label class="filter-date">Desde<input #fromInput type="date" [value]="fromFilter()" /></label>
+      <!-- Filtro por fecha final (#toInput) enlazado al valor de la señal toFilter(). -->
       <label class="filter-date">Hasta<input #toInput type="date" [value]="toFilter()" /></label>
+      <!-- Botón Aplicar: envía los valores actuales de los 5 filtros al método applyFilters() del componente. -->
       <button class="management-button" type="button" (click)="applyFilters(statusFilter.value, driverFilter.value, vehicleFilter.value, fromInput.value, toInput.value)">Aplicar</button>
+      <!-- Botón Limpiar: vacía manualmente los 5 controles del DOM y llama a clearFilters() para recargar sin filtros. -->
       <button class="management-button" type="button" (click)="statusFilter.value = ''; driverFilter.value = ''; vehicleFilter.value = ''; fromInput.value = ''; toInput.value = ''; clearFilters()">Limpiar</button>
     </div>
 
-    @if (loading()) { <p class="management-empty" role="status">Cargando asignaciones&hellip;</p> }
-    @else if (assignments().length === 0) { <p class="management-empty">No existen asignaciones para los filtros actuales.</p> }
+    <!-- Control de flujo de 3 estados: 1) cargando, 2) sin resultados, 3) tabla con asignaciones. -->
+    @if (loading()) { <!-- Muestra mensaje de espera mientras loading() es true. --><p class="management-empty" role="status">Cargando asignaciones&hellip;</p> }
+    @else if (assignments().length === 0) { <!-- Si ya cargó y no hay registros, informa que la lista está vacía. --><p class="management-empty">No existen asignaciones para los filtros actuales.</p> }
     @else {
+      <!-- Contenedor con desplazamiento horizontal y apertura de la tabla de asignaciones. -->
       <div class="management-table-wrap"><table class="management-table">
+        <!-- Fila de encabezados con las 8 columnas de la tabla operativa. -->
         <thead><tr><th>Conductor</th><th>Veh&iacute;culo</th><th>Origen</th><th>Destino</th><th>Inicio</th><th>Fin</th><th>Estado</th><th>Acciones</th></tr></thead>
-        <tbody>@for (assignment of assignments(); track assignment.id) {
+        <!-- Cuerpo de la tabla: recorre la señal assignments() y rastrea cada fila por assignment.id para optimizar el renderizado. -->
+        <tbody>@for (assignment of assignments(); track assignment.id) { <!-- Recorre la lista reactiva de asignaciones recibida y renderiza cada fila -->
+          <!-- Fila de una asignación individual con atributo data-assignment-id para identificación y pruebas. -->
           <tr [attr.data-assignment-id]="assignment.id">
+            <!-- Celda de conductor: muestra el código del conductor y debajo el nombre de su grupo. -->
             <td><strong>CONDUCTOR-{{ assignment.driverId }}</strong><small>{{ assignment.groupName }}</small></td>
+            <!-- Celda de vehículo: muestra la placa de la unidad asignada. -->
             <td>{{ assignment.vehiclePlate }}</td>
+            <!-- Celda de origen: muestra el punto de partida de la asignación. -->
             <td>{{ assignment.originText }}</td>
+            <!-- Celda de destino: muestra el terminal o punto de llegada. -->
             <td>{{ assignment.destinationText }}</td>
+            <!-- Celda de inicio: formatea la fecha/hora programada de inicio mediante dateLabel(). -->
             <td>{{ dateLabel(assignment.scheduledAt) }}</td>
+            <!-- Celda de fin: formatea la fecha/hora programada de fin mediante dateLabel(). -->
             <td>{{ dateLabel(assignment.scheduledEndAt) }}</td>
+            <!-- Celda de estado: colorea la insignia según el estado, muestra el modo de respuesta y aclara si el conductor ya está reservado. -->
             <td><span class="management-status" [class.success]="assignment.status === 'COMPLETED'" [class.warning]="assignment.status === 'PENDING_RESPONSE' || assignment.status === 'SCHEDULED' || assignment.status === 'EN_SERVICIO'" [class.danger]="assignment.status === 'REJECTED' || assignment.status === 'EXPIRED'" [class.muted]="assignment.status === 'CANCELLED'">{{ statusLabel(assignment.status) }}</span><small>{{ responseModeLabel(assignment.responseMode) }}</small>@if (assignment.reservedAt && assignment.status === 'SCHEDULED') { <small>Conductor reservado</small> }</td>
+            <!-- Celda de acciones: botón que abre el modal de detalle llamando a viewDetails(assignment). -->
             <td><button class="management-button compact" type="button" (click)="viewDetails(assignment)">Ver detalle</button></td>
           </tr>
         }</tbody>
       </table></div>
     }
+    <!-- Componente de paginación conectado a page(), totalPages(), totalItems() y a los eventos de página anterior/siguiente. -->
     <rf-pagination [page]="page()" [totalPages]="totalPages()" [totalItems]="totalItems()" (previous)="previousPage()" (next)="nextPage()" />
   </section>
 </section>
 
+<!-- Modal grande para crear, editar o reasignar una oferta; se abre con formOpen() y cambia su título según editing(). -->
 <rf-modal [open]="formOpen()" [title]="editing() ? 'Editar asignaci&oacute;n' : 'Nueva oferta'" size="large" (closed)="closeForm()">
+  <!-- Formulario reactivo vinculado a form; al enviarse ejecuta submit() con validación controlada por Angular (novalidate). -->
   <form #assignmentForm data-assignment-form class="management-form" [formGroup]="form" (ngSubmit)="submit()" tabindex="-1" novalidate>
+    <!-- Si reofferTarget() tiene un servicio, muestra el aviso de reasignación y el campo independiente reofferReason (máx. 160 caracteres). -->
     @if(reofferTarget();as s){<p>Reasignar SERVICIO-{{s.id}}. La oferta anterior y su aceptación se conservan. La nueva oferta exige otra aceptación.</p>
       <label>Motivo sin datos personales <input [formControl]="reofferReason" maxlength="160" /></label>}
+    <!-- Si el resultado de la reasignación quedó incierto por red, bloquea el reenvío y ofrece reconciliar con reconcileReoffer(). -->
     @if(reofferUncertain()){<p role="alert">Resultado incierto; conserva esta solicitud sin emitir otra oferta.</p><button type="button" (click)="reconcileReoffer()" [disabled]="saving()">Consultar operación de reasignación</button>}
+    <!-- Si la emisión de nueva oferta quedó incierta, evita duplicados y permite verificar por clave con reconcileCreation(). -->
     @if(creationUncertain()){<p role="alert">No se confirmó la emisión; conserva el formulario sin repetirla.</p><button type="button" (click)="reconcileCreation()" [disabled]="saving()">Consultar emisión por su clave</button>}
+    <!-- Cuadrícula que organiza los campos del formulario de la oferta. -->
     <div class="form-grid">
+      <!-- Selector de tipo de servicio vigente; al cambiar reinicia candidatos con resetCandidates() y permite cargar más tipos si moreTypes() es true. -->
       <div class="field"><label for="assignment-type">Tipo y configuración vigente</label><select id="assignment-type" formControlName="serviceTypeVersionId" (change)="resetCandidates()"><option value="">Selecciona tipo</option>@for(t of typeChoices();track t.id){<option [value]="t.currentVersionId">{{t.name}}</option>}</select>@if(moreTypes()){<button type="button" (click)="loadTypes(true)">Cargar más tipos</button>}</div>
+      <!-- Campo de solo lectura que muestra el ID del conductor elegido desde la lista de candidatos. -->
       <div class="field"><label for="assignment-driver">Conductor seleccionado</label><input id="assignment-driver" formControlName="driverId" readonly /></div>
+      <!-- Campo de solo lectura que muestra el ID de la unidad vinculada al candidato elegido. -->
       <div class="field"><label for="assignment-vehicle">Unidad vinculada seleccionada</label><input id="assignment-vehicle" formControlName="vehicleId" readonly /></div>
+      <!-- Solo al crear (!editing()), muestra el selector de ruta vigente y llama a routeChanged() para autocompletar origen y terminal. -->
       @if (!editing()) { <div class="field"><label for="assignment-route">Ruta vigente</label><select id="assignment-route" formControlName="routeVersionId" #routePicker (change)="routeChanged(routePicker.value)"><option value="">Selecciona ruta</option>@for (r of routeChoices(); track r.id) { <option [value]="r.currentVersionId">{{ r.name }}</option> }</select></div> }
+      <!-- Campo de solo lectura con el origen heredado de la versión de ruta seleccionada. -->
       <div class="field"><label for="assignment-origin">Origen de la versión</label><input id="assignment-origin" type="text" readonly formControlName="originText" /></div>
+      <!-- Campo de solo lectura con el terminal o destino heredado de la versión de ruta seleccionada. -->
       <div class="field"><label for="assignment-destination">Terminal de la versión</label><input id="assignment-destination" type="text" readonly formControlName="destinationText" /></div>
+      <!-- Selector de fecha y hora de inicio programado; reinicia candidatos al cambiar y marca aria-invalid si tiene error tras tocarlo. -->
       <div class="field"><label for="assignment-start">Inicio programado</label><input id="assignment-start" type="datetime-local" formControlName="scheduledAt" (change)="resetCandidates()" [attr.aria-invalid]="form.controls.scheduledAt.invalid && form.controls.scheduledAt.touched" /></div>
+      <!-- Selector de fecha y hora de fin programado; también reinicia candidatos y expone estado de validación accesible. -->
       <div class="field"><label for="assignment-end">Fin programado</label><input id="assignment-end" type="datetime-local" formControlName="scheduledEndAt" (change)="resetCandidates()" [attr.aria-invalid]="form.controls.scheduledEndAt.invalid && form.controls.scheduledEndAt.touched" /></div>
+      <!-- Área de texto ancha para notas operativas opcionales (máximo 500 caracteres). -->
       <div class="field wide"><label for="assignment-notes">Notas (opcional)</label><textarea id="assignment-notes" maxlength="500" formControlName="notes"></textarea></div>
     </div>
+    <!-- Sección para buscar conductores y unidades elegibles en el horario elegido mediante findCandidates(). -->
     <section><h3>Candidatos para este horario</h3><button type="button" (click)="findCandidates()" [disabled]="candidateLoading()||saving()">Consultar candidatos</button>
+      <!-- Si existe respuesta de búsqueda (candidateResult()), muestra la ventana real con márgenes y los botones seleccionables de cada candidato. -->
       @if(candidateResult();as r){<p>Reserva con márgenes: {{dateLabel(r.reservationStartsAt)}} — {{dateLabel(r.reservationEndsAt)}}. La consulta no reserva recursos.</p>
+        <!-- Recorre los candidatos elegibles y permite seleccionar conductor y unidad con chooseCandidate(c). -->
         @for(c of candidates();track c.periodId){<button type="button" (click)="chooseCandidate(c)">CONDUCTOR-{{c.driverId}} · UNIDAD-{{c.vehicleId}}</button>}
+        <!-- Si no hubo candidatos elegibles en la página actual, muestra el aviso correspondiente. -->
         @if(candidates().length===0){<p>No hay candidatos elegibles en esta página.</p>}
+        <!-- Si el backend devolvió nextOffset, permite consultar la siguiente página de candidatos. -->
         @if(r.nextOffset!=null){<button type="button" (click)="findCandidates(true)" [disabled]="candidateLoading()">Consultar siguientes candidatos</button>}
       }
     </section>
+    <!-- Nota informativa recordando que el conductor debe aceptar y que el servidor revalida todas las reglas. -->
     <p class="management-muted">La oferta requiere aceptación expresa del conductor. Se volverán a comprobar horario, márgenes, documentos y vínculo al emitirla y aceptarla.</p>
+    <!-- Botonera del formulario: Cancelar cierra el modal y Emitir oferta envía el formulario si no está guardando, incierto ni inválido. -->
     <div class="management-actions"><button class="management-button" type="button" (click)="closeForm()" [disabled]="saving()||creationUncertain()||reofferUncertain()">Cancelar</button><button class="management-button primary" type="submit" [disabled]="saving()||creationUncertain()||reofferUncertain()||form.invalid||(reofferTarget()!==null&&reofferReason.invalid)">{{ saving() ? 'Guardando&hellip;' : 'Emitir oferta' }}</button></div>
   </form>
 </rf-modal>
 
+<!-- Modal grande de detalle de la asignación seleccionada; controlado por detailOpen() y closeDetails(). -->
 <rf-modal [open]="detailOpen()" title="Detalle de asignaci&oacute;n" size="large" (closed)="closeDetails()">
+  <!-- Renderiza el contenido solo cuando selectedAssignment() contiene una asignación seleccionada. -->
   @if (selectedAssignment(); as assignment) {
+    <!-- Sub-panel del servicio programado: permite disparar reasignación (reoffer), recargar (changed) y coordinar bloqueos (blocked). -->
     <rf-scheduled-service-panel [assignment]="assignment" [externalBlocked]="serviceBlocked()" (reoffer)="startReoffer($event)" (changed)="load()" (blocked)="serviceBlocked.set($event)" />
+    <!-- Sub-panel de ruta de la asignación: gestiona reemplazo de ruta (replaced) respetando el bloqueo compartido. -->
     <rf-assignment-route-panel [assignment]="assignment" [externalBlocked]="serviceBlocked()" (blocked)="serviceBlocked.set($event)" (replaced)="routeReplaced()" />
+    <!-- Sub-panel de ejecución del servicio: muestra y coordina el avance operativo de la asignación. -->
     <rf-service-execution-panel [assignment]="assignment" [externalBlocked]="serviceBlocked()" (blocked)="serviceBlocked.set($event)" />
+    <!-- Sub-panel de tiempos de servicio: gestiona registros horarios y recarga el listado cuando cambia. -->
     <rf-service-time-panel [assignment]="assignment" [externalBlocked]="serviceBlocked()" (blocked)="serviceBlocked.set($event)" (changed)="load()" />
+    <!-- Sub-panel de atención del servicio: notifica cambios operativos mediante serviceChanged(). -->
     <rf-service-attention-panel [assignment]="assignment" [externalBlocked]="serviceBlocked()" (blocked)="serviceBlocked.set($event)" (changed)="serviceChanged()" />
+    <!-- Sub-panel de relevo/entrega del servicio: gestiona el traspaso y notifica vía serviceChanged(). -->
     <rf-service-handover-panel [assignment]="assignment" [externalBlocked]="serviceBlocked()" (blocked)="serviceBlocked.set($event)" (changed)="serviceChanged()" />
+    <!-- Lista de definición (pares etiqueta/valor) con todos los metadatos de la asignación. -->
     <dl class="rf-detail-grid">
+      <!-- Muestra el código del conductor y la placa del vehículo asignado. -->
       <div><dt>Conductor</dt><dd>CONDUCTOR-{{ assignment.driverId }}</dd></div><div><dt>Veh&iacute;culo</dt><dd>{{ assignment.vehiclePlate }}</dd></div>
+      <!-- Muestra el grupo operativo y el estado actual (añadiendo "Conductor reservado" si aplica). -->
       <div><dt>Grupo</dt><dd>{{ assignment.groupName }}</dd></div><div><dt>Estado</dt><dd>{{ statusLabel(assignment.status) }}@if (assignment.reservedAt && assignment.status === 'SCHEDULED') { &nbsp;&middot; Conductor reservado }</dd></div>
+      <!-- Muestra el modo de respuesta y el plazo límite (o "No aplica" si es nulo). -->
       <div><dt>Modo de respuesta</dt><dd>{{ responseModeLabel(assignment.responseMode) }}</dd></div><div><dt>Plazo de respuesta</dt><dd>{{ assignment.responseDeadlineAt ? dateLabel(assignment.responseDeadlineAt) : 'No aplica' }}</dd></div>
+      <!-- Muestra los textos de origen y destino de la ruta. -->
       <div><dt>Origen</dt><dd>{{ assignment.originText }}</dd></div><div><dt>Destino</dt><dd>{{ assignment.destinationText }}</dd></div>
+      <!-- Muestra las fechas formateadas de inicio y fin programados. -->
       <div><dt>Inicio programado</dt><dd>{{ dateLabel(assignment.scheduledAt) }}</dd></div><div><dt>Fin programado</dt><dd>{{ dateLabel(assignment.scheduledEndAt) }}</dd></div>
+      <!-- Muestra los márgenes antes/después si fueron capturados (CAPTURED); de lo contrario indica configuración histórica sin acreditar. -->
       <div><dt>Márgenes conservados</dt><dd>@if(assignment.marginReferenceStatus==='CAPTURED'){ {{assignment.marginBeforeMinutes}} min antes · {{assignment.marginAfterMinutes}} min después }@else{ Configuración histórica sin acreditar }</dd></div>
+      <!-- Muestra el identificador de la cuenta creadora y las notas (o "Sin notas"). -->
       <div><dt>Creada por</dt><dd>CUENTA-{{ assignment.createdById }}</dd></div><div><dt>Notas</dt><dd>{{ assignment.notes || 'Sin notas' }}</dd></div>
+      <!-- Si el conductor aceptó la oferta, muestra la fecha y hora de aceptación. -->
       @if (assignment.acceptedAt) { <div><dt>Aceptada por conductor</dt><dd>{{ dateLabel(assignment.acceptedAt) }}</dd></div> }
+      <!-- Si el conductor rechazó la oferta, muestra la fecha y hora del rechazo. -->
       @if (assignment.rejectedAt) { <div><dt>Rechazada por conductor</dt><dd>{{ dateLabel(assignment.rejectedAt) }}</dd></div> }
+      <!-- Si existe motivo de rechazo registrado, lo muestra en el detalle. -->
       @if (assignment.rejectionReason) { <div><dt>Motivo de rechazo</dt><dd>{{ assignment.rejectionReason }}</dd></div> }
+      <!-- Si la oferta venció automáticamente en el servidor, muestra la fecha de vencimiento. -->
       @if (assignment.expiredAt) { <div><dt>Vencida por servidor</dt><dd>{{ dateLabel(assignment.expiredAt) }}</dd></div> }
+      <!-- Si la asignación fue cancelada con motivo, muestra el motivo registrado. -->
       @if (assignment.cancellationReason) { <div><dt>Motivo de cancelaci&oacute;n</dt><dd>{{ assignment.cancellationReason }}</dd></div> }
     </dl>
+    <!-- Sección de acciones operativas permitidas según el estado actual de la asignación. -->
     <section class="management-detail"><h3>Acciones disponibles</h3><div class="rf-toolbar">
+      <!-- Muestra el botón Editar solo si canEdit(assignment) devuelve true. -->
       @if (canEdit(assignment)) { <button class="management-button" type="button" (click)="startEdit(assignment)">Editar</button> }
+      <!-- Muestra el botón Reservar conductor solo si canReserve(assignment) devuelve true. -->
       @if (canReserve(assignment)) { <button class="management-button" type="button" (click)="reserve(assignment)">Reservar conductor</button> }
+      <!-- Muestra el botón Iniciar servicio solo si canStart(assignment) devuelve true. -->
       @if (canStart(assignment)) { <button class="management-button primary" type="button" (click)="start(assignment)">Iniciar servicio</button> }
+      <!-- Muestra el botón Completar servicio solo si canComplete(assignment) devuelve true. -->
       @if (canComplete(assignment)) { <button class="management-button primary" type="button" (click)="complete(assignment)">Completar servicio</button> }
+      <!-- Muestra el botón Cancelar asignación solo si canCancel(assignment) devuelve true. -->
       @if (canCancel(assignment)) { <button class="management-button danger" type="button" (click)="cancel(assignment)">Cancelar asignaci&oacute;n</button> }
+      <!-- Si la oferta espera respuesta móvil, aclara que ADMIN puede cancelarla pero no aceptarla ni rechazarla por el conductor. -->
       @if (assignment.status === 'PENDING_RESPONSE') { <p class="management-muted">La respuesta sigue pendiente del conductor móvil vinculado. ADMIN puede cancelarla, pero no aceptarla ni rechazarla.</p> }
+      <!-- Si ninguna de las 5 acciones está permitida, indica que el registro es de solo lectura. -->
       @if (!canEdit(assignment) && !canReserve(assignment) && !canStart(assignment) && !canComplete(assignment) && !canCancel(assignment)) { <p class="management-muted">Esta asignaci&oacute;n es de solo lectura.</p> }
     </div></section>
   }
+  <!-- Botón inferior del modal para cerrar la vista de detalle con closeDetails(). -->
   <div modal-actions><button class="management-button" type="button" (click)="closeDetails()">Cerrar</button></div>
 </rf-modal>
 
+<!-- Diálogo reutilizable de confirmación para acciones críticas (reservar, iniciar, completar); se abre cuando pendingAction() no es nulo. -->
 <rf-confirm-dialog [open]="pendingAction() !== null" [title]="pendingActionTitle()" [message]="pendingActionMessage()" [confirmLabel]="pendingActionLabel()" (confirmed)="confirmPendingAction()" (cancelled)="cancelPendingAction()" />
 
+<!-- Modal pequeño para cancelar una oferta conservando el servicio; se abre cuando cancellationTarget() no es nulo. -->
 <rf-modal [open]="cancellationTarget() !== null" title="Retirar oferta, conservar servicio" size="small" (closed)="closeCancellation()">
+  <!-- Formulario reactivo de cancelación enlazado a cancellationForm y al envío submitCancellation(). -->
   <form class="management-form" [formGroup]="cancellationForm" (ngSubmit)="submitCancellation()" novalidate>
+    <!-- Protección de idempotencia: si la cancelación quedó incierta, impide repetirla y permite consultar el estado persistido. -->
     @if(cancellationUncertain()){<p role="alert">Resultado incierto. No repitas la cancelación.</p><button type="button" (click)="reconcileCancellation()" [disabled]="actionId()!==null">Consultar estado persistido</button>}
+    <!-- Texto explicativo indicando que el motivo se registra y los recursos se liberan cuando corresponda. -->
     <p class="management-muted">Indica el motivo. Esta acci&oacute;n quedar&aacute; registrada y liberar&aacute; los recursos cuando corresponda.</p>
+    <!-- Campo obligatorio de motivo de cancelación (máx. 300 caracteres) con mensaje de error si es inválido y fue tocado. -->
     <div class="field"><label for="cancellation-reason">Motivo de cancelaci&oacute;n</label><textarea id="cancellation-reason" formControlName="reason" maxlength="300" [attr.aria-invalid]="cancellationForm.controls.reason.invalid && cancellationForm.controls.reason.touched"></textarea>@if (cancellationForm.controls.reason.invalid && cancellationForm.controls.reason.touched) { <p class="management-field-error">Ingresa un motivo de hasta 300 caracteres.</p> }</div>
+    <!-- Botones Volver y Confirmar cancelación, deshabilitados mientras actionId() !== null (petición en curso). -->
     <div class="management-actions"><button class="management-button" type="button" (click)="closeCancellation()" [disabled]="actionId() !== null">Volver</button><button class="management-button danger" type="submit" [disabled]="actionId() !== null">{{ actionId() ? 'Cancelando&hellip;' : 'Confirmar cancelaci&oacute;n' }}</button></div>
   </form>
 </rf-modal>
-
-
