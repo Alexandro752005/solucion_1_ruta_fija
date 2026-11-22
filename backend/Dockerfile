@@ -7,7 +7,8 @@ COPY .mvn/ .mvn/
 COPY mvnw pom.xml ./
 COPY src/ src/
 RUN --mount=type=cache,target=/root/.m2 \
-    chmod +x mvnw \
+    sed -i 's/\r$//' mvnw \
+    && chmod +x mvnw \
     && ./mvnw -B -DskipTests package
 
 FROM eclipse-temurin:21-jre-alpine AS runtime
@@ -22,6 +23,6 @@ USER rutafija
 EXPOSE 8080
 
 HEALTHCHECK --interval=15s --timeout=5s --start-period=210s --retries=5 \
-    CMD wget -q -O /dev/null http://localhost:8080/actuator/health || exit 1
+    CMD wget -q -O /dev/null "http://127.0.0.1:${SERVER_PORT:-${PORT:-8080}}/actuator/health/liveness" || exit 1
 
 ENTRYPOINT ["java", "-XX:MaxRAMPercentage=75.0", "-XX:+ExitOnOutOfMemoryError", "-jar", "/app/app.jar"]

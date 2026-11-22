@@ -15,3 +15,5 @@ docs/legal/publicado/** -text
 artifacts/** -text
 scripts/Invoke-RutaFijaNativeRuntime.ps1 -text
 scripts/Invoke-RutaFijaQuickDemo.ps1 -text
+backend/mvnw text eol=lf
+frontend/nginx/*.envsh text eol=lf

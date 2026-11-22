@@ -1,0 +1,50 @@
+#!/bin/sh
+# El entrypoint oficial carga este entorno antes de procesar las plantillas.
+rf_proxy_invalid() {
+    echo "Configuración inválida del proxy Ruta Fija: $1" >&2
+    exit 1
+}
+
+rf_proxy_port() {
+    case "$2" in
+        ''|*[!0-9]*) rf_proxy_invalid "$1" ;;
+    esac
+    if [ "${#2}" -gt 5 ] || [ "$2" -lt 1 ] || [ "$2" -gt 65535 ]; then
+        rf_proxy_invalid "$1"
+    fi
+}
+
+RF_PROXY_LISTEN_PORT=${PORT:-80}
+RF_PROXY_UPSTREAM_HOST=${RF_PROXY_UPSTREAM_HOST:-backend}
+rf_proxy_upstream_scheme=${RF_PROXY_UPSTREAM_SCHEME:-http}
+case "$rf_proxy_upstream_scheme" in
+    http) rf_proxy_upstream_port=${RF_PROXY_UPSTREAM_PORT:-8080} ;;
+    https) rf_proxy_upstream_port=${RF_PROXY_UPSTREAM_PORT:-443} ;;
+    *) rf_proxy_invalid RF_PROXY_UPSTREAM_SCHEME ;;
+esac
+case "$RF_PROXY_UPSTREAM_HOST" in
+    .*|*.|*-|*..*|*[!A-Za-z0-9.-]*|-[A-Za-z0-9.-]*) rf_proxy_invalid RF_PROXY_UPSTREAM_HOST ;;
+esac
+rf_proxy_port PORT "$RF_PROXY_LISTEN_PORT"
+rf_proxy_port RF_PROXY_UPSTREAM_PORT "$rf_proxy_upstream_port"
+
+RF_PROXY_UPSTREAM="$rf_proxy_upstream_scheme://$RF_PROXY_UPSTREAM_HOST:$rf_proxy_upstream_port"
+case "${RF_PROXY_PUBLIC_SCHEME:-auto}" in
+    auto)
+        RF_PROXY_FORWARDED_PROTO='$scheme'
+        RF_PROXY_FORWARDED_PORT='""'
+        RF_PROXY_UPSTREAM_REQUEST_HOST='$host'
+        ;;
+    https)
+        RF_PROXY_FORWARDED_PROTO=https
+        RF_PROXY_FORWARDED_PORT=443
+        RF_PROXY_UPSTREAM_REQUEST_HOST='$proxy_host'
+        ;;
+    *) rf_proxy_invalid RF_PROXY_PUBLIC_SCHEME ;;
+esac
+if [ "$rf_proxy_upstream_scheme" = https ]; then
+    RF_PROXY_UPSTREAM_REQUEST_HOST='$proxy_host'
+fi
+
+export RF_PROXY_LISTEN_PORT RF_PROXY_UPSTREAM_HOST RF_PROXY_UPSTREAM RF_PROXY_UPSTREAM_REQUEST_HOST
+export RF_PROXY_FORWARDED_PROTO RF_PROXY_FORWARDED_PORT

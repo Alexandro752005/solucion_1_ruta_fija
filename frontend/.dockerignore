@@ -6,3 +6,17 @@ coverage
 .git
 .gitignore
 npm-debug.log*
+.runtime
+.local
+.env
+.env.*
+**/.env
+**/.env.*
+logs
+backups
+**/*.pem
+**/*.key
+**/*.p12
+**/*.jks
+**/*.dump
+**/*.backup
