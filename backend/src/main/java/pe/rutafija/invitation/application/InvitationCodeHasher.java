@@ -1,7 +1,5 @@
 package pe.rutafija.invitation.application;
 
-import org.springframework.stereotype.Component;
-
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
@@ -9,7 +7,6 @@ import java.security.MessageDigest;
 import java.util.HexFormat;
 
 /** HMAC values use purpose-specific contexts to prevent OTP/hash cross-use. */
-@Component
 public class InvitationCodeHasher {
 
     private static final byte[] CODE_CONTEXT = "ruta-fija/invitation-code/v1:".getBytes(StandardCharsets.UTF_8);

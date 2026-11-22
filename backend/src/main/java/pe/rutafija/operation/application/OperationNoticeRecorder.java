@@ -1,6 +1,7 @@
 package pe.rutafija.operation.application;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import java.util.*;
 
 /** Synchronous append in the business transaction. A rollback also removes the notice. */
 @Service
+@Profile("!restore-inspection")
 public class OperationNoticeRecorder {
     private final JdbcTemplate jdbc;private final ObjectMapper json;private final ExternalNoticeChannel channel;
     private static final Set<String> REFERENCE_KEYS=Set.of("assignmentId","serviceId","attentionId","incidentId","driverId","vehicleId","announcementId","handoverId");

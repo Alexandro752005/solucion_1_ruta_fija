@@ -1,5 +1,7 @@
 package pe.rutafija.personidentity.application;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,7 @@ import java.util.regex.Pattern;
 /** ID-01 stores a stable pseudonymous binding, never original ADMIN/owner documents. */
 @Service
 public class PersonIdentityService {
+    private static final Logger LOG = LoggerFactory.getLogger(PersonIdentityService.class);
     private static final Pattern UNSAFE_REFERENCE=Pattern.compile("[0-9]{6,}|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}");
     private final PersonIdentityRepository repository;
     private final AppUserRepository users;
@@ -178,12 +181,17 @@ public class PersonIdentityService {
         if(existing.isEmpty()){
             for(var legacy:repository.legacyDocuments()){
                 if(!"DNI".equalsIgnoreCase(legacy.documentType())||legacy.documentNumber()==null||
-                        !legacy.personHash().equals(documentHash("DNI",legacy.documentNumber().strip())))
+                        !legacy.personHash().equals(documentHash("DNI",legacy.documentNumber().strip()))) {
+                    LOG.warn("person_identity_key_check result=LEGACY_BINDING_MISMATCH");
                     throw conflict("La clave o los vinculos documentales previos requieren una revision tecnica antes de nuevas vinculaciones.");
+                }
             }
             repository.initializeKey(fingerprint,now());existing=repository.keyFingerprint();
         }
-        if(existing.isEmpty()||!existing.get().equals(fingerprint))throw conflict("La clave estable de identidad cambio; restaura la configuracion autorizada antes de vincular personas.");
+        if(existing.isEmpty()||!existing.get().equals(fingerprint)) {
+            LOG.warn("person_identity_key_check result=FINGERPRINT_MISMATCH");
+            throw conflict("La clave estable de identidad cambio; restaura la configuracion autorizada antes de vincular personas.");
+        }
     }
     private void safeReference(String text){if(text==null||text.isBlank()||text.length()>160||UNSAFE_REFERENCE.matcher(text).find())throw validation("Usa una referencia de revision sin DNI, telefono, correo ni secretos.");}
     private void safeReason(String text){if(text==null||text.isBlank()||text.length()>500||UNSAFE_REFERENCE.matcher(text).find())throw validation("Usa un motivo de hasta 500 caracteres sin DNI, telefono, correo ni secretos.");}

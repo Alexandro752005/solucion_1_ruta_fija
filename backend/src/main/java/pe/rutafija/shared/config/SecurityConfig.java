@@ -3,7 +3,9 @@ package pe.rutafija.shared.config;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authorization.AuthenticatedAuthorizationManager;
@@ -30,6 +32,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import pe.rutafija.identity.domain.AppUser;
 import pe.rutafija.identity.infrastructure.AppUserRepository;
+import pe.rutafija.invitation.application.InvitationCodeHasher;
 import pe.rutafija.shared.security.JsonAccessDeniedHandler;
 import pe.rutafija.shared.security.JsonAuthenticationEntryPoint;
 import pe.rutafija.terms.application.AdminTermsGateAuthorizationManager;
@@ -47,6 +50,7 @@ import java.util.UUID;
 public class SecurityConfig {
 
     @Bean
+    @Profile("!" + RestoreInspectionEnvironment.PROFILE)
     SecurityFilterChain securityFilterChain(
             HttpSecurity http,
             Converter<Jwt, AbstractAuthenticationToken> jwtAuthenticationConverter,
@@ -141,14 +145,25 @@ public class SecurityConfig {
 
     @Bean
     SecretKey jwtSecretKey(SecurityProperties properties) {
+        return decodeHmacKey(properties.jwt().secretBase64(), "JWT_SECRET_BASE64");
+    }
+
+    @Bean
+    InvitationCodeHasher invitationCodeHasher(SecretKey jwtSecretKey, Environment environment) {
+        String configured = environment.getProperty("RF_PERSISTED_HMAC_KEY_BASE64");
+        return new InvitationCodeHasher(configured == null ? jwtSecretKey
+                : decodeHmacKey(configured, "RF_PERSISTED_HMAC_KEY_BASE64"));
+    }
+
+    private static SecretKey decodeHmacKey(String value, String setting) {
         byte[] decoded;
         try {
-            decoded = Base64.getDecoder().decode(properties.jwt().secretBase64());
+            decoded = Base64.getDecoder().decode(value);
         } catch (IllegalArgumentException exception) {
-            throw new IllegalStateException("JWT_SECRET_BASE64 must contain valid Base64", exception);
+            throw new IllegalStateException(setting + " must contain valid Base64");
         }
         if (decoded.length < 32) {
-            throw new IllegalStateException("JWT_SECRET_BASE64 must decode to at least 32 bytes");
+            throw new IllegalStateException(setting + " must decode to at least 32 bytes");
         }
         return new SecretKeySpec(decoded, "HmacSHA256");
     }

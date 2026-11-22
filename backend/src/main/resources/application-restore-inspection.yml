@@ -1,0 +1,21 @@
+spring:
+  flyway:
+    enabled: false
+  sql:
+    init:
+      mode: never
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    hikari:
+      read-only: true
+      connection-init-sql: SET SESSION CHARACTERISTICS AS TRANSACTION READ ONLY
+
+app:
+  seed:
+    enabled: false
+
+server:
+  address: 127.0.0.1
