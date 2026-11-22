@@ -5,6 +5,8 @@ import jakarta.mail.Session;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.support.StaticListableBeanFactory;
 import org.springframework.mail.MailAuthenticationException;
@@ -25,8 +27,8 @@ import static org.mockito.Mockito.when;
 
 class SmtpOtpEmailSenderTest {
 
-    private static final String SENDER = "rutafija.dev1@gmail.com";
-    private static final String AUTHORIZED_RECIPIENT = "sandrito10xyz@gmail.com";
+    private static final String SENDER = "sender@rutafija.test";
+    private static final String AUTHORIZED_RECIPIENT = "recipient@rutafija.test";
     private static final String SECRET = "application-password-must-not-leak";
 
     @Test
@@ -92,7 +94,7 @@ class SmtpOtpEmailSenderTest {
         JavaMailSender javaMailSender = mock(JavaMailSender.class);
         OtpEmailSender sender = sender(
                 javaMailSender,
-                "other-account@gmail.com",
+                "other-account@rutafija.test",
                 AUTHORIZED_RECIPIENT
         );
 
@@ -104,6 +106,23 @@ class SmtpOtpEmailSenderTest {
                 .isInstanceOf(ExternalServiceUnavailableException.class)
                 .hasMessage("External service unavailable");
 
+        verifyNoInteractions(javaMailSender);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"username", "password", "sender"})
+    void rejectsMissingCredentialsOrSenderBeforeContactingSmtp(String missing) {
+        JavaMailSender javaMailSender = mock(JavaMailSender.class);
+        StaticListableBeanFactory beans = new StaticListableBeanFactory();
+        beans.addBean("mailSender", javaMailSender);
+        var sender = new SmtpOtpEmailSender(beans.getBeanProvider(JavaMailSender.class),
+                missing.equals("username") ? "" : SENDER,
+                missing.equals("password") ? "" : SECRET,
+                missing.equals("sender") ? "" : SENDER, AUTHORIZED_RECIPIENT);
+
+        assertThatThrownBy(() -> sender.sendVerificationCode(AUTHORIZED_RECIPIENT, "012345",
+                Instant.parse("2026-10-14T17:05:00Z")))
+                .isInstanceOf(ExternalServiceUnavailableException.class);
         verifyNoInteractions(javaMailSender);
     }
 
